@@ -10,7 +10,7 @@ import {
   ChildrenPicker, DateTimeFields, FieldLabel, SubmitBar, TextAreaField, TextField, TypeTileGroup,
 } from '@/components/journal/FormFields'
 import { EVENT_ICONS, typeStyle } from '@/components/calendrier/eventTypeStyles'
-import { EVENT_TYPES, REMINDER_OPTIONS, type EventTypeKey, type ReminderKey } from '@/lib/calendrier'
+import { EVENT_TYPES, REMINDER_OPTIONS, SHARED_BY_DEFAULT, type EventTypeKey, type ReminderKey } from '@/lib/calendrier'
 import { cn } from '@/lib/cn'
 import { addDaysToKey, dayKeyInTz, timeInTz, todayKey } from '@/lib/tz'
 import { useChildOptions } from '@/lib/data/children'
@@ -53,7 +53,8 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
   const [submitted, setSubmitted] = useState(false)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
-  // Famille (docs/FAMILLE.md) : partagé par défaut si l'événement concerne un enfant partagé ;
+  // Famille (docs/FAMILLE.md) : partagé par défaut si l'événement concerne un enfant partagé ET que son type
+  // relève de ce que l'autre parent doit savoir (SHARED_BY_DEFAULT) ;
   // `null` = pas encore touché par l'utilisateur (la valeur suit alors les enfants choisis).
   const sharedChildIds = useSharedChildIds()
   const [familyChoice, setFamilyChoice] = useState<boolean | null>(null)
@@ -107,11 +108,11 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
 
   const sharedSelected = childOptions.filter((c) => childIds.includes(c.id) && (sharedChildIds ?? []).includes(c.id))
   const hasFamily = (sharedChildIds?.length ?? 0) > 0
-  const familyShared = familyChoice ?? sharedSelected.length > 0
+  const familyShared = familyChoice ?? (sharedSelected.length > 0 && SHARED_BY_DEFAULT.has(type))
   const familyHelp = !familyShared
-    ? 'Visible par vous seul.'
+    ? 'Masqué : visible par vous seul. L’autre parent n’en est pas informé.'
     : sharedSelected.length > 0
-      ? `Visible en lecture seule par les adultes liés à ${sharedSelected.map((c) => c.prenom).join(', ')}.`
+      ? `Ajouté au calendrier de l’autre parent de ${sharedSelected.map((c) => c.prenom).join(', ')}, en lecture seule${type === 'sante' ? '' : ' (et des proches invités)'}.`
       : 'Choisissez un enfant partagé pour que la famille le voie.'
 
   const titleError = submitted && !title.trim() ? "Donnez un titre à l'événement." : undefined
@@ -255,7 +256,7 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
         {hasFamily && (
           <div className="rounded-xl border border-night-100 bg-white px-4">
             <Switch
-              label="Partager avec la famille"
+              label="Visible par l’autre parent"
               description={familyHelp}
               checked={familyShared}
               onChange={(e) => setFamilyChoice(e.target.checked)}

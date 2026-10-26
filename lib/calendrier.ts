@@ -25,6 +25,13 @@ export type EventType = {
   icon: EventIconKey
 }
 
+/**
+ * Types partagés d'office avec l'autre parent quand l'événement concerne un enfant suivi par les deux :
+ * ce qu'il doit savoir (santé, école, rendez-vous). Les autres (activités, sorties, visites…) restent
+ * masqués par défaut ; le choix reste modifiable sur chaque événement.
+ */
+export const SHARED_BY_DEFAULT: ReadonlySet<EventTypeKey> = new Set<EventTypeKey>(['sante', 'ecole', 'rdv', 'anniversaire'])
+
 export const EVENT_TYPES: EventType[] = [
   { key: 'visite',       label: 'Visite',       icon: 'calendar' },
   { key: 'appel',        label: 'Appel vidéo',  icon: 'video' },
