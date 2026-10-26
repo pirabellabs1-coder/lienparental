@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { Check, CheckCheck, FileText, FolderLock, ImageOff, Loader2 } from 'lucide-react'
+import { Check, CheckCheck, FileText, FolderInput, FolderLock, ImageOff, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { attachmentUrl, durationLabel, vaultDocumentHref, type Message, type MessageAttachment, type VaultLink } from '@/lib/messages'
 import { AudioPlayer } from './AudioPlayer'
@@ -16,10 +16,12 @@ type Props = {
   showSender?: boolean
   /** État du rangement de la pièce jointe dans VOTRE coffre-fort. */
   vault?: VaultLink
+  /** « Mettre au coffre-fort » (ouvre le choix du dossier) ; absent : action masquée. */
+  onSaveToVault?: (message: Message) => void
 }
 
 /** Bulle de message : vous à droite (vert clair), l'autre parent à gauche (blanc). */
-export function MessageBubble({ message, mine, senderName, showSender = false, vault }: Props) {
+export function MessageBubble({ message, mine, senderName, showSender = false, vault, onSaveToVault }: Props) {
   const read = Boolean(message.readAt)
   const isAudio = message.kind === 'audio' && message.attachment
   return (
@@ -66,12 +68,24 @@ export function MessageBubble({ message, mine, senderName, showSender = false, v
           )}
         </p>
         {message.attachment && vault && <VaultBadge link={vault} />}
+        {message.attachment && onSaveToVault && (!vault || vault.status === 'failed') && (
+          <button
+            type="button"
+            onClick={() => onSaveToVault(message)}
+            aria-haspopup="dialog"
+            className="mt-0.5 inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-2.5 text-[12px] font-bold text-leaf-700 hover:bg-leaf-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
+          >
+            <FolderInput className="h-4 w-4" aria-hidden="true" />
+            Mettre au coffre-fort
+            <span className="sr-only"> : {message.kind === 'audio' ? 'note vocale' : message.attachment.name}</span>
+          </button>
+        )}
       </div>
     </li>
   )
 }
 
-/** Rangement automatique de la pièce jointe dans le coffre-fort. */
+/** Pièce jointe rangée (ou en cours de rangement) dans VOTRE coffre-fort. */
 function VaultBadge({ link }: { link: VaultLink }) {
   if (link.status === 'done' && link.documentId) {
     return (
@@ -89,7 +103,7 @@ function VaultBadge({ link }: { link: VaultLink }) {
     <p className="mt-0.5 inline-flex items-center gap-1 px-2 text-[11px] text-night-600">
       {link.status === 'pending'
         ? <><Loader2 className="h-3.5 w-3.5 motion-safe:animate-spin" aria-hidden="true" /> Ajout au coffre-fort…</>
-        : <><FolderLock className="h-3.5 w-3.5" aria-hidden="true" /> Ajout au coffre-fort à reprendre (automatique)</>}
+        : <><FolderLock className="h-3.5 w-3.5" aria-hidden="true" /> Ajout automatique au coffre-fort non abouti</>}
     </p>
   )
 }

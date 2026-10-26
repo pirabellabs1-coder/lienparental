@@ -16,6 +16,9 @@
  * Famille (0340, docs/FAMILLE.md) : la RLS renvoie aussi les documents `family_shared`
  * des autres adultes liés ; ils portent `sharedBy` (badge « Partagé par… ») et restent en
  * lecture seule (renommage / déplacement filtrés sur user_id = moi).
+ * Dossiers (0410, lib/data/vault-folders.ts) : `folder_id` ; les documents d'un dossier
+ * partagé par un autre parent ne figurent pas dans les listes générales, seulement dans
+ * « Partagés avec moi » (listFolderDocuments).
  *
  * Démo : données de lib/mock-vault (aucune écriture distante) + `demoExtraDocs()` :
  * document partagé par l'autre parent et pièces rangées depuis la messagerie.
@@ -68,6 +71,7 @@ type DocumentRow = {
   deleted_at: string | null
   user_id: string
   family_shared: boolean | null
+  folder_id: string | null
 }
 type ShareRow = {
   id: string
@@ -82,7 +86,7 @@ type ShareRow = {
 }
 
 const CAT_COLUMNS = 'id, name, icon, color, visible_filtres, position'
-const DOC_COLUMNS = 'id, category_id, name, mime, size_bytes, confidentialite, storage_path, doc_date, source, description, children_ids, created_at, deleted_at, user_id, family_shared'
+const DOC_COLUMNS = 'id, category_id, name, mime, size_bytes, confidentialite, storage_path, doc_date, source, description, children_ids, created_at, deleted_at, user_id, family_shared, folder_id'
 
 type Viewer = { userId: string; names: Map<string, string> }
 
@@ -154,6 +158,7 @@ function docFromRow(r: DocumentRow, who?: Viewer): VaultDocumentRecord {
     storagePath: r.storage_path,
     deletedAt: r.deleted_at ?? undefined,
     familyShared: Boolean(r.family_shared),
+    folderId: r.folder_id,
     ...(foreign && who ? { sharedBy: { prenom: sharedByLabel(who.names.get(r.user_id)) } } : {}),
   }
 }
@@ -200,8 +205,9 @@ export async function demoExtraDocs(): Promise<VaultDocumentRecord[]> {
       categoryId: cat?.id ?? '',
       tone: toneOf(mime),
       source: 'Messagerie',
-      description: 'Pièce jointe rangée automatiquement depuis la messagerie.',
+      description: 'Pièce jointe rangée depuis la messagerie.',
       confidentialite: 'prive',
+      folderId: v.folderId ?? null,
     }
   })
   return [...FAMILY_DEMO_DOCS, ...imports]
@@ -283,6 +289,25 @@ export async function listDocuments(opts: { trash?: boolean } = {}): Promise<Vau
     : q.is('deleted_at', null).order('created_at', { ascending: false })
   const { data, error } = await q.limit(1000)
   if (error) throw toDataError(error, 'vault.listDocuments')
+  return ((data ?? []) as DocumentRow[])
+    // Documents d'un autre parent visibles seulement par un dossier partagé (0410) :
+    // consultés depuis « Partagés avec moi », pas mêlés au coffre personnel.
+    .filter((r) => r.user_id === who.userId || r.family_shared)
+    .map((r) => docFromRow(r, who))
+}
+
+/** Documents actifs d'un dossier (le mien, ou un dossier partagé avec moi : RLS 0410). */
+export async function listFolderDocuments(folderId: string): Promise<VaultDocumentRecord[]> {
+  if (!z.string().uuid().safeParse(folderId).success) return []
+  const who = await viewer()
+  const { data, error } = await db()
+    .from('documents')
+    .select(DOC_COLUMNS)
+    .eq('folder_id', folderId)
+    .is('deleted_at', null)
+    .order('created_at', { ascending: false })
+    .limit(1000)
+  if (error) throw toDataError(error, 'vault.listFolderDocuments')
   return ((data ?? []) as DocumentRow[]).map((r) => docFromRow(r, who))
 }
 
@@ -320,6 +345,8 @@ const uploadMetaSchema = z.object({
   categoryId: z.string().uuid().nullable(),
   /** Enfants concernés (documents.children_ids, 0004). */
   childIds: z.array(z.string().uuid()).max(20).optional(),
+  /** Dossier de destination (0410) ; absent = racine. */
+  folderId: z.string().uuid().nullable().optional(),
 })
 export type UploadMeta = z.infer<typeof uploadMetaSchema>
 
@@ -348,6 +375,7 @@ export async function uploadDocument(file: File, meta: UploadMeta): Promise<Vaul
       source: p.data.source || null,
       description: p.data.description || null,
       children_ids: p.data.childIds ?? [],
+      folder_id: p.data.folderId ?? null,
     })
     .select(DOC_COLUMNS)
     .single()

@@ -6,8 +6,9 @@
  *   uniquement », messages immuables, plusieurs conversations par paire de
  *   parents (sujet facultatif), archivage par participant, notes vocales,
  *   accusés de lecture via mark_read(), temps réel via supabase.channel.
- *   Les pièces jointes sont rangées dans le coffre-fort de chaque
- *   participant par l'action serveur syncConversationVault (service_role).
+ *   Pièces jointes et coffre-fort (0420) : rangement automatique seulement
+ *   pour les participants qui l'ont activé (syncConversationVault), sinon à la
+ *   demande avec « Mettre au coffre-fort » (saveAttachmentToVault).
  * - Mode démonstration : conversations fictives en sessionStorage, fichiers
  *   et notes vocales en mémoire (URL blob:), rien ne quitte l'appareil.
  *   À n'utiliser que dans des Client Components.
@@ -15,7 +16,8 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
-import { syncConversationVault } from '@/app/app/messages/actions'
+import { saveAttachmentToVault, syncConversationVault } from '@/app/app/messages/actions'
+import { getVaultSettings, listFolders, type SaveOutcome } from '@/lib/data/vault-folders'
 import { listLinkedParents } from '@/lib/coparents/client'
 import {
   DEMO_CONVERSATION_ID, DEMO_ME, DEMO_OTHER, DEMO_THIRD, demoConversations,
@@ -94,7 +96,7 @@ export type MessageEvent = { type: 'insert' | 'update'; message: Message }
 export type SendOptions = {
   /** Note vocale : durée mesurée à l'enregistrement. */
   audioDurationMs?: number
-  /** Catégorie du coffre-fort pour VOTRE copie (défaut « Courriers »). */
+  /** Catégorie du coffre-fort pour VOTRE copie (défaut « Courriers »), si le rangement automatique est activé. */
   vaultCategory?: string
 }
 
@@ -275,7 +277,7 @@ const DEMO_PEOPLE: Participant[] = [DEMO_ME, DEMO_OTHER, DEMO_THIRD]
 
 type DemoMessage = SeedMessage
 type DemoConversation = SeedConversation & { lastReadAt?: string | null }
-type DemoVaultLink = SeedVaultLink & { documentId: string; addedAt: string; name: string; senderId: string }
+type DemoVaultLink = SeedVaultLink & { documentId: string; addedAt: string; name: string; senderId: string; folderId?: string | null }
 type DemoStore = {
   conversations: DemoConversation[]
   messages: Record<string, DemoMessage[]>
@@ -616,10 +618,13 @@ export async function sendMessage(
       id, senderId: state.me.id, body: text, attachment, createdAt: new Date().toISOString(), readAt: null,
       kind, audioDurationMs: durationMs,
     }
-    const vault = attachment
+    // Démo : rangement automatique seulement si le réglage est activé (désactivé par défaut, 0420).
+    const auto = attachment ? await getVaultSettings().catch(() => null) : null
+    const vault = attachment && auto?.autoImportMessages
       ? [...s.vault, {
           messageId: id, conversationId, categoryName: opts.vaultCategory ?? DEFAULT_VAULT_CATEGORY,
           documentId: `demo_doc_${id}`, addedAt: seed.createdAt, name: attachment.name, senderId: state.me.id,
+          folderId: auto.autoImportFolderId,
         }]
       : s.vault
     demoWrite({ ...s, messages: { ...s.messages, [conversationId]: [...(s.messages[conversationId] ?? []), seed] }, vault })
@@ -739,6 +744,52 @@ export async function syncVault(
   return Object.fromEntries(res.links.map((l) => [l.messageId, l]))
 }
 
+/**
+ * « Mettre au coffre-fort » : copie la pièce jointe d'un message dans VOTRE coffre, dans
+ * `folderId` (dossier du coffre) ou à la racine (null). Sans doublon.
+ */
+export async function saveToVault(
+  conversationId: string,
+  messageId: string,
+  folderId: string | null,
+): Promise<{ link: VaultLink; outcome: SaveOutcome }> {
+  if (!SUPABASE_ENABLED) {
+    const s = demoRead()
+    const m = s.messages[conversationId]?.find((x) => x.id === messageId)
+    if (!m?.attachment) throw new Error('Ce message ne contient pas de pièce jointe à ranger.')
+    const existing = s.vault.find((v) => v.messageId === messageId)
+    const folderName = async (id: string | null | undefined) =>
+      id ? (await listFolders().catch(() => [])).find((f) => f.id === id)?.name ?? null : null
+    if (existing) {
+      // Déjà au coffre : aucun déplacement (même règle que le serveur).
+      return {
+        link: { messageId, documentId: existing.documentId, status: 'done', categoryName: existing.categoryName },
+        outcome: { created: false, placed: null, folderName: await folderName(existing.folderId) },
+      }
+    }
+    const link: DemoVaultLink = {
+      messageId, conversationId, categoryName: DEFAULT_VAULT_CATEGORY, documentId: `demo_doc_${messageId}`,
+      addedAt: new Date().toISOString(), name: m.attachment.name, senderId: m.senderId, folderId,
+    }
+    demoWrite({ ...s, vault: [...s.vault, link] })
+    return {
+      link: { messageId, documentId: link.documentId, status: 'done', categoryName: link.categoryName },
+      outcome: { created: true, placed: folderId ? true : null, folderName: await folderName(folderId) },
+    }
+  }
+  const res = await saveAttachmentToVault({ conversationId, messageId, folderId })
+  if (!res.ok) throw new VaultSaveError(res.error, res.code)
+  return { link: res.link, outcome: { created: res.created, placed: res.placed, folderName: res.folderName } }
+}
+
+/** Échec de « Mettre au coffre-fort » ; `code = 'vault_locked'` : coffre à déverrouiller. */
+export class VaultSaveError extends Error {
+  constructor(message: string, readonly code?: 'vault_locked') {
+    super(message)
+    this.name = 'VaultSaveError'
+  }
+}
+
 /** Lien vers le document du coffre (démo : liste du coffre, les documents fictifs n'y figurent pas). */
 export function vaultDocumentHref(documentId: string): string {
   return SUPABASE_ENABLED ? `/app/coffre/documents/${encodeURIComponent(documentId)}` : '/app/coffre'
@@ -749,7 +800,7 @@ export function vaultDocumentHref(documentId: string): string {
  * Point d'accroche pour lib/data/vault.ts (mode démo) si le coordinateur
  * souhaite les afficher dans la liste du coffre.
  */
-export function listDemoVaultImports(): Array<{ documentId: string; name: string; categoryName: string; addedAt: string; conversationId: string; messageId: string; senderId: string; mime?: string; size?: number }> {
+export function listDemoVaultImports(): Array<{ documentId: string; name: string; categoryName: string; addedAt: string; conversationId: string; messageId: string; senderId: string; mime?: string; size?: number; folderId?: string | null }> {
   if (SUPABASE_ENABLED) return []
   const store = demoRead()
   return store.vault.map((v) => {
@@ -757,7 +808,7 @@ export function listDemoVaultImports(): Array<{ documentId: string; name: string
     return {
       documentId: v.documentId, name: v.name, categoryName: v.categoryName, addedAt: v.addedAt,
       conversationId: v.conversationId, messageId: v.messageId, senderId: v.senderId,
-      mime: att?.mime, size: att?.size,
+      mime: att?.mime, size: att?.size, folderId: v.folderId ?? null,
     }
   })
 }

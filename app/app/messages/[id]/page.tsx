@@ -12,10 +12,15 @@ import { ToneCheckSheet } from '@/components/messages/ToneCheckSheet'
 import { dayKey, dayLabel } from '@/components/messages/format'
 import { analyzeTone, TONE_THRESHOLD, type ToneAnalysis } from '@/components/messages/toneCheck'
 import type { VoiceClip } from '@/components/messages/useVoiceRecorder'
+import { FolderPickerSheet } from '@/components/coffre/FolderSheets'
 import { listCategories } from '@/lib/data/vault'
 import {
+  DEFAULT_VAULT_SETTINGS, getVaultSettings, listFolders, listMyFolderShares, saveOutcomeMessage,
+  type FolderShare, type VaultFolder, type VaultSettings,
+} from '@/lib/data/vault-folders'
+import {
   DEFAULT_VAULT_CATEGORY, conversationLabel, displayName, getConversation, getMe, listMessages, markConversationRead,
-  participantsLabel, sendMessage, setConversationArchived, subscribeToConversation, syncVault, validateAttachment,
+  participantsLabel, saveToVault, sendMessage, setConversationArchived, subscribeToConversation, syncVault, validateAttachment,
   type ConversationSummary, type Message, type Participant, type VaultLink,
 } from '@/lib/messages'
 
@@ -30,7 +35,8 @@ function scrollToEnd(smooth: boolean) {
 }
 
 // Conversation : messages horodatés et immuables, accusés de lecture, pièces jointes et
-// notes vocales rangées dans le coffre-fort, vérification du ton (Coach IA), export PDF.
+// notes vocales à mettre au coffre-fort (à la demande, ou automatiquement si le parent l'a
+// activé dans les réglages du coffre), vérification du ton (Coach IA), export PDF.
 export default function ConversationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id: rawId } = use(params)
   const conversationId = decodeURIComponent(rawId)
@@ -42,6 +48,11 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
   const [vault, setVault] = useState<Record<string, VaultLink>>({})
   const [categories, setCategories] = useState<string[]>(FALLBACK_CATEGORIES)
   const [vaultCategory, setVaultCategory] = useState(DEFAULT_VAULT_CATEGORY)
+  const [vaultSettings, setVaultSettings] = useState<VaultSettings>(DEFAULT_VAULT_SETTINGS)
+  const [folders, setFolders] = useState<VaultFolder[]>([])
+  const [folderShares, setFolderShares] = useState<FolderShare[]>([])
+  const [saveFor, setSaveFor] = useState<Message | null>(null)
+  const autoVault = vaultSettings.autoImportMessages
 
   const [text, setText] = useState('')
   const [file, setFile] = useState<File | null>(null)
@@ -95,6 +106,16 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
   }, [conversationId, refreshVault])
 
   useEffect(() => { void load() }, [load])
+
+  // Réglage « Ranger automatiquement » (désactivé par défaut) et dossiers du coffre
+  // (feuille « Mettre au coffre-fort »). Échec : valeurs par défaut, jamais bloquant.
+  useEffect(() => {
+    let alive = true
+    getVaultSettings().then((v) => { if (alive) setVaultSettings(v) }, () => { /* désactivé */ })
+    listFolders().then((f) => { if (alive) setFolders(f.filter((x) => x.mine)) }, () => { /* racine seule */ })
+    listMyFolderShares().then((x) => { if (alive) setFolderShares(x) }, () => { /* pas d'indication de partage */ })
+    return () => { alive = false }
+  }, [])
 
   // Catégories du coffre (sélecteur « Ranger dans »).
   useEffect(() => {
@@ -181,7 +202,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
 
   const afterSend = (sent: Message, category: string) => {
     setMessages((list) => (list && !list.some((m) => m.id === sent.id) ? [...list, sent] : list))
-    if (sent.attachment) {
+    if (sent.attachment && autoVault) {
       setVault((v) => ({ ...v, [sent.id]: v[sent.id] ?? { messageId: sent.id, documentId: null, status: 'pending', categoryName: category } }))
       void refreshVault({ messageId: sent.id, categoryName: category })
     }
@@ -198,7 +219,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
       setText('')
       setFile(null)
       setVaultCategory(DEFAULT_VAULT_CATEGORY)
-      announce(attachment ? `Message envoyé. Pièce jointe ajoutée au coffre-fort (${category}).` : 'Message envoyé')
+      announce(attachment && autoVault ? `Message envoyé. Pièce jointe ajoutée au coffre-fort (${category}).` : 'Message envoyé')
     } catch (err) {
       setError(err instanceof Error ? err.message : "Le message n'a pas pu être envoyé. Réessayez.")
     } finally {
@@ -218,7 +239,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
       const sent = await sendMessage({ me, conversationId }, '', f, { audioDurationMs: clip.durationMs, vaultCategory: category })
       afterSend(sent, category)
       setVaultCategory(DEFAULT_VAULT_CATEGORY)
-      announce(`Note vocale envoyée et ajoutée au coffre-fort (${category}).`)
+      announce(autoVault ? `Note vocale envoyée et ajoutée au coffre-fort (${category}).` : 'Note vocale envoyée')
       return true
     } catch (err) {
       setError(err instanceof Error ? err.message : "La note vocale n'a pas pu être envoyée. Réessayez.")
@@ -367,6 +388,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
                     senderName={nameOf(m.senderId)}
                     showSender={showSender}
                     vault={vault[m.id]}
+                    onSaveToVault={setSaveFor}
                   />
                 </Fragment>
               )
@@ -387,7 +409,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
             busy={busy}
             error={error}
             textareaRef={textareaRef}
-            vaultCategories={categories}
+            vaultCategories={autoVault ? categories : []}
             vaultCategory={vaultCategory}
             onVaultCategoryChange={setVaultCategory}
             recipients={recipients.charAt(0).toUpperCase() + recipients.slice(1)}
@@ -415,6 +437,31 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
         onEdit={() => {
           setPending(null)
           requestAnimationFrame(() => textareaRef.current?.focus())
+        }}
+      />
+
+      <FolderPickerSheet
+        open={saveFor !== null}
+        onClose={() => setSaveFor(null)}
+        title="Mettre au coffre-fort"
+        description={saveFor?.attachment
+          ? `« ${saveFor.kind === 'audio' ? 'Note vocale' : saveFor.attachment.name} » sera copié dans votre coffre-fort. Choisissez son emplacement.`
+          : undefined}
+        folders={folders}
+        initial={null}
+        shares={folderShares}
+        confirmLabel="Ajouter"
+        onConfirm={async (folderId) => {
+          if (!saveFor) return null
+          try {
+            const { link, outcome } = await saveToVault(conversationId, saveFor.id, folderId)
+            setVault((v) => ({ ...v, [saveFor.id]: link }))
+            setSaveFor(null)
+            announce(saveOutcomeMessage(outcome))
+            return null
+          } catch (e) {
+            return e instanceof Error ? e.message : "La pièce jointe n'a pas pu être ajoutée au coffre-fort."
+          }
         }}
       />
 

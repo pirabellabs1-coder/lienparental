@@ -137,7 +137,8 @@ export function demoConversations(now: Date = new Date()): {
     vault: [
       { messageId: 'msg_8', conversationId: DEMO_CONVERSATION_ID, categoryName: 'Courriers' },
       { messageId: 'vac_2', conversationId: 'conv_vacances', categoryName: 'Scolarité' },
-      { messageId: 'vac_3', conversationId: 'conv_vacances', categoryName: 'Courriers' },
+      // vac_3 volontairement absent : pièce jointe pas encore mise au coffre-fort (rangement automatique
+      // désactivé par défaut, 0420) ; la bulle propose « Mettre au coffre-fort ».
       { messageId: 'kar_3', conversationId: 'conv_karim', categoryName: 'Courriers' },
       { messageId: 'san_3', conversationId: 'conv_sante', categoryName: 'Santé' },
     ],

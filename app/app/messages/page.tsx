@@ -230,9 +230,9 @@ export default function MessagesPage() {
                 <div className="flex gap-3">
                   <FolderLock className="mt-0.5 h-5 w-5 shrink-0 text-leaf-600" aria-hidden="true" />
                   <div>
-                    <h2 className="text-[14px] font-bold text-night-900">Pièces jointes rangées pour vous</h2>
+                    <h2 className="text-[14px] font-bold text-night-900">Pièces jointes et coffre-fort</h2>
                     <p className="mt-1 text-[13px] text-night-600">
-                      Documents, photos et notes vocales échangés sont ajoutés automatiquement au coffre-fort de chaque parent, dans « Courriers » ou la catégorie choisie.
+                      Mettez une pièce jointe au coffre-fort d&apos;un geste, dans le dossier de votre choix. Le rangement automatique est désactivé par défaut et s&apos;active dans les paramètres du coffre-fort.
                     </p>
                   </div>
                 </div>

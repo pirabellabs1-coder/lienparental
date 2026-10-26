@@ -105,6 +105,8 @@ export default async function run(db) {
   check('B parti : ne peut plus écrire', !!(await err(as(db, B, `insert into public.messages (conversation_id, sender_id, body) values ($1, $2, 'après')`, [conv3, B.id]))))
   await new Promise((r) => setTimeout(r, 20))
   const att2 = `${conv3}/${uuid()}.pdf`
+  // 0420 : rangement automatique désactivé par défaut ; activé ici pour les trois participants.
+  await db.query(`insert into public.vault_settings (user_id, auto_import_messages) select unnest($1::uuid[]), true on conflict (user_id) do update set auto_import_messages = true`, [[A.id, B.id, E.id]])
   await as(db, A, `insert into public.messages (conversation_id, sender_id, body, attachment_path, attachment_meta) values ($1, $2, 'nouveau', $3, '{"name":"b.pdf","mime":"application/pdf"}')`, [conv3, A.id, att2])
   await db.query(`insert into storage.objects (bucket_id, name) values ('message-attachments', $1)`, [att2])
   const bodiesB = (await as(db, B, `select body from public.messages where conversation_id = $1 order by created_at`, [conv3])).map((r) => r.body)

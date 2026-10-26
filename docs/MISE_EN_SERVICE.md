@@ -33,9 +33,9 @@ Ordre (identique à `docs/DEPLOIEMENT.md` §1.5 et au banc de tests `npm run tes
 `0250_guide` → `0260_sante_enfant` → `0270_security_hardening` → `0280_journal_dates_guide` → `0290_vault_lock` →
 `0300_admin_contenus` → `0310_admin_stats` → `0320_google` → `0330_messagerie_plus` → `0340_famille` →
 `0350_finances_plus` → `0360_security_v3` → `0370_vault_lock_phase2` → `0380_plan_coparentalite` → `0390_rate_limit` →
-`0400_admin_operations`.
+`0400_admin_operations` → `0410_vault_folders` → `0420_vault_import_settings` → `0430_vault_add_from_source_trash`.
 
-**Règle de déploiement** : appliquer `0390_rate_limit` **avant** de déployer le code qui l'utilise ; sinon les routes sensibles (coffre, codes avocat, espace témoin) répondent 503.
+**Règle de déploiement** : appliquer `0390_rate_limit` **avant** de déployer le code qui l'utilise ; sinon les routes sensibles (coffre, codes avocat, espace témoin) répondent 503. Appliquer aussi `0410` → `0420` → `0430` **avant** le code des dossiers du coffre (colonne `documents.folder_id`, table `vault_settings`). Depuis `0420`, le rangement automatique des pièces jointes au coffre est désactivé par défaut pour tous les comptes. Annulation : blocs de rollback en fin de 0410 et 0420 (annuler 0420 avant 0410) ; pour 0430, ré-appliquer la fonction de 0360 §6.
 
 Option A — CLI (recommandée) : exécuter `storage.sql` dans le SQL Editor, puis
 

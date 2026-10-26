@@ -13,8 +13,9 @@ import { requireVaultUnlocked, vaultDeniedResponse } from '@/lib/vault-lock'
 // génère plus d'URL signée lui-même (lib/data/vault.ts).
 //   1. session revalidée (requireAuthedUser : getUser + aal2 si 2FA) ;
 //   2. coffre déverrouillé pour CETTE session (cookie signé ; la base l'exige aussi, 0370) ;
-//   3. document lu avec le client RLS de l'utilisateur : propriétaire, ou gardien d'un enfant
-//      commun pour un document explicitement partagé (0340) ; contrôle applicatif en plus ;
+//   3. document lu avec le client RLS de l'utilisateur : propriétaire, gardien d'un enfant
+//      commun pour un document explicitement partagé (0340), ou parent lié destinataire d'un
+//      dossier partagé (0410, vault_shared_folder_ids) ; contrôle applicatif en plus ;
 //   4. URL signée de 60 s générée avec le client de l'UTILISATEUR (politiques Storage
 //      appliquées), jamais avec le service_role.
 // Réponse : redirection 302 vers l'URL signée, ou { url, expiresIn } si `format=json`
@@ -32,7 +33,10 @@ const querySchema = z.object({
 })
 
 type Ctx = { params: Promise<{ id: string }> }
-type DocRow = { id: string; user_id: string; name: string; mime: string; storage_path: string; family_shared: boolean | null }
+type DocRow = {
+  id: string; user_id: string; name: string; mime: string; storage_path: string
+  family_shared: boolean | null; folder_id: string | null
+}
 
 const NOT_FOUND = 'Document introuvable ou inaccessible.'
 
@@ -83,7 +87,7 @@ export async function GET(req: Request, { params }: Ctx) {
   const db = supabase as unknown as SupabaseClient
   const { data, error } = await db
     .from('documents')
-    .select('id, user_id, name, mime, storage_path, family_shared')
+    .select('id, user_id, name, mime, storage_path, family_shared, folder_id')
     .eq('id', id)
     .is('deleted_at', null)
     .maybeSingle()
@@ -92,8 +96,18 @@ export async function GET(req: Request, { params }: Ctx) {
     return jsonError(503, 'unavailable', 'Fichier momentanément indisponible. Réessayez.')
   }
   const d = data as DocRow | null
-  // Propriétaire, ou document explicitement partagé et visible par la RLS famille (gardien actif).
-  if (!d || (d.user_id !== user.id && !d.family_shared)) return jsonError(404, 'not_found', NOT_FOUND)
+  // Propriétaire, document explicitement partagé et visible par la RLS famille (gardien actif),
+  // ou document d'un dossier partagé avec moi par un parent toujours lié (0410).
+  if (!d) return jsonError(404, 'not_found', NOT_FOUND)
+  if (d.user_id !== user.id && !d.family_shared) {
+    if (!d.folder_id) return jsonError(404, 'not_found', NOT_FOUND)
+    const { data: ids, error: fErr } = await db.rpc('vault_shared_folder_ids')
+    if (fErr) {
+      console.warn(`[coffre/fichier] dossiers partagés indisponibles (code ${fErr.code ?? 'inconnu'})`)
+      return jsonError(503, 'unavailable', 'Fichier momentanément indisponible. Réessayez.')
+    }
+    if (!Array.isArray(ids) || !(ids as unknown[]).includes(d.folder_id)) return jsonError(404, 'not_found', NOT_FOUND)
+  }
   if (!ownedPath(d.storage_path, d.user_id)) {
     console.warn('[coffre/fichier] storage_path hors du dossier propriétaire refusé')
     return jsonError(404, 'not_found', NOT_FOUND)

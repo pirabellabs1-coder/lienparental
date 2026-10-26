@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Download, Eye, FolderInput, Share2, Trash2 } from 'lucide-react'
+import { Download, Eye, Folder, FolderInput, Share2, Trash2 } from 'lucide-react'
 import { ActionSheet } from '@/components/ui'
 import type { VaultDocument } from '@/lib/mock-vault'
 import { LIVE } from '@/lib/data/core'
@@ -63,7 +63,7 @@ export async function startPreview(doc: VaultDocument | VaultDocumentRecord, ann
   }
 }
 
-/** Menu « ⋯ » d'un document (Voir, Télécharger, Partager, Déplacer, Supprimer). */
+/** Menu « ⋯ » d'un document (Voir, Télécharger, Partager, Ranger dans un dossier, Déplacer, Supprimer). */
 export function useDocActions(announce: (m: string) => void) {
   const router = useRouter()
   const [doc, setDoc] = useState<VaultDocument | null>(null)
@@ -79,7 +79,8 @@ export function useDocActions(announce: (m: string) => void) {
         // Document partagé par un autre parent (docs/FAMILLE.md) : lecture et téléchargement seulement.
         ...(doc.sharedBy ? [] : [
           { key: 'share', label: 'Partager', icon: <Share2 className="h-5 w-5" />, onClick: () => { void shareDocument(doc).then((m) => m && announce(m)) } },
-          { key: 'move', label: 'Déplacer', icon: <FolderInput className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}?deplacer=1`) },
+          { key: 'folder', label: 'Ranger dans un dossier', icon: <Folder className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}?dossier=1`) },
+          { key: 'move', label: 'Changer de catégorie', icon: <FolderInput className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}?deplacer=1`) },
           { key: 'del', label: 'Supprimer', icon: <Trash2 className="h-5 w-5" />, variant: 'danger' as const, onClick: () => router.push(`/app/coffre/documents/${doc.id}/supprimer`) },
         ]),
       ] : []}

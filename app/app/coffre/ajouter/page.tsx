@@ -11,7 +11,8 @@ import { CategoryIcon } from '@/components/coffre/CategoryIcon'
 import { FileIcon } from '@/components/coffre/FileIcon'
 import { SuccessBurst } from '@/components/coffre/Illustrations'
 import { btn } from '@/components/coffre/buttons'
-import { useCategories } from '@/components/coffre/store'
+import { useCategories, useFolders } from '@/components/coffre/store'
+import { folderPath } from '@/lib/data/vault-folders'
 import { VAULT_SOURCES, frDate, frSize, type VaultTone } from '@/lib/mock-vault'
 import { cn } from '@/lib/cn'
 import { LIVE } from '@/lib/data/core'
@@ -60,6 +61,17 @@ function Field({ id, label, required, error, children }: { id: string; label: st
 export default function AddDocumentPage({ searchParams }: { searchParams: Promise<RawParams> }) {
   const params = use(searchParams)
   const prefill = useMemo(() => parseVaultPrefill(params), [params])
+  // Ajout depuis un dossier (« Ajouter un document ici », 0410) : ?dossier=<uuid>.
+  const folderId = useMemo(() => {
+    const raw = Array.isArray(params.dossier) ? params.dossier[0] : params.dossier
+    // Démo : identifiants de dossiers d'exemple (f_demo_…) ; Supabase : uuid uniquement.
+    const ok = LIVE ? /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i : /^[A-Za-z0-9_-]{1,64}$/
+    return raw && ok.test(raw) ? raw : null
+  }, [params])
+  const { folders } = useFolders()
+  const destination = folderId ? folderPath(folders, folderId) : []
+  const destinationLabel = destination.map((f) => f.name).join(' / ')
+  const folderHref = folderId ? `/app/coffre/dossiers/${encodeURIComponent(folderId)}` : null
   const router = useRouter()
   const uid = useId()
   const { categories } = useCategories()
@@ -167,6 +179,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
         confidentialite: conf,
         categoryId: category?.id ?? null,
         childIds,
+        folderId,
       })
       setDone(true)
     } catch (e) {
@@ -191,6 +204,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
             <p className="truncate text-[15px] font-bold text-night-900">{name}</p>
             <p className="text-[12.5px] text-night-500">{labelForExt(file.ext) === 'W' ? 'DOCX' : labelForExt(file.ext)} <span aria-hidden="true">•</span> {frSize(file.size)}</p>
             <p className="text-[12.5px] text-night-500">{category?.name}</p>
+            {destinationLabel && <p className="text-[12.5px] text-night-500">Dossier : {destinationLabel}</p>}
           </div>
         </div>
         <div className="mt-auto space-y-2 pt-8">
@@ -202,6 +216,11 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
           ) : healthChild ? (
             <>
               <Link href={`/app/enfants/${healthChild.id}/sante`} className={btn({ variant: 'primary' })}>Retour à l’espace Santé de {healthChild.prenom}</Link>
+              <Link href="/app/coffre/documents/tous" className={btn({ variant: 'secondary' })}>Voir mes documents</Link>
+            </>
+          ) : folderHref ? (
+            <>
+              <Link href={folderHref} className={btn({ variant: 'primary' })}>Retour au dossier{destination.length ? ` « ${destination[destination.length - 1].name} »` : ''}</Link>
               <Link href="/app/coffre/documents/tous" className={btn({ variant: 'secondary' })}>Voir mes documents</Link>
             </>
           ) : (
@@ -231,6 +250,12 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
       <ScreenHeader title="Ajouter un document" onBack={back} backLabel={step > 1 ? 'Étape précédente' : 'Retour'} />
       <div className="px-5">
         <Stepper steps={STEPS} current={step} className="mt-1" />
+        {destinationLabel && (
+          <p className="mt-3 flex items-center gap-2 rounded-xl bg-leaf-50/70 px-3 py-2 text-[12.5px] font-semibold text-night-800">
+            <FolderInput className="h-4 w-4 shrink-0 text-leaf-700" aria-hidden="true" />
+            Sera rangé dans le dossier « {destinationLabel} »
+          </p>
+        )}
 
         <h2 ref={headingRef} tabIndex={-1} className="mt-6 text-[15px] font-extrabold text-night-900 outline-none">
           {titles[step]}

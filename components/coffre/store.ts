@@ -24,6 +24,12 @@ import {
 import {
   listReceivedTestimonies, listTestimonyRequests, reviewTestimony, type ReceivedTestimonyRecord,
 } from '@/lib/data/testimonies'
+import { listFolderDocuments } from '@/lib/data/vault'
+import {
+  DEFAULT_VAULT_SETTINGS, FOLDER_DEMO_DOCS, demoDocsWithFolders, getVaultSettings, listFolders, listMyFolderShares,
+  listSharedWithMe, saveVaultSettings,
+  type FolderShare, type SharedWithMe, type VaultFolder, type VaultSettings,
+} from '@/lib/data/vault-folders'
 
 const KEYS = {
   categories: 'lp.coffre.categories',
@@ -127,9 +133,12 @@ function useDemoExtraDocs() {
 /** Documents actifs (démo : VAULT_DOCS + documents complémentaires, moins ceux supprimés dans la session). */
 export function useVaultDocs() {
   const { deleted, ready: storedReady } = useDeletedDocs()
-  const { extra } = useDemoExtraDocs()
+  const { extra, ready: extraReady } = useDemoExtraDocs()
   const live = useAsyncData<VaultDocumentRecord[]>(LIVE ? () => listDocuments() : noLoad([]), `vault:docs:${LIVE}`)
-  const docs: VaultDocumentRecord[] = LIVE ? (live.data ?? []) : [...extra, ...VAULT_DOCS].filter((d) => !deleted.includes(d.id))
+  // Démo : dossiers lus en sessionStorage, donc seulement après montage (pas d'écart d'hydratation).
+  // FOLDER_DEMO_DOCS : seuls les miens (ceux partagés par Thomas restent dans « Partagés avec moi »).
+  const demoDocs = [...extra, ...FOLDER_DEMO_DOCS.filter((d) => !d.sharedBy), ...VAULT_DOCS].filter((d) => !deleted.includes(d.id))
+  const docs: VaultDocumentRecord[] = LIVE ? (live.data ?? []) : extraReady ? demoDocsWithFolders(demoDocs) : demoDocs
   return { docs, ready: LIVE ? !live.loading : storedReady, loading: LIVE && live.loading, error: live.error, refresh: live.refresh }
 }
 
@@ -140,7 +149,8 @@ export function useVaultDoc(id: string) {
     LIVE ? () => getDocument(id) : noLoad(null),
     `vault:doc:${id}:${LIVE}`,
   )
-  const doc = LIVE ? live.data : (VAULT_DOCS.find((d) => d.id === id) ?? extra.find((d) => d.id === id) ?? null)
+  const demoDoc = LIVE ? null : ([...VAULT_DOCS, ...FOLDER_DEMO_DOCS, ...extra].find((d) => d.id === id) ?? null)
+  const doc = LIVE ? live.data : (demoDoc && extraReady ? demoDocsWithFolders([demoDoc])[0] : demoDoc)
   // Démo : documents complémentaires (partagé par l'autre parent, pièces de messagerie) chargés
   // après montage ; tant qu'ils ne le sont pas, « chargement » plutôt que « introuvable ».
   const loading = LIVE ? live.loading : !doc && !extraReady
@@ -150,6 +160,63 @@ export function useVaultDoc(id: string) {
 /** Corbeille (Supabase uniquement). */
 export function useTrashedDocs() {
   return useAsyncData<VaultDocumentRecord[]>(LIVE ? () => listDocuments({ trash: true }) : noLoad([]), `vault:trash:${LIVE}`)
+}
+
+/* ---- Dossiers (0410) ---------------------------------------------------- */
+
+/**
+ * Dossiers visibles (les miens + ceux partagés avec moi) et partages actifs de mes dossiers.
+ * Démo : lecture après montage (sessionStorage), `version` force le rechargement après écriture.
+ */
+export function useFolders() {
+  const [version, setVersion] = useState(0)
+  const folders = useAsyncData<VaultFolder[]>(listFolders, `vault:folders:${LIVE}:${version}`)
+  const shares = useAsyncData<FolderShare[]>(listMyFolderShares, `vault:folder-shares:${LIVE}:${version}`)
+  const shared = useAsyncData<SharedWithMe[]>(listSharedWithMe, `vault:shared-with-me:${LIVE}:${version}`)
+  const refresh = useCallback(async () => {
+    if (LIVE) await Promise.all([folders.refresh(), shares.refresh(), shared.refresh()])
+    else setVersion((v) => v + 1)
+  }, [folders, shares, shared])
+  return {
+    folders: folders.data ?? [],
+    shares: shares.data ?? [],
+    sharedWithMe: shared.data ?? [],
+    loading: folders.loading,
+    /** Premier chargement seulement (un rechargement garde l'écran et ses feuilles ouvertes). */
+    initialLoading: folders.loading && folders.data === null,
+    error: (folders.error ?? shares.error ?? shared.error) as DataError | null,
+    refresh,
+  }
+}
+
+/**
+ * Documents d'un dossier (le mien ou partagé avec moi). Démo : recalculés à chaque rendu
+ * après montage (sessionStorage), donc à jour dès que l'écran se redessine.
+ */
+export function useFolderDocs(folderId: string) {
+  const { deleted } = useDeletedDocs()
+  const { extra, ready } = useDemoExtraDocs()
+  const live = useAsyncData<VaultDocumentRecord[]>(
+    LIVE ? () => listFolderDocuments(folderId) : noLoad([]),
+    `vault:folder-docs:${folderId}:${LIVE}`,
+  )
+  const docs = LIVE
+    ? (live.data ?? [])
+    : ready
+      ? demoDocsWithFolders([...extra, ...VAULT_DOCS, ...FOLDER_DEMO_DOCS]).filter((d) => !deleted.includes(d.id) && d.folderId === folderId)
+      : []
+  return { docs, loading: LIVE ? live.loading : !ready, error: live.error, refresh: live.refresh }
+}
+
+/** Réglages du coffre (rangement automatique des pièces jointes). */
+export function useVaultSettings() {
+  const live = useAsyncData<VaultSettings>(getVaultSettings, `vault:settings:${LIVE}`)
+  const save = async (next: VaultSettings): Promise<VaultSettings> => {
+    const saved = await saveVaultSettings(next)
+    live.setData(saved)
+    return saved
+  }
+  return { settings: live.data ?? DEFAULT_VAULT_SETTINGS, loading: live.loading, error: live.error, save }
 }
 
 /* ---- Demandes de témoignage ------------------------------------------ */

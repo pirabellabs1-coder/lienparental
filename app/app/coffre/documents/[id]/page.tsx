@@ -1,17 +1,19 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, use, useEffect, useState, type ReactNode } from 'react'
+import { Suspense, use, useEffect, useRef, useState, type ReactNode } from 'react'
 import { useSearchParams } from 'next/navigation'
 import {
-  CalendarDays, ChevronRight, Clock, Download, Eye, FileText, FolderInput, FolderOpen,
+  CalendarDays, ChevronRight, Clock, Download, Eye, FileText, Folder, FolderInput, FolderOpen,
   HardDrive, Landmark, Lock, Pencil, Share2, Trash2,
 } from 'lucide-react'
 import { Button, Input, Modal } from '@/components/ui'
 import { ScreenHeader, headerIconBtn } from '@/components/coffre/ScreenHeader'
 import { FileIcon } from '@/components/coffre/FileIcon'
 import { CategoryIcon } from '@/components/coffre/CategoryIcon'
-import { useCategories, useDeletedDocs, useVaultDoc } from '@/components/coffre/store'
+import { useCategories, useDeletedDocs, useFolders, useVaultDoc } from '@/components/coffre/store'
+import { FolderPickerSheet } from '@/components/coffre/FolderSheets'
+import { folderPath, moveDocumentToFolder } from '@/lib/data/vault-folders'
 import { LoadingState } from '@/components/mobile/StateScreens'
 import { moveDocument, renameDocument } from '@/lib/data/vault'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
@@ -60,10 +62,29 @@ function DocumentDetail({ id }: { id: string }) {
   const [moveTo, setMoveTo] = useState(categoryId)
   const [renameOpen, setRenameOpen] = useState(false)
   const [moveOpen, setMoveOpen] = useState(false)
+  const { folders } = useFolders()
+  // Dossier : celui du document (qui peut arriver après coup, ex. démo après montage),
+  // sauf une fois rangé ici (valeur locale). `undefined` = pas encore modifié ici.
+  const [folderOverride, setFolderOverride] = useState<string | null | undefined>(undefined)
+  const folderId = folderOverride !== undefined ? folderOverride : (base?.folderId ?? null)
+  const [folderOpen, setFolderOpen] = useState(false)
 
   // Document partagé par un autre adulte : lecture seule (aucune modale de modification).
   const readOnly = Boolean(base?.sharedBy)
-  useEffect(() => { if (params.get('deplacer') === '1' && base && !base.sharedBy) setMoveOpen(true) }, [params, base])
+  // ?deplacer=1 / ?dossier=1 : ouvre la feuille UNE fois (dépendances stables : l'objet
+  // document peut être recréé à chaque rendu), puis retire le paramètre de l'adresse.
+  const intent = params.get('dossier') === '1' ? 'dossier' : params.get('deplacer') === '1' ? 'deplacer' : null
+  const handledIntent = useRef(false)
+  const baseReady = Boolean(base)
+  useEffect(() => {
+    if (!intent || !baseReady || handledIntent.current) return
+    handledIntent.current = true
+    if (!readOnly) {
+      if (intent === 'dossier') setFolderOpen(true)
+      else setMoveOpen(true)
+    }
+    window.history.replaceState(window.history.state, '', window.location.pathname)
+  }, [intent, baseReady, readOnly])
 
   // Supabase : le document arrive après montage → on synchronise l'état local une fois chargé.
   const baseId = base?.id
@@ -73,6 +94,7 @@ function DocumentDetail({ id }: { id: string }) {
     setDraftName(base.name)
     setCategoryId(base.categoryId)
     setMoveTo(base.categoryId)
+    setFolderOverride(undefined)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseId])
 
@@ -101,6 +123,7 @@ function DocumentDetail({ id }: { id: string }) {
   }
 
   const category = categories.find((c) => c.id === categoryId)
+  const folderTrail = folderPath(folders, folderId)
   const doc = { ...base, name }
 
   return (
@@ -139,6 +162,13 @@ function DocumentDetail({ id }: { id: string }) {
             <InfoRow icon={<FolderOpen className="h-[18px] w-[18px]" />} label="Catégorie">
               {category?.name ?? '—'}
             </InfoRow>
+            <InfoRow icon={<Folder className="h-[18px] w-[18px]" />} label="Dossier">
+              {folderTrail.length > 0 ? (
+                <Link href={`/app/coffre/dossiers/${encodeURIComponent(folderTrail[folderTrail.length - 1].id)}`} className="font-semibold text-leaf-700 underline-offset-2 hover:underline">
+                  {folderTrail.map((f) => f.name).join(' / ')}
+                </Link>
+              ) : 'Aucun (coffre-fort)'}
+            </InfoRow>
             <InfoRow icon={<CalendarDays className="h-[18px] w-[18px]" />} label="Date du document">{frDate(doc.docDate)}</InfoRow>
             <InfoRow icon={<Clock className="h-[18px] w-[18px]" />} label="Ajouté le">{frDate(doc.addedAt)} à {doc.addedTime.replace(':', 'h')}</InfoRow>
             <InfoRow icon={<Landmark className="h-[18px] w-[18px]" />} label="Source">{doc.source}</InfoRow>
@@ -160,7 +190,8 @@ function DocumentDetail({ id }: { id: string }) {
             {!readOnly && (
               <>
                 <ActionRow icon={<Share2 className="h-5 w-5" />} label="Partager" onClick={() => { void shareDocument(doc).then((m) => m && announce(m)) }} />
-                <ActionRow icon={<FolderInput className="h-5 w-5" />} label="Déplacer" onClick={() => { setMoveTo(categoryId); setMoveOpen(true) }} />
+                <ActionRow icon={<Folder className="h-5 w-5" />} label="Ranger dans un dossier" onClick={() => setFolderOpen(true)} />
+                <ActionRow icon={<FolderInput className="h-5 w-5" />} label="Changer de catégorie" onClick={() => { setMoveTo(categoryId); setMoveOpen(true) }} />
                 <ActionRow icon={<Trash2 className="h-5 w-5" />} label="Supprimer" href={`/app/coffre/documents/${doc.id}/supprimer`} danger />
               </>
             )}
@@ -237,6 +268,26 @@ function DocumentDetail({ id }: { id: string }) {
           ))}
         </fieldset>
       </Modal>
+      <FolderPickerSheet
+        open={folderOpen && !readOnly}
+        onClose={() => setFolderOpen(false)}
+        title="Ranger dans un dossier"
+        description="Choisissez le dossier du document. Les catégories ne changent pas."
+        folders={folders}
+        initial={folderId}
+        confirmLabel="Ranger"
+        onConfirm={async (next) => {
+          try {
+            await moveDocumentToFolder(doc.id, next)
+            setFolderOverride(next)
+            setFolderOpen(false)
+            announce(next ? `Rangé dans « ${folders.find((f) => f.id === next)?.name ?? 'le dossier'} »` : 'Document sorti de son dossier')
+            return null
+          } catch (e) {
+            return e instanceof Error ? e.message : 'Rangement impossible'
+          }
+        }}
+      />
       {node}
     </>
   )

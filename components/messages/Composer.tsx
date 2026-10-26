@@ -21,7 +21,7 @@ type Props = {
   busy: 'idle' | 'checking' | 'sending'
   error: string | null
   textareaRef: RefObject<HTMLTextAreaElement | null>
-  /** Catégories du coffre-fort proposées pour ranger la pièce jointe. */
+  /** Catégories du coffre-fort proposées pour ranger la pièce jointe (vide : rangement automatique désactivé, 0420). */
   vaultCategories: string[]
   vaultCategory: string
   onVaultCategoryChange: (v: string) => void
@@ -264,7 +264,7 @@ export function Composer({
             {vaultCategories.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
           <p id={`${uid}-cat-hint`} className="w-full text-[11px] text-night-600">
-            Ajout automatique à votre coffre-fort. {recipients} le retrouvera aussi dans le sien, rangé dans « Courriers ».
+            Rangement automatique activé dans vos réglages du coffre-fort. {recipients} ne le reçoit dans son coffre que s’il a activé ce réglage.
           </p>
         </div>
       )}

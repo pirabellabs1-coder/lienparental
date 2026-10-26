@@ -32,6 +32,7 @@ dans le même bloc ; même contrainte dans l'éditeur SQL de Supabase). Sortie e
 | `0370-coffre` | verrou du coffre en base : documents, témoignages, partages et fichiers Storage selon la session déverrouillée |
 | `0380-coparentalite` | plan effectif partagé Coparentalité+, garde-fou `users.plan`, statistiques admin |
 | `0400-admin` | opérations admin `aal2` (comptes, déconnexion forcée, journal append-only et rétention, support, témoignages en métadonnées seules, centre d'aide versionné et publié seulement) |
+| `0410-dossiers` | dossiers et sous-dossiers du coffre (cycles, profondeur, noms), partage d'un dossier avec un parent lié (lecture seule, documents ajoutés plus tard, Storage), tiers / proche / anonyme sans accès, écritures refusées au destinataire, arrêt du partage et fin du lien, réglage de rangement automatique des pièces jointes (0420) |
 
 Écrire un scénario : `export default async function run(db)` ; jouer un utilisateur avec
 `set_config('request.jwt.claims', …)` + `set local role authenticated` dans une transaction (voir les helpers `as` /

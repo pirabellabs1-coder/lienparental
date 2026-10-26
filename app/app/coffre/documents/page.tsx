@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { ChevronRight, Ellipsis, FolderOpen, Plus, Search } from 'lucide-react'
+import { ChevronRight, Ellipsis, Folder, FolderOpen, Plus, Search } from 'lucide-react'
 import { ScreenHeader } from '@/components/coffre/ScreenHeader'
 import { CategoryIcon } from '@/components/coffre/CategoryIcon'
 import { DocRow } from '@/components/coffre/DocRow'
-import { useCategories, useVaultDocs } from '@/components/coffre/store'
+import { useCategories, useFolders, useVaultDocs } from '@/components/coffre/store'
+import { sharedRoots } from '@/lib/data/vault-folders'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { useDocActions } from '@/components/coffre/useDocActions'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
@@ -14,6 +15,9 @@ import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 export default function DocumentsHub() {
   const { categories } = useCategories()
   const { docs, loading, error, refresh } = useVaultDocs()
+  const { folders, sharedWithMe: sharedAll } = useFolders()
+  const sharedWithMe = sharedRoots(sharedAll, folders)
+  const myFolders = folders.filter((f) => f.mine).length
   const { announce, node } = useAnnounce()
   const { openActions, sheet } = useDocActions(announce)
   const total = categories.reduce((s, c) => s + c.count, 0)
@@ -67,6 +71,23 @@ export default function DocumentsHub() {
           <span className="min-w-0 flex-1">
             <span className="block text-[15px] font-bold text-night-900">Tous les documents</span>
             <span className="block text-[12.5px] text-night-500">{total} documents</span>
+          </span>
+          <ChevronRight className="h-5 w-5 text-night-500 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5" aria-hidden="true" />
+        </Link>
+
+        <Link
+          href="/app/coffre/dossiers"
+          className="group mt-3 flex items-center gap-3.5 rounded-2xl border border-night-100 bg-white p-4 shadow-soft transition-[box-shadow,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-card active:scale-[0.99]"
+        >
+          <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-xl bg-leaf-50 text-leaf-700">
+            <Folder className="h-[22px] w-[22px]" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-[15px] font-bold text-night-900">Dossiers</span>
+            <span className="block text-[12.5px] text-night-500">
+              {myFolders} dossier{myFolders > 1 ? 's' : ''}
+              {sharedWithMe.length > 0 ? ` · ${sharedWithMe.length} partagé${sharedWithMe.length > 1 ? 's' : ''} avec moi` : ''}
+            </span>
           </span>
           <ChevronRight className="h-5 w-5 text-night-500 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5" aria-hidden="true" />
         </Link>

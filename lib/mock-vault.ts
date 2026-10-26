@@ -87,6 +87,8 @@ export type VaultDocument = {
   familyShared?: boolean
   /** Document d'un AUTRE adulte lié : lecture et téléchargement seulement. */
   sharedBy?: { prenom: string }
+  /** Dossier du coffre (vault_folders, 0410) ; absent ou null = racine. */
+  folderId?: string | null
 }
 
 export const VAULT_DOCS: VaultDocument[] = [

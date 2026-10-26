@@ -56,7 +56,7 @@ export function InfoSheet({ open, onClose, me, participants, title, count, expor
         </li>
         <li className="flex gap-3">
           <FolderLock className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" aria-hidden="true" />
-          <p className="text-[13px] text-night-800">Documents, photos et notes vocales échangés ici sont ajoutés automatiquement au coffre-fort de chaque participant, sans doublon.</p>
+          <p className="text-[13px] text-night-800">Rien n&apos;est ajouté à votre coffre-fort sans votre accord : utilisez « Mettre au coffre-fort » sur une pièce jointe, ou activez le rangement automatique dans les paramètres du coffre-fort.</p>
         </li>
         <li className="flex gap-3">
           <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-iris-600" aria-hidden="true" />

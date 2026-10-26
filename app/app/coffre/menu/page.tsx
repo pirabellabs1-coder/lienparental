@@ -1,4 +1,4 @@
-import { CircleHelp, FolderClosed, Settings, Share2, ShieldCheck, Trash2, Users } from 'lucide-react'
+import { CircleHelp, Folder, FolderClosed, Settings, Share2, ShieldCheck, Trash2, Users } from 'lucide-react'
 import { ScreenHeader } from '@/components/coffre/ScreenHeader'
 import { ListRow } from '@/components/coffre/ListRow'
 
@@ -6,6 +6,7 @@ import { ListRow } from '@/components/coffre/ListRow'
 const ITEMS = [
   { href: '/app/coffre/temoignages', label: 'Témoignages', icon: Users, cls: 'text-iris-500' },
   { href: '/app/coffre/documents', label: 'Documents', icon: FolderClosed, cls: 'text-leaf-500' },
+  { href: '/app/coffre/dossiers', label: 'Dossiers', icon: Folder, cls: 'text-leaf-500' },
   { href: '/app/coffre/corbeille', label: 'Corbeille', icon: Trash2, cls: 'text-night-700' },
   { href: '/app/coffre/partages', label: 'Partages actifs', icon: Share2, cls: 'text-night-700' },
   { href: '/app/coffre/parametres', label: 'Paramètres', icon: Settings, cls: 'text-night-700' },
@@ -39,7 +40,7 @@ export default function CoffreMenuPage() {
             Sécurité <span aria-hidden="true">•</span> Confidentialité <span aria-hidden="true">•</span> Privé
           </p>
           <p className="mt-1 text-[13px] leading-snug text-night-700">
-            Vos données sont protégées et ne sont jamais partagées.
+            Vos données sont protégées et ne sont partagées que si vous le décidez.
           </p>
         </div>
       </div>
