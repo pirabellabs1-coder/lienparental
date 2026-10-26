@@ -15,7 +15,7 @@ export function ModuleBar() {
               className="group flex h-full min-h-[48px] items-center gap-2.5 rounded-xl p-2 text-left text-[14px] font-semibold leading-tight text-night-900 transition-colors duration-200 hover:bg-[#F3F8F3] sm:flex-col sm:gap-2 sm:px-1 sm:text-center"
             >
               <IconBubble className="h-10 w-10 transition-transform duration-200 group-hover:-translate-y-0.5 sm:h-12 sm:w-12 [&>svg]:h-[18px] [&>svg]:w-[18px] sm:[&>svg]:h-[22px] sm:[&>svg]:w-[22px]"><Icon strokeWidth={1.75} /></IconBubble>
-              <span className="min-w-0 [hyphens:auto]">{name}</span>
+              <span className="min-w-0 [hyphens:none] [text-wrap:balance]">{name}</span>
             </Link>
           </li>
         ))}

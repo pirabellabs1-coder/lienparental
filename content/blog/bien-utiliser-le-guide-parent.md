@@ -1,16 +1,16 @@
 ---
-titre: Bien utiliser le Guide Parent : démarches, documents et rappels
-extrait: Le Guide Parent rassemble les démarches courantes de la vie de famille, avec les documents à apporter et les organismes à contacter. Voici comment l’utiliser au quotidien.
+titre: Bien utiliser le Guide parental : démarches, documents et rappels
+extrait: Le Guide parental rassemble les démarches courantes de la vie de famille, avec les documents à apporter et les organismes à contacter. Voici comment l’utiliser au quotidien.
 categorie: application
 tags: guide parent, démarches, Guyane
 auteur: L’équipe Lien Parental
 date: 2026-10-20
 couverture: /images/main-enfant.jpg
 couvertureAlt: Un jeune enfant tient la main d’un adulte pendant une promenade
-seoTitre: Guide Parent Lien Parental : mode d’emploi
-seoDescription: Fiches pratiques, documents à apporter, parcours pas à pas : comment utiliser le Guide Parent de Lien Parental.
+seoTitre: Guide parental Lien Parental : mode d’emploi
+seoDescription: Fiches pratiques, documents à apporter, parcours pas à pas : comment utiliser le Guide parental de Lien Parental.
 ---
-Ouvrir un livret pour son enfant, l’inscrire à l’école, demander une aide : chaque démarche demande des documents précis. Un justificatif oublié, et c’est un déplacement de plus. Le **Guide Parent** a été conçu pour éviter cela.
+Ouvrir un livret pour son enfant, l’inscrire à l’école, demander une aide : chaque démarche demande des documents précis. Un justificatif oublié, et c’est un déplacement de plus. Le **Guide parental** a été conçu pour éviter cela.
 
 ## Des fiches pratiques par territoire
 

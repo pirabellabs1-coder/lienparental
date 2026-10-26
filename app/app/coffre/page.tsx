@@ -20,7 +20,7 @@ export default function CoffrePage() {
         className="flex items-center justify-between"
         style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}
       >
-        <Link href="/app" aria-label="Lien Parental, accueil" className="rounded-lg lg:invisible">
+        <Link href="/app" aria-label="Lien Parental, accueil" className="rounded-lg md:invisible">
           <Logo size="sm" />
         </Link>
         <div className="flex items-center gap-1">

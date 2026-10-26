@@ -40,7 +40,7 @@ export function paymentFailedEmail(props: PaymentFailedProps): { subject: string
     </p>
     ${next}
     <p style="margin:0 0 8px 0;">Pour éviter toute interruption, mettez à jour votre moyen de paiement.</p>
-    ${invoiceUrl ? `<p style="margin:0;font-size:14px;">Vous pouvez aussi <a href="${invoiceUrl}" style="color:${t.colors.iris};">régler la facture en ligne</a>.</p>` : ''}
+    ${invoiceUrl ? `<p style="margin:0;font-size:14px;">Vous pouvez aussi <a href="${invoiceUrl}" style="color:${t.colors.link};">régler la facture en ligne</a>.</p>` : ''}
   `
 
   return {

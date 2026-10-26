@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="color-scheme" content="light dark" />
+<meta name="supported-color-schemes" content="light dark" />
+<title>Confirmez qu’il s’agit bien de vous</title>
+<!--[if mso]>
+<style type="text/css">
+  body, table, td, a { font-family: Arial, sans-serif !important; }
+</style>
+<![endif]-->
+<style>
+  /* Styles minimaux : tout le reste est inline */
+  a { color: #256a29; }
+  @media (max-width: 600px) {
+    .lp-card { padding: 24px !important; }
+    .lp-title { font-size: 22px !important; line-height: 28px !important; }
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#f4f5f7;">
+  <!-- Preheader (masqué) -->
+  <div style="display:none;overflow:hidden;line-height:1px;opacity:0;max-height:0;max-width:0;mso-hide:all;">
+    Votre code de sécurité : {{ .Token }}
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f5f7;">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;">
+          <!-- Header -->
+          <tr>
+            <td style="padding:0 0 16px 0;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="left" style="font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;color:#0b2d5b;font-size:16px;font-weight:600;">
+                    <img src="https://lienparental.fr/brand/logo-email.png" width="120" height="73" alt="Lien Parental" style="display:block;border:0;outline:none;" />
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Card -->
+          <tr>
+            <td class="lp-card" style="background:#ffffff;border:1px solid #e4e6ec;border-radius:12px;padding:32px;font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;color:#1a1a1a;">
+              <h1 class="lp-title" style="margin:0 0 16px 0;font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;font-size:24px;line-height:30px;color:#0b2d5b;font-weight:700;">Confirmez qu’il s’agit bien de vous</h1>
+              <div style="font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;font-size:16px;line-height:24px;color:#1a1a1a;">
+                <p style="margin:0 0 16px 0;">Pour confirmer cette opération sensible, saisissez ce code dans l'application&nbsp;:</p><div style="margin:8px 0 20px 0;padding:16px 0;background:#f2f7f2;border:1px solid #e4e6ec;border-radius:10px;text-align:center;font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;font-size:32px;line-height:36px;letter-spacing:10px;font-weight:700;color:#0b2d5b;">{{ .Token }}</div><p style="margin:0;font-size:14px;line-height:20px;color:#5a5a5a;">Ce code est valable quelques minutes.</p>
+              </div>
+              
+              <div style="margin-top:24px;font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;font-size:14px;line-height:20px;color:#5a5a5a;"><p style="margin:0;font-size:14px;line-height:20px;color:#5a5a5a;">Vous n'êtes pas à l'origine de cette demande&nbsp;? Changez votre mot de passe sans attendre.</p></div>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td style="padding:24px 8px;font-family:system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;font-size:12px;line-height:18px;color:#8a8f99;text-align:center;">
+              <p style="margin:0 0 8px 0;">
+                Vous recevez cet e-mail car vous avez un compte sur Lien Parental.
+              </p>
+              <p style="margin:0 0 8px 0;">
+                <a href="https://lienparental.fr/app/profil/preferences" style="color:#8a8f99;text-decoration:underline;">Gérer mes notifications</a>
+                &nbsp;·&nbsp;
+                <a href="https://lienparental.fr/legal/mentions" style="color:#8a8f99;text-decoration:underline;">Mentions légales</a>
+              </p>
+              <p style="margin:0;">
+                Lien Parental · lienparental.fr
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

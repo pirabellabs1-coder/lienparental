@@ -20,7 +20,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { cat } = await params
-  return { title: getCategory(cat)?.label ?? 'Guide Parent' }
+  return { title: getCategory(cat)?.label ?? 'Guide parental' }
 }
 
 export default async function GuideCategoryPage({ params, searchParams }: Props) {

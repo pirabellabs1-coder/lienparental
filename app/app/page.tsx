@@ -60,7 +60,7 @@ export default function DashboardPage() {
           </p>
         </div>
         <div className="-mr-1.5 flex shrink-0 items-center">
-        <SearchTrigger variant="icon" className="lg:hidden" />
+        <SearchTrigger variant="icon" className="md:hidden" />
         <Link
           href="/app/notifications"
           aria-label={unread > 0 ? `Notifications, ${unread} non lues` : 'Notifications'}
@@ -71,7 +71,7 @@ export default function DashboardPage() {
             <span aria-hidden="true" className="absolute bottom-2.5 right-2.5 h-2.5 w-2.5 rounded-full bg-leaf-500 ring-2 ring-white" />
           )}
         </Link>
-        <LogoutButton variant="icon" className="lg:hidden" />
+        <LogoutButton variant="icon" className="md:hidden" />
         </div>
       </header>
 
@@ -88,7 +88,7 @@ export default function DashboardPage() {
       <nav aria-label="Organisation" className="!mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Link href="/app/guide" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600"><Compass className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="text-[13.5px] font-bold leading-tight text-night-900">Guide Parent Guyane</span>
+          <span className="text-[13.5px] font-bold leading-tight text-night-900">Guide parental</span>
         </Link>
         <Link href="/app/journal?filtre=finances" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-50 text-gold-600"><Wallet className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>

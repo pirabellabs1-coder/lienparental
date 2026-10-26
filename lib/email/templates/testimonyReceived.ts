@@ -42,7 +42,7 @@ export function testimonyReceivedEmail(props: TestimonyReceivedProps): { subject
       </tr>
     </table>
     <p style="margin:0;">
-      Le contenu est chiffré et visible uniquement par vous. Prenez le temps nécessaire pour le lire — rien ne presse.
+      Il est rangé dans votre coffre-fort, visible uniquement par vous. Prenez le temps nécessaire pour le lire, rien ne presse.
     </p>
   `
 

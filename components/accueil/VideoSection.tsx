@@ -25,11 +25,11 @@ export function VideoSection({ hasVideo }: { hasVideo: boolean }) {
   return (
     <section aria-labelledby="video-section-title" className={SECTION}>
       <div className={CONTAINER}>
-        <SectionHead id="video-section-title" title="Découvrez Lien Parental en 1 min 30" />
+        <SectionHead id="video-section-title" title="Découvrez Lien Parental en vidéo" />
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-12 lg:grid-cols-[1.25fr_1fr_1fr] lg:gap-8 [&>*]:min-w-0">
           <VideoTrigger
-            label={hasVideo ? 'Lire la vidéo de présentation (1 min 30)' : 'Découvrir Lien Parental en images (vidéo bientôt disponible)'}
+            label={hasVideo ? 'Lire la vidéo de présentation' : 'Découvrir Lien Parental en images (vidéo bientôt disponible)'}
             className="group relative block aspect-[4/3] w-full overflow-hidden rounded-3xl bg-night-100 shadow-[0_30px_60px_-40px_rgba(11,45,91,0.6)] md:col-span-2 md:aspect-video lg:col-span-1 lg:aspect-auto lg:min-h-[340px]"
           >
             <Image src={hasVideo ? '/video/presentation-poster.jpg' : '/images/home/moment-partage.jpg'} alt="" fill sizes="(min-width:1024px) 460px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
@@ -38,7 +38,7 @@ export function VideoSection({ hasVideo }: { hasVideo: boolean }) {
               <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />
             </span>
             <span aria-hidden className="absolute bottom-4 right-4 rounded-full bg-night-950/80 px-3 py-1 text-[13px] font-semibold text-white">
-              {hasVideo ? '1:30' : 'Aperçu en images'}
+              {hasVideo ? 'Voir la vidéo' : 'Aperçu en images'}
             </span>
           </VideoTrigger>
 

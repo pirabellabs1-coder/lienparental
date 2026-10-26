@@ -49,7 +49,7 @@ export function BrandHeader({
       className="flex items-center gap-4 px-5 pb-2"
       style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}
     >
-      <Link href="/app" aria-label="Lien Parental, accueil" className="rounded-lg lg:invisible focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400">
+      <Link href="/app" aria-label="Lien Parental, accueil" className="rounded-lg md:invisible focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400">
         <Logo size="sm" />
       </Link>
       {title && <p className="flex-1 truncate text-[17px] font-bold text-night-900">{title}</p>}

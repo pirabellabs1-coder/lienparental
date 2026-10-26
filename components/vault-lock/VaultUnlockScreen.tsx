@@ -191,7 +191,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
   return (
     <section aria-labelledby="vault-lock-title" className="flex min-h-[calc(100dvh-6rem)] w-full flex-col px-5 pb-8 lg:min-h-[calc(100dvh-8rem)]">
       <header className="flex items-center" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}>
-        <Link href="/app" aria-label="Lien Parental, accueil" className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 lg:invisible">
+        <Link href="/app" aria-label="Lien Parental, accueil" className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 md:invisible">
           <Logo size="sm" />
         </Link>
       </header>

@@ -23,7 +23,7 @@ const dateFr = (iso: string) =>
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const [{ slug }, sp] = await Promise.all([params, searchParams])
   const f = (await guideAsync.fiche(sp.territoire, slug)) ?? (await guideAsync.ficheParDefaut(slug))
-  return { title: f?.titre ?? 'Guide Parent', description: f?.resume }
+  return { title: f?.titre ?? 'Guide parental', description: f?.resume }
 }
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {

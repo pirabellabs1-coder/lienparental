@@ -67,8 +67,8 @@ export function newLoginEmail(props: NewLoginProps): { subject: string; html: st
     <p style="margin:0;">
       <a href="${notYouUrl}" style="color:${t.colors.alert};text-decoration:underline;font-weight:600;">
         Sécuriser mon compte immédiatement
-      </a>
-      — nous vous aiderons à révoquer les sessions actives et à changer votre mot de passe.
+      </a> :
+      nous vous aiderons à révoquer les sessions actives et à changer votre mot de passe.
     </p>
   `
 

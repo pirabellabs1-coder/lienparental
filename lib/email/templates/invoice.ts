@@ -65,7 +65,7 @@ export function invoiceEmail(props: InvoiceProps): { subject: string; html: stri
   return {
     subject: invoiceSubject,
     html: baseLayout({
-      preheader: `Reçu Lien Parental — ${montant} (${cycle}).`,
+      preheader: `Reçu Lien Parental : ${montant} (${cycle}).`,
       title: 'Reçu de paiement',
       body,
       cta: { label: 'Télécharger la facture', href: invoiceUrl },

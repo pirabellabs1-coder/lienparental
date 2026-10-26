@@ -24,7 +24,7 @@ export function GuideHeader({ territoire, territoires, back }: Props) {
             {back.label}
           </Link>
         ) : (
-          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-leaf-700">Guide Parent</span>
+          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-leaf-700">Guide parental</span>
         )}
         <TerritorySelect current={territoire} territoires={territoires} />
       </div>

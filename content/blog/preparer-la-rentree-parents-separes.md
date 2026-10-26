@@ -22,7 +22,7 @@ Commencez par une liste commune des tâches, puis attribuez chacune à un parent
 4. Certificats et documents demandés par l’établissement.
 5. Inscription aux activités de l’année.
 
-Le **Guide Parent** de Lien Parental détaille ces démarches, avec les documents à apporter et les organismes concernés pour votre territoire.
+Le **Guide parental** de Lien Parental détaille ces démarches, avec les documents à apporter et les organismes concernés pour votre territoire.
 
 ## 2. Informer l’établissement de la situation
 

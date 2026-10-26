@@ -49,8 +49,8 @@ export function baseLayout(opts: BaseLayoutOptions): string {
 </style>
 <![endif]-->
 <style>
-  /* Styles minimaux — tout le reste est inline */
-  a { color: ${t.colors.iris}; }
+  /* Styles minimaux : tout le reste est inline */
+  a { color: ${t.colors.link}; }
   @media (max-width: 600px) {
     .lp-card { padding: 24px !important; }
     .lp-title { font-size: 22px !important; line-height: 28px !important; }
@@ -73,8 +73,7 @@ export function baseLayout(opts: BaseLayoutOptions): string {
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td align="left" style="font-family:${t.font};color:${t.colors.night};font-size:16px;font-weight:600;">
-                    <img src="${t.logoUrl}" width="32" height="32" alt="Lien Parental" style="vertical-align:middle;border-radius:6px;display:inline-block;" />
-                    <span style="vertical-align:middle;margin-left:10px;color:${t.colors.night};">Lien Parental</span>
+                    <img src="${t.logoUrl}" width="${t.logoWidth}" height="${t.logoHeight}" alt="Lien Parental" style="display:block;border:0;outline:none;" />
                   </td>
                 </tr>
               </table>
@@ -95,7 +94,7 @@ export function baseLayout(opts: BaseLayoutOptions): string {
           <tr>
             <td style="padding:24px 8px;font-family:${t.font};font-size:12px;line-height:18px;color:${t.colors.footerText};text-align:center;">
               <p style="margin:0 0 8px 0;">
-                Vous recevez cet email car vous avez un compte sur ${t.brandName}.
+                Vous recevez cet e-mail car vous avez un compte sur ${t.brandName}.
               </p>
               <p style="margin:0 0 8px 0;">
                 <a href="${t.unsubscribeUrlPlaceholder}" style="color:${t.colors.footerText};text-decoration:underline;">Gérer mes notifications</a>

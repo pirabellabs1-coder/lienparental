@@ -6,6 +6,7 @@ import { SiteShell } from '@/components/site/SiteShell'
 import { HomeStyles } from '@/components/accueil/HomeStyles'
 import { Hero } from '@/components/accueil/Hero'
 import { ModuleBar } from '@/components/accueil/ModuleBar'
+import { Partners } from '@/components/accueil/Partners'
 import { VideoSection } from '@/components/accueil/VideoSection'
 import { VideoDialog } from '@/components/accueil/VideoDialog'
 import { WhyChoose } from '@/components/accueil/WhyChoose'
@@ -49,6 +50,7 @@ export default async function HomePage() {
       <HomeStyles />
       <Hero />
       <div className="-mt-4 lg:-mt-6"><ModuleBar /></div>
+      <Partners />
       <VideoSection hasVideo={hasVideo} />
       <WhyChoose />
       <Messaging />

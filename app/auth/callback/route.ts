@@ -11,7 +11,7 @@
  *   - profil : la ligne public.users est créée par le trigger 0200 (nouveau
  *     compte) ou existe déjà (compte e-mail rattaché par Supabase à la même
  *     adresse vérifiée) ; prénom / nom complétés depuis Google s'ils manquent ;
- *   - première connexion → suite de l'onboarding (ajout du premier enfant), SAUF si
+ *   - toute première connexion (et aucun enfant enregistré) → suite de l'onboarding, SAUF si
  *     `next` désigne une autre destination que l'accueil (ex. invitation d'un coparent
  *     /app/coparents/invitation/…) : on la conserve, sinon l'invitation serait perdue.
  */
@@ -24,8 +24,10 @@ import { hasRequiredAal } from '@/lib/auth/session'
 
 export const dynamic = 'force-dynamic'
 
-/** Compte créé il y a moins de 15 min : c'est sa première connexion. */
+/** Au-delà de 15 min après la création, on ne propose plus jamais l'accueil (onboarding). */
 const NEW_ACCOUNT_MS = 15 * 60_000
+/** Écart toléré entre création du compte et connexion pour reconnaître la toute première connexion. */
+const FIRST_SIGN_IN_MS = 60_000
 
 function clean(v: unknown): string | null {
   if (typeof v !== 'string') return null
@@ -81,11 +83,24 @@ async function afterGoogle(supabase: TypedSupabaseClient, next: string): Promise
     if (!upErr) profile = { ...profile, ...patch }
   }
 
-  const isNew = Date.now() - Date.parse(user.created_at) < NEW_ACCOUNT_MS
   // `next` est déjà passé par safeNext (GET) ; destination explicite → conservée.
   const explicitNext = !/^\/app\/?(?:[?#]|$)/.test(next)
-  if (isNew && !explicitNext) return profile?.prenom && profile?.nom ? '/onboarding/enfant' : '/onboarding/profil'
-  return next
+  if (explicitNext || !isFirstSignIn(user)) return next
+  // Première connexion seulement, et jamais si un enfant est déjà enregistré (RLS : ses propres enfants).
+  const { data: kids } = await supabase.from('children').select('id').is('deleted_at', null).limit(1)
+  if (kids?.length) return next
+  return profile?.prenom && profile?.nom ? '/onboarding/enfant' : '/onboarding/profil'
+}
+
+/**
+ * Toute première connexion du compte : à la création, last_sign_in_at ≈ created_at ; chaque reconnexion
+ * l'avance. Une reconnexion (même quelques minutes après l'inscription) mène donc directement à l'espace.
+ */
+function isFirstSignIn(user: User): boolean {
+  const created = Date.parse(user.created_at)
+  if (Date.now() - created > NEW_ACCOUNT_MS) return false
+  const last = user.last_sign_in_at ? Date.parse(user.last_sign_in_at) : created
+  return Math.abs(last - created) < FIRST_SIGN_IN_MS
 }
 
 export async function GET(req: NextRequest) {

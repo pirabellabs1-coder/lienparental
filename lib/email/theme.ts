@@ -4,9 +4,9 @@
 
 export const emailTheme = {
   colors: {
-    night: '#0b1a3f',   // Bleu nuit — fond principal / header
-    leaf: '#1faf5c',    // Vert — succès, CTA principal
-    iris: '#8347d1',    // Violet — accent secondaire
+    night: '#0b2d5b',   // Bleu marine de la charte (night-900)
+    leaf: '#2e7d32',    // Vert des boutons (leaf-500, contraste AA avec le blanc)
+    link: '#256a29',    // Liens (leaf-600)
     gold: '#d49918',    // Doré — mise en avant, avertissement doux
     alert: '#c42727',   // Rouge — alerte sécurité
     text: '#1a1a1a',    // Texte principal sur fond clair
@@ -18,13 +18,16 @@ export const emailTheme = {
   },
   font: `system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif`,
   maxWidth: 560, // px
-  logoUrl: 'https://lienparental.fr/icons/icon-512.png',
+  // Logo officiel (public/brand/logo.svg rendu en PNG 360 px, affiché à 120 px de large).
+  logoUrl: 'https://lienparental.fr/brand/logo-email.png',
+  logoWidth: 120,
+  logoHeight: 73,
   brandName: 'Lien Parental',
   brandDomain: 'lienparental.fr',
   supportEmail: 'contact@lienparental.fr',
-  addressPlaceholder: 'Lien Parental — Adresse postale à compléter, France',
-  unsubscribeUrlPlaceholder: 'https://lienparental.fr/compte/notifications',
-  legalUrl: 'https://lienparental.fr/mentions-legales',
+  addressPlaceholder: 'Lien Parental · lienparental.fr',
+  unsubscribeUrlPlaceholder: 'https://lienparental.fr/app/profil/preferences',
+  legalUrl: 'https://lienparental.fr/legal/mentions',
 } as const
 
 export type EmailTheme = typeof emailTheme

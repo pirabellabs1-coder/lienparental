@@ -265,7 +265,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
         {prefill.source && step === 1 && (
           <p className="mt-3 flex items-start gap-2 rounded-xl bg-leaf-50 px-3.5 py-3 text-[12.5px] leading-relaxed text-leaf-800">
             <Info aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.8} />
-            Formulaire pré-rempli depuis le Guide Parent. Vérifiez les informations avant d’enregistrer.
+            Formulaire pré-rempli depuis le Guide parental. Vérifiez les informations avant d’enregistrer.
           </p>
         )}
 

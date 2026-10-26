@@ -9,7 +9,7 @@ import { loadGuide, toResume } from '@/lib/guide/load'
 import { GUIDE_CATEGORIES } from '@/lib/guide/types'
 import { categoryHref } from '@/lib/guide/links'
 
-export const metadata: Metadata = { title: 'Guide Parent' }
+export const metadata: Metadata = { title: 'Guide parental' }
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> }
 
@@ -24,7 +24,7 @@ export default async function GuidePage({ searchParams }: Props) {
     <div className="w-full px-5 pb-8 lg:px-6">
       <GuideHeader territoire={territoire} territoires={g.territoires} />
 
-      <h1 className="mt-5 text-[26px] font-extrabold tracking-[-0.02em] text-night-900 lg:text-[30px]">Guide Parent {territoire.nom}</h1>
+      <h1 className="mt-5 text-[26px] font-extrabold tracking-[-0.02em] text-night-900 lg:text-[30px]">Guide parental</h1>
       <p className="mt-1.5 max-w-[560px] text-[14px] leading-relaxed text-night-600">
         Comprendre vos démarches, les aides et les organismes, puis les ajouter à Lien Parental en un geste.
       </p>

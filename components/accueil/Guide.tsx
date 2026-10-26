@@ -60,7 +60,7 @@ export function Guide() {
 
         <PhoneFrame
           src="/images/app/mobile-guide.png"
-          alt="L’écran Guide Parent Guyane de l’application : recherche de démarche et parcours pas à pas"
+          alt="L’écran Guide parental de l’application : recherche de démarche et parcours pas à pas"
           sizes="260px"
           className="mx-auto w-[220px] lg:w-[260px]"
         />

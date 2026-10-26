@@ -1,0 +1,1 @@
+Logos des partenaires (SVG ou PNG transparent). Ne déposer un logo qu’avec un partenariat signé et l’accord écrit de l’organisme. Puis compléter PARTNERS dans components/accueil/Partners.tsx.

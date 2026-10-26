@@ -47,7 +47,7 @@ export function subscriptionConfirmedEmail(props: SubscriptionConfirmedProps): {
       ${row('Montant', montant)}
       ${row('Prochain prélèvement', next)}
     </table>
-    ${invoiceUrl ? `<p style="margin:0 0 8px 0;font-size:14px;"><a href="${invoiceUrl}" style="color:${t.colors.iris};">Voir ma facture</a></p>` : ''}
+    ${invoiceUrl ? `<p style="margin:0 0 8px 0;font-size:14px;"><a href="${invoiceUrl}" style="color:${t.colors.link};">Voir ma facture</a></p>` : ''}
     <p style="margin:0;color:${t.colors.textMuted};font-size:14px;">
       Vous pouvez changer de formule ou résilier à tout moment depuis Profil &gt; Abonnement.
     </p>
@@ -56,7 +56,7 @@ export function subscriptionConfirmedEmail(props: SubscriptionConfirmedProps): {
   return {
     subject: props.formule.startsWith('Coparentalité+') ? 'Votre abonnement Coparentalité+ est actif' : subscriptionConfirmedSubject,
     html: baseLayout({
-      preheader: `${formule} — prochain prélèvement le ${next}.`,
+      preheader: `${formule}, prochain prélèvement le ${next}.`,
       title: 'Abonnement confirmé',
       body,
       cta: { label: 'Gérer mon abonnement', href: appUrl },

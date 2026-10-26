@@ -358,7 +358,7 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
         {guideHref && (
           <p className="flex items-center gap-2.5 rounded-xl bg-leaf-50 px-3.5 py-2.5 text-[12.5px] text-leaf-800 ring-1 ring-leaf-200">
             <BookOpen aria-hidden="true" className="h-4 w-4 shrink-0" strokeWidth={1.8} />
-            <span>Pré-rempli depuis le Guide Parent. Vérifiez les informations avant d’enregistrer.</span>
+            <span>Pré-rempli depuis le Guide parental. Vérifiez les informations avant d’enregistrer.</span>
           </p>
         )}
 

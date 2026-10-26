@@ -38,4 +38,4 @@ La médiation repose sur la volonté des deux parents de dialoguer. Elle n’est
 
 Les services de médiation familiale sont souvent soutenus par la CAF. Le tarif peut dépendre des revenus : renseignez-vous directement auprès du service.
 
-Pour les informations officielles et à jour, consultez [Service-Public.fr](https://www.service-public.fr/) (rubrique Famille) ou [justice.fr](https://www.justice.fr/) et la fiche du **Guide Parent** consacrée à la médiation dans votre territoire.
+Pour les informations officielles et à jour, consultez [Service-Public.fr](https://www.service-public.fr/) (rubrique Famille) ou [justice.fr](https://www.justice.fr/) et la fiche du **Guide parental** consacrée à la médiation dans votre territoire.

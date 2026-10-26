@@ -2,46 +2,20 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, NotebookText, CalendarDays, FolderLock, Sparkles, Users, User, LifeBuoy, Crown, Bell, MessageSquareQuote, Compass, MessageCircle, FileStack, Repeat, UsersRound } from 'lucide-react'
+import { Crown } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { SearchTrigger } from '@/components/search/SearchTrigger'
 import { LogoutButton } from '@/components/auth/LogoutButton'
 import { cn } from '@/lib/cn'
+import { NAV_MAIN as MAIN, NAV_SECONDARY as SECONDARY, NAV_TOOLS as TOOLS, activeNavHref, type NavItem } from './navItems'
 
-// Ordre = priorités produit (docs/RECAP_FONCTIONNEL_V2.md). Les finances vivent dans le Journal.
-const MAIN = [
-  { href: '/app', label: 'Accueil', icon: Home },
-  { href: '/app/enfants', label: 'Mes enfants', icon: Users },
-  { href: '/app/journal', label: 'Journal', icon: NotebookText },
-  { href: '/app/calendrier', label: 'Calendrier', icon: CalendarDays },
-  { href: '/app/coach', label: 'Coach IA', icon: Sparkles },
-  { href: '/app/coffre', label: 'Coffre-fort', icon: FolderLock },
-  { href: '/app/coffre/temoignages', label: 'Témoignages', icon: MessageSquareQuote },
-  { href: '/app/guide', label: 'Guide Parent Guyane', icon: Compass },
-]
-// Outils de coparentalité, remis en avant à la demande du client.
-const TOOLS = [
-  { href: '/app/messages', label: 'Messages', icon: MessageCircle },
-  { href: '/app/garde', label: 'Planning de garde', icon: Repeat },
-  { href: '/app/dossier', label: 'Mon dossier JAF', icon: FileStack },
-  { href: '/app/coparents', label: 'Parents liés', icon: UsersRound },
-]
-const SECONDARY = [
-  { href: '/app/notifications', label: 'Notifications', icon: Bell },
-  { href: '/app/profil', label: 'Profil', icon: User },
-  { href: '/app/aide', label: 'Centre d’aide', icon: LifeBuoy },
-]
-
-// Navigation de la version web (≥ lg). Sur mobile, c'est la barre d'onglets du bas.
+// Navigation tablette et ordinateur (≥ md). Sur téléphone : barre d'onglets du bas + menu complet.
 export function DesktopSidebar() {
   const pathname = usePathname()
-  // L'entrée la plus spécifique gagne (Témoignages vit sous /app/coffre).
-  const match = [...MAIN, ...TOOLS, ...SECONDARY]
-    .filter(({ href }) => (href === '/app' ? pathname === '/app' : pathname === href || pathname.startsWith(href + '/')))
-    .sort((a, b) => b.href.length - a.href.length)[0]?.href
+  const match = activeNavHref(pathname)
   const active = (href: string) => match === href
 
-  const item = ({ href, label, icon: Icon }: (typeof MAIN)[number]) => (
+  const item = ({ href, label, icon: Icon }: NavItem) => (
     <li key={href}>
       <Link
         href={href}
@@ -58,7 +32,7 @@ export function DesktopSidebar() {
   )
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col overflow-y-auto overscroll-contain border-r border-night-100 bg-white px-4 py-6 [scrollbar-width:thin] lg:flex">
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col overflow-y-auto overscroll-contain border-r border-night-100 bg-white px-4 py-6 [scrollbar-width:thin] md:flex">
       <Link href="/app" aria-label="Lien Parental, accueil" className="px-3"><Logo size="md" /></Link>
       <SearchTrigger variant="sidebar" className="mt-6" />
       <nav aria-label="Navigation principale" className="mt-4 flex flex-1 flex-col">
