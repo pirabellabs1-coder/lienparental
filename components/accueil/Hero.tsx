@@ -45,7 +45,7 @@ export function Hero() {
             </Link>
             <VideoTrigger className={cn(BTN_OUTLINE, 'h-14 px-6 text-[16px]')}>
               <Play className="h-4 w-4 text-leaf-600" fill="currentColor" aria-hidden />
-              Voir la vidéo (1 min)
+              Voir la vidéo (1 min 30)
             </VideoTrigger>
           </div>
 

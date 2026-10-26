@@ -1,0 +1,76 @@
+LIEN PARENTAL - VIDÉO DE PRÉSENTATION (90 s) - SCRIPT DE VOIX OFF
+=================================================================
+
+Vidéo : public/video/presentation.mp4 (1920x1080, 30 i/s, 90,0 s, voix off intégrée : voix « Nathalie », ElevenLabs multilingual v2)
+Sous-titres : public/video/presentation.fr.vtt (calés sur ce script)
+
+Direction de voix
+- Voix posée, chaleureuse, rassurante. Débit calme : environ 2,3 mots par seconde.
+- Chaque phrase commence au temps indiqué et doit être terminée avant la fin de sa plage :
+  le texte à l'écran change ensuite. Laisser respirer les silences entre les scènes.
+- Prononcer « lienparental.fr » : « lien parental point f r ».
+- Total parlé : environ 70 s sur 90 s.
+
+-----------------------------------------------------------------
+[00:00.5 - 00:05.0]  1. Intro, « Séparés. Toujours parents. »
+Quand on est parents séparés, tout ce qui concerne l'enfant s'éparpille.
+
+[00:05.5 - 00:12.5]  1. Intro, les éléments s'envolent puis se rangent dans le téléphone
+Des papiers, des messages, des rendez-vous...
+(courte pause, vers 00:09.3)
+Et si tout se rangeait au même endroit ?
+
+[00:13.5 - 00:19.5]  2. Logo et modules de l'application
+Voici Lien Parental : l'organisation, les échanges, les documents et les démarches, au même endroit.
+
+[00:20.5 - 00:28.5]  3. Journal et dépenses
+Le Journal garde une trace datée du quotidien.
+Les dépenses et les paiements y sont aussi, avec leurs justificatifs.
+
+[00:29.5 - 00:36.5]  4. Calendrier et Google Agenda
+Le calendrier suit les rendez-vous, l'école et la santé de chaque enfant.
+Il se synchronise avec Google Agenda.
+
+[00:37.5 - 00:44.5]  5. Coffre-fort (code ou empreinte)
+Jugements, certificats, factures : le coffre-fort les garde à l'abri, protégés par un code ou par votre empreinte.
+
+[00:45.5 - 00:53.5]  6. Coach IA (message tendu, réponse apaisée)
+Un message tendu ? Le Coach IA vous aide à répondre avec calme.
+Il ne donne pas de conseil juridique.
+
+[00:54.5 - 01:00.5]  7. Témoignages horodatés
+Vos proches peuvent vous envoyer un témoignage horodaté, sans créer de compte.
+
+[01:01.5 - 01:08.5]  8. Guide Parent Guyane (checklist qui se coche)
+Le Guide Parent Guyane explique vos démarches pas à pas, avec la liste des documents à apporter.
+
+[01:09.5 - 01:15.5]  9. Parents liés
+Invitez l'autre parent à vous rejoindre, et partagez ce qui concerne l'enfant.
+
+[01:16.5 - 01:22.5]  10. Installation sans store (web, iPhone, Android)
+Sur ordinateur, iPhone ou Android, elle s'installe sans passer par un store.
+
+[01:23.5 - 01:29.5]  11. Conclusion
+Lien Parental : informer, accompagner, préserver.
+Commencez gratuitement sur lienparental.fr.
+
+-----------------------------------------------------------------
+Mixage (une fois la voix enregistrée en WAV ou MP3, durée <= 90 s, départ à 0 s)
+Binaire ffmpeg installé (commandes à lancer depuis C:\Users\HP\lien-parental) :
+<FFMPEG> = C:\Users\HP\AppData\Local\Temp\claude\C--Users-HP-lien-parental\c8c32519-a70f-4396-a115-c39b54f0f2d2\scratchpad\video\node_modules\@ffmpeg-installer\win32-x64\ffmpeg.exe
+(ou n'importe quel ffmpeg récent). Remplacer voix-off.wav par le fichier réel. La vidéo n'est pas réencodée (-c:v copy),
+l'audio est normalisé (-16 LUFS) et complété par du silence jusqu'à la fin de l'image.
+
+"<FFMPEG>" -i public/video/presentation.mp4 -i voix-off.wav ^
+  -map 0:v:0 -map 1:a:0 -c:v copy ^
+  -af "loudnorm=I=-16:TP=-1.5:LRA=11,apad" -c:a aac -b:a 160k -ar 48000 ^
+  -shortest -movflags +faststart public/video/presentation-avec-voix.mp4
+
+Avec une musique de fond en plus (musique.mp3 baissée à -20 dB sous la voix) :
+
+"<FFMPEG>" -i public/video/presentation.mp4 -i voix-off.wav -i musique.mp3 ^
+  -filter_complex "[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,apad[v];[2:a]volume=-20dB,afade=t=out:st=86:d=4[m];[v][m]amix=inputs=2:duration=first:normalize=0[a]" ^
+  -map 0:v:0 -map "[a]" -c:v copy -c:a aac -b:a 160k -ar 48000 ^
+  -shortest -movflags +faststart public/video/presentation-avec-voix.mp4
+
+Contrôler le résultat puis remplacer presentation.mp4 par presentation-avec-voix.mp4.

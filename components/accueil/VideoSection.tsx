@@ -25,20 +25,20 @@ export function VideoSection({ hasVideo }: { hasVideo: boolean }) {
   return (
     <section aria-labelledby="video-section-title" className={SECTION}>
       <div className={CONTAINER}>
-        <SectionHead id="video-section-title" title="Découvrez Lien Parental en 1 minute" />
+        <SectionHead id="video-section-title" title="Découvrez Lien Parental en 1 min 30" />
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-12 lg:grid-cols-[1.25fr_1fr_1fr] lg:gap-8 [&>*]:min-w-0">
           <VideoTrigger
-            label={hasVideo ? 'Lire la vidéo de présentation (1 minute)' : 'Découvrir Lien Parental en images (vidéo bientôt disponible)'}
+            label={hasVideo ? 'Lire la vidéo de présentation (1 min 30)' : 'Découvrir Lien Parental en images (vidéo bientôt disponible)'}
             className="group relative block aspect-[4/3] w-full overflow-hidden rounded-3xl bg-night-100 shadow-[0_30px_60px_-40px_rgba(11,45,91,0.6)] md:col-span-2 md:aspect-video lg:col-span-1 lg:aspect-auto lg:min-h-[340px]"
           >
-            <Image src="/images/home/moment-partage.jpg" alt="" fill sizes="(min-width:1024px) 460px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
+            <Image src={hasVideo ? '/video/presentation-poster.jpg' : '/images/home/moment-partage.jpg'} alt="" fill sizes="(min-width:1024px) 460px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
             <span aria-hidden className="absolute inset-0 bg-night-950/30" />
             <span aria-hidden className="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-leaf-600 shadow-xl transition-transform duration-200 group-hover:scale-105 sm:h-[72px] sm:w-[72px]">
               <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />
             </span>
             <span aria-hidden className="absolute bottom-4 right-4 rounded-full bg-night-950/80 px-3 py-1 text-[13px] font-semibold text-white">
-              {hasVideo ? '1:00' : 'Aperçu en images'}
+              {hasVideo ? '1:30' : 'Aperçu en images'}
             </span>
           </VideoTrigger>
 

@@ -124,7 +124,7 @@ export const mockJournalEntries: JournalEntry[] = [
     childIds: ['c_1'], createdAt: isoDaysAgo(4),
   },
   {
-    id: 'j_3', type: 'sante', title: 'Consultation pédiatre — Noah', date: isoDaysAgo(10),
+    id: 'j_3', type: 'sante', title: 'Consultation pédiatre de Noah', date: isoDaysAgo(10),
     heure: '14:00', description: 'Rhume. Prescription paracétamol.',
     lieu: 'Cabinet Dr. Marchand', childIds: ['c_2'], createdAt: isoDaysAgo(10),
   },

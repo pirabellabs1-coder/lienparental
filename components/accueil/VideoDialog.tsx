@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, Play, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
-// Fenêtre « Découvrez Lien Parental en 1 minute ».
+// Fenêtre « Découvrez Lien Parental en 1 min 30 ».
 // - Si public/video/presentation.mp4 existe (détecté côté serveur par app/page.tsx) : lecture avec sous-titres.
 // - Sinon : diaporama des vraies captures de l'application, avec la mention « Vidéo bientôt disponible ».
 // Ouverture : tout bouton <VideoTrigger> de la page (événement « home:video »). <dialog> natif : focus piégé, Échap, retour du focus.
@@ -72,7 +72,7 @@ export function VideoDialog({ hasVideo, hasCaptions }: { hasVideo: boolean; hasC
       className="m-auto w-[min(920px,calc(100vw-24px))] max-h-[calc(100dvh-24px)] overflow-y-auto rounded-3xl bg-white p-0 text-night-900 shadow-2xl backdrop:bg-night-950/70"
     >
       <div className="flex items-center justify-between gap-4 border-b border-[#E5E7EB] px-5 py-4 sm:px-7">
-        <h2 id="video-title" className="text-[18px] font-bold sm:text-[20px]">Lien Parental en 1 minute</h2>
+        <h2 id="video-title" className="text-[18px] font-bold sm:text-[20px]">Lien Parental en 1 min 30</h2>
         <button type="button" onClick={close} aria-label="Fermer" className="grid h-11 w-11 place-items-center rounded-full ring-1 ring-[#E5E7EB] hover:bg-night-50">
           <X className="h-5 w-5" aria-hidden />
         </button>
@@ -82,7 +82,7 @@ export function VideoDialog({ hasVideo, hasCaptions }: { hasVideo: boolean; hasC
         <div className="p-4 sm:p-6">
           {/* preload="none" : rien n'est téléchargé tant que la fenêtre n'est pas ouverte et la lecture lancée. */}
           {open && (
-            <video ref={video} controls preload="metadata" playsInline poster="/images/home/moment-partage.jpg" className="aspect-video w-full rounded-2xl bg-night-950">
+            <video ref={video} controls preload="metadata" playsInline poster="/video/presentation-poster.jpg" className="aspect-video w-full rounded-2xl bg-night-950">
               <source src="/video/presentation.mp4" type="video/mp4" />
               {hasCaptions && <track kind="captions" src="/video/presentation.fr.vtt" srcLang="fr" label="Français" default />}
               Votre navigateur ne lit pas cette vidéo.{' '}
