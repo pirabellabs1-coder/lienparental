@@ -6,7 +6,7 @@ import { cn } from '@/lib/cn'
 import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
 import { btn } from '@/components/onboarding/styles'
 import { useOnboardingDraft } from '@/components/onboarding/draft'
-import { FamilyIllustration } from '@/components/illustrations'
+import Image from 'next/image'
 import { InviteForm } from '@/components/coparents/InviteForm'
 import { ShareInvite } from '@/components/coparents/ShareInvite'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
@@ -41,7 +41,7 @@ export default function OnboardingCoparentPage() {
     <OnboardingScreen
       step={11}
       back="/onboarding/recap"
-      media={<FamilyIllustration className="mb-4 h-24 w-auto" />}
+      media={<Image src="/images/onboarding/bienvenue.webp" alt="" width={720} height={376} className="mb-4 h-24 w-auto" />}
       title={issued ? 'Invitation prête' : 'Ajouter l’autre parent'}
       subtitle={issued
         ? 'Envoyez le lien par WhatsApp, SMS ou e-mail. Vous pourrez gérer les accès depuis Famille et co-parents.'

@@ -1,12 +1,13 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ArrowRight, CalendarDays, CircleCheck, HeartHandshake, Lock, MessagesSquare, Quote, ShieldCheck } from 'lucide-react'
+import { ArrowRight, CalendarDays, CircleCheck, HeartHandshake, Lock, MessagesSquare, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { Logo } from '@/components/brand/Logo'
-import { FamilyIllustration, HighFiveIllustration, MotherChildIllustration } from '@/components/illustrations'
+import { MotherChildIllustration } from '@/components/illustrations'
 import { ProgressDots } from './ProgressDots'
 import { btn, linkLeaf } from './styles'
 
@@ -120,10 +121,17 @@ function SlideWelcome() {
   return (
     <div className="flex flex-1 flex-col items-center text-center">
       <Logo size="lg" />
-      <FamilyIllustration className="mt-4 w-full max-w-[320px]" />
-      <h1 className="mt-5 text-[26px] font-extrabold tracking-[-0.02em] text-night-900">Bienvenue !</h1>
+      <Image
+        src="/images/onboarding/bienvenue.webp"
+        alt="Un père et une mère, assis face à face, accueillent leur fille qui court vers eux en souriant"
+        width={720}
+        height={376}
+        priority
+        className="mt-4 h-auto w-full max-w-[340px]"
+      />
+      <h1 className="mt-5 text-[26px] font-extrabold tracking-[-0.02em] text-night-900">Bienvenue&nbsp;!</h1>
       <p className="mx-auto mt-2 max-w-[19rem] text-[15px] leading-relaxed text-night-600">
-        Quelques étapes simples pour personnaliser votre espace et profiter pleinement de Lien Parental.
+        Un espace pensé pour les parents, centré sur l’essentiel&nbsp;: <strong className="font-bold text-night-900">le bien-être de votre enfant.</strong>
       </p>
     </div>
   )
@@ -187,14 +195,9 @@ function SlideMission() {
         Des fonctionnalités conçues pour préserver le lien parent-enfant dans le respect et la bienveillance.
       </p>
       <MotherChildIllustration className="mt-3 w-full max-w-[280px]" />
-      <figure className="mt-3 w-full rounded-2xl border border-night-100 bg-night-50/50 p-4 text-left">
-        <Quote className="h-5 w-5 fill-leaf-500 text-leaf-500" aria-hidden="true" />
-        <blockquote className="mt-2 text-sm leading-relaxed text-night-800">
-          Lien Parental m’aide à rester organisée et à communiquer sereinement avec l’autre parent. Ma fille en
-          bénéficie chaque jour.
-        </blockquote>
-        <figcaption className="mt-2 text-[13px] font-semibold text-leaf-600">– Julie, maman de 2 enfants</figcaption>
-      </figure>
+      <p className="mt-3 w-full rounded-2xl border border-night-100 bg-night-50/50 p-4 text-left text-sm leading-relaxed text-night-800">
+        Chaque outil aide à garder des échanges clairs et apaisés entre parents, pour que l’enfant garde sa place auprès de chacun.
+      </p>
     </div>
   )
 }
@@ -208,10 +211,18 @@ const VALUES = [
 function SlideReady() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center text-center">
-      <h1 className="sr-only">Prêt(e) à commencer ?</h1>
-      <HighFiveIllustration className="w-full max-w-[320px]" />
-      <p className="mx-auto mt-6 max-w-[17rem] text-[15px] font-semibold leading-relaxed text-night-800">
-        Rejoignez des milliers de parents déjà accompagnés chaque jour.
+      <Image
+        src="/images/onboarding/ensemble.webp"
+        alt="Un père et une mère se tapent dans la main au-dessus de leur fille, qui lève les bras de joie"
+        width={720}
+        height={396}
+        className="h-auto w-full max-w-[340px]"
+      />
+      <h1 className="mt-6 text-[24px] font-extrabold leading-tight tracking-[-0.02em] text-night-900">
+        Ensemble pour le bien-être <span className="text-leaf-500">de votre enfant.</span>
+      </h1>
+      <p className="mx-auto mt-2 max-w-[19rem] text-[15px] leading-relaxed text-night-600">
+        Une meilleure communication entre parents, pour un quotidien plus serein.
       </p>
       <ul className="mt-8 grid w-full grid-cols-3 gap-2">
         {VALUES.map(({ icon: Icon, label }) => (
