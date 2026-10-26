@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, HeartHandshake, MessagesSquare, Play, Smartphone, Sun, Users } from 'lucide-react'
+import { ArrowRight, Download, HeartHandshake, MessagesSquare, Monitor, Play, Smartphone, Sun, Users } from 'lucide-react'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
 import { BTN_OUTLINE, BTN_PRIMARY, CONTAINER, IconBubble } from './ui'
@@ -49,16 +49,39 @@ export function Hero() {
             </VideoTrigger>
           </div>
 
-          {/* Encart PWA de la maquette. */}
-          <div className="home-rise mt-7 flex max-w-[520px] items-start gap-3.5 rounded-2xl bg-white p-4 ring-1 ring-[#E5E7EB]" style={d(300)}>
-            <IconBubble size="sm"><Smartphone strokeWidth={1.75} /></IconBubble>
-            <div className="text-[14px] leading-snug text-night-700">
-              <p className="font-bold text-night-900">Disponible en version web (PWA)</p>
-              <p className="mt-0.5">Ni sur le Play Store, ni sur l’App Store.</p>
-              <Link href="/installer" className="mt-1 inline-flex min-h-[32px] items-center font-semibold text-leaf-600 underline decoration-leaf-600/40 underline-offset-2 hover:decoration-leaf-600">
-                Installez Lien Parental sur votre téléphone en quelques secondes
+          {/* Encart d'installation façon « télécharger l'application » (PWA : pas de store, pas de badge de store). */}
+          <div className="home-rise mt-8" style={d(300)}>
+            <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-night-600">Téléchargez l’application</p>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <Link
+                href="/installer"
+                className="group inline-flex min-h-[60px] items-center gap-3 rounded-2xl bg-night-900 py-2.5 pl-3 pr-5 text-white shadow-[0_14px_30px_-16px_rgba(11,45,91,0.9)] transition-[transform,background-color] duration-200 hover:bg-night-800 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 focus-visible:ring-offset-2"
+              >
+                <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 ring-1 ring-white/15">
+                  <Download className="h-5 w-5 transition-transform duration-200 group-hover:translate-y-0.5" strokeWidth={2} />
+                </span>
+                <span className="flex flex-col leading-tight">
+                  <span className="text-[11.5px] font-medium text-night-100">Installer gratuitement sur</span>
+                  <span className="text-[17px] font-bold">iPhone et Android</span>
+                </span>
+              </Link>
+              <Link
+                href="/installer"
+                className="inline-flex min-h-[60px] items-center gap-3 rounded-2xl bg-white py-2.5 pl-3 pr-5 text-night-900 ring-1 ring-[#E5E7EB] transition-colors duration-200 hover:ring-leaf-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
+              >
+                <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600">
+                  <Monitor className="h-5 w-5" strokeWidth={1.75} />
+                </span>
+                <span className="flex flex-col leading-tight">
+                  <span className="text-[11.5px] font-medium text-night-600">Aussi sur</span>
+                  <span className="text-[17px] font-bold">Ordinateur</span>
+                </span>
               </Link>
             </div>
+            <p className="mt-3 flex items-center gap-2 text-[13.5px] text-night-600">
+              <Smartphone className="h-4 w-4 shrink-0 text-leaf-600" strokeWidth={1.75} aria-hidden />
+              Sans passer par un store : installation directe depuis votre navigateur, en quelques secondes.
+            </p>
           </div>
         </div>
 
