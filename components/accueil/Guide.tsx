@@ -24,7 +24,7 @@ export function Guide() {
     'Un rappel, un document ou une dépense ajoutés en un geste',
   ]
   return (
-    <section id="guide" aria-labelledby="guide-title" className={SECTION}>
+    <section id="guide" aria-labelledby="guide-title" className={cn(SECTION, 'bg-[#F4F6F9]')}>
       <div className={cn(CONTAINER, 'grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_auto] lg:gap-20 [&>*]:min-w-0')}>
         <div>
           <h2 id="guide-title" className={H2}>Le Guide parental</h2>
@@ -44,7 +44,7 @@ export function Guide() {
           <ul className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
             {TERRITORIES.map(t => (
               <li key={t.code} className={cn('flex items-center gap-3 rounded-2xl p-3 ring-1', t.available ? 'bg-leaf-50 ring-leaf-300' : 'bg-white ring-[#E5E7EB]')}>
-                <TerritoryShape path={t.path} available={t.available} className="h-8 w-8 shrink-0" />
+                <TerritoryShape path={t.path} available={t.available} className="h-10 w-10 shrink-0" />
                 <span className="flex min-w-0 flex-col leading-tight">
                   <span className="text-[14.5px] font-semibold text-night-900">{t.name}</span>
                   <span className={cn('mt-0.5 text-[13.5px]', t.available ? 'font-semibold text-leaf-700' : 'text-night-600')}>{t.available ? 'Disponible' : 'Bientôt'}</span>

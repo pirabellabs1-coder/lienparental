@@ -48,7 +48,7 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-wrap gap-2">
               {TERRITORIES.map(t => (
                 <li key={t.code} className={cn('inline-flex items-center gap-2 rounded-full py-1.5 pl-2 pr-3 text-[13px] ring-1', t.available ? 'bg-leaf-50 ring-leaf-200' : 'bg-white ring-[#E5E7EB]')}>
-                  <TerritoryShape path={t.path} available={t.available} className="h-5 w-5" />
+                  <TerritoryShape path={t.path} available={t.available} className="h-6 w-6 shrink-0" />
                   <span className="font-semibold text-night-900">{t.name}</span>
                   <span className={t.available ? 'font-semibold text-leaf-700' : 'text-night-600'}>{t.available ? 'Disponible' : 'Bientôt'}</span>
                 </li>

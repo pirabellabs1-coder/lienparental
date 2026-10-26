@@ -1,57 +1,45 @@
+import Image from 'next/image'
 import { cn } from '@/lib/cn'
 
 type Props = {
   size?: 'sm' | 'md' | 'lg' | 'xl'
+  /** « inline » : version compacte pour les barres de navigation. */
   layout?: 'stacked' | 'inline'
   /** Baseline « Informer • Accompagner • Préserver / Le lien parent-enfant » (logo principal). */
   tagline?: boolean
+  /** « light » : version claire pour les fonds sombres (avec baseline uniquement). */
+  tone?: 'color' | 'light'
   className?: string
 }
 
-// Logo selon le guide d'identité visuelle : « Lien » en Montserrat bleu marine, point du i vert,
-// « Parental » en Allura vert qui chevauche légèrement le mot du dessus.
-// À remplacer par le fichier SVG officiel dès qu'il est fourni.
-const SIZES = {
-  sm: { lien: 'text-[24px]', parental: 'text-[38px] -mt-[0.2em] ml-[0.1em]', dot: 'h-[0.2em] w-[0.2em]' },
-  md: { lien: 'text-[32px]', parental: 'text-[50px] -mt-[0.2em] ml-[0.1em]', dot: 'h-[0.2em] w-[0.2em]' },
-  lg: { lien: 'text-[46px]', parental: 'text-[72px] -mt-[0.2em] ml-[0.1em]', dot: 'h-[0.2em] w-[0.2em]' },
-  xl: { lien: 'text-[64px]', parental: 'text-[100px] -mt-[0.2em] ml-[0.1em]', dot: 'h-[0.2em] w-[0.2em]' },
+// Logo officiel (fichiers vectoriels fournis, recadrés sur leur contenu) : public/brand/*.svg.
+const LOGO = { src: '/brand/logo.svg', ratio: 332.2 / 201.4 }
+const LOGO_BASELINE = { src: '/brand/logo-baseline.svg', ratio: 394 / 225 }
+const LOGO_BASELINE_LIGHT = { src: '/brand/logo-baseline-clair.svg', ratio: 394 / 225 }
+
+// Hauteur affichée en pixels.
+const HEIGHTS = {
+  stacked: { sm: 46, md: 62, lg: 84, xl: 120 },
+  inline: { sm: 40, md: 48, lg: 60, xl: 72 },
+  tagline: { sm: 64, md: 88, lg: 118, xl: 160 },
 }
 
-function Lien({ className, dot }: { className: string; dot: string }) {
+export function Logo({ size = 'md', layout = 'stacked', tagline = false, tone = 'color', className }: Props) {
+  const file = tagline || tone === 'light' ? (tone === 'light' ? LOGO_BASELINE_LIGHT : LOGO_BASELINE) : LOGO
+  const height = tagline || tone === 'light' ? HEIGHTS.tagline[size] : HEIGHTS[layout][size]
+  const width = Math.round(height * file.ratio)
   return (
-    <span className={cn('font-sans font-extrabold leading-none tracking-[-0.03em] text-night-900', className)}>
-      L
-      <span className="relative inline-block">
-        ı
-        <span className={cn('absolute left-1/2 top-[0.06em] -translate-x-1/2 rounded-full bg-leaf-400', dot)} />
-      </span>
-      en
-    </span>
-  )
-}
-
-export function Logo({ size = 'md', layout = 'stacked', tagline = false, className }: Props) {
-  const s = SIZES[size]
-  return (
-    <span role="img" className={cn('inline-flex select-none flex-col', className)} aria-label="Lien Parental">
-      {layout === 'stacked' ? (
-        <span aria-hidden className="flex flex-col leading-none">
-          <Lien className={s.lien} dot={s.dot} />
-          <span className={cn('font-script leading-none text-leaf-400', s.parental)}>Parental</span>
-        </span>
-      ) : (
-        <span aria-hidden className="flex items-baseline gap-1.5 leading-none">
-          <Lien className={s.lien} dot={s.dot} />
-          <span className={cn('font-script leading-none text-leaf-400', s.parental.replace(/-mt-\S+|ml-\S+/g, ''))}>Parental</span>
-        </span>
-      )}
-      {tagline && (
-        <span aria-hidden className="mt-2 flex flex-col gap-0.5 text-[9px] font-semibold uppercase tracking-[0.22em]">
-          <span className="text-night-900">Informer • Accompagner • Préserver</span>
-          <span className="text-leaf-500">Le lien parent-enfant</span>
-        </span>
-      )}
+    <span className={cn('inline-flex select-none flex-col', className)}>
+      <Image
+        src={file.src}
+        alt="Lien Parental"
+        width={width}
+        height={height}
+        unoptimized
+        priority={size === 'sm'}
+        className="block h-auto max-w-full"
+        style={{ width, height: 'auto' }}
+      />
     </span>
   )
 }

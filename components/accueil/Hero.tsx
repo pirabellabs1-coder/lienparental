@@ -19,8 +19,7 @@ export function Hero() {
     <section aria-labelledby="hero-title" className="relative overflow-hidden bg-gradient-to-b from-[#F3F8F3] via-[#F8FBF8] to-white">
       <div className={cn(CONTAINER, 'grid grid-cols-1 items-center gap-12 pb-12 pt-10 sm:pt-14 lg:grid-cols-[1.08fr_1fr] lg:gap-14 lg:pb-16 lg:pt-16 [&>*]:min-w-0')}>
         <div>
-          <p className="home-rise inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-[13px] font-semibold text-leaf-700 ring-1 ring-inset ring-leaf-200">
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-leaf-400" />
+          <p className="home-rise inline-flex items-center rounded-full bg-white px-3.5 py-1.5 text-[13px] font-semibold text-leaf-700 ring-1 ring-inset ring-leaf-200">
             L’application des parents séparés
           </p>
           <h1 id="hero-title" className="home-rise mt-5 max-w-[15ch] text-[35px] font-extrabold leading-[1.1] tracking-[-0.03em] text-night-900 [text-wrap:balance] sm:text-[42px] xl:text-[48px]" style={d(60)}>

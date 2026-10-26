@@ -12,7 +12,7 @@
  * Bump CACHE_V whenever the precache list changes — the old cache is cleared on activate.
  */
 
-const CACHE_V = 'lp-v2';
+const CACHE_V = 'lp-v3';
 const RUNTIME = `${CACHE_V}-runtime`;
 const SHELL   = `${CACHE_V}-shell`;
 
@@ -26,11 +26,10 @@ const PRECACHE = [
   '/manifest.json',
   '/favicon.ico',
   '/icons/favicon.svg',
-  '/icons/icon.svg',
-  '/icons/icon-192.svg',
-  '/icons/icon-512.svg',
-  '/icons/maskable-512.svg',
-  '/icons/apple-touch-icon.svg',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/maskable-512.png',
+  '/icons/apple-touch-icon.png',
 ];
 
 /* ---------------------------------------------------------------- install */

@@ -9,6 +9,7 @@ import { ModuleBar } from '@/components/accueil/ModuleBar'
 import { VideoSection } from '@/components/accueil/VideoSection'
 import { VideoDialog } from '@/components/accueil/VideoDialog'
 import { WhyChoose } from '@/components/accueil/WhyChoose'
+import { Messaging } from '@/components/accueil/Messaging'
 import { Features } from '@/components/accueil/Features'
 import { FeatureTabs } from '@/components/accueil/FeatureTabs'
 import { Guide } from '@/components/accueil/Guide'
@@ -50,9 +51,10 @@ export default async function HomePage() {
       <div className="-mt-4 lg:-mt-6"><ModuleBar /></div>
       <VideoSection hasVideo={hasVideo} />
       <WhyChoose />
+      <Messaging />
+      <Guide />
       <Features />
       <FeatureTabs />
-      <Guide />
       <Pwa />
       <Testimonials />
       <PricingFaq signedIn={signedIn} />
