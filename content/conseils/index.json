@@ -1,0 +1,45 @@
+{
+  "categories": [
+    { "key": "Communication", "label": "Communication" },
+    { "key": "Organisation", "label": "Organisation" },
+    { "key": "Enfant", "label": "Enfant" },
+    { "key": "Soi-même", "label": "Soi-même" },
+    { "key": "Procedures", "label": "Procédures" }
+  ],
+  "conseils": [
+    { "id": 1, "titre": "Répondre à froid", "categorie": "Communication" },
+    { "id": 2, "titre": "Un message, un sujet", "categorie": "Communication" },
+    { "id": 3, "titre": "Reformuler avant d'envoyer", "categorie": "Communication" },
+    { "id": 4, "titre": "Préférer l'écrit pour l'organisation", "categorie": "Communication" },
+    { "id": 5, "titre": "Éviter l'enfant comme messager", "categorie": "Communication" },
+    { "id": 6, "titre": "Garder le ton factuel", "categorie": "Communication" },
+
+    { "id": 7, "titre": "Un calendrier partagé clair", "categorie": "Organisation" },
+    { "id": 8, "titre": "Lister les affaires de l'enfant", "categorie": "Organisation" },
+    { "id": 9, "titre": "Numériser au fil de l'eau", "categorie": "Organisation" },
+    { "id": 10, "titre": "Nommer les fichiers avec la date", "categorie": "Organisation" },
+    { "id": 11, "titre": "Préparer les transitions", "categorie": "Organisation" },
+    { "id": 12, "titre": "Anticiper les vacances scolaires", "categorie": "Organisation" },
+
+    { "id": 13, "titre": "Protéger l'enfant du conflit", "categorie": "Enfant" },
+    { "id": 14, "titre": "Garder les deux parents présents", "categorie": "Enfant" },
+    { "id": 15, "titre": "Écouter sans interroger", "categorie": "Enfant" },
+    { "id": 16, "titre": "Adapter les mots à l'âge", "categorie": "Enfant" },
+    { "id": 17, "titre": "Maintenir les rituels", "categorie": "Enfant" },
+    { "id": 18, "titre": "Repérer les signes d'alerte", "categorie": "Enfant" },
+
+    { "id": 19, "titre": "S'autoriser la pause", "categorie": "Soi-même" },
+    { "id": 20, "titre": "Nommer ses émotions", "categorie": "Soi-même" },
+    { "id": 21, "titre": "Dormir, bouger, manger", "categorie": "Soi-même" },
+    { "id": 22, "titre": "Entourer, pas isoler", "categorie": "Soi-même" },
+    { "id": 23, "titre": "Consulter un professionnel", "categorie": "Soi-même" },
+    { "id": 24, "titre": "Fêter les petits pas", "categorie": "Soi-même" },
+
+    { "id": 25, "titre": "Préparer son rendez-vous avocat", "categorie": "Procedures" },
+    { "id": 26, "titre": "Garder une trace factuelle", "categorie": "Procedures" },
+    { "id": 27, "titre": "Diversifier les témoins", "categorie": "Procedures" },
+    { "id": 28, "titre": "Vérifier les formes légales", "categorie": "Procedures" },
+    { "id": 29, "titre": "Envisager la médiation", "categorie": "Procedures" },
+    { "id": 30, "titre": "Connaître l'aide juridictionnelle", "categorie": "Procedures" }
+  ]
+}

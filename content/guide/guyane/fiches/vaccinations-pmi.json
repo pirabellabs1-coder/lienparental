@@ -1,0 +1,73 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "guyane",
+  "categorie": "sante",
+  "titre": "Vaccinations obligatoires et suivi en PMI",
+  "resume": "Les vaccins exigés pour la crèche, l'école et le centre de loisirs, la fièvre jaune obligatoire en Guyane dès 12 mois, et le suivi gratuit des moins de 6 ans en PMI.",
+  "aQuoiCaSert": "Les vaccinations obligatoires sont exigées pour entrer en crèche, à l'école, en garderie ou en colonie : sans justificatif, l'inscription peut être refusée ou seulement provisoire. Le justificatif, c'est le carnet de santé rempli par le médecin, et pour la fièvre jaune le certificat international de vaccination (carnet jaune). La protection maternelle et infantile (PMI) assure gratuitement des consultations pour les femmes enceintes et les enfants de moins de 6 ans, vaccinations comprises.",
+  "quiEstConcerne": [
+    "Tous les parents d'enfants mineurs, en particulier avant une entrée en crèche, à l'école ou en centre de loisirs.",
+    "Toute personne résidant en Guyane ou y séjournant, à partir de 12 mois, pour la fièvre jaune."
+  ],
+  "aSavoir": [
+    "Enfant né avant 2018 : diphtérie, tétanos et poliomyélite (DTP) obligatoires pour l'école.",
+    "Enfant né entre le 1er janvier 2018 et le 31 décembre 2022 : 11 vaccins obligatoires (diphtérie, tétanos, poliomyélite, coqueluche, Haemophilus influenzae b, hépatite B, pneumocoque, méningocoque C, rougeole, oreillons, rubéole).",
+    "Enfant né à partir de 2023 : même liste, avec les méningocoques A, B, C, W et Y à la place du seul méningocoque C.",
+    "Fièvre jaune : recommandée dès 9 mois et obligatoire en Guyane dès 12 mois. Une seule injection protège à vie. Si l'enfant a été vacciné avant 2 ans, une seconde dose est recommandée entre 6 et 10 ans. Le vaccin fait en Guyane est remboursé par l'Assurance Maladie.",
+    "Un enfant pas à jour peut être admis provisoirement : vous avez alors 3 mois pour régulariser, sinon il peut être exclu. Si l'enfant reste plus d'un an, le justificatif est demandé chaque année.",
+    "Les 20 examens de santé obligatoires jusqu'à 6 ans sont pris en charge à 100 % sans avance de frais, hors dépassements d'honoraires.",
+    "Parents séparés : le parent qui emmène l'enfant se faire vacciner a intérêt à informer l'autre et à lui transmettre une copie des pages vaccins, pour que chacun dispose du justificatif."
+  ],
+  "documents": [
+    { "id": "carnet-sante", "libelle": "Carnet de santé de l'enfant", "detail": "Original à apporter à chaque rendez-vous. C'est le justificatif des vaccinations : gardez une photocopie ou une photo des pages vaccins. Perdu ? Renseignez-vous auprès de la PMI ou de votre médecin.", "coffre": "sante" },
+    { "id": "carnet-jaune", "libelle": "Certificat international de vaccination contre la fièvre jaune (carnet jaune)", "detail": "Remis après le vaccin. Contrôlé par les compagnies aériennes. Duplicata à demander au centre qui a vacciné.", "coffre": "sante" },
+    { "id": "carte-vitale", "libelle": "Carte Vitale du parent ou attestation de droits de l'enfant", "detail": "Attestation téléchargeable gratuitement sur votre compte ameli.", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité du parent ou de l'adulte qui accompagne", "detail": "Original. Si un tiers accompagne l'enfant, prévoyez une autorisation écrite d'un parent.", "coffre": "sante" },
+    { "id": "contre-indication", "libelle": "Certificat médical de contre-indication, le cas échéant", "detail": "Délivré par le médecin. À présenter à la place du justificatif de vaccin.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez le carnet de santé", "detail": "Comparez avec la liste des vaccins obligatoires selon l'année de naissance de votre enfant, et vérifiez la fièvre jaune dès 12 mois." },
+    { "titre": "Prenez rendez-vous", "detail": "Chez votre médecin traitant ou pédiatre, ou dans un centre de PMI de la Collectivité territoriale de Guyane pour les moins de 6 ans. Appelez avant : certains centres peuvent être fermés temporairement." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Carnet de santé, carnet jaune s'il existe déjà, carte Vitale ou attestation de droits, pièce d'identité, autorisation écrite si ce n'est pas un parent qui accompagne." },
+    { "titre": "Faites vacciner votre enfant", "detail": "Le professionnel inscrit le vaccin dans le carnet de santé. Pour la fièvre jaune, dans un centre habilité ou en PMI pour les moins de 6 ans." },
+    { "titre": "Présentez le justificatif", "detail": "Photocopie des pages vaccins à la crèche, à l'école ou au centre de loisirs, chaque année si l'enfant y reste plus d'un an." }
+  ],
+  "ou": [
+    { "nom": "Centres de PMI de la Collectivité territoriale de Guyane (CTG)", "detail": "Consultations gratuites et vaccins pour les moins de 6 ans. Centres à Cayenne, Kourou, Matoury, Saint-Laurent-du-Maroni et dans de nombreuses communes.", "url": "https://www.ctguyane.fr/les-agences-regionales/" },
+    { "nom": "PMI de Cayenne", "detail": "36 rue du 14-Juillet, Cayenne.", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3", "telephone": "05 94 39 03 60" },
+    { "nom": "Votre médecin traitant ou pédiatre", "detail": "Certains médecins généralistes sont habilités pour la fièvre jaune." },
+    { "nom": "Centres de vaccination habilités contre la fièvre jaune", "detail": "Liste et conseils sur le site de l'ARS Guyane.", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires" }
+  ],
+  "liens": [
+    { "titre": "Vaccins exigés pour la crèche et l'école (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Conseils sanitaires aux nouveaux arrivants (ARS Guyane)", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires" },
+    { "titre": "Examens de santé obligatoires jusqu'à 6 ans (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Rendez-vous vaccination", "evenement": "sante" },
+    { "type": "rappel", "titre": "Rappel de vaccin", "evenement": "sante" },
+    { "type": "rappel", "titre": "Seconde dose fièvre jaune entre 6 et 10 ans (si vacciné avant 2 ans)", "evenement": "sante" },
+    { "type": "coffre", "titre": "Pages vaccins du carnet de santé", "categorie": "sante" },
+    { "type": "coffre", "titre": "Certificat international de vaccination fièvre jaune", "categorie": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "3 mois pour régulariser après une admission provisoire", "detail": "Sans vaccins à jour à l'issue de ce délai, l'enfant peut être exclu de la collectivité." },
+    { "libelle": "Fièvre jaune : au plus tard 10 jours avant un départ vers la Guyane", "detail": "Pour un enfant de 12 mois ou plus qui arrive en Guyane." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : horaires et ouverture des centres de PMI, certains pouvant être temporairement fermés. Appelez avant de vous déplacer.",
+    "À confirmer localement : liste à jour des centres habilités pour la fièvre jaune, la page de l'ARS Guyane datant de 2023.",
+    "Le nombre de doses et l'âge de chaque vaccin suivent le calendrier vaccinal en vigueur : à vérifier avec votre médecin ou la PMI."
+  ],
+  "motsCles": ["vaccin", "fièvre jaune", "PMI", "carnet de santé", "carnet jaune", "pédiatre", "bébé"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F1879 Santé à l'école primaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879", "verifieLe": "2026-10-15" },
+    { "titre": "Service-public.gouv.fr, F35490 Examens obligatoires jusqu'à 6 ans", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490", "verifieLe": "2026-07-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
+    { "titre": "ARS Guyane, Nouveaux arrivants : conseils sanitaires", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires", "verifieLe": "2023-01-09" },
+    { "titre": "CTG, PMI : cadre du partenariat avec le CHU de Guyane", "url": "https://www.ctguyane.fr/pmi-la-ctg-clarifie-le-cadre-de-son-partenariat-avec-le-chu-de-guyane/", "verifieLe": "2026-09-08" },
+    { "titre": "Annuaire service-public, PMI de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3" }
+  ]
+}

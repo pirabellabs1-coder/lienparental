@@ -1,0 +1,44 @@
+import { cn } from '@/lib/cn'
+import { SiteFooter } from './SiteFooter'
+import { SiteHeader } from './SiteHeader'
+
+// Gabarit des pages publiques : lien d'évitement, en-tête et pied de page partagés, <main id="contenu">.
+// Animations sobres (transform / opacity uniquement), coupées en prefers-reduced-motion.
+const CSS = `
+@keyframes site-rise{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:none}}
+.site-rise{animation:site-rise .6s cubic-bezier(.22,1,.36,1) both;animation-delay:var(--d,0ms)}
+.site :focus-visible{outline:2px solid #2e7d32;outline-offset:3px;box-shadow:none}
+.site .on-dark :focus-visible{outline-color:#aadcac}
+@media (prefers-reduced-motion:reduce){
+  .site-rise{animation:none!important}
+  .site *{scroll-behavior:auto!important;transition-duration:0s!important}
+}
+`
+
+type Props = {
+  children: React.ReactNode
+  className?: string
+  mainClassName?: string
+  /** La page fournit déjà son propre <main> (ex. /installer) : on l'enveloppe sans en créer un second. */
+  ownMain?: boolean
+}
+
+export function SiteShell({ children, className, mainClassName, ownMain = false }: Props) {
+  const Main = ownMain ? 'div' : 'main'
+  return (
+    <div className={cn('site flex min-h-[100dvh] flex-col overflow-x-clip bg-white font-sans text-night-900 antialiased', className)}>
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <a
+        href="#contenu"
+        className="fixed left-4 top-4 z-50 -translate-y-24 rounded-full bg-white px-5 py-3 text-[15px] font-semibold text-night-900 shadow-lg ring-1 ring-[#E5E7EB] transition-transform focus-visible:translate-y-0"
+      >
+        Aller au contenu
+      </a>
+      <SiteHeader />
+      <Main id="contenu" tabIndex={-1} className={cn('flex-1 outline-none', mainClassName)}>
+        {children}
+      </Main>
+      <SiteFooter />
+    </div>
+  )
+}

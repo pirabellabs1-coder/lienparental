@@ -1,0 +1,36 @@
+'use client';
+
+import { useEffect } from 'react';
+
+/**
+ * RegisterSW — registers the service worker at /sw.js on mount.
+ *
+ * Mounted once in app/layout.tsx body. Returns null (no UI).
+ * Skips registration in dev (next dev) and when SW is unsupported.
+ */
+export default function RegisterSW(): null {
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (process.env.NODE_ENV !== 'production') return;
+    if (!('serviceWorker' in navigator)) return;
+
+    // Register after the page is interactive so SW install doesn't contend
+    // with the LCP paint.
+    const register = () => {
+      navigator.serviceWorker
+        .register('/sw.js', { scope: '/' })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.warn('[SW] registration failed:', err);
+        });
+    };
+
+    if (document.readyState === 'complete') {
+      register();
+    } else {
+      window.addEventListener('load', register, { once: true });
+    }
+  }, []);
+
+  return null;
+}

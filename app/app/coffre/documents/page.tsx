@@ -1,0 +1,136 @@
+'use client'
+
+import Link from 'next/link'
+import { ChevronRight, Ellipsis, FolderOpen, Plus, Search } from 'lucide-react'
+import { ScreenHeader } from '@/components/coffre/ScreenHeader'
+import { CategoryIcon } from '@/components/coffre/CategoryIcon'
+import { DocRow } from '@/components/coffre/DocRow'
+import { useCategories, useVaultDocs } from '@/components/coffre/store'
+import { useAnnounce } from '@/components/coffre/useAnnounce'
+import { useDocActions } from '@/components/coffre/useDocActions'
+import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
+
+// Maquettes « Coffre-fort (documents) » + « 3. Coffre-fort – Documents »
+export default function DocumentsHub() {
+  const { categories } = useCategories()
+  const { docs, loading, error, refresh } = useVaultDocs()
+  const { announce, node } = useAnnounce()
+  const { openActions, sheet } = useDocActions(announce)
+  const total = categories.reduce((s, c) => s + c.count, 0)
+  const recent = [...docs].sort((a, b) => b.addedAt.localeCompare(a.addedAt)).slice(0, 4)
+
+  return (
+    <>
+      <ScreenHeader
+        large
+        title="Documents"
+        backHref="/app/coffre"
+        right={
+          <Link
+            href="/app/coffre/ajouter"
+            aria-label="Ajouter un document"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full"
+          >
+            <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-leaf-500 text-white shadow-[0_6px_14px_-6px_rgba(46,125,50,0.8)]">
+              <Plus className="h-5 w-5" strokeWidth={2.6} />
+            </span>
+          </Link>
+        }
+      />
+
+      <div className="px-5">
+        <p className="text-[14px] leading-relaxed text-night-600">Organisez et sécurisez tous vos documents importants.</p>
+
+        <form action="/app/coffre/documents/tous" role="search" className="mt-4">
+          <label htmlFor="doc-search" className="sr-only">Rechercher un document</label>
+          <div className="flex h-12 items-center gap-2 rounded-xl border border-night-100 bg-white px-3.5 shadow-soft focus-within:border-leaf-500">
+            <input
+              id="doc-search"
+              name="q"
+              type="search"
+              placeholder="Rechercher un document"
+              className="h-full min-w-0 flex-1 bg-transparent text-[14px] text-night-900 outline-none placeholder:text-night-400"
+            />
+            <button type="submit" aria-label="Lancer la recherche" className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-700 hover:bg-night-50">
+              <Search className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
+        </form>
+
+        <Link
+          href="/app/coffre/documents/tous"
+          className="group mt-4 flex items-center gap-3.5 rounded-2xl border border-night-100 bg-white p-4 shadow-soft transition-[box-shadow,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-card active:scale-[0.99]"
+        >
+          <span aria-hidden="true" className="flex h-11 w-11 items-center justify-center rounded-xl bg-night-50 text-night-700">
+            <FolderOpen className="h-[22px] w-[22px]" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-[15px] font-bold text-night-900">Tous les documents</span>
+            <span className="block text-[12.5px] text-night-500">{total} documents</span>
+          </span>
+          <ChevronRight className="h-5 w-5 text-night-500 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5" aria-hidden="true" />
+        </Link>
+
+        <section aria-labelledby="cats-title" className="mt-6">
+          <div className="flex items-center justify-between">
+            <h2 id="cats-title" className="text-[15px] font-extrabold text-night-900">Catégories</h2>
+            <Link href="/app/coffre/categories" className="-mr-2 inline-flex h-11 items-center px-2 text-[13px] font-bold text-leaf-600">
+              Voir tout
+            </Link>
+          </div>
+          <ul className="-mx-5 mt-1 flex gap-2 overflow-x-auto px-5 pb-2 [scrollbar-width:none]">
+            {categories.map((c) => (
+              <li key={c.id} className="shrink-0">
+                <Link
+                  href={`/app/coffre/documents/tous?cats=${c.id}`}
+                  className="flex w-[76px] flex-col items-center gap-1.5 rounded-2xl px-1 py-2 text-center hover:bg-night-50"
+                >
+                  <CategoryIcon icon={c.icon} tone={c.tone} size="lg" />
+                  <span className="w-full truncate text-[11.5px] font-semibold text-night-900">{c.name}</span>
+                  <span className="text-[11px] text-night-500">{c.count}<span className="sr-only"> documents</span></span>
+                </Link>
+              </li>
+            ))}
+            <li className="shrink-0">
+              <Link
+                href="/app/coffre/categories"
+                aria-label="Gérer les catégories"
+                className="flex w-[64px] flex-col items-center gap-1.5 rounded-2xl px-1 py-2 hover:bg-night-50"
+              >
+                <span aria-hidden="true" className="flex h-12 w-12 items-center justify-center rounded-xl bg-night-50 text-night-600">
+                  <Ellipsis className="h-6 w-6" />
+                </span>
+              </Link>
+            </li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="recents-title" className="mt-4">
+          <div className="flex items-center justify-between">
+            <h2 id="recents-title" className="text-[15px] font-extrabold text-night-900">Documents récents</h2>
+            <Link href="/app/coffre/documents/tous" className="-mr-2 inline-flex h-11 items-center px-2 text-[13px] font-bold text-leaf-600">
+              Voir tout
+            </Link>
+          </div>
+          {loading ? (
+            <LoadingState compact title="Chargement des documents" description="" />
+          ) : error ? (
+            <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} secondary={{ label: 'Retour au coffre-fort', href: '/app/coffre' }} />
+          ) : recent.length === 0 ? (
+            <p className="mt-2 rounded-2xl border border-dashed border-night-200 p-6 text-center text-[13px] text-night-500">
+              Aucun document pour le moment. Ajoutez votre premier document avec le bouton +.
+            </p>
+          ) : (
+            <ul className="mt-1 space-y-2.5 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0">
+              {recent.map((d) => (
+                <li key={d.id}><DocRow doc={d} onMore={openActions} /></li>
+              ))}
+            </ul>
+          )}
+        </section>
+      </div>
+      {sheet}
+      {node}
+    </>
+  )
+}

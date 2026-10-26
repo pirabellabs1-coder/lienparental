@@ -1,0 +1,66 @@
+{
+  "slug": "changer-ecole-en-cours-annee",
+  "territoire": "guyane",
+  "categorie": "ecole",
+  "titre": "Changer d'école en cours d'année (déménagement, certificat de radiation)",
+  "resume": "Faire changer votre enfant d'école, de collège ou de lycée en cours d'année : certificat de radiation, inscription en mairie puis à l'école, pièces exactes et cas des parents séparés.",
+  "aQuoiCaSert": "Un enfant peut changer d'établissement en cours d'année, par exemple après un déménagement ou une séparation. Le changement n'est jamais automatique : il dépend des places disponibles. L'ancien établissement remet un certificat de radiation, indispensable pour inscrire l'enfant dans le nouveau. À l'école maternelle et élémentaire publique, l'inscription passe d'abord par la mairie.",
+  "quiEstConcerne": [
+    "Les parents qui déménagent en cours d'année, dans la même commune ou ailleurs en Guyane.",
+    "Les parents séparés dont l'enfant change de résidence principale.",
+    "Les parents qui souhaitent une autre école, un autre collège ou un autre lycée que celui du secteur."
+  ],
+  "aSavoir": [
+    "École publique, autre école de la même commune : il faut l'accord du maire, qui délivre un certificat d'inscription. Dans une autre commune : accord du maire de votre commune de résidence et de celui de la commune d'accueil (service-public.gouv.fr).",
+    "Parents séparés : si l'un des parents s'oppose au changement d'école, le directeur doit attendre la décision du juge aux affaires familiales saisi par ce parent (service-public.gouv.fr). Le changement d'école est un choix important pour l'enfant : mieux vaut un accord écrit des deux parents qui exercent l'autorité parentale.",
+    "Si un jugement vous confie seul l'autorité parentale, présentez-le à l'école et à la mairie.",
+    "Collège ou lycée public du secteur : obtenez le certificat de radiation (exeat) de l'ancien établissement, puis inscrivez l'enfant auprès du nouveau. Le chef d'établissement doit accepter l'inscription. S'il n'y a plus de place, ce sont les services académiques qui affectent l'élève.",
+    "Collège ou lycée hors secteur : il faut d'abord l'accord du directeur académique (Dasen) avant de s'inscrire.",
+    "L'inscription à l'école élémentaire publique est gratuite (service-public.gouv.fr)."
+  ],
+  "documents": [
+    { "id": "certificat-radiation", "libelle": "Certificat de radiation de l'ancienne école (exeat au collège et au lycée)", "detail": "Original remis par la direction de l'ancien établissement, une fois le changement signalé. Indispensable dans tous les cas.", "coffre": "scolarite" },
+    { "id": "certificat-inscription", "libelle": "Certificat d'inscription délivré par la mairie (école publique)", "detail": "Original, à demander au service scolaire de la mairie de la nouvelle commune.", "coffre": "scolarite" },
+    { "id": "filiation", "libelle": "Livret de famille ou extrait d'acte de naissance de l'enfant", "detail": "Copie, pour prouver l'identité et la filiation. Acte gratuit sur service-public.gouv.fr ou à la mairie du lieu de naissance.", "coffre": "scolarite" },
+    { "id": "vaccins", "libelle": "Justificatif des vaccinations obligatoires", "detail": "Copie des pages vaccins du carnet de santé ou certificat de contre-indication. En Guyane, la fièvre jaune fait partie des vaccins exigés.", "coffre": "sante" },
+    { "id": "identite-parents", "libelle": "Pièce d'identité de chaque parent qui fait la démarche", "detail": "Copie en cours de validité, demandée par la mairie pour l'inscription.", "coffre": "scolarite" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Copie de facture ou quittance au nouveau domicile. Si vous êtes hébergé, attestation sur l'honneur de l'hébergeant avec son justificatif.", "coffre": "scolarite" },
+    { "id": "bulletins", "libelle": "Bulletins de l'année et décision d'orientation (collège, lycée)", "detail": "Copies, téléchargeables sur l'espace numérique de l'établissement.", "coffre": "scolarite" },
+    { "id": "accord-autre-parent", "libelle": "Accord écrit de l'autre parent", "detail": "Daté et signé, avec la copie de sa pièce d'identité. Recommandé quand l'autorité parentale est partagée.", "coffre": "jaf" },
+    { "id": "jugement", "libelle": "Jugement ou convention (résidence de l'enfant, autorité parentale)", "detail": "Copie, si une décision fixe la résidence ou confie l'autorité parentale à un seul parent.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Renseignez-vous auprès de la nouvelle école ou du nouvel établissement", "detail": "Vérifiez qu'il reste des places. Pour une école publique, appelez aussi le service scolaire de la mairie." },
+    { "titre": "Obtenez l'accord nécessaire", "detail": "Certificat d'inscription de la mairie pour une école publique, accord du directeur académique pour un collège ou lycée hors secteur." },
+    { "titre": "Signalez le départ à l'ancien établissement", "detail": "Demandez le certificat de radiation ou l'exeat. Prévenez l'autre parent." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Certificat de radiation, certificat d'inscription de la mairie, livret de famille ou acte de naissance, carnet de vaccination à jour, justificatif de domicile, pièces d'identité, bulletins, accord écrit de l'autre parent ou jugement si besoin." },
+    { "titre": "Finalisez l'inscription dans le nouvel établissement", "detail": "Pensez aussi à réinscrire l'enfant à la cantine, au périscolaire et au transport scolaire." }
+  ],
+  "ou": [
+    { "nom": "Mairie de votre nouvelle commune (service scolaire)", "detail": "Pour le certificat d'inscription en école publique." },
+    { "nom": "Rectorat de l'académie de la Guyane", "detail": "Pour l'affectation en collège ou lycée quand l'établissement est complet ou hors secteur.", "url": "https://www.ac-guyane.fr" }
+  ],
+  "liens": [
+    { "titre": "Changer d'école en cours d'année (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722" },
+    { "titre": "Changer de collège ou de lycée en cours d'année (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393" },
+    { "titre": "Inscription à l'école élémentaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Certificat de radiation de l'ancienne école", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Certificat d'inscription de la mairie", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Accord écrit de l'autre parent pour le changement d'école", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Rendez-vous d'inscription dans la nouvelle école", "evenement": "ecole" },
+    { "type": "rappel", "titre": "Réinscrire l'enfant à la cantine et au périscolaire", "evenement": "ecole" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : en Guyane, le service du rectorat chargé des affectations en cours d'année et ses délais de réponse.",
+    "À confirmer localement : les pièces demandées par chaque mairie de Guyane peuvent varier légèrement."
+  ],
+  "motsCles": ["changement d'école", "certificat de radiation", "exeat", "déménagement", "mairie", "collège", "lycée"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10722 Changement d'école en cours d'année", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722", "verifieLe": "2025-07-08" },
+    { "titre": "Service-public.gouv.fr, F20393 Changement de collège ou de lycée en cours d'année", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393", "verifieLe": "2025-10-09" },
+    { "titre": "Service-public.gouv.fr, F1865 Inscription à l'école élémentaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" }
+  ]
+}

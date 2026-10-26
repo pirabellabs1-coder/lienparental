@@ -1,0 +1,66 @@
+{
+  "slug": "complementaire-sante-solidaire",
+  "territoire": "guyane",
+  "categorie": "sante",
+  "titre": "Complémentaire santé solidaire (C2S)",
+  "resume": "Une complémentaire santé gratuite ou à faible coût pour tout le foyer, enfants compris, selon vos revenus des 12 derniers mois, avec des plafonds plus élevés en Guyane.",
+  "aQuoiCaSert": "La complémentaire santé solidaire prend en charge la part des dépenses de santé non remboursée par l'Assurance Maladie, dans la limite des tarifs de la Sécurité sociale. Elle est gratuite ou avec une petite participation mensuelle selon vos ressources, et couvre toutes les personnes du foyer, donc vos enfants. C'est souvent la solution quand on n'a pas de mutuelle et peu de revenus.",
+  "quiEstConcerne": [
+    "Les foyers aux revenus modestes résidant en France de façon stable et régulière depuis plus de 3 mois.",
+    "Les bénéficiaires du RSA : la C2S gratuite est attribuée automatiquement, sauf opposition.",
+    "Les parents isolés et les familles qui n'ont pas de complémentaire santé pour leurs enfants."
+  ],
+  "aSavoir": [
+    "Avec la C2S : pas de dépassement d'honoraires, tiers payant (pas d'avance de frais), forfait hospitalier pris en charge.",
+    "Plafonds annuels en Guyane pour la C2S gratuite : 11 599 € pour 1 personne, 17 398 € pour 2, 20 878 € pour 3, 24 358 € pour 4, plus 4 640 € par personne supplémentaire.",
+    "C2S avec participation en Guyane : ressources jusqu'à 15 659 € pour 1 personne, 23 488 € pour 2, 28 185 € pour 3, 32 883 € pour 4, plus 6 263 € par personne supplémentaire.",
+    "Les ressources comptées sont celles des 12 mois précédant la demande. Un forfait logement est ajouté si vous touchez une aide au logement, êtes logé gratuitement ou êtes propriétaire.",
+    "Décision sous 2 mois. Sans réponse dans ce délai, la demande est acceptée. En cas de refus, recours amiable possible dans les 2 mois.",
+    "La C2S est accordée pour 1 an. Le renouvellement se demande entre 4 et 2 mois avant l'échéance, sauf s'il est automatique (RSA, Aspa, Asi, et AAH sans changement de situation).",
+    "Parents séparés : la C2S est attribuée au foyer qui fait la demande. Un enfant en résidence alternée figure en principe dans le foyer d'un seul parent : renseignez-vous auprès de la caisse."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "Formulaire cerfa n° 12504 rempli et signé, si vous ne faites pas la demande en ligne", "detail": "Il comprend la liste des personnes du foyer et leurs ressources des 12 derniers mois.", "coffre": "sante" },
+    { "id": "avis-impot", "libelle": "Avis d'impôt ou avis de situation déclarative (Asdir)", "detail": "Copie. Téléchargeable sur impots.gouv.fr.", "coffre": "finances" },
+    { "id": "taxe-fonciere", "libelle": "Avis de taxe foncière, si vous êtes propriétaire", "detail": "Copie.", "coffre": "finances" },
+    { "id": "taxe-habitation", "libelle": "Avis de taxe d'habitation, le cas échéant", "detail": "Copie.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Justificatifs de ressources des 12 derniers mois, s'ils sont demandés", "detail": "Bulletins de salaire, indemnités, pensions alimentaires reçues. La caisse peut demander des informations complémentaires.", "coffre": "finances" },
+    { "id": "attestation-caf", "libelle": "Attestation de ressources de la Caf ou de la MSA, si une demande de RSA est en cours", "detail": "Téléchargeable dans votre espace Caf.", "coffre": "finances" },
+    { "id": "etranger", "libelle": "Justificatifs fiscaux et sociaux de chaque pays, si vous avez vécu à l'étranger dans les 12 derniers mois", "coffre": "finances" },
+    { "id": "decision-c2s", "libelle": "Décision d'attribution de la C2S", "detail": "Elle indique la date de fin de droits : notez-la pour le renouvellement.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Estimez vos droits", "detail": "Additionnez les ressources du foyer sur 12 mois et comparez-les aux plafonds de la Guyane. Préparez votre avis d'impôt et vos relevés de ressources." },
+    { "titre": "Faites la demande en ligne", "detail": "Depuis votre compte ameli : c'est le plus rapide. Vous pouvez aussi envoyer le formulaire cerfa n° 12504 à votre caisse." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Si vous déposez le dossier à l'accueil : formulaire signé, avis d'impôt, avis de taxe foncière ou d'habitation, attestation Caf si RSA en cours, justificatifs de ressources, pièce d'identité et carte Vitale. Faites des photocopies." },
+    { "titre": "Attendez la décision", "detail": "Elle est rendue sous 2 mois. En cas de refus, saisissez la commission de recours amiable dans les 2 mois." },
+    { "titre": "Pensez au renouvellement", "detail": "Entre 4 et 2 mois avant la date de fin indiquée sur votre attestation." }
+  ],
+  "ou": [
+    { "nom": "Caisse générale de sécurité sociale (CGSS) de la Guyane", "detail": "Demande en ligne sur ameli ou à l'accueil. Téléphone 36 46.", "url": "https://www.ameli.fr", "telephone": "36 46" },
+    { "nom": "France Services", "detail": "Aide aux démarches en ligne près de chez vous." }
+  ],
+  "liens": [
+    { "titre": "Complémentaire santé solidaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027" },
+    { "titre": "ameli.fr, Assurance Maladie", "url": "https://www.ameli.fr" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Décision d'attribution C2S", "categorie": "sante" },
+    { "type": "coffre", "titre": "Avis d'impôt utilisé pour la C2S", "categorie": "finances" },
+    { "type": "rappel", "titre": "Renouveler la C2S (4 à 2 mois avant l'échéance)", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Renouvellement entre 4 et 2 mois avant l'échéance", "detail": "Automatique pour les bénéficiaires du RSA, de l'Aspa, de l'Asi et de l'AAH sans changement de situation." },
+    { "libelle": "Recours contre un refus dans les 2 mois", "detail": "Auprès de la commission de recours amiable de la caisse." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : montant de la participation mensuelle de la C2S payante en Guyane selon l'âge, la fiche officielle ne détaillant le barème que pour Mayotte.",
+    "À confirmer localement : rattachement d'un enfant en résidence alternée au foyer de l'un ou l'autre parent pour la C2S, auprès de la CGSS de la Guyane.",
+    "À confirmer localement : adresses et horaires des accueils de la CGSS de la Guyane."
+  ],
+  "motsCles": ["C2S", "CMU", "mutuelle", "complémentaire", "santé", "remboursement", "gratuit"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (section Guyane, Guadeloupe, Martinique, La Réunion)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-07-01" }
+  ]
+}

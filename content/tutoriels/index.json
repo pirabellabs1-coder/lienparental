@@ -1,0 +1,10 @@
+{
+  "tutoriels": [
+    { "slug": "bien-demarrer", "title": "Bien démarrer", "duree_min": 5, "coverIcon": "rocket" },
+    { "slug": "utiliser-coach-ia", "title": "Utiliser le Coach IA", "duree_min": 4, "coverIcon": "sparkles" },
+    { "slug": "importer-vos-documents", "title": "Importer vos documents", "duree_min": 3, "coverIcon": "upload" },
+    { "slug": "ajouter-un-temoignage", "title": "Ajouter un témoignage", "duree_min": 4, "coverIcon": "user-check" },
+    { "slug": "exporter-dossier-jaf", "title": "Exporter votre dossier JAF", "duree_min": 3, "coverIcon": "folder-down" },
+    { "slug": "passer-a-premium", "title": "Passer à Premium", "duree_min": 2, "coverIcon": "star" }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "slug": "papiers-identite-mineur",
+  "territoire": "guyane",
+  "categorie": "logement",
+  "titre": "Faire la carte d'identité ou le passeport de mon enfant",
+  "resume": "Les pièces exactes à apporter en mairie selon votre cas (première demande, renouvellement, perte, parents séparés, résidence alternée), les tarifs en Guyane et les règles de présence de l'enfant.",
+  "aQuoiCaSert": "La carte d'identité et le passeport prouvent l'identité et la nationalité française de votre enfant et lui permettent de voyager. Un mineur peut en avoir à tout âge, même bébé. La demande se fait dans n'importe quelle mairie équipée d'une station d'enregistrement, pas forcément celle de votre commune. Le dossier refusé faute d'une pièce est la cause la plus fréquente de déplacement pour rien : préparez la liste correspondant à votre situation.",
+  "quiEstConcerne": [
+    "Le parent (ou le tuteur) qui exerce l'autorité parentale : c'est lui qui dépose la demande, avec l'enfant.",
+    "Les parents séparés, en résidence alternée ou avec un seul parent titulaire de l'autorité parentale : des pièces supplémentaires sont demandées.",
+    "Le représentant légal qui n'est pas un parent (tuteur, aide sociale à l'enfance) : il doit prouver sa délégation d'autorité parentale."
+  ],
+  "aSavoir": [
+    "Carte d'identité : gratuite pour une première demande et pour un renouvellement si vous présentez l'ancienne carte. En cas de perte ou de vol, timbre fiscal de 12,50 € en Guyane (25 € en métropole). Valable 10 ans.",
+    "Passeport en Guyane : 8,50 € pour un enfant de moins de 15 ans, 21 € de 15 à 17 ans si vous fournissez la photo (10 € et 22,50 € si la photo est prise au guichet, uniquement là où il n'y a pas de photographe professionnel). Timbre fiscal à acheter en ligne ou en bureau de tabac agréé. Valable 5 ans.",
+    "L'enfant et le parent doivent venir ensemble au dépôt. Empreintes à partir de 12 ans. À partir de 13 ans, l'enfant peut signer si son représentant légal est d'accord.",
+    "Retrait : avant 12 ans, le parent vient seul ; à partir de 12 ans, l'enfant doit être présent. Le titre doit être retiré dans les 3 mois après sa mise à disposition, sinon il est détruit.",
+    "Renouvellement de la carte : possible dans l'année qui précède sa date d'expiration.",
+    "Parents séparés en résidence alternée : les deux adresses peuvent figurer sur le titre si vous apportez la preuve de la résidence alternée (jugement, convention de divorce ou convention parentale) et un justificatif de domicile de chaque parent.",
+    "Un seul parent exerce l'autorité parentale : apportez le document qui le prouve (par exemple le jugement). Sans lui, le dossier peut être refusé.",
+    "Acte de naissance : il n'est demandé que si l'enfant n'a pas de titre valide ou périmé depuis moins de 5 ans, et seulement si l'état civil de sa commune de naissance n'est pas dématérialisé. Il doit dater de moins de 3 mois. Il est gratuit."
+  ],
+  "documents": [
+    { "id": "photo", "libelle": "Une photo d'identité de moins de 6 mois, conforme aux normes", "detail": "Original. Faite chez un photographe ou en cabine agréée. Pour le passeport, une photo fournie coûte moins cher qu'une photo prise au guichet.", "coffre": "autres" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité valide du parent qui dépose la demande", "detail": "Original. Ce parent doit exercer l'autorité parentale et venir avec l'enfant.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Justificatif de domicile au nom du parent qui dépose", "detail": "Original, récent (facture, avis d'imposition, quittance de loyer). Pour un passeport perdu, il doit dater de moins d'un an.", "coffre": "autres" },
+    { "id": "ancien-titre", "libelle": "Ancienne carte d'identité et passeport de l'enfant, s'il en a", "detail": "Originaux, même périmés depuis moins de 5 ans. Ils évitent de fournir un acte de naissance et rendent le renouvellement de la carte gratuit.", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Acte de naissance de l'enfant de moins de 3 mois, si demandé", "detail": "Seulement sans titre valide ou périmé depuis moins de 5 ans, et si la commune de naissance n'est pas dématérialisée. Gratuit en ligne sur service-public.gouv.fr ou à la mairie de naissance.", "coffre": "autres" },
+    { "id": "nationalite", "libelle": "Justificatif de nationalité française, si elle ne figure pas sur l'acte de naissance", "detail": "Par exemple un certificat de nationalité française ou un document prouvant la nationalité d'un parent : la mairie précise la pièce adaptée.", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant l'autorité parentale ou la résidence de l'enfant", "detail": "Copie. Obligatoire si un seul parent exerce l'autorité parentale, ou pour faire figurer deux adresses en résidence alternée.", "coffre": "jaf" },
+    { "id": "domicile-autre-parent", "libelle": "Justificatif de domicile de l'autre parent (résidence alternée)", "detail": "Uniquement si vous voulez les deux adresses sur le titre. Original ou copie selon la mairie : demandez.", "coffre": "autres" },
+    { "id": "delegation", "libelle": "Justificatif de délégation de l'autorité parentale (tuteur, ASE)", "detail": "Jugement de délégation ou de tutelle. Un agent de l'aide sociale à l'enfance ajoute sa carte ou attestation professionnelle.", "coffre": "jaf" },
+    { "id": "declaration-perte", "libelle": "Déclaration de perte (cerfa n° 14011) ou récépissé de déclaration de vol", "detail": "En cas de perte, elle peut être remplie sur place le jour du dépôt. En cas de vol, déclarez-le d'abord à la police ou à la gendarmerie.", "coffre": "autres" },
+    { "id": "timbre", "libelle": "Timbre fiscal, si nécessaire", "detail": "Passeport, ou carte d'identité perdue ou volée. Achat en ligne (timbres.impots.gouv.fr) ou en bureau de tabac agréé, avant le rendez-vous.", "coffre": "autres" },
+    { "id": "pre-demande", "libelle": "Numéro ou QR code de pré-demande ANTS", "detail": "Facultatif, mais fait gagner du temps au guichet.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Identifiez votre cas", "detail": "Première demande, renouvellement, perte ou vol, puis votre situation familiale (parents ensemble, séparés, résidence alternée, un seul parent titulaire de l'autorité parentale). La liste des pièces en dépend." },
+    { "titre": "Faites la pré-demande en ligne sur le site de l'ANTS", "detail": "Facultatif. Pour un passeport ou une carte perdue, achetez le timbre fiscal à la fin de la pré-demande." },
+    { "titre": "Prenez rendez-vous dans une mairie équipée", "detail": "N'importe laquelle en Guyane ou ailleurs. Les rendez-vous peuvent être loin : anticipez avant un voyage." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Originaux uniquement. Photo de moins de 6 mois, votre pièce d'identité valide, justificatif de domicile, ancien titre de l'enfant, timbre fiscal acheté si besoin, jugement ou convention si vous êtes séparés, deuxième justificatif de domicile en résidence alternée, acte de naissance de moins de 3 mois si demandé. L'enfant vient avec vous." },
+    { "titre": "Déposez le dossier avec votre enfant", "detail": "Empreintes à partir de 12 ans. Le parent signe pour l'enfant de moins de 13 ans." },
+    { "titre": "Suivez la fabrication", "detail": "Plusieurs semaines. Un SMS vous prévient si vous avez donné un numéro de portable ; suivi aussi sur le site de l'ANTS." },
+    { "titre": "Retirez le titre dans les 3 mois", "detail": "À partir de 12 ans, l'enfant doit être présent. Rangez ensuite une copie dans le coffre-fort." }
+  ],
+  "ou": [
+    { "nom": "Mairies équipées d'une station d'enregistrement", "detail": "Liste et prise de rendez-vous sur le site de l'ANTS.", "url": "https://passeport.ants.gouv.fr/services/geolocaliser-une-mairie-habilitee" },
+    { "nom": "France Services", "detail": "Aide gratuite pour la pré-demande en ligne et l'achat du timbre fiscal." }
+  ],
+  "liens": [
+    { "titre": "Carte d'identité d'un mineur : première demande (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342" },
+    { "titre": "Renouvellement de la carte d'identité d'un mineur (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090" },
+    { "titre": "Carte d'identité d'un mineur perdue (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153" },
+    { "titre": "Passeport d'un mineur (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930" },
+    { "titre": "Passeport d'un mineur perdu (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244" },
+    { "titre": "Tarifs du passeport (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752" },
+    { "titre": "Voyage sans les parents : autorisation de sortie du territoire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Rendez-vous en mairie : papiers d'identité de l'enfant", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Retirer le titre d'identité de l'enfant en mairie (3 mois maximum)", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Renouveler la carte d'identité de l'enfant (un an avant expiration)", "evenement": "autre" },
+    { "type": "depense", "titre": "Passeport d'un enfant de moins de 15 ans (Guyane)", "categorie": "frais-administratifs", "montant": 8.5, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752" },
+    { "type": "depense", "titre": "Passeport d'un enfant de 15 à 17 ans (Guyane)", "categorie": "frais-administratifs", "montant": 21, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752" },
+    { "type": "depense", "titre": "Carte d'identité perdue ou volée (Guyane)", "categorie": "frais-administratifs", "montant": 12.5, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153" },
+    { "type": "coffre", "titre": "Copie de la carte d'identité de l'enfant", "categorie": "autres" },
+    { "type": "coffre", "titre": "Copie du passeport de l'enfant", "categorie": "autres" },
+    { "type": "coffre", "titre": "Jugement ou convention (autorité parentale, résidence)", "categorie": "jaf" }
+  ],
+  "datesLimites": [
+    { "libelle": "Retrait du titre dans les 3 mois suivant sa mise à disposition", "detail": "Passé ce délai, il est détruit." },
+    { "libelle": "Renouvellement de la carte possible dans l'année précédant son expiration" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : les délais de rendez-vous et de fabrication varient selon les mairies de Guyane.",
+    "À confirmer localement : si l'état civil de la commune de naissance de votre enfant est dématérialisé (dans ce cas l'acte de naissance n'est pas demandé). Demandez à la mairie au moment du rendez-vous.",
+    "Les fiches officielles ne précisent pas si l'accord de l'autre parent est exigé pour délivrer le passeport quand l'autorité parentale est partagée : en cas de désaccord, renseignez-vous en mairie ou auprès d'un point-justice.",
+    "Le coût d'un renouvellement de carte sans présenter l'ancienne carte n'est pas précisé par la fiche officielle : demandez à la mairie."
+  ],
+  "motsCles": ["carte d'identité", "passeport", "CNI", "ANTS", "mairie", "timbre fiscal", "voyage"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1342 Carte d'identité d'un mineur : première demande", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-04-27" },
+    { "titre": "Service-public.gouv.fr, F21090 Renouvellement de la carte d'identité d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090", "verifieLe": "2026-06-19" },
+    { "titre": "Service-public.gouv.fr, F1153 Carte d'identité d'un mineur perdue", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153", "verifieLe": "2026-06-19" },
+    { "titre": "Service-public.gouv.fr, F14930 Passeport d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930", "verifieLe": "2026-06-19" },
+    { "titre": "Service-public.gouv.fr, F21244 Passeport d'un mineur perdu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244" },
+    { "titre": "Service-public.gouv.fr, F34752 Tarifs du passeport", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752", "verifieLe": "2026-08-05" },
+    { "titre": "Service-public.gouv.fr, F1427 Acte de naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" }
+  ]
+}

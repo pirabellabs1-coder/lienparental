@@ -1,0 +1,39 @@
+{
+  "categories": [
+    { "key": "prise-en-main", "label": "Prise en main" },
+    { "key": "confidentialite-securite", "label": "Confidentialité & sécurité" },
+    { "key": "coffre-fort", "label": "Coffre-fort" },
+    { "key": "temoignages", "label": "Témoignages" },
+    { "key": "coach-ia", "label": "Coach IA" },
+    { "key": "abonnement", "label": "Abonnement" },
+    { "key": "compte", "label": "Compte" }
+  ],
+  "questions": [
+    { "slug": "qu-est-ce-que-lien-parental", "question": "Qu'est-ce que Lien Parental ?", "categoryKey": "prise-en-main" },
+    { "slug": "comment-creer-mon-compte", "question": "Comment créer mon compte ?", "categoryKey": "prise-en-main" },
+    { "slug": "installer-lien-parental-telephone", "question": "Comment installer Lien Parental sur mon téléphone ?", "categoryKey": "prise-en-main" },
+
+    { "slug": "mes-donnees-sont-elles-chiffrees", "question": "Mes données sont-elles chiffrées ?", "categoryKey": "confidentialite-securite" },
+    { "slug": "qui-peut-voir-mes-informations", "question": "Qui peut voir mes informations ?", "categoryKey": "confidentialite-securite" },
+    { "slug": "que-se-passe-t-il-si-je-perds-mon-mot-de-passe", "question": "Que se passe-t-il si je perds mon mot de passe ?", "categoryKey": "confidentialite-securite" },
+
+    { "slug": "quels-documents-mettre-coffre-fort", "question": "Quels documents puis-je mettre dans le coffre-fort ?", "categoryKey": "coffre-fort" },
+    { "slug": "taille-limite-fichiers", "question": "Y a-t-il une taille limite pour les fichiers ?", "categoryKey": "coffre-fort" },
+    { "slug": "classer-documents-coffre-fort", "question": "Comment classer mes documents dans le coffre-fort ?", "categoryKey": "coffre-fort" },
+
+    { "slug": "comment-ajouter-temoignage", "question": "Comment ajouter un témoignage ?", "categoryKey": "temoignages" },
+    { "slug": "qui-peut-ecrire-temoignage", "question": "Qui peut écrire un témoignage pour moi ?", "categoryKey": "temoignages" },
+    { "slug": "valeur-juridique-temoignages", "question": "Les témoignages ont-ils une valeur juridique ?", "categoryKey": "temoignages" },
+
+    { "slug": "que-fait-le-coach-ia", "question": "Que fait exactement le Coach IA ?", "categoryKey": "coach-ia" },
+    { "slug": "coach-ia-donne-t-il-conseil-juridique", "question": "Le Coach IA donne-t-il des conseils juridiques ?", "categoryKey": "coach-ia" },
+    { "slug": "coach-ia-neutre-entre-parents", "question": "Le Coach IA est-il neutre entre les deux parents ?", "categoryKey": "coach-ia" },
+
+    { "slug": "difference-gratuit-premium", "question": "Quelle est la différence entre la version gratuite et Premium ?", "categoryKey": "abonnement" },
+    { "slug": "comment-resilier-abonnement", "question": "Comment résilier mon abonnement ?", "categoryKey": "abonnement" },
+    { "slug": "remboursement-possible", "question": "Puis-je être remboursé ?", "categoryKey": "abonnement" },
+
+    { "slug": "supprimer-mon-compte", "question": "Comment supprimer définitivement mon compte ?", "categoryKey": "compte" },
+    { "slug": "exporter-toutes-mes-donnees", "question": "Comment exporter toutes mes données ?", "categoryKey": "compte" }
+  ]
+}

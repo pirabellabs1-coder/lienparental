@@ -1,0 +1,11 @@
+.env*
+!.env.example
+node_modules
+.next
+.vercel
+maquettes
+captures
+pilotage.html
+tsconfig.tsbuildinfo
+*.log
+.claude

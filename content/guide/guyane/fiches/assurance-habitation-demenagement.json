@@ -1,0 +1,67 @@
+{
+  "slug": "assurance-habitation-demenagement",
+  "territoire": "guyane",
+  "categorie": "assurances",
+  "titre": "Assurance habitation quand on change de logement",
+  "resume": "Après une séparation : assurer le nouveau logement avant la remise des clés, prévenir l'assureur de l'ancien dans les 15 jours, résilier sans frais et vérifier que les enfants restent couverts.",
+  "aQuoiCaSert": "Quand on quitte le logement familial, il faut à la fois régler le sort de l'ancien contrat d'assurance habitation et assurer le nouveau logement. Le locataire doit être assuré au minimum pour les risques locatifs, sinon le propriétaire peut résilier le bail ou souscrire une assurance à ses frais et la lui refacturer. C'est aussi le moment de vérifier la responsabilité civile, souvent incluse dans le contrat habitation, qui couvre les dommages causés par les enfants.",
+  "quiEstConcerne": [
+    "Le parent qui déménage après une séparation, qu'il soit locataire ou propriétaire.",
+    "Le parent qui reste dans le logement et doit adapter le contrat.",
+    "Les deux parents, pour vérifier que les enfants sont couverts en responsabilité civile chez chacun."
+  ],
+  "aSavoir": [
+    "Locataire : seule l'assurance des risques locatifs (incendie, explosion, dégât des eaux) est obligatoire. Remettez l'attestation au propriétaire à la remise des clés, puis chaque année s'il la demande.",
+    "Sans assurance, après une lettre recommandée et un délai d'un mois, le propriétaire peut souscrire pour vous et vous refacturer la prime majorée de 10 % au plus, ou demander la résiliation du bail.",
+    "Déménagement : prévenez votre assureur avant de partir ou au plus tard dans les 15 jours calendaires après avoir quitté le logement, par lettre recommandée ou envoi recommandé électronique.",
+    "Résiliation pour déménagement : possible si le changement de logement modifie les risques assurés. Courrier à envoyer au plus tard 3 mois après le départ, en expliquant le lien avec le déménagement. Le contrat prend fin 1 mois après réception par l'assureur.",
+    "Aucune indemnité de résiliation ne peut être réclamée pour cause de déménagement, et les cotisations payées pour la période après la résiliation doivent vous être remboursées.",
+    "Vous pouvez aussi transférer le contrat vers le nouveau logement si l'assureur l'accepte, par avenant ; la cotisation peut alors changer."
+  ],
+  "documents": [
+    { "id": "contrat-actuel", "libelle": "Contrat d'assurance habitation actuel et numéro de contrat", "detail": "Pour connaître les garanties, le nom des assurés et les conditions de résiliation.", "coffre": "finances" },
+    { "id": "bail-nouveau", "libelle": "Bail ou état des lieux d'entrée du nouveau logement", "detail": "Copie. L'assureur vous demandera l'adresse, la surface et le nombre de pièces.", "coffre": "finances" },
+    { "id": "attestation-nouveau", "libelle": "Attestation d'assurance du nouveau logement", "detail": "À remettre au propriétaire le jour de la remise des clés.", "coffre": "finances" },
+    { "id": "lettre-resiliation", "libelle": "Lettre de résiliation ou d'information à l'ancien assureur", "detail": "Indiquez la date de départ et le lien avec le déménagement. Envoi en recommandé.", "coffre": "courriers" },
+    { "id": "preuve-depart", "libelle": "Justificatif de la date de départ", "detail": "Par exemple l'état des lieux de sortie ou le nouveau bail. La fiche officielle ne précise pas de pièce obligatoire : l'assureur peut en demander une.", "coffre": "courriers" },
+    { "id": "accuse-reception", "libelle": "Accusé de réception de l'assureur", "detail": "Il fait courir le délai d'un mois avant la fin du contrat.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Assurez le nouveau logement avant la remise des clés", "detail": "Le propriétaire vous demandera l'attestation le jour de l'entrée dans les lieux." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pour l'entrée dans les lieux : attestation d'assurance imprimée ou sur téléphone, pièce d'identité, bail signé. Pour l'assureur : numéro de contrat, nouvelle adresse, surface, date d'entrée." },
+    { "titre": "Prévenez l'assureur de l'ancien logement", "detail": "Avant le départ ou dans les 15 jours qui suivent. Résiliez au plus tard 3 mois après le départ si vous le souhaitez." },
+    { "titre": "Contrat au nom des deux ex-conjoints", "detail": "Voyez avec l'assureur comment retirer un nom ou faire un nouveau contrat, pour que le parent qui reste soit bien couvert." },
+    { "titre": "Vérifiez la responsabilité civile des enfants", "detail": "Assurez-vous que les enfants restent couverts lorsqu'ils sont chez vous, par votre contrat ou celui de l'autre parent, et partagez les attestations." },
+    { "titre": "Conservez les preuves d'envoi", "detail": "Rangez la lettre et l'accusé de réception dans le coffre-fort." }
+  ],
+  "ou": [
+    { "nom": "Votre assureur habitation" },
+    { "nom": "ADIL", "detail": "Agence départementale d'information sur le logement : conseils gratuits sur les droits du locataire.", "url": "https://www.anil.org/qui-sommes-nous/reseau-des-adil/" }
+  ],
+  "liens": [
+    { "titre": "Assurance habitation du locataire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300" },
+    { "titre": "Assurance habitation et déménagement (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827" },
+    { "titre": "Résiliation d'une assurance habitation (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19083" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation d'assurance habitation du nouveau logement", "categorie": "finances" },
+    { "type": "coffre", "titre": "Lettre de résiliation de l'ancienne assurance", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Prévenir l'assureur de l'ancien logement (15 jours après le départ)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Résilier l'ancienne assurance habitation (3 mois après le départ)", "evenement": "autre" },
+    { "type": "depense", "titre": "Assurance habitation", "categorie": "assurance" }
+  ],
+  "datesLimites": [
+    { "libelle": "15 jours après le départ pour prévenir l'assureur" },
+    { "libelle": "3 mois après le départ pour résilier au motif du déménagement" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : la présence d'une ADIL en Guyane et ses permanences, sur anil.org.",
+    "Si le contrat est au nom des deux ex-conjoints, les modalités de modification sont à voir directement avec l'assureur : les fiches officielles ne traitent pas ce cas."
+  ],
+  "motsCles": ["assurance habitation", "déménagement", "locataire", "résiliation", "responsabilité civile", "séparation"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F31300 Assurance habitation du locataire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2025-04-16" },
+    { "titre": "Service-public.gouv.fr, F10827 Assurance habitation et déménagement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2025-05-02" }
+  ]
+}

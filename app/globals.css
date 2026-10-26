@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --radius: 16px;
+  --focus-ring: 0 0 0 3px rgba(31,175,92,.35);
+}
+html,body{height:100%}
+body{
+  @apply bg-white text-night-900 antialiased;
+  font-feature-settings: "ss01","cv11";
+}
+[data-theme="dark"] body{ @apply bg-night-950 text-night-50 }
+
+/* Focus visibles AA */
+*:focus-visible{ outline: none; box-shadow: var(--focus-ring); border-radius: 12px }
+
+/* Mobile viewport lock pour la PWA */
+.pwa-safe{ padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) }
+
+@keyframes showcase-progress { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+
+/* Scrollbar discrète */
+::-webkit-scrollbar{ width:10px; height:10px }
+::-webkit-scrollbar-thumb{ background:#c9d2e6; border-radius:999px }
+[data-theme="dark"] ::-webkit-scrollbar-thumb{ background:#2a3560 }
+
+/* ------------------------------------------------------------------------
+   Taille du texte (CDC M12-05), pilotée par components/a11y/DisplayPrefs
+   via html[data-text-size="petite|moyenne|grande"] (défaut : moyenne = 100 %).
+
+   Choix technique : une grande partie des composants utilise des tailles en px
+   (text-[14px]…), qu'une simple modification du font-size racine ne toucherait pas.
+   On applique donc `zoom` sur <body> (Chrome/Edge, Safari, Firefox 126+), ce qui
+   met à l'échelle uniformément textes, icônes et zones tactiles, sans transform
+   (pas de flou, pas de coordonnées de clic décalées, mise en page recalculée).
+   Navigateurs sans `zoom` : repli sur le font-size racine (seules les tailles en
+   rem suivent). Les deux mécanismes sont exclusifs pour éviter un double agrandissement.
+
+   Sous zoom, les unités viewport (vh/dvh) sont aussi multipliées : on compense
+   les utilitaires de hauteur d'écran les plus courants pour éviter un défilement
+   parasite. Les valeurs arbitraires (min-h-[calc(100dvh-…)]) ne sont pas compensées
+   et peuvent dépasser de quelques pourcents en taille « grande ».
+   ------------------------------------------------------------------------ */
+html{ --lp-text-scale: 1 }
+html[data-text-size="petite"]{ --lp-text-scale: .95 }
+html[data-text-size="grande"]{ --lp-text-scale: 1.1 }
+
+@supports (zoom: 1) {
+  html[data-text-size="petite"] body,
+  html[data-text-size="grande"] body{ zoom: var(--lp-text-scale) }
+
+  html[data-text-size="petite"] .min-h-dvh,
+  html[data-text-size="grande"] .min-h-dvh{ min-height: calc(100dvh / var(--lp-text-scale)) }
+  html[data-text-size="petite"] .min-h-screen,
+  html[data-text-size="grande"] .min-h-screen{ min-height: calc(100vh / var(--lp-text-scale)) }
+  html[data-text-size="petite"] .h-dvh,
+  html[data-text-size="grande"] .h-dvh{ height: calc(100dvh / var(--lp-text-scale)) }
+  html[data-text-size="petite"] .h-screen,
+  html[data-text-size="grande"] .h-screen{ height: calc(100vh / var(--lp-text-scale)) }
+}
+
+@supports not (zoom: 1) {
+  html[data-text-size="petite"]{ font-size: 93.75% }
+  html[data-text-size="grande"]{ font-size: 112.5% }
+}

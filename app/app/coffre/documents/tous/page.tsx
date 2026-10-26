@@ -1,0 +1,124 @@
+'use client'
+
+import Link from 'next/link'
+import { Suspense, useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { ListFilter, Search } from 'lucide-react'
+import { ScreenHeader, headerIconBtn } from '@/components/coffre/ScreenHeader'
+import { DocRow } from '@/components/coffre/DocRow'
+import { useCategories, useVaultDocs } from '@/components/coffre/store'
+import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
+import { useAnnounce } from '@/components/coffre/useAnnounce'
+import { useDocActions } from '@/components/coffre/useDocActions'
+import type { VaultFileType } from '@/lib/mock-vault'
+
+type Sort = 'recent' | 'ancien' | 'nom' | 'taille'
+const SORTS: { k: Sort; label: string }[] = [
+  { k: 'recent', label: 'Date (la plus récente)' },
+  { k: 'ancien', label: 'Date (la plus ancienne)' },
+  { k: 'nom', label: 'Nom (A → Z)' },
+  { k: 'taille', label: 'Taille' },
+]
+
+function AllDocuments() {
+  const params = useSearchParams()
+  const { docs, loading, error, refresh } = useVaultDocs()
+  const { categories } = useCategories()
+  const catName = (id: string) => categories.find((c) => c.id === id)?.name
+  const { announce, node } = useAnnounce()
+  const { openActions, sheet } = useDocActions(announce)
+
+  const [q, setQ] = useState(params.get('q') ?? '')
+  const [sort, setSort] = useState<Sort>('recent')
+  const cats = (params.get('cats') ?? '').split(',').filter(Boolean)
+  const types = (params.get('types') ?? '').split(',').filter(Boolean) as VaultFileType[]
+  const du = params.get('du') ?? ''
+  const au = params.get('au') ?? ''
+  const activeFilters = cats.length + types.length + (du ? 1 : 0) + (au ? 1 : 0)
+
+  const list = useMemo(() => {
+    const needle = q.trim().toLocaleLowerCase('fr')
+    const out = docs.filter((d) =>
+      (cats.length === 0 || cats.includes(d.categoryId)) &&
+      (types.length === 0 || types.includes(d.type)) &&
+      (!du || d.docDate >= du) &&
+      (!au || d.docDate <= au) &&
+      (!needle || d.name.toLocaleLowerCase('fr').includes(needle) || d.source.toLocaleLowerCase('fr').includes(needle)),
+    )
+    return out.sort((a, b) =>
+      sort === 'recent' ? b.docDate.localeCompare(a.docDate)
+      : sort === 'ancien' ? a.docDate.localeCompare(b.docDate)
+      : sort === 'nom' ? a.name.localeCompare(b.name, 'fr')
+      : b.size - a.size,
+    )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q, sort, docs, params])
+
+  const filtersHref = `/app/coffre/documents/filtres?${params.toString()}`
+
+  return (
+    <>
+      <ScreenHeader title="Tous les documents" backHref="/app/coffre/documents" />
+      <div className="px-5">
+        <div role="search" className="flex items-center gap-2">
+          <label htmlFor="all-search" className="sr-only">Rechercher un document</label>
+          <div className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-xl border border-night-100 bg-white px-3.5 shadow-soft focus-within:border-leaf-500">
+            <Search className="h-[18px] w-[18px] shrink-0 text-night-400" aria-hidden="true" />
+            <input
+              id="all-search"
+              type="search"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Rechercher un document"
+              className="h-full min-w-0 flex-1 bg-transparent text-[14px] text-night-900 outline-none placeholder:text-night-400"
+            />
+          </div>
+          <Link href={filtersHref} aria-label={activeFilters ? `Filtres (${activeFilters} actifs)` : 'Filtres'} className={`${headerIconBtn} relative h-12 w-12 border border-night-100 bg-white shadow-soft`}>
+            <ListFilter className="h-5 w-5" aria-hidden="true" />
+          </Link>
+        </div>
+
+        <div className="mt-3 flex items-center gap-1 text-[13px]">
+          <label htmlFor="sort" className="text-night-600">Trier par :</label>
+          <select
+            id="sort"
+            value={sort}
+            onChange={(e) => setSort(e.target.value as Sort)}
+            className="h-11 rounded-lg bg-transparent pr-1 font-bold text-night-900 outline-none"
+          >
+            {SORTS.map((s) => <option key={s.k} value={s.k}>{s.label}</option>)}
+          </select>
+        </div>
+
+        <p className="sr-only" role="status" aria-live="polite">{list.length} document{list.length > 1 ? 's' : ''} affiché{list.length > 1 ? 's' : ''}</p>
+
+        {loading ? (
+          <LoadingState compact title="Chargement des documents" description="" />
+        ) : error ? (
+          <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} secondary={{ label: 'Retour aux documents', href: '/app/coffre/documents' }} />
+        ) : list.length === 0 ? (
+          <div className="mt-6 rounded-2xl border border-dashed border-night-200 p-8 text-center">
+            <p className="text-[14px] font-bold text-night-900">Aucun document trouvé</p>
+            <p className="mt-1 text-[13px] text-night-500">Modifiez votre recherche ou vos filtres.</p>
+          </div>
+        ) : (
+          <ul className="space-y-2.5 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0">
+            {list.map((d) => (
+              <li key={d.id}><DocRow doc={d} showCategory categoryName={catName(d.categoryId)} onMore={openActions} /></li>
+            ))}
+          </ul>
+        )}
+      </div>
+      {sheet}
+      {node}
+    </>
+  )
+}
+
+export default function AllDocumentsPage() {
+  return (
+    <Suspense fallback={<div className="p-6 text-center text-sm text-night-500" role="status">Chargement…</div>}>
+      <AllDocuments />
+    </Suspense>
+  )
+}

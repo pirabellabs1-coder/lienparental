@@ -1,0 +1,18 @@
+[
+  {
+    "id": "demo-assurance-scolaire",
+    "territoire": "guyane",
+    "categorie": "assurances",
+    "nom": "Assurance Exemple (nom fictif)",
+    "type": "sponsorise",
+    "description": "Exemple fictif affiché uniquement en démonstration, pour montrer comment une offre partenaire apparaîtrait. Aucune entreprise réelle n'est concernée.",
+    "criteres": [
+      { "libelle": "Garanties incluses", "valeur": "Responsabilité civile et individuelle accident (exemple)" },
+      { "libelle": "Période couverte", "valeur": "Toute l'année, scolaire et extrascolaire (exemple)" },
+      { "libelle": "Souscription", "valeur": "En ligne (exemple)" },
+      { "libelle": "Résiliation", "valeur": "Selon conditions générales (exemple)" }
+    ],
+    "lien": null,
+    "demo": true
+  }
+]

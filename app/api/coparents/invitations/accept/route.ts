@@ -1,0 +1,50 @@
+import { jsonError, jsonOk } from '@/lib/data/server/http'
+import { familyContext, limited, readJson, rpcError } from '@/lib/coparents/server/context'
+import { notifyInvitationAccepted, notifyOwnersNewAdult } from '@/lib/coparents/server/email'
+import { acceptSchema } from '@/lib/coparents/validation'
+import type { AcceptResult, GuardianRole } from '@/lib/coparents/types'
+
+// POST /api/coparents/invitations/accept { token } | { id }
+// La base vérifie : invitation en attente, non expirée, e-mail du JWT vérifié et
+// identique à l'e-mail invité. Réponse indistincte (404) dans tous les autres cas.
+export const dynamic = 'force-dynamic'
+
+const INVALID = 'Invitation invalide ou expirée. Demandez un nouveau lien à la personne qui vous a invité.'
+
+export async function POST(req: Request) {
+  const ctx = await familyContext(req)
+  if ('error' in ctx) return ctx.error
+  const tooMany = await limited(ctx.user.id, 'accept', 20, 10 * 60_000)
+  if (tooMany) return tooMany
+
+  const parsed = acceptSchema.safeParse(await readJson(req))
+  if (!parsed.success) return jsonError(404, 'not_found', INVALID)
+
+  const { data, error } = 'token' in parsed.data
+    ? await ctx.db.rpc('accept_family_invitation', { p_token: parsed.data.token })
+    : await ctx.db.rpc('accept_family_invitation_by_id', { p_invitation_id: parsed.data.id })
+  if (error) return rpcError(error, 'invitation.accept', INVALID)
+
+  const r = (data ?? {}) as { invitation_id?: string; inviter_id?: string; role?: GuardianRole; child_ids?: string[]; conversation_id?: string | null }
+  if (r.inviter_id && r.invitation_id) {
+    const { data: me } = await ctx.db.from('users').select('prenom').eq('id', ctx.user.id).maybeSingle()
+    const prenom = (me as { prenom?: string } | null)?.prenom ?? ''
+    await notifyInvitationAccepted({
+      inviterId: r.inviter_id,
+      inviteePrenom: prenom,
+      role: r.role ?? 'parent',
+      idempotencyKey: `family-accepted:${r.invitation_id}`,
+    })
+    // M2 : le titulaire de chaque fiche est prévenu de tout nouvel adulte lié.
+    await notifyOwnersNewAdult({
+      childIds: r.child_ids ?? [],
+      newUserId: ctx.user.id,
+      newPrenom: prenom,
+      role: r.role ?? 'parent',
+      inviterId: r.inviter_id,
+      invitationId: r.invitation_id,
+    })
+  }
+  const body: AcceptResult = { childIds: r.child_ids ?? [], role: r.role ?? 'parent', conversationId: r.conversation_id ?? null }
+  return jsonOk(body)
+}

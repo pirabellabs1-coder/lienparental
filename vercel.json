@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "regions": ["cdg1"],
+  "crons": [
+    {
+      "path": "/api/integrations/google/calendar/cron",
+      "schedule": "*/5 * * * *"
+    }
+  ]
+}

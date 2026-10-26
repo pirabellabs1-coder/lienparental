@@ -1,0 +1,90 @@
+{
+  "slug": "saisir-juge-affaires-familiales",
+  "territoire": "guyane",
+  "categorie": "separation",
+  "titre": "Saisir le juge aux affaires familiales (JAF)",
+  "resume": "Le formulaire cerfa n° 11530, la liste exacte des pièces (actes de naissance de moins de 3 mois), le tribunal compétent en Guyane, le timbre de 50 € et les cas où il n'est pas dû.",
+  "aQuoiCaSert": "Le juge aux affaires familiales tranche les désaccords entre parents sur l'exercice de l'autorité parentale, la résidence de l'enfant, le droit de visite et d'hébergement ou la pension alimentaire. Il peut aussi modifier une décision existante quand la situation change, ou homologuer un accord trouvé entre les parents pour lui donner la force d'un jugement.",
+  "quiEstConcerne": [
+    "Les parents, mariés ou non, qui ne parviennent pas à un accord sur les enfants.",
+    "Le parent qui veut faire modifier une décision existante (déménagement, changement de revenus, nouvelle organisation).",
+    "Les parents d'accord entre eux qui veulent faire homologuer leur convention parentale.",
+    "Le parent qui perçoit l'ASF sans pension fixée et doit saisir le juge dans les 4 mois."
+  ],
+  "aSavoir": [
+    "Formulaire : cerfa n° 11530 « Demande au juge aux affaires familiales », à remplir en ligne ou sur papier. Une requête entièrement en ligne est aussi possible.",
+    "Tribunal compétent : le tribunal judiciaire du lieu où vit le parent chez qui l'enfant réside habituellement. Si les parents vivent encore ensemble, celui du lieu de résidence de la famille. En Guyane : tribunal judiciaire de Cayenne, à Matoury.",
+    "L'avocat n'est pas obligatoire. L'aide juridictionnelle peut prendre en charge les frais d'avocat selon vos ressources (voir la fiche « Demander l'aide juridictionnelle »).",
+    "Timbre fiscal de 50 €, uniquement électronique, acheté en ligne par carte bancaire avant la saisine. Il n'est pas dû si vous bénéficiez de l'aide juridictionnelle, pour l'homologation d'une convention parentale, ni pour une ordonnance de protection. Valable 12 mois, remboursable dans les 18 mois s'il n'est pas utilisé.",
+    "Parents d'accord : requête conjointe d'homologation (cerfa n° 16139), signée par les deux, au tribunal du lieu de résidence de l'un ou l'autre parent.",
+    "Autorité parentale exclusive : le juge peut la confier à un seul parent, par exemple si l'autre se désintéresse de l'enfant ou fait obstacle à l'exercice de l'autorité parentale.",
+    "Violences : une ordonnance de protection se demande au juge aux affaires familiales (formulaire distinct), sans plainte préalable obligatoire. L'audience a lieu dans les 6 jours suivant sa fixation. Urgence : 17 ou 112 ; écoute : 3919.",
+    "Ce guide ne remplace pas un conseil juridique : pour votre situation, adressez-vous à un avocat ou à un point-justice."
+  ],
+  "documents": [
+    { "id": "cerfa-11530", "libelle": "Formulaire cerfa n° 11530 complété, daté et signé", "detail": "Original pour le tribunal, copie pour vous. Remplissable en ligne sur service-public.gouv.fr.", "coffre": "jaf" },
+    { "id": "acte-naissance-parent", "libelle": "Copie intégrale de votre acte de naissance de moins de 3 mois", "detail": "Pas un extrait. Demande gratuite en ligne sur service-public.gouv.fr auprès de la mairie de naissance (voir la fiche « Obtenir un acte de naissance »).", "coffre": "jaf" },
+    { "id": "actes-naissance-enfants", "libelle": "Copie intégrale de l'acte de naissance de chaque enfant concerné, de moins de 3 mois", "detail": "Même démarche en ligne, auprès de la mairie du lieu de naissance de l'enfant. Comptez le délai d'envoi par courrier.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Livret de famille (copie de toutes les pages remplies) ou copie intégrale de l'acte de mariage de moins de 3 mois", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Copie de votre pièce d'identité", "detail": "Carte d'identité, passeport ou titre de séjour en cours de validité, recto verso.", "coffre": "jaf" },
+    { "id": "jugements", "libelle": "Copie des jugements antérieurs (divorce, séparation, autorité parentale, pension)", "detail": "Si vous ne l'avez plus, demandez une copie au greffe du tribunal qui l'a rendu.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Selon votre demande : facture, quittance de loyer ou attestation d'hébergement.", "coffre": "jaf" },
+    { "id": "ressources", "libelle": "Justificatifs de ressources et de charges", "detail": "Surtout si la demande porte sur la pension : dernier avis d'imposition, dernière déclaration de revenus, 3 derniers bulletins de salaire, attestation des prestations Caf, loyer, crédits, frais de l'enfant.", "coffre": "jaf" },
+    { "id": "timbre", "libelle": "Timbre fiscal électronique de 50 € (PDF ou SMS à 16 chiffres)", "detail": "Sauf aide juridictionnelle ou homologation de convention parentale.", "coffre": "jaf" },
+    { "id": "aj", "libelle": "Décision d'aide juridictionnelle ou récépissé de demande, si vous l'avez demandée", "coffre": "jaf" },
+    { "id": "pieces-situation", "libelle": "Pièces utiles à votre demande", "detail": "Par exemple : certificat de scolarité, échanges écrits sur l'organisation, attestations. Évitez les pièces sans rapport avec la demande.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Tentez d'abord une solution amiable", "detail": "Médiation familiale ou accord écrit à faire homologuer. Le formulaire demande si une démarche amiable a été tentée. Pas de médiation en cas de violences." },
+    { "titre": "Commandez les actes de naissance dès maintenant", "detail": "Ils doivent dater de moins de 3 mois au dépôt et arrivent par courrier : c'est souvent la pièce qui retarde le dossier." },
+    { "titre": "Remplissez le cerfa n° 11530 ou la requête en ligne", "detail": "Expliquez clairement ce que vous demandez (résidence, droit de visite, montant de pension) et pourquoi." },
+    { "titre": "Achetez le timbre de 50 € si vous n'en êtes pas dispensé", "detail": "En ligne, par carte bancaire, avant d'envoyer la demande." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Cerfa signé ; actes de naissance en copie intégrale datant de moins de 3 mois (vous et chaque enfant) ; livret de famille ou acte de mariage ; pièce d'identité ; jugements antérieurs ; justificatifs de ressources si vous parlez de pension ; timbre ou décision d'aide juridictionnelle. Faites une copie complète." },
+    { "titre": "Envoyez ou déposez le dossier au greffe du tribunal judiciaire de Cayenne", "detail": "Ou déposez la requête en ligne. Rangez la copie dans le Dossier JAF du coffre-fort." },
+    { "titre": "Préparez l'audience", "detail": "Ajoutez la date au calendrier dès réception de la convocation, avec un rappel. Apportez les originaux de vos pièces." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Cayenne", "detail": "Situé à Matoury (97351). Ouvert du lundi au vendredi, 8 h à 12 h et 14 h à 17 h. Courriel d'accueil : accueil-cayenne@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/9fd0ecd0-af48-4635-a700-067ebceebcef" },
+    { "nom": "Point-justice ou avocat", "detail": "Information juridique gratuite, aide à la constitution du dossier, demande d'aide juridictionnelle." },
+    { "nom": "Violences Femmes Info", "detail": "Écoute et orientation, gratuit et anonyme, 24 h sur 24. En cas de danger immédiat, appelez le 17 ou le 112.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "telephone": "3919" }
+  ],
+  "liens": [
+    { "titre": "Demande au juge aux affaires familiales, cerfa 11530 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764" },
+    { "titre": "Requête au JAF en ligne (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72663" },
+    { "titre": "Homologation d'une convention parentale, cerfa 16139 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771" },
+    { "titre": "Timbre fiscal de 50 € (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227" },
+    { "titre": "Autorité parentale en cas de séparation (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133" },
+    { "titre": "Violences conjugales et ordonnance de protection (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Timbre fiscal pour saisir le juge aux affaires familiales", "categorie": "frais-administratifs", "montant": 50, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764" },
+    { "type": "coffre", "titre": "Requête au juge aux affaires familiales (copie complète)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Actes de naissance de moins de 3 mois", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Justificatifs de ressources et de charges", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Convocation et décision du juge aux affaires familiales", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Audience devant le juge aux affaires familiales", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Vérifier la date des actes de naissance (moins de 3 mois)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Actes de naissance de moins de 3 mois au moment du dépôt" },
+    { "libelle": "Timbre fiscal valable 12 mois après l'achat", "detail": "Remboursement possible en ligne dans les 18 mois s'il n'est pas utilisé." },
+    { "libelle": "ASF sans pension fixée : saisir le juge dans les 4 mois" }
+  ],
+  "aConfirmer": [
+    "Le délai pour régulariser une demande déposée sans timbre fiscal n'est pas précisé par les fiches officielles actuelles : renseignez-vous auprès du greffe.",
+    "Les fiches officielles sur le timbre de 50 € ne mentionnent pas de règle propre à l'outre-mer : à confirmer auprès du greffe avant le dépôt.",
+    "À confirmer localement : l'adresse postale complète et le téléphone du tribunal judiciaire de Cayenne (l'annuaire officiel n'indique que Matoury, 97351).",
+    "À confirmer localement : le traitement des affaires familiales par le tribunal de proximité de Saint-Laurent-du-Maroni et les permanences de point-justice dans l'ouest guyanais.",
+    "À confirmer localement : les délais moyens d'audience au tribunal judiciaire de Cayenne."
+  ],
+  "motsCles": ["JAF", "juge", "tribunal", "garde", "résidence", "droit de visite", "cerfa 11530", "homologation"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, R15764 Demande au juge aux affaires familiales (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-02-26" },
+    { "titre": "Service-public.gouv.fr, F33227 Timbre fiscal", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-04-10" },
+    { "titre": "Service-public.gouv.fr, R58771 Homologation d'une convention parentale (cerfa 16139)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2025-11-26" },
+    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
+    { "titre": "Service-public.gouv.fr, F12544 Violences conjugales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-04-01" },
+    { "titre": "Annuaire service-public, Tribunal judiciaire de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/9fd0ecd0-af48-4635-a700-067ebceebcef", "verifieLe": "2026-09-16" }
+  ]
+}

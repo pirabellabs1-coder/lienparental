@@ -1,0 +1,27 @@
+import type { Metadata } from 'next'
+import { BottomNav } from '@/components/mobile/BottomNav'
+import { DesktopSidebar } from '@/components/mobile/DesktopSidebar'
+import { SearchProvider } from '@/components/search/SearchProvider'
+
+export const metadata: Metadata = {
+  title: 'Application',
+}
+
+// Mobile : plein écran + barre d'onglets. Ordinateur : menu latéral + colonne de contenu centrée.
+export default function AppShellLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="min-h-dvh bg-white lg:bg-[#f7f8fc]">
+      <DesktopSidebar />
+      <div className="lg:pl-64 lg:pr-8">
+        <main
+          className="relative mx-auto min-h-dvh w-full bg-white lg:my-6 lg:ml-8 lg:min-h-[calc(100dvh-3rem)] lg:max-w-[1120px] lg:rounded-3xl lg:px-4 lg:pb-10 lg:shadow-[0_1px_3px_rgba(11,45,91,0.06),0_12px_40px_-20px_rgba(11,45,91,0.18)] lg:ring-1 lg:ring-night-100"
+          style={{ paddingBottom: 'calc(5.5rem + env(safe-area-inset-bottom, 0px))' }}
+        >
+          {children}
+        </main>
+      </div>
+      <div className="lg:hidden"><BottomNav /></div>
+      <SearchProvider />
+    </div>
+  )
+}

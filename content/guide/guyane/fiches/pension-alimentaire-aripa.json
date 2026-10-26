@@ -1,0 +1,84 @@
+{
+  "slug": "pension-alimentaire-aripa",
+  "territoire": "guyane",
+  "categorie": "separation",
+  "titre": "Que faire si l'autre parent ne paie pas la pension (ARIPA)",
+  "resume": "Pension impayée ou en retard : les pièces exactes pour demander à la Caf (ARIPA) de récupérer les sommes et de verser la pension chaque mois, que faire si vous n'avez pas de titre exécutoire, et l'ASF en complément.",
+  "aQuoiCaSert": "Avec l'intermédiation financière, la Caf (agence ARIPA) collecte chaque mois la pension auprès du parent qui paie et vous la reverse. En cas d'impayé, c'est elle qui engage le recouvrement, gratuitement pour vous. Pour agir, elle a besoin d'un titre exécutoire qui fixe la pension. En attendant, l'allocation de soutien familial (ASF) peut vous être versée en avance.",
+  "quiEstConcerne": [
+    "Le parent qui reçoit une pension pour un enfant et ne la reçoit pas, ou pas en entier, ou en retard.",
+    "Les parents séparés, mariés ou non. Il n'est pas nécessaire d'être allocataire de la Caf, et l'accord de l'autre parent n'est pas exigé.",
+    "Ne sont pas concernées : les pensions versées directement à l'enfant majeur, entre ex-époux (prestation compensatoire) ou aux grands-parents."
+  ],
+  "aSavoir": [
+    "Il faut un titre exécutoire : jugement du juge aux affaires familiales, convention homologuée par le juge, convention de divorce par consentement mutuel (avocats et notaire), acte notarié, accord de médiation ou de conciliation revêtu de la formule exécutoire, ou titre délivré par la Caf ou la MSA.",
+    "Pas de titre exécutoire : si vous n'êtes pas mariés et êtes d'accord sur le montant, demandez ensemble un titre exécutoire à la Caf (formulaire papier signé par les deux parents). Sans accord, saisissez le juge aux affaires familiales.",
+    "Si votre titre prévoit l'intermédiation, aucune démarche : le greffe, l'avocat ou le notaire le transmet à l'ARIPA. Sinon, faites la demande en ligne.",
+    "Le premier versement de l'ARIPA intervient au plus tard 60 jours après réception de toutes les pièces. Pendant ce temps, la pension reste payée directement entre parents.",
+    "Gratuit pour les deux parents. En cas d'impayé, le parent qui ne paie pas supporte des frais de 7,5 % (recouvrement amiable) ou 10 % (recouvrement forcé).",
+    "Violences intrafamiliales : l'intermédiation est imposée et ne peut pas être arrêtée, même d'un commun accord.",
+    "Arriérés : les pensions peuvent être réclamées sur 5 ans en arrière au maximum. Par un commissaire de justice, le paiement direct ne récupère que les 6 derniers mois.",
+    "En complément, l'ASF (200,78 € par enfant et par mois) est versée en avance si la pension fixée n'est pas payée : voir la fiche ASF."
+  ],
+  "documents": [
+    { "id": "titre-executoire", "libelle": "Titre exécutoire fixant la pension (copie)", "detail": "Jugement, convention homologuée, convention de divorce, acte notarié ou titre Caf. Si vous l'avez perdu, demandez une copie au greffe du tribunal, à l'avocat ou au notaire.", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Votre pièce d'identité (copie)", "coffre": "jaf" },
+    { "id": "rib", "libelle": "RIB à votre nom", "detail": "Compte sur lequel l'ARIPA versera la pension.", "coffre": "finances" },
+    { "id": "coordonnees-autre-parent", "libelle": "Coordonnées connues de l'autre parent", "detail": "Nom, date de naissance, dernière adresse connue, employeur si vous le connaissez. Ils aident l'ARIPA à le joindre.", "coffre": "jaf" },
+    { "id": "preuves-impayes", "libelle": "Tableau des impayés et preuves", "detail": "Mois par mois : montant dû, montant reçu, date. Relevés bancaires, échanges écrits, courrier de relance. Le Journal de Lien Parental peut vous aider à le préparer.", "coffre": "finances" },
+    { "id": "numero-allocataire", "libelle": "Numéro d'allocataire Caf ou MSA, si vous en avez un", "coffre": "finances" },
+    { "id": "relance", "libelle": "Copie du courrier de relance à l'autre parent", "detail": "Facultatif : un modèle de lettre existe sur service-public.gouv.fr.", "coffre": "courriers" },
+    { "id": "courriers-aripa", "libelle": "Courriers et attestations de l'ARIPA", "detail": "Dont le courrier indiquant la date de début de l'intermédiation.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Réunissez la preuve de l'impayé", "detail": "Listez mois par mois ce qui est dû et ce qui a été reçu. Vous pouvez d'abord envoyer une relance écrite à l'autre parent." },
+    { "titre": "Vérifiez que vous avez un titre exécutoire", "detail": "Sans titre : demandez un titre Caf si vous êtes d'accord sur le montant (non mariés), sinon saisissez le juge aux affaires familiales. Demandez l'ASF en parallèle." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Copie lisible et complète du titre exécutoire (toutes les pages) ; pièce d'identité ; RIB à votre nom ; coordonnées de l'autre parent ; tableau des impayés avec justificatifs. Gardez une copie de l'ensemble." },
+    { "titre": "Faites la demande en ligne sur pension-alimentaire.caf.fr", "detail": "Demande d'intermédiation financière et de recouvrement. L'ARIPA écrit ensuite à chaque parent ; répondez vite et mettez à jour vos informations dans votre espace." },
+    { "titre": "Demandez l'ASF à la Caf si la pension n'est pas payée", "detail": "Elle est versée en avance pendant le recouvrement." },
+    { "titre": "Suivez chaque versement dans le Journal", "detail": "Avec le justificatif. Lien Parental ne certifie pas qu'un paiement a été effectué, mais vous aide à garder l'historique." },
+    { "titre": "Autres recours si besoin", "detail": "Commissaire de justice (paiement direct, saisie), recouvrement par le Trésor public via le procureur après échec d'une autre procédure, ou plainte pour abandon de famille après plus de 2 mois d'impayés. Un avocat ou un point-justice peut vous orienter." }
+  ],
+  "ou": [
+    { "nom": "ARIPA, service public des pensions alimentaires", "detail": "Demande en ligne d'intermédiation et de recouvrement, simulateur de pension. Conseillers joignables du lundi au vendredi de 9 h à 16 h 30 (numéros sur la page « Nous contacter »).", "url": "https://pension-alimentaire.caf.fr/usagers/nous-contacter" },
+    { "nom": "Caf de la Guyane", "detail": "Demande d'ASF et envoi du formulaire de titre exécutoire Caf.", "url": "https://www.caf.fr/allocataires/caf-de-la-guyane" },
+    { "nom": "Tribunal judiciaire de Cayenne, juge aux affaires familiales", "detail": "Pour fixer ou modifier la pension en cas de désaccord.", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/9fd0ecd0-af48-4635-a700-067ebceebcef" },
+    { "nom": "Point-justice ou avocat", "detail": "Information juridique, aide juridictionnelle possible selon vos ressources." }
+  ],
+  "liens": [
+    { "titre": "Pension alimentaire impayée (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249" },
+    { "titre": "Intermédiation financière des pensions (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407" },
+    { "titre": "ARIPA : intermédiation financière", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" },
+    { "titre": "ARIPA : demander un titre exécutoire Caf", "url": "https://pension-alimentaire.caf.fr/usagers/demande-titre-executoire" },
+    { "titre": "Pension alimentaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F991" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Titre exécutoire fixant la pension", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Tableau et preuves des pensions impayées", "categorie": "finances" },
+    { "type": "coffre", "titre": "Courrier de l'ARIPA (début de l'intermédiation)", "categorie": "courriers" },
+    { "type": "depense", "titre": "Pension alimentaire", "categorie": "pension" },
+    { "type": "rappel", "titre": "Vérifier le versement mensuel de la pension", "evenement": "autre" },
+    { "type": "rappel", "titre": "Relancer l'ARIPA si aucun versement 60 jours après le dossier complet", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Premier versement par l'ARIPA au plus tard 60 jours après réception des pièces" },
+    { "libelle": "Plainte pour abandon de famille possible après plus de 2 mois d'impayés" },
+    { "libelle": "Arriérés réclamables sur 5 ans au maximum", "detail": "Le paiement direct par commissaire de justice ne couvre que les 6 derniers mois." }
+  ],
+  "aConfirmer": [
+    "La liste exacte des pièces demandées par l'ARIPA n'est pas publiée : elle peut demander des documents complémentaires pendant l'instruction.",
+    "Le délai de traitement d'une demande de titre exécutoire Caf n'est pas indiqué par l'ARIPA.",
+    "La durée d'arriérés récupérés dans le cadre de l'ASF et du recouvrement par la Caf est à confirmer auprès de l'ARIPA pour votre situation.",
+    "À confirmer localement : le numéro de téléphone de l'ARIPA à composer depuis la Guyane (la page de contact indique le +33 9 69 32 08 08 depuis l'étranger, sans préciser l'outre-mer).",
+    "À confirmer localement : modalités de dépôt de plainte pour abandon de famille (commissariat, gendarmerie ou courrier au procureur du tribunal judiciaire de Cayenne)."
+  ],
+  "motsCles": ["pension", "ARIPA", "intermédiation", "impayé", "Caf", "recouvrement", "titre exécutoire"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1249 Pension alimentaire impayée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-01-30" },
+    { "titre": "Service-public.gouv.fr, F36407 Intermédiation financière des pensions alimentaires", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F815 Allocation de soutien familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-04-01" },
+    { "titre": "ARIPA, intermédiation financière", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" },
+    { "titre": "ARIPA, demande de titre exécutoire", "url": "https://pension-alimentaire.caf.fr/usagers/demande-titre-executoire" }
+  ]
+}

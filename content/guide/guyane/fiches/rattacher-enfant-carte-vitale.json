@@ -1,0 +1,71 @@
+{
+  "slug": "rattacher-enfant-carte-vitale",
+  "territoire": "guyane",
+  "categorie": "sante",
+  "titre": "Rattacher mon enfant, obtenir son attestation de droits et sa carte Vitale",
+  "resume": "Inscrire l'enfant sur la carte Vitale des deux parents, télécharger son attestation de droits en 2 clics sur ameli, et demander sa propre carte Vitale à partir de 12 ou 16 ans.",
+  "aQuoiCaSert": "Un enfant de moins de 16 ans est ayant droit de l'un ou de ses deux parents. Quand il est inscrit sur les deux cartes Vitale, le parent qui l'emmène chez le médecin ou en pharmacie est remboursé directement : c'est très utile quand les parents sont séparés. L'attestation de droits prouve que l'enfant est couvert : la crèche, l'école, le centre de loisirs ou l'hôpital la demandent souvent. Elle se télécharge gratuitement. Enfin, l'enfant peut avoir sa propre carte Vitale, sur demande d'un parent de 12 à 15 ans, et à partir de 16 ans.",
+  "quiEstConcerne": [
+    "Les parents d'un nouveau-né, ou d'un enfant rattaché à un seul des deux parents.",
+    "Les parents séparés qui veulent chacun être remboursés des soins de l'enfant.",
+    "Les parents à qui l'on demande une attestation de droits (crèche, école, colonie, hôpital).",
+    "Les jeunes de 12 à 18 ans qui ont besoin de leur propre carte Vitale."
+  ],
+  "aSavoir": [
+    "Le rattachement aux deux parents est possible quelle que soit la situation familiale. Le remboursement va sur le compte du parent qui a présenté sa carte Vitale. Si l'un des parents n'est plus assuré, les remboursements vont à l'autre.",
+    "Pour un rattachement en ligne, la démarche se fait depuis le compte ameli du parent sur la carte duquel l'enfant figure déjà.",
+    "Attestation de droits : dans votre compte ameli (site ou application), rubrique Mes démarches ou « Mes démarches en 2 clics », choisissez l'enfant et téléchargez le document. Si l'enfant n'apparaît pas, il n'est pas encore rattaché à votre dossier. Pour un nouveau-né, un délai de certification est nécessaire.",
+    "Carte Vitale de l'enfant : de 12 à 15 ans, sur demande d'un parent ; dès 16 ans, avec l'accord d'un parent exerçant l'autorité parentale. Elle est gratuite. À 16 ans, l'Assurance Maladie envoie un courrier et la carte arrive sous 3 semaines environ.",
+    "À 16 ans, joignez un RIB au nom du jeune si vous voulez que ses remboursements lui soient versés directement. Le parent peut bloquer l'accès à l'application carte Vitale du mineur.",
+    "De 16 à 18 ans, le jeune peut rester ayant droit de ses parents ou devenir ayant droit autonome. Le rattachement cesse s'il travaille, y compris en apprentissage."
+  ],
+  "documents": [
+    { "id": "livret-famille", "libelle": "Copie du livret de famille à jour ou extrait d'acte de naissance de l'enfant", "detail": "Une seule de ces pièces suffit pour le rattachement. Acte de naissance gratuit en ligne sur service-public.gouv.fr ou à la mairie du lieu de naissance.", "coffre": "sante" },
+    { "id": "cerfa-14445", "libelle": "Formulaire cerfa n° 14445, si vous faites le rattachement par courrier", "detail": "Rempli et signé, envoyé à votre caisse d'assurance maladie.", "coffre": "sante" },
+    { "id": "tutelle", "libelle": "Jugement de tutelle ou de délégation, si vous n'êtes pas le parent", "detail": "Copie. Pour un tuteur ou une personne qui a recueilli l'enfant.", "coffre": "jaf" },
+    { "id": "photo-enfant", "libelle": "Photo d'identité récente de l'enfant, pour sa carte Vitale", "detail": "Format photo d'identité. En ligne, une photo numérisée suffit.", "coffre": "sante" },
+    { "id": "identite-enfant", "libelle": "Pièce d'identité de l'enfant, pour sa carte Vitale", "detail": "Copie ou version numérisée de sa carte d'identité ou de son passeport.", "coffre": "sante" },
+    { "id": "rib-jeune", "libelle": "RIB au nom du jeune de 16 ans ou plus", "detail": "Facultatif, pour qu'il soit remboursé sur son propre compte.", "coffre": "finances" },
+    { "id": "attestation-droits", "libelle": "Attestation de droits mentionnant l'enfant", "detail": "Téléchargeable gratuitement sur ameli. À renouveler en cas de changement de situation.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez sur quelle carte Vitale l'enfant figure", "detail": "Dans votre compte ameli, rubrique bénéficiaires, ou en pharmacie." },
+    { "titre": "Inscrivez l'enfant sur la carte de l'autre parent", "detail": "Depuis le compte ameli du parent qui a déjà l'enfant : démarche « Inscrire votre enfant sur la carte Vitale de l'autre parent ». Ou par courrier, cerfa n° 14445 avec la copie du livret de famille ou l'acte de naissance." },
+    { "titre": "Téléchargez l'attestation de droits", "detail": "Compte ameli, Mes démarches, Télécharger mon attestation de droits : sélectionnez l'enfant. Sans compte, appelez le 36 46 pour obtenir un code d'accès ou un envoi par courrier." },
+    { "titre": "Demandez la carte Vitale de l'enfant si besoin", "detail": "Depuis le compte ameli du parent auquel l'enfant est rattaché : choisissez l'enfant, vérifiez ses informations, ajoutez sa photo et sa pièce d'identité numérisées. Par courrier, collez la photo et joignez la copie de la pièce d'identité sur le formulaire." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Si vous allez à l'accueil de la caisse : votre carte Vitale, votre pièce d'identité, le livret de famille ou l'acte de naissance de l'enfant, sa photo et sa pièce d'identité pour une carte Vitale, le jugement de tutelle le cas échéant." },
+    { "titre": "Mettez à jour votre carte Vitale", "detail": "En pharmacie ou sur une borne, une fois le rattachement enregistré." }
+  ],
+  "ou": [
+    { "nom": "Compte ameli (site et application)", "detail": "Rattachement, attestation de droits, commande de carte Vitale.", "url": "https://www.ameli.fr" },
+    { "nom": "Caisse générale de sécurité sociale (CGSS) de la Guyane", "detail": "Caisse d'assurance maladie en Guyane. Accueil et téléphone au 36 46.", "url": "https://www.ameli.fr", "telephone": "36 46" },
+    { "nom": "Pharmacie", "detail": "Mise à jour de la carte Vitale." },
+    { "nom": "France Services", "detail": "Aide gratuite pour créer votre compte ameli et faire les démarches en ligne." }
+  ],
+  "liens": [
+    { "titre": "Rattachement d'un mineur comme ayant droit (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620" },
+    { "titre": "Carte Vitale des mineurs (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693" },
+    { "titre": "Obtenir une attestation de droits (ameli.fr)", "url": "https://www.ameli.fr/assure/adresses-et-contacts/l-obtention-d-un-document/obtenir-une-attestation/obtenir-une-attestation-de-droits" },
+    { "titre": "Demander sa carte Vitale (ameli.fr)", "url": "https://www.ameli.fr/assure/remboursements/etre-bien-rembourse/carte-vitale/carte-vitale-application/demander-sa-carte-vitale-conditions-et-demarches" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation de droits Assurance Maladie de l'enfant", "categorie": "sante" },
+    { "type": "coffre", "titre": "Copie de la carte Vitale de l'enfant", "categorie": "sante" },
+    { "type": "rappel", "titre": "Mettre à jour la carte Vitale après le rattachement", "evenement": "sante" },
+    { "type": "rappel", "titre": "Demander la carte Vitale de l'enfant à ses 16 ans", "evenement": "sante" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : adresses et horaires des points d'accueil de la CGSS de la Guyane, à vérifier sur ameli.fr avant de vous déplacer.",
+    "À confirmer localement : conditions exactes pour une carte Vitale de 12 à 15 ans (possible sur demande d'un parent selon service-public.gouv.fr, réservée à certaines situations selon ameli.fr).",
+    "Les pages d'ameli.fr n'ont pas pu être consultées directement lors de la vérification : les libellés des menus peuvent avoir changé."
+  ],
+  "motsCles": ["carte Vitale", "ameli", "ayant droit", "attestation de droits", "remboursement", "sécurité sociale", "CGSS"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F16620 Rattachement d'un mineur en tant qu'ayant droit", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620", "verifieLe": "2024-11-13" },
+    { "titre": "Service-public.gouv.fr, actualité A17693 Carte Vitale des mineurs (10 septembre 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693" },
+    { "titre": "Service-public.gouv.fr, actualité A18009 Inscrire son enfant sur les deux cartes Vitale", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18009" },
+    { "titre": "ameli.fr, Obtenir une attestation de droits", "url": "https://www.ameli.fr/assure/adresses-et-contacts/l-obtention-d-un-document/obtenir-une-attestation/obtenir-une-attestation-de-droits" },
+    { "titre": "ameli.fr, Demander sa carte Vitale : conditions et démarches", "url": "https://www.ameli.fr/assure/remboursements/etre-bien-rembourse/carte-vitale/carte-vitale-application/demander-sa-carte-vitale-conditions-et-demarches" }
+  ]
+}
