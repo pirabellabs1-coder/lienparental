@@ -84,7 +84,7 @@ export function VideoDialog({ hasVideo, hasCaptions }: { hasVideo: boolean; hasC
           {open && (
             <video ref={video} controls preload="metadata" playsInline poster="/video/presentation-poster.jpg" className="aspect-video w-full rounded-2xl bg-night-950">
               <source src="/video/presentation.mp4" type="video/mp4" />
-              {hasCaptions && <track kind="captions" src="/video/presentation.fr.vtt" srcLang="fr" label="Français" default />}
+              {hasCaptions && <track kind="captions" src="/video/presentation.fr.vtt" srcLang="fr" label="Français" />}
               Votre navigateur ne lit pas cette vidéo.{' '}
               <a href="/video/presentation.mp4">Télécharger la vidéo</a>.
             </video>

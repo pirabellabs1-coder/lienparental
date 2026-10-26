@@ -1,11 +1,11 @@
 LIEN PARENTAL - VIDÉO DE PRÉSENTATION (90 s) - SCRIPT DE VOIX OFF
 =================================================================
 
-Vidéo : public/video/presentation.mp4 (1920x1080, 30 i/s, 90,0 s, voix off intégrée : voix « Nathalie », ElevenLabs multilingual v2)
+Vidéo : public/video/presentation.mp4 (1920x1080, 30 i/s, 90,0 s, voix off intégrée : voix « Sophie - Publicité et Réseaux sociaux », ElevenLabs multilingual v2)
 Sous-titres : public/video/presentation.fr.vtt (calés sur ce script)
 
 Direction de voix
-- Voix posée, chaleureuse, rassurante. Débit calme : environ 2,3 mots par seconde.
+- Voix féminine française (accent de France), douce et animée : souriante, rythmée, jamais criée.
 - Chaque phrase commence au temps indiqué et doit être terminée avant la fin de sa plage :
   le texte à l'écran change ensuite. Laisser respirer les silences entre les scènes.
 - Prononcer « lienparental.fr » : « lien parental point f r ».
@@ -21,7 +21,7 @@ Des papiers, des messages, des rendez-vous...
 Et si tout se rangeait au même endroit ?
 
 [00:13.5 - 00:19.5]  2. Logo et modules de l'application
-Voici Lien Parental : l'organisation, les échanges, les documents et les démarches, au même endroit.
+Bienvenue sur Lien Parental : l'organisation, les échanges, les documents et les démarches, au même endroit.
 
 [00:20.5 - 00:28.5]  3. Journal et dépenses
 Le Journal garde une trace datée du quotidien.
