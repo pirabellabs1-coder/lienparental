@@ -59,14 +59,16 @@ export function Pricing({ signedIn = false }: { signedIn?: boolean }) {
   const PLANS = plans(signedIn)
   return (
     <div id="tarifs" className="scroll-mt-24">
-      <h2 id="pricing-title" className={H2}>Nos formules simples et transparentes</h2>
-      <p className={cn(LEAD, 'mt-3 max-w-[56ch]')}>Gratuit pour commencer. Sans engagement, résiliable à tout moment depuis votre profil.</p>
-      <ul className={cn('mt-10 grid grid-cols-1 gap-5 md:items-stretch', PLANS.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2')}>
+      <div className="mx-auto max-w-[640px] text-center">
+        <h2 id="pricing-title" className={H2}>Nos formules simples et transparentes</h2>
+        <p className={cn(LEAD, 'mx-auto mt-3 max-w-[52ch]')}>Gratuit pour commencer. Sans engagement, résiliable à tout moment depuis votre profil.</p>
+      </div>
+      <ul className={cn('mx-auto mt-12 grid max-w-[420px] grid-cols-1 gap-6 md:max-w-none md:items-stretch', PLANS.length === 3 ? 'lg:grid-cols-3' : 'md:grid-cols-2')}>
         {PLANS.map(p => (
           <li
             key={p.key}
             className={cn(
-              'relative flex flex-col rounded-3xl bg-white p-6 ring-1',
+              'relative flex flex-col rounded-3xl bg-white p-7 ring-1 sm:p-8',
               p.featured ? 'ring-2 ring-leaf-500 shadow-[0_20px_44px_-28px_rgba(46,125,50,0.6)]' : 'ring-[#E5E7EB]',
             )}
           >
@@ -75,32 +77,32 @@ export function Pricing({ signedIn = false }: { signedIn?: boolean }) {
                 Le plus populaire
               </span>
             )}
-            <h3 className="text-[18px] font-bold text-night-900">{PLAN_NAME[p.key]}</h3>
+            <h3 className="text-[20px] font-bold text-night-900">{PLAN_NAME[p.key]}</h3>
             <p className="mt-3 flex flex-wrap items-baseline gap-x-1">
-              <span className="text-[32px] font-extrabold leading-none tracking-[-0.02em] text-night-900">{p.price === 0 ? '0 €' : formatPrice(p.price)}</span>
-              {p.period && <span className="text-[14px] text-night-700">{p.period}</span>}
+              <span className="text-[40px] font-extrabold leading-none tracking-[-0.02em] text-night-900">{p.price === 0 ? '0 €' : formatPrice(p.price)}</span>
+              {p.period && <span className="text-[15px] font-medium text-night-700">{p.period}</span>}
             </p>
-            <p className="mt-2 min-h-[2.8em] text-[14px] leading-snug text-night-600">{p.note}</p>
-            <ul className="mt-5 flex-1 space-y-3 border-t border-[#E5E7EB] pt-5">
+            <p className="mt-3 min-h-[2.6em] text-[14.5px] leading-snug text-night-600">{p.note}</p>
+            <ul className="mt-6 flex-1 space-y-3.5 border-t border-[#E5E7EB] pt-6">
               {PLAN_FEATURES[p.key].map(f => (
-                <li key={f} className="flex items-start gap-2.5 text-[14.5px] leading-snug text-night-800">
+                <li key={f} className="flex items-start gap-3 text-[15px] leading-snug text-night-800">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" strokeWidth={2.25} aria-hidden />{f}
                 </li>
               ))}
             </ul>
-            <Link href={p.cta.href} className={cn(p.featured ? BTN_PRIMARY : BTN_OUTLINE, 'mt-7 w-full whitespace-normal px-4 text-center')}>
+            <Link href={p.cta.href} className={cn(p.featured ? BTN_PRIMARY : BTN_OUTLINE, 'mt-8 w-full whitespace-nowrap px-4 text-center')}>
               {p.cta.label}
             </Link>
           </li>
         ))}
       </ul>
 
-      <details className="group mt-8">
-        <summary className="flex min-h-[44px] w-max cursor-pointer list-none items-center gap-2 rounded-lg text-[16px] font-semibold text-leaf-600 hover:text-leaf-700">
+      <details className="group mt-10 text-center">
+        <summary className="mx-auto flex min-h-[44px] w-max cursor-pointer list-none items-center gap-2 rounded-lg text-[16px] font-semibold text-leaf-600 hover:text-leaf-700">
           Comparer les formules en détail
           <ChevronDown className="h-4 w-4 transition-transform duration-200 group-open:rotate-180" aria-hidden />
         </summary>
-        <div className="mt-6 overflow-x-auto rounded-2xl bg-white ring-1 ring-[#E5E7EB]">
+        <div className="mt-6 overflow-x-auto rounded-2xl bg-white text-left ring-1 ring-[#E5E7EB]">
           <table className="w-full min-w-[560px] text-left text-[14.5px]">
             <caption className="sr-only">Comparatif des formules</caption>
             <thead>

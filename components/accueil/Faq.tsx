@@ -32,34 +32,47 @@ const FAQ = [
   },
 ]
 
-/** Bloc FAQ : colonne droite (≈ 1/3) de la section Tarifs + FAQ (PricingFaq). */
+function Item({ q, a, link }: (typeof FAQ)[number]) {
+  return (
+    <details className="group">
+      <summary className="flex min-h-[64px] cursor-pointer list-none items-center justify-between gap-4 py-4 text-[16px] font-semibold leading-snug text-night-900">
+        {q}
+        <span aria-hidden className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-leaf-50 text-leaf-600 transition-transform duration-300 group-open:rotate-45">
+          <Plus className="h-4 w-4" strokeWidth={2} />
+        </span>
+      </summary>
+      <div className="pb-5 pr-2 text-[15px] leading-relaxed text-night-700">
+        <p>{a}</p>
+        {link && (
+          <Link href={link.href} className="mt-2 inline-flex min-h-[44px] items-center font-semibold text-leaf-600 underline decoration-leaf-600/40 underline-offset-2 hover:decoration-leaf-600">
+            {link.label}
+          </Link>
+        )}
+      </div>
+    </details>
+  )
+}
+
+/** FAQ sous les tarifs : titre centré, questions sur deux colonnes en grand écran. */
 export function Faq() {
+  const half = Math.ceil(FAQ.length / 2)
   return (
     <div id="faq" className="scroll-mt-24">
-      <h2 id="faq-title" className={H2}>Questions fréquentes</h2>
-      <div className="mt-8 divide-y divide-[#E5E7EB] rounded-3xl bg-white px-5 ring-1 ring-[#E5E7EB] sm:px-6">
-        {FAQ.map(({ q, a, link }) => (
-          <details key={q} className="group">
-            <summary className="flex min-h-[60px] cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15.5px] font-semibold leading-snug text-night-900">
-              {q}
-              <span aria-hidden className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-leaf-50 text-leaf-600 transition-transform duration-300 group-open:rotate-45">
-                <Plus className="h-4 w-4" strokeWidth={2} />
-              </span>
-            </summary>
-            <div className="pb-5 pr-2 text-[15px] leading-relaxed text-night-700">
-              <p>{a}</p>
-              {link && (
-                <Link href={link.href} className="mt-2 inline-flex min-h-[44px] items-center font-semibold text-leaf-600 underline decoration-leaf-600/40 underline-offset-2 hover:decoration-leaf-600">
-                  {link.label}
-                </Link>
-              )}
-            </div>
-          </details>
+      <div className="mx-auto max-w-[640px] text-center">
+        <h2 id="faq-title" className={H2}>Questions fréquentes</h2>
+      </div>
+      <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2 lg:items-start">
+        {[FAQ.slice(0, half), FAQ.slice(half)].map((col, i) => (
+          <div key={i} className="divide-y divide-[#E5E7EB] rounded-3xl bg-white px-5 ring-1 ring-[#E5E7EB] sm:px-7">
+            {col.map(item => <Item key={item.q} {...item} />)}
+          </div>
         ))}
       </div>
-      <Link href="/aide" className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-lg text-[16px] font-semibold text-leaf-600 hover:text-leaf-700">
-        Voir toutes les questions<ArrowRight className="h-4 w-4" aria-hidden />
-      </Link>
+      <div className="mt-8 text-center">
+        <Link href="/aide" className="inline-flex min-h-[44px] items-center gap-2 rounded-lg text-[16px] font-semibold text-leaf-600 hover:text-leaf-700">
+          Voir toutes les questions<ArrowRight className="h-4 w-4" aria-hidden />
+        </Link>
+      </div>
     </div>
   )
 }
