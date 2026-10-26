@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation'
 import { ArrowRight, CalendarDays, CircleCheck, HeartHandshake, Lock, MessagesSquare, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { Logo } from '@/components/brand/Logo'
-import { MotherChildIllustration } from '@/components/illustrations'
 import { ProgressDots } from './ProgressDots'
 import { btn, linkLeaf } from './styles'
 
@@ -194,7 +193,13 @@ function SlideMission() {
       <p className="mx-auto mt-2 max-w-[19rem] text-sm leading-relaxed text-night-600">
         Des fonctionnalités conçues pour préserver le lien parent-enfant dans le respect et la bienveillance.
       </p>
-      <MotherChildIllustration className="mt-3 w-full max-w-[280px]" />
+      <Image
+        src="/images/onboarding/mission.webp"
+        alt="Une mère serre tendrement sa fille dans ses bras, toutes deux les yeux fermés et souriantes"
+        width={720}
+        height={421}
+        className="mt-3 h-auto w-full max-w-[320px]"
+      />
       <p className="mt-3 w-full rounded-2xl border border-night-100 bg-night-50/50 p-4 text-left text-sm leading-relaxed text-night-800">
         Chaque outil aide à garder des échanges clairs et apaisés entre parents, pour que l’enfant garde sa place auprès de chacun.
       </p>
