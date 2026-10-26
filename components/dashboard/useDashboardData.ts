@@ -4,7 +4,8 @@
  * Données de l'accueil (M03).
  * - Compte réel (Supabase) : événements à venir (lib/data/calendar), derniers documents du
  *   coffre (lib/data/vault, chargés UNIQUEMENT coffre ouvert), RLS côté base.
- * - Démonstration : jeux fictifs historiques de lib/mock-data (affichage inchangé).
+ * - Démonstration : événements du calendrier de démo (mêmes identifiants que /app/calendrier),
+ *   documents récents fictifs de lib/mock-data.
  */
 import { useEffect, useMemo, useState } from 'react'
 import { LIVE, toDataError, type DataError } from '@/lib/data/core'
@@ -12,7 +13,7 @@ import { useEvents } from '@/lib/data/calendar'
 import { listDocuments, type VaultDocumentRecord } from '@/lib/data/vault'
 import { frDate } from '@/lib/mock-vault'
 import { timeInTz } from '@/lib/tz'
-import { mockEvents, mockRecentlyViewed, type AppEvent, type RecentlyViewedDoc } from '@/lib/mock-data'
+import { mockRecentlyViewed, type AppEvent, type RecentlyViewedDoc } from '@/lib/mock-data'
 import type { CalendarEvent } from '@/lib/calendrier'
 
 type Loadable<T> = { data: T; loading: boolean; error: DataError | null; retry: () => void }
@@ -40,7 +41,6 @@ function toAppEvent(e: CalendarEvent): AppEvent {
 export function useUpcomingEvents(): Loadable<AppEvent[]> {
   const live = useEvents()
   const data = useMemo(() => {
-    if (!LIVE) return mockEvents
     const now = Date.now()
     return (live.data ?? [])
       .filter((e) => new Date(e.end).getTime() >= now)

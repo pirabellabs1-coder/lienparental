@@ -9,7 +9,7 @@ import 'server-only'
  *   lib/modeles/seeds) : ce qui est affiché au parent est donc le même contenu.
  * - Perdu au redémarrage du serveur (assumé : recette uniquement, jamais en production).
  */
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import { getFiches, getParcoursList, getPartenairesDemo, listTerritoires } from '@/lib/guide/load'
 import type { Territoire } from '@/lib/guide/types'
 import { SEED_TEMPLATES } from '@/lib/modeles/seeds'
@@ -28,6 +28,16 @@ type G = typeof globalThis & { [KEY]?: Store }
 
 const MAX_VERSIONS = 50
 
+/**
+ * Identifiant stable d'un contenu de démonstration (même valeur d'un processus à l'autre) : en développement,
+ * chaque route peut être servie par un processus distinct qui amorce sa propre copie de la démo ; des UUID
+ * aléatoires feraient pointer les liens d'une liste vers des fiches « introuvables ».
+ */
+function stableId(kind: string, key: string): string {
+  const h = createHash('sha1').update(`lp-demo:${kind}:${key}`).digest('hex')
+  return `${h.slice(0, 8)}-${h.slice(8, 12)}-5${h.slice(13, 16)}-a${h.slice(17, 20)}-${h.slice(20, 32)}`
+}
+
 function seed(): Store {
   const store: Store = {
     records: {
@@ -42,7 +52,8 @@ function seed(): Store {
     const nowIso = new Date().toISOString()
     const at = opts.at && opts.at < nowIso ? opts.at : nowIso
     const statut = opts.statut ?? 'publie'
-    const rec = makeRecord(kind, opts.id ?? randomUUID(), data, {
+    const d0 = describe(kind, data)
+    const rec = makeRecord(kind, opts.id ?? stableId(kind, `${d0.territoire ?? ''}:${d0.slug || d0.titre}`), data, {
       statut,
       version: 1,
       createdAt: at,
@@ -58,7 +69,7 @@ function seed(): Store {
     for (const f of getFiches(t.code)) add('fiche', f, { at: `${f.derniereVerification}T08:00:00.000Z` })
     for (const p of getParcoursList(t.code)) add('parcours', p)
     for (const p of getPartenairesDemo(t.code)) {
-      const id = randomUUID()
+      const id = stableId('partenaire', `${t.code}:${describe('partenaire', p as ContentData['partenaire']).titre}`)
       add('partenaire', { ...p, id }, { id })
     }
   }
