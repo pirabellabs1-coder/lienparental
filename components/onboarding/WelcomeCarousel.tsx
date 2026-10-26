@@ -4,13 +4,14 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ArrowRight, CalendarDays, CircleCheck, HeartHandshake, Lock, MessagesSquare, ShieldCheck } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CalendarDays, CircleCheck, HeartHandshake, Lock, MessagesSquare, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { Logo } from '@/components/brand/Logo'
 import { ProgressDots } from './ProgressDots'
 import { btn, linkLeaf } from './styles'
 
 const TOTAL = 4
+const backBtn = '-ml-2.5 grid h-11 w-11 place-items-center rounded-full text-night-900 transition-colors hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500'
 
 /**
  * Onboarding steps 1-4 (Bienvenue, Pourquoi, Mission, Prêt(e) ?) as a swipeable carousel.
@@ -53,6 +54,18 @@ export function WelcomeCarousel() {
 
   return (
     <section className="flex flex-1 flex-col" aria-roledescription="carrousel" aria-label="Découvrir Lien Parental">
+      {/* Retour : page d'accueil du site au premier écran, écran précédent ensuite. */}
+      <div className="px-6 pt-3">
+        {index === 0 ? (
+          <Link href="/" aria-label="Retour à la page d’accueil" className={backBtn}>
+            <ArrowLeft className="h-[22px] w-[22px]" aria-hidden="true" />
+          </Link>
+        ) : (
+          <button type="button" onClick={() => goTo(index - 1)} aria-label="Écran précédent" className={backBtn}>
+            <ArrowLeft className="h-[22px] w-[22px]" aria-hidden="true" />
+          </button>
+        )}
+      </div>
       <div
         className="relative flex-1 overflow-hidden"
         onTouchStart={onTouchStart}
@@ -71,7 +84,7 @@ export function WelcomeCarousel() {
               inert={i !== index}
               aria-roledescription="diapositive"
               aria-label={`${i + 1} sur ${TOTAL}`}
-              className="flex w-full shrink-0 flex-col overflow-y-auto px-6 pb-2 pt-6"
+              className="flex w-full shrink-0 flex-col overflow-y-auto px-6 pb-2 pt-1"
             >
               {s}
             </article>

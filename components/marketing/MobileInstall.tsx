@@ -5,7 +5,7 @@ import { useEffect, useId, useRef, useState, type KeyboardEvent, type MouseEvent
 import { ArrowLeft, Bell, CheckCircle2, ChevronDown, Download, Heart, HelpCircle, Lock, ShieldCheck, Smartphone, X, Zap } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { InstallSteps, type InstallOS } from '@/components/install/InstallSteps'
-import { PhoneIllustration } from '@/components/install/PhoneIllustration'
+import Image from 'next/image'
 import { cn } from '@/lib/cn'
 
 /** Événement non standard (Chromium) émis quand l'installation de la PWA est possible. */
@@ -137,7 +137,7 @@ export function MobileInstall({ continueHref, qr }: Props) {
           </Link>
         </div>
 
-        <section aria-labelledby={`${baseId}-title`} className="mt-6 grid grid-cols-[minmax(0,1fr)_104px] items-center gap-4 sm:grid-cols-[minmax(0,1fr)_120px]">
+        <section aria-labelledby={`${baseId}-title`} className="mt-6 grid grid-cols-[minmax(0,1fr)_132px] items-center gap-3 sm:grid-cols-[minmax(0,1fr)_170px]">
           <div>
             <h1 id={`${baseId}-title`} className="text-[25px] font-extrabold leading-[1.15] text-night-900 sm:text-[28px]">
               {installed ? (
@@ -152,7 +152,15 @@ export function MobileInstall({ continueHref, qr }: Props) {
                 : 'Ajoutez l’application à votre écran d’accueil pour y accéder rapidement, comme une vraie application.'}
             </p>
           </div>
-          <PhoneIllustration className="ml-auto mr-2 h-[184px] w-[92px] sm:h-[204px] sm:w-[104px]" />
+          <Image
+            src="/images/install/telephone.webp"
+            alt=""
+            width={520}
+            height={700}
+            priority
+            sizes="(min-width:640px) 170px, 132px"
+            className="h-auto w-full"
+          />
         </section>
 
         {installed ? (
