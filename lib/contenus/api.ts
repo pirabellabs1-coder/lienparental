@@ -139,6 +139,7 @@ export function revalidateFor(kind: ContentKind, slug?: string) {
       revalidatePath('/sitemap.xml')
     }
     if (kind === 'faq' || kind === 'tutoriel') revalidatePath('/app/aide', 'layout')
+    if (kind === 'faq') revalidatePath('/aide')
     if (kind === 'conseil') revalidatePath('/app')
   } catch {
     /* hors contexte de requête (tests) : sans effet */

@@ -1,123 +1,152 @@
-'use client'
-import { useMemo, useState } from 'react'
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Card, CardBody, CardHeader, SearchField, Button, Badge } from '@/components/ui'
-import { DataTable, type Column } from '@/components/admin/DataTable'
-import { Download, ChevronRight } from 'lucide-react'
+import { ChevronRight, Download } from 'lucide-react'
+import { pageAdminCtx } from '@/lib/contenus/api'
+import { RepoError } from '@/lib/contenus/repo'
+import { listAccounts, type AccountPage } from '@/lib/admin/ops/comptes'
+import {
+  ACCOUNT_PLANS, ACCOUNT_STATUSES, PLAN_LABEL, STATUS_LABEL, accountFiltersSchema, flatParams,
+  type AccountFilters,
+} from '@/lib/admin/ops/types'
+import {
+  DemoNotice, Empty, ErrorBox, FilterBar, FilterField, Note, OpsHeader, Pill, btnSecondaryCls, fieldCls, fmtDate, fmtDateTime, fmtMb, hrefWith, linkCls,
+} from '@/components/admin/ops/ui'
+import { PLAN_TONE, STATUS_TONE } from '@/components/admin/ops/tones'
 
-// TODO: Supabase service_role — SELECT auth.users JOIN public.users
-type User = {
-  id: string
-  prenom: string
-  nom: string
-  email: string
-  plan: 'gratuit' | 'premium' | 'coparentalite' | 'admin'
-  inscritLe: string
-  stockageGo: number
-}
+export const metadata: Metadata = { title: 'Comptes' }
+export const dynamic = 'force-dynamic'
 
-const mock: User[] = [
-  { id: 'u_001', prenom: 'Camille', nom: 'Durand',  email: 'camille.d@mail.fr',  plan: 'premium', inscritLe: '2025-11-02', stockageGo: 3.4 },
-  { id: 'u_002', prenom: 'Nassim',  nom: 'Ouali',   email: 'n.ouali@mail.fr',    plan: 'gratuit', inscritLe: '2025-09-18', stockageGo: 0.4 },
-  { id: 'u_003', prenom: 'Sofia',   nom: 'Martinez',email: 'sofia.m@proton.me',  plan: 'premium', inscritLe: '2025-12-14', stockageGo: 1.9 },
-  { id: 'u_004', prenom: 'Thomas',  nom: 'Petit',   email: 't.petit@mail.fr',    plan: 'gratuit', inscritLe: '2026-01-04', stockageGo: 0.2 },
-  { id: 'u_005', prenom: 'Léa',     nom: 'Fontaine',email: 'lea.f@mail.fr',      plan: 'coparentalite', inscritLe: '2025-07-21', stockageGo: 5.8 },
-  { id: 'u_006', prenom: 'Hugo',    nom: 'Bernard', email: 'h.bernard@mail.fr',  plan: 'gratuit', inscritLe: '2026-02-12', stockageGo: 0.1 },
-  { id: 'u_007', prenom: 'Yasmine', nom: 'El-Amrani',email: 'yas.ea@mail.fr',    plan: 'premium', inscritLe: '2025-10-30', stockageGo: 2.6 },
-  { id: 'u_008', prenom: 'Paul',    nom: 'Girard',  email: 'paul.g@mail.fr',     plan: 'gratuit', inscritLe: '2025-08-05', stockageGo: 0.9 },
-  { id: 'u_009', prenom: 'Inès',    nom: 'Lopez',   email: 'ines.l@mail.fr',     plan: 'premium', inscritLe: '2026-03-01', stockageGo: 4.1 },
-  { id: 'u_010', prenom: 'Antoine', nom: 'Roche',   email: 'a.roche@mail.fr',    plan: 'gratuit', inscritLe: '2025-12-28', stockageGo: 0.0 },
-  { id: 'u_011', prenom: 'Claire',  nom: 'Moreau',  email: 'c.moreau@mail.fr',   plan: 'premium', inscritLe: '2025-06-11', stockageGo: 7.2 },
-  { id: 'u_012', prenom: 'Mehdi',   nom: 'Benali',  email: 'mehdi.b@mail.fr',    plan: 'gratuit', inscritLe: '2026-04-02', stockageGo: 0.3 },
-]
+type SP = Promise<Record<string, string | string[] | undefined>>
 
-function toCSV(rows: User[]) {
-  const header = ['id', 'prenom', 'nom', 'email', 'plan', 'inscritLe', 'stockageGo']
-  const esc = (v: unknown) => {
-    const s = String(v ?? '')
-    return /[",\n;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+export default async function ComptesPage({ searchParams }: { searchParams: SP }) {
+  const ctx = await pageAdminCtx()
+  const parsed = accountFiltersSchema.safeParse(flatParams(await searchParams))
+  const f: AccountFilters = parsed.success ? parsed.data : {}
+  let page: AccountPage | null = null
+  let error: string | null = parsed.success ? null : 'Filtres invalides : ils ont été ignorés.'
+  try {
+    page = await listAccounts(ctx, f)
+  } catch (e) {
+    error = e instanceof RepoError ? e.message : 'Liste des comptes indisponible.'
   }
-  const lines = [header.join(';'), ...rows.map((r) => header.map((k) => esc((r as Record<string, unknown>)[k])).join(';'))]
-  return lines.join('\n')
-}
-
-export default function ComptesPage() {
-  const [q, setQ] = useState('')
-
-  const rows = useMemo(() => {
-    const needle = q.trim().toLowerCase()
-    if (!needle) return mock
-    return mock.filter((u) => u.email.toLowerCase().includes(needle))
-  }, [q])
-
-  const handleExport = () => {
-    const csv = toCSV(rows)
-    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `comptes-${new Date().toISOString().slice(0, 10)}.csv`
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-    URL.revokeObjectURL(url)
-  }
-
-  const columns: Column<User>[] = [
-    { key: 'prenom', header: 'Prénom', sortable: true, accessor: (r) => r.prenom },
-    { key: 'nom',    header: 'Nom',    sortable: true, accessor: (r) => r.nom },
-    { key: 'email',  header: 'Email',  sortable: true, accessor: (r) => r.email, cell: (r) => <span className="font-mono text-xs text-night-700">{r.email}</span> },
-    {
-      key: 'plan', header: 'Plan', sortable: true, accessor: (r) => r.plan,
-      cell: (r) => (
-        <Badge className={r.plan === 'coparentalite' ? 'bg-night-900 text-white' : r.plan === 'premium' ? 'bg-gold-100 text-gold-700' : r.plan === 'admin' ? 'bg-iris-100 text-iris-700' : 'bg-night-100 text-night-700'}>
-          {r.plan}
-        </Badge>
-      ),
-    },
-    { key: 'inscritLe', header: 'Inscrit le', sortable: true, accessor: (r) => r.inscritLe },
-    {
-      key: 'stockageGo', header: 'Stockage', sortable: true, accessor: (r) => r.stockageGo,
-      cell: (r) => <span className="tabular-nums">{r.stockageGo.toFixed(1)} Go</span>,
-    },
-    {
-      key: 'actions', header: '', className: 'text-right w-24',
-      cell: (r) => (
-        <Link
-          href={`/admin/comptes/${r.id}`}
-          className="inline-flex items-center gap-1 text-xs font-medium text-leaf-700 hover:text-leaf-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 rounded"
-        >
-          Ouvrir <ChevronRight className="h-3.5 w-3.5" />
-        </Link>
-      ),
-    },
-  ]
+  const filters = { q: f.q, plan: f.plan, statut: f.statut, du: f.du, au: f.au }
 
   return (
-    <div className="space-y-6">
-      <header className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
-        <div>
-          <h1 className="font-display text-3xl text-night-900">Comptes</h1>
-          <p className="text-sm text-night-600 mt-1">Rechercher, consulter et exporter les comptes utilisateurs.</p>
-        </div>
-        <Button variant="secondary" onClick={handleExport}>
-          <Download className="h-4 w-4" /> Exporter CSV
-        </Button>
-      </header>
+    <div>
+      <OpsHeader
+        title="Comptes"
+        description="Rechercher, consulter et gérer les comptes. Seules les informations nécessaires à l’assistance sont affichées."
+        actions={
+          <a href={hrefWith('/api/admin/comptes/export', filters)} className={btnSecondaryCls} download>
+            <Download className="h-4 w-4" aria-hidden="true" /> Exporter en CSV<span className="sr-only"> (filtres appliqués, sans nom ni contenu)</span>
+          </a>
+        }
+      />
+      <DemoNotice mode={ctx.mode} />
+      <Note tone="privacy">
+        Minimisation : l’administration ne voit jamais le Journal, le coffre-fort, les témoignages, la messagerie ni les informations de santé d’un utilisateur. Les enfants sont seulement comptés.
+      </Note>
 
-      <Card>
-        <CardHeader>
-          <SearchField
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Rechercher par email…"
-            aria-label="Rechercher un compte par email"
-          />
-        </CardHeader>
-        <CardBody>
-          <DataTable rows={rows} columns={columns} rowKey={(r) => r.id} caption="Liste des comptes" />
-        </CardBody>
-      </Card>
+      <FilterBar action="/admin/comptes" resetHref="/admin/comptes">
+        <FilterField label="E-mail, prénom ou nom" htmlFor="f-q">
+          <input id="f-q" name="q" type="search" defaultValue={f.q ?? ''} maxLength={120} className={fieldCls} placeholder="ex. camille@" autoComplete="off" />
+        </FilterField>
+        <FilterField label="Formule" htmlFor="f-plan">
+          <select id="f-plan" name="plan" defaultValue={f.plan ?? ''} className={fieldCls}>
+            <option value="">Toutes</option>
+            {ACCOUNT_PLANS.map((p) => <option key={p} value={p}>{PLAN_LABEL[p]}</option>)}
+          </select>
+        </FilterField>
+        <FilterField label="Statut" htmlFor="f-statut">
+          <select id="f-statut" name="statut" defaultValue={f.statut ?? ''} className={fieldCls}>
+            <option value="">Tous (hors supprimés)</option>
+            {ACCOUNT_STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABEL[s]}</option>)}
+          </select>
+        </FilterField>
+        <FilterField label="Inscrit à partir du" htmlFor="f-du">
+          <input id="f-du" name="du" type="date" defaultValue={f.du ?? ''} className={fieldCls} />
+        </FilterField>
+        <FilterField label="Inscrit jusqu’au" htmlFor="f-au">
+          <input id="f-au" name="au" type="date" defaultValue={f.au ?? ''} className={fieldCls} />
+        </FilterField>
+      </FilterBar>
+
+      {error && <ErrorBox message={error} />}
+
+      {page && (
+        <div className="mt-5">
+          {page.rows.length === 0 ? (
+            <Empty>Aucun compte ne correspond à ces filtres.</Empty>
+          ) : (
+            <>
+              {/* Grand écran : tableau */}
+              <div className="hidden overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white shadow-soft md:block">
+                <table className="min-w-full text-[14px]">
+                  <caption className="sr-only">Comptes (50 par page, du plus récent au plus ancien)</caption>
+                  <thead className="bg-night-50 text-left text-night-700">
+                    <tr>
+                      <th scope="col" className="px-4 py-3 font-semibold">Compte</th>
+                      <th scope="col" className="px-4 py-3 font-semibold">Formule</th>
+                      <th scope="col" className="px-4 py-3 font-semibold">Statut</th>
+                      <th scope="col" className="px-4 py-3 font-semibold">Inscription</th>
+                      <th scope="col" className="px-4 py-3 font-semibold">Dernière connexion</th>
+                      <th scope="col" className="px-4 py-3 text-right font-semibold">Stockage</th>
+                      <th scope="col" className="px-4 py-3 text-right font-semibold">Enfants</th>
+                      <th scope="col" className="px-4 py-3"><span className="sr-only">Ouvrir</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {page.rows.map((r) => (
+                      <tr key={r.id} className="border-t border-night-100 align-middle hover:bg-leaf-50/40">
+                        <td className="max-w-[280px] px-4 py-3">
+                          <p className="truncate font-semibold text-night-900">{[r.prenom, r.nom].filter(Boolean).join(' ') || 'Sans nom'}</p>
+                          <p className="truncate font-mono text-[12px] text-night-600">{r.email}</p>
+                        </td>
+                        <td className="px-4 py-3"><Pill tone={PLAN_TONE[r.plan]}>{PLAN_LABEL[r.plan]}</Pill></td>
+                        <td className="px-4 py-3"><Pill tone={STATUS_TONE[r.status]}>{STATUS_LABEL[r.status]}</Pill></td>
+                        <td className="whitespace-nowrap px-4 py-3 text-night-700">{fmtDate(r.createdAt)}</td>
+                        <td className="whitespace-nowrap px-4 py-3 text-night-700">{fmtDateTime(r.lastSignInAt) || 'Jamais'}</td>
+                        <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums text-night-700">{fmtMb(r.storageMb)}</td>
+                        <td className="px-4 py-3 text-right tabular-nums text-night-700">{r.childrenCount}</td>
+                        <td className="px-4 py-3 text-right">
+                          <Link href={`/admin/comptes/${r.id}`} className={`${linkCls} inline-flex min-h-[44px] items-center gap-1 px-1 text-[13.5px]`}>
+                            Ouvrir<span className="sr-only"> le compte {r.email}</span> <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile : cartes */}
+              <ul className="space-y-3 md:hidden" aria-label="Comptes">
+                {page.rows.map((r) => (
+                  <li key={r.id}>
+                    <Link href={`/admin/comptes/${r.id}`} className="block rounded-2xl border border-[#E5E7EB] bg-white p-4 shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
+                      <p className="font-semibold text-night-900">{[r.prenom, r.nom].filter(Boolean).join(' ') || 'Sans nom'}</p>
+                      <p className="truncate font-mono text-[12px] text-night-600">{r.email}</p>
+                      <p className="mt-2 flex flex-wrap gap-1.5">
+                        <Pill tone={PLAN_TONE[r.plan]}>{PLAN_LABEL[r.plan]}</Pill>
+                        <Pill tone={STATUS_TONE[r.status]}>{STATUS_LABEL[r.status]}</Pill>
+                      </p>
+                      <p className="mt-2 text-[12.5px] text-night-600">Inscrit le {fmtDate(r.createdAt)} · {fmtMb(r.storageMb)} · {r.childrenCount} enfant{r.childrenCount > 1 ? 's' : ''}</p>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          <nav aria-label="Pagination des comptes" className="mt-4 flex flex-wrap items-center justify-between gap-2 text-[13.5px] text-night-600">
+            <span>{page.rows.length} compte{page.rows.length > 1 ? 's' : ''} sur cette page</span>
+            <span className="flex gap-2">
+              {f.apres && <Link href={hrefWith('/admin/comptes', filters)} className={btnSecondaryCls}>Première page</Link>}
+              {page.nextCursor && <Link href={hrefWith('/admin/comptes', { ...filters, apres: page.nextCursor })} className={btnSecondaryCls}>Page suivante</Link>}
+            </span>
+          </nav>
+        </div>
+      )}
     </div>
   )
 }

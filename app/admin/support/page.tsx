@@ -1,111 +1,105 @@
-'use client'
-import { useMemo, useState } from 'react'
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Card, CardBody, CardHeader, Badge, Select, SearchField } from '@/components/ui'
-import { DataTable, type Column } from '@/components/admin/DataTable'
+import { pageAdminCtx } from '@/lib/contenus/api'
+import { RepoError } from '@/lib/contenus/repo'
+import { listTickets, type TicketPage } from '@/lib/admin/ops/support'
+import {
+  CATEGORY_LABEL, PRIORITY_LABEL, TICKET_CATEGORIES, TICKET_PRIORITIES, TICKET_STATUSES, TICKET_STATUS_LABEL,
+  flatParams, ticketFiltersSchema, type TicketFilters,
+} from '@/lib/admin/ops/types'
+import { DemoNotice, Empty, ErrorBox, FilterBar, FilterField, Note, OpsHeader, Pill, btnSecondaryCls, fieldCls, fmtDateTime, hrefWith, linkCls } from '@/components/admin/ops/ui'
+import { PRIORITY_TONE, TICKET_STATUS_TONE } from '@/components/admin/ops/tones'
 
-// TODO: Supabase service_role — table `support_tickets`
-type Ticket = {
-  id: string
-  sujet: string
-  auteur: string
-  statut: 'ouvert' | 'en_cours' | 'ferme'
-  priorite: 'basse' | 'normale' | 'haute' | 'urgente'
-  createdAt: string
-  lastReply: string
-}
+export const metadata: Metadata = { title: 'Support' }
+export const dynamic = 'force-dynamic'
 
-const all: Ticket[] = [
-  { id: '4821', sujet: 'Impossible d’ajouter un document > 20 Mo', auteur: 'camille.d@…', statut: 'ouvert', priorite: 'haute', createdAt: '2026-10-22', lastReply: 'Il y a 1 h' },
-  { id: '4820', sujet: 'Export RGPD : relancer la génération', auteur: 'thomas.p@…', statut: 'en_cours', priorite: 'normale', createdAt: '2026-10-21', lastReply: 'Il y a 3 h' },
-  { id: '4819', sujet: 'Facturation Premium — remboursement', auteur: 'lea.f@…', statut: 'ouvert', priorite: 'urgente', createdAt: '2026-10-21', lastReply: 'Hier' },
-  { id: '4818', sujet: 'Le témoin n’a pas reçu l’email', auteur: 'sofia.m@…', statut: 'en_cours', priorite: 'normale', createdAt: '2026-10-20', lastReply: 'Il y a 2 j' },
-  { id: '4817', sujet: 'Changer l’email du compte', auteur: 'n.ouali@…', statut: 'ferme', priorite: 'basse', createdAt: '2026-10-15', lastReply: 'Il y a 5 j' },
-  { id: '4816', sujet: 'Suppression définitive demandée (RGPD)', auteur: 'h.bernard@…', statut: 'ferme', priorite: 'haute', createdAt: '2026-10-12', lastReply: 'Il y a 7 j' },
-]
+type SP = Promise<Record<string, string | string[] | undefined>>
 
-const prioTone: Record<Ticket['priorite'], 'neutral' | 'success' | 'warning' | 'danger'> = {
-  basse: 'neutral', normale: 'success', haute: 'warning', urgente: 'danger',
-}
-
-export default function SupportPage() {
-  const [statut, setStatut] = useState<string>('')
-  const [prio, setPrio] = useState<string>('')
-  const [q, setQ] = useState('')
-
-  const rows = useMemo(() => {
-    return all.filter((t) => {
-      if (statut && t.statut !== statut) return false
-      if (prio && t.priorite !== prio) return false
-      if (q && !(`${t.sujet} ${t.auteur}`.toLowerCase().includes(q.toLowerCase()))) return false
-      return true
-    })
-  }, [statut, prio, q])
-
-  const columns: Column<Ticket>[] = [
-    { key: 'id', header: '#', sortable: true, accessor: (r) => r.id, cell: (r) => <span className="font-mono text-xs text-night-500">#{r.id}</span>, className: 'w-16' },
-    {
-      key: 'sujet', header: 'Sujet', sortable: true, accessor: (r) => r.sujet,
-      cell: (r) => (
-        <Link href={`/admin/support/${r.id}`} className="font-medium text-night-900 hover:text-leaf-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 rounded">
-          {r.sujet}
-        </Link>
-      ),
-    },
-    { key: 'auteur', header: 'Auteur', sortable: true, accessor: (r) => r.auteur, cell: (r) => <span className="text-xs text-night-700">{r.auteur}</span> },
-    {
-      key: 'statut', header: 'Statut', sortable: true, accessor: (r) => r.statut,
-      cell: (r) => (
-        <Badge variant={r.statut === 'ouvert' ? 'warning' : r.statut === 'ferme' ? 'neutral' : 'iris'} dot>
-          {r.statut === 'en_cours' ? 'en cours' : r.statut === 'ferme' ? 'fermé' : 'ouvert'}
-        </Badge>
-      ),
-    },
-    { key: 'priorite', header: 'Priorité', sortable: true, accessor: (r) => r.priorite, cell: (r) => <Badge variant={prioTone[r.priorite]}>{r.priorite}</Badge> },
-    { key: 'createdAt', header: 'Créé le', sortable: true, accessor: (r) => r.createdAt },
-    { key: 'lastReply', header: 'Dernière réponse', accessor: (r) => r.lastReply },
-  ]
+export default async function SupportPage({ searchParams }: { searchParams: SP }) {
+  const ctx = await pageAdminCtx()
+  const raw = flatParams(await searchParams)
+  // Par défaut : la file des tickets à traiter.
+  const parsed = ticketFiltersSchema.safeParse({ statut: 'en_cours', ...raw, ...(raw.statut === 'tous' ? { statut: undefined } : {}) })
+  const f: TicketFilters = parsed.success ? parsed.data : { statut: 'en_cours' }
+  let page: TicketPage | null = null
+  let error: string | null = parsed.success ? null : 'Filtres invalides : ils ont été ignorés.'
+  try {
+    page = await listTickets(ctx, f)
+  } catch (e) {
+    error = e instanceof RepoError ? e.message : 'File du support indisponible.'
+  }
+  const filters = { statut: f.statut ?? 'tous', priorite: f.priorite, categorie: f.categorie, q: f.q }
 
   return (
-    <div className="space-y-6">
-      <header>
-        <h1 className="font-display text-3xl text-night-900">Support</h1>
-        <p className="text-sm text-night-600 mt-1">Tickets ouverts par les utilisateurs.</p>
-      </header>
+    <div>
+      <OpsHeader title="Support" description="Demandes envoyées depuis le centre d’aide. Les abonnés Coparentalité+ passent en premier (assistance prioritaire), puis l’ordre d’arrivée." />
+      <DemoNotice mode={ctx.mode} />
+      <Note>
+        Priorité posée par la base selon la formule effective du demandeur : haute pour Coparentalité+, normale pour Premium, basse pour Gratuit. « Urgente » est réservée au support.
+      </Note>
 
-      <Card>
-        <CardHeader>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <SearchField value={q} onChange={(e) => setQ(e.target.value)} placeholder="Rechercher un ticket…" aria-label="Rechercher" />
-            <Select
-              aria-label="Filtrer par statut"
-              value={statut}
-              onChange={(e) => setStatut(e.target.value)}
-              options={[
-                { value: '', label: 'Tous les statuts' },
-                { value: 'ouvert', label: 'Ouverts' },
-                { value: 'en_cours', label: 'En cours' },
-                { value: 'ferme', label: 'Fermés' },
-              ]}
-            />
-            <Select
-              aria-label="Filtrer par priorité"
-              value={prio}
-              onChange={(e) => setPrio(e.target.value)}
-              options={[
-                { value: '', label: 'Toutes les priorités' },
-                { value: 'urgente', label: 'Urgente' },
-                { value: 'haute', label: 'Haute' },
-                { value: 'normale', label: 'Normale' },
-                { value: 'basse', label: 'Basse' },
-              ]}
-            />
-          </div>
-        </CardHeader>
-        <CardBody>
-          <DataTable rows={rows} columns={columns} rowKey={(r) => r.id} caption="Tickets de support" />
-        </CardBody>
-      </Card>
+      <FilterBar action="/admin/support" resetHref="/admin/support">
+        <FilterField label="Recherche (objet, e-mail)" htmlFor="s-q">
+          <input id="s-q" name="q" type="search" defaultValue={f.q ?? ''} maxLength={120} className={fieldCls} autoComplete="off" />
+        </FilterField>
+        <FilterField label="Statut" htmlFor="s-statut">
+          <select id="s-statut" name="statut" defaultValue={f.statut ?? 'tous'} className={fieldCls}>
+            <option value="en_cours">À traiter (ouverts, en cours, en attente)</option>
+            <option value="tous">Tous</option>
+            {TICKET_STATUSES.map((s) => <option key={s} value={s}>{TICKET_STATUS_LABEL[s]}</option>)}
+          </select>
+        </FilterField>
+        <FilterField label="Priorité" htmlFor="s-prio">
+          <select id="s-prio" name="priorite" defaultValue={f.priorite ?? ''} className={fieldCls}>
+            <option value="">Toutes</option>
+            {TICKET_PRIORITIES.map((p) => <option key={p} value={p}>{PRIORITY_LABEL[p]}</option>)}
+          </select>
+        </FilterField>
+        <FilterField label="Catégorie" htmlFor="s-cat">
+          <select id="s-cat" name="categorie" defaultValue={f.categorie ?? ''} className={fieldCls}>
+            <option value="">Toutes</option>
+            {TICKET_CATEGORIES.map((c) => <option key={c} value={c}>{CATEGORY_LABEL[c]}</option>)}
+          </select>
+        </FilterField>
+      </FilterBar>
+
+      {error && <ErrorBox message={error} />}
+
+      {page && (
+        <div className="mt-5">
+          {page.rows.length === 0 ? <Empty>Aucun ticket pour ces filtres.</Empty> : (
+            <ul className="space-y-2.5" aria-label="Tickets de support">
+              {page.rows.map((t) => (
+                <li key={t.id} className="rounded-2xl border border-[#E5E7EB] bg-white p-4 shadow-soft">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0">
+                      <Link href={`/admin/support/${t.id}`} className={`${linkCls} text-[15px]`}>{t.subject}</Link>
+                      <p className="mt-0.5 truncate text-[13px] text-night-600">
+                        {t.userEmail ?? 'Compte supprimé'} · {CATEGORY_LABEL[t.category]} · {t.messageCount} message{t.messageCount > 1 ? 's' : ''}
+                      </p>
+                    </div>
+                    <p className="flex shrink-0 flex-wrap gap-1.5">
+                      <Pill tone={PRIORITY_TONE[t.priority]}>{PRIORITY_LABEL[t.priority].split(' (')[0]}</Pill>
+                      <Pill tone={TICKET_STATUS_TONE[t.status]}>{TICKET_STATUS_LABEL[t.status]}</Pill>
+                    </p>
+                  </div>
+                  <p className="mt-2 text-[12.5px] text-night-500">
+                    Ouvert le {fmtDateTime(t.createdAt)}
+                    {t.lastReplyAt ? ` · dernière réponse ${t.lastReplyBy === 'admin' ? 'du support' : 'de l’utilisateur'} le ${fmtDateTime(t.lastReplyAt)}` : ' · sans réponse'}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
+          <nav aria-label="Pagination des tickets" className="mt-4 flex flex-wrap items-center justify-between gap-2 text-[13.5px] text-night-600">
+            <span>{page.total} ticket{page.total > 1 ? 's' : ''} · page {page.page} sur {page.pages}</span>
+            <span className="flex gap-2">
+              {page.page > 1 && <Link className={btnSecondaryCls} href={hrefWith('/admin/support', { ...filters, page: page.page - 1 })}>Page précédente</Link>}
+              {page.page < page.pages && <Link className={btnSecondaryCls} href={hrefWith('/admin/support', { ...filters, page: page.page + 1 })}>Page suivante</Link>}
+            </span>
+          </nav>
+        </div>
+      )}
     </div>
   )
 }

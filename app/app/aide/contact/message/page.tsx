@@ -19,9 +19,23 @@ export default function ContactMessagePage() {
     if (!objet.trim() || message.trim().length < 10) return setError('Renseignez un objet et un message (10 caractères minimum).')
     setError(undefined)
     setLoading(true)
-    // NOTE Supabase: insert `support_tickets` (validation serveur) + e-mail au support.
-    await new Promise(r => setTimeout(r, 500))
-    router.push('/app/aide/confirmation')
+    try {
+      const res = await fetch('/api/support/tickets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subject: objet, body: message, category: 'contact' }),
+      })
+      if (!res.ok) {
+        const j = await res.json().catch(() => null)
+        setError(j?.error?.message ?? 'Envoi impossible.')
+        setLoading(false)
+        return
+      }
+      router.push('/app/aide/confirmation')
+    } catch {
+      setError('Envoi impossible.')
+      setLoading(false)
+    }
   }
 
   return (

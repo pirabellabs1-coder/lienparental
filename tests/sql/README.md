@@ -31,6 +31,7 @@ dans le même bloc ; même contrainte dans l'éditeur SQL de Supabase). Sortie e
 | `0360-securite` | audit v3 : santé masquée aux proches, titulaire seul invite un parent, départ de conversation, chemins de pièces jointes, admin `aal2`, essais du code coffre, `search_path` |
 | `0370-coffre` | verrou du coffre en base : documents, témoignages, partages et fichiers Storage selon la session déverrouillée |
 | `0380-coparentalite` | plan effectif partagé Coparentalité+, garde-fou `users.plan`, statistiques admin |
+| `0400-admin` | opérations admin `aal2` (comptes, déconnexion forcée, journal append-only et rétention, support, témoignages en métadonnées seules, centre d'aide versionné et publié seulement) |
 
 Écrire un scénario : `export default async function run(db)` ; jouer un utilisateur avec
 `set_config('request.jwt.claims', …)` + `set local role authenticated` dans une transaction (voir les helpers `as` /

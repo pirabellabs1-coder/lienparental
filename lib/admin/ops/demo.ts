@@ -19,7 +19,7 @@ type Store = {
   nextAudit: number
 }
 
-const KEY = '__lienParentalAdminOpsDemo_v1'
+const KEY = '__lienParentalAdminOpsDemo_v2'
 type G = typeof globalThis & { [KEY]?: Store }
 
 export const DEMO_ACTOR = 'admin@demo.lienparental.fr'

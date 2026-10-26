@@ -1,16 +1,22 @@
 import type { Metadata } from 'next'
 import { ChevronDown, Mail, Clock3 } from 'lucide-react'
 import { SiteShell } from '@/components/site/SiteShell'
-import { readFaqIndex, readMarkdown } from '@/lib/content'
+import { getHelpFaq } from '@/lib/aide/public'
+import { FAQ_CATEGORIES } from '@/lib/aide/types'
 
 export const metadata: Metadata = {
   title: 'Centre d’aide',
   description: 'Questions fréquentes, installation et contact du support Lien Parental.',
 }
 
+export const revalidate = 300
+
+// Ligne d'appel au vote des fichiers du dépôt : sans objet sur la page publique.
+const FEEDBACK_LINE = /\n*Cet article a-t-il été utile \?\s*$/
+
 // Centre d'aide public : accessible depuis un ordinateur (CDC M01, règle de gestion).
-export default function AidePublique() {
-  const { categories, questions } = readFaqIndex()
+export default async function AidePublique() {
+  const questions = await getHelpFaq()
   return (
     <SiteShell mainClassName="bg-[#F7F9FC]">
       <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
@@ -18,25 +24,22 @@ export default function AidePublique() {
         <p className="mt-2 text-night-700">Trouvez rapidement une réponse, ou écrivez-nous.</p>
 
         <div className="mt-8 space-y-8">
-          {categories.map(cat => {
-            const items = questions.filter(q => q.categoryKey === cat.key)
+          {FAQ_CATEGORIES.map(cat => {
+            const items = questions.filter(q => q.categorie === cat.key)
             if (!items.length) return null
             return (
               <section key={cat.key} aria-labelledby={`cat-${cat.key}`}>
                 <h2 id={`cat-${cat.key}`} className="text-xs font-bold uppercase tracking-wider text-night-500">{cat.label}</h2>
                 <div className="mt-3 divide-y divide-night-100 rounded-xl2 border border-night-100 bg-white">
-                  {items.map(q => {
-                    const md = readMarkdown(`faq/${q.slug}.md`)
-                    return (
+                  {items.map(q => (
                       <details key={q.slug} className="group px-5 py-4">
                         <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-semibold text-night-900 [&::-webkit-details-marker]:hidden">
                           {q.question}
                           <ChevronDown className="h-4 w-4 shrink-0 text-night-500 transition-transform group-open:rotate-180" aria-hidden />
                         </summary>
-                        <div className="mt-3 whitespace-pre-line text-sm leading-relaxed text-night-700">{md?.body}</div>
+                        <div className="mt-3 whitespace-pre-line text-sm leading-relaxed text-night-700">{q.reponse.replace(FEEDBACK_LINE, '').trim()}</div>
                       </details>
-                    )
-                  })}
+                  ))}
                 </div>
               </section>
             )

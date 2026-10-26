@@ -23,7 +23,11 @@ const CAT_RANK = new Map<string, number>(FAQ_CATEGORIES.map((c, i) => [c.key, i]
 
 async function published<K extends 'faq' | 'tutoriel' | 'conseil', T>(kind: K, fallback: () => T[], map: (r: ContentRecord<K>) => T): Promise<T[]> {
   try {
-    return (await listPublished(kind)).map(map)
+    const rows = await listPublished(kind)
+    // Tables encore vides (migration 0400 appliquée, import « Importer depuis le dépôt » pas encore fait) :
+    // on garde les contenus du dépôt plutôt qu'un centre d'aide vide. Conséquence assumée : dépublier
+    // (ou archiver) TOUS les éléments d'un type fait réapparaître ceux du dépôt : garder au moins un élément publié.
+    return rows.length ? rows.map(map) : fallback()
   } catch (e) {
     if (e instanceof PublicReadError) return fallback()
     throw e

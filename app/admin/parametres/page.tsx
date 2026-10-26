@@ -1,128 +1,63 @@
-'use client'
-import { useState } from 'react'
-import { Card, CardBody, CardHeader, Button, Input } from '@/components/ui'
-import { Save, Settings2 } from 'lucide-react'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import { CheckCircle2, CircleAlert } from 'lucide-react'
+import { pageAdminCtx } from '@/lib/contenus/api'
+import { getSettings } from '@/lib/admin/ops/parametres'
+import { DemoNotice, Note, OpsHeader, Panel, Pill, linkCls } from '@/components/admin/ops/ui'
 
-// TODO: Supabase service_role — persister dans une table `settings` (clé/valeur)
-// À brancher en V1.1 : lecture via createServiceClient(), écriture via Server Action
-type Quotas = {
-  gratuitStockageGo: number
-  gratuitAnalyseIA: number
-  premiumStockageGo: number
-  premiumAnalyseIA: number
-  prixMensuel: number
-  prixAnnuel: number
-}
+export const metadata: Metadata = { title: 'Paramètres' }
+export const dynamic = 'force-dynamic'
 
-const defaults: Quotas = {
-  gratuitStockageGo: 1,
-  gratuitAnalyseIA: 3,
-  premiumStockageGo: 20,
-  premiumAnalyseIA: 50,
-  prixMensuel: 7.9,
-  prixAnnuel: 79,
-}
-
-export default function ParametresPage() {
-  const [q, setQ] = useState<Quotas>(defaults)
-  const [saved, setSaved] = useState(false)
-
-  const update = (k: keyof Quotas, v: string) => {
-    setQ((prev) => ({ ...prev, [k]: Number(v) || 0 }))
-    setSaved(false)
-  }
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // TODO: Supabase service_role — UPSERT settings
-    setSaved(true)
-    setTimeout(() => setSaved(false), 2500)
-  }
-
+export default async function ParametresPage() {
+  const ctx = await pageAdminCtx()
+  const { groups, territoires, territoiresError } = await getSettings(ctx)
   return (
-    <div className="space-y-6">
-      <header>
-        <h1 className="font-display text-3xl text-night-900">Paramètres</h1>
-        <p className="text-sm text-night-600 mt-1">Quotas et tarifs modifiables à chaud, sans redéploiement.</p>
-      </header>
+    <div className="space-y-5">
+      <OpsHeader title="Paramètres" description="État réel du déploiement, en lecture seule. Aucun secret n’est affiché : seulement s’il est configuré ou non." />
+      <DemoNotice mode={ctx.mode}>Le déploiement de recette n’a pas de base de données : les intégrations apparaissent non configurées.</DemoNotice>
+      <Note>
+        Les formules, quotas et tarifs sont définis dans le code et dans Stripe, pas en base : les modifier passe par un déploiement
+        (et par le tableau de bord Stripe pour les prix facturés). Les réglages réellement stockés en base sont listés en bas de page.
+      </Note>
 
-      <form onSubmit={onSubmit} className="space-y-4">
-        <Card>
-          <CardHeader>
-            <h2 className="font-display text-lg text-night-900 flex items-center gap-2">
-              <Settings2 className="h-4 w-4 text-night-500" aria-hidden="true" /> Offre Gratuite
-            </h2>
-          </CardHeader>
-          <CardBody className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              type="number" min={0} step={0.5}
-              label="Stockage (Go)"
-              value={q.gratuitStockageGo}
-              onChange={(e) => update('gratuitStockageGo', e.target.value)}
-              hint="Volume maximum du coffre pour les comptes gratuits."
-            />
-            <Input
-              type="number" min={0} step={1}
-              label="Analyses IA / cycle"
-              value={q.gratuitAnalyseIA}
-              onChange={(e) => update('gratuitAnalyseIA', e.target.value)}
-              hint="Nombre d’analyses IA par cycle de 30 jours."
-            />
-          </CardBody>
-        </Card>
+      <div className="grid gap-5 lg:grid-cols-2">
+        {groups.map((g) => (
+          <Panel key={g.title} title={g.title}>
+            {g.description && <p className="-mt-1 mb-2 text-[13px] text-night-600">{g.description}</p>}
+            <dl className="divide-y divide-night-100 text-[14px]">
+              {g.items.map((it) => (
+                <div key={it.label} className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 py-2">
+                  <dt className="min-w-0 text-night-700">
+                    {it.label}
+                    {it.hint && <span className="block text-[12px] text-night-500">{it.hint}</span>}
+                  </dt>
+                  <dd className="text-right font-semibold text-night-900">
+                    {it.tone === 'ok' ? (
+                      <Pill tone="ok"><CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />{it.value}</Pill>
+                    ) : it.tone === 'warn' ? (
+                      <Pill tone="warn"><CircleAlert className="h-3.5 w-3.5" aria-hidden="true" />{it.value}</Pill>
+                    ) : it.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Panel>
+        ))}
+      </div>
 
-        <Card>
-          <CardHeader>
-            <h2 className="font-display text-lg text-night-900 flex items-center gap-2">
-              <Settings2 className="h-4 w-4 text-gold-400" aria-hidden="true" /> Offre Premium
-            </h2>
-          </CardHeader>
-          <CardBody className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              type="number" min={0} step={0.5}
-              label="Stockage (Go)"
-              value={q.premiumStockageGo}
-              onChange={(e) => update('premiumStockageGo', e.target.value)}
-            />
-            <Input
-              type="number" min={0} step={1}
-              label="Analyses IA / cycle"
-              value={q.premiumAnalyseIA}
-              onChange={(e) => update('premiumAnalyseIA', e.target.value)}
-            />
-          </CardBody>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <h2 className="font-display text-lg text-night-900">Tarifs Premium</h2>
-            <p className="text-xs text-night-500 mt-1">Les montants sont synchronisés avec Stripe au prochain déclenchement du webhook.</p>
-          </CardHeader>
-          <CardBody className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              type="number" min={0} step={0.1}
-              label="Prix mensuel (€)"
-              value={q.prixMensuel}
-              onChange={(e) => update('prixMensuel', e.target.value)}
-            />
-            <Input
-              type="number" min={0} step={1}
-              label="Prix annuel (€)"
-              value={q.prixAnnuel}
-              onChange={(e) => update('prixAnnuel', e.target.value)}
-            />
-          </CardBody>
-        </Card>
-
-        <div className="flex items-center justify-between gap-3">
-          <p role="status" aria-live="polite" className={`text-sm font-medium ${saved ? 'text-leaf-700' : 'text-transparent'}`}>
-            Paramètres enregistrés.
-          </p>
-          <Button type="submit" variant="primary">
-            <Save className="h-4 w-4" /> Enregistrer les modifications
-          </Button>
-        </div>
-      </form>
+      <Panel title="Réglages en base : territoires du Guide" actions={<Link className={`${linkCls} text-[13px]`} href="/admin/guides">Gérer dans Guides</Link>}>
+        {territoiresError ? (
+          <p className="text-[14px] text-alert-700">Territoires indisponibles (base injoignable).</p>
+        ) : territoires.length === 0 ? (
+          <p className="text-[14px] text-night-600">Aucun territoire.</p>
+        ) : (
+          <ul className="flex flex-wrap gap-2">
+            {territoires.map((t) => (
+              <li key={t.code}><Pill tone={t.disponible ? 'ok' : 'neutral'}>{t.nom}{t.disponible ? '' : ' (bientôt)'}</Pill></li>
+            ))}
+          </ul>
+        )}
+      </Panel>
     </div>
   )
 }

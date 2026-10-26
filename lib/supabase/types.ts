@@ -326,6 +326,8 @@ export type AuditLogRow = {
   user_agent: string | null
   metadata: Record<string, unknown>
   created_at: string
+  /** 0400 : auteur d'une action d'administration (user_id = personne concernée). */
+  actor_id?: string | null
 }
 
 export type HelpArticleRow = {
@@ -353,6 +355,10 @@ export type SupportTicketRow = {
   created_at: string
   updated_at: string
   closed_at: string | null
+  /** 0400 : catégorie (formulaires du centre d'aide) et dernière réponse. */
+  category: 'contact' | 'bug' | 'technique' | 'suggestion' | 'abus' | 'autre'
+  last_reply_at: string | null
+  last_reply_by: 'user' | 'admin' | null
 }
 
 // --- Database schema aggregate --------------------------------------

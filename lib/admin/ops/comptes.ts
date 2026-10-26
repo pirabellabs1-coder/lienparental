@@ -12,7 +12,7 @@ import { z } from 'zod'
 import { RepoError, type AdminCtx } from '@/lib/contenus/repo'
 import { csvCell } from '@/lib/admin/stats/csv'
 import { softDeleteAccount } from '@/lib/account/deletion'
-import { DEFAULT_TZ, addDaysToKey, wallTimeToIso } from '@/lib/tz'
+import { DEFAULT_TZ, addDaysToKey, dayKeyInTz, wallTimeToIso } from '@/lib/tz'
 import { demoAudit, opsDemo } from './demo'
 import { logAdminAction, logAdminFailure, rpc, serviceClient, type LiveCtx } from './rpc'
 import {
@@ -275,7 +275,7 @@ export async function deleteAccountAsAdmin(ctx: AdminCtx, id: string, confirmEma
 // --- Export CSV ------------------------------------------------------------------------------
 
 const yesNo = (b: boolean) => (b ? 'oui' : 'non')
-const dateFr = (iso: string | null) => (iso ? iso.slice(0, 10) : '')
+const dateFr = (iso: string | null) => (iso ? dayKeyInTz(iso, DEFAULT_TZ) : '')
 
 /**
  * Export minimisé : identifiant, e-mail (contact opérationnel), formule, statut, dates,

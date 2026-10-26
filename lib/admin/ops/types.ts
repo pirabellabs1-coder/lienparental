@@ -176,6 +176,7 @@ export const ACTION_LABEL: Record<string, string> = {
   'admin.account.force_logout': 'Déconnexion forcée',
   'admin.account.delete': 'Compte supprimé (administration)',
   'admin.account.export': 'Export CSV des comptes',
+  'admin.account.failed': 'Action sur un compte en échec',
   'admin.support.reply': 'Réponse au support',
   'admin.support.update': 'Ticket modifié',
   'admin.testimony.revoke': 'Lien de témoignage révoqué',

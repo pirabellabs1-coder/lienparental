@@ -181,17 +181,53 @@ export default function ConfidentialitePage() {
             </p>
           </section>
 
+          <section aria-labelledby="donnees-google">
+            <h2 id="donnees-google" className="font-display text-xl font-bold text-night-900">
+              Données reçues de Google
+            </h2>
+            <p className="mt-3">
+              Si vous choisissez « Continuer avec Google », Lien Parental reçoit de Google votre
+              nom, votre adresse e-mail, votre photo de profil et un identifiant de compte. Ces
+              informations servent uniquement à créer votre compte et à vous connecter.
+            </p>
+            <p className="mt-3">
+              Si vous activez la synchronisation avec Google Agenda, Lien Parental demande
+              l&apos;accès à un agenda « Lien Parental » qu&apos;il crée pour vous (ou, si vous le
+              choisissez, aux événements de votre agenda principal). Cet accès sert uniquement à
+              y copier, modifier ou supprimer les événements que vous créez dans Lien Parental.
+              Lien Parental ne lit pas vos autres événements, ne les conserve pas et ne les
+              utilise à aucune autre fin. Vous pouvez arrêter la synchronisation à tout moment
+              depuis les paramètres du calendrier ou depuis votre compte Google ; les jetons
+              d&apos;accès sont alors révoqués et supprimés.
+            </p>
+            <p className="mt-3">
+              L&apos;utilisation et le transfert vers toute autre application des informations
+              reçues des API Google respectent les{' '}
+              <a
+                href="https://developers.google.com/terms/api-services-user-data-policy"
+                className="font-semibold text-leaf-700 underline underline-offset-2"
+              >
+                règles relatives aux données utilisateur des services d&apos;API Google
+              </a>
+              , y compris les exigences d&apos;utilisation limitée (Limited Use). Ces données ne
+              sont ni vendues, ni utilisées pour de la publicité, ni pour entraîner des modèles
+              d&apos;intelligence artificielle, et aucune personne de l&apos;équipe ne les lit,
+              sauf demande de votre part, obligation légale ou nécessité de sécurité.
+            </p>
+          </section>
+
           <section>
             <h2 className="font-display text-xl font-bold text-night-900">
               Chiffrement et sécurité
             </h2>
             <p className="mt-3">
-              Les échanges sont chiffrés en transit via TLS 1.3. Les données
-              sensibles (coffre-fort, journal) sont chiffrées au repos à
-              l&apos;aide d&apos;AES-256. Les secrets d&apos;authentification
-              sont stockés sous forme de hachés dérivés (Argon2id). Les
-              sauvegardes sont elles-mêmes chiffrées et conservées sur un
-              périmètre distinct.
+              Les échanges sont chiffrés en transit (HTTPS/TLS). Les données sont stockées
+              chiffrées au repos par notre hébergeur de base de données (AES-256), et les
+              informations médicales des enfants sont en plus chiffrées par l&apos;application
+              elle-même (AES-256-GCM). Les mots de passe sont hachés par notre service
+              d&apos;authentification (bcrypt) et le code du coffre-fort est haché (scrypt) : ils
+              ne sont jamais stockés en clair. Les jetons d&apos;accès Google sont chiffrés.
+              Les sauvegardes de la base sont chiffrées.
             </p>
           </section>
 

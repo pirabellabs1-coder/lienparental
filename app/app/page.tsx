@@ -13,7 +13,8 @@ import { UpcomingEvents } from '@/components/dashboard/UpcomingEvents'
 import { TestimonyRequestCard } from '@/components/dashboard/TestimonyRequestCard'
 import { DailyTip } from '@/components/dashboard/DailyTip'
 import { useRecentVaultDocs, useUpcomingEvents } from '@/components/dashboard/useDashboardData'
-import { mockUser, mockModels, mockTips } from '@/lib/mock-data'
+import { mockUser, mockModels } from '@/lib/mock-data'
+import { useDailyTips } from '@/lib/aide/client'
 import { toModelCard, usePublishedTemplates } from '@/lib/modeles/client'
 import { useAccountProfile } from '@/lib/auth/browser'
 import { LIVE } from '@/lib/data/core'
@@ -39,6 +40,7 @@ export default function DashboardPage() {
   const { state: vault } = useVaultLockState()
   const events = useUpcomingEvents()
   const recent = useRecentVaultDocs(vault === 'open')
+  const tips = useDailyTips()
   // Catalogue intégré (générique, non personnel) tant qu'aucun modèle n'est publié.
   const models = publishedTemplates.length ? publishedTemplates.map(toModelCard) : templatesStatus === 'loading' && LIVE ? [] : mockModels
 
@@ -160,10 +162,13 @@ export default function DashboardPage() {
       <div className="space-y-6 lg:grid lg:grid-cols-2 lg:items-end lg:gap-6 lg:space-y-0">
         <TestimonyRequestCard />
 
-        <section aria-labelledby="tip-title">
-          <SectionTitle id="tip-title">Conseil du jour</SectionTitle>
-          <DailyTip tips={mockTips} />
-        </section>
+        {/* Contenu éditorial non essentiel : section omise si indisponible ou vide. */}
+        {(tips.status === 'loading' || tips.data.length > 0) && (
+          <section aria-labelledby="tip-title">
+            <SectionTitle id="tip-title">Conseil du jour</SectionTitle>
+            {tips.status === 'loading' ? <SectionPlaceholder label="Chargement du conseil du jour" /> : <DailyTip tips={tips.data} />}
+          </section>
+        )}
       </div>
     </div>
   )
