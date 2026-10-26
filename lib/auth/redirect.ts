@@ -19,8 +19,10 @@ export function safeNext(value: string | null | undefined, fallback: string): st
  * être définie et figurer dans les « Redirect URLs » Supabase.
  */
 export function appUrl(): string {
+  // Dans le navigateur, on revient toujours sur l'origine courante : le vérificateur PKCE de
+  // Supabase est stocké dans un cookie de cette origine (vercel.app, domaine final, localhost…).
+  if (typeof window !== 'undefined') return window.location.origin
   const env = process.env.NEXT_PUBLIC_APP_URL?.replace(/\/+$/, '')
   if (env) return env
-  if (typeof window !== 'undefined') return window.location.origin
   return 'http://localhost:3000'
 }
