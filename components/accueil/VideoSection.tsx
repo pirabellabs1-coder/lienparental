@@ -17,7 +17,8 @@ const MESSAGING = [
   { icon: Smile, key: 'msgRespect' },
 ] as const
 
-export async function VideoSection({ hasVideo }: { hasVideo: boolean }) {
+// poster : vignette de la vidéo dans la langue courante (fournie par app/page.tsx), repli sur le poster français.
+export async function VideoSection({ hasVideo, poster = '/video/presentation-poster.jpg' }: { hasVideo: boolean; poster?: string }) {
   const t = await getTranslations('video')
   return (
     <section aria-labelledby="video-section-title" className={SECTION}>
@@ -29,7 +30,7 @@ export async function VideoSection({ hasVideo }: { hasVideo: boolean }) {
             label={hasVideo ? t('playVideo') : t('playImages')}
             className="group relative block aspect-[4/3] w-full overflow-hidden rounded-3xl bg-night-100 shadow-[0_30px_60px_-40px_rgba(11,45,91,0.6)] md:col-span-2 md:aspect-video lg:col-span-1 lg:aspect-auto lg:min-h-[340px]"
           >
-            <Image src={hasVideo ? '/video/presentation-poster.jpg' : '/images/home/moment-partage.jpg'} alt="" fill sizes="(min-width:1024px) 460px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
+            <Image src={hasVideo ? poster :'/images/home/moment-partage.jpg'} alt="" fill sizes="(min-width:1024px) 460px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
             <span aria-hidden className="absolute inset-0 bg-night-950/30" />
             <span aria-hidden className="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-leaf-600 shadow-xl transition-transform duration-200 group-hover:scale-105 sm:h-[72px] sm:w-[72px]">
               <Play className="h-6 w-6 translate-x-0.5" fill="currentColor" />

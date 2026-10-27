@@ -6,20 +6,27 @@ import { ChevronLeft, ChevronRight, Play, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
 // Fenêtre « Découvrez Lien Parental en vidéo ».
-// - Si public/video/presentation.mp4 existe (détecté côté serveur par app/page.tsx) : lecture avec sous-titres.
-// - Sinon : diaporama des vraies captures de l'application, avec la mention « Vidéo bientôt disponible ».
+// - Si la vidéo de la langue courante existe (détectée côté serveur par app/page.tsx) : lecture, voix off seule (pas de sous-titres).
+// - Sinon : diaporama des vraies captures de l'application (localisées), avec la mention « Vidéo bientôt disponible ».
 // Ouverture : tout bouton <VideoTrigger> de la page (événement « home:video »). <dialog> natif : focus piégé, Échap, retour du focus.
 
 const EVENT = 'home:video'
 
+/** Vidéo de présentation de la langue courante (chemins publics). */
+export type PresentationVideo = { src: string; poster: string }
+
 const SLIDES = [
-  { src: '/images/app/mobile-accueil.png', key: 'accueil' },
-  { src: '/images/app/mobile-journal.png', key: 'journal' },
-  { src: '/images/app/mobile-calendrier.png', key: 'calendrier' },
-  { src: '/images/app/mobile-coffre.png', key: 'coffre' },
-  { src: '/images/app/mobile-temoignages.png', key: 'temoignages' },
-  { src: '/images/app/mobile-coach.png', key: 'coach' },
+  { name: 'mobile-accueil', key: 'accueil' },
+  { name: 'mobile-journal', key: 'journal' },
+  { name: 'mobile-calendrier', key: 'calendrier' },
+  { name: 'mobile-coffre', key: 'coffre' },
+  { name: 'mobile-temoignages', key: 'temoignages' },
+  { name: 'mobile-coach', key: 'coach' },
 ] as const
+
+/** Capture de l'app dans la langue : /images/app/<nom>.png en français, /images/app/<locale>/<nom>.png sinon. */
+const slideSrc = (name: string, locale: string) =>
+  locale === 'en' || locale === 'pt' ? `/images/app/${locale}/${name}.png` : `/images/app/${name}.png`
 
 export function VideoTrigger({ children, className, label }: { children: React.ReactNode; className?: string; label?: string }) {
   return (
@@ -35,7 +42,7 @@ export function VideoTrigger({ children, className, label }: { children: React.R
   )
 }
 
-export function VideoDialog({ hasVideo, hasCaptions }: { hasVideo: boolean; hasCaptions: boolean }) {
+export function VideoDialog({ video: media }: { video: PresentationVideo | null }) {
   const ref = useRef<HTMLDialogElement>(null)
   const opener = useRef<HTMLElement | null>(null)
   const video = useRef<HTMLVideoElement>(null)
@@ -83,15 +90,14 @@ export function VideoDialog({ hasVideo, hasCaptions }: { hasVideo: boolean; hasC
         </button>
       </div>
 
-      {hasVideo ? (
+      {media ? (
         <div className="p-4 sm:p-6">
-          {/* preload="none" : rien n'est téléchargé tant que la fenêtre n'est pas ouverte et la lecture lancée. */}
+          {/* Rendu seulement à l'ouverture : rien n'est téléchargé avant (preload="metadata" ensuite). */}
           {open && (
-            <video ref={video} controls preload="metadata" playsInline poster="/video/presentation-poster.jpg" className="aspect-video w-full rounded-2xl bg-night-950">
-              <source src="/video/presentation.mp4" type="video/mp4" />
-              {hasCaptions && <track kind="captions" src="/video/presentation.fr.vtt" srcLang="fr" label="Français" default={locale === 'fr'} />}
+            <video key={media.src} ref={video} controls preload="metadata" playsInline poster={media.poster} className="aspect-video w-full rounded-2xl bg-night-950">
+              <source src={media.src} type="video/mp4" />
               {t('unsupported')}{' '}
-              <a href="/video/presentation.mp4">{t('download')}</a>.
+              <a href={media.src}>{t('download')}</a>.
             </video>
           )}
         </div>
@@ -99,7 +105,7 @@ export function VideoDialog({ hasVideo, hasCaptions }: { hasVideo: boolean; hasC
         <div className="grid gap-6 p-5 sm:p-7 md:grid-cols-[minmax(0,260px)_1fr] md:items-center md:gap-10">
           <div className="mx-auto w-[150px] rounded-[2.2rem] bg-night-950 p-[6px] sm:w-[200px] shadow-[0_30px_60px_-30px_rgba(11,45,91,0.6)] md:w-full md:max-w-[260px]">
             <div className="relative aspect-[390/844] overflow-hidden rounded-[1.8rem] bg-white">
-              {open && <Image key={slide.src} src={slide.src} alt={t('alt', { title: slideTitle(slide.key) })} fill sizes="260px" className="home-rise object-cover object-top" />}
+              {open && <Image key={slide.name} src={slideSrc(slide.name, locale)} alt={t('alt', { title: slideTitle(slide.key) })} fill sizes="260px" className="home-rise object-cover object-top" />}
             </div>
           </div>
           <div>
@@ -121,7 +127,7 @@ export function VideoDialog({ hasVideo, hasCaptions }: { hasVideo: boolean; hasC
               </button>
               <ol className="ml-2 flex gap-1.5" aria-label={t('list')}>
                 {SLIDES.map((s, n) => (
-                  <li key={s.src}>
+                  <li key={s.name}>
                     <button
                       type="button"
                       onClick={() => setI(n)}

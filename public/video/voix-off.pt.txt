@@ -1,0 +1,54 @@
+LIEN PARENTAL - VÍDEO DE APRESENTAÇÃO (90 s) - ROTEIRO DA LOCUÇÃO EM PORTUGUÊS (BRASIL)
+======================================================================================
+
+Vídeo: public/video/presentation.pt.mp4 (1920x1080, 30 fps, 90,0 s, somente locução, sem legendas)
+Voz: "Bruna da Costa" (ElevenLabs voice id AKXBn24T1f9tvTDnWzWT, português do Brasil, sotaque paulista neutro),
+modelo eleven_multilingual_v2. Mixagem normalizada (loudnorm, alvo -14 LUFS, pico real -1,5 dBTP) como a faixa francesa.
+Textos na tela: anim.html?lang=pt (projeto de vídeo no scratchpad), capturas do app em public/images/app/pt/.
+
+Direção de voz
+- Voz feminina nativa brasileira, calorosa e serena, sorridente, nunca gritada.
+- Cada frase começa no tempo indicado e termina antes do fim do seu intervalo (o texto na tela muda depois).
+- "lienparental.fr" é lido "lien parental ponto f r".
+- Glossário: Diário, Cofre, Coach com IA, Depoimentos, Guia parental, Google Agenda.
+
+Tempos reais das tomadas gravadas: [início - fim da fala] / limite do intervalo
+-----------------------------------------------------------------
+[00:00.50 - 00:04.30] / 00:05.0   1. Abertura, "Separados. Sempre pais."
+Quando os pais se separam, tudo o que envolve a criança se espalha.
+
+[00:05.50 - 00:07.90] / 00:09.0   1. Abertura, os itens se espalham
+Papéis, mensagens, consultas...
+
+[00:09.30 - 00:11.20] / 00:12.5   1. Abertura, tudo se organiza no celular
+E se tudo ficasse em um só lugar?
+
+[00:13.15 - 00:19.39] / 00:19.9   2. Logo e módulos do app
+Conheça o Lien Parental: organização, conversas, documentos e trâmites, num só lugar.
+
+[00:20.50 - 00:27.26] / 00:28.5   3. Diário e despesas
+O Diário guarda um registro datado do dia a dia. As despesas e os pagamentos também estão lá, com os comprovantes.
+
+[00:29.50 - 00:36.41] / 00:36.5   4. Calendário e Google Agenda
+O calendário acompanha as consultas, a escola e a saúde de cada criança. Ele sincroniza com o Google Agenda.
+
+[00:37.30 - 00:43.56] / 00:44.5   5. Cofre (código ou digital)
+Decisões, atestados, faturas: o Cofre protege tudo com um código ou com a sua digital.
+
+[00:45.50 - 00:51.89] / 00:53.5   6. Coach com IA (mensagem tensa, resposta tranquila)
+Uma mensagem tensa? O Coach com IA ajuda você a responder com calma. Ele não dá orientação jurídica.
+
+[00:54.50 - 00:59.22] / 01:00.5   7. Depoimentos com data e hora
+Pessoas próximas podem enviar um depoimento com data e hora, sem criar conta.
+
+[01:01.50 - 01:06.63] / 01:08.5   8. Guia parental (checklist)
+O Guia parental explica seus trâmites passo a passo, com a lista de documentos a levar.
+
+[01:09.50 - 01:13.48] / 01:15.5   9. Pais vinculados
+Convide o outro pai ou mãe e compartilhe o que diz respeito à criança.
+
+[01:16.50 - 01:21.95] / 01:22.5   10. Instalação sem loja de aplicativos (web, iPhone, Android)
+No computador, iPhone ou Android, ele se instala sem passar por loja de aplicativos.
+
+[01:22.90 - 01:28.72] / 01:29.8   11. Encerramento
+Informar, acompanhar, preservar. Comece grátis em lien parental ponto f r.

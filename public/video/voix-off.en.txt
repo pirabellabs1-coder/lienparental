@@ -1,0 +1,54 @@
+LIEN PARENTAL - PRESENTATION VIDEO (90 s) - ENGLISH VOICE-OVER SCRIPT
+=====================================================================
+
+Video: public/video/presentation.en.mp4 (1920x1080, 30 fps, 90.0 s, voice-over only, no subtitles)
+Voice: "Sarah - Warm & Conversational" (ElevenLabs voice id h1Q2hoJVsQ8dXy9QYQN5, American English),
+model eleven_multilingual_v2. Mix normalised (loudnorm, target -14 LUFS, true peak -1.5 dBTP) like the French track.
+On-screen texts: anim.html?lang=en (scratchpad video project), app screenshots from public/images/app/en/.
+
+Voice direction
+- Native English female voice, warm and calm, smiling, never shouted.
+- Each line starts at the given time and must end before its slot ends (the screen text changes afterwards).
+- "lienparental.fr" is read "lien parental dot f r".
+- Glossary: Journal, Vault, AI Coach, Testimonials, Parenting guide, Google Calendar.
+
+Actual timing of the recorded takes: [start - end of speech] / slot limit
+-----------------------------------------------------------------
+[00:00.50 - 00:03.84] / 00:05.0   1. Intro, "Separated. Still parents."
+When parents separate, everything about the child gets scattered.
+
+[00:05.50 - 00:07.28] / 00:09.0   1. Intro, items fly around
+Papers, messages, appointments...
+
+[00:09.30 - 00:11.62] / 00:12.5   1. Intro, everything tidies into the phone
+What if it all came together in one place?
+
+[00:13.15 - 00:18.60] / 00:19.9   2. Logo and app modules
+Welcome to Lien Parental: organization, messages, documents and paperwork, in one place.
+
+[00:20.50 - 00:26.16] / 00:28.5   3. Journal and expenses
+The Journal keeps a dated record of everyday life. Expenses and payments are there too, with their receipts.
+
+[00:29.50 - 00:34.26] / 00:36.5   4. Calendar and Google Calendar
+The calendar tracks each child's appointments, school and health. It syncs with Google Calendar.
+
+[00:37.30 - 00:43.48] / 00:44.5   5. Vault (code or fingerprint)
+Rulings, certificates, invoices: the Vault keeps them safe, protected by a code or your fingerprint.
+
+[00:45.50 - 00:50.33] / 00:53.5   6. AI Coach (tense message, calm reply)
+A tense message? The AI Coach helps you reply calmly. It does not give legal advice.
+
+[00:54.50 - 00:58.70] / 01:00.5   7. Time-stamped testimonies
+Your loved ones can send you a time-stamped testimony, without creating an account.
+
+[01:01.50 - 01:06.44] / 01:08.5   8. Parenting guide (checklist)
+The Parenting guide walks you through your procedures step by step, with the list of documents to bring.
+
+[01:09.50 - 01:13.00] / 01:15.5   9. Linked parents
+Invite the other parent to join you, and share what concerns your child.
+
+[01:16.50 - 01:20.85] / 01:22.5   10. Installation without an app store (web, iPhone, Android)
+On a computer, iPhone or Android, it installs without going through an app store.
+
+[01:22.90 - 01:28.33] / 01:29.8   11. Closing
+Lien Parental: inform, support, protect. Start for free at lien parental dot f r.

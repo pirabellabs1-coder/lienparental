@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { cookies } from 'next/headers'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
@@ -9,7 +9,8 @@ import { Hero } from '@/components/accueil/Hero'
 import { ModuleBar } from '@/components/accueil/ModuleBar'
 import { Partners } from '@/components/accueil/Partners'
 import { VideoSection } from '@/components/accueil/VideoSection'
-import { VideoDialog } from '@/components/accueil/VideoDialog'
+import { VideoDialog, type PresentationVideo } from '@/components/accueil/VideoDialog'
+import { isLocale, type Locale } from '@/lib/i18n/config'
 import { WhyChoose } from '@/components/accueil/WhyChoose'
 import { Messaging } from '@/components/accueil/Messaging'
 import { Features } from '@/components/accueil/Features'
@@ -27,11 +28,22 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t('homeTitle'), description: t('homeDescription') }
 }
 
-// Vidéo de présentation : déposer public/video/presentation.mp4 (+ presentation.fr.vtt pour les sous-titres).
-// Détection au rendu serveur : sans fichier, la fenêtre affiche un diaporama de vraies captures de l’app.
-const PUBLIC = join(process.cwd(), 'public', 'video')
-const hasVideo = existsSync(join(PUBLIC, 'presentation.mp4'))
-const hasCaptions = existsSync(join(PUBLIC, 'presentation.fr.vtt'))
+// Vidéo de présentation, une par langue (voix off seule, pas de sous-titres) :
+// fr = public/video/presentation.mp4, en/pt = public/video/presentation.<locale>.mp4 (+ poster du même nom).
+// Détection au rendu serveur : sans fichier pour la langue, la fenêtre affiche un diaporama de vraies captures de l’app.
+const VIDEOS: Record<Locale, PresentationVideo> = {
+  fr: { src: '/video/presentation.mp4', poster: '/video/presentation-poster.jpg' },
+  en: { src: '/video/presentation.en.mp4', poster: '/video/presentation-poster.en.jpg' },
+  pt: { src: '/video/presentation.pt.mp4', poster: '/video/presentation-poster.pt.jpg' },
+}
+const publicFile = (url: string) => existsSync(join(process.cwd(), 'public', ...url.split('/').filter(Boolean)))
+
+function presentationVideo(locale: string): PresentationVideo | null {
+  const video = VIDEOS[isLocale(locale) ? locale : 'fr']
+  if (!publicFile(video.src)) return null
+  // Poster localisé manquant : repli sur le poster français plutôt qu'une vignette vide.
+  return publicFile(video.poster) ? video : { ...video, poster: VIDEOS.fr.poster }
+}
 
 /**
  * Présence d'un cookie de session (démo ou Supabase), sans appel réseau : sert seulement à choisir la cible
@@ -44,6 +56,7 @@ async function hasSessionCookie(): Promise<boolean> {
 
 export default async function HomePage() {
   const signedIn = await hasSessionCookie()
+  const video = presentationVideo(await getLocale())
   // Ordre de la maquette du client ; en-tête et pied de page partagés avec les autres pages publiques (SiteShell).
   return (
     <SiteShell className="home">
@@ -51,7 +64,7 @@ export default async function HomePage() {
       <Hero />
       <div className="-mt-4 lg:-mt-6"><ModuleBar /></div>
       <Partners />
-      <VideoSection hasVideo={hasVideo} />
+      <VideoSection hasVideo={!!video} poster={video?.poster} />
       <WhyChoose />
       <Messaging />
       <Guide />
@@ -61,7 +74,7 @@ export default async function HomePage() {
       <Testimonials />
       <PricingFaq signedIn={signedIn} />
       <FinalBanner />
-      <VideoDialog hasVideo={hasVideo} hasCaptions={hasCaptions} />
+      <VideoDialog video={video} />
     </SiteShell>
   )
 }
