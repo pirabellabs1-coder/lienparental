@@ -28,7 +28,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   }
 
   return (
-    <div role="group" aria-label={t('label')} className={cn('flex items-center gap-2', className)}>
+    <div role="group" aria-label={t('label')} className={cn('flex items-center gap-2.5', className)}>
       {locales.map((loc) => {
         const meta = LOCALE_META[loc]
         const isActive = loc === active
@@ -40,7 +40,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
             disabled={pending}
             aria-pressed={isActive}
             aria-label={isActive ? t('current', { name: meta.native }) : t('switchTo', { name: meta.native })}
-            className="group flex flex-col items-center gap-0.5 rounded-lg px-1 py-0.5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 disabled:cursor-wait"
+            className="group flex flex-col items-center gap-[7px] rounded-lg px-1 py-0.5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 disabled:cursor-wait"
           >
             {/* Pastille compacte (plus petite que le logo) : contour vert si sélectionnée, gris léger sinon. */}
             <span className={cn(
