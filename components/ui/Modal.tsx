@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 type Props = {
@@ -19,6 +20,7 @@ type Props = {
 const FOCUSABLE = 'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])'
 
 export function Modal({ open, onClose, title, description, children, footer, closeOnBackdrop = true, size = 'md', className, initialFocusRef }: Props) {
+  const t = useTranslations('account.ui.modal')
   const dialogRef = useRef<HTMLDivElement>(null)
   const previousActive = useRef<HTMLElement | null>(null)
   const titleId = useId()
@@ -99,7 +101,7 @@ export function Modal({ open, onClose, title, description, children, footer, clo
             <button
               type="button"
               onClick={onClose}
-              aria-label="Fermer"
+              aria-label={t('close')}
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-night-500 hover:bg-night-50 dark:hover:bg-night-800 focus-visible:outline-none"
             >
               <X className="h-5 w-5" aria-hidden="true" />

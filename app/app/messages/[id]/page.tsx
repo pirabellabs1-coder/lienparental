@@ -1,6 +1,7 @@
 'use client'
 
 import { Fragment, use, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Archive, Info, Lock, MessageCircle } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
@@ -9,7 +10,9 @@ import { Composer } from '@/components/messages/Composer'
 import { InfoSheet } from '@/components/messages/InfoSheet'
 import { MessageBubble } from '@/components/messages/MessageBubble'
 import { ToneCheckSheet } from '@/components/messages/ToneCheckSheet'
-import { dayKey, dayLabel } from '@/components/messages/format'
+import { dayKey } from '@/components/messages/format'
+import { useMessagesFormat } from '@/components/messages/useMessagesFormat'
+import type { ConversationPdfLabels } from '@/components/messages/conversationPdf'
 import { analyzeTone, TONE_THRESHOLD, type ToneAnalysis } from '@/components/messages/toneCheck'
 import type { VoiceClip } from '@/components/messages/useVoiceRecorder'
 import { FolderPickerSheet } from '@/components/coffre/FolderSheets'
@@ -19,8 +22,8 @@ import {
   type FolderShare, type VaultFolder, type VaultSettings,
 } from '@/lib/data/vault-folders'
 import {
-  DEFAULT_VAULT_CATEGORY, conversationLabel, displayName, getConversation, getMe, listMessages, markConversationRead,
-  participantsLabel, saveToVault, sendMessage, setConversationArchived, subscribeToConversation, syncVault, validateAttachment,
+  ALLOWED_ATTACHMENT_MIME, DEFAULT_VAULT_CATEGORY, MAX_ATTACHMENT_BYTES, getConversation, getMe, listMessages, markConversationRead,
+  saveToVault, sendMessage, setConversationArchived, subscribeToConversation, syncVault, validateAttachment,
   type ConversationSummary, type Message, type Participant, type VaultLink,
 } from '@/lib/messages'
 
@@ -39,6 +42,10 @@ function scrollToEnd(smooth: boolean) {
 // activé dans les réglages du coffre), vérification du ton (Coach IA), export PDF.
 export default function ConversationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id: rawId } = use(params)
+  const t = useTranslations('messaging.conversation')
+  const tm = useTranslations('messaging')
+  const fmt = useMessagesFormat()
+  const { conversationLabel, displayName, participantsLabel, dayLabel } = fmt
   const conversationId = decodeURIComponent(rawId)
 
   const [me, setMe] = useState<Participant | null>(null)
@@ -134,9 +141,9 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
   const nameOf = useCallback(
     (id: string) => {
       const p = others.find((x) => x.id === id)
-      return p ? displayName(p) : 'Autre parent'
+      return p ? displayName(p) : tm('format.otherParent')
     },
-    [others],
+    [others, displayName, tm],
   )
 
   // Temps réel : nouveaux messages et accusés de lecture.
@@ -155,12 +162,12 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
         return list
       })
       if (type === 'insert' && message.senderId !== me.id) {
-        announce(`Nouveau message de ${nameOf(message.senderId)}`)
+        announce(t('newMessageFrom', { name: nameOf(message.senderId) }))
         if (document.visibilityState === 'visible') void markConversationRead(conversationId, me.id)
         if (message.attachment) void refreshVault()
       }
     })
-  }, [status, me, conversationId, announce, nameOf, refreshVault])
+  }, [status, me, conversationId, announce, nameOf, refreshVault, t])
 
   // Contenu chargé après coup (aperçus d'images, mentions « Dans le coffre-fort ») :
   // si l'on était en bas de la conversation, on y reste.
@@ -195,7 +202,14 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
     setError(null)
     if (f) {
       const err = validateAttachment(f)
-      if (err) { setError(err); return }
+      if (err) {
+        // Même contrôle que validateAttachment, message dans la langue de l'utilisateur.
+        const key = !(ALLOWED_ATTACHMENT_MIME as readonly string[]).includes(f.type) ? 'format'
+          : f.size > MAX_ATTACHMENT_BYTES ? 'tooBig'
+            : f.size === 0 ? 'empty' : null
+        setError(key ? tm(`attachmentErrors.${key}`) : err)
+        return
+      }
     }
     setFile(f)
   }
@@ -219,9 +233,9 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
       setText('')
       setFile(null)
       setVaultCategory(DEFAULT_VAULT_CATEGORY)
-      announce(attachment && autoVault ? `Message envoyé. Pièce jointe ajoutée au coffre-fort (${category}).` : 'Message envoyé')
+      announce(attachment && autoVault ? t('sentWithVault', { category }) : t('sent'))
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Le message n'a pas pu être envoyé. Réessayez.")
+      setError(err instanceof Error ? err.message : t('sendFailed'))
     } finally {
       setBusy('idle')
       textareaRef.current?.focus()
@@ -239,10 +253,10 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
       const sent = await sendMessage({ me, conversationId }, '', f, { audioDurationMs: clip.durationMs, vaultCategory: category })
       afterSend(sent, category)
       setVaultCategory(DEFAULT_VAULT_CATEGORY)
-      announce(autoVault ? `Note vocale envoyée et ajoutée au coffre-fort (${category}).` : 'Note vocale envoyée')
+      announce(autoVault ? t('voiceSentWithVault', { category }) : t('voiceSent'))
       return true
     } catch (err) {
-      setError(err instanceof Error ? err.message : "La note vocale n'a pas pu être envoyée. Réessayez.")
+      setError(err instanceof Error ? err.message : t('voiceFailed'))
       return false
     } finally {
       setBusy('idle')
@@ -269,15 +283,37 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
     setExporting(true)
     try {
       const { renderConversationPdf, downloadBlob } = await import('@/components/messages/conversationPdf')
-      const blob = await renderConversationPdf({ me, participants: conv.participants, title: conv.title, messages })
+      const labels: ConversationPdfLabels = {
+        noMessages: tm('pdf.noMessages'),
+        dateTime: fmt.numericStamp,
+        displayName: fmt.displayName,
+        participantsLabel: fmt.participantsLabel,
+        otherParent: tm('pdf.otherParent'),
+        voiceNote: (duration) => tm('pdf.voiceNote', { duration }),
+        attachment: (name) => tm('pdf.attachment', { name }),
+        readOn: (date) => tm('pdf.readOn', { date }),
+        docTitle: (meName, othersNames) => tm('pdf.docTitle', { me: meName, others: othersNames }),
+        header: tm('pdf.header'),
+        footer: (date) => tm('pdf.footer', { date }),
+        eyebrow: tm('pdf.eyebrow'),
+        titleWith: (names) => tm('pdf.titleWith', { names }),
+        topic: tm('pdf.topic'),
+        participants: tm('pdf.participants'),
+        count: tm('pdf.count'),
+        period: tm('pdf.period'),
+        periodValue: (from, to) => tm('pdf.periodValue', { from, to }),
+        generated: tm('pdf.generated'),
+        notice: tm('pdf.notice'),
+      }
+      const blob = await renderConversationPdf({ me, participants: conv.participants, title: conv.title, messages, labels })
       const stamp = new Date().toISOString().slice(0, 10)
       const slug = (conv.title ?? conv.participants.map((p) => p.prenom).join('-'))
         .normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'conversation'
       downloadBlob(blob, `Conversation-${slug}-${stamp}.pdf`)
-      announce('Conversation exportée en PDF')
+      announce(t('exported'))
       setInfoOpen(false)
     } catch {
-      announce("L'export PDF a échoué. Réessayez.")
+      announce(t('exportFailed'))
     } finally {
       setExporting(false)
     }
@@ -289,9 +325,9 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
     try {
       await setConversationArchived(conv.id, !conv.archived)
       setConv({ ...conv, archived: !conv.archived })
-      announce(conv.archived ? 'Conversation ressortie des archives' : 'Conversation archivée')
+      announce(conv.archived ? t('unarchived') : t('archived'))
     } catch (err) {
-      announce(err instanceof Error ? err.message : "L'action n'a pas abouti. Réessayez.")
+      announce(err instanceof Error ? err.message : t('actionFailed'))
     } finally {
       setArchiving(false)
     }
@@ -302,11 +338,11 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
   if (status === 'error' || status === 'notfound') {
     return (
       <>
-        <TopBar title="Conversation" showBack backHref="/app/messages" showBell={false} />
+        <TopBar title={t('title')} showBack backHref="/app/messages" showBell={false} />
         {status === 'notfound' ? (
-          <ErrorState compact title="Conversation introuvable" description="Elle n'existe pas ou vous n'y participez pas." primary={{ label: 'Retour aux messages', href: '/app/messages' }} />
+          <ErrorState compact title={t('notFoundTitle')} description={t('notFoundDescription')} primary={{ label: t('backToMessages'), href: '/app/messages' }} />
         ) : (
-          <ErrorState compact title="Conversation indisponible" description="Vérifiez votre connexion puis réessayez." primary={{ label: 'Réessayer', onClick: () => void load() }} secondary={{ label: 'Retour aux messages', href: '/app/messages' }} />
+          <ErrorState compact title={t('errorTitle')} description={t('errorDescription')} primary={{ label: t('retry'), onClick: () => void load() }} secondary={{ label: t('backToMessages'), href: '/app/messages' }} />
         )}
       </>
     )
@@ -315,20 +351,20 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
   if (status === 'loading' || !me || !conv || !messages) {
     return (
       <>
-        <TopBar title="Conversation" showBack backHref="/app/messages" showBell={false} />
-        <LoadingState compact title="Chargement de la conversation" description="" />
+        <TopBar title={t('title')} showBack backHref="/app/messages" showBell={false} />
+        <LoadingState compact title={t('loading')} description="" />
       </>
     )
   }
 
   const group = others.length > 1
-  const recipients = others.length === 1 ? others[0].prenom || displayName(others[0]) : 'chaque participant'
+  const recipients = others.length === 1 ? others[0].prenom || displayName(others[0]) : t('everyParticipant')
 
   return (
     <>
       <TopBar
         title={conversationLabel(conv)}
-        subtitle={conv.title ? `Avec ${participantsLabel(others)}` : others.length === 1 ? 'Parent lié' : `${others.length + 1} participants`}
+        subtitle={conv.title ? t('with', { names: participantsLabel(others) }) : others.length === 1 ? t('linkedParent') : t('participants', { count: others.length + 1 })}
         showBack
         backHref="/app/messages"
         showBell={false}
@@ -337,7 +373,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
           <button
             type="button"
             onClick={() => setInfoOpen(true)}
-            aria-label="Informations, archivage et export de la conversation"
+            aria-label={t('infoButton')}
             aria-haspopup="dialog"
             className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
           >
@@ -349,12 +385,12 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
       <div className="flex w-full flex-col px-5 pt-3 lg:px-6">
         <p className="mx-auto mb-3 inline-flex max-w-md items-center gap-2 rounded-full bg-night-50 px-3 py-1.5 text-center text-[11px] font-semibold text-night-700">
           <Lock className="h-3.5 w-3.5 shrink-0 text-leaf-600" aria-hidden="true" />
-          Messages horodatés, ni modifiables ni supprimables
+          {t('immutableBanner')}
         </p>
         {conv.archived && (
           <p className="mx-auto mb-3 inline-flex max-w-md items-center gap-2 rounded-xl bg-night-50 px-3 py-2 text-[12px] text-night-800">
             <Archive className="h-4 w-4 shrink-0" aria-hidden="true" />
-            Conversation archivée. Vous pouvez toujours écrire, ou la ressortir des archives depuis le bouton Informations.
+            {t('archivedBanner')}
           </p>
         )}
 
@@ -363,13 +399,13 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
             <span aria-hidden="true" className="grid h-16 w-16 place-items-center rounded-full bg-leaf-50 text-leaf-600">
               <MessageCircle className="h-7 w-7" />
             </span>
-            <h2 className="mt-4 text-[15px] font-bold text-night-900">Aucun message pour le moment</h2>
+            <h2 className="mt-4 text-[15px] font-bold text-night-900">{t('emptyTitle')}</h2>
             <p className="mt-1 text-[13px] text-night-600">
-              {conv.title ? `Lancez la discussion « ${conv.title} »` : `Écrivez à ${recipients}`} : un message court et factuel facilite l&apos;échange.
+              {t('emptyHint', { lead: conv.title ? t('emptyStartTopic', { title: conv.title }) : t('emptyWriteTo', { name: recipients }) })}
             </p>
           </div>
         ) : (
-          <ol ref={listRef} aria-label={`Messages, ${conversationLabel(conv)}`} className="space-y-3 pb-4">
+          <ol ref={listRef} aria-label={t('listLabel', { label: conversationLabel(conv) })} className="space-y-3 pb-4">
             {messages.map((m, i) => {
               const newDay = i === 0 || dayKey(messages[i - 1].createdAt) !== dayKey(m.createdAt)
               const showSender = group && (i === 0 || messages[i - 1].senderId !== m.senderId || newDay)
@@ -443,14 +479,14 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
       <FolderPickerSheet
         open={saveFor !== null}
         onClose={() => setSaveFor(null)}
-        title="Mettre au coffre-fort"
+        title={t('saveTitle')}
         description={saveFor?.attachment
-          ? `« ${saveFor.kind === 'audio' ? 'Note vocale' : saveFor.attachment.name} » sera copié dans votre coffre-fort. Choisissez son emplacement.`
+          ? t('saveDescription', { name: saveFor.kind === 'audio' ? tm('format.voiceNote') : saveFor.attachment.name })
           : undefined}
         folders={folders}
         initial={null}
         shares={folderShares}
-        confirmLabel="Ajouter"
+        confirmLabel={t('saveConfirm')}
         onConfirm={async (folderId) => {
           if (!saveFor) return null
           try {
@@ -460,7 +496,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
             announce(saveOutcomeMessage(outcome))
             return null
           } catch (e) {
-            return e instanceof Error ? e.message : "La pièce jointe n'a pas pu être ajoutée au coffre-fort."
+            return e instanceof Error ? e.message : t('saveFailed')
           }
         }}
       />

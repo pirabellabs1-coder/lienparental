@@ -7,11 +7,13 @@
  *   (la base fait foi), puis enregistrement via Server Action (zod + RLS).
  */
 import { useEffect, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { usePrefs, type Prefs } from '@/components/profil/usePrefs'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { loadPreferences, savePreferences } from '@/lib/auth/actions'
 
 export function useSyncedPrefs() {
+  const t = useTranslations('account.prefs')
   const { prefs, set, save } = usePrefs()
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -41,7 +43,7 @@ export function useSyncedPrefs() {
       if (!res.ok) { setError(res.error); return false }
       return true
     } catch {
-      setError('Enregistrement impossible pour le moment. Réessayez dans un instant.')
+      setError(t('saveError'))
       return false
     } finally {
       setSaving(false)

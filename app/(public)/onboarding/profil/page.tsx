@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState, type FormEvent } from 'react'
 import { cn } from '@/lib/cn'
 import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
@@ -15,6 +16,7 @@ import { uploadAvatar } from '@/lib/auth/browser'
 // Étape 8 — Configurer votre profil (photo facultative, prénom, nom)
 export default function ProfilPage() {
   const router = useRouter()
+  const t = useTranslations('public.onboarding.profile')
   const [prenom, setPrenom] = useState('')
   const [nom, setNom] = useState('')
   const [photo, setPhoto] = useState<string | null>(null)
@@ -34,8 +36,8 @@ export default function ProfilPage() {
     setPhoto(url)
   }
 
-  const prenomErr = submitted && !prenom.trim() ? 'Indiquez votre prénom.' : undefined
-  const nomErr = submitted && !nom.trim() ? 'Indiquez votre nom.' : undefined
+  const prenomErr = submitted && !prenom.trim() ? t('errFirstName') : undefined
+  const nomErr = submitted && !nom.trim() ? t('errLastName') : undefined
 
   // Supabase : photo → bucket privé « avatars » (${uid}/avatar.jpg), puis public.users via Server Action.
   const persist = async () => {
@@ -72,14 +74,14 @@ export default function ProfilPage() {
   return (
     <OnboardingScreen
       step={8}
-      title="Votre profil"
-      subtitle="Renseignez quelques informations à votre sujet."
+      title={t('title')}
+      subtitle={t('subtitle')}
       onSubmit={onSubmit}
       footer={
         <>
           {serverError && <p role="alert" className="text-center text-sm font-semibold text-alert-600">{serverError}</p>}
           <button type="submit" className={cn(btn.primary, 'w-full')} disabled={saving} aria-busy={saving}>
-            {saving ? 'Enregistrement…' : 'Continuer'}
+            {saving ? t('saving') : t('continue')}
           </button>
         </>
       }
@@ -87,19 +89,19 @@ export default function ProfilPage() {
       <PhotoPicker kind="parent" value={photo} onChange={onPhoto} className="flex justify-center" />
       <div className="mt-7 space-y-4">
         <TextField
-          label="Prénom"
+          label={t('firstName')}
           required
           autoComplete="given-name"
-          placeholder="Ex : Martin"
+          placeholder={t('firstNamePh')}
           value={prenom}
           onChange={(e) => setPrenom(e.target.value)}
           error={prenomErr}
         />
         <TextField
-          label="Nom"
+          label={t('lastName')}
           required
           autoComplete="family-name"
-          placeholder="Ex : Dupont"
+          placeholder={t('lastNamePh')}
           value={nom}
           onChange={(e) => setNom(e.target.value)}
           error={nomErr}

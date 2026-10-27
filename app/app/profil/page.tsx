@@ -4,7 +4,10 @@ import { loadProfileUsage } from '@/components/profil/usage-server'
 import { getDemoBilling } from '@/lib/billing/demo'
 import { demoBillingView, demoPeriodEnd } from '@/lib/billing/demo-core'
 import { describeStatus } from '@/lib/billing/ui-state'
-import { formatDateFr } from '@/lib/billing/types'
+import type { BillingView } from '@/lib/billing/types'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { billingFormat, localizeStatus, type BillingFmt } from '@/app/app/abonnement/_components/billing-i18n'
+import { intlLocale } from '@/lib/i18n/config'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { ProfilView, type ProfilViewProps } from './ProfilView'
 
@@ -17,9 +20,22 @@ type PageProps = { searchParams: Promise<Record<string, string | string[] | unde
 // lus côté serveur (components/profil/usage-server) ; `?plan=` est ignoré.
 // Démonstration : abonnement simulé (Mon abonnement, cookie lp_demo_billing) ;
 // `?plan=premium` / `?plan=coparentalite` / `?plan=gratuit` force un aperçu.
-const statusOf = (s: ReturnType<typeof describeStatus>) => ({ label: s.label, headline: s.headline, tone: s.tone })
+// Libellé et phrase traduits (miroir de describeStatus côté « Mon abonnement ») ; le ton reste celui de describeStatus.
+const statusOf = (v: BillingView, f: BillingFmt) => {
+  const s = localizeStatus(v, f)
+  return { label: s.label, headline: s.headline, tone: describeStatus(v).tone }
+}
 
 export default async function ProfilPage({ searchParams }: PageProps) {
+  const t = await getTranslations('account.profile.home')
+  const locale = await getLocale()
+  const bf = billingFormat(await getTranslations('billing'), locale)
+  // Même rendu que formatDateFr (date longue, fuseau Guyane), dans la langue de l’utilisateur.
+  const formatDate = (iso: string | null | undefined) => {
+    const d = iso ? new Date(iso) : null
+    if (!d || Number.isNaN(d.getTime())) return t('unknownDate')
+    return new Intl.DateTimeFormat(intlLocale(locale), { dateStyle: 'long', timeZone: 'America/Cayenne' }).format(d)
+  }
   if (!SUPABASE_ENABLED) {
     const forced = (await searchParams).plan
     const demo = forced ? null : await getDemoBilling()
@@ -31,11 +47,11 @@ export default async function ProfilPage({ searchParams }: PageProps) {
         plan={plan}
         storage={{ usedBytes: u.storageUsed * GO, maxBytes: u.storageMax * GO }}
         coach={{ used: u.coachUsed, quota: u.coachMax }}
-        status={demo && demo.plan !== 'gratuit' ? statusOf(describeStatus(demoBillingView(demo))) : null}
+        status={demo && demo.plan !== 'gratuit' ? statusOf(demoBillingView(demo), bf) : null}
         subscriptionDate={
           demo && demo.plan !== 'gratuit'
-            ? { label: demo.cancelAtPeriodEnd ? 'Se termine le' : 'Renouvellement le', date: formatDateFr(demoPeriodEnd(demo)) }
-            : { label: 'Se termine le', date: subscription.endsOn }
+            ? { label: demo.cancelAtPeriodEnd ? t('endsOn') : t('renewsOn'), date: formatDate(demoPeriodEnd(demo)) }
+            : { label: t('endsOn'), date: subscription.endsOn }
         }
       />
     )
@@ -50,7 +66,7 @@ export default async function ProfilPage({ searchParams }: PageProps) {
         coach: data.coach,
         status: data.subscription?.status ?? null,
         subscriptionDate: data.subscription?.periodEnd
-          ? { label: data.subscription.cancelAtPeriodEnd ? 'Se termine le' : 'Renouvellement le', date: formatDateFr(data.subscription.periodEnd) }
+          ? { label: data.subscription.cancelAtPeriodEnd ? t('endsOn') : t('renewsOn'), date: formatDate(data.subscription.periodEnd) }
           : null,
       }
     : // Session illisible (le middleware redirige normalement avant) : aucune valeur inventée.

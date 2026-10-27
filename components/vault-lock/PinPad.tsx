@@ -9,6 +9,7 @@
  * - Validation automatique au 6e chiffre.
  */
 import { forwardRef, useCallback, useEffect, useId, useImperativeHandle, useRef, useState, type ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { Delete } from 'lucide-react'
 import { PIN_LENGTH } from '@/lib/vault-lock/config'
 import { cn } from '@/lib/cn'
@@ -32,6 +33,7 @@ export const PinPad = forwardRef<PinPadHandle, Props>(function PinPad(
   { label, onComplete, disabled, error, describedBy, extraKey, autoFocus = true },
   ref,
 ) {
+  const t = useTranslations('vault.lock.pinPad')
   const id = useId()
   const inputRef = useRef<HTMLInputElement>(null)
   const [value, setValue] = useState('')
@@ -122,10 +124,10 @@ export const PinPad = forwardRef<PinPadHandle, Props>(function PinPad(
         </span>
       </div>
       <p className="sr-only" aria-live="polite" aria-atomic="true">
-        {value.length > 0 ? `${value.length} chiffre${value.length > 1 ? 's' : ''} sur ${PIN_LENGTH}` : ''}
+        {value.length > 0 ? t('digits', { count: value.length, max: PIN_LENGTH }) : ''}
       </p>
 
-      <div className="mt-3 grid grid-cols-3 gap-x-6 gap-y-3" role="group" aria-label="Pavé numérique">
+      <div className="mt-3 grid grid-cols-3 gap-x-6 gap-y-3" role="group" aria-label={t('keypad')}>
         {KEYS.map((k) => (
           <button key={k} type="button" tabIndex={-1} onMouseDown={keepFocus} disabled={disabled} onClick={() => press(k)} className={keyCls} aria-label={k}>
             {k}
@@ -139,7 +141,7 @@ export const PinPad = forwardRef<PinPadHandle, Props>(function PinPad(
           onMouseDown={keepFocus}
           disabled={disabled || value.length === 0}
           onClick={backspace}
-          aria-label="Effacer le dernier chiffre"
+          aria-label={t('backspace')}
           className={cn(keyCls, 'bg-transparent text-night-700 hover:bg-night-50')}
         >
           <Delete className="h-6 w-6" aria-hidden="true" />

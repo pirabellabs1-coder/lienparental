@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Check, Copy } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 type Props = {
@@ -33,7 +34,9 @@ export async function copyText(text: string) {
 }
 
 /** Bloc « Lien de témoignage » + bouton copier, avec confirmation annoncée (aria-live). */
-export function CopyLinkField({ link, label = 'Lien de témoignage', tone = 'iris', variant = 'card', className }: Props) {
+export function CopyLinkField({ link, label: labelProp, tone = 'iris', variant = 'card', className }: Props) {
+  const t = useTranslations('vault.ui.copyLink')
+  const label = labelProp ?? t('label')
   const [copied, setCopied] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   useEffect(() => () => { if (timer.current) clearTimeout(timer.current) }, [])
@@ -63,7 +66,7 @@ export function CopyLinkField({ link, label = 'Lien de témoignage', tone = 'iri
       <button
         type="button"
         onClick={onCopy}
-        aria-label={copied ? 'Lien copié' : `Copier le lien ${link}`}
+        aria-label={copied ? t('copied') : t('copyAria', { link })}
         className={cn(
           'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors',
           copied ? 'bg-leaf-50 text-leaf-600' : 'text-night-700 hover:bg-night-50',
@@ -71,7 +74,7 @@ export function CopyLinkField({ link, label = 'Lien de témoignage', tone = 'iri
       >
         {copied ? <Check className="h-5 w-5" aria-hidden="true" /> : <Copy className="h-5 w-5" aria-hidden="true" />}
       </button>
-      <span className="sr-only" role="status" aria-live="polite">{copied ? 'Lien copié dans le presse-papiers' : ''}</span>
+      <span className="sr-only" role="status" aria-live="polite">{copied ? t('copiedLive') : ''}</span>
     </div>
   )
 }

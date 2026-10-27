@@ -2,6 +2,7 @@
 // Champs "boîte" des maquettes : libellé gris en petit à l'intérieur du cadre,
 // valeur en dessous. Restent de vrais <input>/<select> avec <label> associé.
 import { forwardRef, useId, useState, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from 'react'
+import { useTranslations } from 'next-intl'
 import { ChevronDown, Eye, EyeOff } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
@@ -111,6 +112,7 @@ export function PasswordField({
   const auto = useId()
   const inputId = id ?? auto
   const errId = `${inputId}-err`
+  const t = useTranslations('account.fields')
   const [visible, setVisible] = useState(false)
   return (
     <div>
@@ -131,7 +133,7 @@ export function PasswordField({
         <button
           type="button"
           onClick={() => setVisible(v => !v)}
-          aria-label={visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+          aria-label={visible ? t('hidePassword') : t('showPassword')}
           aria-pressed={visible}
           className="absolute right-1 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-night-900 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
         >

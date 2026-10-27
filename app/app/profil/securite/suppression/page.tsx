@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { AlertTriangle, Download, Trash2 } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { Button, Card, Checkbox, ConfirmDialog, Input } from '@/components/ui'
@@ -19,7 +20,11 @@ async function readError(res: Response, fallback: string) {
   }
 }
 
+// Mot de confirmation vérifié aussi côté serveur : identique dans toutes les langues.
+const CONFIRM_WORD = 'SUPPRIMER'
+
 export default function SuppressionPage() {
+  const t = useTranslations('account.security.deletion')
   const router = useRouter()
   const [checks, setChecks] = useState({
     coffre: false,
@@ -37,18 +42,18 @@ export default function SuppressionPage() {
 
   const allChecked = checks.coffre && checks.abo && checks.irreversible
   // Supabase : ré-authentification par mot de passe exigée (vérifiée côté serveur).
-  const canDelete = allChecked && confirmText.trim().toUpperCase() === 'SUPPRIMER' && (!SUPABASE_ENABLED || password.length > 0)
+  const canDelete = allChecked && confirmText.trim().toUpperCase() === CONFIRM_WORD && (!SUPABASE_ENABLED || password.length > 0)
 
   const exportData = async () => {
     if (!SUPABASE_ENABLED) {
-      alert('Un e-mail avec vos données vous sera envoyé sous 48 h.')
+      alert(t('exportDemo'))
       return
     }
     setExporting(true)
     setExportStatus(null)
     try {
       const res = await fetch('/api/account/export', { method: 'GET', credentials: 'same-origin', cache: 'no-store' })
-      if (!res.ok) { setExportStatus(await readError(res, 'L’export a échoué. Réessayez dans un instant.')); return }
+      if (!res.ok) { setExportStatus(await readError(res, t('exportError'))); return }
       const blob = await res.blob()
       const name = /filename="([^"]+)"/.exec(res.headers.get('Content-Disposition') ?? '')?.[1] ?? 'lien-parental-export.json'
       const url = URL.createObjectURL(blob)
@@ -59,9 +64,9 @@ export default function SuppressionPage() {
       a.click()
       a.remove()
       setTimeout(() => URL.revokeObjectURL(url), 1000)
-      setExportStatus('Vos données ont été téléchargées.')
+      setExportStatus(t('exportDone'))
     } catch {
-      setExportStatus('Connexion au serveur impossible. Vérifiez votre connexion internet.')
+      setExportStatus(t('networkError'))
     } finally {
       setExporting(false)
     }
@@ -79,13 +84,13 @@ export default function SuppressionPage() {
           body: JSON.stringify({ password, confirm: confirmText }),
         })
         if (!res.ok) {
-          setError(await readError(res, 'La suppression a échoué. Réessayez dans un instant.'))
+          setError(await readError(res, t('deleteError')))
           setLoading(false)
           setSecondConfirmOpen(false)
           return
         }
       } catch {
-        setError('Connexion au serveur impossible. Vérifiez votre connexion internet.')
+        setError(t('networkError'))
         setLoading(false)
         setSecondConfirmOpen(false)
         return
@@ -103,17 +108,17 @@ export default function SuppressionPage() {
 
   return (
     <>
-      <TopBar title="Supprimer mon compte" showBack backHref="/app/profil/securite" />
+      <TopBar title={t('title')} showBack backHref="/app/profil/securite" />
       <div className="w-full px-5 pb-8 pt-4 space-y-5">
         <Card className="p-5 border-alert-200 bg-alert-50">
           <div className="flex items-start gap-3">
             <AlertTriangle className="h-5 w-5 text-alert-500 shrink-0 mt-0.5" aria-hidden="true" />
             <div>
               <h2 className="font-display text-base font-semibold text-alert-700">
-                Action irréversible
+                {t('warningTitle')}
               </h2>
               <p className="text-sm text-alert-700/90 mt-1">
-                La suppression du compte efface définitivement vos données après un délai légal de 30 jours.
+                {t('warningText')}
               </p>
             </div>
           </div>
@@ -121,13 +126,13 @@ export default function SuppressionPage() {
 
         {/* Export */}
         <Card className="p-5">
-          <h3 className="font-display text-base font-semibold text-night-900">Avant de partir</h3>
+          <h3 className="font-display text-base font-semibold text-night-900">{t('exportTitle')}</h3>
           <p className="text-sm text-night-600 mt-1">
-            Téléchargez une copie de vos documents, témoignages et métadonnées.
+            {t('exportText')}
           </p>
           <Button variant="secondary" full className="mt-3" onClick={() => void exportData()} disabled={exporting} aria-busy={exporting}>
             <Download className="h-4 w-4" aria-hidden="true" />
-            {exporting ? 'Préparation de l’export…' : 'Exporter mes données'}
+            {exporting ? t('exporting') : t('export')}
           </Button>
           {exportStatus && <p role="status" className="mt-2 text-sm text-night-700">{exportStatus}</p>}
         </Card>
@@ -135,20 +140,20 @@ export default function SuppressionPage() {
         {/* Checklist */}
         <Card className="p-5 space-y-1">
           <h3 className="font-display text-base font-semibold text-night-900 mb-2">
-            Je comprends que :
+            {t('understand')}
           </h3>
           <Checkbox
-            label="Mon coffre-fort et tous ses documents seront supprimés"
+            label={t('checks.vault')}
             checked={checks.coffre}
             onChange={(e) => setChecks(c => ({ ...c, coffre: e.target.checked }))}
           />
           <Checkbox
-            label="Mon abonnement Premium sera annulé immédiatement, sans remboursement"
+            label={t('checks.subscription')}
             checked={checks.abo}
             onChange={(e) => setChecks(c => ({ ...c, abo: e.target.checked }))}
           />
           <Checkbox
-            label="Cette action est irréversible après 30 jours"
+            label={t('checks.irreversible')}
             checked={checks.irreversible}
             onChange={(e) => setChecks(c => ({ ...c, irreversible: e.target.checked }))}
           />
@@ -157,7 +162,7 @@ export default function SuppressionPage() {
         {/* Confirmation textuelle */}
         <Card className="p-5">
           <Input
-            label="Pour confirmer, tapez SUPPRIMER"
+            label={t('typeToConfirm', { word: CONFIRM_WORD })}
             value={confirmText}
             onChange={(e) => setConfirmText(e.target.value)}
             autoCapitalize="characters"
@@ -165,7 +170,7 @@ export default function SuppressionPage() {
           {SUPABASE_ENABLED && (
             <Input
               containerClassName="mt-4"
-              label="Votre mot de passe"
+              label={t('password')}
               type="password"
               autoComplete="current-password"
               value={password}
@@ -183,7 +188,7 @@ export default function SuppressionPage() {
           onClick={() => setFirstConfirmOpen(true)}
         >
           <Trash2 className="h-4 w-4" aria-hidden="true" />
-          Supprimer définitivement
+          {t('deleteForever')}
         </Button>
       </div>
 
@@ -191,18 +196,18 @@ export default function SuppressionPage() {
         open={firstConfirmOpen}
         onClose={() => setFirstConfirmOpen(false)}
         onConfirm={() => { setFirstConfirmOpen(false); setSecondConfirmOpen(true) }}
-        title="Confirmer la suppression ?"
-        description="Un dernier contrôle vous sera demandé."
-        confirmLabel="Continuer"
+        title={t('confirm1Title')}
+        description={t('confirm1Text')}
+        confirmLabel={t('confirm1Button')}
         tone="danger"
       />
       <ConfirmDialog
         open={secondConfirmOpen}
         onClose={() => setSecondConfirmOpen(false)}
         onConfirm={deleteAccount}
-        title="Supprimer le compte ?"
-        description="Dernière confirmation. Vos données seront effacées."
-        confirmLabel="Je supprime mon compte"
+        title={t('confirm2Title')}
+        description={t('confirm2Text')}
+        confirmLabel={t('confirm2Button')}
         tone="danger"
         loading={loading}
       />

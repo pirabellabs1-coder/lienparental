@@ -1,19 +1,22 @@
 'use client'
 
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import {
-  eventsOnDay, fmtDayLong, fmtHourRange, getEventType, getWeekDays, isSameDay, minutesOfDay, toDateKey, WEEKDAY_SHORT_FR,
+  eventsOnDay, getWeekDays, isSameDay, minutesOfDay, toDateKey,
   type CalendarEvent,
 } from '@/lib/calendrier'
 import { typeIcon, typeStyle } from './eventTypeStyles'
 import { EventMeta } from './DayEventList'
+import { useCalFormat } from './useCalFormat'
 import { SharedByBadge } from '@/components/famille/SharedByBadge'
 
 /** Bandeau LUN → DIM de la semaine ; jour sélectionné en cercle vert plein. */
 export function WeekStrip({ weekRef, selected, onSelect, today }: {
   weekRef: Date; selected: Date; onSelect: (d: Date) => void; today?: Date
 }) {
+  const f = useCalFormat()
   const days = getWeekDays(weekRef)
   return (
     <div className="grid grid-cols-7">
@@ -27,11 +30,11 @@ export function WeekStrip({ weekRef, selected, onSelect, today }: {
             onClick={() => onSelect(d)}
             aria-pressed={isSel}
             aria-current={isToday ? 'date' : undefined}
-            aria-label={fmtDayLong(d)}
+            aria-label={f.dayLong(d)}
             className="flex min-h-[56px] flex-col items-center gap-1 rounded-lg pt-1 hover:bg-night-50/60"
           >
             <span aria-hidden="true" className="text-[10px] font-semibold uppercase tracking-wide text-night-500 md:text-[11px]">
-              {WEEKDAY_SHORT_FR[i]}
+              {f.weekdays[i].short}
             </span>
             <span
               aria-hidden="true"
@@ -55,6 +58,8 @@ const LABELS = [8, 10, 12, 14, 16, 18, 20]
 
 /** Grille horaire 08h → 20h du jour sélectionné, blocs colorés par type. */
 export function DayTimeline({ day, events, childNames }: { day: Date; events: CalendarEvent[]; childNames?: (ids?: string[]) => string }) {
+  const t = useTranslations('calendar.common')
+  const f = useCalFormat()
   const list = eventsOnDay(events, day)
   const span = (HOUR_END - HOUR_START) * 60
   const pct = (iso: string) => {
@@ -72,7 +77,7 @@ export function DayTimeline({ day, events, childNames }: { day: Date; events: Ca
             className="absolute left-0 -translate-y-1/2 text-[10px] font-medium tabular-nums text-night-500"
             style={{ top: `${((h - HOUR_START) / (HOUR_END - HOUR_START)) * 100}%` }}
           >
-            {String(h).padStart(2, '0')}h
+            {f.hourTick(h)}
           </span>
         ))}
       </div>
@@ -89,7 +94,7 @@ export function DayTimeline({ day, events, childNames }: { day: Date; events: Ca
 
         {list.length === 0 && (
           <p className="absolute inset-x-3 top-1/2 -translate-y-1/2 text-center text-xs text-night-500">
-            Aucun événement ce jour-là.
+            {t('noEventsDay')}
           </p>
         )}
 
@@ -108,10 +113,10 @@ export function DayTimeline({ day, events, childNames }: { day: Date; events: Ca
                 >
                   <Icon aria-hidden="true" className={cn('mt-0.5 h-4 w-4 shrink-0', s.icon)} strokeWidth={1.9} />
                   <span className="min-w-0">
-                    <span className={cn('block text-[10px] font-semibold tabular-nums', s.text)}>{fmtHourRange(e.start, e.end)}</span>
+                    <span className={cn('block text-[10px] font-semibold tabular-nums', s.text)}>{f.hourRange(e.start, e.end)}</span>
                     <span className={cn('block truncate text-[11.5px] font-bold', s.text)}>
                       {e.title}
-                      <span className="sr-only"> ({getEventType(e.type).label})</span>
+                      <span className="sr-only"> ({f.typeLabel(e.type)})</span>
                     </span>
                     <EventMeta kids={childNames?.(e.childrenIds)} location={e.location} className="text-[10.5px] text-night-700" />
                     {e.sharedBy && <SharedByBadge prenom={e.sharedBy.prenom} className="mt-0.5" />}

@@ -1,5 +1,6 @@
 'use client'
 import { useRef, type ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { AlertTriangle } from 'lucide-react'
 import { Modal } from './Modal'
 import { Button } from './Button'
@@ -18,14 +19,20 @@ type Props = {
 
 export function ConfirmDialog({
   open, onClose, onConfirm,
-  title = 'Confirmer l’action',
-  description = 'Cette action est irréversible.',
-  confirmLabel = 'Confirmer',
-  cancelLabel = 'Annuler',
+  title,
+  description,
+  confirmLabel,
+  cancelLabel,
   loading,
   tone = 'danger',
 }: Props) {
+  const t = useTranslations('account.ui.confirm')
   const cancelRef = useRef<HTMLElement>(null)
+  // Libellés par défaut traduits ; un libellé passé par l’appelant reste prioritaire.
+  title = title ?? t('title')
+  description = description ?? t('description')
+  confirmLabel = confirmLabel ?? t('confirm')
+  cancelLabel = cancelLabel ?? t('cancel')
 
   return (
     <Modal
@@ -52,7 +59,7 @@ export function ConfirmDialog({
             onClick={() => void onConfirm()}
             disabled={loading}
           >
-            {loading ? 'Patientez…' : confirmLabel}
+            {loading ? t('wait') : confirmLabel}
           </Button>
         </>
       }

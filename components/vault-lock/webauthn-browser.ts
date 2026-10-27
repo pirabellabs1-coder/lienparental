@@ -11,9 +11,14 @@ import {
 } from '@simplewebauthn/browser'
 
 export class WebauthnError extends Error {
-  constructor(public kind: 'cancelled' | 'already_registered' | 'unsupported' | 'security' | 'failed', message: string) {
+  constructor(public kind: 'cancelled' | 'already_registered' | 'unsupported' | 'security' | 'failed', message: string, public browserUnsupported = false) {
     super(message)
   }
+}
+
+/** Message traduit d'une WebauthnError (le message français d'origine reste le repli). */
+export function webauthnErrorMessage(e: WebauthnError, t: (key: string) => string): string {
+  return t(e.browserUnsupported ? 'unsupportedBrowser' : e.kind)
 }
 
 export function webauthnSupported(): boolean {
@@ -41,7 +46,7 @@ function mapError(e: unknown): WebauthnError {
 }
 
 export async function createCredential(optionsJSON: unknown) {
-  if (!webauthnSupported()) throw new WebauthnError('unsupported', 'Ce navigateur ne prend pas en charge l’empreinte.')
+  if (!webauthnSupported()) throw new WebauthnError('unsupported', 'Ce navigateur ne prend pas en charge l’empreinte.', true)
   try {
     return await startRegistration({ optionsJSON: optionsJSON as PublicKeyCredentialCreationOptionsJSON })
   } catch (e) {
@@ -50,7 +55,7 @@ export async function createCredential(optionsJSON: unknown) {
 }
 
 export async function getAssertion(optionsJSON: unknown) {
-  if (!webauthnSupported()) throw new WebauthnError('unsupported', 'Ce navigateur ne prend pas en charge l’empreinte.')
+  if (!webauthnSupported()) throw new WebauthnError('unsupported', 'Ce navigateur ne prend pas en charge l’empreinte.', true)
   try {
     return await startAuthentication({ optionsJSON: optionsJSON as PublicKeyCredentialRequestOptionsJSON })
   } catch (e) {
@@ -59,13 +64,13 @@ export async function getAssertion(optionsJSON: unknown) {
 }
 
 /** Nom proposé par défaut pour l'appareil courant. */
-export function guessDeviceName(): string {
-  if (typeof navigator === 'undefined') return 'Cet appareil'
+export function guessDeviceName(labels: { thisDevice: string; android: string; windows: string } = { thisDevice: 'Cet appareil', android: 'Téléphone Android', windows: 'PC Windows (Windows Hello)' }): string {
+  if (typeof navigator === 'undefined') return labels.thisDevice
   const ua = navigator.userAgent
   if (/iPhone/.test(ua)) return 'iPhone (Face ID / Touch ID)'
   if (/iPad/.test(ua)) return 'iPad'
-  if (/Android/.test(ua)) return 'Téléphone Android'
+  if (/Android/.test(ua)) return labels.android
   if (/Macintosh/.test(ua)) return 'Mac (Touch ID)'
-  if (/Windows/.test(ua)) return 'PC Windows (Windows Hello)'
-  return 'Cet appareil'
+  if (/Windows/.test(ua)) return labels.windows
+  return labels.thisDevice
 }

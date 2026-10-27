@@ -4,6 +4,7 @@
  * données (accueil, espace Santé, partage familial…). Remplace une liste vide trompeuse.
  */
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { Loader2, Lock } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import type { VaultLockState } from './useVaultLockState'
@@ -16,12 +17,14 @@ type Props = {
   compact?: boolean
 }
 
-export function VaultLockedNotice({ state, what = 'vos documents', className, compact }: Props) {
+export function VaultLockedNotice({ state, what: whatProp, className, compact }: Props) {
+  const t = useTranslations('vault.lock.notice')
+  const what = whatProp ?? t('defaultWhat')
   if (state === 'loading') {
     return (
       <p role="status" className={cn('flex items-center gap-2 rounded-xl2 border border-night-100 bg-white p-4 text-[13px] text-night-700 shadow-soft', className)}>
         <Loader2 className="h-4 w-4 shrink-0 motion-safe:animate-spin" aria-hidden="true" />
-        Vérification du coffre-fort…
+        {t('checking')}
       </p>
     )
   }
@@ -31,17 +34,17 @@ export function VaultLockedNotice({ state, what = 'vos documents', className, co
         <Lock className="h-5 w-5" strokeWidth={1.9} />
       </span>
       <div className="min-w-0 flex-1">
-        <p className="text-[14px] font-bold text-night-900">Coffre-fort verrouillé</p>
+        <p className="text-[14px] font-bold text-night-900">{t('title')}</p>
         <p className="mt-0.5 text-[12.5px] leading-relaxed text-night-700">
           {state === 'unknown'
-            ? 'Impossible de vérifier le verrou pour le moment : les données du coffre restent masquées.'
-            : `Déverrouillez le coffre avec votre code ou votre empreinte pour afficher ${what}.`}
+            ? t('unknown')
+            : t('locked', { what })}
         </p>
         <Link
           href="/app/coffre"
           className="mt-3 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg bg-leaf-500 px-4 text-[13.5px] font-bold text-white transition hover:bg-leaf-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2 active:scale-[.98] motion-reduce:active:scale-100"
         >
-          <Lock className="h-4 w-4" aria-hidden="true" /> Déverrouiller
+          <Lock className="h-4 w-4" aria-hidden="true" /> {t('unlock')}
         </Link>
       </div>
     </div>

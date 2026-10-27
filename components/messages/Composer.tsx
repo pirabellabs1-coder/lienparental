@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent, type KeyboardEvent, type PointerEvent, type RefObject } from 'react'
+import { useTranslations } from 'next-intl'
 import { FileText, FolderLock, Loader2, Mic, Paperclip, SendHorizontal, Sparkles, Square, Trash2, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { ALLOWED_ATTACHMENT_MIME, MAX_BODY_CHARS, durationLabel } from '@/lib/messages'
 import { AudioPlayer } from './AudioPlayer'
-import { sizeLabel } from './format'
+import { useMessagesFormat } from './useMessagesFormat'
 import { useVoiceRecorder, voiceSupported, type VoiceClip } from './useVoiceRecorder'
 
 type Props = {
@@ -40,6 +41,7 @@ export function Composer({
   value, onChange, file, onPickFile, toneCheck, onToneCheckChange, onSubmit, onSendVoice, busy, error, textareaRef,
   vaultCategories, vaultCategory, onVaultCategoryChange, recipients, announce,
 }: Props) {
+  const t = useTranslations('messaging.composer')
   const fileRef = useRef<HTMLInputElement>(null)
   const voiceRef = useRef<HTMLDivElement>(null)
   const micRef = useRef<HTMLButtonElement>(null)
@@ -53,7 +55,7 @@ export function Composer({
   const [canRecord, setCanRecord] = useState(true)
 
   const voice = useVoiceRecorder({
-    onAutoStop: () => announce('Durée maximale de 3 minutes atteinte : enregistrement arrêté.'),
+    onAutoStop: () => announce(t('autoStopped')),
   })
   const voiceMode = voice.phase !== 'idle'
 
@@ -74,15 +76,15 @@ export function Composer({
     prevPhase.current = voice.phase
     if (prev === voice.phase) return
     if (voice.phase === 'recording') {
-      announce('Enregistrement en cours. 3 minutes maximum.')
+      announce(t('recordingStarted'))
       requestAnimationFrame(() => voiceRef.current?.querySelector<HTMLElement>('[data-voice-focus]')?.focus())
     } else if (voice.phase === 'preview' && voice.clip) {
-      announce(`Note vocale de ${durationLabel(voice.clip.durationMs)} prête. Réécoutez-la avant de l'envoyer.`)
+      announce(t('voiceReady', { duration: durationLabel(voice.clip.durationMs) }))
       requestAnimationFrame(() => voiceRef.current?.querySelector<HTMLElement>('[data-voice-focus-wrap] button')?.focus())
     } else if (voice.phase === 'idle' && (prev === 'preview' || prev === 'recording')) {
       requestAnimationFrame(() => micRef.current?.focus())
     }
-  }, [voice.phase, voice.clip, announce])
+  }, [voice.phase, voice.clip, announce, t])
 
   const submit = (e?: FormEvent) => {
     e?.preventDefault()
@@ -126,16 +128,16 @@ export function Composer({
   const showVault = (file !== null || voice.phase === 'preview') && vaultCategories.length > 0
 
   return (
-    <form onSubmit={submit} className="rounded-2xl border border-night-100 bg-white p-2.5 shadow-[0_-8px_24px_-18px_rgba(11,45,91,0.25)]" aria-label="Écrire un message">
+    <form onSubmit={submit} className="rounded-2xl border border-night-100 bg-white p-2.5 shadow-[0_-8px_24px_-18px_rgba(11,45,91,0.25)]" aria-label={t('formLabel')}>
       {file && !voiceMode && <FileChip file={file} onRemove={() => onPickFile(null)} />}
 
       {voiceMode ? (
-        <div ref={voiceRef} className="flex items-center gap-2" role="group" aria-label="Note vocale">
+        <div ref={voiceRef} className="flex items-center gap-2" role="group" aria-label={t('voiceGroup')}>
           <button
             type="button"
             onClick={voice.cancel}
             disabled={disabled}
-            aria-label={voice.phase === 'preview' ? 'Supprimer la note vocale' : "Annuler l'enregistrement"}
+            aria-label={voice.phase === 'preview' ? t('deleteVoice') : t('cancelRecording')}
             className={cn(iconBtn, 'text-alert-600 hover:bg-alert-50')}
           >
             <Trash2 className="h-5 w-5" aria-hidden="true" />
@@ -147,7 +149,7 @@ export function Composer({
                 <AudioPlayer
                   src={voice.clip.url}
                   durationMs={voice.clip.durationMs}
-                  label={`votre note vocale, ${durationLabel(voice.clip.durationMs)}`}
+                  label={t('yourVoiceNote', { duration: durationLabel(voice.clip.durationMs) })}
                   seed={voice.clip.url}
                   tone="mine"
                   className="min-w-0"
@@ -157,11 +159,11 @@ export function Composer({
                 type="button"
                 onClick={() => void sendVoice()}
                 disabled={disabled}
-                aria-label={busy === 'sending' ? 'Envoi en cours' : 'Envoyer la note vocale'}
+                aria-label={busy === 'sending' ? t('sending') : t('sendVoice')}
                 className={cn('inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-leaf-500 text-white transition hover:bg-leaf-600 disabled:opacity-50 lg:w-auto lg:px-5', focusRing)}
               >
                 {busy === 'sending' ? <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden="true" /> : <SendHorizontal className="h-5 w-5" aria-hidden="true" />}
-                <span className="hidden text-[14px] font-semibold lg:ml-2 lg:inline" aria-hidden="true">Envoyer</span>
+                <span className="hidden text-[14px] font-semibold lg:ml-2 lg:inline" aria-hidden="true">{t('send')}</span>
               </button>
             </>
           ) : (
@@ -172,7 +174,7 @@ export function Composer({
                 onClick={voice.stop}
                 disabled={voice.phase !== 'recording'}
                 data-voice-focus
-                aria-label="Arrêter l'enregistrement et réécouter"
+                aria-label={t('stopAndReview')}
                 className={cn('inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-alert-500 text-white transition hover:bg-alert-600 disabled:opacity-60', focusRing)}
               >
                 <Square className="h-4 w-4" fill="currentColor" aria-hidden="true" />
@@ -186,7 +188,7 @@ export function Composer({
             type="button"
             onClick={() => fileRef.current?.click()}
             disabled={disabled}
-            aria-label="Joindre une image ou un PDF (10 Mo maximum)"
+            aria-label={t('attach')}
             className={cn(iconBtn, 'mb-0.5')}
           >
             <Paperclip className="h-5 w-5" aria-hidden="true" />
@@ -208,7 +210,7 @@ export function Composer({
               onClick={(e) => { if (e.detail === 0) void voice.start() }}
               onContextMenu={(e) => e.preventDefault()}
               disabled={disabled || file !== null}
-              aria-label="Enregistrer une note vocale (3 minutes maximum)"
+              aria-label={t('record')}
               aria-describedby={`${uid}-mic-hint`}
               className={cn(iconBtn, 'mb-0.5 touch-none select-none', holding && 'bg-alert-50 text-alert-600')}
             >
@@ -216,7 +218,7 @@ export function Composer({
             </button>
           )}
 
-          <label htmlFor={`${uid}-ta`} className="sr-only">Votre message</label>
+          <label htmlFor={`${uid}-ta`} className="sr-only">{t('messageLabel')}</label>
           <textarea
             id={`${uid}-ta`}
             ref={textareaRef}
@@ -225,7 +227,7 @@ export function Composer({
             onKeyDown={onKeyDown}
             rows={1}
             maxLength={MAX_BODY_CHARS}
-            placeholder="Écrire un message…"
+            placeholder={t('placeholder')}
             aria-describedby={shownError ? `${hintId} ${errorId}` : hintId}
             aria-invalid={error ? true : undefined}
             className="min-h-[48px] min-w-0 flex-1 resize-none rounded-xl border border-night-200 bg-white px-3.5 py-3 text-[15px] leading-snug text-night-900 placeholder:text-night-500 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-200"
@@ -234,7 +236,7 @@ export function Composer({
           <button
             type="submit"
             disabled={!canSend}
-            aria-label={busy === 'checking' ? 'Vérification du ton en cours' : busy === 'sending' ? 'Envoi en cours' : 'Envoyer'}
+            aria-label={busy === 'checking' ? t('checkingTone') : busy === 'sending' ? t('sending') : t('send')}
             className={cn(
               'inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-leaf-500 text-white transition hover:bg-leaf-600 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 lg:w-auto lg:px-5',
               focusRing,
@@ -245,7 +247,7 @@ export function Composer({
             ) : (
               <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden="true" />
             )}
-            <span className="hidden lg:ml-2 lg:inline text-[14px] font-semibold" aria-hidden="true">Envoyer</span>
+            <span className="hidden lg:ml-2 lg:inline text-[14px] font-semibold" aria-hidden="true">{t('send')}</span>
           </button>
         </div>
       )}
@@ -253,7 +255,7 @@ export function Composer({
       {showVault && (
         <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl bg-leaf-50/60 px-2.5 py-1.5">
           <FolderLock className="h-4 w-4 shrink-0 text-leaf-700" aria-hidden="true" />
-          <label htmlFor={`${uid}-cat`} className="text-[12px] font-semibold text-night-800">Ranger dans mon coffre-fort :</label>
+          <label htmlFor={`${uid}-cat`} className="text-[12px] font-semibold text-night-800">{t('vaultLabel')}</label>
           <select
             id={`${uid}-cat`}
             value={vaultCategory}
@@ -264,7 +266,7 @@ export function Composer({
             {vaultCategories.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
           <p id={`${uid}-cat-hint`} className="w-full text-[11px] text-night-600">
-            Rangement automatique activé dans vos réglages du coffre-fort. {recipients} ne le reçoit dans son coffre que s’il a activé ce réglage.
+            {t('vaultHint', { recipients })}
           </p>
         </div>
       )}
@@ -284,17 +286,17 @@ export function Composer({
             <span aria-hidden="true" className="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-soft transition-transform duration-200 peer-checked:translate-x-4" />
           </span>
           <Sparkles className="h-3.5 w-3.5 text-iris-600" aria-hidden="true" />
-          Vérification du ton
+          {t('toneCheck')}
         </label>
         <p id={hintId} className="text-[11px] text-night-600">
           {busy === 'checking'
-            ? 'Le Coach IA relit votre message…'
+            ? t('coachReading')
             : voice.phase === 'recording'
-              ? holding ? 'Relâchez pour arrêter et réécouter' : 'Appuyez sur le carré rouge pour arrêter'
-              : 'Message horodaté, non modifiable après envoi'}
+              ? holding ? t('releaseToStop') : t('pressToStop')
+              : t('timestamped')}
         </p>
         <p id={`${uid}-mic-hint`} className="sr-only">
-          Appuyez une fois pour démarrer, puis sur Arrêter. Vous pourrez réécouter la note avant de l&apos;envoyer.
+          {t('micHint')}
         </p>
       </div>
 
@@ -307,12 +309,13 @@ export function Composer({
 
 /** Visualisation du niveau sonore + durée (décorative, la durée est annoncée en texte). */
 function RecordingMeter({ levels, elapsedMs, requesting }: { levels: number[]; elapsedMs: number; requesting: boolean }) {
+  const t = useTranslations('messaging.composer')
   return (
     <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-xl bg-alert-50/60 px-3 py-2">
       <span aria-hidden="true" className={cn('h-2.5 w-2.5 shrink-0 rounded-full bg-alert-500', !requesting && 'motion-safe:animate-pulse')} />
       <span className="shrink-0 text-[13px] font-bold tabular-nums text-night-900">
-        {requesting ? 'Micro…' : durationLabel(elapsedMs)}
-        <span className="sr-only"> écoulées sur 3 minutes</span>
+        {requesting ? t('mic') : durationLabel(elapsedMs)}
+        <span className="sr-only">{t('elapsedSr')}</span>
       </span>
       <div aria-hidden="true" className="flex h-7 min-w-0 flex-1 items-center gap-[2px] overflow-hidden">
         {levels.map((l, i) => (
@@ -329,6 +332,8 @@ function RecordingMeter({ levels, elapsedMs, requesting }: { levels: number[]; e
 }
 
 function FileChip({ file, onRemove }: { file: File; onRemove: () => void }) {
+  const t = useTranslations('messaging.composer')
+  const { sizeLabel } = useMessagesFormat()
   const isImage = file.type.startsWith('image/')
   const [url, setUrl] = useState<string | null>(null)
   useEffect(() => {
@@ -350,12 +355,12 @@ function FileChip({ file, onRemove }: { file: File; onRemove: () => void }) {
       )}
       <span className="min-w-0 flex-1">
         <span className="block truncate text-[13px] font-semibold text-night-900">{file.name}</span>
-        <span className="block text-[11px] text-night-600">{isImage ? 'Image' : 'PDF'} · {sizeLabel(file.size)}</span>
+        <span className="block text-[11px] text-night-600">{isImage ? t('image') : t('pdf')} · {sizeLabel(file.size)}</span>
       </span>
       <button
         type="button"
         onClick={onRemove}
-        aria-label={`Retirer la pièce jointe ${file.name}`}
+        aria-label={t('removeAttachment', { name: file.name })}
         className={cn('inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-night-700 hover:bg-white', focusRing)}
       >
         <X className="h-4 w-4" aria-hidden="true" />

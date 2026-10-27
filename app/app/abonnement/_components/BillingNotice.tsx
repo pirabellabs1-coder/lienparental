@@ -1,6 +1,8 @@
 import { AlertCircle, Info } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { Banner } from '@/components/profil/kit'
-import { billingErrorMessage } from '@/lib/billing/client'
+import { BILLING_ERROR_MESSAGES } from '@/lib/billing/client'
+import { billingError } from './billing-i18n'
 
 /**
  * Bandeau d'erreur / d'information des écrans abonnement.
@@ -8,11 +10,12 @@ import { billingErrorMessage } from '@/lib/billing/client'
  * seul le libellé connu est affiché, jamais la valeur brute de l'URL.
  */
 export function BillingNotice({ code, info, className }: { code?: string | null; info?: string | null; className?: string }) {
+  const t = useTranslations('billing')
   if (code) {
     return (
       <div role="alert" className={className}>
-        <Banner tone="red" icon={<AlertCircle className="h-5 w-5" />} title="Opération impossible">
-          {billingErrorMessage(code)}
+        <Banner tone="red" icon={<AlertCircle className="h-5 w-5" />} title={t('errors.title')}>
+          {billingError(t, code, BILLING_ERROR_MESSAGES)}
         </Banner>
       </div>
     )

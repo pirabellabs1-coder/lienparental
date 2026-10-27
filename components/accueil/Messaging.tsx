@@ -16,7 +16,7 @@ const POINTS = [
 ] as const
 
 export async function Messaging() {
-  const t = await getTranslations('messaging')
+  const t = await getTranslations('homeMessaging')
   return (
     <section id="messagerie" aria-labelledby="messaging-title" className={cn(SECTION, 'overflow-hidden')}>
       <div className={cn(CONTAINER, 'grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_0.85fr] lg:gap-16 [&>*]:min-w-0')}>

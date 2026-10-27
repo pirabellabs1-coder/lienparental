@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { ConfirmDialog } from '@/components/ui'
 import { FolderNameSheet, ShareFolderSheet } from './FolderSheets'
 import { listLinkedParents } from '@/lib/coparents/client'
@@ -24,6 +25,8 @@ export function useFolderActions({ shares, refresh, announce, onCreated, onDelet
   /** Suppression réussie : si fourni, appelé AVANT tout rechargement (ex. quitter l'écran). */
   onDeleted?: (f: VaultFolder) => void
 }) {
+  const t = useTranslations('vault.folders')
+  const tc = useTranslations('vault.common')
   const [createIn, setCreateIn] = useState<{ parentId: string | null } | null>(null)
   const [renaming, setRenaming] = useState<VaultFolder | null>(null)
   const [sharing, setSharing] = useState<VaultFolder | null>(null)
@@ -38,9 +41,9 @@ export function useFolderActions({ shares, refresh, announce, onCreated, onDelet
     setParentsError(null)
     setParents(null)
     listLinkedParents().then(setParents, (e: unknown) => {
-      setParentsError(e instanceof Error && e.message ? e.message : 'Vérifiez votre connexion puis réessayez.')
+      setParentsError(e instanceof Error && e.message ? e.message : t('connectionRetry'))
     })
-  }, [])
+  }, [t])
 
   const openShare = useCallback((f: VaultFolder) => {
     setSharing(f)
@@ -54,37 +57,37 @@ export function useFolderActions({ shares, refresh, announce, onCreated, onDelet
       <FolderNameSheet
         open={createIn !== null}
         onClose={() => setCreateIn(null)}
-        title={createIn?.parentId ? 'Nouveau sous-dossier' : 'Nouveau dossier'}
-        submitLabel="Créer"
+        title={createIn?.parentId ? t('newSubfolder') : t('newFolder')}
+        submitLabel={t('create')}
         onSubmit={async (name) => {
           try {
             const f = await createFolder(name, createIn?.parentId ?? null)
             setCreateIn(null)
             await refresh()
-            announce(`Dossier « ${f.name} » créé`)
+            announce(t('created', { name: f.name }))
             onCreated?.(f)
             return null
           } catch (e) {
-            return message(e, 'Création impossible. Réessayez.')
+            return message(e, t('createFailed'))
           }
         }}
       />
       <FolderNameSheet
         open={renaming !== null}
         onClose={() => setRenaming(null)}
-        title="Renommer le dossier"
+        title={t('renameTitle')}
         initial={renaming?.name ?? ''}
-        submitLabel="Enregistrer"
+        submitLabel={tc('save')}
         onSubmit={async (name) => {
           if (!renaming) return null
           try {
             await renameFolder(renaming.id, name)
             setRenaming(null)
             await refresh()
-            announce('Dossier renommé')
+            announce(t('renamed'))
             return null
           } catch (e) {
-            return message(e, 'Renommage impossible. Réessayez.')
+            return message(e, t('renameFailed'))
           }
         }}
       />
@@ -100,12 +103,12 @@ export function useFolderActions({ shares, refresh, announce, onCreated, onDelet
           if (!sharing) return ''
           await shareFolder(sharing.id, { userId: p.userId, prenom: p.prenom })
           await refresh()
-          return `Dossier partagé avec ${p.prenom}.`
+          return t('sharedWithParent', { name: p.prenom })
         }}
         onUnshare={async (s) => {
           await unshareFolder(s.id)
           await refresh()
-          return `Partage arrêté : ${s.granteePrenom} n’a plus accès au dossier.`
+          return t('shareStopped', { name: s.granteePrenom })
         }}
       />
       <ConfirmDialog
@@ -120,23 +123,23 @@ export function useFolderActions({ shares, refresh, announce, onCreated, onDelet
           try {
             await deleteFolder(f.id)
             setDeleting(null)
-            announce(`Dossier « ${f.name} » supprimé`)
+            announce(t('deleted', { name: f.name }))
             if (onDeleted) onDeleted(f)
             else await refresh()
           } catch (e) {
-            setDeleteError(message(e, 'Suppression impossible. Réessayez.'))
+            setDeleteError(message(e, t('deleteFailed')))
           } finally {
             setDeleteBusy(false)
           }
         }}
-        title="Supprimer ce dossier ?"
+        title={t('deleteTitle')}
         description={deleting ? (
           <>
-            « {deleting.name} » et ses sous-dossiers seront supprimés. Les documents qu’ils contiennent ne sont pas supprimés : ils reviennent dans le coffre-fort, sans dossier. Les partages de ce dossier s’arrêtent.
+            {t('deleteText', { name: deleting.name })}
             {deleteError && <span role="alert" className="mt-2 block font-semibold text-alert-600">{deleteError}</span>}
           </>
         ) : ''}
-        confirmLabel="Supprimer le dossier"
+        confirmLabel={t('deleteConfirm')}
         tone="danger"
       />
     </>

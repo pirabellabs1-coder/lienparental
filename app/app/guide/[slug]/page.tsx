@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { Building2, CalendarClock, ExternalLink, ListChecks, Phone, TriangleAlert } from 'lucide-react'
 import { GuideHeader } from '@/components/guide/GuideHeader'
 import { FicheActions } from '@/components/guide/FicheActions'
@@ -11,19 +12,21 @@ import { DEMO_MODE } from '@/lib/demo-auth'
 import { guideAsync, loadGuide } from '@/lib/guide/load'
 import { getCategory } from '@/lib/guide/types'
 import { categoryHref, parcoursHref } from '@/lib/guide/links'
+import { intlLocale } from '@/lib/i18n/config'
 
 type Props = {
   params: Promise<{ slug: string }>
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }
 
-const dateFr = (iso: string) =>
-  new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${iso}T00:00:00Z`))
+const formatDate = (iso: string, locale: string) =>
+  new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${iso}T00:00:00Z`))
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const [{ slug }, sp] = await Promise.all([params, searchParams])
   const f = (await guideAsync.fiche(sp.territoire, slug)) ?? (await guideAsync.ficheParDefaut(slug))
-  return { title: f?.titre ?? 'Guide parental', description: f?.resume }
+  const t = await getTranslations('coach.guide')
+  return { title: f?.titre ?? t('title'), description: f?.resume }
 }
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
@@ -46,39 +49,43 @@ export default async function GuideFichePage({ params, searchParams }: Props) {
   const category = getCategory(fiche.categorie)!
   const parcours = g.parcours.filter((p) => p.elements.some((e) => e.fiche === fiche.slug))
   const demoPartners = DEMO_MODE ? g.partenairesDemo : []
+  const t = await getTranslations('coach.guide')
+  const locale = await getLocale()
+  const dateFr = (iso: string) => formatDate(iso, locale)
+  const categoryLabel = t(`categories.${category.key}`)
 
   return (
     <div className="w-full px-5 pb-8 lg:px-6">
       <GuideHeader
         territoire={territoire}
         territoires={g.territoires}
-        back={{ href: categoryHref(category.key, territoire.code), label: category.label }}
+        back={{ href: categoryHref(category.key, territoire.code), label: categoryLabel }}
       />
 
       <article className="mt-5 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-x-10">
         <div className="lg:col-start-1">
           <p className="inline-flex items-center gap-1.5 rounded-full bg-leaf-50 px-2.5 py-1 text-[12px] font-semibold text-leaf-800">
             <CategoryIcon cat={category.key} className="h-3.5 w-3.5" />
-            {category.label}
+            {categoryLabel}
           </p>
           <h1 className="mt-3 text-[24px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 lg:text-[28px]">{fiche.titre}</h1>
           <p className="mt-2 text-[14.5px] leading-relaxed text-night-700">{fiche.resume}</p>
           <p className="mt-2 text-[12.5px] text-night-600">
-            Dernière vérification le <time dateTime={fiche.derniereVerification}>{dateFr(fiche.derniereVerification)}</time>
+            {t('fiche.lastChecked')}<time dateTime={fiche.derniereVerification}>{dateFr(fiche.derniereVerification)}</time>
           </p>
 
-          <Section id="sert" title="À quoi ça sert ?">
+          <Section id="sert" title={t('fiche.whatFor')}>
             <p className="text-[14.5px] leading-relaxed text-night-800">{fiche.aQuoiCaSert}</p>
           </Section>
 
-          <Section id="qui" title="Qui est concerné ?">
+          <Section id="qui" title={t('fiche.who')}>
             <ul className="list-disc space-y-1.5 pl-5 text-[14.5px] leading-relaxed text-night-800 marker:text-leaf-500">
               {fiche.quiEstConcerne.map((q) => <li key={q}>{q}</li>)}
             </ul>
           </Section>
 
           {fiche.aSavoir.length > 0 && (
-            <Section id="savoir" title="À savoir">
+            <Section id="savoir" title={t('fiche.goodToKnow')}>
               <ul className="space-y-2">
                 {fiche.aSavoir.map((s) => (
                   <li key={s} className="rounded-xl bg-night-50/70 px-3.5 py-2.5 text-[14px] leading-relaxed text-night-800">{s}</li>
@@ -88,7 +95,7 @@ export default async function GuideFichePage({ params, searchParams }: Props) {
           )}
 
           {fiche.datesLimites.length > 0 && (
-            <Section id="dates" title="Dates limites">
+            <Section id="dates" title={t('fiche.deadlines')}>
               <ul className="space-y-2">
                 {fiche.datesLimites.map((d) => (
                   <li key={d.libelle} className="flex gap-2.5 rounded-xl border border-gold-200 bg-gold-50 px-3.5 py-2.5">
@@ -104,12 +111,12 @@ export default async function GuideFichePage({ params, searchParams }: Props) {
           )}
 
           {fiche.documents.length > 0 && (
-            <Section id="documents" title="Documents nécessaires">
+            <Section id="documents" title={t('fiche.documents')}>
               <FicheChecklist fiche={fiche} territoire={territoire.code} />
             </Section>
           )}
 
-          <Section id="etapes" title="Étapes">
+          <Section id="etapes" title={t('fiche.steps')}>
             <ol className="space-y-3">
               {fiche.etapes.map((e, i) => (
                 <li key={e.titre} className="flex gap-3">
@@ -123,7 +130,7 @@ export default async function GuideFichePage({ params, searchParams }: Props) {
             </ol>
           </Section>
 
-          <Section id="ou" title="Où effectuer la démarche ?">
+          <Section id="ou" title={t('fiche.where')}>
             <ul className="space-y-2">
               {fiche.ou.map((o) => (
                 <li key={o.nom} className="flex gap-3 rounded-xl border border-night-100 p-3.5">
@@ -139,7 +146,7 @@ export default async function GuideFichePage({ params, searchParams }: Props) {
                       )}
                       {o.url && (
                         <a href={o.url} target="_blank" rel="noopener noreferrer" className={extLink}>
-                          Site officiel<span className="sr-only"> de {o.nom} (nouvel onglet)</span>
+                          {t('fiche.officialSite')}<span className="sr-only">{t('fiche.officialSiteSr', { name: o.nom })}</span>
                           <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.75} aria-hidden="true" />
                         </a>
                       )}
@@ -150,12 +157,12 @@ export default async function GuideFichePage({ params, searchParams }: Props) {
             </ul>
           </Section>
 
-          <Section id="liens" title="Liens utiles">
+          <Section id="liens" title={t('fiche.links')}>
             <ul className="space-y-1.5 text-[14px]">
               {fiche.liens.map((l) => (
                 <li key={l.url}>
                   <a href={l.url} target="_blank" rel="noopener noreferrer" className={extLink}>
-                    {l.titre}<span className="sr-only"> (nouvel onglet)</span>
+                    {l.titre}<span className="sr-only">{t('fiche.newTab')}</span>
                     <ExternalLink className="h-3.5 w-3.5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
                   </a>
                 </li>
@@ -167,15 +174,15 @@ export default async function GuideFichePage({ params, searchParams }: Props) {
         <aside aria-labelledby="ajouter-titre" className="mt-8 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mt-0">
           <div className="lg:sticky lg:top-6">
             <div className="rounded-2xl bg-[#f7f8fc] p-4 ring-1 ring-night-100">
-              <h2 id="ajouter-titre" className="text-[16px] font-extrabold text-night-900">Ajouter à Lien Parental</h2>
-              <p className="mt-0.5 text-[12.5px] text-night-600">Ouvre le formulaire pré-rempli, vous vérifiez avant d'enregistrer.</p>
+              <h2 id="ajouter-titre" className="text-[16px] font-extrabold text-night-900">{t('fiche.addTitle')}</h2>
+              <p className="mt-0.5 text-[12.5px] text-night-600">{t('fiche.addHint')}</p>
               <div className="mt-3"><FicheActions actions={fiche.actions} ficheSlug={fiche.slug} /></div>
               <div className="mt-4"><MarkDoneButton fiche={fiche} territoire={territoire.code} /></div>
             </div>
             {parcours.length > 0 && (
               <div className="mt-4 rounded-2xl border border-night-100 p-4">
                 <h2 className="flex items-center gap-1.5 text-[14px] font-extrabold text-night-900">
-                  <ListChecks className="h-4 w-4 text-leaf-700" strokeWidth={1.75} aria-hidden="true" />Dans le parcours
+                  <ListChecks className="h-4 w-4 text-leaf-700" strokeWidth={1.75} aria-hidden="true" />{t('fiche.inParcours')}
                 </h2>
                 <ul className="mt-1.5 space-y-1">
                   {parcours.map((p) => (
@@ -195,7 +202,7 @@ export default async function GuideFichePage({ params, searchParams }: Props) {
           {fiche.aConfirmer.length > 0 && (
             <section aria-labelledby="confirmer" className="mt-8 rounded-2xl border border-gold-200 bg-gold-50 p-4">
               <h2 id="confirmer" className="flex items-center gap-2 text-[15px] font-extrabold text-night-900">
-                <TriangleAlert className="h-5 w-5 text-gold-700" strokeWidth={1.75} aria-hidden="true" />À confirmer localement
+                <TriangleAlert className="h-5 w-5 text-gold-700" strokeWidth={1.75} aria-hidden="true" />{t('fiche.toConfirm')}
               </h2>
               <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[13.5px] leading-relaxed text-night-800">
                 {fiche.aConfirmer.map((c) => <li key={c}>{c}</li>)}
@@ -204,20 +211,19 @@ export default async function GuideFichePage({ params, searchParams }: Props) {
           )}
 
           <section aria-labelledby="sources" className="mt-6">
-            <h2 id="sources" className="text-[15px] font-extrabold text-night-900">Sources</h2>
+            <h2 id="sources" className="text-[15px] font-extrabold text-night-900">{t('fiche.sources')}</h2>
             <ul className="mt-2 space-y-1.5 text-[13px] leading-snug">
               {fiche.sources.map((s) => (
                 <li key={s.url} className="text-night-700">
                   <a href={s.url} target="_blank" rel="noopener noreferrer" className={extLink}>
-                    {s.titre}<span className="sr-only"> (nouvel onglet)</span>
+                    {s.titre}<span className="sr-only">{t('fiche.newTab')}</span>
                   </a>
-                  {s.verifieLe && <span className="text-night-600">, vérifiée par la source le {dateFr(s.verifieLe)}</span>}
+                  {s.verifieLe && <span className="text-night-600">{t('fiche.checkedBySource', { date: dateFr(s.verifieLe) })}</span>}
                 </li>
               ))}
             </ul>
             <p className="mt-3 text-[12.5px] leading-relaxed text-night-600">
-              Ce guide donne une information générale et ne constitue pas un conseil juridique. Les montants et délais peuvent évoluer :
-              vérifiez auprès de l'organisme concerné avant toute démarche.
+              {t('fiche.disclaimer')}
             </p>
           </section>
 

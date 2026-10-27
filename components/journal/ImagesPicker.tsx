@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type DragEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { Camera, ChevronRight, FileText, Image as ImageIcon, Images, X } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { cn } from '@/lib/cn'
@@ -19,6 +20,8 @@ function isAccepted(f: File) {
 
 /** Écran « Ajouter des images » (maquette Journal, 5e écran). `draftKey` = 'nouveau' ou id d'entrée. */
 export function ImagesPicker({ draftKey }: { draftKey: string }) {
+  const t = useTranslations('family.journal.images')
+  const locale = useLocale()
   const router = useRouter()
   const [items, setItems] = useState<DraftImage[]>(() => getDraft(draftKey))
   const [error, setError] = useState<string>()
@@ -46,9 +49,9 @@ export function ImagesPicker({ draftKey }: { draftKey: string }) {
     const room = MAX_FILES - items.length
     const accepted: DraftImage[] = []
     for (const f of files) {
-      if (!isAccepted(f)) { problems.push(`« ${f.name} » : format non pris en charge.`); continue }
-      if (f.size > MAX_SIZE_BYTES) { problems.push(`« ${f.name} » dépasse 10 Mo.`); continue }
-      if (accepted.length >= room) { problems.push(`Limite de ${MAX_FILES} fichiers atteinte.`); break }
+      if (!isAccepted(f)) { problems.push(t('formatUnsupported', { name: f.name })); continue }
+      if (f.size > MAX_SIZE_BYTES) { problems.push(t('tooBig', { name: f.name })); continue }
+      if (accepted.length >= room) { problems.push(t('limitReached', { max: MAX_FILES })); break }
       accepted.push(toDraftImage(f))
     }
     setError(problems.length ? problems.join(' ') : undefined)
@@ -78,16 +81,16 @@ export function ImagesPicker({ draftKey }: { draftKey: string }) {
   }
 
   const sources = [
-    { key: 'camera', label: 'Prendre une photo', icon: Camera, ref: cameraInput },
-    { key: 'gallery', label: 'Choisir dans la galerie', icon: Images, ref: galleryInput },
-    { key: 'doc', label: 'Importer un document', icon: FileText, ref: docInput },
+    { key: 'camera', label: t('sourceCamera'), icon: Camera, ref: cameraInput },
+    { key: 'gallery', label: t('sourceGallery'), icon: Images, ref: galleryInput },
+    { key: 'doc', label: t('sourceDocument'), icon: FileText, ref: docInput },
   ] as const
 
   const full = items.length >= MAX_FILES
 
   return (
     <>
-      <TopBar title="Ajouter des images" showBack showBell={false} />
+      <TopBar title={t('title')} showBack showBell={false} />
 
       <div className="min-h-[calc(100dvh-12.5rem)] space-y-6 px-4 pb-6 pt-3">
         <button
@@ -104,9 +107,9 @@ export function ImagesPicker({ draftKey }: { draftKey: string }) {
           )}
         >
           <ImageIcon aria-hidden="true" className="h-8 w-8 text-night-900" strokeWidth={1.7} />
-          <span className="mt-3 text-[13px] font-bold text-night-900">Ajouter des photos ou documents</span>
+          <span className="mt-3 text-[13px] font-bold text-night-900">{t('dropTitle')}</span>
           <span id="images-limits" className="mt-1 text-[11px] text-night-600">
-            Jusqu&apos;à {MAX_FILES} fichiers (10 Mo max. par fichier)
+            {t('limits', { max: MAX_FILES })}
           </span>
         </button>
 
@@ -115,7 +118,7 @@ export function ImagesPicker({ draftKey }: { draftKey: string }) {
         )}
 
         <section aria-labelledby="sources-title">
-          <h2 id="sources-title" className="mb-2.5 text-[13px] font-bold text-night-900">Sources</h2>
+          <h2 id="sources-title" className="mb-2.5 text-[13px] font-bold text-night-900">{t('sources')}</h2>
           <ul className="space-y-2">
             {sources.map(({ key, label, icon: Icon, ref }) => (
               <li key={key}>
@@ -136,11 +139,11 @@ export function ImagesPicker({ draftKey }: { draftKey: string }) {
 
         <section aria-labelledby="added-title" aria-live="polite">
           <h2 id="added-title" className="mb-2.5 text-[13px] font-bold text-night-900">
-            Images ajoutées ({items.length})
+            {t('added', { count: items.length })}
           </h2>
           {items.length === 0 ? (
             <p className="rounded-xl border border-dashed border-night-200 px-4 py-5 text-center text-xs text-night-600">
-              Aucune image pour le moment.
+              {t('empty')}
             </p>
           ) : (
             <ul className="space-y-2">
@@ -156,12 +159,12 @@ export function ImagesPicker({ draftKey }: { draftKey: string }) {
                   )}
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-[13px] font-semibold text-night-900">{d.file.name}</p>
-                    <p className="text-[11px] text-night-600">{fmtSize(d.file.size)}</p>
+                    <p className="text-[11px] text-night-600">{fmtSize(d.file.size, locale)}</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => remove(d.id)}
-                    aria-label={`Retirer ${d.file.name}`}
+                    aria-label={t('remove', { name: d.file.name })}
                     className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-night-900 hover:bg-night-50"
                   >
                     <X aria-hidden="true" className="h-[18px] w-[18px]" />
@@ -178,7 +181,7 @@ export function ImagesPicker({ draftKey }: { draftKey: string }) {
         style={{ bottom: 'calc(4.5rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <SubmitBar type="button" onClick={validate}>
-          {items.length ? `Valider (${items.length})` : 'Valider'}
+          {items.length ? t('validateCount', { count: items.length }) : t('validate')}
         </SubmitBar>
       </div>
 

@@ -1,6 +1,7 @@
 'use client'
 import { useCallback, useId, useRef, useState, type DragEvent, type ReactNode } from 'react'
 import { UploadCloud, X, FileText, Image as ImageIcon } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 export type FileDropError = 'type' | 'size' | 'count'
@@ -23,16 +24,17 @@ export type FileDropProps = {
   required?: boolean
 }
 
-function formatSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} o`
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} Ko`
-  return `${(bytes / 1024 / 1024).toFixed(1)} Mo`
+function formatSize(bytes: number, t: (key: string, values: Record<string, string | number>) => string): string {
+  if (bytes < 1024) return t('sizeB', { n: bytes })
+  if (bytes < 1024 * 1024) return t('sizeKB', { n: (bytes / 1024).toFixed(1) })
+  return t('sizeMB', { n: (bytes / 1024 / 1024).toFixed(1) })
 }
 
 export function FileDrop({
   label, hint, error, accept, multiple = false, maxFiles = 5, maxSizeMB = 10,
   value, defaultValue = [], onChange, onReject, helperText, className, disabled, required
 }: FileDropProps) {
+  const t = useTranslations('account.ui.fileDrop')
   const autoId = useId()
   const inputId = `${autoId}-file`
   const hintId = `${autoId}-hint`
@@ -59,15 +61,15 @@ export function FileDrop({
           if (t.endsWith('/*')) return f.type.startsWith(t.slice(0, -1))
           return f.type === t
         })
-        if (!okType) { onReject?.('type', f); setLocalError(`Type non supporté: ${f.name}`); continue }
+        if (!okType) { onReject?.('type', f); setLocalError(t('badType', { name: f.name })); continue }
       }
       if (maxSizeMB && f.size > maxSizeMB * 1024 * 1024) {
-        onReject?.('size', f); setLocalError(`Fichier trop volumineux (max ${maxSizeMB} Mo)`); continue
+        onReject?.('size', f); setLocalError(t('tooBig', { max: maxSizeMB })); continue
       }
       accepted.push(f)
     }
     return accepted
-  }, [accept, maxSizeMB, onReject])
+  }, [accept, maxSizeMB, onReject, t])
 
   const handleFiles = useCallback((incoming: FileList | File[]) => {
     setLocalError(undefined)
@@ -76,10 +78,10 @@ export function FileDrop({
     const next = multiple ? [...files, ...valid].slice(0, maxFiles) : valid.slice(0, 1)
     if (next.length < [...files, ...valid].length) {
       onReject?.('count', valid[0])
-      setLocalError(`Maximum ${maxFiles} fichier(s)`)
+      setLocalError(t('tooMany', { max: maxFiles }))
     }
     commit(next)
-  }, [files, multiple, maxFiles, validate, onReject])
+  }, [files, multiple, maxFiles, validate, onReject, t])
 
   const onDrop = (e: DragEvent) => {
     e.preventDefault(); setDragOver(false)
@@ -123,10 +125,10 @@ export function FileDrop({
       >
         <UploadCloud className="h-7 w-7 text-leaf-500" aria-hidden="true" />
         <div className="text-sm font-medium text-night-900 dark:text-night-50">
-          Déposer un fichier ou <span className="text-leaf-600 dark:text-leaf-400 underline">parcourir</span>
+          {t.rich('drop', { browse: (chunks) => <span className="text-leaf-600 dark:text-leaf-400 underline">{chunks}</span> })}
         </div>
         <p className="text-xs text-night-500 dark:text-night-300">
-          {helperText ?? (<>Max {maxSizeMB} Mo{accept ? ` · ${accept}` : ''}</>)}
+          {helperText ?? (<>{t('max', { max: maxSizeMB })}{accept ? ` · ${accept}` : ''}</>)}
         </p>
         <input
           ref={inputRef}
@@ -141,7 +143,7 @@ export function FileDrop({
       </div>
 
       {files.length > 0 && (
-        <ul className="mt-3 space-y-2" aria-label="Fichiers sélectionnés">
+        <ul className="mt-3 space-y-2" aria-label={t('selected')}>
           {files.map((f, i) => {
             const isImage = f.type.startsWith('image/')
             const url = isImage ? URL.createObjectURL(f) : null
@@ -152,12 +154,12 @@ export function FileDrop({
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium text-night-900 dark:text-night-50">{f.name}</p>
-                  <p className="text-xs text-night-500 dark:text-night-300">{formatSize(f.size)}</p>
+                  <p className="text-xs text-night-500 dark:text-night-300">{formatSize(f.size, t)}</p>
                 </div>
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); remove(i) }}
-                  aria-label={`Retirer ${f.name}`}
+                  aria-label={t('remove', { name: f.name })}
                   className="flex h-11 w-11 items-center justify-center rounded-lg text-night-500 hover:text-alert-500 hover:bg-alert-50 dark:hover:bg-alert-900/20 focus-visible:outline-none"
                 >
                   <X className="h-5 w-5" aria-hidden="true" />

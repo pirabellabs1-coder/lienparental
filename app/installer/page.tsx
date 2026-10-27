@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { SiteShell } from '@/components/site/SiteShell'
 import { MobileInstall } from '@/components/marketing/MobileInstall'
 import { InstallQr } from '@/components/install/InstallQr'
 import { getCurrentUser } from '@/lib/auth/session'
 import { appUrl } from '@/lib/auth/redirect'
 
-export const metadata: Metadata = {
-  title: 'Installer l’application',
-  description: 'Ajoutez Lien Parental à l’écran d’accueil de votre iPhone ou de votre téléphone Android, en quelques secondes.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('public.install')
+  return { title: t('metaTitle'), description: t('metaDescription') }
 }
 
 export default async function InstallerPage() {

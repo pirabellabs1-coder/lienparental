@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowLeftRight, CalendarPlus, MapPin, Settings2, Users } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { PeriodNav } from '@/components/calendrier/CalendarHeader'
@@ -11,11 +12,12 @@ import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { CustodyLegend, CustodyMonth } from '@/components/garde/CustodyMonth'
 import { downloadText, takeGardeFlash } from '@/components/garde/store'
 import { useGardeNames } from '@/components/garde/useGardeNames'
+import { useGardeFormat } from '@/components/garde/useGardeFormat'
 import { fetchGardeConfig } from '@/lib/data/garde'
 import { cn } from '@/lib/cn'
 import {
-  buildHandoversIcs, capitalize, childrenVerb, computeCustody, custodyOfDay, fmtHandoverDate,
-  handoversBetween, holidayAt, lieuLabel, nextHandover, RYTHME_LABELS, type GardeConfig,
+  buildHandoversIcs, capitalize, computeCustody, custodyOfDay,
+  handoversBetween, holidayAt, nextHandover, type GardeConfig,
 } from '@/lib/garde'
 
 const card = 'rounded-2xl border border-night-100 bg-white shadow-[0_1px_2px_rgba(11,45,91,0.05),0_12px_30px_-18px_rgba(11,45,91,0.2)]'
@@ -27,6 +29,8 @@ const btnSecondary =
 export default function GardePage() {
   const today = useClientNow()
   const names = useGardeNames()
+  const t = useTranslations('calendar')
+  const f = useGardeFormat(names)
   const [config, setConfig] = useState<GardeConfig | null>(null)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [attempt, setAttempt] = useState(0)
@@ -40,7 +44,7 @@ export default function GardePage() {
     setLoadError(null)
     fetchGardeConfig(today)
       .then((c) => alive && setConfig(c))
-      .catch((e: unknown) => alive && setLoadError(e instanceof Error ? e.message : 'Chargement du planning impossible.'))
+      .catch((e: unknown) => alive && setLoadError(e instanceof Error ? e.message : t('custody.loadFailed')))
     setMonth(new Date(today.getFullYear(), today.getMonth(), 1))
     const flash = takeGardeFlash()
     if (flash) announce(flash)
@@ -61,7 +65,7 @@ export default function GardePage() {
     ).slice(0, 4)
     return {
       now,
-      period: same >= 4 ? 'Cette semaine' : 'En ce moment',
+      thisWeek: same >= 4,
       next: nextHandover(config, today),
       upcoming,
       holiday: holidayAt(config, today),
@@ -73,23 +77,23 @@ export default function GardePage() {
     const end = new Date(today.getFullYear(), today.getMonth() + 3, today.getDate(), 23, 59)
     const list = handoversBetween(config, today, end)
     if (list.length === 0) {
-      announce("Aucun échange prévu sur les 3 prochains mois.")
+      announce(t('custody.noExport'))
       return
     }
-    downloadText(buildHandoversIcs(config, list, new Date(), names), 'planning-de-garde.ics', 'text/calendar;charset=utf-8')
-    announce(`${list.length} échanges ajoutés au fichier agenda.`)
+    downloadText(buildHandoversIcs(config, list, new Date(), names, f.icsText(config)), t('custody.fileName'), 'text/calendar;charset=utf-8')
+    announce(t('custody.exported', { count: list.length }))
   }
 
   const shift = (n: number) => month && setMonth(new Date(month.getFullYear(), month.getMonth() + n, 1))
 
   return (
     <>
-      <TopBar title="Planning de garde" showBack backHref="/app" />
+      <TopBar title={t('custody.title')} showBack backHref="/app" />
 
       {loadError && !config ? (
-        <ErrorState compact description={loadError} primary={{ label: 'Réessayer', onClick: () => setAttempt((n) => n + 1) }} secondary={{ label: "Retour à l'accueil", href: '/app' }} />
+        <ErrorState compact description={loadError} primary={{ label: t('common.retry'), onClick: () => setAttempt((n) => n + 1) }} secondary={{ label: t('custody.backHome'), href: '/app' }} />
       ) : !config || !month || !today || !summary ? (
-        <LoadingState compact title="Chargement du planning" description="" />
+        <LoadingState compact title={t('custody.loading')} description="" />
       ) : (
         <div className="w-full space-y-5 px-5 pb-8 pt-2">
           <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
@@ -107,11 +111,16 @@ export default function GardePage() {
                 </span>
                 <div className="min-w-0 flex-1">
                   <h2 id="garde-now" className="text-[15px] font-bold leading-snug text-night-900">
-                    {summary.period}, {names.children} {childrenVerb(names, 'sont', 'est')} {summary.now === 'moi' ? 'avec vous' : `avec ${names.coParent}`}
+                    {t(summary.now === 'moi' ? 'custody.nowWithMe' : 'custody.nowWithOther', {
+                      period: summary.thisWeek ? t('custody.thisWeek') : t('custody.rightNow'),
+                      children: names.children,
+                      count: f.count,
+                      ...f.who,
+                    })}
                   </h2>
                   <p className="mt-0.5 text-xs text-night-600">
-                    {RYTHME_LABELS[config.rythme]}
-                    {summary.holiday ? ` · ${summary.holiday}` : ''}
+                    {f.rythme(config.rythme)}
+                    {summary.holiday ? ` · ${f.holiday(summary.holiday)}` : ''}
                   </p>
                 </div>
               </div>
@@ -120,14 +129,18 @@ export default function GardePage() {
                 <ArrowLeftRight aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-night-700" strokeWidth={2.2} />
                 {summary.next ? (
                   <p className="text-[13px] text-night-900">
-                    <span className="font-bold">Prochain échange : </span>
-                    {fmtHandoverDate(summary.next.date)}, {lieuLabel(config, names)}
+                    <span className="font-bold">{t('custody.nextLabel')}</span>
+                    {f.handoverDate(summary.next.date)}, {f.lieu(config)}
                     <span className="mt-0.5 block text-xs text-night-600">
-                      {capitalize(names.children)} {summary.next.to === 'moi' ? `${childrenVerb(names, 'reviennent', 'revient')} chez vous` : `${childrenVerb(names, 'vont', 'va')} chez ${names.coParent}`}.
+                      {t(summary.next.to === 'moi' ? 'custody.nextBackToMe' : 'custody.nextGoToOther', {
+                        children: capitalize(names.children),
+                        count: f.count,
+                        ...f.who,
+                      })}
                     </span>
                   </p>
                 ) : (
-                  <p className="text-[13px] text-night-700">Aucun échange prévu dans les 60 prochains jours.</p>
+                  <p className="text-[13px] text-night-700">{t('custody.noNext')}</p>
                 )}
               </div>
             </section>
@@ -136,25 +149,25 @@ export default function GardePage() {
             <div className="flex flex-col gap-2.5 lg:justify-center">
               <button type="button" onClick={exportIcs} className={btnSecondary}>
                 <CalendarPlus aria-hidden="true" className="h-[18px] w-[18px]" />
-                Ajouter à mon agenda
+                {t('custody.addToCalendar')}
               </button>
               <Link href="/app/garde/configurer" className={btnSecondary}>
                 <Settings2 aria-hidden="true" className="h-[18px] w-[18px]" />
-                Modifier le planning
+                {t('custody.edit')}
               </Link>
-              <p className="text-center text-[11px] text-night-500">Fichier .ics des échanges des 3 prochains mois</p>
+              <p className="text-center text-[11px] text-night-500">{t('custody.icsHint')}</p>
             </div>
           </div>
 
           {/* Calendrier */}
           <section aria-labelledby="garde-month" className={cn(card, 'p-3 md:p-4')}>
-            <h2 id="garde-month" className="sr-only">Calendrier de garde</h2>
+            <h2 id="garde-month" className="sr-only">{t('custody.monthHeading')}</h2>
             <PeriodNav
-              label={month.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}
+              label={f.monthYear(month)}
               onPrev={() => shift(-1)}
               onNext={() => shift(1)}
-              prevLabel="Mois précédent"
-              nextLabel="Mois suivant"
+              prevLabel={t('common.prevMonth')}
+              nextLabel={t('common.nextMonth')}
             />
             <div className="mt-1">
               <CustodyMonth month={month} config={config} today={today} names={names} />
@@ -166,9 +179,9 @@ export default function GardePage() {
 
           {/* Prochains échanges */}
           <section aria-labelledby="garde-next">
-            <h2 id="garde-next" className="mb-2.5 text-[15px] font-bold text-night-900">Prochains échanges</h2>
+            <h2 id="garde-next" className="mb-2.5 text-[15px] font-bold text-night-900">{t('custody.upcomingTitle')}</h2>
             {summary.upcoming.length === 0 ? (
-              <p className={cn(card, 'p-4 text-[13px] text-night-600')}>Aucun échange dans les 4 prochaines semaines.</p>
+              <p className={cn(card, 'p-4 text-[13px] text-night-600')}>{t('custody.noUpcoming')}</p>
             ) : (
               <ul className="grid gap-2.5 lg:grid-cols-2">
                 {summary.upcoming.map((h) => (
@@ -183,12 +196,12 @@ export default function GardePage() {
                       <ArrowLeftRight className="h-[18px] w-[18px]" strokeWidth={2} />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[13px] font-bold text-night-900 first-letter:uppercase">{fmtHandoverDate(h.date)}</span>
+                      <span className="block text-[13px] font-bold text-night-900 first-letter:uppercase">{f.handoverDate(h.date)}</span>
                       <span className="mt-0.5 flex items-center gap-1 text-xs text-night-600">
-                        {h.to === 'moi' ? 'Retour chez vous' : `Départ chez ${names.coParent}`}
+                        {h.to === 'moi' ? t('custody.returnHome') : t('custody.departOther', f.who)}
                         <span aria-hidden="true">·</span>
                         <MapPin aria-hidden="true" className="h-3 w-3" />
-                        <span className="truncate">{lieuLabel(config, names)}</span>
+                        <span className="truncate">{f.lieu(config)}</span>
                       </span>
                     </span>
                   </li>

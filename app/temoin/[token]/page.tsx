@@ -2,6 +2,7 @@
 
 import { use, useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react'
 import { Check, ChevronDown, FileText, Paperclip, Sparkles, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { Logo } from '@/components/brand/Logo'
 import { ConfettiBurst, EnvelopeShieldIcon, LockLeavesIllustration } from '@/components/illustrations'
@@ -21,10 +22,20 @@ const MAX_TEXT = 2000
 const MAX_FILES = 5
 const MAX_FILE_BYTES = 10 * 1024 * 1024
 
-const LIEN_ADULTE = ['Membre de la famille', 'Ami(e)', 'Voisin(e)', 'Collègue', 'Enseignant(e) / personnel scolaire', 'Professionnel(le) de santé', 'Autre']
-const DUREE = ['Moins de 6 mois', '6 mois à 1 an', '1 à 3 ans', '3 à 5 ans', 'Plus de 5 ans']
-const LIEN_ENFANT = ['Membre de la famille', 'Ami(e) de la famille', 'Voisin(e)', 'Enseignant(e) / personnel scolaire', 'Encadrant(e) d’activité', 'Professionnel(le) de santé', 'Autre']
-const LIEUX = ['Domicile du parent', 'École', 'Lieu public', 'Lors d’un échange de garde', 'Activité extrascolaire']
+// Valeurs enregistrées (texte du témoignage, réponses) : en français, pour le dossier du parent.
+// Seul le libellé affiché est traduit (public.witness.options.<liste>.<clé>).
+const LIEN_ADULTE = [
+  ['family', 'Membre de la famille'], ['friend', 'Ami(e)'], ['neighbour', 'Voisin(e)'], ['colleague', 'Collègue'],
+  ['school', 'Enseignant(e) / personnel scolaire'], ['health', 'Professionnel(le) de santé'], ['other', 'Autre'],
+] as const
+const DUREE = [
+  ['lt6m', 'Moins de 6 mois'], ['6m1y', '6 mois à 1 an'], ['1y3y', '1 à 3 ans'], ['3y5y', '3 à 5 ans'], ['gt5y', 'Plus de 5 ans'],
+] as const
+const LIEN_ENFANT = [
+  ['family', 'Membre de la famille'], ['familyFriend', 'Ami(e) de la famille'], ['neighbour', 'Voisin(e)'],
+  ['school', 'Enseignant(e) / personnel scolaire'], ['activity', 'Encadrant(e) d’activité'], ['health', 'Professionnel(le) de santé'], ['other', 'Autre'],
+] as const
+const LIEUX = ['home', 'school', 'public', 'handover', 'activity'] as const
 
 type Fact = { faits: string; quand: string; ou: string; contexte: string }
 type ParentAns = { lien: string; duree: string; facts: Fact[] }
@@ -57,9 +68,9 @@ function reformulate(text: string) {
   return text
     .split('\n')
     .map((line) => {
-      const t = line.replace(/\s+/g, ' ').replace(/\s+([,.;:!?])/g, '$1').trim()
-      if (!t) return ''
-      const cap = t.replace(/(^|[.!?]\s+)([a-zà-ÿ])/g, (_, a: string, b: string) => a + b.toUpperCase())
+      const clean = line.replace(/\s+/g, ' ').replace(/\s+([,.;:!?])/g, '$1').trim()
+      if (!clean) return ''
+      const cap = clean.replace(/(^|[.!?]\s+)([a-zà-ÿ])/g, (_, a: string, b: string) => a + b.toUpperCase())
       return /[.!?:)]$/.test(cap) ? cap : `${cap}.`
     })
     .join('\n')
@@ -78,6 +89,9 @@ async function apiError(res: Response, fallback: string): Promise<string> {
 
 export default function TemoinPage({ params }: { params: Promise<{ token: string }> }) {
   const { token } = use(params)
+  const t = useTranslations('public.witness')
+  const opts = (list: string, items: ReadonlyArray<readonly [string, string]>) =>
+    items.map(([key, value]) => ({ value, label: t(`options.${list}.${key}`) }))
   const localRef = useMemo(() => referenceFrom(token), [token])
   const [serverRef, setServerRef] = useState<string | null>(null)
   const ref = serverRef ?? localRef
@@ -93,13 +107,13 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       .then(async (res) => {
         if (!alive) return
         if (!res.ok) {
-          setLoad({ k: 'error', message: await apiError(res, 'Ce lien de témoignage n’est pas valide ou a expiré.') })
+          setLoad({ k: 'error', message: await apiError(res, t('errInvalid')) })
           return
         }
         const body = (await res.json()) as TestimonyRequestPublic
         if (alive) setLoad({ k: 'ready', request: { parents: body.parents ?? [], enfants: body.enfants ?? [] } })
       })
-      .catch(() => alive && setLoad({ k: 'error', message: 'Connexion impossible. Vérifiez votre réseau puis réessayez.' }))
+      .catch(() => alive && setLoad({ k: 'error', message: t('errNetwork') }))
     return () => { alive = false }
   }, [token])
   const request: TestimonyRequestPublic = load.k === 'ready' ? load.request : { parents: [], enfants: [] }
@@ -204,18 +218,18 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
     const ok: File[] = []
     for (const f of picked) {
       if (!/^(image\/|application\/pdf$)/.test(f.type)) {
-        setFileError('Formats acceptés : images et PDF.')
+        setFileError(t('errFormat'))
         continue
       }
       if (f.size > MAX_FILE_BYTES) {
-        setFileError(`« ${f.name} » dépasse 10 Mo.`)
+        setFileError(t('errSize', { name: f.name }))
         continue
       }
       ok.push(f)
     }
     setFiles((cur) => {
       const merged = [...cur, ...ok]
-      if (merged.length > MAX_FILES) setFileError(`${MAX_FILES} fichiers maximum.`)
+      if (merged.length > MAX_FILES) setFileError(t('errCount', { max: MAX_FILES }))
       return merged.slice(0, MAX_FILES)
     })
   }
@@ -234,7 +248,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
           const fd = new FormData()
           fd.append('file', f)
           const up = await fetch(`/api/temoin/${encodeURIComponent(token)}/upload`, { method: 'POST', body: fd })
-          if (!up.ok) throw new Error(await apiError(up, `« ${f.name} » n’a pas pu être envoyé.`))
+          if (!up.ok) throw new Error(await apiError(up, t('errUpload', { name: f.name })))
           const body = (await up.json()) as { path: string }
           attachments.push({ path: body.path, name: f.name.slice(0, 120) })
         }
@@ -265,14 +279,14 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
             certified: true,
           }),
         })
-        if (!res.ok) throw new Error(await apiError(res, 'L’envoi a échoué. Vérifiez votre connexion puis réessayez.'))
+        if (!res.ok) throw new Error(await apiError(res, t('errSend')))
         const body = (await res.json()) as { reference?: string | null }
         if (body.reference) setServerRef(body.reference)
       }
       setHistory([])
       setScreen({ k: 'merci' })
     } catch (e) {
-      setSendError(e instanceof Error && e.message ? e.message : 'L’envoi a échoué. Vérifiez votre connexion puis réessayez.')
+      setSendError(e instanceof Error && e.message ? e.message : t('errSend'))
     } finally {
       setSending(false)
     }
@@ -290,7 +304,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
   if (load.k === 'loading') {
     return (
       <WitnessFrame>
-        <LoadingState title="Chargement de l’invitation" description="Vérification du lien sécurisé…" />
+        <LoadingState title={t('loadingTitle')} description={t('loadingText')} />
       </WitnessFrame>
     )
   }
@@ -299,10 +313,10 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       <WitnessFrame>
         <ErrorState
           headingLevel={1}
-          title="Lien indisponible"
+          title={t('errorTitle')}
           description={load.message}
-          primary={{ label: 'Réessayer', reload: true }}
-          secondary={{ label: 'Découvrir Lien Parental', href: '/' }}
+          primary={{ label: t('retry'), reload: true }}
+          secondary={{ label: t('discover'), href: '/' }}
         />
       </WitnessFrame>
     )
@@ -316,7 +330,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
           footer={
             <>
               <button type="button" className={cn(btn.primary, 'w-full')} onClick={() => go({ k: 'cible' })}>
-                Commencer
+                {t('start')}
               </button>
               <button
                 type="button"
@@ -325,7 +339,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                 onClick={() => setLearnMore((v) => !v)}
                 className="inline-flex min-h-[44px] w-full items-center justify-center gap-1 text-[13px] font-bold text-leaf-600"
               >
-                En savoir plus
+                {t('learnMore')}
                 <ChevronDown className={cn('h-4 w-4 transition-transform motion-reduce:transition-none', learnMore && 'rotate-180')} aria-hidden="true" />
               </button>
             </>
@@ -335,15 +349,13 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
             <Logo size="sm" layout="inline" className="mx-auto" />
             <EnvelopeShieldIcon className="mx-auto mt-8 h-28 w-28" />
             <h1 id="witness-title" tabIndex={-1} className="mt-6 text-[22px] font-extrabold leading-snug text-night-900 outline-none">
-              Vous avez été invité(e) à déposer un témoignage
+              {t('introTitle')}
             </h1>
             <p className="mx-auto mt-3 max-w-[18rem] text-sm leading-relaxed text-night-600">
-              Ce témoignage sera transmis uniquement au parent demandeur et stocké de manière sécurisée.
+              {t('introText')}
             </p>
             <div id="learn-more" hidden={!learnMore} className="mt-4 rounded-xl bg-leaf-50 p-4 text-left text-[13px] leading-relaxed text-night-700">
-              Aucun compte n’est nécessaire. Vous répondez à quelques questions sur ce que vous avez personnellement
-              constaté, puis vous pouvez relire votre texte avant l’envoi. Votre témoignage est chiffré, horodaté et
-              accessible uniquement au parent demandeur.
+              {t('introMore')}
             </div>
           </div>
         </WitnessBody>
@@ -354,19 +366,19 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       const none = parentIds.length + childIds.length === 0
       content = (
         <>
-          <WitnessHeader title="Sur qui souhaitez-vous témoigner ?" onBack={back} />
+          <WitnessHeader title={t('targetTitle')} onBack={back} />
           <WitnessBody
             footer={
               <button type="button" className={cn(btn.primary, 'w-full')} disabled={none} onClick={() => go(parentIds.length ? { k: 'p-lien', p: 0 } : { k: 'enfant', c: 0 })}>
-                Continuer
+                {t('continue')}
               </button>
             }
           >
-            <p className="text-center text-sm text-night-600">Vous pouvez choisir une ou plusieurs personnes.</p>
+            <p className="text-center text-sm text-night-600">{t('targetHint')}</p>
             {(
               [
-                ['Parents', request.parents, parentIds, setParentIds],
-                ['Enfants', request.enfants, childIds, setChildIds],
+                [t('parents'), request.parents, parentIds, setParentIds],
+                [t('children'), request.enfants, childIds, setChildIds],
               ] as const
             ).map(([legend, people, list, set]) => (
               <fieldset key={legend} className="mt-6">
@@ -396,12 +408,12 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       const next = () => go({ k: 'p-faits', p: screen.p, f: 0 })
       content = (
         <>
-          <WitnessHeader title={`Concernant ${p.nom}`} counter={[1, 4]} onBack={back} />
+          <WitnessHeader title={t('about', { name: p.nom })} counter={[1, 4]} onBack={back} />
           <WitnessBody
             footer={
               <>
                 <button type="button" className={cn(btn.primary, 'w-full')} onClick={next}>
-                  Suivant
+                  {t('next')}
                 </button>
                 <SkipLink onClick={next} />
                 <WitnessDots current={1} total={4} />
@@ -409,8 +421,8 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
             }
           >
             <div className="space-y-7">
-              <SelectField label={<Q>Quel est votre lien avec cette personne ?</Q>} placeholder="Sélectionner" options={LIEN_ADULTE} value={a.lien} onChange={(e) => patchParent(p, { lien: e.target.value })} />
-              <SelectField label={<Q>Depuis combien de temps connaissez-vous cette personne ?</Q>} placeholder="Sélectionner" options={DUREE} value={a.duree} onChange={(e) => patchParent(p, { duree: e.target.value })} />
+              <SelectField label={<Q>{t('qLinkAdult')}</Q>} placeholder={t('select')} options={opts('linkAdult', LIEN_ADULTE)} value={a.lien} onChange={(e) => patchParent(p, { lien: e.target.value })} />
+              <SelectField label={<Q>{t('qDuration')}</Q>} placeholder={t('select')} options={opts('duration', DUREE)} value={a.duree} onChange={(e) => patchParent(p, { duree: e.target.value })} />
             </div>
           </WitnessBody>
         </>
@@ -424,23 +436,23 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       const next = () => go({ k: 'p-contexte', p: screen.p, f: screen.f })
       content = (
         <>
-          <WitnessHeader title={`Concernant ${p.nom}`} counter={[2, 4]} onBack={back} />
+          <WitnessHeader title={t('about', { name: p.nom })} counter={[2, 4]} onBack={back} />
           <WitnessBody
             footer={
               <>
                 <button type="button" className={cn(btn.primary, 'w-full')} onClick={next}>
-                  Suivant
+                  {t('next')}
                 </button>
                 <SkipLink onClick={next} />
                 <WitnessDots current={2} total={4} />
               </>
             }
           >
-            {screen.f > 0 && <p className="mb-2 text-xs font-bold uppercase tracking-wide text-leaf-600">Fait n° {screen.f + 1}</p>}
+            {screen.f > 0 && <p className="mb-2 text-xs font-bold uppercase tracking-wide text-leaf-600">{t('factN', { n: screen.f + 1 })}</p>}
             <TextAreaField
-              label={<Q>Quels faits, comportements ou situations avez-vous personnellement constatés concernant cette personne ?</Q>}
-              hint="Décrivez précisément ce que vous avez vu ou entendu, sans interprétation."
-              placeholder="Écrivez votre témoignage ici…"
+              label={<Q>{t('qFacts')}</Q>}
+              hint={t('factsHint')}
+              placeholder={t('factsPh')}
               rows={8}
               maxLength={MAX_TEXT}
               value={fact.faits}
@@ -458,12 +470,12 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       const next = () => go({ k: 'p-autre', p: screen.p, f: screen.f })
       content = (
         <>
-          <WitnessHeader title={`Concernant ${p.nom}`} counter={[3, 4]} onBack={back} />
+          <WitnessHeader title={t('about', { name: p.nom })} counter={[3, 4]} onBack={back} />
           <WitnessBody
             footer={
               <>
                 <button type="button" className={cn(btn.primary, 'w-full')} onClick={next}>
-                  Suivant
+                  {t('next')}
                 </button>
                 <SkipLink onClick={next} />
                 <WitnessDots current={3} total={4} />
@@ -473,26 +485,26 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
             <div className="space-y-6">
               <TextField
                 type="date"
-                label={<Q>Quand cela s’est-il produit ?</Q>}
+                label={<Q>{t('qWhen')}</Q>}
                 max={new Date().toISOString().slice(0, 10)}
                 value={fact.quand}
                 onChange={(e) => patchFact(p, screen.f, { quand: e.target.value })}
               />
               <TextField
-                label={<Q>Où cela s’est-il produit ?</Q>}
-                placeholder="Sélectionner ou préciser le lieu"
+                label={<Q>{t('qWhere')}</Q>}
+                placeholder={t('wherePh')}
                 list="lieux"
                 value={fact.ou}
                 onChange={(e) => patchFact(p, screen.f, { ou: e.target.value })}
               />
               <datalist id="lieux">
                 {LIEUX.map((l) => (
-                  <option key={l} value={l} />
+                  <option key={l} value={t(`options.places.${l}`)} />
                 ))}
               </datalist>
               <TextAreaField
-                label={<Q>Dans quel contexte étiez-vous présent(e) ?</Q>}
-                placeholder="Décrivez le contexte…"
+                label={<Q>{t('qContext')}</Q>}
+                placeholder={t('contextPh')}
                 rows={4}
                 maxLength={MAX_TEXT}
                 value={fact.contexte}
@@ -516,7 +528,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       const skip = () => go(afterParent(screen.p))
       content = (
         <>
-          <WitnessHeader title={`Concernant ${p.nom}`} counter={[4, 4]} onBack={back} />
+          <WitnessHeader title={t('about', { name: p.nom })} counter={[4, 4]} onBack={back} />
           <WitnessBody
             footer={
               <>
@@ -525,14 +537,14 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
               </>
             }
           >
-            <Q>Souhaitez-vous ajouter un autre fait ou situation concernant cette personne ?</Q>
-            <p className="mt-2 text-sm leading-relaxed text-night-600">Vous pourrez décrire un autre fait avec la même précision.</p>
+            <Q>{t('qAnother')}</Q>
+            <p className="mt-2 text-sm leading-relaxed text-night-600">{t('anotherHint')}</p>
             <div className="mt-6 space-y-3">
               <button type="button" className={cn(btn.secondary, 'w-full')} onClick={addFact}>
-                Oui, ajouter un autre fait
+                {t('anotherYes')}
               </button>
               <button type="button" className={cn(btn.secondary, 'w-full')} onClick={skip}>
-                Non, passer à la suite
+                {t('anotherNo')}
               </button>
             </div>
           </WitnessBody>
@@ -547,12 +559,12 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       const next = () => go(screen.c + 1 < children.length ? { k: 'enfant', c: screen.c + 1 } : { k: 'complements' })
       content = (
         <>
-          <WitnessHeader title={`Concernant ${c.nom}`} counter={[screen.c + 1, children.length]} onBack={back} />
+          <WitnessHeader title={t('about', { name: c.nom })} counter={[screen.c + 1, children.length]} onBack={back} />
           <WitnessBody
             footer={
               <>
                 <button type="button" className={cn(btn.primary, 'w-full')} onClick={next}>
-                  Suivant
+                  {t('next')}
                 </button>
                 <SkipLink onClick={next} />
                 <WitnessDots current={screen.c + 1} total={children.length} />
@@ -560,10 +572,10 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
             }
           >
             <div className="space-y-7">
-              <SelectField label={<Q>Quel est votre lien avec cet enfant ?</Q>} placeholder="Sélectionner" options={LIEN_ENFANT} value={a.lien} onChange={(e) => patchChild(c, { lien: e.target.value })} />
+              <SelectField label={<Q>{t('qLinkChild')}</Q>} placeholder={t('select')} options={opts('linkChild', LIEN_ENFANT)} value={a.lien} onChange={(e) => patchChild(c, { lien: e.target.value })} />
               <TextAreaField
-                label={<Q>Qu’avez-vous personnellement constaté concernant cet enfant ?</Q>}
-                placeholder="Décrivez ce que vous avez observé…"
+                label={<Q>{t('qChild')}</Q>}
+                placeholder={t('childPh')}
                 rows={6}
                 maxLength={MAX_TEXT}
                 value={a.constate}
@@ -579,12 +591,12 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
     case 'complements':
       content = (
         <>
-          <WitnessHeader title="Informations complémentaires" counter={[1, 2]} onBack={back} />
+          <WitnessHeader title={t('complementsTitle')} counter={[1, 2]} onBack={back} />
           <WitnessBody
             footer={
               <>
                 <button type="button" className={cn(btn.primary, 'w-full')} onClick={() => go({ k: 'relecture' })}>
-                  Suivant
+                  {t('next')}
                 </button>
                 <SkipLink onClick={() => go({ k: 'relecture' })} />
                 <WitnessDots current={1} total={2} />
@@ -592,8 +604,8 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
             }
           >
             <TextAreaField
-              label={<Q>Y a-t-il un autre fait important que vous souhaitez rapporter ?</Q>}
-              placeholder="Décrivez-le ici…"
+              label={<Q>{t('qComplement')}</Q>}
+              placeholder={t('complementPh')}
               rows={5}
               maxLength={MAX_TEXT}
               value={complement}
@@ -602,7 +614,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
 
             <div className="mt-7">
               <Q>
-                Souhaitez-vous joindre un document ou une photo ? <span className="font-medium text-night-500">(facultatif)</span>
+                {t('qAttach')} <span className="font-medium text-night-500">{t('optional')}</span>
               </Q>
               <input ref={fileInput} type="file" accept="image/*,application/pdf" multiple className="sr-only" tabIndex={-1} aria-hidden="true" onChange={onFiles} />
               <button
@@ -613,7 +625,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                 aria-describedby={fileError ? 'file-error' : undefined}
               >
                 <Paperclip className="h-[18px] w-[18px] text-leaf-600" aria-hidden="true" />
-                Joindre un fichier
+                {t('attach')}
               </button>
               {fileError && (
                 <p id="file-error" role="alert" className="mt-2 text-xs font-semibold text-alert-600">
@@ -621,7 +633,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                 </p>
               )}
               {files.length > 0 && (
-                <ul className="mt-3 space-y-2" aria-label="Fichiers joints">
+                <ul className="mt-3 space-y-2" aria-label={t('attached')}>
                   {files.map((f, i) => (
                     <li key={`${f.name}-${i}`} className="flex items-center gap-3 rounded-xl border border-night-100 py-1 pl-3 pr-1 text-sm">
                       <FileText className="h-4 w-4 shrink-0 text-leaf-600" aria-hidden="true" />
@@ -629,7 +641,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                       <button
                         type="button"
                         onClick={() => setFiles((cur) => cur.filter((_, j) => j !== i))}
-                        aria-label={`Retirer ${f.name}`}
+                        aria-label={t('remove', { name: f.name })}
                         className="grid h-10 w-10 place-items-center rounded-lg text-night-500 hover:bg-night-50 hover:text-night-900"
                       >
                         <X className="h-4 w-4" aria-hidden="true" />
@@ -648,7 +660,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       const empty = !original.trim()
       content = (
         <>
-          <WitnessHeader title="Relecture avant envoi" counter={[2, 2]} onBack={back} />
+          <WitnessHeader title={t('reviewTitle')} counter={[2, 2]} onBack={back} />
           <WitnessBody
             footer={
               <>
@@ -658,7 +670,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                   </p>
                 )}
                 <button type="button" className={cn(btn.primary, 'w-full')} disabled={empty || !certified || sending} aria-busy={sending} onClick={send}>
-                  {sending ? 'Envoi en cours…' : 'Envoyer'}
+                  {sending ? t('sending') : t('send')}
                 </button>
                 <WitnessDots current={2} total={2} />
               </>
@@ -666,17 +678,17 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
           >
             {empty ? (
               <p role="alert" className="rounded-xl bg-night-50 p-4 text-sm text-night-700">
-                Votre témoignage est vide. Revenez en arrière pour décrire au moins un fait.
+                {t('empty')}
               </p>
             ) : (
               <>
                 <section aria-labelledby="ia-title" className="rounded-2xl border border-iris-100 bg-iris-50/60 p-4">
                   <h2 id="ia-title" className="flex items-center gap-2 text-sm font-bold text-iris-700">
                     <Sparkles className="h-4 w-4" aria-hidden="true" />
-                    Reformulation par l’IA (facultatif)
+                    {t('iaTitle')}
                   </h2>
                   <p className="mt-1 text-[13px] leading-relaxed text-night-700">
-                    L’IA améliore la clarté et l’orthographe en respectant fidèlement vos propos. Vous gardez le contrôle.
+                    {t('iaText')}
                   </p>
                   <button
                     type="button"
@@ -686,17 +698,17 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                     }}
                     className="mt-3 inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-night-200 bg-white px-4 text-sm font-semibold text-night-900 hover:bg-night-50"
                   >
-                    {iaText === null ? 'Proposer une reformulation' : 'Nouvelle reformulation'}
+                    {iaText === null ? t('iaPropose') : t('iaAgain')}
                   </button>
                 </section>
 
                 {iaText !== null && (
                   <fieldset className="mt-5">
-                    <legend className="text-[13px] font-bold text-night-900">Version à envoyer</legend>
+                    <legend className="text-[13px] font-bold text-night-900">{t('versionLegend')}</legend>
                     <div className="mt-2 grid grid-cols-2 gap-2">
                       {([
-                        [false, 'Ma version'],
-                        [true, 'Version proposée'],
+                        [false, t('versionMine')],
+                        [true, t('versionIa')],
                       ] as const).map(([val, label]) => (
                         <label
                           key={label}
@@ -716,14 +728,14 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                 {iaText !== null && useIa ? (
                   <TextAreaField
                     containerClassName="mt-4"
-                    label="Version proposée (modifiable)"
+                    label={t('versionIaEditable')}
                     rows={9}
                     value={iaText}
                     onChange={(e) => setIaText(e.target.value)}
                   />
                 ) : (
                   <div className="mt-4">
-                    <p className="mb-1.5 text-[13px] font-bold text-night-900">Votre témoignage</p>
+                    <p className="mb-1.5 text-[13px] font-bold text-night-900">{t('yourTestimony')}</p>
                     <p className="max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl border border-night-100 p-4 text-sm leading-relaxed text-night-800">
                       {original}
                     </p>
@@ -732,7 +744,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
 
                 <label className="mt-5 flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-night-600">
                   <input type="checkbox" checked={certified} onChange={(e) => setCertified(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-leaf-500" />
-                  Je certifie que ce témoignage relate des faits que j’ai personnellement constatés.
+                  {t('certify')}
                 </label>
               </>
             )}
@@ -748,7 +760,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
           className="pt-10"
           footer={
             <button type="button" className={cn(btn.primary, 'w-full')} onClick={() => setScreen({ k: 'fin' })}>
-              Terminer
+              {t('finish')}
             </button>
           }
         >
@@ -760,14 +772,14 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
               </span>
             </div>
             <h1 id="witness-title" tabIndex={-1} className="mt-4 text-[26px] font-extrabold text-night-900 outline-none">
-              Merci !
+              {t('thanksTitle')}
             </h1>
-            <p className="mt-2 text-[15px] font-bold text-night-900">Votre témoignage a bien été envoyé.</p>
+            <p className="mt-2 text-[15px] font-bold text-night-900">{t('thanksSent')}</p>
             <p className="mx-auto mt-4 max-w-[17rem] text-sm leading-relaxed text-night-600">
-              Il sera transmis au parent demandeur qui vous a invité(e) via le lien.
+              {t('thanksText')}
             </p>
             <p className="mt-4 text-xs text-night-500">
-              Référence : <span className="font-mono font-semibold text-night-700">{ref}</span>
+              {t('reference')} <span className="font-mono font-semibold text-night-700">{ref}</span>
             </p>
           </div>
         </WitnessBody>
@@ -781,10 +793,10 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
           footer={
             <>
               <button type="button" className={cn(btn.primary, 'w-full')} onClick={closePage}>
-                Fermer la page
+                {t('close')}
               </button>
               <p role="status" className="min-h-[20px] text-center text-xs text-night-500">
-                {closeHint ? 'Vous pouvez fermer cet onglet en toute sécurité.' : ''}
+                {closeHint ? t('closeHint') : ''}
               </p>
             </>
           }
@@ -792,12 +804,12 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
           <div className="text-center">
             <LockLeavesIllustration className="mx-auto w-full max-w-[240px]" />
             <h1 id="witness-title" tabIndex={-1} className="mt-6 text-[22px] font-extrabold text-night-900 outline-none">
-              Votre témoignage est sécurisé
+              {t('endTitle')}
             </h1>
             <p className="mt-3 text-sm leading-relaxed text-night-600">
-              Vous pouvez maintenant
+              {t('endText1')}
               <br />
-              fermer cette page.
+              {t('endText2')}
             </p>
           </div>
         </WitnessBody>

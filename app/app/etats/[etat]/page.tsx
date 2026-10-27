@@ -2,6 +2,7 @@
 
 import { notFound, useRouter } from 'next/navigation'
 import { use, useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { TopBar } from '@/components/mobile/TopBar'
 import {
   EmptyState, ErrorState, LoadingState, MaintenanceState, OfflineState, ProgressOperation,
@@ -10,20 +11,11 @@ import {
 
 // Rendu plein écran de chaque état système (revue client). Les opérations longues
 // progressent en démo jusqu'à la valeur de la maquette.
-const TITLES: Record<string, string> = {
-  chargement: 'Chargement',
-  succes: 'Succès',
-  erreur: 'Erreur',
-  'hors-connexion': 'Hors connexion',
-  vide: 'Aucune donnée',
-  maintenance: 'Maintenance',
-  synchronisation: 'Synchronisation',
-  sauvegarde: 'Sauvegarde',
-  suppression: 'Suppression',
-  importation: 'Importation',
-  'mise-a-jour': 'Mise à jour',
-  'a-jour': 'Tout est à jour',
-}
+// Titres traduits au rendu : account.states.items.{slug}.title.
+const SLUGS = new Set([
+  'chargement', 'succes', 'erreur', 'hors-connexion', 'vide', 'maintenance',
+  'synchronisation', 'sauvegarde', 'suppression', 'importation', 'mise-a-jour', 'a-jour',
+])
 
 const TARGET: Record<OperationKind, number> = {
   synchronisation: 68,
@@ -52,9 +44,10 @@ function useDemoProgress(target: number, active: boolean) {
 
 export default function EtatPage({ params }: { params: Promise<{ etat: string }> }) {
   const { etat } = use(params)
+  const t = useTranslations('account.states')
   const router = useRouter()
-  const title = TITLES[etat]
-  if (!title) notFound()
+  if (!SLUGS.has(etat)) notFound()
+  const title = t(`items.${etat}.title`)
 
   const isOp = etat in TARGET
   const value = useDemoProgress(isOp ? TARGET[etat as OperationKind] : 0, isOp)
@@ -67,24 +60,24 @@ export default function EtatPage({ params }: { params: Promise<{ etat: string }>
       screen = <LoadingState />
       break
     case 'succes':
-      screen = <SuccessState primary={{ label: 'Continuer', href: '/app' }} secondary={{ label: 'Voir le détail', href: '/app/journal' }} />
+      screen = <SuccessState primary={{ label: t('demo.continue'), href: '/app' }} secondary={{ label: t('demo.details'), href: '/app/journal' }} />
       break
     case 'erreur':
-      screen = <ErrorState code={500} primary={{ label: 'Réessayer', href: '/app/etats/chargement' }} />
+      screen = <ErrorState code={500} primary={{ label: t('demo.retry'), href: '/app/etats/chargement' }} />
       break
     case 'hors-connexion':
-      screen = <OfflineState secondary={{ label: 'Travailler hors ligne', href: '/app' }} />
+      screen = <OfflineState secondary={{ label: t('demo.offline'), href: '/app' }} />
       break
     case 'vide':
       screen = (
         <EmptyState
-          primary={{ label: 'Ajouter un élément', href: '/app/journal/nouveau' }}
-          secondary={{ label: 'En savoir plus', href: '/app/aide' }}
+          primary={{ label: t('demo.add'), href: '/app/journal/nouveau' }}
+          secondary={{ label: t('demo.learnMore'), href: '/app/aide' }}
         />
       )
       break
     case 'maintenance':
-      screen = <MaintenanceState primary={{ label: 'Réessayer plus tard', href: '/app/etats' }} />
+      screen = <MaintenanceState primary={{ label: t('demo.retryLater'), href: '/app/etats' }} />
       break
     case 'a-jour':
       screen = <UpToDateState />
@@ -98,7 +91,7 @@ export default function EtatPage({ params }: { params: Promise<{ etat: string }>
       break
     case 'importation':
       screen = (
-        <ProgressOperation kind="importation" value={value} fileName="Contrat_parental.pdf" fileSize="2,4 Mo" remainingLabel="3 fichiers restants" onCancel={toList} />
+        <ProgressOperation kind="importation" value={value} fileName="Contrat_parental.pdf" fileSize={t('demo.fileSize')} remainingLabel={t('demo.remaining', { count: 3 })} onCancel={toList} />
       )
       break
     case 'mise-a-jour':

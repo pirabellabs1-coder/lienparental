@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { ArrowLeft } from 'lucide-react'
 import { TerritorySelect } from './TerritorySelect'
 import type { Territoire } from '@/lib/guide/types'
@@ -12,6 +13,7 @@ type Props = {
 
 // En-tête commun du Guide : retour éventuel + bandeau « Territoire ».
 export function GuideHeader({ territoire, territoires, back }: Props) {
+  const t = useTranslations('coach.guide')
   return (
     <div style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}>
       <div className="flex min-h-[44px] items-center justify-between gap-3">
@@ -24,7 +26,7 @@ export function GuideHeader({ territoire, territoires, back }: Props) {
             {back.label}
           </Link>
         ) : (
-          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-leaf-700">Guide parental</span>
+          <span className="text-[13px] font-semibold uppercase tracking-[0.08em] text-leaf-700">{t('title')}</span>
         )}
         <TerritorySelect current={territoire} territoires={territoires} />
       </div>

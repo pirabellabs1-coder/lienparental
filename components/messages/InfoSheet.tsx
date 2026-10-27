@@ -1,11 +1,13 @@
 'use client'
 
 import { Archive, ArchiveRestore, Clock3, FileDown, FolderLock, Loader2, Lock, Sparkles } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { btn } from '@/components/ui/kit'
-import { displayName, type Participant } from '@/lib/messages'
+import type { Participant } from '@/lib/messages'
 import { Sheet } from './Sheet'
 import { Avatar } from './Avatar'
+import { useMessagesFormat } from './useMessagesFormat'
 
 type Props = {
   open: boolean
@@ -23,15 +25,17 @@ type Props = {
 }
 
 export function InfoSheet({ open, onClose, me, participants, title, count, exporting, onExport, archived, archiving, onToggleArchive }: Props) {
+  const t = useTranslations('messaging.info')
+  const { displayName } = useMessagesFormat()
   return (
     <Sheet
       open={open}
       onClose={onClose}
-      title="Informations sur la conversation"
-      description={title ? `Sujet : ${title}` : undefined}
+      title={t('title')}
+      description={title ? t('topic', { title }) : undefined}
     >
-      <ul className="space-y-2" aria-label="Participants">
-        {[{ p: me, role: 'Vous' }, ...participants.map((p) => ({ p, role: 'Parent lié' }))].map(({ p, role }) => (
+      <ul className="space-y-2" aria-label={t('participants')}>
+        {[{ p: me, role: t('you') }, ...participants.map((p) => ({ p, role: t('linkedParent') }))].map(({ p, role }) => (
           <li key={p.id} className="flex items-center gap-3 rounded-xl bg-night-50/60 p-3">
             <Avatar person={p} size="sm" />
             <span className="min-w-0">
@@ -46,40 +50,40 @@ export function InfoSheet({ open, onClose, me, participants, title, count, expor
         <li className="flex gap-3">
           <Lock className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" aria-hidden="true" />
           <p className="text-[13px] text-night-800">
-            <span className="font-bold">Les messages ne peuvent être ni modifiés ni supprimés.</span>{' '}
-            Cela garantit leur valeur de preuve, pour vous comme pour les autres participants.
+            <span className="font-bold">{t('immutableStrong')}</span>{' '}
+            {t('immutableText')}
           </p>
         </li>
         <li className="flex gap-3">
           <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-night-700" aria-hidden="true" />
-          <p className="text-[13px] text-night-800">Chaque message est horodaté au moment de son envoi. La mention « Lu » indique qu&apos;un destinataire a ouvert la conversation.</p>
+          <p className="text-[13px] text-night-800">{t('timestamp')}</p>
         </li>
         <li className="flex gap-3">
           <FolderLock className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" aria-hidden="true" />
-          <p className="text-[13px] text-night-800">Rien n&apos;est ajouté à votre coffre-fort sans votre accord : utilisez « Mettre au coffre-fort » sur une pièce jointe, ou activez le rangement automatique dans les paramètres du coffre-fort.</p>
+          <p className="text-[13px] text-night-800">{t('vault')}</p>
         </li>
         <li className="flex gap-3">
           <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-iris-600" aria-hidden="true" />
-          <p className="text-[13px] text-night-800">La vérification du ton propose une reformulation avant l&apos;envoi. Elle ne bloque jamais votre message.</p>
+          <p className="text-[13px] text-night-800">{t('tone')}</p>
         </li>
       </ul>
 
       <button type="button" onClick={onExport} disabled={exporting || count === 0} className={cn(btn.primary, 'mt-5 w-full')} data-autofocus>
         {exporting ? <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden="true" /> : <FileDown className="h-5 w-5" aria-hidden="true" />}
-        {exporting ? 'Préparation du PDF…' : 'Exporter la conversation en PDF'}
+        {exporting ? t('preparing') : t('export')}
       </button>
       <p className="mt-2 text-center text-[11px] text-night-600">
-        {count} message{count > 1 ? 's' : ''} · à joindre à votre dossier
+        {t('count', { count })}
       </p>
 
       <button type="button" onClick={onToggleArchive} disabled={archiving} className={cn(btn.secondary, 'mt-3 w-full')}>
         {archiving
           ? <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden="true" />
           : archived ? <ArchiveRestore className="h-5 w-5" aria-hidden="true" /> : <Archive className="h-5 w-5" aria-hidden="true" />}
-        {archived ? 'Ressortir des archives' : 'Archiver la conversation'}
+        {archived ? t('unarchive') : t('archive')}
       </button>
       <p className="mt-2 text-center text-[11px] text-night-600">
-        L&apos;archivage range la conversation pour vous seul. Rien n&apos;est supprimé.
+        {t('archiveHint')}
       </p>
     </Sheet>
   )

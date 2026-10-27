@@ -2,6 +2,7 @@
 // Couvre uniquement ce qu'utilisent ces fichiers : front-matter, ## titres,
 // paragraphes, listes à puces, listes numérotées, **gras**. Les images sont ignorées.
 // Le texte est rendu en nœuds React (jamais en HTML brut) : pas de risque XSS.
+import { useTranslations } from 'next-intl'
 import { Check } from 'lucide-react'
 import { Fragment, type ReactNode } from 'react'
 
@@ -85,6 +86,7 @@ function splitStep(item: string) {
 }
 
 export function MarkdownBlocks({ blocks }: { blocks: Block[] }) {
+  const t = useTranslations('account.markdown')
   return (
     <div className="space-y-4 text-[13px] leading-relaxed text-night-800">
       {blocks.map((b, i) => {
@@ -112,7 +114,7 @@ export function MarkdownBlocks({ blocks }: { blocks: Block[] }) {
                 <li key={j} className="flex items-start gap-3.5">
                   <span aria-hidden className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-leaf-600 text-[12.5px] font-bold text-white">{j + 1}</span>
                   <span className="pt-0.5">
-                    <span className="sr-only">Étape {j + 1} : </span>
+                    <span className="sr-only">{t('step', { n: j + 1 })} </span>
                     {title && <span className="block font-bold text-night-900">{title}</span>}
                     <span className="block">{inline(rest)}</span>
                   </span>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ArrowRight, Check } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
@@ -9,11 +10,12 @@ import { clearDraft } from '@/components/onboarding/draft'
 import { DEMO_MODE, startDemoSession } from '@/lib/demo-auth'
 import { ConfettiBurst, FamilyHeartIcon } from '@/components/illustrations'
 
-const BENEFITS = ['Communication simplifiée', 'Documents sécurisés', 'Organisation facilitée']
+const BENEFITS = ['communication', 'documents', 'organization'] as const
 
 // Étape 12 : c'est terminé ! Votre espace est prêt.
 export default function PretPage() {
   const router = useRouter()
+  const t = useTranslations('public.onboarding.ready')
 
   const enter = () => {
     clearDraft()
@@ -34,11 +36,11 @@ export default function PretPage() {
           <FamilyHeartIcon className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2" />
         </div>
       }
-      title="Votre espace est prêt !"
-      subtitle="Vous pouvez dès à présent accéder à votre espace personnalisé."
+      title={t('title')}
+      subtitle={t('subtitle')}
       footer={
         <button type="button" onClick={enter} className={cn(btn.primary, 'relative w-full')}>
-          Accéder à mon espace
+          {t('enter')}
           <ArrowRight className="absolute right-5 h-5 w-5" aria-hidden="true" />
         </button>
       }
@@ -49,7 +51,7 @@ export default function PretPage() {
             <span className="grid h-5 w-5 place-items-center rounded-full border-[1.5px] border-leaf-500 text-leaf-500" aria-hidden="true">
               <Check className="h-3 w-3" strokeWidth={3.2} />
             </span>
-            {b}
+            {t(`benefits.${b}`)}
           </li>
         ))}
       </ul>

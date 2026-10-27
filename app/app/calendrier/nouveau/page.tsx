@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { use, useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
 import { ChevronDown, Info } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { TopBar } from '@/components/mobile/TopBar'
 import { EmptyState, SuccessState } from '@/components/mobile/StateScreens'
 import { Switch } from '@/components/ui'
@@ -10,11 +11,12 @@ import {
   ChildrenPicker, DateTimeFields, FieldLabel, SubmitBar, TextAreaField, TextField, TypeTileGroup,
 } from '@/components/journal/FormFields'
 import { EVENT_ICONS, typeStyle } from '@/components/calendrier/eventTypeStyles'
+import { useCalFormat } from '@/components/calendrier/useCalFormat'
 import { EVENT_TYPES, REMINDER_OPTIONS, SHARED_BY_DEFAULT, type EventTypeKey, type ReminderKey } from '@/lib/calendrier'
 import { cn } from '@/lib/cn'
 import { addDaysToKey, dayKeyInTz, timeInTz, todayKey } from '@/lib/tz'
 import { useChildOptions } from '@/lib/data/children'
-import { SANTE_CHILD_REQUIRED, createEvent, updateEvent, useEvent } from '@/lib/data/calendar'
+import { createEvent, updateEvent, useEvent } from '@/lib/data/calendar'
 import { useSharedChildIds } from '@/lib/data/family'
 import { parseCalendarPrefill, type RawParams } from '@/lib/prefill'
 
@@ -32,6 +34,8 @@ const selectCls =
 
 export default function NouvelEvenementPage({ searchParams }: { searchParams: Promise<RawParams> }) {
   const params = use(searchParams)
+  const t = useTranslations('calendar')
+  const f = useCalFormat()
   const editId = typeof params.id === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(params.id) ? params.id : undefined
   // En modification, l'URL de pré-remplissage est ignorée : l'événement existant fait foi.
   const prefill = useMemo(() => (editId ? {} : parseCalendarPrefill(params)), [editId, params])
@@ -110,22 +114,22 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
   const hasFamily = (sharedChildIds?.length ?? 0) > 0
   const familyShared = familyChoice ?? (sharedSelected.length > 0 && SHARED_BY_DEFAULT.has(type))
   const familyHelp = !familyShared
-    ? 'Masqué : visible par vous seul. L’autre parent n’en est pas informé.'
+    ? t('new.familyHidden')
     : sharedSelected.length > 0
-      ? `Ajouté au calendrier de l’autre parent de ${sharedSelected.map((c) => c.prenom).join(', ')}, en lecture seule${type === 'sante' ? '' : ' (et des proches invités)'}.`
-      : 'Choisissez un enfant partagé pour que la famille le voie.'
+      ? t(type === 'sante' ? 'new.familySharedHealth' : 'new.familyShared', { names: sharedSelected.map((c) => c.prenom).join(', ') })
+      : t('new.familyPickChild')
 
-  const titleError = submitted && !title.trim() ? "Donnez un titre à l'événement." : undefined
-  const dateError = submitted && !date ? 'La date est requise.' : undefined
+  const titleError = submitted && !title.trim() ? t('new.titleRequired') : undefined
+  const dateError = submitted && !date ? t('new.dateRequired') : undefined
   const childMissing = isHealth && childOptions.length > 1 && childIds.length === 0
-  const childError = submitted && childMissing ? SANTE_CHILD_REQUIRED : undefined
+  const childError = submitted && childMissing ? t('new.childRequired') : undefined
 
-  const tiles = EVENT_TYPES.map((t) => {
-    const s = typeStyle(t.key)
-    const Icon = EVENT_ICONS[t.icon]
+  const tiles = EVENT_TYPES.map((et) => {
+    const s = typeStyle(et.key)
+    const Icon = EVENT_ICONS[et.icon]
     return {
-      value: t.key,
-      label: t.label,
+      value: et.key,
+      label: f.typeLabel(et.key),
       icon: <Icon className={cn('h-[22px] w-[22px]', s.icon)} strokeWidth={1.8} />,
       idleClass: cn(s.bg, s.border),
       selectedClass: cn(s.bg, 'border-transparent ring-2', s.ring),
@@ -153,7 +157,7 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
       const healthChild = type === 'sante' && childIds.length === 1 ? childIds[0] : undefined
       router.push(editing ? `/app/calendrier/${editId}` : (healthReturn && healthChild ? `/app/enfants/${healthChild}/sante` : '/app/calendrier'))
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : 'Enregistrement impossible.')
+      setSaveError(err instanceof Error ? err.message : t('common.saveFailed'))
       setSaving(false)
     }
   }
@@ -161,13 +165,13 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
   if (saved && prefill.source) {
     return (
       <>
-        <TopBar title="Événement enregistré" showBack backHref={prefill.source.href} showBell={false} />
+        <TopBar title={t('new.savedTitle')} showBack backHref={prefill.source.href} showBell={false} />
         <SuccessState
           compact
-          title="C’est noté dans votre calendrier"
-          description={`« ${title.trim()} » a bien été enregistré.`}
-          primary={{ label: 'Retour au guide', href: prefill.source.href }}
-          secondary={{ label: 'Voir le calendrier', href: '/app/calendrier' }}
+          title={t('new.savedHeading')}
+          description={t('new.savedDesc', { title: title.trim() })}
+          primary={{ label: t('new.backToGuide'), href: prefill.source.href }}
+          secondary={{ label: t('new.viewCalendar'), href: '/app/calendrier' }}
         />
       </>
     )
@@ -177,11 +181,11 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
   if (existing?.sharedBy) {
     return (
       <>
-        <TopBar title="Modifier l'événement" showBack backHref={`/app/calendrier/${existing.id}`} showBell={false} />
+        <TopBar title={t('new.titleEdit')} showBack backHref={`/app/calendrier/${existing.id}`} showBell={false} />
         <EmptyState
-          title="Modification réservée à l’auteur"
-          description={`Cet événement a été partagé par ${existing.sharedBy.prenom}. Vous pouvez le consulter, mais seul son auteur peut le modifier.`}
-          primary={{ label: 'Voir l’événement', href: `/app/calendrier/${existing.id}` }}
+          title={t('new.authorOnlyTitle')}
+          description={t('new.authorOnlyDesc', { prenom: existing.sharedBy.prenom })}
+          primary={{ label: t('new.viewEvent'), href: `/app/calendrier/${existing.id}` }}
         />
       </>
     )
@@ -189,13 +193,13 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
 
   return (
     <>
-      <TopBar title={editing ? "Modifier l'événement" : 'Ajouter un événement'} showBack backHref={backHref} showBell={false} />
+      <TopBar title={editing ? t('new.titleEdit') : t('new.titleAdd')} showBack backHref={backHref} showBell={false} />
 
       <form onSubmit={onSubmit} noValidate className="space-y-5 px-4 pb-6 pt-3">
         {prefill.source && (
           <p className="flex items-start gap-2 rounded-xl bg-leaf-50 px-3.5 py-3 text-[12.5px] leading-relaxed text-leaf-800">
             <Info aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.8} />
-            Formulaire pré-rempli depuis le Guide parental. Vérifiez les informations avant d’enregistrer.
+            {t('new.prefillNotice')}
           </p>
         )}
 
@@ -205,49 +209,49 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
 
         <TextField
           id="ev-title"
-          label="Titre"
+          label={t('new.titleLabel')}
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder={isHealth ? 'Ex : Pédiatre, vaccin, dentiste…' : 'Ex : Visite avec Lina'}
+          placeholder={isHealth ? t('new.titlePlaceholderHealth') : t('new.titlePlaceholder')}
           maxLength={120}
           error={titleError}
         />
 
         <TextField
-          label="Lieu"
+          label={t('new.locationLabel')}
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          placeholder={isHealth ? 'Ex : Cabinet du Dr Martin' : 'Ex : À mon domicile'}
+          placeholder={isHealth ? t('new.locationPlaceholderHealth') : t('new.locationPlaceholder')}
           maxLength={200}
         />
 
         <TextAreaField
-          label="Description (facultatif)"
+          label={t('new.descriptionLabel')}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Décrivez l'événement…"
+          placeholder={t('new.descriptionPlaceholder')}
           maxLength={500}
         />
 
         <div ref={pickerRef}>
           <ChildrenPicker
-            label={isHealth ? (childOptions.length > 1 ? 'Enfant concerné (obligatoire)' : 'Enfant concerné') : 'Enfants concernés'}
+            label={isHealth ? (childOptions.length > 1 ? t('new.childRequiredLabel') : t('new.childLabel')) : t('new.childrenLabel')}
             options={childOptions}
             value={childIds}
             onChange={setChildIds}
           />
           {isHealth && !childError && (
-            <p className="mt-1.5 text-xs text-night-600">Le rendez-vous apparaîtra dans l’espace Santé de l’enfant.</p>
+            <p className="mt-1.5 text-xs text-night-600">{t('new.healthHint')}</p>
           )}
           {childError && <p role="alert" className="mt-1.5 text-xs font-medium text-alert-600">{childError}</p>}
         </div>
 
         <div>
-          <FieldLabel htmlFor="ev-reminder">Rappel</FieldLabel>
+          <FieldLabel htmlFor="ev-reminder">{t('new.reminderLabel')}</FieldLabel>
           <div className="relative">
             <select id="ev-reminder" value={reminder} onChange={(e) => setReminder(e.target.value as ReminderKey)} className={selectCls}>
-              {REMINDER_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+              {REMINDER_OPTIONS.map((o) => <option key={o.value} value={o.value}>{f.reminderLabel(o.value)}</option>)}
             </select>
             <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-night-700" />
           </div>
@@ -256,7 +260,7 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
         {hasFamily && (
           <div className="rounded-xl border border-night-100 bg-white px-4">
             <Switch
-              label="Visible par l’autre parent"
+              label={t('new.familyLabel')}
               description={familyHelp}
               checked={familyShared}
               onChange={(e) => setFamilyChoice(e.target.checked)}
@@ -269,7 +273,7 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
         )}
 
         <div className="pt-1">
-          <SubmitBar disabled={saving}>{saving ? 'Enregistrement…' : 'Enregistrer'}</SubmitBar>
+          <SubmitBar disabled={saving}>{saving ? t('common.saving') : t('new.save')}</SubmitBar>
         </div>
       </form>
     </>

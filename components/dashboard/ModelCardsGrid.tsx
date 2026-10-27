@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { CalendarRange, FileText, Plus, ScrollText, Users } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import type { ModelCard } from '@/lib/mock-data'
@@ -20,8 +21,16 @@ const ACCENTS: Record<ModelCard['accent'], string> = {
 
 const MODELS_HREF = '/app/modeles'
 
+// Libellés de catégorie fournis en français (lib/modeles) : traduits au rendu.
+const CATEGORY_KEY_BY_LABEL: Record<string, string> = { Juridique: 'juridique', Communication: 'communication', Scolaire: 'scolaire', Autre: 'autre' }
+
 // M03 — Documents prêts à l'emploi : 4 tuiles + « Plus de modèles ».
 export function ModelCardsGrid({ models }: { models: ModelCard[] }) {
+  const tr = useTranslations('coach.templates')
+  const categoryLabel = (c: string) => {
+    const key = CATEGORY_KEY_BY_LABEL[c]
+    return key ? tr(`categories.${key}`) : c
+  }
   return (
     <ul className="-mx-2 grid grid-cols-5 divide-x divide-night-100">
       {models.slice(0, 4).map((m) => {
@@ -36,7 +45,7 @@ export function ModelCardsGrid({ models }: { models: ModelCard[] }) {
                 <Icon className="h-6 w-6" strokeWidth={1.8} />
               </span>
               <span lang="fr" className="mt-1 text-[10.5px] font-bold leading-tight text-night-900 [hyphens:auto]">{m.title}</span>
-              {m.category && <span className="text-[10px] leading-tight text-night-600">{m.category}</span>}
+              {m.category && <span className="text-[10px] leading-tight text-night-600">{categoryLabel(m.category)}</span>}
             </Link>
           </li>
         )
@@ -50,9 +59,9 @@ export function ModelCardsGrid({ models }: { models: ModelCard[] }) {
             <Plus className="h-7 w-7" strokeWidth={1.8} />
           </span>
           <span className="mt-1 text-[11px] font-bold leading-tight text-night-900">
-            Plus de
+            {tr('grid.more1')}
             <br />
-            modèles
+            {tr('grid.more2')}
           </span>
         </Link>
       </li>

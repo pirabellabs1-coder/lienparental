@@ -1,26 +1,23 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { CalendarHeader, PeriodNav } from '@/components/calendrier/CalendarHeader'
 import { DayTimeline, WeekStrip } from '@/components/calendrier/WeekGrid'
 import { useClientNow } from '@/components/calendrier/useClientNow'
 import { useChildNames } from '@/components/calendrier/useChildNames'
+import { useCalFormat } from '@/components/calendrier/useCalFormat'
 import { Fab } from '@/components/journal/Fab'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
-import { addDaysDay, fmtDayLong, getWeekDays, todayDay } from '@/lib/calendrier'
+import { addDaysDay, todayDay } from '@/lib/calendrier'
 import { useEvents } from '@/lib/data/calendar'
 
 // M06 — Vue hebdomadaire (jours = DEFAULT_TZ, Dates à midi UTC) : bandeau de la semaine + grille horaire 08h → 20h du jour choisi.
-function weekLabel(ref: Date): string {
-  const days = getWeekDays(ref)
-  const first = days[0]
-  const last = days[6]
-  const end = last.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
-  if (first.getUTCMonth() === last.getUTCMonth()) return `${first.getUTCDate()} – ${end}`
-  return `${first.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', timeZone: 'UTC' })} – ${end}`
-}
+// Libellé de la semaine : useCalFormat().weekRange.
 
 export default function CalendrierSemainePage() {
+  const t = useTranslations('calendar')
+  const f = useCalFormat()
   const now = useClientNow()
   const today = now ? todayDay(now) : null
   const { data, loading, error, refresh } = useEvents()
@@ -39,23 +36,23 @@ export default function CalendrierSemainePage() {
       <CalendarHeader view="semaine" />
 
       {error ? (
-        <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} />
+        <ErrorState compact description={error.message} primary={{ label: t('common.retry'), onClick: () => void refresh() }} />
       ) : !selected || (loading && !data) ? (
-        <LoadingState compact title="Chargement du calendrier" description="" />
+        <LoadingState compact title={t('common.loadingCalendar')} description="" />
       ) : (
         <div className="px-4 pb-4 pt-3">
           <PeriodNav
-            label={weekLabel(selected)}
+            label={f.weekRange(selected)}
             onPrev={() => shift(-1)}
             onNext={() => shift(1)}
-            prevLabel="Semaine précédente"
-            nextLabel="Semaine suivante"
+            prevLabel={t('common.prevWeek')}
+            nextLabel={t('common.nextWeek')}
           />
           <div className="mt-1">
             <WeekStrip weekRef={selected} selected={selected} onSelect={setSelected} today={today ?? undefined} />
           </div>
           <section
-            aria-label={fmtDayLong(selected)}
+            aria-label={f.dayLong(selected)}
             className="mt-4"
           >
             <DayTimeline day={selected} events={EVENTS} childNames={childNames} />
@@ -63,7 +60,7 @@ export default function CalendrierSemainePage() {
         </div>
       )}
 
-      <Fab href="/app/calendrier/nouveau" label="Ajouter un événement" />
+      <Fab href="/app/calendrier/nouveau" label={t('week.addEvent')} />
     </>
   )
 }

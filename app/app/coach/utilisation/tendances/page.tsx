@@ -1,17 +1,25 @@
 import Link from 'next/link'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { ChevronRight } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { UsageBar } from '@/components/coach/ui'
 import { cn } from '@/lib/cn'
 import { loadCoachUsage } from '@/lib/ai/quota'
-
-const fmt = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 })
+import { intlLocale } from '@/lib/i18n/config'
 
 // M09 — Coach IA · Tendances d'utilisation (maquette 12.12.09, page 4).
 export const dynamic = 'force-dynamic'
 
 export default async function CoachTendancesPage() {
+  const t = await getTranslations('coach.usage')
+  const fmt = new Intl.NumberFormat(intlLocale(await getLocale()), { maximumFractionDigits: 1 })
   const { used, total, cycles } = await loadCoachUsage()
+  // Libellés « Cycle actuel » / « Cycle -N » fournis en français par le serveur : traduits au rendu.
+  const cycleLabel = (c: { label: string; current: boolean }) => {
+    if (c.current) return t('trends.currentCycle')
+    const m = /^Cycle -(\d+)$/.exec(c.label)
+    return m ? t('trends.cycleN', { n: m[1]! }) : c.label
+  }
   const last3 = cycles.slice(-3)
   const values = cycles.length ? cycles.map((c) => c.used) : [0]
   const avg = values.reduce((a, b) => a + b, 0) / values.length
@@ -20,24 +28,24 @@ export default async function CoachTendancesPage() {
 
   return (
     <>
-      <TopBar title="Tendances d’utilisation" showBack backHref="/app/coach/utilisation" showBell={false} />
+      <TopBar title={t('trends.topTitle')} showBack backHref="/app/coach/utilisation" showBell={false} />
 
       <div className="w-full px-4 pb-8 pt-3">
         <section aria-labelledby="this-cycle" className="rounded-xl2 border border-night-100 bg-white p-4 shadow-soft">
           <h2 id="this-cycle" className="text-[12.5px] font-bold text-night-900">
-            Ce cycle
+            {t('trends.thisCycle')}
           </h2>
           <p className="mt-2 text-[15px] text-night-900">
-            <span className="text-[18px] font-extrabold">{used}</span> / {total} analyses
+            <span className="text-[18px] font-extrabold">{used}</span>{t('ofAnalyses', { total })}
           </p>
           <div className="mt-3">
-            <UsageBar used={used} total={total} label="Analyses utilisées ce cycle" />
+            <UsageBar used={used} total={total} label={t('usedThisCycle')} />
           </div>
-          <p className="mt-3 text-[12px] text-night-700">{Math.round((used / total) * 100)}% utilisées</p>
+          <p className="mt-3 text-[12px] text-night-700">{t('detail.pctUsed', { pct: Math.round((used / total) * 100) })}</p>
         </section>
 
         <figure className="mt-6">
-          <figcaption className="text-[13px] font-bold text-night-900">Utilisation des 3 derniers cycles</figcaption>
+          <figcaption className="text-[13px] font-bold text-night-900">{t('trends.last3')}</figcaption>
 
           {/* Graphique en barres — CSS pur, données exposées en tableau pour les lecteurs d'écran */}
           <div className="mt-4 flex gap-3" aria-hidden="true">
@@ -61,7 +69,7 @@ export default async function CoachTendancesPage() {
               <div className="mt-2 flex justify-around px-2">
                 {last3.map((c) => (
                   <span key={c.label} className="w-[72px] text-center text-[10.5px] leading-tight text-night-700">
-                    {c.label}
+                    {cycleLabel(c)}
                     <br />({c.startLabel})
                   </span>
                 ))}
@@ -70,18 +78,18 @@ export default async function CoachTendancesPage() {
           </div>
 
           <table className="sr-only">
-            <caption>Analyses utilisées par cycle</caption>
+            <caption>{t('trends.caption')}</caption>
             <thead>
               <tr>
-                <th scope="col">Cycle</th>
-                <th scope="col">Début</th>
-                <th scope="col">Analyses</th>
+                <th scope="col">{t('trends.colCycle')}</th>
+                <th scope="col">{t('trends.colStart')}</th>
+                <th scope="col">{t('trends.colAnalyses')}</th>
               </tr>
             </thead>
             <tbody>
               {last3.map((c) => (
                 <tr key={c.label}>
-                  <th scope="row">{c.label}</th>
+                  <th scope="row">{cycleLabel(c)}</th>
                   <td>{c.startLabel}</td>
                   <td>{c.used}</td>
                 </tr>
@@ -92,11 +100,11 @@ export default async function CoachTendancesPage() {
 
         <ul className="mt-6 divide-y divide-night-100 rounded-xl2 border border-night-100 bg-white shadow-soft">
           <li className="flex min-h-[48px] items-center justify-between px-4">
-            <span className="text-[13px] text-night-800">Moyenne par cycle</span>
-            <span className="text-[13px] font-bold text-night-900">{fmt.format(avg)} analyses</span>
+            <span className="text-[13px] text-night-800">{t('trends.average')}</span>
+            <span className="text-[13px] font-bold text-night-900">{t('trends.avgValue', { value: fmt.format(avg) })}</span>
           </li>
-          <StatLink label="Utilisation maximale" value={`${max} analyses`} />
-          <StatLink label="Utilisation minimale" value={`${min} analyses`} />
+          <StatLink label={t('trends.max')} value={t('analysesCount', { count: max })} />
+          <StatLink label={t('trends.min')} value={t('analysesCount', { count: min })} />
         </ul>
       </div>
     </>

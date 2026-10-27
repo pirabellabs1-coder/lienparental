@@ -3,7 +3,12 @@
 export type SseHandler = (event: string, data: unknown) => void
 
 /** Message d'erreur lisible depuis une réponse non-SSE ({ error: { message } }). */
-export async function errorMessage(res: Response, fallback = 'Une erreur est survenue. Réessayez dans un instant.'): Promise<string> {
+export async function errorMessage(
+  res: Response,
+  fallback = 'Une erreur est survenue. Réessayez dans un instant.',
+  /** Libellés traduits pour les statuts gérés côté client (repli : français). */
+  statusMessages?: { sessionExpired?: string; tooLarge?: string },
+): Promise<string> {
   try {
     const body = (await res.json()) as { error?: { message?: unknown } | string }
     if (typeof body.error === 'string') return body.error
@@ -11,8 +16,8 @@ export async function errorMessage(res: Response, fallback = 'Une erreur est sur
   } catch {
     // corps non JSON
   }
-  if (res.status === 401) return 'Votre session a expiré. Reconnectez-vous.'
-  if (res.status === 413) return 'Contenu trop volumineux.'
+  if (res.status === 401) return statusMessages?.sessionExpired ?? 'Votre session a expiré. Reconnectez-vous.'
+  if (res.status === 413) return statusMessages?.tooLarge ?? 'Contenu trop volumineux.'
   return fallback
 }
 

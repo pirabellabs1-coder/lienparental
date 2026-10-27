@@ -1,6 +1,7 @@
 'use client'
 
 import { useId, useRef, useState, type ChangeEvent } from 'react'
+import { useTranslations } from 'next-intl'
 import { Camera, User } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { ChildAvatarIllustration } from '@/components/illustrations'
@@ -22,7 +23,9 @@ type Props = {
  * "Ajouter une photo (facultatif)" caption (mockup steps 8 & 9).
  * Native file input stays keyboard-focusable; focus ring shown on the visual.
  */
-export function PhotoPicker({ kind, value, onChange, label = 'Ajouter une photo', className }: Props) {
+export function PhotoPicker({ kind, value, onChange, label: labelProp, className }: Props) {
+  const t = useTranslations('public.onboarding.photo')
+  const label = labelProp ?? t('add')
   const id = useId()
   const errId = `${id}-err`
   const [error, setError] = useState<string | null>(null)
@@ -33,11 +36,11 @@ export function PhotoPicker({ kind, value, onChange, label = 'Ajouter une photo'
     e.target.value = ''
     if (!file) return
     if (!file.type.startsWith('image/')) {
-      setError('Format non pris en charge. Choisissez une image (JPG, PNG, HEIC…).')
+      setError(t('errFormat'))
       return
     }
     if (file.size > MAX_BYTES) {
-      setError('Image trop lourde (5 Mo maximum).')
+      setError(t('errSize'))
       return
     }
     setError(null)
@@ -84,15 +87,15 @@ export function PhotoPicker({ kind, value, onChange, label = 'Ajouter une photo'
           >
             <Camera className="h-3.5 w-3.5" />
           </span>
-          <span className="sr-only">{value ? 'Changer la photo' : label} (facultatif)</span>
+          <span className="sr-only">{value ? t('change') : label} {t('optional')}</span>
         </label>
 
         <div className="min-w-0 text-[13px] font-bold leading-snug text-leaf-600">
           {/* Visual caption only — the input above carries the accessible name. */}
           <span className="block cursor-pointer" aria-hidden="true" onClick={() => inputRef.current?.click()}>
-            {value ? 'Changer la photo' : label}
+            {value ? t('change') : label}
             <br />
-            <span className="font-semibold">(facultatif)</span>
+            <span className="font-semibold">{t('optional')}</span>
           </span>
           {value && (
             <button
@@ -100,7 +103,7 @@ export function PhotoPicker({ kind, value, onChange, label = 'Ajouter une photo'
               onClick={() => onChange(null)}
               className="mt-0.5 block min-h-[32px] text-xs font-semibold text-night-500 underline-offset-2 hover:underline"
             >
-              Retirer la photo
+              {t('remove')}
             </button>
           )}
         </div>

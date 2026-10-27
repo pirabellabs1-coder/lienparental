@@ -20,13 +20,16 @@ import {
   UserRound,
   Weight,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { btn } from '@/components/onboarding/styles'
 import { BackButton, EnfantsHeader } from '@/components/enfants/EnfantsHeader'
 import { ChildAvatar, ChildStatusBadge, DetailRow } from '@/components/enfants/ChildBits'
 import { useChild } from '@/components/enfants/useChild'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
-import { ageFromBirthDate, childAgeLabel, formatLongDate, type Child } from '@/lib/mock-data'
+import { ageFromBirthDate, type Child } from '@/lib/mock-data'
+import { useChildLabels } from '@/components/enfants/childLabels'
+import { useFamilyFormat } from '@/components/famille/useFamilyFormat'
 
 type SectionKey = 'general' | 'physique' | 'medical'
 
@@ -38,6 +41,8 @@ export default function EnfantProfilePage({
   params: Promise<{ id: string }>
   searchParams: Promise<{ vue?: string }>
 }) {
+  const t = useTranslations('family.children.profile')
+  const labels = useChildLabels()
   const { id } = use(params)
   const { vue } = use(searchParams)
   const recap = vue === 'recap'
@@ -52,11 +57,11 @@ export default function EnfantProfilePage({
   if (!child && (loading || error)) {
     return (
       <div className="w-full px-4 pb-8 md:px-6">
-        <EnfantsHeader title="Profil" left={<BackButton href="/app/enfants" />} />
+        <EnfantsHeader title={t('title')} left={<BackButton href="/app/enfants" />} />
         {error ? (
-          <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} secondary={{ label: 'Retour à mes enfants', href: '/app/enfants' }} />
+          <ErrorState compact description={error.message} primary={{ label: t('retry'), onClick: () => void refresh() }} secondary={{ label: t('backToChildren'), href: '/app/enfants' }} />
         ) : (
-          <LoadingState compact title="Chargement du profil" description="" />
+          <LoadingState compact title={t('loading')} description="" />
         )}
       </div>
     )
@@ -65,10 +70,10 @@ export default function EnfantProfilePage({
   if (!child) {
     return (
       <div className="w-full px-4 pb-8 md:px-6">
-        <EnfantsHeader title="Profil" left={<BackButton href="/app/enfants" />} />
-        <p className="mt-10 text-center text-sm text-night-600">Ce profil n’existe pas ou a été supprimé.</p>
+        <EnfantsHeader title={t('title')} left={<BackButton href="/app/enfants" />} />
+        <p className="mt-10 text-center text-sm text-night-600">{t('notFound')}</p>
         <Link href="/app/enfants" className={cn(btn.secondary, 'mt-6 w-full')}>
-          Retour à mes enfants
+          {t('backToChildren')}
         </Link>
       </div>
     )
@@ -83,20 +88,20 @@ export default function EnfantProfilePage({
   }
 
   const sections: { key: SectionKey; label: string; icon: ReactNode; body: ReactNode }[] = [
-    { key: 'general', label: 'Informations générales', icon: <CalendarDays className="h-5 w-5" />, body: <General child={child} /> },
-    { key: 'physique', label: 'Informations physiques', icon: <PersonStanding className="h-5 w-5" />, body: <Physique child={child} /> },
-    { key: 'medical', label: 'Informations médicales', icon: <HeartPulse className="h-5 w-5" />, body: <Medical child={child} /> },
+    { key: 'general', label: t('sectionGeneral'), icon: <CalendarDays className="h-5 w-5" />, body: <General child={child} /> },
+    { key: 'physique', label: t('sectionPhysical'), icon: <PersonStanding className="h-5 w-5" />, body: <Physique child={child} /> },
+    { key: 'medical', label: t('sectionMedical'), icon: <HeartPulse className="h-5 w-5" />, body: <Medical child={child} /> },
   ]
 
   return (
     <div className="w-full px-4 pb-8 md:px-6">
       <EnfantsHeader
-        title={`Profil de ${child.prenom}`}
+        title={t('titleOf', { name: child.prenom })}
         left={<BackButton href="/app/enfants" />}
         right={
           <Link
             href={`/app/enfants/${child.id}/modifier`}
-            aria-label={`Modifier le profil de ${child.prenom}`}
+            aria-label={t('editAria', { name: child.prenom })}
             className="grid h-11 w-11 place-items-center rounded-full text-night-900 hover:bg-night-50"
           >
             <Pencil className="h-5 w-5" aria-hidden="true" />
@@ -104,24 +109,24 @@ export default function EnfantProfilePage({
         }
       />
 
-      <section className="mt-3 flex flex-col items-center text-center" aria-label="Identité">
+      <section className="mt-3 flex flex-col items-center text-center" aria-label={t('identity')}>
         <div className="relative">
           <ChildAvatar child={child} src={photo} size="xl" />
           <label className="absolute bottom-0.5 right-0.5 grid h-9 w-9 cursor-pointer place-items-center rounded-full bg-leaf-500 text-white ring-[3px] ring-white has-[:focus-visible]:ring-leaf-200">
             <input type="file" accept="image/*" className="sr-only" onChange={onPhoto} />
             <Camera className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">Changer la photo de {child.prenom}</span>
+            <span className="sr-only">{t('changePhoto', { name: child.prenom })}</span>
           </label>
         </div>
         <p className="mt-3 text-[20px] font-extrabold text-night-900">{child.prenom}</p>
         <p className="mt-0.5 text-[13px] text-night-600">
-          {childAgeLabel(child)} <span aria-hidden="true">•</span>
-          <span className="sr-only">,</span> {child.classe}
+          {labels.ageLabel(child)} <span aria-hidden="true">•</span>
+          <span className="sr-only">,</span> {labels.classLabel(child.classe)}
         </p>
         <ChildStatusBadge child={child} className="mt-2" />
         {recap && (
           <p role="status" className="sr-only">
-            Modifications enregistrées.
+            {t('saved')}
           </p>
         )}
       </section>
@@ -134,8 +139,8 @@ export default function EnfantProfilePage({
           <HeartPulse className="h-5 w-5" strokeWidth={1.8} />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-[15px] font-extrabold text-night-900">Espace Santé</span>
-          <span className="block text-[12.5px] leading-snug text-night-700">Rendez-vous, vaccins, traitements, documents médicaux</span>
+          <span className="block text-[15px] font-extrabold text-night-900">{t('healthSpace')}</span>
+          <span className="block text-[12.5px] leading-snug text-night-700">{t('healthSpaceHint')}</span>
         </span>
         <ChevronRight aria-hidden="true" className="h-5 w-5 shrink-0 text-leaf-700" />
       </Link>
@@ -178,45 +183,52 @@ export default function EnfantProfilePage({
       </div>
 
       <Link href={`/app/enfants/${child.id}/modifier`} className={cn(btn.secondary, 'mt-8 w-full')}>
-        Modifier le profil
+        {t('edit')}
       </Link>
     </div>
   )
 }
 
 function General({ child }: { child: Child }) {
+  const t = useTranslations('family.children.profile')
+  const labels = useChildLabels()
+  const fmt = useFamilyFormat()
   return (
     <>
       <DetailRow
         icon={<CalendarDays className="h-4 w-4" />}
-        label="Date de naissance"
-        value={child.dateNaissance && `${formatLongDate(child.dateNaissance)} (${ageFromBirthDate(child.dateNaissance)} ans)`}
+        label={t('birthDate')}
+        value={child.dateNaissance && t('birthDateValue', { date: fmt.day(child.dateNaissance), count: ageFromBirthDate(child.dateNaissance) })}
       />
-      <DetailRow icon={<School className="h-4 w-4" />} label="Classe" value={child.classe} />
+      <DetailRow icon={<School className="h-4 w-4" />} label={t('class')} value={labels.classLabel(child.classe)} />
     </>
   )
 }
 
 function Physique({ child }: { child: Child }) {
+  const t = useTranslations('family.children.profile')
+  const labels = useChildLabels()
   return (
     <>
-      <DetailRow icon={<Ruler className="h-4 w-4" />} label="Taille" value={child.taille && `${child.taille} cm`} />
-      <DetailRow icon={<Weight className="h-4 w-4" />} label="Poids" value={child.poids && `${child.poids} kg`} />
-      <DetailRow icon={<Eye className="h-4 w-4" />} label="Yeux" value={child.couleurYeux} />
-      <DetailRow icon={<Scissors className="h-4 w-4" />} label="Cheveux" value={child.couleurCheveux} />
+      <DetailRow icon={<Ruler className="h-4 w-4" />} label={t('height')} value={child.taille && t('heightValue', { value: child.taille })} />
+      <DetailRow icon={<Weight className="h-4 w-4" />} label={t('weight')} value={child.poids && t('weightValue', { value: child.poids })} />
+      <DetailRow icon={<Eye className="h-4 w-4" />} label={t('eyes')} value={labels.eyeLabel(child.couleurYeux)} />
+      <DetailRow icon={<Scissors className="h-4 w-4" />} label={t('hair')} value={labels.hairLabel(child.couleurCheveux)} />
     </>
   )
 }
 
 function Medical({ child }: { child: Child }) {
-  const allergies = [...(child.allergies ?? []), child.autresAllergies].filter(Boolean).join(', ')
+  const t = useTranslations('family.children.profile')
+  const labels = useChildLabels()
+  const allergies = [...(child.allergies ?? []).map(labels.allergyLabel), child.autresAllergies].filter(Boolean).join(', ')
   return (
     <>
-      <DetailRow icon={<ShieldAlert className="h-4 w-4" />} label="Allergies" value={allergies} />
-      <DetailRow icon={<Stethoscope className="h-4 w-4" />} label="Informations médicales" value={child.infosMedicales} />
-      <DetailRow icon={<Droplet className="h-4 w-4" />} label="Groupe sanguin" value={child.groupeSanguin} />
-      <DetailRow icon={<Pill className="h-4 w-4" />} label="Traitement en cours" value={child.traitement} />
-      <DetailRow icon={<UserRound className="h-4 w-4" />} label="Médecin traitant" value={child.medecinTraitant} />
+      <DetailRow icon={<ShieldAlert className="h-4 w-4" />} label={t('allergies')} value={allergies} />
+      <DetailRow icon={<Stethoscope className="h-4 w-4" />} label={t('sectionMedical')} value={child.infosMedicales} />
+      <DetailRow icon={<Droplet className="h-4 w-4" />} label={t('bloodGroup')} value={labels.bloodLabel(child.groupeSanguin)} />
+      <DetailRow icon={<Pill className="h-4 w-4" />} label={t('treatment')} value={child.traitement} />
+      <DetailRow icon={<UserRound className="h-4 w-4" />} label={t('doctor')} value={child.medecinTraitant} />
     </>
   )
 }

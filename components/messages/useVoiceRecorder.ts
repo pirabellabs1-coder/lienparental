@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { MAX_VOICE_MS, MIN_VOICE_MS, baseMime } from '@/lib/messages'
 
 export type VoicePhase = 'idle' | 'requesting' | 'recording' | 'preview'
@@ -20,12 +21,15 @@ export function voiceSupported(): boolean {
     && Boolean(navigator.mediaDevices?.getUserMedia)
 }
 
-function micError(err: unknown): string {
+/** Clés de messaging.voice (traduites au rendu). */
+type VoiceErrorKey = 'unsupported' | 'denied' | 'notFound' | 'busy' | 'failed' | 'tooShort'
+
+function micError(err: unknown): VoiceErrorKey {
   const name = (err as { name?: string } | null)?.name
-  if (name === 'NotAllowedError' || name === 'SecurityError') return 'Accès au micro refusé. Autorisez le micro dans les réglages du navigateur, puis réessayez.'
-  if (name === 'NotFoundError' || name === 'OverconstrainedError') return 'Aucun micro détecté sur cet appareil.'
-  if (name === 'NotReadableError') return 'Le micro est utilisé par une autre application.'
-  return "L'enregistrement n'a pas pu démarrer. Réessayez."
+  if (name === 'NotAllowedError' || name === 'SecurityError') return 'denied'
+  if (name === 'NotFoundError' || name === 'OverconstrainedError') return 'notFound'
+  if (name === 'NotReadableError') return 'busy'
+  return 'failed'
 }
 
 /**
@@ -40,7 +44,8 @@ export function useVoiceRecorder(opts: { maxMs?: number; onAutoStop?: () => void
   const [elapsedMs, setElapsedMs] = useState(0)
   const [levels, setLevels] = useState<number[]>(() => Array(VOICE_BARS).fill(0))
   const [clip, setClip] = useState<VoiceClip | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const tv = useTranslations('messaging.voice')
+  const [error, setError] = useState<VoiceErrorKey | null>(null)
 
   const recRef = useRef<MediaRecorder | null>(null)
   const streamRef = useRef<MediaStream | null>(null)
@@ -86,7 +91,7 @@ export function useVoiceRecorder(opts: { maxMs?: number; onAutoStop?: () => void
     if (phase === 'recording' || phase === 'requesting') return
     setError(null)
     if (!voiceSupported()) {
-      setError("L'enregistrement vocal n'est pas pris en charge par ce navigateur.")
+      setError('unsupported')
       return
     }
     setClipSafe(null)
@@ -115,7 +120,7 @@ export function useVoiceRecorder(opts: { maxMs?: number; onAutoStop?: () => void
       rec = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 32_000 } : undefined)
     } catch {
       releaseInputs()
-      setError("L'enregistrement n'a pas pu démarrer. Réessayez.")
+      setError('failed')
       setPhase('idle')
       return
     }
@@ -128,7 +133,7 @@ export function useVoiceRecorder(opts: { maxMs?: number; onAutoStop?: () => void
       recRef.current = null
       if (cancelledRef.current) { setPhase('idle'); return }
       if (durationMs < MIN_VOICE_MS || chunks.length === 0) {
-        setError('Note vocale trop courte. Maintenez le bouton, ou appuyez une fois pour démarrer puis pour arrêter.')
+        setError('tooShort')
         setPhase('idle')
         return
       }
@@ -205,7 +210,7 @@ export function useVoiceRecorder(opts: { maxMs?: number; onAutoStop?: () => void
   }, [setClipSafe])
 
   return {
-    phase, elapsedMs, levels, clip, error, start, stop, cancel, reset,
+    phase, elapsedMs, levels, clip, error: error ? tv(error) : null, start, stop, cancel, reset,
     startedAt: () => startedRef.current,
     clearError: () => setError(null),
   }

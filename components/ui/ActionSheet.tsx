@@ -1,5 +1,6 @@
 'use client'
 import { useCallback, useEffect, useId, useRef, type ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 export type ActionSheetAction = {
@@ -23,7 +24,8 @@ type Props = {
 
 const FOCUSABLE = 'button:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])'
 
-export function ActionSheet({ open, onClose, title, description, actions, cancelLabel = 'Annuler', className }: Props) {
+export function ActionSheet({ open, onClose, title, description, actions, cancelLabel, className }: Props) {
+  const t = useTranslations('account.ui.confirm')
   const ref = useRef<HTMLDivElement>(null)
   const previousActive = useRef<HTMLElement | null>(null)
   const titleId = useId()
@@ -101,7 +103,7 @@ export function ActionSheet({ open, onClose, title, description, actions, cancel
           onClick={onClose}
           className="mt-2 flex w-full items-center justify-center rounded-xl3 bg-white dark:bg-night-900 border border-night-100 dark:border-night-800 px-5 py-4 text-base font-semibold text-night-900 dark:text-night-50 shadow-card min-h-[56px] focus-visible:outline-none"
         >
-          {cancelLabel}
+          {cancelLabel ?? t('cancel')}
         </button>
       </div>
     </div>

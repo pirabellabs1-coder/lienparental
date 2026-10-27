@@ -17,6 +17,14 @@ export function isLocale(value: string | undefined | null): value is Locale {
 
 export type FlagKey = 'fr' | 'gb' | 'br'
 
+/** Locale BCP 47 pour Intl (dates, nombres, devises) : fr → fr-FR, en → en-US, pt → pt-BR. */
+export const INTL_LOCALE: Record<Locale, string> = { fr: 'fr-FR', en: 'en-US', pt: 'pt-BR' }
+
+/** Locale Intl à partir de la locale next-intl (repli fr-FR). Utiliser avec useLocale() / getLocale(). */
+export function intlLocale(locale: string | undefined | null): string {
+  return isLocale(locale) ? INTL_LOCALE[locale] : INTL_LOCALE.fr
+}
+
 /** Métadonnées d'affichage de chaque langue (libellé, nom natif, attribut lang, drapeau). */
 export const LOCALE_META: Record<Locale, { code: string; native: string; htmlLang: string; flag: FlagKey }> = {
   fr: { code: 'FR', native: 'Français', htmlLang: 'fr', flag: 'fr' },

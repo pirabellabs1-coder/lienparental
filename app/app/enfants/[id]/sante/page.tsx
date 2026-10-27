@@ -6,6 +6,7 @@ import {
   CalendarClock, CalendarPlus, ChevronRight, FileHeart, FilePlus2, History, Lock, NotebookPen, Pencil,
   Pill, Plus, ShieldAlert, Stethoscope, Syringe, Trash2,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { btn } from '@/components/onboarding/styles'
 import { BackButton, EnfantsHeader } from '@/components/enfants/EnfantsHeader'
@@ -18,7 +19,8 @@ import { VaultLockedNotice } from '@/components/vault-lock/VaultLockedNotice'
 import { ConfirmDialog } from '@/components/ui'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import type { CalendarEvent } from '@/lib/calendrier'
-import { frDate } from '@/lib/mock-vault'
+import { useFamilyFormat } from '@/components/famille/useFamilyFormat'
+import { useChildLabels } from '@/components/enfants/childLabels'
 import { dayKeyInTz, dayKeyToDate, timeInTz } from '@/lib/tz'
 import { useEvents } from '@/lib/data/calendar'
 import { useJournalList, type JournalRecord } from '@/lib/data/journal'
@@ -38,32 +40,33 @@ import type { Child } from '@/lib/mock-data'
 const card = 'min-w-0 scroll-mt-20 rounded-2xl border border-night-100 bg-white p-4 shadow-[0_1px_2px_rgba(11,45,91,0.06),0_8px_24px_-16px_rgba(11,45,91,0.12)]'
 
 const SECTIONS = [
-  { id: 'rendez-vous', label: 'Rendez-vous' },
-  { id: 'vaccinations', label: 'Vaccinations' },
-  { id: 'allergies', label: 'Allergies' },
-  { id: 'traitements', label: 'Traitements' },
-  { id: 'medecin', label: 'Médecin' },
-  { id: 'documents', label: 'Documents' },
-  { id: 'historique', label: 'Historique' },
+  { id: 'rendez-vous', labelKey: 'appointments' },
+  { id: 'vaccinations', labelKey: 'vaccinations' },
+  { id: 'allergies', labelKey: 'allergies' },
+  { id: 'traitements', labelKey: 'treatments' },
+  { id: 'medecin', labelKey: 'doctor' },
+  { id: 'documents', labelKey: 'documents' },
+  { id: 'historique', labelKey: 'history' },
 ] as const
 
 export default function EnfantSantePage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations('family.children.health')
   const { id } = use(params)
   const { child, loading, error, refresh } = useChild(id)
-  const back = <BackButton href={`/app/enfants/${id}`} label="Retour au profil" />
+  const back = <BackButton href={`/app/enfants/${id}`} label={t('backToProfile')} />
 
   if (!child) {
     return (
       <div className="w-full px-4 pb-8 md:px-6">
-        <EnfantsHeader title="Santé" left={back} />
+        <EnfantsHeader title={t('title')} left={back} />
         {error ? (
-          <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} secondary={{ label: 'Retour à mes enfants', href: '/app/enfants' }} />
+          <ErrorState compact description={error.message} primary={{ label: t('retry'), onClick: () => void refresh() }} secondary={{ label: t('backToChildren'), href: '/app/enfants' }} />
         ) : loading ? (
-          <LoadingState compact title="Chargement de l’espace Santé" description="" />
+          <LoadingState compact title={t('loading')} description="" />
         ) : (
           <>
-            <p className="mt-10 text-center text-sm text-night-600">Ce profil n’existe pas ou a été supprimé.</p>
-            <Link href="/app/enfants" className={cn(btn.secondary, 'mt-6 w-full')}>Retour à mes enfants</Link>
+            <p className="mt-10 text-center text-sm text-night-600">{t('notFound')}</p>
+            <Link href="/app/enfants" className={cn(btn.secondary, 'mt-6 w-full')}>{t('backToChildren')}</Link>
           </>
         )}
       </div>
@@ -73,6 +76,7 @@ export default function EnfantSantePage({ params }: { params: Promise<{ id: stri
 }
 
 function HealthSpace({ child, back }: { child: Child; back: ReactNode }) {
+  const t = useTranslations('family.children.health')
   const now = useClientNow()
   // Jour courant dans DEFAULT_TZ (rappels de vaccin, traitements en cours).
   const today = now ? dayKeyInTz(now) : ''
@@ -87,28 +91,28 @@ function HealthSpace({ child, back }: { child: Child; back: ReactNode }) {
 
   return (
     <div className="w-full px-4 pb-8 md:px-6">
-      <EnfantsHeader title={`Santé de ${child.prenom}`} left={back} />
+      <EnfantsHeader title={t('titleOf', { name: child.prenom })} left={back} />
 
       <p className="mt-2 flex items-start gap-2 text-[12.5px] leading-relaxed text-night-600">
         <Lock aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" strokeWidth={1.8} />
-        Informations de santé chiffrées, visibles par vous seul.
+        {t('privacy')}
       </p>
 
       <div className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:max-w-2xl">
         <Link href={addRdv} className={btn.primary}>
-          <CalendarPlus aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.8} /> Ajouter un rendez-vous santé
+          <CalendarPlus aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.8} /> {t('addAppointment')}
         </Link>
         <Link href={addDoc} className={btn.secondary}>
-          <FilePlus2 aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.8} /> Ajouter un document médical
+          <FilePlus2 aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.8} /> {t('addDocument')}
         </Link>
       </div>
 
-      <nav aria-label="Rubriques santé" className="-mx-4 mt-5 overflow-x-auto px-4 md:mx-0 md:px-0">
+      <nav aria-label={t('sectionsNav')} className="-mx-4 mt-5 overflow-x-auto px-4 md:mx-0 md:px-0">
         <ul className="flex gap-2 px-0.5 py-1.5">
           {SECTIONS.map((s) => (
             <li key={s.id} className="shrink-0">
               <a href={`#${s.id}`} className="inline-flex min-h-[40px] items-center rounded-xl border border-night-100 bg-white px-3.5 text-[12.5px] font-semibold text-night-800 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2">
-                {s.label}
+                {t(`sections.${s.labelKey}`)}
               </a>
             </li>
           ))}
@@ -118,7 +122,7 @@ function HealthSpace({ child, back }: { child: Child; back: ReactNode }) {
       <p role="status" aria-live="polite" className="sr-only">{announce}</p>
 
       {!now ? (
-        <LoadingState compact title="Chargement de l’espace Santé" description="" />
+        <LoadingState compact title={t('loading')} description="" />
       ) : (
         <div className="mt-4 grid grid-cols-1 items-start gap-4 lg:grid-cols-2">
           <Appointments child={child} now={now} addHref={addRdv} events={events} />
@@ -156,16 +160,18 @@ function Empty({ children }: { children: ReactNode }) {
 }
 
 function InlineError({ message, onRetry }: { message: string; onRetry: () => void }) {
+  const t = useTranslations('family.children.health')
   return (
     <div role="alert" className="flex flex-wrap items-center gap-2 rounded-xl bg-alert-50 px-3.5 py-3 text-[13px] text-alert-700">
       <span className="flex-1">{message}</span>
-      <button type="button" onClick={onRetry} className="min-h-[40px] rounded-lg px-2 font-semibold text-alert-700 underline underline-offset-2">Réessayer</button>
+      <button type="button" onClick={onRetry} className="min-h-[40px] rounded-lg px-2 font-semibold text-alert-700 underline underline-offset-2">{t('retry')}</button>
     </div>
   )
 }
 
 function Loading() {
-  return <p className="px-1 py-2 text-[13px] text-night-500" role="status">Chargement…</p>
+  const t = useTranslations('family.children.health')
+  return <p className="px-1 py-2 text-[13px] text-night-500" role="status">{t('loadingShort')}</p>
 }
 
 function EditLink({ child, label }: { child: Child; label: string }) {
@@ -209,6 +215,8 @@ type Health = AsyncState<ChildHealth>
 type Events = AsyncState<CalendarEvent[]>
 
 function Appointments({ child, now, addHref, events }: { child: Child; now: Date; addHref: string; events: Events }) {
+  const t = useTranslations('family.children.health')
+  const fmt = useFamilyFormat()
   const { data, loading, error, refresh } = events
   const upcoming = useMemo(
     () => (data ?? [])
@@ -217,13 +225,13 @@ function Appointments({ child, now, addHref, events }: { child: Child; now: Date
     [data, child.id, now],
   )
   return (
-    <Section id="rendez-vous" title="Rendez-vous à venir" icon={<CalendarClock className="h-5 w-5" strokeWidth={1.8} />}>
+    <Section id="rendez-vous" title={t('upcomingTitle')} icon={<CalendarClock className="h-5 w-5" strokeWidth={1.8} />}>
       {error ? <InlineError message={error.message} onRetry={() => void refresh()} />
         : loading && !data ? <Loading />
         : upcoming.length === 0 ? (
           <Empty>
-            Aucun rendez-vous santé prévu.{' '}
-            <Link href={addHref} className="font-semibold text-leaf-600 underline underline-offset-2">Ajouter un rendez-vous</Link>
+            {t('noAppointments')}{' '}
+            <Link href={addHref} className="font-semibold text-leaf-600 underline underline-offset-2">{t('addAppointmentShort')}</Link>
           </Empty>
         ) : (
           <ul className="divide-y divide-night-100">
@@ -232,10 +240,10 @@ function Appointments({ child, now, addHref, events }: { child: Child; now: Date
                 <Link href={`/app/calendrier/${e.id}`} className="flex items-center gap-3 rounded-lg py-2.5 hover:bg-night-50/50">
                   <DateChip iso={e.start} />
                   <span className="min-w-0 flex-1">
-                    <span className="sr-only">{frDate(dayKeyInTz(e.start))}, </span>
+                    <span className="sr-only">{fmt.day(dayKeyInTz(e.start))}, </span>
                     <span className="block truncate text-[13.5px] font-bold text-night-900">{e.title}</span>
                     <span className="block truncate text-[12px] text-night-600">
-                      {timeInTz(e.start).replace(':', 'h')}{e.location && <><span aria-hidden="true"> · </span><span className="sr-only">, </span>{e.location}</>}
+                      {fmt.hm(timeInTz(e.start))}{e.location && <><span aria-hidden="true"> · </span><span className="sr-only">, </span>{e.location}</>}
                     </span>
                   </span>
                   <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0 text-night-400" />
@@ -250,12 +258,13 @@ function Appointments({ child, now, addHref, events }: { child: Child; now: Date
 
 function DateChip({ iso }: { iso: string }) {
   // Jour du rendez-vous dans DEFAULT_TZ, rendu comme date « jour seul » (UTC).
+  const { intl } = useFamilyFormat()
   const d = dayKeyToDate(dayKeyInTz(iso))
   return (
     <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-purple-50 text-purple-700" aria-hidden="true">
       <span className="text-center leading-none">
         <span className="block text-[15px] font-extrabold">{d.getUTCDate()}</span>
-        <span className="block text-[10px] font-semibold uppercase">{d.toLocaleDateString('fr-FR', { month: 'short', timeZone: 'UTC' }).replace('.', '')}</span>
+        <span className="block text-[10px] font-semibold uppercase">{d.toLocaleDateString(intl, { month: 'short', timeZone: 'UTC' }).replace('.', '')}</span>
       </span>
     </span>
   )
@@ -264,6 +273,7 @@ function DateChip({ iso }: { iso: string }) {
 // --- Vaccinations ---------------------------------------------------------------
 
 function useRemoval(child: Child, onAnnounce: (s: string) => void, onRemoved: (kind: HealthKind, id: string) => void) {
+  const t = useTranslations('family.children.health')
   const [target, setTarget] = useState<{ kind: HealthKind; id: string; nom: string } | null>(null)
   const [busy, setBusy] = useState(false)
   const [failure, setFailure] = useState('')
@@ -274,10 +284,10 @@ function useRemoval(child: Child, onAnnounce: (s: string) => void, onRemoved: (k
     try {
       await removeHealthItem(child.id, target.kind, target.id)
       onRemoved(target.kind, target.id)
-      onAnnounce(`${target.nom} supprimé.`)
+      onAnnounce(t('removedAnnounce', { name: target.nom }))
       setTarget(null)
     } catch (e) {
-      setFailure(e instanceof Error ? e.message : 'Suppression impossible.')
+      setFailure(e instanceof Error ? e.message : t('deleteFailed'))
       setTarget(null)
     } finally {
       setBusy(false)
@@ -289,15 +299,17 @@ function useRemoval(child: Child, onAnnounce: (s: string) => void, onRemoved: (k
       onClose={() => setTarget(null)}
       onConfirm={confirm}
       loading={busy}
-      title={`Supprimer « ${target?.nom ?? ''} » ?`}
-      description="Cette information de santé sera définitivement retirée de l’espace Santé."
-      confirmLabel="Supprimer"
+      title={t('deleteTitle', { name: target?.nom ?? '' })}
+      description={t('deleteText')}
+      confirmLabel={t('delete')}
     />
   )
   return { ask: setTarget, dialog, failure }
 }
 
 function Vaccinations({ child, today, onAnnounce, health }: { child: Child; today: string; onAnnounce: (s: string) => void; health: Health }) {
+  const t = useTranslations('family.children.health')
+  const fmt = useFamilyFormat()
   const { data, loading, error, refresh, setData } = health
   const [open, setOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
@@ -308,20 +320,20 @@ function Vaccinations({ child, today, onAnnounce, health }: { child: Child; toda
   function added(v: Vaccination) {
     setData((h) => ({ ...(h ?? { traitements: [] }), vaccinations: [v, ...(h?.vaccinations ?? [])].sort((a, b) => b.date.localeCompare(a.date)) }))
     setOpen(false)
-    onAnnounce(`Vaccination « ${v.nom} » ajoutée.`)
+    onAnnounce(t('vaccinationAdded', { name: v.nom }))
     toggleRef.current?.focus()
   }
 
   return (
     <Section
       id="vaccinations"
-      title="Vaccinations"
+      title={t('sections.vaccinations')}
       icon={<Syringe className="h-5 w-5" strokeWidth={1.8} />}
-      action={<AddToggle open={open} controls={formId} label="Ajouter" onClick={() => setOpen((o) => !o)} btnRef={toggleRef} />}
+      action={<AddToggle open={open} controls={formId} label={t('add')} onClick={() => setOpen((o) => !o)} btnRef={toggleRef} />}
     >
       {error ? <InlineError message={error.message} onRetry={() => void refresh()} />
         : loading && !data ? <Loading />
-        : list.length === 0 ? <Empty>Aucune vaccination enregistrée.</Empty>
+        : list.length === 0 ? <Empty>{t('noVaccinations')}</Empty>
         : (
           <ul className="divide-y divide-night-100">
             {list.map((v) => {
@@ -330,22 +342,22 @@ function Vaccinations({ child, today, onAnnounce, health }: { child: Child; toda
                 <li key={v.id} className="flex items-start gap-2 py-2.5">
                   <div className="min-w-0 flex-1">
                     <p className="break-words text-[13.5px] font-bold text-night-900">{v.nom}</p>
-                    <p className="text-[12px] text-night-600">Fait le {frDate(v.date)}</p>
+                    <p className="text-[12px] text-night-600">{t('doneOn', { date: fmt.day(v.date) })}</p>
                     {v.rappel && (
                       <p className="mt-1 flex flex-wrap items-center gap-1.5 text-[12px] text-night-700">
-                        Rappel prévu le {frDate(v.rappel)}
-                        {st === 'overdue' && <HealthBadge tone="alert">Rappel dépassé</HealthBadge>}
-                        {st === 'soon' && <HealthBadge tone="orange">Bientôt</HealthBadge>}
+                        {t('boosterOn', { date: fmt.day(v.rappel) })}
+                        {st === 'overdue' && <HealthBadge tone="alert">{t('boosterOverdue')}</HealthBadge>}
+                        {st === 'soon' && <HealthBadge tone="orange">{t('soon')}</HealthBadge>}
                       </p>
                     )}
                   </div>
-                  {v.byMe !== false && <DeleteButton label={`Supprimer la vaccination ${v.nom}`} onClick={() => removal.ask({ kind: 'vaccination', id: v.id, nom: v.nom })} />}
+                  {v.byMe !== false && <DeleteButton label={t('deleteVaccinationAria', { name: v.nom })} onClick={() => removal.ask({ kind: 'vaccination', id: v.id, nom: v.nom })} />}
                 </li>
               )
             })}
           </ul>
         )}
-      {data?.unavailable && <p className="mt-2 text-[12px] text-night-500">Certaines informations n’ont pas pu être lues pour le moment.</p>}
+      {data?.unavailable && <p className="mt-2 text-[12px] text-night-500">{t('partialUnavailable')}</p>}
       {removal.failure && <p role="alert" className="mt-2 text-[12.5px] font-semibold text-alert-600">{removal.failure}</p>}
       <div id={formId} hidden={!open}>
         {open && <VaccinationForm childId={child.id} today={today} onDone={added} onCancel={() => { setOpen(false); toggleRef.current?.focus() }} />}
@@ -358,10 +370,12 @@ function Vaccinations({ child, today, onAnnounce, health }: { child: Child; toda
 // --- Allergies --------------------------------------------------------------------
 
 function Allergies({ child }: { child: Child }) {
-  const items = [...(child.allergies ?? []), ...(child.autresAllergies ? [child.autresAllergies] : [])]
+  const t = useTranslations('family.children.health')
+  const labels = useChildLabels()
+  const items = [...(child.allergies ?? []).map(labels.allergyLabel), ...(child.autresAllergies ? [child.autresAllergies] : [])]
   return (
-    <Section id="allergies" title="Allergies" icon={<ShieldAlert className="h-5 w-5" strokeWidth={1.8} />} action={<EditLink child={child} label={`Modifier les allergies de ${child.prenom}`} />}>
-      {items.length === 0 ? <Empty>Aucune allergie renseignée.</Empty> : (
+    <Section id="allergies" title={t('sections.allergies')} icon={<ShieldAlert className="h-5 w-5" strokeWidth={1.8} />} action={<EditLink child={child} label={t('editAllergiesAria', { name: child.prenom })} />}>
+      {items.length === 0 ? <Empty>{t('noAllergies')}</Empty> : (
         <ul className="flex flex-wrap gap-2">
           {items.map((a) => (
             <li key={a} className="max-w-full break-words rounded-lg bg-alert-50 px-2.5 py-1 text-[12.5px] font-semibold text-alert-700">{a}</li>
@@ -375,53 +389,55 @@ function Allergies({ child }: { child: Child }) {
 // --- Traitements ------------------------------------------------------------------
 
 function Treatments({ child, today, onAnnounce, health }: { child: Child; today: string; onAnnounce: (s: string) => void; health: Health }) {
+  const t = useTranslations('family.children.health')
+  const fmt = useFamilyFormat()
   const { data, loading, error, refresh, setData } = health
   const [open, setOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
-  const removal = useRemoval(child, onAnnounce, (_k, id) => setData((h) => ({ vaccinations: h?.vaccinations ?? [], traitements: (h?.traitements ?? []).filter((t) => t.id !== id) })))
+  const removal = useRemoval(child, onAnnounce, (_k, id) => setData((h) => ({ vaccinations: h?.vaccinations ?? [], traitements: (h?.traitements ?? []).filter((tr) => tr.id !== id) })))
   const list = data?.traitements ?? []
   const formId = `trt-form-${child.id}`
 
-  function added(t: Treatment) {
-    setData((h) => ({ ...(h ?? { vaccinations: [] }), traitements: [t, ...(h?.traitements ?? [])].sort((a, b) => b.debut.localeCompare(a.debut)) }))
+  function added(tr: Treatment) {
+    setData((h) => ({ ...(h ?? { vaccinations: [] }), traitements: [tr, ...(h?.traitements ?? [])].sort((a, b) => b.debut.localeCompare(a.debut)) }))
     setOpen(false)
-    onAnnounce(`Traitement « ${t.nom} » ajouté.`)
+    onAnnounce(t('treatmentAdded', { name: tr.nom }))
     toggleRef.current?.focus()
   }
 
   return (
     <Section
       id="traitements"
-      title="Traitements"
+      title={t('sections.treatments')}
       icon={<Pill className="h-5 w-5" strokeWidth={1.8} />}
-      action={<AddToggle open={open} controls={formId} label="Ajouter" onClick={() => setOpen((o) => !o)} btnRef={toggleRef} />}
+      action={<AddToggle open={open} controls={formId} label={t('add')} onClick={() => setOpen((o) => !o)} btnRef={toggleRef} />}
     >
       {child.traitement && (
         <p className="mb-2 rounded-xl bg-night-50/60 px-3.5 py-2.5 text-[12.5px] text-night-700">
-          <span className="font-semibold text-night-900">Noté dans le profil : </span>{child.traitement}
+          <span className="font-semibold text-night-900">{t('notedInProfile')} </span>{child.traitement}
         </p>
       )}
       {error ? <InlineError message={error.message} onRetry={() => void refresh()} />
         : loading && !data ? <Loading />
-        : list.length === 0 ? <Empty>Aucun traitement enregistré.</Empty>
+        : list.length === 0 ? <Empty>{t('noTreatments')}</Empty>
         : (
           <ul className="divide-y divide-night-100">
-            {list.map((t) => {
-              const active = isTreatmentActive(t, today)
-              const future = t.debut > today
+            {list.map((tr) => {
+              const active = isTreatmentActive(tr, today)
+              const future = tr.debut > today
               return (
-                <li key={t.id} className="flex items-start gap-2 py-2.5">
+                <li key={tr.id} className="flex items-start gap-2 py-2.5">
                   <div className="min-w-0 flex-1">
                     <p className="flex flex-wrap items-center gap-1.5 text-[13.5px] font-bold text-night-900">
-                      <span className="break-words">{t.nom}</span>
-                      {active ? <HealthBadge tone="leaf">En cours</HealthBadge> : future ? <HealthBadge tone="night">À venir</HealthBadge> : <HealthBadge tone="night">Terminé</HealthBadge>}
+                      <span className="break-words">{tr.nom}</span>
+                      {active ? <HealthBadge tone="leaf">{t('ongoing')}</HealthBadge> : future ? <HealthBadge tone="night">{t('upcoming')}</HealthBadge> : <HealthBadge tone="night">{t('finished')}</HealthBadge>}
                     </p>
-                    {t.posologie && <p className="break-words text-[12.5px] text-night-700">{t.posologie}</p>}
+                    {tr.posologie && <p className="break-words text-[12.5px] text-night-700">{tr.posologie}</p>}
                     <p className="text-[12px] text-night-600">
-                      Du {frDate(t.debut)}{t.fin ? ` au ${frDate(t.fin)}` : ', sans date de fin'}
+                      {tr.fin ? t('fromTo', { start: fmt.day(tr.debut), end: fmt.day(tr.fin) }) : t('fromNoEnd', { start: fmt.day(tr.debut) })}
                     </p>
                   </div>
-                  {t.byMe !== false && <DeleteButton label={`Supprimer le traitement ${t.nom}`} onClick={() => removal.ask({ kind: 'traitement', id: t.id, nom: t.nom })} />}
+                  {tr.byMe !== false && <DeleteButton label={t('deleteTreatmentAria', { name: tr.nom })} onClick={() => removal.ask({ kind: 'traitement', id: tr.id, nom: tr.nom })} />}
                 </li>
               )
             })}
@@ -439,18 +455,20 @@ function Treatments({ child, today, onAnnounce, health }: { child: Child; today:
 // --- Médecin & fiche ------------------------------------------------------------
 
 function Doctor({ child }: { child: Child }) {
+  const t = useTranslations('family.children.health')
+  const labels = useChildLabels()
   const rows: [string, string | undefined][] = [
-    ['Médecin traitant', child.medecinTraitant],
-    ['Groupe sanguin', child.groupeSanguin],
-    ['Informations médicales', child.infosMedicales],
+    [t('doctorLabel'), child.medecinTraitant],
+    [t('bloodGroup'), labels.bloodLabel(child.groupeSanguin)],
+    [t('medicalInfo'), child.infosMedicales],
   ]
   return (
-    <Section id="medecin" title="Médecin et fiche médicale" icon={<Stethoscope className="h-5 w-5" strokeWidth={1.8} />} action={<EditLink child={child} label={`Modifier la fiche médicale de ${child.prenom}`} />}>
+    <Section id="medecin" title={t('doctorTitle')} icon={<Stethoscope className="h-5 w-5" strokeWidth={1.8} />} action={<EditLink child={child} label={t('editMedicalAria', { name: child.prenom })} />}>
       <dl className="divide-y divide-night-100">
         {rows.map(([k, v]) => (
           <div key={k} className="flex gap-3 py-2 text-[13px]">
             <dt className="w-36 shrink-0 text-night-600">{k}</dt>
-            <dd className={cn('min-w-0 flex-1 break-words', v ? 'font-semibold text-night-900' : 'italic text-night-500')}>{v || 'Non renseigné'}</dd>
+            <dd className={cn('min-w-0 flex-1 break-words', v ? 'font-semibold text-night-900' : 'italic text-night-500')}>{v || t('notProvided')}</dd>
           </div>
         ))}
       </dl>
@@ -463,17 +481,20 @@ function Doctor({ child }: { child: Child }) {
 function Documents({ child, addHref }: { child: Child; addHref: string }) {
   // Documents du coffre-fort : affichés seulement coffre déverrouillé (sinon la base n'en
   // renvoie aucun, 0370, et « Aucun document » serait trompeur).
+  const t = useTranslations('family.children.health')
   const { state: vault } = useVaultLockState()
   return (
-    <Section id="documents" title="Documents médicaux" icon={<FileHeart className="h-5 w-5" strokeWidth={1.8} />}>
+    <Section id="documents" title={t('documentsTitle')} icon={<FileHeart className="h-5 w-5" strokeWidth={1.8} />}>
       {vault === 'open'
         ? <DocumentsList child={child} addHref={addHref} />
-        : <VaultLockedNotice state={vault} what={`les documents médicaux de ${child.prenom}`} compact className="shadow-none" />}
+        : <VaultLockedNotice state={vault} what={t('documentsWhat', { name: child.prenom })} compact className="shadow-none" />}
     </Section>
   )
 }
 
 function DocumentsList({ child, addHref }: { child: Child; addHref: string }) {
+  const t = useTranslations('family.children.health')
+  const fmt = useFamilyFormat()
   const { docs, ready, error, refresh } = useVaultDocs()
   const { categories } = useCategories()
   const sante = matchCategory(categories, 'sante')
@@ -484,8 +505,8 @@ function DocumentsList({ child, addHref }: { child: Child; addHref: string }) {
         : !ready ? <Loading />
         : list.length === 0 ? (
           <Empty>
-            Aucun document médical lié à {child.prenom}.{' '}
-            <Link href={addHref} className="font-semibold text-leaf-600 underline underline-offset-2">Ajouter un document</Link>
+            {t('noDocuments', { name: child.prenom })}{' '}
+            <Link href={addHref} className="font-semibold text-leaf-600 underline underline-offset-2">{t('addDocumentShort')}</Link>
           </Empty>
         ) : (
           <ul className="divide-y divide-night-100">
@@ -495,7 +516,7 @@ function DocumentsList({ child, addHref }: { child: Child; addHref: string }) {
                   <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-[10px] font-extrabold text-leaf-700">{d.ext}</span>
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-[13.5px] font-bold text-night-900">{d.name}</span>
-                    <span className="block truncate text-[12px] text-night-600">{frDate(d.docDate)}{d.source && <><span aria-hidden="true"> · </span><span className="sr-only">, </span>{d.source}</>}</span>
+                    <span className="block truncate text-[12px] text-night-600">{fmt.day(d.docDate)}{d.source && <><span aria-hidden="true"> · </span><span className="sr-only">, </span>{d.source}</>}</span>
                   </span>
                   <ChevronRight aria-hidden="true" className="h-4 w-4 shrink-0 text-night-400" />
                 </Link>
@@ -512,6 +533,8 @@ function DocumentsList({ child, addHref }: { child: Child; addHref: string }) {
 type HistoryItem = { key: string; sort: string; day: string; time?: string; title: string; sub?: string; href: string; kind: 'rdv' | 'journal' }
 
 function HealthHistory({ child, now, events, journal }: { child: Child; now: Date; events: Events; journal: AsyncState<JournalRecord[]> }) {
+  const t = useTranslations('family.children.health')
+  const fmt = useFamilyFormat()
   const items = useMemo<HistoryItem[]>(() => {
     const past = (events.data ?? [])
       .filter((e) => isHealthEventFor(e, child.id) && new Date(e.end).getTime() < now.getTime())
@@ -530,10 +553,10 @@ function HealthHistory({ child, now, events, journal }: { child: Child; now: Dat
   const loading = (events.loading && !events.data) || (journal.loading && !journal.data)
 
   return (
-    <Section id="historique" title="Historique santé" icon={<History className="h-5 w-5" strokeWidth={1.8} />} className="lg:col-span-2">
+    <Section id="historique" title={t('historyTitle')} icon={<History className="h-5 w-5" strokeWidth={1.8} />} className="lg:col-span-2">
       {failed ? <InlineError message={failed.message} onRetry={() => { void events.refresh(); void journal.refresh() }} />
         : loading ? <Loading />
-        : items.length === 0 ? <Empty>Rien pour le moment. Les rendez-vous passés et les notes Santé du Journal apparaîtront ici.</Empty>
+        : items.length === 0 ? <Empty>{t('historyEmpty')}</Empty>
         : (
           <ol className="relative ml-2 border-l border-night-100">
             {items.map((it) => (
@@ -542,16 +565,16 @@ function HealthHistory({ child, now, events, journal }: { child: Child; now: Dat
                 <Link href={it.href} className="flex items-start gap-3 rounded-lg py-2.5 pr-1 hover:bg-night-50/50">
                   <span className="min-w-0 flex-1">
                     <span className="block text-[11.5px] font-semibold text-night-600">
-                      <time dateTime={it.day}>{frDate(it.day)}</time>
-                      {it.time && it.time !== '00:00' && <> à {it.time.replace(':', 'h')}</>}
+                      <time dateTime={it.day}>{fmt.day(it.day)}</time>
+                      {it.time && it.time !== '00:00' && <> {t('atTime', { time: fmt.hm(it.time) })}</>}
                     </span>
                     <span className="block break-words text-[13.5px] font-bold text-night-900">{it.title}</span>
                     {it.sub && <span className="block truncate text-[12px] text-night-600">{it.sub}</span>}
                   </span>
                   <span className="mt-0.5 inline-flex shrink-0 items-center gap-1 rounded-md bg-night-50 px-2 py-0.5 text-[11px] font-bold text-night-700">
                     {it.kind === 'rdv'
-                      ? <><CalendarClock aria-hidden="true" className="h-3 w-3" /> Rendez-vous</>
-                      : <><NotebookPen aria-hidden="true" className="h-3 w-3" /> Journal</>}
+                      ? <><CalendarClock aria-hidden="true" className="h-3 w-3" /> {t('kindAppointment')}</>
+                      : <><NotebookPen aria-hidden="true" className="h-3 w-3" /> {t('kindJournal')}</>}
                   </span>
                 </Link>
               </li>
@@ -559,9 +582,11 @@ function HealthHistory({ child, now, events, journal }: { child: Child; now: Dat
           </ol>
         )}
       <p className="mt-3 text-[12px] text-night-600">
-        Ajoutez une note Santé dans le{' '}
-        <Link href={prefillHref('/app/journal/nouveau', { type: 'sante', enfant: child.id })} className="font-semibold text-leaf-600 underline underline-offset-2">Journal</Link>{' '}
-        pour compléter l’historique.
+        {t.rich('historyHint', {
+          link: (chunks) => (
+            <Link href={prefillHref('/app/journal/nouveau', { type: 'sante', enfant: child.id })} className="font-semibold text-leaf-600 underline underline-offset-2">{chunks}</Link>
+          ),
+        })}
       </p>
     </Section>
   )

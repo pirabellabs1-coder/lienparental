@@ -8,6 +8,8 @@ export type CoachListItem = {
   kind: CoachListKind
   title: string
   dateLabel: string
+  /** Date ISO (éléments réels) : le libellé est reformaté au rendu dans la langue de l'utilisateur. */
+  createdAt?: string
   responseReady: boolean
   /** true : élément réel (actions via /api/coach/history) ; false : exemple de démonstration. */
   remote: boolean
@@ -36,6 +38,21 @@ export function dateLabel(iso: string, now = new Date()): string {
   return `${dm.format(d)} à ${hm.format(d)}`
 }
 
+/** Libellé de date localisé (fuseau Guyane), pour le rendu côté client. */
+export function localizedDateLabel(
+  iso: string,
+  intl: string,
+  fmt: { today: (time: string) => string; yesterday: (time: string) => string; dateAt: (date: string, time: string) => string },
+  now = new Date(),
+): string {
+  const d = new Date(iso)
+  const time = new Intl.DateTimeFormat(intl, { timeZone: TZ, hour: '2-digit', minute: '2-digit' }).format(d)
+  const k = dayKey.format(d)
+  if (k === dayKey.format(now)) return fmt.today(time)
+  if (k === dayKey.format(new Date(now.getTime() - 86_400_000))) return fmt.yesterday(time)
+  return fmt.dateAt(new Intl.DateTimeFormat(intl, { timeZone: TZ, day: 'numeric', month: 'long' }).format(d), time)
+}
+
 export function toListItem(a: StoredAnalysis): CoachListItem {
-  return { id: a.id, kind: a.kind, title: a.title, dateLabel: dateLabel(a.createdAt), responseReady: Boolean(a.result), remote: true }
+  return { id: a.id, kind: a.kind, title: a.title, dateLabel: dateLabel(a.createdAt), createdAt: a.createdAt, responseReady: Boolean(a.result), remote: true }
 }

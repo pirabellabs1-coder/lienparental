@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/cn'
-import { getEventType, type EventTypeKey } from '@/lib/calendrier'
+import { type EventTypeKey } from '@/lib/calendrier'
+import { useCalFormat } from './useCalFormat'
 import { typeIcon, typeStyle } from './eventTypeStyles'
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
 export function EventPill({ type, label, size = 'sm', className, withIcon = true }: Props) {
   const s = typeStyle(type)
   const Icon = typeIcon(type)
+  const f = useCalFormat()
   return (
     <span
       className={cn(
@@ -25,7 +27,7 @@ export function EventPill({ type, label, size = 'sm', className, withIcon = true
       )}
     >
       {withIcon && <Icon className={size === 'sm' ? 'h-3 w-3' : 'h-3.5 w-3.5'} aria-hidden="true" />}
-      {label ?? getEventType(type).label}
+      {label ?? f.typeLabel(type)}
     </span>
   )
 }

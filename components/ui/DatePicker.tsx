@@ -1,7 +1,9 @@
 'use client'
 import { forwardRef, useId, type InputHTMLAttributes } from 'react'
 import { Calendar } from 'lucide-react'
+import { useLocale } from 'next-intl'
 import { cn } from '@/lib/cn'
+import { intlLocale } from '@/lib/i18n/config'
 
 type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
   label?: string
@@ -12,8 +14,10 @@ type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
 }
 
 export const DatePicker = forwardRef<HTMLInputElement, Props>(function DatePicker(
-  { id, label, hint, error, mode = 'date', className, containerClassName, required, lang = 'fr-FR', ...props }, ref
+  { id, label, hint, error, mode = 'date', className, containerClassName, required, lang, ...props }, ref
 ) {
+  const locale = useLocale()
+  lang = lang ?? intlLocale(locale)
   const autoId = useId()
   const inputId = id ?? autoId
   const hintId = `${inputId}-hint`

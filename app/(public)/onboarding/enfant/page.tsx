@@ -1,10 +1,11 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState, type FormEvent } from 'react'
 import { cn } from '@/lib/cn'
 import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
-import { SelectField, TextField } from '@/components/onboarding/fields'
+import { SelectField, TextField, childClassKey } from '@/components/onboarding/fields'
 import { PhotoPicker } from '@/components/onboarding/PhotoPicker'
 import { btn } from '@/components/onboarding/styles'
 import { getDraftPhoto, readDraft, setDraftPhoto, writeDraft } from '@/components/onboarding/draft'
@@ -16,6 +17,8 @@ import { uploadAvatar } from '@/lib/auth/browser'
 // Étape 9 — Ajouter un enfant (proposé) : photo, prénom, date de naissance, classe.
 export default function EnfantPage() {
   const router = useRouter()
+  const t = useTranslations('public.onboarding.child')
+  const tc = useTranslations('public.onboarding.classes')
   const [photo, setPhoto] = useState<string | null>(null)
   const [prenom, setPrenom] = useState('')
   const [dateNaissance, setDateNaissance] = useState('')
@@ -42,9 +45,9 @@ export default function EnfantPage() {
     setPhoto(url)
   }
 
-  const prenomErr = submitted && !prenom.trim() ? 'Indiquez le prénom de l’enfant.' : undefined
+  const prenomErr = submitted && !prenom.trim() ? t('errFirstName') : undefined
   const dateErr =
-    submitted && (!dateNaissance || dateNaissance > today) ? 'Indiquez une date de naissance valide.' : undefined
+    submitted && (!dateNaissance || dateNaissance > today) ? t('errBirthDate') : undefined
 
   const onAuthLost = (reason?: string) => {
     if (reason === 'unauthenticated' || reason === 'mfa_required') {
@@ -112,17 +115,17 @@ export default function EnfantPage() {
       align="center"
       title={
         <>
-          Ajoutez un enfant
-          <br />à votre espace
+          {t('titleLine1')}
+          <br />{t('titleLine2')}
         </>
       }
-      subtitle="Vous pourrez en ajouter d’autres plus tard dans les paramètres."
+      subtitle={t('subtitle')}
       onSubmit={onSubmit}
       footer={
         <>
           {serverError && <p role="alert" className="text-center text-sm font-semibold text-alert-600">{serverError}</p>}
           <button type="submit" className={cn(btn.primary, 'w-full')} disabled={saving} aria-busy={saving}>
-            {saving ? 'Enregistrement…' : 'Ajouter cet enfant'}
+            {saving ? t('saving') : t('submit')}
           </button>
           <button
             type="button"
@@ -130,7 +133,7 @@ export default function EnfantPage() {
             disabled={saving}
             className="inline-flex min-h-[44px] w-full items-center justify-center text-[13px] font-bold text-leaf-600 underline-offset-4 hover:underline"
           >
-            Je le ferai plus tard
+            {t('later')}
           </button>
         </>
       }
@@ -138,16 +141,16 @@ export default function EnfantPage() {
       <PhotoPicker kind="child" value={photo} onChange={onPhoto} className="flex justify-center" />
       <div className="mt-6 space-y-4">
         <TextField
-          label="Prénom"
+          label={t('firstName')}
           required
           autoComplete="off"
-          placeholder="Ex : Lina"
+          placeholder={t('firstNamePh')}
           value={prenom}
           onChange={(e) => setPrenom(e.target.value)}
           error={prenomErr}
         />
         <TextField
-          label="Date de naissance"
+          label={t('birthDate')}
           required
           type="date"
           max={today}
@@ -156,10 +159,13 @@ export default function EnfantPage() {
           error={dateErr}
         />
         <SelectField
-          label="Classe"
+          label={t('class')}
           optional
-          placeholder="Sélectionner"
-          options={CHILD_CLASSES}
+          placeholder={t('select')}
+          options={CHILD_CLASSES.map((c) => {
+            const k = childClassKey(c)
+            return { value: c, label: k ? tc(k) : c }
+          })}
           value={classe}
           onChange={(e) => setClasse(e.target.value)}
         />

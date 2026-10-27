@@ -3,34 +3,37 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useId, useMemo } from 'react'
+import { useTranslations } from 'next-intl'
 import {
   ArrowDownLeft, ArrowUpRight, ChevronLeft, ChevronRight, Filter, Info, Paperclip, Plus, ReceiptText, Repeat, Wallet,
 } from 'lucide-react'
 import { EmptyState, ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { deMonth, fmtMonthShort, fmtMonthYear, parseDay } from '@/components/journal/journalData'
 import { cn } from '@/lib/cn'
+import { intlLocale } from '@/lib/i18n/config'
+import { useFinanceLabels } from '@/components/journal/financeLabels'
 import {
-  DEPENSE_CATEGORIES, DEPENSE_CATEGORIE_LABELS, DEPENSE_SENS, DEPENSE_SENS_LABELS, DEPENSE_STATUTS, DEPENSE_STATUT_LABELS,
-  FINANCES_DISCLAIMER, FINANCE_PERIODES, FINANCE_PERIODE_LABELS, RECURRENCE_LABELS,
-  activeFilterCount, allJustificatifs, applyFinanceFilters, financeRange, fluxOf, formatMontant, formatSolde, formatTotals,
+  DEPENSE_CATEGORIES, DEPENSE_SENS, DEPENSE_STATUTS, FINANCE_PERIODES,
+  activeFilterCount, allJustificatifs, applyFinanceFilters, financeRange, fluxOf,
   montantRegleCents, recurrenceOf, resteDuCents, sensOf, shiftMonth, statutOf, totalsByChild, totalsByFlux,
   type DepenseStatut, type FinanceFilters, type FinancePeriode,
 } from '@/lib/journal-finances'
-import { fmtDayKey } from '@/lib/tz'
 import { useExpensesInRange } from '@/lib/data/journal'
 
 /** Mention obligatoire : affichée sur la vue Finances, le formulaire et le détail d'une dépense. */
 export function FinancesNotice({ className }: { className?: string }) {
+  const fl = useFinanceLabels()
   return (
     <p className={cn('flex gap-2.5 rounded-xl border border-night-100 bg-night-50/60 px-3.5 py-3 text-[12px] leading-relaxed text-night-700', className)}>
       <Info aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-night-700" strokeWidth={1.8} />
-      <span>{FINANCES_DISCLAIMER}</span>
+      <span>{fl.disclaimer()}</span>
     </p>
   )
 }
 
 /** Pastille de statut (texte toujours présent : la couleur n'est jamais seule porteuse de sens). */
 export function StatutBadge({ statut, className }: { statut: DepenseStatut; className?: string }) {
+  const fl = useFinanceLabels()
   if (statut === 'paye') return null
   const tone: Record<Exclude<DepenseStatut, 'paye'>, string> = {
     'en-attente': 'bg-night-50 text-night-800 ring-night-200',
@@ -40,16 +43,13 @@ export function StatutBadge({ statut, className }: { statut: DepenseStatut; clas
   }
   return (
     <span className={cn('inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-semibold ring-1 ring-inset', tone[statut], className)}>
-      {DEPENSE_STATUT_LABELS[statut]}
+      {fl.statut(statut)}
     </span>
   )
 }
 
 type ChildOpt = { id: string; prenom: string }
 
-const SENS_OPTIONS = DEPENSE_SENS.map((s) => ({ value: s, label: DEPENSE_SENS_LABELS[s] }))
-const STATUT_OPTIONS = DEPENSE_STATUTS.map((s) => ({ value: s, label: DEPENSE_STATUT_LABELS[s] }))
-const CATEGORY_OPTIONS = DEPENSE_CATEGORIES.map((c) => ({ value: c, label: DEPENSE_CATEGORIE_LABELS[c] }))
 
 /**
  * Vue « Finances » du Journal : période (mois navigable, 3 / 12 derniers mois, dates
@@ -71,6 +71,17 @@ export function FinancesView({
   filters: FinanceFilters
   basePath: string
 }) {
+  const t = useTranslations('family.finances.view')
+  const fl = useFinanceLabels()
+  const loc = fl.locale
+  const formatMontant = fl.money
+  const formatTotals = fl.totals
+  const formatSolde = fl.solde
+  const fmtDayKey = (key: string, opts: Intl.DateTimeFormatOptions) =>
+    parseDay(key).toLocaleDateString(intlLocale(loc), { ...opts, timeZone: 'UTC' })
+  const sensOptions = DEPENSE_SENS.map((s) => ({ value: s, label: fl.sens(s) }))
+  const statutOptions = DEPENSE_STATUTS.map((s) => ({ value: s, label: fl.statut(s) }))
+  const categoryOptions = DEPENSE_CATEGORIES.map((c) => ({ value: c, label: fl.category(c) }))
   const router = useRouter()
   const uid = useId()
   const range = financeRange(filters, month, today)
@@ -101,18 +112,21 @@ export function FinancesView({
   }
   const go = (patch: Partial<FinanceFilters>) => router.replace(href(patch), { scroll: false })
 
-  const label = fmtMonthYear(parseDay(`${month}-01`))
+  const label = fmtMonthYear(parseDay(`${month}-01`), loc)
   const prev = shiftMonth(month, -1)
   const next = shiftMonth(month, 1)
   const canNext = next <= currentMonth
   const periodLabel = filters.periode === 'mois'
     ? label
-    : `Du ${fmtDayKey(range.fromDay, { day: 'numeric', month: 'short', year: 'numeric' })} au ${fmtDayKey(range.toDay, { day: 'numeric', month: 'short', year: 'numeric' })}`
+    : t('periodRange', {
+      from: fmtDayKey(range.fromDay, { day: 'numeric', month: 'short', year: 'numeric' }),
+      to: fmtDayKey(range.toDay, { day: 'numeric', month: 'short', year: 'numeric' }),
+    })
   const names = (ids: string[]) => childOptions.filter((c) => ids.includes(c.id)).map((c) => c.prenom).join(', ')
 
   const navBtn = 'grid h-11 w-11 shrink-0 place-items-center rounded-full border border-night-100 bg-white text-night-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2'
   const selectCls = 'block h-11 w-full appearance-none rounded-xl border border-night-100 bg-white px-3.5 text-[13px] text-night-900 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-500/20'
-  const childFilterOptions = [...childOptions.map((c) => ({ value: c.id, label: c.prenom })), { value: '__aucun', label: 'Sans enfant précisé' }]
+  const childFilterOptions = [...childOptions.map((c) => ({ value: c.id, label: c.prenom })), { value: '__aucun', label: t('noChild') }]
 
   return (
     <div className="space-y-4">
@@ -120,10 +134,10 @@ export function FinancesView({
       <section aria-labelledby={`${uid}-periode`} className="rounded-2xl border border-night-100 bg-white p-4 shadow-soft">
         <div className="flex flex-wrap items-end gap-3">
           <div className="w-full sm:w-64">
-            <label id={`${uid}-periode`} htmlFor={`${uid}-p`} className="mb-1.5 block text-[12px] font-bold text-night-900">Période</label>
+            <label id={`${uid}-periode`} htmlFor={`${uid}-p`} className="mb-1.5 block text-[12px] font-bold text-night-900">{t('period')}</label>
             <div className="relative">
               <select id={`${uid}-p`} className={cn(selectCls, 'pr-9')} value={filters.periode} onChange={(e) => go({ periode: e.target.value as FinancePeriode })}>
-                {FINANCE_PERIODES.map((p) => <option key={p} value={p}>{FINANCE_PERIODE_LABELS[p]}</option>)}
+                {FINANCE_PERIODES.map((p) => <option key={p} value={p}>{fl.periode(p)}</option>)}
               </select>
               <ChevronRight aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 rotate-90 text-night-700" />
             </div>
@@ -131,23 +145,23 @@ export function FinancesView({
           {filters.periode === 'perso' && (
             <div className="grid w-full grid-cols-2 gap-3 sm:w-auto">
               <div>
-                <label htmlFor={`${uid}-du`} className="mb-1.5 block text-[12px] font-bold text-night-900">Du</label>
+                <label htmlFor={`${uid}-du`} className="mb-1.5 block text-[12px] font-bold text-night-900">{t('from')}</label>
                 <input id={`${uid}-du`} type="date" className={selectCls} value={filters.du ?? range.fromDay} max={today} onChange={(e) => e.target.value && go({ du: e.target.value })} />
               </div>
               <div>
-                <label htmlFor={`${uid}-au`} className="mb-1.5 block text-[12px] font-bold text-night-900">Au</label>
+                <label htmlFor={`${uid}-au`} className="mb-1.5 block text-[12px] font-bold text-night-900">{t('to')}</label>
                 <input id={`${uid}-au`} type="date" className={selectCls} value={filters.au ?? range.toDay} max={today} onChange={(e) => e.target.value && go({ au: e.target.value })} />
               </div>
             </div>
           )}
           {filters.periode === 'mois' && (
             <div className="flex w-full items-center justify-between gap-2 sm:flex-1">
-              <Link href={href({ mois: prev })} replace scroll={false} className={cn(navBtn, 'hover:bg-night-50')} aria-label={`Mois précédent : ${fmtMonthYear(parseDay(`${prev}-01`))}`}>
+              <Link href={href({ mois: prev })} replace scroll={false} className={cn(navBtn, 'hover:bg-night-50')} aria-label={t('prevMonth', { month: fmtMonthYear(parseDay(`${prev}-01`), loc) })}>
                 <ChevronLeft aria-hidden="true" className="h-5 w-5" strokeWidth={1.8} />
               </Link>
               <p className="text-center text-[14px] font-bold capitalize text-night-900">{label}</p>
               {canNext ? (
-                <Link href={href({ mois: next })} replace scroll={false} className={cn(navBtn, 'hover:bg-night-50')} aria-label={`Mois suivant : ${fmtMonthYear(parseDay(`${next}-01`))}`}>
+                <Link href={href({ mois: next })} replace scroll={false} className={cn(navBtn, 'hover:bg-night-50')} aria-label={t('nextMonth', { month: fmtMonthYear(parseDay(`${next}-01`), loc) })}>
                   <ChevronRight aria-hidden="true" className="h-5 w-5" strokeWidth={1.8} />
                 </Link>
               ) : (
@@ -168,16 +182,16 @@ export function FinancesView({
         <summary className="flex min-h-[48px] cursor-pointer list-none items-center gap-2.5 rounded-2xl px-4 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
           <Filter aria-hidden="true" className="h-4 w-4 text-leaf-600" strokeWidth={2} />
           <span className="flex-1 text-[13px] font-bold text-night-900">
-            Filtres
-            {nFilters > 0 && <span className="ml-2 rounded-full bg-leaf-50 px-2 py-0.5 text-[11px] font-semibold text-leaf-700">{nFilters} actif{nFilters > 1 ? 's' : ''}</span>}
+            {t('filters')}
+            {nFilters > 0 && <span className="ml-2 rounded-full bg-leaf-50 px-2 py-0.5 text-[11px] font-semibold text-leaf-700">{t('activeCount', { count: nFilters })}</span>}
           </span>
           <ChevronRight aria-hidden="true" className="h-[18px] w-[18px] text-night-700 group-open:rotate-90 motion-safe:transition-transform" />
         </summary>
         <div className="grid gap-3 border-t border-night-100 px-4 pb-4 pt-3 sm:grid-cols-2 lg:grid-cols-4">
-          <FilterSelect id={`${uid}-sens`} label="Sens" value={filters.sens ?? ''} options={SENS_OPTIONS} onChange={(v) => go({ sens: (v || undefined) as FinanceFilters['sens'] })} cls={selectCls} />
-          <FilterSelect id={`${uid}-statut`} label="Statut" value={filters.statut ?? ''} options={STATUT_OPTIONS} onChange={(v) => go({ statut: (v || undefined) as FinanceFilters['statut'] })} cls={selectCls} />
-          <FilterSelect id={`${uid}-cat`} label="Catégorie" value={filters.categorie ?? ''} options={CATEGORY_OPTIONS} onChange={(v) => go({ categorie: (v || undefined) as FinanceFilters['categorie'] })} cls={selectCls} />
-          <FilterSelect id={`${uid}-enfant`} label="Enfant" value={filters.enfant ?? ''} options={childFilterOptions} onChange={(v) => go({ enfant: v || undefined })} cls={selectCls} />
+          <FilterSelect id={`${uid}-sens`} label={t('direction')} value={filters.sens ?? ''} options={sensOptions} onChange={(v) => go({ sens: (v || undefined) as FinanceFilters['sens'] })} cls={selectCls} />
+          <FilterSelect id={`${uid}-statut`} label={t('status')} value={filters.statut ?? ''} options={statutOptions} onChange={(v) => go({ statut: (v || undefined) as FinanceFilters['statut'] })} cls={selectCls} />
+          <FilterSelect id={`${uid}-cat`} label={t('category')} value={filters.categorie ?? ''} options={categoryOptions} onChange={(v) => go({ categorie: (v || undefined) as FinanceFilters['categorie'] })} cls={selectCls} />
+          <FilterSelect id={`${uid}-enfant`} label={t('child')} value={filters.enfant ?? ''} options={childFilterOptions} onChange={(v) => go({ enfant: v || undefined })} cls={selectCls} />
           {nFilters > 0 && (
             <div className="sm:col-span-2 lg:col-span-4">
               <Link
@@ -186,7 +200,7 @@ export function FinancesView({
                 scroll={false}
                 className="inline-flex min-h-[44px] items-center text-[13px] font-semibold text-leaf-700 underline underline-offset-2 hover:text-leaf-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500"
               >
-                Effacer les filtres
+                {t('clearFilters')}
               </Link>
             </div>
           )}
@@ -197,25 +211,25 @@ export function FinancesView({
       <div className="grid gap-3 lg:grid-cols-2">
         <section aria-labelledby={`${uid}-tot`} aria-busy={pending} className="rounded-2xl border border-night-100 bg-white p-4 shadow-soft">
           <h2 id={`${uid}-tot`} className="text-[13px] font-bold text-night-900">
-            {filters.periode === 'mois' ? 'Totaux du mois' : 'Totaux de la période'}
-            <span className="block text-[11px] font-normal text-night-600">{periodLabel}{nFilters > 0 ? ' · filtres appliqués' : ''}</span>
+            {filters.periode === 'mois' ? t('totalsMonth') : t('totalsPeriod')}
+            <span className="block text-[11px] font-normal text-night-600">{periodLabel}{nFilters > 0 ? ` · ${t('filtersApplied')}` : ''}</span>
           </h2>
           <div aria-live="polite" className="mt-3">
             {error ? (
-              <p className="text-xs text-night-600">Totaux indisponibles.</p>
+              <p className="text-xs text-night-600">{t('totalsUnavailable')}</p>
             ) : pending ? (
-              <p className="text-xs text-night-600">Calcul des totaux…</p>
+              <p className="text-xs text-night-600">{t('computing')}</p>
             ) : (
               <>
                 <dl className="grid grid-cols-3 gap-2 text-center">
-                  <TotalTile label="Dépensé" value={formatTotals(flux.sortie)} />
-                  <TotalTile label="Reçu" value={formatTotals(flux.entree)} />
-                  <TotalTile label="Solde" value={formatSolde(flux.solde)} strong />
+                  <TotalTile label={t('spent')} value={formatTotals(flux.sortie)} />
+                  <TotalTile label={t('received')} value={formatTotals(flux.entree)} />
+                  <TotalTile label={t('balance')} value={formatSolde(flux.solde)} strong />
                 </dl>
                 <ul className="mt-3 space-y-1 text-[12px] text-night-700">
-                  <li>{items.length} opération{items.length > 1 ? 's' : ''} enregistrée{items.length > 1 ? 's' : ''}</li>
-                  {flux.tiers.length > 0 && <li>Réglé par l’autre parent ou un tiers (hors solde) : <strong className="tabular-nums text-night-900">{formatTotals(flux.tiers)}</strong></li>}
-                  {flux.aRegler.length > 0 && <li>Reste à régler (en attente, partiel) : <strong className="tabular-nums text-night-900">{formatTotals(flux.aRegler)}</strong></li>}
+                  <li>{t('operationsCount', { count: items.length })}</li>
+                  {flux.tiers.length > 0 && <li>{t('paidByThird')} <strong className="tabular-nums text-night-900">{formatTotals(flux.tiers)}</strong></li>}
+                  {flux.aRegler.length > 0 && <li>{t('remainingToPay')} <strong className="tabular-nums text-night-900">{formatTotals(flux.aRegler)}</strong></li>}
                 </ul>
               </>
             )}
@@ -223,27 +237,27 @@ export function FinancesView({
         </section>
 
         <section aria-labelledby={`${uid}-enfants`} className="rounded-2xl border border-night-100 bg-white p-4 shadow-soft">
-          <h2 id={`${uid}-enfants`} className="text-[13px] font-bold text-night-900">Par enfant</h2>
+          <h2 id={`${uid}-enfants`} className="text-[13px] font-bold text-night-900">{t('byChild')}</h2>
           {error ? (
-            <p className="mt-2 text-xs text-night-600">Totaux indisponibles.</p>
+            <p className="mt-2 text-xs text-night-600">{t('totalsUnavailable')}</p>
           ) : pending || childrenLoading ? (
-            <p aria-busy="true" className="mt-2 text-xs text-night-600">Chargement…</p>
+            <p aria-busy="true" className="mt-2 text-xs text-night-600">{t('loadingShort')}</p>
           ) : buckets.length === 0 ? (
-            <p className="mt-2 text-xs text-night-600">Aucune opération sur cette période.</p>
+            <p className="mt-2 text-xs text-night-600">{t('noOperationsPeriod')}</p>
           ) : (
             <table className="mt-2 w-full text-[13px]">
               <thead>
                 <tr className="text-left text-[11px] font-semibold uppercase tracking-wide text-night-600">
-                  <th scope="col" className="py-1.5 font-semibold">Enfant</th>
-                  <th scope="col" className="py-1.5 text-right font-semibold">Dépensé</th>
-                  <th scope="col" className="py-1.5 text-right font-semibold">Reçu</th>
+                  <th scope="col" className="py-1.5 font-semibold">{t('child')}</th>
+                  <th scope="col" className="py-1.5 text-right font-semibold">{t('spent')}</th>
+                  <th scope="col" className="py-1.5 text-right font-semibold">{t('received')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-night-100">
                 {buckets.map((b) => (
                   <tr key={b.key}>
                     <th scope="row" className="max-w-[9rem] truncate py-2.5 pr-2 text-left font-semibold text-night-900">
-                      {b.label}<span className="ml-1 font-normal text-night-600">({b.count})</span>
+                      {b.key === '__plusieurs' ? t('severalChildren') : b.key === '__aucun' ? t('noChild') : b.label}<span className="ml-1 font-normal text-night-600">({b.count})</span>
                     </th>
                     <td className="py-2.5 text-right font-bold tabular-nums text-night-900">{formatTotals(b.sortie)}</td>
                     <td className="py-2.5 pl-2 text-right font-bold tabular-nums text-night-900">{formatTotals(b.entree)}</td>
@@ -253,38 +267,38 @@ export function FinancesView({
             </table>
           )}
           {!pending && !childrenLoading && buckets.some((b) => b.key === '__plusieurs') && (
-            <p className="mt-1 text-[11px] leading-snug text-night-600">Une opération commune à plusieurs enfants est comptée une seule fois, sous « Plusieurs enfants ».</p>
+            <p className="mt-1 text-[11px] leading-snug text-night-600">{t('severalChildrenNote')}</p>
           )}
         </section>
       </div>
 
       <div className="flex items-center justify-between gap-3">
         <h2 className="text-[15px] font-bold text-night-900">
-          {filters.periode === 'mois' ? `Opérations ${deMonth(label.toLowerCase())}` : 'Opérations de la période'}
+          {filters.periode === 'mois' ? t('operationsMonth', { deMonth: deMonth(label.toLowerCase()), month: label }) : t('operationsPeriod')}
         </h2>
         <Link
           href="/app/journal/nouveau?type=depense"
           className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl bg-leaf-500 px-3.5 text-[13px] font-semibold text-white transition-colors hover:bg-leaf-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2 motion-safe:active:scale-[.98]"
         >
           <Plus aria-hidden="true" className="h-4 w-4" strokeWidth={2} />
-          Ajouter
-          <span className="sr-only"> une dépense ou un paiement</span>
+          {t('add')}
+          <span className="sr-only"> {t('addSr')}</span>
         </Link>
       </div>
 
       {error ? (
-        <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} />
+        <ErrorState compact description={error.message} primary={{ label: t('retry'), onClick: () => void refresh() }} />
       ) : pending ? (
-        <LoadingState compact title="Chargement des opérations" description="" />
+        <LoadingState compact title={t('loadingOperations')} description="" />
       ) : items.length === 0 ? (
         <EmptyState
           compact
           icon={<Wallet className="h-9 w-9" strokeWidth={1.6} />}
-          title={nFilters > 0 ? 'Aucune opération pour ces filtres' : 'Aucune opération sur cette période'}
-          description={nFilters > 0 ? 'Modifiez ou effacez les filtres pour voir plus d’opérations.' : 'Enregistrez une dépense ou un paiement et joignez son justificatif pour retrouver l’historique.'}
+          title={nFilters > 0 ? t('emptyFiltersTitle') : t('emptyPeriodTitle')}
+          description={nFilters > 0 ? t('emptyFiltersText') : t('emptyPeriodText')}
           primary={nFilters > 0
-            ? { label: 'Effacer les filtres', href: href({ sens: undefined, statut: undefined, categorie: undefined, enfant: undefined }) }
-            : { label: 'Ajouter une dépense', href: '/app/journal/nouveau?type=depense' }}
+            ? { label: t('clearFilters'), href: href({ sens: undefined, statut: undefined, categorie: undefined, enfant: undefined }) }
+            : { label: t('addExpense'), href: '/app/journal/nouveau?type=depense' }}
         />
       ) : (
         <ul className="space-y-2.5">
@@ -309,7 +323,7 @@ export function FinancesView({
                 >
                   <span className="w-9 shrink-0 self-start text-center leading-none text-teal-700">
                     <span className="block text-xl font-extrabold tabular-nums">{String(day.getUTCDate()).padStart(2, '0')}</span>
-                    <span className="mt-1 block text-[10px] font-bold tracking-wide">{fmtMonthShort(day)}</span>
+                    <span className="mt-1 block text-[10px] font-bold tracking-wide">{fmtMonthShort(day, loc)}</span>
                     <span className="sr-only"> {day.getUTCFullYear()}</span>
                   </span>
                   <span className="min-w-0 flex-1">
@@ -320,12 +334,12 @@ export function FinancesView({
                           {f === 'entree'
                             ? <ArrowDownLeft aria-hidden="true" className="h-3 w-3" strokeWidth={2.2} />
                             : <ArrowUpRight aria-hidden="true" className="h-3 w-3" strokeWidth={2.2} />}
-                          {DEPENSE_SENS_LABELS[s]}
+                          {fl.sens(s)}
                         </span>
                       )}
                       <span className="inline-flex items-center gap-1 rounded-md bg-teal-50 px-1.5 py-0.5 font-semibold text-teal-800">
                         <ReceiptText aria-hidden="true" className="h-3 w-3" strokeWidth={2} />
-                        {DEPENSE_CATEGORIE_LABELS[d.categorie]}
+                        {fl.category(d.categorie)}
                       </span>
                       <StatutBadge statut={st} />
                       {kids && <span className="truncate">{kids}</span>}
@@ -333,30 +347,30 @@ export function FinancesView({
                     <span className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-[11px] text-night-600">
                       <span className="inline-flex items-center gap-1">
                         {nJustifs ? (
-                          <><Paperclip aria-hidden="true" className="h-3 w-3" strokeWidth={2} />{nJustifs > 1 ? `${nJustifs} justificatifs` : 'Justificatif joint'}</>
+                          <><Paperclip aria-hidden="true" className="h-3 w-3" strokeWidth={2} />{nJustifs > 1 ? t('receiptsCount', { count: nJustifs }) : t('receiptAttached')}</>
                         ) : (
-                          'Sans justificatif'
+                          t('noReceipt')
                         )}
                       </span>
                       {rec !== 'ponctuel' && (
                         <span className="inline-flex items-center gap-1">
                           <Repeat aria-hidden="true" className="h-3 w-3" strokeWidth={2} />
-                          {RECURRENCE_LABELS[rec]}
-                          {d.echeanceSuivante && <>, prochaine échéance le {fmtDayKey(d.echeanceSuivante, { day: 'numeric', month: 'short' })}</>}
+                          {fl.recurrence(rec)}
+                          {d.echeanceSuivante && <>{t('nextDue', { date: fmtDayKey(d.echeanceSuivante, { day: 'numeric', month: 'short' }) })}</>}
                         </span>
                       )}
-                      {f === 'tiers' && <span>Réglé par un tiers</span>}
+                      {f === 'tiers' && <span>{t('paidByThirdShort')}</span>}
                     </span>
                   </span>
                   <span className="shrink-0 text-right">
                     <span className={cn('block text-[14px] font-extrabold tabular-nums', f === 'entree' ? 'text-leaf-700' : 'text-night-900')}>
-                      <span className="sr-only">{f === 'entree' ? 'Entrée' : f === 'sortie' ? 'Sortie' : 'Hors solde'}{reste > 0 ? ', montant réglé' : ''} : </span>
+                      <span className="sr-only">{f === 'entree' ? t('fluxIn') : f === 'sortie' ? t('fluxOut') : t('fluxThird')}{reste > 0 ? t('amountPaidSr') : ''} : </span>
                       {regle > 0 && <span aria-hidden="true">{sign}</span>}
                       {formatMontant(regle, d.devise)}
                     </span>
                     {reste > 0 && (
                       <span className="mt-0.5 block max-w-[6.5rem] text-[11px] font-semibold leading-snug text-night-700">
-                        <span className="sr-only">sur {formatMontant(d.montantCents, d.devise)}, </span>dont {formatMontant(reste, d.devise)} à régler
+                        <span className="sr-only">{t('outOfSr', { total: formatMontant(d.montantCents, d.devise) })} </span>{t('ofWhichToPay', { value: formatMontant(reste, d.devise) })}
                       </span>
                     )}
                   </span>
@@ -383,12 +397,13 @@ function TotalTile({ label, value, strong }: { label: string; value: string; str
 function FilterSelect({ id, label, value, options, onChange, cls }: {
   id: string; label: string; value: string; options: { value: string; label: string }[]; onChange: (v: string) => void; cls: string
 }) {
+  const t = useTranslations('family.finances.view')
   return (
     <div>
       <label htmlFor={id} className="mb-1.5 block text-[12px] font-bold text-night-900">{label}</label>
       <div className="relative">
         <select id={id} className={cn(cls, 'pr-9')} value={value} onChange={(e) => onChange(e.target.value)}>
-          <option value="">Tous</option>
+          <option value="">{t('all')}</option>
           {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
         <ChevronRight aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 rotate-90 text-night-700" />

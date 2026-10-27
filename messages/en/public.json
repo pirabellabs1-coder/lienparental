@@ -1,0 +1,840 @@
+{
+  "public": {
+    "onboarding": {
+      "welcome": {
+        "carousel": "carousel",
+        "carouselLabel": "Discover Lien Parental",
+        "backHome": "Back to the home page",
+        "prevScreen": "Previous screen",
+        "slide": "slide",
+        "slideOf": "{n} of {total}",
+        "start": "Get started",
+        "haveAccount": "Already have an account?",
+        "signIn": "Sign in",
+        "next": "Next",
+        "createAccount": "Create my account",
+        "welcomeAlt": "A father and a mother, sitting face to face, welcome their daughter as she runs toward them smiling",
+        "welcomeTitle": "Welcome!",
+        "welcomeText": "A space designed for parents, focused on what matters most: <b>your child’s well-being.</b>",
+        "whyTitle": "Everything you<br></br>need, <hl>in one place.</hl>",
+        "features": {
+          "communicate": {
+            "title": "Communicate calmly",
+            "text": "Tools and templates to exchange clearly and without conflict."
+          },
+          "organize": {
+            "title": "Get organized easily",
+            "text": "Shared calendar, events, appointments and important reminders."
+          },
+          "secure": {
+            "title": "Keep your documents safe",
+            "text": "Store all your important documents in a secure vault."
+          }
+        },
+        "missionTitle": "Designed around the best<br></br>interests <hl>of the child.</hl>",
+        "missionLead": "Features designed to preserve the parent-child bond with respect and kindness.",
+        "missionAlt": "A mother tenderly hugs her daughter, both with their eyes closed and smiling",
+        "missionText": "Every tool helps keep exchanges between parents clear and calm, so the child keeps their place with each of them.",
+        "readyAlt": "A father and a mother high-five above their daughter, who raises her arms with joy",
+        "readyTitle": "Together for <hl>your child’s well-being.</hl>",
+        "readyText": "Better communication between parents, for a calmer everyday life.",
+        "values": {
+          "simple": "Simple",
+          "secure": "Secure",
+          "caring": "Caring"
+        }
+      },
+      "photo": {
+        "add": "Add a photo",
+        "change": "Change photo",
+        "optional": "(optional)",
+        "remove": "Remove photo",
+        "errFormat": "Unsupported format. Choose an image (JPG, PNG, HEIC…).",
+        "errSize": "Image too large (5 MB maximum)."
+      },
+      "otp": {
+        "label": "Verification code",
+        "digit": "Digit {n} of {total}"
+      },
+      "fields": {
+        "optional": "(optional)",
+        "characters": "characters"
+      },
+      "profile": {
+        "errFirstName": "Enter your first name.",
+        "errLastName": "Enter your last name.",
+        "title": "Your profile",
+        "subtitle": "Tell us a little about yourself.",
+        "saving": "Saving…",
+        "continue": "Continue",
+        "firstName": "First name",
+        "firstNamePh": "E.g. Martin",
+        "lastName": "Last name",
+        "lastNamePh": "E.g. Smith"
+      },
+      "coparent": {
+        "skip": "Skip this step",
+        "readyTitle": "Invitation ready",
+        "title": "Add the other parent",
+        "readySubtitle": "Send the link by WhatsApp, text message or email. You can manage access from Family and co-parents.",
+        "subtitle": "Optional. The other parent or a relative gets access to the child’s shared space; your Journal and your notes stay private.",
+        "continue": "Continue",
+        "noChild": "First add your child’s profile so you can share it. You can invite the other parent later from Family and co-parents.",
+        "invite": "Invite"
+      },
+      "ready": {
+        "title": "Your space is ready!",
+        "subtitle": "You can now access your personalized space.",
+        "enter": "Go to my space",
+        "benefits": {
+          "communication": "Simpler communication",
+          "documents": "Secure documents",
+          "organization": "Easier organization"
+        }
+      },
+      "child": {
+        "errFirstName": "Enter the child’s first name.",
+        "errBirthDate": "Enter a valid date of birth.",
+        "titleLine1": "Add a child",
+        "titleLine2": "to your space",
+        "subtitle": "You can add more later in the settings.",
+        "saving": "Saving…",
+        "submit": "Add this child",
+        "later": "I’ll do it later",
+        "firstName": "First name",
+        "firstNamePh": "E.g. Lina",
+        "birthDate": "Date of birth",
+        "class": "School year",
+        "select": "Select"
+      },
+      "classes": {
+        "creche": "Daycare",
+        "tps": "Nursery (age 2)",
+        "ps": "Preschool – 1st year",
+        "ms": "Preschool – 2nd year",
+        "gs": "Kindergarten",
+        "cp": "1st grade",
+        "ce1": "2nd grade",
+        "ce2": "3rd grade",
+        "cm1": "4th grade",
+        "cm2": "5th grade",
+        "g6": "6th grade",
+        "g5": "7th grade",
+        "g4": "8th grade",
+        "g3": "9th grade",
+        "g2": "10th grade",
+        "g1": "11th grade",
+        "term": "12th grade",
+        "other": "Other"
+      },
+      "recap": {
+        "title": "Check your information",
+        "subtitle": "Here is a summary of your profile and the child you added.",
+        "continue": "Continue",
+        "summary": "Summary",
+        "you": "You",
+        "noName": "Name not provided",
+        "noEmail": "Email not provided",
+        "editProfile": "Edit your profile",
+        "child": "Child",
+        "noChild": "No child added yet.",
+        "editChild": "Edit child {name}",
+        "addChild": "Add a child"
+      },
+      "verify": {
+        "errUnavailable": "Unable to send right now. Please try again in a moment.",
+        "errNetwork": "Unable to connect. Check your network and try again.",
+        "resent": "A new code has just been sent to you.",
+        "errBlocked": "Too many attempts. Verification is temporarily blocked, please try again later.",
+        "errWrong": "Incorrect code. You have {count, plural, one {# attempt} other {# attempts}} left.",
+        "errWrongOrExpired": "Incorrect or expired code. You have {count, plural, one {# attempt} other {# attempts}} left. You can also request a new code.",
+        "title": "Check your email",
+        "sentTo": "We just sent a 6-digit code to the following address:",
+        "yourEmail": "your email address",
+        "verifying": "Verifying…",
+        "verify": "Verify",
+        "notReceived": "Didn’t receive the code?",
+        "checkSpam": "Check your spam folder",
+        "help": "Enter the code you received by email. It is valid for 1 hour.",
+        "noSession": "Sign-up session not found.",
+        "restart": "Start sign-up again",
+        "resendBlocked": "Resend unavailable",
+        "resendIn": "Resend code ({time})",
+        "resend": "Resend code"
+      }
+    },
+    "password": {
+      "forgot": {
+        "errLink": "This link has expired or has already been used. Request a new one.",
+        "errEmail": "Enter a valid email address.",
+        "errUnavailable": "Unable to send right now. Please try again in a moment.",
+        "errNetwork": "Unable to connect. Check your network and try again.",
+        "title": "Forgot your password?",
+        "subtitle": "Enter the email linked to your account: we will send you a link to create a new one.",
+        "sending": "Sending…",
+        "send": "Send the link",
+        "email": "Email",
+        "emailPh": "example@email.com",
+        "sentTitle": "Link sent",
+        "sentText": "If an account exists for <b>{email}</b>, you will receive an email within a few minutes.",
+        "backToLogin": "Back to sign in"
+      },
+      "reset": {
+        "errRules": "The password does not meet all the rules yet.",
+        "errMatch": "The passwords do not match.",
+        "errInvalid": "Invalid password.",
+        "checking": "Checking the link…",
+        "expiredTitle": "Link expired",
+        "expiredText": "This reset link is no longer valid or has already been used. Request a new one.",
+        "newLink": "Request a new link",
+        "doneSignupTitle": "Password saved",
+        "doneTitle": "Password changed",
+        "doneSignupText": "Your password has been saved.",
+        "doneText": "Your new password has been saved.",
+        "othersOut": "Your other devices have been signed out.",
+        "continue": "Continue",
+        "enter": "Go to my space",
+        "backToLogin": "Back to sign in",
+        "mfaTitle": "Two-factor authentication",
+        "mfaSubtitle": "Enter the 6-digit code from your authenticator app to continue.",
+        "verifying": "Verifying…",
+        "verify": "Verify",
+        "mfaCode": "Two-factor authentication code",
+        "signupTitle": "Choose your password",
+        "title": "New password",
+        "signupSubtitle": "Your address is confirmed. Choose a password for your account that you don’t use anywhere else.",
+        "subtitle": "Choose a password that you don’t use anywhere else.",
+        "saving": "Saving…",
+        "save": "Save",
+        "cancel": "Cancel",
+        "newPassword": "New password",
+        "newPasswordPh": "Your new password",
+        "confirm": "Confirm password",
+        "confirmPh": "Enter it again"
+      }
+    },
+    "help": {
+      "center": "Help center",
+      "home": {
+        "rows": {
+          "faq": {
+            "title": "FAQ",
+            "sub": "Answers to your questions"
+          },
+          "tutorials": {
+            "title": "Tutorials",
+            "sub": "Guides and tips for using the app"
+          },
+          "contact": {
+            "title": "Contact us",
+            "sub": "Our team will get back to you"
+          },
+          "report": {
+            "title": "Report a problem",
+            "sub": "Help us improve"
+          },
+          "terms": {
+            "title": "Terms and conditions",
+            "sub": "Read our terms of use"
+          },
+          "privacy": {
+            "title": "Privacy policy",
+            "sub": "Find out how we protect your data"
+          }
+        },
+        "aboutSearch": "About version",
+        "searchPh": "Search help…",
+        "searchLabel": "Search help",
+        "faqTag": "FAQ",
+        "about": "About",
+        "version": "Version {version}",
+        "results": "{count, plural, one {# result} other {# results}}",
+        "noResult": "No results for “{q}”."
+      },
+      "faq": {
+        "title": "FAQ",
+        "searchPh": "Search for a question…",
+        "searchLabel": "Search for a question",
+        "heading": "Frequently asked questions",
+        "noMatch": "No question matches “{q}”.",
+        "empty": "No questions yet.",
+        "notFoundTitle": "Can’t find the answer?",
+        "notFoundText": "Contact our team, we’re here to help.",
+        "contact": "Contact us"
+      },
+      "tutorials": {
+        "title": "Tutorials",
+        "searchPh": "Search for a tutorial…",
+        "searchLabel": "Search for a tutorial",
+        "heading": "User guides",
+        "noMatch": "No tutorial matches “{q}”.",
+        "empty": "No tutorials yet.",
+        "minutes": "{n} min",
+        "readingTime": "{n} min read"
+      },
+      "about": {
+        "title": "About",
+        "version": "Version {version}",
+        "intro": "Lien Parental supports separated parents with organization, paperwork and preserving the parent-child bond.",
+        "missionTitle": "Our mission",
+        "mission": "Encourage healthy, respectful communication between parents.",
+        "visionTitle": "Our vision",
+        "vision": "A world where every child can keep a strong, balanced bond with both parents.",
+        "madeWith": "Made with <heart></heart> in France",
+        "love": "love",
+        "thanks": "Thank you for trusting Lien Parental.",
+        "rights": "All rights reserved."
+      },
+      "terms": {
+        "topTitle": "Terms and conditions",
+        "title": "Terms of Use",
+        "updated": "Last updated: {date}",
+        "intro": "Welcome to Lien Parental. By using our app, you accept these Terms of Use.",
+        "s1": {
+          "title": "1. Purpose",
+          "body": "These Terms govern access to and use of Lien Parental, an app designed to make communication, day-to-day organization and the keeping of evidence easier for separated parents. Any registration or use implies unreserved acceptance of these Terms."
+        },
+        "s2": {
+          "title": "2. Use of the service",
+          "body": "Users shall not misuse the service, in particular by distributing content that is unlawful, defamatory, abusive or that infringes the privacy of others. Journal and Vault content must remain factual and authentic."
+        },
+        "s3": {
+          "title": "3. User accounts",
+          "body": "Access is restricted to adults exercising parental authority. Users provide accurate information, keep it up to date and are solely responsible for keeping their login credentials confidential."
+        },
+        "s4": {
+          "title": "4. Subscription and payment",
+          "body": "The Premium plan is payable monthly or annually through our secure payment provider Stripe. The subscription can be cancelled at any time from your profile; benefits remain active until the end of the paid period."
+        },
+        "s5": {
+          "title": "5. Contact",
+          "body": "For any question about these Terms: <mail>{email}</mail>."
+        }
+      },
+      "privacy": {
+        "title": "Privacy policy",
+        "updated": "Last updated: {date}",
+        "intro": "At Lien Parental, protecting your <b>personal data is a priority.</b>",
+        "s1": {
+          "title": "1. Data collected",
+          "body": "Account data (identity, contact details), content you add (journal, documents, calendar, testimonials) and technical data needed for the service to run securely."
+        },
+        "s2": {
+          "title": "2. Use of data",
+          "body": "Providing the service and managing your account (contractual basis), improving the experience (legitimate interest, you may object), complying with our legal obligations. No advertising use, no resale."
+        },
+        "s3": {
+          "title": "3. Storage and security",
+          "body": "Data hosted in the European Union. Exchanges encrypted in transit (TLS 1.3), sensitive data encrypted at rest (AES-256), encrypted backups in a separate environment."
+        },
+        "s4": {
+          "title": "4. Your rights",
+          "body": "Access, rectification, erasure, restriction, portability and objection (articles 15 to 22 of the GDPR), from your profile or by email. You can also contact the CNIL, the French data protection authority (www.cnil.fr)."
+        },
+        "s5": {
+          "title": "5. Contact",
+          "body": "Data protection officer: <mail>{email}</mail>."
+        }
+      },
+      "confirmation": {
+        "topTitle": "Contact - Confirmation",
+        "title": "Message sent!",
+        "text": "Thank you! Your message has been sent. We will get back to you as soon as possible.",
+        "back": "Back to the help center"
+      },
+      "contactInfo": {
+        "topTitle": "Contact us - Details",
+        "title": "How to contact us?",
+        "lead": "Our team is here to answer all your questions.",
+        "byEmail": "By email",
+        "writeUs": "Write to us at the following address:",
+        "delaySr": "Response time",
+        "delayTitle": "Response time",
+        "delay": "We reply within 24 to 48 business hours.",
+        "hoursSr": "Hours",
+        "hoursTitle": "Our hours",
+        "hours": "Monday - Friday: 9 am - 6 pm",
+        "faqTip": "Before writing to us, check our FAQ: you may already find the answer to your question there."
+      },
+      "message": {
+        "errRequired": "Enter a subject and a message (at least 10 characters).",
+        "errSend": "Unable to send.",
+        "title": "Contact us",
+        "subject": "Subject",
+        "subjectPh": "Summary of your request",
+        "message": "Message",
+        "messagePh": "Describe your request…",
+        "sending": "Sending…",
+        "send": "Send the message"
+      },
+      "contact": {
+        "title": "Contact us",
+        "headline1": "Our team will get back to you",
+        "headline2": "as soon as possible",
+        "lead": "Have a question, need help or have a suggestion? Write to us, we’re here to help.",
+        "send": "Send a message",
+        "faq": "Frequently asked questions",
+        "other": "Other ways to contact us",
+        "email": "Email",
+        "hoursTitle": "Opening hours",
+        "hours": "Mon - Fri: 9 am - 6 pm"
+      },
+      "report": {
+        "errRequired": "Enter the type, the title and the description (at least 10 characters).",
+        "errSend": "Unable to send.",
+        "topTitle": "Report a problem",
+        "title": "Help us improve",
+        "lead": "Found a bug, a technical problem or have a suggestion for improvement? Let us know.",
+        "type": "Type of problem",
+        "typePh": "Select a type",
+        "types": {
+          "bug": "Bug / malfunction",
+          "technique": "Technical problem",
+          "suggestion": "Suggestion for improvement",
+          "abus": "Abusive content",
+          "autre": "Other"
+        },
+        "titleLabel": "Title",
+        "titlePh": "Summary of the problem",
+        "description": "Description",
+        "descriptionPh": "Describe the problem in detail…",
+        "sending": "Sending…",
+        "send": "Send the report"
+      },
+      "public": {
+        "metaTitle": "Help center",
+        "metaDescription": "Frequently asked questions, installation and Lien Parental support contact.",
+        "title": "Help center",
+        "lead": "Quickly find an answer, or write to us.",
+        "categories": {
+          "prise-en-main": "Getting started",
+          "confidentialite-securite": "Privacy & security",
+          "coffre-fort": "Vault",
+          "temoignages": "Testimonials",
+          "coach-ia": "AI Coach",
+          "abonnement": "Subscription",
+          "compte": "Account"
+        },
+        "writeUs": "Write to us",
+        "hoursTitle": "Hours",
+        "hours": "Monday – Friday, 9 am – 6 pm · reply within 24 to 48 hours"
+      }
+    },
+    "legal": {
+      "bindingNotice": "This is a translation provided for convenience. The French version of this document is the only legally binding one.",
+      "backHome": "Back to home",
+      "updated": "Last updated: {date}",
+      "cgu": {
+        "metaTitle": "Terms of use",
+        "metaDescription": "Terms of use of the Lien Parental service: purpose, access, obligations, suspension, liability.",
+        "title": "Terms of use",
+        "s1": {
+          "title": "1. Purpose",
+          "body": "These terms of use (the “Terms”) govern access to and use of the Lien Parental service, an online application designed to make communication, day-to-day organization and the keeping of evidence easier for separated parents. Any registration or use implies unreserved acceptance of these Terms."
+        },
+        "s2": {
+          "title": "2. Access to the service",
+          "body": "Access to Lien Parental is restricted to adults exercising parental authority over one or more children. Users undertake to provide accurate information and to keep their account details up to date. They are solely responsible for keeping their login credentials confidential."
+        },
+        "s3": {
+          "title": "3. User obligations",
+          "body": "Users shall not misuse the service, in particular by distributing content that is unlawful, defamatory, abusive, hateful or that infringes the privacy of others. Content created in the “journal” and “vault” areas must remain factual and authentic. Users warrant that they hold the necessary rights to the documents they upload."
+        },
+        "s4": {
+          "title": "4. Suspension and termination",
+          "body": "In the event of a clear breach of these Terms, the publisher reserves the right to suspend or close the account, after notification by email. Users may delete their account at any time from the “profile” area. Data is then erased under the conditions described in the privacy policy."
+        },
+        "s5": {
+          "title": "5. Liability",
+          "body": "Lien Parental provides a tool to support co-parenting; it is in no way a substitute for legal, medical or psychological advice. The publisher makes its best efforts to ensure the availability of the service, without however guaranteeing absolute continuity. It cannot be held liable for indirect damage or for an interruption due to force majeure."
+        },
+        "s6": {
+          "title": "6. Governing law",
+          "body": "These Terms are governed by French law. Any dispute relating to their interpretation or performance falls under the exclusive jurisdiction of the French courts, subject to the mandatory provisions applicable to consumers."
+        }
+      },
+      "mentions": {
+        "metaTitle": "Legal notice",
+        "metaDescription": "Legal notice of the Lien Parental service: publisher, host, publication director, contact.",
+        "title": "Legal notice",
+        "s1": {
+          "title": "Site publisher",
+          "body": "The <b>Lien Parental</b> service is published by the company Pirabel Labs, [legal form to be completed], registered with the Trade and Companies Register of [city] under number [SIREN], whose registered office is located at [full postal address]. Share capital: €[amount]. Intra-community VAT number: [FR-XX-XXXXXXXXX]."
+        },
+        "s2": {
+          "title": "Publication director",
+          "body": "The publication director is [first and last name], acting as [position]. For any question about editorial content, you can contact them at: contact@lienparental.fr."
+        },
+        "s3": {
+          "title": "Host",
+          "body": "The application is hosted within the European Union by [host’s company name], a [legal form] company whose registered office is located at [address], reachable at [phone number]. The application servers are located in France (region [zone])."
+        },
+        "s4": {
+          "title": "Intellectual property",
+          "body": "All content on the Lien Parental service (text, graphics, logos, icons, images, interfaces, sound identity, source code) is protected by copyright and trademark law. Any reproduction, representation, modification or adaptation, in whole or in part, by any means whatsoever, is prohibited without the publisher’s prior written authorization."
+        },
+        "s5": {
+          "title": "Contact",
+          "body": "For any request for information, complaint or report, write to <b>contact@lienparental.fr</b>. We undertake to reply within a reasonable time, and at the latest within thirty days for requests relating to personal data."
+        }
+      },
+      "privacy": {
+        "metaTitle": "Privacy policy",
+        "metaDescription": "Lien Parental privacy policy: GDPR, data storage in the EU, processors and transfers, encryption, retention period, right to be forgotten.",
+        "title": "Privacy policy",
+        "controller": {
+          "title": "Data controller",
+          "p1": "The controller of the data collected through Lien Parental is the company Pirabel Labs, whose contact details appear in the legal notice. Any question about the processing of your data can be sent to<b> dpo@lienparental.fr</b>."
+        },
+        "purposes": {
+          "title": "Purposes and legal bases (GDPR)",
+          "p1": "We process your data for: (i) providing the service and managing your account (contractual basis); (ii) improving the experience (legitimate interest, which you may object to); (iii) complying with our legal obligations, in particular regarding the retention of evidence. No processing is carried out for advertising purposes."
+        },
+        "storage": {
+          "title": "Where your data is stored",
+          "p1": "Your data (account, children, journal, calendar, vault, testimonials, messages and files) is stored in the European Union (Ireland), in the database and storage space of our host Supabase. The application’s functions run in France (Paris).",
+          "p2": "Some providers, listed below, are companies based in the United States and may process part of the data outside the European Union. These transfers are only made with the appropriate safeguards provided for in articles 44 et seq. of the GDPR."
+        },
+        "processors": {
+          "title": "Processors and transfers outside the EU",
+          "intro": "We only send each provider the data needed for the service it provides. Transfer safeguards rely on the standard contractual clauses adopted by the European Commission, included in each provider’s data processing agreement, where applicable supplemented by its participation in the EU-U.S. Data Privacy Framework.",
+          "outro": "The up-to-date list of processors can be obtained on request from <b>dpo@lienparental.fr</b>.",
+          "labels": {
+            "purpose": "Purpose:",
+            "data": "Data concerned:",
+            "location": "Location:",
+            "safeguard": "Transfer safeguard:"
+          },
+          "scc": "European Commission standard contractual clauses (provider’s data processing agreement), where applicable supplemented by the EU-U.S. Data Privacy Framework.",
+          "supabase": {
+            "name": "Supabase (database, accounts, files)",
+            "purpose": "Database hosting, authentication and file storage.",
+            "data": "All the data in your space: account, children, journal, calendar, vault, testimonials, messages and files.",
+            "location": "European Union (Ireland). Supabase is an American company: occasional access from outside the EU (support, maintenance) remains possible."
+          },
+          "vercel": {
+            "name": "Vercel (application hosting)",
+            "purpose": "Running the web application and serving pages and static files.",
+            "data": "Technical request data (IP address, pages visited, browser) and data in transit while using the service.",
+            "location": "Functions run in the European Union (Paris). Vercel is an American company with a global delivery network: a request may pass through a point of presence near you, including outside the EU."
+          },
+          "anthropic": {
+            "name": "Anthropic (AI Coach)",
+            "purpose": "AI Coach answers and analysis of the messages you submit to it.",
+            "data": "Only when you use the Coach: your question or the content to analyze, and a summary of your space (children’s first names and ages, journal, calendar, document names). Medical information is only sent if you enable it for a question.",
+            "location": "United States (Anthropic is an American company)."
+          },
+          "stripe": {
+            "name": "Stripe (payments)",
+            "purpose": "Payment and management of subscriptions, invoices.",
+            "data": "Email address, account ID, chosen plan, and payment data entered directly on Stripe’s pages (we never see your card number).",
+            "location": "European Union and United States (Stripe is an American group)."
+          },
+          "resend": {
+            "name": "Resend (sending emails)",
+            "purpose": "Sending the service’s emails: account confirmation, security, invitations, testimonials, invoices.",
+            "data": "Recipient’s email address and email content (first names, links).",
+            "location": "United States (Resend is an American company)."
+          },
+          "google": {
+            "name": "Google (sign-in and Google Calendar, only if you choose them)",
+            "purpose": "Sign-in with your Google account and, if you enable it, copying your events to your Google Calendar.",
+            "data": "Sign-in: name, email address and Google ID. Calendar: title, dates and location of copied events (health appointments hidden by default, children’s first names never sent).",
+            "location": "European Union and United States. For your Google account data, Google acts under its own privacy rules."
+          }
+        },
+        "google": {
+          "title": "Data received from Google",
+          "p1": "If you choose “Continue with Google”, Lien Parental receives from Google your name, your email address, your profile picture and an account identifier. This information is used only to create your account and sign you in.",
+          "p2": "If you enable synchronization with Google Calendar, Lien Parental requests access to a “Lien Parental” calendar that it creates for you (or, if you choose, to the events of your primary calendar). This access is used only to copy, edit or delete there the events you create in Lien Parental. Lien Parental does not read your other events, does not keep them and does not use them for any other purpose. You can stop synchronization at any time from the calendar settings or from your Google account; the access tokens are then revoked and deleted.",
+          "p3": "Lien Parental’s use and transfer to any other app of information received from Google APIs will adhere to the <link>Google API Services User Data Policy</link>, including the Limited Use requirements. This data is never sold, used for advertising or used to train artificial intelligence models, and no one on the team reads it, except at your request, for legal obligations or for security reasons."
+        },
+        "security": {
+          "title": "Encryption and security",
+          "p1": "Exchanges are encrypted in transit (HTTPS/TLS). Data is stored encrypted at rest by our database host (AES-256), and children’s medical information is additionally encrypted by the application itself (AES-256-GCM). Passwords are hashed by our authentication service (bcrypt) and the vault code is hashed (scrypt): they are never stored in plain text. Google access tokens are encrypted. Database backups are encrypted."
+        },
+        "retention": {
+          "title": "Retention period",
+          "p1": "Account data is kept for as long as you use the service, then for a period of three (3) years after the last active sign-in, for evidentiary purposes and in accordance with legal requirements. Documents with evidentiary value uploaded to the vault may be kept longer at your express request."
+        },
+        "rights": {
+          "title": "Rights and right to be forgotten",
+          "p1": "In accordance with articles 15 to 22 of the GDPR, you have the right of access, rectification, erasure (“right to be forgotten”), restriction, portability and objection. These rights can be exercised directly from your “profile” area, or by email to<b> dpo@lienparental.fr</b>. You can also lodge a complaint with the CNIL, the French data protection authority (www.cnil.fr)."
+        }
+      }
+    },
+    "donate": {
+      "metaTitle": "Support Lien Parental",
+      "title": "Support Lien Parental",
+      "text": "Your support helps us develop new free tools to support families and preserve the parent-child bond.",
+      "cta": "Make a donation",
+      "soon": "The donation page is opening very soon. Thank you for your generosity!",
+      "backHome": "Back to home"
+    },
+    "install": {
+      "metaTitle": "Install the app",
+      "metaDescription": "Add Lien Parental to the home screen of your iPhone or Android phone in a few seconds.",
+      "more": "Show more",
+      "moreSr": ": more details about step {n}",
+      "dotsSr": "Menu (three dots)",
+      "stepSr": "Step {n}: ",
+      "steps": {
+        "ios": {
+          "share": {
+            "title": "Open the share menu",
+            "text": "Tap the Share button <share></share> at the bottom of Safari.",
+            "more": "It’s the square with an arrow pointing up, in the middle of the bottom bar. If the bar is hidden, tap the bottom of the screen to bring it back. On iPad, the button is at the top right. If you use another browser, open this page in Safari."
+          },
+          "scroll": {
+            "title": "Scroll through the options",
+            "text": "Swipe up to show the full list of actions.",
+            "more": "The menu opens from the bottom of the screen. The actions are below the row of app icons: keep scrolling until you see “Add to Home Screen”."
+          },
+          "add": {
+            "title": "Add to the Home Screen",
+            "text": "Tap “Add to Home Screen”.",
+            "more": "The option has a square with a “+” next to it. If it doesn’t appear, tap “Edit Actions” at the very bottom of the list to add it."
+          },
+          "confirm": {
+            "title": "Confirm",
+            "text": "Tap “Add” at the top right.",
+            "more": "You can change the displayed name before confirming. The Lien Parental icon then appears on your Home Screen: tap it to open the app in full screen."
+          }
+        },
+        "android": {
+          "menu": {
+            "title": "Open the menu",
+            "text": "Tap the <dots></dots> button at the top right of Chrome.",
+            "more": "These are the three vertical dots, to the right of the address bar. With another browser (Samsung Internet, Firefox), open its main menu: the option has a similar name."
+          },
+          "add": {
+            "title": "Select “Add to Home screen”",
+            "text": "Tap this option in the menu.",
+            "more": "Depending on your version of Chrome, it may be called “Install app”. Scroll through the menu if you don’t see it right away."
+          },
+          "confirm": {
+            "title": "Confirm",
+            "text": "Check the name, then tap “Add”.",
+            "more": "A confirmation window opens. The button may also be called “Install”. Android may then let you place the icon yourself on the home screen."
+          },
+          "done": {
+            "title": "The app has been added",
+            "text": "Find Lien Parental on your home screen.",
+            "more": "The icon appears on the home screen or in your app list. Tap it to open Lien Parental in full screen, like a regular app."
+          }
+        }
+      },
+      "tabs": {
+        "ios": "iPhone (iOS)",
+        "android": "Android"
+      },
+      "benefits": {
+        "quick": "Quick access from your home screen",
+        "notifications": "Important notifications in real time",
+        "smooth": "A smooth, secure experience, just like a real app"
+      },
+      "statusAccepted": "Installing. Lien Parental will soon be on your home screen.",
+      "statusDismissed": "Installation cancelled. You can follow the steps below at any time.",
+      "statusError": "Automatic installation could not start. Follow the steps below.",
+      "back": "Back",
+      "helpCenter": "Help center",
+      "homeLabel": "Lien Parental, home",
+      "installedTitle": "Lien Parental is already <hl>installed</hl>",
+      "title": "Install Lien Parental on your <hl>{device}</hl>",
+      "installedLead": "You are using the app from your home screen.",
+      "lead": "Add the app to your home screen to access it quickly, just like a real app.",
+      "readyTitle": "All set",
+      "readyText": "Find the Lien Parental icon on your home screen. Tap “Continue” to go to your space.",
+      "desktopTitle": "On a computer?",
+      "desktopText": "Scan this QR code with your phone’s camera to open this page, then follow the steps.",
+      "tabsLabel": "Choose your phone",
+      "stepsFor": "Steps for {device}",
+      "promptText": "Your browser lets you install the app in one tap.",
+      "installNow": "Install now",
+      "orSteps": "Or follow the steps below.",
+      "whyTitle": "Why add the app?",
+      "donTitle": "Support Lien Parental",
+      "donCollapse": "Collapse the support message",
+      "donExpand": "Expand the support message",
+      "donClose": "Close the support message",
+      "donText": "Lien Parental is built for families. Your support helps us create new free tools to preserve the parent-child bond.",
+      "donCta": "Make a donation",
+      "continue": "Continue",
+      "safeTitle": "Your data is safe",
+      "safeText": "Lien Parental protects your family information.",
+      "qrLabel": "QR code to open this page on your phone",
+      "visuals": {
+        "copy": "Copy",
+        "readingList": "Add to Reading List",
+        "bookmarks": "Add Bookmark",
+        "markup": "Markup",
+        "iosAddHome": "Add to Home Screen",
+        "cancel": "Cancel",
+        "add": "Add",
+        "newTab": "New tab",
+        "favorites": "Bookmarks",
+        "downloads": "Downloads",
+        "androidAddHome": "Add to Home screen",
+        "settings": "Settings"
+      }
+    },
+    "offline": {
+      "metaTitle": "Offline — Lien Parental",
+      "metaDescription": "You are offline. Check your connection and try again.",
+      "title": "Offline",
+      "retry": "Try again",
+      "workOffline": "Work offline"
+    },
+    "share": {
+      "metaTitle": "Shared file"
+    },
+    "blog": {
+      "newTab": "(new tab)",
+      "readingTime": "{n} min read",
+      "allArticles": "All articles",
+      "tags": "Tags",
+      "ctaTitle": "Organize your child’s life calmly",
+      "ctaText": "Shared calendar, journal, vault and paperwork guide: Lien Parental supports you every day.",
+      "ctaButton": "Create my free space",
+      "toc": "Contents",
+      "related": "Read also",
+      "categories": {
+        "coparentalite": "Co-parenting",
+        "demarches": "Paperwork",
+        "organisation": "Organization",
+        "enfant": "Child well-being",
+        "application": "Lien Parental"
+      },
+      "metaTitle": "Blog",
+      "metaTitleCategory": "Blog · {category}",
+      "description": "Practical advice for separated parents: co-parenting, paperwork, day-to-day organization and child well-being.",
+      "kicker": "The blog",
+      "title": "Advice for separated parents",
+      "categoriesLabel": "Categories",
+      "all": "All",
+      "emptyCategory": "No articles in “{category}” yet.",
+      "empty": "The first articles are coming soon.",
+      "articles": "Articles",
+      "articlesIn": "Articles: {category}",
+      "pagination": "Pagination",
+      "prev": "Previous",
+      "next": "Next",
+      "pageOf": "Page {page} of {pages}",
+      "notFound": "Article not found"
+    },
+    "witness": {
+      "back": "Back",
+      "questionOf": "Question {n} of {total}",
+      "skip": "Skip this question",
+      "options": {
+        "linkAdult": {
+          "family": "Family member",
+          "friend": "Friend",
+          "neighbour": "Neighbor",
+          "colleague": "Colleague",
+          "school": "Teacher / school staff",
+          "health": "Healthcare professional",
+          "other": "Other"
+        },
+        "duration": {
+          "lt6m": "Less than 6 months",
+          "6m1y": "6 months to 1 year",
+          "1y3y": "1 to 3 years",
+          "3y5y": "3 to 5 years",
+          "gt5y": "More than 5 years"
+        },
+        "linkChild": {
+          "family": "Family member",
+          "familyFriend": "Family friend",
+          "neighbour": "Neighbor",
+          "school": "Teacher / school staff",
+          "activity": "Activity leader",
+          "health": "Healthcare professional",
+          "other": "Other"
+        },
+        "places": {
+          "home": "Parent’s home",
+          "school": "School",
+          "public": "Public place",
+          "handover": "During a custody handover",
+          "activity": "Extracurricular activity"
+        }
+      },
+      "errInvalid": "This testimony link is not valid or has expired.",
+      "errNetwork": "Unable to connect. Check your network and try again.",
+      "errFormat": "Accepted formats: images and PDF.",
+      "errSize": "“{name}” exceeds 10 MB.",
+      "errCount": "{max} files maximum.",
+      "errUpload": "“{name}” could not be sent.",
+      "errSend": "Sending failed. Check your connection and try again.",
+      "loadingTitle": "Loading the invitation",
+      "loadingText": "Checking the secure link…",
+      "errorTitle": "Link unavailable",
+      "retry": "Try again",
+      "discover": "Discover Lien Parental",
+      "start": "Get started",
+      "learnMore": "Learn more",
+      "introTitle": "You have been invited to submit a testimony",
+      "introText": "This testimony will be sent only to the requesting parent and stored securely.",
+      "introMore": "No account is needed. You answer a few questions about what you personally witnessed, then you can review your text before sending it. Your testimony is encrypted, time-stamped and accessible only to the requesting parent.",
+      "targetTitle": "Who would you like to testify about?",
+      "continue": "Continue",
+      "targetHint": "You can choose one or more people.",
+      "parents": "Parents",
+      "children": "Children",
+      "about": "About {name}",
+      "next": "Next",
+      "select": "Select",
+      "qLinkAdult": "What is your relationship with this person?",
+      "qDuration": "How long have you known this person?",
+      "factN": "Fact no. {n}",
+      "qFacts": "What facts, behaviors or situations have you personally witnessed regarding this person?",
+      "factsHint": "Describe precisely what you saw or heard, without interpretation.",
+      "factsPh": "Write your testimony here…",
+      "qWhen": "When did this happen?",
+      "qWhere": "Where did this happen?",
+      "wherePh": "Select or specify the place",
+      "qContext": "In what context were you present?",
+      "contextPh": "Describe the context…",
+      "qAnother": "Would you like to add another fact or situation regarding this person?",
+      "anotherHint": "You will be able to describe another fact with the same level of detail.",
+      "anotherYes": "Yes, add another fact",
+      "anotherNo": "No, continue",
+      "qLinkChild": "What is your relationship with this child?",
+      "qChild": "What have you personally witnessed regarding this child?",
+      "childPh": "Describe what you observed…",
+      "complementsTitle": "Additional information",
+      "qComplement": "Is there another important fact you would like to report?",
+      "complementPh": "Describe it here…",
+      "qAttach": "Would you like to attach a document or a photo?",
+      "optional": "(optional)",
+      "attach": "Attach a file",
+      "attached": "Attached files",
+      "remove": "Remove {name}",
+      "reviewTitle": "Review before sending",
+      "sending": "Sending…",
+      "send": "Send",
+      "empty": "Your testimony is empty. Go back to describe at least one fact.",
+      "iaTitle": "AI rewording (optional)",
+      "iaText": "The AI improves clarity and spelling while faithfully respecting your words. You stay in control.",
+      "iaPropose": "Suggest a rewording",
+      "iaAgain": "New rewording",
+      "versionLegend": "Version to send",
+      "versionMine": "My version",
+      "versionIa": "Suggested version",
+      "versionIaEditable": "Suggested version (editable)",
+      "yourTestimony": "Your testimony",
+      "certify": "I certify that this testimony describes facts I personally witnessed.",
+      "finish": "Finish",
+      "thanksTitle": "Thank you!",
+      "thanksSent": "Your testimony has been sent.",
+      "thanksText": "It will be forwarded to the requesting parent who invited you via the link.",
+      "reference": "Reference:",
+      "close": "Close the page",
+      "closeHint": "You can safely close this tab.",
+      "endTitle": "Your testimony is secure",
+      "endText1": "You can now",
+      "endText2": "close this page."
+    }
+  }
+}

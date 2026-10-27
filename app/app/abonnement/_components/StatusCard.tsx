@@ -1,9 +1,11 @@
 import { AlertTriangle, CalendarDays, CheckCircle2, Clock, CreditCard, Euro, Info, RotateCcw } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { CrownIcon } from '@/components/profil/kit'
-import { PLAN_NAME, formatPrice, periodFor, planLabel, priceForPlan } from '@/components/profil/pricing'
-import { formatDateFr, type BillingView } from '@/lib/billing/types'
+import { priceForPlan } from '@/components/profil/pricing'
+import type { BillingView } from '@/lib/billing/types'
 import { TONE_BADGE, hasManagedSubscription, type StatusSummary, type StatusTone } from '@/lib/billing/ui-state'
 import { cn } from '@/lib/cn'
+import { billingFormat } from './billing-i18n'
 import { CardValue } from './CardValue'
 
 const TONE_ICON: Record<StatusTone, typeof CheckCircle2> = {
@@ -20,6 +22,8 @@ const TONE_ICON: Record<StatusTone, typeof CheckCircle2> = {
  * reprise) est fournie par l'écran parent (`action`).
  */
 export function StatusCard({ view, status, action }: { view: BillingView; status: StatusSummary; action?: React.ReactNode }) {
+  const t = useTranslations('billing')
+  const f = billingFormat(t, useLocale())
   const managed = hasManagedSubscription(view)
   const Icon = TONE_ICON[status.tone]
   const amount = view.amount ?? priceForPlan(view.formule, view.cycle)
@@ -37,14 +41,14 @@ export function StatusCard({ view, status, action }: { view: BillingView; status
           ? <CrownIcon className="mt-0.5 h-9 w-11 shrink-0" />
           : <CrownIcon variant="outline" className="mt-0.5 h-9 w-11 shrink-0 text-night-900" />}
         <div className="min-w-0 flex-1">
-          <p className="text-[12px] font-semibold uppercase tracking-wide text-night-700">Votre formule</p>
+          <p className="text-[12px] font-semibold uppercase tracking-wide text-night-700">{t('status.yourPlan')}</p>
           <h2 id="statut-titre" className="mt-0.5 text-[18px] font-extrabold leading-tight text-night-900">
-            {managed ? PLAN_NAME[view.formule] : view.sharedPremium ? 'Premium (accès famille)' : 'Gratuit'}
+            {managed ? f.plan(view.formule) : view.sharedPremium ? t('status.sharedPremium') : f.plan('gratuit')}
           </h2>
           <p className="mt-2">
             <span className={cn('inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[12px] font-bold', TONE_BADGE[status.tone])}>
               <Icon className="h-3.5 w-3.5" aria-hidden />
-              <span><span className="sr-only">Statut : </span>{status.label}</span>
+              <span><span className="sr-only">{t('status.statusSr')}</span>{status.label}</span>
             </span>
           </p>
         </div>
@@ -55,15 +59,15 @@ export function StatusCard({ view, status, action }: { view: BillingView; status
 
       {managed && (
         <dl className="mt-4 divide-y divide-night-100 rounded-xl border border-night-100">
-          <Row icon={<CrownIcon variant="outline" className="h-4 w-5 text-night-900" />} label="Formule" value={planLabel(view.formule, view.cycle)} />
-          <Row icon={<Euro className="h-4 w-4" />} label="Prix" value={`${formatPrice(amount)} ${periodFor(view.cycle)}`} />
+          <Row icon={<CrownIcon variant="outline" className="h-4 w-5 text-night-900" />} label={t('status.rowPlan')} value={f.offer(view.formule, view.cycle)} />
+          <Row icon={<Euro className="h-4 w-4" />} label={t('status.rowPrice')} value={f.pricePeriod(amount, view.cycle)} />
           {status.dateLabel && status.date && (
-            <Row icon={<CalendarDays className="h-4 w-4" />} label={status.dateLabel} value={formatDateFr(status.date)} />
+            <Row icon={<CalendarDays className="h-4 w-4" />} label={status.dateLabel} value={f.date(status.date)} />
           )}
           {view.pending && (
-            <Row icon={<RotateCcw className="h-4 w-4" />} label="Changement prévu" value={planLabel(view.pending.plan, view.pending.cycle)} />
+            <Row icon={<RotateCcw className="h-4 w-4" />} label={t('status.rowPending')} value={f.offer(view.pending.plan, view.pending.cycle)} />
           )}
-          <Row icon={<CreditCard className="h-4 w-4" />} label="Moyen de paiement" value={<CardValue card={view.card} />} />
+          <Row icon={<CreditCard className="h-4 w-4" />} label={t('status.rowPayment')} value={<CardValue card={view.card} />} />
         </dl>
       )}
 

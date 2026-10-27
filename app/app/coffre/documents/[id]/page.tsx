@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Suspense, use, useEffect, useRef, useState, type ReactNode } from 'react'
 import { useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import {
   CalendarDays, ChevronRight, Clock, Download, Eye, FileText, Folder, FolderInput, FolderOpen,
   HardDrive, Landmark, Lock, Pencil, Share2, Trash2,
@@ -19,7 +20,7 @@ import { moveDocument, renameDocument } from '@/lib/data/vault'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { shareDocument, startDownload, startPreview } from '@/components/coffre/useDocActions'
 import { SharedByBadge } from '@/components/famille/SharedByBadge'
-import { frDate, frSize } from '@/lib/mock-vault'
+import { useVaultI18n } from '@/components/coffre/i18n'
 import { cn } from '@/lib/cn'
 
 function InfoRow({ icon, label, children }: { icon: ReactNode; label: string; children: ReactNode }) {
@@ -50,6 +51,10 @@ function ActionRow({ icon, label, onClick, href, danger }: { icon: ReactNode; la
 }
 
 function DocumentDetail({ id }: { id: string }) {
+  const t = useTranslations('vault.docDetail')
+  const tc = useTranslations('vault.common')
+  const ta = useTranslations('vault.docActions')
+  const f = useVaultI18n()
   const params = useSearchParams()
   const { doc: base, loading } = useVaultDoc(id)
   const { categories } = useCategories()
@@ -101,8 +106,8 @@ function DocumentDetail({ id }: { id: string }) {
   if (!base && loading) {
     return (
       <>
-        <ScreenHeader title="Détail du document" backHref="/app/coffre/documents" />
-        <LoadingState compact title="Chargement du document" description="" />
+        <ScreenHeader title={t('title')} backHref="/app/coffre/documents" />
+        <LoadingState compact title={t('loading')} description="" />
       </>
     )
   }
@@ -110,12 +115,12 @@ function DocumentDetail({ id }: { id: string }) {
   if (!base || (ready && deleted.includes(id))) {
     return (
       <>
-        <ScreenHeader title="Détail du document" backHref="/app/coffre/documents" />
+        <ScreenHeader title={t('title')} backHref="/app/coffre/documents" />
         <div className="px-6 pt-16 text-center">
-          <p className="text-[16px] font-bold text-night-900">Document introuvable</p>
-          <p className="mt-1 text-[13px] text-night-500">Il a peut-être été supprimé ou déplacé.</p>
+          <p className="text-[16px] font-bold text-night-900">{t('notFound')}</p>
+          <p className="mt-1 text-[13px] text-night-500">{t('notFoundText')}</p>
           <Link href="/app/coffre/documents/tous" className="mt-5 inline-flex h-11 items-center rounded-xl px-4 text-[14px] font-bold text-leaf-600 hover:bg-leaf-50">
-            Voir tous les documents
+            {t('seeAll')}
           </Link>
         </div>
       </>
@@ -129,10 +134,10 @@ function DocumentDetail({ id }: { id: string }) {
   return (
     <>
       <ScreenHeader
-        title="Détail du document"
+        title={t('title')}
         backHref="/app/coffre/documents"
         right={readOnly ? undefined : (
-          <button type="button" onClick={() => { setDraftName(name); setRenameOpen(true) }} aria-label="Renommer le document" className={cn(headerIconBtn, '-mr-2')}>
+          <button type="button" onClick={() => { setDraftName(name); setRenameOpen(true) }} aria-label={t('renameAria')} className={cn(headerIconBtn, '-mr-2')}>
             <Pencil className="h-5 w-5" aria-hidden="true" />
           </button>
         )}
@@ -142,7 +147,7 @@ function DocumentDetail({ id }: { id: string }) {
         <div className="flex flex-col items-center pt-3 text-center">
           <FileIcon tone={doc.tone} label={doc.ext === 'DOCX' ? 'W' : doc.ext} size="xl" framed />
           <h2 className="mt-3 text-[18px] font-extrabold text-night-900">{doc.name}</h2>
-          <p className="text-[13px] text-night-500">{doc.ext} <span aria-hidden="true">•</span> {frSize(doc.size)}</p>
+          <p className="text-[13px] text-night-500">{doc.ext} <span aria-hidden="true">•</span> {f.size(doc.size)}</p>
           {doc.sharedBy && <SharedByBadge prenom={doc.sharedBy.prenom} className="mt-2" />}
         </div>
 
@@ -150,49 +155,49 @@ function DocumentDetail({ id }: { id: string }) {
           <p role="note" className="mt-4 flex items-start gap-2.5 rounded-xl border border-night-100 bg-night-50/60 px-3.5 py-3 text-[13px] leading-relaxed text-night-800">
             <Lock className="mt-0.5 h-4 w-4 shrink-0 text-night-600" aria-hidden="true" />
             <span>
-              <span className="font-bold text-night-900">Lecture seule.</span>{' '}
-              {doc.sharedBy.prenom} a partagé ce document avec vous : vous pouvez le consulter et le télécharger. Seul son auteur peut le renommer, le déplacer ou le supprimer.
+              <span className="font-bold text-night-900">{t('readOnly')}</span>{' '}
+              {t('readOnlyText', { name: doc.sharedBy.prenom })}
             </span>
           </p>
         )}
 
         <section aria-labelledby="infos" className="mt-6">
-          <h3 id="infos" className="text-[15px] font-extrabold text-night-900">Informations</h3>
+          <h3 id="infos" className="text-[15px] font-extrabold text-night-900">{t('info')}</h3>
           <dl className="mt-1 divide-y divide-night-100">
-            <InfoRow icon={<FolderOpen className="h-[18px] w-[18px]" />} label="Catégorie">
-              {category?.name ?? '—'}
+            <InfoRow icon={<FolderOpen className="h-[18px] w-[18px]" />} label={t('category')}>
+              {category ? f.category(category.name) : '—'}
             </InfoRow>
-            <InfoRow icon={<Folder className="h-[18px] w-[18px]" />} label="Dossier">
+            <InfoRow icon={<Folder className="h-[18px] w-[18px]" />} label={t('folder')}>
               {folderTrail.length > 0 ? (
                 <Link href={`/app/coffre/dossiers/${encodeURIComponent(folderTrail[folderTrail.length - 1].id)}`} className="font-semibold text-leaf-700 underline-offset-2 hover:underline">
                   {folderTrail.map((f) => f.name).join(' / ')}
                 </Link>
-              ) : 'Aucun (coffre-fort)'}
+              ) : t('noFolder')}
             </InfoRow>
-            <InfoRow icon={<CalendarDays className="h-[18px] w-[18px]" />} label="Date du document">{frDate(doc.docDate)}</InfoRow>
-            <InfoRow icon={<Clock className="h-[18px] w-[18px]" />} label="Ajouté le">{frDate(doc.addedAt)} à {doc.addedTime.replace(':', 'h')}</InfoRow>
-            <InfoRow icon={<Landmark className="h-[18px] w-[18px]" />} label="Source">{doc.source}</InfoRow>
-            <InfoRow icon={<HardDrive className="h-[18px] w-[18px]" />} label="Taille">{frSize(doc.size)}</InfoRow>
+            <InfoRow icon={<CalendarDays className="h-[18px] w-[18px]" />} label={t('docDate')}>{f.date(doc.docDate)}</InfoRow>
+            <InfoRow icon={<Clock className="h-[18px] w-[18px]" />} label={t('addedOn')}>{t('addedValue', { date: f.date(doc.addedAt), time: f.locale === 'fr' ? doc.addedTime.replace(':', 'h') : doc.addedTime })}</InfoRow>
+            <InfoRow icon={<Landmark className="h-[18px] w-[18px]" />} label={t('source')}>{f.source(doc.source)}</InfoRow>
+            <InfoRow icon={<HardDrive className="h-[18px] w-[18px]" />} label={t('size')}>{f.size(doc.size)}</InfoRow>
             {doc.description && (
-              <InfoRow icon={<FileText className="h-[18px] w-[18px]" />} label="Description">{doc.description}</InfoRow>
+              <InfoRow icon={<FileText className="h-[18px] w-[18px]" />} label={t('description')}>{doc.description}</InfoRow>
             )}
           </dl>
         </section>
 
         <section aria-labelledby="actions" className="mt-5">
-          <h3 id="actions" className="text-[15px] font-extrabold text-night-900">Actions</h3>
+          <h3 id="actions" className="text-[15px] font-extrabold text-night-900">{t('actions')}</h3>
           <div className="mt-1 divide-y divide-night-100">
             {(doc.type === 'pdf' || doc.type === 'image') && (
-              <ActionRow icon={<Eye className="h-5 w-5" />} label="Aperçu" onClick={() => { void startPreview(doc, announce) }} />
+              <ActionRow icon={<Eye className="h-5 w-5" />} label={t('preview')} onClick={() => { void startPreview(doc, announce, ta) }} />
             )}
-            <ActionRow icon={<Download className="h-5 w-5" />} label="Télécharger" onClick={() => { void startDownload(doc, announce) }} />
+            <ActionRow icon={<Download className="h-5 w-5" />} label={tc('download')} onClick={() => { void startDownload(doc, announce, ta) }} />
             {/* Document d'un autre adulte (docs/FAMILLE.md) : ni partage, ni déplacement, ni suppression. */}
             {!readOnly && (
               <>
-                <ActionRow icon={<Share2 className="h-5 w-5" />} label="Partager" onClick={() => { void shareDocument(doc).then((m) => m && announce(m)) }} />
-                <ActionRow icon={<Folder className="h-5 w-5" />} label="Ranger dans un dossier" onClick={() => setFolderOpen(true)} />
-                <ActionRow icon={<FolderInput className="h-5 w-5" />} label="Changer de catégorie" onClick={() => { setMoveTo(categoryId); setMoveOpen(true) }} />
-                <ActionRow icon={<Trash2 className="h-5 w-5" />} label="Supprimer" href={`/app/coffre/documents/${doc.id}/supprimer`} danger />
+                <ActionRow icon={<Share2 className="h-5 w-5" />} label={tc('share')} onClick={() => { void shareDocument(doc, ta).then((m) => m && announce(m)) }} />
+                <ActionRow icon={<Folder className="h-5 w-5" />} label={ta('toFolder')} onClick={() => setFolderOpen(true)} />
+                <ActionRow icon={<FolderInput className="h-5 w-5" />} label={ta('changeCategory')} onClick={() => { setMoveTo(categoryId); setMoveOpen(true) }} />
+                <ActionRow icon={<Trash2 className="h-5 w-5" />} label={tc('delete')} href={`/app/coffre/documents/${doc.id}/supprimer`} danger />
               </>
             )}
           </div>
@@ -202,11 +207,11 @@ function DocumentDetail({ id }: { id: string }) {
       <Modal
         open={renameOpen && !readOnly}
         onClose={() => setRenameOpen(false)}
-        title="Renommer le document"
+        title={t('renameAria')}
         size="sm"
         footer={
           <>
-            <Button variant="secondary" onClick={() => setRenameOpen(false)}>Annuler</Button>
+            <Button variant="secondary" onClick={() => setRenameOpen(false)}>{tc('cancel')}</Button>
             <Button
               variant="primary"
               disabled={!draftName.trim()}
@@ -216,29 +221,29 @@ function DocumentDetail({ id }: { id: string }) {
                   await renameDocument(doc.id, next)
                   setName(next)
                   setRenameOpen(false)
-                  announce('Document renommé')
+                  announce(t('renamed'))
                 } catch (e) {
-                  announce(e instanceof Error ? e.message : 'Renommage impossible')
+                  announce(e instanceof Error ? e.message : t('renameFailed'))
                 }
               }}
             >
-              Enregistrer
+              {tc('save')}
             </Button>
           </>
         }
       >
-        <Input label="Nom du document" value={draftName} onChange={(e) => setDraftName(e.target.value)} required maxLength={120} />
+        <Input label={t('nameLabel')} value={draftName} onChange={(e) => setDraftName(e.target.value)} required maxLength={120} />
       </Modal>
 
       <Modal
         open={moveOpen && !readOnly}
         onClose={() => setMoveOpen(false)}
-        title="Déplacer vers…"
-        description="Choisissez la nouvelle catégorie du document."
+        title={t('moveTitle')}
+        description={t('moveDescription')}
         size="sm"
         footer={
           <>
-            <Button variant="secondary" onClick={() => setMoveOpen(false)}>Annuler</Button>
+            <Button variant="secondary" onClick={() => setMoveOpen(false)}>{tc('cancel')}</Button>
             <Button
               variant="primary"
               onClick={async () => {
@@ -246,23 +251,23 @@ function DocumentDetail({ id }: { id: string }) {
                   await moveDocument(doc.id, moveTo)
                   setCategoryId(moveTo)
                   setMoveOpen(false)
-                  announce(`Déplacé vers ${categories.find((c) => c.id === moveTo)?.name ?? 'la catégorie'}`)
+                  announce(t('moved', { name: (() => { const c = categories.find((x) => x.id === moveTo); return c ? f.category(c.name) : t('theCategory') })() }))
                 } catch (e) {
-                  announce(e instanceof Error ? e.message : 'Déplacement impossible')
+                  announce(e instanceof Error ? e.message : t('moveFailed'))
                 }
               }}
             >
-              Déplacer
+              {t('move')}
             </Button>
           </>
         }
       >
         <fieldset>
-          <legend className="sr-only">Catégorie de destination</legend>
+          <legend className="sr-only">{t('destination')}</legend>
           {categories.map((c) => (
             <label key={c.id} className="flex min-h-[48px] cursor-pointer items-center gap-3">
               <CategoryIcon icon={c.icon} tone={c.tone} size="sm" />
-              <span className="flex-1 text-[14px] font-semibold text-night-900">{c.name}</span>
+              <span className="flex-1 text-[14px] font-semibold text-night-900">{f.category(c.name)}</span>
               <input type="radio" name="move-to" value={c.id} checked={moveTo === c.id} onChange={() => setMoveTo(c.id)} className="h-5 w-5 accent-leaf-500" />
             </label>
           ))}
@@ -271,20 +276,20 @@ function DocumentDetail({ id }: { id: string }) {
       <FolderPickerSheet
         open={folderOpen && !readOnly}
         onClose={() => setFolderOpen(false)}
-        title="Ranger dans un dossier"
-        description="Choisissez le dossier du document. Les catégories ne changent pas."
+        title={ta('toFolder')}
+        description={t('folderDescription')}
         folders={folders}
         initial={folderId}
-        confirmLabel="Ranger"
+        confirmLabel={t('file')}
         onConfirm={async (next) => {
           try {
             await moveDocumentToFolder(doc.id, next)
             setFolderOverride(next)
             setFolderOpen(false)
-            announce(next ? `Rangé dans « ${folders.find((f) => f.id === next)?.name ?? 'le dossier'} »` : 'Document sorti de son dossier')
+            announce(next ? t('filedIn', { name: folders.find((fo) => fo.id === next)?.name ?? t('theFolder') }) : t('removedFromFolder'))
             return null
           } catch (e) {
-            return e instanceof Error ? e.message : 'Rangement impossible'
+            return e instanceof Error ? e.message : t('fileFailed')
           }
         }}
       />
@@ -295,8 +300,9 @@ function DocumentDetail({ id }: { id: string }) {
 
 export default function DocumentDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
+  const tc = useTranslations('vault.common')
   return (
-    <Suspense fallback={<div className="p-6 text-center text-sm text-night-500" role="status">Chargement…</div>}>
+    <Suspense fallback={<div className="p-6 text-center text-sm text-night-500" role="status">{tc('loading')}</div>}>
       <DocumentDetail id={id} />
     </Suspense>
   )

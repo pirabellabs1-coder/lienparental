@@ -12,6 +12,7 @@
  */
 import { useRouter } from 'next/navigation'
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { Loader2, Lock } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import type { VaultStatus } from '@/lib/vault-lock/config'
@@ -38,12 +39,13 @@ const TOUCH_EVERY_MS = 60_000
 const CHECK_EVERY_MS = 5_000
 const CHANNEL = 'lp-vault-lock'
 
-const NOTICES: Record<LockReason, string | null> = {
-  manual: 'Coffre-fort verrouillé.',
-  inactivity: 'Verrouillé après une période d’inactivité.',
-  background: 'Verrouillé pendant votre absence.',
-  expired: 'Votre session du coffre-fort a expiré.',
-  'other-tab': 'Coffre-fort verrouillé depuis un autre onglet.',
+/** Clés des messages affichés après verrouillage (vault.lock.gate.notices.*). */
+const NOTICE_KEYS: Record<LockReason, string> = {
+  manual: 'manual',
+  inactivity: 'inactivity',
+  background: 'background',
+  expired: 'expired',
+  'other-tab': 'otherTab',
 }
 
 type Props = {
@@ -58,6 +60,8 @@ type Props = {
 
 export function VaultGate({ initialStatus, blocked, context = 'coffre', showLockButton = true, children }: Props) {
   const router = useRouter()
+  const t = useTranslations('vault.lock.gate')
+  const tc = useTranslations('vault.common')
   const [status, setStatusState] = useState<VaultStatus | null>(initialStatus)
   const [notice, setNotice] = useState<string | null>(null)
   const [announce, setAnnounce] = useState('')
@@ -72,8 +76,8 @@ export function VaultGate({ initialStatus, blocked, context = 'coffre', showLock
 
   const lock = useCallback((reason: LockReason = 'manual') => {
     setStatusState((s) => (s && s.enabled ? { ...s, unlocked: false, expiresAt: null } : s))
-    setNotice(NOTICES[reason])
-    setAnnounce('Coffre-fort verrouillé.')
+    setNotice(t(`notices.${NOTICE_KEYS[reason]}`))
+    setAnnounce(t('locked'))
     if (reason !== 'other-tab') channel.current?.postMessage({ type: 'locked' })
     // Puis retire les écrans du coffre de l'arbre rendu côté serveur, une fois le cookie effacé.
     if (reason === 'background') {
@@ -84,17 +88,17 @@ export function VaultGate({ initialStatus, blocked, context = 'coffre', showLock
     } else {
       void vaultApi.lock().catch(() => undefined).finally(() => router.refresh())
     }
-  }, [router])
+  }, [router, t])
 
   const onUnlocked = useCallback((s: VaultStatus) => {
     setStatusState(s)
     setNotice(null)
-    setAnnounce('Coffre-fort déverrouillé.')
+    setAnnounce(t('unlocked'))
     lastActivity.current = Date.now()
     lastTouch.current = Date.now()
     channel.current?.postMessage({ type: 'unlocked' })
     router.refresh()
-  }, [router])
+  }, [router, t])
 
   // Synchronisation entre onglets du même navigateur.
   useEffect(() => {
@@ -169,13 +173,13 @@ export function VaultGate({ initialStatus, blocked, context = 'coffre', showLock
         <span aria-hidden="true" className="flex h-16 w-16 items-center justify-center rounded-full bg-night-900 text-white">
           <Lock className="h-7 w-7" />
         </span>
-        <h1 className="mt-5 text-[20px] font-extrabold text-night-900">{blocked?.title ?? 'Coffre-fort indisponible'}</h1>
+        <h1 className="mt-5 text-[20px] font-extrabold text-night-900">{blocked?.title ?? t('unavailableTitle')}</h1>
         <p className="mt-2 max-w-[320px] text-[14px] leading-relaxed text-night-600">
-          {blocked?.message ?? 'Impossible de vérifier le verrou du coffre-fort. Réessayez dans un instant.'}
+          {blocked?.message ?? t('unavailableText')}
         </p>
         {blocked?.href && (
           <a href={blocked.href} className="mt-5 inline-flex min-h-[48px] items-center rounded-xl bg-leaf-500 px-5 text-[15px] font-semibold text-white hover:bg-leaf-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2">
-            {blocked.cta ?? 'Continuer'}
+            {blocked.cta ?? tc('continue')}
           </a>
         )}
       </div>
@@ -197,7 +201,7 @@ export function VaultGate({ initialStatus, blocked, context = 'coffre', showLock
       {children ?? (
         // Déverrouillé : les écrans arrivent du serveur (router.refresh en cours).
         <div role="status" className="flex min-h-[60dvh] items-center justify-center gap-2 text-[14px] font-semibold text-night-700">
-          <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden="true" /> Ouverture du coffre-fort…
+          <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden="true" /> {t('opening')}
         </div>
       )}
       {showLockButton && status.enabled && <LockButton onLock={() => lock('manual')} />}
@@ -210,6 +214,7 @@ export function VaultGate({ initialStatus, blocked, context = 'coffre', showLock
  * quand une barre d'actions collante (StickyActions) est présente à l'écran.
  */
 function LockButton({ onLock }: { onLock: () => void }) {
+  const t = useTranslations('vault.lock.gate')
   return (
     <button
       type="button"
@@ -225,7 +230,7 @@ function LockButton({ onLock }: { onLock: () => void }) {
       )}
     >
       <Lock className="h-4 w-4 shrink-0 text-leaf-600" aria-hidden="true" />
-      <span className="[body:has([data-sticky-actions])_&]:sr-only lg:[body:has([data-sticky-actions])_&]:not-sr-only">Verrouiller</span>
+      <span className="[body:has([data-sticky-actions])_&]:sr-only lg:[body:has([data-sticky-actions])_&]:not-sr-only">{t('lockButton')}</span>
     </button>
   )
 }

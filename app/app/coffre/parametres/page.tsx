@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { TopBar } from '@/components/mobile/TopBar'
 import { Card } from '@/components/ui/Card'
 import { RadioGroup, Select, Switch } from '@/components/ui'
@@ -10,18 +11,19 @@ import { flattenFolders, folderAudience, folderPath, type VaultSettings } from '
 
 /** Messagerie → coffre-fort : rangement automatique (désactivé par défaut, 0420). */
 function MessagingSection() {
+  const t = useTranslations('vault.settings')
   const { settings, loading, error, save } = useVaultSettings()
   const { folders, shares } = useFolders()
   const { announce, node } = useAnnounce()
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState<string | null>(null)
   const options = [
-    { value: '', label: 'Coffre-fort (sans dossier)' },
+    { value: '', label: t('rootOption') },
     // Sous-dossiers : chemin complet (lisible tel quel par les lecteurs d'écran).
     ...flattenFolders(folders.filter((f) => f.mine)).map((f) => ({
       value: f.id,
       label: folderPath(folders, f.id).map((x) => x.name).join(' / ')
-        + (folderAudience(folders, shares, f.id).length ? ` (partagé avec ${folderAudience(folders, shares, f.id).join(', ')})` : ''),
+        + (folderAudience(folders, shares, f.id).length ? t('sharedSuffix', { names: folderAudience(folders, shares, f.id).join(', ') }) : ''),
     })),
   ]
 
@@ -37,7 +39,7 @@ function MessagingSection() {
       await save(next)
       announce(done)
     } catch (e) {
-      setSaveError(e instanceof Error ? e.message : 'Réglage non enregistré. Réessayez.')
+      setSaveError(e instanceof Error ? e.message : t('saveFailed'))
     } finally {
       setSaving(false)
     }
@@ -46,37 +48,37 @@ function MessagingSection() {
   return (
     <section aria-labelledby="messagerie-coffre">
       <h2 id="messagerie-coffre" className="font-display text-sm font-semibold text-night-900 mb-2 px-1">
-        Messagerie
+        {t('messaging')}
       </h2>
       <Card className="p-2">
         <div className="px-3">
           <Switch
-            label="Ranger automatiquement les pièces jointes dans le coffre-fort"
-            description="Désactivé par défaut : rien n'est ajouté sans votre accord, utilisez alors « Mettre au coffre-fort » sur chaque pièce jointe à conserver."
+            label={t('autoImportLabel')}
+            description={t('autoImportDesc')}
             checked={settings.autoImportMessages}
             disabled={loading || saving || Boolean(error)}
             onChange={(e) => void update(
               { ...settings, autoImportMessages: e.target.checked },
-              e.target.checked ? 'Rangement automatique activé' : 'Rangement automatique désactivé',
+              e.target.checked ? t('autoImportOn') : t('autoImportOff'),
             )}
           />
         </div>
         {settings.autoImportMessages && (
           <div className="px-3 pb-3 pt-1">
             <Select
-              label="Dossier de destination"
-              hint="Les nouvelles pièces jointes reçues ou envoyées y sont rangées."
+              label={t('destination')}
+              hint={t('destinationHint')}
               value={settings.autoImportFolderId ?? ''}
               disabled={saving}
               options={options}
               onChange={(e) => void update(
                 { ...settings, autoImportFolderId: e.target.value || null },
-                'Dossier de destination enregistré',
+                t('destinationSaved'),
               )}
             />
             {audience.length > 0 && (
               <p role="note" className="mt-2 rounded-lg border border-gold-200 bg-gold-50 px-3 py-2 text-xs font-semibold text-night-900">
-                Ce dossier est partagé avec {audience.join(', ')} : les pièces jointes de toutes vos conversations y seront visibles par {audience.length > 1 ? 'ces parents' : 'ce parent'}.
+                {t('sharedWarning', { names: audience.join(', '), count: audience.length })}
               </p>
             )}
           </div>
@@ -91,6 +93,7 @@ function MessagingSection() {
 }
 
 export default function CoffreParametresPage() {
+  const t = useTranslations('vault.settings')
   const [bio, setBio] = useState(true)
   const [sharesByLink, setSharesByLink] = useState(true)
   const [scanAllowed, setScanAllowed] = useState(true)
@@ -98,35 +101,35 @@ export default function CoffreParametresPage() {
 
   return (
     <>
-      <TopBar title="Paramètres du coffre" showBack backHref="/app/coffre" />
+      <TopBar title={t('title')} showBack backHref="/app/coffre" />
       <div className="w-full px-5 pb-6 pt-4 space-y-4">
         <MessagingSection />
 
         <section aria-labelledby="securite">
           <h2 id="securite" className="font-display text-sm font-semibold text-night-900 mb-2 px-1">
-            Sécurité
+            {t('security')}
           </h2>
           <Card className="p-2 divide-y divide-night-100">
             <div className="px-3">
               <Switch
-                label="Déverrouillage biométrique"
-                description="Face ID / empreinte pour ouvrir le coffre."
+                label={t('bioLabel')}
+                description={t('bioDesc')}
                 checked={bio}
                 onChange={(e) => setBio(e.target.checked)}
               />
             </div>
             <div className="px-3">
               <Switch
-                label="Autorisation des partages par lien"
-                description="Génération de liens signés expirables."
+                label={t('linksLabel')}
+                description={t('linksDesc')}
                 checked={sharesByLink}
                 onChange={(e) => setSharesByLink(e.target.checked)}
               />
             </div>
             <div className="px-3">
               <Switch
-                label="Autorisation du scan de documents"
-                description="Caméra et OCR via l'application mobile."
+                label={t('scanLabel')}
+                description={t('scanDesc')}
                 checked={scanAllowed}
                 onChange={(e) => setScanAllowed(e.target.checked)}
               />
@@ -136,23 +139,23 @@ export default function CoffreParametresPage() {
 
         <section aria-labelledby="ttl">
           <h2 id="ttl" className="font-display text-sm font-semibold text-night-900 mb-2 px-1">
-            Durée de vie des liens signés
+            {t('ttlTitle')}
           </h2>
           <Card className="p-4">
             <RadioGroup
               name="ttl-lien"
               value={ttl}
               onChange={setTtl}
-              aria-label="Durée de vie par défaut d'un lien signé"
+              aria-label={t('ttlAria')}
               options={[
-                { value: '5', label: '5 minutes' },
-                { value: '15', label: '15 minutes (par défaut)' },
-                { value: '60', label: '1 heure' },
-                { value: '1440', label: '24 heures' },
+                { value: '5', label: t('ttl5') },
+                { value: '15', label: t('ttl15') },
+                { value: '60', label: t('ttl60') },
+                { value: '1440', label: t('ttl1440') },
               ]}
             />
             <p className="text-xs text-night-500 mt-3">
-              Le destinataire perd l&rsquo;accès automatiquement une fois ce délai écoulé.
+              {t('ttlHint')}
             </p>
           </Card>
         </section>

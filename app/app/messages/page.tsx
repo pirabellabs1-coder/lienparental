@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { FolderLock, Lock, MessageCircle, Plus, Search, Sparkles, X } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
@@ -11,9 +12,10 @@ import { btn, card } from '@/components/ui/kit'
 import { InviteCard } from '@/components/messages/InviteCard'
 import { ConversationRow } from '@/components/messages/ConversationRow'
 import { NewConversationSheet } from '@/components/messages/NewConversationSheet'
+import { useMessagesFormat } from '@/components/messages/useMessagesFormat'
 import { cn } from '@/lib/cn'
 import {
-  conversationLabel, getMe, getPendingInvite, listConversations, listMessageableParents, participantsLabel, previewText,
+  getMe, getPendingInvite, listConversations, listMessageableParents,
   setConversationArchived,
   type ConversationSummary, type CoparentInvite, type Participant,
 } from '@/lib/messages'
@@ -35,6 +37,8 @@ function fold(s: string): string {
 // Historique des conversations entre parents : recherche, archives, nouvelle discussion.
 // Démo : ?apercu=invitation affiche l'écran sans parent lié ; ?nouvelle=1 ouvre la création.
 export default function MessagesPage() {
+  const t = useTranslations('messaging.list')
+  const { conversationLabel, participantsLabel, previewText } = useMessagesFormat()
   const router = useRouter()
   const [data, setData] = useState<Data | null>(null)
   const [error, setError] = useState(false)
@@ -77,7 +81,7 @@ export default function MessagesPage() {
         const hay = [conversationLabel(c), participantsLabel(c.participants), c.lastMessage ? previewText(c.lastMessage) : '']
         return hay.some((h) => fold(h).includes(q))
       })
-  }, [data, query, tab])
+  }, [data, query, tab, conversationLabel, participantsLabel, previewText])
 
   const totalUnread = useMemo(() => (data?.conversations ?? []).reduce((n, c) => n + (c.archived ? 0 : c.unread), 0), [data])
 
@@ -86,9 +90,9 @@ export default function MessagesPage() {
     try {
       await setConversationArchived(c.id, !c.archived)
       setData((d) => d && { ...d, conversations: d.conversations.map((x) => (x.id === c.id ? { ...x, archived: !c.archived } : x)) })
-      announce(c.archived ? 'Conversation ressortie des archives' : 'Conversation archivée')
+      announce(c.archived ? t('unarchived') : t('archived'))
     } catch (err) {
-      announce(err instanceof Error ? err.message : "L'action n'a pas abouti. Réessayez.")
+      announce(err instanceof Error ? err.message : t('actionFailed'))
     } finally {
       setArchivingId(null)
     }
@@ -100,12 +104,12 @@ export default function MessagesPage() {
 
   return (
     <>
-      <TopBar title="Messages" showBack backHref="/app" />
+      <TopBar title={t('title')} showBack backHref="/app" />
 
       {error ? (
-        <ErrorState compact title="Messages indisponibles" description="Vérifiez votre connexion puis réessayez." primary={{ label: 'Réessayer', onClick: () => void load() }} />
+        <ErrorState compact title={t('errorTitle')} description={t('errorDescription')} primary={{ label: t('retry'), onClick: () => void load() }} />
       ) : !data ? (
-        <LoadingState compact title="Chargement des messages" description="" />
+        <LoadingState compact title={t('loading')} description="" />
       ) : (
         <div className="w-full space-y-5 px-5 pb-8 pt-2">
           <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
@@ -117,7 +121,7 @@ export default function MessagesPage() {
                       <MessageCircle className="h-5 w-5" strokeWidth={1.9} />
                     </span>
                     <p className="text-[13px] text-night-700">
-                      Aucune conversation pour le moment. Dès que l&apos;autre parent aura accepté votre invitation, vous pourrez échanger ici.
+                      {t('noLink')}
                     </p>
                   </div>
                   <InviteCard invite={data.invite} senderPrenom={data.me.prenom} onChange={setInvite} announce={announce} />
@@ -126,24 +130,24 @@ export default function MessagesPage() {
                 <section aria-labelledby="msg-threads" className="space-y-3">
                   <div className="flex items-center justify-between gap-3">
                     <h2 id="msg-threads" className="text-[15px] font-bold text-night-900">
-                      Discussions
-                      {totalUnread > 0 && <span className="sr-only">, {totalUnread} message{totalUnread > 1 ? 's' : ''} non lu{totalUnread > 1 ? 's' : ''}</span>}
+                      {t('threads')}
+                      {totalUnread > 0 && <span className="sr-only">{t('unreadSr', { count: totalUnread })}</span>}
                     </h2>
                     <button type="button" onClick={() => setCreating(true)} aria-haspopup="dialog" className={cn(btn.primary, 'h-11 shrink-0 px-4')}>
                       <Plus className="h-5 w-5" aria-hidden="true" />
-                      Nouvelle discussion
+                      {t('newConversation')}
                     </button>
                   </div>
 
                   <div className="relative">
-                    <label htmlFor="msg-search" className="sr-only">Rechercher une conversation, un parent ou un message</label>
+                    <label htmlFor="msg-search" className="sr-only">{t('searchLabel')}</label>
                     <Search className="pointer-events-none absolute left-3.5 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-night-500" aria-hidden="true" />
                     <input
                       id="msg-search"
                       type="search"
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
-                      placeholder="Rechercher un sujet, un parent…"
+                      placeholder={t('searchPlaceholder')}
                       autoComplete="off"
                       className="h-12 w-full rounded-xl border border-night-200 bg-white pl-11 pr-12 text-[15px] text-night-900 placeholder:text-night-500 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-200 [&::-webkit-search-cancel-button]:hidden"
                     />
@@ -151,7 +155,7 @@ export default function MessagesPage() {
                       <button
                         type="button"
                         onClick={() => { setQuery(''); document.getElementById('msg-search')?.focus() }}
-                        aria-label="Effacer la recherche"
+                        aria-label={t('clearSearch')}
                         className="absolute right-0.5 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full text-night-600 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
                       >
                         <X className="h-4 w-4" aria-hidden="true" />
@@ -161,21 +165,21 @@ export default function MessagesPage() {
 
                   <SegmentedTabs<Tab>
                     tabs={[
-                      { key: 'actives', label: 'En cours', count: counts.actives },
-                      { key: 'archives', label: 'Archivées', count: counts.archives },
+                      { key: 'actives', label: t('tabActive'), count: counts.actives },
+                      { key: 'archives', label: t('tabArchived'), count: counts.archives },
                     ]}
                     value={tab}
                     onChange={setTab}
-                    label="Filtrer les conversations"
+                    label={t('filterLabel')}
                     idPrefix="msg"
                   />
 
                   <div id="msg-panel" role="tabpanel" aria-labelledby={`msg-tab-${tab}`}>
                     <p className="sr-only" role="status" aria-live="polite">
-                      {query ? `${visible.length} conversation${visible.length > 1 ? 's' : ''} trouvée${visible.length > 1 ? 's' : ''}` : ''}
+                      {query ? t('found', { count: visible.length }) : ''}
                     </p>
                     {visible.length > 0 ? (
-                      <ul aria-label={tab === 'archives' ? 'Conversations archivées' : 'Conversations en cours'} className={cn(card, 'divide-y divide-night-100/80 p-1')}>
+                      <ul aria-label={tab === 'archives' ? t('archivedList') : t('activeList')} className={cn(card, 'divide-y divide-night-100/80 p-1')}>
                         {visible.map((c) => (
                           <ConversationRow
                             key={c.id}
@@ -192,19 +196,19 @@ export default function MessagesPage() {
                           {query ? <Search className="h-5 w-5" /> : <MessageCircle className="h-5 w-5" />}
                         </span>
                         <p className="mt-3 text-[14px] font-bold text-night-900">
-                          {query ? 'Aucun résultat' : tab === 'archives' ? 'Aucune conversation archivée' : 'Aucune discussion en cours'}
+                          {query ? t('noResults') : tab === 'archives' ? t('noArchived') : t('noActive')}
                         </p>
                         <p className="mt-1 max-w-xs text-[13px] text-night-600">
                           {query
-                            ? 'Essayez un autre mot : un sujet, un prénom ou un extrait de message.'
+                            ? t('noResultsHint')
                             : tab === 'archives'
-                              ? "Archivez une conversation terminée pour alléger la liste. Elle reste consultable ici."
-                              : 'Démarrez une discussion par sujet : vacances, école, santé…'}
+                              ? t('noArchivedHint')
+                              : t('noActiveHint')}
                         </p>
                         {!query && tab === 'actives' && (
                           <button type="button" onClick={() => setCreating(true)} aria-haspopup="dialog" className={cn(btn.secondary, 'mt-4')}>
                             <Plus className="h-5 w-5" aria-hidden="true" />
-                            Nouvelle discussion
+                            {t('newConversation')}
                           </button>
                         )}
                       </div>
@@ -214,14 +218,14 @@ export default function MessagesPage() {
               )}
             </div>
 
-            <aside aria-label="Bon à savoir" className="space-y-3">
+            <aside aria-label={t('asideLabel')} className="space-y-3">
               <div className={cn(card, 'p-4')}>
                 <div className="flex gap-3">
                   <Lock className="mt-0.5 h-5 w-5 shrink-0 text-leaf-600" aria-hidden="true" />
                   <div>
-                    <h2 className="text-[14px] font-bold text-night-900">Des échanges qui font foi</h2>
+                    <h2 className="text-[14px] font-bold text-night-900">{t('proofTitle')}</h2>
                     <p className="mt-1 text-[13px] text-night-600">
-                      Chaque message est horodaté. Les messages ne peuvent être ni modifiés ni supprimés, et chaque conversation peut être exportée en PDF pour votre dossier.
+                      {t('proofText')}
                     </p>
                   </div>
                 </div>
@@ -230,9 +234,9 @@ export default function MessagesPage() {
                 <div className="flex gap-3">
                   <FolderLock className="mt-0.5 h-5 w-5 shrink-0 text-leaf-600" aria-hidden="true" />
                   <div>
-                    <h2 className="text-[14px] font-bold text-night-900">Pièces jointes et coffre-fort</h2>
+                    <h2 className="text-[14px] font-bold text-night-900">{t('vaultTitle')}</h2>
                     <p className="mt-1 text-[13px] text-night-600">
-                      Mettez une pièce jointe au coffre-fort d&apos;un geste, dans le dossier de votre choix. Le rangement automatique est désactivé par défaut et s&apos;active dans les paramètres du coffre-fort.
+                      {t('vaultText')}
                     </p>
                   </div>
                 </div>
@@ -241,9 +245,9 @@ export default function MessagesPage() {
                 <div className="flex gap-3">
                   <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-iris-600" aria-hidden="true" />
                   <div>
-                    <h2 className="text-[14px] font-bold text-night-900">Vérification du ton</h2>
+                    <h2 className="text-[14px] font-bold text-night-900">{t('toneTitle')}</h2>
                     <p className="mt-1 text-[13px] text-night-700">
-                      Avant l&apos;envoi, le Coach IA peut vous signaler une formulation susceptible d&apos;être mal reçue et vous proposer une version plus apaisée.
+                      {t('toneText')}
                     </p>
                   </div>
                 </div>

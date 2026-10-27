@@ -1,0 +1,428 @@
+{
+  "billing": {
+    "common": {
+      "plan": {
+        "gratuit": "Free",
+        "premium": "Premium",
+        "coparentalite": "Coparentalité+"
+      },
+      "offer": {
+        "mensuel": "{plan} monthly",
+        "annuel": "{plan} yearly"
+      },
+      "period": {
+        "mensuel": "/ month",
+        "annuel": "/ year"
+      },
+      "pricePeriod": "{price} {period}",
+      "perMonth": "{price} / month",
+      "perYear": "{price} / year",
+      "cycle": {
+        "mensuel": "Monthly",
+        "annuel": "Yearly"
+      },
+      "cycleLower": {
+        "mensuel": "monthly",
+        "annuel": "yearly"
+      },
+      "freeMonths": "{count, plural, one {# month free} other {# months free}}",
+      "discount": "-{pct}%",
+      "saveDiscount": "Save {pct}%",
+      "zeroPrice": "€0",
+      "unknownDate": "unknown date",
+      "noCommitment": "No commitment",
+      "mostChosen": "Most popular",
+      "included": "Included",
+      "notIncluded": "Not included"
+    },
+    "features": {
+      "gratuit": {
+        "vault": "{gb} GB vault",
+        "coach": "3 AI Coach analyses per month",
+        "journalCalendar": "Journal and calendar",
+        "exportPdf": "PDF export"
+      },
+      "premium": {
+        "vault": "{gb} GB vault",
+        "coach": "10 AI Coach analyses per month",
+        "templatesAll": "All letter and file templates",
+        "journalAdvanced": "Advanced chronological journal",
+        "exportAll": "PDF, Word and Canva export",
+        "sync": "Multi-device sync"
+      },
+      "coparentalite": {
+        "allPremium": "Everything in Premium",
+        "multiParents": "Multiple parents: your linked family gets Premium benefits",
+        "expenses": "Enhanced tracking of shared expenses",
+        "exportAdvanced": "Advanced export (file for a lawyer or mediator)",
+        "supportPriority": "Priority support",
+        "webPwa": "Web access and installable app (PWA)"
+      }
+    },
+    "comparison": {
+      "caption": "Plan comparison",
+      "featuresCol": "Features",
+      "featureCol": "Feature",
+      "rows": {
+        "coach": "AI Coach",
+        "vault": "Secure vault",
+        "journalCalendar": "Journal and calendar",
+        "templates": "Letter and file templates",
+        "export": "PDF, Word and Canva export",
+        "multiParents": "Multiple parents (shared access)",
+        "expenses": "Enhanced expense tracking",
+        "exportAdvanced": "Advanced export (lawyer, mediator)",
+        "support": "Support",
+        "webApp": "Web access and installable app"
+      },
+      "cells": {
+        "coach": {
+          "gratuit": "3 analyses / month",
+          "premium": "10 analyses / month",
+          "coparentalite": "10 analyses / month"
+        },
+        "vault": {
+          "gratuit": "{gb} GB",
+          "premium": "{gb} GB",
+          "coparentalite": "{gb} GB"
+        },
+        "templates": {
+          "gratuit": "Essentials",
+          "premium": "All",
+          "coparentalite": "All"
+        },
+        "export": {
+          "gratuit": "PDF"
+        },
+        "support": {
+          "gratuit": "Standard",
+          "premium": "Ahead of the Free plan",
+          "coparentalite": "Priority, handled first"
+        }
+      }
+    },
+    "cycleToggle": {
+      "ariaLabel": "Billing frequency"
+    },
+    "planPicker": {
+      "label": "Plan",
+      "sub": {
+        "premium": "For one parent",
+        "coparentalite": "For your whole linked family"
+      },
+      "from": "{sub} · from {price} / month"
+    },
+    "radioCard": {
+      "referencePrice": "Reference price: ",
+      "perMonthEquivalent": "That's {price} / month",
+      "currentPlan": "Current plan"
+    },
+    "pricing": {
+      "title": "Simple, transparent plans",
+      "lead": "Free to start. No commitment, cancel anytime from My subscription.",
+      "note": {
+        "gratuit": "To get started",
+        "paid": "or {price} per year, {promo}"
+      },
+      "cta": {
+        "createAccount": "Create an account",
+        "trial": "Try free for {days} days",
+        "subscribePremium": "Subscribe to Premium",
+        "upgradePremium": "Upgrade to Premium",
+        "subscribeCopa": "Subscribe to Coparentalité+",
+        "chooseCopa": "Choose this plan"
+      },
+      "compare": "Compare plans in detail"
+    },
+    "planCard": {
+      "tagline": {
+        "gratuit": "To get started",
+        "premium": "Every feature for one parent",
+        "coparentalite": "Premium for your whole linked family"
+      },
+      "yourPlan": "Your plan",
+      "forever": "forever",
+      "annualEquivalent": "That's {price} / month.",
+      "annualSavings": "Save {amount} per year ({promo})",
+      "monthlyHint": "Or {price} / year on the yearly plan, {promo}",
+      "noCard": "No credit card required",
+      "includedIn": "Included in {plan}",
+      "wait": "One moment…",
+      "srFree": ": {plan}",
+      "srPaid": ": {plan} {cycle}"
+    },
+    "status": {
+      "yourPlan": "Your plan",
+      "sharedPremium": "Premium (family access)",
+      "statusSr": "Status: ",
+      "rowPlan": "Plan",
+      "rowPrice": "Price",
+      "rowPending": "Scheduled change",
+      "rowPayment": "Payment method",
+      "label": {
+        "active": "Active",
+        "trialing": "Trial",
+        "past_due": "Payment failed",
+        "unpaid": "Payment failed",
+        "canceled": "Canceled",
+        "incomplete": "Payment to complete",
+        "incomplete_expired": "Expired",
+        "paused": "Paused",
+        "premiumOffered": "Premium included",
+        "free": "Free",
+        "cancelScheduled": "Cancellation scheduled for {date}"
+      },
+      "periodEndFallback": "the end of the current period",
+      "periodEndShortFallback": "the end of the period",
+      "trialEndFallback": "the end of the trial",
+      "incomplete": {
+        "headline": "Your {name} payment is not complete",
+        "detailPay": "Complete the payment on Stripe's secure page to activate your plan. Without payment, the request expires on its own within 24 hours.",
+        "detailNoPay": "Without payment, the request expires on its own within 24 hours. You can choose a plan again below."
+      },
+      "shared": {
+        "headline": "You enjoy Premium thanks to your family",
+        "detail": "A parent linked to your children subscribes to Coparentalité+. You have nothing to pay."
+      },
+      "free": {
+        "headlineEnded": "Your subscription has ended",
+        "headline": "You are on the Free plan",
+        "detailEnded": "Your account is back on the Free plan. Your data is kept and remains accessible.",
+        "detail": "Choose a plan below to unlock more space and every feature."
+      },
+      "trouble": {
+        "headline": "The last payment failed",
+        "detailPastDue": "Stripe will retry automatically. Update your payment method to keep {name} without interruption.",
+        "detailUnpaid": "Your {name} benefits are suspended. Update your payment method to get them back."
+      },
+      "canceling": {
+        "headline": "Your {name} subscription will end on {date}",
+        "detail": "No further charges. You keep all your benefits until {date}, then your account will switch to the Free plan. You can resume your subscription anytime before that date.",
+        "dateLabel": "Access ends"
+      },
+      "trial": {
+        "headline": "{name} free trial in progress",
+        "detail": "First charge of {price} on {date}, unless you cancel before that date.",
+        "dateLabel": "Trial ends"
+      },
+      "paused": {
+        "headline": "Your {name} subscription is paused",
+        "detail": "No charges while paused. Contact support to reactivate it."
+      },
+      "active": {
+        "headline": "Your {name} subscription is active",
+        "detail": "Next charge of {price} on {date}.",
+        "detailPending": "Next charge of {price} on {date}, when you switch to {offer}.",
+        "dateLabel": "Next billing date"
+      }
+    },
+    "card": {
+      "managedByStripe": "Managed by Stripe",
+      "endingIn": "{brand} ending in {last4}"
+    },
+    "actions": {
+      "current": "Current plan",
+      "paymentSoon": "Payment coming soon",
+      "paymentSoonHint": "Online payment opens very soon.",
+      "subscribe": "Subscribe",
+      "demoHint": "Demo: no real payment.",
+      "secureHint": "Secure payment by Stripe, cancel anytime.",
+      "scheduledOn": "Scheduled for {date}",
+      "backToFreeScheduledHint": "Your account will switch back to the Free plan on that date.",
+      "backToFree": "Switch to Free",
+      "benefitsUntil": "Your benefits remain active until {date}.",
+      "updatePayment": "Update payment",
+      "portalHint": "Opens Stripe's secure portal.",
+      "fixFirst": "Settle the payment first.",
+      "resume": "Resume subscription",
+      "resumeHint": "Cancels the cancellation scheduled for {date}.",
+      "resumeFirst": "Resume your subscription first to change plans.",
+      "keep": "Keep this plan",
+      "keepHint": "Cancels the switch to {offer}.",
+      "scheduledHint": "This change will apply on your next billing date.",
+      "soon": "Coming soon",
+      "fromDate": "Starting {date}, at no cost.",
+      "immediateUpgrade": "Takes effect immediately, prorated difference",
+      "immediateDowngrade": "Takes effect immediately, prorated credit",
+      "cycleFrom": "; {cycle} starting {date}",
+      "upgradeTo": "Switch to {plan}",
+      "downgradeTo": "Go back to {plan}",
+      "toYearly": "Switch to yearly",
+      "toMonthly": "Switch to monthly"
+    },
+    "impact": {
+      "nextDueFallback": "your next billing date",
+      "none": "This is already the plan for your next billing date.",
+      "cancelPending": "The scheduled change is canceled: you stay on {offer}.",
+      "scheduled": "The switch to {offer} ({price}) will apply on {date}, at no cost and with no proration. Nothing changes until then.",
+      "cyclePart": " The switch to {cycle} billing ({price}) will then apply on {date}.",
+      "thenPrice": ", then {price}",
+      "trialThen": "; at the end of the trial, {price}",
+      "familyGain": " Parents linked to your children immediately get Premium benefits.",
+      "familyLoss": " Parents linked to your children lose shared access.",
+      "upgradeTrial": "Takes effect immediately: you switch to {offer}. Nothing is charged today during the trial{trialThen}.{cyclePart}{family}",
+      "upgrade": "Takes effect immediately: you switch to {offer}. Today you only pay the prorated difference for the days remaining until {date}{thenPrice}.{cyclePart}{family}",
+      "downgradeTrial": "Takes effect immediately: you switch to {offer}. Nothing is charged during the trial{trialThen}.{cyclePart}{family}",
+      "downgrade": "Takes effect immediately: you switch to {offer}. Unused time on your current plan is credited on a prorated basis and deducted from your next invoices{thenPrice}.{cyclePart}{family}"
+    },
+    "info": {
+      "scheduled": "Plan change saved: it will apply on your next billing date.",
+      "pending_change_canceled": "The scheduled plan change has been canceled.",
+      "unchanged": "Your plan is unchanged.",
+      "upgraded": "Your new plan is active. Any prorated difference is charged today.",
+      "downgraded": "Your new plan is active. Unused time is credited to your next invoices.",
+      "canceled": "Cancellation saved. Your benefits remain active until the end of the paid period.",
+      "resumed": "Your subscription continues: the cancellation has been withdrawn.",
+      "portal": "Your changes on Stripe have been applied.",
+      "checkout_canceled": "Payment canceled: nothing was charged. You can pick up where you left off anytime.",
+      "demo_reset": "Demo: simulated subscription reset."
+    },
+    "paywall": {
+      "coach": {
+        "title": "You have used your free analyses",
+        "text": "The Free plan includes 3 AI Coach analyses per month. Premium offers 10."
+      },
+      "stockage": {
+        "title": "Your vault is almost full",
+        "text": "Premium increases your space from 2 GB to 10 GB."
+      },
+      "modeles": {
+        "title": "This template is part of Premium",
+        "text": "Premium unlocks every letter and file template."
+      },
+      "export": {
+        "title": "This export is part of Premium",
+        "text": "Premium adds Word and Canva export; Coparentalité+ adds advanced export for a lawyer or mediator."
+      },
+      "partage": {
+        "title": "Shared access is part of Coparentalité+",
+        "text": "With Coparentalité+, every parent linked to your children gets Premium benefits."
+      }
+    },
+    "errors": {
+      "title": "Action not possible",
+      "generic": "Something went wrong. Please try again in a moment.",
+      "codes": {
+        "billing_disabled": "Online payment is not available yet.",
+        "unauthenticated": "Your session has expired. Sign in again and retry.",
+        "invalid_origin": "Request refused. Reload the page and try again.",
+        "invalid_cycle": "Unknown plan. Choose Monthly or Yearly.",
+        "invalid_plan": "Unknown plan. Choose Premium or Coparentalité+.",
+        "already_subscribed": "You already have an active subscription: change plans from My subscription.",
+        "rate_limited": "Too many requests. Wait a moment and try again.",
+        "session_not_found": "Payment session not found for this account.",
+        "invalid_state": "This action is not possible right now. Reload the page.",
+        "invalid_body": "Invalid request. Reload the page and try again.",
+        "payment_failed": "Payment of the difference was declined. Check your payment method and try again.",
+        "no_subscription": "No active subscription.",
+        "no_customer": "No payment method has been saved yet.",
+        "cancel_pending": "Withdraw the cancellation first to change plans.",
+        "subscription_not_active": "Settle your payment first to change plans.",
+        "stripe_unavailable": "The payment service is temporarily unavailable. Try again in a moment.",
+        "misconfigured": "The payment service is temporarily unavailable.",
+        "network": "Unable to connect. Check your network and try again."
+      }
+    },
+    "invoices": {
+      "status": {
+        "paid": "Paid",
+        "open": "Due",
+        "uncollectible": "Unpaid",
+        "void": "Void",
+        "draft": "Draft"
+      },
+      "pending": "Pending",
+      "previousCaption": "Previous payments",
+      "caption": "Invoices",
+      "colDate": "Date",
+      "colAmount": "Amount",
+      "colStatus": "Status",
+      "colDocument": "Document",
+      "colDocuments": "Documents",
+      "pdfDemoTitle": "PDF available with a real payment",
+      "pdfDemoSr": "PDF not available in demo",
+      "demoNote": "Demo: sample invoices, no real payment.",
+      "loading": "Loading invoices…",
+      "emptyTitle": "No payments",
+      "emptyText": "Your invoices will appear here after your first charge.",
+      "view": "View invoice {number} of {date} (new tab)",
+      "viewNoNumber": "View invoice of {date} (new tab)",
+      "download": "Download invoice {number} of {date} as PDF",
+      "downloadNoNumber": "Download invoice of {date} as PDF",
+      "loadingShort": "Loading…",
+      "more": "Show more invoices",
+      "retry": "Try again"
+    },
+    "center": {
+      "title": "My subscription",
+      "demoTitle": "Demo mode",
+      "demoText": "No real payment: the subscription is simulated for the tour.",
+      "resetDemo": "Go back to the Free plan",
+      "unavailableTitle": "Payment coming soon",
+      "unavailableText": "Online subscriptions open very soon. You can already compare plans; your Free account remains fully usable.",
+      "manage": "Manage",
+      "portalOpening": "Opening the secure portal…",
+      "managePayment": "Manage payment method",
+      "managePaymentSub": "Card and billing details, on Stripe",
+      "invoices": "Invoices",
+      "invoicesSub": "History and PDF download",
+      "resuming": "Resuming…",
+      "resume": "Resume subscription",
+      "resumeSub": "Cancels the cancellation scheduled for {date}",
+      "cancel": "Cancel subscription",
+      "cancelSub": "Free of charge, access kept until {date}",
+      "changePlan": "Change plan",
+      "choosePlan": "Choose a plan",
+      "noCommitment": "No commitment, cancel anytime.",
+      "annualBanner": "Yearly: <strong>{premiumPromo}</strong> on Premium ({savings} saved per year), <strong>{copaPromo}</strong> on Coparentalité+.",
+      "monthlyBanner": "Switch to yearly to save up to <strong>{amount} per year</strong>.",
+      "changeRules": "Plan change (Premium or Coparentalité+): immediate, on your current billing cycle, prorated (difference charged or credited). Billing cycle change (monthly or yearly): always on your next billing date, at no cost.",
+      "compare": "Compare plans in detail",
+      "sharedNote": "Coparentalité+ shared access: every parent linked to your children (account holder or invited parent) gets Premium benefits without a subscription of their own. Invited relatives do not.",
+      "payOnStripe": "Complete payment on Stripe",
+      "updatePaymentMethod": "Update payment method",
+      "billingAria": "Billing",
+      "upTo": "up to {discount}",
+      "changeTitle": "Switch to {offer}?",
+      "changeTitleFallback": "Change plan?",
+      "demoSuffix": " Demo: no real payment.",
+      "confirmChange": "Confirm change",
+      "cancelButton": "Cancel",
+      "cancelTitle": "Cancel your subscription?",
+      "cancelDescription": "No further charges will be made. Your {name} benefits remain active until {date}, then your account will switch to the Free plan (your data remains accessible).{family} You can resume your subscription anytime before that date.",
+      "cancelFamily": " Linked parents will then lose shared access.",
+      "confirmCancel": "Cancel subscription",
+      "keepPlan": "Keep {name}",
+      "canceledNotice": "Cancellation saved. Your {name} benefits remain active until {date}, with no further charges.",
+      "demoChanged": "Demo: you are now on {offer}.",
+      "laterChange": " Switch to {offer} on your next billing date.",
+      "demoPortal": "Demo: Stripe's secure portal would open here to change your card or download your invoices."
+    },
+    "confirmation": {
+      "metaTitle": "Subscription confirmation",
+      "topBar": "Subscription",
+      "demoTitle": "Demo mode",
+      "demoText": "No real payment was made: the subscription is simulated.",
+      "activeTitle": "Subscription activated",
+      "activePlan": "Your {plan} plan is active. All its features are unlocked right now.",
+      "activeGeneric": "Your subscription is active.",
+      "checkingTitle": "Confirming payment…",
+      "checkingText": "We are verifying your payment with Stripe. Please don't close this page; it usually takes a few seconds.",
+      "pendingTitle": "Payment being confirmed",
+      "pendingText": "Your payment is being confirmed; this can take a minute. Your subscription will activate automatically and you will receive a confirmation email.",
+      "openTitle": "Payment not completed",
+      "openText": "Nothing was charged. You can resume your subscription whenever you like.",
+      "notFoundTitle": "Payment not found",
+      "notFoundText": "We can't find a recent payment for this account. Check My subscription to see your status.",
+      "readyTitle": "You're all set",
+      "readyFamily": "Parents linked to your children also get Premium benefits. ",
+      "readyDemo": "Demo: no receipt is sent.",
+      "readyReceipt": "Your receipt is on its way by email.",
+      "readyManage": " You can manage or cancel your subscription at any time.",
+      "goToApp": "Go to my space",
+      "viewSubscription": "View my subscription",
+      "checkAgain": "Check again",
+      "backToSubscription": "Back to My subscription"
+    }
+  }
+}

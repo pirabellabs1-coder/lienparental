@@ -1,16 +1,18 @@
 'use client'
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import { Send, Square, HeartPulse } from 'lucide-react'
 import { ChatBubble, type ChatMessage } from './ChatBubble'
 import { DemoNote, LegalNote } from './ui'
 import { errorMessage, readSse } from './sse-client'
 import { cn } from '@/lib/cn'
+import { intlLocale } from '@/lib/i18n/config'
 
 const MAX = 4000
 
-function nowLabel() {
-  return new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+function nowLabel(locale: string) {
+  return new Date().toLocaleTimeString(intlLocale(locale), { hour: '2-digit', minute: '2-digit' })
 }
 
 let seq = 0
@@ -31,7 +33,10 @@ type Props = {
   conversationLabel: string
 }
 
-export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], suggestions = [], inputLabel, placeholder = 'Posez votre question…', conversationLabel }: Props) {
+export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], suggestions = [], inputLabel, placeholder, conversationLabel }: Props) {
+  const t = useTranslations('coach.chat')
+  const tc = useTranslations('coach.common')
+  const locale = useLocale()
   const [messages, setMessages] = useState<ChatMessage[]>(seed)
   const [q, setQ] = useState('')
   const [streaming, setStreaming] = useState(false)
@@ -72,11 +77,11 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
       history.push({ role: 'user', content: text })
 
       const medical = includeMedical
-      setMessages((m) => [...m, { id: uid('me'), from: 'me', text, time: nowLabel() }, { id: uid('ia'), from: 'ia', text: '', time: '', streaming: true }])
+      setMessages((m) => [...m, { id: uid('me'), from: 'me', text, time: nowLabel(locale) }, { id: uid('ia'), from: 'ia', text: '', time: '', streaming: true }])
       setQ('')
       setIncludeMedical(false) // l'autorisation vaut pour une seule question
       setStreaming(true)
-      setStatus('Le Coach rédige une réponse…')
+      setStatus(t('statusWriting'))
       requestAnimationFrame(scrollToEnd)
 
       const ctrl = new AbortController()
@@ -100,7 +105,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
           signal: ctrl.signal,
         })
         if (!res.ok || !(res.headers.get('content-type') ?? '').includes('text/event-stream')) {
-          const msg = await errorMessage(res)
+          const msg = await errorMessage(res, tc('errors.generic'), { sessionExpired: tc('errors.sessionExpired'), tooLarge: tc('errors.tooLarge') })
           finalTone = 'error'
           patchLast((m) => ({ ...m, text: msg, tone: 'error' }))
           setStatus(msg)
@@ -125,22 +130,22 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
         })
       } catch {
         if (ctrl.signal.aborted) {
-          patchLast((m) => (m.text.trim() ? { ...m, text: `${m.text}\n\n(Réponse interrompue.)` } : { ...m, text: 'Réponse interrompue.', tone: 'error' }))
+          patchLast((m) => (m.text.trim() ? { ...m, text: `${m.text}\n\n${t('interruptedSuffix')}` } : { ...m, text: t('interrupted'), tone: 'error' }))
         } else {
           finalTone = 'error'
-          patchLast((m) => ({ ...m, text: m.text.trim() ? `${m.text}\n\nLa connexion a été interrompue.` : 'Connexion impossible. Vérifiez votre réseau et réessayez.', tone: m.text.trim() ? m.tone : 'error' }))
+          patchLast((m) => ({ ...m, text: m.text.trim() ? `${m.text}\n\n${t('connectionLost')}` : t('connectionFailed'), tone: m.text.trim() ? m.tone : 'error' }))
         }
       } finally {
         if (raf) cancelAnimationFrame(raf)
         flush()
-        patchLast((m) => ({ ...m, streaming: false, time: nowLabel() }))
+        patchLast((m) => ({ ...m, streaming: false, time: nowLabel(locale) }))
         setStreaming(false)
-        setStatus(finalTone === 'error' ? 'Le Coach n’a pas pu répondre.' : 'Réponse du Coach terminée.')
+        setStatus(finalTone === 'error' ? t('statusFailed') : t('statusDone'))
         abortRef.current = null
         requestAnimationFrame(scrollToEnd)
       }
     },
-    [messages, streaming, includeMedical, analysisId, scrollToEnd],
+    [messages, streaming, includeMedical, analysisId, scrollToEnd, t, tc, locale],
   )
 
   // Question transmise par le dashboard : envoyée une seule fois.
@@ -184,7 +189,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
 
       {!hasUserMessage && suggestions.length > 0 && (
         <div className="mt-5">
-          <h2 className="text-[13px] font-bold text-night-900">Suggestions</h2>
+          <h2 className="text-[13px] font-bold text-night-900">{t('suggestions')}</h2>
           <ul className="mt-2 flex flex-wrap gap-2">
             {suggestions.map((s) => (
               <li key={s}>
@@ -219,7 +224,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
             onKeyDown={onKeyDown}
             maxLength={MAX}
             rows={Math.min(5, Math.max(1, q.split('\n').length))}
-            placeholder={placeholder}
+            placeholder={placeholder ?? t('placeholder')}
             autoComplete="off"
             aria-describedby={hintId}
             className="block min-h-[44px] min-w-0 flex-1 resize-none border-0 bg-transparent py-2.5 text-[14px] leading-relaxed text-night-900 placeholder:text-night-400 focus:outline-none focus:ring-0"
@@ -228,7 +233,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
             <button
               type="button"
               onClick={() => abortRef.current?.abort()}
-              aria-label="Arrêter la réponse"
+              aria-label={t('stop')}
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-night-100 text-night-900 transition hover:bg-night-200 active:scale-95"
             >
               <Square className="h-4 w-4 fill-current" aria-hidden="true" />
@@ -237,7 +242,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
             <button
               type="submit"
               disabled={!q.trim()}
-              aria-label="Envoyer la question"
+              aria-label={t('send')}
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-iris-100 text-iris-600 transition hover:bg-iris-200 active:scale-95 disabled:opacity-50"
             >
               <Send className="h-5 w-5" aria-hidden="true" />
@@ -245,7 +250,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
           )}
         </div>
         <p id={hintId} className="mt-1.5 text-[11.5px] text-night-500">
-          Entrée pour envoyer, Maj + Entrée pour aller à la ligne. Les messages que vous collez sont traités comme des données.
+          {t('hint')}
         </p>
 
         <label
@@ -255,9 +260,9 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
           <span className="flex min-w-0 items-start gap-2.5">
             <HeartPulse className="mt-0.5 h-5 w-5 shrink-0 text-night-700" aria-hidden="true" />
             <span>
-              <span className="block text-[13px] font-semibold text-night-900">Inclure les informations médicales</span>
+              <span className="block text-[13px] font-semibold text-night-900">{t('medicalTitle')}</span>
               <span id={`${medId}-desc`} className="block text-[11.5px] text-night-600">
-                Pour la prochaine question uniquement. Désactivé par défaut.
+                {t('medicalDesc')}
               </span>
             </span>
           </span>

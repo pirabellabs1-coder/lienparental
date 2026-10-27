@@ -1,0 +1,754 @@
+{
+  "account": {
+    "ui": {
+      "confirm": {
+        "title": "Confirmar ação",
+        "description": "Esta ação é irreversível.",
+        "confirm": "Confirmar",
+        "cancel": "Cancelar",
+        "wait": "Aguarde…"
+      },
+      "modal": {
+        "close": "Fechar"
+      },
+      "search": {
+        "placeholder": "Pesquisar…",
+        "clear": "Limpar pesquisa"
+      },
+      "gauge": {
+        "full": "Cota atingida",
+        "near": "Atenção, limite próximo"
+      },
+      "steps": {
+        "aria": "Etapa {current} de {total}",
+        "ariaWithLabel": "Etapa {current} de {total}: {label}",
+        "short": "Etapa {current}/{total}"
+      },
+      "fileDrop": {
+        "sizeB": "{n} B",
+        "sizeKB": "{n} KB",
+        "sizeMB": "{n} MB",
+        "badType": "Tipo não suportado: {name}",
+        "tooBig": "Arquivo muito grande (máx. {max} MB)",
+        "tooMany": "Máximo de {max} arquivo(s)",
+        "drop": "Solte um arquivo ou <browse>procure</browse>",
+        "max": "Máx. {max} MB",
+        "selected": "Arquivos selecionados",
+        "remove": "Remover {name}"
+      }
+    },
+    "kit": {
+      "homeAria": "Lien Parental, início",
+      "notifications": "Notificações",
+      "notificationsUnread": "Notificações, {count} não lidas",
+      "prevStep": "Etapa anterior",
+      "back": "Voltar",
+      "step": "Etapa {current} de {total}",
+      "stepWithLabel": "Etapa {current} de {total}: {label}",
+      "stripe": "Pagamento seguro via Stripe"
+    },
+    "feedback": {
+      "thanks": "Obrigado pelo seu feedback!",
+      "question": "Este artigo foi útil?",
+      "yes": "Sim, útil",
+      "no": "Não, não foi útil"
+    },
+    "storage": {
+      "usage": {
+        "title": "Espaço utilizado",
+        "progress": "{pct}% do espaço utilizado"
+      },
+      "vault": {
+        "title": "Seus arquivos são gerenciados no cofre",
+        "text": "Consulte, organize e exclua seus documentos pelo cofre. Um documento excluído fica 30 dias na lixeira antes de ser excluído definitivamente.",
+        "open": "Abrir o cofre",
+        "back": "Voltar ao armazenamento"
+      },
+      "usageTitle": "Armazenamento - Uso",
+      "usedPct": "{pct}% utilizado",
+      "usedPctOf": "{pct}% utilizado de {max}",
+      "breakdown": "Distribuição",
+      "categories": {
+        "documents": "Documentos",
+        "documentsPdf": "Documentos (PDF, Word)",
+        "photos": "Fotos",
+        "pieces": "Anexos",
+        "autres": "Outros"
+      },
+      "unavailable": "O consumo de armazenamento está indisponível no momento. Tente novamente em instantes.",
+      "manageFiles": "Gerenciar meus arquivos",
+      "categoriesTitle": "Categorias",
+      "freeSpace": "Para liberar espaço, exclua documentos pelo cofre. Eles ficam 30 dias na lixeira antes da exclusão definitiva.",
+      "deleteAll": "Excluir todos os arquivos",
+      "documents": {
+        "title": "Documentos",
+        "deleted": "{count, plural, one {# arquivo excluído.} other {# arquivos excluídos.}}",
+        "exitSelection": "Sair da seleção",
+        "back": "Voltar",
+        "selectedCount": "{count, plural, one {# selecionado} other {# selecionados}}",
+        "cancel": "Cancelar",
+        "selectedSize": "{size} selecionados",
+        "willDelete": "Estes arquivos serão excluídos.",
+        "deleteSelection": "Excluir seleção",
+        "searchLabel": "Pesquisar um documento",
+        "searchPlaceholder": "Pesquisar",
+        "sortSize": "Ordenar por tamanho",
+        "sortDate": "Ordenar por data",
+        "emptyTitle": "Nenhum documento",
+        "noResultTitle": "Nenhum resultado",
+        "emptyText": "Seus documentos aparecerão aqui.",
+        "noResultText": "Tente outra palavra-chave.",
+        "deleteCount": "Excluir ({count})",
+        "confirmTitle": "{count, plural, one {Excluir # arquivo?} other {Excluir # arquivos?}}",
+        "confirmText": "{size} serão liberados. Esta ação é irreversível.",
+        "confirm": "Excluir"
+      },
+      "wipe": {
+        "title": "Excluir todos os arquivos",
+        "runningTitle": "Excluindo",
+        "doneTitle": "Armazenamento - Uso",
+        "irreversible": "Esta ação é irreversível.",
+        "irreversibleText": "Todos os seus arquivos serão excluídos definitivamente e você não poderá recuperá-los.",
+        "freed": "Espaço que será liberado",
+        "sizeGo": "{n} GB",
+        "deleteAll": "Excluir tudo",
+        "cancel": "Cancelar",
+        "running": "Excluindo…",
+        "wait": "Aguarde, isso pode levar alguns instantes.",
+        "progress": "Progresso da exclusão",
+        "deleting": "Excluindo {size}…",
+        "dontClose": "Não feche o aplicativo.",
+        "zeroUsed": "0% utilizado",
+        "done": "Todos os seus arquivos foram excluídos.",
+        "doneText": "Seu espaço de armazenamento agora está vazio."
+      }
+    },
+    "fields": {
+      "hidePassword": "Ocultar senha",
+      "showPassword": "Mostrar senha"
+    },
+    "markdown": {
+      "step": "Etapa {n}:"
+    },
+    "push": {
+      "enableError": "Não foi possível ativar agora. Tente novamente em instantes.",
+      "disableError": "Não foi possível desativar agora. Tente novamente em instantes.",
+      "removeError": "Não foi possível remover agora.",
+      "status": {
+        "checking": "Verificando este dispositivo…",
+        "demo": "Disponível com uma conta real (modo demonstração).",
+        "notConfigured": "As notificações no dispositivo ainda não estão disponíveis.",
+        "iosInstall": "No iPhone e iPad, adicione primeiro o Lien Parental à tela de início.",
+        "unsupported": "Este navegador não permite notificações.",
+        "blocked": "As notificações estão bloqueadas para este site nas configurações do navegador.",
+        "on": "Ativadas neste dispositivo.",
+        "onAccountOff": "Ativadas neste dispositivo, mas desligadas para toda a conta (botão acima).",
+        "off": "Desativadas neste dispositivo."
+      },
+      "title": "Este dispositivo",
+      "iosHelp": "No Safari, toque no botão Compartilhar e depois em “Adicionar à Tela de Início”. Em seguida, abra o Lien Parental por esse ícone e volte a esta tela.",
+      "busy": "Um instante…",
+      "disable": "Desativar neste dispositivo",
+      "enabling": "Ativando…",
+      "enable": "Ativar notificações neste dispositivo",
+      "others": "Outros dispositivos",
+      "since": "Desde {date}",
+      "removeAria": "Remover {label}",
+      "remove": "Remover"
+    },
+    "profile": {
+      "home": {
+        "unknownDate": "data desconhecida",
+        "endsOn": "Termina em",
+        "renewsOn": "Renovação em",
+        "title": "Meu perfil",
+        "subtitle": "Gerencie suas informações e sua conta.",
+        "memberSince": "Membro desde {date}",
+        "editInfo": "Editar minhas informações",
+        "active": "Ativo",
+        "activeHeadline": "Sua assinatura está ativa.",
+        "subscriptionDetail": "Ver detalhes da assinatura",
+        "free": "Gratuito",
+        "freeTitle": "Conta gratuita",
+        "freeText1": "Acesse os recursos básicos.",
+        "freeText2": "Mude para o Premium para ter mais espaço e todos os recursos.",
+        "seePlans": "Ver planos",
+        "sections": {
+          "account": "Minha conta",
+          "subscription": "Minha assinatura",
+          "storage": "Armazenamento",
+          "coach": "Coach com IA",
+          "help": "Suporte"
+        },
+        "rows": {
+          "info": "Informações pessoais",
+          "infoSub": "Gerencie suas informações e dados de contato",
+          "security": "Segurança",
+          "securitySub": "Senha, autenticação e sessões",
+          "prefs": "Preferências",
+          "prefsSub": "Notificações, idioma e exibição",
+          "subscription": "Minha assinatura",
+          "subscriptionSub": "Plano, pagamento, faturas, troca ou cancelamento",
+          "subscriptionFreeSub": "Plano Gratuito: ver planos e assinar",
+          "help": "Central de ajuda",
+          "helpSub": "Perguntas frequentes, guias e contato com o suporte"
+        },
+        "storageUsed": "Espaço utilizado",
+        "storageAria": "Espaço de armazenamento utilizado",
+        "storageUnavailable": "Consumo indisponível no momento. Tente novamente mais tarde.",
+        "coachUsage": "Uso atual",
+        "coachCount": "{used} / {quota} análises",
+        "coachCount30": "{used} / {quota} análises em 30 dias",
+        "coachAria": "Análises do Coach com IA utilizadas",
+        "coachUnavailable": "Uso indisponível no momento. Tente novamente mais tarde.",
+        "logout": {
+          "button": "Sair",
+          "title": "Sair?",
+          "description": "Você precisará informar suas credenciais para voltar.",
+          "confirm": "Sair"
+        }
+      },
+      "info": {
+        "steps": {
+          "1": {
+            "title": "Foto de perfil",
+            "sub": "Adicione uma foto para personalizar sua conta."
+          },
+          "2": {
+            "title": "Informações básicas",
+            "sub": "Edite suas informações pessoais."
+          },
+          "3": {
+            "title": "Dados de contato",
+            "sub": "Atualize seus dados de contato."
+          },
+          "4": {
+            "title": "Preferências",
+            "sub": "Personalize sua experiência."
+          }
+        },
+        "countries": {
+          "FR": "França",
+          "BE": "Bélgica",
+          "CH": "Suíça",
+          "CA": "Canadá",
+          "LU": "Luxemburgo"
+        },
+        "photoType": "Escolha uma imagem (JPG ou PNG).",
+        "photoSize": "Imagem muito pesada (máximo de 5 MB).",
+        "invalidEmail": "Endereço de e-mail inválido.",
+        "emailPending": "{current} (novo endereço {next} a confirmar por e-mail)",
+        "title": "Informações pessoais",
+        "changePhoto": "Alterar foto",
+        "firstName": "Nome",
+        "lastName": "Sobrenome",
+        "birthDate": "Data de nascimento",
+        "gender": "Gênero",
+        "genders": {
+          "f": "Mulher",
+          "h": "Homem",
+          "nb": "Não binário",
+          "nsp": "Prefiro não dizer"
+        },
+        "situation": "Situação familiar",
+        "situations": {
+          "couple": "Em um relacionamento",
+          "separe": "Separado(a)",
+          "divorce": "Divorciado(a)",
+          "procedure": "Em processo",
+          "celibataire": "Solteiro(a)",
+          "autre": "Outro"
+        },
+        "email": "Endereço de e-mail",
+        "phone": "Número de telefone",
+        "address": "Endereço",
+        "postalCode": "CEP",
+        "city": "Cidade",
+        "country": "País",
+        "language": "Idioma",
+        "timezone": "Fuso horário",
+        "tz": {
+          "brussels": "(UTC+01:00) Bruxelas",
+          "reunion": "(UTC+04:00) Reunião",
+          "montreal": "(UTC-05:00) Montreal"
+        },
+        "dateFormat": "Formato de data",
+        "dmy": "DD / MM / AAAA",
+        "mdy": "MM / DD / AAAA",
+        "ymd": "AAAA - MM - DD",
+        "notifEmail": "Notificações por e-mail",
+        "notifEmailText": "Receba e-mails sobre informações importantes.",
+        "notifPush": "Notificações push",
+        "notifPushText": "Receba notificações no seu dispositivo.",
+        "continue": "Continuar",
+        "saving": "Salvando…",
+        "save": "Salvar"
+      },
+      "validation": {
+        "name": "Nome",
+        "email": "E-mail",
+        "phone": "Telefone",
+        "address": "Endereço",
+        "language": "Idioma",
+        "title": "Informações atualizadas!",
+        "text": "Suas informações pessoais foram salvas.",
+        "summary": "Resumo das suas informações",
+        "back": "Voltar ao perfil"
+      }
+    },
+    "security": {
+      "home": {
+        "title": "Segurança",
+        "protectedTitle": "Sua conta está protegida",
+        "protectedText": "Cuidamos da segurança dos seus dados pessoais.",
+        "accountSection": "Segurança da conta",
+        "password": "Senha",
+        "passwordSub": "Altere sua senha",
+        "twoFactor": "Autenticação de dois fatores",
+        "twoFactorSub": "Reforce a segurança da sua conta",
+        "vaultLock": "Bloqueio do cofre",
+        "vaultLockSub": "Código, impressão digital ou reconhecimento facial",
+        "sessions": "Sessões ativas",
+        "sessionsCount": "{count, plural, one {# sessão} other {# sessões}}",
+        "sessionsSub": "Gerencie seus dispositivos conectados",
+        "loginEmails": "E-mails de login",
+        "loginEmailsSub": "Receba um e-mail a cada login",
+        "advanced": "Segurança avançada",
+        "deleteAccount": "Excluir minha conta",
+        "deleteAccountSub": "Exclua sua conta definitivamente"
+      },
+      "vaultLock": {
+        "metaTitle": "Bloqueio do cofre"
+      },
+      "emails": {
+        "title": "E-mails de login",
+        "bannerTitle": "Seja notificado",
+        "bannerText": "Receba um e-mail a cada novo login na sua conta.",
+        "switchLabel": "Receber e-mails de login",
+        "switchDescription": "Você será avisado por e-mail quando um novo login for detectado.",
+        "saving": "Salvando…",
+        "save": "Salvar"
+      },
+      "password": {
+        "title": "Senha",
+        "bannerTitle": "Escolha uma senha segura",
+        "bannerText": "Use pelo menos 8 caracteres com letras, números e símbolos.",
+        "current": "Senha atual",
+        "new": "Nova senha",
+        "confirm": "Confirme a nova senha",
+        "strength": "Força da senha",
+        "strengthValue": ": {level}",
+        "levels": {
+          "0": "Muito fraca",
+          "1": "Fraca",
+          "2": "Média",
+          "3": "Boa",
+          "4": "Forte"
+        },
+        "rules": {
+          "length": "Pelo menos 8 caracteres",
+          "case": "Uma letra maiúscula e uma minúscula",
+          "digit": "Um número",
+          "symbol": "Um símbolo (ex.: ! @ # ?)"
+        },
+        "tips": "Dicas para <em>uma senha segura</em>:",
+        "ruleOk": ": atendido",
+        "ruleKo": ": não atendido",
+        "errors": {
+          "current": "Digite sua senha atual.",
+          "rules": "A nova senha não atende a todas as dicas.",
+          "mismatch": "As senhas não coincidem."
+        },
+        "saving": "Salvando…",
+        "save": "Salvar"
+      },
+      "sessions": {
+        "today": "Hoje às {time}",
+        "yesterday": "Ontem às {time}",
+        "dateAt": "{date} às {time}",
+        "ua": {
+          "browser": "Navegador",
+          "android": "Dispositivo Android",
+          "windows": "PC Windows",
+          "linux": "Computador Linux",
+          "unknownDevice": "Dispositivo desconhecido",
+          "unknownOs": "Sistema desconhecido"
+        },
+        "signedIn": "Login: {when}",
+        "lastActivity": "Última atividade: {when}",
+        "loadError": "Não foi possível carregar a lista das outras sessões.",
+        "allRevoked": "Todas as outras sessões foram desconectadas.",
+        "revokeError": "Não foi possível desconectar este dispositivo no momento.",
+        "revoked": "{name} foi desconectado.",
+        "title": "Sessões ativas",
+        "bannerTitle": "Gerencie seus dispositivos",
+        "bannerText": "Você está conectado nestes dispositivos. Desconecte os que você não reconhece.",
+        "current": "Sessão atual",
+        "loading": "Carregando…",
+        "others": "Outras sessões",
+        "emptyTitle": "Nenhuma outra sessão",
+        "emptyText": "Sua conta está aberta somente neste dispositivo.",
+        "revokeAll1": "Desconectar de todas",
+        "revokeAll2": "as outras sessões",
+        "confirmAllTitle": "Desconectar as outras sessões?",
+        "confirmOneTitle": "Desconectar este dispositivo?",
+        "confirmAllText": "Todos os outros dispositivos precisarão entrar novamente.",
+        "confirm": "Desconectar",
+        "currentBadge": "Atual",
+        "revokeAria": "Desconectar {name}"
+      },
+      "twoFactor": {
+        "title": "Autenticação de dois fatores",
+        "bannerTitle": "Proteja sua conta",
+        "bannerText": "A autenticação de dois fatores adiciona uma camada extra de segurança.",
+        "adminTitle": "Obrigatória para a administração",
+        "adminActive": "A autenticação de dois fatores está ativa nesta sessão.",
+        "adminLink": "Acessar a administração",
+        "adminRequired": "Contas de administrador precisam ativar a autenticação de dois fatores antes de abrir o painel administrativo.",
+        "status": "Status",
+        "loading": "Carregando…",
+        "on": "Ativada",
+        "off": "Desativada",
+        "features": {
+          "protectionTitle": "Proteção reforçada",
+          "protectionText": "Impede acessos não autorizados",
+          "codeTitle": "Código único",
+          "codeText": "Um código de uso único a cada login",
+          "easyTitle": "Fácil de usar",
+          "easyText": "Receba seus códigos por aplicativo ou SMS"
+        },
+        "preparing": "Preparando…",
+        "enable": "Ativar a autenticação",
+        "disabling": "Desativando…",
+        "disable": "Desativar a autenticação",
+        "setupTitle": "Configure seu aplicativo",
+        "setupStep1": "Abra o Google Authenticator, Authy ou 1Password.",
+        "setupStep2Qr": "Escaneie o QR code ou adicione uma conta com a chave abaixo.",
+        "setupStep2Key": "Adicione uma conta com a chave abaixo.",
+        "setupStep3": "Digite o código de 6 dígitos exibido.",
+        "qrAlt": "QR code para escanear com seu aplicativo autenticador",
+        "copyKey": "Copiar chave",
+        "codeLabel": "Código de verificação",
+        "cancel": "Cancelar",
+        "verifying": "Verificando…",
+        "verify": "Verificar"
+      },
+      "deletion": {
+        "exportDemo": "Um e-mail com seus dados será enviado em até 48 h.",
+        "exportError": "A exportação falhou. Tente novamente em instantes.",
+        "exportDone": "Seus dados foram baixados.",
+        "networkError": "Não foi possível conectar ao servidor. Verifique sua conexão com a internet.",
+        "deleteError": "A exclusão falhou. Tente novamente em instantes.",
+        "title": "Excluir minha conta",
+        "warningTitle": "Ação irreversível",
+        "warningText": "A exclusão da conta apaga seus dados definitivamente após um prazo legal de 30 dias.",
+        "exportTitle": "Antes de sair",
+        "exportText": "Baixe uma cópia dos seus documentos, depoimentos e metadados.",
+        "exporting": "Preparando a exportação…",
+        "export": "Exportar meus dados",
+        "understand": "Eu entendo que:",
+        "checks": {
+          "vault": "Meu cofre e todos os seus documentos serão excluídos",
+          "subscription": "Minha assinatura Premium será cancelada imediatamente, sem reembolso",
+          "irreversible": "Esta ação é irreversível após 30 dias"
+        },
+        "typeToConfirm": "Para confirmar, digite {word}",
+        "password": "Sua senha",
+        "deleteForever": "Excluir definitivamente",
+        "confirm1Title": "Confirmar a exclusão?",
+        "confirm1Text": "Uma última verificação será solicitada.",
+        "confirm1Button": "Continuar",
+        "confirm2Title": "Excluir a conta?",
+        "confirm2Text": "Última confirmação. Seus dados serão apagados.",
+        "confirm2Button": "Excluir minha conta"
+      }
+    },
+    "prefs": {
+      "saveError": "Não foi possível salvar agora. Tente novamente em instantes.",
+      "general": {
+        "title": "Geral",
+        "subtitle": "Personalize as configurações gerais da sua conta.",
+        "language": "Idioma do aplicativo",
+        "timezone": "Fuso horário",
+        "tz": {
+          "brussels": "(GMT+01:00) Bruxelas",
+          "reunion": "(GMT+04:00) Reunião",
+          "montreal": "(GMT-05:00) Montreal"
+        },
+        "dateFormat": "Formato da data",
+        "dmy": "DD / MM / AAAA",
+        "mdy": "MM / DD / AAAA",
+        "ymd": "AAAA - MM - DD",
+        "timeFormat": "Formato da hora",
+        "h24": "24 horas",
+        "h12": "12 horas",
+        "saving": "Salvando…",
+        "save": "Salvar"
+      },
+      "home": {
+        "title": "Preferências",
+        "subtitle": "Gerencie suas preferências e personalize sua experiência.",
+        "items": {
+          "general": {
+            "title": "Geral",
+            "text": "Idioma, fuso horário, formato…"
+          },
+          "notifications": {
+            "title": "Notificações",
+            "text": "Alertas, lembretes, e-mails…"
+          },
+          "appearance": {
+            "title": "Aparência",
+            "text": "Tema, cores, tamanho do texto…"
+          }
+        },
+        "synced": "Suas preferências são sincronizadas em todos os seus dispositivos."
+      },
+      "appearance": {
+        "title": "Aparência",
+        "subtitle": "Personalize a aparência do aplicativo como preferir.",
+        "theme": "Tema",
+        "themes": {
+          "clair": "Claro",
+          "sombre": "Escuro",
+          "auto": "Automático"
+        },
+        "themeSoon": "Em breve. Sua escolha foi salva; o tema escuro chegará em uma próxima versão.",
+        "color": "Cor principal",
+        "colors": {
+          "leaf": "Verde",
+          "blue": "Azul",
+          "iris": "Roxo",
+          "orange": "Laranja",
+          "red": "Vermelho"
+        },
+        "colorSoon": "Em breve. Sua escolha foi salva e será aplicada em uma próxima versão.",
+        "size": "Tamanho do texto",
+        "sizes": {
+          "petite": "Pequeno",
+          "moyenne": "Médio",
+          "grande": "Grande"
+        },
+        "saving": "Salvando…",
+        "save": "Salvar"
+      },
+      "notifications": {
+        "title": "Notificações",
+        "subtitle": "Escolha como e quando deseja ser notificado.",
+        "push": "Notificações do navegador",
+        "pushText": "Alertas nos dispositivos em que você as ativou, mesmo com o aplicativo fechado.",
+        "email": "Notificações por e-mail",
+        "emailText": "Mensagens não lidas, compartilhamentos, lembretes e eventos compartilhados próximos.",
+        "reminders": "Lembretes do calendário",
+        "remindersText": "Um lembrete antes dos seus eventos e dos que o outro genitor compartilha com você.",
+        "topicsTitle": "Notificar sobre",
+        "topicsText": "Um tema desativado passa a aparecer somente na tela Notificações do aplicativo.",
+        "topics": {
+          "onMessages": "Mensagens",
+          "onCalendrier": "Calendário compartilhado e lembretes",
+          "onGarde": "Agenda de guarda e despesas compartilhadas",
+          "onDocuments": "Processos compartilhados e depoimentos"
+        },
+        "security": "Os alertas de segurança (login em um novo dispositivo, senha, endereço de e-mail, autenticação de dois fatores, código do cofre, exclusão da conta) são sempre enviados por e-mail e no aplicativo, independentemente destas configurações.",
+        "matrixTitle": "O que você recebe, e onde",
+        "matrixCaption": "Canais usados para cada tipo de notificação",
+        "colEvent": "Evento",
+        "colDevice": "Dispositivo",
+        "colEmail": "E-mail",
+        "matrix": {
+          "message": "Nova mensagem",
+          "event": "Evento compartilhado adicionado, alterado ou cancelado",
+          "reminder": "Lembrete antes de um evento",
+          "folder": "Processo compartilhado, depoimento recebido",
+          "invitation": "Convite aceito",
+          "custody": "Guarda ou despesa alterada pelo outro genitor"
+        },
+        "emailMessage": "Se não lida após 5 min, no máximo 1 a cada 30 min",
+        "emailEvent": "Se previsto nos próximos 14 dias",
+        "yes": "Sim",
+        "no": "Não",
+        "matrixNote": "Tudo também aparece na tela Notificações. As notificações nunca contêm o texto das suas mensagens nem o conteúdo dos seus documentos.",
+        "saving": "Salvando…",
+        "save": "Salvar"
+      }
+    },
+    "notifications": {
+      "demo": {
+        "n1": {
+          "title": "Novo depoimento recebido",
+          "body": "Hélène D. respondeu ao seu pedido de depoimento.",
+          "time": "Há 5 min"
+        },
+        "n2": {
+          "title": "Lembrete do calendário",
+          "body": "Consulta médica com a Lina em 2 h.",
+          "time": "Há 1 h"
+        },
+        "n3": {
+          "title": "Coach com IA renovado",
+          "body": "Você tem 10 novas análises este mês.",
+          "time": "Ontem"
+        }
+      },
+      "justNow": "Agora mesmo",
+      "title": "Notificações",
+      "loading": "Carregando notificações",
+      "retry": "Tentar novamente",
+      "backHome": "Voltar ao início",
+      "allRead": "Todas as notificações foram marcadas como lidas.",
+      "allReadError": "Não foi possível marcar as notificações como lidas. Tente novamente.",
+      "emptyTitle": "Nenhuma notificação",
+      "emptyText": "Seus novos alertas aparecerão aqui.",
+      "recent": "Recentes",
+      "markAll": "Marcar tudo como lido",
+      "unread": "(não lida)"
+    },
+    "states": {
+      "title": "Estados do sistema",
+      "general": "Carregamento, sucesso, erro e offline",
+      "operations": "Operações longas",
+      "items": {
+        "chargement": {
+          "title": "Carregamento",
+          "text": "Indica que o aplicativo está processando uma solicitação."
+        },
+        "succes": {
+          "title": "Sucesso",
+          "text": "Confirma que a ação foi realizada corretamente."
+        },
+        "erreur": {
+          "title": "Erro",
+          "text": "Informa um problema e propõe soluções imediatas."
+        },
+        "hors-connexion": {
+          "title": "Offline",
+          "text": "Alerta sobre a falta de conexão e propõe um modo de uso adequado."
+        },
+        "vide": {
+          "title": "Nenhum dado",
+          "text": "Indica que nenhum item está disponível ainda."
+        },
+        "maintenance": {
+          "title": "Manutenção",
+          "text": "Sinaliza uma manutenção em andamento e convida a tentar novamente mais tarde."
+        },
+        "synchronisation": {
+          "title": "Sincronização",
+          "text": "Indica que seus dados estão sendo sincronizados entre seus dispositivos."
+        },
+        "sauvegarde": {
+          "title": "Backup",
+          "text": "Confirma que seus dados foram salvos com segurança."
+        },
+        "suppression": {
+          "title": "Exclusão",
+          "text": "Mostra o número de itens sendo excluídos e o progresso."
+        },
+        "importation": {
+          "title": "Importação",
+          "text": "Mostra o andamento da importação e o número de arquivos restantes."
+        },
+        "mise-a-jour": {
+          "title": "Atualização",
+          "text": "Informa o download e a instalação de uma nova versão."
+        },
+        "a-jour": {
+          "title": "Tudo está atualizado",
+          "text": "Confirma que o aplicativo está atualizado e funcionando da melhor forma."
+        }
+      },
+      "demo": {
+        "continue": "Continuar",
+        "details": "Ver detalhes",
+        "retry": "Tentar novamente",
+        "offline": "Trabalhar offline",
+        "add": "Adicionar um item",
+        "learnMore": "Saiba mais",
+        "retryLater": "Tentar mais tarde",
+        "fileSize": "2,4 MB",
+        "remaining": "{count, plural, one {# arquivo restante} other {# arquivos restantes}}"
+      }
+    },
+    "search": {
+      "sections": {
+        "documents": "Documentos",
+        "journal": "Diário",
+        "calendrier": "Calendário",
+        "temoignages": "Depoimentos",
+        "pages": "Páginas"
+      },
+      "pages": {
+        "home": "Início",
+        "journal": "Diário",
+        "calendar": "Calendário",
+        "vault": "Cofre",
+        "coach": "Coach com IA",
+        "children": "Meus filhos",
+        "profile": "Perfil",
+        "security": "Segurança",
+        "preferences": "Preferências",
+        "help": "Central de ajuda",
+        "custody": "Agenda de guarda",
+        "finances": "Finanças (Diário)"
+      },
+      "keywords": {
+        "home": "painel início",
+        "journal": "notas cronologia",
+        "calendar": "agenda compromisso",
+        "vault": "documentos provas",
+        "coach": "assistente conselho",
+        "children": "criança filho família",
+        "profile": "conta",
+        "security": "senha login",
+        "preferences": "aparência tamanho do texto notificações idioma",
+        "help": "ajuda faq suporte contato",
+        "custody": "guarda alternância",
+        "finances": "finanças despesas pagamentos dinheiro pensão custos"
+      },
+      "journalTypes": {
+        "visite": "Visita",
+        "appel": "Ligação",
+        "message": "Mensagem",
+        "sante": "Saúde",
+        "depense": "Despesa",
+        "autre": "Outro",
+        "note": "Nota"
+      },
+      "requestDone": "Concluída",
+      "requestPending": "Pendente",
+      "received": "{count}/{total} {count, plural, one {recebido} other {recebidos}}",
+      "recent": "Pesquisas recentes",
+      "quick": "Acesso rápido",
+      "dialogTitle": "Pesquisa global",
+      "inputLabel": "Pesquisar no Lien Parental",
+      "placeholder": "Pesquisar um documento, um evento, um depoimento…",
+      "clear": "Limpar pesquisa",
+      "close": "Fechar pesquisa",
+      "cancel": "Cancelar",
+      "noResultsFor": "Nenhum resultado para {query}",
+      "resultCount": "{count, plural, one {# resultado} other {# resultados}}",
+      "noResultsQuoted": "Nenhum resultado para “<q>{query}</q>”",
+      "noResultsHint": "Verifique a ortografia ou tente outra palavra.",
+      "noResultsLocked": "Seus documentos e depoimentos não são incluídos enquanto o cofre estiver bloqueado.",
+      "vaultChecking": "Verificando o cofre…",
+      "vaultLocked": "Desbloqueie o cofre para pesquisar seus documentos e depoimentos.",
+      "unlock": "Desbloquear",
+      "results": "Resultados da pesquisa",
+      "clearRecent": "Limpar pesquisas recentes",
+      "keys": {
+        "navigate": "navegar",
+        "enter": "Enter",
+        "open": "abrir",
+        "esc": "Esc",
+        "close": "fechar"
+      },
+      "trigger": "Pesquisar",
+      "triggerPlaceholder": "Pesquisar…"
+    },
+    "pwa": {
+      "title": "Instalar o app",
+      "install": "Instalar",
+      "dismiss": "Fechar a sugestão de instalação"
+    }
+  }
+}

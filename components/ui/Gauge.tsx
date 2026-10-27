@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
 }
 
 export function Gauge({ value, max = 100, label, description, showPercent = true, warningAt = 80, dangerAt = 100, className }: Props) {
+  const t = useTranslations('account.ui.gauge')
   const pct = Math.max(0, Math.min(100, (value / max) * 100))
   const level: 'ok' | 'warn' | 'danger' = pct >= dangerAt ? 'danger' : pct >= warningAt ? 'warn' : 'ok'
 
@@ -42,8 +44,8 @@ export function Gauge({ value, max = 100, label, description, showPercent = true
         />
       </div>
       {description && <p className="mt-1.5 text-xs text-night-500 dark:text-night-300">{description}</p>}
-      {level === 'danger' && <p className="mt-1 text-xs font-medium text-alert-500">Quota atteint</p>}
-      {level === 'warn' && <p className="mt-1 text-xs font-medium text-gold-500">Attention, limite proche</p>}
+      {level === 'danger' && <p className="mt-1 text-xs font-medium text-alert-500">{t('full')}</p>}
+      {level === 'warn' && <p className="mt-1 text-xs font-medium text-gold-500">{t('near')}</p>}
     </div>
   )
 }

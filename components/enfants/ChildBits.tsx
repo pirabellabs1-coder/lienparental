@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { childProfileStatus, type Child } from '@/lib/mock-data'
 
@@ -30,6 +31,7 @@ export function ChildAvatar({ child, src, size = 'md', className }: { child: Chi
 
 /** "Profil à jour" (green) / "Informations incomplètes" (orange). Text label, not colour-only. */
 export function ChildStatusBadge({ child, className }: { child: Child; className?: string }) {
+  const t = useTranslations('family.children.common')
   const ok = childProfileStatus(child) === 'complet'
   return (
     <span
@@ -39,13 +41,14 @@ export function ChildStatusBadge({ child, className }: { child: Child; className
         className,
       )}
     >
-      {ok ? 'Profil à jour' : 'Informations incomplètes'}
+      {ok ? t('profileUpToDate') : t('profileIncomplete')}
     </span>
   )
 }
 
 /** Icon + label + value row used in the profile recap. */
 export function DetailRow({ icon, label, value }: { icon: ReactNode; label: ReactNode; value?: ReactNode }) {
+  const t = useTranslations('family.children.common')
   const empty = value === undefined || value === null || value === ''
   return (
     <div className="flex items-start gap-3 py-1.5 text-[13px]">
@@ -54,7 +57,7 @@ export function DetailRow({ icon, label, value }: { icon: ReactNode; label: Reac
       </span>
       <dt className="w-32 shrink-0 text-night-600">{label}</dt>
       <dd className={cn('min-w-0 flex-1 break-words font-semibold', empty ? 'font-medium italic text-night-400' : 'text-night-900')}>
-        {empty ? 'Non renseigné' : value}
+        {empty ? t('notProvided') : value}
       </dd>
     </div>
   )

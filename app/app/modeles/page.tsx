@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { ChevronRight, FileText, ListFilter, Search } from 'lucide-react'
 import { StatusBadge } from '@/components/coffre/StatusBadge'
 import { TONES } from '@/components/coffre/tones'
@@ -16,6 +17,7 @@ const TONE_BY_CATEGORY: Record<string, VaultTone> = { juridique: 'violet', scola
 // « Documents prêts à l'emploi » : liste filtrable des modèles publiés depuis l'admin
 // (repli sur les modèles de démonstration si aucun n'est publié ou si l'API est indisponible).
 export default function ModelesPage() {
+  const tr = useTranslations('coach.templates')
   const [q, setQ] = useState('')
   const [cat, setCat] = useState<ModeleCategory | 'tous'>('tous')
   const [popularFirst, setPopularFirst] = useState(false)
@@ -24,18 +26,18 @@ export default function ModelesPage() {
 
   const source = useMemo<ListItem[]>(() => {
     if (published.data.length > 0) {
-      return published.data.map((t) => ({
-        slug: t.slug,
-        title: t.titre,
-        kind: t.champs > 0 ? `Modèle à remplir, ${t.pages} page${t.pages > 1 ? 's' : ''}` : `${t.pages} page${t.pages > 1 ? 's' : ''}`,
-        category: t.categorie,
-        badge: t.badge,
-        tone: TONE_BY_CATEGORY[t.categorie] ?? 'gray',
-        description: t.description,
+      return published.data.map((tpl) => ({
+        slug: tpl.slug,
+        title: tpl.titre,
+        kind: tpl.champs > 0 ? tr('list.fillable', { pages: tr('pages', { count: tpl.pages }) }) : tr('pages', { count: tpl.pages }),
+        category: tpl.categorie,
+        badge: tpl.badge,
+        tone: TONE_BY_CATEGORY[tpl.categorie] ?? 'gray',
+        description: tpl.description,
       }))
     }
     return loading ? [] : MODELES
-  }, [published.data, loading])
+  }, [published.data, loading, tr])
 
   const list = useMemo(() => {
     const needle = q.trim().toLocaleLowerCase('fr')
@@ -49,14 +51,14 @@ export default function ModelesPage() {
   return (
     <div className="w-full px-5 pb-6" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1.25rem)' }}>
       <h1 className="max-w-[260px] text-[24px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 md:max-w-none">
-        Documents prêts à l’emploi
+        {tr('list.title')}
       </h1>
       <p className="mt-2 max-w-[300px] text-[13px] leading-relaxed text-night-700 md:max-w-none">
-        Des modèles rédigés par des professionnels à adapter à votre situation.
+        {tr('list.intro')}
       </p>
 
       <div role="search" className="mt-4 flex items-center gap-2">
-        <label htmlFor="modele-search" className="sr-only">Rechercher un document</label>
+        <label htmlFor="modele-search" className="sr-only">{tr('list.searchLabel')}</label>
         <div className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-full border border-night-100 bg-white px-4 shadow-soft focus-within:border-leaf-500">
           <Search className="h-[18px] w-[18px] shrink-0 text-night-500" aria-hidden="true" />
           <input
@@ -64,14 +66,14 @@ export default function ModelesPage() {
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Rechercher un document…"
+            placeholder={tr('list.searchPlaceholder')}
             className="h-full min-w-0 flex-1 bg-transparent text-[14px] text-night-900 outline-none placeholder:text-night-400"
           />
         </div>
         <button
           type="button"
           aria-pressed={popularFirst}
-          aria-label="Afficher les modèles populaires en premier"
+          aria-label={tr('list.popularFirst')}
           onClick={() => setPopularFirst((v) => !v)}
           className={cn('inline-flex h-12 w-12 items-center justify-center rounded-full transition-colors', popularFirst ? 'bg-leaf-50 text-leaf-600' : 'text-night-800 hover:bg-night-50')}
         >
@@ -79,7 +81,7 @@ export default function ModelesPage() {
         </button>
       </div>
 
-      <div role="radiogroup" aria-label="Catégorie de modèles" className="-mx-5 mt-4 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none]">
+      <div role="radiogroup" aria-label={tr('list.categoryGroup')} className="-mx-5 mt-4 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none]">
         {MODELE_CATEGORIES.map((c) => {
           const on = cat === c.id
           return (
@@ -94,14 +96,14 @@ export default function ModelesPage() {
                 on ? 'border-leaf-500 bg-leaf-500 text-white' : 'border-night-100 bg-white text-night-800 hover:bg-night-50',
               )}
             >
-              {c.label}
+              {tr(`categories.${c.id}`)}
             </button>
           )
         })}
       </div>
 
       <p className="sr-only" role="status" aria-live="polite">
-        {loading ? 'Chargement des modèles' : `${list.length} modèle${list.length > 1 ? 's' : ''}`}
+        {loading ? tr('list.loading') : tr('list.count', { count: list.length })}
       </p>
 
       {loading ? (
@@ -115,7 +117,7 @@ export default function ModelesPage() {
         </ul>
       ) : list.length === 0 ? (
         <p className="mt-6 rounded-2xl border border-dashed border-night-200 p-8 text-center text-[13.5px] text-night-500">
-          Aucun modèle ne correspond à votre recherche.
+          {tr('list.empty')}
         </p>
       ) : (
         <ul className="mt-4 space-y-3 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0">

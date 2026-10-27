@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { BottomNav } from '@/components/mobile/BottomNav'
 import { DesktopSidebar } from '@/components/mobile/DesktopSidebar'
 import { SearchProvider } from '@/components/search/SearchProvider'
+import { LocaleSync } from '@/components/i18n/LocaleSync'
 import { getCurrentUser } from '@/lib/auth/session'
 import { getEffectivePlan } from '@/lib/billing/entitlements'
 import type { PlanId } from '@/components/profil/pricing'
@@ -37,6 +38,7 @@ export default async function AppShellLayout({ children }: { children: React.Rea
       </div>
       <div className="md:hidden"><BottomNav /></div>
       <SearchProvider />
+      <LocaleSync />
     </div>
   )
 }

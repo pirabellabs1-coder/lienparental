@@ -6,6 +6,7 @@
  */
 import Link from 'next/link'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { ArrowLeft, Fingerprint, KeyRound, LockKeyhole, ShieldCheck } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { PasswordField } from '@/components/profil/fields'
@@ -14,7 +15,7 @@ import { cn } from '@/lib/cn'
 import type { VaultStatus } from '@/lib/vault-lock/config'
 import { VaultApiError, isWebauthnServerUnavailable, vaultApi } from './api'
 import { PinPad, type PinPadHandle } from './PinPad'
-import { WebauthnError, webauthnSupported } from './webauthn-browser'
+import { WebauthnError, webauthnErrorMessage, webauthnSupported } from './webauthn-browser'
 
 type Mode = 'pin' | 'password' | 'setup'
 
@@ -45,10 +46,13 @@ function useCountdown(until: number | null) {
 }
 
 export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', notice }: Props) {
+  const t = useTranslations('vault.lock.unlock')
+  const te = useTranslations('vault.lock.errors')
+  const tc = useTranslations('vault.common')
   const [mode, setMode] = useState<Mode>(() => initialMode(status))
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(() =>
-    status.pinLockedUntil && status.pinLockedUntil > Date.now() ? 'Trop d’essais. Patientez avant de réessayer.' : null)
+    status.pinLockedUntil && status.pinLockedUntil > Date.now() ? t('tooManyAttempts') : null)
   const [lockedUntil, setLockedUntil] = useState<number | null>(status.pinLockedUntil)
   const [password, setPassword] = useState('')
   const [setupFirst, setSetupFirst] = useState<string | null>(null)
@@ -76,13 +80,13 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
   const fail = useCallback((e: unknown) => {
     if (e instanceof VaultApiError) {
       if (e.code === 'locked_out' && e.details.lockedUntil) setLockedUntil(e.details.lockedUntil)
-      setError(e.message)
+      setError(e.code === 'network' ? te('network') : e.message)
     } else if (e instanceof WebauthnError) {
-      setError(e.kind === 'cancelled' ? 'Empreinte annulée. Réessayez ou saisissez votre code.' : e.message)
+      setError(e.kind === 'cancelled' ? t('bioCancelled') : webauthnErrorMessage(e, (k) => te(`webauthn.${k}`)))
     } else {
-      setError('Une erreur est survenue. Réessayez.')
+      setError(te('generic'))
     }
-  }, [])
+  }, [t, te])
 
   const submitPin = useCallback(async (pin: string) => {
     if (busy) return
@@ -101,7 +105,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
 
   const submitPassword = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!password) return setError('Saisissez le mot de passe de votre compte.')
+    if (!password) return setError(t('enterPassword'))
     setBusy(true)
     setError(null)
     try {
@@ -124,7 +128,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
     if (pin !== setupFirst) {
       setSetupFirst(null)
       pinRef.current?.clear()
-      setError('Les deux codes ne correspondent pas. Recommencez.')
+      setError(t('mismatch'))
       return
     }
     setBusy(true)
@@ -137,7 +141,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
     } finally {
       setBusy(false)
     }
-  }, [fail, onUnlocked, setupFirst])
+  }, [fail, onUnlocked, setupFirst, t])
 
   const unlockWithBiometric = async () => {
     setBusy(true)
@@ -169,19 +173,19 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
 
   const intro =
     mode === 'setup'
-      ? setupFirst ? 'Saisissez à nouveau votre code pour le confirmer.' : 'Créez un code à 6 chiffres pour protéger vos documents et témoignages.'
+      ? setupFirst ? t('introConfirm') : t('introSetup')
       : mode === 'password'
-        ? 'Saisissez le mot de passe de votre compte Lien Parental.'
+        ? t('introPassword')
         : context === 'settings'
-          ? 'Déverrouillez le coffre-fort pour modifier ses réglages de sécurité.'
-          : 'Saisissez votre code à 6 chiffres pour accéder à vos documents et témoignages.'
+          ? t('introSettings')
+          : t('introPin')
 
   const bioButton = bioAvailable && mode === 'pin' ? (
     <button
       type="button"
       onClick={unlockWithBiometric}
       disabled={busy}
-      aria-label="Déverrouiller avec l’empreinte ou le visage"
+      aria-label={t('bioAria')}
       className="inline-flex h-[60px] w-[60px] items-center justify-center rounded-full text-leaf-600 transition-colors hover:bg-leaf-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2 disabled:opacity-40 sm:h-16 sm:w-16"
     >
       <Fingerprint className="h-8 w-8" aria-hidden="true" />
@@ -191,7 +195,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
   return (
     <section aria-labelledby="vault-lock-title" className="flex min-h-[calc(100dvh-6rem)] w-full flex-col px-5 pb-8 lg:min-h-[calc(100dvh-8rem)]">
       <header className="flex items-center" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}>
-        <Link href="/app" aria-label="Lien Parental, accueil" className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 md:invisible">
+        <Link href="/app" aria-label={tc('homeAria')} className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 md:invisible">
           <Logo size="sm" />
         </Link>
       </header>
@@ -208,7 +212,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
         </div>
 
         <h1 id="vault-lock-title" ref={headingRef} tabIndex={-1} className="mt-6 text-[24px] font-extrabold tracking-[-0.02em] text-night-900 focus:outline-none">
-          Coffre-fort sécurisé
+          {t('title')}
         </h1>
         <p className="mt-2 max-w-[300px] text-[14px] leading-relaxed text-night-600">{intro}</p>
         {notice && (
@@ -221,13 +225,13 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
               {mode === 'pin' && !status.hasPin ? (
                 // Ni code ni mot de passe, mais une empreinte : seul le bouton empreinte est proposé.
                 <button type="button" onClick={unlockWithBiometric} disabled={busy} className={btn.primary}>
-                  <Fingerprint className="h-5 w-5" aria-hidden="true" /> Utiliser l’empreinte ou le visage
+                  <Fingerprint className="h-5 w-5" aria-hidden="true" /> {t('useBio')}
                 </button>
               ) : (
                 <PinPad
                   key={mode + (setupFirst ? '-confirm' : '')}
                   ref={pinRef}
-                  label={mode === 'setup' ? (setupFirst ? 'Confirmez le code, 6 chiffres' : 'Nouveau code du coffre-fort, 6 chiffres') : 'Code du coffre-fort, 6 chiffres'}
+                  label={mode === 'setup' ? (setupFirst ? t('pinConfirmLabel') : t('pinNewLabel')) : t('pinLabel')}
                   onComplete={mode === 'setup' ? submitSetup : submitPin}
                   disabled={busy || pinBlocked}
                   error={Boolean(error)}
@@ -241,7 +245,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
           {mode === 'password' && (
             <form onSubmit={submitPassword} className="space-y-4 text-left" noValidate>
               <PasswordField
-                label="Mot de passe du compte"
+                label={t('accountPassword')}
                 autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -250,7 +254,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
               />
               <button type="submit" disabled={busy} aria-busy={busy} className={btn.primary}>
                 <KeyRound className="h-5 w-5" aria-hidden="true" />
-                {busy ? 'Vérification…' : 'Déverrouiller'}
+                {busy ? t('checking') : t('unlock')}
               </button>
             </form>
           )}
@@ -262,43 +266,43 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
                 {pinBlocked && <span className="mt-1 block font-bold tabular-nums" aria-hidden="true">{countdown}</span>}
               </p>
             )}
-            {!error && busy && mode !== 'password' && <p role="status" className="text-[13px] text-night-600">Vérification…</p>}
+            {!error && busy && mode !== 'password' && <p role="status" className="text-[13px] text-night-600">{t('checking')}</p>}
           </div>
         </div>
 
         <div className="mt-2 flex w-full flex-col items-center gap-1">
           {bioAvailable && mode === 'pin' && status.hasPin && (
             <button type="button" onClick={unlockWithBiometric} disabled={busy} className={cn(btn.secondary, 'mb-2')}>
-              <Fingerprint className="h-5 w-5 text-leaf-600" aria-hidden="true" /> Empreinte ou visage
+              <Fingerprint className="h-5 w-5 text-leaf-600" aria-hidden="true" /> {t('bioButton')}
             </button>
           )}
           {mode === 'pin' && status.hasPassword && (
             <button type="button" onClick={() => switchTo('password')} className="min-h-[44px] rounded-lg px-3 text-[13.5px] font-semibold text-leaf-700 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
-              {pinBlocked ? 'Utiliser le mot de passe du compte' : 'Code oublié ? Mot de passe du compte'}
+              {pinBlocked ? t('usePassword') : t('forgotPassword')}
             </button>
           )}
           {mode === 'password' && status.hasPin && (
             <button type="button" onClick={() => switchTo('pin')} className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg px-3 text-[13.5px] font-semibold text-leaf-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" /> Revenir au code
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" /> {t('backToCode')}
             </button>
           )}
           {mode === 'pin' && !status.hasPassword && status.hasPin && (status.recentLogin ? (
             <button type="button" onClick={() => { setSetupFirst(null); switchTo('setup') }} className="min-h-[44px] rounded-lg px-3 text-[13.5px] font-semibold text-leaf-700 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
-              Code oublié ? Redéfinir mon code
+              {t('forgotReset')}
             </button>
           ) : (
             <p className="max-w-[300px] text-[12.5px] leading-relaxed text-night-600">
-              Code oublié ? Déconnectez-vous puis reconnectez-vous : vous pourrez le redéfinir ici pendant 5 minutes.
+              {t('forgotRelogin')}
             </p>
           ))}
         </div>
 
         <p className="mt-auto flex items-center gap-1.5 pt-6 text-[12px] text-night-600">
           <ShieldCheck className="h-4 w-4 text-leaf-500" aria-hidden="true" />
-          Verrouillage automatique après {status.timeoutMinutes} min d’inactivité
+          {t('autoLock', { minutes: status.timeoutMinutes })}
         </p>
         {status.demo && (
-          <p className="mt-2 text-[11.5px] text-night-500">Démonstration : code 123456</p>
+          <p className="mt-2 text-[11.5px] text-night-500">{t('demo')}</p>
         )}
       </div>
     </section>

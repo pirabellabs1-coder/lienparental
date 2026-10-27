@@ -1,6 +1,7 @@
 'use client'
 import { forwardRef, useId, useRef, useState, type InputHTMLAttributes } from 'react'
 import { Search, X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
@@ -10,8 +11,9 @@ type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
 }
 
 export const SearchField = forwardRef<HTMLInputElement, Props>(function SearchField(
-  { id, label, className, containerClassName, value, defaultValue, onChange, onClear, placeholder = 'Rechercher…', ...props }, ref
+  { id, label, className, containerClassName, value, defaultValue, onChange, onClear, placeholder, ...props }, ref
 ) {
+  const t = useTranslations('account.ui.search')
   const autoId = useId()
   const inputId = id ?? autoId
   const [internal, setInternal] = useState<string>(() => (defaultValue ?? value ?? '').toString())
@@ -50,7 +52,7 @@ export const SearchField = forwardRef<HTMLInputElement, Props>(function SearchFi
           inputMode="search"
           enterKeyHint="search"
           autoComplete="off"
-          placeholder={placeholder}
+          placeholder={placeholder ?? t('placeholder')}
           value={value}
           defaultValue={value === undefined ? defaultValue : undefined}
           onChange={(e) => { if (value === undefined) setInternal(e.target.value); onChange?.(e) }}
@@ -68,7 +70,7 @@ export const SearchField = forwardRef<HTMLInputElement, Props>(function SearchFi
           <button
             type="button"
             onClick={clear}
-            aria-label="Effacer la recherche"
+            aria-label={t('clear')}
             className="absolute right-1.5 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full text-night-500 hover:text-night-900 hover:bg-night-50 dark:hover:bg-night-800 focus-visible:outline-none"
           >
             <X className="h-5 w-5" aria-hidden="true" />

@@ -1,10 +1,12 @@
 'use client'
 
 import { useEffect, useId, useRef, useState, type ChangeEvent } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import { FileText, LockKeyhole, Paperclip, X } from 'lucide-react'
 import { FieldError, FieldLabel } from '@/components/journal/FormFields'
 import { fmtSize } from '@/components/journal/journalData'
 import { cn } from '@/lib/cn'
+import { useFinanceLabels } from '@/components/journal/financeLabels'
 import { MAX_JUSTIFICATIFS, justificatifError, type DepenseJustificatif } from '@/lib/journal-finances'
 
 /** Aperçus locaux (object URL) des images choisies ; libérés à chaque changement et au démontage. */
@@ -30,6 +32,9 @@ export function JustificatifsField({
   onKeptChange: (list: DepenseJustificatif[]) => void
   onAddedChange: (list: File[]) => void
 }) {
+  const t = useTranslations('family.journal.receipts')
+  const fl = useFinanceLabels()
+  const locale = useLocale()
   const inputId = useId()
   const inputRef = useRef<HTMLInputElement>(null)
   const [error, setError] = useState<string>()
@@ -46,11 +51,11 @@ export function JustificatifsField({
     const rejected: string[] = []
     for (const f of list) {
       const err = justificatifError(f)
-      if (err) rejected.push(`« ${f.name} » : ${err}`)
+      if (err) rejected.push(t('fileRejected', { name: f.name, error: fl.error(err) ?? err }))
       else ok.push(f)
     }
     const room = MAX_JUSTIFICATIFS - total
-    if (ok.length > room) rejected.push(`${MAX_JUSTIFICATIFS} justificatifs maximum : ${ok.length - room} fichier${ok.length - room > 1 ? 's' : ''} non ajouté${ok.length - room > 1 ? 's' : ''}.`)
+    if (ok.length > room) rejected.push(t('tooMany', { max: MAX_JUSTIFICATIFS, count: ok.length - room }))
     if (rejected.length) setError(rejected.join(' '))
     if (ok.length && room > 0) onAddedChange([...added, ...ok.slice(0, room)])
   }
@@ -59,15 +64,15 @@ export function JustificatifsField({
 
   return (
     <div>
-      <FieldLabel htmlFor={inputId}>Justificatifs (facultatif)</FieldLabel>
+      <FieldLabel htmlFor={inputId}>{t('label')}</FieldLabel>
 
       {total > 0 && (
-        <ul className="mb-2.5 space-y-2" aria-label="Justificatifs joints">
+        <ul className="mb-2.5 space-y-2" aria-label={t('attached')}>
           {kept.map((j, i) => (
             <Item
               key={`k-${j.path ?? j.name}-${i}`}
               name={j.name}
-              meta={`${j.sizeBytes ? fmtSize(j.sizeBytes) : ''}${j.sizeBytes ? ' · ' : ''}déjà enregistré`}
+              meta={`${j.sizeBytes ? fmtSize(j.sizeBytes, locale) : ''}${j.sizeBytes ? ' · ' : ''}${t('alreadySaved')}`}
               onRemove={() => { onKeptChange(kept.filter((_, k) => k !== i)); refocus() }}
             />
           ))}
@@ -75,7 +80,7 @@ export function JustificatifsField({
             <Item
               key={`a-${f.name}-${f.size}-${i}`}
               name={f.name}
-              meta={`${fmtSize(f.size)} · nouveau`}
+              meta={`${fmtSize(f.size, locale)} · ${t('new')}`}
               preview={previews[i] ?? null}
               onRemove={() => { onAddedChange(added.filter((_, k) => k !== i)); refocus() }}
             />
@@ -95,9 +100,9 @@ export function JustificatifsField({
       >
         <Paperclip aria-hidden="true" className="h-5 w-5 text-leaf-600" strokeWidth={1.8} />
         <span className="text-[13px] font-semibold text-night-900">
-          {full ? 'Nombre maximum de justificatifs atteint' : total ? 'Ajouter un autre justificatif' : 'Ajouter une photo ou un PDF'}
+          {full ? t('maxReached') : total ? t('addAnother') : t('addFirst')}
         </span>
-        <span className="text-xs text-night-600">Photo ou PDF, 10 Mo par fichier, {MAX_JUSTIFICATIFS} au total</span>
+        <span className="text-xs text-night-600">{t('hint', { max: MAX_JUSTIFICATIFS })}</span>
         <input
           ref={inputRef}
           id={inputId}
@@ -114,13 +119,14 @@ export function JustificatifsField({
       <FieldError id={`${inputId}-err`}>{error}</FieldError>
       <p id={`${inputId}-note`} className="mt-1.5 flex items-center gap-1.5 text-xs text-night-600">
         <LockKeyhole aria-hidden="true" className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
-        {total ? `${total} justificatif${total > 1 ? 's' : ''} · ` : ''}Stockés de façon privée avec cette entrée du journal.
+        {total ? `${t('count', { count: total })} · ` : ''}{t('privacy')}
       </p>
     </div>
   )
 }
 
 function Item({ name, meta, preview, onRemove }: { name: string; meta: string; preview?: string | null; onRemove: () => void }) {
+  const t = useTranslations('family.journal.receipts')
   return (
     <li className="flex items-center gap-3 rounded-xl border border-night-100 bg-white p-2.5">
       <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-lg bg-night-50">
@@ -138,7 +144,7 @@ function Item({ name, meta, preview, onRemove }: { name: string; meta: string; p
       <button
         type="button"
         onClick={onRemove}
-        aria-label={`Retirer ${name}`}
+        aria-label={t('remove', { name })}
         className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-night-700 hover:bg-alert-50 hover:text-alert-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500"
       >
         <X aria-hidden="true" className="h-5 w-5" />

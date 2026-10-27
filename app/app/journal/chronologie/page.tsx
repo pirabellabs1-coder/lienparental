@@ -2,6 +2,7 @@
 
 import { use, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Filter, Search, X } from 'lucide-react'
 import { ActionSheet } from '@/components/ui'
 import { TopBar } from '@/components/mobile/TopBar'
@@ -10,9 +11,10 @@ import { Fab } from '@/components/journal/Fab'
 import { TimelineEvent } from '@/components/journal/TimelineEvent'
 import { JournalFilters, journalFilterHref } from '@/components/journal/JournalFilters'
 import { fmtMonthYear, parseDay } from '@/components/journal/journalData'
+import { useFinanceLabels } from '@/components/journal/financeLabels'
 import { useJournalList } from '@/lib/data/journal'
 import {
-  DEPENSE_CATEGORIE_LABELS, FILTER_TYPE, JOURNAL_FILTERS, JOURNAL_FILTER_LABELS, parseJournalFilter,
+  DEPENSE_CATEGORIE_LABELS, FILTER_TYPE, JOURNAL_FILTERS, parseJournalFilter,
 } from '@/lib/journal-finances'
 import { cn } from '@/lib/cn'
 
@@ -20,6 +22,8 @@ import { cn } from '@/lib/cn'
 const BASE = '/app/journal/chronologie'
 
 export default function ChronologiePage({ searchParams }: { searchParams: Promise<{ filtre?: string | string[] }> }) {
+  const t = useTranslations('family.journal.timeline')
+  const fl = useFinanceLabels()
   const filter = parseJournalFilter(use(searchParams).filtre)
   const type = FILTER_TYPE[filter]
   const router = useRouter()
@@ -40,9 +44,12 @@ export default function ChronologiePage({ searchParams }: { searchParams: Promis
         e.title.toLowerCase().includes(needle) ||
         (e.description ?? '').toLowerCase().includes(needle) ||
         (e.lieu ?? '').toLowerCase().includes(needle) ||
-        (e.depense ? DEPENSE_CATEGORIE_LABELS[e.depense.categorie].toLowerCase().includes(needle) : false),
+        (e.depense
+          ? DEPENSE_CATEGORIE_LABELS[e.depense.categorie].toLowerCase().includes(needle) ||
+            fl.category(e.depense.categorie).toLowerCase().includes(needle)
+          : false),
       )
-  }, [all, type, q])
+  }, [all, type, q, fl])
 
   const groups = useMemo(() => {
     const map = new Map<string, typeof filtered>()
@@ -66,7 +73,7 @@ export default function ChronologiePage({ searchParams }: { searchParams: Promis
   return (
     <>
       <TopBar
-        title="Chronologie"
+        title={t('title')}
         showBack
         backHref="/app/journal"
         showBell={false}
@@ -75,7 +82,7 @@ export default function ChronologiePage({ searchParams }: { searchParams: Promis
             <button
               type="button"
               onClick={() => setSheet(true)}
-              aria-label="Filtrer par type"
+              aria-label={t('filterByType')}
               aria-haspopup="dialog"
               className={cn(iconBtn, filter !== 'tous' && 'text-leaf-600')}
             >
@@ -84,7 +91,7 @@ export default function ChronologiePage({ searchParams }: { searchParams: Promis
             <button
               type="button"
               onClick={toggleSearch}
-              aria-label={searchOpen ? 'Fermer la recherche' : 'Rechercher'}
+              aria-label={searchOpen ? t('closeSearch') : t('search')}
               aria-expanded={searchOpen}
               aria-controls="journal-search"
               className={iconBtn}
@@ -97,7 +104,7 @@ export default function ChronologiePage({ searchParams }: { searchParams: Promis
 
       <div className="px-4 pb-6 pt-2">
         <div id="journal-search" hidden={!searchOpen} className="mb-3">
-          <label htmlFor="journal-q" className="sr-only">Rechercher dans le journal</label>
+          <label htmlFor="journal-q" className="sr-only">{t('searchLabel')}</label>
           <div className="relative">
             <Search aria-hidden="true" className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-night-500" />
             <input
@@ -106,7 +113,7 @@ export default function ChronologiePage({ searchParams }: { searchParams: Promis
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Rechercher un fait, un lieu…"
+              placeholder={t('searchPlaceholder')}
               className="h-11 w-full rounded-xl border border-night-100 bg-white pl-10 pr-4 text-[13px] text-night-900 placeholder:text-night-400 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-500/20"
             />
           </div>
@@ -115,28 +122,28 @@ export default function ChronologiePage({ searchParams }: { searchParams: Promis
         <JournalFilters basePath={BASE} value={filter} />
 
         <div aria-live="polite" className="sr-only">
-          {filtered.length} événement{filtered.length > 1 ? 's' : ''}
+          {t('count', { count: filtered.length })}
         </div>
 
         {loading && !data ? (
-          <LoadingState compact title="Chargement du journal" description="" />
+          <LoadingState compact title={t('loading')} description="" />
         ) : error ? (
-          <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} secondary={{ label: 'Retour au journal', href: '/app/journal' }} />
+          <ErrorState compact description={error.message} primary={{ label: t('retry'), onClick: () => void refresh() }} secondary={{ label: t('backToJournal'), href: '/app/journal' }} />
         ) : filtered.length === 0 ? (
           <EmptyState
             compact
-            title="Aucun résultat"
-            description={q ? 'Essayez un autre terme ou un autre filtre.' : 'Aucun événement pour ce filtre.'}
+            title={t('noResults')}
+            description={q ? t('noResultsQuery') : t('noResultsFilter')}
             primary={filter === 'finances'
-              ? { label: 'Ajouter une dépense', href: '/app/journal/nouveau?type=depense' }
-              : { label: 'Ajouter un événement', href: '/app/journal/nouveau' }}
+              ? { label: t('addExpense'), href: '/app/journal/nouveau?type=depense' }
+              : { label: t('addEvent'), href: '/app/journal/nouveau' }}
           />
         ) : (
           <div className="mt-4 space-y-4">
             {groups.map(([monthKey, entries]) => (
               <section key={monthKey} aria-labelledby={`m-${monthKey}`}>
                 <h2 id={`m-${monthKey}`} className="rounded-lg bg-night-50/70 px-3 py-2 text-xs font-bold text-night-900">
-                  {fmtMonthYear(parseDay(`${monthKey}-01`))}
+                  {fmtMonthYear(parseDay(`${monthKey}-01`), fl.locale)}
                 </h2>
                 <ul className="mt-3">
                   {entries.map((e, i) => (
@@ -151,16 +158,16 @@ export default function ChronologiePage({ searchParams }: { searchParams: Promis
 
       <Fab
         href={filter === 'finances' ? '/app/journal/nouveau?type=depense' : '/app/journal/nouveau'}
-        label={filter === 'finances' ? 'Ajouter une dépense' : 'Ajouter un événement'}
+        label={filter === 'finances' ? t('addExpense') : t('addEvent')}
       />
 
       <ActionSheet
         open={sheet}
         onClose={() => setSheet(false)}
-        title="Filtrer par type"
+        title={t('filterByType')}
         actions={JOURNAL_FILTERS.map((f) => ({
           key: f,
-          label: filter === f ? `${JOURNAL_FILTER_LABELS[f]} (actif)` : JOURNAL_FILTER_LABELS[f],
+          label: filter === f ? t('activeFilter', { filter: fl.filter(f) }) : fl.filter(f),
           onClick: () => { router.replace(journalFilterHref(BASE, f), { scroll: false }); setSheet(false) },
         }))}
       />

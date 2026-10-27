@@ -3,7 +3,9 @@
 import Link from 'next/link'
 import { ChevronRight, Ellipsis } from 'lucide-react'
 import { cn } from '@/lib/cn'
-import { frDate, frSize, getVaultCategory, type VaultDocument } from '@/lib/mock-vault'
+import { useTranslations } from 'next-intl'
+import { getVaultCategory, type VaultDocument } from '@/lib/mock-vault'
+import { useVaultI18n } from './i18n'
 import { FileIcon } from './FileIcon'
 import { SharedByBadge } from '@/components/famille/SharedByBadge'
 
@@ -27,8 +29,11 @@ type Props = {
  * est un frère (pas imbriqué dans le lien) pour rester un contrôle distinct.
  */
 export function DocRow({ doc, showCategory, categoryName, onMore, className }: Props) {
-  const cat = showCategory ? (categoryName ?? getVaultCategory(doc.categoryId)?.name) : undefined
-  const meta = [cat, doc.ext, doc.size > 0 ? frSize(doc.size) : null].filter(Boolean).join(' • ')
+  const t = useTranslations('vault.ui.docRow')
+  const f = useVaultI18n()
+  const rawCat = showCategory ? (categoryName ?? getVaultCategory(doc.categoryId)?.name) : undefined
+  const cat = rawCat ? f.category(rawCat) : undefined
+  const meta = [cat, doc.ext, doc.size > 0 ? f.size(doc.size) : null].filter(Boolean).join(' • ')
   const imported = IMPORT_SOURCES.has(doc.source)
   return (
     <div className={cn('relative flex items-center gap-3 rounded-2xl border border-night-100 bg-white px-3.5 py-3 shadow-soft transition-[box-shadow,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-card active:scale-[0.99]', className)}>
@@ -38,13 +43,13 @@ export function DocRow({ doc, showCategory, categoryName, onMore, className }: P
           {doc.name}
         </Link>
         <p className="truncate text-[12px] text-night-500">{meta}</p>
-        <p className="text-[12px] text-night-500">{frDate(doc.docDate)}</p>
+        <p className="text-[12px] text-night-500">{f.date(doc.docDate)}</p>
         {(doc.sharedBy || imported) && (
           <p className="mt-1 flex flex-wrap gap-1">
             {doc.sharedBy && <SharedByBadge prenom={doc.sharedBy.prenom} />}
             {imported && (
               <span className="inline-flex items-center rounded-md bg-night-50 px-1.5 py-0.5 text-[10.5px] font-bold text-night-700">
-                <span className="sr-only">Source : </span>{doc.source}
+                <span className="sr-only">{t('sourceSr')}</span>{f.source(doc.source)}
               </span>
             )}
           </p>
@@ -54,7 +59,7 @@ export function DocRow({ doc, showCategory, categoryName, onMore, className }: P
         <button
           type="button"
           onClick={() => onMore(doc)}
-          aria-label={`Actions pour ${doc.name}`}
+          aria-label={t('actionsAria', { name: doc.name })}
           className="relative z-10 -mr-1.5 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-500 hover:bg-night-50"
         >
           <Ellipsis className="h-5 w-5" aria-hidden="true" />

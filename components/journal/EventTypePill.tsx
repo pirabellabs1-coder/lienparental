@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import type { JournalType } from '@/lib/mock-data'
 import { JOURNAL_TYPES } from './journalTypes'
@@ -12,6 +13,7 @@ type Props = {
 
 /** Badge doux du type (« Visite ») — style maquette Détail de l'événement. */
 export function EventTypePill({ type, withLabel = true, withIcon = false, size = 'md', className }: Props) {
+  const t = useTranslations('family.finances.labels.types')
   const c = JOURNAL_TYPES[type]
   const Icon = c.icon
   return (
@@ -24,7 +26,7 @@ export function EventTypePill({ type, withLabel = true, withIcon = false, size =
       )}
     >
       {withIcon && <Icon className={size === 'sm' ? 'h-3 w-3' : 'h-3.5 w-3.5'} aria-hidden="true" />}
-      {withLabel && <span>{c.label}</span>}
+      {withLabel && <span>{t(type)}</span>}
     </span>
   )
 }

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Check, RefreshCw, Sparkles } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ProgressRing } from '@/components/coach/ProgressRing'
@@ -10,17 +11,13 @@ import { btn, ScreenTitle } from '@/components/coach/ui'
 import { getPendingFile, loadDraft, saveAnalysis, type CoachAnalysisResult, type CoachDraft } from '@/components/coach/session'
 import { errorMessage, readSse } from '@/components/coach/sse-client'
 import { cn } from '@/lib/cn'
-import { mockCoachAnalysis, mockCoachCapture } from '@/lib/mock-data'
+import { mockCoachCapture } from '@/lib/mock-data'
 import { LIVE } from '@/lib/data/core'
 
-const STAGE_LABEL: Record<string, string> = {
-  sending: 'Envoi du contenu…',
-  received: 'Contenu reçu, analyse en préparation…',
-  thinking: 'Le Coach réfléchit au contexte…',
-  reading: 'Lecture du contenu…',
-  writing: 'Rédaction de l’analyse…',
-  done: 'Analyse terminée',
-}
+const STAGES = ['sending', 'received', 'thinking', 'reading', 'writing', 'done']
+
+// Critères affichés pendant l'analyse (libellés : coach.analysis.checks.<clé>).
+const CHECKS = ['tone', 'hurtful', 'clarity', 'respect', 'impact'] as const
 
 type Failure = { message: string; quota?: boolean }
 
@@ -28,6 +25,8 @@ type Failure = { message: string; quota?: boolean }
 // La progression suit le flux réel de /api/coach/analyze : étapes du serveur, puis
 // chaque critère coché quand le modèle l'a effectivement produit.
 export default function CoachAnalysePage() {
+  const t = useTranslations('coach.analysis')
+  const tc = useTranslations('coach.common')
   const router = useRouter()
   const [progress, setProgress] = useState(0)
   const [stage, setStage] = useState('sending')
@@ -45,7 +44,7 @@ export default function CoachAnalysePage() {
     let kind: CoachDraft['kind'] = 'capture'
     if (!draft && LIVE) {
       // Compte réel : jamais d'analyse du contenu d'exemple (quota décompté pour rien).
-      setFailure({ message: 'Aucun contenu à analyser. Importez une capture, un document ou un message depuis l’accueil du Coach.' })
+      setFailure({ message: t('noContent') })
       return
     }
     if (!draft) {
@@ -53,12 +52,12 @@ export default function CoachAnalysePage() {
       form.set('text', mockCoachCapture.messages.map((m) => m.text).join('\n'))
     } else if (draft.kind === 'message') {
       form.set('text', draft.text ?? '')
-      title = 'Message écrit'
+      title = tc('kinds.message')
       kind = 'message'
     } else {
       const file = getPendingFile()
       if (!file) {
-        setFailure({ message: 'Le fichier n’est plus disponible (la page a été rechargée). Importez-le à nouveau.' })
+        setFailure({ message: t('fileGone') })
         return
       }
       form.set('file', file, file.name)
@@ -79,9 +78,9 @@ export default function CoachAnalysePage() {
         if (res.status === 429) {
           const body = (await res.json().catch(() => null)) as { error?: { code?: string; message?: string } } | null
           quota = body?.error?.code === 'quota_exceeded'
-          message = body?.error?.message ?? 'Trop de demandes. Patientez un instant.'
+          message = body?.error?.message ?? t('tooMany')
         } else {
-          message = await errorMessage(res)
+          message = await errorMessage(res, tc('errors.generic'), { sessionExpired: tc('errors.sessionExpired'), tooLarge: tc('errors.tooLarge') })
         }
         if (mounted.current) setFailure({ message, quota })
         return
@@ -118,13 +117,13 @@ export default function CoachAnalysePage() {
           setFailure({ message: d.message })
         }
       })
-      if (!finished && mounted.current) setFailure({ message: 'La connexion a été interrompue. Réessayez.' })
+      if (!finished && mounted.current) setFailure({ message: t('interrupted') })
     } catch {
-      if (mounted.current) setFailure({ message: 'Connexion impossible. Vérifiez votre réseau et réessayez.' })
+      if (mounted.current) setFailure({ message: t('connectionFailed') })
     } finally {
       window.clearInterval(creep.current)
     }
-  }, [])
+  }, [t, tc])
 
   useEffect(() => {
     mounted.current = true
@@ -141,21 +140,20 @@ export default function CoachAnalysePage() {
 
   useEffect(() => {
     if (progress < 100 || failure) return
-    const t = window.setTimeout(() => router.replace('/app/coach/reponse'), 450)
-    return () => window.clearTimeout(t)
+    const timer = window.setTimeout(() => router.replace('/app/coach/reponse'), 450)
+    return () => window.clearTimeout(timer)
   }, [progress, failure, router])
 
-  const checks = mockCoachAnalysis.checks
   const done = progress >= 100
 
   return (
     <>
-      <TopBar title="Coach parental IA" showBack backHref="/app/coach/document" showBell={false} />
+      <TopBar title={t('topTitle')} showBack backHref="/app/coach/document" showBell={false} />
 
       <div className="w-full px-5 pb-8 pt-8">
         <ScreenTitle
-          title={failure ? 'Analyse interrompue' : done ? 'Analyse terminée' : 'Analyse en cours…'}
-          subtitle={failure ? undefined : 'Notre IA analyse le contenu et le contexte de votre message.'}
+          title={failure ? t('titleFailed') : done ? t('titleDone') : t('titleRunning')}
+          subtitle={failure ? undefined : t('subtitle')}
         />
 
         {failure ? (
@@ -166,16 +164,16 @@ export default function CoachAnalysePage() {
             {failure.quota ? (
               <Link href="/app/abonnement?formule=premium&raison=coach" className={btn.primary}>
                 <Sparkles className="h-5 w-5" aria-hidden="true" />
-                Passer à Premium
+                {t('upgrade')}
               </Link>
             ) : (
               <button type="button" onClick={() => setAttempt((a) => a + 1)} className={btn.primary}>
                 <RefreshCw className="h-5 w-5" aria-hidden="true" />
-                Réessayer
+                {t('retry')}
               </button>
             )}
             <Link href="/app/coach" className={btn.secondary}>
-              Revenir au Coach
+              {t('back')}
             </Link>
           </div>
         ) : (
@@ -185,15 +183,15 @@ export default function CoachAnalysePage() {
             </div>
 
             <p role="status" aria-live="polite" className="mt-4 text-center text-[13px] text-night-700">
-              {STAGE_LABEL[stage] ?? ''}
+              {STAGES.includes(stage) ? t(`stages.${stage}`) : ''}
             </p>
 
             <section aria-labelledby="analyse-checks" className="mt-8 rounded-xl2 bg-night-50/70 px-5 py-4">
               <h3 id="analyse-checks" className="text-[14px] font-bold text-night-900">
-                Ce que nous analysons
+                {t('checksTitle')}
               </h3>
               <ul className="mt-3 space-y-3">
-                {checks.map((c, i) => {
+                {CHECKS.map((c, i) => {
                   const checked = checksDone > i
                   return (
                     <li key={c} className="flex items-center gap-3 text-[13px] text-night-800">
@@ -207,8 +205,8 @@ export default function CoachAnalysePage() {
                         <Check className="h-3 w-3" strokeWidth={3.5} />
                       </span>
                       <span>
-                        {c}
-                        <span className="sr-only">{checked ? ' : vérifié' : ' : en attente'}</span>
+                        {t(`checks.${c}`)}
+                        <span className="sr-only">{checked ? t('checked') : t('pending')}</span>
                       </span>
                     </li>
                   )

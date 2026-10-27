@@ -2,11 +2,13 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Check, CheckCheck, FileText, FolderInput, FolderLock, ImageOff, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { attachmentUrl, durationLabel, vaultDocumentHref, type Message, type MessageAttachment, type VaultLink } from '@/lib/messages'
 import { AudioPlayer } from './AudioPlayer'
-import { fullStamp, sizeLabel, timeLabel } from './format'
+import { timeLabel } from './format'
+import { useMessagesFormat } from './useMessagesFormat'
 
 type Props = {
   message: Message
@@ -22,6 +24,8 @@ type Props = {
 
 /** Bulle de message : vous à droite (vert clair), l'autre parent à gauche (blanc). */
 export function MessageBubble({ message, mine, senderName, showSender = false, vault, onSaveToVault }: Props) {
+  const t = useTranslations('messaging.bubble')
+  const { fullStamp } = useMessagesFormat()
   const read = Boolean(message.readAt)
   const isAudio = message.kind === 'audio' && message.attachment
   return (
@@ -38,7 +42,7 @@ export function MessageBubble({ message, mine, senderName, showSender = false, v
               : 'rounded-bl-md border border-night-100 bg-white shadow-soft',
           )}
         >
-          <span className="sr-only">{mine ? 'Vous' : senderName}, {fullStamp(message.createdAt)} : </span>
+          <span className="sr-only">{t('srPrefix', { who: mine ? t('you') : senderName, stamp: fullStamp(message.createdAt) })}</span>
           {isAudio && message.attachment ? (
             <VoiceView attachment={message.attachment} durationMs={message.audioDurationMs ?? 0} mine={mine} senderName={senderName} seed={message.id} />
           ) : (
@@ -54,14 +58,14 @@ export function MessageBubble({ message, mine, senderName, showSender = false, v
             <>
               <span aria-hidden="true">·</span>
               {read ? (
-                <span className="inline-flex items-center gap-0.5 font-semibold text-leaf-700" title={message.readAt ? `Lu le ${fullStamp(message.readAt)}` : undefined}>
+                <span className="inline-flex items-center gap-0.5 font-semibold text-leaf-700" title={message.readAt ? t('readOn', { stamp: fullStamp(message.readAt) }) : undefined}>
                   <CheckCheck className="h-3.5 w-3.5" aria-hidden="true" />
-                  Lu
+                  {t('read')}
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-0.5">
                   <Check className="h-3.5 w-3.5" aria-hidden="true" />
-                  Envoyé
+                  {t('sent')}
                 </span>
               )}
             </>
@@ -76,8 +80,8 @@ export function MessageBubble({ message, mine, senderName, showSender = false, v
             className="mt-0.5 inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-2.5 text-[12px] font-bold text-leaf-700 hover:bg-leaf-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
           >
             <FolderInput className="h-4 w-4" aria-hidden="true" />
-            Mettre au coffre-fort
-            <span className="sr-only"> : {message.kind === 'audio' ? 'note vocale' : message.attachment.name}</span>
+            {t('saveToVault')}
+            <span className="sr-only"> : {message.kind === 'audio' ? t('voiceNoteLower') : message.attachment.name}</span>
           </button>
         )}
       </div>
@@ -87,6 +91,7 @@ export function MessageBubble({ message, mine, senderName, showSender = false, v
 
 /** Pièce jointe rangée (ou en cours de rangement) dans VOTRE coffre-fort. */
 function VaultBadge({ link }: { link: VaultLink }) {
+  const t = useTranslations('messaging.bubble')
   if (link.status === 'done' && link.documentId) {
     return (
       <Link
@@ -94,16 +99,16 @@ function VaultBadge({ link }: { link: VaultLink }) {
         className="mt-0.5 inline-flex min-h-[32px] items-center gap-1 rounded-full px-2 text-[11px] font-semibold text-leaf-700 hover:bg-leaf-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
       >
         <FolderLock className="h-3.5 w-3.5" aria-hidden="true" />
-        Dans le coffre-fort · {link.categoryName}
-        <span className="sr-only"> (ouvrir le document)</span>
+        {t('inVault', { category: link.categoryName })}
+        <span className="sr-only">{t('openDocument')}</span>
       </Link>
     )
   }
   return (
     <p className="mt-0.5 inline-flex items-center gap-1 px-2 text-[11px] text-night-600">
       {link.status === 'pending'
-        ? <><Loader2 className="h-3.5 w-3.5 motion-safe:animate-spin" aria-hidden="true" /> Ajout au coffre-fort…</>
-        : <><FolderLock className="h-3.5 w-3.5" aria-hidden="true" /> Ajout automatique au coffre-fort non abouti</>}
+        ? <><Loader2 className="h-3.5 w-3.5 motion-safe:animate-spin" aria-hidden="true" /> {t('addingToVault')}</>
+        : <><FolderLock className="h-3.5 w-3.5" aria-hidden="true" /> {t('autoVaultFailed')}</>}
     </p>
   )
 }
@@ -111,6 +116,7 @@ function VaultBadge({ link }: { link: VaultLink }) {
 function VoiceView({ attachment, durationMs, mine, senderName, seed }: {
   attachment: MessageAttachment; durationMs: number; mine: boolean; senderName: string; seed: string
 }) {
+  const t = useTranslations('messaging.bubble')
   const [url, setUrl] = useState<string | null | undefined>(undefined)
   useEffect(() => {
     let alive = true
@@ -121,7 +127,7 @@ function VoiceView({ attachment, durationMs, mine, senderName, seed }: {
     <AudioPlayer
       src={url}
       durationMs={durationMs}
-      label={`note vocale ${mine ? 'envoyée' : `de ${senderName}`}, ${durationLabel(durationMs)}`}
+      label={mine ? t('voiceSent', { duration: durationLabel(durationMs) }) : t('voiceFrom', { name: senderName, duration: durationLabel(durationMs) })}
       seed={seed}
       tone={mine ? 'mine' : 'theirs'}
       className="w-[min(260px,62vw)]"
@@ -130,6 +136,8 @@ function VoiceView({ attachment, durationMs, mine, senderName, seed }: {
 }
 
 function AttachmentView({ attachment }: { attachment: MessageAttachment }) {
+  const t = useTranslations('messaging.bubble')
+  const { sizeLabel } = useMessagesFormat()
   const [url, setUrl] = useState<string | null | undefined>(undefined)
   const isImage = attachment.mime.startsWith('image/')
 
@@ -149,8 +157,8 @@ function AttachmentView({ attachment }: { attachment: MessageAttachment }) {
       >
         {/* Dimensions réservées : pas de décalage de mise en page au chargement. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={url} alt={`Pièce jointe : ${attachment.name}`} width={224} height={160} loading="lazy" className="h-40 w-56 max-w-full bg-night-50 object-cover" />
-        <span className="sr-only">(ouvre dans un nouvel onglet)</span>
+        <img src={url} alt={t('attachmentAlt', { name: attachment.name })} width={224} height={160} loading="lazy" className="h-40 w-56 max-w-full bg-night-50 object-cover" />
+        <span className="sr-only">{t('newTab')}</span>
       </a>
     )
   }
@@ -164,9 +172,9 @@ function AttachmentView({ attachment }: { attachment: MessageAttachment }) {
       <span className="min-w-0 flex-1">
         <span className="block truncate text-[13px] font-semibold text-night-900">{attachment.name}</span>
         <span className="block text-[11px] text-night-600">
-          {attachment.mime === 'application/pdf' ? 'PDF' : 'Image'}
+          {attachment.mime === 'application/pdf' ? t('pdf') : t('image')}
           {attachment.size > 0 ? ` · ${sizeLabel(attachment.size)}` : ''}
-          {url === null ? ' · aperçu indisponible en démonstration' : ''}
+          {url === null ? t('previewUnavailable') : ''}
         </span>
       </span>
     </>
@@ -180,7 +188,7 @@ function AttachmentView({ attachment }: { attachment: MessageAttachment }) {
       className="flex min-h-[44px] items-center gap-3 rounded-xl bg-night-50/70 p-2 pr-3 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
     >
       {body}
-      <span className="sr-only">(ouvre dans un nouvel onglet)</span>
+      <span className="sr-only">{t('newTab')}</span>
     </a>
   ) : (
     <div className="flex items-center gap-3 rounded-xl bg-night-50/70 p-2 pr-3">{body}</div>

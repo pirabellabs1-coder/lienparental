@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { Menu, FileImage, FileText, History, Archive, Gauge, ArrowLeft, WandSparkles, MessagesSquare } from 'lucide-react'
 import { ActionSheet } from '@/components/ui'
@@ -14,13 +15,15 @@ import {
   saveDraft,
   setPendingFile,
   takePrefill,
-  validateFile,
+  fileErrorCode,
 } from '@/components/coach/session'
 
 const MAX = 2000
 
 // M09 — Coach parental IA · étape 1 « Écrire ou importer » (maquette 12.12.07 (2)).
 export default function CoachPage() {
+  const t = useTranslations('coach.home')
+  const tc = useTranslations('coach.common')
   const router = useRouter()
   const [text, setText] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
@@ -38,9 +41,9 @@ export default function CoachPage() {
 
   const onFile = (file: File | undefined, accept: 'image' | 'doc') => {
     if (!file) return
-    const err = validateFile(file, accept)
+    const err = fileErrorCode(file, accept)
     if (err) {
-      setError(err)
+      setError(tc(`fileErrors.${err}`))
       return
     }
     setError('')
@@ -54,7 +57,7 @@ export default function CoachPage() {
     const value = text.trim()
     if (!value) return
     setPendingFile(null)
-    saveDraft({ kind: 'message', name: 'Message écrit', text: value, createdAt: new Date().toISOString() })
+    saveDraft({ kind: 'message', name: tc('kinds.message'), text: value, createdAt: new Date().toISOString() })
     router.push('/app/coach/document')
   }
 
@@ -69,14 +72,14 @@ export default function CoachPage() {
           <button
             type="button"
             onClick={() => setMenuOpen(true)}
-            aria-label="Menu du Coach IA"
+            aria-label={t('menuLabel')}
             aria-haspopup="dialog"
             className="-ml-2 grid h-11 w-11 place-items-center rounded-full text-night-900 hover:bg-night-50"
           >
             <Menu className="h-[22px] w-[22px]" aria-hidden="true" />
           </button>
           <h1 className="pointer-events-none absolute inset-x-14 truncate text-center text-[15px] font-bold text-night-900">
-            Coach parental IA
+            {t('title')}
           </h1>
           <span className="w-11" aria-hidden="true" />
         </div>
@@ -88,16 +91,16 @@ export default function CoachPage() {
         </div>
 
         <div className="mt-5 text-center">
-          <h2 className="text-[21px] font-bold text-night-900">Écrivez votre message</h2>
+          <h2 className="text-[21px] font-bold text-night-900">{t('heading')}</h2>
           <p className="mx-auto mt-3 max-w-[280px] text-[13px] leading-relaxed text-night-700">
-            Ou ajoutez une capture d’écran ou un document pour obtenir une reformulation adaptée.
+            {t('intro')}
           </p>
         </div>
 
         <form onSubmit={submitText} className="mt-6">
           <div className="rounded-xl2 border border-night-100 bg-white p-3.5 shadow-soft focus-within:border-iris-300">
             <label htmlFor={textareaId} className="sr-only">
-              Votre message à reformuler
+              {t('textareaLabel')}
             </label>
             <textarea
               id={textareaId}
@@ -105,28 +108,28 @@ export default function CoachPage() {
               onChange={(e) => setText(e.target.value.slice(0, MAX))}
               maxLength={MAX}
               rows={6}
-              placeholder="Écrivez votre message ici…"
+              placeholder={t('placeholder')}
               aria-describedby={`${textareaId}-count`}
               className="block w-full resize-none border-0 bg-transparent p-0 text-[14px] leading-relaxed text-night-900 placeholder:text-night-400 focus:outline-none focus:ring-0"
             />
             <p id={`${textareaId}-count`} className="mt-1 text-right text-[12px] tabular-nums text-night-500">
               {text.length}/{MAX}
-              <span className="sr-only"> caractères</span>
+              <span className="sr-only">{t('characters')}</span>
             </p>
           </div>
 
           <div className="mt-4 space-y-3 md:grid md:grid-cols-2 md:gap-3 md:space-y-0">
             <UploadOption
               icon={<FileImage className="h-5 w-5" aria-hidden="true" />}
-              title="Ajouter une capture d’écran"
-              hint="(Image JPG, PNG)"
+              title={t('addCapture')}
+              hint={t('addCaptureHint')}
               onClick={() => imageRef.current?.click()}
               describedBy={error ? errorId : undefined}
             />
             <UploadOption
               icon={<FileText className="h-5 w-5" aria-hidden="true" />}
-              title="Ajouter un document"
-              hint="(PDF ou texte)"
+              title={t('addDoc')}
+              hint={t('addDocHint')}
               onClick={() => docRef.current?.click()}
               describedBy={error ? errorId : undefined}
             />
@@ -164,7 +167,7 @@ export default function CoachPage() {
           {text.trim() && (
             <button type="submit" className={`${btn.primary} mt-4`}>
               <WandSparkles className="h-5 w-5" aria-hidden="true" />
-              Analyser mon message
+              {t('analyze')}
             </button>
           )}
         </form>
@@ -177,8 +180,8 @@ export default function CoachPage() {
             <MessagesSquare className="h-5 w-5" />
           </span>
           <span className="min-w-0">
-            <span className="block text-[14px] font-bold text-night-900">Demandez à votre Coach</span>
-            <span className="mt-0.5 block text-[12px] text-night-600">Résumé du mois, documents, frais, message à préparer…</span>
+            <span className="block text-[14px] font-bold text-night-900">{t('askTitle')}</span>
+            <span className="mt-0.5 block text-[12px] text-night-600">{t('askHint')}</span>
           </span>
         </Link>
 
@@ -188,13 +191,13 @@ export default function CoachPage() {
       <ActionSheet
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
-        title="Coach parental IA"
+        title={t('title')}
         actions={[
-          { key: 'ask', label: 'Demandez à votre Coach', icon: <MessagesSquare className="h-5 w-5" />, onClick: () => router.push('/app/coach/assistant') },
-          { key: 'hist', label: 'Historique', icon: <History className="h-5 w-5" />, onClick: () => router.push('/app/coach/historique') },
-          { key: 'arch', label: 'Archives', icon: <Archive className="h-5 w-5" />, onClick: () => router.push('/app/coach/archives') },
-          { key: 'use', label: 'Mon utilisation', icon: <Gauge className="h-5 w-5" />, onClick: () => router.push('/app/coach/utilisation') },
-          { key: 'home', label: "Retour à l'accueil", icon: <ArrowLeft className="h-5 w-5" />, onClick: () => router.push('/app') },
+          { key: 'ask', label: t('menu.ask'), icon: <MessagesSquare className="h-5 w-5" />, onClick: () => router.push('/app/coach/assistant') },
+          { key: 'hist', label: t('menu.history'), icon: <History className="h-5 w-5" />, onClick: () => router.push('/app/coach/historique') },
+          { key: 'arch', label: t('menu.archives'), icon: <Archive className="h-5 w-5" />, onClick: () => router.push('/app/coach/archives') },
+          { key: 'use', label: t('menu.usage'), icon: <Gauge className="h-5 w-5" />, onClick: () => router.push('/app/coach/utilisation') },
+          { key: 'home', label: t('menu.home'), icon: <ArrowLeft className="h-5 w-5" />, onClick: () => router.push('/app') },
         ]}
       />
     </div>

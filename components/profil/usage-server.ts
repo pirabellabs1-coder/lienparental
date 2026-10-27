@@ -17,6 +17,8 @@ import { getEffectivePlan } from '@/lib/billing/entitlements'
 import { BILLING_LIVE } from '@/lib/billing/config'
 import { getBillingOverview } from '@/lib/billing/overview'
 import { describeStatus, type StatusTone } from '@/lib/billing/ui-state'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { billingFormat, localizeStatus } from '@/app/app/abonnement/_components/billing-i18n'
 
 /** Statut d'abonnement affiché sur le profil : même libellé que « Mon abonnement ». */
 export type ProfileStatus = { label: string; headline: string; tone: StatusTone }
@@ -79,8 +81,9 @@ async function loadSubscription(user: CurrentUser): Promise<ProfileUsage['subscr
   if (!BILLING_LIVE) return null
   try {
     const v = await getBillingOverview(user.id)
-    const s = describeStatus(v)
-    return { periodEnd: v.periodEnd, cancelAtPeriodEnd: v.cancelAtPeriodEnd, status: { label: s.label, headline: s.headline, tone: s.tone } }
+    // Libellé et phrase dans la langue de l'utilisateur (miroir de describeStatus) ; le ton reste celui de describeStatus.
+    const s = localizeStatus(v, billingFormat(await getTranslations('billing'), await getLocale()))
+    return { periodEnd: v.periodEnd, cancelAtPeriodEnd: v.cancelAtPeriodEnd, status: { label: s.label, headline: s.headline, tone: describeStatus(v).tone } }
   } catch {
     return null
   }

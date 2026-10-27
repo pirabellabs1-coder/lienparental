@@ -8,6 +8,7 @@ import {
   type SelectHTMLAttributes,
   type TextareaHTMLAttributes,
 } from 'react'
+import { useTranslations } from 'next-intl'
 import { Calendar, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
@@ -30,6 +31,21 @@ type Common = {
   containerClassName?: string
   /** Hide the label visually (still announced). */
   srLabel?: boolean
+}
+
+/**
+ * Translation keys (public.onboarding.classes.*) for the French school-level values of
+ * CHILD_CLASSES (lib/mock-data). The stored value stays French; only the label is translated.
+ */
+const CHILD_CLASS_KEYS: Record<string, string> = {
+  'Crèche': 'creche', 'Toute petite section': 'tps', 'Petite section': 'ps', 'Moyenne section': 'ms', 'Grande section': 'gs',
+  CP: 'cp', CE1: 'ce1', CE2: 'ce2', CM1: 'cm1', CM2: 'cm2',
+  '6ème': 'g6', '5ème': 'g5', '4ème': 'g4', '3ème': 'g3', '2nde': 'g2', '1ère': 'g1', Terminale: 'term', Autre: 'other',
+}
+
+/** Key of a school level under public.onboarding.classes, or null for an unknown (free) value. */
+export function childClassKey(value: string): string | null {
+  return CHILD_CLASS_KEYS[value] ?? null
 }
 
 function useFieldIds(id?: string) {
@@ -55,6 +71,7 @@ export function FieldLabel({
   as?: 'label' | 'span'
   id?: string
 }) {
+  const t = useTranslations('public.onboarding.fields')
   const cls = cn('mb-1.5 block text-[13px] font-bold text-night-900', srOnly && 'sr-only')
   const content = (
     <>
@@ -64,7 +81,7 @@ export function FieldLabel({
           {' '}*
         </span>
       )}
-      {optional && <span className="font-medium text-night-500"> (facultatif)</span>}
+      {optional && <span className="font-medium text-night-500"> {t('optional')}</span>}
     </>
   )
   return as === 'span' ? (
@@ -221,6 +238,7 @@ export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>
   { id, label, optional, hint, error, containerClassName, srLabel, required, maxLength, className, value, rows = 5, ...props },
   ref,
 ) {
+  const t = useTranslations('public.onboarding.fields')
   const { fieldId, hintId, errorId } = useFieldIds(id)
   const counterId = `${fieldId}-count`
   const describedBy =
@@ -248,7 +266,7 @@ export const TextAreaField = forwardRef<HTMLTextAreaElement, TextAreaFieldProps>
         {maxLength && (
           <p id={counterId} className="mt-1.5 shrink-0 text-xs tabular-nums text-night-500">
             {value.length} / {maxLength}
-            <span className="sr-only"> caractères</span>
+            <span className="sr-only"> {t('characters')}</span>
           </p>
         )}
       </div>

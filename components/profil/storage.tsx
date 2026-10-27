@@ -1,19 +1,27 @@
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { Camera, File, FolderLock, Image as ImageIcon, Paperclip } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ProgressBar, btn } from './kit'
 import { cn } from '@/lib/cn'
+import { intlLocale } from '@/lib/i18n/config'
 
 export const GO = 1024 ** 3
 const MO = 1024 ** 2
 
-/** « 1,2 Go », « 350 Mo », « 12 Ko » : unité adaptée, virgule à la française. */
-export function formatBytes(bytes: number): string {
-  if (!Number.isFinite(bytes) || bytes <= 0) return '0 Go'
-  const fmt = (v: number) => v.toLocaleString('fr-FR', { maximumFractionDigits: v >= 100 ? 0 : 1 })
-  if (bytes >= GO) return `${fmt(bytes / GO)} Go`
-  if (bytes >= MO) return `${fmt(bytes / MO)} Mo`
-  return `${Math.max(1, Math.round(bytes / 1024))} Ko`
+/** Unités d'octets par langue (fr : Go/Mo/Ko ; en, pt : GB/MB/KB). */
+function byteUnits(locale?: string | null) {
+  return locale === 'en' || locale === 'pt' ? { g: 'GB', m: 'MB', k: 'KB' } : { g: 'Go', m: 'Mo', k: 'Ko' }
+}
+
+/** « 1,2 Go », « 350 Mo », « 12 Ko » : unité adaptée, séparateur décimal de la langue (fr par défaut). */
+export function formatBytes(bytes: number, locale?: string | null): string {
+  const u = byteUnits(locale)
+  if (!Number.isFinite(bytes) || bytes <= 0) return `0 ${u.g}`
+  const fmt = (v: number) => v.toLocaleString(intlLocale(locale), { maximumFractionDigits: v >= 100 ? 0 : 1 })
+  if (bytes >= GO) return `${fmt(bytes / GO)} ${u.g}`
+  if (bytes >= MO) return `${fmt(bytes / MO)} ${u.m}`
+  return `${Math.max(1, Math.round(bytes / 1024))} ${u.k}`
 }
 
 // Démonstration uniquement. Comptes réels : components/profil/usage-server (documents du coffre).
@@ -36,20 +44,23 @@ export const DOCUMENTS: StoredFile[] = [
   { id: 'f5', name: 'Échanges parents.pdf', sizeLabel: '350 Mo', sizeMo: 350, date: '10 mars 2024' },
 ]
 
-export function formatMo(mo: number) {
-  return mo >= 1000 ? `${(mo / 1000).toLocaleString('fr-FR', { maximumFractionDigits: 2 })} Go` : `${mo} Mo`
+export function formatMo(mo: number, locale?: string | null) {
+  const u = byteUnits(locale)
+  return mo >= 1000 ? `${(mo / 1000).toLocaleString(intlLocale(locale), { maximumFractionDigits: 2 })} ${u.g}` : `${mo} ${u.m}`
 }
 
 /** Carte "Espace utilisé" (octets). */
 export function UsageCard({ usedBytes, maxBytes, caption, compact }: { usedBytes: number; maxBytes: number; caption: string; compact?: boolean }) {
+  const t = useTranslations('account.storage.usage')
+  const locale = useLocale()
   const pct = maxBytes > 0 ? Math.round((usedBytes / maxBytes) * 100) : 0
   return (
-    <section aria-label="Espace utilisé" className="rounded-xl2 border border-night-100 bg-white p-4 shadow-soft">
-      <p className="text-[12px] font-semibold text-night-900">Espace utilisé</p>
+    <section aria-label={t('title')} className="rounded-xl2 border border-night-100 bg-white p-4 shadow-soft">
+      <p className="text-[12px] font-semibold text-night-900">{t('title')}</p>
       <p className={cn('mt-2 font-extrabold text-night-900', compact ? 'text-[15px]' : 'text-[19px]')}>
-        <span className={usedBytes > 0 ? 'text-leaf-600' : ''}>{formatBytes(usedBytes)}</span> / {formatBytes(maxBytes)}
+        <span className={usedBytes > 0 ? 'text-leaf-600' : ''}>{formatBytes(usedBytes, locale)}</span> / {formatBytes(maxBytes, locale)}
       </p>
-      <ProgressBar className="mt-4 h-2" tone="leaf" value={usedBytes} max={maxBytes} label={`${pct} % de l’espace utilisé`} />
+      <ProgressBar className="mt-4 h-2" tone="leaf" value={usedBytes} max={maxBytes} label={t('progress', { pct })} />
       <p className="mt-3 text-[11.5px] text-night-700">{caption.replace('{pct}', String(pct))}</p>
     </section>
   )
@@ -76,6 +87,7 @@ export function TrashIllustration({ className }: { className?: string }) {
  * « Documents » et « Supprimer tous les fichiers », qui ne manipulent que des données fictives.
  */
 export function ManagedInVault({ title, backHref }: { title: string; backHref: string }) {
+  const t = useTranslations('account.storage.vault')
   return (
     <>
       <TopBar title={title} showBack backHref={backHref} showBell={false} />
@@ -83,15 +95,15 @@ export function ManagedInVault({ title, backHref }: { title: string; backHref: s
         <span aria-hidden className="mx-auto inline-flex h-20 w-20 items-center justify-center rounded-full bg-night-50 text-night-700">
           <FolderLock className="h-9 w-9" strokeWidth={1.6} />
         </span>
-        <h2 className="mt-6 text-[15px] font-bold text-night-900">Vos fichiers se gèrent dans le coffre-fort</h2>
+        <h2 className="mt-6 text-[15px] font-bold text-night-900">{t('title')}</h2>
         <p className="mx-auto mt-3 max-w-[300px] text-[12.5px] leading-relaxed text-night-800">
-          Consultez, triez et supprimez vos documents depuis le coffre-fort. Un document supprimé reste 30 jours dans la corbeille avant sa suppression définitive.
+          {t('text')}
         </p>
         <Link href="/app/coffre/documents/tous" className={cn(btn.primary, 'mt-8')}>
-          Ouvrir le coffre-fort
+          {t('open')}
         </Link>
         <Link href="/app/profil/stockage" className={cn(btn.secondary, 'mt-3')}>
-          Retour au stockage
+          {t('back')}
         </Link>
       </div>
     </>

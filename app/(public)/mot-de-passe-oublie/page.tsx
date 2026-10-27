@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState, type FormEvent } from 'react'
 import { MailCheck } from 'lucide-react'
 import { cn } from '@/lib/cn'
@@ -15,6 +16,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 // Mot de passe oublié — même grammaire visuelle que l'onboarding (écran 5).
 export default function MotDePasseOubliePage() {
   const router = useRouter()
+  const t = useTranslations('public.password.forgot')
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
   const [error, setError] = useState<string | undefined>()
@@ -23,20 +25,20 @@ export default function MotDePasseOubliePage() {
   // Retour d'un lien de réinitialisation expiré (/auth/confirm, POST → ?erreur=lien).
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get('erreur') === 'lien') {
-      setError('Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau.')
+      setError(t('errLink'))
     }
   }, [])
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     if (!EMAIL_RE.test(email.trim()) || loading) {
-      if (!loading) setError('Indiquez une adresse e-mail valide.')
+      if (!loading) setError(t('errEmail'))
       return
     }
     setError(undefined)
     if (SUPABASE_ENABLED) {
       const parsed = emailSchema.safeParse(email)
-      if (!parsed.success) { setError('Indiquez une adresse e-mail valide.'); return }
+      if (!parsed.success) { setError(t('errEmail')); return }
       setLoading(true)
       // Lien envoyé par NOTRE e-mail (POST /api/auth/password-reset, generateLink recovery).
       // Réponse identique que le compte existe ou non ; seules les limites de débit et les pannes sont signalées.
@@ -48,10 +50,10 @@ export default function MotDePasseOubliePage() {
         })
         if (!res.ok) {
           const data = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
-          err = data?.error?.message ?? 'Envoi impossible pour le moment. Réessayez dans un instant.'
+          err = data?.error?.message ?? t('errUnavailable')
         }
       } catch {
-        err = 'Connexion impossible. Vérifiez votre réseau puis réessayez.'
+        err = t('errNetwork')
       }
       setLoading(false)
       if (err) {
@@ -67,23 +69,23 @@ export default function MotDePasseOubliePage() {
       {!sent ? (
         <OnboardingScreen
           back="/onboarding/connexion"
-          title="Mot de passe oublié ?"
-          subtitle="Indiquez l’e-mail associé à votre compte : nous vous enverrons un lien pour en créer un nouveau."
+          title={t('title')}
+          subtitle={t('subtitle')}
           onSubmit={onSubmit}
           footer={
             <button type="submit" className={cn(btn.primary, 'w-full')} disabled={loading} aria-busy={loading}>
-              {loading ? 'Envoi…' : 'Envoyer le lien'}
+              {loading ? t('sending') : t('send')}
             </button>
           }
         >
           <TextField
-            label="E-mail"
+            label={t('email')}
             type="email"
             inputMode="email"
             autoComplete="email"
             autoCapitalize="none"
             spellCheck={false}
-            placeholder="exemple@email.com"
+            placeholder={t('emailPh')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={error}
@@ -98,16 +100,15 @@ export default function MotDePasseOubliePage() {
               <MailCheck className="h-9 w-9" />
             </span>
           }
-          title="Lien envoyé"
+          title={t('sentTitle')}
           subtitle={
             <span aria-live="polite">
-              Si un compte existe pour <strong className="text-night-900">{email}</strong>, vous recevrez un e-mail dans
-              quelques minutes.
+              {t.rich('sentText', { email, b: (c) => <strong className="text-night-900">{c}</strong> })}
             </span>
           }
           footer={
             <button type="button" className={cn(btn.primary, 'w-full')} onClick={() => router.push('/onboarding/connexion')}>
-              Retour à la connexion
+              {t('backToLogin')}
             </button>
           }
         />

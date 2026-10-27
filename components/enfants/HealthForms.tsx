@@ -1,6 +1,7 @@
 'use client'
 
 import { useId, useRef, useState, type FormEvent } from 'react'
+import { useTranslations } from 'next-intl'
 import { TextField } from '@/components/journal/FormFields'
 import { btn } from '@/components/onboarding/styles'
 import { cn } from '@/lib/cn'
@@ -15,6 +16,24 @@ import {
 
 type Errors = Record<string, string | undefined>
 
+// Messages de validation zod (lib/data/health, partagé) → clés traduites au rendu.
+const ZOD_KEYS: Record<string, string> = {
+  'Date invalide.': 'invalidDate',
+  'Indiquez le nom du vaccin.': 'vaccineNameRequired',
+  'Indiquez la date de vaccination.': 'vaccineDateRequired',
+  'Le rappel doit être postérieur à la vaccination.': 'boosterAfter',
+  'Indiquez le nom du traitement.': 'treatmentNameRequired',
+  'Indiquez la date de début.': 'startRequired',
+  'La fin doit être après le début.': 'endAfterStart',
+  '80 caractères maximum.': 'max80',
+  '160 caractères maximum.': 'max160',
+}
+
+function useErrorText() {
+  const t = useTranslations('family.children.healthForm.errors')
+  return (m: string | undefined) => (m && ZOD_KEYS[m] ? t(ZOD_KEYS[m]) : m)
+}
+
 function collect(issues: { path: (string | number)[]; message: string }[]): Errors {
   const out: Errors = {}
   for (const i of issues) {
@@ -25,10 +44,11 @@ function collect(issues: { path: (string | number)[]; message: string }[]): Erro
 }
 
 function Actions({ saving, onCancel }: { saving: boolean; onCancel: () => void }) {
+  const t = useTranslations('family.children.healthForm')
   return (
     <div className="grid grid-cols-2 gap-2.5 pt-1">
-      <button type="button" onClick={onCancel} disabled={saving} className={btn.secondary}>Annuler</button>
-      <button type="submit" disabled={saving} aria-busy={saving} className={btn.primary}>{saving ? 'Ajout…' : 'Ajouter'}</button>
+      <button type="button" onClick={onCancel} disabled={saving} className={btn.secondary}>{t('cancel')}</button>
+      <button type="submit" disabled={saving} aria-busy={saving} className={btn.primary}>{saving ? t('adding') : t('add')}</button>
     </div>
   )
 }
@@ -36,6 +56,8 @@ function Actions({ saving, onCancel }: { saving: boolean; onCancel: () => void }
 export function VaccinationForm({ childId, today, onDone, onCancel }: {
   childId: string; today: string; onDone: (v: Vaccination) => void; onCancel: () => void
 }) {
+  const t = useTranslations('family.children.healthForm')
+  const err = useErrorText()
   const id = useId()
   const formRef = useRef<HTMLFormElement>(null)
   const [nom, setNom] = useState('')
@@ -49,7 +71,7 @@ export function VaccinationForm({ childId, today, onDone, onCancel }: {
     e.preventDefault()
     const p = vaccinationInput.safeParse({ nom, date, rappel })
     const errs: Errors = p.success ? {} : collect(p.error.issues)
-    if (!errs.date && date > today) errs.date = 'La date de vaccination ne peut pas être dans le futur.'
+    if (!errs.date && date > today) errs.date = t('errors.futureDate')
     setErrors(errs)
     const firstKey = ['nom', 'date', 'rappel'].find((k) => errs[k])
     if (firstKey) { formRef.current?.querySelector<HTMLInputElement>(`[name="${firstKey}"]`)?.focus(); return }
@@ -58,18 +80,18 @@ export function VaccinationForm({ childId, today, onDone, onCancel }: {
     try {
       onDone(await addVaccination(childId, { nom, date, rappel }))
     } catch (err) {
-      setFailure(err instanceof Error ? err.message : 'Ajout impossible.')
+      setFailure(err instanceof Error ? err.message : t('addFailed'))
       setSaving(false)
     }
   }
 
   return (
     <form ref={formRef} onSubmit={submit} noValidate aria-labelledby={`${id}-t`} className="mt-3 space-y-3.5 rounded-xl bg-night-50/60 p-3.5">
-      <p id={`${id}-t`} className="text-[13px] font-extrabold text-night-900">Nouvelle vaccination</p>
-      <TextField name="nom" label="Nom du vaccin" required autoComplete="off" maxLength={80} value={nom} onChange={(e) => setNom(e.target.value)} placeholder="Ex : ROR, fièvre jaune…" error={errors.nom} />
+      <p id={`${id}-t`} className="text-[13px] font-extrabold text-night-900">{t('newVaccination')}</p>
+      <TextField name="nom" label={t('vaccineName')} required autoComplete="off" maxLength={80} value={nom} onChange={(e) => setNom(e.target.value)} placeholder={t('vaccineNamePlaceholder')} error={err(errors.nom)} />
       <div className="grid gap-3.5 sm:grid-cols-2">
-        <TextField name="date" type="date" label="Date de vaccination" required max={today} value={date} onChange={(e) => setDate(e.target.value)} error={errors.date} />
-        <TextField name="rappel" type="date" label="Rappel prévu (facultatif)" min={date || undefined} value={rappel} onChange={(e) => setRappel(e.target.value)} error={errors.rappel} />
+        <TextField name="date" type="date" label={t('vaccineDate')} required max={today} value={date} onChange={(e) => setDate(e.target.value)} error={err(errors.date)} />
+        <TextField name="rappel" type="date" label={t('boosterDate')} min={date || undefined} value={rappel} onChange={(e) => setRappel(e.target.value)} error={err(errors.rappel)} />
       </div>
       {failure && <p role="alert" className="text-[12.5px] font-semibold text-alert-600">{failure}</p>}
       <Actions saving={saving} onCancel={onCancel} />
@@ -80,6 +102,8 @@ export function VaccinationForm({ childId, today, onDone, onCancel }: {
 export function TreatmentForm({ childId, onDone, onCancel }: {
   childId: string; onDone: (t: Treatment) => void; onCancel: () => void
 }) {
+  const t = useTranslations('family.children.healthForm')
+  const err = useErrorText()
   const id = useId()
   const formRef = useRef<HTMLFormElement>(null)
   const [nom, setNom] = useState('')
@@ -102,19 +126,19 @@ export function TreatmentForm({ childId, onDone, onCancel }: {
     try {
       onDone(await addTreatment(childId, { nom, posologie, debut, fin }))
     } catch (err) {
-      setFailure(err instanceof Error ? err.message : 'Ajout impossible.')
+      setFailure(err instanceof Error ? err.message : t('addFailed'))
       setSaving(false)
     }
   }
 
   return (
     <form ref={formRef} onSubmit={submit} noValidate aria-labelledby={`${id}-t`} className="mt-3 space-y-3.5 rounded-xl bg-night-50/60 p-3.5">
-      <p id={`${id}-t`} className="text-[13px] font-extrabold text-night-900">Nouveau traitement</p>
-      <TextField name="nom" label="Nom du traitement" required autoComplete="off" maxLength={80} value={nom} onChange={(e) => setNom(e.target.value)} placeholder="Ex : Amoxicilline" error={errors.nom} />
-      <TextField name="posologie" label="Posologie (facultatif)" autoComplete="off" maxLength={160} value={posologie} onChange={(e) => setPosologie(e.target.value)} placeholder="Ex : 2 prises par jour" error={errors.posologie} />
+      <p id={`${id}-t`} className="text-[13px] font-extrabold text-night-900">{t('newTreatment')}</p>
+      <TextField name="nom" label={t('treatmentName')} required autoComplete="off" maxLength={80} value={nom} onChange={(e) => setNom(e.target.value)} placeholder={t('treatmentNamePlaceholder')} error={err(errors.nom)} />
+      <TextField name="posologie" label={t('dosage')} autoComplete="off" maxLength={160} value={posologie} onChange={(e) => setPosologie(e.target.value)} placeholder={t('dosagePlaceholder')} error={err(errors.posologie)} />
       <div className="grid gap-3.5 sm:grid-cols-2">
-        <TextField name="debut" type="date" label="Début" required value={debut} onChange={(e) => setDebut(e.target.value)} error={errors.debut} />
-        <TextField name="fin" type="date" label="Fin (facultatif)" min={debut || undefined} value={fin} onChange={(e) => setFin(e.target.value)} error={errors.fin} />
+        <TextField name="debut" type="date" label={t('start')} required value={debut} onChange={(e) => setDebut(e.target.value)} error={err(errors.debut)} />
+        <TextField name="fin" type="date" label={t('end')} min={debut || undefined} value={fin} onChange={(e) => setFin(e.target.value)} error={err(errors.fin)} />
       </div>
       {failure && <p role="alert" className="text-[12.5px] font-semibold text-alert-600">{failure}</p>}
       <Actions saving={saving} onCancel={onCancel} />

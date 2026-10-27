@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, X } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 type Props = {
@@ -30,8 +31,9 @@ const iconBtn = 'inline-flex h-11 w-11 items-center justify-center rounded-full 
  */
 export function ScreenHeader({ title, srSuffix, leading = 'back', backHref, onBack, backLabel, right, large, className }: Props) {
   const router = useRouter()
+  const t = useTranslations('vault.common')
   const Icon = leading === 'close' ? X : ArrowLeft
-  const label = backLabel ?? (leading === 'close' ? 'Fermer' : 'Retour')
+  const label = backLabel ?? (leading === 'close' ? t('close') : t('back'))
 
   const lead =
     leading === 'none' ? null : onBack ? (

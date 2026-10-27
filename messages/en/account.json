@@ -1,0 +1,754 @@
+{
+  "account": {
+    "ui": {
+      "confirm": {
+        "title": "Confirm action",
+        "description": "This action cannot be undone.",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "wait": "Please wait…"
+      },
+      "modal": {
+        "close": "Close"
+      },
+      "search": {
+        "placeholder": "Search…",
+        "clear": "Clear search"
+      },
+      "gauge": {
+        "full": "Quota reached",
+        "near": "Heads up, limit almost reached"
+      },
+      "steps": {
+        "aria": "Step {current} of {total}",
+        "ariaWithLabel": "Step {current} of {total}: {label}",
+        "short": "Step {current}/{total}"
+      },
+      "fileDrop": {
+        "sizeB": "{n} B",
+        "sizeKB": "{n} KB",
+        "sizeMB": "{n} MB",
+        "badType": "Unsupported file type: {name}",
+        "tooBig": "File too large (max {max} MB)",
+        "tooMany": "Maximum {max} file(s)",
+        "drop": "Drop a file or <browse>browse</browse>",
+        "max": "Max {max} MB",
+        "selected": "Selected files",
+        "remove": "Remove {name}"
+      }
+    },
+    "kit": {
+      "homeAria": "Lien Parental, home",
+      "notifications": "Notifications",
+      "notificationsUnread": "Notifications, {count} unread",
+      "prevStep": "Previous step",
+      "back": "Back",
+      "step": "Step {current} of {total}",
+      "stepWithLabel": "Step {current} of {total}: {label}",
+      "stripe": "Secure payment by Stripe"
+    },
+    "feedback": {
+      "thanks": "Thank you for your feedback!",
+      "question": "Was this article helpful?",
+      "yes": "Yes, helpful",
+      "no": "No, not helpful"
+    },
+    "storage": {
+      "usage": {
+        "title": "Space used",
+        "progress": "{pct}% of space used"
+      },
+      "vault": {
+        "title": "Your files are managed in the vault",
+        "text": "View, sort and delete your documents from the vault. A deleted document stays in the trash for 30 days before it is permanently deleted.",
+        "open": "Open the vault",
+        "back": "Back to storage"
+      },
+      "usageTitle": "Storage - Usage",
+      "usedPct": "{pct}% used",
+      "usedPctOf": "{pct}% used of {max}",
+      "breakdown": "Breakdown",
+      "categories": {
+        "documents": "Documents",
+        "documentsPdf": "Documents (PDF, Word)",
+        "photos": "Photos",
+        "pieces": "Attachments",
+        "autres": "Other"
+      },
+      "unavailable": "Storage usage is unavailable right now. Please try again in a few moments.",
+      "manageFiles": "Manage my files",
+      "categoriesTitle": "Categories",
+      "freeSpace": "To free up space, delete documents from the vault. They stay in the trash for 30 days before being permanently deleted.",
+      "deleteAll": "Delete all files",
+      "documents": {
+        "title": "Documents",
+        "deleted": "{count, plural, one {# file deleted.} other {# files deleted.}}",
+        "exitSelection": "Exit selection",
+        "back": "Back",
+        "selectedCount": "{count} selected",
+        "cancel": "Cancel",
+        "selectedSize": "{size} selected",
+        "willDelete": "These files will be deleted.",
+        "deleteSelection": "Delete selection",
+        "searchLabel": "Search for a document",
+        "searchPlaceholder": "Search",
+        "sortSize": "Sort by size",
+        "sortDate": "Sort by date",
+        "emptyTitle": "No documents",
+        "noResultTitle": "No results",
+        "emptyText": "Your documents will appear here.",
+        "noResultText": "Try another keyword.",
+        "deleteCount": "Delete ({count})",
+        "confirmTitle": "{count, plural, one {Delete # file?} other {Delete # files?}}",
+        "confirmText": "{size} will be freed. This action cannot be undone.",
+        "confirm": "Delete"
+      },
+      "wipe": {
+        "title": "Delete all files",
+        "runningTitle": "Deleting",
+        "doneTitle": "Storage - Usage",
+        "irreversible": "This action cannot be undone.",
+        "irreversibleText": "All your files will be permanently deleted and you won’t be able to recover them.",
+        "freed": "Space to be freed",
+        "sizeGo": "{n} GB",
+        "deleteAll": "Delete everything",
+        "cancel": "Cancel",
+        "running": "Deleting…",
+        "wait": "Please wait, this may take a few moments.",
+        "progress": "Deletion progress",
+        "deleting": "Deleting {size}…",
+        "dontClose": "Don’t close the app.",
+        "zeroUsed": "0% used",
+        "done": "All your files have been deleted.",
+        "doneText": "Your storage space is now empty."
+      }
+    },
+    "fields": {
+      "hidePassword": "Hide password",
+      "showPassword": "Show password"
+    },
+    "markdown": {
+      "step": "Step {n}:"
+    },
+    "push": {
+      "enableError": "Unable to turn on notifications right now. Please try again in a moment.",
+      "disableError": "Unable to turn off notifications right now. Please try again in a moment.",
+      "removeError": "Unable to remove this device right now.",
+      "status": {
+        "checking": "Checking this device…",
+        "demo": "Available with a real account (demo mode).",
+        "notConfigured": "Device notifications are not available yet.",
+        "iosInstall": "On iPhone and iPad, first add Lien Parental to your Home Screen.",
+        "unsupported": "This browser doesn’t support notifications.",
+        "blocked": "Notifications are blocked for this site in your browser settings.",
+        "on": "On for this device.",
+        "onAccountOff": "On for this device, but turned off for the whole account (switch above).",
+        "off": "Off for this device."
+      },
+      "title": "This device",
+      "iosHelp": "In Safari, tap the Share button, then “Add to Home Screen”. Then open Lien Parental from that icon and come back to this screen.",
+      "busy": "One moment…",
+      "disable": "Turn off on this device",
+      "enabling": "Turning on…",
+      "enable": "Turn on notifications on this device",
+      "others": "Other devices",
+      "since": "Since {date}",
+      "removeAria": "Remove {label}",
+      "remove": "Remove"
+    },
+    "profile": {
+      "home": {
+        "unknownDate": "unknown date",
+        "endsOn": "Ends on",
+        "renewsOn": "Renews on",
+        "title": "My profile",
+        "subtitle": "Manage your information and your account.",
+        "memberSince": "Member since {date}",
+        "editInfo": "Edit my information",
+        "active": "Active",
+        "activeHeadline": "Your subscription is active.",
+        "subscriptionDetail": "View subscription details",
+        "free": "Free",
+        "freeTitle": "Free account",
+        "freeText1": "Access the basic features.",
+        "freeText2": "Upgrade to Premium for more space and every feature.",
+        "seePlans": "See plans",
+        "sections": {
+          "account": "My account",
+          "subscription": "My subscription",
+          "storage": "Storage",
+          "coach": "AI Coach",
+          "help": "Support"
+        },
+        "rows": {
+          "info": "Personal information",
+          "infoSub": "Manage your details and contact information",
+          "security": "Security",
+          "securitySub": "Password, authentication and sessions",
+          "prefs": "Preferences",
+          "prefsSub": "Notifications, language and display",
+          "subscription": "My subscription",
+          "subscriptionSub": "Plan, payment, invoices, change or cancel",
+          "subscriptionFreeSub": "Free plan: see plans and subscribe",
+          "help": "Help center",
+          "helpSub": "FAQ, guides and support contact"
+        },
+        "storageUsed": "Space used",
+        "storageAria": "Storage space used",
+        "storageUnavailable": "Usage unavailable right now. Please try again later.",
+        "coachUsage": "Current usage",
+        "coachCount": "{used} / {quota} analyses",
+        "coachCount30": "{used} / {quota} analyses over 30 days",
+        "coachAria": "AI Coach analyses used",
+        "coachUnavailable": "Usage unavailable right now. Please try again later.",
+        "logout": {
+          "button": "Log out",
+          "title": "Log out?",
+          "description": "You’ll need to enter your credentials to come back.",
+          "confirm": "Log out"
+        }
+      },
+      "info": {
+        "steps": {
+          "1": {
+            "title": "Profile photo",
+            "sub": "Add a photo to personalize your account."
+          },
+          "2": {
+            "title": "Basic information",
+            "sub": "Edit your personal information."
+          },
+          "3": {
+            "title": "Contact details",
+            "sub": "Update your contact details."
+          },
+          "4": {
+            "title": "Preferences",
+            "sub": "Personalize your experience."
+          }
+        },
+        "countries": {
+          "FR": "France",
+          "BE": "Belgium",
+          "CH": "Switzerland",
+          "CA": "Canada",
+          "LU": "Luxembourg"
+        },
+        "photoType": "Choose an image (JPG or PNG).",
+        "photoSize": "Image too large (5 MB maximum).",
+        "invalidEmail": "Invalid email address.",
+        "emailPending": "{current} (new address {next} to be confirmed by email)",
+        "title": "Personal information",
+        "changePhoto": "Change photo",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "birthDate": "Date of birth",
+        "gender": "Gender",
+        "genders": {
+          "f": "Woman",
+          "h": "Man",
+          "nb": "Non-binary",
+          "nsp": "I’d rather not say"
+        },
+        "situation": "Family situation",
+        "situations": {
+          "couple": "In a relationship",
+          "separe": "Separated",
+          "divorce": "Divorced",
+          "procedure": "Proceedings underway",
+          "celibataire": "Single",
+          "autre": "Other"
+        },
+        "email": "Email address",
+        "phone": "Phone number",
+        "address": "Address",
+        "postalCode": "Postal code",
+        "city": "City",
+        "country": "Country",
+        "language": "Language",
+        "timezone": "Time zone",
+        "tz": {
+          "brussels": "(UTC+01:00) Brussels",
+          "reunion": "(UTC+04:00) Réunion",
+          "montreal": "(UTC-05:00) Montreal"
+        },
+        "dateFormat": "Date format",
+        "dmy": "DD / MM / YYYY",
+        "mdy": "MM / DD / YYYY",
+        "ymd": "YYYY - MM - DD",
+        "notifEmail": "Email notifications",
+        "notifEmailText": "Get emails about important information.",
+        "notifPush": "Push notifications",
+        "notifPushText": "Get notifications on your device.",
+        "continue": "Continue",
+        "saving": "Saving…",
+        "save": "Save"
+      },
+      "validation": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "language": "Language",
+        "title": "Information updated!",
+        "text": "Your personal information has been saved.",
+        "summary": "Summary of your information",
+        "back": "Back to profile"
+      }
+    },
+    "security": {
+      "home": {
+        "title": "Security",
+        "protectedTitle": "Your account is protected",
+        "protectedText": "We take care to keep your personal data safe.",
+        "accountSection": "Account security",
+        "password": "Password",
+        "passwordSub": "Change your password",
+        "twoFactor": "Two-factor authentication",
+        "twoFactorSub": "Strengthen your account security",
+        "vaultLock": "Vault lock",
+        "vaultLockSub": "Passcode, fingerprint or face recognition",
+        "sessions": "Active sessions",
+        "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+        "sessionsSub": "Manage your signed-in devices",
+        "loginEmails": "Sign-in emails",
+        "loginEmailsSub": "Get an email whenever someone signs in",
+        "advanced": "Advanced security",
+        "deleteAccount": "Delete my account",
+        "deleteAccountSub": "Permanently delete your account"
+      },
+      "vaultLock": {
+        "metaTitle": "Vault lock"
+      },
+      "emails": {
+        "title": "Sign-in emails",
+        "bannerTitle": "Stay informed",
+        "bannerText": "Get an email each time someone signs in to your account.",
+        "switchLabel": "Receive sign-in emails",
+        "switchDescription": "You’ll be notified by email when a new sign-in is detected.",
+        "saving": "Saving…",
+        "save": "Save"
+      },
+      "password": {
+        "title": "Password",
+        "bannerTitle": "Choose a secure password",
+        "bannerText": "Use at least 8 characters with letters, numbers and symbols.",
+        "current": "Current password",
+        "new": "New password",
+        "confirm": "Confirm new password",
+        "strength": "Password strength",
+        "strengthValue": ": {level}",
+        "levels": {
+          "0": "Very weak",
+          "1": "Weak",
+          "2": "Fair",
+          "3": "Good",
+          "4": "Strong"
+        },
+        "rules": {
+          "length": "At least 8 characters",
+          "case": "An uppercase and a lowercase letter",
+          "digit": "A number",
+          "symbol": "A symbol (e.g. ! @ # ?)"
+        },
+        "tips": "Tips for <em>a secure password</em>:",
+        "ruleOk": ": met",
+        "ruleKo": ": not met",
+        "errors": {
+          "current": "Enter your current password.",
+          "rules": "The new password doesn’t meet all the tips.",
+          "mismatch": "Passwords don’t match."
+        },
+        "saving": "Saving…",
+        "save": "Save"
+      },
+      "sessions": {
+        "today": "Today at {time}",
+        "yesterday": "Yesterday at {time}",
+        "dateAt": "{date} at {time}",
+        "ua": {
+          "browser": "Browser",
+          "android": "Android device",
+          "windows": "Windows PC",
+          "linux": "Linux computer",
+          "unknownDevice": "Unknown device",
+          "unknownOs": "Unknown system"
+        },
+        "signedIn": "Signed in: {when}",
+        "lastActivity": "Last activity: {when}",
+        "loadError": "Unable to load your other sessions.",
+        "allRevoked": "All other sessions have been signed out.",
+        "revokeError": "Unable to sign out this device right now.",
+        "revoked": "{name} has been signed out.",
+        "title": "Active sessions",
+        "bannerTitle": "Manage your devices",
+        "bannerText": "You’re signed in on these devices. Sign out any you don’t recognize.",
+        "current": "Current session",
+        "loading": "Loading…",
+        "others": "Other sessions",
+        "emptyTitle": "No other sessions",
+        "emptyText": "Your account is only signed in on this device.",
+        "revokeAll1": "Sign out of all",
+        "revokeAll2": "other sessions",
+        "confirmAllTitle": "Sign out other sessions?",
+        "confirmOneTitle": "Sign out this device?",
+        "confirmAllText": "All other devices will need to sign in again.",
+        "confirm": "Sign out",
+        "currentBadge": "Current",
+        "revokeAria": "Sign out {name}"
+      },
+      "twoFactor": {
+        "title": "Two-factor authentication",
+        "bannerTitle": "Secure your account",
+        "bannerText": "Two-factor authentication adds an extra layer of security.",
+        "adminTitle": "Required for administration",
+        "adminActive": "Two-factor authentication is active for this session.",
+        "adminLink": "Go to administration",
+        "adminRequired": "Administrator accounts must turn on two-factor authentication before opening the back office.",
+        "status": "Status",
+        "loading": "Loading…",
+        "on": "On",
+        "off": "Off",
+        "features": {
+          "protectionTitle": "Stronger protection",
+          "protectionText": "Prevents unauthorized access",
+          "codeTitle": "One-time code",
+          "codeText": "A single-use code every time you sign in",
+          "easyTitle": "Easy to use",
+          "easyText": "Get your codes by app or text message"
+        },
+        "preparing": "Preparing…",
+        "enable": "Turn on authentication",
+        "disabling": "Turning off…",
+        "disable": "Turn off authentication",
+        "setupTitle": "Set up your app",
+        "setupStep1": "Open Google Authenticator, Authy or 1Password.",
+        "setupStep2Qr": "Scan the QR code or add an account with the key below.",
+        "setupStep2Key": "Add an account with the key below.",
+        "setupStep3": "Enter the 6-digit code shown.",
+        "qrAlt": "QR code to scan with your authenticator app",
+        "copyKey": "Copy key",
+        "codeLabel": "Verification code",
+        "cancel": "Cancel",
+        "verifying": "Verifying…",
+        "verify": "Verify"
+      },
+      "deletion": {
+        "exportDemo": "An email with your data will be sent to you within 48 hours.",
+        "exportError": "The export failed. Please try again in a moment.",
+        "exportDone": "Your data has been downloaded.",
+        "networkError": "Unable to reach the server. Check your internet connection.",
+        "deleteError": "Deletion failed. Please try again in a moment.",
+        "title": "Delete my account",
+        "warningTitle": "Irreversible action",
+        "warningText": "Deleting your account permanently erases your data after a 30-day legal period.",
+        "exportTitle": "Before you go",
+        "exportText": "Download a copy of your documents, testimonials and metadata.",
+        "exporting": "Preparing the export…",
+        "export": "Export my data",
+        "understand": "I understand that:",
+        "checks": {
+          "vault": "My vault and all its documents will be deleted",
+          "subscription": "My Premium subscription will be canceled immediately, without a refund",
+          "irreversible": "This action cannot be undone after 30 days"
+        },
+        "typeToConfirm": "To confirm, type {word}",
+        "password": "Your password",
+        "deleteForever": "Delete permanently",
+        "confirm1Title": "Confirm deletion?",
+        "confirm1Text": "You’ll be asked for one last check.",
+        "confirm1Button": "Continue",
+        "confirm2Title": "Delete the account?",
+        "confirm2Text": "Final confirmation. Your data will be erased.",
+        "confirm2Button": "Delete my account"
+      }
+    },
+    "prefs": {
+      "saveError": "Unable to save right now. Please try again in a moment.",
+      "general": {
+        "title": "General",
+        "subtitle": "Customize your account’s general settings.",
+        "language": "App language",
+        "timezone": "Time zone",
+        "tz": {
+          "brussels": "(GMT+01:00) Brussels",
+          "reunion": "(GMT+04:00) Réunion",
+          "montreal": "(GMT-05:00) Montreal"
+        },
+        "dateFormat": "Date format",
+        "dmy": "DD / MM / YYYY",
+        "mdy": "MM / DD / YYYY",
+        "ymd": "YYYY - MM - DD",
+        "timeFormat": "Time format",
+        "h24": "24-hour",
+        "h12": "12-hour",
+        "saving": "Saving…",
+        "save": "Save"
+      },
+      "home": {
+        "title": "Preferences",
+        "subtitle": "Manage your preferences and personalize your experience.",
+        "items": {
+          "general": {
+            "title": "General",
+            "text": "Language, time zone, format…"
+          },
+          "notifications": {
+            "title": "Notifications",
+            "text": "Alerts, reminders, emails…"
+          },
+          "appearance": {
+            "title": "Appearance",
+            "text": "Theme, colors, text size…"
+          }
+        },
+        "synced": "Your preferences are synced across all your devices."
+      },
+      "appearance": {
+        "title": "Appearance",
+        "subtitle": "Customize how the app looks to suit you.",
+        "theme": "Theme",
+        "themes": {
+          "clair": "Light",
+          "sombre": "Dark",
+          "auto": "Auto"
+        },
+        "themeSoon": "Coming soon. Your choice is saved; dark theme will arrive in a future version.",
+        "color": "Main color",
+        "colors": {
+          "leaf": "Green",
+          "blue": "Blue",
+          "iris": "Purple",
+          "orange": "Orange",
+          "red": "Red"
+        },
+        "colorSoon": "Coming soon. Your choice is saved and will be applied in a future version.",
+        "size": "Text size",
+        "sizes": {
+          "petite": "Small",
+          "moyenne": "Medium",
+          "grande": "Large"
+        },
+        "saving": "Saving…",
+        "save": "Save"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "subtitle": "Choose how and when you want to be notified.",
+        "push": "Browser notifications",
+        "pushText": "Alerts on the devices where you turned them on, even when the app is closed.",
+        "email": "Email notifications",
+        "emailText": "Unread messages, shares, reminders and upcoming shared events.",
+        "reminders": "Calendar reminders",
+        "remindersText": "A reminder before your events and those the other parent shares with you.",
+        "topicsTitle": "Notify me about",
+        "topicsText": "A topic that is turned off only appears in the app’s Notifications screen.",
+        "topics": {
+          "onMessages": "Messages",
+          "onCalendrier": "Shared calendar and reminders",
+          "onGarde": "Custody schedule and shared expenses",
+          "onDocuments": "Shared files and testimonials"
+        },
+        "security": "Security alerts (sign-in from a new device, password, email address, two-factor authentication, vault passcode, account deletion) are always sent by email and in the app, whatever these settings.",
+        "matrixTitle": "What you receive, and where",
+        "matrixCaption": "Channels used for each type of notification",
+        "colEvent": "Event",
+        "colDevice": "Device",
+        "colEmail": "Email",
+        "matrix": {
+          "message": "New message",
+          "event": "Shared event added, changed or canceled",
+          "reminder": "Reminder before an event",
+          "folder": "Shared file, testimonial received",
+          "invitation": "Invitation accepted",
+          "custody": "Custody or expense changed by the other parent"
+        },
+        "emailMessage": "If unread after 5 min, at most 1 every 30 min",
+        "emailEvent": "If scheduled within 14 days",
+        "yes": "Yes",
+        "no": "No",
+        "matrixNote": "Everything also appears in the Notifications screen. Notifications never contain the text of your messages or the content of your documents.",
+        "saving": "Saving…",
+        "save": "Save"
+      }
+    },
+    "notifications": {
+      "demo": {
+        "n1": {
+          "title": "New testimonial received",
+          "body": "Hélène D. replied to your testimonial request.",
+          "time": "5 min ago"
+        },
+        "n2": {
+          "title": "Calendar reminder",
+          "body": "Medical appointment with Lina in 2 hours.",
+          "time": "1 hour ago"
+        },
+        "n3": {
+          "title": "AI Coach renewed",
+          "body": "You have 10 new analyses this month.",
+          "time": "Yesterday"
+        }
+      },
+      "justNow": "Just now",
+      "title": "Notifications",
+      "loading": "Loading notifications",
+      "retry": "Try again",
+      "backHome": "Back to home",
+      "allRead": "All notifications are marked as read.",
+      "allReadError": "Unable to mark notifications as read. Please try again.",
+      "emptyTitle": "No notifications",
+      "emptyText": "Your new alerts will appear here.",
+      "recent": "Recent",
+      "markAll": "Mark all as read",
+      "unread": "(unread)"
+    },
+    "states": {
+      "title": "System states",
+      "general": "Loading, success, error and offline",
+      "operations": "Long operations",
+      "items": {
+        "chargement": {
+          "title": "Loading",
+          "text": "Shows that the app is processing a request."
+        },
+        "succes": {
+          "title": "Success",
+          "text": "Confirms that the action was completed successfully."
+        },
+        "erreur": {
+          "title": "Error",
+          "text": "Reports a problem and suggests immediate solutions."
+        },
+        "hors-connexion": {
+          "title": "Offline",
+          "text": "Warns that there is no connection and offers a suitable way to keep using the app."
+        },
+        "vide": {
+          "title": "No data",
+          "text": "Shows that no items are available yet."
+        },
+        "maintenance": {
+          "title": "Maintenance",
+          "text": "Reports ongoing maintenance and invites you to try again later."
+        },
+        "synchronisation": {
+          "title": "Syncing",
+          "text": "Shows that your data is syncing across your devices."
+        },
+        "sauvegarde": {
+          "title": "Backup",
+          "text": "Confirms that your data is safely saved."
+        },
+        "suppression": {
+          "title": "Deletion",
+          "text": "Shows how many items are being deleted and the progress."
+        },
+        "importation": {
+          "title": "Import",
+          "text": "Shows the import progress and how many files remain."
+        },
+        "mise-a-jour": {
+          "title": "Update",
+          "text": "Reports the download and installation of a new version."
+        },
+        "a-jour": {
+          "title": "Everything is up to date",
+          "text": "Confirms that the app is up to date and running smoothly."
+        }
+      },
+      "demo": {
+        "continue": "Continue",
+        "details": "View details",
+        "retry": "Try again",
+        "offline": "Work offline",
+        "add": "Add an item",
+        "learnMore": "Learn more",
+        "retryLater": "Try again later",
+        "fileSize": "2.4 MB",
+        "remaining": "{count, plural, one {# file left} other {# files left}}"
+      }
+    },
+    "search": {
+      "sections": {
+        "documents": "Documents",
+        "journal": "Journal",
+        "calendrier": "Calendar",
+        "temoignages": "Testimonials",
+        "pages": "Pages"
+      },
+      "pages": {
+        "home": "Home",
+        "journal": "Journal",
+        "calendar": "Calendar",
+        "vault": "Vault",
+        "coach": "AI Coach",
+        "children": "My children",
+        "profile": "Profile",
+        "security": "Security",
+        "preferences": "Preferences",
+        "help": "Help center",
+        "custody": "Custody schedule",
+        "finances": "Finances (Journal)"
+      },
+      "keywords": {
+        "home": "dashboard home",
+        "journal": "notes timeline",
+        "calendar": "agenda schedule appointment",
+        "vault": "documents evidence",
+        "coach": "assistant advice",
+        "children": "child family",
+        "profile": "account",
+        "security": "password sign-in login",
+        "preferences": "appearance text size notifications language",
+        "help": "help faq support contact",
+        "custody": "custody rotation",
+        "finances": "finances expenses payments money support costs"
+      },
+      "journalTypes": {
+        "visite": "Visit",
+        "appel": "Call",
+        "message": "Message",
+        "sante": "Health",
+        "depense": "Expense",
+        "autre": "Other",
+        "note": "Note"
+      },
+      "requestDone": "Completed",
+      "requestPending": "Pending",
+      "received": "{count}/{total} received",
+      "recent": "Recent searches",
+      "quick": "Quick access",
+      "dialogTitle": "Global search",
+      "inputLabel": "Search Lien Parental",
+      "placeholder": "Search for a document, an event, a testimonial…",
+      "clear": "Clear search",
+      "close": "Close search",
+      "cancel": "Cancel",
+      "noResultsFor": "No results for {query}",
+      "resultCount": "{count, plural, one {# result} other {# results}}",
+      "noResultsQuoted": "No results for “<q>{query}</q>”",
+      "noResultsHint": "Check the spelling or try another word.",
+      "noResultsLocked": "Your documents and testimonials aren’t included while the vault is locked.",
+      "vaultChecking": "Checking the vault…",
+      "vaultLocked": "Unlock the vault to search your documents and testimonials.",
+      "unlock": "Unlock",
+      "results": "Search results",
+      "clearRecent": "Clear recent searches",
+      "keys": {
+        "navigate": "navigate",
+        "enter": "Enter",
+        "open": "open",
+        "esc": "Esc",
+        "close": "close"
+      },
+      "trigger": "Search",
+      "triggerPlaceholder": "Search…"
+    },
+    "pwa": {
+      "title": "Install the app",
+      "install": "Install",
+      "dismiss": "Dismiss install prompt"
+    }
+  }
+}

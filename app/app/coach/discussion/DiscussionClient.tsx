@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ArrowLeft } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { CoachChat } from '@/components/coach/CoachChat'
@@ -14,15 +15,8 @@ import { LIVE } from '@/lib/data/core'
 
 type Props = { aiEnabled: boolean; initialQuestion?: string; analysisId?: string }
 
-const ASSISTANT_GREETING: ChatMessage = {
-  id: 'greet',
-  from: 'ia',
-  local: true,
-  time: '',
-  text: 'Bonjour, je m’appuie sur votre espace (journal, calendrier, garde, documents, frais) pour vous répondre.',
-}
-
 export function DiscussionClient({ aiEnabled, initialQuestion, analysisId }: Props) {
+  const t = useTranslations('coach.discussion')
   const router = useRouter()
   // undefined = pas encore résolu (lecture du sessionStorage côté client).
   const [target, setTarget] = useState<{ analysisId?: string; title?: string } | undefined>(undefined)
@@ -43,16 +37,16 @@ export function DiscussionClient({ aiEnabled, initialQuestion, analysisId }: Pro
 
   const aboutAnalysis = Boolean(target?.analysisId)
   const seed: ChatMessage[] = aboutAnalysis
-    ? [{ id: 'greet', from: 'ia', local: true, time: '', text: `Posez-moi vos questions sur l’analyse${target?.title ? ` « ${target.title} »` : ''}.` }]
+    ? [{ id: 'greet', from: 'ia', local: true, time: '', text: target?.title ? t('aboutAnalysisTitled', { title: target.title }) : t('aboutAnalysis') }]
     : !aiEnabled && !question && !LIVE
       ? mockCoachChat.map((m) => ({ ...m, local: true }))
-      : [ASSISTANT_GREETING]
+      : [{ id: 'greet', from: 'ia', local: true, time: '', text: t('greeting') }]
 
   return (
     <>
       <TopBar
-        title={aboutAnalysis || (!question && !aiEnabled && !LIVE) ? 'Analyse de l’IA' : 'Coach parental IA'}
-        subtitle={aboutAnalysis ? 'Posez vos questions sur l’analyse' : 'Posez vos questions au Coach'}
+        title={aboutAnalysis || (!question && !aiEnabled && !LIVE) ? t('titleAnalysis') : t('titleCoach')}
+        subtitle={aboutAnalysis ? t('subtitleAnalysis') : t('subtitleCoach')}
         showBack
         backHref={aboutAnalysis ? '/app/coach/reponse' : '/app'}
         showBell={false}
@@ -68,19 +62,19 @@ export function DiscussionClient({ aiEnabled, initialQuestion, analysisId }: Pro
             analysisId={target.analysisId}
             initialQuestion={question}
             seed={seed}
-            inputLabel={aboutAnalysis ? 'Votre question sur l’analyse' : 'Votre question au Coach IA'}
-            conversationLabel="Conversation avec le Coach IA"
+            inputLabel={aboutAnalysis ? t('inputAnalysis') : t('inputCoach')}
+            conversationLabel={t('conversationLabel')}
           />
         )}
 
         {aboutAnalysis ? (
           <Link href="/app/coach/reponse" className={`${btn.secondary} mt-4`}>
             <ArrowLeft className="h-5 w-5" aria-hidden="true" />
-            Retour à la réponse proposée
+            {t('backToResponse')}
           </Link>
         ) : (
           <Link href="/app/coach/assistant" className={`${btn.secondary} mt-4`}>
-            Voir les suggestions du Coach
+            {t('seeSuggestions')}
           </Link>
         )}
       </div>

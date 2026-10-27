@@ -1,0 +1,532 @@
+{
+  "coach": {
+    "common": {
+      "legalNote": "The AI Coach suggests ways to communicate. The AI Coach does not give legal advice.",
+      "demoNote": "Demo mode: simulated replies",
+      "usageValueText": "{used} of {total} ({pct}%)",
+      "progressLabel": "Analysis",
+      "progressAria": "{label}: {value}%",
+      "errors": {
+        "generic": "Something went wrong. Please try again in a moment.",
+        "sessionExpired": "Your session has expired. Please sign in again.",
+        "tooLarge": "Content too large."
+      },
+      "fileErrors": {
+        "tooBig": "File too large (10 MB maximum).",
+        "imageFormat": "Accepted format: JPG or PNG image.",
+        "imageTooBig": "Image too large (5 MB maximum).",
+        "word": "Word documents are not supported yet: please save it as a PDF.",
+        "docFormat": "Accepted formats: PDF or text."
+      },
+      "time": {
+        "today": "today at {time}",
+        "yesterday": "yesterday at {time}",
+        "dateAt": "{date} at {time}"
+      },
+      "kinds": {
+        "capture": "Screenshot",
+        "pdf": "Document - PDF",
+        "word": "Document - Word",
+        "document": "Document - Text",
+        "message": "Written message"
+      }
+    },
+    "chat": {
+      "you": "You: ",
+      "sent": "Sent",
+      "coachPrefix": "AI Coach: ",
+      "typing": "The coach is writing a reply…",
+      "dataUsed": "Data used: ",
+      "placeholder": "Ask your question…",
+      "statusWriting": "The Coach is writing a reply…",
+      "statusFailed": "The Coach could not reply.",
+      "statusDone": "The Coach has finished replying.",
+      "interruptedSuffix": "(Reply interrupted.)",
+      "interrupted": "Reply interrupted.",
+      "connectionLost": "The connection was interrupted.",
+      "connectionFailed": "Unable to connect. Check your network and try again.",
+      "suggestions": "Suggestions",
+      "stop": "Stop the reply",
+      "send": "Send the question",
+      "hint": "Enter to send, Shift + Enter for a new line. Messages you paste are treated as data.",
+      "medicalTitle": "Include medical information",
+      "medicalDesc": "For the next question only. Off by default."
+    },
+    "list": {
+      "opFailed": "The operation failed. Please try again.",
+      "connectionFailed": "Unable to connect. Please try again.",
+      "restored": "Analysis restored to history.",
+      "archived": "Analysis archived.",
+      "deleted": "Analysis deleted.",
+      "archivesDeleted": "Archives deleted.",
+      "historyDeleted": "History deleted.",
+      "viewResponse": "View the reply",
+      "restore": "Restore to history",
+      "archive": "Archive",
+      "delete": "Delete",
+      "filterLabel": "Filter by type",
+      "filters": {
+        "all": "All types",
+        "capture": "Screenshots",
+        "pdf": "PDF documents",
+        "document": "Text documents",
+        "word": "Word documents",
+        "message": "Written messages"
+      },
+      "emptyArchived": "No archived analyses",
+      "emptyHistory": "No analyses yet",
+      "emptyFilter": "No results for this type",
+      "emptyHint": "Your analyses will appear here.",
+      "emptyFilterHint": "Try another filter.",
+      "responseReady": "Reply available",
+      "actionsFor": "Actions for {title}, {date}",
+      "deleteArchives": "Delete archives",
+      "deleteHistory": "Delete history",
+      "newAnalysis": "Start a new analysis",
+      "confirmArchives": "Delete archives?",
+      "confirmHistory": "Delete history?",
+      "confirmDesc": "The content of every analysis in this list will be permanently deleted. Analyses from this cycle still count toward your quota."
+    },
+    "home": {
+      "menuLabel": "AI Coach menu",
+      "title": "AI parenting coach",
+      "heading": "Write your message",
+      "intro": "Or add a screenshot or a document to get a suitable rewording.",
+      "textareaLabel": "Your message to rephrase",
+      "placeholder": "Write your message here…",
+      "characters": " characters",
+      "addCapture": "Add a screenshot",
+      "addCaptureHint": "(JPG, PNG image)",
+      "addDoc": "Add a document",
+      "addDocHint": "(PDF or text)",
+      "analyze": "Analyze my message",
+      "askTitle": "Ask your Coach",
+      "askHint": "Monthly summary, documents, expenses, a message to prepare…",
+      "menu": {
+        "ask": "Ask your Coach",
+        "history": "History",
+        "archives": "Archives",
+        "usage": "My usage",
+        "home": "Back to home"
+      }
+    },
+    "archives": {
+      "title": "Archives",
+      "intro": "Your archived analyses, kept safe."
+    },
+    "history": {
+      "title": "History",
+      "intro": "Find all your analyses at any time."
+    },
+    "assistant": {
+      "title": "Ask your Coach",
+      "intro": "The Coach draws on your journal, your calendar, your custody schedule, the names of your documents and your shared expenses. It shows which data it used and tells you when information is missing.",
+      "greeting": "Hello, what would you like to know or prepare today?",
+      "inputLabel": "Your question for the AI Coach",
+      "placeholder": "Ask your question or paste a message…",
+      "conversationLabel": "Conversation with the AI Coach",
+      "suggestions": {
+        "month": "Summarize this month’s events",
+        "jaf": "Which documents are missing from my court file?",
+        "custody": "Draft a message proposing a custody change",
+        "owed": "How much does the other parent owe me?"
+      }
+    },
+    "discussion": {
+      "greeting": "Hello, I draw on your space (journal, calendar, custody, documents, expenses) to answer you.",
+      "aboutAnalysis": "Ask me your questions about the analysis.",
+      "aboutAnalysisTitled": "Ask me your questions about the analysis “{title}”.",
+      "titleAnalysis": "AI analysis",
+      "titleCoach": "AI parenting coach",
+      "subtitleAnalysis": "Ask your questions about the analysis",
+      "subtitleCoach": "Ask the Coach your questions",
+      "inputAnalysis": "Your question about the analysis",
+      "inputCoach": "Your question for the AI Coach",
+      "conversationLabel": "Conversation with the AI Coach",
+      "backToResponse": "Back to the suggested reply",
+      "seeSuggestions": "See the Coach’s suggestions"
+    },
+    "analysis": {
+      "stages": {
+        "sending": "Sending the content…",
+        "received": "Content received, preparing the analysis…",
+        "thinking": "The Coach is considering the context…",
+        "reading": "Reading the content…",
+        "writing": "Writing the analysis…",
+        "done": "Analysis complete"
+      },
+      "noContent": "Nothing to analyze. Import a screenshot, a document or a message from the Coach home screen.",
+      "fileGone": "The file is no longer available (the page was reloaded). Please import it again.",
+      "tooMany": "Too many requests. Please wait a moment.",
+      "interrupted": "The connection was interrupted. Please try again.",
+      "connectionFailed": "Unable to connect. Check your network and try again.",
+      "topTitle": "AI parenting coach",
+      "titleFailed": "Analysis interrupted",
+      "titleDone": "Analysis complete",
+      "titleRunning": "Analyzing…",
+      "subtitle": "Our AI is analyzing the content and context of your message.",
+      "upgrade": "Upgrade to Premium",
+      "retry": "Try again",
+      "back": "Back to the Coach",
+      "checksTitle": "What we analyze",
+      "checks": {
+        "tone": "Tone and level of aggressiveness",
+        "hurtful": "Hurtful or reactive words",
+        "clarity": "Clarity of the message",
+        "respect": "Respect and kindness",
+        "impact": "Impact on communication"
+      },
+      "checked": ": checked",
+      "pending": ": pending"
+    },
+    "document": {
+      "topTitle": "AI parenting coach",
+      "recognized": {
+        "capture": "This is a screenshot. The AI will read the conversation and analyze its content.",
+        "pdf": "This is a PDF document. The AI will analyze its content and tone.",
+        "word": "Word documents are not supported yet: please save it as a PDF.",
+        "document": "This is a text document. The AI will analyze its content and tone.",
+        "message": "This is a written message. The AI will analyze its tone and wording."
+      },
+      "emptyTitle": "No document imported",
+      "emptySubtitle": "Add a screenshot, a PDF or a message from the Coach home screen to start an analysis.",
+      "importContent": "Import content",
+      "messageAdded": "Message added",
+      "documentAdded": "Document added",
+      "subtitle": "Your file is imported and ready to be analyzed.",
+      "fileSection": "Imported file",
+      "remove": "Remove {title}",
+      "preview": "Preview of {title}",
+      "fileMissing": "The file is no longer available after the page was reloaded. Use “Add another document” to import it again.",
+      "recognizedTitle": "Document recognized",
+      "start": "Start the analysis",
+      "another": "Add another document",
+      "savedToVault": "Added to the vault",
+      "saveToVault": "Add to the vault",
+      "savedStatus": "Copy saved in your vault."
+    },
+    "response": {
+      "types": {
+        "message_ecrit": "This is a message you wrote.",
+        "capture_conversation": "This is a screenshot of a conversation.",
+        "document": "This is a document.",
+        "autre": "The content could not be identified as an exchange between parents."
+      },
+      "notFound": "Analysis not found.",
+      "topTitle": "AI parenting coach",
+      "backToHistory": "Back to history",
+      "emptyTitle": "No analysis to show",
+      "emptySubtitle": "Start an analysis from the Coach home screen, or find your analyses in the history.",
+      "analyzeContent": "Analyze content",
+      "seeHistory": "View history",
+      "rephrased": "Rephrased message",
+      "proposed": "Suggested reply",
+      "copiedStatus": "Text copied to the clipboard.",
+      "copyFailed": "Copy failed. Select the text to copy it.",
+      "archivedStatus": "Analysis archived.",
+      "archiveFailed": "Archiving failed.",
+      "connectionFailed": "Unable to connect.",
+      "title": "AI reply",
+      "subtitle": "Here is the suggested reply and what the AI noticed in your content.",
+      "copied": "Copied",
+      "copy": "Copy",
+      "archived": "Archived",
+      "archive": "Archive",
+      "scoresTitle": "What the AI noticed",
+      "scores": {
+        "calm": "Calm tone",
+        "aggressiveness": "Aggressiveness",
+        "clarity": "Clarity",
+        "respect": "Respect"
+      },
+      "scoreValueText": "{value} out of 100",
+      "hurtfulWords": "Hurtful or reactive words",
+      "quoted": "“{word}”",
+      "aboutTitle": "About your document",
+      "recognizedText": "Recognized text",
+      "tips": "Tips",
+      "ask": "Ask a question about the analysis",
+      "newAnalysis": "Start a new analysis"
+    },
+    "usage": {
+      "topTitle": "AI Coach",
+      "current": "Current usage",
+      "seeDetail": ", view details",
+      "ofAnalyses": " / {total} analyses",
+      "usedThisCycle": "Analyses used this cycle",
+      "releaseOn": "An analysis becomes available again on",
+      "resetOn": "Your analyses reset on",
+      "noneCounted": "No analyses counted",
+      "atMidnight": " at 00:00",
+      "plan": "Current plan",
+      "analysesCount": "{count, plural, one {# analysis} other {# analyses}}",
+      "perCycle": "per cycle",
+      "reset": "Reset",
+      "inDays": "{count, plural, one {In # day} other {In # days}}",
+      "cycle30": "30-day cycle",
+      "goodToKnow": "Good to know",
+      "goodToKnowText": "Each cycle lets you run up to {total} analyses with the AI Coach. Your counter resets automatically every 30 days.",
+      "seeHistory": "View my history",
+      "detail": {
+        "topTitle": "Usage details",
+        "used": "Analyses used",
+        "remaining": "Analyses remaining",
+        "totalPerCycle": "Total per cycle",
+        "resetIn": "Resets in",
+        "days": "{count, plural, one {# day} other {# days}}",
+        "resetDate": "Reset date",
+        "pctUsed": "{pct}% used",
+        "tip": "Tip",
+        "tipText": "Plan your important analyses to make the most of your cycle."
+      },
+      "log": {
+        "topTitle": "Analysis history",
+        "sort": "Sort analyses",
+        "summary": "Current cycle summary",
+        "ofUsed": " / {total} analyses used",
+        "quotaUsed": "Quota used this cycle",
+        "pctQuota": "{pct}% of quota used",
+        "listTitle": "Analyses in this cycle ({order})",
+        "newestFirst": "Newest first",
+        "oldestFirst": "Oldest first",
+        "checkmark": "{label} ✓",
+        "empty": "No analyses in this cycle.",
+        "statusDone": "Completed",
+        "statusDeleted": "Deleted",
+        "deletedTitle": "Deleted analysis"
+      },
+      "info": {
+        "topTitle": "Information",
+        "aboutTitle": "About the AI Coach",
+        "aboutText": "The AI Coach supports you with personalized analyses to help you in your parenting.",
+        "quotaTitle": "How does your quota work?",
+        "quotaText": "You have {total} analyses per 30-day cycle. Once you reach this quota, you will need to wait for the reset to run new analyses.",
+        "nextCycle": "Next cycle",
+        "noneYet": "No analyses counted yet",
+        "moreTitle": "Need more analyses?",
+        "moreText": "Contact our team to discover our additional offers.",
+        "contact": "Contact us"
+      },
+      "trends": {
+        "topTitle": "Usage trends",
+        "thisCycle": "This cycle",
+        "last3": "Usage over the last 3 cycles",
+        "caption": "Analyses used per cycle",
+        "colCycle": "Cycle",
+        "colStart": "Start",
+        "colAnalyses": "Analyses",
+        "average": "Average per cycle",
+        "max": "Maximum usage",
+        "min": "Minimum usage",
+        "currentCycle": "Current cycle",
+        "cycleN": "Cycle -{n}",
+        "avgValue": "{value} analyses"
+      }
+    },
+    "guide": {
+      "title": "Parenting guide",
+      "categories": {
+        "ecole": "School & education",
+        "sante": "Health",
+        "aides": "Benefits & rights",
+        "argent": "Banking & money",
+        "assurances": "Insurance",
+        "naissance": "Birth & early childhood",
+        "separation": "Separation & parenting",
+        "loisirs": "Leisure & activities",
+        "logement": "Housing & daily life"
+      },
+      "home": {
+        "intro": "Understand your procedures, benefits and organizations, then add them to Lien Parental in one tap.",
+        "parcoursTitle": "Step-by-step journeys",
+        "parcoursHint": "Track your progress; it is saved automatically.",
+        "categoriesTitle": "Categories",
+        "ficheCount": "{count, plural, one {# guide sheet} other {# guide sheets}}",
+        "disclaimer": "The guide’s information is checked against official sources and dated on each sheet. It does not replace legal advice: for your situation, contact the organization concerned."
+      },
+      "header": {
+        "back": "Guide",
+        "territory": "Territory:",
+        "onlyTerritory": "Only territory available for now."
+      },
+      "search": {
+        "label": "Search for a procedure",
+        "placeholder": "Search for a procedure",
+        "clear": "Clear the search",
+        "none": "No matching sheets.",
+        "found": "{count, plural, one {# sheet found} other {# sheets found}}"
+      },
+      "category": {
+        "empty": "No sheets in this category yet.",
+        "others": "Other categories"
+      },
+      "parcours": {
+        "metaTitle": "Journey",
+        "eyebrow": "Journey",
+        "privacy": "Your progress is saved automatically. It stays private and is not shared with the other parent."
+      },
+      "progress": {
+        "doneOf": "{done} of {total} completed",
+        "inProgress": ", {count} in progress",
+        "percent": "{value}%",
+        "ariaLabel": "Progress of the journey {title}",
+        "statusLegend": "Status: {label}",
+        "status": {
+          "a_faire": "To do",
+          "en_cours": "In progress",
+          "termine": "Done"
+        },
+        "retry": "Try again",
+        "loading": "Loading your progress…",
+        "saveFailed": "Unable to save.",
+        "seeFiche": "View the sheet",
+        "readyOf": "{done} of {total} ready",
+        "done": "Procedure completed",
+        "markDone": "Mark as done",
+        "undoHint": "Tap again to set it back to “to do”.",
+        "badgeDone": "Done"
+      },
+      "fiche": {
+        "lastChecked": "Last checked on ",
+        "whatFor": "What is it for?",
+        "who": "Who is concerned?",
+        "goodToKnow": "Good to know",
+        "deadlines": "Deadlines",
+        "documents": "Required documents",
+        "steps": "Steps",
+        "where": "Where to complete the procedure?",
+        "officialSite": "Official website",
+        "officialSiteSr": " of {name} (new tab)",
+        "newTab": " (new tab)",
+        "links": "Useful links",
+        "addTitle": "Add to Lien Parental",
+        "addHint": "Opens the pre-filled form; you check it before saving.",
+        "inParcours": "In the journey",
+        "toConfirm": "To confirm locally",
+        "sources": "Sources",
+        "checkedBySource": ", checked against the source on {date}",
+        "disclaimer": "This guide provides general information and does not constitute legal advice. Amounts and deadlines may change: check with the organization concerned before taking any step."
+      },
+      "actions": {
+        "labels": {
+          "coffre": "Add a document to the vault",
+          "calendrier": "Add to the calendar",
+          "rappel": "Add a reminder",
+          "depense": "Add an expense to the Journal"
+        },
+        "amountBy": "Amount given by",
+        "officialSource": "the official source",
+        "newTab": " (new tab)",
+        "editable": ", editable in the form."
+      },
+      "partners": {
+        "title": "Offers available in {territory}",
+        "intro": "Commercial content, separate from the information above. Offers are shown in no particular order: compare them according to your needs.",
+        "sponsored": "Sponsored offer",
+        "partner": "Partner",
+        "demo": "Example (demo)",
+        "seeOffer": "View the offer",
+        "seeOfferSr": " from {name} (new tab)",
+        "linkDisabled": "Link disabled in the demo."
+      }
+    },
+    "templates": {
+      "categories": {
+        "tous": "All",
+        "juridique": "Legal",
+        "communication": "Communication",
+        "scolaire": "School",
+        "autre": "Other"
+      },
+      "pages": "{count, plural, one {# page} other {# pages}}",
+      "list": {
+        "title": "Ready-to-use documents",
+        "intro": "Templates written by professionals, to adapt to your situation.",
+        "searchLabel": "Search for a document",
+        "searchPlaceholder": "Search for a document…",
+        "popularFirst": "Show popular templates first",
+        "categoryGroup": "Template category",
+        "fillable": "Fillable template, {pages}",
+        "loading": "Loading templates",
+        "count": "{count, plural, one {# template} other {# templates}}",
+        "empty": "No templates match your search."
+      },
+      "detail": {
+        "added": "Added to favorites",
+        "removed": "Removed from favorites",
+        "linkCopied": "Template link copied",
+        "share": "Share this template",
+        "favorite": "Add to favorites",
+        "loading": "Loading the template",
+        "category": "Category",
+        "format": "Format",
+        "updated": "Last updated",
+        "compatible": "Compatible",
+        "info": "Information",
+        "fillTitle": "Fill in and download",
+        "fillHint": "Fill in the fields, check the preview, then download the document.",
+        "preview": "Preview",
+        "previewPage": "Preview of page {page}, open the document",
+        "open": "Open the document"
+      },
+      "generator": {
+        "generating": "Generating the document…",
+        "ready": "Document “{filename}” ready: download started.",
+        "failed": "Generation failed. Please try again.",
+        "fixFields": "Some fields need to be completed:",
+        "optional": "(optional)",
+        "choose": "Choose…",
+        "downloadPdf": "Download as PDF",
+        "wordVersion": "Editable Word version",
+        "privacy": "Your information stays on your device: the document is created in your browser.",
+        "previewLabel": "Document preview"
+      },
+      "export": {
+        "steps": {
+          "file": "Generating the file",
+          "layout": "Formatting",
+          "compat": "Checking compatibility",
+          "final": "Finalizing"
+        },
+        "success": "Download complete!",
+        "ready": "Your document is ready.",
+        "sizeKb": "{size} KB",
+        "openFile": "Open the file",
+        "saved": "Saved",
+        "saveToFiles": "Save to Files",
+        "back": "Back to documents",
+        "savedStatus": "File saved",
+        "failedTitle": "The export did not complete",
+        "failedHint": "Check your connection and try again.",
+        "retry": "Try again",
+        "otherFormat": "Choose another format",
+        "preparing": "Preparing your document…",
+        "wait": "Please wait a moment.",
+        "stepDone": " — done",
+        "stepDoing": " — in progress",
+        "pdfDesc": "Ideal for printing or sending",
+        "wordDesc": "Editable with Microsoft Word",
+        "canvaDesc": "Customizable on Canva",
+        "modalTitle": "Download the document",
+        "modalDesc": "Choose the format that suits you",
+        "optionLabel": "{title} — {desc}"
+      },
+      "reader": {
+        "back": "Back to the template details",
+        "closeSearch": "Close the search",
+        "search": "Search the document",
+        "searchPlaceholder": "Search for a word…",
+        "page": "Page ",
+        "zoomOut": "Zoom out",
+        "zoomIn": "Zoom in",
+        "fullscreen": "Full screen",
+        "pageOf": "Page {page} of {total}",
+        "download": "Download / Export"
+      },
+      "grid": {
+        "more1": "More",
+        "more2": "templates"
+      }
+    }
+  }
+}

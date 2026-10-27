@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { ChevronRight, Ellipsis, Folder, FolderOpen, Plus, Search } from 'lucide-react'
 import { ScreenHeader } from '@/components/coffre/ScreenHeader'
 import { CategoryIcon } from '@/components/coffre/CategoryIcon'
@@ -10,9 +11,13 @@ import { sharedRoots } from '@/lib/data/vault-folders'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { useDocActions } from '@/components/coffre/useDocActions'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
+import { useVaultI18n } from '@/components/coffre/i18n'
 
 // Maquettes « Coffre-fort (documents) » + « 3. Coffre-fort – Documents »
 export default function DocumentsHub() {
+  const t = useTranslations('vault.docs')
+  const tc = useTranslations('vault.common')
+  const f = useVaultI18n()
   const { categories } = useCategories()
   const { docs, loading, error, refresh } = useVaultDocs()
   const { folders, sharedWithMe: sharedAll } = useFolders()
@@ -27,12 +32,12 @@ export default function DocumentsHub() {
     <>
       <ScreenHeader
         large
-        title="Documents"
+        title={tc('documents')}
         backHref="/app/coffre"
         right={
           <Link
             href="/app/coffre/ajouter"
-            aria-label="Ajouter un document"
+            aria-label={t('addAria')}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full"
           >
             <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-leaf-500 text-white shadow-[0_6px_14px_-6px_rgba(46,125,50,0.8)]">
@@ -43,19 +48,19 @@ export default function DocumentsHub() {
       />
 
       <div className="px-5">
-        <p className="text-[14px] leading-relaxed text-night-600">Organisez et sécurisez tous vos documents importants.</p>
+        <p className="text-[14px] leading-relaxed text-night-600">{t('lead')}</p>
 
         <form action="/app/coffre/documents/tous" role="search" className="mt-4">
-          <label htmlFor="doc-search" className="sr-only">Rechercher un document</label>
+          <label htmlFor="doc-search" className="sr-only">{t('search')}</label>
           <div className="flex h-12 items-center gap-2 rounded-xl border border-night-100 bg-white px-3.5 shadow-soft focus-within:border-leaf-500">
             <input
               id="doc-search"
               name="q"
               type="search"
-              placeholder="Rechercher un document"
+              placeholder={t('search')}
               className="h-full min-w-0 flex-1 bg-transparent text-[14px] text-night-900 outline-none placeholder:text-night-400"
             />
-            <button type="submit" aria-label="Lancer la recherche" className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-700 hover:bg-night-50">
+            <button type="submit" aria-label={t('searchSubmit')} className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-700 hover:bg-night-50">
               <Search className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
@@ -69,8 +74,8 @@ export default function DocumentsHub() {
             <FolderOpen className="h-[22px] w-[22px]" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-[15px] font-bold text-night-900">Tous les documents</span>
-            <span className="block text-[12.5px] text-night-500">{total} documents</span>
+            <span className="block text-[15px] font-bold text-night-900">{t('all')}</span>
+            <span className="block text-[12.5px] text-night-500">{t('count', { count: total })}</span>
           </span>
           <ChevronRight className="h-5 w-5 text-night-500 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5" aria-hidden="true" />
         </Link>
@@ -83,10 +88,10 @@ export default function DocumentsHub() {
             <Folder className="h-[22px] w-[22px]" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-[15px] font-bold text-night-900">Dossiers</span>
+            <span className="block text-[15px] font-bold text-night-900">{t('folders')}</span>
             <span className="block text-[12.5px] text-night-500">
-              {myFolders} dossier{myFolders > 1 ? 's' : ''}
-              {sharedWithMe.length > 0 ? ` · ${sharedWithMe.length} partagé${sharedWithMe.length > 1 ? 's' : ''} avec moi` : ''}
+              {t('folderCount', { count: myFolders })}
+              {sharedWithMe.length > 0 ? t('sharedWithMeCount', { count: sharedWithMe.length }) : ''}
             </span>
           </span>
           <ChevronRight className="h-5 w-5 text-night-500 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5" aria-hidden="true" />
@@ -94,9 +99,9 @@ export default function DocumentsHub() {
 
         <section aria-labelledby="cats-title" className="mt-6">
           <div className="flex items-center justify-between">
-            <h2 id="cats-title" className="text-[15px] font-extrabold text-night-900">Catégories</h2>
+            <h2 id="cats-title" className="text-[15px] font-extrabold text-night-900">{t('categories')}</h2>
             <Link href="/app/coffre/categories" className="-mr-2 inline-flex h-11 items-center px-2 text-[13px] font-bold text-leaf-600">
-              Voir tout
+              {t('seeAll')}
             </Link>
           </div>
           <ul className="-mx-5 mt-1 flex gap-2 overflow-x-auto px-5 pb-2 [scrollbar-width:none]">
@@ -107,15 +112,15 @@ export default function DocumentsHub() {
                   className="flex w-[76px] flex-col items-center gap-1.5 rounded-2xl px-1 py-2 text-center hover:bg-night-50"
                 >
                   <CategoryIcon icon={c.icon} tone={c.tone} size="lg" />
-                  <span className="w-full truncate text-[11.5px] font-semibold text-night-900">{c.name}</span>
-                  <span className="text-[11px] text-night-500">{c.count}<span className="sr-only"> documents</span></span>
+                  <span className="w-full truncate text-[11.5px] font-semibold text-night-900">{f.category(c.name)}</span>
+                  <span className="text-[11px] text-night-500">{c.count}<span className="sr-only">{t('documentsSr')}</span></span>
                 </Link>
               </li>
             ))}
             <li className="shrink-0">
               <Link
                 href="/app/coffre/categories"
-                aria-label="Gérer les catégories"
+                aria-label={t('manageCategories')}
                 className="flex w-[64px] flex-col items-center gap-1.5 rounded-2xl px-1 py-2 hover:bg-night-50"
               >
                 <span aria-hidden="true" className="flex h-12 w-12 items-center justify-center rounded-xl bg-night-50 text-night-600">
@@ -128,18 +133,18 @@ export default function DocumentsHub() {
 
         <section aria-labelledby="recents-title" className="mt-4">
           <div className="flex items-center justify-between">
-            <h2 id="recents-title" className="text-[15px] font-extrabold text-night-900">Documents récents</h2>
+            <h2 id="recents-title" className="text-[15px] font-extrabold text-night-900">{t('recent')}</h2>
             <Link href="/app/coffre/documents/tous" className="-mr-2 inline-flex h-11 items-center px-2 text-[13px] font-bold text-leaf-600">
-              Voir tout
+              {t('seeAll')}
             </Link>
           </div>
           {loading ? (
-            <LoadingState compact title="Chargement des documents" description="" />
+            <LoadingState compact title={t('loading')} description="" />
           ) : error ? (
-            <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} secondary={{ label: 'Retour au coffre-fort', href: '/app/coffre' }} />
+            <ErrorState compact description={error.message} primary={{ label: tc('retry'), onClick: () => void refresh() }} secondary={{ label: t('backToVault'), href: '/app/coffre' }} />
           ) : recent.length === 0 ? (
             <p className="mt-2 rounded-2xl border border-dashed border-night-200 p-6 text-center text-[13px] text-night-500">
-              Aucun document pour le moment. Ajoutez votre premier document avec le bouton +.
+              {t('empty')}
             </p>
           ) : (
             <ul className="mt-1 space-y-2.5 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0">

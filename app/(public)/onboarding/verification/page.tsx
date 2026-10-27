@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/cn'
 import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
@@ -27,6 +28,7 @@ function mmss(s: number) {
 
 export default function VerificationPage() {
   const router = useRouter()
+  const t = useTranslations('public.onboarding.verify')
   const { draft, ready } = useOnboardingDraft()
   const [code, setCode] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -38,8 +40,8 @@ export default function VerificationPage() {
 
   useEffect(() => {
     if (countdown <= 0) return
-    const t = setTimeout(() => setCountdown((c) => Math.max(c - 1, 0)), 1000)
-    return () => clearTimeout(t)
+    const timer = setTimeout(() => setCountdown((c) => Math.max(c - 1, 0)), 1000)
+    return () => clearTimeout(timer)
   }, [countdown])
 
   const missingEmail = SUPABASE_ENABLED && ready && !draft.email
@@ -59,17 +61,17 @@ export default function VerificationPage() {
         })
         if (!res.ok) {
           const data = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
-          setError(data?.error?.message ?? 'Envoi impossible pour le moment. Réessayez dans un instant.')
+          setError(data?.error?.message ?? t('errUnavailable'))
           setCountdown(RESEND_DELAY)
           return
         }
       } catch {
-        setError('Connexion impossible. Vérifiez votre réseau puis réessayez.')
+        setError(t('errNetwork'))
         setCountdown(RESEND_DELAY)
         return
       }
     }
-    setInfo('Un nouveau code vient de vous être envoyé.')
+    setInfo(t('resent'))
     setAttempts(0)
     setCountdown(RESEND_DELAY)
   }
@@ -79,9 +81,9 @@ export default function VerificationPage() {
     setAttempts(next)
     if (next >= MAX_ATTEMPTS) {
       setBlocked(true)
-      setError('Trop de tentatives. La vérification est temporairement bloquée, réessayez plus tard.')
+      setError(t('errBlocked'))
     } else {
-      setError(`Code incorrect. Il vous reste ${MAX_ATTEMPTS - next} tentative${MAX_ATTEMPTS - next > 1 ? 's' : ''}.`)
+      setError(t('errWrong', { count: MAX_ATTEMPTS - next }))
     }
     setCode('')
   }
@@ -120,9 +122,9 @@ export default function VerificationPage() {
         setAttempts(next)
         if (next >= MAX_ATTEMPTS) {
           setBlocked(true)
-          setError('Trop de tentatives. La vérification est temporairement bloquée, réessayez plus tard.')
+          setError(t('errBlocked'))
         } else {
-          setError(`Code incorrect ou expiré. Il vous reste ${MAX_ATTEMPTS - next} tentative${MAX_ATTEMPTS - next > 1 ? 's' : ''}. Vous pouvez aussi demander un nouveau code.`)
+          setError(t('errWrongOrExpired', { count: MAX_ATTEMPTS - next }))
         }
         setCode('')
         return
@@ -144,12 +146,12 @@ export default function VerificationPage() {
   return (
     <OnboardingScreen
       step={7}
-      title="Vérifiez votre e-mail"
+      title={t('title')}
       subtitle={
         <>
-          Nous venons de vous envoyer un code à 6 chiffres à l’adresse suivante :
+          {t('sentTo')}
           <br />
-          <strong className="font-bold text-night-900">{draft.email || 'votre adresse e-mail'}</strong>
+          <strong className="font-bold text-night-900">{draft.email || t('yourEmail')}</strong>
         </>
       }
       footer={
@@ -160,12 +162,12 @@ export default function VerificationPage() {
             disabled={code.length !== 6 || blocked || verifying || missingEmail}
             onClick={() => void verify(code)}
           >
-            {verifying ? 'Vérification…' : 'Vérifier'}
+            {verifying ? t('verifying') : t('verify')}
           </button>
           <p className="text-center text-[13px] text-night-600">
-            Vous n’avez pas reçu le code ?
+            {t('notReceived')}
             <br />
-            <span className="font-semibold text-leaf-600">Vérifiez le dossier spam</span>
+            <span className="font-semibold text-leaf-600">{t('checkSpam')}</span>
           </p>
         </>
       }
@@ -183,14 +185,14 @@ export default function VerificationPage() {
         describedBy="otp-help"
       />
       <p id="otp-help" className="sr-only">
-        Saisissez le code reçu par e-mail. Il est valable 1 heure.
+        {t('help')}
       </p>
 
       <div className="mt-4 min-h-[20px]" aria-live="polite">
         {missingEmail && (
           <p role="alert" className="text-sm font-semibold text-alert-600">
-            Session d’inscription introuvable.{' '}
-            <Link href="/onboarding/inscription" className="underline underline-offset-2">Recommencer l’inscription</Link>
+            {t('noSession')}{' '}
+            <Link href="/onboarding/inscription" className="underline underline-offset-2">{t('restart')}</Link>
           </p>
         )}
         {error && (
@@ -207,7 +209,7 @@ export default function VerificationPage() {
         disabled={countdown > 0 || blocked || missingEmail}
         className="mt-1 inline-flex min-h-[44px] items-center text-[13px] font-bold text-leaf-600 underline-offset-4 enabled:hover:underline disabled:cursor-default disabled:font-semibold disabled:text-leaf-700/80"
       >
-        {blocked ? 'Renvoi indisponible' : countdown > 0 ? `Renvoyer le code (${mmss(countdown)})` : 'Renvoyer le code'}
+        {blocked ? t('resendBlocked') : countdown > 0 ? t('resendIn', { time: mmss(countdown) }) : t('resend')}
       </button>
     </OnboardingScreen>
   )

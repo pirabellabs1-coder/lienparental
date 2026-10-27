@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState, type FormEvent } from 'react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { SelectField, TextField } from '@/components/onboarding/fields'
 import { PhotoPicker } from '@/components/onboarding/PhotoPicker'
@@ -9,10 +10,13 @@ import { btn } from '@/components/onboarding/styles'
 import { BackButton, EnfantsHeader } from '@/components/enfants/EnfantsHeader'
 import { CHILD_CLASSES } from '@/lib/mock-data'
 import { createChild } from '@/lib/data/children'
+import { useChildLabels } from '@/components/enfants/childLabels'
 
 // M04 — Ajouter un enfant (même formulaire que l'étape 9 de l'onboarding).
 // RLS Supabase : insert dans `children` avec user_id = auth.uid().
 export default function NouvelEnfantPage() {
+  const t = useTranslations('family.children.form')
+  const labels = useChildLabels()
   const router = useRouter()
   const [photo, setPhoto] = useState<string | null>(null)
   const [prenom, setPrenom] = useState('')
@@ -27,8 +31,8 @@ export default function NouvelEnfantPage() {
     if (photo) URL.revokeObjectURL(photo)
   }, [photo])
 
-  const prenomErr = submitted && !prenom.trim() ? 'Le prénom est requis.' : undefined
-  const dateErr = submitted && (!dateNaissance || dateNaissance > today) ? 'Indiquez une date de naissance valide.' : undefined
+  const prenomErr = submitted && !prenom.trim() ? t('firstNameRequired') : undefined
+  const dateErr = submitted && (!dateNaissance || dateNaissance > today) ? t('birthDateInvalid') : undefined
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -42,21 +46,21 @@ export default function NouvelEnfantPage() {
       await createChild({ prenom: prenom.trim(), dateNaissance, classe: classe || undefined })
       router.push('/app/enfants')
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : 'Enregistrement impossible.')
+      setSaveError(err instanceof Error ? err.message : t('saveFailed'))
       setSaving(false)
     }
   }
 
   return (
     <div className="w-full px-4 pb-8 md:px-6">
-      <EnfantsHeader title="Ajouter un enfant" left={<BackButton href="/app/enfants" />} />
+      <EnfantsHeader title={t('addTitle')} left={<BackButton href="/app/enfants" />} />
 
       <form onSubmit={onSubmit} noValidate className="mt-4">
         <PhotoPicker kind="child" value={photo} onChange={setPhoto} className="flex justify-center" />
         <div className="mt-6 space-y-4">
-          <TextField label="Prénom" required placeholder="Ex : Lina" value={prenom} onChange={(e) => setPrenom(e.target.value)} error={prenomErr} />
+          <TextField label={t('firstName')} required placeholder={t('firstNamePlaceholder')} value={prenom} onChange={(e) => setPrenom(e.target.value)} error={prenomErr} />
           <TextField
-            label="Date de naissance"
+            label={t('birthDate')}
             required
             type="date"
             max={today}
@@ -64,7 +68,7 @@ export default function NouvelEnfantPage() {
             onChange={(e) => setDateNaissance(e.target.value)}
             error={dateErr}
           />
-          <SelectField label="Classe" optional placeholder="Sélectionner" options={CHILD_CLASSES} value={classe} onChange={(e) => setClasse(e.target.value)} />
+          <SelectField label={t('class')} optional placeholder={t('select')} options={labels.classOptions(CHILD_CLASSES)} value={classe} onChange={(e) => setClasse(e.target.value)} />
         </div>
         {saveError && (
           <p role="alert" className="mt-6 text-center text-sm font-semibold text-alert-600">
@@ -72,7 +76,7 @@ export default function NouvelEnfantPage() {
           </p>
         )}
         <button type="submit" className={cn(btn.primary, 'mt-8 w-full')} disabled={saving} aria-busy={saving}>
-          {saving ? 'Enregistrement…' : 'Ajouter cet enfant'}
+          {saving ? t('saving') : t('addSubmit')}
         </button>
       </form>
     </div>

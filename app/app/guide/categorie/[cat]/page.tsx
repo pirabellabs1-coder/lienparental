@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { ChevronRight } from 'lucide-react'
 import { GuideHeader } from '@/components/guide/GuideHeader'
@@ -20,30 +21,33 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { cat } = await params
-  return { title: getCategory(cat)?.label ?? 'Guide parental' }
+  const t = await getTranslations('coach.guide')
+  const category = getCategory(cat)
+  return { title: category ? t(`categories.${category.key}`) : t('title') }
 }
 
 export default async function GuideCategoryPage({ params, searchParams }: Props) {
   const [{ cat }, sp] = await Promise.all([params, searchParams])
   const category = getCategory(cat)
   if (!category) notFound()
+  const t = await getTranslations('coach.guide')
   const g = await loadGuide(sp.territoire)
   const { territoire } = g
   const fiches = g.fiches.filter((f) => f.categorie === category.key)
 
   return (
     <div className="w-full px-5 pb-8 lg:px-6">
-      <GuideHeader territoire={territoire} territoires={g.territoires} back={{ href: homeHref(territoire.code), label: 'Guide' }} />
+      <GuideHeader territoire={territoire} territoires={g.territoires} back={{ href: homeHref(territoire.code), label: t('header.back') }} />
 
       <div className="mt-5 flex items-center gap-3">
         <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-leaf-50 text-leaf-700">
           <CategoryIcon cat={category.key} className="h-6 w-6" />
         </span>
-        <h1 className="text-[24px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 lg:text-[28px]">{category.label}</h1>
+        <h1 className="text-[24px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 lg:text-[28px]">{t(`categories.${category.key}`)}</h1>
       </div>
 
       {fiches.length === 0 ? (
-        <p className="mt-6 rounded-2xl bg-night-50 p-4 text-[14px] text-night-700">Aucune fiche pour le moment dans cette catégorie.</p>
+        <p className="mt-6 rounded-2xl bg-night-50 p-4 text-[14px] text-night-700">{t('category.empty')}</p>
       ) : (
         <ul className="mt-6 grid gap-3 lg:grid-cols-2">
           {fiches.map((f) => (
@@ -64,8 +68,8 @@ export default async function GuideCategoryPage({ params, searchParams }: Props)
         </ul>
       )}
 
-      <nav aria-label="Autres catégories" className="mt-8">
-        <h2 className="text-[14px] font-extrabold text-night-900">Autres catégories</h2>
+      <nav aria-label={t('category.others')} className="mt-8">
+        <h2 className="text-[14px] font-extrabold text-night-900">{t('category.others')}</h2>
         <ul className="mt-2 flex flex-wrap gap-2">
           {GUIDE_CATEGORIES.filter((c) => c.key !== category.key).map((c) => (
             <li key={c.key}>
@@ -74,7 +78,7 @@ export default async function GuideCategoryPage({ params, searchParams }: Props)
                 className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full border border-night-200 bg-white px-3 text-[13px] font-semibold text-night-800 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500"
               >
                 <CategoryIcon cat={c.key} className="h-4 w-4 text-leaf-700" />
-                {c.label}
+                {t(`categories.${c.key}`)}
               </Link>
             </li>
           ))}

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { ChevronRight, Crown, FolderDown, Rocket, Sparkles, Upload, UserCheck } from 'lucide-react'
 import { SoftSearch } from '@/components/profil/SoftSearch'
 import { cn } from '@/lib/cn'
@@ -21,34 +22,35 @@ const ICONS: Record<TutoIcon, { icon: React.ReactNode; tone: string }> = {
 }
 
 export function TutorielList({ tutoriels }: { tutoriels: TutorielLink[] }) {
+  const t = useTranslations('public.help.tutorials')
   const [q, setQ] = useState('')
   const list = useMemo(() => {
     const s = norm(q.trim())
-    return s ? tutoriels.filter(t => norm(t.titre).includes(s)) : tutoriels
+    return s ? tutoriels.filter(tuto => norm(tuto.titre).includes(s)) : tutoriels
   }, [q, tutoriels])
 
   return (
     <>
-      <SoftSearch value={q} onChange={setQ} placeholder="Rechercher un tutoriel…" label="Rechercher un tutoriel" />
-      <h2 className="mt-5 text-[13px] font-bold text-night-900">Guides d’utilisation</h2>
+      <SoftSearch value={q} onChange={setQ} placeholder={t('searchPh')} label={t('searchLabel')} />
+      <h2 className="mt-5 text-[13px] font-bold text-night-900">{t('heading')}</h2>
       {list.length === 0 ? (
         <p className="mt-6 text-center text-[13px] text-night-700" role="status">
-          {q.trim() ? `Aucun tutoriel ne correspond à « ${q} ».` : 'Aucun tutoriel pour le moment.'}
+          {q.trim() ? t('noMatch', { q }) : t('empty')}
         </p>
       ) : (
         <ul className="mt-2 space-y-1">
-          {list.map(t => {
-            const v = ICONS[t.icone] ?? ICONS.rocket
+          {list.map(tuto => {
+            const v = ICONS[tuto.icone] ?? ICONS.rocket
             return (
-              <li key={t.slug}>
+              <li key={tuto.slug}>
                 <Link
-                  href={`/app/aide/tutoriels/${t.slug}`}
+                  href={`/app/aide/tutoriels/${tuto.slug}`}
                   className="flex min-h-[72px] items-center gap-4 rounded-xl2 py-2 hover:bg-night-50/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
                 >
                   <span aria-hidden className={cn('inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-xl2', v.tone)}>{v.icon}</span>
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[13.5px] font-bold text-night-900">{t.titre}</span>
-                    <span className="mt-1 block text-[12px] text-night-700">{t.dureeMin} min</span>
+                    <span className="block text-[13.5px] font-bold text-night-900">{tuto.titre}</span>
+                    <span className="mt-1 block text-[12px] text-night-700">{t('minutes', { n: tuto.dureeMin })}</span>
                   </span>
                   <ChevronRight className="h-5 w-5 shrink-0 text-night-900" aria-hidden />
                 </Link>

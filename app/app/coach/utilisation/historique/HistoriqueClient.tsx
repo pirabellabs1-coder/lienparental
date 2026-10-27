@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Brain, ListFilter } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ActionSheet } from '@/components/ui'
@@ -9,14 +10,18 @@ type LogItem = { id: string; title: string; dateLabel: string; status: string }
 
 // M09 — Coach IA · Historique des analyses du cycle (maquette 12.12.09, page 3).
 export function HistoriqueClient({ used, total, log }: { used: number; total: number; log: LogItem[] }) {
+  const t = useTranslations('coach.usage.log')
   const [order, setOrder] = useState<'desc' | 'asc'>('desc')
+  // Statuts / titres fournis en français par le serveur : traduits au rendu.
+  const isDeleted = (it: LogItem) => it.status === 'Supprimée'
+  const statusLabel = (it: LogItem) => (it.status === 'Terminée' ? t('statusDone') : isDeleted(it) ? t('statusDeleted') : it.status)
   const [sortOpen, setSortOpen] = useState(false)
   const items = useMemo(() => (order === 'desc' ? log : [...log].reverse()), [order, log])
 
   return (
     <>
       <TopBar
-        title="Historique des analyses"
+        title={t('topTitle')}
         showBack
         backHref="/app/coach/utilisation"
         showBell={false}
@@ -24,7 +29,7 @@ export function HistoriqueClient({ used, total, log }: { used: number; total: nu
           <button
             type="button"
             onClick={() => setSortOpen(true)}
-            aria-label="Trier les analyses"
+            aria-label={t('sort')}
             aria-haspopup="dialog"
             className="-mr-2 grid h-11 w-11 place-items-center rounded-full text-night-900 hover:bg-night-50"
           >
@@ -36,19 +41,19 @@ export function HistoriqueClient({ used, total, log }: { used: number; total: nu
       <div className="w-full px-4 pb-8 pt-3">
         <section aria-labelledby="cycle-summary" className="rounded-xl2 border border-night-100 bg-white p-4 shadow-soft">
           <h2 id="cycle-summary" className="text-[12.5px] font-bold text-night-900">
-            Résumé du cycle actuel
+            {t('summary')}
           </h2>
           <p className="mt-2 text-[14px] text-night-900">
-            <span className="text-[16px] font-extrabold">{used}</span> / {total} analyses utilisées
+            <span className="text-[16px] font-extrabold">{used}</span>{t('ofUsed', { total })}
           </p>
           <div className="mt-3">
-            <UsageBar used={used} total={total} label="Quota utilisé ce cycle" />
+            <UsageBar used={used} total={total} label={t('quotaUsed')} />
           </div>
-          <p className="mt-2.5 text-[12px] text-night-700">{total > 0 ? Math.round((used / total) * 100) : 0}% du quota utilisé</p>
+          <p className="mt-2.5 text-[12px] text-night-700">{t('pctQuota', { pct: total > 0 ? Math.round((used / total) * 100) : 0 })}</p>
         </section>
 
-        <h2 className="sr-only">Analyses du cycle ({order === 'desc' ? 'plus récentes d’abord' : 'plus anciennes d’abord'})</h2>
-        {items.length === 0 && <p className="mt-6 text-center text-[13px] text-night-600">Aucune analyse sur ce cycle.</p>}
+        <h2 className="sr-only">{t('listTitle', { order: (order === 'desc' ? t('newestFirst') : t('oldestFirst')).toLocaleLowerCase() })}</h2>
+        {items.length === 0 && <p className="mt-6 text-center text-[13px] text-night-600">{t('empty')}</p>}
         <ul className="mt-4 divide-y divide-night-100">
           {items.map((it) => (
             <li key={it.id} className="flex items-center gap-3 py-3.5">
@@ -56,10 +61,10 @@ export function HistoriqueClient({ used, total, log }: { used: number; total: nu
                 <Brain className="h-5 w-5 text-night-700" strokeWidth={1.7} />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[13px] font-semibold text-night-900">{it.title}</p>
+                <p className="truncate text-[13px] font-semibold text-night-900">{isDeleted(it) && it.title === 'Analyse supprimée' ? t('deletedTitle') : it.title}</p>
                 <p className="mt-0.5 text-[11.5px] text-night-600">{it.dateLabel}</p>
               </div>
-              <span className="shrink-0 rounded-md bg-leaf-50 px-2 py-1 text-[11px] font-semibold text-leaf-700">{it.status}</span>
+              <span className="shrink-0 rounded-md bg-leaf-50 px-2 py-1 text-[11px] font-semibold text-leaf-700">{statusLabel(it)}</span>
             </li>
           ))}
         </ul>
@@ -68,10 +73,10 @@ export function HistoriqueClient({ used, total, log }: { used: number; total: nu
       <ActionSheet
         open={sortOpen}
         onClose={() => setSortOpen(false)}
-        title="Trier les analyses"
+        title={t('sort')}
         actions={[
-          { key: 'desc', label: `Plus récentes d’abord${order === 'desc' ? ' ✓' : ''}`, onClick: () => setOrder('desc') },
-          { key: 'asc', label: `Plus anciennes d’abord${order === 'asc' ? ' ✓' : ''}`, onClick: () => setOrder('asc') },
+          { key: 'desc', label: order === 'desc' ? t('checkmark', { label: t('newestFirst') }) : t('newestFirst'), onClick: () => setOrder('desc') },
+          { key: 'asc', label: order === 'asc' ? t('checkmark', { label: t('oldestFirst') }) : t('oldestFirst'), onClick: () => setOrder('asc') },
         ]}
       />
     </>

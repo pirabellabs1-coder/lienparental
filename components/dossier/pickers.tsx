@@ -1,18 +1,22 @@
 'use client'
 
 import { useId, type ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
-import { childAgeLabel, type Child } from '@/lib/mock-data'
+import type { Child } from '@/lib/mock-data'
+import { useChildLabels } from '@/components/enfants/childLabels'
 import { PERIOD_PRESETS, presetPeriod, type Period, type PeriodPreset } from './data'
 
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 focus-visible:ring-offset-2'
 
 /** Choix de l'enfant concerné (boutons radio natifs, cibles ≥ 44 px). */
 export function ChildPicker({ children, value, onChange }: { children: Child[]; value: string; onChange: (id: string) => void }) {
+  const t = useTranslations('family.courtFile.pickers')
+  const labels = useChildLabels()
   const name = useId()
   return (
     <fieldset>
-      <legend className="mb-2.5 text-[15px] font-bold text-night-900">Enfant concerné</legend>
+      <legend className="mb-2.5 text-[15px] font-bold text-night-900">{t('child')}</legend>
       <div className="grid grid-cols-2 gap-2.5">
         {children.map((c) => {
           const checked = c.id === value
@@ -30,7 +34,7 @@ export function ChildPicker({ children, value, onChange }: { children: Child[]; 
               </span>
               <span className="min-w-0">
                 <span className="block truncate text-[14px] font-bold text-night-900">{c.prenom}</span>
-                <span className="block truncate text-[12px] text-night-600">{childAgeLabel(c)}{c.classe ? ` · ${c.classe}` : ''}</span>
+                <span className="block truncate text-[12px] text-night-600">{labels.ageLabel(c)}{c.classe ? ` · ${labels.classLabel(c.classe)}` : ''}</span>
               </span>
             </label>
           )
@@ -49,10 +53,11 @@ export function PeriodPicker({
   onChange: (preset: PeriodPreset, period: Period) => void
   error?: string | null
 }) {
+  const t = useTranslations('family.courtFile.pickers')
   const uid = useId()
   return (
     <fieldset>
-      <legend className="mb-2.5 text-[15px] font-bold text-night-900">Période</legend>
+      <legend className="mb-2.5 text-[15px] font-bold text-night-900">{t('period')}</legend>
       <div className="flex flex-wrap gap-2">
         {PERIOD_PRESETS.map((p) => {
           const active = p.value === preset
@@ -68,7 +73,7 @@ export function PeriodPicker({
                 active ? 'border-leaf-500 bg-leaf-500 text-white' : 'border-night-200 bg-white text-night-900 hover:bg-night-50',
               )}
             >
-              {p.label}
+              {t(`presets.${p.value}`)}
             </button>
           )
         })}
@@ -76,7 +81,7 @@ export function PeriodPicker({
       {preset === 'custom' && (
         <div className="mt-3 grid grid-cols-2 gap-2.5">
           <div>
-            <label htmlFor={`${uid}-from`} className="block text-[12px] font-semibold text-night-800">Du</label>
+            <label htmlFor={`${uid}-from`} className="block text-[12px] font-semibold text-night-800">{t('from')}</label>
             <input
               id={`${uid}-from`}
               type="date"
@@ -89,7 +94,7 @@ export function PeriodPicker({
             />
           </div>
           <div>
-            <label htmlFor={`${uid}-to`} className="block text-[12px] font-semibold text-night-800">Au</label>
+            <label htmlFor={`${uid}-to`} className="block text-[12px] font-semibold text-night-800">{t('to')}</label>
             <input
               id={`${uid}-to`}
               type="date"
@@ -122,6 +127,7 @@ export function CheckRow({
   disabled?: boolean
   children?: ReactNode
 }) {
+  const t = useTranslations('family.courtFile.pickers')
   const uid = useId()
   return (
     <div className={cn('rounded-xl border transition-colors', checked ? 'border-leaf-200 bg-leaf-50/40' : 'border-night-100 bg-white')}>
@@ -142,7 +148,7 @@ export function CheckRow({
         </span>
         {count !== undefined && (
           <span className={cn('shrink-0 rounded-full px-2.5 py-1 text-[12px] font-bold tabular-nums', count > 0 ? 'bg-night-50 text-night-800' : 'bg-night-50/60 text-night-500')}>
-            {count}<span className="sr-only"> {countLabel ?? 'éléments'}</span>
+            {count}<span className="sr-only"> {countLabel ?? t('items')}</span>
           </span>
         )}
       </label>

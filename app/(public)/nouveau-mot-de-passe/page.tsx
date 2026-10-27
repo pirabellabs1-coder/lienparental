@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState, type FormEvent } from 'react'
 import { ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/cn'
@@ -22,6 +23,7 @@ type Phase = 'checking' | 'invalid' | 'mfa' | 'form' | 'done'
 // le compte a un mot de passe aléatoire et l'utilisateur choisit le sien ici.
 export default function NouveauMotDePassePage() {
   const router = useRouter()
+  const t = useTranslations('public.password.reset')
   const [phase, setPhase] = useState<Phase>(SUPABASE_ENABLED ? 'checking' : 'form')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
@@ -51,8 +53,8 @@ export default function NouveauMotDePassePage() {
   }, [])
 
   const rulesOk = PASSWORD_RULES.every(r => r.test(password))
-  const pwdError = submitted && !rulesOk ? 'Le mot de passe ne respecte pas encore toutes les règles.' : undefined
-  const confirmError = submitted && confirm !== password ? 'Les mots de passe ne correspondent pas.' : undefined
+  const pwdError = submitted && !rulesOk ? t('errRules') : undefined
+  const confirmError = submitted && confirm !== password ? t('errMatch') : undefined
 
   const verifyMfa = async (value: string) => {
     if (!factorId || value.length !== 6 || loading) return
@@ -73,7 +75,7 @@ export default function NouveauMotDePassePage() {
     if (!SUPABASE_ENABLED) { setPhase('done'); return }
 
     const parsed = passwordSchema.safeParse(password)
-    if (!parsed.success) { setError(parsed.error.issues[0]?.message ?? 'Mot de passe invalide.'); return }
+    if (!parsed.success) { setError(parsed.error.issues[0]?.message ?? t('errInvalid')); return }
     setLoading(true)
     const supabase = createClient()
     const { error: err } = await supabase.auth.updateUser({ password: parsed.data })
@@ -92,7 +94,7 @@ export default function NouveauMotDePassePage() {
   }
 
   if (phase === 'checking') {
-    return <main className="flex flex-1 flex-col" aria-busy="true"><OnboardingScreen back={false} title="Vérification du lien…" /></main>
+    return <main className="flex flex-1 flex-col" aria-busy="true"><OnboardingScreen back={false} title={t('checking')} /></main>
   }
 
   if (phase === 'invalid') {
@@ -100,11 +102,11 @@ export default function NouveauMotDePassePage() {
       <main className="flex flex-1 flex-col">
         <OnboardingScreen
           back="/onboarding/connexion"
-          title="Lien expiré"
-          subtitle="Ce lien de réinitialisation n’est plus valide ou a déjà été utilisé. Demandez-en un nouveau."
+          title={t('expiredTitle')}
+          subtitle={t('expiredText')}
           footer={
             <Link href="/mot-de-passe-oublie" className={cn(btn.primary, 'w-full')}>
-              Demander un nouveau lien
+              {t('newLink')}
             </Link>
           }
         />
@@ -123,15 +125,15 @@ export default function NouveauMotDePassePage() {
               <ShieldCheck className="h-9 w-9" />
             </span>
           }
-          title={signup ? 'Mot de passe enregistré' : 'Mot de passe modifié'}
-          subtitle={<span role="status">Votre {signup ? '' : 'nouveau '}mot de passe est enregistré.{SUPABASE_ENABLED && !signup && ' Les autres appareils ont été déconnectés.'}</span>}
+          title={signup ? t('doneSignupTitle') : t('doneTitle')}
+          subtitle={<span role="status">{signup ? t('doneSignupText') : t('doneText')}{SUPABASE_ENABLED && !signup && ` ${t('othersOut')}`}</span>}
           footer={
             <button
               type="button"
               className={cn(btn.primary, 'w-full')}
               onClick={() => router.push(signup ? '/onboarding/profil' : SUPABASE_ENABLED ? '/app' : '/onboarding/connexion')}
             >
-              {signup ? 'Continuer' : SUPABASE_ENABLED ? 'Accéder à mon espace' : 'Retour à la connexion'}
+              {signup ? t('continue') : SUPABASE_ENABLED ? t('enter') : t('backToLogin')}
             </button>
           }
         />
@@ -144,12 +146,12 @@ export default function NouveauMotDePassePage() {
       <main className="flex flex-1 flex-col">
         <OnboardingScreen
           back={false}
-          title="Double authentification"
-          subtitle="Saisissez le code à 6 chiffres de votre application d’authentification pour continuer."
+          title={t('mfaTitle')}
+          subtitle={t('mfaSubtitle')}
           onSubmit={onSubmit}
           footer={
             <button type="submit" className={cn(btn.primary, 'w-full')} disabled={loading || code.length !== 6} aria-busy={loading}>
-              {loading ? 'Vérification…' : 'Vérifier'}
+              {loading ? t('verifying') : t('verify')}
             </button>
           }
         >
@@ -160,7 +162,7 @@ export default function NouveauMotDePassePage() {
             disabled={loading}
             error={!!error}
             autoFocus
-            ariaLabel="Code de double authentification"
+            ariaLabel={t('mfaCode')}
           />
           <div className="mt-4 min-h-[20px]" aria-live="polite">
             {error && <p role="alert" className="text-sm font-semibold text-alert-600">{error}</p>}
@@ -174,40 +176,38 @@ export default function NouveauMotDePassePage() {
     <main className="flex flex-1 flex-col">
       <OnboardingScreen
         back="/onboarding/connexion"
-        title={signup ? 'Choisissez votre mot de passe' : 'Nouveau mot de passe'}
-        subtitle={signup
-          ? 'Votre adresse est confirmée. Choisissez le mot de passe de votre compte, que vous n’utilisez nulle part ailleurs.'
-          : 'Choisissez un mot de passe que vous n’utilisez nulle part ailleurs.'}
+        title={signup ? t('signupTitle') : t('title')}
+        subtitle={signup ? t('signupSubtitle') : t('subtitle')}
         onSubmit={onSubmit}
         footer={
           <>
             {error && <p role="alert" className="text-center text-sm font-semibold text-alert-600">{error}</p>}
             <button type="submit" className={cn(btn.primary, 'w-full')} disabled={loading} aria-busy={loading}>
-              {loading ? 'Enregistrement…' : 'Enregistrer'}
+              {loading ? t('saving') : t('save')}
             </button>
             <Link href="/onboarding/connexion" className={cn(linkLeaf, 'inline-flex min-h-[44px] w-full items-center justify-center text-[13px]')}>
-              Annuler
+              {t('cancel')}
             </Link>
           </>
         }
       >
         <div className="space-y-4">
           <PasswordField
-            label="Nouveau mot de passe"
+            label={t('newPassword')}
             value={password}
             onValueChange={setPassword}
             showRules
             showStrength
             autoComplete="new-password"
-            placeholder="Votre nouveau mot de passe"
+            placeholder={t('newPasswordPh')}
             errorText={pwdError}
           />
           <PasswordField
-            label="Confirmer le mot de passe"
+            label={t('confirm')}
             value={confirm}
             onValueChange={setConfirm}
             autoComplete="new-password"
-            placeholder="Saisissez-le à nouveau"
+            placeholder={t('confirmPh')}
             errorText={confirmError}
           />
         </div>

@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ArrowLeft, ArrowRight, CalendarDays, CircleCheck, HeartHandshake, Lock, MessagesSquare, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { Logo } from '@/components/brand/Logo'
@@ -19,6 +20,7 @@ const backBtn = '-ml-2.5 grid h-11 w-11 place-items-center rounded-full text-nig
  */
 export function WelcomeCarousel() {
   const router = useRouter()
+  const t = useTranslations('public.onboarding.welcome')
   const [index, setIndex] = useState(0)
   const startX = useRef<number | null>(null)
   const deltaX = useRef(0)
@@ -27,8 +29,8 @@ export function WelcomeCarousel() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const t = e.target as HTMLElement | null
-      if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return
+      const el = e.target as HTMLElement | null
+      if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return
       if (e.key === 'ArrowRight') goTo(index + 1)
       if (e.key === 'ArrowLeft') goTo(index - 1)
     }
@@ -53,15 +55,15 @@ export function WelcomeCarousel() {
   const slides: ReactNode[] = [<SlideWelcome key="1" />, <SlideWhy key="2" />, <SlideMission key="3" />, <SlideReady key="4" />]
 
   return (
-    <section className="flex flex-1 flex-col" aria-roledescription="carrousel" aria-label="Découvrir Lien Parental">
+    <section className="flex flex-1 flex-col" aria-roledescription={t('carousel')} aria-label={t('carouselLabel')}>
       {/* Retour : page d'accueil du site au premier écran, écran précédent ensuite. */}
       <div className="px-6 pt-3">
         {index === 0 ? (
-          <Link href="/" aria-label="Retour à la page d’accueil" className={backBtn}>
+          <Link href="/" aria-label={t('backHome')} className={backBtn}>
             <ArrowLeft className="h-[22px] w-[22px]" aria-hidden="true" />
           </Link>
         ) : (
-          <button type="button" onClick={() => goTo(index - 1)} aria-label="Écran précédent" className={backBtn}>
+          <button type="button" onClick={() => goTo(index - 1)} aria-label={t('prevScreen')} className={backBtn}>
             <ArrowLeft className="h-[22px] w-[22px]" aria-hidden="true" />
           </button>
         )}
@@ -82,8 +84,8 @@ export function WelcomeCarousel() {
               key={i}
               aria-hidden={i !== index}
               inert={i !== index}
-              aria-roledescription="diapositive"
-              aria-label={`${i + 1} sur ${TOTAL}`}
+              aria-roledescription={t('slide')}
+              aria-label={t('slideOf', { n: i + 1, total: TOTAL })}
               className="flex w-full shrink-0 flex-col overflow-y-auto px-6 pb-2 pt-1"
             >
               {s}
@@ -98,13 +100,13 @@ export function WelcomeCarousel() {
         {index === 0 && (
           <>
             <button type="button" className={cn(btn.primary, 'w-full')} onClick={() => goTo(1)}>
-              Commencer
+              {t('start')}
             </button>
             <p className="rounded-xl bg-leaf-50/70 px-4 py-3 text-center text-[13px] text-night-700">
-              Vous avez déjà un compte ?
+              {t('haveAccount')}
               <br />
               <Link href="/onboarding/connexion" className={cn(linkLeaf, 'inline-flex min-h-[32px] items-center underline')}>
-                Se connecter
+                {t('signIn')}
               </Link>
             </p>
           </>
@@ -112,14 +114,14 @@ export function WelcomeCarousel() {
 
         {(index === 1 || index === 2) && (
           <button type="button" className={cn(btn.primary, 'relative w-full')} onClick={() => goTo(index + 1)}>
-            Suivant
+            {t('next')}
             <ArrowRight className="absolute right-5 h-5 w-5" aria-hidden="true" />
           </button>
         )}
 
         {index === 3 && (
           <button type="button" className={cn(btn.primary, 'w-full')} onClick={() => router.push('/onboarding/inscription')}>
-            Créer mon compte
+            {t('createAccount')}
           </button>
         )}
       </div>
@@ -130,63 +132,48 @@ export function WelcomeCarousel() {
 /* ---------------------------------------------------------------- slides -- */
 
 function SlideWelcome() {
+  const t = useTranslations('public.onboarding.welcome')
   return (
     <div className="flex flex-1 flex-col items-center text-center">
       <Logo size="lg" />
       <Image
         src="/images/onboarding/bienvenue.webp"
-        alt="Un père et une mère, assis face à face, accueillent leur fille qui court vers eux en souriant"
+        alt={t('welcomeAlt')}
         width={720}
         height={376}
         priority
         className="mt-4 h-auto w-full max-w-[340px]"
       />
-      <h1 className="mt-5 text-[26px] font-extrabold tracking-[-0.02em] text-night-900">Bienvenue&nbsp;!</h1>
+      <h1 className="mt-5 text-[26px] font-extrabold tracking-[-0.02em] text-night-900">{t('welcomeTitle')}</h1>
       <p className="mx-auto mt-2 max-w-[19rem] text-[15px] leading-relaxed text-night-600">
-        Un espace pensé pour les parents, centré sur l’essentiel&nbsp;: <strong className="font-bold text-night-900">le bien-être de votre enfant.</strong>
+        {t.rich('welcomeText', { b: (c) => <strong className="font-bold text-night-900">{c}</strong> })}
       </p>
     </div>
   )
 }
 
 const FEATURES = [
-  {
-    icon: MessagesSquare,
-    tone: 'bg-night-50 text-night-900',
-    title: 'Communiquez sereinement',
-    text: 'Des outils et des modèles pour échanger clairement et sans conflit.',
-  },
-  {
-    icon: CalendarDays,
-    tone: 'bg-leaf-50 text-leaf-600',
-    title: 'Organisez facilement',
-    text: 'Calendrier partagé, événements, rendez-vous et rappels importants.',
-  },
-  {
-    icon: Lock,
-    tone: 'bg-night-50 text-night-900',
-    title: 'Sécurisez vos documents',
-    text: 'Conservez tous vos documents importants dans un coffre-fort sécurisé.',
-  },
-]
+  { key: 'communicate', icon: MessagesSquare, tone: 'bg-night-50 text-night-900' },
+  { key: 'organize', icon: CalendarDays, tone: 'bg-leaf-50 text-leaf-600' },
+  { key: 'secure', icon: Lock, tone: 'bg-night-50 text-night-900' },
+] as const
 
 function SlideWhy() {
+  const t = useTranslations('public.onboarding.welcome')
   return (
     <div className="flex flex-1 flex-col justify-center">
       <h1 className="text-center text-[24px] font-extrabold leading-tight tracking-[-0.02em] text-night-900">
-        Tout ce dont vous avez
-        <br />
-        besoin, <span className="text-leaf-500">au même endroit.</span>
+        {t.rich('whyTitle', { br: () => <br />, hl: (c) => <span className="text-leaf-500">{c}</span> })}
       </h1>
       <ul className="mt-9 space-y-7">
-        {FEATURES.map(({ icon: Icon, tone, title, text }) => (
-          <li key={title} className="flex items-start gap-4">
+        {FEATURES.map(({ key, icon: Icon, tone }) => (
+          <li key={key} className="flex items-start gap-4">
             <span className={cn('grid h-14 w-14 shrink-0 place-items-center rounded-2xl', tone)} aria-hidden="true">
               <Icon className="h-6 w-6" />
             </span>
             <div>
-              <h2 className="text-[15px] font-bold text-night-900">{title}</h2>
-              <p className="mt-1 text-sm leading-relaxed text-night-600">{text}</p>
+              <h2 className="text-[15px] font-bold text-night-900">{t(`features.${key}.title`)}</h2>
+              <p className="mt-1 text-sm leading-relaxed text-night-600">{t(`features.${key}.text`)}</p>
             </div>
           </li>
         ))}
@@ -196,59 +183,59 @@ function SlideWhy() {
 }
 
 function SlideMission() {
+  const t = useTranslations('public.onboarding.welcome')
   return (
     <div className="flex flex-1 flex-col items-center text-center">
       <h1 className="text-[24px] font-extrabold leading-tight tracking-[-0.02em] text-night-900">
-        Pensé pour l’intérêt
-        <br />
-        supérieur <span className="text-leaf-500">de l’enfant.</span>
+        {t.rich('missionTitle', { br: () => <br />, hl: (c) => <span className="text-leaf-500">{c}</span> })}
       </h1>
       <p className="mx-auto mt-2 max-w-[19rem] text-sm leading-relaxed text-night-600">
-        Des fonctionnalités conçues pour préserver le lien parent-enfant dans le respect et la bienveillance.
+        {t('missionLead')}
       </p>
       <Image
         src="/images/onboarding/mission.webp"
-        alt="Une mère serre tendrement sa fille dans ses bras, toutes deux les yeux fermés et souriantes"
+        alt={t('missionAlt')}
         width={720}
         height={421}
         className="mt-3 h-auto w-full max-w-[320px]"
       />
       <p className="mt-3 w-full rounded-2xl border border-night-100 bg-night-50/50 p-4 text-left text-sm leading-relaxed text-night-800">
-        Chaque outil aide à garder des échanges clairs et apaisés entre parents, pour que l’enfant garde sa place auprès de chacun.
+        {t('missionText')}
       </p>
     </div>
   )
 }
 
 const VALUES = [
-  { icon: CircleCheck, label: 'Simple' },
-  { icon: ShieldCheck, label: 'Sécurisé' },
-  { icon: HeartHandshake, label: 'Bienveillant' },
-]
+  { icon: CircleCheck, key: 'simple' },
+  { icon: ShieldCheck, key: 'secure' },
+  { icon: HeartHandshake, key: 'caring' },
+] as const
 
 function SlideReady() {
+  const t = useTranslations('public.onboarding.welcome')
   return (
     <div className="flex flex-1 flex-col items-center justify-center text-center">
       <Image
         src="/images/onboarding/ensemble.webp"
-        alt="Un père et une mère se tapent dans la main au-dessus de leur fille, qui lève les bras de joie"
+        alt={t('readyAlt')}
         width={720}
         height={396}
         className="h-auto w-full max-w-[340px]"
       />
       <h1 className="mt-6 text-[24px] font-extrabold leading-tight tracking-[-0.02em] text-night-900">
-        Ensemble pour le bien-être <span className="text-leaf-500">de votre enfant.</span>
+        {t.rich('readyTitle', { hl: (c) => <span className="text-leaf-500">{c}</span> })}
       </h1>
       <p className="mx-auto mt-2 max-w-[19rem] text-[15px] leading-relaxed text-night-600">
-        Une meilleure communication entre parents, pour un quotidien plus serein.
+        {t('readyText')}
       </p>
       <ul className="mt-8 grid w-full grid-cols-3 gap-2">
-        {VALUES.map(({ icon: Icon, label }) => (
-          <li key={label} className="flex flex-col items-center gap-2">
+        {VALUES.map(({ icon: Icon, key }) => (
+          <li key={key} className="flex flex-col items-center gap-2">
             <span className="grid h-11 w-11 place-items-center rounded-full border-[1.5px] border-leaf-500 text-leaf-500" aria-hidden="true">
               <Icon className="h-5 w-5" />
             </span>
-            <span className="text-[13px] font-bold text-night-900">{label}</span>
+            <span className="text-[13px] font-bold text-night-900">{t(`values.${key}`)}</span>
           </li>
         ))}
       </ul>

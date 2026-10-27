@@ -1,0 +1,532 @@
+{
+  "coach": {
+    "common": {
+      "legalNote": "O Coach com IA sugere caminhos de comunicação. O Coach com IA não dá orientação jurídica.",
+      "demoNote": "Modo de demonstração: respostas simuladas",
+      "usageValueText": "{used} de {total} ({pct}%)",
+      "progressLabel": "Análise",
+      "progressAria": "{label}: {value}%",
+      "errors": {
+        "generic": "Ocorreu um erro. Tente novamente em instantes.",
+        "sessionExpired": "Sua sessão expirou. Entre novamente.",
+        "tooLarge": "Conteúdo grande demais."
+      },
+      "fileErrors": {
+        "tooBig": "Arquivo grande demais (máximo de 10 MB).",
+        "imageFormat": "Formato aceito: imagem JPG ou PNG.",
+        "imageTooBig": "Imagem grande demais (máximo de 5 MB).",
+        "word": "Documentos do Word ainda não são compatíveis: salve-o em PDF.",
+        "docFormat": "Formatos aceitos: PDF ou texto."
+      },
+      "time": {
+        "today": "hoje às {time}",
+        "yesterday": "ontem às {time}",
+        "dateAt": "{date} às {time}"
+      },
+      "kinds": {
+        "capture": "Captura de tela",
+        "pdf": "Documento - PDF",
+        "word": "Documento - Word",
+        "document": "Documento - Texto",
+        "message": "Mensagem escrita"
+      }
+    },
+    "chat": {
+      "you": "Você: ",
+      "sent": "Enviado",
+      "coachPrefix": "Coach com IA: ",
+      "typing": "O coach está escrevendo uma resposta…",
+      "dataUsed": "Dados utilizados: ",
+      "placeholder": "Faça sua pergunta…",
+      "statusWriting": "O Coach está escrevendo uma resposta…",
+      "statusFailed": "O Coach não conseguiu responder.",
+      "statusDone": "Resposta do Coach concluída.",
+      "interruptedSuffix": "(Resposta interrompida.)",
+      "interrupted": "Resposta interrompida.",
+      "connectionLost": "A conexão foi interrompida.",
+      "connectionFailed": "Não foi possível conectar. Verifique sua rede e tente novamente.",
+      "suggestions": "Sugestões",
+      "stop": "Parar a resposta",
+      "send": "Enviar a pergunta",
+      "hint": "Enter para enviar, Shift + Enter para pular linha. As mensagens que você cola são tratadas como dados.",
+      "medicalTitle": "Incluir as informações médicas",
+      "medicalDesc": "Somente para a próxima pergunta. Desativado por padrão."
+    },
+    "list": {
+      "opFailed": "A operação falhou. Tente novamente.",
+      "connectionFailed": "Não foi possível conectar. Tente novamente.",
+      "restored": "Análise restaurada no histórico.",
+      "archived": "Análise arquivada.",
+      "deleted": "Análise excluída.",
+      "archivesDeleted": "Arquivos excluídos.",
+      "historyDeleted": "Histórico excluído.",
+      "viewResponse": "Ver a resposta",
+      "restore": "Restaurar no histórico",
+      "archive": "Arquivar",
+      "delete": "Excluir",
+      "filterLabel": "Filtrar por tipo",
+      "filters": {
+        "all": "Todos os tipos",
+        "capture": "Capturas de tela",
+        "pdf": "Documentos PDF",
+        "document": "Documentos de texto",
+        "word": "Documentos Word",
+        "message": "Mensagens escritas"
+      },
+      "emptyArchived": "Nenhuma análise arquivada",
+      "emptyHistory": "Nenhuma análise por enquanto",
+      "emptyFilter": "Nenhum resultado para este tipo",
+      "emptyHint": "Suas análises aparecerão aqui.",
+      "emptyFilterHint": "Tente outro filtro.",
+      "responseReady": "Resposta disponível",
+      "actionsFor": "Ações para {title}, {date}",
+      "deleteArchives": "Excluir os arquivos",
+      "deleteHistory": "Excluir o histórico",
+      "newAnalysis": "Fazer uma nova análise",
+      "confirmArchives": "Excluir os arquivos?",
+      "confirmHistory": "Excluir o histórico?",
+      "confirmDesc": "O conteúdo de todas as análises desta lista será excluído definitivamente. As análises deste ciclo continuam contando na sua cota."
+    },
+    "home": {
+      "menuLabel": "Menu do Coach com IA",
+      "title": "Coach parental com IA",
+      "heading": "Escreva sua mensagem",
+      "intro": "Ou adicione uma captura de tela ou um documento para obter uma reformulação adequada.",
+      "textareaLabel": "Sua mensagem a reformular",
+      "placeholder": "Escreva sua mensagem aqui…",
+      "characters": " caracteres",
+      "addCapture": "Adicionar uma captura de tela",
+      "addCaptureHint": "(Imagem JPG, PNG)",
+      "addDoc": "Adicionar um documento",
+      "addDocHint": "(PDF ou texto)",
+      "analyze": "Analisar minha mensagem",
+      "askTitle": "Pergunte ao seu Coach",
+      "askHint": "Resumo do mês, documentos, despesas, mensagem a preparar…",
+      "menu": {
+        "ask": "Pergunte ao seu Coach",
+        "history": "Histórico",
+        "archives": "Arquivos",
+        "usage": "Meu uso",
+        "home": "Voltar ao início"
+      }
+    },
+    "archives": {
+      "title": "Arquivos",
+      "intro": "Suas análises arquivadas com toda a segurança."
+    },
+    "history": {
+      "title": "Histórico",
+      "intro": "Encontre todas as suas análises a qualquer momento."
+    },
+    "assistant": {
+      "title": "Pergunte ao seu Coach",
+      "intro": "O Coach se baseia no seu diário, no seu calendário, na sua agenda de guarda, nos nomes dos seus documentos e nas suas despesas compartilhadas. Ele indica os dados utilizados e avisa quando falta alguma informação.",
+      "greeting": "Olá, o que você gostaria de saber ou preparar hoje?",
+      "inputLabel": "Sua pergunta para o Coach com IA",
+      "placeholder": "Faça sua pergunta ou cole uma mensagem…",
+      "conversationLabel": "Conversa com o Coach com IA",
+      "suggestions": {
+        "month": "Resuma os eventos deste mês",
+        "jaf": "Quais documentos faltam no meu processo judicial?",
+        "custody": "Prepare uma mensagem para propor uma mudança de guarda",
+        "owed": "Quanto o outro genitor me deve?"
+      }
+    },
+    "discussion": {
+      "greeting": "Olá, eu me baseio no seu espaço (diário, calendário, guarda, documentos, despesas) para responder.",
+      "aboutAnalysis": "Faça suas perguntas sobre a análise.",
+      "aboutAnalysisTitled": "Faça suas perguntas sobre a análise “{title}”.",
+      "titleAnalysis": "Análise da IA",
+      "titleCoach": "Coach parental com IA",
+      "subtitleAnalysis": "Faça suas perguntas sobre a análise",
+      "subtitleCoach": "Faça suas perguntas ao Coach",
+      "inputAnalysis": "Sua pergunta sobre a análise",
+      "inputCoach": "Sua pergunta para o Coach com IA",
+      "conversationLabel": "Conversa com o Coach com IA",
+      "backToResponse": "Voltar à resposta sugerida",
+      "seeSuggestions": "Ver as sugestões do Coach"
+    },
+    "analysis": {
+      "stages": {
+        "sending": "Enviando o conteúdo…",
+        "received": "Conteúdo recebido, preparando a análise…",
+        "thinking": "O Coach está refletindo sobre o contexto…",
+        "reading": "Lendo o conteúdo…",
+        "writing": "Redigindo a análise…",
+        "done": "Análise concluída"
+      },
+      "noContent": "Nenhum conteúdo para analisar. Importe uma captura, um documento ou uma mensagem a partir da tela inicial do Coach.",
+      "fileGone": "O arquivo não está mais disponível (a página foi recarregada). Importe-o novamente.",
+      "tooMany": "Solicitações demais. Aguarde um instante.",
+      "interrupted": "A conexão foi interrompida. Tente novamente.",
+      "connectionFailed": "Não foi possível conectar. Verifique sua rede e tente novamente.",
+      "topTitle": "Coach parental com IA",
+      "titleFailed": "Análise interrompida",
+      "titleDone": "Análise concluída",
+      "titleRunning": "Análise em andamento…",
+      "subtitle": "Nossa IA está analisando o conteúdo e o contexto da sua mensagem.",
+      "upgrade": "Assinar o Premium",
+      "retry": "Tentar novamente",
+      "back": "Voltar ao Coach",
+      "checksTitle": "O que analisamos",
+      "checks": {
+        "tone": "Tom e nível de agressividade",
+        "hurtful": "Palavras ofensivas ou reativas",
+        "clarity": "Clareza da mensagem",
+        "respect": "Respeito e gentileza",
+        "impact": "Impacto na comunicação"
+      },
+      "checked": ": verificado",
+      "pending": ": pendente"
+    },
+    "document": {
+      "topTitle": "Coach parental com IA",
+      "recognized": {
+        "capture": "Trata-se de uma captura de tela. A IA vai ler a conversa e analisar o conteúdo.",
+        "pdf": "Trata-se de um documento PDF. A IA vai analisar o conteúdo e o tom.",
+        "word": "Documentos do Word ainda não são compatíveis: salve-o em PDF.",
+        "document": "Trata-se de um documento de texto. A IA vai analisar o conteúdo e o tom.",
+        "message": "Trata-se de uma mensagem escrita. A IA vai analisar o tom e a formulação."
+      },
+      "emptyTitle": "Nenhum documento importado",
+      "emptySubtitle": "Adicione uma captura de tela, um PDF ou uma mensagem a partir da tela inicial do Coach para iniciar uma análise.",
+      "importContent": "Importar um conteúdo",
+      "messageAdded": "Mensagem adicionada",
+      "documentAdded": "Documento adicionado",
+      "subtitle": "Seu arquivo foi importado e está pronto para ser analisado.",
+      "fileSection": "Arquivo importado",
+      "remove": "Remover {title}",
+      "preview": "Pré-visualização de {title}",
+      "fileMissing": "O arquivo não está mais disponível depois que a página foi recarregada. Use “Adicionar outro documento” para importá-lo novamente.",
+      "recognizedTitle": "Documento reconhecido",
+      "start": "Iniciar a análise",
+      "another": "Adicionar outro documento",
+      "savedToVault": "Adicionado ao cofre",
+      "saveToVault": "Adicionar ao cofre",
+      "savedStatus": "Cópia salva no seu cofre."
+    },
+    "response": {
+      "types": {
+        "message_ecrit": "Trata-se de uma mensagem que você escreveu.",
+        "capture_conversation": "Trata-se de uma captura de tela de uma conversa.",
+        "document": "Trata-se de um documento.",
+        "autre": "Não foi possível identificar o conteúdo como uma troca entre pais."
+      },
+      "notFound": "Análise não encontrada.",
+      "topTitle": "Coach parental com IA",
+      "backToHistory": "Voltar ao histórico",
+      "emptyTitle": "Nenhuma análise para exibir",
+      "emptySubtitle": "Inicie uma análise a partir da tela inicial do Coach ou encontre suas análises no histórico.",
+      "analyzeContent": "Analisar um conteúdo",
+      "seeHistory": "Ver o histórico",
+      "rephrased": "Mensagem reformulada",
+      "proposed": "Resposta sugerida",
+      "copiedStatus": "Texto copiado para a área de transferência.",
+      "copyFailed": "Não foi possível copiar. Selecione o texto para copiá-lo.",
+      "archivedStatus": "Análise arquivada.",
+      "archiveFailed": "Não foi possível arquivar.",
+      "connectionFailed": "Não foi possível conectar.",
+      "title": "Resposta da IA",
+      "subtitle": "Veja a resposta sugerida e o que a IA identificou no seu conteúdo.",
+      "copied": "Copiado",
+      "copy": "Copiar",
+      "archived": "Arquivada",
+      "archive": "Arquivar",
+      "scoresTitle": "O que a IA identificou",
+      "scores": {
+        "calm": "Tom tranquilo",
+        "aggressiveness": "Agressividade",
+        "clarity": "Clareza",
+        "respect": "Respeito"
+      },
+      "scoreValueText": "{value} de 100",
+      "hurtfulWords": "Palavras ofensivas ou reativas",
+      "quoted": "“{word}”",
+      "aboutTitle": "Sobre o seu documento",
+      "recognizedText": "Texto reconhecido",
+      "tips": "Dicas",
+      "ask": "Fazer uma pergunta sobre a análise",
+      "newAnalysis": "Fazer uma nova análise"
+    },
+    "usage": {
+      "topTitle": "Coach com IA",
+      "current": "Uso atual",
+      "seeDetail": ", ver os detalhes",
+      "ofAnalyses": " / {total} análises",
+      "usedThisCycle": "Análises usadas neste ciclo",
+      "releaseOn": "Uma análise fica disponível novamente em",
+      "resetOn": "Suas análises são renovadas em",
+      "noneCounted": "Nenhuma análise contabilizada",
+      "atMidnight": " às 00:00",
+      "plan": "Plano atual",
+      "analysesCount": "{count, plural, one {# análise} other {# análises}}",
+      "perCycle": "por ciclo",
+      "reset": "Renovação",
+      "inDays": "{count, plural, one {Em # dia} other {Em # dias}}",
+      "cycle30": "Ciclo de 30 dias",
+      "goodToKnow": "Bom saber",
+      "goodToKnowText": "Cada ciclo permite que você faça até {total} análises com o Coach com IA. Seu contador é renovado automaticamente a cada 30 dias.",
+      "seeHistory": "Ver meu histórico",
+      "detail": {
+        "topTitle": "Detalhes do uso",
+        "used": "Análises usadas",
+        "remaining": "Análises restantes",
+        "totalPerCycle": "Total por ciclo",
+        "resetIn": "Renovação em",
+        "days": "{count, plural, one {# dia} other {# dias}}",
+        "resetDate": "Data de renovação",
+        "pctUsed": "{pct}% usadas",
+        "tip": "Dica",
+        "tipText": "Planeje suas análises importantes para aproveitar melhor o seu ciclo."
+      },
+      "log": {
+        "topTitle": "Histórico de análises",
+        "sort": "Ordenar as análises",
+        "summary": "Resumo do ciclo atual",
+        "ofUsed": " / {total} análises usadas",
+        "quotaUsed": "Cota usada neste ciclo",
+        "pctQuota": "{pct}% da cota usada",
+        "listTitle": "Análises do ciclo ({order})",
+        "newestFirst": "Mais recentes primeiro",
+        "oldestFirst": "Mais antigas primeiro",
+        "checkmark": "{label} ✓",
+        "empty": "Nenhuma análise neste ciclo.",
+        "statusDone": "Concluída",
+        "statusDeleted": "Excluída",
+        "deletedTitle": "Análise excluída"
+      },
+      "info": {
+        "topTitle": "Informações",
+        "aboutTitle": "Sobre o Coach com IA",
+        "aboutText": "O Coach com IA acompanha você com análises personalizadas para ajudar na sua parentalidade.",
+        "quotaTitle": "Como funciona a sua cota?",
+        "quotaText": "Você tem {total} análises por ciclo de 30 dias. Depois de atingir essa cota, será preciso aguardar a renovação para fazer novas análises.",
+        "nextCycle": "Próximo ciclo",
+        "noneYet": "Nenhuma análise contabilizada por enquanto",
+        "moreTitle": "Precisa de mais análises?",
+        "moreText": "Fale com a nossa equipe para conhecer nossas ofertas adicionais.",
+        "contact": "Fale conosco"
+      },
+      "trends": {
+        "topTitle": "Tendências de uso",
+        "thisCycle": "Este ciclo",
+        "last3": "Uso nos últimos 3 ciclos",
+        "caption": "Análises usadas por ciclo",
+        "colCycle": "Ciclo",
+        "colStart": "Início",
+        "colAnalyses": "Análises",
+        "average": "Média por ciclo",
+        "max": "Uso máximo",
+        "min": "Uso mínimo",
+        "currentCycle": "Ciclo atual",
+        "cycleN": "Ciclo -{n}",
+        "avgValue": "{value} análises"
+      }
+    },
+    "guide": {
+      "title": "Guia parental",
+      "categories": {
+        "ecole": "Escola e escolaridade",
+        "sante": "Saúde",
+        "aides": "Auxílios e direitos",
+        "argent": "Banco e dinheiro",
+        "assurances": "Seguros",
+        "naissance": "Nascimento e primeira infância",
+        "separation": "Separação e parentalidade",
+        "loisirs": "Lazer e atividades",
+        "logement": "Moradia e vida cotidiana"
+      },
+      "home": {
+        "intro": "Entenda seus trâmites, os auxílios e os órgãos, e depois adicione-os ao Lien Parental com um toque.",
+        "parcoursTitle": "Percursos passo a passo",
+        "parcoursHint": "Acompanhe seu andamento, ele é salvo automaticamente.",
+        "categoriesTitle": "Categorias",
+        "ficheCount": "{count, plural, one {# ficha} other {# fichas}}",
+        "disclaimer": "As informações do guia são verificadas em fontes oficiais e datadas em cada ficha. Elas não substituem uma orientação jurídica: para a sua situação, procure o órgão responsável."
+      },
+      "header": {
+        "back": "Guia",
+        "territory": "Território:",
+        "onlyTerritory": "Único território disponível no momento."
+      },
+      "search": {
+        "label": "Pesquisar um trâmite",
+        "placeholder": "Pesquisar um trâmite",
+        "clear": "Limpar a pesquisa",
+        "none": "Nenhuma ficha corresponde.",
+        "found": "{count, plural, one {# ficha encontrada} other {# fichas encontradas}}"
+      },
+      "category": {
+        "empty": "Ainda não há fichas nesta categoria.",
+        "others": "Outras categorias"
+      },
+      "parcours": {
+        "metaTitle": "Percurso",
+        "eyebrow": "Percurso",
+        "privacy": "Seu progresso é salvo automaticamente. Ele é pessoal e não é compartilhado com o outro genitor."
+      },
+      "progress": {
+        "doneOf": "{done} de {total} {done, plural, one {concluído} other {concluídos}}",
+        "inProgress": ", {count} em andamento",
+        "percent": "{value}%",
+        "ariaLabel": "Progresso do percurso {title}",
+        "statusLegend": "Status: {label}",
+        "status": {
+          "a_faire": "A fazer",
+          "en_cours": "Em andamento",
+          "termine": "Concluído"
+        },
+        "retry": "Tentar novamente",
+        "loading": "Carregando seu progresso…",
+        "saveFailed": "Não foi possível salvar.",
+        "seeFiche": "Ver a ficha",
+        "readyOf": "{done} de {total} {done, plural, one {pronto} other {prontos}}",
+        "done": "Trâmite concluído",
+        "markDone": "Marcar como concluído",
+        "undoHint": "Toque novamente para voltar a “a fazer”.",
+        "badgeDone": "Concluído"
+      },
+      "fiche": {
+        "lastChecked": "Última verificação em ",
+        "whatFor": "Para que serve?",
+        "who": "Quem é afetado?",
+        "goodToKnow": "Bom saber",
+        "deadlines": "Prazos",
+        "documents": "Documentos necessários",
+        "steps": "Etapas",
+        "where": "Onde fazer o trâmite?",
+        "officialSite": "Site oficial",
+        "officialSiteSr": " de {name} (nova aba)",
+        "newTab": " (nova aba)",
+        "links": "Links úteis",
+        "addTitle": "Adicionar ao Lien Parental",
+        "addHint": "Abre o formulário pré-preenchido; você confere antes de salvar.",
+        "inParcours": "No percurso",
+        "toConfirm": "A confirmar localmente",
+        "sources": "Fontes",
+        "checkedBySource": ", verificada pela fonte em {date}",
+        "disclaimer": "Este guia fornece informações gerais e não constitui orientação jurídica. Valores e prazos podem mudar: confirme com o órgão responsável antes de qualquer trâmite."
+      },
+      "actions": {
+        "labels": {
+          "coffre": "Adicionar um documento ao cofre",
+          "calendrier": "Adicionar ao calendário",
+          "rappel": "Adicionar um lembrete",
+          "depense": "Adicionar uma despesa ao Diário"
+        },
+        "amountBy": "Valor indicado pela",
+        "officialSource": "fonte oficial",
+        "newTab": " (nova aba)",
+        "editable": ", editável no formulário."
+      },
+      "partners": {
+        "title": "Ofertas disponíveis em {territory}",
+        "intro": "Conteúdo comercial, separado das informações acima. As ofertas são apresentadas sem classificação: compare-as de acordo com suas necessidades.",
+        "sponsored": "Oferta patrocinada",
+        "partner": "Parceiro",
+        "demo": "Exemplo (demonstração)",
+        "seeOffer": "Ver a oferta",
+        "seeOfferSr": " de {name} (nova aba)",
+        "linkDisabled": "Link desativado na demonstração."
+      }
+    },
+    "templates": {
+      "categories": {
+        "tous": "Todos",
+        "juridique": "Jurídico",
+        "communication": "Comunicação",
+        "scolaire": "Escolar",
+        "autre": "Outro"
+      },
+      "pages": "{count, plural, one {# página} other {# páginas}}",
+      "list": {
+        "title": "Documentos prontos para usar",
+        "intro": "Modelos redigidos por profissionais para adaptar à sua situação.",
+        "searchLabel": "Pesquisar um documento",
+        "searchPlaceholder": "Pesquisar um documento…",
+        "popularFirst": "Mostrar primeiro os modelos populares",
+        "categoryGroup": "Categoria de modelos",
+        "fillable": "Modelo para preencher, {pages}",
+        "loading": "Carregando os modelos",
+        "count": "{count, plural, one {# modelo} other {# modelos}}",
+        "empty": "Nenhum modelo corresponde à sua pesquisa."
+      },
+      "detail": {
+        "added": "Adicionado aos favoritos",
+        "removed": "Removido dos favoritos",
+        "linkCopied": "Link do modelo copiado",
+        "share": "Compartilhar este modelo",
+        "favorite": "Adicionar aos favoritos",
+        "loading": "Carregando o modelo",
+        "category": "Categoria",
+        "format": "Formato",
+        "updated": "Última atualização",
+        "compatible": "Compatível",
+        "info": "Informações",
+        "fillTitle": "Preencher e baixar",
+        "fillHint": "Preencha os campos, confira a pré-visualização e depois baixe o documento.",
+        "preview": "Pré-visualização",
+        "previewPage": "Pré-visualização da página {page}, abrir o documento",
+        "open": "Abrir o documento"
+      },
+      "generator": {
+        "generating": "Gerando o documento…",
+        "ready": "Documento “{filename}” pronto: download iniciado.",
+        "failed": "A geração falhou. Tente novamente.",
+        "fixFields": "Alguns campos precisam ser preenchidos:",
+        "optional": "(opcional)",
+        "choose": "Escolher…",
+        "downloadPdf": "Baixar em PDF",
+        "wordVersion": "Versão Word editável",
+        "privacy": "Suas informações ficam no seu aparelho: o documento é criado no seu navegador.",
+        "previewLabel": "Pré-visualização do documento"
+      },
+      "export": {
+        "steps": {
+          "file": "Gerando o arquivo",
+          "layout": "Formatação",
+          "compat": "Verificação da compatibilidade",
+          "final": "Finalização"
+        },
+        "success": "Download concluído!",
+        "ready": "Seu documento está pronto.",
+        "sizeKb": "{size} KB",
+        "openFile": "Abrir o arquivo",
+        "saved": "Salvo",
+        "saveToFiles": "Salvar em Arquivos",
+        "back": "Voltar aos documentos",
+        "savedStatus": "Arquivo salvo",
+        "failedTitle": "A exportação não foi concluída",
+        "failedHint": "Verifique sua conexão e tente novamente.",
+        "retry": "Tentar novamente",
+        "otherFormat": "Escolher outro formato",
+        "preparing": "Preparando seu documento…",
+        "wait": "Aguarde alguns instantes.",
+        "stepDone": " — concluído",
+        "stepDoing": " — em andamento",
+        "pdfDesc": "Ideal para imprimir ou enviar",
+        "wordDesc": "Editável no Microsoft Word",
+        "canvaDesc": "Personalizável no Canva",
+        "modalTitle": "Baixar o documento",
+        "modalDesc": "Escolha o formato que preferir",
+        "optionLabel": "{title} — {desc}"
+      },
+      "reader": {
+        "back": "Voltar aos detalhes do modelo",
+        "closeSearch": "Fechar a pesquisa",
+        "search": "Pesquisar no documento",
+        "searchPlaceholder": "Pesquisar uma palavra…",
+        "page": "Página ",
+        "zoomOut": "Diminuir o zoom",
+        "zoomIn": "Aumentar o zoom",
+        "fullscreen": "Tela cheia",
+        "pageOf": "Página {page} de {total}",
+        "download": "Baixar / Exportar"
+      },
+      "grid": {
+        "more1": "Mais",
+        "more2": "modelos"
+      }
+    }
+  }
+}

@@ -168,17 +168,17 @@ export const SUPPORT_LABEL: Record<PlanId, string> = {
 export type ComparisonValue = boolean | string
 
 /** Comparatif des trois formules (Mon abonnement /app/abonnement, page d'accueil). */
-export const PLAN_COMPARISON: ReadonlyArray<{ label: string; values: Record<PlanId, ComparisonValue> }> = [
-  { label: 'Coach IA', values: { gratuit: '3 analyses / mois', premium: '10 analyses / mois', coparentalite: '10 analyses / mois' } },
-  { label: 'Coffre-fort sécurisé', values: { gratuit: `${PRICING.storage.free} Go`, premium: `${PRICING.storage.premium} Go`, coparentalite: `${PRICING.storage.coparentalite} Go` } },
-  { label: 'Journal et calendrier', values: { gratuit: true, premium: true, coparentalite: true } },
-  { label: 'Modèles de courriers et dossiers', values: { gratuit: 'Essentiels', premium: 'Tous', coparentalite: 'Tous' } },
-  { label: 'Export PDF, Word et Canva', values: { gratuit: 'PDF', premium: true, coparentalite: true } },
-  { label: 'Plusieurs parents (accès partagé)', values: { gratuit: false, premium: false, coparentalite: true } },
-  { label: 'Suivi renforcé des dépenses', values: { gratuit: false, premium: false, coparentalite: true } },
-  { label: 'Export avancé (avocat, médiateur)', values: { gratuit: false, premium: false, coparentalite: true } },
-  { label: 'Assistance', values: SUPPORT_LABEL },
-  { label: 'Accès web et application installable', values: { gratuit: true, premium: true, coparentalite: true } },
+export const PLAN_COMPARISON: ReadonlyArray<{ /** Clé stable de traduction (i18n, additif). */ key?: string; label: string; values: Record<PlanId, ComparisonValue> }> = [
+  { key: 'coach', label: 'Coach IA', values: { gratuit: '3 analyses / mois', premium: '10 analyses / mois', coparentalite: '10 analyses / mois' } },
+  { key: 'vault', label: 'Coffre-fort sécurisé', values: { gratuit: `${PRICING.storage.free} Go`, premium: `${PRICING.storage.premium} Go`, coparentalite: `${PRICING.storage.coparentalite} Go` } },
+  { key: 'journalCalendar', label: 'Journal et calendrier', values: { gratuit: true, premium: true, coparentalite: true } },
+  { key: 'templates', label: 'Modèles de courriers et dossiers', values: { gratuit: 'Essentiels', premium: 'Tous', coparentalite: 'Tous' } },
+  { key: 'export', label: 'Export PDF, Word et Canva', values: { gratuit: 'PDF', premium: true, coparentalite: true } },
+  { key: 'multiParents', label: 'Plusieurs parents (accès partagé)', values: { gratuit: false, premium: false, coparentalite: true } },
+  { key: 'expenses', label: 'Suivi renforcé des dépenses', values: { gratuit: false, premium: false, coparentalite: true } },
+  { key: 'exportAdvanced', label: 'Export avancé (avocat, médiateur)', values: { gratuit: false, premium: false, coparentalite: true } },
+  { key: 'support', label: 'Assistance', values: SUPPORT_LABEL },
+  { key: 'webApp', label: 'Accès web et application installable', values: { gratuit: true, premium: true, coparentalite: true } },
 ]
 
 export const PREMIUM_INCLUDED = [
@@ -192,3 +192,40 @@ export const PREMIUM_INCLUDED = [
 
 /** Libellés du stepper du tunnel d'abonnement. */
 export const SUBSCRIBE_STEPS = ['Choix de l’offre', 'Paiement', 'Confirmation']
+
+// --- i18n (ajouts uniquement) ------------------------------------------------
+// Les libellés français ci-dessus restent la référence (facturation, e-mails, admin).
+// Les écrans traduisent au rendu via ces clés stables (catalogue messages/*/billing.json).
+
+/** Clés de traduction des avantages, alignées index par index sur PLAN_FEATURES. */
+export const PLAN_FEATURE_KEYS: Record<PlanId, readonly string[]> = {
+  gratuit: ['vault', 'coach', 'journalCalendar', 'exportPdf'],
+  premium: ['vault', 'coach', 'templatesAll', 'journalAdvanced', 'exportAll', 'sync'],
+  coparentalite: ['allPremium', 'multiParents', 'expenses', 'exportAdvanced', 'supportPriority', 'webPwa'],
+}
+
+/** Valeurs numériques des libellés promotionnels (mêmes calculs que derivePlanPricing). */
+export function planPromo(plan: PaidPlan): { freeMonths: number; discountPct: number } {
+  const p = PRICING[plan]
+  return {
+    freeMonths: Math.floor(p.yearlySavings / p.monthly),
+    discountPct: Math.max(0, Math.floor((p.yearlySavings / p.yearlyReference) * 100)),
+  }
+}
+
+/** Stockage (Go) d'une formule : PRICING.storage indexé par niveau applicatif. */
+export function storageGb(plan: PlanId): number {
+  return plan === 'gratuit' ? PRICING.storage.free : PRICING.storage[plan]
+}
+
+const eurByLocale = new Map<string, Intl.NumberFormat>()
+
+/** Prix en euros formaté pour une locale Intl (fr-FR, en-US, pt-BR). Montant inchangé. */
+export function formatPriceIn(value: number, intlLocale: string): string {
+  let f = eurByLocale.get(intlLocale)
+  if (!f) {
+    f = new Intl.NumberFormat(intlLocale, { style: 'currency', currency: 'EUR', minimumFractionDigits: 2 })
+    eurByLocale.set(intlLocale, f)
+  }
+  return f.format(value)
+}

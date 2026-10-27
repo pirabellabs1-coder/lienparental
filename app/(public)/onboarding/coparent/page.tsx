@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
 import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
@@ -18,6 +19,7 @@ import { FAMILY_LIVE, type IssuedInvitation } from '@/lib/coparents'
 // l'étape 7 et la fiche enfant de l'étape 9 existe (draft.child.id).
 export default function OnboardingCoparentPage() {
   const router = useRouter()
+  const t = useTranslations('public.onboarding.coparent')
   const { draft, ready } = useOnboardingDraft()
   const [issued, setIssued] = useState<IssuedInvitation | null>(null)
   const { announce, node: announcer } = useAnnounce()
@@ -33,7 +35,7 @@ export default function OnboardingCoparentPage() {
 
   const skip = (
     <button type="button" onClick={next} className={cn(btn.secondary, 'w-full')}>
-      Passer cette étape
+      {t('skip')}
     </button>
   )
 
@@ -42,12 +44,10 @@ export default function OnboardingCoparentPage() {
       step={11}
       back="/onboarding/recap"
       media={<Image src="/images/onboarding/bienvenue.webp" alt="" width={720} height={376} className="mb-4 h-24 w-auto" />}
-      title={issued ? 'Invitation prête' : 'Ajouter l’autre parent'}
-      subtitle={issued
-        ? 'Envoyez le lien par WhatsApp, SMS ou e-mail. Vous pourrez gérer les accès depuis Famille et co-parents.'
-        : 'Facultatif. L’autre parent ou un proche accède à l’espace partagé de l’enfant ; votre Journal et vos notes restent privés.'}
+      title={issued ? t('readyTitle') : t('title')}
+      subtitle={issued ? t('readySubtitle') : t('subtitle')}
       footer={issued ? (
-        <button type="button" onClick={next} className={cn(btn.primary, 'w-full')}>Continuer</button>
+        <button type="button" onClick={next} className={cn(btn.primary, 'w-full')}>{t('continue')}</button>
       ) : childOptions.length === 0 && ready ? skip : undefined}
     >
       <div className={cn('transition-opacity', !ready && 'opacity-0')}>
@@ -55,13 +55,13 @@ export default function OnboardingCoparentPage() {
           <ShareInvite issued={issued} senderPrenom={draft.prenom ?? ''} announce={announce} />
         ) : childOptions.length === 0 ? (
           <p className="rounded-xl bg-night-50 p-3 text-[13px] text-night-700">
-            Ajoutez d&apos;abord la fiche de votre enfant pour pouvoir la partager. Vous pourrez inviter l&apos;autre parent plus tard depuis Famille et co-parents.
+            {t('noChild')}
           </p>
         ) : (
           <InviteForm
             childOptions={childOptions}
             onCreated={setIssued}
-            submitLabel="Inviter"
+            submitLabel={t('invite')}
             secondary={skip}
           />
         )}

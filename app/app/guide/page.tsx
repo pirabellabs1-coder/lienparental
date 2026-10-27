@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { ChevronRight } from 'lucide-react'
 import { GuideHeader } from '@/components/guide/GuideHeader'
 import { GuideSearch } from '@/components/guide/GuideSearch'
@@ -9,12 +10,16 @@ import { loadGuide, toResume } from '@/lib/guide/load'
 import { GUIDE_CATEGORIES } from '@/lib/guide/types'
 import { categoryHref } from '@/lib/guide/links'
 
-export const metadata: Metadata = { title: 'Guide parental' }
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('coach.guide')
+  return { title: t('title') }
+}
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> }
 
 // Guide Parent : accueil (recherche, parcours, catégories).
 export default async function GuidePage({ searchParams }: Props) {
+  const t = await getTranslations('coach.guide')
   const sp = await searchParams
   const g = await loadGuide(sp.territoire)
   const { territoire, fiches, parcours } = g
@@ -24,9 +29,9 @@ export default async function GuidePage({ searchParams }: Props) {
     <div className="w-full px-5 pb-8 lg:px-6">
       <GuideHeader territoire={territoire} territoires={g.territoires} />
 
-      <h1 className="mt-5 text-[26px] font-extrabold tracking-[-0.02em] text-night-900 lg:text-[30px]">Guide parental</h1>
+      <h1 className="mt-5 text-[26px] font-extrabold tracking-[-0.02em] text-night-900 lg:text-[30px]">{t('title')}</h1>
       <p className="mt-1.5 max-w-[560px] text-[14px] leading-relaxed text-night-600">
-        Comprendre vos démarches, les aides et les organismes, puis les ajouter à Lien Parental en un geste.
+        {t('home.intro')}
       </p>
 
       <div className="mt-5 max-w-[640px]">
@@ -35,8 +40,8 @@ export default async function GuidePage({ searchParams }: Props) {
 
       {parcours.length > 0 && (
         <section aria-labelledby="parcours-titre" className="mt-8">
-          <h2 id="parcours-titre" className="text-[17px] font-extrabold text-night-900">Parcours pas à pas</h2>
-          <p className="mt-0.5 text-[13px] text-night-600">Suivez votre avancement, il est enregistré automatiquement.</p>
+          <h2 id="parcours-titre" className="text-[17px] font-extrabold text-night-900">{t('home.parcoursTitle')}</h2>
+          <p className="mt-0.5 text-[13px] text-night-600">{t('home.parcoursHint')}</p>
           <ul className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {parcours.map((p) => (
               <li key={p.slug}><ParcoursCard parcours={p} territoire={territoire.code} /></li>
@@ -46,7 +51,7 @@ export default async function GuidePage({ searchParams }: Props) {
       )}
 
       <section aria-labelledby="categories-titre" className="mt-8">
-        <h2 id="categories-titre" className="text-[17px] font-extrabold text-night-900">Catégories</h2>
+        <h2 id="categories-titre" className="text-[17px] font-extrabold text-night-900">{t('home.categoriesTitle')}</h2>
         <ul className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
           {GUIDE_CATEGORIES.map((c) => (
             <li key={c.key}>
@@ -58,8 +63,8 @@ export default async function GuidePage({ searchParams }: Props) {
                   <CategoryIcon cat={c.key} className="h-5 w-5" />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[14.5px] font-bold text-night-900">{c.label}</span>
-                  <span className="block text-[12.5px] text-night-600">{counts[c.key]} fiche{counts[c.key] > 1 ? 's' : ''}</span>
+                  <span className="block text-[14.5px] font-bold text-night-900">{t(`categories.${c.key}`)}</span>
+                  <span className="block text-[12.5px] text-night-600">{t('home.ficheCount', { count: counts[c.key] ?? 0 })}</span>
                 </span>
                 <ChevronRight className="h-5 w-5 shrink-0 text-night-400 transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none" strokeWidth={1.75} aria-hidden="true" />
               </Link>
@@ -69,8 +74,7 @@ export default async function GuidePage({ searchParams }: Props) {
       </section>
 
       <p className="mt-8 max-w-[640px] text-[12.5px] leading-relaxed text-night-600">
-        Les informations du guide sont vérifiées sur des sources officielles et datées sur chaque fiche. Elles ne remplacent pas un conseil juridique :
-        pour votre situation, adressez-vous à l'organisme concerné.
+        {t('home.disclaimer')}
       </p>
     </div>
   )

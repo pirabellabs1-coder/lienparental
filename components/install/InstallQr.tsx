@@ -1,4 +1,5 @@
 import QRCode from 'qrcode'
+import { getTranslations } from 'next-intl/server'
 import { AppIcon } from './AppIcon'
 
 // QR code (SVG généré côté serveur) aux couleurs de la marque, avec une petite icône
@@ -11,11 +12,12 @@ export async function InstallQr({ url, size = 168 }: { url: string; size?: numbe
     color: { dark: '#0b2d5b', light: '#ffffff' },
   })
   const icon = Math.round(size * 0.22)
+  const t = await getTranslations('public.install')
   return (
     <div className="relative" style={{ width: size, height: size }}>
       <div
         role="img"
-        aria-label="QR code pour ouvrir cette page sur votre téléphone"
+        aria-label={t('qrLabel')}
         className="h-full w-full [&>svg]:h-full [&>svg]:w-full"
         dangerouslySetInnerHTML={{ __html: svg }}
       />

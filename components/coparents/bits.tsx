@@ -1,8 +1,10 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
+import { intlLocale } from '@/lib/i18n/config'
 import { DEFAULT_TZ } from '@/lib/tz'
-import { ROLE_LABEL, type FamilyRole } from '@/lib/coparents/types'
+import type { FamilyRole } from '@/lib/coparents/types'
 
 // Petites briques visuelles de la liaison des parents.
 
@@ -13,9 +15,10 @@ const ROLE_TONE: Record<FamilyRole, string> = {
 }
 
 export function RoleBadge({ role, className }: { role: FamilyRole; className?: string }) {
+  const t = useTranslations('family.coparents.roles')
   return (
     <span className={cn('inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold ring-1 ring-inset', ROLE_TONE[role], className)}>
-      {ROLE_LABEL[role]}
+      {t(role)}
     </span>
   )
 }
@@ -32,18 +35,20 @@ export function PersonAvatar({ prenom, nom, seed, size = 'md' }: { prenom: strin
   )
 }
 
-export function frDay(iso: string, withYear = false): string {
-  return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', ...(withYear ? { year: 'numeric' } : {}), timeZone: DEFAULT_TZ })
+// Les helpers de date acceptent la locale next-intl (défaut 'fr' : rendu historique).
+export function frDay(iso: string, withYear = false, locale = 'fr'): string {
+  return new Date(iso).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', ...(withYear ? { year: 'numeric' } : {}), timeZone: DEFAULT_TZ })
 }
 
 /** Date de naissance yyyy-mm-dd → « 12 mai 2019 » (sans décalage de fuseau). */
-export function frBirth(day: string | null | undefined): string {
+export function frBirth(day: string | null | undefined, locale = 'fr'): string {
   if (!day || !/^\d{4}-\d{2}-\d{2}$/.test(day)) return ''
-  return new Date(`${day}T12:00:00Z`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+  return new Date(`${day}T12:00:00Z`).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
 }
 
-export function joinNames(names: string[]): string {
+export function joinNames(names: string[], locale = 'fr'): string {
   if (names.length <= 1) return names[0] ?? ''
+  if (locale !== 'fr') return new Intl.ListFormat(intlLocale(locale), { type: 'conjunction' }).format(names)
   return `${names.slice(0, -1).join(', ')} et ${names[names.length - 1]}`
 }
 

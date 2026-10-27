@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import { ArrowLeft, Check, FileText, ListFilter, Search, Trash2, X } from 'lucide-react'
 import { ConfirmDialog, EmptyState } from '@/components/ui'
 import { btn } from '@/components/profil/kit'
@@ -13,11 +14,14 @@ type Sort = 'date' | 'taille'
 
 // NOTE Supabase: lister `vault_files` (catégorie documents) + suppression via route serveur.
 export default function DocumentsPage() {
-  return LIVE ? <ManagedInVault title="Documents" backHref="/app/profil/stockage/fichiers" /> : <DemoDocumentsPage />
+  const t = useTranslations('account.storage.documents')
+  return LIVE ? <ManagedInVault title={t('title')} backHref="/app/profil/stockage/fichiers" /> : <DemoDocumentsPage />
 }
 
 /** Démonstration uniquement (fichiers et suppression simulés). */
 function DemoDocumentsPage() {
+  const t = useTranslations('account.storage.documents')
+  const locale = useLocale()
   const [files, setFiles] = useState<StoredFile[]>(DOCUMENTS)
   const [q, setQ] = useState('')
   const [sort, setSort] = useState<Sort>('date')
@@ -33,7 +37,7 @@ function DemoDocumentsPage() {
   }, [files, q, sort])
 
   const selecting = selected.size > 0
-  const selectedMo = files.filter(f => selected.has(f.id)).reduce((t, f) => t + f.sizeMo, 0)
+  const selectedMo = files.filter(f => selected.has(f.id)).reduce((sum, f) => sum + f.sizeMo, 0)
 
   const toggle = (id: string) =>
     setSelected(prev => {
@@ -51,7 +55,7 @@ function DemoDocumentsPage() {
     setSelected(new Set())
     setDeleting(false)
     setConfirmOpen(false)
-    setStatus(`${n} fichier${n > 1 ? 's' : ''} supprimé${n > 1 ? 's' : ''}.`)
+    setStatus(t('deleted', { count: n }))
   }
 
   return (
@@ -59,20 +63,20 @@ function DemoDocumentsPage() {
       <header className="sticky top-0 z-30 bg-white px-4" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}>
         <div className="relative flex h-12 items-center justify-between">
           {selecting ? (
-            <button type="button" onClick={() => setSelected(new Set())} aria-label="Quitter la sélection" className="-ml-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 hover:bg-night-50">
+            <button type="button" onClick={() => setSelected(new Set())} aria-label={t('exitSelection')} className="-ml-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 hover:bg-night-50">
               <X className="h-[22px] w-[22px]" aria-hidden />
             </button>
           ) : (
-            <Link href="/app/profil/stockage/fichiers" aria-label="Retour" className="-ml-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 hover:bg-night-50">
+            <Link href="/app/profil/stockage/fichiers" aria-label={t('back')} className="-ml-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 hover:bg-night-50">
               <ArrowLeft className="h-[22px] w-[22px]" aria-hidden />
             </Link>
           )}
           <h1 className="pointer-events-none absolute inset-x-14 truncate text-center text-[16px] font-bold text-night-900">
-            {selecting ? `${selected.size} sélectionné${selected.size > 1 ? 's' : ''}` : 'Documents'}
+            {selecting ? t('selectedCount', { count: selected.size }) : t('title')}
           </h1>
           {selecting && (
             <button type="button" onClick={() => setSelected(new Set())} className="min-h-[44px] px-1 text-[13px] font-bold text-night-900">
-              Annuler
+              {t('cancel')}
             </button>
           )}
         </div>
@@ -82,31 +86,31 @@ function DemoDocumentsPage() {
         {selecting ? (
           <div className="flex items-center gap-3 rounded-xl2 bg-night-50 p-4">
             <div className="flex-1">
-              <p className="text-[13px] font-bold text-night-900">{formatMo(selectedMo)} sélectionnés</p>
-              <p className="mt-1 text-[11.5px] text-night-700">Ces fichiers seront supprimés.</p>
+              <p className="text-[13px] font-bold text-night-900">{t('selectedSize', { size: formatMo(selectedMo, locale) })}</p>
+              <p className="mt-1 text-[11.5px] text-night-700">{t('willDelete')}</p>
             </div>
-            <button type="button" onClick={() => setConfirmOpen(true)} aria-label="Supprimer la sélection" className="inline-flex h-11 w-11 items-center justify-center rounded-full text-alert-500 hover:bg-alert-50">
+            <button type="button" onClick={() => setConfirmOpen(true)} aria-label={t('deleteSelection')} className="inline-flex h-11 w-11 items-center justify-center rounded-full text-alert-500 hover:bg-alert-50">
               <Trash2 className="h-5 w-5" aria-hidden />
             </button>
           </div>
         ) : (
           <div className="flex gap-3">
             <div className="relative flex-1">
-              <label htmlFor="doc-search" className="sr-only">Rechercher un document</label>
+              <label htmlFor="doc-search" className="sr-only">{t('searchLabel')}</label>
               <Search className="pointer-events-none absolute left-3.5 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-night-500" aria-hidden />
               <input
                 id="doc-search"
                 type="search"
                 value={q}
                 onChange={e => setQ(e.target.value)}
-                placeholder="Rechercher"
+                placeholder={t('searchPlaceholder')}
                 className="min-h-[46px] w-full rounded-xl2 bg-night-50 pl-10 pr-3 text-[13.5px] text-night-900 placeholder:text-night-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
               />
             </div>
             <button
               type="button"
               onClick={() => setSort(s => (s === 'date' ? 'taille' : 'date'))}
-              aria-label={sort === 'date' ? 'Trier par taille' : 'Trier par date'}
+              aria-label={sort === 'date' ? t('sortSize') : t('sortDate')}
               className="inline-flex h-[46px] w-[46px] items-center justify-center rounded-xl2 border border-night-100 bg-white text-night-900 shadow-soft hover:bg-night-50"
             >
               <ListFilter className="h-5 w-5" aria-hidden />
@@ -117,9 +121,9 @@ function DemoDocumentsPage() {
         <p className="sr-only" aria-live="polite">{status}</p>
 
         {visible.length === 0 ? (
-          <EmptyState className="mt-6" title={files.length === 0 ? 'Aucun document' : 'Aucun résultat'} description={files.length === 0 ? 'Vos documents apparaîtront ici.' : 'Essayez un autre mot-clé.'} />
+          <EmptyState className="mt-6" title={files.length === 0 ? t('emptyTitle') : t('noResultTitle')} description={files.length === 0 ? t('emptyText') : t('noResultText')} />
         ) : (
-          <ul className="mt-4" aria-label="Documents">
+          <ul className="mt-4" aria-label={t('title')}>
             {visible.map(f => {
               const on = selected.has(f.id)
               return (
@@ -146,7 +150,7 @@ function DemoDocumentsPage() {
 
         {selecting && (
           <button type="button" onClick={() => setConfirmOpen(true)} className={cn(btn.danger, 'mt-8')}>
-            Supprimer ({selected.size})
+            {t('deleteCount', { count: selected.size })}
           </button>
         )}
       </div>
@@ -156,9 +160,9 @@ function DemoDocumentsPage() {
         onClose={() => setConfirmOpen(false)}
         onConfirm={remove}
         loading={deleting}
-        title={`Supprimer ${selected.size} fichier${selected.size > 1 ? 's' : ''} ?`}
-        description={`${formatMo(selectedMo)} seront libérés. Cette action est irréversible.`}
-        confirmLabel="Supprimer"
+        title={t('confirmTitle', { count: selected.size })}
+        description={t('confirmText', { size: formatMo(selectedMo, locale) })}
+        confirmLabel={t('confirm')}
       />
     </>
   )

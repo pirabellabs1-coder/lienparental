@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import { CalendarDays, FileText, Lock, Wallet } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
@@ -16,14 +17,17 @@ import { VaultLockedNotice } from '@/components/vault-lock/VaultLockedNotice'
 
 type ChildOpt = { id: string; prenom: string }
 
-const SECTIONS: { key: 'documents' | 'expenses' | 'events'; title: string; help: string; empty: string; icon: LucideIcon }[] = [
-  { key: 'documents', title: 'Documents du coffre', help: 'Désactivé par défaut. Un document partagé peut être consulté et téléchargé par les parents liés.', empty: 'Aucun document rattaché à cet enfant.', icon: FileText },
-  { key: 'expenses', title: 'Dépenses', help: 'Désactivé par défaut. Seuls le montant, la catégorie, le titre et la date sont visibles ; la description et les photos du Journal restent privées.', empty: 'Aucune dépense rattachée à cet enfant.', icon: Wallet },
-  { key: 'events', title: 'Événements à venir', help: 'Les nouveaux événements liés à l’enfant sont partagés avec les parents et proches liés ; rendez privé ce qui doit le rester.', empty: 'Aucun événement à venir pour cet enfant.', icon: CalendarDays },
+// Textes : family.coparents.sharing.sections.<clé>.{title,help,empty} (traduits au rendu).
+const SECTIONS: { key: 'documents' | 'expenses' | 'events'; icon: LucideIcon }[] = [
+  { key: 'documents', icon: FileText },
+  { key: 'expenses', icon: Wallet },
+  { key: 'events', icon: CalendarDays },
 ]
 
 // Partage fin : ce que JE partage pour un enfant (documents, dépenses, événements).
 export default function PartagePage() {
+  const t = useTranslations('family.coparents.sharing')
+  const locale = useLocale()
   const [kids, setKids] = useState<ChildOpt[] | null>(null)
   const [childId, setChildId] = useState<string | null>(null)
   const [summary, setSummary] = useState<SharingSummary | null>(null)
@@ -41,8 +45,8 @@ export default function PartagePage() {
         const wanted = new URLSearchParams(window.location.search).get('enfant')
         setChildId(list.find((c) => c.id === wanted)?.id ?? list[0]?.id ?? null)
       })
-      .catch((e) => setError(e instanceof Error ? e.message : 'Chargement impossible.'))
-  }, [])
+      .catch((e) => setError(e instanceof Error ? e.message : t('loadFailed')))
+  }, [t])
 
   const load = useCallback(async (id: string) => {
     setSummary(null)
@@ -50,9 +54,9 @@ export default function PartagePage() {
     try {
       setSummary(await loadSharing(id))
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Chargement impossible.')
+      setError(e instanceof Error ? e.message : t('loadFailed'))
     }
-  }, [])
+  }, [t])
   useEffect(() => { if (childId) void load(childId) }, [childId, load])
 
   const toggle = async (item: SharingItem, shared: boolean) => {
@@ -60,10 +64,10 @@ export default function PartagePage() {
     setSummary((s) => s && patch(s, item, shared))
     try {
       await setSharing(item.kind, item.id, shared)
-      announce(shared ? `« ${item.label} » est partagé.` : `« ${item.label} » est désormais privé.`)
+      announce(shared ? t('nowShared', { label: item.label }) : t('nowPrivate', { label: item.label }))
     } catch (e) {
       setSummary((s) => s && patch(s, item, !shared))
-      announce(e instanceof Error ? e.message : 'Modification impossible.')
+      announce(e instanceof Error ? e.message : t('updateFailed'))
     } finally {
       setPending(null)
     }
@@ -73,17 +77,17 @@ export default function PartagePage() {
 
   return (
     <>
-      <TopBar title="Ce que je partage" showBack backHref="/app/coparents" />
+      <TopBar title={t('title')} showBack backHref="/app/coparents" />
       {error ? (
-        <ErrorState compact title="Partage indisponible" description={error} primary={{ label: 'Réessayer', onClick: () => childId ? void load(childId) : window.location.reload() }} />
+        <ErrorState compact title={t('unavailable')} description={error} primary={{ label: t('retry'), onClick: () => childId ? void load(childId) : window.location.reload() }} />
       ) : !kids ? (
-        <LoadingState compact title="Chargement" description="" />
+        <LoadingState compact title={t('loading')} description="" />
       ) : kids.length === 0 ? (
-        <p className={cn(card, 'mx-5 mt-2 p-4 text-[13px] text-night-700')}>Aucun enfant à partager pour le moment.</p>
+        <p className={cn(card, 'mx-5 mt-2 p-4 text-[13px] text-night-700')}>{t('noChildren')}</p>
       ) : (
         <div className="w-full space-y-5 px-5 pb-10 pt-2">
           {kids.length > 1 && (
-            <div role="group" aria-label="Enfant" className="flex flex-wrap gap-2">
+            <div role="group" aria-label={t('child')} className="flex flex-wrap gap-2">
               {kids.map((k) => (
                 <button
                   key={k.id}
@@ -103,11 +107,11 @@ export default function PartagePage() {
 
           <p className="flex gap-2.5 rounded-xl bg-night-50/70 p-3 text-[13px] text-night-700">
             <Lock className="mt-0.5 h-4 w-4 shrink-0 text-night-600" aria-hidden="true" />
-            Votre Journal, le Coach IA et vos témoignages ne sont jamais partagés. Ici, vous choisissez ce que les adultes liés à {prenom} peuvent voir parmi vos propres éléments.
+            {t('privacyNote', { name: prenom })}
           </p>
 
           {!summary ? (
-            <LoadingState compact title="Chargement des éléments" description="" />
+            <LoadingState compact title={t('loadingItems')} description="" />
           ) : (
             <div className="grid gap-4 lg:grid-cols-2">
               {SECTIONS.map((sec) => {
@@ -118,14 +122,14 @@ export default function PartagePage() {
                     <div className="flex items-start gap-3">
                       <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-night-50 text-night-700"><Icon className="h-5 w-5" /></span>
                       <div className="min-w-0">
-                        <h2 id={`sec-${sec.key}`} className="text-[15px] font-bold text-night-900">{sec.title}</h2>
-                        <p className="mt-0.5 text-[12px] text-night-600">{sec.help}</p>
+                        <h2 id={`sec-${sec.key}`} className="text-[15px] font-bold text-night-900">{t(`sections.${sec.key}.title`)}</h2>
+                        <p className="mt-0.5 text-[12px] text-night-600">{t(`sections.${sec.key}.help`)}</p>
                       </div>
                     </div>
                     {sec.key === 'documents' && (vault !== 'open' || summary.documentsLocked) ? (
-                      <VaultLockedNotice state={vault === 'open' ? 'locked' : vault} what="et partager vos documents" compact className="mt-3 shadow-none" />
+                      <VaultLockedNotice state={vault === 'open' ? 'locked' : vault} what={t('vaultWhat')} compact className="mt-3 shadow-none" />
                     ) : items.length === 0 ? (
-                      <p className="mt-3 text-[13px] text-night-600">{sec.empty}</p>
+                      <p className="mt-3 text-[13px] text-night-600">{t(`sections.${sec.key}.empty`)}</p>
                     ) : (
                       <ul className="mt-2 divide-y divide-night-100">
                         {items.map((it) => (
@@ -135,7 +139,7 @@ export default function PartagePage() {
                               disabled={pending === it.id}
                               onChange={(e) => void toggle(it, e.target.checked)}
                               label={it.label}
-                              description={`${frDay(it.date, true)}${it.detail ? ` · ${it.detail}` : ''} · ${it.shared ? 'partagé' : 'privé'}`}
+                              description={`${frDay(it.date, true, locale)}${it.detail ? ` · ${it.detail}` : ''} · ${it.shared ? t('shared') : t('private')}`}
                             />
                           </li>
                         ))}

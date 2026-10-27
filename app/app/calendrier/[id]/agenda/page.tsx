@@ -2,6 +2,7 @@
 
 import { use, type ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ChevronRight } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { EmptyState, LoadingState } from '@/components/mobile/StateScreens'
@@ -12,6 +13,7 @@ import { useEvent } from '@/lib/data/calendar'
 // M06 — « Ajouter à l'agenda » : confirmation + ouverture dans un agenda externe.
 export default function AjouterAgendaPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
+  const t = useTranslations('calendar')
   const router = useRouter()
   const { data: event, loading } = useEvent(id)
   const now = useClientNow()
@@ -20,8 +22,8 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
   if (!event && loading) {
     return (
       <>
-        <TopBar title="Ajouter à l'agenda" showBack backHref={back} showBell={false} />
-        <LoadingState compact title="Préparation" description="" />
+        <TopBar title={t('agenda.title')} showBack backHref={back} showBell={false} />
+        <LoadingState compact title={t('agenda.preparing')} description="" />
       </>
     )
   }
@@ -29,11 +31,11 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
   if (!event) {
     return (
       <>
-        <TopBar title="Ajouter à l'agenda" showBack backHref="/app/calendrier" showBell={false} />
+        <TopBar title={t('agenda.title')} showBack backHref="/app/calendrier" showBell={false} />
         <EmptyState
-          title="Événement introuvable"
-          description="Il a peut-être été supprimé ou n'existe pas."
-          primary={{ label: 'Retour au calendrier', href: '/app/calendrier' }}
+          title={t('common.eventNotFound')}
+          description={t('common.eventNotFoundDesc')}
+          primary={{ label: t('common.backToCalendar'), href: '/app/calendrier' }}
         />
       </>
     )
@@ -43,8 +45,8 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
   if (!now) {
     return (
       <>
-        <TopBar title="Ajouter à l'agenda" showBack backHref={back} showBell={false} />
-        <LoadingState compact title="Préparation" description="" />
+        <TopBar title={t('agenda.title')} showBack backHref={back} showBell={false} />
+        <LoadingState compact title={t('agenda.preparing')} description="" />
       </>
     )
   }
@@ -63,38 +65,38 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
 
   return (
     <>
-      <TopBar title="Ajouter à l'agenda" showBack backHref={back} showBell={false} />
+      <TopBar title={t('agenda.title')} showBack backHref={back} showBell={false} />
 
       <div className="px-4 pb-6 pt-4">
         <div className="flex flex-col items-center text-center" role="status">
           <CalendarAddedIllustration />
-          <h2 className="mt-5 text-[17px] font-extrabold text-night-900">Événement ajouté !</h2>
+          <h2 className="mt-5 text-[17px] font-extrabold text-night-900">{t('agenda.added')}</h2>
           <p className="mt-2 max-w-[16rem] text-[12.5px] leading-relaxed text-night-600">
-            L&apos;événement a été ajouté avec succès à votre agenda.
+            {t('agenda.addedDesc')}
           </p>
         </div>
 
         <section aria-labelledby="open-in" className="mt-8">
-          <h3 id="open-in" className="mb-2.5 text-[13px] font-bold text-night-900">Ouvrir dans</h3>
+          <h3 id="open-in" className="mb-2.5 text-[13px] font-bold text-night-900">{t('agenda.openIn')}</h3>
           <ul className="space-y-2.5">
             <li>
               <a href={googleCalendarUrl(event)} target="_blank" rel="noopener noreferrer" className={row}>
                 <GoogleCalIcon />
-                <RowLabel>Google Agenda</RowLabel>
-                <span className="sr-only">(nouvel onglet)</span>
+                <RowLabel>{t('agenda.google')}</RowLabel>
+                <span className="sr-only">{t('agenda.newTab')}</span>
               </a>
             </li>
             <li>
               <button type="button" onClick={downloadIcs} className={row}>
                 <AppleCalIcon />
-                <RowLabel>Apple Calendrier</RowLabel>
+                <RowLabel>{t('agenda.apple')}</RowLabel>
               </button>
             </li>
             <li>
               <a href={outlookCalendarUrl(event)} target="_blank" rel="noopener noreferrer" className={row}>
                 <OutlookIcon />
-                <RowLabel>Outlook</RowLabel>
-                <span className="sr-only">(nouvel onglet)</span>
+                <RowLabel>{t('agenda.outlook')}</RowLabel>
+                <span className="sr-only">{t('agenda.newTab')}</span>
               </a>
             </li>
           </ul>
@@ -105,7 +107,7 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
           onClick={() => router.push(back)}
           className="mt-10 flex h-12 w-full items-center justify-center rounded-xl border border-night-200 bg-white text-[14px] font-bold text-night-900 transition-colors hover:bg-night-50"
         >
-          Fermer
+          {t('agenda.close')}
         </button>
       </div>
     </>

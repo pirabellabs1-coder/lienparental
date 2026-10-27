@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { use, useEffect, useRef, useState, type ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import {
   ArrowLeftRight, CalendarDays, CircleDot, Clock3, CreditCard, Download, EllipsisVertical, FileText, Hash, Image as ImageIcon,
   MapPin, Paperclip, Pencil, PieChart, Plus, Repeat, Share, Tag, Trash2, Users,
@@ -11,7 +12,9 @@ import { ActionSheet, ConfirmDialog } from '@/components/ui'
 import { TopBar } from '@/components/mobile/TopBar'
 import { EmptyState, ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { EventTypePill } from '@/components/journal/EventTypePill'
-import { JournalTypeIcon, JOURNAL_TYPES } from '@/components/journal/journalTypes'
+import { JournalTypeIcon } from '@/components/journal/journalTypes'
+import { useFinanceLabels } from '@/components/journal/financeLabels'
+import { useFamilyFormat } from '@/components/famille/useFamilyFormat'
 import {
   createdParts, fmtDateFull, fmtDateMedium, fmtHeure, fmtPlage, fmtSize, parseDay,
 } from '@/components/journal/journalData'
@@ -21,13 +24,16 @@ import { useChildOptions } from '@/lib/data/children'
 import { addJournalFiles, removeJournal, signJournalMedia, signJustificatifs, useJournalEntry } from '@/lib/data/journal'
 import { FinancesNotice, StatutBadge } from '@/components/journal/FinancesView'
 import {
-  DEPENSE_CATEGORIE_LABELS, DEPENSE_SENS_LABELS, DEPENSE_STATUT_LABELS, RECURRENCE_LABELS,
-  allJustificatifs, fluxOf, formatMontant, modeLabel, partieLabel, partsCents, recurrenceOf, resteDuCents, sensOf, statutOf,
+  allJustificatifs, fluxOf, partsCents, recurrenceOf, resteDuCents, sensOf, statutOf,
 } from '@/lib/journal-finances'
-import { fmtDayKey } from '@/lib/tz'
 
 // M05 — Détail d'une entrée. Supabase : journal_entries (RLS user_id = auth.uid()), images en URL signées 15 min.
 export default function JournalDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations('family.journal.detail')
+  const fl = useFinanceLabels()
+  const fmt = useFamilyFormat()
+  const loc = fl.locale
+  const formatMontant = fl.money
   const { id } = use(params)
   const router = useRouter()
   const { data: entry, loading, error, refresh } = useJournalEntry(id)
@@ -66,25 +72,25 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
   useEffect(() => {
     if (!LIVE || !entry || draft.length === 0 || uploading.current) return
     uploading.current = true
-    setNotice('Envoi des images…')
+    setNotice(t('uploadingImages'))
     addJournalFiles(entry.id, draft.map((d) => d.file))
       .then(async () => {
         clearDraft(id)
         await refresh()
-        setNotice('Images ajoutées.')
+        setNotice(t('imagesAdded'))
       })
-      .catch((err: unknown) => setNotice(err instanceof Error ? err.message : 'Envoi impossible.'))
+      .catch((err: unknown) => setNotice(err instanceof Error ? err.message : t('uploadFailed')))
       .finally(() => { uploading.current = false })
-  }, [entry, draft, id, refresh])
+  }, [entry, draft, id, refresh, t])
 
   if (!entry && (loading || error)) {
     return (
       <>
-        <TopBar title="Détail de l'événement" showBack backHref="/app/journal" showBell={false} />
+        <TopBar title={t('titleEvent')} showBack backHref="/app/journal" showBell={false} />
         {error ? (
-          <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} secondary={{ label: 'Retour au journal', href: '/app/journal' }} />
+          <ErrorState compact description={error.message} primary={{ label: t('retry'), onClick: () => void refresh() }} secondary={{ label: t('backToJournal'), href: '/app/journal' }} />
         ) : (
-          <LoadingState compact title="Chargement de l'événement" description="" />
+          <LoadingState compact title={t('loading')} description="" />
         )}
       </>
     )
@@ -93,11 +99,11 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
   if (!entry) {
     return (
       <>
-        <TopBar title="Détail de l'événement" showBack backHref="/app/journal" showBell={false} />
+        <TopBar title={t('titleEvent')} showBack backHref="/app/journal" showBell={false} />
         <EmptyState
-          title="Événement introuvable"
-          description="Cet événement n'existe pas ou a été supprimé."
-          primary={{ label: 'Retour au journal', href: '/app/journal' }}
+          title={t('notFoundTitle')}
+          description={t('notFoundText')}
+          primary={{ label: t('backToJournal'), href: '/app/journal' }}
         />
       </>
     )
@@ -108,7 +114,7 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
   const createdAt = createdParts(entry)
   const created = parseDay(createdAt.day)
   const createdTime = createdAt.time
-  const kids = childOptions.filter((c) => entry.childIds.includes(c.id)).map((c) => c.label).join(', ')
+  const kids = childOptions.filter((c) => entry.childIds.includes(c.id)).map((c) => t('childOption', { name: c.prenom, count: c.age })).join(', ')
   const imageCount = entry.images.length + draft.length
   const dep = entry.type === 'depense' ? entry.depense : undefined
   const backHref = entry.type === 'depense' ? `/app/journal?filtre=finances&mois=${entry.date.slice(0, 7)}` : '/app/journal'
@@ -119,33 +125,33 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
   const rec = dep ? recurrenceOf(dep) : 'ponctuel'
   // Sens « sortant » (dépense payée, remboursement versé), indépendamment du payeur.
   const outgoing = fluxOf({ sens }) === 'sortie'
-  const payeur = dep ? partieLabel(dep.payeurType ?? (outgoing ? 'moi' : undefined), dep.payeurLibelle) : undefined
-  const beneficiaire = dep ? partieLabel(dep.beneficiaireType ?? (outgoing ? undefined : 'moi'), dep.beneficiaire) : undefined
+  const payeur = dep ? fl.partieLabel(dep.payeurType ?? (outgoing ? 'moi' : undefined), dep.payeurLibelle) : undefined
+  const beneficiaire = dep ? fl.partieLabel(dep.beneficiaireType ?? (outgoing ? undefined : 'moi'), dep.beneficiaire) : undefined
   const parts = dep ? partsCents(dep) : null
   const reste = dep ? resteDuCents(dep) : 0
-  const fmtDay = (k: string) => fmtDayKey(k, { day: 'numeric', month: 'long', year: 'numeric' })
+  const fmtDay = (k: string) => fmt.day(k)
   const partsText = dep && parts
-    ? `ma part ${formatMontant(parts.moi, dep.devise)}${parts.pct !== undefined ? ` (${parts.pct} %)` : ''}, part de l’autre parent ${formatMontant(parts.autre, dep.devise)}`
+    ? t('summary.partsText', { mine: formatMontant(parts.moi, dep.devise), pct: parts.pct !== undefined ? ` (${parts.pct} %)` : '', other: formatMontant(parts.autre, dep.devise) })
     : ''
 
   const summary = [
-    `${JOURNAL_TYPES[entry.type].label} : ${entry.title}`,
-    `${fmtDateFull(day)}${entry.heure && !dep ? ` · ${fmtPlage(entry)}` : ''}`,
-    dep ? `Sens : ${DEPENSE_SENS_LABELS[sens]}` : '',
-    dep ? `Montant : ${formatMontant(dep.montantCents, dep.devise)}` : '',
-    dep ? `Statut : ${DEPENSE_STATUT_LABELS[statut]}` : '',
+    t('summary.typeTitle', { type: fl.type(entry.type), title: entry.title }),
+    `${fmtDateFull(day, loc)}${entry.heure && !dep ? ` · ${fmtPlage(entry, loc)}` : ''}`,
+    dep ? t('summary.direction', { value: fl.sens(sens) }) : '',
+    dep ? t('summary.amount', { value: formatMontant(dep.montantCents, dep.devise) }) : '',
+    dep ? t('summary.status', { value: fl.statut(statut) }) : '',
     dep && statut === 'partiel' && dep.montantPayeCents !== undefined
-      ? `Déjà payé : ${formatMontant(dep.montantPayeCents, dep.devise)} · reste ${formatMontant(reste, dep.devise)}` : '',
-    dep ? `Catégorie : ${DEPENSE_CATEGORIE_LABELS[dep.categorie]}` : '',
-    dep ? `Mode de paiement : ${modeLabel(dep)}` : '',
-    dep?.reference ? `Référence : ${dep.reference}` : '',
-    payeur ? `Payeur : ${payeur}` : '',
-    beneficiaire ? `Bénéficiaire / destinataire : ${beneficiaire}` : '',
-    partsText ? `Répartition : ${partsText}` : '',
-    dep && rec !== 'ponctuel' ? `Récurrence : ${RECURRENCE_LABELS[rec]}${dep.echeanceSuivante ? `, prochaine échéance le ${fmtDay(dep.echeanceSuivante)}` : ''}` : '',
-    dep ? `Justificatifs : ${justifList.length ? justifList.map((j) => j.name).join(', ') : 'aucun'}` : '',
-    entry.lieu ? `Lieu : ${entry.lieu}` : '',
-    kids ? `Enfants concernés : ${kids}` : '',
+      ? t('summary.alreadyPaid', { paid: formatMontant(dep.montantPayeCents, dep.devise), rest: formatMontant(reste, dep.devise) }) : '',
+    dep ? t('summary.category', { value: fl.category(dep.categorie) }) : '',
+    dep ? t('summary.paymentMode', { value: fl.modeLabel(dep) }) : '',
+    dep?.reference ? t('summary.reference', { value: dep.reference }) : '',
+    payeur ? t('summary.payer', { value: payeur }) : '',
+    beneficiaire ? t('summary.beneficiary', { value: beneficiaire }) : '',
+    partsText ? t('summary.split', { value: partsText }) : '',
+    dep && rec !== 'ponctuel' ? `${t('summary.recurrence', { value: fl.recurrence(rec) })}${dep.echeanceSuivante ? t('summary.nextDue', { date: fmtDay(dep.echeanceSuivante) }) : ''}` : '',
+    dep ? t('summary.receipts', { value: justifList.length ? justifList.map((j) => j.name).join(', ') : t('summary.none') }) : '',
+    entry.lieu ? t('summary.place', { value: entry.lieu }) : '',
+    kids ? t('summary.children', { value: kids }) : '',
     entry.description ? `\n${entry.description}` : '',
   ].filter(Boolean).join('\n')
 
@@ -156,7 +162,7 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
         return
       }
       await navigator.clipboard.writeText(summary)
-      setNotice('Détails copiés dans le presse-papier.')
+      setNotice(t('copied'))
     } catch {
       /* partage annulé */
     }
@@ -164,14 +170,17 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
 
   function exportEntry() {
     // Export texte local ; l'export PDF signé passera par lib/pdf côté serveur.
-    const blob = new Blob([summary + `\n\nCréé le ${fmtDateMedium(created)}${createdTime ? ` à ${fmtHeure(createdTime)}` : ''}\n`], { type: 'text/plain;charset=utf-8' })
+    const createdLine = createdTime
+      ? t('createdOnAt', { date: fmtDateMedium(created, loc), time: fmtHeure(createdTime, loc) })
+      : t('createdOn', { date: fmtDateMedium(created, loc) })
+    const blob = new Blob([summary + `\n\n${createdLine}\n`], { type: 'text/plain;charset=utf-8' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
     a.download = `journal-${entry!.date}-${entry!.id}.txt`
     a.click()
     URL.revokeObjectURL(url)
-    setNotice('Export téléchargé.')
+    setNotice(t('exported'))
   }
 
   async function handleDelete() {
@@ -183,7 +192,7 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
     } catch (err) {
       setDeleting(false)
       setConfirm(false)
-      setNotice(err instanceof Error ? err.message : 'Suppression impossible.')
+      setNotice(err instanceof Error ? err.message : t('deleteFailed'))
     }
   }
 
@@ -192,16 +201,16 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
   return (
     <>
       <TopBar
-        title={dep ? 'Détail de la dépense' : "Détail de l'événement"}
+        title={dep ? t('titleExpense') : t('titleEvent')}
         showBack
         backHref={backHref}
         showBell={false}
         rightSlot={
           <span className="-mr-2 flex">
-            <Link href={`/app/journal/nouveau?id=${entry.id}`} aria-label="Modifier" className={iconBtn}>
+            <Link href={`/app/journal/nouveau?id=${entry.id}`} aria-label={t('edit')} className={iconBtn}>
               <Pencil aria-hidden="true" className="h-[19px] w-[19px]" />
             </Link>
-            <button type="button" onClick={() => setSheet(true)} aria-label="Plus d'actions" aria-haspopup="dialog" className={iconBtn}>
+            <button type="button" onClick={() => setSheet(true)} aria-label={t('moreActions')} aria-haspopup="dialog" className={iconBtn}>
               <EllipsisVertical aria-hidden="true" className="h-5 w-5" />
             </button>
           </span>
@@ -219,50 +228,50 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
                 {formatMontant(dep.montantCents, dep.devise)}
               </p>
               <p className="mt-1 flex flex-wrap items-center justify-center gap-1.5 text-[12px] font-semibold text-night-700">
-                {DEPENSE_SENS_LABELS[sens]}
+                {fl.sens(sens)}
                 <StatutBadge statut={statut} />
               </p>
             </>
           )}
-          <p className="mt-2 text-[13px] text-night-700">{fmtDateFull(day)}</p>
-          {entry.heure && !dep && <p className="mt-0.5 text-[13px] tabular-nums text-night-700">{fmtPlage(entry)}</p>}
+          <p className="mt-2 text-[13px] text-night-700">{fmtDateFull(day, loc)}</p>
+          {entry.heure && !dep && <p className="mt-0.5 text-[13px] tabular-nums text-night-700">{fmtPlage(entry, loc)}</p>}
         </header>
 
         {dep && (
           <dl className="mt-5 divide-y divide-night-100 rounded-2xl border border-night-100 bg-white px-4 shadow-soft">
-            <Row icon={<Tag className="h-5 w-5" />} label="Catégorie">{DEPENSE_CATEGORIE_LABELS[dep.categorie]}</Row>
-            <Row icon={<CreditCard className="h-5 w-5" />} label="Mode de paiement">{modeLabel(dep)}</Row>
-            {dep.reference && <Row icon={<Hash className="h-5 w-5" />} label="Référence"><span className="break-all">{dep.reference}</span></Row>}
+            <Row icon={<Tag className="h-5 w-5" />} label={t('category')}>{fl.category(dep.categorie)}</Row>
+            <Row icon={<CreditCard className="h-5 w-5" />} label={t('paymentMode')}>{fl.modeLabel(dep)}</Row>
+            {dep.reference && <Row icon={<Hash className="h-5 w-5" />} label={t('reference')}><span className="break-all">{dep.reference}</span></Row>}
             {(payeur || beneficiaire) && (
-              <Row icon={<ArrowLeftRight className="h-5 w-5" />} label="Payeur et bénéficiaire">
-                {payeur && <span className="block">Payé par : {payeur}</span>}
-                {beneficiaire && <span className="block">Bénéficiaire / destinataire : {beneficiaire}</span>}
+              <Row icon={<ArrowLeftRight className="h-5 w-5" />} label={t('payerAndBeneficiary')}>
+                {payeur && <span className="block">{t('paidBy', { value: payeur })}</span>}
+                {beneficiaire && <span className="block">{t('beneficiaryValue', { value: beneficiaire })}</span>}
               </Row>
             )}
             {statut !== 'paye' && (
-              <Row icon={<CircleDot className="h-5 w-5" />} label="Statut">
-                {DEPENSE_STATUT_LABELS[statut]}
+              <Row icon={<CircleDot className="h-5 w-5" />} label={t('status')}>
+                {fl.statut(statut)}
                 {statut === 'partiel' && dep.montantPayeCents !== undefined && (
                   <span className="block tabular-nums">
-                    Déjà payé : {formatMontant(dep.montantPayeCents, dep.devise)} · reste à payer : {formatMontant(reste, dep.devise)}
+                    {t('alreadyPaidRest', { paid: formatMontant(dep.montantPayeCents, dep.devise), rest: formatMontant(reste, dep.devise) })}
                   </span>
                 )}
-                {statut === 'en-attente' && <span className="block">Non compté dans les totaux tant qu’il n’est pas payé.</span>}
+                {statut === 'en-attente' && <span className="block">{t('pendingNote')}</span>}
               </Row>
             )}
             {parts && (
-              <Row icon={<PieChart className="h-5 w-5" />} label="Répartition entre parents">
-                <span className="block tabular-nums">Ma part : {formatMontant(parts.moi, dep.devise)}{parts.pct !== undefined ? ` (${parts.pct} %)` : ''}</span>
-                <span className="block tabular-nums">Part de l’autre parent : {formatMontant(parts.autre, dep.devise)}{parts.pct !== undefined ? ` (${100 - parts.pct} %)` : ''}</span>
+              <Row icon={<PieChart className="h-5 w-5" />} label={t('split')}>
+                <span className="block tabular-nums">{t('myShare', { value: formatMontant(parts.moi, dep.devise) })}{parts.pct !== undefined ? ` (${parts.pct} %)` : ''}</span>
+                <span className="block tabular-nums">{t('otherShare', { value: formatMontant(parts.autre, dep.devise) })}{parts.pct !== undefined ? ` (${100 - parts.pct} %)` : ''}</span>
               </Row>
             )}
             {rec !== 'ponctuel' && (
-              <Row icon={<Repeat className="h-5 w-5" />} label="Récurrence">
-                {RECURRENCE_LABELS[rec]}
-                {dep.echeanceSuivante && <span className="block">Prochaine échéance : {fmtDay(dep.echeanceSuivante)}</span>}
+              <Row icon={<Repeat className="h-5 w-5" />} label={t('recurrence')}>
+                {fl.recurrence(rec)}
+                {dep.echeanceSuivante && <span className="block">{t('nextDue', { date: fmtDay(dep.echeanceSuivante) })}</span>}
               </Row>
             )}
-            <Row icon={<Paperclip className="h-5 w-5" />} label={justifList.length > 1 ? `Justificatifs (${justifList.length})` : 'Justificatif'}>
+            <Row icon={<Paperclip className="h-5 w-5" />} label={justifList.length > 1 ? t('receiptsCount', { count: justifList.length }) : t('receipt')}>
               {justifList.length ? (
                 <ul className="space-y-0.5">
                   {justifList.map((j, i) => (
@@ -271,12 +280,12 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
                         <a href={justifUrls[i]!} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-1.5 font-semibold text-leaf-600 underline-offset-2 hover:underline">
                           <FileText aria-hidden="true" className="h-4 w-4 shrink-0" strokeWidth={1.8} />
                           {j.name}
-                          <span className="sr-only"> (ouvre un nouvel onglet)</span>
+                          <span className="sr-only"> {t('newTab')}</span>
                         </a>
                       ) : (
                         <span className="inline-flex items-center gap-1.5">
                           <FileText aria-hidden="true" className="h-4 w-4 shrink-0" strokeWidth={1.8} />
-                          {j.name}{j.sizeBytes ? ` · ${fmtSize(j.sizeBytes)}` : ''}
+                          {j.name}{j.sizeBytes ? ` · ${fmtSize(j.sizeBytes, loc)}` : ''}
                         </span>
                       )}
                     </li>
@@ -284,8 +293,8 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
                 </ul>
               ) : (
                 <>
-                  Aucun justificatif joint.{' '}
-                  <Link href={`/app/journal/nouveau?id=${entry.id}`} className="font-semibold text-leaf-600 underline underline-offset-2">Ajouter un justificatif</Link>
+                  {t('noReceipt')}{' '}
+                  <Link href={`/app/journal/nouveau?id=${entry.id}`} className="font-semibold text-leaf-600 underline underline-offset-2">{t('addReceipt')}</Link>
                 </>
               )}
             </Row>
@@ -293,13 +302,13 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
         )}
 
         <dl className="mt-5 divide-y divide-night-100 rounded-2xl border border-night-100 bg-white px-4 shadow-soft">
-          <Row icon={<CalendarDays className="h-5 w-5" />} label={dep ? (outgoing ? 'Date de la dépense' : 'Date de réception') : 'Date et heure'}>
-            {fmtDateMedium(day)}{entry.heure && !dep ? ` à ${fmtHeure(entry.heure)}` : ''}
+          <Row icon={<CalendarDays className="h-5 w-5" />} label={dep ? (outgoing ? t('dateExpense') : t('dateReceived')) : t('dateTime')}>
+            {entry.heure && !dep ? t('dateAt', { date: fmtDateMedium(day, loc), time: fmtHeure(entry.heure, loc) }) : fmtDateMedium(day, loc)}
           </Row>
-          {entry.lieu && <Row icon={<MapPin className="h-5 w-5" />} label="Lieu">{entry.lieu}</Row>}
-          {kids && <Row icon={<Users className="h-5 w-5" />} label="Enfants concernés">{kids}</Row>}
+          {entry.lieu && <Row icon={<MapPin className="h-5 w-5" />} label={t('place')}>{entry.lieu}</Row>}
+          {kids && <Row icon={<Users className="h-5 w-5" />} label={t('children')}>{kids}</Row>}
           {entry.description && (
-            <Row icon={<Clock3 className="h-5 w-5" />} label="Description">
+            <Row icon={<Clock3 className="h-5 w-5" />} label={t('description')}>
               <span className="whitespace-pre-wrap">{entry.description}</span>
             </Row>
           )}
@@ -308,7 +317,7 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
         {dep && <FinancesNotice className="mt-5" />}
 
         {(!dep || entry.images.length > 0) && <section aria-labelledby="imgs" className="mt-5">
-          <h3 id="imgs" className="mb-2.5 text-[13px] font-bold text-night-900">Images jointes ({imageCount})</h3>
+          <h3 id="imgs" className="mb-2.5 text-[13px] font-bold text-night-900">{t('images', { count: imageCount })}</h3>
           <ul className="grid grid-cols-3 gap-2.5">
             {entry.images.map((img, i) => (
               <li key={`${img.name}-${i}`}>
@@ -344,7 +353,7 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
               <li>
                 <Link
                   href={`/app/journal/${entry.id}/images`}
-                  aria-label="Ajouter des images"
+                  aria-label={t('addImages')}
                   className="grid aspect-[1/0.9] place-items-center rounded-xl border border-night-100 bg-night-50/70 text-night-900 transition-colors hover:bg-night-50"
                 >
                   <Plus aria-hidden="true" className="h-6 w-6" strokeWidth={1.8} />
@@ -355,15 +364,15 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
         </section>}
 
         <dl className="mt-5 rounded-2xl border border-night-100 bg-white px-4 shadow-soft">
-          <Row icon={<CalendarDays className="h-5 w-5" />} label="Créé le">
-            {fmtDateMedium(created)}{createdTime ? ` à ${fmtHeure(createdTime)}` : ''}
+          <Row icon={<CalendarDays className="h-5 w-5" />} label={t('createdLabel')}>
+            {createdTime ? t('dateAt', { date: fmtDateMedium(created, loc), time: fmtHeure(createdTime, loc) }) : fmtDateMedium(created, loc)}
           </Row>
         </dl>
 
         <div className="mt-5 grid grid-cols-3 gap-2.5">
-          <ActionTile icon={<Share className="h-5 w-5" />} label="Partager" onClick={share} />
-          <ActionTile icon={<Download className="h-5 w-5" />} label="Exporter" onClick={exportEntry} />
-          <ActionTile icon={<Trash2 className="h-5 w-5" />} label="Supprimer" danger onClick={() => setConfirm(true)} />
+          <ActionTile icon={<Share className="h-5 w-5" />} label={t('share')} onClick={share} />
+          <ActionTile icon={<Download className="h-5 w-5" />} label={t('export')} onClick={exportEntry} />
+          <ActionTile icon={<Trash2 className="h-5 w-5" />} label={t('delete')} danger onClick={() => setConfirm(true)} />
         </div>
 
         <p role="status" aria-live="polite" className="mt-3 min-h-[1rem] text-center text-xs font-medium text-leaf-700">
@@ -374,12 +383,12 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
       <ActionSheet
         open={sheet}
         onClose={() => setSheet(false)}
-        title="Actions"
+        title={t('actions')}
         actions={[
-          { key: 'edit', label: 'Modifier', icon: <Pencil className="h-5 w-5" aria-hidden="true" />, onClick: () => router.push(`/app/journal/nouveau?id=${entry.id}`) },
-          { key: 'share', label: 'Partager', icon: <Share className="h-5 w-5" aria-hidden="true" />, onClick: () => void share() },
-          { key: 'export', label: 'Exporter', icon: <Download className="h-5 w-5" aria-hidden="true" />, onClick: exportEntry },
-          { key: 'delete', label: 'Supprimer', variant: 'danger', icon: <Trash2 className="h-5 w-5" aria-hidden="true" />, onClick: () => setConfirm(true) },
+          { key: 'edit', label: t('edit'), icon: <Pencil className="h-5 w-5" aria-hidden="true" />, onClick: () => router.push(`/app/journal/nouveau?id=${entry.id}`) },
+          { key: 'share', label: t('share'), icon: <Share className="h-5 w-5" aria-hidden="true" />, onClick: () => void share() },
+          { key: 'export', label: t('export'), icon: <Download className="h-5 w-5" aria-hidden="true" />, onClick: exportEntry },
+          { key: 'delete', label: t('delete'), variant: 'danger', icon: <Trash2 className="h-5 w-5" aria-hidden="true" />, onClick: () => setConfirm(true) },
         ]}
       />
 
@@ -388,9 +397,9 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
         onClose={() => setConfirm(false)}
         onConfirm={handleDelete}
         loading={deleting}
-        title={dep ? 'Supprimer cette dépense ?' : 'Supprimer cet événement ?'}
-        description={dep ? 'L’opération et ses justificatifs seront définitivement supprimés.' : "L'événement et ses pièces jointes seront définitivement supprimés."}
-        confirmLabel="Supprimer"
+        title={dep ? t('deleteExpenseTitle') : t('deleteEventTitle')}
+        description={dep ? t('deleteExpenseText') : t('deleteEventText')}
+        confirmLabel={t('delete')}
         tone="danger"
       />
     </>

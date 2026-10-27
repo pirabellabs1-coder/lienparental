@@ -2,6 +2,7 @@
 
 import { use, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { AlertCircle, Users } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { LoadingState } from '@/components/mobile/StateScreens'
@@ -11,19 +12,16 @@ import { RoleBadge, frBirth, frDay, joinNames } from '@/components/coparents/bit
 import { btn, card } from '@/components/ui/kit'
 import { cn } from '@/lib/cn'
 import {
-  ROLE_HELP, acceptFamilyInvitation, declineFamilyInvitation, previewFamilyInvitation, type InvitationPreview,
+  acceptFamilyInvitation, declineFamilyInvitation, previewFamilyInvitation, type InvitationPreview,
 } from '@/lib/coparents'
 
-const ENDED: Record<'invalid' | 'expired' | 'accepted' | 'cancelled' | 'declined', { title: string; text: string }> = {
-  invalid: { title: 'Invitation invalide', text: 'Ce lien n’est pas reconnu. Demandez un nouveau lien à la personne qui vous a invité.' },
-  expired: { title: 'Invitation expirée', text: 'Ce lien a dépassé sa durée de validité de 7 jours. Demandez à la personne qui vous a invité de vous le renvoyer.' },
-  accepted: { title: 'Invitation déjà acceptée', text: 'Cette invitation a déjà été utilisée. Retrouvez les enfants partagés dans Famille et co-parents.' },
-  cancelled: { title: 'Invitation annulée', text: 'La personne qui vous a invité a annulé ce lien.' },
-  declined: { title: 'Invitation refusée', text: 'Cette invitation a été refusée.' },
-}
+// États terminaux : family.coparents.invitationPage.ended.<état>.{title,text} (traduits au rendu).
 
 // Acceptation d'une invitation famille (compte requis : /app est protégé, retour ici après connexion).
 export default function FamilyInvitationPage({ params }: { params: Promise<{ token: string }> }) {
+  const t = useTranslations('family.coparents.invitationPage')
+  const tRoles = useTranslations('family.coparents.inviteForm.roles')
+  const locale = useLocale()
   const { token } = use(params)
   const router = useRouter()
   const [preview, setPreview] = useState<InvitationPreview | null>(null)
@@ -45,7 +43,7 @@ export default function FamilyInvitationPage({ params }: { params: Promise<{ tok
       await acceptFamilyInvitation({ token })
       router.push('/app/coparents')
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Invitation invalide ou expirée.')
+      setError(e instanceof Error ? e.message : t('invalidOrExpired'))
       setBusy(false)
     }
   }
@@ -57,17 +55,17 @@ export default function FamilyInvitationPage({ params }: { params: Promise<{ tok
       await declineFamilyInvitation(preview.id)
       router.push('/app')
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Action impossible.')
+      setError(e instanceof Error ? e.message : t('actionFailed'))
       setBusy(false)
     }
   }
 
   return (
     <>
-      <TopBar title="Invitation" showBack backHref="/app" showBell={false} />
+      <TopBar title={t('title')} showBack backHref="/app" showBell={false} />
       <div className="w-full px-5 pb-10 pt-2">
         {!preview ? (
-          <LoadingState compact title="Vérification de l’invitation" description="" />
+          <LoadingState compact title={t('checking')} description="" />
         ) : preview.state === 'ready' ? (
           <div className="mx-auto grid max-w-3xl gap-4 lg:grid-cols-[1.2fr_1fr]">
             <section aria-labelledby="inv-title" className={cn(card, 'p-5')}>
@@ -75,25 +73,25 @@ export default function FamilyInvitationPage({ params }: { params: Promise<{ tok
                 <Users className="h-6 w-6" strokeWidth={1.9} />
               </span>
               <h2 id="inv-title" className="mt-4 text-[18px] font-extrabold text-night-900">
-                {preview.inviterPrenom || 'Un parent'} vous invite à rejoindre l&apos;espace partagé
+                {t('heading', { name: preview.inviterPrenom || t('aParent') })}
               </h2>
               <p className="mt-2 text-[14px] text-night-700">
-                {joinNames(preview.children.map((c) => (c.dateNaissance ? `${c.prenom} (né(e) le ${frBirth(c.dateNaissance)})` : c.prenom)))}
+                {joinNames(preview.children.map((c) => (c.dateNaissance ? t('childBorn', { name: c.prenom, date: frBirth(c.dateNaissance, locale) }) : c.prenom)), locale)}
               </p>
               <p className="mt-3 flex flex-wrap items-center gap-2 text-[13px] text-night-700">
-                Rôle proposé : <RoleBadge role={preview.role} />
+                {t('proposedRole')} <RoleBadge role={preview.role} />
               </p>
-              <p className="mt-1.5 text-[13px] text-night-600">{ROLE_HELP[preview.role]}</p>
-              <p className="mt-3 text-[12px] text-night-600">Valable jusqu&apos;au {frDay(preview.expiresAt)}.</p>
+              <p className="mt-1.5 text-[13px] text-night-600">{tRoles(`${preview.role}.help`)}</p>
+              <p className="mt-3 text-[12px] text-night-600">{t('validUntil', { date: frDay(preview.expiresAt, false, locale) })}</p>
               <p className="mt-3 rounded-xl bg-night-50/70 p-3 text-[12px] text-night-700">
-                Vous avez déjà une fiche pour cet enfant ? Après acceptation, nous vous proposerons de fusionner les deux fiches, avec votre confirmation.
+                {t('mergeNote')}
               </p>
               {error && <p role="alert" className="mt-4 rounded-xl bg-alert-50 p-3 text-[13px] font-semibold text-alert-700">{error}</p>}
               <button type="button" onClick={() => void accept()} disabled={busy} className={cn(btn.primary, 'mt-5 w-full')}>
-                {busy ? 'Un instant…' : 'Accepter l’invitation'}
+                {busy ? t('wait') : t('accept')}
               </button>
               <button type="button" onClick={() => void decline()} disabled={busy} className={cn(btn.secondary, 'mt-2.5 w-full')}>
-                Refuser
+                {t('decline')}
               </button>
             </section>
             <SharedScope compact />
@@ -101,19 +99,22 @@ export default function FamilyInvitationPage({ params }: { params: Promise<{ tok
         ) : preview.state === 'other_account' ? (
           <section className={cn(card, 'mx-auto max-w-lg p-5')} aria-labelledby="inv-other">
             <AlertCircle className="h-7 w-7 text-orange-700" aria-hidden="true" />
-            <h2 id="inv-other" className="mt-3 text-[18px] font-extrabold text-night-900">Cette invitation est destinée à un autre compte</h2>
+            <h2 id="inv-other" className="mt-3 text-[18px] font-extrabold text-night-900">{t('otherAccountTitle')}</h2>
             <p className="mt-2 text-[14px] text-night-700">
-              Elle a été envoyée à <strong className="font-semibold">{preview.inviteeHint}</strong>. Connectez-vous avec le compte de cette adresse, après l&apos;avoir vérifiée, pour l&apos;accepter.
+              {t.rich('otherAccountText', {
+                hint: preview.inviteeHint,
+                strong: (chunks) => <strong className="font-semibold">{chunks}</strong>,
+              })}
             </p>
             <LogoutButton variant="button" className="mt-5" />
           </section>
         ) : (
           <section className={cn(card, 'mx-auto max-w-lg p-5')} aria-labelledby="inv-ended">
             <AlertCircle className="h-7 w-7 text-night-600" aria-hidden="true" />
-            <h2 id="inv-ended" className="mt-3 text-[18px] font-extrabold text-night-900">{ENDED[preview.state].title}</h2>
-            <p className="mt-2 text-[14px] text-night-700">{ENDED[preview.state].text}</p>
+            <h2 id="inv-ended" className="mt-3 text-[18px] font-extrabold text-night-900">{t(`ended.${preview.state}.title`)}</h2>
+            <p className="mt-2 text-[14px] text-night-700">{t(`ended.${preview.state}.text`)}</p>
             <button type="button" onClick={() => router.push('/app/coparents')} className={cn(btn.secondary, 'mt-5 w-full')}>
-              Famille et co-parents
+              {t('familyLink')}
             </button>
           </section>
         )}

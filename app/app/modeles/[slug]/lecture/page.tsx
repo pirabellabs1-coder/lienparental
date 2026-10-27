@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { use, useEffect, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ChevronRight, Download, Maximize2, Minus, Plus, Search, X } from 'lucide-react'
 import { StatusBadge } from '@/components/coffre/StatusBadge'
@@ -17,6 +18,7 @@ const ZOOMS = [0.85, 1, 1.15, 1.3, 1.5]
 // Maquette « Lecture du document »
 export default function LecturePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
+  const tr = useTranslations('coach.templates.reader')
   const found = getModele(slug)
 
   const [zoomIdx, setZoomIdx] = useState(1)
@@ -60,7 +62,7 @@ export default function LecturePage({ params }: { params: Promise<{ slug: string
         style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
       >
         <div className="flex items-start gap-1 pb-2">
-          <Link href={`/app/modeles/${m.slug}`} aria-label="Retour au détail du modèle" className={cn(headerIconBtn, '-ml-2 shrink-0')}>
+          <Link href={`/app/modeles/${m.slug}`} aria-label={tr('back')} className={cn(headerIconBtn, '-ml-2 shrink-0')}>
             <ArrowLeft className="h-[22px] w-[22px]" aria-hidden="true" />
           </Link>
           <div className="min-w-0 flex-1 pt-1 text-center">
@@ -72,7 +74,7 @@ export default function LecturePage({ params }: { params: Promise<{ slug: string
             onClick={() => { setSearchOpen((v) => !v); if (searchOpen) setQuery('') }}
             aria-expanded={searchOpen}
             aria-controls="doc-search"
-            aria-label={searchOpen ? 'Fermer la recherche' : 'Rechercher dans le document'}
+            aria-label={searchOpen ? tr('closeSearch') : tr('search')}
             className={cn(headerIconBtn, '-mr-2 shrink-0')}
           >
             {searchOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Search className="h-5 w-5" aria-hidden="true" />}
@@ -80,14 +82,14 @@ export default function LecturePage({ params }: { params: Promise<{ slug: string
         </div>
         {searchOpen && (
           <div id="doc-search" role="search" className="pb-2">
-            <label htmlFor="doc-search-input" className="sr-only">Rechercher dans le document</label>
+            <label htmlFor="doc-search-input" className="sr-only">{tr('search')}</label>
             <input
               id="doc-search-input"
               ref={searchRef}
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Rechercher un mot…"
+              placeholder={tr('searchPlaceholder')}
               className="h-11 w-full rounded-xl border border-night-200 px-3.5 text-[14px] outline-none focus:border-leaf-500"
             />
           </div>
@@ -95,14 +97,14 @@ export default function LecturePage({ params }: { params: Promise<{ slug: string
 
         <div className="flex h-12 items-center justify-between border-y border-night-100">
           <p className="text-[13px] font-semibold text-night-800" aria-live="polite">
-            <span className="sr-only">Page </span>{current} / {pages}
+            <span className="sr-only">{tr('page')}</span>{current} / {pages}
           </p>
           <div className="flex items-center gap-1">
             <button
               type="button"
               onClick={() => setZoomIdx((i) => Math.max(0, i - 1))}
               disabled={zoomIdx === 0}
-              aria-label="Dézoomer"
+              aria-label={tr('zoomOut')}
               className={cn(headerIconBtn, 'disabled:opacity-30')}
             >
               <Minus className="h-5 w-5" aria-hidden="true" />
@@ -111,13 +113,13 @@ export default function LecturePage({ params }: { params: Promise<{ slug: string
               type="button"
               onClick={() => setZoomIdx((i) => Math.min(ZOOMS.length - 1, i + 1))}
               disabled={zoomIdx === ZOOMS.length - 1}
-              aria-label="Zoomer"
+              aria-label={tr('zoomIn')}
               className={cn(headerIconBtn, 'disabled:opacity-30')}
             >
               <Plus className="h-5 w-5" aria-hidden="true" />
             </button>
             {canFullscreen && (
-              <button type="button" onClick={() => void toggleFullscreen()} aria-label="Plein écran" className={cn(headerIconBtn, '-mr-2')}>
+              <button type="button" onClick={() => void toggleFullscreen()} aria-label={tr('fullscreen')} className={cn(headerIconBtn, '-mr-2')}>
                 <Maximize2 className="h-[18px] w-[18px]" aria-hidden="true" />
               </button>
             )}
@@ -128,7 +130,7 @@ export default function LecturePage({ params }: { params: Promise<{ slug: string
       <div ref={viewerRef} className="overflow-x-auto bg-night-50/50 px-4 py-4 [&:fullscreen]:overflow-y-auto">
         <div className="mx-auto max-w-2xl space-y-4" style={{ fontSize: `${12 * ZOOMS[zoomIdx]}px` }}>
           {Array.from({ length: pages }, (_, i) => (
-            <div key={i} ref={(el) => { pageRefs.current[i] = el }} data-page={i + 1} aria-label={`Page ${i + 1} sur ${pages}`} role="region">
+            <div key={i} ref={(el) => { pageRefs.current[i] = el }} data-page={i + 1} aria-label={tr('pageOf', { page: i + 1, total: pages })} role="region">
               <LetterSheet modele={m} page={i} query={query} className="min-h-[60vh]" />
             </div>
           ))}
@@ -138,7 +140,7 @@ export default function LecturePage({ params }: { params: Promise<{ slug: string
       <StickyActions>
         <Link href={`/app/modeles/${m.slug}/export`} className={btn({ variant: 'primary' })}>
           <Download className="h-[18px] w-[18px]" aria-hidden="true" />
-          <span className="flex-1 text-center">Télécharger / Exporter</span>
+          <span className="flex-1 text-center">{tr('download')}</span>
           <ChevronRight className="h-5 w-5" aria-hidden="true" />
         </Link>
       </StickyActions>

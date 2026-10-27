@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { use, useEffect, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { notFound, useRouter } from 'next/navigation'
 import { ArrowLeft, Check, ChevronRight, CircleCheck, FileText, LoaderCircle } from 'lucide-react'
 import { Modal } from '@/components/ui'
@@ -12,7 +13,7 @@ import type { ExportFormat } from '@/components/coffre/modeleExport'
 import { cn } from '@/lib/cn'
 
 type Phase = 'choose' | 'progress' | 'success' | 'error'
-const STEPS = ['Génération du fichier', 'Mise en forme', 'Vérification de la compatibilité', 'Finalisation']
+const STEPS = ['file', 'layout', 'compat', 'final'] as const
 
 function WordGlyph() {
   return (
@@ -42,6 +43,7 @@ function CanvaGlyph() {
 // Maquettes « Télécharger / Exporter » → « Exportation en cours » → « Téléchargement réussi »
 export default function ExportPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
+  const tr = useTranslations('coach.templates')
   const router = useRouter()
   const found = getModele(slug)
 
@@ -118,32 +120,32 @@ export default function ExportPage({ params }: { params: Promise<{ slug: string 
             <Check className="h-12 w-12 text-leaf-600" strokeWidth={3} />
           </span>
           <h1 ref={successHeading} tabIndex={-1} className="mt-6 text-center text-[22px] font-extrabold outline-none">
-            Téléchargement réussi !
+            {tr('export.success')}
           </h1>
-          <p className="mt-1 text-center text-[14px] text-white/90">Votre document est prêt.</p>
+          <p className="mt-1 text-center text-[14px] text-white/90">{tr('export.ready')}</p>
 
           <div className="mt-7 flex items-center gap-3.5 rounded-2xl bg-white p-4 text-night-900 shadow-card">
             <FileIcon tone={format === 'word' ? 'blue' : 'red'} label={format === 'word' ? 'W' : 'PDF'} size="lg" />
             <div className="min-w-0">
               <p className="text-[14.5px] font-bold leading-snug">{displayName}</p>
               <p className="mt-1 text-[12.5px] text-night-500">
-                {pages} page{pages > 1 ? 's' : ''} <span aria-hidden="true">•</span> {sizeKo} Ko
+                {tr('pages', { count: pages })} <span aria-hidden="true">•</span> {tr('export.sizeKb', { size: sizeKo })}
               </p>
             </div>
           </div>
 
           <div className="mt-8 space-y-3">
             <button type="button" onClick={openFile} className={cn(btn({ variant: 'primary' }), 'bg-leaf-500 shadow-none ring-1 ring-white/25 hover:bg-leaf-400')}>
-              Ouvrir le fichier
+              {tr('export.openFile')}
             </button>
             <button type="button" onClick={() => void saveFile()} className={cn(btn({ variant: 'secondary' }), 'border-[1.5px] border-white/80 bg-transparent text-white hover:bg-white/10')}>
-              {saved ? <><CircleCheck className="h-[18px] w-[18px]" aria-hidden="true" /> Enregistré</> : 'Enregistrer dans Fichiers'}
+              {saved ? <><CircleCheck className="h-[18px] w-[18px]" aria-hidden="true" /> {tr('export.saved')}</> : tr('export.saveToFiles')}
             </button>
             <Link href="/app/modeles" className={cn(btn({ variant: 'secondary' }), 'border-[1.5px] border-white/80 bg-transparent text-white hover:bg-white/10')}>
-              Retour aux documents
+              {tr('export.back')}
             </Link>
           </div>
-          <p className="sr-only" role="status" aria-live="polite">{saved ? 'Fichier enregistré' : ''}</p>
+          <p className="sr-only" role="status" aria-live="polite">{saved ? tr('export.savedStatus') : ''}</p>
         </div>
       </div>
     )
@@ -158,17 +160,17 @@ export default function ExportPage({ params }: { params: Promise<{ slug: string 
         </span>
         {phase === 'error' ? (
           <div role="alert" className="mt-6 text-center">
-            <p className="text-[16px] font-extrabold text-night-900">L’export n’a pas abouti</p>
-            <p className="mt-1 text-[13px] text-night-600">Vérifiez votre connexion puis réessayez.</p>
+            <p className="text-[16px] font-extrabold text-night-900">{tr('export.failedTitle')}</p>
+            <p className="mt-1 text-[13px] text-night-600">{tr('export.failedHint')}</p>
             <div className="mt-6 space-y-3">
-              <button type="button" onClick={() => void start(format)} className={btn({ variant: 'primary' })}>Réessayer</button>
-              <button type="button" onClick={() => setPhase('choose')} className={btn({ variant: 'secondary' })}>Choisir un autre format</button>
+              <button type="button" onClick={() => void start(format)} className={btn({ variant: 'primary' })}>{tr('export.retry')}</button>
+              <button type="button" onClick={() => setPhase('choose')} className={btn({ variant: 'secondary' })}>{tr('export.otherFormat')}</button>
             </div>
           </div>
         ) : (
           <>
-            <h1 className="mt-6 text-center text-[16px] font-extrabold text-night-900">Préparation de votre document…</h1>
-            <p className="mt-1 text-center text-[13px] text-night-600">Veuillez patienter quelques instants.</p>
+            <h1 className="mt-6 text-center text-[16px] font-extrabold text-night-900">{tr('export.preparing')}</h1>
+            <p className="mt-1 text-center text-[13px] text-night-600">{tr('export.wait')}</p>
             <ol className="mx-auto mt-10 w-full max-w-[260px] space-y-5" aria-live="polite">
               {STEPS.map((s, i) => {
                 const state = i < progress ? 'done' : i === progress ? 'doing' : 'todo'
@@ -182,8 +184,8 @@ export default function ExportPage({ params }: { params: Promise<{ slug: string 
                       <span aria-hidden="true" className="h-5 w-5 rounded-full border-2 border-night-200" />
                     )}
                     <span className={state === 'todo' ? 'text-night-400' : 'text-night-800'}>
-                      {s}
-                      <span className="sr-only">{state === 'done' ? ' — terminé' : state === 'doing' ? ' — en cours' : ''}</span>
+                      {tr(`export.steps.${s}`)}
+                      <span className="sr-only">{state === 'done' ? tr('export.stepDone') : state === 'doing' ? tr('export.stepDoing') : ''}</span>
                     </span>
                   </li>
                 )
@@ -197,9 +199,9 @@ export default function ExportPage({ params }: { params: Promise<{ slug: string 
 
   /* ------------------------- Choix du format ------------------------- */
   const options: { k: ExportFormat; title: string; desc: string; icon: React.ReactNode }[] = [
-    { k: 'pdf', title: 'PDF', desc: 'Idéal pour l’impression ou l’envoi', icon: <FileIcon tone="red" label="PDF" size="md" /> },
-    { k: 'word', title: 'Word (.docx)', desc: 'Modifiable avec Microsoft Word', icon: <WordGlyph /> },
-    { k: 'canva', title: 'Canva', desc: 'Personnalisable sur Canva', icon: <CanvaGlyph /> },
+    { k: 'pdf', title: 'PDF', desc: tr('export.pdfDesc'), icon: <FileIcon tone="red" label="PDF" size="md" /> },
+    { k: 'word', title: 'Word (.docx)', desc: tr('export.wordDesc'), icon: <WordGlyph /> },
+    { k: 'canva', title: 'Canva', desc: tr('export.canvaDesc'), icon: <CanvaGlyph /> },
   ]
 
   return (
@@ -218,8 +220,8 @@ export default function ExportPage({ params }: { params: Promise<{ slug: string 
       <Modal
         open
         onClose={() => router.push(`/app/modeles/${m.slug}/lecture`)}
-        title={<span className="text-[18px] font-extrabold">Télécharger le document</span>}
-        description="Choisissez le format qui vous convient"
+        title={<span className="text-[18px] font-extrabold">{tr('export.modalTitle')}</span>}
+        description={tr('export.modalDesc')}
       >
         <ul className="space-y-3 pb-2">
           {options.map((o) => {
@@ -229,7 +231,7 @@ export default function ExportPage({ params }: { params: Promise<{ slug: string 
                 <button
                   type="button"
                   onClick={() => void start(o.k)}
-                  aria-label={`${o.title} — ${o.desc}`}
+                  aria-label={tr('export.optionLabel', { title: o.title, desc: o.desc })}
                   className={cn(
                     'flex min-h-[72px] w-full items-center gap-3.5 rounded-2xl border bg-white px-4 py-3 text-left transition-colors hover:bg-night-50/60',
                     selected ? 'border-leaf-200' : 'border-night-100',

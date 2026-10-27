@@ -1,5 +1,6 @@
 import { cn } from '@/lib/cn'
 import { Check } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   current: number
@@ -10,11 +11,12 @@ type Props = {
 }
 
 export function StepIndicator({ current, total, labels, variant = 'pills', className }: Props) {
+  const t = useTranslations('account.ui.steps')
   const steps = Array.from({ length: total }, (_, i) => i + 1)
   const label = labels?.[current - 1]
 
   return (
-    <div className={cn('w-full', className)} role="group" aria-label={`Étape ${current} sur ${total}${label ? ` : ${label}` : ''}`}>
+    <div className={cn('w-full', className)} role="group" aria-label={label ? t('ariaWithLabel', { current, total, label }) : t('aria', { current, total })}>
       {variant === 'dots' && (
         <div className="flex items-center justify-center gap-2">
           {steps.map(i => (
@@ -45,7 +47,7 @@ export function StepIndicator({ current, total, labels, variant = 'pills', class
             ))}
           </div>
           <div className="mt-2 flex items-baseline justify-between gap-3">
-            <p className="text-xs font-medium text-night-500 dark:text-night-300 tabular-nums">Étape {current}/{total}</p>
+            <p className="text-xs font-medium text-night-500 dark:text-night-300 tabular-nums">{t('short', { current, total })}</p>
             {label && <p className="text-xs font-semibold text-night-900 dark:text-night-50 truncate">{label}</p>}
           </div>
         </>

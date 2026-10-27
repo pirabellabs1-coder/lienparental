@@ -136,14 +136,30 @@ export function draftFromFile(file: File): CoachDraft {
   return { kind, name: file.name, sizeKb: Math.round(file.size / 1024), createdAt: new Date().toISOString() }
 }
 
-/** Valide un fichier choisi ; renvoie un message d'erreur lisible ou null. */
-export function validateFile(file: File, accept: 'image' | 'doc'): string | null {
-  if (file.size > MAX_FILE_BYTES) return 'Fichier trop volumineux (10 Mo maximum).'
-  if (accept === 'image' && !/^image\/(jpeg|png)$/.test(file.type)) return 'Format accepté : image JPG ou PNG.'
-  if (accept === 'image' && file.size > MAX_IMAGE_BYTES) return 'Image trop volumineuse (5 Mo maximum).'
-  if (accept === 'doc' && /\.docx?$/i.test(file.name)) return 'Les documents Word ne sont pas encore pris en charge : enregistrez-le en PDF.'
-  if (accept === 'doc' && !/\.(pdf|txt)$/i.test(file.name)) return 'Formats acceptés : PDF ou texte.'
+export type FileErrorCode = 'tooBig' | 'imageFormat' | 'imageTooBig' | 'word' | 'docFormat'
+
+/** Code d'erreur d'un fichier choisi (traduit au rendu : `coach.common.fileErrors.<code>`) ou null. */
+export function fileErrorCode(file: File, accept: 'image' | 'doc'): FileErrorCode | null {
+  if (file.size > MAX_FILE_BYTES) return 'tooBig'
+  if (accept === 'image' && !/^image\/(jpeg|png)$/.test(file.type)) return 'imageFormat'
+  if (accept === 'image' && file.size > MAX_IMAGE_BYTES) return 'imageTooBig'
+  if (accept === 'doc' && /\.docx?$/i.test(file.name)) return 'word'
+  if (accept === 'doc' && !/\.(pdf|txt)$/i.test(file.name)) return 'docFormat'
   return null
+}
+
+const FILE_ERRORS_FR: Record<FileErrorCode, string> = {
+  tooBig: 'Fichier trop volumineux (10 Mo maximum).',
+  imageFormat: 'Format accepté : image JPG ou PNG.',
+  imageTooBig: 'Image trop volumineuse (5 Mo maximum).',
+  word: 'Les documents Word ne sont pas encore pris en charge : enregistrez-le en PDF.',
+  docFormat: 'Formats acceptés : PDF ou texte.',
+}
+
+/** Valide un fichier choisi ; renvoie un message d'erreur lisible (français) ou null. Préférer fileErrorCode + traduction. */
+export function validateFile(file: File, accept: 'image' | 'doc'): string | null {
+  const code = fileErrorCode(file, accept)
+  return code ? FILE_ERRORS_FR[code] : null
 }
 
 export function timeLabel(iso: string): string {

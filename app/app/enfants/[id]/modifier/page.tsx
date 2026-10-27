@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { use, useEffect, useMemo, useState, type FormEvent, type ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { CalendarDays, HeartPulse, Lock, PersonStanding, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { ConfirmDialog } from '@/components/ui'
@@ -12,6 +13,7 @@ import { EnfantsHeader } from '@/components/enfants/EnfantsHeader'
 import { useChild } from '@/components/enfants/useChild'
 import { LoadingState } from '@/components/mobile/StateScreens'
 import { removeChild } from '@/lib/data/children'
+import { useChildLabels } from '@/components/enfants/childLabels'
 import {
   ALLERGY_SUGGESTIONS,
   BLOOD_GROUPS,
@@ -62,6 +64,8 @@ const num = (v: string) => {
 
 // M04 — Modifier le profil (2 étapes : générales + physiques, puis médicales).
 export default function ModifierEnfantPage({ params }: { params: Promise<{ id: string }> }) {
+  const t = useTranslations('family.children.form')
+  const labels = useChildLabels()
   const { id } = use(params)
   const router = useRouter()
   const { child, save, loading } = useChild(id)
@@ -90,7 +94,7 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
   if (!child && loading) {
     return (
       <div className="w-full px-4 pb-8 md:px-6">
-        <LoadingState compact title="Chargement du profil" description="" />
+        <LoadingState compact title={t('loadingProfile')} description="" />
       </div>
     )
   }
@@ -98,9 +102,9 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
   if (!child || !form) {
     return (
       <div className="w-full px-4 pb-8 md:px-6">
-        <p className="mt-10 text-center text-sm text-night-600">Ce profil n’existe pas ou a été supprimé.</p>
+        <p className="mt-10 text-center text-sm text-night-600">{t('notFound')}</p>
         <Link href="/app/enfants" className={cn(btn.secondary, 'mt-6 w-full')}>
-          Retour à mes enfants
+          {t('backToChildren')}
         </Link>
       </div>
     )
@@ -112,11 +116,11 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
   }
 
   const errors = {
-    prenom: !form.prenom.trim() ? 'Le prénom est requis.' : undefined,
+    prenom: !form.prenom.trim() ? t('firstNameRequired') : undefined,
     dateNaissance:
-      !form.dateNaissance || form.dateNaissance > today ? 'Indiquez une date de naissance valide.' : undefined,
-    taille: form.taille && !num(form.taille) ? 'Taille invalide.' : undefined,
-    poids: form.poids && !num(form.poids) ? 'Poids invalide.' : undefined,
+      !form.dateNaissance || form.dateNaissance > today ? t('birthDateInvalid') : undefined,
+    taille: form.taille && !num(form.taille) ? t('heightInvalid') : undefined,
+    poids: form.poids && !num(form.poids) ? t('weightInvalid') : undefined,
   }
   const step1Valid = !Object.values(errors).some(Boolean)
   const dirty = JSON.stringify(form) !== JSON.stringify(initial)
@@ -148,7 +152,7 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
     })
     router.push(`/app/enfants/${id}?vue=recap`)
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : 'Enregistrement impossible.')
+      setSaveError(err instanceof Error ? err.message : t('saveFailed'))
       setSaving(false)
     }
   }
@@ -172,10 +176,10 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
   return (
     <div className="w-full px-4 pb-8 md:px-6">
       <EnfantsHeader
-        title="Modifier le profil"
+        title={t('editTitle')}
         left={
           <button type="button" onClick={cancel} className="min-h-[44px] rounded-lg px-2 text-sm font-semibold text-night-700 hover:text-night-900">
-            Annuler
+            {t('cancel')}
           </button>
         }
         right={
@@ -185,25 +189,25 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
             disabled={saving}
             className="min-h-[44px] rounded-lg px-2 text-sm font-bold text-leaf-600 hover:text-leaf-700 disabled:opacity-50"
           >
-            Enregistrer
+            {t('save')}
           </button>
         }
       />
 
       <form onSubmit={onSubmit} noValidate className="mt-3">
         <p className="sr-only" aria-live="polite">
-          Étape {step} sur 2
+          {t('step', { step, total: 2 })}
         </p>
 
         {step === 1 ? (
           <>
             <SectionTitle id="edit-step-title" icon={<CalendarDays className="h-[18px] w-[18px]" />}>
-              Informations générales
+              {t('sectionGeneral')}
             </SectionTitle>
             <div className="mt-4 space-y-4">
-              <TextField label="Prénom" required value={form.prenom} onChange={(e) => set('prenom', e.target.value)} error={submitted ? errors.prenom : undefined} />
+              <TextField label={t('firstName')} required value={form.prenom} onChange={(e) => set('prenom', e.target.value)} error={submitted ? errors.prenom : undefined} />
               <TextField
-                label="Date de naissance"
+                label={t('birthDate')}
                 required
                 type="date"
                 max={today}
@@ -211,15 +215,15 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
                 onChange={(e) => set('dateNaissance', e.target.value)}
                 error={submitted ? errors.dateNaissance : undefined}
               />
-              <SelectField label="Classe" placeholder="Sélectionner" options={CHILD_CLASSES} value={form.classe} onChange={(e) => set('classe', e.target.value)} />
+              <SelectField label={t('class')} placeholder={t('select')} options={labels.classOptions(CHILD_CLASSES)} value={form.classe} onChange={(e) => set('classe', e.target.value)} />
             </div>
 
             <SectionTitle icon={<PersonStanding className="h-[18px] w-[18px]" />} className="mt-8">
-              Informations physiques
+              {t('sectionPhysical')}
             </SectionTitle>
             <div className="mt-4 space-y-4">
               <TextField
-                label="Taille"
+                label={t('height')}
                 optional
                 inputMode="decimal"
                 suffix="cm"
@@ -228,7 +232,7 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
                 error={submitted ? errors.taille : undefined}
               />
               <TextField
-                label="Poids"
+                label={t('weight')}
                 optional
                 inputMode="decimal"
                 suffix="kg"
@@ -236,40 +240,40 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
                 onChange={(e) => set('poids', e.target.value)}
                 error={submitted ? errors.poids : undefined}
               />
-              <SelectField label="Couleur des yeux" optional placeholder="Sélectionner" options={EYE_COLORS} value={form.couleurYeux} onChange={(e) => set('couleurYeux', e.target.value)} />
-              <SelectField label="Couleur des cheveux" optional placeholder="Sélectionner" options={HAIR_COLORS} value={form.couleurCheveux} onChange={(e) => set('couleurCheveux', e.target.value)} />
+              <SelectField label={t('eyeColor')} optional placeholder={t('select')} options={labels.options(EYE_COLORS, labels.eyeLabel)} value={form.couleurYeux} onChange={(e) => set('couleurYeux', e.target.value)} />
+              <SelectField label={t('hairColor')} optional placeholder={t('select')} options={labels.options(HAIR_COLORS, labels.hairLabel)} value={form.couleurCheveux} onChange={(e) => set('couleurCheveux', e.target.value)} />
             </div>
 
             <div className="mt-8 flex justify-end">
               <button type="submit" className={cn(btn.primary, 'px-10')}>
-                Suivant
+                {t('next')}
               </button>
             </div>
           </>
         ) : (
           <>
             <SectionTitle id="edit-step-title" icon={<HeartPulse className="h-[18px] w-[18px]" />}>
-              Informations médicales
+              {t('sectionMedical')}
             </SectionTitle>
             <p className="mt-2 flex items-center gap-1.5 text-xs text-night-500">
               <Lock className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              Données de santé chiffrées, visibles par vous seul.
+              {t('medicalPrivacy')}
             </p>
 
             <div className="mt-4 space-y-4">
               <div>
                 <span id="allergies-label" className="mb-1.5 block text-[13px] font-bold text-night-900">
-                  Allergies <span className="font-medium text-night-500">(facultatif)</span>
+                  {t('allergies')} <span className="font-medium text-night-500">{t('optional')}</span>
                 </span>
                 <div className="relative flex min-h-[48px] flex-wrap items-center gap-1.5 rounded-xl border border-night-100 bg-white py-1.5 pl-2 pr-10 focus-within:border-leaf-500 focus-within:ring-4 focus-within:ring-leaf-100">
                   <ul className="contents" aria-labelledby="allergies-label">
                     {form.allergies.map((a) => (
                       <li key={a} className="inline-flex items-center gap-0.5 rounded-lg bg-night-50 py-0.5 pl-2.5 pr-0.5 text-[13px] font-semibold text-night-800">
-                        {a}
+                        {labels.allergyLabel(a)}
                         <button
                           type="button"
                           onClick={() => set('allergies', form.allergies.filter((x) => x !== a))}
-                          aria-label={`Retirer ${a}`}
+                          aria-label={t('removeAllergy', { name: labels.allergyLabel(a) })}
                           className="grid h-7 w-7 place-items-center rounded-md text-night-500 hover:bg-night-100 hover:text-night-900"
                         >
                           <X className="h-3.5 w-3.5" aria-hidden="true" />
@@ -278,16 +282,16 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
                     ))}
                   </ul>
                   <select
-                    aria-label="Ajouter une allergie"
+                    aria-label={t('addAllergy')}
                     value=""
                     onChange={(e) => e.target.value && set('allergies', [...form.allergies, e.target.value])}
                     disabled={remaining.length === 0}
                     className="h-9 min-w-[7.5rem] flex-1 cursor-pointer appearance-none bg-transparent pl-2 text-base text-night-400 outline-none disabled:cursor-default"
                   >
-                    <option value="">{form.allergies.length ? 'Ajouter…' : 'Sélectionner'}</option>
+                    <option value="">{form.allergies.length ? t('addMore') : t('select')}</option>
                     {remaining.map((a) => (
                       <option key={a} value={a} className="text-night-900">
-                        {a}
+                        {labels.allergyLabel(a)}
                       </option>
                     ))}
                   </select>
@@ -297,11 +301,11 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
                 </div>
               </div>
 
-              <TextField label="Autres allergies" optional placeholder="Ex : Poils d’animaux, médicaments…" value={form.autresAllergies} onChange={(e) => set('autresAllergies', e.target.value)} />
-              <TextField label="Informations médicales" optional placeholder="Ex : Asthme léger – Ventoline si besoin" value={form.infosMedicales} onChange={(e) => set('infosMedicales', e.target.value)} />
-              <SelectField label="Groupe sanguin" optional placeholder="Sélectionner" options={BLOOD_GROUPS} value={form.groupeSanguin} onChange={(e) => set('groupeSanguin', e.target.value)} />
-              <TextField label="Traitement en cours" optional placeholder="Ex : Aucun" value={form.traitement} onChange={(e) => set('traitement', e.target.value)} />
-              <TextField label="Médecin traitant" optional placeholder="Ex : Dr Martin – 05 94 12 34 56" value={form.medecinTraitant} onChange={(e) => set('medecinTraitant', e.target.value)} />
+              <TextField label={t('otherAllergies')} optional placeholder={t('otherAllergiesPlaceholder')} value={form.autresAllergies} onChange={(e) => set('autresAllergies', e.target.value)} />
+              <TextField label={t('sectionMedical')} optional placeholder={t('medicalInfoPlaceholder')} value={form.infosMedicales} onChange={(e) => set('infosMedicales', e.target.value)} />
+              <SelectField label={t('bloodGroup')} optional placeholder={t('select')} options={labels.options(BLOOD_GROUPS, labels.bloodLabel)} value={form.groupeSanguin} onChange={(e) => set('groupeSanguin', e.target.value)} />
+              <TextField label={t('treatment')} optional placeholder={t('treatmentPlaceholder')} value={form.traitement} onChange={(e) => set('traitement', e.target.value)} />
+              <TextField label={t('doctor')} optional placeholder={t('doctorPlaceholder')} value={form.medecinTraitant} onChange={(e) => set('medecinTraitant', e.target.value)} />
             </div>
 
             {saveError && (
@@ -314,10 +318,10 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
                   setStepChanged(true)
                   setStep(1)
                 }}>
-                Précédent
+                {t('previous')}
               </button>
               <button type="submit" className={btn.primary} disabled={saving} aria-busy={saving}>
-                {saving ? 'Enregistrement…' : 'Enregistrer'}
+                {saving ? t('saving') : t('save')}
               </button>
             </div>
 
@@ -326,7 +330,7 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
               onClick={() => setConfirmDelete(true)}
               className="mx-auto mt-6 flex min-h-[44px] items-center text-xs font-semibold text-alert-600 underline-offset-4 hover:underline"
             >
-              Supprimer ce profil
+              {t('deleteProfile')}
             </button>
           </>
         )}
@@ -336,10 +340,10 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
         open={confirmCancel}
         onClose={() => setConfirmCancel(false)}
         onConfirm={() => router.push(`/app/enfants/${id}`)}
-        title="Abandonner les modifications ?"
-        description="Les changements non enregistrés seront perdus."
-        confirmLabel="Abandonner"
-        cancelLabel="Continuer"
+        title={t('discardTitle')}
+        description={t('discardText')}
+        confirmLabel={t('discard')}
+        cancelLabel={t('continue')}
         tone="default"
       />
       <ConfirmDialog
@@ -352,12 +356,12 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
             router.push('/app/enfants')
           } catch (err) {
             setConfirmDelete(false)
-            setSaveError(err instanceof Error ? err.message : 'Suppression impossible.')
+            setSaveError(err instanceof Error ? err.message : t('deleteFailed'))
           }
         }}
-        title={`Supprimer le profil de ${child.prenom} ?`}
-        description="Cette action est irréversible. Les informations rattachées à cet enfant seront retirées."
-        confirmLabel="Supprimer"
+        title={t('deleteTitle', { name: child.prenom })}
+        description={t('deleteText')}
+        confirmLabel={t('delete')}
         tone="danger"
       />
     </div>

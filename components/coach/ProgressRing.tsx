@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 type Props = {
@@ -11,7 +12,9 @@ type Props = {
 
 // Anneau de progression (analyse IA). La transition du tracé est désactivée
 // quand l'utilisateur demande moins d'animations (motion-safe).
-export function ProgressRing({ value, size = 148, stroke = 12, label = 'Analyse', className }: Props) {
+export function ProgressRing({ value, size = 148, stroke = 12, label: labelProp, className }: Props) {
+  const t = useTranslations('coach.common')
+  const label = labelProp ?? t('progressLabel')
   const v = Math.max(0, Math.min(100, Math.round(value)))
   const r = (size - stroke) / 2
   const c = 2 * Math.PI * r
@@ -23,7 +26,7 @@ export function ProgressRing({ value, size = 148, stroke = 12, label = 'Analyse'
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={v}
-      aria-label={`${label} : ${v} %`}
+      aria-label={t('progressAria', { label, value: v })}
       className={cn('relative inline-grid place-items-center', className)}
       style={{ width: size, height: size }}
     >

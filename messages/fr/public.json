@@ -1,0 +1,840 @@
+{
+  "public": {
+    "onboarding": {
+      "welcome": {
+        "carousel": "carrousel",
+        "carouselLabel": "Découvrir Lien Parental",
+        "backHome": "Retour à la page d’accueil",
+        "prevScreen": "Écran précédent",
+        "slide": "diapositive",
+        "slideOf": "{n} sur {total}",
+        "start": "Commencer",
+        "haveAccount": "Vous avez déjà un compte ?",
+        "signIn": "Se connecter",
+        "next": "Suivant",
+        "createAccount": "Créer mon compte",
+        "welcomeAlt": "Un père et une mère, assis face à face, accueillent leur fille qui court vers eux en souriant",
+        "welcomeTitle": "Bienvenue !",
+        "welcomeText": "Un espace pensé pour les parents, centré sur l’essentiel : <b>le bien-être de votre enfant.</b>",
+        "whyTitle": "Tout ce dont vous avez<br></br>besoin, <hl>au même endroit.</hl>",
+        "features": {
+          "communicate": {
+            "title": "Communiquez sereinement",
+            "text": "Des outils et des modèles pour échanger clairement et sans conflit."
+          },
+          "organize": {
+            "title": "Organisez facilement",
+            "text": "Calendrier partagé, événements, rendez-vous et rappels importants."
+          },
+          "secure": {
+            "title": "Sécurisez vos documents",
+            "text": "Conservez tous vos documents importants dans un coffre-fort sécurisé."
+          }
+        },
+        "missionTitle": "Pensé pour l’intérêt<br></br>supérieur <hl>de l’enfant.</hl>",
+        "missionLead": "Des fonctionnalités conçues pour préserver le lien parent-enfant dans le respect et la bienveillance.",
+        "missionAlt": "Une mère serre tendrement sa fille dans ses bras, toutes deux les yeux fermés et souriantes",
+        "missionText": "Chaque outil aide à garder des échanges clairs et apaisés entre parents, pour que l’enfant garde sa place auprès de chacun.",
+        "readyAlt": "Un père et une mère se tapent dans la main au-dessus de leur fille, qui lève les bras de joie",
+        "readyTitle": "Ensemble pour le bien-être <hl>de votre enfant.</hl>",
+        "readyText": "Une meilleure communication entre parents, pour un quotidien plus serein.",
+        "values": {
+          "simple": "Simple",
+          "secure": "Sécurisé",
+          "caring": "Bienveillant"
+        }
+      },
+      "photo": {
+        "add": "Ajouter une photo",
+        "change": "Changer la photo",
+        "optional": "(facultatif)",
+        "remove": "Retirer la photo",
+        "errFormat": "Format non pris en charge. Choisissez une image (JPG, PNG, HEIC…).",
+        "errSize": "Image trop lourde (5 Mo maximum)."
+      },
+      "otp": {
+        "label": "Code de vérification",
+        "digit": "Chiffre {n} sur {total}"
+      },
+      "fields": {
+        "optional": "(facultatif)",
+        "characters": "caractères"
+      },
+      "profile": {
+        "errFirstName": "Indiquez votre prénom.",
+        "errLastName": "Indiquez votre nom.",
+        "title": "Votre profil",
+        "subtitle": "Renseignez quelques informations à votre sujet.",
+        "saving": "Enregistrement…",
+        "continue": "Continuer",
+        "firstName": "Prénom",
+        "firstNamePh": "Ex : Martin",
+        "lastName": "Nom",
+        "lastNamePh": "Ex : Dupont"
+      },
+      "coparent": {
+        "skip": "Passer cette étape",
+        "readyTitle": "Invitation prête",
+        "title": "Ajouter l’autre parent",
+        "readySubtitle": "Envoyez le lien par WhatsApp, SMS ou e-mail. Vous pourrez gérer les accès depuis Famille et co-parents.",
+        "subtitle": "Facultatif. L’autre parent ou un proche accède à l’espace partagé de l’enfant ; votre Journal et vos notes restent privés.",
+        "continue": "Continuer",
+        "noChild": "Ajoutez d'abord la fiche de votre enfant pour pouvoir la partager. Vous pourrez inviter l'autre parent plus tard depuis Famille et co-parents.",
+        "invite": "Inviter"
+      },
+      "ready": {
+        "title": "Votre espace est prêt !",
+        "subtitle": "Vous pouvez dès à présent accéder à votre espace personnalisé.",
+        "enter": "Accéder à mon espace",
+        "benefits": {
+          "communication": "Communication simplifiée",
+          "documents": "Documents sécurisés",
+          "organization": "Organisation facilitée"
+        }
+      },
+      "child": {
+        "errFirstName": "Indiquez le prénom de l’enfant.",
+        "errBirthDate": "Indiquez une date de naissance valide.",
+        "titleLine1": "Ajoutez un enfant",
+        "titleLine2": "à votre espace",
+        "subtitle": "Vous pourrez en ajouter d’autres plus tard dans les paramètres.",
+        "saving": "Enregistrement…",
+        "submit": "Ajouter cet enfant",
+        "later": "Je le ferai plus tard",
+        "firstName": "Prénom",
+        "firstNamePh": "Ex : Lina",
+        "birthDate": "Date de naissance",
+        "class": "Classe",
+        "select": "Sélectionner"
+      },
+      "classes": {
+        "creche": "Crèche",
+        "tps": "Toute petite section",
+        "ps": "Petite section",
+        "ms": "Moyenne section",
+        "gs": "Grande section",
+        "cp": "CP",
+        "ce1": "CE1",
+        "ce2": "CE2",
+        "cm1": "CM1",
+        "cm2": "CM2",
+        "g6": "6ème",
+        "g5": "5ème",
+        "g4": "4ème",
+        "g3": "3ème",
+        "g2": "2nde",
+        "g1": "1ère",
+        "term": "Terminale",
+        "other": "Autre"
+      },
+      "recap": {
+        "title": "Vérifiez vos informations",
+        "subtitle": "Voici un récapitulatif de votre profil et de l’enfant ajouté.",
+        "continue": "Continuer",
+        "summary": "Récapitulatif",
+        "you": "Vous",
+        "noName": "Nom non renseigné",
+        "noEmail": "E-mail non renseigné",
+        "editProfile": "Modifier votre profil",
+        "child": "Enfant",
+        "noChild": "Aucun enfant ajouté pour le moment.",
+        "editChild": "Modifier l’enfant {name}",
+        "addChild": "Ajouter un enfant"
+      },
+      "verify": {
+        "errUnavailable": "Envoi impossible pour le moment. Réessayez dans un instant.",
+        "errNetwork": "Connexion impossible. Vérifiez votre réseau puis réessayez.",
+        "resent": "Un nouveau code vient de vous être envoyé.",
+        "errBlocked": "Trop de tentatives. La vérification est temporairement bloquée, réessayez plus tard.",
+        "errWrong": "Code incorrect. Il vous reste {count, plural, one {# tentative} other {# tentatives}}.",
+        "errWrongOrExpired": "Code incorrect ou expiré. Il vous reste {count, plural, one {# tentative} other {# tentatives}}. Vous pouvez aussi demander un nouveau code.",
+        "title": "Vérifiez votre e-mail",
+        "sentTo": "Nous venons de vous envoyer un code à 6 chiffres à l’adresse suivante :",
+        "yourEmail": "votre adresse e-mail",
+        "verifying": "Vérification…",
+        "verify": "Vérifier",
+        "notReceived": "Vous n’avez pas reçu le code ?",
+        "checkSpam": "Vérifiez le dossier spam",
+        "help": "Saisissez le code reçu par e-mail. Il est valable 1 heure.",
+        "noSession": "Session d’inscription introuvable.",
+        "restart": "Recommencer l’inscription",
+        "resendBlocked": "Renvoi indisponible",
+        "resendIn": "Renvoyer le code ({time})",
+        "resend": "Renvoyer le code"
+      }
+    },
+    "password": {
+      "forgot": {
+        "errLink": "Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau.",
+        "errEmail": "Indiquez une adresse e-mail valide.",
+        "errUnavailable": "Envoi impossible pour le moment. Réessayez dans un instant.",
+        "errNetwork": "Connexion impossible. Vérifiez votre réseau puis réessayez.",
+        "title": "Mot de passe oublié ?",
+        "subtitle": "Indiquez l’e-mail associé à votre compte : nous vous enverrons un lien pour en créer un nouveau.",
+        "sending": "Envoi…",
+        "send": "Envoyer le lien",
+        "email": "E-mail",
+        "emailPh": "exemple@email.com",
+        "sentTitle": "Lien envoyé",
+        "sentText": "Si un compte existe pour <b>{email}</b>, vous recevrez un e-mail dans quelques minutes.",
+        "backToLogin": "Retour à la connexion"
+      },
+      "reset": {
+        "errRules": "Le mot de passe ne respecte pas encore toutes les règles.",
+        "errMatch": "Les mots de passe ne correspondent pas.",
+        "errInvalid": "Mot de passe invalide.",
+        "checking": "Vérification du lien…",
+        "expiredTitle": "Lien expiré",
+        "expiredText": "Ce lien de réinitialisation n’est plus valide ou a déjà été utilisé. Demandez-en un nouveau.",
+        "newLink": "Demander un nouveau lien",
+        "doneSignupTitle": "Mot de passe enregistré",
+        "doneTitle": "Mot de passe modifié",
+        "doneSignupText": "Votre mot de passe est enregistré.",
+        "doneText": "Votre nouveau mot de passe est enregistré.",
+        "othersOut": "Les autres appareils ont été déconnectés.",
+        "continue": "Continuer",
+        "enter": "Accéder à mon espace",
+        "backToLogin": "Retour à la connexion",
+        "mfaTitle": "Double authentification",
+        "mfaSubtitle": "Saisissez le code à 6 chiffres de votre application d’authentification pour continuer.",
+        "verifying": "Vérification…",
+        "verify": "Vérifier",
+        "mfaCode": "Code de double authentification",
+        "signupTitle": "Choisissez votre mot de passe",
+        "title": "Nouveau mot de passe",
+        "signupSubtitle": "Votre adresse est confirmée. Choisissez le mot de passe de votre compte, que vous n’utilisez nulle part ailleurs.",
+        "subtitle": "Choisissez un mot de passe que vous n’utilisez nulle part ailleurs.",
+        "saving": "Enregistrement…",
+        "save": "Enregistrer",
+        "cancel": "Annuler",
+        "newPassword": "Nouveau mot de passe",
+        "newPasswordPh": "Votre nouveau mot de passe",
+        "confirm": "Confirmer le mot de passe",
+        "confirmPh": "Saisissez-le à nouveau"
+      }
+    },
+    "help": {
+      "center": "Centre d’aide",
+      "home": {
+        "rows": {
+          "faq": {
+            "title": "FAQ",
+            "sub": "Les réponses à vos questions"
+          },
+          "tutorials": {
+            "title": "Tutoriels",
+            "sub": "Guides et conseils d’utilisation"
+          },
+          "contact": {
+            "title": "Nous contacter",
+            "sub": "Notre équipe vous répond"
+          },
+          "report": {
+            "title": "Signaler un problème",
+            "sub": "Nous aider à nous améliorer"
+          },
+          "terms": {
+            "title": "Conditions générales",
+            "sub": "Consultez nos CGU"
+          },
+          "privacy": {
+            "title": "Politique de confidentialité",
+            "sub": "Découvrez comment nous protégeons vos données"
+          }
+        },
+        "aboutSearch": "À propos version",
+        "searchPh": "Rechercher dans l’aide…",
+        "searchLabel": "Rechercher dans l’aide",
+        "faqTag": "FAQ",
+        "about": "À propos",
+        "version": "Version {version}",
+        "results": "{count} résultat(s)",
+        "noResult": "Aucun résultat pour « {q} »."
+      },
+      "faq": {
+        "title": "FAQ",
+        "searchPh": "Rechercher une question…",
+        "searchLabel": "Rechercher une question",
+        "heading": "Questions fréquentes",
+        "noMatch": "Aucune question ne correspond à « {q} ».",
+        "empty": "Aucune question pour le moment.",
+        "notFoundTitle": "Vous ne trouvez pas la réponse ?",
+        "notFoundText": "Contactez notre équipe, nous sommes là pour vous aider.",
+        "contact": "Nous contacter"
+      },
+      "tutorials": {
+        "title": "Tutoriels",
+        "searchPh": "Rechercher un tutoriel…",
+        "searchLabel": "Rechercher un tutoriel",
+        "heading": "Guides d’utilisation",
+        "noMatch": "Aucun tutoriel ne correspond à « {q} ».",
+        "empty": "Aucun tutoriel pour le moment.",
+        "minutes": "{n} min",
+        "readingTime": "{n} min de lecture"
+      },
+      "about": {
+        "title": "À propos",
+        "version": "Version {version}",
+        "intro": "Lien Parental accompagne les parents séparés dans l’organisation, les démarches et la préservation du lien parent-enfant.",
+        "missionTitle": "Notre mission",
+        "mission": "Favoriser une communication saine et respectueuse entre parents.",
+        "visionTitle": "Notre vision",
+        "vision": "Un monde où chaque enfant peut garder un lien fort et équilibré avec ses deux parents.",
+        "madeWith": "Développé avec <heart></heart> en France",
+        "love": "amour",
+        "thanks": "Merci de faire confiance à Lien Parental.",
+        "rights": "Tous droits réservés."
+      },
+      "terms": {
+        "topTitle": "Conditions générales",
+        "title": "Conditions Générales d’Utilisation",
+        "updated": "Dernière mise à jour : {date}",
+        "intro": "Bienvenue sur Lien Parental. En utilisant notre application, vous acceptez les présentes Conditions Générales d’Utilisation.",
+        "s1": {
+          "title": "1. Objet",
+          "body": "Les présentes CGU encadrent l’accès et l’utilisation de Lien Parental, application destinée à faciliter la communication, l’organisation du quotidien et la conservation des preuves pour les parents séparés. Toute inscription ou utilisation vaut acceptation sans réserve des présentes."
+        },
+        "s2": {
+          "title": "2. Utilisation du service",
+          "body": "L’utilisateur s’interdit tout usage détourné du service, notamment la diffusion de contenus illicites, diffamatoires, injurieux ou portant atteinte à la vie privée d’autrui. Les contenus du journal et du coffre-fort doivent rester factuels et authentiques."
+        },
+        "s3": {
+          "title": "3. Comptes utilisateurs",
+          "body": "L’accès est réservé aux personnes majeures exerçant une autorité parentale. L’utilisateur fournit des informations exactes, les tient à jour et reste seul responsable de la confidentialité de ses identifiants."
+        },
+        "s4": {
+          "title": "4. Abonnement et paiement",
+          "body": "La formule Premium est payable mensuellement ou annuellement via notre prestataire de paiement sécurisé Stripe. L’abonnement est résiliable à tout moment depuis votre profil ; les avantages restent actifs jusqu’à la fin de la période payée."
+        },
+        "s5": {
+          "title": "5. Contact",
+          "body": "Pour toute question relative aux présentes CGU : <mail>{email}</mail>."
+        }
+      },
+      "privacy": {
+        "title": "Politique de confidentialité",
+        "updated": "Dernière mise à jour : {date}",
+        "intro": "Chez Lien Parental, la protection de vos données <b>personnelles est une priorité.</b>",
+        "s1": {
+          "title": "1. Données collectées",
+          "body": "Données de compte (identité, coordonnées), contenus que vous ajoutez (journal, documents, calendrier, témoignages) et données techniques nécessaires au fonctionnement et à la sécurité du service."
+        },
+        "s2": {
+          "title": "2. Utilisation des données",
+          "body": "Fourniture du service et gestion du compte (base contractuelle), amélioration de l’expérience (intérêt légitime, opposition possible), respect de nos obligations légales. Aucun traitement à des fins publicitaires, aucune revente."
+        },
+        "s3": {
+          "title": "3. Stockage et sécurité",
+          "body": "Données hébergées dans l’Union européenne. Échanges chiffrés en transit (TLS 1.3), données sensibles chiffrées au repos (AES-256), sauvegardes chiffrées sur un périmètre distinct."
+        },
+        "s4": {
+          "title": "4. Vos droits",
+          "body": "Accès, rectification, effacement, limitation, portabilité et opposition (articles 15 à 22 du RGPD), depuis votre profil ou par e-mail. Vous pouvez aussi saisir la CNIL (www.cnil.fr)."
+        },
+        "s5": {
+          "title": "5. Contact",
+          "body": "Délégué à la protection des données : <mail>{email}</mail>."
+        }
+      },
+      "confirmation": {
+        "topTitle": "Contact - Confirmation",
+        "title": "Message envoyé !",
+        "text": "Merci ! Votre message a bien été envoyé. Nous vous répondrons dans les plus brefs délais.",
+        "back": "Retour au centre d’aide"
+      },
+      "contactInfo": {
+        "topTitle": "Nous contacter - Détail",
+        "title": "Comment nous contacter ?",
+        "lead": "Notre équipe est à votre écoute pour répondre à toutes vos questions.",
+        "byEmail": "Par e-mail",
+        "writeUs": "Écrivez-nous à l’adresse suivante :",
+        "delaySr": "Délai",
+        "delayTitle": "Délai de réponse",
+        "delay": "Nous répondons sous 24 à 48h ouvrées.",
+        "hoursSr": "Horaires",
+        "hoursTitle": "Nos horaires",
+        "hours": "Lundi - Vendredi : 9h - 18h",
+        "faqTip": "Avant de nous écrire, consultez notre FAQ : vous y trouverez peut-être déjà la réponse à votre question."
+      },
+      "message": {
+        "errRequired": "Renseignez un objet et un message (10 caractères minimum).",
+        "errSend": "Envoi impossible.",
+        "title": "Nous contacter",
+        "subject": "Objet",
+        "subjectPh": "Résumé de votre demande",
+        "message": "Message",
+        "messagePh": "Décrivez votre demande…",
+        "sending": "Envoi…",
+        "send": "Envoyer le message"
+      },
+      "contact": {
+        "title": "Nous contacter",
+        "headline1": "Notre équipe vous répond",
+        "headline2": "dans les plus brefs délais",
+        "lead": "Vous avez une question, besoin d’aide ou une suggestion ? Écrivez-nous, nous sommes là pour vous aider.",
+        "send": "Envoyer un message",
+        "faq": "Questions fréquentes",
+        "other": "Autres moyens de contact",
+        "email": "Email",
+        "hoursTitle": "Horaires d’ouverture",
+        "hours": "Lun - Ven : 9h - 18h"
+      },
+      "report": {
+        "errRequired": "Renseignez le type, le titre et la description (10 caractères minimum).",
+        "errSend": "Envoi impossible.",
+        "topTitle": "Signaler un problème",
+        "title": "Aidez-nous à nous améliorer",
+        "lead": "Vous rencontrez un bug, un problème technique ou vous avez une suggestion d’amélioration ? Faites-le nous savoir.",
+        "type": "Type de problème",
+        "typePh": "Sélectionner un type",
+        "types": {
+          "bug": "Bug / dysfonctionnement",
+          "technique": "Problème technique",
+          "suggestion": "Suggestion d’amélioration",
+          "abus": "Contenu abusif",
+          "autre": "Autre"
+        },
+        "titleLabel": "Titre",
+        "titlePh": "Résumé du problème",
+        "description": "Description",
+        "descriptionPh": "Décrivez le problème en détail…",
+        "sending": "Envoi…",
+        "send": "Envoyer le signalement"
+      },
+      "public": {
+        "metaTitle": "Centre d’aide",
+        "metaDescription": "Questions fréquentes, installation et contact du support Lien Parental.",
+        "title": "Centre d’aide",
+        "lead": "Trouvez rapidement une réponse, ou écrivez-nous.",
+        "categories": {
+          "prise-en-main": "Prise en main",
+          "confidentialite-securite": "Confidentialité & sécurité",
+          "coffre-fort": "Coffre-fort",
+          "temoignages": "Témoignages",
+          "coach-ia": "Coach IA",
+          "abonnement": "Abonnement",
+          "compte": "Compte"
+        },
+        "writeUs": "Écrivez-nous",
+        "hoursTitle": "Horaires",
+        "hours": "Lundi – vendredi, 9 h – 18 h · réponse sous 24 à 48 h"
+      }
+    },
+    "legal": {
+      "bindingNotice": "La version française de ce document est la seule qui fait foi juridiquement.",
+      "backHome": "Retour à l'accueil",
+      "updated": "Dernière mise à jour : {date}",
+      "cgu": {
+        "metaTitle": "Conditions générales d’utilisation",
+        "metaDescription": "Conditions générales d’utilisation du service Lien Parental : objet, accès, obligations, suspension, responsabilité.",
+        "title": "Conditions générales d'utilisation",
+        "s1": {
+          "title": "1. Objet",
+          "body": "Les présentes conditions générales d'utilisation (les « CGU ») encadrent l'accès et l'utilisation du service Lien Parental, application en ligne destinée à faciliter la communication, l'organisation du quotidien et la conservation des preuves pour les parents séparés. Toute inscription ou utilisation vaut acceptation sans réserve des présentes."
+        },
+        "s2": {
+          "title": "2. Accès au service",
+          "body": "L'accès à Lien Parental est réservé aux personnes majeures exerçant une autorité parentale sur un ou plusieurs enfants. L'utilisateur s'engage à fournir des informations exactes et à maintenir à jour les éléments de son compte. Il est seul responsable de la confidentialité de ses identifiants."
+        },
+        "s3": {
+          "title": "3. Obligations de l'utilisateur",
+          "body": "L'utilisateur s'interdit tout usage détourné du service, notamment la diffusion de contenus illicites, diffamatoires, injurieux, haineux, ou portant atteinte à la vie privée d'autrui. Les contenus produits dans l'espace « journal » et « coffre-fort » doivent rester factuels et authentiques. L'utilisateur garantit disposer des droits nécessaires sur les documents téléversés."
+        },
+        "s4": {
+          "title": "4. Suspension et résiliation",
+          "body": "En cas de manquement caractérisé aux présentes, l'éditeur se réserve le droit de suspendre ou de clôturer le compte, après notification par courrier électronique. L'utilisateur peut à tout moment supprimer son compte depuis l'espace « profil ». Les données sont alors effacées dans les conditions décrites par la politique de confidentialité."
+        },
+        "s5": {
+          "title": "5. Responsabilité",
+          "body": "Lien Parental fournit un outil de soutien à la coparentalité ; il ne se substitue en aucun cas à un conseil juridique, médical ou psychologique. L'éditeur met en œuvre les meilleurs efforts pour assurer la disponibilité du service, sans toutefois garantir une continuité absolue. Sa responsabilité ne saurait être engagée pour un préjudice indirect ou pour une interruption liée à un cas de force majeure."
+        },
+        "s6": {
+          "title": "6. Droit applicable",
+          "body": "Les présentes CGU sont soumises au droit français. Tout litige relatif à leur interprétation ou leur exécution relève de la compétence exclusive des tribunaux français, sous réserve des dispositions impératives applicables aux consommateurs."
+        }
+      },
+      "mentions": {
+        "metaTitle": "Mentions légales",
+        "metaDescription": "Mentions légales du service Lien Parental : éditeur, hébergeur, directeur de la publication, contact.",
+        "title": "Mentions légales",
+        "s1": {
+          "title": "Éditeur du site",
+          "body": "Le service <b>Lien Parental</b> est édité par la société Pirabel Labs, [forme juridique à compléter], immatriculée au Registre du Commerce et des Sociétés de [ville] sous le numéro [SIREN], dont le siège social est situé [adresse postale complète]. Capital social : [montant] €. Numéro de TVA intracommunautaire : [FR-XX-XXXXXXXXX]."
+        },
+        "s2": {
+          "title": "Directeur de la publication",
+          "body": "Le directeur de la publication est [nom et prénom], en qualité de [fonction]. Pour toute question relative au contenu éditorial, vous pouvez le contacter à l'adresse : contact@lienparental.fr."
+        },
+        "s3": {
+          "title": "Hébergeur",
+          "body": "L'application est hébergée au sein de l'Union européenne par [raison sociale de l'hébergeur], société [forme juridique] dont le siège social est situé [adresse], joignable au [numéro de téléphone]. Les serveurs applicatifs sont localisés en France (région [zone])."
+        },
+        "s4": {
+          "title": "Propriété intellectuelle",
+          "body": "L'ensemble des contenus présents sur le service Lien Parental (textes, graphismes, logos, icônes, images, interfaces, identité sonore, code source) est protégé par le droit d'auteur et le droit des marques. Toute reproduction, représentation, modification ou adaptation, totale ou partielle, par quelque procédé que ce soit, est interdite sans autorisation écrite préalable de l'éditeur."
+        },
+        "s5": {
+          "title": "Contact",
+          "body": "Pour toute demande d'information, réclamation ou signalement, écrivez à <b>contact@lienparental.fr</b>. Nous nous engageons à répondre dans un délai raisonnable, et au plus tard sous trente jours pour les demandes relatives aux données personnelles."
+        }
+      },
+      "privacy": {
+        "metaTitle": "Politique de confidentialité",
+        "metaDescription": "Politique de confidentialité de Lien Parental : RGPD, stockage des données dans l’UE, sous-traitants et transferts, chiffrement, durée de conservation, droit à l’oubli.",
+        "title": "Politique de confidentialité",
+        "controller": {
+          "title": "Responsable de traitement",
+          "p1": "Le responsable de traitement des données collectées via Lien Parental est la société Pirabel Labs, dont les coordonnées figurent dans les mentions légales. Toute question relative au traitement de vos données peut être adressée à<b> dpo@lienparental.fr</b>."
+        },
+        "purposes": {
+          "title": "Finalités et bases légales (RGPD)",
+          "p1": "Nous traitons vos données pour : (i) la fourniture du service et la gestion du compte (base contractuelle) ; (ii) l'amélioration de l'expérience (intérêt légitime, avec opposition possible) ; (iii) le respect de nos obligations légales, notamment en matière de conservation probatoire. Aucun traitement à des fins publicitaires n'est réalisé."
+        },
+        "storage": {
+          "title": "Où sont stockées vos données",
+          "p1": "Vos données (compte, enfants, journal, calendrier, coffre-fort, témoignages, messages et fichiers) sont stockées dans l'Union européenne (Irlande), dans la base de données et l'espace de stockage de notre hébergeur Supabase. Les fonctions de l'application s'exécutent en France (Paris).",
+          "p2": "Certains prestataires, listés ci-dessous, sont des sociétés établies aux États-Unis et peuvent traiter une partie des données hors de l'Union européenne. Ces transferts ne sont effectués qu'avec les garanties appropriées prévues aux articles 44 et suivants du RGPD."
+        },
+        "processors": {
+          "title": "Sous-traitants et transferts hors UE",
+          "intro": "Nous ne transmettons à chaque prestataire que les données nécessaires au service qu'il rend. Les garanties de transfert reposent sur les clauses contractuelles types adoptées par la Commission européenne, prévues dans l'accord de traitement des données de chaque prestataire, le cas échéant complétées par son adhésion au cadre de protection des données UE-États-Unis (Data Privacy Framework).",
+          "outro": "La liste à jour des sous-traitants peut être obtenue sur simple demande à <b>dpo@lienparental.fr</b>.",
+          "labels": {
+            "purpose": "Finalité :",
+            "data": "Données concernées :",
+            "location": "Localisation :",
+            "safeguard": "Garantie de transfert :"
+          },
+          "scc": "Clauses contractuelles types de la Commission européenne (accord de traitement des données du prestataire), le cas échéant complétées par le Data Privacy Framework UE-États-Unis.",
+          "supabase": {
+            "name": "Supabase (base de données, comptes, fichiers)",
+            "purpose": "Hébergement de la base de données, authentification et stockage des fichiers.",
+            "data": "Toutes les données de votre espace : compte, enfants, journal, calendrier, coffre-fort, témoignages, messages et fichiers.",
+            "location": "Union européenne (Irlande). Supabase est une société américaine : un accès ponctuel depuis l’extérieur de l’UE (support, maintenance) reste possible."
+          },
+          "vercel": {
+            "name": "Vercel (hébergement de l’application)",
+            "purpose": "Exécution de l’application web et diffusion des pages et fichiers statiques.",
+            "data": "Données techniques des requêtes (adresse IP, pages consultées, navigateur) et données en transit pendant l’utilisation du service.",
+            "location": "Fonctions exécutées dans l’Union européenne (Paris). Vercel est une société américaine dont le réseau de diffusion est mondial : une requête peut transiter par un point de présence proche de vous, y compris hors UE."
+          },
+          "anthropic": {
+            "name": "Anthropic (Coach IA)",
+            "purpose": "Réponses du Coach IA et analyse des messages que vous lui soumettez.",
+            "data": "Uniquement lorsque vous utilisez le Coach : votre question ou le contenu à analyser, et un résumé de votre espace (prénoms et âges des enfants, journal, calendrier, noms des documents). Les informations médicales ne sont transmises que si vous l’activez pour une question.",
+            "location": "États-Unis (Anthropic est une société américaine)."
+          },
+          "stripe": {
+            "name": "Stripe (paiements)",
+            "purpose": "Paiement et gestion des abonnements, factures.",
+            "data": "Adresse e-mail, identifiant de compte, formule choisie, et données de paiement saisies directement sur les pages de Stripe (nous ne voyons jamais votre numéro de carte).",
+            "location": "Union européenne et États-Unis (Stripe est un groupe américain)."
+          },
+          "resend": {
+            "name": "Resend (envoi des e-mails)",
+            "purpose": "Envoi des e-mails du service : confirmation de compte, sécurité, invitations, témoignages, factures.",
+            "data": "Adresse e-mail du destinataire et contenu de l’e-mail (prénoms, liens).",
+            "location": "États-Unis (Resend est une société américaine)."
+          },
+          "google": {
+            "name": "Google (connexion et Google Agenda, uniquement si vous les choisissez)",
+            "purpose": "Connexion avec votre compte Google et, si vous l’activez, copie de vos événements dans votre Google Agenda.",
+            "data": "Connexion : nom, adresse e-mail et identifiant Google. Agenda : titre, dates et lieu des événements copiés (rendez-vous de santé masqués par défaut, prénoms des enfants jamais envoyés).",
+            "location": "Union européenne et États-Unis. Pour les données de votre compte Google, Google agit selon ses propres règles de confidentialité."
+          }
+        },
+        "google": {
+          "title": "Données reçues de Google",
+          "p1": "Si vous choisissez « Continuer avec Google », Lien Parental reçoit de Google votre nom, votre adresse e-mail, votre photo de profil et un identifiant de compte. Ces informations servent uniquement à créer votre compte et à vous connecter.",
+          "p2": "Si vous activez la synchronisation avec Google Agenda, Lien Parental demande l'accès à un agenda « Lien Parental » qu'il crée pour vous (ou, si vous le choisissez, aux événements de votre agenda principal). Cet accès sert uniquement à y copier, modifier ou supprimer les événements que vous créez dans Lien Parental. Lien Parental ne lit pas vos autres événements, ne les conserve pas et ne les utilise à aucune autre fin. Vous pouvez arrêter la synchronisation à tout moment depuis les paramètres du calendrier ou depuis votre compte Google ; les jetons d'accès sont alors révoqués et supprimés.",
+          "p3": "L'utilisation et le transfert vers toute autre application des informations reçues des API Google respectent les <link>règles relatives aux données utilisateur des services d'API Google</link>, y compris les exigences d'utilisation limitée (Limited Use). Ces données ne sont ni vendues, ni utilisées pour de la publicité, ni pour entraîner des modèles d'intelligence artificielle, et aucune personne de l'équipe ne les lit, sauf demande de votre part, obligation légale ou nécessité de sécurité."
+        },
+        "security": {
+          "title": "Chiffrement et sécurité",
+          "p1": "Les échanges sont chiffrés en transit (HTTPS/TLS). Les données sont stockées chiffrées au repos par notre hébergeur de base de données (AES-256), et les informations médicales des enfants sont en plus chiffrées par l'application elle-même (AES-256-GCM). Les mots de passe sont hachés par notre service d'authentification (bcrypt) et le code du coffre-fort est haché (scrypt) : ils ne sont jamais stockés en clair. Les jetons d'accès Google sont chiffrés. Les sauvegardes de la base sont chiffrées."
+        },
+        "retention": {
+          "title": "Durée de conservation",
+          "p1": "Les données du compte sont conservées pendant toute la durée d'utilisation du service, puis pendant une durée de trois (3) ans suivant la dernière connexion active, à des fins de preuve et conformément aux prescriptions légales. Les documents à valeur probatoire téléversés dans le coffre-fort peuvent être conservés plus longtemps à votre demande expresse."
+        },
+        "rights": {
+          "title": "Droits et droit à l'oubli",
+          "p1": "Conformément aux articles 15 à 22 du RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement (« droit à l'oubli »), de limitation, de portabilité et d'opposition. Ces droits s'exercent directement depuis votre espace « profil », ou par courriel à<b> dpo@lienparental.fr</b>. Vous pouvez également introduire une réclamation auprès de la CNIL (www.cnil.fr)."
+        }
+      }
+    },
+    "donate": {
+      "metaTitle": "Soutenir Lien Parental",
+      "title": "Soutenez Lien Parental",
+      "text": "Votre soutien nous permet de développer gratuitement de nouveaux outils pour accompagner les familles et préserver le lien parent-enfant.",
+      "cta": "Faire un don",
+      "soon": "La page de don ouvre très bientôt. Merci pour votre générosité !",
+      "backHome": "Retour à l’accueil"
+    },
+    "install": {
+      "metaTitle": "Installer l’application",
+      "metaDescription": "Ajoutez Lien Parental à l’écran d’accueil de votre iPhone ou de votre téléphone Android, en quelques secondes.",
+      "more": "Menu défilant",
+      "moreSr": " : plus de détails sur l’étape {n}",
+      "dotsSr": "Menu (trois points)",
+      "stepSr": "Étape {n} : ",
+      "steps": {
+        "ios": {
+          "share": {
+            "title": "Ouvrez le menu de partage",
+            "text": "Touchez le bouton Partager <share></share> en bas de Safari.",
+            "more": "Il s’agit du carré avec une flèche vers le haut, au centre de la barre du bas. Si la barre est masquée, touchez le bas de l’écran pour la faire réapparaître. Sur iPad, le bouton se trouve en haut à droite. Si vous utilisez un autre navigateur, ouvrez cette page dans Safari."
+          },
+          "scroll": {
+            "title": "Faites défiler les options",
+            "text": "Glissez vers le haut pour afficher toute la liste des actions.",
+            "more": "Le menu s’ouvre depuis le bas de l’écran. Les actions se trouvent sous la rangée d’icônes d’applications : continuez à faire défiler jusqu’à voir « Sur l’écran d’accueil »."
+          },
+          "add": {
+            "title": "Ajoutez à l’écran d’accueil",
+            "text": "Touchez « Sur l’écran d’accueil ».",
+            "more": "L’option est accompagnée d’un carré avec un « + ». Si elle n’apparaît pas, touchez « Modifier les actions » tout en bas de la liste pour l’ajouter."
+          },
+          "confirm": {
+            "title": "Confirmez l’ajout",
+            "text": "Touchez « Ajouter » en haut à droite.",
+            "more": "Vous pouvez modifier le nom affiché avant de valider. L’icône Lien Parental apparaît ensuite sur votre écran d’accueil : touchez-la pour ouvrir l’application en plein écran."
+          }
+        },
+        "android": {
+          "menu": {
+            "title": "Ouvrez le menu",
+            "text": "Touchez le bouton <dots></dots> en haut à droite de Chrome.",
+            "more": "Ce sont les trois points verticaux, à droite de la barre d’adresse. Avec un autre navigateur (Samsung Internet, Firefox), ouvrez son menu principal : l’option porte un nom proche."
+          },
+          "add": {
+            "title": "Sélectionnez « Ajouter à l’écran d’accueil »",
+            "text": "Touchez cette option dans le menu.",
+            "more": "Selon votre version de Chrome, elle peut s’appeler « Installer l’application ». Faites défiler le menu si vous ne la voyez pas tout de suite."
+          },
+          "confirm": {
+            "title": "Confirmez l’ajout",
+            "text": "Vérifiez le nom puis touchez « Ajouter ».",
+            "more": "Une fenêtre de confirmation s’ouvre. Le bouton peut aussi s’appeler « Installer ». Android peut ensuite vous proposer de placer l’icône vous-même sur l’écran d’accueil."
+          },
+          "done": {
+            "title": "L’application est ajoutée",
+            "text": "Retrouvez Lien Parental sur votre écran d’accueil.",
+            "more": "L’icône apparaît sur l’écran d’accueil ou dans la liste de vos applications. Touchez-la pour ouvrir Lien Parental en plein écran, comme une application classique."
+          }
+        }
+      },
+      "tabs": {
+        "ios": "iPhone (iOS)",
+        "android": "Android"
+      },
+      "benefits": {
+        "quick": "Accès rapide depuis votre écran d’accueil",
+        "notifications": "Notifications importantes en temps réel",
+        "smooth": "Expérience fluide et sécurisée, comme une vraie application"
+      },
+      "statusAccepted": "Installation en cours. Lien Parental sera bientôt sur votre écran d’accueil.",
+      "statusDismissed": "Installation annulée. Vous pouvez suivre les étapes ci-dessous à tout moment.",
+      "statusError": "L’installation automatique n’a pas pu démarrer. Suivez les étapes ci-dessous.",
+      "back": "Retour",
+      "helpCenter": "Centre d’aide",
+      "homeLabel": "Lien Parental, accueil",
+      "installedTitle": "Lien Parental est déjà <hl>installé</hl>",
+      "title": "Installez Lien Parental sur votre <hl>{device}</hl>",
+      "installedLead": "Vous utilisez l’application depuis votre écran d’accueil.",
+      "lead": "Ajoutez l’application à votre écran d’accueil pour y accéder rapidement, comme une vraie application.",
+      "readyTitle": "Tout est prêt",
+      "readyText": "Retrouvez l’icône Lien Parental sur votre écran d’accueil. Touchez « Continuer » pour accéder à votre espace.",
+      "desktopTitle": "Vous êtes sur ordinateur ?",
+      "desktopText": "Scannez ce QR code avec l’appareil photo de votre téléphone pour ouvrir cette page, puis suivez les étapes.",
+      "tabsLabel": "Choisissez votre téléphone",
+      "stepsFor": "Étapes pour {device}",
+      "promptText": "Votre navigateur permet d’installer l’application en un geste.",
+      "installNow": "Installer maintenant",
+      "orSteps": "Ou suivez les étapes ci-dessous.",
+      "whyTitle": "Pourquoi ajouter l’application ?",
+      "donTitle": "Soutenez Lien Parental",
+      "donCollapse": "Replier le message de soutien",
+      "donExpand": "Déplier le message de soutien",
+      "donClose": "Fermer le message de soutien",
+      "donText": "Lien Parental est développé pour les familles. Votre soutien nous aide à créer gratuitement de nouveaux outils pour préserver le lien parent-enfant.",
+      "donCta": "Faire un don",
+      "continue": "Continuer",
+      "safeTitle": "Vos données sont en sécurité",
+      "safeText": "Lien Parental protège vos informations familiales.",
+      "qrLabel": "QR code pour ouvrir cette page sur votre téléphone",
+      "visuals": {
+        "copy": "Copier",
+        "readingList": "Liste de lecture",
+        "bookmarks": "Signets",
+        "markup": "Annoter",
+        "iosAddHome": "Sur l’écran d’accueil",
+        "cancel": "Annuler",
+        "add": "Ajouter",
+        "newTab": "Nouvel onglet",
+        "favorites": "Favoris",
+        "downloads": "Téléchargements",
+        "androidAddHome": "Ajouter à l’écran d’accueil",
+        "settings": "Paramètres"
+      }
+    },
+    "offline": {
+      "metaTitle": "Hors connexion — Lien Parental",
+      "metaDescription": "Vous êtes hors connexion. Vérifiez votre connexion et réessayez.",
+      "title": "Hors connexion",
+      "retry": "Réessayer",
+      "workOffline": "Travailler hors ligne"
+    },
+    "share": {
+      "metaTitle": "Dossier partagé"
+    },
+    "blog": {
+      "newTab": "(nouvel onglet)",
+      "readingTime": "{n} min de lecture",
+      "allArticles": "Tous les articles",
+      "tags": "Étiquettes",
+      "ctaTitle": "Organisez la vie de votre enfant sereinement",
+      "ctaText": "Calendrier partagé, journal, coffre-fort et guide des démarches : Lien Parental vous accompagne au quotidien.",
+      "ctaButton": "Créer mon espace gratuit",
+      "toc": "Sommaire",
+      "related": "À lire aussi",
+      "categories": {
+        "coparentalite": "Coparentalité",
+        "demarches": "Démarches",
+        "organisation": "Organisation",
+        "enfant": "Bien-être de l’enfant",
+        "application": "Lien Parental"
+      },
+      "metaTitle": "Blog",
+      "metaTitleCategory": "Blog · {category}",
+      "description": "Conseils pratiques pour les parents séparés : coparentalité, démarches, organisation du quotidien et bien-être de l’enfant.",
+      "kicker": "Le blog",
+      "title": "Conseils pour parents séparés",
+      "categoriesLabel": "Catégories",
+      "all": "Tous",
+      "emptyCategory": "Aucun article dans « {category} » pour le moment.",
+      "empty": "Les premiers articles arrivent bientôt.",
+      "articles": "Articles",
+      "articlesIn": "Articles : {category}",
+      "pagination": "Pagination",
+      "prev": "Précédent",
+      "next": "Suivant",
+      "pageOf": "Page {page} sur {pages}",
+      "notFound": "Article introuvable"
+    },
+    "witness": {
+      "back": "Retour",
+      "questionOf": "Question {n} sur {total}",
+      "skip": "Passer cette question",
+      "options": {
+        "linkAdult": {
+          "family": "Membre de la famille",
+          "friend": "Ami(e)",
+          "neighbour": "Voisin(e)",
+          "colleague": "Collègue",
+          "school": "Enseignant(e) / personnel scolaire",
+          "health": "Professionnel(le) de santé",
+          "other": "Autre"
+        },
+        "duration": {
+          "lt6m": "Moins de 6 mois",
+          "6m1y": "6 mois à 1 an",
+          "1y3y": "1 à 3 ans",
+          "3y5y": "3 à 5 ans",
+          "gt5y": "Plus de 5 ans"
+        },
+        "linkChild": {
+          "family": "Membre de la famille",
+          "familyFriend": "Ami(e) de la famille",
+          "neighbour": "Voisin(e)",
+          "school": "Enseignant(e) / personnel scolaire",
+          "activity": "Encadrant(e) d’activité",
+          "health": "Professionnel(le) de santé",
+          "other": "Autre"
+        },
+        "places": {
+          "home": "Domicile du parent",
+          "school": "École",
+          "public": "Lieu public",
+          "handover": "Lors d’un échange de garde",
+          "activity": "Activité extrascolaire"
+        }
+      },
+      "errInvalid": "Ce lien de témoignage n’est pas valide ou a expiré.",
+      "errNetwork": "Connexion impossible. Vérifiez votre réseau puis réessayez.",
+      "errFormat": "Formats acceptés : images et PDF.",
+      "errSize": "« {name} » dépasse 10 Mo.",
+      "errCount": "{max} fichiers maximum.",
+      "errUpload": "« {name} » n’a pas pu être envoyé.",
+      "errSend": "L’envoi a échoué. Vérifiez votre connexion puis réessayez.",
+      "loadingTitle": "Chargement de l’invitation",
+      "loadingText": "Vérification du lien sécurisé…",
+      "errorTitle": "Lien indisponible",
+      "retry": "Réessayer",
+      "discover": "Découvrir Lien Parental",
+      "start": "Commencer",
+      "learnMore": "En savoir plus",
+      "introTitle": "Vous avez été invité(e) à déposer un témoignage",
+      "introText": "Ce témoignage sera transmis uniquement au parent demandeur et stocké de manière sécurisée.",
+      "introMore": "Aucun compte n’est nécessaire. Vous répondez à quelques questions sur ce que vous avez personnellement constaté, puis vous pouvez relire votre texte avant l’envoi. Votre témoignage est chiffré, horodaté et accessible uniquement au parent demandeur.",
+      "targetTitle": "Sur qui souhaitez-vous témoigner ?",
+      "continue": "Continuer",
+      "targetHint": "Vous pouvez choisir une ou plusieurs personnes.",
+      "parents": "Parents",
+      "children": "Enfants",
+      "about": "Concernant {name}",
+      "next": "Suivant",
+      "select": "Sélectionner",
+      "qLinkAdult": "Quel est votre lien avec cette personne ?",
+      "qDuration": "Depuis combien de temps connaissez-vous cette personne ?",
+      "factN": "Fait n° {n}",
+      "qFacts": "Quels faits, comportements ou situations avez-vous personnellement constatés concernant cette personne ?",
+      "factsHint": "Décrivez précisément ce que vous avez vu ou entendu, sans interprétation.",
+      "factsPh": "Écrivez votre témoignage ici…",
+      "qWhen": "Quand cela s’est-il produit ?",
+      "qWhere": "Où cela s’est-il produit ?",
+      "wherePh": "Sélectionner ou préciser le lieu",
+      "qContext": "Dans quel contexte étiez-vous présent(e) ?",
+      "contextPh": "Décrivez le contexte…",
+      "qAnother": "Souhaitez-vous ajouter un autre fait ou situation concernant cette personne ?",
+      "anotherHint": "Vous pourrez décrire un autre fait avec la même précision.",
+      "anotherYes": "Oui, ajouter un autre fait",
+      "anotherNo": "Non, passer à la suite",
+      "qLinkChild": "Quel est votre lien avec cet enfant ?",
+      "qChild": "Qu’avez-vous personnellement constaté concernant cet enfant ?",
+      "childPh": "Décrivez ce que vous avez observé…",
+      "complementsTitle": "Informations complémentaires",
+      "qComplement": "Y a-t-il un autre fait important que vous souhaitez rapporter ?",
+      "complementPh": "Décrivez-le ici…",
+      "qAttach": "Souhaitez-vous joindre un document ou une photo ?",
+      "optional": "(facultatif)",
+      "attach": "Joindre un fichier",
+      "attached": "Fichiers joints",
+      "remove": "Retirer {name}",
+      "reviewTitle": "Relecture avant envoi",
+      "sending": "Envoi en cours…",
+      "send": "Envoyer",
+      "empty": "Votre témoignage est vide. Revenez en arrière pour décrire au moins un fait.",
+      "iaTitle": "Reformulation par l’IA (facultatif)",
+      "iaText": "L’IA améliore la clarté et l’orthographe en respectant fidèlement vos propos. Vous gardez le contrôle.",
+      "iaPropose": "Proposer une reformulation",
+      "iaAgain": "Nouvelle reformulation",
+      "versionLegend": "Version à envoyer",
+      "versionMine": "Ma version",
+      "versionIa": "Version proposée",
+      "versionIaEditable": "Version proposée (modifiable)",
+      "yourTestimony": "Votre témoignage",
+      "certify": "Je certifie que ce témoignage relate des faits que j’ai personnellement constatés.",
+      "finish": "Terminer",
+      "thanksTitle": "Merci !",
+      "thanksSent": "Votre témoignage a bien été envoyé.",
+      "thanksText": "Il sera transmis au parent demandeur qui vous a invité(e) via le lien.",
+      "reference": "Référence :",
+      "close": "Fermer la page",
+      "closeHint": "Vous pouvez fermer cet onglet en toute sécurité.",
+      "endTitle": "Votre témoignage est sécurisé",
+      "endText1": "Vous pouvez maintenant",
+      "endText2": "fermer cette page."
+    }
+  }
+}

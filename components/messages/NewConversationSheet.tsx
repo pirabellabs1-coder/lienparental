@@ -2,12 +2,14 @@
 
 import Link from 'next/link'
 import { useEffect, useId, useState, type FormEvent } from 'react'
+import { useTranslations } from 'next-intl'
 import { Check, Loader2, UserPlus } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { btn } from '@/components/ui/kit'
-import { MAX_TITLE_CHARS, createConversation, displayName, type Participant } from '@/lib/messages'
+import { MAX_TITLE_CHARS, createConversation, type Participant } from '@/lib/messages'
 import { Sheet } from './Sheet'
 import { Avatar } from './Avatar'
+import { useMessagesFormat } from './useMessagesFormat'
 
 type Props = {
   open: boolean
@@ -17,12 +19,15 @@ type Props = {
   onCreated: (conversationId: string) => void
 }
 
-const SUGGESTIONS = ['Vacances', 'École', 'Santé', 'Frais partagés', 'Activités', 'Week-end'] as const
+// Clés de messaging.newConversation.suggestions (libellés traduits au rendu).
+const SUGGESTIONS = ['holidays', 'school', 'health', 'sharedCosts', 'activities', 'weekend'] as const
 
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 focus-visible:ring-offset-2'
 
 /** Nouvelle discussion : un ou plusieurs parents liés et un sujet facultatif. */
 export function NewConversationSheet({ open, onClose, linked, onCreated }: Props) {
+  const t = useTranslations('messaging.newConversation')
+  const { displayName } = useMessagesFormat()
   const uid = useId()
   const [selected, setSelected] = useState<string[]>([])
   const [title, setTitle] = useState('')
@@ -48,7 +53,7 @@ export function NewConversationSheet({ open, onClose, linked, onCreated }: Props
   const submit = async (e: FormEvent) => {
     e.preventDefault()
     if (selected.length === 0) {
-      setPickError('Choisissez au moins un interlocuteur.')
+      setPickError(t('pickError'))
       document.getElementById(`${uid}-p-${linked[0]?.id}`)?.focus()
       return
     }
@@ -58,7 +63,7 @@ export function NewConversationSheet({ open, onClose, linked, onCreated }: Props
       const id = await createConversation({ participantIds: selected, title })
       onCreated(id)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "La discussion n'a pas pu être créée.")
+      setError(err instanceof Error ? err.message : t('createFailed'))
       setBusy(false)
     }
   }
@@ -70,23 +75,23 @@ export function NewConversationSheet({ open, onClose, linked, onCreated }: Props
     <Sheet
       open={open}
       onClose={onClose}
-      title="Nouvelle discussion"
-      description="Une discussion par sujet garde les échanges clairs et faciles à retrouver."
+      title={t('title')}
+      description={t('description')}
     >
       {linked.length === 0 ? (
         <div className="space-y-3">
           <p className="text-[14px] text-night-700">
-            Aucun parent n&apos;est encore lié à votre compte. Invitez l&apos;autre parent pour pouvoir lui écrire.
+            {t('noLinked')}
           </p>
           <Link href="/app/coparents" onClick={onClose} className={cn(btn.primary, 'w-full')}>
             <UserPlus className="h-5 w-5" aria-hidden="true" />
-            Inviter un parent
+            {t('inviteParent')}
           </Link>
         </div>
       ) : (
         <form onSubmit={submit} noValidate className="space-y-5">
           <fieldset aria-describedby={pickError ? pickErrId : undefined}>
-            <legend className="text-[13px] font-bold text-night-900">Avec qui ?</legend>
+            <legend className="text-[13px] font-bold text-night-900">{t('withWhom')}</legend>
             <ul className="mt-2 space-y-2">
               {linked.map((p) => {
                 const checked = selected.includes(p.id)
@@ -134,7 +139,7 @@ export function NewConversationSheet({ open, onClose, linked, onCreated }: Props
 
           <div>
             <label htmlFor={`${uid}-title`} className="text-[13px] font-bold text-night-900">
-              Sujet <span className="font-normal text-night-600">(facultatif)</span>
+              {t('topic')} <span className="font-normal text-night-600">{t('optional')}</span>
             </label>
             <input
               id={`${uid}-title`}
@@ -142,31 +147,34 @@ export function NewConversationSheet({ open, onClose, linked, onCreated }: Props
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               maxLength={MAX_TITLE_CHARS}
-              placeholder="Ex. Vacances de Lina"
+              placeholder={t('placeholder')}
               autoComplete="off"
               data-autofocus={linked.length === 1 ? true : undefined}
               aria-describedby={titleHint}
               className="mt-1.5 h-12 w-full rounded-xl border border-night-200 bg-white px-3.5 text-[15px] text-night-900 placeholder:text-night-500 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-200"
             />
             <p id={titleHint} className="mt-1 text-[11px] text-night-600">
-              Sans sujet, la discussion s&apos;appelle du nom de vos interlocuteurs.
+              {t('topicHint')}
             </p>
-            <div className="mt-2 flex flex-wrap gap-1.5" role="group" aria-label="Suggestions de sujet">
-              {SUGGESTIONS.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => setTitle(s)}
-                  aria-pressed={title === s}
-                  className={cn(
-                    'inline-flex min-h-[44px] items-center rounded-full border px-3.5 text-[12px] font-semibold transition-colors',
-                    title === s ? 'border-leaf-400 bg-leaf-50 text-leaf-700' : 'border-night-100 bg-white text-night-800 hover:bg-night-50',
-                    focusRing,
-                  )}
-                >
-                  {s}
-                </button>
-              ))}
+            <div className="mt-2 flex flex-wrap gap-1.5" role="group" aria-label={t('suggestionsLabel')}>
+              {SUGGESTIONS.map((key) => {
+                const s = t(`suggestions.${key}`)
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setTitle(s)}
+                    aria-pressed={title === s}
+                    className={cn(
+                      'inline-flex min-h-[44px] items-center rounded-full border px-3.5 text-[12px] font-semibold transition-colors',
+                      title === s ? 'border-leaf-400 bg-leaf-50 text-leaf-700' : 'border-night-100 bg-white text-night-800 hover:bg-night-50',
+                      focusRing,
+                    )}
+                  >
+                    {s}
+                  </button>
+                )
+              })}
             </div>
           </div>
 
@@ -174,7 +182,7 @@ export function NewConversationSheet({ open, onClose, linked, onCreated }: Props
 
           <button type="submit" disabled={busy} className={cn(btn.primary, 'w-full')}>
             {busy && <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden="true" />}
-            {busy ? 'Création…' : 'Démarrer la discussion'}
+            {busy ? t('creating') : t('start')}
           </button>
         </form>
       )}

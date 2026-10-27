@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Loader2, Pause, Play } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { durationLabel } from '@/lib/messages'
@@ -37,6 +38,7 @@ function bars(seed: string): number[] {
  * au clavier (curseur natif), durée. Un seul lecteur joue à la fois.
  */
 export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', className }: Props) {
+  const t = useTranslations('messaging.audio')
   const audioRef = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
   const [current, setCurrent] = useState(0)
@@ -106,7 +108,7 @@ export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', cl
         type="button"
         onClick={() => void toggle()}
         disabled={!src || failed}
-        aria-label={playing ? `Mettre en pause : ${label}` : `Écouter : ${label}`}
+        aria-label={playing ? t('pause', { label }) : t('play', { label })}
         className={cn(
           'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition disabled:cursor-not-allowed disabled:opacity-50',
           tone === 'mine' ? 'bg-leaf-500 hover:bg-leaf-600' : 'bg-night-800 hover:bg-night-900',
@@ -133,7 +135,7 @@ export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', cl
               />
             ))}
           </div>
-          <label htmlFor={`${uid}-seek`} className="sr-only">Position de lecture</label>
+          <label htmlFor={`${uid}-seek`} className="sr-only">{t('seek')}</label>
           <input
             id={`${uid}-seek`}
             type="range"
@@ -143,13 +145,13 @@ export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', cl
             value={Math.min(current, total)}
             onChange={(e) => seek(Number(e.target.value))}
             disabled={!src || failed}
-            aria-valuetext={`${durationLabel(current * 1000)} sur ${durationLabel(durationMs)}`}
+            aria-valuetext={t('valueText', { current: durationLabel(current * 1000), total: durationLabel(durationMs) })}
             className="absolute inset-0 h-full w-full cursor-pointer appearance-none bg-transparent opacity-0 disabled:cursor-not-allowed"
           />
         </div>
         <p className="mt-0.5 flex justify-between text-[11px] tabular-nums text-night-600">
-          <span>{playing || current > 0 ? durationLabel(current * 1000) : 'Note vocale'}</span>
-          <span>{unavailable ? 'Lecture indisponible' : durationLabel(durationMs)}</span>
+          <span>{playing || current > 0 ? durationLabel(current * 1000) : t('voiceNote')}</span>
+          <span>{unavailable ? t('unavailable') : durationLabel(durationMs)}</span>
         </p>
       </div>
     </div>

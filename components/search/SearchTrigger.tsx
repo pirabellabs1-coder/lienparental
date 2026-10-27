@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Search } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { OPEN_SEARCH_EVENT } from './CommandPalette'
@@ -16,6 +17,7 @@ export function openSearch() {
 }
 
 export function SearchTrigger({ variant = 'sidebar', className }: Props) {
+  const t = useTranslations('account.search')
   // Le raccourci affiché s'adapte au Mac après hydratation (rendu serveur : « Ctrl K »).
   const [isMac, setIsMac] = useState(false)
   useEffect(() => {
@@ -27,7 +29,7 @@ export function SearchTrigger({ variant = 'sidebar', className }: Props) {
       <button
         type="button"
         onClick={openSearch}
-        aria-label="Rechercher"
+        aria-label={t('trigger')}
         aria-haspopup="dialog"
         className={cn(
           'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-night-100 bg-white text-night-900 transition-colors hover:bg-night-50',
@@ -51,7 +53,7 @@ export function SearchTrigger({ variant = 'sidebar', className }: Props) {
       )}
     >
       <Search aria-hidden className="h-4 w-4 shrink-0 text-night-400" strokeWidth={2.2} />
-      <span className="min-w-0 flex-1 truncate">Rechercher…</span>
+      <span className="min-w-0 flex-1 truncate">{t('triggerPlaceholder')}</span>
       <kbd aria-hidden className="shrink-0 rounded-md border border-night-200 bg-night-50 px-1.5 py-0.5 font-sans text-[11px] font-semibold text-night-600">
         {isMac ? '⌘ K' : 'Ctrl K'}
       </kbd>

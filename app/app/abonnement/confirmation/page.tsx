@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { TopBar } from '@/components/mobile/TopBar'
 import { getCurrentUser } from '@/lib/auth/session'
 import { parseCheckoutSessionId, type CheckoutReturnState } from '@/lib/billing/checkout-core'
@@ -9,7 +10,10 @@ import { isUuid } from '@/lib/billing/subscription'
 import { ConfirmationView } from './ConfirmationView'
 
 export const dynamic = 'force-dynamic'
-export const metadata: Metadata = { title: 'Confirmation de l’abonnement' }
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('billing.confirmation')
+  return { title: t('metaTitle') }
+}
 
 type PageProps = { searchParams: Promise<Record<string, string | string[] | undefined>> }
 
@@ -23,13 +27,14 @@ type PageProps = { searchParams: Promise<Record<string, string | string[] | unde
  */
 export default async function ConfirmationPage({ searchParams }: PageProps) {
   const sp = await searchParams
+  const t = await getTranslations('billing.confirmation')
 
   if (DEMO_BILLING) {
     const demo = await getDemoBilling()
     const initial: CheckoutReturnState = demo && demo.plan !== 'gratuit' ? { state: 'active', plan: demo.plan } : { state: 'not_found' }
     return (
       <>
-        <TopBar title="Abonnement" showBell={false} />
+        <TopBar title={t('topBar')} showBell={false} />
         <ConfirmationView mode="demo" sessionId={null} initial={initial} />
       </>
     )
@@ -52,7 +57,7 @@ export default async function ConfirmationPage({ searchParams }: PageProps) {
 
   return (
     <>
-      <TopBar title="Abonnement" showBell={false} />
+      <TopBar title={t('topBar')} showBell={false} />
       <ConfirmationView mode={BILLING_LIVE ? 'live' : 'unavailable'} sessionId={sessionId} initial={initial} />
     </>
   )

@@ -3,7 +3,7 @@ import { useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { locales, LOCALE_META, type Locale } from '@/lib/i18n/config'
-import { setLocale } from '@/lib/i18n/actions'
+import { applyLocale } from '@/lib/i18n/actions'
 import { Flag } from './Flags'
 import { cn } from '@/lib/cn'
 
@@ -21,7 +21,8 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   const pick = (loc: Locale) => {
     if (loc === active || pending) return
     start(async () => {
-      await setLocale(loc)
+      // Cookie d'affichage + préférence du compte (si connecté) : un seul réglage effectif.
+      await applyLocale(loc)
       router.refresh()
     })
   }

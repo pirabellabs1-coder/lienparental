@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, type ClipboardEvent, type KeyboardEvent } from 'react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 type Props = {
@@ -30,9 +31,11 @@ export function OTPInput({
   disabled,
   error,
   autoFocus,
-  ariaLabel = 'Code de vérification',
+  ariaLabel: ariaLabelProp,
   describedBy,
 }: Props) {
+  const t = useTranslations('public.onboarding.otp')
+  const ariaLabel = ariaLabelProp ?? t('label')
   const refs = useRef<Array<HTMLInputElement | null>>([])
   const digits = Array.from({ length }, (_, i) => value[i] ?? '')
 
@@ -119,7 +122,7 @@ export function OTPInput({
             }
             e.currentTarget.select()
           }}
-          aria-label={`Chiffre ${i + 1} sur ${length}`}
+          aria-label={t('digit', { n: i + 1, total: length })}
           aria-invalid={error ? true : undefined}
           className={cn(
             'h-12 w-full min-w-0 max-w-[48px] rounded-xl border bg-white text-center text-xl font-bold text-night-900 outline-none transition-colors',

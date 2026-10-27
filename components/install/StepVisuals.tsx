@@ -1,4 +1,5 @@
 import { BookOpen, ChevronLeft, ChevronRight, Copy, Download, Lock, MoreVertical, PenLine, PlusSquare, RotateCw, Share, Star } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { AppIcon } from './AppIcon'
 
@@ -30,15 +31,16 @@ export function IosShareBar() {
 }
 
 export function IosShareSheet() {
+  const t = useTranslations('public.install.visuals')
   return (
     <div className={cn(frame, 'relative overflow-hidden')}>
       <div className="flex gap-1.5 border-b border-night-100 pb-1.5">
         {['bg-leaf-100', 'bg-night-100', 'bg-night-200', 'bg-leaf-100'].map((c, i) => <span key={i} className={cn('h-4 w-4 rounded-[5px]', c)} />)}
       </div>
-      <div className={row}><span>Copier</span><Copy className="h-2.5 w-2.5" /></div>
-      <div className={row}><span>Liste de lecture</span><BookOpen className="h-2.5 w-2.5" /></div>
-      <div className={row}><span>Signets</span><Star className="h-2.5 w-2.5" /></div>
-      <div className={cn(row, 'text-night-400')}><span>Annoter</span><PenLine className="h-2.5 w-2.5" /></div>
+      <div className={row}><span>{t('copy')}</span><Copy className="h-2.5 w-2.5" /></div>
+      <div className={row}><span>{t('readingList')}</span><BookOpen className="h-2.5 w-2.5" /></div>
+      <div className={row}><span>{t('bookmarks')}</span><Star className="h-2.5 w-2.5" /></div>
+      <div className={cn(row, 'text-night-400')}><span>{t('markup')}</span><PenLine className="h-2.5 w-2.5" /></div>
       {/* indicateur de défilement */}
       <span className="absolute right-0.5 top-7 h-6 w-[3px] rounded-full bg-night-300" />
       <span className="pointer-events-none absolute inset-x-0 bottom-0 h-4 bg-gradient-to-t from-white" />
@@ -47,22 +49,24 @@ export function IosShareSheet() {
 }
 
 export function IosAddToHome() {
+  const t = useTranslations('public.install.visuals')
   return (
     <div className={frame}>
-      <div className={cn(row, 'text-night-400')}><span>Copier</span><Copy className="h-2.5 w-2.5" /></div>
-      <div className={cn(row, 'text-night-400')}><span>Signets</span><Star className="h-2.5 w-2.5" /></div>
-      <div className={highlight}><span>Sur l’écran d’accueil</span><PlusSquare className="h-2.5 w-2.5 text-leaf-500" /></div>
-      <div className={cn(row, 'text-night-400')}><span>Annoter</span><PenLine className="h-2.5 w-2.5" /></div>
+      <div className={cn(row, 'text-night-400')}><span>{t('copy')}</span><Copy className="h-2.5 w-2.5" /></div>
+      <div className={cn(row, 'text-night-400')}><span>{t('bookmarks')}</span><Star className="h-2.5 w-2.5" /></div>
+      <div className={highlight}><span>{t('iosAddHome')}</span><PlusSquare className="h-2.5 w-2.5 text-leaf-500" /></div>
+      <div className={cn(row, 'text-night-400')}><span>{t('markup')}</span><PenLine className="h-2.5 w-2.5" /></div>
     </div>
   )
 }
 
 export function IosConfirm() {
+  const t = useTranslations('public.install.visuals')
   return (
     <div className={frame}>
       <div className="flex items-center justify-between font-semibold">
-        <span className="text-night-500">Annuler</span>
-        <span className="rounded-full px-1.5 py-0.5 font-bold text-leaf-600 ring-2 ring-leaf-400">Ajouter</span>
+        <span className="text-night-500">{t('cancel')}</span>
+        <span className="rounded-full px-1.5 py-0.5 font-bold text-leaf-600 ring-2 ring-leaf-400">{t('add')}</span>
       </div>
       <div className="mt-2 flex items-center gap-1.5">
         <AppIcon className="h-6 w-6" />
@@ -94,27 +98,29 @@ export function AndroidMenuBar() {
 }
 
 export function AndroidMenu() {
+  const t = useTranslations('public.install.visuals')
   return (
     <div className={frame}>
-      <div className={cn(row, 'text-night-400')}>Nouvel onglet</div>
-      <div className={cn(row, 'text-night-400')}>Favoris</div>
-      <div className={cn(row, 'text-night-400')}>Téléchargements</div>
-      <div className={highlight}><span>Ajouter à l’écran d’accueil</span><PlusSquare className="h-2.5 w-2.5 shrink-0 text-leaf-500" /></div>
-      <div className={cn(row, 'text-night-400')}>Paramètres</div>
+      <div className={cn(row, 'text-night-400')}>{t('newTab')}</div>
+      <div className={cn(row, 'text-night-400')}>{t('favorites')}</div>
+      <div className={cn(row, 'text-night-400')}>{t('downloads')}</div>
+      <div className={highlight}><span>{t('androidAddHome')}</span><PlusSquare className="h-2.5 w-2.5 shrink-0 text-leaf-500" /></div>
+      <div className={cn(row, 'text-night-400')}>{t('settings')}</div>
     </div>
   )
 }
 
 export function AndroidConfirm() {
+  const t = useTranslations('public.install.visuals')
   return (
     <div className={frame}>
-      <div className="font-bold">Ajouter à l’écran d’accueil</div>
+      <div className="font-bold">{t('androidAddHome')}</div>
       <div className="mt-1.5 flex items-center gap-1.5 border-b border-leaf-400 pb-1">
         <AppIcon className="h-5 w-5" /><span>Lien Parental</span>
       </div>
       <div className="mt-2 flex items-center justify-end gap-1.5 pr-0.5 font-semibold">
-        <span className="text-night-500">Annuler</span>
-        <span className="rounded-full px-1.5 py-0.5 font-bold text-leaf-600 ring-2 ring-leaf-400">Ajouter</span>
+        <span className="text-night-500">{t('cancel')}</span>
+        <span className="rounded-full px-1.5 py-0.5 font-bold text-leaf-600 ring-2 ring-leaf-400">{t('add')}</span>
       </div>
     </div>
   )

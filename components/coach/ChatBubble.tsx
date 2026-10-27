@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { CheckCheck, Database } from 'lucide-react'
 import type { CoachChatMessage } from '@/lib/mock-data'
 import { cn } from '@/lib/cn'
@@ -50,6 +51,7 @@ function toBlocks(text: string): { blocks: Block[]; sources: string | null } {
 }
 
 export function RichText({ text, bullets }: { text: string; bullets?: string[] }) {
+  const t = useTranslations('coach.chat')
   const { blocks, sources } = toBlocks(text)
   return (
     <>
@@ -85,7 +87,7 @@ export function RichText({ text, bullets }: { text: string; bullets?: string[] }
         <p className="mt-2.5 flex items-start gap-1.5 border-t border-night-100 pt-2 text-[12px] leading-snug text-night-600">
           <Database className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
           <span>
-            <span className="font-semibold">Données utilisées : </span>
+            <span className="font-semibold">{t('dataUsed')}</span>
             {sources}
           </span>
         </p>
@@ -97,15 +99,16 @@ export function RichText({ text, bullets }: { text: string; bullets?: string[] }
 // Bulle de discussion Coach IA : utilisateur à droite (violet clair),
 // IA à gauche (carte blanche + avatar robot).
 export function ChatBubble({ message, live = false }: { message: ChatMessage; live?: boolean }) {
+  const t = useTranslations('coach.chat')
   if (message.from === 'me') {
     return (
       <li className="flex justify-end">
         <div className="max-w-[80%] rounded-xl2 rounded-br-md bg-iris-100/70 px-4 pb-2 pt-3 text-[14px] leading-relaxed text-night-900">
-          <span className="sr-only">Vous : </span>
+          <span className="sr-only">{t('you')}</span>
           <p className="whitespace-pre-line break-words">{message.text}</p>
           <p className="mt-1 flex items-center justify-end gap-1 text-[11px] text-night-500">
             <time>{message.time}</time>
-            <CheckCheck className="h-3.5 w-3.5 text-iris-500" aria-label="Envoyé" />
+            <CheckCheck className="h-3.5 w-3.5 text-iris-500" aria-label={t('sent')} />
           </p>
         </div>
       </li>
@@ -126,10 +129,10 @@ export function ChatBubble({ message, live = false }: { message: ChatMessage; li
           message.tone === 'error' ? 'border-alert-200 bg-alert-50 text-night-900' : 'border-night-100 bg-white text-night-900',
         )}
       >
-        <span className="sr-only">Coach IA : </span>
+        <span className="sr-only">{t('coachPrefix')}</span>
         {waiting ? (
           <span className="flex h-5 items-center gap-1">
-            <span className="sr-only">Le coach rédige une réponse…</span>
+            <span className="sr-only">{t('typing')}</span>
             {[0, 150, 300].map((d) => (
               <span key={d} aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-iris-400 motion-safe:animate-bounce" style={{ animationDelay: `${d}ms` }} />
             ))}
@@ -152,13 +155,14 @@ export function ChatBubble({ message, live = false }: { message: ChatMessage; li
 
 /** Indicateur « le coach écrit… ». */
 export function TypingBubble() {
+  const t = useTranslations('coach.chat')
   return (
     <li className="flex items-start gap-2.5">
       <span className="mt-1 grid h-9 w-9 shrink-0 place-items-center">
         <RobotMascot variant="head" size={34} />
       </span>
       <div className="flex items-center gap-1 rounded-xl2 rounded-tl-md border border-night-100 bg-white px-4 py-3.5 shadow-soft">
-        <span className="sr-only">Le coach rédige une réponse…</span>
+        <span className="sr-only">{t('typing')}</span>
         {[0, 150, 300].map((d) => (
           <span
             key={d}

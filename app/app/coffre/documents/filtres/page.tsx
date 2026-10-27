@@ -2,19 +2,22 @@
 
 import { Suspense, useState, type ReactNode } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Check, File, FileImage, FileText, FileType, Files, Folder } from 'lucide-react'
 import { ScreenHeader } from '@/components/coffre/ScreenHeader'
 import { StickyActions } from '@/components/coffre/StickyActions'
 import { btn } from '@/components/coffre/buttons'
 import { useCategories } from '@/components/coffre/store'
 import type { VaultFileType } from '@/lib/mock-vault'
+import { useVaultI18n } from '@/components/coffre/i18n'
 
-const TYPES: { k: VaultFileType | 'tous'; label: string; icon: ReactNode }[] = [
-  { k: 'tous', label: 'Tous les types', icon: <Files className="h-[18px] w-[18px]" /> },
-  { k: 'pdf', label: 'PDF', icon: <FileText className="h-[18px] w-[18px]" /> },
-  { k: 'image', label: 'Image', icon: <FileImage className="h-[18px] w-[18px]" /> },
-  { k: 'word', label: 'Word', icon: <FileType className="h-[18px] w-[18px]" /> },
-  { k: 'autre', label: 'Autres', icon: <File className="h-[18px] w-[18px]" /> },
+// Libellés : vault.filters.types.*
+const TYPES: { k: VaultFileType | 'tous'; icon: ReactNode }[] = [
+  { k: 'tous', icon: <Files className="h-[18px] w-[18px]" /> },
+  { k: 'pdf', icon: <FileText className="h-[18px] w-[18px]" /> },
+  { k: 'image', icon: <FileImage className="h-[18px] w-[18px]" /> },
+  { k: 'word', icon: <FileType className="h-[18px] w-[18px]" /> },
+  { k: 'autre', icon: <File className="h-[18px] w-[18px]" /> },
 ]
 
 function CheckRow({ id, label, icon, checked, onChange }: { id: string; label: string; icon: ReactNode; checked: boolean; onChange: (v: boolean) => void }) {
@@ -38,6 +41,8 @@ function CheckRow({ id, label, icon, checked, onChange }: { id: string; label: s
 
 function Filters() {
   const router = useRouter()
+  const t = useTranslations('vault.filters')
+  const f = useVaultI18n()
   const params = useSearchParams()
   const { categories } = useCategories()
 
@@ -45,7 +50,7 @@ function Filters() {
   const [types, setTypes] = useState<VaultFileType[]>((params.get('types') ?? '').split(',').filter(Boolean) as VaultFileType[])
   const [du, setDu] = useState(params.get('du') ?? '')
   const [au, setAu] = useState(params.get('au') ?? '')
-  const periodError = du && au && du > au ? 'La date de fin doit être postérieure à la date de début.' : ''
+  const periodError = du && au && du > au ? t('periodError') : ''
 
   const toggle = <T,>(list: T[], v: T, on: boolean) => (on ? [...list, v] : list.filter((x) => x !== v))
 
@@ -67,25 +72,25 @@ function Filters() {
   return (
     <>
       <ScreenHeader
-        title="Filtres"
+        title={t('title')}
         leading="close"
-        backLabel="Fermer les filtres"
+        backLabel={t('close')}
         right={
           <button type="button" onClick={reset} className="-mr-2 inline-flex h-11 items-center rounded-lg px-2 text-[13px] font-bold text-leaf-600 hover:bg-leaf-50">
-            Réinitialiser
+            {t('reset')}
           </button>
         }
       />
       <div className="px-5">
         <fieldset>
-          <legend className="text-[15px] font-extrabold text-night-900">Catégories</legend>
-          <p className="text-[12.5px] text-night-500">Sélectionnez une ou plusieurs catégories</p>
+          <legend className="text-[15px] font-extrabold text-night-900">{t('categories')}</legend>
+          <p className="text-[12.5px] text-night-500">{t('categoriesHint')}</p>
           <div className="mt-2">
             {categories.map((c) => (
               <CheckRow
                 key={c.id}
                 id={`cat-${c.id}`}
-                label={c.name}
+                label={f.category(c.name)}
                 icon={<Folder className="h-[18px] w-[18px]" />}
                 checked={cats.includes(c.id)}
                 onChange={(on) => setCats((xs) => toggle(xs, c.id, on))}
@@ -95,18 +100,18 @@ function Filters() {
         </fieldset>
 
         <fieldset className="mt-5">
-          <legend className="text-[15px] font-extrabold text-night-900">Type de fichier</legend>
+          <legend className="text-[15px] font-extrabold text-night-900">{t('fileType')}</legend>
           <div className="mt-2">
-            {TYPES.map((t) => (
+            {TYPES.map((ty) => (
               <CheckRow
-                key={t.k}
-                id={`type-${t.k}`}
-                label={t.label}
-                icon={t.icon}
-                checked={t.k === 'tous' ? types.length === 0 : types.includes(t.k)}
+                key={ty.k}
+                id={`type-${ty.k}`}
+                label={t(`types.${ty.k}`)}
+                icon={ty.icon}
+                checked={ty.k === 'tous' ? types.length === 0 : types.includes(ty.k)}
                 onChange={(on) => {
-                  if (t.k === 'tous') { if (on) setTypes([]); return }
-                  const k = t.k
+                  if (ty.k === 'tous') { if (on) setTypes([]); return }
+                  const k = ty.k
                   setTypes((xs) => toggle(xs, k, on))
                 }}
               />
@@ -115,9 +120,9 @@ function Filters() {
         </fieldset>
 
         <fieldset className="mt-5">
-          <legend className="text-[15px] font-extrabold text-night-900">Période</legend>
+          <legend className="text-[15px] font-extrabold text-night-900">{t('period')}</legend>
           <div className="mt-2 space-y-2.5">
-            {([['du', 'Du', du, setDu], ['au', 'Au', au, setAu]] as const).map(([id, label, value, set]) => (
+            {([['du', t('from'), du, setDu], ['au', t('to'), au, setAu]] as const).map(([id, label, value, set]) => (
               <div key={id} className="flex items-center gap-3">
                 <label htmlFor={`periode-${id}`} className="w-10 text-[14px] font-bold text-night-900">{label}</label>
                 <div className="flex-1">
@@ -139,15 +144,16 @@ function Filters() {
       </div>
 
       <StickyActions>
-        <button type="button" onClick={apply} className={btn({ variant: 'primary' })}>Appliquer les filtres</button>
+        <button type="button" onClick={apply} className={btn({ variant: 'primary' })}>{t('apply')}</button>
       </StickyActions>
     </>
   )
 }
 
 export default function FiltersPage() {
+  const tc = useTranslations('vault.common')
   return (
-    <Suspense fallback={<div className="p-6 text-center text-sm text-night-500" role="status">Chargement…</div>}>
+    <Suspense fallback={<div className="p-6 text-center text-sm text-night-500" role="status">{tc('loading')}</div>}>
       <Filters />
     </Suspense>
   )

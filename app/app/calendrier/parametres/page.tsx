@@ -1,8 +1,10 @@
 'use client'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { CalendarCheck2, CheckCircle2, Loader2, RefreshCw, ShieldCheck, TriangleAlert } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { TopBar } from '@/components/mobile/TopBar'
 import { typeStyle } from '@/components/calendrier/eventTypeStyles'
+import { useCalFormat } from '@/components/calendrier/useCalFormat'
 import { GoogleLogo } from '@/components/auth/GoogleButton'
 import { RadioGroup, Switch, Select, Button, Badge, ConfirmDialog } from '@/components/ui'
 import {
@@ -12,20 +14,24 @@ import {
 import { resetGoogleSyncHint } from '@/lib/integrations/google/client'
 import type { CalendarTarget, GoogleCalendarState, MaskMode, SyncResponse, UiEventType } from '@/lib/integrations/google/types'
 import { cn } from '@/lib/cn'
+import { intlLocale } from '@/lib/i18n/config'
 
+// Libellés : clés calendar.settings.tz.* (traduites au rendu).
 const TZ_OPTIONS = [
-  { value: 'America/Cayenne', label: 'Guyane, Cayenne (par défaut)' },
-  { value: 'America/Martinique', label: 'Martinique' },
-  { value: 'America/Guadeloupe', label: 'Guadeloupe' },
-  { value: 'Europe/Paris',    label: 'Europe/Paris' },
-  { value: 'Europe/Brussels', label: 'Europe/Bruxelles' },
-  { value: 'Europe/Zurich',   label: 'Europe/Zurich' },
-  { value: 'Europe/London',   label: 'Europe/Londres' },
-  { value: 'America/Montreal',label: 'Amérique/Montréal' },
-  { value: 'Africa/Dakar',    label: 'Afrique/Dakar' },
+  { value: 'America/Cayenne',    key: 'cayenne' },
+  { value: 'America/Martinique', key: 'martinique' },
+  { value: 'America/Guadeloupe', key: 'guadeloupe' },
+  { value: 'Europe/Paris',       key: 'paris' },
+  { value: 'Europe/Brussels',    key: 'brussels' },
+  { value: 'Europe/Zurich',      key: 'zurich' },
+  { value: 'Europe/London',      key: 'london' },
+  { value: 'America/Montreal',   key: 'montreal' },
+  { value: 'Africa/Dakar',       key: 'dakar' },
 ]
 
 export default function ParametresCalendrierPage() {
+  const t = useTranslations('calendar.settings')
+  const f = useCalFormat()
   const [defaultReminder, setDefaultReminder] = useState<ReminderKey>('1h')
   const [enabled, setEnabled] = useState<Record<EventTypeKey, boolean>>(DEFAULT_TYPE_REMINDER_ENABLED)
   const [tz, setTz] = useState<string>(DEFAULT_TZ)
@@ -39,31 +45,31 @@ export default function ParametresCalendrierPage() {
 
   return (
     <>
-      <TopBar title="Paramètres des rappels" showBack backHref="/app/calendrier/rappels" showBell={false} />
+      <TopBar title={t('title')} showBack backHref="/app/calendrier/rappels" showBell={false} />
       <div className="mx-auto w-full max-w-2xl px-4 pb-6 pt-2">
       <section className="mt-5">
-        <h2 className="font-display text-sm font-semibold text-night-900">Délai du rappel par défaut</h2>
-        <p className="mt-0.5 text-xs text-night-500">Appliqué aux nouveaux événements.</p>
+        <h2 className="font-display text-sm font-semibold text-night-900">{t('defaultTitle')}</h2>
+        <p className="mt-0.5 text-xs text-night-500">{t('defaultHint')}</p>
         <div className="mt-2">
           <RadioGroup
             value={defaultReminder}
             onChange={(v) => setDefaultReminder(v as ReminderKey)}
-            options={REMINDER_OPTIONS.map(o => ({ value: o.value, label: o.label }))}
+            options={REMINDER_OPTIONS.map(o => ({ value: o.value, label: f.reminderLabel(o.value) }))}
             columns={1}
           />
         </div>
       </section>
 
       <section className="mt-6">
-        <h2 className="font-display text-sm font-semibold text-night-900">Activation par type</h2>
-        <p className="mt-0.5 text-xs text-night-500">Recevez les rappels seulement pour les types activés.</p>
+        <h2 className="font-display text-sm font-semibold text-night-900">{t('byTypeTitle')}</h2>
+        <p className="mt-0.5 text-xs text-night-500">{t('byTypeHint')}</p>
         <div className="mt-2 rounded-xl2 border border-night-100 bg-white shadow-soft divide-y divide-night-100 px-4">
-          {EVENT_TYPES.map((t) => (
+          {EVENT_TYPES.map((et) => (
             <Switch
-              key={t.key}
-              label={<span className="inline-flex items-center gap-2"><span className={cn('h-2 w-2 rounded-full', typeStyle(t.key).dot)} aria-hidden="true" />{t.label}</span>}
-              checked={enabled[t.key]}
-              onChange={(e) => setEnabled(prev => ({ ...prev, [t.key]: e.target.checked }))}
+              key={et.key}
+              label={<span className="inline-flex items-center gap-2"><span className={cn('h-2 w-2 rounded-full', typeStyle(et.key).dot)} aria-hidden="true" />{f.typeLabel(et.key)}</span>}
+              checked={enabled[et.key]}
+              onChange={(e) => setEnabled(prev => ({ ...prev, [et.key]: e.target.checked }))}
             />
           ))}
         </div>
@@ -71,21 +77,21 @@ export default function ParametresCalendrierPage() {
 
       <section className="mt-6">
         <Select
-          label="Fuseau horaire"
+          label={t('tzLabel')}
           value={tz}
           onChange={(e) => setTz(e.target.value)}
-          options={TZ_OPTIONS}
-          hint="Les heures affichées dans l'application seront converties selon ce fuseau."
+          options={TZ_OPTIONS.map((o) => ({ value: o.value, label: t(`tz.${o.key}`) }))}
+          hint={t('tzHint')}
         />
       </section>
 
       <div className="mt-6">
         <Button variant="primary" full size="lg" onClick={onSave}>
-          Enregistrer les paramètres
+          {t('save')}
         </Button>
         {saved && (
           <p role="status" aria-live="polite" className="mt-2 text-center text-sm font-medium text-leaf-700">
-            Préférences enregistrées.
+            {t('saved')}
           </p>
         )}
       </div>
@@ -100,26 +106,22 @@ export default function ParametresCalendrierPage() {
 
 const API = '/api/integrations/google/calendar'
 
-const RETURN_MESSAGES: Record<string, { tone: 'ok' | 'error'; text: string }> = {
-  connecte: { tone: 'ok', text: 'Google Agenda est connecté. Vos événements à venir sont en cours d’envoi.' },
-  refuse: { tone: 'error', text: 'Vous avez refusé l’accès à Google Agenda : rien n’a été connecté.' },
-  etat_invalide: { tone: 'error', text: 'La demande de connexion a expiré ou n’est pas valide. Recommencez depuis cet écran.' },
-  autorisation_incomplete: { tone: 'error', text: 'Google n’a pas accordé l’accès à l’agenda. Recommencez en laissant l’autorisation demandée cochée.' },
-  indisponible: { tone: 'error', text: 'Google ne répond pas pour le moment. Réessayez dans quelques minutes.' },
-  non_configure: { tone: 'error', text: 'La connexion à Google Agenda n’est pas encore configurée sur ce service.' },
-  erreur: { tone: 'error', text: 'La connexion à Google Agenda a échoué. Réessayez.' },
+// Retour de Google (?google=…) : ton du message ; texte = calendar.google.return.<code>.
+const RETURN_TONES: Record<string, 'ok' | 'error'> = {
+  connecte: 'ok',
+  refuse: 'error',
+  etat_invalide: 'error',
+  autorisation_incomplete: 'error',
+  indisponible: 'error',
+  non_configure: 'error',
+  erreur: 'error',
 }
 
-const MASK_OPTIONS: { value: MaskMode; label: string; description: string }[] = [
-  { value: 'sensitive', label: 'Masquer les rendez-vous santé (recommandé)', description: 'Titre « Rendez-vous santé », sans lieu ni description.' },
-  { value: 'all', label: 'Masquer tous les détails', description: 'Chaque événement apparaît avec un titre générique (Visite, École…).' },
-  { value: 'none', label: 'Tout afficher', description: 'Titre, lieu et description sont copiés dans Google Agenda.' },
-]
+// Libellés : calendar.google.mask.<value> / <value>Desc.
+const MASK_VALUES: MaskMode[] = ['sensitive', 'all', 'none']
 
-const TARGET_OPTIONS: { value: CalendarTarget; label: string; description: string }[] = [
-  { value: 'dedicated', label: 'Un agenda « Lien Parental » (recommandé)', description: 'Créé automatiquement. Lien Parental n’a accès à aucun autre agenda.' },
-  { value: 'primary', label: 'Mon agenda principal', description: 'Les événements s’ajoutent à votre agenda Google habituel.' },
-]
+// Libellés : calendar.google.target.<value> / <value>Desc.
+const TARGET_VALUES: CalendarTarget[] = ['dedicated', 'primary']
 
 type Connection = Extract<GoogleCalendarState, { configured: true }>['connection']
 
@@ -135,20 +137,28 @@ async function api<T>(method: string, path = '', body?: unknown): Promise<{ ok: 
     const json = (await res.json().catch(() => null)) as (T & { error?: { message?: string; code?: string } }) | null
     return { ok: res.ok, status: res.status, data: res.ok ? json : null, message: json?.error?.message ?? null }
   } catch {
-    return { ok: false, status: 0, data: null, message: 'Connexion impossible. Vérifiez votre réseau.' }
+    // Réseau indisponible (status 0) : message traduit par l'appelant (calendar.google.network).
+    return { ok: false, status: 0, data: null, message: null }
   }
 }
 
-function formatDateTime(iso: string | null) {
+function formatDateTime(iso: string | null, locale: string) {
   if (!iso) return null
   try {
-    return new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: DEFAULT_TZ }).format(new Date(iso))
+    return new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: DEFAULT_TZ }).format(new Date(iso))
   } catch {
     return null
   }
 }
 
 function GoogleCalendarSection() {
+  const t = useTranslations('calendar.google')
+  const tc = useTranslations('calendar.common')
+  const f = useCalFormat()
+  const locale = useLocale()
+  // Traductions lues depuis les callbacks mémorisés (load / drain) sans les recréer.
+  const tRef = useRef(t)
+  tRef.current = t
   const [state, setState] = useState<GoogleCalendarState | null>(null)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [notice, setNotice] = useState<{ tone: 'ok' | 'error'; text: string } | null>(null)
@@ -159,6 +169,9 @@ function GoogleCalendarSection() {
   const [progress, setProgress] = useState<number | null>(null)
   const [confirmOff, setConfirmOff] = useState(false)
   const draining = useRef(false)
+  // Message d'erreur : celui de l'API, sinon « réseau indisponible » (status 0), sinon le repli fourni.
+  const errText = (r: { status: number; message: string | null }, fallback: string) =>
+    r.message ?? (r.status === 0 ? t('network') : fallback)
 
   const applyConnection = (c: Connection) => {
     if (!c) return
@@ -170,7 +183,7 @@ function GoogleCalendarSection() {
   const load = useCallback(async () => {
     const r = await api<GoogleCalendarState>('GET')
     if (!r.ok || !r.data) {
-      setLoadError(r.message ?? 'Impossible de lire l’état de la synchronisation.')
+      setLoadError(r.message ?? (r.status === 0 ? tRef.current('network') : tRef.current('loadFailed')))
       return null
     }
     setLoadError(null)
@@ -189,7 +202,7 @@ function GoogleCalendarSection() {
         const r = await api<SyncResponse>('POST', '/sync', { action })
         action = 'process'
         if (!r.ok || !r.data || r.data.status !== 'processed') {
-          if (r.message) setNotice({ tone: 'error', text: r.message })
+          if (r.message || r.status === 0) setNotice({ tone: 'error', text: r.message ?? tRef.current('network') })
           break
         }
         setProgress(r.data.remaining)
@@ -206,7 +219,8 @@ function GoogleCalendarSection() {
     // Retour de Google : message puis nettoyage de l'URL (le code n'y figure plus, seul ?google=…).
     const code = new URLSearchParams(window.location.search).get('google')
     if (code) {
-      setNotice(RETURN_MESSAGES[code] ?? RETURN_MESSAGES.erreur)
+      const key = code in RETURN_TONES ? code : 'erreur'
+      setNotice({ tone: RETURN_TONES[key], text: tRef.current(`return.${key}`) })
       window.history.replaceState(null, '', window.location.pathname)
       if (code === 'connecte') resetGoogleSyncHint()
     }
@@ -215,16 +229,16 @@ function GoogleCalendarSection() {
     })
   }, [load, drain])
 
-  const connect = async (t: CalendarTarget = target) => {
+  const connect = async (dest: CalendarTarget = target) => {
     setBusy('connect')
     setNotice(null)
-    const r = await api<{ url: string }>('POST', '/connect', { target: t })
+    const r = await api<{ url: string }>('POST', '/connect', { target: dest })
     if (r.ok && r.data?.url) {
       window.location.assign(r.data.url)
       return
     }
     setBusy(null)
-    setNotice({ tone: 'error', text: r.message ?? 'La connexion à Google n’a pas pu démarrer.' })
+    setNotice({ tone: 'error', text: errText(r, t('connectFailed')) })
   }
 
   const save = async () => {
@@ -239,10 +253,10 @@ function GoogleCalendarSection() {
       return
     }
     if (!r.ok) {
-      setNotice({ tone: 'error', text: r.message ?? 'Les préférences n’ont pas pu être enregistrées.' })
+      setNotice({ tone: 'error', text: errText(r, t('saveFailed')) })
       return
     }
-    setNotice({ tone: 'ok', text: 'Préférences de synchronisation enregistrées.' })
+    setNotice({ tone: 'ok', text: t('saved') })
     await drain()
   }
 
@@ -252,14 +266,14 @@ function GoogleCalendarSection() {
     setBusy(null)
     setConfirmOff(false)
     if (!r.ok) {
-      setNotice({ tone: 'error', text: r.message ?? 'La déconnexion a échoué.' })
+      setNotice({ tone: 'error', text: errText(r, t('disconnectFailed')) })
       return
     }
     setNotice({
       tone: 'ok',
       text: r.data?.revoked
-        ? 'Google Agenda est déconnecté et l’accès de Lien Parental a été révoqué.'
-        : 'Google Agenda est déconnecté. Pensez à retirer aussi l’accès depuis votre compte Google.',
+        ? t('disconnectedRevoked')
+        : t('disconnected'),
     })
     await load()
   }
@@ -269,6 +283,8 @@ function GoogleCalendarSection() {
   const conn = state?.configured ? state.connection : null
   const active = conn?.status === 'active'
   const needsReauth = conn?.status === 'reauth_required'
+  const targetOptions = TARGET_VALUES.map((value) => ({ value, label: t(`target.${value}`), description: t(`target.${value}Desc`) }))
+  const maskOptions = MASK_VALUES.map((value) => ({ value, label: t(`mask.${value}`), description: t(`mask.${value}Desc`) }))
 
   return (
     <section className="mt-10 border-t border-night-100 pt-6" aria-labelledby="gcal-title" aria-busy={state === null}>
@@ -277,9 +293,9 @@ function GoogleCalendarSection() {
           <GoogleLogo className="h-5 w-5" />
         </span>
         <div className="min-w-0">
-          <h2 id="gcal-title" className="font-display text-base font-bold text-night-900">Synchronisation Google Agenda</h2>
+          <h2 id="gcal-title" className="font-display text-base font-bold text-night-900">{t('title')}</h2>
           <p className="mt-0.5 text-xs leading-relaxed text-night-500">
-            Les événements créés, modifiés ou supprimés dans Lien Parental sont reportés automatiquement dans Google Agenda.
+            {t('intro')}
           </p>
         </div>
       </div>
@@ -304,27 +320,27 @@ function GoogleCalendarSection() {
       <div className="mt-4 rounded-xl2 border border-night-100 bg-white p-4 shadow-soft">
         {state === null && !loadError && (
           <p className="flex items-center gap-2 text-sm text-night-600">
-            <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden /> Chargement…
+            <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden /> {tc('loading')}
           </p>
         )}
 
         {loadError && (
           <div className="space-y-3">
             <p role="alert" className="text-sm font-medium text-alert-700">{loadError}</p>
-            <Button variant="secondary" onClick={() => void load()}>Réessayer</Button>
+            <Button variant="secondary" onClick={() => void load()}>{tc('retry')}</Button>
           </div>
         )}
 
         {state && !state.configured && (
           <div className="space-y-2">
-            <Badge variant="neutral">Non configurée</Badge>
+            <Badge variant="neutral">{t('notConfigured')}</Badge>
             <p className="text-sm text-night-800">
-              La connexion à Google Agenda n’est pas encore configurée sur ce service.
+              {t('notConfiguredText')}
             </p>
             <p className="text-xs leading-relaxed text-night-500">
               {state.mode === 'demo'
-                ? 'En mode démonstration, aucun agenda externe ne peut être relié. Vous pouvez toujours ajouter un événement à Google Agenda depuis sa fiche.'
-                : 'Elle sera proposée ici dès son activation. En attendant, chaque événement peut être ajouté à Google Agenda depuis sa fiche.'}
+                ? t('demoText')
+                : t('soonText')}
             </p>
           </div>
         )}
@@ -332,35 +348,34 @@ function GoogleCalendarSection() {
         {state?.configured && !conn && (
           <div className="space-y-4">
             <RadioGroup
-              label="Où envoyer vos événements ?"
+              label={t('whereLabel')}
               value={target}
               onChange={(v) => setTarget(v as CalendarTarget)}
-              options={TARGET_OPTIONS}
+              options={targetOptions}
             />
             <p className="flex items-start gap-2 text-xs leading-relaxed text-night-500">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" aria-hidden />
-              Envoi uniquement, de Lien Parental vers Google : vos autres événements Google ne sont jamais lus.
-              Les rendez-vous santé sont masqués par défaut. Vous pouvez déconnecter à tout moment.
+              {t('privacyNote')}
             </p>
             <Button full size="lg" onClick={() => void connect()} disabled={busy !== null} aria-busy={busy === 'connect'}>
               <CalendarCheck2 className="h-5 w-5" aria-hidden />
-              {busy === 'connect' ? 'Redirection vers Google…' : 'Connecter Google Agenda'}
+              {busy === 'connect' ? t('redirecting') : t('connect')}
             </Button>
           </div>
         )}
 
         {conn && needsReauth && (
           <div className="space-y-3">
-            <Badge variant="warning">Reconnexion nécessaire</Badge>
+            <Badge variant="warning">{t('reauthBadge')}</Badge>
             <p className="text-sm text-night-800">
-              Google a refusé l’accès (autorisation retirée ou expirée). Les modifications sont en attente et seront envoyées après reconnexion.
+              {t('reauthText')}
             </p>
             <div className="flex flex-col gap-2 sm:flex-row">
               <Button size="lg" onClick={() => void connect(conn.target)} disabled={busy !== null} className="sm:flex-1">
-                {busy === 'connect' ? 'Redirection vers Google…' : 'Reconnecter Google Agenda'}
+                {busy === 'connect' ? t('redirecting') : t('reconnect')}
               </Button>
               <Button variant="secondary" size="lg" onClick={() => setConfirmOff(true)} disabled={busy !== null} className="sm:flex-1">
-                Déconnecter
+                {t('disconnect')}
               </Button>
             </div>
           </div>
@@ -370,11 +385,11 @@ function GoogleCalendarSection() {
           <div className="space-y-5">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="min-w-0">
-                <Badge variant="success" dot>Connecté</Badge>
-                <p className="mt-1.5 truncate text-sm font-semibold text-night-900">{conn.googleEmail ?? 'Compte Google'}</p>
+                <Badge variant="success" dot>{t('connected')}</Badge>
+                <p className="mt-1.5 truncate text-sm font-semibold text-night-900">{conn.googleEmail ?? t('googleAccount')}</p>
                 <p className="text-xs text-night-500">
-                  {conn.target === 'dedicated' ? 'Agenda « Lien Parental »' : 'Agenda principal'}
-                  {conn.lastSyncAt && <> · Dernier envoi le {formatDateTime(conn.lastSyncAt)}</>}
+                  {conn.target === 'dedicated' ? t('dedicatedName') : t('primaryName')}
+                  {conn.lastSyncAt && t('lastSync', { date: formatDateTime(conn.lastSyncAt, locale) ?? '' })}
                 </p>
               </div>
             </div>
@@ -382,58 +397,58 @@ function GoogleCalendarSection() {
             {(progress !== null || conn.pending > 0 || conn.failed > 0) && (
               <p role="status" className="flex items-center gap-2 rounded-xl bg-night-50 px-3 py-2 text-xs text-night-700">
                 {progress !== null ? (
-                  <><Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden /> Envoi en cours, {progress} événement{progress > 1 ? 's' : ''} restant{progress > 1 ? 's' : ''}.</>
+                  <><Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden /> {t('progress', { count: progress })}</>
                 ) : conn.pending > 0 ? (
-                  <>{conn.pending} événement{conn.pending > 1 ? 's' : ''} en attente d’envoi (nouvel essai automatique).</>
+                  <>{t('pending', { count: conn.pending })}</>
                 ) : (
-                  <>{conn.failed} événement{conn.failed > 1 ? 's n’ont' : ' n’a'} pas pu être envoyé{conn.failed > 1 ? 's' : ''}. Utilisez « Tout renvoyer ».</>
+                  <>{t('failed', { count: conn.failed })}</>
                 )}
               </p>
             )}
 
             <fieldset>
-              <legend className="text-sm font-semibold text-night-900">Types d’événements envoyés</legend>
-              <p className="mt-0.5 text-xs text-night-500">Touchez un type pour l’ajouter ou le retirer.</p>
+              <legend className="text-sm font-semibold text-night-900">{t('typesLegend')}</legend>
+              <p className="mt-0.5 text-xs text-night-500">{t('typesHint')}</p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {EVENT_TYPES.map((t) => {
-                  const on = types.includes(t.key)
+                {EVENT_TYPES.map((et) => {
+                  const on = types.includes(et.key)
                   return (
                     <button
-                      key={t.key}
+                      key={et.key}
                       type="button"
                       aria-pressed={on}
-                      onClick={() => toggleType(t.key)}
+                      onClick={() => toggleType(et.key)}
                       className={cn(
                         'inline-flex min-h-[44px] items-center gap-2 rounded-full border px-3.5 text-[13px] font-medium transition-colors motion-reduce:transition-none',
                         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2',
                         on ? 'border-leaf-500 bg-leaf-50 text-night-900' : 'border-[#E5E7EB] bg-white text-night-600 hover:border-night-300',
                       )}
                     >
-                      <span className={cn('h-2 w-2 rounded-full', on ? typeStyle(t.key).dot : 'bg-night-200')} aria-hidden="true" />
-                      {t.label}
+                      <span className={cn('h-2 w-2 rounded-full', on ? typeStyle(et.key).dot : 'bg-night-200')} aria-hidden="true" />
+                      {f.typeLabel(et.key)}
                     </button>
                   )
                 })}
               </div>
-              {types.length === 0 && <p className="mt-2 text-xs font-medium text-alert-600">Aucun type sélectionné : rien ne sera envoyé.</p>}
+              {types.length === 0 && <p className="mt-2 text-xs font-medium text-alert-600">{t('noType')}</p>}
             </fieldset>
 
-            <RadioGroup label="Confidentialité dans Google Agenda" value={mask} onChange={(v) => setMask(v as MaskMode)} options={MASK_OPTIONS} />
+            <RadioGroup label={t('privacyLabel')} value={mask} onChange={(v) => setMask(v as MaskMode)} options={maskOptions} />
 
             <RadioGroup
-              label="Agenda de destination"
+              label={t('targetLabel')}
               value={target}
               onChange={(v) => setTarget(v as CalendarTarget)}
-              options={TARGET_OPTIONS.map((o) => ({
+              options={targetOptions.map((o) => ({
                 ...o,
-                description: conn.canUse[o.value] || o.value === conn.target ? o.description : `${o.description} Une nouvelle autorisation Google sera demandée.`,
+                description: conn.canUse[o.value] || o.value === conn.target ? o.description : t('reauthSuffix', { description: o.description }),
               }))}
-              hint="Les événements déjà envoyés restent dans leur agenda d’origine."
+              hint={t('targetHint')}
             />
 
             <div className="flex flex-col gap-2">
               <Button full size="lg" onClick={() => void save()} disabled={busy !== null} aria-busy={busy === 'save'}>
-                {busy === 'save' ? 'Enregistrement…' : 'Enregistrer la synchronisation'}
+                {busy === 'save' ? tc('saving') : t('saveSync')}
               </Button>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <Button
@@ -444,10 +459,10 @@ function GoogleCalendarSection() {
                   onClick={async () => { setBusy('sync'); setNotice(null); await drain('resync'); setBusy(null) }}
                 >
                   <RefreshCw className={cn('h-4 w-4', busy === 'sync' && 'animate-spin motion-reduce:animate-none')} aria-hidden />
-                  Tout renvoyer
+                  {t('resendAll')}
                 </Button>
                 <Button variant="secondary" size="lg" className="sm:flex-1 text-alert-600" disabled={busy !== null} onClick={() => setConfirmOff(true)}>
-                  Déconnecter
+                  {t('disconnect')}
                 </Button>
               </div>
             </div>
@@ -460,9 +475,9 @@ function GoogleCalendarSection() {
         onClose={() => setConfirmOff(false)}
         onConfirm={disconnect}
         loading={busy === 'disconnect'}
-        title="Déconnecter Google Agenda ?"
-        description="Lien Parental n’enverra plus rien à Google et son accès sera révoqué. Les événements déjà envoyés restent dans votre agenda Google."
-        confirmLabel="Déconnecter"
+        title={t('confirmTitle')}
+        description={t('confirmDesc')}
+        confirmLabel={t('disconnect')}
       />
     </section>
   )

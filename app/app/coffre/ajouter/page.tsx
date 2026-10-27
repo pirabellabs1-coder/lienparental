@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { use, useEffect, useId, useMemo, useRef, useState, type ChangeEvent, type DragEvent, type ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Camera, Check, ChevronDown, ChevronRight, CloudUpload, FolderInput, Info, Lock, Plus, ScanLine, X } from 'lucide-react'
 import { ScreenHeader } from '@/components/coffre/ScreenHeader'
 import { Stepper } from '@/components/coffre/Stepper'
@@ -13,7 +14,8 @@ import { SuccessBurst } from '@/components/coffre/Illustrations'
 import { btn } from '@/components/coffre/buttons'
 import { useCategories, useFolders } from '@/components/coffre/store'
 import { folderPath } from '@/lib/data/vault-folders'
-import { VAULT_SOURCES, frDate, frSize, type VaultTone } from '@/lib/mock-vault'
+import { VAULT_SOURCES, type VaultTone } from '@/lib/mock-vault'
+import { useVaultI18n } from '@/components/coffre/i18n'
 import { cn } from '@/lib/cn'
 import { LIVE } from '@/lib/data/core'
 import { uploadDocument, validateVaultFile } from '@/lib/data/vault'
@@ -21,7 +23,8 @@ import { useChildOptions } from '@/lib/data/children'
 import { matchCategory, parseVaultPrefill, type RawParams } from '@/lib/prefill'
 
 type Step = 1 | 2 | 3 | 4
-const STEPS = ['Détails', 'Catégorie', 'Fichier', 'Aperçu']
+/** Étapes (libellés : vault.upload.steps.*). */
+const STEP_KEYS = ['details', 'category', 'file', 'preview'] as const
 const MAX_SIZE = 20 * 1024 * 1024
 const ACCEPT = '.pdf,.jpg,.jpeg,.png,.docx,.doc,application/pdf,image/jpeg,image/png,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 const ALLOWED_EXT = ['pdf', 'jpg', 'jpeg', 'png', 'docx', 'doc']
@@ -60,6 +63,9 @@ function Field({ id, label, required, error, children }: { id: string; label: st
 // Pré-remplissage (contrat d'URL, lib/prefill) : categorie, titre, enfant, source=guide:<slug>.
 export default function AddDocumentPage({ searchParams }: { searchParams: Promise<RawParams> }) {
   const params = use(searchParams)
+  const t = useTranslations('vault.upload')
+  const tc = useTranslations('vault.common')
+  const fmt = useVaultI18n()
   const prefill = useMemo(() => parseVaultPrefill(params), [params])
   // Ajout depuis un dossier (« Ajouter un document ici », 0410) : ?dossier=<uuid>.
   const folderId = useMemo(() => {
@@ -131,18 +137,18 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
   }, [step, done])
 
   const errors = {
-    name: !name.trim() ? 'Indiquez le nom du document.' : '',
-    date: !docDate ? 'Indiquez la date du document.' : '',
-    file: !file ? 'Ajoutez un fichier pour continuer.' : '',
+    name: !name.trim() ? t('errors.name') : '',
+    date: !docDate ? t('errors.date') : '',
+    file: !file ? t('errors.file') : '',
   }
 
   const accept = (f: File | undefined | null) => {
     if (!f) return
     const ext = extOf(f.name)
-    if (!ALLOWED_EXT.includes(ext)) { setFileError('Format non pris en charge. Formats acceptés : PDF, JPG, PNG, DOCX, DOC.'); return }
-    if (f.size > MAX_SIZE) { setFileError(`Fichier trop volumineux (${frSize(f.size)}). Taille max. 20 Mo.`); return }
+    if (!ALLOWED_EXT.includes(ext)) { setFileError(t('errors.format')); return }
+    if (f.size > MAX_SIZE) { setFileError(t('errors.tooBig', { size: fmt.size(f.size) })); return }
     if (LIVE) {
-      try { validateVaultFile(f) } catch (e) { setFileError(e instanceof Error ? e.message : 'Fichier refusé.'); return }
+      try { validateVaultFile(f) } catch (e) { setFileError(e instanceof Error ? e.message : t('errors.rejected')); return }
     }
     setFileError('')
     setSaveError('')
@@ -183,7 +189,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
       })
       setDone(true)
     } catch (e) {
-      setSaveError(e instanceof Error ? e.message : 'Enregistrement impossible.')
+      setSaveError(e instanceof Error ? e.message : t('errors.saveFailed'))
     } finally {
       setSaving(false)
     }
@@ -194,44 +200,44 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
     return (
       <div className="flex min-h-[calc(100dvh-6rem)] flex-col px-6 pb-6 pt-10 text-center">
         <SuccessBurst />
-        <h1 ref={headingRef} tabIndex={-1} className="mt-2 text-[22px] font-extrabold text-leaf-600 outline-none">Document ajouté !</h1>
+        <h1 ref={headingRef} tabIndex={-1} className="mt-2 text-[22px] font-extrabold text-leaf-600 outline-none">{t('success.title')}</h1>
         <p className="mx-auto mt-2 max-w-[290px] text-[14px] leading-relaxed text-night-600">
-          Votre document a été enregistré et est maintenant disponible dans votre coffre-fort.
+          {t('success.text')}
         </p>
         <div className="mx-auto mt-6 flex w-full items-center gap-3.5 rounded-2xl border border-night-100 bg-white p-4 text-left shadow-soft">
           <FileIcon tone={toneForExt(file.ext)} label={labelForExt(file.ext)} size="lg" />
           <div className="min-w-0">
             <p className="truncate text-[15px] font-bold text-night-900">{name}</p>
-            <p className="text-[12.5px] text-night-500">{labelForExt(file.ext) === 'W' ? 'DOCX' : labelForExt(file.ext)} <span aria-hidden="true">•</span> {frSize(file.size)}</p>
-            <p className="text-[12.5px] text-night-500">{category?.name}</p>
-            {destinationLabel && <p className="text-[12.5px] text-night-500">Dossier : {destinationLabel}</p>}
+            <p className="text-[12.5px] text-night-500">{labelForExt(file.ext) === 'W' ? 'DOCX' : labelForExt(file.ext)} <span aria-hidden="true">•</span> {fmt.size(file.size)}</p>
+            <p className="text-[12.5px] text-night-500">{category ? fmt.category(category.name) : undefined}</p>
+            {destinationLabel && <p className="text-[12.5px] text-night-500">{t('success.folder', { name: destinationLabel })}</p>}
           </div>
         </div>
         <div className="mt-auto space-y-2 pt-8">
           {prefill.source ? (
             <>
-              <Link href={prefill.source.href} className={btn({ variant: 'primary' })}>Retour au guide</Link>
-              <Link href="/app/coffre/documents/tous" className={btn({ variant: 'secondary' })}>Voir mes documents</Link>
+              <Link href={prefill.source.href} className={btn({ variant: 'primary' })}>{t('success.backToGuide')}</Link>
+              <Link href="/app/coffre/documents/tous" className={btn({ variant: 'secondary' })}>{t('success.seeMyDocs')}</Link>
             </>
           ) : healthChild ? (
             <>
-              <Link href={`/app/enfants/${healthChild.id}/sante`} className={btn({ variant: 'primary' })}>Retour à l’espace Santé de {healthChild.prenom}</Link>
-              <Link href="/app/coffre/documents/tous" className={btn({ variant: 'secondary' })}>Voir mes documents</Link>
+              <Link href={`/app/enfants/${healthChild.id}/sante`} className={btn({ variant: 'primary' })}>{t('success.backToHealth', { name: healthChild.prenom })}</Link>
+              <Link href="/app/coffre/documents/tous" className={btn({ variant: 'secondary' })}>{t('success.seeMyDocs')}</Link>
             </>
           ) : folderHref ? (
             <>
-              <Link href={folderHref} className={btn({ variant: 'primary' })}>Retour au dossier{destination.length ? ` « ${destination[destination.length - 1].name} »` : ''}</Link>
-              <Link href="/app/coffre/documents/tous" className={btn({ variant: 'secondary' })}>Voir mes documents</Link>
+              <Link href={folderHref} className={btn({ variant: 'primary' })}>{destination.length ? t('success.backToFolderNamed', { name: destination[destination.length - 1].name }) : t('success.backToFolder')}</Link>
+              <Link href="/app/coffre/documents/tous" className={btn({ variant: 'secondary' })}>{t('success.seeMyDocs')}</Link>
             </>
           ) : (
-            <Link href="/app/coffre/documents/tous" className={btn({ variant: 'primary' })}>Voir mes documents</Link>
+            <Link href="/app/coffre/documents/tous" className={btn({ variant: 'primary' })}>{t('success.seeMyDocs')}</Link>
           )}
           <button
             type="button"
             onClick={() => { setDone(false); setStep(1); setName(''); setDesc(''); setDocDate(''); setSource(''); setFile(null); setRawFile(null); setChildIds([]) }}
             className={btn({ variant: 'ghost' })}
           >
-            Ajouter un autre document
+            {t('success.addAnother')}
           </button>
         </div>
       </div>
@@ -239,45 +245,45 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
   }
 
   const titles: Record<Step, string> = {
-    1: 'Informations principales',
-    2: 'Catégorie du document',
-    3: 'Fichier',
-    4: 'Récapitulatif',
+    1: t('titles.1'),
+    2: t('titles.2'),
+    3: t('titles.3'),
+    4: t('titles.4'),
   }
 
   return (
     <>
-      <ScreenHeader title="Ajouter un document" onBack={back} backLabel={step > 1 ? 'Étape précédente' : 'Retour'} />
+      <ScreenHeader title={t('title')} onBack={back} backLabel={step > 1 ? t('prevStep') : tc('back')} />
       <div className="px-5">
-        <Stepper steps={STEPS} current={step} className="mt-1" />
+        <Stepper steps={STEP_KEYS.map((k) => t(`steps.${k}`))} current={step} className="mt-1" />
         {destinationLabel && (
           <p className="mt-3 flex items-center gap-2 rounded-xl bg-leaf-50/70 px-3 py-2 text-[12.5px] font-semibold text-night-800">
             <FolderInput className="h-4 w-4 shrink-0 text-leaf-700" aria-hidden="true" />
-            Sera rangé dans le dossier « {destinationLabel} »
+            {t('willFile', { name: destinationLabel })}
           </p>
         )}
 
         <h2 ref={headingRef} tabIndex={-1} className="mt-6 text-[15px] font-extrabold text-night-900 outline-none">
           {titles[step]}
-          <span className="sr-only"> — étape {step} sur 4</span>
+          <span className="sr-only">{t('stepSr', { step })}</span>
         </h2>
 
         {prefill.source && step === 1 && (
           <p className="mt-3 flex items-start gap-2 rounded-xl bg-leaf-50 px-3.5 py-3 text-[12.5px] leading-relaxed text-leaf-800">
             <Info aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.8} />
-            Formulaire pré-rempli depuis le Guide parental. Vérifiez les informations avant d’enregistrer.
+            {t('prefilled')}
           </p>
         )}
 
         {/* ---------------------------- Étape 1 ---------------------------- */}
         {step === 1 && (
           <div className="mt-3 space-y-4">
-            <Field id={`${uid}-name`} label="Nom du document" required error={tried ? errors.name : ''}>
+            <Field id={`${uid}-name`} label={t('nameLabel')} required error={tried ? errors.name : ''}>
               <input
                 id={`${uid}-name`}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Ex. : Jugement du 12 mai 2024"
+                placeholder={t('namePlaceholder')}
                 maxLength={120}
                 aria-required="true"
                 aria-invalid={tried && !!errors.name}
@@ -285,17 +291,17 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
                 className={cn(fieldCls, tried && errors.name ? 'border-alert-400' : 'border-night-200')}
               />
             </Field>
-            <Field id={`${uid}-desc`} label="Description">
+            <Field id={`${uid}-desc`} label={t('descLabel')}>
               <input
                 id={`${uid}-desc`}
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
-                placeholder="Ajoutez une description (facultatif)"
+                placeholder={t('descPlaceholder')}
                 maxLength={280}
                 className={cn(fieldCls, 'border-night-200')}
               />
             </Field>
-            <Field id={`${uid}-date`} label="Date du document" required error={tried ? errors.date : ''}>
+            <Field id={`${uid}-date`} label={t('dateLabel')} required error={tried ? errors.date : ''}>
               <input
                 id={`${uid}-date`}
                 type="date"
@@ -307,7 +313,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
                 className={cn(fieldCls, tried && errors.date ? 'border-alert-400' : 'border-night-200')}
               />
             </Field>
-            <Field id={`${uid}-source`} label="Source">
+            <Field id={`${uid}-source`} label={t('sourceLabel')}>
               <div className="relative">
                 <select
                   id={`${uid}-source`}
@@ -315,13 +321,13 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
                   onChange={(e) => setSource(e.target.value)}
                   className={cn(fieldCls, 'appearance-none border-night-200 pr-10', !source && 'text-night-400')}
                 >
-                  <option value="">Ex. : Tribunal judiciaire de Cayenne</option>
-                  {VAULT_SOURCES.map((s) => <option key={s} value={s} className="text-night-900">{s}</option>)}
+                  <option value="">{t('sourcePlaceholder')}</option>
+                  {VAULT_SOURCES.map((s) => <option key={s} value={s} className="text-night-900">{fmt.source(s)}</option>)}
                 </select>
                 <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-night-500" aria-hidden="true" />
               </div>
             </Field>
-            <Field id={`${uid}-conf`} label="Confidentialité">
+            <Field id={`${uid}-conf`} label={t('confLabel')}>
               <div className="relative rounded-xl border border-night-200 bg-white focus-within:border-leaf-500">
                 <Lock className="pointer-events-none absolute left-3.5 top-3.5 h-4 w-4 text-leaf-600" aria-hidden="true" />
                 <select
@@ -331,19 +337,19 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
                   aria-describedby={`${uid}-conf-help`}
                   className="h-11 w-full appearance-none rounded-xl bg-transparent pl-10 pr-10 text-[14px] font-bold text-night-900 outline-none"
                 >
-                  <option value="prive">Privé</option>
-                  <option value="partage">Partageable</option>
+                  <option value="prive">{t('private')}</option>
+                  <option value="partage">{t('shareable')}</option>
                 </select>
                 <ChevronDown className="pointer-events-none absolute right-3.5 top-3 h-5 w-5 text-night-500" aria-hidden="true" />
                 <p id={`${uid}-conf-help`} className="-mt-1 pb-2.5 pl-10 text-[12px] text-night-500">
-                  {conf === 'prive' ? 'Seul vous pouvez voir ce document' : 'Partage possible par lien sécurisé et expirable'}
+                  {conf === 'prive' ? t('privateHelp') : t('shareableHelp')}
                 </p>
               </div>
             </Field>
             {childOptions.length > 0 && (
               <fieldset aria-describedby={`${uid}-kids-help`}>
-                <legend className="mb-1.5 block text-[13px] font-bold text-night-900">Enfant(s) concerné(s)</legend>
-                <p id={`${uid}-kids-help`} className="mb-2 text-[12px] text-night-500">Facultatif. Un document Santé lié à un enfant apparaît dans son espace Santé.</p>
+                <legend className="mb-1.5 block text-[13px] font-bold text-night-900">{t('childrenLegend')}</legend>
+                <p id={`${uid}-kids-help`} className="mb-2 text-[12px] text-night-500">{t('childrenHelp')}</p>
                 <div className="flex flex-wrap gap-2">
                   {childOptions.map((c) => {
                     const on = childIds.includes(c.id)
@@ -372,12 +378,12 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
         {/* ---------------------------- Étape 2 ---------------------------- */}
         {step === 2 && (
           <fieldset className="mt-1">
-            <legend className="text-[13px] text-night-600">Sélectionnez une catégorie existante ou créez-en une nouvelle.</legend>
+            <legend className="text-[13px] text-night-600">{t('categoryLegend')}</legend>
             <div className="mt-3 divide-y divide-night-100">
               {categories.map((c) => (
                 <label key={c.id} className="flex min-h-[56px] cursor-pointer items-center gap-3">
                   <CategoryIcon icon={c.icon} tone={c.tone} size="sm" />
-                  <span className="flex-1 text-[14px] font-semibold text-night-900">{c.name}</span>
+                  <span className="flex-1 text-[14px] font-semibold text-night-900">{fmt.category(c.name)}</span>
                   <input
                     type="radio"
                     name="categorie"
@@ -396,7 +402,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
               href="/app/coffre/categories/nouvelle?from=ajouter"
               className="mt-3 inline-flex h-11 items-center gap-2 rounded-xl px-2 text-[14px] font-bold text-leaf-600 hover:bg-leaf-50"
             >
-              <Plus className="h-4 w-4" strokeWidth={2.6} aria-hidden="true" /> Créer une nouvelle catégorie
+              <Plus className="h-4 w-4" strokeWidth={2.6} aria-hidden="true" /> {t('newCategory')}
             </Link>
           </fieldset>
         )}
@@ -412,9 +418,9 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
                 <FileIcon tone={toneForExt(file.ext)} label={labelForExt(file.ext)} size="lg" />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-[14.5px] font-bold text-night-900">{file.name}</p>
-                  <p className="text-[12.5px] text-night-500">{frSize(file.size)}</p>
+                  <p className="text-[12.5px] text-night-500">{fmt.size(file.size)}</p>
                 </div>
-                <button type="button" onClick={() => { setFile(null); setRawFile(null) }} aria-label={`Retirer ${file.name}`} className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-600 hover:bg-white">
+                <button type="button" onClick={() => { setFile(null); setRawFile(null) }} aria-label={t('removeFile', { name: file.name })} className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-600 hover:bg-white">
                   <X className="h-5 w-5" aria-hidden="true" />
                 </button>
               </div>
@@ -430,26 +436,26 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
                 )}
               >
                 <CloudUpload className="h-11 w-11 text-night-800" strokeWidth={1.6} aria-hidden="true" />
-                <p className="mt-3 text-[14px] font-bold text-night-900">Glissez votre fichier ici</p>
+                <p className="mt-3 text-[14px] font-bold text-night-900">{t('dropHere')}</p>
                 <p className="text-[14px] font-bold text-night-900">
-                  ou{' '}
+                  {t('or')}{' '}
                   <button type="button" onClick={() => fileRef.current?.click()} className="rounded text-leaf-600 underline decoration-2 underline-offset-2">
-                    parcourez
+                    {t('browse')}
                   </button>
                 </p>
-                <p id={`${uid}-file-help`} className="mt-3 text-[12px] text-night-500">PDF, JPG, PNG, DOCX, DOC<br />Taille max. 20 Mo</p>
+                <p id={`${uid}-file-help`} className="mt-3 text-[12px] text-night-500">PDF, JPG, PNG, DOCX, DOC<br />{t('maxSize')}</p>
               </div>
             )}
             {(fileError || (tried && errors.file)) && (
               <p role="alert" className="mt-2 text-[12.5px] font-semibold text-alert-600">{fileError || errors.file}</p>
             )}
 
-            <h3 className="mt-6 text-[14px] font-extrabold text-night-900">Autres options</h3>
+            <h3 className="mt-6 text-[14px] font-extrabold text-night-900">{t('otherOptions')}</h3>
             <div className="mt-2 divide-y divide-night-100">
               {[
-                { label: 'Prendre une photo', icon: Camera, on: () => cameraRef.current?.click() },
-                { label: 'Scanner un document', icon: ScanLine, on: () => cameraRef.current?.click() },
-                { label: 'Importer depuis un autre dossier', icon: FolderInput, on: () => fileRef.current?.click() },
+                { label: t('takePhoto'), icon: Camera, on: () => cameraRef.current?.click() },
+                { label: t('scan'), icon: ScanLine, on: () => cameraRef.current?.click() },
+                { label: t('importOther'), icon: FolderInput, on: () => fileRef.current?.click() },
               ].map(({ label, icon: Icon, on }) => (
                 <button key={label} type="button" onClick={on} className="flex min-h-[52px] w-full items-center gap-3 px-1 text-left hover:bg-night-50/60">
                   <Icon className="h-5 w-5 text-night-700" aria-hidden="true" />
@@ -468,17 +474,17 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
               <FileIcon tone={toneForExt(file.ext)} label={labelForExt(file.ext)} size="lg" />
               <div className="min-w-0">
                 <p className="truncate text-[15px] font-bold text-night-900">{name}</p>
-                <p className="text-[12.5px] text-night-500">{labelForExt(file.ext) === 'W' ? 'DOCX' : labelForExt(file.ext)} <span aria-hidden="true">•</span> {frSize(file.size)}</p>
+                <p className="text-[12.5px] text-night-500">{labelForExt(file.ext) === 'W' ? 'DOCX' : labelForExt(file.ext)} <span aria-hidden="true">•</span> {fmt.size(file.size)}</p>
               </div>
             </div>
             <dl className="mt-4 divide-y divide-night-100 text-[13.5px]">
               {[
-                ['Catégorie', category?.name ?? '—'],
-                ['Enfant(s)', childLabel || '—'],
-                ['Date du document', docDate ? frDate(docDate) : '—'],
-                ['Source', source || '—'],
-                ['Confidentialité', conf === 'prive' ? 'Privé' : 'Partageable'],
-                ['Description', desc || '—'],
+                [t('summary.category'), category ? fmt.category(category.name) : '—'],
+                [t('summary.children'), childLabel || '—'],
+                [t('summary.date'), docDate ? fmt.date(docDate) : '—'],
+                [t('summary.source'), source ? fmt.source(source) : '—'],
+                [t('summary.conf'), conf === 'prive' ? t('private') : t('shareable')],
+                [t('summary.description'), desc || '—'],
               ].map(([k, v]) => (
                 <div key={k} className="flex gap-4 py-2.5">
                   <dt className="w-[42%] shrink-0 font-bold text-night-900">{k}</dt>
@@ -492,14 +498,14 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
 
       <StickyActions>
         {step < 4 ? (
-          <button type="button" onClick={next} className={btn({ variant: 'primary' })}>Continuer</button>
+          <button type="button" onClick={next} className={btn({ variant: 'primary' })}>{tc('continue')}</button>
         ) : (
           <>
             {saveError && <p role="alert" className="mb-2 text-center text-[12.5px] font-semibold text-alert-600">{saveError}</p>}
             <div className="grid grid-cols-2 gap-3">
-              <button type="button" onClick={() => setStep(1)} disabled={saving} className={btn({ variant: 'secondary' })}>Modifier</button>
+              <button type="button" onClick={() => setStep(1)} disabled={saving} className={btn({ variant: 'secondary' })}>{t('edit')}</button>
               <button type="button" onClick={() => void save()} disabled={saving} aria-busy={saving} className={btn({ variant: 'primary' })}>
-                {saving ? 'Envoi…' : 'Enregistrer'}
+                {saving ? t('sending') : tc('save')}
               </button>
             </div>
           </>

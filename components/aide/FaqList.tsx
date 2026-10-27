@@ -2,11 +2,13 @@
 
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { ChevronRight } from 'lucide-react'
 import { SoftSearch } from '@/components/profil/SoftSearch'
 import { norm, type FaqLink } from './AideHome'
 
 export function FaqList({ faq }: { faq: FaqLink[] }) {
+  const t = useTranslations('public.help.faq')
   const [q, setQ] = useState('')
   const list = useMemo(() => {
     const s = norm(q.trim())
@@ -15,12 +17,12 @@ export function FaqList({ faq }: { faq: FaqLink[] }) {
 
   return (
     <>
-      <SoftSearch value={q} onChange={setQ} placeholder="Rechercher une question…" label="Rechercher une question" />
+      <SoftSearch value={q} onChange={setQ} placeholder={t('searchPh')} label={t('searchLabel')} />
 
-      <h2 className="mt-5 text-[13px] font-bold text-night-900">Questions fréquentes</h2>
+      <h2 className="mt-5 text-[13px] font-bold text-night-900">{t('heading')}</h2>
       {list.length === 0 ? (
         <p className="mt-6 text-center text-[13px] text-night-700" role="status">
-          {q.trim() ? `Aucune question ne correspond à « ${q} ».` : 'Aucune question pour le moment.'}
+          {q.trim() ? t('noMatch', { q }) : t('empty')}
         </p>
       ) : (
         <ul className="mt-1 divide-y divide-night-100">

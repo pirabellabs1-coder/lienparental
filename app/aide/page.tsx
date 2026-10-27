@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import { ChevronDown, Mail, Clock3 } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import { SiteShell } from '@/components/site/SiteShell'
 import { getHelpFaq } from '@/lib/aide/public'
 import { FAQ_CATEGORIES } from '@/lib/aide/types'
 
-export const metadata: Metadata = {
-  title: 'Centre d’aide',
-  description: 'Questions fréquentes, installation et contact du support Lien Parental.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('public.help.public')
+  return { title: t('metaTitle'), description: t('metaDescription') }
 }
 
 export const revalidate = 300
@@ -17,11 +18,12 @@ const FEEDBACK_LINE = /\n*Cet article a-t-il été utile \?\s*$/
 // Centre d'aide public : accessible depuis un ordinateur (CDC M01, règle de gestion).
 export default async function AidePublique() {
   const questions = await getHelpFaq()
+  const t = await getTranslations('public.help.public')
   return (
     <SiteShell mainClassName="bg-[#F7F9FC]">
       <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
-        <h1 className="text-[32px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 sm:text-[38px]">Centre d’aide</h1>
-        <p className="mt-2 text-night-700">Trouvez rapidement une réponse, ou écrivez-nous.</p>
+        <h1 className="text-[32px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 sm:text-[38px]">{t('title')}</h1>
+        <p className="mt-2 text-night-700">{t('lead')}</p>
 
         <div className="mt-8 space-y-8">
           {FAQ_CATEGORIES.map(cat => {
@@ -29,7 +31,7 @@ export default async function AidePublique() {
             if (!items.length) return null
             return (
               <section key={cat.key} aria-labelledby={`cat-${cat.key}`}>
-                <h2 id={`cat-${cat.key}`} className="text-xs font-bold uppercase tracking-wider text-night-500">{cat.label}</h2>
+                <h2 id={`cat-${cat.key}`} className="text-xs font-bold uppercase tracking-wider text-night-500">{t(`categories.${cat.key}`)}</h2>
                 <div className="mt-3 divide-y divide-night-100 rounded-xl2 border border-night-100 bg-white">
                   {items.map(q => (
                       <details key={q.slug} className="group px-5 py-4">
@@ -50,15 +52,15 @@ export default async function AidePublique() {
           <div className="flex gap-3">
             <Mail className="h-6 w-6 text-leaf-500" aria-hidden />
             <div>
-              <p className="font-bold text-night-900">Écrivez-nous</p>
+              <p className="font-bold text-night-900">{t('writeUs')}</p>
               <a href="mailto:support@lienparental.fr" className="text-sm text-leaf-600 underline">support@lienparental.fr</a>
             </div>
           </div>
           <div className="flex gap-3">
             <Clock3 className="h-6 w-6 text-leaf-500" aria-hidden />
             <div>
-              <p className="font-bold text-night-900">Horaires</p>
-              <p className="text-sm text-night-700">Lundi – vendredi, 9 h – 18 h · réponse sous 24 à 48 h</p>
+              <p className="font-bold text-night-900">{t('hoursTitle')}</p>
+              <p className="text-sm text-night-700">{t('hours')}</p>
             </div>
           </div>
         </section>

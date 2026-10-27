@@ -2,6 +2,7 @@
 // Composants sans état : utilisables depuis des pages serveur comme client.
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { ArrowLeft, Bell, Check, ChevronRight, Lock } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { cn } from '@/lib/cn'
@@ -44,12 +45,13 @@ export function BrandHeader({
   bell = true,
   notifications = 0,
 }: { title?: string; bell?: boolean; notifications?: number }) {
+  const t = useTranslations('account.kit')
   return (
     <header
       className="flex items-center gap-4 px-5 pb-2"
       style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}
     >
-      <Link href="/app" aria-label="Lien Parental, accueil" className="rounded-lg md:invisible focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400">
+      <Link href="/app" aria-label={t('homeAria')} className="rounded-lg md:invisible focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400">
         <Logo size="sm" />
       </Link>
       {title && <p className="flex-1 truncate text-[17px] font-bold text-night-900">{title}</p>}
@@ -59,10 +61,11 @@ export function BrandHeader({
 }
 
 export function BellLink({ count = 0, className }: { count?: number; className?: string }) {
+  const t = useTranslations('account.kit')
   return (
     <Link
       href="/app/notifications"
-      aria-label={count > 0 ? `Notifications, ${count} non lues` : 'Notifications'}
+      aria-label={count > 0 ? t('notificationsUnread', { count }) : t('notifications')}
       className={cn('relative -mr-2 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-night-900 hover:bg-night-50', className)}
     >
       <Bell className="h-[22px] w-[22px]" aria-hidden />
@@ -80,16 +83,17 @@ export function TitleBar({
   right,
   onBack,
 }: { title: string; backHref: string; size?: 'md' | 'lg'; subtitle?: ReactNode; right?: ReactNode; onBack?: () => void }) {
+  const t = useTranslations('account.kit')
   const backCls = '-ml-2.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-night-900 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400'
   return (
     <div className="px-5 pt-3">
       <div className="flex items-center gap-2">
         {onBack ? (
-          <button type="button" onClick={onBack} aria-label="Étape précédente" className={backCls}>
+          <button type="button" onClick={onBack} aria-label={t('prevStep')} className={backCls}>
             <ArrowLeft className="h-[22px] w-[22px]" aria-hidden />
           </button>
         ) : (
-          <Link href={backHref} aria-label="Retour" className={backCls}>
+          <Link href={backHref} aria-label={t('back')} className={backCls}>
             <ArrowLeft className="h-[22px] w-[22px]" aria-hidden />
           </Link>
         )}
@@ -247,12 +251,13 @@ export function Banner({
  * Terminé = cercle vert contour + coche ; en cours = vert plein ; à venir = contour gris.
  */
 export function Stepper({ current, total, labels, className }: { current: number; total: number; labels?: string[]; className?: string }) {
+  const t = useTranslations('account.kit')
   const steps = Array.from({ length: total }, (_, i) => i + 1)
   const currentLabel = labels?.[current - 1]
   return (
     <div className={cn('w-full', className)}>
       <p className="sr-only">
-        Étape {current} sur {total}{currentLabel ? ` : ${currentLabel}` : ''}
+        {currentLabel ? t('stepWithLabel', { current, total, label: currentLabel }) : t('step', { current, total })}
       </p>
       <ol aria-hidden className={cn('flex items-start', labels && 'px-8 pb-7')}>
         {steps.map((i, idx) => {
@@ -377,10 +382,11 @@ export function ProgressBar({
 }
 
 export function StripeNote({ className }: { className?: string }) {
+  const t = useTranslations('account.kit')
   return (
     <p className={cn('flex items-center justify-center gap-1.5 text-[12px] text-night-600', className)}>
       <Lock className="h-3.5 w-3.5" aria-hidden />
-      Paiement sécurisé par Stripe
+      {t('stripe')}
     </p>
   )
 }

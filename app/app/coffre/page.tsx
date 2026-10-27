@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { Bell, ChevronRight, FolderOpen, Menu, Plus, Users } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { useCategories, useRequests } from '@/components/coffre/store'
@@ -8,6 +9,8 @@ import { useCategories, useRequests } from '@/components/coffre/store'
 // Coffre-fort — accueil (maquette « 1. Coffre-fort – Accueil »)
 export default function CoffrePage() {
   // Supabase : compteurs issus de categories/documents/testimonies (RLS) ; démo : lib/mock-vault.
+  const t = useTranslations('vault.home')
+  const tc = useTranslations('vault.common')
   const { categories } = useCategories()
   const { requests } = useRequests()
   const totalDocs = categories.reduce((s, c) => s + c.count, 0)
@@ -20,20 +23,20 @@ export default function CoffrePage() {
         className="flex items-center justify-between"
         style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}
       >
-        <Link href="/app" aria-label="Lien Parental, accueil" className="rounded-lg md:invisible">
+        <Link href="/app" aria-label={tc('homeAria')} className="rounded-lg md:invisible">
           <Logo size="sm" />
         </Link>
         <div className="flex items-center gap-1">
           <Link
             href="/app/coffre/menu"
-            aria-label="Menu du coffre-fort"
+            aria-label={t('menuAria')}
             className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 transition-colors duration-200 hover:bg-night-50"
           >
             <Menu className="h-[22px] w-[22px]" aria-hidden="true" />
           </Link>
           <Link
             href="/app/notifications"
-            aria-label="Notifications"
+            aria-label={t('notifications')}
             className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 hover:bg-night-50"
           >
             <Bell className="h-[22px] w-[22px]" aria-hidden="true" />
@@ -41,9 +44,9 @@ export default function CoffrePage() {
         </div>
       </header>
 
-      <h1 className="mt-6 text-[26px] font-extrabold tracking-[-0.02em] text-night-900">Coffre-fort</h1>
+      <h1 className="mt-6 text-[26px] font-extrabold tracking-[-0.02em] text-night-900">{tc('vault')}</h1>
       <p className="mt-1.5 max-w-[300px] text-[14px] leading-relaxed text-night-600">
-        Gérez, sécurisez et partagez vos informations en toute sérénité.
+        {t('lead')}
       </p>
 
       <div className="mt-6 space-y-3.5">
@@ -55,12 +58,12 @@ export default function CoffrePage() {
             <Users className="h-6 w-6" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-[16px] font-extrabold text-iris-700">Témoignages</span>
+            <span className="block text-[16px] font-extrabold text-iris-700">{tc('testimonials')}</span>
             <span className="mt-1 block text-[13px] leading-snug text-night-600">
-              Créez vos demandes, suivez les témoignages reçus et conservez-les en sécurité.
+              {t('testimonialsText')}
             </span>
             <span className="mt-3 block text-[12.5px] font-semibold text-night-700">
-              {enAttente} en attente <span aria-hidden="true">•</span> {recus} reçus
+              {t('pending', { count: enAttente })} <span aria-hidden="true">•</span> {t('received', { count: recus })}
             </span>
           </span>
           <ChevronRight className="mt-4 h-5 w-5 shrink-0 text-iris-500 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5" aria-hidden="true" />
@@ -74,12 +77,12 @@ export default function CoffrePage() {
             <FolderOpen className="h-6 w-6" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-[16px] font-extrabold text-leaf-700">Documents</span>
+            <span className="block text-[16px] font-extrabold text-leaf-700">{tc('documents')}</span>
             <span className="mt-1 block text-[13px] leading-snug text-night-600">
-              Stockez, organisez et accédez à tous vos documents importants.
+              {t('documentsText')}
             </span>
             <span className="mt-3 block text-[12.5px] font-semibold text-night-700">
-              {totalDocs} documents <span aria-hidden="true">•</span> {categories.length} catégories
+              {t('docCount', { count: totalDocs })} <span aria-hidden="true">•</span> {t('catCount', { count: categories.length })}
             </span>
           </span>
           <ChevronRight className="mt-4 h-5 w-5 shrink-0 text-leaf-600 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5" aria-hidden="true" />
@@ -87,7 +90,7 @@ export default function CoffrePage() {
       </div>
 
       <section aria-labelledby="acces-rapides" className="mt-7">
-        <h2 id="acces-rapides" className="text-[15px] font-extrabold text-night-900">Accès rapides</h2>
+        <h2 id="acces-rapides" className="text-[15px] font-extrabold text-night-900">{t('quickAccess')}</h2>
         <div className="mt-3 grid grid-cols-2 gap-3">
           <Link
             href="/app/coffre/temoignages/nouveau"
@@ -96,7 +99,7 @@ export default function CoffrePage() {
             <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-iris-500 text-iris-500">
               <Plus className="h-5 w-5" strokeWidth={2.6} />
             </span>
-            <span className="text-[13px] font-bold leading-tight text-night-900">Nouvelle demande de témoignage</span>
+            <span className="text-[13px] font-bold leading-tight text-night-900">{t('newRequest')}</span>
           </Link>
           <Link
             href="/app/coffre/ajouter"
@@ -105,7 +108,7 @@ export default function CoffrePage() {
             <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full text-leaf-500">
               <Plus className="h-7 w-7" strokeWidth={2.4} />
             </span>
-            <span className="text-[13px] font-bold leading-tight text-night-900">Ajouter un document</span>
+            <span className="text-[13px] font-bold leading-tight text-night-900">{t('addDocument')}</span>
           </Link>
         </div>
       </section>

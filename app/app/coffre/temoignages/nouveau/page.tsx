@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useId, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Lock, Pencil, Plus, Share2, Trash2 } from 'lucide-react'
 import { ScreenHeader } from '@/components/coffre/ScreenHeader'
 import { StickyActions } from '@/components/coffre/StickyActions'
@@ -30,6 +31,7 @@ const person = (name: string, editing = false): Person => ({ id: `p${++seq}`, na
 
 /** Liste éditable « Parent 1 / Enfant 1 » : nom + crayon + corbeille, ajout en pointillés. */
 function PeopleEditor({ kind, people, setPeople, error }: { kind: 'Parent' | 'Enfant'; people: Person[]; setPeople: (fn: (p: Person[]) => Person[]) => void; error?: string }) {
+  const t = useTranslations('vault.testimonials.new')
   const uid = useId()
   const lastAdded = useRef<string | null>(null)
   const inputs = useRef<Record<string, HTMLInputElement | null>>({})
@@ -44,7 +46,7 @@ function PeopleEditor({ kind, people, setPeople, error }: { kind: 'Parent' | 'En
     <div>
       <ul className="space-y-4">
         {people.map((p, i) => {
-          const label = `${kind} ${i + 1}`
+          const label = kind === 'Parent' ? t('parent', { n: i + 1 }) : t('child', { n: i + 1 })
           return (
             <li key={p.id}>
               <label htmlFor={`${uid}-${p.id}`} className="mb-1.5 block text-[13px] font-semibold text-night-700">{label}</label>
@@ -57,7 +59,7 @@ function PeopleEditor({ kind, people, setPeople, error }: { kind: 'Parent' | 'En
                   onChange={(e) => update(p.id, { name: e.target.value })}
                   onBlur={() => update(p.id, { editing: false, name: p.name.trim() })}
                   onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); (e.target as HTMLInputElement).blur() } }}
-                  placeholder="Prénom Nom"
+                  placeholder={t('namePlaceholder')}
                   maxLength={60}
                   autoComplete="off"
                   className="h-full min-w-0 flex-1 bg-transparent text-[14px] font-semibold text-night-900 outline-none placeholder:font-normal placeholder:text-night-400"
@@ -65,7 +67,7 @@ function PeopleEditor({ kind, people, setPeople, error }: { kind: 'Parent' | 'En
                 <button
                   type="button"
                   onClick={() => { update(p.id, { editing: true }); requestAnimationFrame(() => inputs.current[p.id]?.focus()) }}
-                  aria-label={`Modifier ${label}`}
+                  aria-label={t('editAria', { label })}
                   className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-leaf-600 hover:bg-leaf-50"
                 >
                   <Pencil className="h-[18px] w-[18px]" aria-hidden="true" />
@@ -73,7 +75,7 @@ function PeopleEditor({ kind, people, setPeople, error }: { kind: 'Parent' | 'En
                 <button
                   type="button"
                   onClick={() => setPeople((ps) => ps.filter((x) => x.id !== p.id))}
-                  aria-label={`Retirer ${label}${p.name ? ` (${p.name})` : ''}`}
+                  aria-label={t('removeAria', { label: `${label}${p.name ? ` (${p.name})` : ''}` })}
                   className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-alert-500 hover:bg-alert-50"
                 >
                   <Trash2 className="h-[18px] w-[18px]" aria-hidden="true" />
@@ -88,7 +90,7 @@ function PeopleEditor({ kind, people, setPeople, error }: { kind: 'Parent' | 'En
         onClick={() => { const np = person('', true); lastAdded.current = np.id; setPeople((ps) => [...ps, np]) }}
         className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-xl border-[1.5px] border-dashed border-night-300 text-[14px] font-bold text-night-900 hover:bg-night-50"
       >
-        <Plus className="h-4 w-4" strokeWidth={2.6} aria-hidden="true" /> Ajouter un {kind.toLowerCase()}
+        <Plus className="h-4 w-4" strokeWidth={2.6} aria-hidden="true" /> {kind === 'Parent' ? t('addParent') : t('addChild')}
       </button>
       {error && <p role="alert" className="mt-2 text-[12.5px] font-semibold text-alert-600">{error}</p>}
     </div>
@@ -96,6 +98,8 @@ function PeopleEditor({ kind, people, setPeople, error }: { kind: 'Parent' | 'En
 }
 
 export default function NouveauTemoignagePage() {
+  const t = useTranslations('vault.testimonials.new')
+  const tc = useTranslations('vault.common')
   const uid = useId()
   const { add } = useRequests()
   const { announce, node } = useAnnounce()
@@ -140,9 +144,9 @@ export default function NouveauTemoignagePage() {
 
   const names = (ps: Person[]) => ps.map((p) => p.name.trim()).filter(Boolean)
   const errors = {
-    title: !title.trim() ? 'Indiquez le titre de la demande.' : '',
-    parents: names(parents).length === 0 ? 'Ajoutez au moins un parent.' : '',
-    enfants: names(enfants).length === 0 ? 'Ajoutez au moins un enfant.' : '',
+    title: !title.trim() ? t('errors.title') : '',
+    parents: names(parents).length === 0 ? t('errors.parents') : '',
+    enfants: names(enfants).length === 0 ? t('errors.children') : '',
   }
 
   const next = async () => {
@@ -166,7 +170,7 @@ export default function NouveauTemoignagePage() {
           id = res.id
           token = res.token
         } catch (e) {
-          setCreateError(e instanceof Error ? e.message : 'La demande n’a pas pu être créée.')
+          setCreateError(e instanceof Error ? e.message : t('errors.createFailed'))
           setCreating(false)
           return
         }
@@ -197,25 +201,25 @@ export default function NouveauTemoignagePage() {
   const share = async () => {
     const url = created && LIVE ? testimonyUrl(created.token) : `https://${link}`
     if (navigator.share) {
-      try { await navigator.share({ title: 'Lien Parental — témoignage', text: 'Pourriez-vous rédiger un témoignage ? Le formulaire est sécurisé et ne prend que quelques minutes.', url }) } catch { /* annulé */ }
+      try { await navigator.share({ title: t('shareTitle'), text: t('shareText'), url }) } catch { /* annulé */ }
       return
     }
-    if (await copyText(url)) announce('Lien copié dans le presse-papiers')
+    if (await copyText(url)) announce(t('copied'))
   }
 
   /* --------------------------- Intro (0) --------------------------- */
   if (step === 0) {
     return (
       <>
-        <ScreenHeader title="Nouveau témoignage" leading="none" />
+        <ScreenHeader title={t('title')} leading="none" />
         <div className="mx-auto w-full max-w-md px-5 pt-4 text-center">
           <ClipboardPersonIllustration />
           <p className="mx-auto mt-6 max-w-[290px] text-[14.5px] leading-relaxed text-night-800">
-            Créez une demande de témoignage et recevez les témoignages dans votre coffre-fort sécurisé.
+            {t('intro')}
           </p>
           <div className="mt-8 space-y-3">
-            <button type="button" onClick={() => setStep(1)} className={btn({ variant: 'primary' })}>Créer une demande</button>
-            <Link href="/app/coffre/temoignages" className={btn({ variant: 'secondary' })}>Voir mes demandes</Link>
+            <button type="button" onClick={() => setStep(1)} className={btn({ variant: 'primary' })}>{t('create')}</button>
+            <Link href="/app/coffre/temoignages" className={btn({ variant: 'secondary' })}>{t('seeRequests')}</Link>
           </div>
         </div>
       </>
@@ -226,22 +230,22 @@ export default function NouveauTemoignagePage() {
   if (step === 4 && created) {
     return (
       <>
-        <ScreenHeader title="Lien de témoignage généré" leading="none" />
+        <ScreenHeader title={t('linkTitle')} leading="none" />
         <div className="mx-auto w-full max-w-md px-5 pt-2 text-center">
           <LinkBurst />
           <h2 ref={headingRef} tabIndex={-1} className="text-[16px] font-extrabold text-night-900 outline-none">
-            Votre lien de témoignage est prêt !
+            {t('linkReady')}
           </h2>
           <CopyLinkField className="mt-5 text-left" variant="field" link={link} />
           <p className="mx-auto mt-4 max-w-[280px] text-[13px] leading-relaxed text-night-600">
-            Partagez ce lien avec la personne que vous souhaitez inviter à témoigner.
+            {t('linkHelp')}
           </p>
           <div className="mt-7 space-y-3">
             <button type="button" onClick={() => void share()} className={btn({ variant: 'primary' })}>
-              <Share2 className="h-[18px] w-[18px]" aria-hidden="true" /> Partager le lien
+              <Share2 className="h-[18px] w-[18px]" aria-hidden="true" /> {t('shareLink')}
             </button>
             <Link href={`/app/coffre/temoignages/${created.id}`} className={btn({ variant: 'secondary' })}>
-              Voir / Gérer ma demande
+              {t('manage')}
             </Link>
           </div>
         </div>
@@ -250,24 +254,24 @@ export default function NouveauTemoignagePage() {
     )
   }
 
-  const titles = { 1: 'Informations de la demande', 2: 'Parents concernés', 3: 'Enfants concernés' } as const
+  const titles = { 1: t('titles.1'), 2: t('titles.2'), 3: t('titles.3') } as const
   const s = step as 1 | 2 | 3
 
   return (
     <>
-      <ScreenHeader title={titles[s]} srSuffix={`étape ${s} sur 3`} onBack={back} backLabel="Étape précédente" />
+      <ScreenHeader title={titles[s]} srSuffix={t('stepOf', { step: s })} onBack={back} backLabel={t('prevStep')} />
       <div className="mx-auto w-full max-w-md px-5 pt-2">
-        <h2 ref={headingRef} tabIndex={-1} className="sr-only">{titles[s]} — étape {s} sur 3</h2>
+        <h2 ref={headingRef} tabIndex={-1} className="sr-only">{titles[s]} — {t('stepOf', { step: s })}</h2>
 
         {step === 1 && (
           <div className="space-y-5">
             <div>
-              <label htmlFor={`${uid}-title`} className="mb-1.5 block text-[13px] font-bold text-night-900">Titre de la demande</label>
+              <label htmlFor={`${uid}-title`} className="mb-1.5 block text-[13px] font-bold text-night-900">{t('titleLabel')}</label>
               <input
                 id={`${uid}-title`}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Témoignage dans le cadre de la procédure"
+                placeholder={t('titlePlaceholder')}
                 maxLength={90}
                 aria-required="true"
                 aria-invalid={tried && !!errors.title}
@@ -277,7 +281,7 @@ export default function NouveauTemoignagePage() {
               {tried && errors.title && <p id={`${uid}-title-error`} role="alert" className="mt-1.5 text-[12.5px] font-semibold text-alert-600">{errors.title}</p>}
             </div>
             <div>
-              <label htmlFor={`${uid}-ctx`} className="mb-1.5 block text-[13px] font-bold text-night-900">Contexte de la demande (facultatif)</label>
+              <label htmlFor={`${uid}-ctx`} className="mb-1.5 block text-[13px] font-bold text-night-900">{t('contextLabel')}</label>
               <textarea
                 id={`${uid}-ctx`}
                 value={context}
@@ -285,13 +289,13 @@ export default function NouveauTemoignagePage() {
                 rows={4}
                 maxLength={600}
                 aria-describedby={`${uid}-ctx-note`}
-                placeholder={'Décrivez brièvement le contexte…\n(ex : procédure JAF, garde alternée, etc.)'}
+                placeholder={t('contextPlaceholder')}
                 className={cn(fieldCls, 'min-h-[112px] resize-y py-3')}
               />
             </div>
             <p id={`${uid}-ctx-note`} className="flex items-start gap-2.5 text-[12.5px] leading-snug text-night-600">
               <Lock className="mt-0.5 h-4 w-4 shrink-0 text-night-500" aria-hidden="true" />
-              Ces informations ne seront pas visibles par le témoin.
+              {t('contextNote')}
             </p>
           </div>
         )}
@@ -303,7 +307,7 @@ export default function NouveauTemoignagePage() {
       <StickyActions>
         {createError && <p role="alert" className="mb-2 text-center text-[12.5px] font-semibold text-alert-600">{createError}</p>}
         <button type="button" onClick={() => void next()} disabled={creating} aria-busy={creating} className={btn({ variant: 'primary' })}>
-          {creating ? 'Création…' : 'Continuer'}
+          {creating ? t('creating') : tc('continue')}
         </button>
       </StickyActions>
     </>

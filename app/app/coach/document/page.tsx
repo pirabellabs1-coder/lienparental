@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { CheckCheck, CheckCircle2, FileImage, FileText, Lock, RefreshCw, Trash2, WandSparkles } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { btn, ScreenTitle } from '@/components/coach/ui'
@@ -15,27 +16,22 @@ import {
   loadDraft,
   saveDraft,
   setPendingFile,
-  timeLabel,
-  validateFile,
+  fileErrorCode,
   type CoachDraft,
 } from '@/components/coach/session'
 import { mockCoachCapture } from '@/lib/mock-data'
 import { LIVE } from '@/lib/data/core'
+import { intlLocale } from '@/lib/i18n/config'
 
 // Brouillon de démonstration quand on arrive ici sans rien avoir importé (démo uniquement :
 // un compte réel voit un état vide, jamais la capture fictive).
 const DEMO: CoachDraft = { kind: 'capture', name: mockCoachCapture.title, createdAt: '' }
 
-const RECOGNIZED: Record<CoachDraft['kind'], string> = {
-  capture: 'Il s’agit d’une capture d’écran. L’IA va lire la conversation et analyser son contenu.',
-  pdf: 'Il s’agit d’un document PDF. L’IA va analyser son contenu et son ton.',
-  word: 'Les documents Word ne sont pas encore pris en charge : enregistrez-le en PDF.',
-  document: 'Il s’agit d’un document texte. L’IA va analyser son contenu et son ton.',
-  message: 'Il s’agit d’un message écrit. L’IA va analyser le ton et la formulation.',
-}
-
 // M09 — étape 2 « Document ajouté » (maquette 12.12.07 (2)).
 export default function CoachDocumentPage() {
+  const t = useTranslations('coach.document')
+  const tc = useTranslations('coach.common')
+  const locale = useLocale()
   const router = useRouter()
   const [draft, setDraft] = useState<CoachDraft | null>(null)
   const [savedToVault, setSavedToVault] = useState(false)
@@ -66,11 +62,11 @@ export default function CoachDocumentPage() {
   if (empty) {
     return (
       <>
-        <TopBar title="Coach parental IA" showBack backHref="/app/coach" showBell={false} />
+        <TopBar title={t('topTitle')} showBack backHref="/app/coach" showBell={false} />
         <div className="w-full px-5 pt-8">
-          <ScreenTitle title="Aucun document importé" subtitle="Ajoutez une capture d’écran, un PDF ou un message depuis l’accueil du Coach pour lancer une analyse." />
+          <ScreenTitle title={t('emptyTitle')} subtitle={t('emptySubtitle')} />
           <Link href="/app/coach" className={`${btn.primary} mt-6`}>
-            Importer un contenu
+            {t('importContent')}
           </Link>
         </div>
       </>
@@ -80,7 +76,7 @@ export default function CoachDocumentPage() {
   if (!draft) {
     return (
       <>
-        <TopBar title="Coach parental IA" showBack backHref="/app/coach" showBell={false} />
+        <TopBar title={t('topTitle')} showBack backHref="/app/coach" showBell={false} />
         <div className="w-full px-5 pt-10" aria-busy="true">
           <div className="mx-auto h-6 w-48 animate-pulse rounded bg-night-50" />
           <div className="mt-6 h-40 animate-pulse rounded-xl2 bg-night-50" />
@@ -89,13 +85,23 @@ export default function CoachDocumentPage() {
     )
   }
 
+  // Libellé « aujourd’hui à 10:32 » / « 12 mars à 10:32 » dans la langue de l'utilisateur.
+  const addedLabel = (iso: string) => {
+    const d = new Date(iso)
+    const intl = intlLocale(locale)
+    const time = d.toLocaleTimeString(intl, { hour: '2-digit', minute: '2-digit' })
+    return d.toDateString() === new Date().toDateString()
+      ? tc('time.today', { time })
+      : tc('time.dateAt', { date: d.toLocaleDateString(intl, { day: 'numeric', month: 'long' }), time })
+  }
+
   const isDemo = draft === DEMO
   const isMessage = draft.kind === 'message'
-  const title = isMessage ? 'Message écrit' : draft.kind === 'capture' && isDemo ? mockCoachCapture.title : draft.name
-  const added = draft.createdAt ? timeLabel(draft.createdAt) : mockCoachCapture.addedLabel
+  const title = isMessage ? tc('kinds.message') : draft.kind === 'capture' && isDemo ? mockCoachCapture.title : draft.name
+  const added = draft.createdAt ? addedLabel(draft.createdAt) : mockCoachCapture.addedLabel
   // Pour une capture, on affiche les messages « reconnus » (OCR simulé).
   const lines: { text: string; time?: string }[] = isMessage
-    ? (draft.text ?? '').split(/\n+/).filter(Boolean).map((t) => ({ text: t }))
+    ? (draft.text ?? '').split(/\n+/).filter(Boolean).map((line) => ({ text: line }))
     : draft.kind === 'capture' && isDemo
       ? mockCoachCapture.messages
       : []
@@ -104,8 +110,8 @@ export default function CoachDocumentPage() {
   const replaceFile = (file: File | undefined) => {
     if (!file) return
     const isImage = file.type.startsWith('image/')
-    const err = validateFile(file, isImage ? 'image' : 'doc')
-    if (err) return setError(err)
+    const err = fileErrorCode(file, isImage ? 'image' : 'doc')
+    if (err) return setError(tc(`fileErrors.${err}`))
     setError('')
     const d = draftFromFile(file)
     setPendingFile(file)
@@ -117,13 +123,13 @@ export default function CoachDocumentPage() {
 
   return (
     <>
-      <TopBar title="Coach parental IA" showBack backHref="/app/coach" showBell={false} />
+      <TopBar title={t('topTitle')} showBack backHref="/app/coach" showBell={false} />
 
       <div className="w-full px-5 pb-8 pt-3">
-        <ScreenTitle title={isMessage ? 'Message ajouté' : 'Document ajouté'} subtitle="Votre fichier est importé et prêt à être analysé." />
+        <ScreenTitle title={isMessage ? t('messageAdded') : t('documentAdded')} subtitle={t('subtitle')} />
 
         {/* Fichier + aperçu */}
-        <section aria-label="Fichier importé" className="mt-5 overflow-hidden rounded-xl2 border border-night-100 bg-white shadow-soft">
+        <section aria-label={t('fileSection')} className="mt-5 overflow-hidden rounded-xl2 border border-night-100 bg-white shadow-soft">
           <div className="flex items-center gap-3 px-4 py-3">
             <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border-2 border-night-800 text-night-900" aria-hidden="true">
               {draft.kind === 'capture' ? <FileImage className="h-5 w-5" /> : <FileText className="h-5 w-5" />}
@@ -141,7 +147,7 @@ export default function CoachDocumentPage() {
                 setPendingFile(null)
                 router.push('/app/coach')
               }}
-              aria-label={`Retirer ${title}`}
+              aria-label={t('remove', { title })}
               className="-mr-1.5 grid h-11 w-11 shrink-0 place-items-center rounded-full text-night-900 hover:bg-alert-50 hover:text-alert-500"
             >
               <Trash2 className="h-5 w-5" aria-hidden="true" />
@@ -150,7 +156,7 @@ export default function CoachDocumentPage() {
 
           {previewUrl && (
             // eslint-disable-next-line @next/next/no-img-element -- aperçu blob local
-            <img src={previewUrl} alt={`Aperçu de ${title}`} className="mx-3 mb-3 max-h-80 w-[calc(100%-1.5rem)] rounded-xl bg-night-50 object-contain" />
+            <img src={previewUrl} alt={t('preview', { title })} className="mx-3 mb-3 max-h-80 w-[calc(100%-1.5rem)] rounded-xl bg-night-50 object-contain" />
           )}
 
           {lines.length > 0 && (
@@ -172,7 +178,7 @@ export default function CoachDocumentPage() {
 
         {fileMissing && (
           <p role="alert" className="mt-4 rounded-xl2 border border-gold-200 bg-gold-50 p-4 text-[12.5px] leading-relaxed text-night-800">
-            Le fichier n’est plus disponible après le rechargement de la page. Utilisez « Ajouter un autre document » pour l’importer à nouveau.
+            {t('fileMissing')}
           </p>
         )}
 
@@ -180,19 +186,19 @@ export default function CoachDocumentPage() {
         <section className="mt-4 flex gap-3 rounded-xl2 border border-leaf-100 bg-leaf-50/70 p-4" aria-live="polite">
           <CheckCircle2 className="h-6 w-6 shrink-0 fill-leaf-500 text-white" aria-hidden="true" />
           <div>
-            <h3 className="text-[14px] font-bold text-night-900">Document reconnu</h3>
-            <p className="mt-1 text-[12.5px] leading-relaxed text-night-700">{RECOGNIZED[draft.kind]}</p>
+            <h3 className="text-[14px] font-bold text-night-900">{t('recognizedTitle')}</h3>
+            <p className="mt-1 text-[12.5px] leading-relaxed text-night-700">{t(`recognized.${draft.kind}`)}</p>
           </div>
         </section>
 
         <div className="mt-6 space-y-3.5">
           <button type="button" onClick={() => router.push('/app/coach/analyse')} disabled={fileMissing || draft.kind === 'word'} className={btn.primary}>
             <WandSparkles className="h-5 w-5" aria-hidden="true" />
-            Lancer l’analyse
+            {t('start')}
           </button>
           <button type="button" onClick={() => fileRef.current?.click()} className={btn.secondary}>
             <RefreshCw className="h-5 w-5" aria-hidden="true" />
-            Ajouter un autre document
+            {t('another')}
           </button>
           <button
             type="button"
@@ -205,7 +211,7 @@ export default function CoachDocumentPage() {
             ) : (
               <Lock className="h-5 w-5" aria-hidden="true" />
             )}
-            {savedToVault ? 'Ajouté au coffre-fort' : 'Ajouter au coffre-fort'}
+            {savedToVault ? t('savedToVault') : t('saveToVault')}
           </button>
           <input
             ref={fileRef}
@@ -225,7 +231,7 @@ export default function CoachDocumentPage() {
           {error}
         </p>
         <p role="status" aria-live="polite" className="sr-only">
-          {savedToVault ? 'Copie enregistrée dans votre coffre-fort.' : ''}
+          {savedToVault ? t('savedStatus') : ''}
         </p>
       </div>
     </>

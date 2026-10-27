@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { use, useEffect, useRef, useState, type FormEvent } from 'react'
+import { useTranslations } from 'next-intl'
 import { BookOpen, CircleCheck, ChevronRight, Image as ImageIcon, MapPin } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import {
@@ -14,13 +15,14 @@ import {
   DepenseDetails, EMPTY_DETAILS, parsePartValue, type DepenseDetailsValues, type DetailsErrors,
 } from '@/components/journal/DepenseDetails'
 import { JustificatifsField } from '@/components/journal/JustificatifsField'
+import { useFinanceLabels } from '@/components/journal/financeLabels'
 import { JOURNAL_TYPES, JOURNAL_TYPE_ORDER } from '@/components/journal/journalTypes'
 import { useChildOptions } from '@/lib/data/children'
 import { createJournal, updateJournal, useJournalEntry } from '@/lib/data/journal'
 import { clearDraft, useImageDraft } from '@/components/journal/imageDraft'
 import {
-  DEPENSE_CATEGORIES, DEPENSE_CATEGORIE_LABELS, DEPENSE_MODES_AUTRES, DEPENSE_MODES_PRINCIPAUX, DEPENSE_MODE_LABELS,
-  DEPENSE_SENS, DEPENSE_SENS_LABELS, DEVISES, MODES_AVEC_SERVICE,
+  DEPENSE_CATEGORIES, DEPENSE_CATEGORIE_LABELS, DEPENSE_MODES_AUTRES, DEPENSE_MODES_PRINCIPAUX,
+  DEPENSE_SENS, DEVISES, MODES_AVEC_SERVICE,
   advancedErrors, allJustificatifs, centsToInput, depenseSchema, monthKeyOf, parseAmountToCents,
   suggestNextDue,
   type DepenseCategorie, type DepenseJustificatif, type DepenseMode, type DepenseSens, type Devise,
@@ -43,14 +45,7 @@ type Search = Record<string, string | string[] | undefined>
 const todayInput = (): string => todayKey()
 const nowTime = (): string => timeInTz(new Date())
 
-const CATEGORY_OPTIONS = DEPENSE_CATEGORIES.map((c) => ({ value: c, label: DEPENSE_CATEGORIE_LABELS[c] }))
-const SENS_OPTIONS = DEPENSE_SENS.map((s) => ({ value: s, label: DEPENSE_SENS_LABELS[s] }))
 const AUTRE_MODE = '__autre'
-const MODE_CHIPS = [
-  ...DEPENSE_MODES_PRINCIPAUX.map((m) => ({ value: m, label: DEPENSE_MODE_LABELS[m] })),
-  { value: AUTRE_MODE, label: 'Autres' },
-]
-const AUTRE_MODE_OPTIONS = DEPENSE_MODES_AUTRES.map((m) => ({ value: m, label: DEPENSE_MODE_LABELS[m] }))
 const isPrincipal = (m: string) => (DEPENSE_MODES_PRINCIPAUX as readonly string[]).includes(m)
 // Libellé court (champ étroit) : code + symbole.
 const DEVISE_SHORT: Record<Devise, string> = { EUR: 'EUR (€)', BRL: 'BRL (R$)', SRD: 'SRD', USD: 'USD ($)' }
@@ -61,11 +56,15 @@ const isOutgoing = (s: DepenseSens) => s === 'depense' || s === 'remboursement-v
 const tiersLabelShown = (t: string) => t !== '' && t !== 'autre-parent'
 
 export default function NouvelleEntreePage({ searchParams }: { searchParams: Promise<Search> }) {
+  const t = useTranslations('family.journal.entryForm')
+  const fl = useFinanceLabels()
   const sp = use(searchParams)
   const editId = typeof sp.id === 'string' ? sp.id : undefined
   const router = useRouter()
   const images = useImageDraft(DRAFT_KEY)
-  const { options: childOptions } = useChildOptions()
+  const { options: rawChildOptions } = useChildOptions()
+  // Libellé « Prénom (n ans) » traduit au rendu (lib/data/children est partagé).
+  const childOptions = rawChildOptions.map((c) => ({ ...c, label: t('childOption', { name: c.prenom, count: c.age }) }))
   const { data: existing, loading: existingLoading, error: existingError } = useJournalEntry(editId ?? null)
   const prefilled = useRef(false)
   const urlChild = useRef<string | undefined>(undefined)
@@ -111,8 +110,8 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
     : existingError
       ? existingError.message
       : existingLoading
-        ? 'Chargement de l’entrée à modifier…'
-        : 'Entrée introuvable : elle a peut-être été supprimée. Modification impossible.'
+        ? t('editLoading')
+        : t('editNotFound')
 
   const patchDetails = (p: Partial<DepenseDetailsValues>) => setDetails((d) => {
     const next = { ...d, ...p }
@@ -135,9 +134,9 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
 
   // Montage : date du jour + pré-remplissage par URL (création uniquement).
   useEffect(() => {
-    const t = todayInput()
-    setToday(t)
-    const p = parseJournalPrefill(sp, t)
+    const day = todayInput()
+    setToday(day)
+    const p = parseJournalPrefill(sp, day)
     if (p.guideSlug) setGuideSlug(p.guideSlug)
     if (!editId) {
       if (p.type) setType(p.type)
@@ -147,7 +146,7 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
       if (p.date) setDate(p.date)
       urlChild.current = p.enfant
     }
-    setDate((d) => d || t)
+    setDate((d) => d || day)
     setHeure((h) => h || nowTime())
     // eslint-disable-next-line react-hooks/exhaustive-deps -- lecture unique des paramètres d'URL
   }, [])
@@ -155,10 +154,10 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
   // `enfant=<id>` : appliqué seulement s'il correspond à un enfant réel du compte.
   useEffect(() => {
     const cid = urlChild.current
-    if (!cid || childOptions.length === 0) return
+    if (!cid || rawChildOptions.length === 0) return
     urlChild.current = undefined
-    if (childOptions.some((c) => c.id === cid)) setChildIds((ids) => (ids.includes(cid) ? ids : [...ids, cid]))
-  }, [childOptions])
+    if (rawChildOptions.some((c) => c.id === cid)) setChildIds((ids) => (ids.includes(cid) ? ids : [...ids, cid]))
+  }, [rawChildOptions])
 
   // Modification : pré-remplissage une seule fois, dès que l'entrée est chargée.
   useEffect(() => {
@@ -235,25 +234,25 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
     echeanceSuivante: details.recurrence !== 'ponctuel' ? details.echeance || undefined : undefined,
   }
   const depenseCheck = depenseSchema.safeParse(depenseInput)
-  const issue = (k: string) => (depenseCheck.success ? undefined : depenseCheck.error.issues.find((i) => i.path[0] === k)?.message)
+  const issue = (k: string) => (depenseCheck.success ? undefined : fl.error(depenseCheck.error.issues.find((i) => i.path[0] === k)?.message))
   // Règles avancées évaluées directement (le schéma ne les vérifie qu'une fois les champs principaux valides).
   const adv = advancedErrors({ ...depenseInput, montantCents: cents ?? undefined })
   const detailsErrors: DetailsErrors = !isDepense ? {} : {
     montantPaye: details.statut === 'partiel' && details.montantPaye.trim() && payeCents === null
-      ? 'Montant invalide. Exemple : 42,50.'
-      : adv.montantPayeCents,
+      ? t('errors.amountExample')
+      : fl.error(adv.montantPayeCents),
     partageValeur: details.partageMode && details.partageValeur.trim() && partValue === null
-      ? (details.partageMode === 'pourcentage' ? 'Indiquez un nombre entier de 0 à 100.' : 'Montant invalide. Exemple : 42,50.')
-      : adv.partageValeur,
-    echeance: adv.echeanceSuivante
+      ? (details.partageMode === 'pourcentage' ? t('errors.percentInteger') : t('errors.amountExample'))
+      : fl.error(adv.partageValeur),
+    echeance: fl.error(adv.echeanceSuivante)
       ?? (details.recurrence !== 'ponctuel' && details.echeance && date && details.echeance <= date
-        ? 'L’échéance suivante doit être postérieure à la date de la dépense.'
+        ? t('errors.dueAfterDate')
         : undefined),
   }
   const errors = {
-    titre: !isDepense && !titre.trim() ? 'Donnez un titre à cet événement.' : undefined,
-    date: !date ? 'La date est requise.' : today && date > today ? 'La date ne peut pas être dans le futur.' : undefined,
-    montant: !isDepense ? undefined : !montant.trim() ? 'Indiquez un montant.' : cents === null ? 'Montant invalide. Exemple : 42,50 (100 000 maximum).' : issue('montantCents'),
+    titre: !isDepense && !titre.trim() ? t('errors.titleRequired') : undefined,
+    date: !date ? t('errors.dateRequired') : today && date > today ? t('errors.dateFuture') : undefined,
+    montant: !isDepense ? undefined : !montant.trim() ? t('errors.amountRequired') : cents === null ? t('errors.amountInvalid') : issue('montantCents'),
     categorie: isDepense ? issue('categorie') : undefined,
     mode: isDepense ? issue('mode') : undefined,
     counterpart: isDepense ? issue(outgoing ? 'beneficiaire' : 'payeurLibelle') : undefined,
@@ -273,11 +272,12 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
     if (Object.values(errors).some(Boolean) || (isDepense && !depenseCheck.success)) {
       // Un champ de « Plus de détails » en erreur : on ouvre la section avant d'y placer le focus.
       if (Object.values(detailsErrors).some(Boolean)) setDetailsOpen(true)
-      setFocusTick((t) => t + 1)
+      setFocusTick((n) => n + 1)
       return
     }
     setSaving(true)
     setSaveError(null)
+    // Titre par défaut enregistré en base : libellé français de la catégorie (donnée, inchangée).
     const finalTitre = titre.trim() || (isDepense && categorie ? DEPENSE_CATEGORIE_LABELS[categorie] : '')
     const input = {
       type,
@@ -304,19 +304,26 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
         isEdit ? `/app/journal/${editId}` : isDepense ? `/app/journal?filtre=finances&mois=${monthKeyOf(date)}` : '/app/journal',
       )
     } catch (err) {
-      setSaveError(err instanceof Error ? err.message : 'Enregistrement impossible.')
+      setSaveError(err instanceof Error ? err.message : t('saveFailed'))
       setSaving(false)
     }
   }
 
   const tiles = JOURNAL_TYPE_ORDER.map((k) => {
     const Icon = JOURNAL_TYPES[k].icon
-    return { value: k, label: JOURNAL_TYPES[k].label, icon: <Icon className="h-[22px] w-[22px]" strokeWidth={1.8} /> }
+    return { value: k, label: fl.type(k), icon: <Icon className="h-[22px] w-[22px]" strokeWidth={1.8} /> }
   })
+  const categoryOptions = DEPENSE_CATEGORIES.map((c) => ({ value: c, label: fl.category(c) }))
+  const sensOptions = DEPENSE_SENS.map((s) => ({ value: s, label: fl.sens(s) }))
+  const modeChips = [
+    ...DEPENSE_MODES_PRINCIPAUX.map((m) => ({ value: m, label: fl.mode(m) })),
+    { value: AUTRE_MODE, label: t('otherModes') },
+  ]
+  const autreModeOptions = DEPENSE_MODES_AUTRES.map((m) => ({ value: m, label: fl.mode(m) }))
 
   const guideHref = guideSlug ? `/app/guide/${guideSlug}` : null
   const backHref = isEdit ? `/app/journal/${editId}` : guideHref ?? (isDepense ? '/app/journal?filtre=finances' : '/app/journal')
-  const title = isEdit ? (isDepense ? 'Modifier la dépense' : "Modifier l'événement") : isDepense ? 'Ajouter une dépense' : 'Ajouter un événement'
+  const title = isEdit ? (isDepense ? t('titleEditExpense') : t('titleEditEvent')) : isDepense ? t('titleAddExpense') : t('titleAddEvent')
   const modeChip = mode ? (isPrincipal(mode) ? mode : AUTRE_MODE) : ''
   const showService = mode !== '' && MODES_AVEC_SERVICE.includes(mode)
 
@@ -325,24 +332,24 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
     const listHref = done.type === 'depense' ? `/app/journal?filtre=finances&mois=${monthKeyOf(done.date)}` : '/app/journal'
     return (
       <>
-        <TopBar title={done.type === 'depense' ? 'Dépense enregistrée' : 'Événement enregistré'} showBack backHref={guideHref ?? '/app/journal'} showBell={false} />
+        <TopBar title={done.type === 'depense' ? t('doneExpenseTitle') : t('doneEventTitle')} showBack backHref={guideHref ?? '/app/journal'} showBell={false} />
         <section aria-labelledby="ok-title" className="mx-auto flex max-w-md flex-col items-center px-4 pb-6 pt-8 text-center">
           <span aria-hidden="true" className="grid h-[76px] w-[76px] place-items-center rounded-full bg-leaf-50 text-leaf-600 motion-safe:animate-fade-up">
             <CircleCheck className="h-9 w-9" strokeWidth={1.7} />
           </span>
           <h2 id="ok-title" ref={successRef} tabIndex={-1} className="mt-4 text-[19px] font-extrabold text-night-900 focus:outline-none">
-            {done.type === 'depense' ? 'Dépense ajoutée au Journal' : 'Événement ajouté au Journal'}
+            {done.type === 'depense' ? t('doneExpenseHeading') : t('doneEventHeading')}
           </h2>
-          <p role="status" className="mt-2 text-[13px] text-night-700">Vous pouvez revenir à la fiche du guide ou retrouver l’entrée dans votre journal.</p>
+          <p role="status" className="mt-2 text-[13px] text-night-700">{t('doneText')}</p>
           <div className="mt-6 grid w-full gap-3">
             {guideHref && (
               <Link href={guideHref} className="flex h-12 items-center justify-center gap-2 rounded-xl bg-leaf-500 text-[15px] font-semibold text-white shadow-[0_8px_20px_-10px_rgba(46,125,50,0.55)] transition-colors hover:bg-leaf-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2 motion-safe:active:scale-[.98]">
                 <BookOpen aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.8} />
-                Retour au guide
+                {t('backToGuide')}
               </Link>
             )}
             <Link href={done.id ? `/app/journal/${done.id}` : listHref} className="flex h-12 items-center justify-center rounded-xl border border-night-200 bg-white text-[15px] font-semibold text-night-900 transition-colors hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2">
-              Voir dans le journal
+              {t('viewInJournal')}
             </Link>
           </div>
         </section>
@@ -358,17 +365,17 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
         {guideHref && (
           <p className="flex items-center gap-2.5 rounded-xl bg-leaf-50 px-3.5 py-2.5 text-[12.5px] text-leaf-800 ring-1 ring-leaf-200">
             <BookOpen aria-hidden="true" className="h-4 w-4 shrink-0" strokeWidth={1.8} />
-            <span>Pré-rempli depuis le Guide parental. Vérifiez les informations avant d’enregistrer.</span>
+            <span>{t('prefilledFromGuide')}</span>
           </p>
         )}
 
-        <TypeTileGroup name="type" options={tiles} value={type} onChange={(v) => setType(v as JournalType)} columns={3} />
+        <TypeTileGroup name="type" legend={t('eventType')} options={tiles} value={type} onChange={(v) => setType(v as JournalType)} columns={3} />
 
         {isDepense && (
           <ChoiceChips
             name="sens"
-            legend="Sens"
-            options={SENS_OPTIONS}
+            legend={t('direction')}
+            options={sensOptions}
             value={sens}
             onChange={(v) => changeSens(v as DepenseSens)}
             columns={4}
@@ -378,19 +385,19 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
         {isDepense && (
           <div className="grid grid-cols-[1fr_auto] gap-3">
             <TextField
-              label={details.statut === 'partiel' ? 'Montant total dû' : 'Montant'}
+              label={details.statut === 'partiel' ? t('amountTotalDue') : t('amount')}
               required
               inputMode="decimal"
               autoComplete="off"
-              placeholder="0,00"
+              placeholder={t('amountPlaceholder')}
               value={montant}
               onChange={(e) => setMontant(e.target.value)}
               maxLength={14}
-              hint="Virgule ou point acceptés"
+              hint={t('amountHint')}
               error={show('montant')}
             />
             <div className="w-[8.5rem]">
-              <SelectField label="Devise" value={devise} onChange={(e) => setDevise(e.target.value as Devise)} options={DEVISE_OPTIONS} />
+              <SelectField label={t('currency')} value={devise} onChange={(e) => setDevise(e.target.value as Devise)} options={DEVISE_OPTIONS} />
             </div>
           </div>
         )}
@@ -403,37 +410,37 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
           max={today || undefined}
           dateError={show('date')}
           withTime={!isDepense}
-          legend={isDepense ? (outgoing ? 'Date de la dépense' : 'Date de réception') : 'Date et heure'}
+          legend={isDepense ? (outgoing ? t('dateExpense') : t('dateReceived')) : t('dateTime')}
         />
 
         <TextField
-          label={isDepense ? 'Libellé (facultatif)' : 'Titre'}
+          label={isDepense ? t('labelOptional') : t('titleLabel')}
           required={!isDepense}
           value={titre}
           onChange={(e) => setTitre(e.target.value)}
-          placeholder={isDepense ? (outgoing ? 'Ex : Cantine de novembre' : 'Ex : Pension de novembre') : 'Ex : Visite avec Lina'}
+          placeholder={isDepense ? (outgoing ? t('labelPlaceholderOut') : t('labelPlaceholderIn')) : t('titlePlaceholder')}
           maxLength={120}
-          hint={isDepense ? 'À défaut, la catégorie sert de libellé.' : undefined}
+          hint={isDepense ? t('labelHint') : undefined}
           error={show('titre')}
         />
 
         {isDepense && (
           <>
             <SelectField
-              label="Catégorie"
+              label={t('category')}
               required
-              placeholder="Choisir une catégorie"
+              placeholder={t('categoryPlaceholder')}
               value={categorie}
               onChange={(e) => setCategorie(e.target.value as DepenseCategorie)}
-              options={CATEGORY_OPTIONS}
+              options={categoryOptions}
               error={show('categorie')}
             />
 
             <div className="space-y-3">
               <ChoiceChips
                 name="mode"
-                legend="Mode de paiement"
-                options={MODE_CHIPS}
+                legend={t('paymentMode')}
+                options={modeChips}
                 value={modeChip}
                 onChange={(v) => setMode(v === AUTRE_MODE ? (mode && !isPrincipal(mode) ? mode : 'mobile') : (v as DepenseMode))}
                 error={show('mode')}
@@ -441,17 +448,17 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
               {modeChip === AUTRE_MODE && (
                 <div className="grid gap-3 sm:grid-cols-2">
                   <SelectField
-                    label="Précisez le mode"
+                    label={t('specifyMode')}
                     value={mode}
                     onChange={(e) => setMode(e.target.value as DepenseMode)}
-                    options={AUTRE_MODE_OPTIONS}
+                    options={autreModeOptions}
                   />
                   {showService && (
                     <TextField
-                      label={mode === 'mobile' ? 'Service utilisé (facultatif)' : 'Précision (facultatif)'}
+                      label={mode === 'mobile' ? t('serviceUsed') : t('precision')}
                       value={modeLibelle}
                       onChange={(e) => setModeLibelle(e.target.value)}
-                      placeholder={mode === 'mobile' ? 'Ex : PayPal, Lydia, Wero' : 'Ex : bon d’achat'}
+                      placeholder={mode === 'mobile' ? t('servicePlaceholder') : t('precisionPlaceholder')}
                       maxLength={60}
                       autoComplete="off"
                       error={show('modeLibelle')}
@@ -462,10 +469,10 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
             </div>
 
             <TextField
-              label={outgoing ? 'Bénéficiaire / destinataire (facultatif)' : 'Reçu de (facultatif)'}
+              label={outgoing ? t('beneficiary') : t('receivedFrom')}
               value={counterpart}
               onChange={(e) => patchDetails(outgoing ? { beneficiaire: e.target.value } : { payeurLibelle: e.target.value })}
-              placeholder={outgoing ? 'Ex : Autre parent, école, pharmacie' : 'Ex : Autre parent, CAF, mutuelle'}
+              placeholder={outgoing ? t('beneficiaryPlaceholder') : t('receivedFromPlaceholder')}
               maxLength={120}
               autoComplete="off"
               error={show('counterpart')}
@@ -477,23 +484,23 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
           options={childOptions}
           value={childIds}
           onChange={setChildIds}
-          label={isDepense ? 'Enfant(s) concerné(s)' : 'Enfants concernés'}
+          label={isDepense ? t('childrenExpense') : t('children')}
         />
 
         <TextAreaField
-          label={isDepense ? 'Description (facultatif)' : 'Description'}
+          label={isDepense ? t('descriptionOptional') : t('description')}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder={isDepense ? 'Précisions utiles (période, référence de facture…)' : "Décrivez l'événement…"}
+          placeholder={isDepense ? t('descriptionPlaceholderExpense') : t('descriptionPlaceholder')}
           maxLength={2000}
         />
 
         {!isDepense && (
           <TextField
-            label="Lieu"
+            label={t('place')}
             value={lieu}
             onChange={(e) => setLieu(e.target.value)}
-            placeholder="Ex : À mon domicile"
+            placeholder={t('placePlaceholder')}
             trailingIcon={<MapPin className="h-[18px] w-[18px]" />}
           />
         )}
@@ -516,16 +523,16 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
           </>
         ) : (
           <div>
-            <FieldLabel as="p">Ajouter des images (facultatif)</FieldLabel>
+            <FieldLabel as="p">{t('addImages')}</FieldLabel>
             <Link
               href="/app/journal/nouveau/images"
               className="flex min-h-[64px] items-center gap-4 rounded-xl border border-night-100 bg-white px-4 py-3.5 transition-colors hover:border-night-200"
             >
               <ImageIcon aria-hidden="true" className="h-6 w-6 shrink-0 text-night-900" strokeWidth={1.7} />
               <span className="min-w-0 flex-1">
-                <span className="block text-[12.5px] font-semibold text-night-900">Ajouter des photos ou documents</span>
+                <span className="block text-[12.5px] font-semibold text-night-900">{t('addImagesButton')}</span>
                 <span className="block text-[11px] text-night-600">
-                  {images.length ? `${images.length} fichier${images.length > 1 ? 's' : ''} ajouté${images.length > 1 ? 's' : ''} · Max. 10 fichiers` : 'Max. 10 fichiers'}
+                  {images.length ? `${t('filesAdded', { count: images.length })} · ${t('maxFiles')}` : t('maxFiles')}
                 </span>
               </span>
               <ChevronRight aria-hidden="true" className="h-[18px] w-[18px] shrink-0 text-night-700" />
@@ -544,7 +551,7 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
 
         <div className="pt-1">
           <SubmitBar disabled={saving || editBlocked}>
-            {saving ? 'Enregistrement…' : isDepense ? (outgoing ? 'Enregistrer la dépense' : 'Enregistrer le paiement') : 'Enregistrer'}
+            {saving ? t('saving') : isDepense ? (outgoing ? t('saveExpense') : t('savePayment')) : t('save')}
           </SubmitBar>
         </div>
       </form>

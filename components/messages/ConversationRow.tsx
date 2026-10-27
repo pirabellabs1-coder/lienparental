@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { Archive, ArchiveRestore, Loader2, Mic, Paperclip } from 'lucide-react'
 import { cn } from '@/lib/cn'
-import { conversationLabel, participantsLabel, previewText, type ConversationSummary } from '@/lib/messages'
+import type { ConversationSummary } from '@/lib/messages'
 import { AvatarStack } from './Avatar'
-import { shortStamp } from './format'
+import { useMessagesFormat } from './useMessagesFormat'
 
 type Props = {
   conversation: ConversationSummary
@@ -16,10 +17,12 @@ type Props = {
 
 /** Ligne de la liste : lien vers la conversation + bouton d'archivage (jamais imbriqués). */
 export function ConversationRow({ conversation: c, meId, busy, onToggleArchive }: Props) {
+  const t = useTranslations('messaging.row')
+  const { conversationLabel, participantsLabel, previewText, shortStamp } = useMessagesFormat()
   const label = conversationLabel(c)
   const last = c.lastMessage
   const unread = c.unread > 0
-  const preview = last ? previewText(last) : 'Aucun message pour le moment'
+  const preview = last ? previewText(last) : t('noMessage')
   const KindIcon = last?.kind === 'audio' ? Mic : last?.kind === 'attachment' ? Paperclip : null
 
   return (
@@ -39,17 +42,17 @@ export function ConversationRow({ conversation: c, meId, busy, onToggleArchive }
             )}
           </span>
           {c.title && (
-            <span className="block truncate text-[12px] text-night-600">Avec {participantsLabel(c.participants)}</span>
+            <span className="block truncate text-[12px] text-night-600">{t('with', { names: participantsLabel(c.participants) })}</span>
           )}
           <span className="mt-0.5 flex items-center gap-2">
             <span className={cn('flex min-w-0 flex-1 items-center gap-1 text-[13px]', unread ? 'font-semibold text-night-900' : 'text-night-600')}>
               {KindIcon && <KindIcon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />}
-              <span className="truncate">{last && last.senderId === meId ? 'Vous : ' : ''}{preview}</span>
+              <span className="truncate">{last && last.senderId === meId ? t('you') : ''}{preview}</span>
             </span>
             {unread && (
               <span className="inline-flex h-5 min-w-[20px] shrink-0 items-center justify-center rounded-full bg-leaf-500 px-1.5 text-[11px] font-bold text-white">
                 {c.unread}
-                <span className="sr-only"> message{c.unread > 1 ? 's' : ''} non lu{c.unread > 1 ? 's' : ''}</span>
+                <span className="sr-only">{t('unreadSr', { count: c.unread })}</span>
               </span>
             )}
           </span>
@@ -59,8 +62,8 @@ export function ConversationRow({ conversation: c, meId, busy, onToggleArchive }
         type="button"
         onClick={onToggleArchive}
         disabled={busy}
-        aria-label={c.archived ? `Ressortir des archives : ${label}` : `Archiver : ${label}`}
-        title={c.archived ? 'Ressortir des archives' : 'Archiver'}
+        aria-label={c.archived ? t('unarchiveLabel', { label }) : t('archiveLabel', { label })}
+        title={c.archived ? t('unarchive') : t('archive')}
         className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-night-600 hover:bg-night-50 hover:text-night-900 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
       >
         {busy

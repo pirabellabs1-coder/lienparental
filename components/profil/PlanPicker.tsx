@@ -1,28 +1,27 @@
 'use client'
-import { PLAN_NAME, PRICING, formatPrice, type PaidPlan } from './pricing'
+import { useLocale, useTranslations } from 'next-intl'
+import { PRICING, formatPriceIn, type PaidPlan } from './pricing'
+import { intlLocale } from '@/lib/i18n/config'
 import { cn } from '@/lib/cn'
 
 const ORDER: readonly PaidPlan[] = ['premium', 'coparentalite']
-
-const SUB: Record<PaidPlan, string> = {
-  premium: 'Pour un parent',
-  coparentalite: 'Pour toute la famille liée',
-}
 
 /**
  * Sélecteur de formule payante (Premium / Coparentalité+), groupe radio
  * accessible : flèches pour changer, une seule tabulation.
  */
 export function PlanPicker({
-  value, onChange, className, label = 'Formule',
+  value, onChange, className, label,
 }: {
   value: PaidPlan
   onChange: (p: PaidPlan) => void
   className?: string
   label?: string
 }) {
+  const t = useTranslations('billing')
+  const loc = intlLocale(useLocale())
   return (
-    <div role="radiogroup" aria-label={label} className={cn('grid grid-cols-2 gap-3', className)}>
+    <div role="radiogroup" aria-label={label ?? t('planPicker.label')} className={cn('grid grid-cols-2 gap-3', className)}>
       {ORDER.map(p => {
         const active = value === p
         return (
@@ -50,9 +49,9 @@ export function PlanPicker({
                 : 'border-night-100 bg-white text-night-900 hover:bg-night-50',
             )}
           >
-            <span className="block text-[14px] font-bold">{PLAN_NAME[p]}</span>
+            <span className="block text-[14px] font-bold">{t(`common.plan.${p}`)}</span>
             <span className={cn('block text-[11.5px]', active && p === 'coparentalite' ? 'text-white/85' : 'text-night-700')}>
-              {SUB[p]} · dès {formatPrice(PRICING[p].yearlyPerMonth)} / mois
+              {t('planPicker.from', { sub: t(`planPicker.sub.${p}`), price: formatPriceIn(PRICING[p].yearlyPerMonth, loc) })}
             </span>
           </button>
         )

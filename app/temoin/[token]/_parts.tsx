@@ -1,6 +1,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
@@ -25,6 +26,7 @@ export function WitnessHeader({
   counter?: [number, number]
   onBack?: () => void
 }) {
+  const t = useTranslations('public.witness')
   return (
     <header className="px-4 pt-3">
       <div className="relative flex min-h-[44px] items-center justify-center">
@@ -32,7 +34,7 @@ export function WitnessHeader({
           <button
             type="button"
             onClick={onBack}
-            aria-label="Retour"
+            aria-label={t('back')}
             className="absolute left-0 grid h-11 w-11 place-items-center rounded-full text-night-900 transition-colors hover:bg-night-50"
           >
             <ArrowLeft className="h-[22px] w-[22px]" aria-hidden="true" />
@@ -52,7 +54,7 @@ export function WitnessHeader({
             {counter[0]} / {counter[1]}
           </span>
           <span className="sr-only">
-            Question {counter[0]} sur {counter[1]}
+            {t('questionOf', { n: counter[0], total: counter[1] })}
           </span>
         </p>
       )}
@@ -88,13 +90,14 @@ export function Q({ children }: { children: ReactNode }) {
 }
 
 export function SkipLink({ onClick }: { onClick: () => void }) {
+  const t = useTranslations('public.witness')
   return (
     <button
       type="button"
       onClick={onClick}
       className="inline-flex min-h-[44px] w-full items-center justify-center text-[13px] font-semibold text-night-500 underline-offset-4 hover:text-night-900 hover:underline"
     >
-      Passer cette question
+      {t('skip')}
     </button>
   )
 }

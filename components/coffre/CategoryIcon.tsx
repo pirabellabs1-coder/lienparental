@@ -20,12 +20,6 @@ export const CATEGORY_ICONS: Record<VaultIconKey, LucideIcon> = {
   lock: Lock,
 }
 
-export const ICON_LABELS: Record<VaultIconKey, string> = {
-  calendar: 'Calendrier', badge: 'Badge', health: 'Santé', wallet: 'Portefeuille',
-  mail: 'Courrier', shapes: 'Formes', folder: 'Dossier', file: 'Document',
-  heart: 'Cœur', bank: 'Banque', lock: 'Cadenas',
-}
-
 /** Icônes du sélecteur « Nouvelle catégorie » (ordre de la maquette). */
 export const PICKER_ICONS: VaultIconKey[] = ['folder', 'file', 'heart', 'bank', 'mail', 'lock']
 

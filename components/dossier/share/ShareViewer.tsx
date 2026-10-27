@@ -1,12 +1,16 @@
 'use client'
 
 import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import {
   AlertTriangle, CalendarClock, Download, FileText, KeyRound, Link2Off, Loader2, Lock, MessageCircle, Printer, Quote,
 } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { cn } from '@/lib/cn'
-import { frDate, frSize } from '@/lib/mock-vault'
+import { frSize } from '@/lib/mock-vault'
+import { formatDay } from '@/components/famille/useFamilyFormat'
+import { fmtSize } from '@/components/journal/journalData'
+import { intlLocale } from '@/lib/i18n/config'
 import type { ShareContent } from '@/lib/partages'
 import { DEFAULT_TZ } from '@/lib/tz'
 
@@ -21,11 +25,24 @@ type View =
 const card = 'rounded-2xl border border-night-100 bg-white shadow-[0_1px_2px_rgba(11,45,91,0.05),0_12px_30px_-18px_rgba(11,45,91,0.2)]'
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 focus-visible:ring-offset-2'
 
-const dateTime = (iso: string) =>
-  `${new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: DEFAULT_TZ })} à ${new Date(iso).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: DEFAULT_TZ })}`
+/** Formats localisés (date « 12 mai 2024 à 14:30 », jour seul, taille de fichier). */
+function useViewerFormat() {
+  const t = useTranslations('family.courtFile.viewer')
+  const locale = useLocale()
+  const loc = intlLocale(locale)
+  return {
+    dateTime: (iso: string) => t('dateTime', {
+      date: new Date(iso).toLocaleDateString(loc, { day: 'numeric', month: 'long', year: 'numeric', timeZone: DEFAULT_TZ }),
+      time: new Date(iso).toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit', timeZone: DEFAULT_TZ }),
+    }),
+    frDate: (ymd: string) => formatDay(ymd, locale),
+    size: (bytes: number) => (locale === 'fr' ? frSize(bytes) : fmtSize(bytes, locale)),
+  }
+}
 
 /** Visionneuse publique d'un partage avocat (code d'accès éventuel, puis lecture seule). */
 export function ShareViewer({ token }: { token: string }) {
+  const t = useTranslations('family.courtFile.viewer')
   const [view, setView] = useState<View>({ k: 'loading' })
 
   const open = useCallback(async (code?: string) => {
@@ -44,9 +61,9 @@ export function ShareViewer({ token }: { token: string }) {
       } else if (res.status === 401) {
         setView({ k: 'code', error: null, busy: false })
       } else if (res.status === 403) {
-        setView({ k: 'code', error: json?.error?.message ?? 'Code incorrect.', busy: false })
+        setView({ k: 'code', error: json?.error?.message ?? t('wrongCode'), busy: false })
       } else if (res.status === 429) {
-        setView({ k: 'locked', message: json?.error?.message ?? 'Trop de tentatives. Réessayez plus tard.' })
+        setView({ k: 'locked', message: json?.error?.message ?? t('tooManyAttempts') })
       } else if (res.status === 404) {
         setView({ k: 'invalid' })
       } else {
@@ -55,7 +72,7 @@ export function ShareViewer({ token }: { token: string }) {
     } catch {
       setView({ k: 'error' })
     }
-  }, [token])
+  }, [token, t])
 
   useEffect(() => { void open() }, [open])
 
@@ -66,7 +83,7 @@ export function ShareViewer({ token }: { token: string }) {
           <Logo size="sm" layout="inline" />
           <p className="inline-flex items-center gap-1.5 rounded-full bg-night-50 px-3 py-1.5 text-[12px] font-semibold text-night-800">
             <Lock className="h-3.5 w-3.5 text-leaf-600" aria-hidden="true" />
-            Consultation en lecture seule
+            {t('readOnly')}
           </p>
         </div>
       </header>
@@ -75,7 +92,7 @@ export function ShareViewer({ token }: { token: string }) {
         {view.k === 'loading' && (
           <div role="status" className="flex flex-col items-center py-24 text-center">
             <Loader2 className="h-8 w-8 text-night-700 motion-safe:animate-spin" aria-hidden="true" />
-            <p className="mt-3 text-[14px] text-night-700">Ouverture du dossier partagé…</p>
+            <p className="mt-3 text-[14px] text-night-700">{t('opening')}</p>
           </div>
         )}
 
@@ -91,22 +108,22 @@ export function ShareViewer({ token }: { token: string }) {
         )}
 
         {view.k === 'locked' && (
-          <Notice icon={<KeyRound className="h-7 w-7" aria-hidden="true" />} title="Accès temporairement bloqué" tone="alert">
-            {view.message} Ce délai protège le dossier contre les tentatives répétées.
+          <Notice icon={<KeyRound className="h-7 w-7" aria-hidden="true" />} title={t('lockedTitle')} tone="alert">
+            {view.message} {t('lockedText')}
           </Notice>
         )}
 
         {view.k === 'invalid' && (
-          <Notice icon={<Link2Off className="h-7 w-7" aria-hidden="true" />} title="Ce lien n'est plus valide">
-            Il a peut-être expiré ou été révoqué par le parent. Demandez-lui de générer un nouveau lien de partage.
+          <Notice icon={<Link2Off className="h-7 w-7" aria-hidden="true" />} title={t('invalidTitle')}>
+            {t('invalidText')}
           </Notice>
         )}
 
         {view.k === 'error' && (
-          <Notice icon={<AlertTriangle className="h-7 w-7" aria-hidden="true" />} title="Dossier momentanément indisponible" tone="alert">
-            Vérifiez votre connexion puis réessayez.
+          <Notice icon={<AlertTriangle className="h-7 w-7" aria-hidden="true" />} title={t('errorTitle')} tone="alert">
+            {t('errorText')}
             <button type="button" onClick={() => { setView({ k: 'loading' }); void open() }} className={cn('mt-5 inline-flex h-12 items-center justify-center rounded-xl bg-leaf-500 px-5 text-[14px] font-semibold text-white hover:bg-leaf-600 active:scale-[0.98]', focusRing)}>
-              Réessayer
+              {t('retry')}
             </button>
           </Notice>
         )}
@@ -128,6 +145,7 @@ function Notice({ icon, title, children, tone = 'neutral' }: { icon: React.React
 }
 
 function CodePrompt({ error, busy, onSubmit }: { error: string | null; busy: boolean; onSubmit: (code: string) => void }) {
+  const t = useTranslations('family.courtFile.viewer')
   const uid = useId()
   const [code, setCode] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -143,12 +161,12 @@ function CodePrompt({ error, busy, onSubmit }: { error: string | null; busy: boo
       <span aria-hidden="true" className="grid h-12 w-12 place-items-center rounded-xl bg-leaf-50 text-leaf-600">
         <KeyRound className="h-6 w-6" />
       </span>
-      <h1 id={`${uid}-t`} className="mt-4 text-[20px] font-extrabold text-night-900">Code d&apos;accès requis</h1>
+      <h1 id={`${uid}-t`} className="mt-4 text-[20px] font-extrabold text-night-900">{t('codeRequired')}</h1>
       <p className="mt-1.5 text-[14px] text-night-600">
-        Ce dossier est protégé. Saisissez le code à 6 chiffres que le parent vous a communiqué séparément.
+        {t('codeIntro')}
       </p>
       <form onSubmit={submit} className="mt-5" noValidate>
-        <label htmlFor={`${uid}-code`} className="block text-[13px] font-semibold text-night-900">Code d&apos;accès</label>
+        <label htmlFor={`${uid}-code`} className="block text-[13px] font-semibold text-night-900">{t('codeLabel')}</label>
         <input
           ref={inputRef}
           id={`${uid}-code`}
@@ -165,7 +183,7 @@ function CodePrompt({ error, busy, onSubmit }: { error: string | null; busy: boo
         {error ? (
           <p id={`${uid}-err`} role="alert" className="mt-2 text-[13px] font-semibold text-alert-600">{error}</p>
         ) : (
-          <p id={`${uid}-hint`} className="mt-2 text-[12px] text-night-600">5 essais maximum par période de 15 minutes.</p>
+          <p id={`${uid}-hint`} className="mt-2 text-[12px] text-night-600">{t('codeHint')}</p>
         )}
         <button
           type="submit"
@@ -173,7 +191,7 @@ function CodePrompt({ error, busy, onSubmit }: { error: string | null; busy: boo
           className={cn('mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-leaf-500 px-5 text-[14px] font-semibold text-white transition hover:bg-leaf-600 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50', focusRing)}
         >
           {busy && <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden="true" />}
-          {busy ? 'Vérification…' : 'Ouvrir le dossier'}
+          {busy ? t('checking') : t('open')}
         </button>
       </form>
     </section>
@@ -181,38 +199,40 @@ function CodePrompt({ error, busy, onSubmit }: { error: string | null; busy: boo
 }
 
 function SharedDossier({ content, token, accessKey }: { content: ShareContent; token: string; accessKey: string }) {
+  const t = useTranslations('family.courtFile.viewer')
+  const { dateTime, frDate, size } = useViewerFormat()
   const sections = [
-    { id: 'chronologie', label: 'Chronologie', count: content.timeline.length, show: content.periode !== null },
-    { id: 'documents', label: 'Documents', count: content.documents.length, show: content.documents.length > 0 },
-    { id: 'temoignages', label: 'Témoignages', count: content.testimonies.length, show: content.testimonies.length > 0 },
-    { id: 'messages', label: 'Messages', count: content.messages.length, show: content.messages.length > 0 },
+    { id: 'chronologie', label: t('navTimeline'), count: content.timeline.length, show: content.periode !== null },
+    { id: 'documents', label: t('navDocuments'), count: content.documents.length, show: content.documents.length > 0 },
+    { id: 'temoignages', label: t('navTestimonies'), count: content.testimonies.length, show: content.testimonies.length > 0 },
+    { id: 'messages', label: t('navMessages'), count: content.messages.length, show: content.messages.length > 0 },
   ].filter((s) => s.show)
 
   return (
     <div className="grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start">
       <aside className="space-y-4 lg:sticky lg:top-6">
         <section aria-labelledby="share-summary" className={cn(card, 'p-5')}>
-          <p className="text-[11px] font-bold uppercase tracking-wide text-leaf-700">Dossier partagé</p>
+          <p className="text-[11px] font-bold uppercase tracking-wide text-leaf-700">{t('sharedFile')}</p>
           <h1 id="share-summary" className="mt-1 text-[22px] font-extrabold leading-tight text-night-900">
-            {content.child ? `Dossier concernant ${content.child}` : 'Dossier parental'}
+            {content.child ? t('fileAbout', { name: content.child }) : t('parentalFile')}
           </h1>
           <dl className="mt-4 space-y-2.5 text-[13px]">
             <div>
-              <dt className="text-night-600">Transmis par</dt>
+              <dt className="text-night-600">{t('sentBy')}</dt>
               <dd className="font-semibold text-night-900">{content.owner}</dd>
             </div>
             <div>
-              <dt className="text-night-600">Destinataire</dt>
+              <dt className="text-night-600">{t('recipient')}</dt>
               <dd className="font-semibold text-night-900">{content.label}</dd>
             </div>
             {content.periode && (
               <div>
-                <dt className="text-night-600">Période</dt>
-                <dd className="font-semibold text-night-900">du {frDate(content.periode.from)} au {frDate(content.periode.to)}</dd>
+                <dt className="text-night-600">{t('period')}</dt>
+                <dd className="font-semibold text-night-900">{t('periodRange', { from: frDate(content.periode.from), to: frDate(content.periode.to) })}</dd>
               </div>
             )}
             <div>
-              <dt className="text-night-600">Lien valable jusqu&apos;au</dt>
+              <dt className="text-night-600">{t('validUntil')}</dt>
               <dd className="font-semibold text-night-900">{dateTime(content.expiresAt)}</dd>
             </div>
           </dl>
@@ -222,12 +242,12 @@ function SharedDossier({ content, token, accessKey }: { content: ShareContent; t
             className={cn('mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-night-200 bg-white px-4 text-[14px] font-semibold text-night-900 hover:bg-night-50 active:scale-[0.98] print:hidden', focusRing)}
           >
             <Printer className="h-4 w-4" aria-hidden="true" />
-            Imprimer ou enregistrer en PDF
+            {t('print')}
           </button>
         </section>
 
         {sections.length > 1 && (
-          <nav aria-label="Sections du dossier" className={cn(card, 'p-2 print:hidden')}>
+          <nav aria-label={t('sectionsNav')} className={cn(card, 'p-2 print:hidden')}>
             <ul>
               {sections.map((s) => (
                 <li key={s.id}>
@@ -242,20 +262,20 @@ function SharedDossier({ content, token, accessKey }: { content: ShareContent; t
         )}
 
         <p className="px-1 text-[12px] text-night-600">
-          Document confidentiel transmis dans le cadre d&apos;une procédure. Chaque consultation de ce lien est enregistrée et visible par le parent.
+          {t('confidential')}
         </p>
       </aside>
 
       <div className="min-w-0 space-y-6">
         {sections.length === 0 && (
-          <section className={cn(card, 'p-6 text-center text-[14px] text-night-600')}>Ce partage ne contient aucun élément sur la période choisie.</section>
+          <section className={cn(card, 'p-6 text-center text-[14px] text-night-600')}>{t('emptyShare')}</section>
         )}
 
         {content.periode !== null && (
           <section id="chronologie" aria-labelledby="h-chrono" className={cn(card, 'scroll-mt-6 p-5')}>
-            <SectionTitle id="h-chrono" icon={<CalendarClock className="h-5 w-5" aria-hidden="true" />} title="Chronologie du journal" count={content.timeline.length} />
+            <SectionTitle id="h-chrono" icon={<CalendarClock className="h-5 w-5" aria-hidden="true" />} title={t('timelineTitle')} count={content.timeline.length} />
             {content.timeline.length === 0 ? (
-              <p className="mt-3 text-[14px] text-night-600">Aucun événement sur la période.</p>
+              <p className="mt-3 text-[14px] text-night-600">{t('noEvents')}</p>
             ) : (
               <ol className="mt-4 space-y-4 border-l-2 border-night-100 pl-4">
                 {content.timeline.map((e) => (
@@ -265,7 +285,7 @@ function SharedDossier({ content, token, accessKey }: { content: ShareContent; t
                       <time dateTime={e.date}>{frDate(e.date)}</time>{e.heure ? ` · ${e.heure}` : ''} · {e.type}
                     </p>
                     <h3 className="text-[15px] font-bold text-night-900">{e.titre}</h3>
-                    {e.lieu && <p className="text-[13px] text-night-600">Lieu : {e.lieu}</p>}
+                    {e.lieu && <p className="text-[13px] text-night-600">{t('place', { value: e.lieu })}</p>}
                     {e.description && <p className="mt-1 whitespace-pre-wrap break-words text-[14px] text-night-800">{e.description}</p>}
                   </li>
                 ))}
@@ -276,23 +296,23 @@ function SharedDossier({ content, token, accessKey }: { content: ShareContent; t
 
         {content.documents.length > 0 && (
           <section id="documents" aria-labelledby="h-docs" className={cn(card, 'scroll-mt-6 p-5')}>
-            <SectionTitle id="h-docs" icon={<FileText className="h-5 w-5" aria-hidden="true" />} title="Documents" count={content.documents.length} />
+            <SectionTitle id="h-docs" icon={<FileText className="h-5 w-5" aria-hidden="true" />} title={t('navDocuments')} count={content.documents.length} />
             <ul className="mt-4 divide-y divide-night-100">
               {content.documents.map((d) => (
                 <li key={d.id} className="flex items-center gap-3 py-3">
                   <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-night-50 text-[10px] font-extrabold text-night-700">{d.ext}</span>
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-[14px] font-semibold text-night-900">{d.name}</span>
-                    <span className="block text-[12px] text-night-600">{frDate(d.date)} · {frSize(d.sizeBytes)}</span>
+                    <span className="block text-[12px] text-night-600">{frDate(d.date)} · {size(d.sizeBytes)}</span>
                   </span>
                   <a
                     href={`/api/partage/${encodeURIComponent(token)}/document/${encodeURIComponent(d.id)}?k=${encodeURIComponent(accessKey)}`}
                     rel="noreferrer"
-                    aria-label={`Télécharger ${d.name}`}
+                    aria-label={t('downloadAria', { name: d.name })}
                     className={cn('inline-flex h-11 shrink-0 items-center gap-2 rounded-xl border border-night-200 bg-white px-3 text-[13px] font-semibold text-night-900 hover:bg-night-50 print:hidden', focusRing)}
                   >
                     <Download className="h-4 w-4" aria-hidden="true" />
-                    <span className="hidden sm:inline">Télécharger</span>
+                    <span className="hidden sm:inline">{t('download')}</span>
                   </a>
                 </li>
               ))}
@@ -302,16 +322,16 @@ function SharedDossier({ content, token, accessKey }: { content: ShareContent; t
 
         {content.testimonies.length > 0 && (
           <section id="temoignages" aria-labelledby="h-tmg" className={cn(card, 'scroll-mt-6 p-5')}>
-            <SectionTitle id="h-tmg" icon={<Quote className="h-5 w-5" aria-hidden="true" />} title="Témoignages reçus" count={content.testimonies.length} />
+            <SectionTitle id="h-tmg" icon={<Quote className="h-5 w-5" aria-hidden="true" />} title={t('testimoniesTitle')} count={content.testimonies.length} />
             <ul className="mt-4 space-y-4">
-              {content.testimonies.map((t) => (
-                <li key={t.id} className="rounded-xl border-l-4 border-gold-300 bg-night-50/50 p-4">
-                  <p className="text-[14px] font-bold text-night-900">{t.author}{t.relation ? <span className="font-normal text-night-600"> · {t.relation}</span> : null}</p>
-                  <p className="text-[12px] text-night-600">Reçu le {frDate(t.date)}</p>
-                  <p className="mt-2 whitespace-pre-wrap break-words text-[14px] text-night-800">{t.summary}</p>
-                  {t.facts.length > 0 && (
+              {content.testimonies.map((tm) => (
+                <li key={tm.id} className="rounded-xl border-l-4 border-gold-300 bg-night-50/50 p-4">
+                  <p className="text-[14px] font-bold text-night-900">{tm.author}{tm.relation ? <span className="font-normal text-night-600"> · {tm.relation}</span> : null}</p>
+                  <p className="text-[12px] text-night-600">{t('receivedOn', { date: frDate(tm.date) })}</p>
+                  <p className="mt-2 whitespace-pre-wrap break-words text-[14px] text-night-800">{tm.summary}</p>
+                  {tm.facts.length > 0 && (
                     <ul className="mt-2 list-disc space-y-1 pl-5 text-[13px] text-night-800">
-                      {t.facts.map((f, i) => <li key={i}>{f}</li>)}
+                      {tm.facts.map((f, i) => <li key={i}>{f}</li>)}
                     </ul>
                   )}
                 </li>
@@ -322,15 +342,15 @@ function SharedDossier({ content, token, accessKey }: { content: ShareContent; t
 
         {content.messages.length > 0 && (
           <section id="messages" aria-labelledby="h-msg" className={cn(card, 'scroll-mt-6 p-5')}>
-            <SectionTitle id="h-msg" icon={<MessageCircle className="h-5 w-5" aria-hidden="true" />} title="Messages entre les parents" count={content.messages.length} />
-            <p className="mt-1 text-[12px] text-night-600">Messages horodatés à l&apos;envoi, ni modifiables ni supprimables.</p>
+            <SectionTitle id="h-msg" icon={<MessageCircle className="h-5 w-5" aria-hidden="true" />} title={t('messagesTitle')} count={content.messages.length} />
+            <p className="mt-1 text-[12px] text-night-600">{t('messagesNote')}</p>
             <ol className="mt-4 space-y-3">
               {content.messages.map((m) => (
                 <li key={m.id} className={cn('flex', m.fromOwner ? 'justify-end' : 'justify-start')}>
                   <div className={cn('max-w-[85%] rounded-2xl px-3.5 py-2.5', m.fromOwner ? 'rounded-br-md bg-leaf-50 ring-1 ring-inset ring-leaf-100' : 'rounded-bl-md border border-night-100 bg-white')}>
                     <p className="text-[11px] font-bold text-night-700">{m.sender} · <time dateTime={m.createdAt}>{dateTime(m.createdAt)}</time></p>
                     {m.body && <p className="mt-0.5 whitespace-pre-wrap break-words text-[14px] text-night-900">{m.body}</p>}
-                    {m.attachmentName && <p className="mt-1 text-[12px] text-night-600">Pièce jointe : {m.attachmentName}</p>}
+                    {m.attachmentName && <p className="mt-1 text-[12px] text-night-600">{t('attachment', { name: m.attachmentName })}</p>}
                   </div>
                 </li>
               ))}
@@ -343,12 +363,13 @@ function SharedDossier({ content, token, accessKey }: { content: ShareContent; t
 }
 
 function SectionTitle({ id, icon, title, count }: { id: string; icon: React.ReactNode; title: string; count: number }) {
+  const t = useTranslations('family.courtFile.viewer')
   return (
     <div className="flex items-center gap-3">
       <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600">{icon}</span>
       <h2 id={id} className="flex-1 text-[17px] font-extrabold text-night-900">{title}</h2>
       <span className="rounded-full bg-night-50 px-2.5 py-1 text-[12px] font-bold tabular-nums text-night-700">
-        {count} <span className="sr-only">éléments</span>
+        {count} <span className="sr-only">{t('items')}</span>
       </span>
     </div>
   )

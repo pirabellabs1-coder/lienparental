@@ -3,6 +3,7 @@
 import {
   useId, useState, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes,
 } from 'react'
+import { useTranslations } from 'next-intl'
 import { Calendar, Check, ChevronDown, ChevronRight, Clock } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
@@ -183,7 +184,7 @@ const pickerIndicator =
   '[&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0'
 
 export function DateTimeFields({
-  date, time, onDate, onTime, dateError, max, legend = 'Date et heure', withTime = true,
+  date, time, onDate, onTime, dateError, max, legend, withTime = true,
 }: {
   date: string; time: string
   onDate: (v: string) => void; onTime: (v: string) => void
@@ -191,13 +192,14 @@ export function DateTimeFields({
   /** false : date seule (ex. dépense) */
   withTime?: boolean
 }) {
+  const t = useTranslations('family.journal.fields')
   const id = useId()
   return (
     <fieldset>
-      <FieldLabel as="legend">{legend}</FieldLabel>
+      <FieldLabel as="legend">{legend ?? t('dateTime')}</FieldLabel>
       <div className={cn('grid gap-3', withTime ? 'grid-cols-[1.25fr_1fr]' : 'grid-cols-1 sm:max-w-xs')}>
         <div className="relative">
-          <label htmlFor={`${id}-d`} className="sr-only">Date</label>
+          <label htmlFor={`${id}-d`} className="sr-only">{t('date')}</label>
           <input
             id={`${id}-d`}
             type="date"
@@ -212,7 +214,7 @@ export function DateTimeFields({
           <Calendar aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-night-700" />
         </div>
         {withTime && <div className="relative">
-          <label htmlFor={`${id}-t`} className="sr-only">Heure</label>
+          <label htmlFor={`${id}-t`} className="sr-only">{t('time')}</label>
           <input
             id={`${id}-t`}
             type="time"
@@ -230,13 +232,14 @@ export function DateTimeFields({
 
 // Ligne « Sélectionner un ou plusieurs enfants › » qui déplie une liste de cases à cocher.
 export function ChildrenPicker({
-  options, value, onChange, label = 'Enfants concernés',
+  options, value, onChange, label,
 }: {
   options: { id: string; label: string; hint?: string }[]
   value: string[]
   onChange: (ids: string[]) => void
   label?: string
 }) {
+  const t = useTranslations('family.journal.fields')
   const [open, setOpen] = useState(false)
   const id = useId()
   const selected = options.filter((o) => value.includes(o.id)).map((o) => o.label)
@@ -245,7 +248,7 @@ export function ChildrenPicker({
 
   return (
     <div>
-      <FieldLabel as="p" id={`${id}-l`}>{label}</FieldLabel>
+      <FieldLabel as="p" id={`${id}-l`}>{label ?? t('children')}</FieldLabel>
       <button
         type="button"
         aria-expanded={open}
@@ -258,7 +261,7 @@ export function ChildrenPicker({
         )}
       >
         <span id={`${id}-v`} className={cn('truncate', selected.length ? 'font-medium text-night-900' : 'text-night-500')}>
-          {selected.length ? selected.join(', ') : 'Sélectionner un ou plusieurs enfants'}
+          {selected.length ? selected.join(', ') : t('childrenPlaceholder')}
         </span>
         <ChevronRight
           aria-hidden="true"
@@ -306,15 +309,16 @@ export type TypeTileOption = {
 
 /** Grille de tuiles « Type d'événement » — radios natifs (flèches clavier incluses). */
 export function TypeTileGroup({
-  name, legend = "Type d'événement", options, value, onChange, columns = 4,
+  name, legend, options, value, onChange, columns = 4,
 }: {
   name: string; legend?: string; options: TypeTileOption[]; value: string; onChange: (v: string) => void
   /** 4 par défaut ; 3 pour 6 tuiles (Journal) */
   columns?: 3 | 4
 }) {
+  const t = useTranslations('family.journal.fields')
   return (
     <fieldset>
-      <FieldLabel as="legend">{legend}</FieldLabel>
+      <FieldLabel as="legend">{legend ?? t('eventType')}</FieldLabel>
       <div className={cn('grid gap-2.5', columns === 3 ? 'grid-cols-3 sm:grid-cols-6' : 'grid-cols-4')}>
         {options.map((o) => {
           const checked = value === o.value

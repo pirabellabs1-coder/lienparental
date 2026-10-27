@@ -1,9 +1,10 @@
 'use client'
 
 import { useId, useState, type FormEvent } from 'react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { btn } from '@/components/ui/kit'
-import { createFamilyInvitation, ROLE_HELP, type GuardianRole, type IssuedInvitation } from '@/lib/coparents'
+import { createFamilyInvitation, type GuardianRole, type IssuedInvitation } from '@/lib/coparents'
 import { isValidEmail } from '@/lib/coparents/validation'
 import { dePrenom } from './bits'
 
@@ -24,13 +25,12 @@ type Props = {
   secondary?: React.ReactNode
 }
 
-const ROLES: { value: GuardianRole; title: string }[] = [
-  { value: 'parent', title: 'Parent' },
-  { value: 'proche', title: 'Proche (beau-parent, grand-parent…)' },
-]
+// Titres et aides : family.coparents.inviteForm.roles.<rôle>.{title,help} (traduits au rendu).
+const ROLES: { value: GuardianRole }[] = [{ value: 'parent' }, { value: 'proche' }]
 
 /** Formulaire d'invitation : e-mail nominatif, rôle, enfants concernés. Erreurs liées aux champs. */
-export function InviteForm({ childOptions, ownerChildIds, defaultChildIds, defaultRole = 'parent', onCreated, submitLabel = 'Créer l’invitation', secondary }: Props) {
+export function InviteForm({ childOptions, ownerChildIds, defaultChildIds, defaultRole = 'parent', onCreated, submitLabel, secondary }: Props) {
+  const t = useTranslations('family.coparents.inviteForm')
   const uid = useId()
   const owned = (id: string) => !ownerChildIds || ownerChildIds.includes(id)
   // Rôle « parent » proposé seulement si je suis titulaire d'au moins une fiche (la base
@@ -59,8 +59,8 @@ export function InviteForm({ childOptions, ownerChildIds, defaultChildIds, defau
   const submit = async (e: FormEvent) => {
     e.preventDefault()
     const next: typeof errors = {}
-    if (!isValidEmail(email)) next.email = 'Saisissez une adresse e-mail valide, par exemple prenom.nom@email.com.'
-    if (childIds.length === 0) next.children = 'Choisissez au moins un enfant.'
+    if (!isValidEmail(email)) next.email = t('emailInvalid')
+    if (childIds.length === 0) next.children = t('childrenRequired')
     setErrors(next)
     if (next.email || next.children) {
       document.getElementById(next.email ? `${uid}-email` : `${uid}-child-0`)?.focus()
@@ -70,7 +70,7 @@ export function InviteForm({ childOptions, ownerChildIds, defaultChildIds, defau
     try {
       onCreated(await createFamilyInvitation({ email, role, childIds }))
     } catch (err) {
-      setErrors({ form: err instanceof Error ? err.message : 'L’invitation n’a pas pu être créée.' })
+      setErrors({ form: err instanceof Error ? err.message : t('createFailed') })
     } finally {
       setBusy(false)
     }
@@ -79,8 +79,8 @@ export function InviteForm({ childOptions, ownerChildIds, defaultChildIds, defau
   return (
     <form onSubmit={submit} noValidate className="space-y-5">
       <div>
-        <label htmlFor={`${uid}-email`} className="block text-[13px] font-bold text-night-900">Adresse e-mail de l&apos;adulte invité</label>
-        <p id={`${uid}-email-hint`} className="mt-0.5 text-[12px] text-night-600">L&apos;invitation ne pourra être acceptée qu&apos;avec un compte vérifié à cette adresse.</p>
+        <label htmlFor={`${uid}-email`} className="block text-[13px] font-bold text-night-900">{t('emailLabel')}</label>
+        <p id={`${uid}-email-hint`} className="mt-0.5 text-[12px] text-night-600">{t('emailHint')}</p>
         <input
           id={`${uid}-email`}
           type="email"
@@ -91,14 +91,14 @@ export function InviteForm({ childOptions, ownerChildIds, defaultChildIds, defau
           onChange={(e) => setEmail(e.target.value)}
           aria-invalid={errors.email ? true : undefined}
           aria-describedby={[`${uid}-email-hint`, errors.email && `${uid}-email-err`].filter(Boolean).join(' ')}
-          placeholder="prenom.nom@email.com"
+          placeholder={t('emailPlaceholder')}
           className="mt-1.5 h-12 w-full rounded-xl border border-night-200 bg-white px-3.5 text-[15px] text-night-900 placeholder:text-night-500 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-200 aria-[invalid=true]:border-alert-500"
         />
         {errors.email && <p id={`${uid}-email-err`} className="mt-1.5 text-[12px] font-semibold text-alert-600">{errors.email}</p>}
       </div>
 
       <fieldset>
-        <legend className="text-[13px] font-bold text-night-900">Rôle</legend>
+        <legend className="text-[13px] font-bold text-night-900">{t('role')}</legend>
         <div className={cn('mt-2 grid gap-2', roles.length > 1 && 'sm:grid-cols-2')}>
           {roles.map((r) => (
             <label
@@ -118,8 +118,8 @@ export function InviteForm({ childOptions, ownerChildIds, defaultChildIds, defau
                 className="mt-0.5 h-5 w-5 shrink-0 accent-leaf-600"
               />
               <span className="min-w-0">
-                <span className="block text-[14px] font-semibold text-night-900">{r.title}</span>
-                <span id={`${uid}-role-${r.value}`} className="mt-0.5 block text-[12px] leading-snug text-night-600">{ROLE_HELP[r.value]}</span>
+                <span className="block text-[14px] font-semibold text-night-900">{t(`roles.${r.value}.title`)}</span>
+                <span id={`${uid}-role-${r.value}`} className="mt-0.5 block text-[12px] leading-snug text-night-600">{t(`roles.${r.value}.help`)}</span>
               </span>
             </label>
           ))}
@@ -127,15 +127,15 @@ export function InviteForm({ childOptions, ownerChildIds, defaultChildIds, defau
         {notOwned.length > 0 && (
           <p id={`${uid}-owner-note`} className="mt-2 rounded-xl bg-night-50/70 p-3 text-[12px] leading-relaxed text-night-700">
             {canInviteParent
-              ? `Vous n’êtes pas titulaire de la fiche ${dePrenom(notOwned.map((c) => c.prenom).join(', '))} : seul son titulaire peut y inviter un autre parent. Vous pouvez y inviter un proche.`
-              : 'Seul le parent titulaire de la fiche peut inviter un autre parent. Vous pouvez inviter un proche ; pour un parent, demandez-le au titulaire.'}
+              ? t('notOwner', { dePrenom: dePrenom(notOwned.map((c) => c.prenom).join(', ')), names: notOwned.map((c) => c.prenom).join(', ') })
+              : t('notOwnerAny')}
           </p>
         )}
       </fieldset>
 
       {childOptions.length > 0 && (
         <fieldset aria-describedby={errors.children ? `${uid}-children-err` : undefined}>
-          <legend className="text-[13px] font-bold text-night-900">Enfants concernés</legend>
+          <legend className="text-[13px] font-bold text-night-900">{t('children')}</legend>
           <div className="mt-2 flex flex-wrap gap-2">
             {childOptions.map((c, i) => {
               const checked = childIds.includes(c.id)
@@ -172,7 +172,7 @@ export function InviteForm({ childOptions, ownerChildIds, defaultChildIds, defau
 
       <div className="space-y-2.5">
         <button type="submit" disabled={busy} className={cn(btn.primary, 'w-full')}>
-          {busy ? 'Création de l’invitation…' : submitLabel}
+          {busy ? t('creating') : submitLabel ?? t('submit')}
         </button>
         {secondary}
       </div>

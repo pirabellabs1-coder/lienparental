@@ -1,12 +1,17 @@
 import Link from 'next/link'
-import { blogCategoryLabel, type PublishedPost } from '@/lib/blog/types'
+import { useLocale, useTranslations } from 'next-intl'
+import { BLOG_CATEGORIES, blogCategoryLabel, type PublishedPost } from '@/lib/blog/types'
+import { intlLocale } from '@/lib/i18n/config'
 import { readingMinutes } from '@/lib/blog/markdown'
 
-const dateFr = (iso: string) =>
-  new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'America/Cayenne' }).format(new Date(iso))
+const formatDate = (iso: string, locale: string) =>
+  new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'America/Cayenne' }).format(new Date(iso))
 
 /** Carte d'article (liste du blog, « À lire aussi »). Toute la carte est cliquable via le titre. */
 export function PostCard({ post, featured = false }: { post: PublishedPost; featured?: boolean }) {
+  const t = useTranslations('public.blog')
+  const locale = useLocale()
+  const category = BLOG_CATEGORIES.some((c) => c.key === post.categorie) ? t(`categories.${post.categorie}`) : blogCategoryLabel(post.categorie)
   return (
     <article className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white transition-shadow duration-200 hover:shadow-card focus-within:ring-2 focus-within:ring-leaf-500 motion-reduce:transition-none ${featured ? 'lg:flex-row' : ''}`}>
       <div className={`relative overflow-hidden bg-gradient-to-br from-night-900 to-night-700 ${featured ? 'aspect-[16/9] lg:aspect-auto lg:w-1/2' : 'aspect-[16/9]'}`}>
@@ -18,13 +23,13 @@ export function PostCard({ post, featured = false }: { post: PublishedPost; feat
         )}
       </div>
       <div className={`flex flex-1 flex-col p-5 ${featured ? 'lg:p-8' : ''}`}>
-        <p className="text-[12px] font-bold uppercase tracking-wider text-leaf-700">{blogCategoryLabel(post.categorie)}</p>
+        <p className="text-[12px] font-bold uppercase tracking-wider text-leaf-700">{category}</p>
         <h3 className={`mt-2 font-extrabold leading-snug text-night-900 ${featured ? 'text-[22px] lg:text-[28px]' : 'text-[17px]'}`}>
           <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0 focus-visible:outline-none">{post.titre}</Link>
         </h3>
         <p className="mt-2 line-clamp-3 text-[14px] leading-relaxed text-night-700">{post.extrait}</p>
         <p className="mt-auto pt-4 text-[12.5px] text-night-600">
-          <time dateTime={post.publishedAt}>{dateFr(post.publishedAt)}</time> · {readingMinutes(post.contenu)} min de lecture
+          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time> · {t('readingTime', { n: readingMinutes(post.contenu) })}
         </p>
       </div>
     </article>

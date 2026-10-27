@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 import { getPost, listPosts, relatedPosts, siteUrl } from '@/lib/blog/queries'
 import { markdownToText } from '@/lib/blog/markdown'
 import { blogCategoryLabel } from '@/lib/blog/types'
@@ -19,7 +20,7 @@ const absolute = (u: string) => (u.startsWith('/') ? `${siteUrl()}${u}` : u)
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = await getPost(slug)
-  if (!post) return { title: 'Article introuvable', robots: { index: false } }
+  if (!post) return { title: (await getTranslations('public.blog'))('notFound'), robots: { index: false } }
   const title = post.seoTitre || post.titre
   const description = post.seoDescription || post.extrait || markdownToText(post.contenu).slice(0, 160)
   const images = post.couverture ? [{ url: absolute(post.couverture), alt: post.couvertureAlt }] : undefined

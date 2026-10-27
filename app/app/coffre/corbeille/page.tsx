@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import { TopBar } from '@/components/mobile/TopBar'
 import { Card } from '@/components/ui/Card'
 import { Button, ConfirmDialog, EmptyState } from '@/components/ui'
@@ -10,11 +11,13 @@ import { useTrashedDocs } from '@/components/coffre/store'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { LIVE } from '@/lib/data/core'
 import { TRASH_RETENTION_DAYS, purgeDocument, restoreDocument, type VaultDocumentRecord } from '@/lib/data/vault'
+import { intlLocale } from '@/lib/i18n/config'
 
 type TrashedDoc = {
   id: string
   name: string
   mime: string
+  /** Date de mise à la corbeille (ISO) — formatée au rendu selon la locale. */
   deletedAt: string
   daysLeft: number
   /** Supabase : document source (chemin Storage pour la purge). */
@@ -28,20 +31,24 @@ function toTrashed(d: VaultDocumentRecord, now = Date.now()): TrashedDoc {
     id: d.id,
     name: d.name,
     mime: d.ext.toLowerCase(),
-    deletedAt: at.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' }),
+    deletedAt: at.toISOString(),
     daysLeft: left,
     record: d,
   }
 }
 
 const INITIAL: TrashedDoc[] = [
-  { id: 't1', name: 'Ancien RIB.pdf', mime: 'pdf', deletedAt: '12 oct. 2026', daysLeft: 18 },
-  { id: 't2', name: 'Facture cantine 2024.pdf', mime: 'pdf', deletedAt: '03 oct. 2026', daysLeft: 9 },
-  { id: 't3', name: 'Scan carte vitale (ancien).jpg', mime: 'jpg', deletedAt: '28 sept. 2026', daysLeft: 4 },
+  { id: 't1', name: 'Ancien RIB.pdf', mime: 'pdf', deletedAt: '2026-10-12T12:00:00', daysLeft: 18 },
+  { id: 't2', name: 'Facture cantine 2024.pdf', mime: 'pdf', deletedAt: '2026-10-03T12:00:00', daysLeft: 9 },
+  { id: 't3', name: 'Scan carte vitale (ancien).jpg', mime: 'jpg', deletedAt: '2026-09-28T12:00:00', daysLeft: 4 },
 ]
 
 export default function CorbeillePage() {
   // Supabase : documents.deleted_at non nul (RLS) ; démo : liste fictive locale.
+  const t = useTranslations('vault.trash')
+  const tc = useTranslations('vault.common')
+  const locale = useLocale()
+  const fmtDeleted = (iso: string) => new Date(iso).toLocaleDateString(intlLocale(locale), { day: '2-digit', month: 'short', year: 'numeric' })
   const trash = useTrashedDocs()
   const [docs, setDocs] = useState<TrashedDoc[]>(LIVE ? [] : INITIAL)
   const [toDelete, setToDelete] = useState<TrashedDoc | null>(null)
@@ -55,9 +62,9 @@ export default function CorbeillePage() {
     if (LIVE) {
       try {
         await restoreDocument(id)
-        announce('Document restauré')
+        announce(t('restored'))
       } catch (e) {
-        announce(e instanceof Error ? e.message : 'Restauration impossible')
+        announce(e instanceof Error ? e.message : t('restoreFailed'))
         return
       }
     }
@@ -68,9 +75,9 @@ export default function CorbeillePage() {
     if (LIVE) {
       try {
         await purgeDocument({ id: toDelete.id, storagePath: toDelete.record?.storagePath })
-        announce('Document supprimé définitivement')
+        announce(t('purged'))
       } catch (e) {
-        announce(e instanceof Error ? e.message : 'Suppression impossible')
+        announce(e instanceof Error ? e.message : t('purgeFailed'))
         setToDelete(null)
         return
       }
@@ -81,28 +88,25 @@ export default function CorbeillePage() {
 
   return (
     <>
-      <TopBar title="Corbeille" showBack backHref="/app/coffre" />
+      <TopBar title={t('title')} showBack backHref="/app/coffre" />
       <div className="w-full px-5 pb-6 pt-4 space-y-4">
         <div
           role="note"
           className="flex items-start gap-3 rounded-xl2 border border-night-100 bg-night-50 p-3 text-sm text-night-700"
         >
           <Info className="h-4 w-4 text-night-500 mt-0.5 shrink-0" aria-hidden="true" />
-          <p>
-            Conservation 30 jours. Passé ce délai, les documents sont supprimés
-            définitivement et ne peuvent plus être restaurés.
-          </p>
+          <p>{t('retention')}</p>
         </div>
 
         {LIVE && trash.loading ? (
-          <LoadingState compact title="Chargement de la corbeille" description="" />
+          <LoadingState compact title={t('loading')} description="" />
         ) : LIVE && trash.error ? (
           <p role="alert" className="rounded-xl2 border border-alert-100 bg-alert-50 p-4 text-sm text-alert-600">{trash.error.message}</p>
         ) : docs.length === 0 ? (
           <EmptyState
             icon={<Trash2 className="h-6 w-6" />}
-            title="Corbeille vide"
-            description="Les documents supprimés apparaîtront ici pendant 30 jours."
+            title={t('emptyTitle')}
+            description={t('emptyText')}
           />
         ) : (
           <ul className="space-y-2.5">
@@ -118,18 +122,18 @@ export default function CorbeillePage() {
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium text-night-900 truncate">{d.name}</p>
-                      <p className="text-xs text-night-600">Supprimé le {d.deletedAt}</p>
+                      <p className="text-xs text-night-600">{t('deletedOn', { date: fmtDeleted(d.deletedAt) })}</p>
                       <p className="text-xs text-alert-500 mt-1">
-                        Expire dans {d.daysLeft} jour{d.daysLeft > 1 ? 's' : ''}
+                        {t('expiresIn', { days: d.daysLeft })}
                       </p>
                     </div>
                   </div>
                   <div className="flex justify-end gap-2">
                     <Button variant="secondary" size="sm" onClick={() => void restore(d.id)}>
-                      <RotateCcw className="h-4 w-4" aria-hidden="true" /> Restaurer
+                      <RotateCcw className="h-4 w-4" aria-hidden="true" /> {t('restore')}
                     </Button>
                     <Button variant="danger" size="sm" onClick={() => setToDelete(d)}>
-                      <Trash2 className="h-4 w-4" aria-hidden="true" /> Supprimer
+                      <Trash2 className="h-4 w-4" aria-hidden="true" /> {tc('delete')}
                     </Button>
                   </div>
                 </Card>
@@ -143,11 +147,11 @@ export default function CorbeillePage() {
         open={toDelete !== null}
         onClose={() => setToDelete(null)}
         onConfirm={purge}
-        title="Supprimer définitivement ?"
+        title={t('purgeTitle')}
         description={toDelete
-          ? `« ${toDelete.name} » sera supprimé immédiatement et ne pourra plus être récupéré.`
+          ? t('purgeText', { name: toDelete.name })
           : ''}
-        confirmLabel="Supprimer définitivement"
+        confirmLabel={t('purgeConfirm')}
         tone="danger"
       />
       {node}

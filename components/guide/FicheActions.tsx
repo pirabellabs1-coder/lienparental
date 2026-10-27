@@ -1,7 +1,9 @@
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { BellPlus, CalendarPlus, ChevronRight, FolderPlus, Wallet, type LucideIcon } from 'lucide-react'
 import { resolveAction } from '@/lib/guide/actions'
 import type { FicheAction } from '@/lib/guide/types'
+import { intlLocale } from '@/lib/i18n/config'
 
 const ICONS: Record<FicheAction['type'], LucideIcon> = {
   coffre: FolderPlus,
@@ -10,10 +12,10 @@ const ICONS: Record<FicheAction['type'], LucideIcon> = {
   depense: Wallet,
 }
 
-const euro = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' })
-
 // « Ajouter à Lien Parental » : chaque action ouvre le formulaire existant, pré-rempli (contrat d'URL).
 export function FicheActions({ actions, ficheSlug }: { actions: FicheAction[]; ficheSlug: string }) {
+  const t = useTranslations('coach.guide.actions')
+  const euro = new Intl.NumberFormat(intlLocale(useLocale()), { style: 'currency', currency: 'EUR' })
   if (actions.length === 0) return null
   const items = actions.map((a) => resolveAction(a, ficheSlug))
   return (
@@ -30,7 +32,7 @@ export function FicheActions({ actions, ficheSlug }: { actions: FicheAction[]; f
                 <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[13.5px] font-bold leading-snug text-night-900">{a.label}</span>
+                <span className="block text-[13.5px] font-bold leading-snug text-night-900">{t(`labels.${a.kind}`)}</span>
                 <span className="block text-[12.5px] leading-snug text-night-600">
                   {a.titre}
                   {a.montant !== undefined && <> : {euro.format(a.montant)}</>}
@@ -40,11 +42,11 @@ export function FicheActions({ actions, ficheSlug }: { actions: FicheAction[]; f
             </Link>
             {a.montant !== undefined && a.montantSource && (
               <p className="mt-1 px-1 text-[11.5px] text-night-600">
-                Montant indiqué par{' '}
+                {t('amountBy')}{' '}
                 <a href={a.montantSource} target="_blank" rel="noopener noreferrer" className="font-semibold text-leaf-700 underline">
-                  la source officielle<span className="sr-only"> (nouvel onglet)</span>
+                  {t('officialSource')}<span className="sr-only">{t('newTab')}</span>
                 </a>
-                , modifiable dans le formulaire.
+                {t('editable')}
               </p>
             )}
           </li>

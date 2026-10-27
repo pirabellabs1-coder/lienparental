@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 export type Crumb = { label: string; href?: string }
@@ -9,8 +10,9 @@ export type Crumb = { label: string; href?: string }
  * élément = page courante (aria-current). Défile horizontalement s'il est long.
  */
 export function Breadcrumb({ items, className }: { items: Crumb[]; className?: string }) {
+  const t = useTranslations('vault.ui')
   return (
-    <nav aria-label="Fil d’Ariane" className={cn('-mx-5 overflow-x-auto px-5 [scrollbar-width:none]', className)}>
+    <nav aria-label={t('breadcrumb')} className={cn('-mx-5 overflow-x-auto px-5 [scrollbar-width:none]', className)}>
       <ol className="flex min-w-max items-center gap-0.5 text-[12.5px]">
         {items.map((c, i) => {
           const last = i === items.length - 1

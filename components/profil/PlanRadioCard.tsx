@@ -1,7 +1,9 @@
 'use client'
 import { Check } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { CrownIcon } from './kit'
-import { PRICING, formatPrice, planLabel, type Cycle, type PaidPlan } from './pricing'
+import { PRICING, formatPriceIn, planPromo, type Cycle, type PaidPlan } from './pricing'
+import { intlLocale } from '@/lib/i18n/config'
 import { cn } from '@/lib/cn'
 
 /** Carte radio "Premium mensuel / annuel", "Coparentalité+ mensuel / annuel" (Abonnement étape 1 & Changer de formule). */
@@ -22,6 +24,9 @@ export function PlanRadioCard({
   /** Formule actuellement souscrite (affiche "Formule actuelle"). */
   current?: boolean
 }) {
+  const t = useTranslations('billing')
+  const loc = intlLocale(useLocale())
+  const formatPrice = (v: number) => formatPriceIn(v, loc)
   const annual = cycle === 'annuel'
   const p = PRICING[plan]
   return (
@@ -35,24 +40,24 @@ export function PlanRadioCard({
       <input type="radio" name={name} value={`${plan}:${cycle}`} checked={checked} onChange={() => onChange(cycle)} className="sr-only" />
       <CrownIcon className="mt-3 h-8 w-9 shrink-0" />
       <span className="min-w-0 flex-1">
-        <span className="block text-[14px] font-bold text-night-900">{planLabel(plan, cycle)}</span>
+        <span className="block text-[14px] font-bold text-night-900">{t(`common.offer.${cycle}`, { plan: t(`common.plan.${plan}`) })}</span>
         <span className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
           <span className="text-[15px] font-bold text-night-900">
-            {formatPrice(annual ? p.yearly : p.monthly)} / {annual ? 'an' : 'mois'}
+            {t('common.pricePeriod', { price: formatPrice(annual ? p.yearly : p.monthly), period: t(`common.period.${cycle}`) })}
           </span>
-          {annual && <span className="rounded-md bg-leaf-50 px-2 py-0.5 text-[11px] font-bold text-leaf-700">{p.discountShortLabel}</span>}
+          {annual && <span className="rounded-md bg-leaf-50 px-2 py-0.5 text-[11px] font-bold text-leaf-700">{t('common.saveDiscount', { pct: planPromo(plan).discountPct })}</span>}
         </span>
         {annual ? (
           <>
             <span className="mt-1.5 block text-[12px] text-night-600 line-through">
-              <span className="sr-only">Prix de référence : </span>{formatPrice(p.yearlyReference)} / an
+              <span className="sr-only">{t('radioCard.referencePrice')}</span>{t('common.perYear', { price: formatPrice(p.yearlyReference) })}
             </span>
-            <span className="mt-1 block text-[12px] text-night-800">Soit {formatPrice(p.yearlyPerMonth)} / mois</span>
+            <span className="mt-1 block text-[12px] text-night-800">{t('radioCard.perMonthEquivalent', { price: formatPrice(p.yearlyPerMonth) })}</span>
           </>
         ) : (
-          <span className="mt-1.5 block text-[12px] text-night-800">Sans engagement</span>
+          <span className="mt-1.5 block text-[12px] text-night-800">{t('common.noCommitment')}</span>
         )}
-        {current && <span className="mt-2 inline-block rounded-md bg-night-100 px-2 py-0.5 text-[11px] font-bold text-night-900">Formule actuelle</span>}
+        {current && <span className="mt-2 inline-block rounded-md bg-night-100 px-2 py-0.5 text-[11px] font-bold text-night-900">{t('radioCard.currentPlan')}</span>}
       </span>
       <span
         aria-hidden

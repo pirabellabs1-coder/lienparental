@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 // Petites briques visuelles partagées par les écrans Coach IA.
@@ -35,6 +36,7 @@ export function ScreenTitle({ title, subtitle, className }: { title: string; sub
 
 /** Barre de quota bleu nuit sur fond gris-bleu. */
 export function UsageBar({ used, total, label }: { used: number; total: number; label: string }) {
+  const t = useTranslations('coach.common')
   const pct = total > 0 ? Math.round((used / total) * 100) : 0
   return (
     <div
@@ -43,7 +45,7 @@ export function UsageBar({ used, total, label }: { used: number; total: number; 
       aria-valuemin={0}
       aria-valuemax={total}
       aria-valuenow={used}
-      aria-valuetext={`${used} sur ${total} (${pct} %)`}
+      aria-valuetext={t('usageValueText', { used, total, pct })}
       className="h-2 w-full overflow-hidden rounded-full bg-night-100"
     >
       <div className="h-full rounded-full bg-night-900" style={{ width: `${pct}%` }} />
@@ -53,18 +55,20 @@ export function UsageBar({ used, total, label }: { used: number; total: number; 
 
 /** Petit texte rappelant que le Coach IA ne remplace pas un professionnel du droit. */
 export function LegalNote({ className }: { className?: string }) {
+  const t = useTranslations('coach.common')
   return (
     <p className={cn('text-center text-[11px] leading-snug text-night-500', className)}>
-      Le Coach IA propose des pistes de communication. Le Coach IA ne donne pas de conseil juridique.
+      {t('legalNote')}
     </p>
   )
 }
 
 /** Mention discrète quand l'IA n'est pas configurée (réponses simulées). */
 export function DemoNote({ className }: { className?: string }) {
+  const t = useTranslations('coach.common')
   return (
     <p className={cn('mx-auto w-fit rounded-full bg-gold-50 px-3 py-1 text-center text-[11px] font-medium text-night-700', className)}>
-      Mode démonstration : réponses simulées
+      {t('demoNote')}
     </p>
   )
 }

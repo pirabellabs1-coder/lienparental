@@ -1,6 +1,8 @@
 import { mockJournalEntries, mockChildren, type JournalEntry } from '@/lib/mock-data'
 import { demoDepenseEntries, type JournalDepense } from '@/lib/journal-finances'
 import { dayKeyInTz, dayKeyToDate, isDayKey, timeInTz } from '@/lib/tz'
+import { intlLocale } from '@/lib/i18n/config'
+import { formatHm } from '@/components/famille/useFamilyFormat'
 
 // Couche d'accès aux entrées du journal pour l'UI (données de démonstration).
 // Mode connecté : lib/data/journal (journal_entries + journal_expenses, RLS user_id).
@@ -77,35 +79,38 @@ export function createdParts(e: Pick<JournalItem, 'createdAt' | 'createdTime'>):
   return { day: dayKeyInTz(e.createdAt), time: timeInTz(e.createdAt) || undefined }
 }
 
-/** "18:00" → "18h00" */
-export function fmtHeure(hhmm?: string): string {
-  return hhmm ? hhmm.replace(':', 'h') : ''
+// Les helpers de format acceptent la locale next-intl (défaut : 'fr', rendu historique).
+
+/** "18:00" → "18h00" (fr) ; "6:00 PM" (en) ; "18:00" (pt) */
+export function fmtHeure(hhmm?: string, locale = 'fr'): string {
+  if (!hhmm) return ''
+  return locale === 'fr' ? hhmm.replace(':', 'h') : formatHm(hhmm, locale)
 }
 
 /** "14h30 - 17h30" ou "14h30" */
-export function fmtPlage(e: Pick<JournalItem, 'heure' | 'heureFin'>): string {
+export function fmtPlage(e: Pick<JournalItem, 'heure' | 'heureFin'>, locale = 'fr'): string {
   if (!e.heure) return ''
-  return e.heureFin ? `${fmtHeure(e.heure)} - ${fmtHeure(e.heureFin)}` : fmtHeure(e.heure)
+  return e.heureFin ? `${fmtHeure(e.heure, locale)} - ${fmtHeure(e.heureFin, locale)}` : fmtHeure(e.heure, locale)
 }
 
 // Dates « jour seul » (parseDay) : formatage en UTC, cf. lib/tz.
 const UTC = { timeZone: 'UTC' } as const
 
-export function fmtMonthShort(d: Date): string {
-  return d.toLocaleDateString('fr-FR', { month: 'short', ...UTC }).replace('.', '').toUpperCase()
+export function fmtMonthShort(d: Date, locale = 'fr'): string {
+  return d.toLocaleDateString(intlLocale(locale), { month: 'short', ...UTC }).replace('.', '').toUpperCase()
 }
 
-export function fmtDateFull(d: Date): string {
-  const s = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', ...UTC })
+export function fmtDateFull(d: Date, locale = 'fr'): string {
+  const s = d.toLocaleDateString(intlLocale(locale), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', ...UTC })
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-export function fmtDateMedium(d: Date): string {
-  return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', ...UTC })
+export function fmtDateMedium(d: Date, locale = 'fr'): string {
+  return d.toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', ...UTC })
 }
 
-export function fmtMonthYear(d: Date): string {
-  const s = d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', ...UTC })
+export function fmtMonthYear(d: Date, locale = 'fr'): string {
+  const s = d.toLocaleDateString(intlLocale(locale), { month: 'long', year: 'numeric', ...UTC })
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
@@ -114,9 +119,13 @@ export function deMonth(label: string): string {
   return /^[aeiouyàâäéèêëîïôöûü]/i.test(label) ? `d’${label}` : `de ${label}`
 }
 
-/** 1 258 291 → "1,2 Mo" ; 84 000 → "82 Ko" */
-export function fmtSize(bytes?: number): string {
+/** 1 258 291 → "1,2 Mo" ; 84 000 → "82 Ko" (en : "1.2 MB", pt : "1,2 MB") */
+export function fmtSize(bytes?: number, locale = 'fr'): string {
   if (bytes == null) return ''
-  if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1).replace('.', ',')} Mo`
-  return `${Math.max(1, Math.round(bytes / 1024))} Ko`
+  const [mb, kb] = locale === 'fr' ? ['Mo', 'Ko'] : ['MB', 'KB']
+  if (bytes >= 1024 * 1024) {
+    const v = (bytes / (1024 * 1024)).toFixed(1)
+    return `${locale === 'en' ? v : v.replace('.', ',')} ${mb}`
+  }
+  return `${Math.max(1, Math.round(bytes / 1024))} ${kb}`
 }

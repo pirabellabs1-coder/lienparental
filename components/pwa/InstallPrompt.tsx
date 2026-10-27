@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 /**
  * InstallPrompt — floating "Installer l'app" button (bottom-right).
@@ -14,6 +15,7 @@ import { useEffect, useRef, useState } from 'react';
  *   the current tab/session).
  */
 export default function InstallPrompt() {
+  const t = useTranslations('account.pwa');
   const deferredRef = useRef<BeforeInstallPromptEvent | null>(null);
   const [visible, setVisible] = useState(false);
   const [delayElapsed, setDelayElapsed] = useState(false);
@@ -36,7 +38,7 @@ export default function InstallPrompt() {
     window.addEventListener('beforeinstallprompt', onBIP);
     window.addEventListener('appinstalled', onInstalled);
 
-    const t = window.setTimeout(() => {
+    const timer = window.setTimeout(() => {
       setDelayElapsed(true);
       if (deferredRef.current) setVisible(true);
     }, 5000);
@@ -44,7 +46,7 @@ export default function InstallPrompt() {
     return () => {
       window.removeEventListener('beforeinstallprompt', onBIP);
       window.removeEventListener('appinstalled', onInstalled);
-      window.clearTimeout(t);
+      window.clearTimeout(timer);
     };
   }, [delayElapsed]);
 
@@ -78,19 +80,19 @@ export default function InstallPrompt() {
       className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full bg-night-900/95 backdrop-blur border border-white/10 shadow-lg px-3 py-2 text-sm text-white"
     >
       <span id="lp-install-title" className="pl-2 pr-1 font-medium">
-        Installer l&apos;app
+        {t('title')}
       </span>
       <button
         type="button"
         onClick={handleInstall}
         className="rounded-full bg-leaf-500 hover:bg-leaf-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf-500 px-4 py-1.5 font-semibold transition-colors"
       >
-        Installer
+        {t('install')}
       </button>
       <button
         type="button"
         onClick={handleDismiss}
-        aria-label="Fermer la proposition d'installation"
+        aria-label={t('dismiss')}
         className="rounded-full p-1.5 text-white/70 hover:text-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf-500 transition-colors"
       >
         <svg

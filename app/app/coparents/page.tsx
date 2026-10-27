@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Baby, ShieldCheck, UserPlus } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
@@ -26,6 +27,7 @@ import {
 // Famille et co-parents : adultes liés par enfant, invitations, demandes reçues, fusion guidée.
 // Démo : Thomas déjà lié, une invitation en attente ; ?apercu=demande | ?apercu=fusion.
 export default function CoparentsPage() {
+  const t = useTranslations('family.coparents.page')
   const [data, setData] = useState<FamilyOverview | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [busyId, setBusyId] = useState<string | null>(null)
@@ -42,9 +44,9 @@ export default function CoparentsPage() {
     try {
       setData(await loadFamilyOverview())
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Chargement impossible.')
+      setError(e instanceof Error ? e.message : t('loadFailed'))
     }
-  }, [])
+  }, [t])
   useEffect(() => { void load() }, [load])
 
   const myPrenom = useMemo(() => {
@@ -63,21 +65,21 @@ export default function CoparentsPage() {
       announce(done)
       await load()
     } catch (e) {
-      announce(e instanceof Error ? e.message : 'Action impossible pour le moment.')
+      announce(e instanceof Error ? e.message : t('actionFailed'))
     } finally {
       setBusyId(null)
     }
   }
 
   const onChangeRole = (m: FamilyMember, role: GuardianRole) =>
-    m.guardianId && void run(m.guardianId, () => changeGuardianRole(m.guardianId as string, role), `${m.prenom} est maintenant ${role === 'parent' ? 'parent' : 'proche'}.`)
+    m.guardianId && void run(m.guardianId, () => changeGuardianRole(m.guardianId as string, role), role === 'parent' ? t('nowParent', { name: m.prenom }) : t('nowProche', { name: m.prenom }))
 
   const confirmRemoval = async () => {
     if (!removal?.member.guardianId) return
     const { member, child } = removal
     setRemoval(null)
     await run(member.guardianId as string, () => removeGuardian(member.guardianId as string),
-      member.isMe ? `Vous avez quitté l’espace de ${child.prenom}.` : `${member.prenom} n’a plus accès à l’espace de ${child.prenom}.`)
+      member.isMe ? t('youLeft', { child: child.prenom }) : t('accessRemoved', { name: member.prenom, child: child.prenom }))
   }
 
   const onResend = async (inv: SentInvitation) => {
@@ -88,7 +90,7 @@ export default function CoparentsPage() {
       setInviteOpen(true)
       await load()
     } catch (e) {
-      announce(e instanceof Error ? e.message : 'Renvoi impossible.')
+      announce(e instanceof Error ? e.message : t('resendFailed'))
     } finally {
       setBusyId(null)
     }
@@ -100,10 +102,10 @@ export default function CoparentsPage() {
     try {
       await mergeChildren(c.myChild.id, c.sharedChild.id)
       setMerge(null)
-      announce(`Les fiches de ${c.sharedChild.prenom} ont été fusionnées.`)
+      announce(t('merged', { name: c.sharedChild.prenom }))
       await load()
     } catch (e) {
-      setMergeError(e instanceof Error ? e.message : 'Fusion impossible.')
+      setMergeError(e instanceof Error ? e.message : t('mergeFailed'))
     } finally {
       setBusyId(null)
     }
@@ -111,7 +113,7 @@ export default function CoparentsPage() {
 
   const onDismiss = async (c: MergeCandidate) => {
     setMerge(null)
-    await run('merge', () => dismissMergeCandidate(c.myChild.id, c.sharedChild.id), 'C’est noté : ces fiches restent séparées.')
+    await run('merge', () => dismissMergeCandidate(c.myChild.id, c.sharedChild.id), t('keptSeparate'))
   }
 
   const closeInvite = () => {
@@ -121,29 +123,29 @@ export default function CoparentsPage() {
 
   return (
     <>
-      <TopBar title="Famille et co-parents" showBack backHref="/app" />
+      <TopBar title={t('title')} showBack backHref="/app" />
 
       {error ? (
-        <ErrorState compact title="Espace famille indisponible" description={error} primary={{ label: 'Réessayer', onClick: () => void load() }} />
+        <ErrorState compact title={t('unavailable')} description={error} primary={{ label: t('retry'), onClick: () => void load() }} />
       ) : !data ? (
-        <LoadingState compact title="Chargement de votre famille" description="" />
+        <LoadingState compact title={t('loading')} description="" />
       ) : (
         <div className="w-full space-y-5 px-5 pb-10 pt-2">
           <div className={cn(card, 'flex flex-col gap-3 p-4 sm:flex-row sm:items-center')}>
             <p className="min-w-0 flex-1 text-[13px] text-night-700">
-              Ajoutez l&apos;autre parent ou un proche : chacun garde son espace, et seules les informations de l&apos;enfant que vous partagez deviennent communes. Vous pouvez retirer un accès à tout moment.
+              {t('intro')}
             </p>
             {shareable.length > 0 && (
               <button type="button" onClick={() => { setIssued(null); setInviteOpen(true) }} className={cn(btn.primary, 'w-full shrink-0 sm:w-auto')}>
                 <UserPlus className="h-5 w-5" aria-hidden="true" />
-                Inviter un adulte
+                {t('invite')}
               </button>
             )}
           </div>
 
           {!FAMILY_LIVE && (
             <p className="rounded-xl bg-night-50 px-3 py-2 text-[12px] text-night-700">
-              Mode démonstration : les invitations ne sont pas envoyées et rien ne quitte cet appareil.
+              {t('demo')}
             </p>
           )}
 
@@ -151,15 +153,15 @@ export default function CoparentsPage() {
             <div className="min-w-0 space-y-6">
               {data.received.length > 0 && (
                 <section aria-labelledby="received-title">
-                  <h2 id="received-title" className="mb-2.5 text-[15px] font-bold text-night-900">Demandes reçues</h2>
+                  <h2 id="received-title" className="mb-2.5 text-[15px] font-bold text-night-900">{t('received')}</h2>
                   <ul className="space-y-3">
                     {data.received.map((r) => (
                       <ReceivedCard
                         key={r.id}
                         inv={r}
                         busy={busyId === r.id}
-                        onAccept={() => void run(r.id, async () => { await acceptFamilyInvitation({ id: r.id }) }, `Vous avez rejoint l’espace partagé de ${r.children.map((c) => c.prenom).join(', ')}.`)}
-                        onDecline={() => void run(r.id, () => declineFamilyInvitation(r.id), 'Demande refusée.')}
+                        onAccept={() => void run(r.id, async () => { await acceptFamilyInvitation({ id: r.id }) }, t('joined', { names: r.children.map((c) => c.prenom).join(', ') }))}
+                        onDecline={() => void run(r.id, () => declineFamilyInvitation(r.id), t('declined'))}
                       />
                     ))}
                   </ul>
@@ -168,7 +170,7 @@ export default function CoparentsPage() {
 
               {data.mergeCandidates.length > 0 && (
                 <section aria-labelledby="merge-title">
-                  <h2 id="merge-title" className="mb-2.5 text-[15px] font-bold text-night-900">Fiches en double</h2>
+                  <h2 id="merge-title" className="mb-2.5 text-[15px] font-bold text-night-900">{t('duplicates')}</h2>
                   <ul className="space-y-3">
                     {data.mergeCandidates.map((m) => (
                       <MergeBanner key={`${m.myChild.id}-${m.sharedChild.id}`} candidate={m} onOpen={() => { setMergeError(null); setMerge(m) }} />
@@ -178,12 +180,12 @@ export default function CoparentsPage() {
               )}
 
               <section aria-labelledby="members-title">
-                <h2 id="members-title" className="mb-2.5 text-[15px] font-bold text-night-900">Adultes liés par enfant</h2>
+                <h2 id="members-title" className="mb-2.5 text-[15px] font-bold text-night-900">{t('membersByChild')}</h2>
                 {data.children.length === 0 ? (
                   <div className={cn(card, 'flex flex-col items-center gap-3 p-6 text-center')}>
                     <span aria-hidden="true" className="grid h-14 w-14 place-items-center rounded-full bg-leaf-50 text-leaf-600"><Baby className="h-7 w-7" /></span>
-                    <p className="text-[14px] text-night-700">Ajoutez d&apos;abord la fiche de votre enfant pour pouvoir la partager.</p>
-                    <Link href="/app/enfants/nouveau" className={btn.primary}>Ajouter un enfant</Link>
+                    <p className="text-[14px] text-night-700">{t('addChildFirst')}</p>
+                    <Link href="/app/enfants/nouveau" className={btn.primary}>{t('addChild')}</Link>
                   </div>
                 ) : (
                   <div className="space-y-3">
@@ -195,9 +197,9 @@ export default function CoparentsPage() {
               </section>
 
               <section aria-labelledby="sent-title">
-                <h2 id="sent-title" className="mb-2.5 text-[15px] font-bold text-night-900">Invitations envoyées</h2>
+                <h2 id="sent-title" className="mb-2.5 text-[15px] font-bold text-night-900">{t('sent')}</h2>
                 {data.sent.length === 0 ? (
-                  <p className={cn(card, 'p-4 text-[13px] text-night-600')}>Aucune invitation en attente.</p>
+                  <p className={cn(card, 'p-4 text-[13px] text-night-600')}>{t('noPending')}</p>
                 ) : (
                   <ul className={cn(card, 'divide-y divide-night-100 p-4')}>
                     {data.sent.map((inv) => (
@@ -208,12 +210,12 @@ export default function CoparentsPage() {
               </section>
             </div>
 
-            <aside aria-label="Bon à savoir" className="space-y-3">
+            <aside aria-label={t('goodToKnow')} className="space-y-3">
               <SharedScope />
               <div className={cn(card, 'flex gap-3 p-4')}>
                 <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-leaf-600" aria-hidden="true" />
                 <p className="text-[13px] text-night-700">
-                  Les invitations sont nominatives et expirent après 7 jours. Retirer un adulte coupe immédiatement son accès aux informations partagées ; ses propres données restent dans son espace.
+                  {t('securityNote')}
                 </p>
               </div>
             </aside>
@@ -224,13 +226,13 @@ export default function CoparentsPage() {
       <Modal
         open={inviteOpen}
         onClose={closeInvite}
-        title={issued ? 'Partagez l’invitation' : 'Inviter un adulte'}
-        description={issued ? undefined : 'L’autre parent, un beau-parent ou un grand-parent.'}
+        title={issued ? t('shareInvitation') : t('invite')}
+        description={issued ? undefined : t('inviteDescription')}
       >
         {issued ? (
           <div className="space-y-4">
             <ShareInvite issued={issued} senderPrenom={myPrenom} announce={announce} />
-            <button type="button" onClick={closeInvite} className={cn(btn.secondary, 'w-full')}>Terminé</button>
+            <button type="button" onClick={closeInvite} className={cn(btn.secondary, 'w-full')}>{t('done')}</button>
           </div>
         ) : (
           <InviteForm
@@ -254,11 +256,11 @@ export default function CoparentsPage() {
         open={!!removal}
         onClose={() => setRemoval(null)}
         onConfirm={() => void confirmRemoval()}
-        title={removal?.member.isMe ? `Quitter l’espace de ${removal.child.prenom} ?` : `Retirer ${removal?.member.prenom ?? ''} ?`}
+        title={removal?.member.isMe ? t('leaveTitle', { child: removal.child.prenom }) : t('removeTitle', { name: removal?.member.prenom ?? '' })}
         description={removal?.member.isMe
-          ? 'Vous ne verrez plus les informations partagées de cet enfant. Vos propres données restent dans votre espace.'
-          : `${removal?.member.prenom ?? ''} ne verra plus les informations partagées de ${removal?.child.prenom ?? ''}. Ses propres données restent dans son espace.`}
-        confirmLabel={removal?.member.isMe ? 'Quitter' : 'Retirer l’accès'}
+          ? t('leaveText')
+          : t('removeText', { name: removal?.member.prenom ?? '', child: removal?.child.prenom ?? '' })}
+        confirmLabel={removal?.member.isMe ? t('leave') : t('removeAccess')}
       />
 
       <ConfirmDialog
@@ -267,12 +269,12 @@ export default function CoparentsPage() {
         onConfirm={() => {
           const inv = cancelTarget
           setCancelTarget(null)
-          if (inv) void run(inv.id, () => cancelFamilyInvitation(inv.id), 'Invitation annulée.')
+          if (inv) void run(inv.id, () => cancelFamilyInvitation(inv.id), t('cancelled'))
         }}
-        title="Annuler l’invitation ?"
-        description={`Le lien envoyé à ${cancelTarget?.email ?? ''} ne fonctionnera plus.`}
-        confirmLabel="Annuler l’invitation"
-        cancelLabel="Garder"
+        title={t('cancelTitle')}
+        description={t('cancelText', { email: cancelTarget?.email ?? '' })}
+        confirmLabel={t('cancelConfirm')}
+        cancelLabel={t('keep')}
       />
       {announcer}
     </>

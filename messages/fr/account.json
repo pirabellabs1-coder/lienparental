@@ -1,0 +1,754 @@
+{
+  "account": {
+    "ui": {
+      "confirm": {
+        "title": "Confirmer l’action",
+        "description": "Cette action est irréversible.",
+        "confirm": "Confirmer",
+        "cancel": "Annuler",
+        "wait": "Patientez…"
+      },
+      "modal": {
+        "close": "Fermer"
+      },
+      "search": {
+        "placeholder": "Rechercher…",
+        "clear": "Effacer la recherche"
+      },
+      "gauge": {
+        "full": "Quota atteint",
+        "near": "Attention, limite proche"
+      },
+      "steps": {
+        "aria": "Étape {current} sur {total}",
+        "ariaWithLabel": "Étape {current} sur {total} : {label}",
+        "short": "Étape {current}/{total}"
+      },
+      "fileDrop": {
+        "sizeB": "{n} o",
+        "sizeKB": "{n} Ko",
+        "sizeMB": "{n} Mo",
+        "badType": "Type non supporté: {name}",
+        "tooBig": "Fichier trop volumineux (max {max} Mo)",
+        "tooMany": "Maximum {max} fichier(s)",
+        "drop": "Déposer un fichier ou <browse>parcourir</browse>",
+        "max": "Max {max} Mo",
+        "selected": "Fichiers sélectionnés",
+        "remove": "Retirer {name}"
+      }
+    },
+    "kit": {
+      "homeAria": "Lien Parental, accueil",
+      "notifications": "Notifications",
+      "notificationsUnread": "Notifications, {count} non lues",
+      "prevStep": "Étape précédente",
+      "back": "Retour",
+      "step": "Étape {current} sur {total}",
+      "stepWithLabel": "Étape {current} sur {total} : {label}",
+      "stripe": "Paiement sécurisé par Stripe"
+    },
+    "feedback": {
+      "thanks": "Merci pour votre retour !",
+      "question": "Cet article vous a-t-il été utile ?",
+      "yes": "Oui, utile",
+      "no": "Non, pas utile"
+    },
+    "storage": {
+      "usage": {
+        "title": "Espace utilisé",
+        "progress": "{pct} % de l’espace utilisé"
+      },
+      "vault": {
+        "title": "Vos fichiers se gèrent dans le coffre-fort",
+        "text": "Consultez, triez et supprimez vos documents depuis le coffre-fort. Un document supprimé reste 30 jours dans la corbeille avant sa suppression définitive.",
+        "open": "Ouvrir le coffre-fort",
+        "back": "Retour au stockage"
+      },
+      "usageTitle": "Stockage - Utilisation",
+      "usedPct": "{pct} % utilisés",
+      "usedPctOf": "{pct} % utilisés sur {max}",
+      "breakdown": "Répartition",
+      "categories": {
+        "documents": "Documents",
+        "documentsPdf": "Documents (PDF, Word)",
+        "photos": "Photos",
+        "pieces": "Pièces jointes",
+        "autres": "Autres"
+      },
+      "unavailable": "La consommation de stockage est indisponible pour le moment. Réessayez dans quelques instants.",
+      "manageFiles": "Gérer mes fichiers",
+      "categoriesTitle": "Catégories",
+      "freeSpace": "Pour libérer de l’espace, supprimez des documents depuis le coffre-fort. Ils restent 30 jours dans la corbeille avant leur suppression définitive.",
+      "deleteAll": "Supprimer tous les fichiers",
+      "documents": {
+        "title": "Documents",
+        "deleted": "{count, plural, one {# fichier supprimé.} other {# fichiers supprimés.}}",
+        "exitSelection": "Quitter la sélection",
+        "back": "Retour",
+        "selectedCount": "{count, plural, one {# sélectionné} other {# sélectionnés}}",
+        "cancel": "Annuler",
+        "selectedSize": "{size} sélectionnés",
+        "willDelete": "Ces fichiers seront supprimés.",
+        "deleteSelection": "Supprimer la sélection",
+        "searchLabel": "Rechercher un document",
+        "searchPlaceholder": "Rechercher",
+        "sortSize": "Trier par taille",
+        "sortDate": "Trier par date",
+        "emptyTitle": "Aucun document",
+        "noResultTitle": "Aucun résultat",
+        "emptyText": "Vos documents apparaîtront ici.",
+        "noResultText": "Essayez un autre mot-clé.",
+        "deleteCount": "Supprimer ({count})",
+        "confirmTitle": "{count, plural, one {Supprimer # fichier ?} other {Supprimer # fichiers ?}}",
+        "confirmText": "{size} seront libérés. Cette action est irréversible.",
+        "confirm": "Supprimer"
+      },
+      "wipe": {
+        "title": "Supprimer tous les fichiers",
+        "runningTitle": "Suppression en cours",
+        "doneTitle": "Stockage - Utilisation",
+        "irreversible": "Cette action est irréversible.",
+        "irreversibleText": "Tous vos fichiers seront définitivement supprimés et vous ne pourrez pas les récupérer.",
+        "freed": "Espace qui sera libéré",
+        "sizeGo": "{n} Go",
+        "deleteAll": "Tout supprimer",
+        "cancel": "Annuler",
+        "running": "Suppression en cours…",
+        "wait": "Veuillez patienter, cela peut prendre quelques instants.",
+        "progress": "Progression de la suppression",
+        "deleting": "Suppression de {size}…",
+        "dontClose": "Ne fermez pas l’application.",
+        "zeroUsed": "0 % utilisés",
+        "done": "Tous vos fichiers ont été supprimés.",
+        "doneText": "Votre espace de stockage est maintenant vide."
+      }
+    },
+    "fields": {
+      "hidePassword": "Masquer le mot de passe",
+      "showPassword": "Afficher le mot de passe"
+    },
+    "markdown": {
+      "step": "Étape {n} :"
+    },
+    "push": {
+      "enableError": "Activation impossible pour le moment. Réessayez dans un instant.",
+      "disableError": "Désactivation impossible pour le moment. Réessayez dans un instant.",
+      "removeError": "Suppression impossible pour le moment.",
+      "status": {
+        "checking": "Vérification de cet appareil…",
+        "demo": "Disponible avec un compte réel (mode démonstration).",
+        "notConfigured": "Les notifications sur appareil ne sont pas encore disponibles.",
+        "iosInstall": "Sur iPhone et iPad, ajoutez d’abord Lien Parental à l’écran d’accueil.",
+        "unsupported": "Ce navigateur ne permet pas les notifications.",
+        "blocked": "Les notifications sont bloquées pour ce site dans les réglages du navigateur.",
+        "on": "Activées sur cet appareil.",
+        "onAccountOff": "Activées sur cet appareil, mais coupées pour tout le compte (interrupteur ci-dessus).",
+        "off": "Désactivées sur cet appareil."
+      },
+      "title": "Cet appareil",
+      "iosHelp": "Dans Safari, touchez le bouton Partager, puis « Sur l’écran d’accueil ». Ouvrez ensuite Lien Parental depuis cette icône et revenez sur cet écran.",
+      "busy": "Un instant…",
+      "disable": "Désactiver sur cet appareil",
+      "enabling": "Activation…",
+      "enable": "Activer les notifications sur cet appareil",
+      "others": "Autres appareils",
+      "since": "Depuis le {date}",
+      "removeAria": "Retirer {label}",
+      "remove": "Retirer"
+    },
+    "profile": {
+      "home": {
+        "unknownDate": "date inconnue",
+        "endsOn": "Se termine le",
+        "renewsOn": "Renouvellement le",
+        "title": "Mon profil",
+        "subtitle": "Gérez vos informations et votre compte.",
+        "memberSince": "Membre depuis {date}",
+        "editInfo": "Modifier mes informations",
+        "active": "Actif",
+        "activeHeadline": "Votre abonnement est actif.",
+        "subscriptionDetail": "Voir le détail de l’abonnement",
+        "free": "Gratuit",
+        "freeTitle": "Compte gratuit",
+        "freeText1": "Accédez aux fonctionnalités de base.",
+        "freeText2": "Passez à Premium pour plus d’espace et toutes les fonctionnalités.",
+        "seePlans": "Voir les formules",
+        "sections": {
+          "account": "Mon compte",
+          "subscription": "Mon abonnement",
+          "storage": "Stockage",
+          "coach": "Coach IA",
+          "help": "Assistance"
+        },
+        "rows": {
+          "info": "Informations personnelles",
+          "infoSub": "Gérez vos informations et coordonnées",
+          "security": "Sécurité",
+          "securitySub": "Mot de passe, authentification et sessions",
+          "prefs": "Préférences",
+          "prefsSub": "Notifications, langue et affichage",
+          "subscription": "Mon abonnement",
+          "subscriptionSub": "Formule, paiement, factures, changement ou résiliation",
+          "subscriptionFreeSub": "Offre Gratuite : voir les formules et s’abonner",
+          "help": "Centre d'aide",
+          "helpSub": "FAQ, guides et contact support"
+        },
+        "storageUsed": "Espace utilisé",
+        "storageAria": "Espace de stockage utilisé",
+        "storageUnavailable": "Consommation indisponible pour le moment. Réessayez plus tard.",
+        "coachUsage": "Utilisation actuelle",
+        "coachCount": "{used} / {quota} analyses",
+        "coachCount30": "{used} / {quota} analyses sur 30 jours",
+        "coachAria": "Analyses du Coach IA utilisées",
+        "coachUnavailable": "Utilisation indisponible pour le moment. Réessayez plus tard.",
+        "logout": {
+          "button": "Se déconnecter",
+          "title": "Se déconnecter ?",
+          "description": "Vous devrez saisir vos identifiants pour revenir.",
+          "confirm": "Déconnexion"
+        }
+      },
+      "info": {
+        "steps": {
+          "1": {
+            "title": "Photo de profil",
+            "sub": "Ajoutez une photo pour personnaliser votre compte."
+          },
+          "2": {
+            "title": "Informations de base",
+            "sub": "Modifiez vos informations personnelles."
+          },
+          "3": {
+            "title": "Coordonnées",
+            "sub": "Mettez à jour vos coordonnées de contact."
+          },
+          "4": {
+            "title": "Préférences",
+            "sub": "Personnalisez votre expérience."
+          }
+        },
+        "countries": {
+          "FR": "France",
+          "BE": "Belgique",
+          "CH": "Suisse",
+          "CA": "Canada",
+          "LU": "Luxembourg"
+        },
+        "photoType": "Choisissez une image (JPG ou PNG).",
+        "photoSize": "Image trop lourde (5 Mo maximum).",
+        "invalidEmail": "Adresse e-mail invalide.",
+        "emailPending": "{current} (nouvelle adresse {next} à confirmer par e-mail)",
+        "title": "Informations personnelles",
+        "changePhoto": "Changer la photo",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "birthDate": "Date de naissance",
+        "gender": "Genre",
+        "genders": {
+          "f": "Femme",
+          "h": "Homme",
+          "nb": "Non-binaire",
+          "nsp": "Je préfère ne pas dire"
+        },
+        "situation": "Situation familiale",
+        "situations": {
+          "couple": "En couple",
+          "separe": "Séparé·e",
+          "divorce": "Divorcé·e",
+          "procedure": "En procédure",
+          "celibataire": "Célibataire",
+          "autre": "Autre"
+        },
+        "email": "Adresse e-mail",
+        "phone": "Numéro de téléphone",
+        "address": "Adresse",
+        "postalCode": "Code postal",
+        "city": "Ville",
+        "country": "Pays",
+        "language": "Langue",
+        "timezone": "Fuseau horaire",
+        "tz": {
+          "brussels": "(UTC+01:00) Bruxelles",
+          "reunion": "(UTC+04:00) La Réunion",
+          "montreal": "(UTC-05:00) Montréal"
+        },
+        "dateFormat": "Format de date",
+        "dmy": "JJ / MM / AAAA",
+        "mdy": "MM / JJ / AAAA",
+        "ymd": "AAAA - MM - JJ",
+        "notifEmail": "Notifications par e-mail",
+        "notifEmailText": "Recevez des emails pour les informations importantes.",
+        "notifPush": "Notifications push",
+        "notifPushText": "Recevez des notifications sur votre appareil.",
+        "continue": "Continuer",
+        "saving": "Enregistrement…",
+        "save": "Enregistrer"
+      },
+      "validation": {
+        "name": "Nom",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "address": "Adresse",
+        "language": "Langue",
+        "title": "Informations mises à jour !",
+        "text": "Vos informations personnelles ont bien été enregistrées.",
+        "summary": "Résumé de vos informations",
+        "back": "Retour au profil"
+      }
+    },
+    "security": {
+      "home": {
+        "title": "Sécurité",
+        "protectedTitle": "Votre compte est protégé",
+        "protectedText": "Nous veillons à la sécurité de vos données personnelles.",
+        "accountSection": "Sécurité du compte",
+        "password": "Mot de passe",
+        "passwordSub": "Modifiez votre mot de passe",
+        "twoFactor": "Authentification à deux facteurs",
+        "twoFactorSub": "Renforcez la sécurité de votre compte",
+        "vaultLock": "Verrou du coffre-fort",
+        "vaultLockSub": "Code, empreinte ou reconnaissance faciale",
+        "sessions": "Sessions actives",
+        "sessionsCount": "{count, plural, one {# session} other {# sessions}}",
+        "sessionsSub": "Gérez vos appareils connectés",
+        "loginEmails": "E-mails de connexion",
+        "loginEmailsSub": "Recevez un e-mail lors d’une connexion",
+        "advanced": "Sécurité avancée",
+        "deleteAccount": "Supprimer mon compte",
+        "deleteAccountSub": "Supprimez définitivement votre compte"
+      },
+      "vaultLock": {
+        "metaTitle": "Verrouillage du coffre-fort"
+      },
+      "emails": {
+        "title": "E-mails de connexion",
+        "bannerTitle": "Soyez notifié",
+        "bannerText": "Recevez un e-mail à chaque nouvelle connexion sur votre compte.",
+        "switchLabel": "Recevoir des e-mails de connexion",
+        "switchDescription": "Vous serez informé par e-mail lorsqu’une nouvelle connexion est détectée.",
+        "saving": "Enregistrement…",
+        "save": "Enregistrer"
+      },
+      "password": {
+        "title": "Mot de passe",
+        "bannerTitle": "Choisissez un mot de passe sécurisé",
+        "bannerText": "Utilisez au moins 8 caractères avec des lettres, chiffres et symboles.",
+        "current": "Mot de passe actuel",
+        "new": "Nouveau mot de passe",
+        "confirm": "Confirmer le nouveau mot de passe",
+        "strength": "Force du mot de passe",
+        "strengthValue": " : {level}",
+        "levels": {
+          "0": "Très faible",
+          "1": "Faible",
+          "2": "Moyen",
+          "3": "Bon",
+          "4": "Fort"
+        },
+        "rules": {
+          "length": "Au moins 8 caractères",
+          "case": "Une lettre majuscule et minuscule",
+          "digit": "Un chiffre",
+          "symbol": "Un symbole (ex. : ! @ # ?)"
+        },
+        "tips": "Conseils pour <em>un mot de passe sécurisé</em> :",
+        "ruleOk": " : respecté",
+        "ruleKo": " : non respecté",
+        "errors": {
+          "current": "Saisissez votre mot de passe actuel.",
+          "rules": "Le nouveau mot de passe ne respecte pas tous les conseils.",
+          "mismatch": "Les mots de passe ne correspondent pas."
+        },
+        "saving": "Enregistrement…",
+        "save": "Enregistrer"
+      },
+      "sessions": {
+        "today": "Aujourd’hui à {time}",
+        "yesterday": "Hier à {time}",
+        "dateAt": "{date} à {time}",
+        "ua": {
+          "browser": "Navigateur",
+          "android": "Appareil Android",
+          "windows": "PC Windows",
+          "linux": "Ordinateur Linux",
+          "unknownDevice": "Appareil inconnu",
+          "unknownOs": "Système inconnu"
+        },
+        "signedIn": "Connexion : {when}",
+        "lastActivity": "Dernière activité : {when}",
+        "loadError": "Impossible de charger la liste des autres sessions.",
+        "allRevoked": "Toutes les autres sessions ont été déconnectées.",
+        "revokeError": "Impossible de déconnecter cet appareil pour le moment.",
+        "revoked": "{name} a été déconnecté.",
+        "title": "Sessions actives",
+        "bannerTitle": "Gérez vos appareils",
+        "bannerText": "Vous êtes connecté sur ces appareils. Déconnectez ceux que vous ne reconnaissez pas.",
+        "current": "Session actuelle",
+        "loading": "Chargement…",
+        "others": "Autres sessions",
+        "emptyTitle": "Aucune autre session",
+        "emptyText": "Votre compte n’est ouvert que sur cet appareil.",
+        "revokeAll1": "Se déconnecter de toutes",
+        "revokeAll2": "les autres sessions",
+        "confirmAllTitle": "Déconnecter les autres sessions ?",
+        "confirmOneTitle": "Déconnecter cet appareil ?",
+        "confirmAllText": "Tous les autres appareils devront se reconnecter.",
+        "confirm": "Déconnecter",
+        "currentBadge": "Actuelle",
+        "revokeAria": "Déconnecter {name}"
+      },
+      "twoFactor": {
+        "title": "Authentification à deux facteurs",
+        "bannerTitle": "Sécurisez votre compte",
+        "bannerText": "L’authentification à deux facteurs ajoute une couche de sécurité supplémentaire.",
+        "adminTitle": "Obligatoire pour l’administration",
+        "adminActive": "La double authentification est active pour cette session.",
+        "adminLink": "Accéder à l’administration",
+        "adminRequired": "Les comptes administrateurs doivent activer la double authentification avant d’ouvrir le back-office.",
+        "status": "Statut",
+        "loading": "Chargement…",
+        "on": "Activée",
+        "off": "Désactivée",
+        "features": {
+          "protectionTitle": "Protection renforcée",
+          "protectionText": "Empêche les accès non autorisés",
+          "codeTitle": "Code unique",
+          "codeText": "Un code à usage unique lors de chaque connexion",
+          "easyTitle": "Facile à utiliser",
+          "easyText": "Recevez vos codes par application ou SMS"
+        },
+        "preparing": "Préparation…",
+        "enable": "Activer l’authentification",
+        "disabling": "Désactivation…",
+        "disable": "Désactiver l’authentification",
+        "setupTitle": "Configurer votre application",
+        "setupStep1": "Ouvrez Google Authenticator, Authy ou 1Password.",
+        "setupStep2Qr": "Scannez le QR code ou ajoutez un compte avec la clé ci-dessous.",
+        "setupStep2Key": "Ajoutez un compte avec la clé ci-dessous.",
+        "setupStep3": "Saisissez le code à 6 chiffres affiché.",
+        "qrAlt": "QR code à scanner avec votre application d’authentification",
+        "copyKey": "Copier la clé",
+        "codeLabel": "Code de vérification",
+        "cancel": "Annuler",
+        "verifying": "Vérification…",
+        "verify": "Vérifier"
+      },
+      "deletion": {
+        "exportDemo": "Un e-mail avec vos données vous sera envoyé sous 48 h.",
+        "exportError": "L’export a échoué. Réessayez dans un instant.",
+        "exportDone": "Vos données ont été téléchargées.",
+        "networkError": "Connexion au serveur impossible. Vérifiez votre connexion internet.",
+        "deleteError": "La suppression a échoué. Réessayez dans un instant.",
+        "title": "Supprimer mon compte",
+        "warningTitle": "Action irréversible",
+        "warningText": "La suppression du compte efface définitivement vos données après un délai légal de 30 jours.",
+        "exportTitle": "Avant de partir",
+        "exportText": "Téléchargez une copie de vos documents, témoignages et métadonnées.",
+        "exporting": "Préparation de l’export…",
+        "export": "Exporter mes données",
+        "understand": "Je comprends que :",
+        "checks": {
+          "vault": "Mon coffre-fort et tous ses documents seront supprimés",
+          "subscription": "Mon abonnement Premium sera annulé immédiatement, sans remboursement",
+          "irreversible": "Cette action est irréversible après 30 jours"
+        },
+        "typeToConfirm": "Pour confirmer, tapez {word}",
+        "password": "Votre mot de passe",
+        "deleteForever": "Supprimer définitivement",
+        "confirm1Title": "Confirmer la suppression ?",
+        "confirm1Text": "Un dernier contrôle vous sera demandé.",
+        "confirm1Button": "Continuer",
+        "confirm2Title": "Supprimer le compte ?",
+        "confirm2Text": "Dernière confirmation. Vos données seront effacées.",
+        "confirm2Button": "Je supprime mon compte"
+      }
+    },
+    "prefs": {
+      "saveError": "Enregistrement impossible pour le moment. Réessayez dans un instant.",
+      "general": {
+        "title": "Général",
+        "subtitle": "Personnalisez les paramètres généraux de votre compte.",
+        "language": "Langue de l’application",
+        "timezone": "Fuseau horaire",
+        "tz": {
+          "brussels": "(GMT+01:00) Bruxelles",
+          "reunion": "(GMT+04:00) La Réunion",
+          "montreal": "(GMT-05:00) Montréal"
+        },
+        "dateFormat": "Format de la date",
+        "dmy": "JJ / MM / AAAA",
+        "mdy": "MM / JJ / AAAA",
+        "ymd": "AAAA - MM - JJ",
+        "timeFormat": "Format de l’heure",
+        "h24": "24 heures",
+        "h12": "12 heures",
+        "saving": "Enregistrement…",
+        "save": "Enregistrer"
+      },
+      "home": {
+        "title": "Préférences",
+        "subtitle": "Gérez vos préférences et personnalisez votre expérience.",
+        "items": {
+          "general": {
+            "title": "Général",
+            "text": "Langue, fuseau horaire, format…"
+          },
+          "notifications": {
+            "title": "Notifications",
+            "text": "Alertes, rappels, e-mails…"
+          },
+          "appearance": {
+            "title": "Apparence",
+            "text": "Thème, couleurs, taille du texte…"
+          }
+        },
+        "synced": "Vos préférences sont synchronisées sur tous vos appareils."
+      },
+      "appearance": {
+        "title": "Apparence",
+        "subtitle": "Personnalisez l’apparence de l’application selon vos préférences.",
+        "theme": "Thème",
+        "themes": {
+          "clair": "Clair",
+          "sombre": "Sombre",
+          "auto": "Auto"
+        },
+        "themeSoon": "Bientôt disponible. Votre choix est enregistré, le thème sombre arrivera dans une prochaine version.",
+        "color": "Couleur principale",
+        "colors": {
+          "leaf": "Vert",
+          "blue": "Bleu",
+          "iris": "Violet",
+          "orange": "Orange",
+          "red": "Rouge"
+        },
+        "colorSoon": "Bientôt disponible. Votre choix est enregistré et sera appliqué dans une prochaine version.",
+        "size": "Taille du texte",
+        "sizes": {
+          "petite": "Petite",
+          "moyenne": "Moyenne",
+          "grande": "Grande"
+        },
+        "saving": "Enregistrement…",
+        "save": "Enregistrer"
+      },
+      "notifications": {
+        "title": "Notifications",
+        "subtitle": "Choisissez comment et quand vous souhaitez être notifié.",
+        "push": "Notifications du navigateur",
+        "pushText": "Alertes sur les appareils où vous les avez activées, même application fermée.",
+        "email": "Notifications par e-mail",
+        "emailText": "Messages restés non lus, partages, rappels et événements partagés proches.",
+        "reminders": "Rappels du calendrier",
+        "remindersText": "Un rappel avant vos événements et ceux que l’autre parent partage avec vous.",
+        "topicsTitle": "À notifier pour",
+        "topicsText": "Un thème désactivé ne s’affiche plus que dans l’écran Notifications de l’application.",
+        "topics": {
+          "onMessages": "Messages",
+          "onCalendrier": "Calendrier partagé et rappels",
+          "onGarde": "Planning de garde et dépenses partagées",
+          "onDocuments": "Dossiers partagés et témoignages"
+        },
+        "security": "Les alertes de sécurité (connexion depuis un nouvel appareil, mot de passe, adresse e-mail, double authentification, code du coffre-fort, suppression du compte) sont toujours envoyées par e-mail et dans l’application, quels que soient ces réglages.",
+        "matrixTitle": "Ce que vous recevez, et où",
+        "matrixCaption": "Canaux utilisés pour chaque type de notification",
+        "colEvent": "Événement",
+        "colDevice": "Appareil",
+        "colEmail": "E-mail",
+        "matrix": {
+          "message": "Nouveau message",
+          "event": "Événement partagé ajouté, modifié ou annulé",
+          "reminder": "Rappel avant un événement",
+          "folder": "Dossier partagé, témoignage reçu",
+          "invitation": "Invitation acceptée",
+          "custody": "Garde ou dépense modifiée par l’autre parent"
+        },
+        "emailMessage": "Si non lu après 5 min, 1 par 30 min au plus",
+        "emailEvent": "Si prévu dans les 14 jours",
+        "yes": "Oui",
+        "no": "Non",
+        "matrixNote": "Tout apparaît aussi dans l’écran Notifications. Les notifications ne contiennent jamais le texte de vos messages ni le contenu de vos documents.",
+        "saving": "Enregistrement…",
+        "save": "Enregistrer"
+      }
+    },
+    "notifications": {
+      "demo": {
+        "n1": {
+          "title": "Nouveau témoignage reçu",
+          "body": "Hélène D. a répondu à votre demande de témoignage.",
+          "time": "Il y a 5 min"
+        },
+        "n2": {
+          "title": "Rappel calendrier",
+          "body": "Rendez-vous médical avec Lina dans 2 h.",
+          "time": "Il y a 1 h"
+        },
+        "n3": {
+          "title": "Coach IA renouvelé",
+          "body": "Vous disposez de 10 nouvelles analyses ce mois-ci.",
+          "time": "Hier"
+        }
+      },
+      "justNow": "À l’instant",
+      "title": "Notifications",
+      "loading": "Chargement des notifications",
+      "retry": "Réessayer",
+      "backHome": "Retour à l'accueil",
+      "allRead": "Toutes les notifications sont marquées comme lues.",
+      "allReadError": "Impossible de marquer les notifications comme lues. Réessayez.",
+      "emptyTitle": "Aucune notification",
+      "emptyText": "Vos nouvelles alertes apparaîtront ici.",
+      "recent": "Récentes",
+      "markAll": "Tout marquer comme lu",
+      "unread": "(non lue)"
+    },
+    "states": {
+      "title": "États système",
+      "general": "Chargement, succès, erreur et hors connexion",
+      "operations": "Opérations longues",
+      "items": {
+        "chargement": {
+          "title": "Chargement",
+          "text": "Indique que l'application est en train de traiter une demande."
+        },
+        "succes": {
+          "title": "Succès",
+          "text": "Confirme que l'action a été réalisée correctement."
+        },
+        "erreur": {
+          "title": "Erreur",
+          "text": "Informe d'un problème et propose des solutions immédiates."
+        },
+        "hors-connexion": {
+          "title": "Hors connexion",
+          "text": "Alerte sur l'absence de connexion et propose un mode d'utilisation adapté."
+        },
+        "vide": {
+          "title": "Aucune donnée",
+          "text": "Indique qu'aucun élément n'est encore disponible."
+        },
+        "maintenance": {
+          "title": "Maintenance",
+          "text": "Signale une maintenance en cours et invite à réessayer ultérieurement."
+        },
+        "synchronisation": {
+          "title": "Synchronisation",
+          "text": "Indique que vos données se synchronisent entre vos appareils."
+        },
+        "sauvegarde": {
+          "title": "Sauvegarde",
+          "text": "Confirme que vos données sont enregistrées en toute sécurité."
+        },
+        "suppression": {
+          "title": "Suppression",
+          "text": "Affiche le nombre d'éléments en cours de suppression et la progression."
+        },
+        "importation": {
+          "title": "Importation",
+          "text": "Montre l'avancement de l'importation et le nombre de fichiers restants."
+        },
+        "mise-a-jour": {
+          "title": "Mise à jour",
+          "text": "Informe du téléchargement et de l'installation d'une nouvelle version."
+        },
+        "a-jour": {
+          "title": "Tout est à jour",
+          "text": "Confirme que l'application est à jour et fonctionne de manière optimale."
+        }
+      },
+      "demo": {
+        "continue": "Continuer",
+        "details": "Voir le détail",
+        "retry": "Réessayer",
+        "offline": "Travailler hors ligne",
+        "add": "Ajouter un élément",
+        "learnMore": "En savoir plus",
+        "retryLater": "Réessayer plus tard",
+        "fileSize": "2,4 Mo",
+        "remaining": "{count, plural, one {# fichier restant} other {# fichiers restants}}"
+      }
+    },
+    "search": {
+      "sections": {
+        "documents": "Documents",
+        "journal": "Journal",
+        "calendrier": "Calendrier",
+        "temoignages": "Témoignages",
+        "pages": "Pages"
+      },
+      "pages": {
+        "home": "Accueil",
+        "journal": "Journal",
+        "calendar": "Calendrier",
+        "vault": "Coffre-fort",
+        "coach": "Coach IA",
+        "children": "Mes enfants",
+        "profile": "Profil",
+        "security": "Sécurité",
+        "preferences": "Préférences",
+        "help": "Centre d’aide",
+        "custody": "Planning de garde",
+        "finances": "Finances (Journal)"
+      },
+      "keywords": {
+        "home": "",
+        "journal": "",
+        "calendar": "",
+        "vault": "",
+        "coach": "",
+        "children": "",
+        "profile": "",
+        "security": "",
+        "preferences": "",
+        "help": "",
+        "custody": "",
+        "finances": ""
+      },
+      "journalTypes": {
+        "visite": "Visite",
+        "appel": "Appel",
+        "message": "Message",
+        "sante": "Santé",
+        "depense": "Dépense",
+        "autre": "Autre",
+        "note": "Note"
+      },
+      "requestDone": "Terminée",
+      "requestPending": "En attente",
+      "received": "{count}/{total} {count, plural, one {reçu} other {reçus}}",
+      "recent": "Recherches récentes",
+      "quick": "Accès rapides",
+      "dialogTitle": "Recherche globale",
+      "inputLabel": "Rechercher dans Lien Parental",
+      "placeholder": "Rechercher un document, un événement, un témoignage…",
+      "clear": "Effacer la recherche",
+      "close": "Fermer la recherche",
+      "cancel": "Annuler",
+      "noResultsFor": "Aucun résultat pour {query}",
+      "resultCount": "{count, plural, one {# résultat} other {# résultats}}",
+      "noResultsQuoted": "Aucun résultat pour « <q>{query}</q> »",
+      "noResultsHint": "Vérifiez l’orthographe ou essayez un autre mot.",
+      "noResultsLocked": "Vos documents et témoignages ne sont pas inclus tant que le coffre est verrouillé.",
+      "vaultChecking": "Vérification du coffre-fort…",
+      "vaultLocked": "Déverrouillez le coffre pour chercher dans vos documents et témoignages.",
+      "unlock": "Déverrouiller",
+      "results": "Résultats de recherche",
+      "clearRecent": "Effacer les recherches récentes",
+      "keys": {
+        "navigate": "naviguer",
+        "enter": "Entrée",
+        "open": "ouvrir",
+        "esc": "Échap",
+        "close": "fermer"
+      },
+      "trigger": "Rechercher",
+      "triggerPlaceholder": "Rechercher…"
+    },
+    "pwa": {
+      "title": "Installer l'app",
+      "install": "Installer",
+      "dismiss": "Fermer la proposition d'installation"
+    }
+  }
+}

@@ -2,27 +2,47 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Download, Eye, Folder, FolderInput, Share2, Trash2 } from 'lucide-react'
 import { ActionSheet } from '@/components/ui'
 import type { VaultDocument } from '@/lib/mock-vault'
 import { LIVE } from '@/lib/data/core'
 import { createShare, downloadDocument, previewDocument, type VaultDocumentRecord } from '@/lib/data/vault'
 
+/** Traducteur de l'espace « vault.docActions » (useTranslations('vault.docActions')). */
+export type DocActionsT = (key: string, values?: Record<string, string | number>) => string
+
+/** Repli français (appelants sans traducteur) : textes historiques à l'identique. */
+const FR_FALLBACK: DocActionsT = (key, values) => {
+  const name = String(values?.name ?? '')
+  switch (key) {
+    case 'linkFailed': return 'Création du lien impossible'
+    case 'shareText': return `Document « ${name} » — Lien Parental`
+    case 'linkCopied': return 'Lien du document copié'
+    case 'shareUnavailable': return 'Partage indisponible sur cet appareil'
+    case 'downloadStarted': return `Téléchargement de « ${name} » lancé`
+    case 'downloadFailed': return 'Téléchargement impossible'
+    case 'previewDemo': return 'Aperçu indisponible en mode démonstration : aucun fichier réel n’est stocké.'
+    case 'previewFailed': return 'Aperçu impossible'
+    default: return key
+  }
+}
+
 /** Partage natif si disponible, sinon copie du lien. Renvoie un message de retour.
  *  Supabase : un document « Partageable » génère un lien sécurisé expirable (7 jours, révocable
  *  dans « Partages actifs ») ; un document « Privé » ne partage que le lien interne (connexion requise). */
-export async function shareDocument(doc: Pick<VaultDocument, 'id' | 'name'> & Partial<Pick<VaultDocument, 'confidentialite'>>): Promise<string | null> {
+export async function shareDocument(doc: Pick<VaultDocument, 'id' | 'name'> & Partial<Pick<VaultDocument, 'confidentialite'>>, t: DocActionsT = FR_FALLBACK): Promise<string | null> {
   let url = `${window.location.origin}/app/coffre/documents/${doc.id}`
   if (LIVE && doc.confidentialite === 'partage') {
     try {
       url = (await createShare(doc.id, { days: 7 })).url
     } catch (e) {
-      return e instanceof Error ? e.message : 'Création du lien impossible'
+      return e instanceof Error ? e.message : t('linkFailed')
     }
   }
   if (navigator.share) {
     try {
-      await navigator.share({ title: doc.name, text: `Document « ${doc.name} » — Lien Parental`, url })
+      await navigator.share({ title: doc.name, text: t('shareText', { name: doc.name }), url })
       return null
     } catch {
       return null // annulation utilisateur
@@ -30,42 +50,44 @@ export async function shareDocument(doc: Pick<VaultDocument, 'id' | 'name'> & Pa
   }
   try {
     await navigator.clipboard.writeText(url)
-    return 'Lien du document copié'
+    return t('linkCopied')
   } catch {
-    return 'Partage indisponible sur cet appareil'
+    return t('shareUnavailable')
   }
 }
 
 /** Téléchargement : URL signée 60 s émise par le serveur (Supabase) ; démo : simple annonce. */
-export async function startDownload(doc: VaultDocument | VaultDocumentRecord, announce: (m: string) => void) {
+export async function startDownload(doc: VaultDocument | VaultDocumentRecord, announce: (m: string) => void, t: DocActionsT = FR_FALLBACK) {
   if (!LIVE) {
-    announce(`Téléchargement de « ${doc.name} » lancé`)
+    announce(t('downloadStarted', { name: doc.name }))
     return
   }
   try {
     await downloadDocument(doc)
-    announce(`Téléchargement de « ${doc.name} » lancé`)
+    announce(t('downloadStarted', { name: doc.name }))
   } catch (e) {
-    announce(e instanceof Error ? e.message : 'Téléchargement impossible')
+    announce(e instanceof Error ? e.message : t('downloadFailed'))
   }
 }
 
 /** Aperçu dans un nouvel onglet (même route serveur) ; démo : aucun fichier réel. */
-export async function startPreview(doc: VaultDocument | VaultDocumentRecord, announce: (m: string) => void) {
+export async function startPreview(doc: VaultDocument | VaultDocumentRecord, announce: (m: string) => void, t: DocActionsT = FR_FALLBACK) {
   if (!LIVE) {
-    announce('Aperçu indisponible en mode démonstration : aucun fichier réel n’est stocké.')
+    announce(t('previewDemo'))
     return
   }
   try {
     await previewDocument(doc)
   } catch (e) {
-    announce(e instanceof Error ? e.message : 'Aperçu impossible')
+    announce(e instanceof Error ? e.message : t('previewFailed'))
   }
 }
 
 /** Menu « ⋯ » d'un document (Voir, Télécharger, Partager, Ranger dans un dossier, Déplacer, Supprimer). */
 export function useDocActions(announce: (m: string) => void) {
   const router = useRouter()
+  const t = useTranslations('vault.docActions')
+  const tc = useTranslations('vault.common')
   const [doc, setDoc] = useState<VaultDocument | null>(null)
 
   const sheet = (
@@ -74,14 +96,14 @@ export function useDocActions(announce: (m: string) => void) {
       onClose={() => setDoc(null)}
       title={doc?.name}
       actions={doc ? [
-        { key: 'voir', label: 'Voir le détail', icon: <Eye className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}`) },
-        { key: 'dl', label: 'Télécharger', icon: <Download className="h-5 w-5" />, onClick: () => { void startDownload(doc, announce) } },
+        { key: 'voir', label: t('view'), icon: <Eye className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}`) },
+        { key: 'dl', label: tc('download'), icon: <Download className="h-5 w-5" />, onClick: () => { void startDownload(doc, announce, t) } },
         // Document partagé par un autre parent (docs/FAMILLE.md) : lecture et téléchargement seulement.
         ...(doc.sharedBy ? [] : [
-          { key: 'share', label: 'Partager', icon: <Share2 className="h-5 w-5" />, onClick: () => { void shareDocument(doc).then((m) => m && announce(m)) } },
-          { key: 'folder', label: 'Ranger dans un dossier', icon: <Folder className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}?dossier=1`) },
-          { key: 'move', label: 'Changer de catégorie', icon: <FolderInput className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}?deplacer=1`) },
-          { key: 'del', label: 'Supprimer', icon: <Trash2 className="h-5 w-5" />, variant: 'danger' as const, onClick: () => router.push(`/app/coffre/documents/${doc.id}/supprimer`) },
+          { key: 'share', label: tc('share'), icon: <Share2 className="h-5 w-5" />, onClick: () => { void shareDocument(doc, t).then((m) => m && announce(m)) } },
+          { key: 'folder', label: t('toFolder'), icon: <Folder className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}?dossier=1`) },
+          { key: 'move', label: t('changeCategory'), icon: <FolderInput className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}?deplacer=1`) },
+          { key: 'del', label: tc('delete'), icon: <Trash2 className="h-5 w-5" />, variant: 'danger' as const, onClick: () => router.push(`/app/coffre/documents/${doc.id}/supprimer`) },
         ]),
       ] : []}
     />

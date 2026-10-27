@@ -2,12 +2,14 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { TopBar } from '@/components/mobile/TopBar'
 import { LoadingState } from '@/components/mobile/StateScreens'
 import { listConversations } from '@/lib/messages'
 
 // Ancienne adresse (V1, fil unique) : redirige vers la conversation la plus récente.
 export default function LegacyConversationRedirect() {
+  const t = useTranslations('messaging.legacy')
   const router = useRouter()
   useEffect(() => {
     let alive = true
@@ -23,8 +25,8 @@ export default function LegacyConversationRedirect() {
 
   return (
     <>
-      <TopBar title="Conversation" showBack backHref="/app/messages" showBell={false} />
-      <LoadingState compact title="Ouverture de la conversation" description="" />
+      <TopBar title={t('title')} showBack backHref="/app/messages" showBell={false} />
+      <LoadingState compact title={t('loading')} description="" />
     </>
   )
 }

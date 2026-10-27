@@ -3,16 +3,16 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { AlertTriangle, ChevronDown, CreditCard, FlaskConical, Info, Receipt, RotateCcw, Sparkles, XCircle } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { ConfirmDialog } from '@/components/ui'
 import { Banner, ListGroup, ListRow, StripeNote, btn } from '@/components/profil/kit'
 import { PlanComparison } from '@/components/profil/PlanComparison'
-import { PLAN_NAME, PRICING, formatPrice, planLabel, type Cycle, type Offer, type PaidPlan, type PlanId } from '@/components/profil/pricing'
-import { notifyBillingChanged, openBillingPortal, postBilling, startCheckout } from '@/lib/billing/client'
-import { formatDateFr, type BillingView } from '@/lib/billing/types'
+import { PRICING, type Cycle, type Offer, type PaidPlan, type PlanId } from '@/components/profil/pricing'
+import { BILLING_ERROR_MESSAGES, notifyBillingChanged, openBillingPortal, postBilling, startCheckout } from '@/lib/billing/client'
+import type { BillingView } from '@/lib/billing/types'
 import {
   BILLING_INFO,
   changeImpact,
-  changeImpactText,
   describeStatus,
   hasManagedSubscription,
   planAction,
@@ -21,6 +21,7 @@ import {
   type PlanAction,
 } from '@/lib/billing/ui-state'
 import { cn } from '@/lib/cn'
+import { billingError, billingFormat, localizeChangeImpact, localizePlanAction, localizeStatus, type BillingFmt } from './billing-i18n'
 import { BillingNotice } from './BillingNotice'
 import { InvoicesList } from './InvoicesList'
 import { PlanCard } from './PlanCard'
@@ -50,18 +51,24 @@ export type SubscriptionCenterProps = {
 
 export function SubscriptionCenter({ mode, view, available, initialCycle, focusPlan, reason, info, erreur, showInvoices, hasCustomer, scrollToInvoices, demoInvoices }: SubscriptionCenterProps) {
   const router = useRouter()
+  const t = useTranslations('billing')
+  const f = billingFormat(t, useLocale())
+  /** Message d'un code ?info= / retour d'action (codes de BILLING_INFO). */
+  const infoText = (code: string) => t(`info.${code}`)
   const [cycle, setCycle] = useState<Cycle>(initialCycle)
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [notice, setNotice] = useState<string | null>(info ? BILLING_INFO[info] ?? null : null)
+  const [notice, setNotice] = useState<string | null>(info && Object.hasOwn(BILLING_INFO, info) ? infoText(info) : null)
   const [dialog, setDialog] = useState<Dialog>(null)
   const plansRef = useRef<HTMLElement>(null)
 
   const managed = hasManagedSubscription(view)
-  const status = describeStatus(view)
+  // Comportement (tone, action, date) : ui-state ; libellés : traduits.
+  const status = { ...describeStatus(view), ...localizeStatus(view, f) }
   const demo = mode === 'demo'
-  const name = PLAN_NAME[view.formule]
-  const endLabel = view.periodEnd ? formatDateFr(view.periodEnd) : 'la fin de la période en cours'
+  const name = f.plan(view.formule)
+  const endLabel = view.periodEnd ? f.date(view.periodEnd) : t('status.periodEndFallback')
+  const errorText = (code: string) => billingError(t, code, BILLING_ERROR_MESSAGES)
 
   // Arrivée depuis la page d'accueil ou un paywall : la grille des formules est montrée directement.
   useEffect(() => {
@@ -95,7 +102,7 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
     setBusy(plan)
     if (demo) {
       const res = await postBilling('/api/stripe/demo', { action: 'subscribe', formule: plan, cycle })
-      if (!res.ok) return fail(res.message)
+      if (!res.ok) return fail(errorText(res.code))
       notifyBillingChanged()
       router.push(`/app/abonnement/confirmation?demo=1&formule=${plan}&cycle=${cycle}`)
       return
@@ -103,7 +110,7 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
     const res = await startCheckout(plan, cycle)
     if (!res.ok) {
       if (res.code === 'already_subscribed') router.refresh()
-      fail(res.message)
+      fail(errorText(res.code))
     }
     // Succès : navigation vers Stripe Checkout en cours (le bouton reste « Un instant… »).
   }
@@ -119,12 +126,12 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
           request_id: crypto.randomUUID(),
         })
     setDialog(null)
-    if (!res.ok) return fail(res.message)
+    if (!res.ok) return fail(errorText(res.code))
     setBusy(null)
     const code = 'status' in res.data ? res.data.status : 'upgraded'
     const pending = 'pending' in res.data ? res.data.pending : null
-    const later = pending ? ` Passage en ${planLabel(pending.plan, pending.cycle)} à la prochaine échéance.` : ''
-    changed(demo ? `Démonstration : vous êtes maintenant en ${planLabel(target.plan, target.cycle)}.` : `${BILLING_INFO[code] ?? BILLING_INFO.unchanged!}${later}`)
+    const later = pending ? t('center.laterChange', { offer: f.offer(pending.plan, pending.cycle) }) : ''
+    changed(demo ? t('center.demoChanged', { offer: f.offer(target.plan, target.cycle) }) : `${infoText(Object.hasOwn(BILLING_INFO, code) ? code : 'unchanged')}${later}`)
   }
 
   async function setCancel(cancel: boolean) {
@@ -133,30 +140,30 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
       ? await postBilling('/api/stripe/demo', { action: cancel ? 'cancel' : 'resume' })
       : await postBilling<{ current_period_end: string }>('/api/stripe/cancel', { cancel })
     setDialog(null)
-    if (!res.ok) return fail(res.message)
+    if (!res.ok) return fail(errorText(res.code))
     setBusy(null)
     changed(cancel
-      ? `Résiliation enregistrée. Vos avantages ${name} restent actifs jusqu’au ${endLabel}, sans nouveau prélèvement.`
-      : BILLING_INFO.resumed!)
+      ? t('center.canceledNotice', { name, date: endLabel })
+      : infoText('resumed'))
   }
 
   async function portal() {
     setError(null)
     if (demo) {
-      setNotice('Démonstration : le portail sécurisé Stripe s’ouvrirait ici pour changer de carte ou télécharger vos factures.')
+      setNotice(t('center.demoPortal'))
       return
     }
     setBusy('portal')
     const res = await openBillingPortal()
-    if (!res.ok) fail(res.message)
+    if (!res.ok) fail(errorText(res.code))
   }
 
   async function resetDemo() {
     setBusy('reset')
     const res = await postBilling('/api/stripe/demo', { action: 'reset' })
-    if (!res.ok) return fail(res.message)
+    if (!res.ok) return fail(errorText(res.code))
     setBusy(null)
-    changed(BILLING_INFO.demo_reset!)
+    changed(infoText('demo_reset'))
   }
 
   function onPlan(plan: PlanId, action: PlanAction) {
@@ -193,17 +200,17 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
     status.action === 'pay' && view.payUrl ? (
       <a href={view.payUrl} className={btn.primary} rel="noopener noreferrer">
         <CreditCard className="h-5 w-5" aria-hidden />
-        Finaliser le paiement sur Stripe
+        {t('center.payOnStripe')}
       </a>
     ) : status.action === 'fix_payment' ? (
       <button type="button" className={btn.primary} onClick={() => void portal()} disabled={!!busy} aria-busy={busy === 'portal' || undefined}>
         <CreditCard className="h-5 w-5" aria-hidden />
-        {busy === 'portal' ? 'Ouverture du portail sécurisé…' : 'Mettre à jour le moyen de paiement'}
+        {busy === 'portal' ? t('center.portalOpening') : t('center.updatePaymentMethod')}
       </button>
     ) : status.action === 'resume' ? (
       <button type="button" className={btn.primary} onClick={() => void setCancel(false)} disabled={!!busy} aria-busy={busy === 'resume' || undefined}>
         <RotateCcw className="h-5 w-5" aria-hidden />
-        {busy === 'resume' ? 'Reprise en cours…' : 'Reprendre l’abonnement'}
+        {busy === 'resume' ? t('center.resuming') : t('center.resume')}
       </button>
     ) : null
 
@@ -214,24 +221,23 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
         <BillingNotice code={erreur} />
         {error && (
           <div role="alert">
-            <Banner tone="red" icon={<AlertTriangle className="h-5 w-5" />} title="Opération impossible">{error}</Banner>
+            <Banner tone="red" icon={<AlertTriangle className="h-5 w-5" />} title={t('errors.title')}>{error}</Banner>
           </div>
         )}
         {notice && <div role="status"><Banner tone="green" icon={<Info className="h-5 w-5" />}>{notice}</Banner></div>}
         {demo && (
-          <Banner tone="gold" icon={<FlaskConical className="h-5 w-5" />} title="Mode démonstration">
-            Aucun paiement réel : l’abonnement est simulé pour la visite.{' '}
+          <Banner tone="gold" icon={<FlaskConical className="h-5 w-5" />} title={t('center.demoTitle')}>
+            {t('center.demoText')}{' '}
             {(managed || view.plan !== 'gratuit') && (
               <button type="button" onClick={() => void resetDemo()} disabled={!!busy} className="inline-flex min-h-[44px] items-center font-semibold text-night-900 underline underline-offset-2">
-                Revenir à l’offre Gratuite
+                {t('center.resetDemo')}
               </button>
             )}
           </Banner>
         )}
         {mode === 'unavailable' && (
-          <Banner tone="night" icon={<Info className="h-5 w-5" />} title="Paiement bientôt disponible">
-            Les abonnements en ligne ouvrent très prochainement. Vous pouvez dès maintenant comparer les formules ;
-            votre compte Gratuit reste entièrement utilisable.
+          <Banner tone="night" icon={<Info className="h-5 w-5" />} title={t('center.unavailableTitle')}>
+            {t('center.unavailableText')}
           </Banner>
         )}
         {reason && !managed && (
@@ -247,29 +253,29 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
 
           {(managed || hasCustomer) && (
             <section aria-labelledby="gerer-titre">
-              <h2 id="gerer-titre" className="mb-2 text-[15px] font-bold text-night-900">Gérer</h2>
+              <h2 id="gerer-titre" className="mb-2 text-[15px] font-bold text-night-900">{t('center.manage')}</h2>
               <ListGroup>
                 <ListRow
                   onClick={busy ? undefined : () => void portal()}
                   icon={<CreditCard className="h-5 w-5" />}
-                  title={busy === 'portal' ? 'Ouverture du portail sécurisé…' : 'Gérer le moyen de paiement'}
-                  subtitle="Carte et coordonnées de facturation, sur Stripe"
+                  title={busy === 'portal' ? t('center.portalOpening') : t('center.managePayment')}
+                  subtitle={t('center.managePaymentSub')}
                 />
-                <ListRow href="#factures" icon={<Receipt className="h-5 w-5" />} title="Factures" subtitle="Historique et téléchargement PDF" />
+                <ListRow href="#factures" icon={<Receipt className="h-5 w-5" />} title={t('center.invoices')} subtitle={t('center.invoicesSub')} />
                 {!managed ? null : view.cancelAtPeriodEnd ? (
                   <ListRow
                     onClick={busy ? undefined : () => void setCancel(false)}
                     icon={<RotateCcw className="h-5 w-5" />}
-                    title={busy === 'resume' ? 'Reprise en cours…' : 'Reprendre l’abonnement'}
-                    subtitle={`Annule la résiliation prévue le ${endLabel}`}
+                    title={busy === 'resume' ? t('center.resuming') : t('center.resume')}
+                    subtitle={t('center.resumeSub', { date: endLabel })}
                   />
                 ) : (
                   <ListRow
                     onClick={busy ? undefined : () => setDialog({ type: 'cancel' })}
                     tone="danger"
                     icon={<XCircle className="h-5 w-5" />}
-                    title="Résilier"
-                    subtitle={<span className="text-night-700">Sans frais, accès conservé jusqu’au {endLabel}</span>}
+                    title={t('center.cancel')}
+                    subtitle={<span className="text-night-700">{t('center.cancelSub', { date: endLabel })}</span>}
                   />
                 )}
               </ListGroup>
@@ -281,20 +287,21 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
         <section ref={plansRef} aria-labelledby="formules-titre" className="mt-6 scroll-mt-20 2xl:mt-0">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
-              <h2 id="formules-titre" className="text-[17px] font-extrabold text-night-900">{managed ? 'Changer de formule' : 'Choisir une formule'}</h2>
-              <p className="mt-0.5 text-[12.5px] text-night-700">Sans engagement, résiliable à tout moment.</p>
+              <h2 id="formules-titre" className="text-[17px] font-extrabold text-night-900">{managed ? t('center.changePlan') : t('center.choosePlan')}</h2>
+              <p className="mt-0.5 text-[12.5px] text-night-700">{t('center.noCommitment')}</p>
             </div>
-            <CycleSwitch value={cycle} onChange={setCycle} />
+            <CycleSwitch value={cycle} onChange={setCycle} f={f} />
           </div>
           <p className="mt-3 rounded-xl border border-leaf-100 bg-leaf-50 px-3.5 py-2.5 text-[12.5px] leading-relaxed text-night-900">
             {cycle === 'annuel'
-              ? <>Annuel : <strong className="font-bold text-leaf-800">{PRICING.premium.freeMonthsLabel}</strong> sur Premium ({formatPrice(PRICING.premium.yearlySavings)} économisés par an), <strong className="font-bold text-leaf-800">{PRICING.coparentalite.freeMonthsLabel}</strong> sur Coparentalité+.</>
-              : <>Passez à l’annuel pour économiser jusqu’à <strong className="font-bold text-leaf-800">{formatPrice(PRICING.coparentalite.yearlySavings)} par an</strong>.</>}
+              ? t.rich('center.annualBanner', { strong, premiumPromo: f.freeMonths('premium'), savings: f.price(PRICING.premium.yearlySavings), copaPromo: f.freeMonths('coparentalite') })
+              : t.rich('center.monthlyBanner', { strong, amount: f.price(PRICING.coparentalite.yearlySavings) })}
           </p>
 
           <ul className="mt-4 grid gap-4 xl:grid-cols-3">
             {PLANS.map(plan => {
-              const action = planAction({ mode, view, target: plan, cycle, available })
+              const input = { mode, view, target: plan, cycle, available }
+              const action = localizePlanAction(input, planAction(input), f)
               const isOwn = managed ? plan === view.formule : plan === 'gratuit' && !view.sharedPremium
               return (
                 <PlanCard
@@ -313,27 +320,25 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
           </ul>
           {managed && (
             <p className="mt-3 text-[12px] leading-relaxed text-night-700">
-              Changement de formule (Premium ou Coparentalité+) : immédiat, sur votre cycle actuel, au prorata
-              (différence facturée ou crédit). Changement de cycle (mensuel ou annuel) : toujours à la prochaine échéance, sans frais.
+              {t('center.changeRules')}
             </p>
           )}
 
           <details className="group mt-5">
             <summary className="flex min-h-[44px] cursor-pointer list-none items-center gap-2 text-[13.5px] font-semibold text-leaf-700 hover:text-leaf-800 [&::-webkit-details-marker]:hidden">
-              Comparer les formules en détail
+              {t('center.compare')}
               <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden />
             </summary>
             <PlanComparison highlight={managed ? view.formule : focusPlan ?? undefined} className="mt-2" />
             <p className="mt-2 text-[12px] leading-relaxed text-night-700">
-              Accès partagé Coparentalité+ : chaque parent lié à vos enfants (titulaire ou parent invité) profite des avantages Premium,
-              sans abonnement de son côté. Les proches invités n’en bénéficient pas.
+              {t('center.sharedNote')}
             </p>
           </details>
 
           {/* 3. Factures */}
           {(showInvoices || hasCustomer) && (
             <section id="factures" aria-labelledby="factures-titre" className="mt-8 scroll-mt-20">
-              <h2 id="factures-titre" className="mb-1 text-[15px] font-bold text-night-900">Factures</h2>
+              <h2 id="factures-titre" className="mb-1 text-[15px] font-bold text-night-900">{t('center.invoices')}</h2>
               <InvoicesList live={mode === 'live'} mock={demoInvoices} />
             </section>
           )}
@@ -346,10 +351,10 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
         open={dialog?.type === 'change'}
         onClose={() => { if (!busy) setDialog(null) }}
         onConfirm={() => { if (changeTarget) void applyChange(changeTarget) }}
-        title={changeTarget ? `Passer à ${planLabel(changeTarget.plan, changeTarget.cycle)} ?` : 'Changer de formule ?'}
-        description={changeTarget ? `${changeImpactText(impact, current, changeTarget, view.periodEnd, { trialing: view.status === 'trialing' })}${demo ? ' Démonstration : aucun paiement réel.' : ''}` : ''}
-        confirmLabel="Confirmer le changement"
-        cancelLabel="Annuler"
+        title={changeTarget ? t('center.changeTitle', { offer: f.offer(changeTarget.plan, changeTarget.cycle) }) : t('center.changeTitleFallback')}
+        description={changeTarget ? `${localizeChangeImpact(impact, current, changeTarget, view.periodEnd, f, { trialing: view.status === 'trialing' })}${demo ? t('center.demoSuffix') : ''}` : ''}
+        confirmLabel={t('center.confirmChange')}
+        cancelLabel={t('center.cancelButton')}
         tone="default"
         loading={busy === 'change'}
       />
@@ -358,24 +363,28 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
         open={dialog?.type === 'cancel'}
         onClose={() => { if (!busy) setDialog(null) }}
         onConfirm={() => void setCancel(true)}
-        title="Résilier l’abonnement ?"
-        description={`Aucun nouveau prélèvement ne sera effectué. Vos avantages ${name} restent actifs jusqu’au ${endLabel}, puis votre compte passera à l’offre Gratuite (vos données restent consultables).${view.formule === 'coparentalite' ? ' Les parents liés perdront alors l’accès partagé.' : ''} Vous pourrez reprendre l’abonnement à tout moment avant cette date.`}
-        confirmLabel="Résilier"
-        cancelLabel={`Garder ${name}`}
+        title={t('center.cancelTitle')}
+        description={t('center.cancelDescription', { name, date: endLabel, family: view.formule === 'coparentalite' ? t('center.cancelFamily') : '' })}
+        confirmLabel={t('center.confirmCancel')}
+        cancelLabel={t('center.keepPlan', { name })}
         loading={busy === 'cancel'}
       />
     </div>
   )
 }
 
+/** Mise en gras des montants dans les bandeaux traduits (t.rich). */
+const strong = (chunks: React.ReactNode) => <strong className="font-bold text-leaf-800">{chunks}</strong>
+
 /** Sélecteur Mensuel / Annuel (groupe radio, flèches du clavier). */
-function CycleSwitch({ value, onChange }: { value: Cycle; onChange: (c: Cycle) => void }) {
+function CycleSwitch({ value, onChange, f }: { value: Cycle; onChange: (c: Cycle) => void; f: BillingFmt }) {
+  const { t } = f
   const items: { key: Cycle; label: string; badge?: string }[] = [
-    { key: 'mensuel', label: 'Mensuel' },
-    { key: 'annuel', label: 'Annuel', badge: `jusqu’à ${PRICING.premium.discountLabel}` },
+    { key: 'mensuel', label: t('common.cycle.mensuel') },
+    { key: 'annuel', label: t('common.cycle.annuel'), badge: t('center.upTo', { discount: f.discount('premium') }) },
   ]
   return (
-    <div role="radiogroup" aria-label="Facturation" className="inline-flex rounded-xl border border-night-200 bg-night-50 p-1">
+    <div role="radiogroup" aria-label={t('center.billingAria')} className="inline-flex rounded-xl border border-night-200 bg-night-50 p-1">
       {items.map(it => {
         const active = value === it.key
         return (

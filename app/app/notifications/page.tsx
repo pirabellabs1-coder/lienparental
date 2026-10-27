@@ -2,11 +2,13 @@
 
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import { BellRing, CalendarClock, ChevronRight, MessageSquareQuote, Sparkles, type LucideIcon } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { EmptyState, ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { cn } from '@/lib/cn'
 import { LIVE } from '@/lib/data/core'
+import { intlLocale } from '@/lib/i18n/config'
 import {
   markAllNotificationsRead, markNotificationRead, useNotifications, type AppNotification,
 } from '@/lib/data/notifications'
@@ -22,12 +24,24 @@ type Notif = {
   unread: boolean
 }
 
+type T = ReturnType<typeof useTranslations>
+
 // Démonstration uniquement. Compte réel : table `notifications` (lib/data/notifications).
-const DEMO_NOTIFICATIONS: Notif[] = [
-  { id: 'n1', icon: MessageSquareQuote, tone: 'bg-iris-50 text-iris-600', title: 'Nouveau témoignage reçu', body: 'Hélène D. a répondu à votre demande de témoignage.', timeAgo: 'Il y a 5 min', href: '/app/coffre/temoignages', unread: true },
-  { id: 'n2', icon: CalendarClock, tone: 'bg-leaf-50 text-leaf-600', title: 'Rappel calendrier', body: 'Rendez-vous médical avec Lina dans 2 h.', timeAgo: 'Il y a 1 h', href: '/app/calendrier/rappels', unread: true },
-  { id: 'n3', icon: Sparkles, tone: 'bg-gold-50 text-gold-600', title: 'Coach IA renouvelé', body: 'Vous disposez de 10 nouvelles analyses ce mois-ci.', timeAgo: 'Hier', href: '/app/coach', unread: false },
-]
+// Textes traduits au rendu : account.notifications.demo.{id}.
+const DEMO_NOTIFICATIONS = [
+  { id: 'n1', icon: MessageSquareQuote, tone: 'bg-iris-50 text-iris-600', href: '/app/coffre/temoignages', unread: true },
+  { id: 'n2', icon: CalendarClock, tone: 'bg-leaf-50 text-leaf-600', href: '/app/calendrier/rappels', unread: true },
+  { id: 'n3', icon: Sparkles, tone: 'bg-gold-50 text-gold-600', href: '/app/coach', unread: false },
+] as const
+
+function demoNotifications(t: T): Notif[] {
+  return DEMO_NOTIFICATIONS.map(n => ({
+    ...n,
+    title: t(`demo.${n.id}.title`),
+    body: t(`demo.${n.id}.body`),
+    timeAgo: t(`demo.${n.id}.time`),
+  }))
+}
 
 function iconFor(type: string): Pick<Notif, 'icon' | 'tone'> {
   if (type.startsWith('temoignage')) return { icon: MessageSquareQuote, tone: 'bg-iris-50 text-iris-600' }
@@ -36,17 +50,16 @@ function iconFor(type: string): Pick<Notif, 'icon' | 'tone'> {
   return { icon: BellRing, tone: 'bg-night-50 text-night-700' }
 }
 
-const rtf = new Intl.RelativeTimeFormat('fr-FR', { numeric: 'auto' })
-
-function timeAgo(iso: string, now = Date.now()): string {
+function timeAgo(iso: string, t: T, locale: string, now = Date.now()): string {
+  const rtf = new Intl.RelativeTimeFormat(intlLocale(locale), { numeric: 'auto' })
   const min = Math.round((new Date(iso).getTime() - now) / 60_000)
-  if (Math.abs(min) < 1) return 'À l’instant'
+  if (Math.abs(min) < 1) return t('justNow')
   if (Math.abs(min) < 60) return capitalize(rtf.format(min, 'minute'))
   const h = Math.round(min / 60)
   if (Math.abs(h) < 24) return capitalize(rtf.format(h, 'hour'))
   const d = Math.round(h / 24)
   if (Math.abs(d) < 7) return capitalize(rtf.format(d, 'day'))
-  return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
+  return new Date(iso).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
@@ -56,31 +69,39 @@ const rowClass = (unread: boolean) => cn(
   unread ? 'border-leaf-100' : 'border-night-100',
 )
 
-function toNotif(n: AppNotification): Notif {
-  return { id: n.id, ...iconFor(n.type), title: n.title, body: n.body, timeAgo: timeAgo(n.createdAt), href: n.href, unread: n.unread }
+function toNotif(n: AppNotification, t: T, locale: string): Notif {
+  return { id: n.id, ...iconFor(n.type), title: n.title, body: n.body, timeAgo: timeAgo(n.createdAt, t, locale), href: n.href, unread: n.unread }
 }
 
 export default function NotificationsPage() {
-  return LIVE ? <LiveNotifications /> : <NotificationList initial={DEMO_NOTIFICATIONS} />
+  return LIVE ? <LiveNotifications /> : <DemoNotifications />
+}
+
+function DemoNotifications() {
+  const t = useTranslations('account.notifications')
+  const initial = useMemo(() => demoNotifications(t), [t])
+  return <NotificationList initial={initial} />
 }
 
 /** Compte réel : chargement, erreur, liste vide ou notifications du compte. */
 function LiveNotifications() {
+  const t = useTranslations('account.notifications')
+  const locale = useLocale()
   const { data, loading, error, refresh } = useNotifications()
-  const items = useMemo(() => (data ?? []).map(toNotif), [data])
+  const items = useMemo(() => (data ?? []).map(n => toNotif(n, t, locale)), [data, t, locale])
   if (loading && !data) {
     return (
       <>
-        <TopBar title="Notifications" showBack backHref="/app" showBell={false} />
-        <LoadingState compact title="Chargement des notifications" description="" />
+        <TopBar title={t('title')} showBack backHref="/app" showBell={false} />
+        <LoadingState compact title={t('loading')} description="" />
       </>
     )
   }
   if (error) {
     return (
       <>
-        <TopBar title="Notifications" showBack backHref="/app" showBell={false} />
-        <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} secondary={{ label: "Retour à l'accueil", href: '/app' }} />
+        <TopBar title={t('title')} showBack backHref="/app" showBell={false} />
+        <ErrorState compact description={error.message} primary={{ label: t('retry'), onClick: () => void refresh() }} secondary={{ label: t('backHome'), href: '/app' }} />
       </>
     )
   }
@@ -88,6 +109,7 @@ function LiveNotifications() {
 }
 
 function NotificationList({ initial, live = false }: { initial: Notif[]; live?: boolean }) {
+  const t = useTranslations('account.notifications')
   const [items, setItems] = useState<Notif[]>(initial)
   const [status, setStatus] = useState('')
   useEffect(() => setItems(initial), [initial])
@@ -99,10 +121,10 @@ function NotificationList({ initial, live = false }: { initial: Notif[]; live?: 
     if (!live) return
     try {
       await markAllNotificationsRead()
-      setStatus('Toutes les notifications sont marquées comme lues.')
+      setStatus(t('allRead'))
     } catch {
       setItems(before)
-      setStatus('Impossible de marquer les notifications comme lues. Réessayez.')
+      setStatus(t('allReadError'))
     }
   }
 
@@ -113,26 +135,26 @@ function NotificationList({ initial, live = false }: { initial: Notif[]; live?: 
 
   return (
     <>
-      <TopBar title="Notifications" showBack backHref="/app" showBell={false} />
+      <TopBar title={t('title')} showBack backHref="/app" showBell={false} />
       <p className="sr-only" aria-live="polite">{status}</p>
 
       {items.length === 0 ? (
         <EmptyState
           icon={<BellRing className="h-11 w-11" strokeWidth={1.6} />}
-          title="Aucune notification"
-          description="Vos nouvelles alertes apparaîtront ici."
+          title={t('emptyTitle')}
+          description={t('emptyText')}
         />
       ) : (
         <div className="px-4 pb-6 pt-2">
           <div className="mb-2.5 flex items-center justify-between">
-            <h2 className="text-[13px] font-bold text-night-900">Récentes</h2>
+            <h2 className="text-[13px] font-bold text-night-900">{t('recent')}</h2>
             <button
               type="button"
               onClick={() => void markAll()}
               disabled={unread === 0}
               className="-mr-2 h-11 rounded-full px-3 text-xs font-bold text-leaf-700 hover:bg-leaf-50 disabled:text-night-400 disabled:hover:bg-transparent"
             >
-              Tout marquer comme lu
+              {t('markAll')}
             </button>
           </div>
 
@@ -159,6 +181,7 @@ function NotificationList({ initial, live = false }: { initial: Notif[]; live?: 
 }
 
 function RowBody({ n }: { n: Notif }) {
+  const t = useTranslations('account.notifications')
   const Icon = n.icon
   return (
     <>
@@ -171,7 +194,7 @@ function RowBody({ n }: { n: Notif }) {
           {n.unread && (
             <>
               <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-leaf-500" />
-              <span className="sr-only">(non lue)</span>
+              <span className="sr-only">{t('unread')}</span>
             </>
           )}
         </span>

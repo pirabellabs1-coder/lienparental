@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { Check, Copy, KeyRound, ShieldCheck, Smartphone, ShieldHalf } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { Banner, Pill, btn } from '@/components/profil/kit'
@@ -19,6 +20,7 @@ const FRIENDLY_NAME = 'Application d’authentification'
 type Phase = 'loading' | 'intro' | 'setup' | 'enabled'
 
 export default function TwoFactorPage() {
+  const t = useTranslations('account.security.twoFactor')
   const [phase, setPhase] = useState<Phase>(SUPABASE_ENABLED ? 'loading' : 'intro')
   const [code, setCode] = useState('')
   const [copied, setCopied] = useState(false)
@@ -123,72 +125,72 @@ export default function TwoFactorPage() {
 
   return (
     <>
-      <TopBar title="Authentification à deux facteurs" showBack backHref="/app/profil/securite" showBell={false} />
+      <TopBar title={t('title')} showBack backHref="/app/profil/securite" showBell={false} />
       <div className="px-5 pb-8 pt-3">
-        <Banner icon={<ShieldHalf className="h-7 w-7" strokeWidth={1.8} />} title="Sécurisez votre compte">
-          L’authentification à deux facteurs ajoute une couche de sécurité supplémentaire.
+        <Banner icon={<ShieldHalf className="h-7 w-7" strokeWidth={1.8} />} title={t('bannerTitle')}>
+          {t('bannerText')}
         </Banner>
 
         {adminRequired && (
-          <Banner role="status" className="mt-3" icon={<ShieldCheck className="h-6 w-6" strokeWidth={1.8} />} title="Obligatoire pour l’administration">
+          <Banner role="status" className="mt-3" icon={<ShieldCheck className="h-6 w-6" strokeWidth={1.8} />} title={t('adminTitle')}>
             {phase === 'enabled'
-              ? <>La double authentification est active pour cette session. <Link href="/admin" className="font-bold text-night-900 underline underline-offset-2">Accéder à l’administration</Link></>
-              : 'Les comptes administrateurs doivent activer la double authentification avant d’ouvrir le back-office.'}
+              ? <>{t('adminActive')} <Link href="/admin" className="font-bold text-night-900 underline underline-offset-2">{t('adminLink')}</Link></>
+              : t('adminRequired')}
           </Banner>
         )}
 
         <PhoneIllustration />
 
         <div className="flex items-center gap-4" aria-live="polite">
-          <span className="text-[14px] font-bold text-night-900">Statut</span>
+          <span className="text-[14px] font-bold text-night-900">{t('status')}</span>
           {phase === 'loading'
-            ? <span className="text-[12.5px] text-night-600">Chargement…</span>
-            : enabled ? <Pill tone="leafSoft">Activée</Pill> : <Pill tone="orange">Désactivée</Pill>}
+            ? <span className="text-[12.5px] text-night-600">{t('loading')}</span>
+            : enabled ? <Pill tone="leafSoft">{t('on')}</Pill> : <Pill tone="orange">{t('off')}</Pill>}
         </div>
 
         {error && <p role="alert" className="mt-4 text-sm font-medium text-alert-500">{error}</p>}
 
         {phase !== 'setup' && phase !== 'loading' && (
           <ul className="mt-4 divide-y divide-night-100 rounded-xl2 border border-night-100 bg-white shadow-soft">
-            <Feature icon={<ShieldCheck className="h-6 w-6" strokeWidth={1.7} />} title="Protection renforcée" text="Empêche les accès non autorisés" />
-            <Feature icon={<KeyRound className="h-6 w-6" strokeWidth={1.7} />} title="Code unique" text="Un code à usage unique lors de chaque connexion" />
-            <Feature icon={<Smartphone className="h-6 w-6" strokeWidth={1.7} />} title="Facile à utiliser" text="Recevez vos codes par application ou SMS" />
+            <Feature icon={<ShieldCheck className="h-6 w-6" strokeWidth={1.7} />} title={t('features.protectionTitle')} text={t('features.protectionText')} />
+            <Feature icon={<KeyRound className="h-6 w-6" strokeWidth={1.7} />} title={t('features.codeTitle')} text={t('features.codeText')} />
+            <Feature icon={<Smartphone className="h-6 w-6" strokeWidth={1.7} />} title={t('features.easyTitle')} text={t('features.easyText')} />
           </ul>
         )}
 
         {phase === 'intro' && (
           <button type="button" onClick={() => void startSetup()} disabled={busy} aria-busy={busy} className={cn(btn.primary, 'mt-6')}>
-            {busy ? 'Préparation…' : 'Activer l’authentification'}
+            {busy ? t('preparing') : t('enable')}
           </button>
         )}
 
         {phase === 'enabled' && (
           <button type="button" onClick={() => void disable()} disabled={busy} aria-busy={busy} className={cn(btn.dangerOutline, 'mt-6')}>
-            {busy ? 'Désactivation…' : 'Désactiver l’authentification'}
+            {busy ? t('disabling') : t('disable')}
           </button>
         )}
 
         {phase === 'setup' && (
           <form onSubmit={verify} className="mt-5 space-y-4 rounded-xl2 border border-night-100 bg-white p-4 shadow-soft">
-            <h2 ref={setupRef} tabIndex={-1} className="text-[15px] font-bold text-night-900 focus:outline-none">Configurer votre application</h2>
+            <h2 ref={setupRef} tabIndex={-1} className="text-[15px] font-bold text-night-900 focus:outline-none">{t('setupTitle')}</h2>
             <ol className="list-decimal space-y-1.5 pl-5 text-[12.5px] text-night-800">
-              <li>Ouvrez Google Authenticator, Authy ou 1Password.</li>
-              <li>{qr ? 'Scannez le QR code ou ajoutez un compte avec la clé ci-dessous.' : 'Ajoutez un compte avec la clé ci-dessous.'}</li>
-              <li>Saisissez le code à 6 chiffres affiché.</li>
+              <li>{t('setupStep1')}</li>
+              <li>{qr ? t('setupStep2Qr') : t('setupStep2Key')}</li>
+              <li>{t('setupStep3')}</li>
             </ol>
             {qr && (
               // QR fourni par Supabase (data URL SVG).
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={qr} alt="QR code à scanner avec votre application d’authentification" width={176} height={176} className="mx-auto h-44 w-44 rounded-xl bg-white p-2 ring-1 ring-night-100" />
+              <img src={qr} alt={t('qrAlt')} width={176} height={176} className="mx-auto h-44 w-44 rounded-xl bg-white p-2 ring-1 ring-night-100" />
             )}
             <div className="flex items-center gap-2 rounded-xl2 bg-night-50 p-3">
               <code className="flex-1 break-all font-mono text-sm text-night-900">{secret}</code>
-              <button type="button" onClick={copySecret} aria-label="Copier la clé" className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-700 hover:bg-white">
+              <button type="button" onClick={copySecret} aria-label={t('copyKey')} className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-700 hover:bg-white">
                 {copied ? <Check className="h-5 w-5 text-leaf-500" aria-hidden /> : <Copy className="h-5 w-5" aria-hidden />}
               </button>
             </div>
             <div>
-              <label htmlFor="otp" className="mb-2 block text-[13px] font-bold text-night-900">Code de vérification</label>
+              <label htmlFor="otp" className="mb-2 block text-[13px] font-bold text-night-900">{t('codeLabel')}</label>
               <input
                 id="otp"
                 inputMode="numeric"
@@ -201,9 +203,9 @@ export default function TwoFactorPage() {
               />
             </div>
             <div className="flex gap-3">
-              <button type="button" onClick={() => void cancelSetup()} className={btn.secondary}>Annuler</button>
+              <button type="button" onClick={() => void cancelSetup()} className={btn.secondary}>{t('cancel')}</button>
               <button type="submit" disabled={code.length !== 6 || verifying} className={cn(btn.primary, '')}>
-                {verifying ? 'Vérification…' : 'Vérifier'}
+                {verifying ? t('verifying') : t('verify')}
               </button>
             </div>
           </form>

@@ -492,15 +492,29 @@ function icsUtc(d: Date): string {
   return `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}${pad(d.getUTCSeconds())}Z`
 }
 
-export function buildHandoversIcs(config: GardeConfig, handovers: Handover[], now: Date, names: GardeNames = NEUTRAL_GARDE_NAMES): string {
-  const lieu = lieuLabel(config, names)
+/**
+ * Libellés traduits de l'export .ics (facultatif, ajout i18n). Sans eux : textes français ci-dessous.
+ * Fournis par l'écran Planning de garde (components/garde/useGardeFormat).
+ */
+export type HandoversIcsText = {
+  calName: string
+  location: string
+  summary: (h: Handover) => string
+  description: (h: Handover) => string
+  alarm: string
+}
+
+export function buildHandoversIcs(
+  config: GardeConfig, handovers: Handover[], now: Date, names: GardeNames = NEUTRAL_GARDE_NAMES, text?: HandoversIcsText,
+): string {
+  const lieu = text?.location ?? lieuLabel(config, names)
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     'PRODID:-//Lien Parental//Planning de garde//FR',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
-    'X-WR-CALNAME:Planning de garde',
+    `X-WR-CALNAME:${icsEscape(text?.calName ?? 'Planning de garde')}`,
   ]
   for (const h of handovers) {
     const end = new Date(h.date.getTime() + 30 * 60_000)
@@ -511,12 +525,12 @@ export function buildHandoversIcs(config: GardeConfig, handovers: Handover[], no
       `DTSTAMP:${icsUtc(now)}`,
       `DTSTART:${icsLocal(h.date)}`,
       `DTEND:${icsLocal(end)}`,
-      `SUMMARY:${icsEscape(`Échange de garde : ${names.children} ${dest}`)}`,
+      `SUMMARY:${icsEscape(text ? text.summary(h) : `Échange de garde : ${names.children} ${dest}`)}`,
       `LOCATION:${icsEscape(lieu)}`,
-      `DESCRIPTION:${icsEscape(`${capitalize(names.children)} ${childrenVerb(names, 'vont', 'va')} ${dest}. Rythme : ${RYTHME_LABELS[config.rythme]}.`)}`,
+      `DESCRIPTION:${icsEscape(text ? text.description(h) : `${capitalize(names.children)} ${childrenVerb(names, 'vont', 'va')} ${dest}. Rythme : ${RYTHME_LABELS[config.rythme]}.`)}`,
       'BEGIN:VALARM',
       'ACTION:DISPLAY',
-      'DESCRIPTION:Échange de garde dans 1 heure',
+      `DESCRIPTION:${icsEscape(text?.alarm ?? 'Échange de garde dans 1 heure')}`,
       'TRIGGER:-PT1H',
       'END:VALARM',
       'END:VEVENT',

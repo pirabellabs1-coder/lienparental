@@ -2,6 +2,7 @@ import {
   CalendarDays, Video, MessageCircleMore, Stethoscope, ClipboardList, School,
   Trees, Tent, Utensils, Car, Cake, Ellipsis, type LucideIcon,
 } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { getEventType, type EventIconKey, type EventTypeKey } from '@/lib/calendrier'
 
@@ -84,10 +85,11 @@ export function EventTypeIcon({
 
 /** Badge doux « Visite » (détail). */
 export function EventTypeBadge({ type, className }: { type: EventTypeKey; className?: string }) {
+  const t = useTranslations('calendar.types')
   const s = typeStyle(type)
   return (
     <span className={cn('inline-flex items-center rounded-md px-2.5 py-1 text-xs font-semibold', s.bg, s.text, className)}>
-      {getEventType(type).label}
+      {t(type)}
     </span>
   )
 }

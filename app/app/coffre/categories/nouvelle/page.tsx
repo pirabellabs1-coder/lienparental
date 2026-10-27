@@ -2,10 +2,11 @@
 
 import { Suspense, useId, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Check } from 'lucide-react'
 import { Switch } from '@/components/ui'
 import { ScreenHeader } from '@/components/coffre/ScreenHeader'
-import { CATEGORY_ICONS, ICON_LABELS, PICKER_ICONS } from '@/components/coffre/CategoryIcon'
+import { CATEGORY_ICONS, PICKER_ICONS } from '@/components/coffre/CategoryIcon'
 import { PICKER_TONES, TONES } from '@/components/coffre/tones'
 import { useCategories } from '@/components/coffre/store'
 import type { VaultIconKey, VaultTone } from '@/lib/mock-vault'
@@ -13,6 +14,9 @@ import { cn } from '@/lib/cn'
 
 function NewCategory() {
   const router = useRouter()
+  const t = useTranslations('vault.newCategory')
+  const tu = useTranslations('vault.ui')
+  const tc = useTranslations('vault.common')
   const params = useSearchParams()
   const uid = useId()
   const { categories, add } = useCategories()
@@ -28,7 +32,7 @@ function NewCategory() {
 
   const trimmed = name.trim()
   const duplicate = categories.some((c) => c.name.toLocaleLowerCase('fr') === trimmed.toLocaleLowerCase('fr'))
-  const error = !trimmed ? 'Indiquez un nom de catégorie.' : duplicate ? 'Une catégorie porte déjà ce nom.' : ''
+  const error = !trimmed ? t('nameRequired') : duplicate ? t('duplicate') : ''
 
   const save = async () => {
     setTried(true)
@@ -41,7 +45,7 @@ function NewCategory() {
       await add({ id: `${slug || 'cat'}-${Date.now().toString(36)}`, name: trimmed, icon, tone, count: 0, description: desc.trim() || undefined, visibleInFilters: visible })
       router.push(params.get('from') === 'ajouter' ? '/app/coffre/ajouter' : '/app/coffre/categories')
     } catch (e) {
-      setSaveError(e instanceof Error ? e.message : 'Enregistrement impossible.')
+      setSaveError(e instanceof Error ? e.message : t('saveFailed'))
       setSaving(false)
     }
   }
@@ -50,23 +54,23 @@ function NewCategory() {
   return (
     <>
       <ScreenHeader
-        title="Nouvelle catégorie"
+        title={t('title')}
         right={
           <button type="button" onClick={() => void save()} disabled={saving} className="-mr-2 inline-flex h-11 items-center rounded-lg px-2 text-[13px] font-bold text-leaf-600 hover:bg-leaf-50">
-            Enregistrer
+            {tc('save')}
           </button>
         }
       />
       <div className="space-y-6 px-5 pt-1">
         <div>
           <label htmlFor={`${uid}-name`} className="mb-1.5 block text-[13px] font-bold text-night-900">
-            Nom de la catégorie<span className="text-alert-500" aria-hidden="true"> *</span>
+            {t('nameLabel')}<span className="text-alert-500" aria-hidden="true"> *</span>
           </label>
           <input
             id={`${uid}-name`}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Ex. : Assurances"
+            placeholder={t('namePlaceholder')}
             maxLength={40}
             aria-required="true"
             aria-invalid={tried && !!error}
@@ -81,7 +85,7 @@ function NewCategory() {
         </div>
 
         <fieldset>
-          <legend className="text-[13px] font-bold text-night-900">Icône</legend>
+          <legend className="text-[13px] font-bold text-night-900">{t('icon')}</legend>
           <div className="mt-2 grid grid-cols-6 gap-2">
             {PICKER_ICONS.map((k) => {
               const Icon = CATEGORY_ICONS[k]
@@ -89,7 +93,7 @@ function NewCategory() {
               return (
                 <label key={k} className="relative cursor-pointer">
                   <input type="radio" name={`${uid}-icon`} value={k} checked={on} onChange={() => setIcon(k)} className="peer sr-only" />
-                  <span className="sr-only">{ICON_LABELS[k]}</span>
+                  <span className="sr-only">{tu(`icons.${k}`)}</span>
                   <span
                     aria-hidden="true"
                     className={cn(
@@ -106,19 +110,19 @@ function NewCategory() {
         </fieldset>
 
         <fieldset>
-          <legend className="text-[13px] font-bold text-night-900">Couleur</legend>
+          <legend className="text-[13px] font-bold text-night-900">{t('color')}</legend>
           <div className="mt-2 flex items-center gap-3">
-            {PICKER_TONES.map((t) => {
-              const on = tone === t
+            {PICKER_TONES.map((tn) => {
+              const on = tone === tn
               return (
-                <label key={t} className="relative cursor-pointer">
-                  <input type="radio" name={`${uid}-tone`} value={t} checked={on} onChange={() => setTone(t)} className="peer sr-only" />
-                  <span className="sr-only">{TONES[t].label}</span>
+                <label key={tn} className="relative cursor-pointer">
+                  <input type="radio" name={`${uid}-tone`} value={tn} checked={on} onChange={() => setTone(tn)} className="peer sr-only" />
+                  <span className="sr-only">{tu(`tones.${tn}`)}</span>
                   <span
                     aria-hidden="true"
                     className={cn(
                       'flex h-11 w-11 items-center justify-center rounded-full ring-offset-2 transition-shadow peer-focus-visible:ring-4 peer-focus-visible:ring-leaf-200',
-                      on ? cn(TONES[t].solid, 'ring-2', TONES[t].ring) : cn('border-[2.5px] bg-white', t === 'gray' ? 'border-slate-300 bg-slate-200' : ''),
+                      on ? cn(TONES[tn].solid, 'ring-2', TONES[tn].ring) : cn('border-[2.5px] bg-white', tn === 'gray' ? 'border-slate-300 bg-slate-200' : ''),
                     )}
                     style={on ? undefined : { borderColor: undefined }}
                   >
@@ -127,7 +131,7 @@ function NewCategory() {
                     ) : (
                       <span className={cn('h-7 w-7 rounded-full border-[2.5px] bg-white', {
                         violet: 'border-iris-500', blue: 'border-blue-600', green: 'border-leaf-500', orange: 'border-orange-500 bg-orange-500', pink: 'border-pink-500', gray: 'border-slate-300 bg-slate-300', red: 'border-alert-500',
-                      }[t])} />
+                      }[tn])} />
                     )}
                   </span>
                 </label>
@@ -137,19 +141,19 @@ function NewCategory() {
         </fieldset>
 
         <div>
-          <label htmlFor={`${uid}-desc`} className="mb-1.5 block text-[13px] font-bold text-night-900">Description (facultatif)</label>
+          <label htmlFor={`${uid}-desc`} className="mb-1.5 block text-[13px] font-bold text-night-900">{t('descLabel')}</label>
           <input
             id={`${uid}-desc`}
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
-            placeholder="Ajoutez une description"
+            placeholder={t('descPlaceholder')}
             maxLength={140}
             className="h-12 w-full rounded-xl border border-night-200 bg-white px-3.5 text-[14px] text-night-900 outline-none placeholder:text-night-400 focus:border-leaf-500"
           />
         </div>
 
         <Switch
-          label={<span className="font-bold">Visible dans mes filtres</span>}
+          label={<span className="font-bold">{t('visible')}</span>}
           checked={visible}
           onChange={(e) => setVisible(e.target.checked)}
         />
@@ -160,8 +164,9 @@ function NewCategory() {
 }
 
 export default function NewCategoryPage() {
+  const tc = useTranslations('vault.common')
   return (
-    <Suspense fallback={<div className="p-6 text-center text-sm text-night-500" role="status">Chargement…</div>}>
+    <Suspense fallback={<div className="p-6 text-center text-sm text-night-500" role="status">{tc('loading')}</div>}>
       <NewCategory />
     </Suspense>
   )

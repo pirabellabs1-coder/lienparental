@@ -2,6 +2,7 @@
 
 import type { ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ArrowLeft } from 'lucide-react'
 
 /** Three-slot header: left action, centred title (h1), right action — as in the mockups. */
@@ -17,13 +18,14 @@ export function EnfantsHeader({ title, left, right }: { title: ReactNode; left?:
   )
 }
 
-export function BackButton({ href, label = 'Retour' }: { href?: string; label?: string }) {
+export function BackButton({ href, label }: { href?: string; label?: string }) {
+  const t = useTranslations('family.children.common')
   const router = useRouter()
   return (
     <button
       type="button"
       onClick={() => (href ? router.push(href) : router.back())}
-      aria-label={label}
+      aria-label={label ?? t('back')}
       className="grid h-11 w-11 place-items-center rounded-full text-night-900 transition-colors hover:bg-night-50"
     >
       <ArrowLeft className="h-[22px] w-[22px]" aria-hidden="true" />

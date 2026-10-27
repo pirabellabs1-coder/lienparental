@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactNode } from 'react'
 import { ArrowLeft, Bell, CheckCircle2, ChevronDown, Download, Heart, HelpCircle, Lock, ShieldCheck, Smartphone, X, Zap } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
@@ -14,16 +15,13 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>
 }
 
-const TABS: { id: InstallOS; label: string }[] = [
-  { id: 'ios', label: 'iPhone (iOS)' },
-  { id: 'android', label: 'Android' },
-]
+const TABS: { id: InstallOS }[] = [{ id: 'ios' }, { id: 'android' }]
 
 const BENEFITS = [
-  { icon: Zap, text: 'Accès rapide depuis votre écran d’accueil' },
-  { icon: Bell, text: 'Notifications importantes en temps réel' },
-  { icon: ShieldCheck, text: 'Expérience fluide et sécurisée, comme une vraie application' },
-]
+  { icon: Zap, key: 'quick' },
+  { icon: Bell, key: 'notifications' },
+  { icon: ShieldCheck, key: 'smooth' },
+] as const
 
 const DON_HIDDEN_KEY = 'lp:install-don-hidden'
 
@@ -44,6 +42,7 @@ type Props = {
 
 export function MobileInstall({ continueHref, qr }: Props) {
   const router = useRouter()
+  const t = useTranslations('public.install')
   const baseId = useId()
   const [os, setOs] = useState<InstallOS>('ios')
   const [installed, setInstalled] = useState(false)
@@ -76,7 +75,7 @@ export function MobileInstall({ continueHref, qr }: Props) {
   const panelId = `${baseId}-panel`
 
   function onTabKey(e: KeyboardEvent<HTMLButtonElement>) {
-    const i = TABS.findIndex(t => t.id === os)
+    const i = TABS.findIndex(tab => tab.id === os)
     let next = -1
     if (e.key === 'ArrowRight') next = (i + 1) % TABS.length
     else if (e.key === 'ArrowLeft') next = (i - 1 + TABS.length) % TABS.length
@@ -95,11 +94,9 @@ export function MobileInstall({ continueHref, qr }: Props) {
     try {
       await evt.prompt()
       const { outcome } = await evt.userChoice
-      setInstallStatus(outcome === 'accepted'
-        ? 'Installation en cours. Lien Parental sera bientôt sur votre écran d’accueil.'
-        : 'Installation annulée. Vous pouvez suivre les étapes ci-dessous à tout moment.')
+      setInstallStatus(outcome === 'accepted' ? t('statusAccepted') : t('statusDismissed'))
     } catch {
-      setInstallStatus('L’installation automatique n’a pas pu démarrer. Suivez les étapes ci-dessous.')
+      setInstallStatus(t('statusError'))
     } finally {
       // L'événement ne peut servir qu'une fois.
       setPromptEvt(null)
@@ -123,16 +120,16 @@ export function MobileInstall({ continueHref, qr }: Props) {
     <div className="min-h-dvh bg-white md:bg-night-50 md:px-6 md:py-10">
       <main className="mx-auto max-w-[480px] px-5 pb-10 pt-4 md:max-w-[520px] md:rounded-3xl md:border md:border-[#E5E7EB] md:bg-white md:px-8 md:pb-10 md:pt-6 md:shadow-card">
         <header className="grid grid-cols-[44px_1fr_auto] items-center gap-2">
-          <Link href="/" onClick={goBack} aria-label="Retour" className="grid h-11 w-11 place-items-center rounded-full text-night-900 hover:bg-night-50">
+          <Link href="/" onClick={goBack} aria-label={t('back')} className="grid h-11 w-11 place-items-center rounded-full text-night-900 hover:bg-night-50">
             <ArrowLeft className="h-5 w-5" aria-hidden />
           </Link>
           <span aria-hidden />
           <Link href="/aide" className="inline-flex h-11 items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-3.5 text-[13px] font-semibold text-night-900 hover:bg-night-50">
-            <HelpCircle className="h-4 w-4 text-leaf-500" aria-hidden /> Centre d’aide
+            <HelpCircle className="h-4 w-4 text-leaf-500" aria-hidden /> {t('helpCenter')}
           </Link>
         </header>
         <div className="mt-1 flex justify-center">
-          <Link href="/" aria-label="Lien Parental, accueil" className="rounded-xl">
+          <Link href="/" aria-label={t('homeLabel')} className="rounded-xl">
             <Logo size="sm" tagline className="items-center text-center" />
           </Link>
         </div>
@@ -141,15 +138,13 @@ export function MobileInstall({ continueHref, qr }: Props) {
           <div>
             <h1 id={`${baseId}-title`} className="text-[25px] font-extrabold leading-[1.15] text-night-900 sm:text-[28px]">
               {installed ? (
-                <>Lien Parental est déjà <span className="text-leaf-500">installé</span></>
+                t.rich('installedTitle', { hl: (c) => <span className="text-leaf-500">{c}</span> })
               ) : (
-                <>Installez Lien Parental sur votre <span className="text-leaf-500">{os === 'ios' ? 'iPhone' : 'Android'}</span></>
+                t.rich('title', { device: os === 'ios' ? 'iPhone' : 'Android', hl: (c) => <span className="text-leaf-500">{c}</span> })
               )}
             </h1>
             <p className="mt-3 text-[14px] leading-relaxed text-night-700">
-              {installed
-                ? 'Vous utilisez l’application depuis votre écran d’accueil.'
-                : 'Ajoutez l’application à votre écran d’accueil pour y accéder rapidement, comme une vraie application.'}
+              {installed ? t('installedLead') : t('lead')}
             </p>
           </div>
           <Image
@@ -167,8 +162,8 @@ export function MobileInstall({ continueHref, qr }: Props) {
           <div className="mt-6 flex items-start gap-3 rounded-2xl border border-leaf-200 bg-leaf-50 p-4">
             <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0 text-leaf-500" aria-hidden />
             <div>
-              <p className="text-[15px] font-bold text-night-900">Tout est prêt</p>
-              <p className="mt-1 text-[13px] leading-relaxed text-night-700">Retrouvez l’icône Lien Parental sur votre écran d’accueil. Touchez « Continuer » pour accéder à votre espace.</p>
+              <p className="text-[15px] font-bold text-night-900">{t('readyTitle')}</p>
+              <p className="mt-1 text-[13px] leading-relaxed text-night-700">{t('readyText')}</p>
             </div>
           </div>
         ) : (
@@ -177,25 +172,25 @@ export function MobileInstall({ continueHref, qr }: Props) {
             <div className="mt-6 hidden items-center gap-5 rounded-2xl border border-[#E5E7EB] p-5 [@media(min-width:768px)_and_(pointer:fine)]:flex">
               <div className="shrink-0 rounded-xl bg-white p-2.5 ring-1 ring-night-100">{qr}</div>
               <div className="min-w-0">
-                <p className="flex items-center gap-1.5 text-[14px] font-bold text-night-900"><Smartphone className="h-4 w-4 text-leaf-500" aria-hidden /> Vous êtes sur ordinateur ?</p>
-                <p className="mt-1 text-[13px] leading-relaxed text-night-700">Scannez ce QR code avec l’appareil photo de votre téléphone pour ouvrir cette page, puis suivez les étapes.</p>
+                <p className="flex items-center gap-1.5 text-[14px] font-bold text-night-900"><Smartphone className="h-4 w-4 text-leaf-500" aria-hidden /> {t('desktopTitle')}</p>
+                <p className="mt-1 text-[13px] leading-relaxed text-night-700">{t('desktopText')}</p>
               </div>
             </div>
 
-            <div role="tablist" aria-label="Choisissez votre téléphone" className="mt-6 grid grid-cols-2 gap-1 rounded-xl bg-night-50 p-1">
-              {TABS.map(t => {
-                const selected = os === t.id
+            <div role="tablist" aria-label={t('tabsLabel')} className="mt-6 grid grid-cols-2 gap-1 rounded-xl bg-night-50 p-1">
+              {TABS.map(tab => {
+                const selected = os === tab.id
                 return (
                   <button
-                    key={t.id}
-                    ref={el => { tabRefs.current[t.id] = el }}
+                    key={tab.id}
+                    ref={el => { tabRefs.current[tab.id] = el }}
                     type="button"
                     role="tab"
-                    id={tabId(t.id)}
+                    id={tabId(tab.id)}
                     aria-selected={selected}
                     aria-controls={panelId}
                     tabIndex={selected ? 0 : -1}
-                    onClick={() => setOs(t.id)}
+                    onClick={() => setOs(tab.id)}
                     onKeyDown={onTabKey}
                     className={cn(
                       'inline-flex h-11 items-center justify-center gap-2 rounded-lg text-[14px] font-semibold transition-colors motion-reduce:transition-none',
@@ -203,7 +198,7 @@ export function MobileInstall({ continueHref, qr }: Props) {
                     )}
                   >
                     <Smartphone className={cn('h-4 w-4', selected ? 'text-leaf-500' : 'text-night-400')} aria-hidden />
-                    {t.label}
+                    {t(`tabs.${tab.id}`)}
                   </button>
                 )
               })}
@@ -216,15 +211,15 @@ export function MobileInstall({ continueHref, qr }: Props) {
               tabIndex={0}
               className="mt-4 rounded-2xl border border-[#E5E7EB] p-4 sm:p-5"
             >
-              <h2 className="sr-only">Étapes pour {os === 'ios' ? 'iPhone' : 'Android'}</h2>
+              <h2 className="sr-only">{t('stepsFor', { device: os === 'ios' ? 'iPhone' : 'Android' })}</h2>
 
               {os === 'android' && promptEvt && (
                 <div className="mb-5 rounded-xl bg-leaf-50 p-4">
-                  <p className="text-[13px] leading-relaxed text-night-800">Votre navigateur permet d’installer l’application en un geste.</p>
+                  <p className="text-[13px] leading-relaxed text-night-800">{t('promptText')}</p>
                   <button type="button" onClick={installNow} className="mt-3 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-leaf-500 text-[15px] font-semibold text-white hover:bg-leaf-600">
-                    <Download className="h-4 w-4" aria-hidden /> Installer maintenant
+                    <Download className="h-4 w-4" aria-hidden /> {t('installNow')}
                   </button>
-                  <p className="mt-2 text-center text-[12px] text-night-600">Ou suivez les étapes ci-dessous.</p>
+                  <p className="mt-2 text-center text-[12px] text-night-600">{t('orSteps')}</p>
                 </div>
               )}
               <p role="status" className={cn('text-[13px] font-medium text-leaf-700', installStatus && 'mb-4')}>{installStatus}</p>
@@ -233,14 +228,14 @@ export function MobileInstall({ continueHref, qr }: Props) {
             </div>
 
             <section aria-labelledby={`${baseId}-why`} className="mt-4 rounded-2xl bg-leaf-50 p-4 sm:p-5">
-              <h2 id={`${baseId}-why`} className="text-[15px] font-bold text-night-900">Pourquoi ajouter l’application ?</h2>
+              <h2 id={`${baseId}-why`} className="text-[15px] font-bold text-night-900">{t('whyTitle')}</h2>
               <ul className="mt-3 space-y-2.5">
-                {BENEFITS.map(({ icon: Icon, text }) => (
-                  <li key={text} className="flex items-start gap-3 text-[13.5px] leading-snug text-night-800">
+                {BENEFITS.map(({ icon: Icon, key }) => (
+                  <li key={key} className="flex items-start gap-3 text-[13.5px] leading-snug text-night-800">
                     <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white text-leaf-500 ring-1 ring-leaf-200">
                       <Icon className="h-3.5 w-3.5" aria-hidden />
                     </span>
-                    <span className="pt-1">{text}</span>
+                    <span className="pt-1">{t(`benefits.${key}`)}</span>
                   </li>
                 ))}
               </ul>
@@ -252,7 +247,7 @@ export function MobileInstall({ continueHref, qr }: Props) {
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-leaf-50">
                     <Heart className="h-5 w-5 fill-leaf-400 text-leaf-500" aria-hidden />
                   </span>
-                  <h2 id={`${baseId}-don`} className="min-w-0 flex-1 text-[15px] font-bold text-night-900">Soutenez Lien Parental</h2>
+                  <h2 id={`${baseId}-don`} className="min-w-0 flex-1 text-[15px] font-bold text-night-900">{t('donTitle')}</h2>
                   <button
                     type="button"
                     aria-expanded={donOpen}
@@ -261,17 +256,17 @@ export function MobileInstall({ continueHref, qr }: Props) {
                     className="grid h-11 w-11 place-items-center rounded-full text-night-700 hover:bg-night-50"
                   >
                     <ChevronDown className={cn('h-5 w-5 transition-transform duration-200 motion-reduce:transition-none', donOpen && 'rotate-180')} aria-hidden />
-                    <span className="sr-only">{donOpen ? 'Replier' : 'Déplier'} le message de soutien</span>
+                    <span className="sr-only">{donOpen ? t('donCollapse') : t('donExpand')}</span>
                   </button>
                   <button type="button" onClick={hideDon} className="grid h-11 w-11 place-items-center rounded-full text-night-700 hover:bg-night-50">
                     <X className="h-5 w-5" aria-hidden />
-                    <span className="sr-only">Fermer le message de soutien</span>
+                    <span className="sr-only">{t('donClose')}</span>
                   </button>
                 </div>
                 <div id={`${baseId}-don-body`} hidden={!donOpen} className="mt-2 pl-[52px]">
-                  <p className="text-[13px] leading-relaxed text-night-700">Lien Parental est développé pour les familles. Votre soutien nous aide à créer gratuitement de nouveaux outils pour préserver le lien parent-enfant.</p>
+                  <p className="text-[13px] leading-relaxed text-night-700">{t('donText')}</p>
                   <Link href="/don" className="mt-3 inline-flex h-11 items-center gap-2 rounded-xl border border-leaf-500 bg-white px-4 text-[14px] font-semibold text-leaf-600 hover:bg-leaf-50">
-                    <Heart className="h-4 w-4" aria-hidden /> Faire un don
+                    <Heart className="h-4 w-4" aria-hidden /> {t('donCta')}
                   </Link>
                 </div>
               </section>
@@ -280,11 +275,11 @@ export function MobileInstall({ continueHref, qr }: Props) {
         )}
 
         <Link href={continueHref} className="mt-6 flex h-12 w-full items-center justify-center rounded-xl bg-night-900 text-[15px] font-semibold text-white hover:bg-night-800">
-          Continuer
+          {t('continue')}
         </Link>
         <div className="mt-4 text-center">
-          <p className="flex items-center justify-center gap-1.5 text-[13px] font-semibold text-night-900"><Lock className="h-3.5 w-3.5 text-leaf-500" aria-hidden /> Vos données sont en sécurité</p>
-          <p className="mt-0.5 text-[12.5px] text-night-700">Lien Parental protège vos informations familiales.</p>
+          <p className="flex items-center justify-center gap-1.5 text-[13px] font-semibold text-night-900"><Lock className="h-3.5 w-3.5 text-leaf-500" aria-hidden /> {t('safeTitle')}</p>
+          <p className="mt-0.5 text-[12.5px] text-night-700">{t('safeText')}</p>
         </div>
       </main>
     </div>

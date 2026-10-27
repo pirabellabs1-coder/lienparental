@@ -1,0 +1,428 @@
+{
+  "billing": {
+    "common": {
+      "plan": {
+        "gratuit": "Gratuit",
+        "premium": "Premium",
+        "coparentalite": "Coparentalité+"
+      },
+      "offer": {
+        "mensuel": "{plan} mensuel",
+        "annuel": "{plan} annuel"
+      },
+      "period": {
+        "mensuel": "/ mois",
+        "annuel": "/ an"
+      },
+      "pricePeriod": "{price} {period}",
+      "perMonth": "{price} / mois",
+      "perYear": "{price} / an",
+      "cycle": {
+        "mensuel": "Mensuel",
+        "annuel": "Annuel"
+      },
+      "cycleLower": {
+        "mensuel": "mensuel",
+        "annuel": "annuel"
+      },
+      "freeMonths": "{count, plural, one {# mois offert} other {# mois offerts}}",
+      "discount": "-{pct} %",
+      "saveDiscount": "Économisez {pct} %",
+      "zeroPrice": "0 €",
+      "unknownDate": "date inconnue",
+      "noCommitment": "Sans engagement",
+      "mostChosen": "Le plus choisi",
+      "included": "Inclus",
+      "notIncluded": "Non inclus"
+    },
+    "features": {
+      "gratuit": {
+        "vault": "Coffre-fort de {gb} Go",
+        "coach": "3 analyses du Coach IA par mois",
+        "journalCalendar": "Journal et calendrier",
+        "exportPdf": "Export PDF"
+      },
+      "premium": {
+        "vault": "Coffre-fort de {gb} Go",
+        "coach": "10 analyses du Coach IA par mois",
+        "templatesAll": "Tous les modèles de courriers et dossiers",
+        "journalAdvanced": "Journal chronologique avancé",
+        "exportAll": "Export PDF, Word et Canva",
+        "sync": "Synchronisation multi-appareils"
+      },
+      "coparentalite": {
+        "allPremium": "Tout Premium",
+        "multiParents": "Plusieurs parents : la famille liée profite des avantages Premium",
+        "expenses": "Suivi renforcé des dépenses partagées",
+        "exportAdvanced": "Export avancé (dossier pour avocat, médiateur)",
+        "supportPriority": "Assistance prioritaire",
+        "webPwa": "Accès web et application installable (PWA)"
+      }
+    },
+    "comparison": {
+      "caption": "Comparatif des formules",
+      "featuresCol": "Fonctionnalités",
+      "featureCol": "Fonctionnalité",
+      "rows": {
+        "coach": "Coach IA",
+        "vault": "Coffre-fort sécurisé",
+        "journalCalendar": "Journal et calendrier",
+        "templates": "Modèles de courriers et dossiers",
+        "export": "Export PDF, Word et Canva",
+        "multiParents": "Plusieurs parents (accès partagé)",
+        "expenses": "Suivi renforcé des dépenses",
+        "exportAdvanced": "Export avancé (avocat, médiateur)",
+        "support": "Assistance",
+        "webApp": "Accès web et application installable"
+      },
+      "cells": {
+        "coach": {
+          "gratuit": "3 analyses / mois",
+          "premium": "10 analyses / mois",
+          "coparentalite": "10 analyses / mois"
+        },
+        "vault": {
+          "gratuit": "{gb} Go",
+          "premium": "{gb} Go",
+          "coparentalite": "{gb} Go"
+        },
+        "templates": {
+          "gratuit": "Essentiels",
+          "premium": "Tous",
+          "coparentalite": "Tous"
+        },
+        "export": {
+          "gratuit": "PDF"
+        },
+        "support": {
+          "gratuit": "Standard",
+          "premium": "Avant l’offre Gratuite",
+          "coparentalite": "Prioritaire, traitée en premier"
+        }
+      }
+    },
+    "cycleToggle": {
+      "ariaLabel": "Fréquence de facturation"
+    },
+    "planPicker": {
+      "label": "Formule",
+      "sub": {
+        "premium": "Pour un parent",
+        "coparentalite": "Pour toute la famille liée"
+      },
+      "from": "{sub} · dès {price} / mois"
+    },
+    "radioCard": {
+      "referencePrice": "Prix de référence : ",
+      "perMonthEquivalent": "Soit {price} / mois",
+      "currentPlan": "Formule actuelle"
+    },
+    "pricing": {
+      "title": "Nos formules simples et transparentes",
+      "lead": "Gratuit pour commencer. Sans engagement, résiliable à tout moment depuis Mon abonnement.",
+      "note": {
+        "gratuit": "Pour bien commencer",
+        "paid": "ou {price} par an, {promo}"
+      },
+      "cta": {
+        "createAccount": "Créer un compte",
+        "trial": "Essayer {days} jours gratuitement",
+        "subscribePremium": "S’abonner à Premium",
+        "upgradePremium": "Passer à Premium",
+        "subscribeCopa": "S’abonner à Coparentalité+",
+        "chooseCopa": "Choisir cette formule"
+      },
+      "compare": "Comparer les formules en détail"
+    },
+    "planCard": {
+      "tagline": {
+        "gratuit": "Pour bien commencer",
+        "premium": "Toutes les fonctionnalités pour un parent",
+        "coparentalite": "Premium pour toute la famille liée"
+      },
+      "yourPlan": "Votre formule",
+      "forever": "pour toujours",
+      "annualEquivalent": "Soit {price} / mois.",
+      "annualSavings": "Économie de {amount} par an ({promo})",
+      "monthlyHint": "Ou {price} / an en annuel, {promo}",
+      "noCard": "Sans carte bancaire",
+      "includedIn": "Inclus dans {plan}",
+      "wait": "Un instant…",
+      "srFree": " : {plan}",
+      "srPaid": " : {plan} {cycle}"
+    },
+    "status": {
+      "yourPlan": "Votre formule",
+      "sharedPremium": "Premium (accès famille)",
+      "statusSr": "Statut : ",
+      "rowPlan": "Formule",
+      "rowPrice": "Prix",
+      "rowPending": "Changement prévu",
+      "rowPayment": "Moyen de paiement",
+      "label": {
+        "active": "Actif",
+        "trialing": "Essai",
+        "past_due": "Paiement en échec",
+        "unpaid": "Paiement en échec",
+        "canceled": "Résilié",
+        "incomplete": "Paiement à finaliser",
+        "incomplete_expired": "Expiré",
+        "paused": "En pause",
+        "premiumOffered": "Premium offert",
+        "free": "Gratuit",
+        "cancelScheduled": "Résiliation programmée le {date}"
+      },
+      "periodEndFallback": "la fin de la période en cours",
+      "periodEndShortFallback": "la fin de la période",
+      "trialEndFallback": "la fin de l’essai",
+      "incomplete": {
+        "headline": "Votre paiement {name} n’est pas terminé",
+        "detailPay": "Finalisez le paiement sur la page sécurisée de Stripe pour activer votre formule. Sans paiement, la demande expire seule sous 24 heures.",
+        "detailNoPay": "Sans paiement, la demande expire seule sous 24 heures. Vous pouvez choisir à nouveau une formule ci-dessous."
+      },
+      "shared": {
+        "headline": "Vous profitez de Premium grâce à votre famille",
+        "detail": "Un parent lié à vos enfants est abonné à Coparentalité+. Vous n’avez rien à payer."
+      },
+      "free": {
+        "headlineEnded": "Votre abonnement a pris fin",
+        "headline": "Vous utilisez l’offre Gratuite",
+        "detailEnded": "Votre compte est revenu à l’offre Gratuite. Vos données restent conservées et consultables.",
+        "detail": "Choisissez une formule ci-dessous pour débloquer plus d’espace et toutes les fonctionnalités."
+      },
+      "trouble": {
+        "headline": "Le dernier paiement a échoué",
+        "detailPastDue": "Stripe va réessayer automatiquement. Mettez à jour votre moyen de paiement pour garder {name} sans interruption.",
+        "detailUnpaid": "Vos avantages {name} sont suspendus. Mettez à jour votre moyen de paiement pour les retrouver."
+      },
+      "canceling": {
+        "headline": "Votre abonnement {name} s’arrêtera le {date}",
+        "detail": "Aucun nouveau prélèvement. Vous gardez tous vos avantages jusqu’au {date}, puis votre compte passera à l’offre Gratuite. Vous pouvez reprendre l’abonnement à tout moment avant cette date.",
+        "dateLabel": "Fin d’accès"
+      },
+      "trial": {
+        "headline": "Essai gratuit de {name} en cours",
+        "detail": "Premier prélèvement de {price} le {date}, sauf résiliation avant cette date.",
+        "dateLabel": "Fin de l’essai"
+      },
+      "paused": {
+        "headline": "Votre abonnement {name} est en pause",
+        "detail": "Aucun prélèvement pendant la pause. Contactez l’assistance pour le réactiver."
+      },
+      "active": {
+        "headline": "Votre abonnement {name} est actif",
+        "detail": "Prochain prélèvement de {price} le {date}.",
+        "detailPending": "Prochain prélèvement de {price} le {date}, date du passage en {offer}.",
+        "dateLabel": "Prochaine échéance"
+      }
+    },
+    "card": {
+      "managedByStripe": "Géré par Stripe",
+      "endingIn": "{brand} se terminant par {last4}"
+    },
+    "actions": {
+      "current": "Plan actuel",
+      "paymentSoon": "Paiement bientôt disponible",
+      "paymentSoonHint": "Le paiement en ligne ouvre très prochainement.",
+      "subscribe": "S’abonner",
+      "demoHint": "Démonstration : aucun paiement réel.",
+      "secureHint": "Paiement sécurisé par Stripe, résiliable à tout moment.",
+      "scheduledOn": "Prévu le {date}",
+      "backToFreeScheduledHint": "Votre compte repassera à l’offre Gratuite à cette date.",
+      "backToFree": "Revenir à Gratuit",
+      "benefitsUntil": "Vos avantages restent actifs jusqu’au {date}.",
+      "updatePayment": "Mettre à jour le paiement",
+      "portalHint": "Ouvre le portail sécurisé Stripe.",
+      "fixFirst": "Régularisez d’abord le paiement.",
+      "resume": "Reprendre l’abonnement",
+      "resumeHint": "Annule la résiliation prévue le {date}.",
+      "resumeFirst": "Reprenez d’abord l’abonnement pour changer de formule.",
+      "keep": "Garder cette formule",
+      "keepHint": "Annule le passage en {offer}.",
+      "scheduledHint": "Ce changement s’appliquera à votre prochaine échéance.",
+      "soon": "Bientôt disponible",
+      "fromDate": "À partir du {date}, sans frais.",
+      "immediateUpgrade": "Effet immédiat, différence au prorata",
+      "immediateDowngrade": "Effet immédiat, crédit au prorata",
+      "cycleFrom": " ; {cycle} à partir du {date}",
+      "upgradeTo": "Passer à {plan}",
+      "downgradeTo": "Revenir à {plan}",
+      "toYearly": "Passer à l’annuel",
+      "toMonthly": "Passer au mensuel"
+    },
+    "impact": {
+      "nextDueFallback": "votre prochaine échéance",
+      "none": "C’est déjà la formule de votre prochaine échéance.",
+      "cancelPending": "Le changement programmé est annulé : vous restez en {offer}.",
+      "scheduled": "Le passage en {offer} ({price}) s’appliquera le {date}, sans frais ni prorata. Rien ne change d’ici là.",
+      "cyclePart": " Le passage en {cycle} ({price}) s’appliquera ensuite le {date}.",
+      "thenPrice": ", puis {price}",
+      "trialThen": " ; à la fin de l’essai, {price}",
+      "familyGain": " Les parents liés à vos enfants profitent aussitôt des avantages Premium.",
+      "familyLoss": " Les parents liés à vos enfants perdent l’accès partagé.",
+      "upgradeTrial": "Effet immédiat : vous passez en {offer}. Rien n’est prélevé aujourd’hui pendant l’essai{trialThen}.{cyclePart}{family}",
+      "upgrade": "Effet immédiat : vous passez en {offer}. Vous payez aujourd’hui uniquement la différence au prorata des jours restants jusqu’au {date}{thenPrice}.{cyclePart}{family}",
+      "downgradeTrial": "Effet immédiat : vous passez en {offer}. Rien n’est prélevé pendant l’essai{trialThen}.{cyclePart}{family}",
+      "downgrade": "Effet immédiat : vous passez en {offer}. Le temps non utilisé de votre formule actuelle est crédité au prorata et déduit de vos prochaines factures{thenPrice}.{cyclePart}{family}"
+    },
+    "info": {
+      "scheduled": "Changement de formule enregistré : il s’appliquera à votre prochaine échéance.",
+      "pending_change_canceled": "Le changement de formule programmé a été annulé.",
+      "unchanged": "Votre formule reste inchangée.",
+      "upgraded": "Votre nouvelle formule est active. La différence au prorata éventuelle est facturée aujourd’hui.",
+      "downgraded": "Votre nouvelle formule est active. Le temps non utilisé est crédité sur vos prochaines factures.",
+      "canceled": "Résiliation enregistrée. Vos avantages restent actifs jusqu’à la fin de la période payée.",
+      "resumed": "Votre abonnement continue : la résiliation est annulée.",
+      "portal": "Vos modifications sur Stripe ont été prises en compte.",
+      "checkout_canceled": "Paiement annulé : aucun montant n’a été débité. Vous pouvez reprendre quand vous voulez.",
+      "demo_reset": "Démonstration : abonnement simulé remis à zéro."
+    },
+    "paywall": {
+      "coach": {
+        "title": "Vous avez utilisé vos analyses gratuites",
+        "text": "L’offre Gratuite inclut 3 analyses du Coach IA par mois. Premium en offre 10."
+      },
+      "stockage": {
+        "title": "Votre coffre-fort est presque plein",
+        "text": "Premium passe votre espace de 2 Go à 10 Go."
+      },
+      "modeles": {
+        "title": "Ce modèle fait partie de Premium",
+        "text": "Premium débloque tous les modèles de courriers et dossiers."
+      },
+      "export": {
+        "title": "Cet export fait partie de Premium",
+        "text": "Premium ajoute l’export Word et Canva ; Coparentalité+ ajoute l’export avancé pour avocat ou médiateur."
+      },
+      "partage": {
+        "title": "L’accès partagé fait partie de Coparentalité+",
+        "text": "Avec Coparentalité+, chaque parent lié à vos enfants profite des avantages Premium."
+      }
+    },
+    "errors": {
+      "title": "Opération impossible",
+      "generic": "Une erreur est survenue. Réessayez dans un instant.",
+      "codes": {
+        "billing_disabled": "Le paiement en ligne n’est pas encore disponible.",
+        "unauthenticated": "Votre session a expiré. Reconnectez-vous puis réessayez.",
+        "invalid_origin": "Requête refusée. Rechargez la page puis réessayez.",
+        "invalid_cycle": "Formule inconnue. Choisissez Mensuel ou Annuel.",
+        "invalid_plan": "Formule inconnue. Choisissez Premium ou Coparentalité+.",
+        "already_subscribed": "Vous avez déjà un abonnement en cours : changez de formule depuis Mon abonnement.",
+        "rate_limited": "Trop de demandes. Patientez un instant puis réessayez.",
+        "session_not_found": "Session de paiement introuvable pour ce compte.",
+        "invalid_state": "Cette action n’est pas possible pour le moment. Rechargez la page.",
+        "invalid_body": "Requête invalide. Rechargez la page puis réessayez.",
+        "payment_failed": "Le paiement de la différence a été refusé. Vérifiez votre moyen de paiement puis réessayez.",
+        "no_subscription": "Aucun abonnement en cours.",
+        "no_customer": "Aucun moyen de paiement n’est encore enregistré.",
+        "cancel_pending": "Annulez d’abord la résiliation pour changer de formule.",
+        "subscription_not_active": "Régularisez d’abord votre paiement pour changer de formule.",
+        "stripe_unavailable": "Le service de paiement est momentanément indisponible. Réessayez dans un instant.",
+        "misconfigured": "Le service de paiement est momentanément indisponible.",
+        "network": "Connexion impossible. Vérifiez votre réseau puis réessayez."
+      }
+    },
+    "invoices": {
+      "status": {
+        "paid": "Payé",
+        "open": "À régler",
+        "uncollectible": "Impayé",
+        "void": "Annulée",
+        "draft": "Brouillon"
+      },
+      "pending": "En attente",
+      "previousCaption": "Paiements précédents",
+      "caption": "Factures",
+      "colDate": "Date",
+      "colAmount": "Montant",
+      "colStatus": "Statut",
+      "colDocument": "Document",
+      "colDocuments": "Documents",
+      "pdfDemoTitle": "PDF disponible avec un vrai paiement",
+      "pdfDemoSr": "PDF non disponible en démonstration",
+      "demoNote": "Démonstration : factures fictives, aucun paiement réel.",
+      "loading": "Chargement des factures…",
+      "emptyTitle": "Aucun paiement",
+      "emptyText": "Vos factures apparaîtront ici après votre premier prélèvement.",
+      "view": "Voir la facture {number} du {date} (nouvel onglet)",
+      "viewNoNumber": "Voir la facture du {date} (nouvel onglet)",
+      "download": "Télécharger la facture {number} du {date} en PDF",
+      "downloadNoNumber": "Télécharger la facture du {date} en PDF",
+      "loadingShort": "Chargement…",
+      "more": "Afficher plus de factures",
+      "retry": "Réessayer"
+    },
+    "center": {
+      "title": "Mon abonnement",
+      "demoTitle": "Mode démonstration",
+      "demoText": "Aucun paiement réel : l’abonnement est simulé pour la visite.",
+      "resetDemo": "Revenir à l’offre Gratuite",
+      "unavailableTitle": "Paiement bientôt disponible",
+      "unavailableText": "Les abonnements en ligne ouvrent très prochainement. Vous pouvez dès maintenant comparer les formules ; votre compte Gratuit reste entièrement utilisable.",
+      "manage": "Gérer",
+      "portalOpening": "Ouverture du portail sécurisé…",
+      "managePayment": "Gérer le moyen de paiement",
+      "managePaymentSub": "Carte et coordonnées de facturation, sur Stripe",
+      "invoices": "Factures",
+      "invoicesSub": "Historique et téléchargement PDF",
+      "resuming": "Reprise en cours…",
+      "resume": "Reprendre l’abonnement",
+      "resumeSub": "Annule la résiliation prévue le {date}",
+      "cancel": "Résilier",
+      "cancelSub": "Sans frais, accès conservé jusqu’au {date}",
+      "changePlan": "Changer de formule",
+      "choosePlan": "Choisir une formule",
+      "noCommitment": "Sans engagement, résiliable à tout moment.",
+      "annualBanner": "Annuel : <strong>{premiumPromo}</strong> sur Premium ({savings} économisés par an), <strong>{copaPromo}</strong> sur Coparentalité+.",
+      "monthlyBanner": "Passez à l’annuel pour économiser jusqu’à <strong>{amount} par an</strong>.",
+      "changeRules": "Changement de formule (Premium ou Coparentalité+) : immédiat, sur votre cycle actuel, au prorata (différence facturée ou crédit). Changement de cycle (mensuel ou annuel) : toujours à la prochaine échéance, sans frais.",
+      "compare": "Comparer les formules en détail",
+      "sharedNote": "Accès partagé Coparentalité+ : chaque parent lié à vos enfants (titulaire ou parent invité) profite des avantages Premium, sans abonnement de son côté. Les proches invités n’en bénéficient pas.",
+      "payOnStripe": "Finaliser le paiement sur Stripe",
+      "updatePaymentMethod": "Mettre à jour le moyen de paiement",
+      "billingAria": "Facturation",
+      "upTo": "jusqu’à {discount}",
+      "changeTitle": "Passer à {offer} ?",
+      "changeTitleFallback": "Changer de formule ?",
+      "demoSuffix": " Démonstration : aucun paiement réel.",
+      "confirmChange": "Confirmer le changement",
+      "cancelButton": "Annuler",
+      "cancelTitle": "Résilier l’abonnement ?",
+      "cancelDescription": "Aucun nouveau prélèvement ne sera effectué. Vos avantages {name} restent actifs jusqu’au {date}, puis votre compte passera à l’offre Gratuite (vos données restent consultables).{family} Vous pourrez reprendre l’abonnement à tout moment avant cette date.",
+      "cancelFamily": " Les parents liés perdront alors l’accès partagé.",
+      "confirmCancel": "Résilier",
+      "keepPlan": "Garder {name}",
+      "canceledNotice": "Résiliation enregistrée. Vos avantages {name} restent actifs jusqu’au {date}, sans nouveau prélèvement.",
+      "demoChanged": "Démonstration : vous êtes maintenant en {offer}.",
+      "laterChange": " Passage en {offer} à la prochaine échéance.",
+      "demoPortal": "Démonstration : le portail sécurisé Stripe s’ouvrirait ici pour changer de carte ou télécharger vos factures."
+    },
+    "confirmation": {
+      "metaTitle": "Confirmation de l’abonnement",
+      "topBar": "Abonnement",
+      "demoTitle": "Mode démonstration",
+      "demoText": "Aucun paiement réel n’a été effectué : l’abonnement est simulé.",
+      "activeTitle": "Abonnement activé",
+      "activePlan": "Votre formule {plan} est active. Toutes ses fonctionnalités sont débloquées dès maintenant.",
+      "activeGeneric": "Votre abonnement est actif.",
+      "checkingTitle": "Confirmation du paiement…",
+      "checkingText": "Nous vérifions votre paiement auprès de Stripe. Ne fermez pas cette page, cela prend généralement quelques secondes.",
+      "pendingTitle": "Paiement en cours de confirmation",
+      "pendingText": "Le paiement est en cours de confirmation, cela peut prendre une minute. Votre abonnement s’activera automatiquement et un e-mail de confirmation vous sera envoyé.",
+      "openTitle": "Paiement non finalisé",
+      "openText": "Aucun montant n’a été débité. Vous pouvez reprendre l’abonnement quand vous le souhaitez.",
+      "notFoundTitle": "Paiement introuvable",
+      "notFoundText": "Nous ne trouvons pas de paiement récent pour ce compte. Consultez Mon abonnement pour voir votre statut.",
+      "readyTitle": "Tout est prêt",
+      "readyFamily": "Les parents liés à vos enfants profitent aussi des avantages Premium. ",
+      "readyDemo": "Démonstration : aucun reçu n’est envoyé.",
+      "readyReceipt": "Votre reçu arrive par e-mail.",
+      "readyManage": " Vous pouvez gérer ou résilier votre abonnement à tout moment.",
+      "goToApp": "Accéder à mon espace",
+      "viewSubscription": "Voir mon abonnement",
+      "checkAgain": "Vérifier à nouveau",
+      "backToSubscription": "Retour à Mon abonnement"
+    }
+  }
+}

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Suspense, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ListFilter, Search } from 'lucide-react'
 import { ScreenHeader, headerIconBtn } from '@/components/coffre/ScreenHeader'
 import { DocRow } from '@/components/coffre/DocRow'
@@ -13,14 +14,13 @@ import { useDocActions } from '@/components/coffre/useDocActions'
 import type { VaultFileType } from '@/lib/mock-vault'
 
 type Sort = 'recent' | 'ancien' | 'nom' | 'taille'
-const SORTS: { k: Sort; label: string }[] = [
-  { k: 'recent', label: 'Date (la plus récente)' },
-  { k: 'ancien', label: 'Date (la plus ancienne)' },
-  { k: 'nom', label: 'Nom (A → Z)' },
-  { k: 'taille', label: 'Taille' },
-]
+/** Ordre des tris ; libellés : vault.allDocs.sorts.* */
+const SORTS: Sort[] = ['recent', 'ancien', 'nom', 'taille']
 
 function AllDocuments() {
+  const t = useTranslations('vault.allDocs')
+  const td = useTranslations('vault.docs')
+  const tc = useTranslations('vault.common')
   const params = useSearchParams()
   const { docs, loading, error, refresh } = useVaultDocs()
   const { categories } = useCategories()
@@ -58,10 +58,10 @@ function AllDocuments() {
 
   return (
     <>
-      <ScreenHeader title="Tous les documents" backHref="/app/coffre/documents" />
+      <ScreenHeader title={td('all')} backHref="/app/coffre/documents" />
       <div className="px-5">
         <div role="search" className="flex items-center gap-2">
-          <label htmlFor="all-search" className="sr-only">Rechercher un document</label>
+          <label htmlFor="all-search" className="sr-only">{td('search')}</label>
           <div className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-xl border border-night-100 bg-white px-3.5 shadow-soft focus-within:border-leaf-500">
             <Search className="h-[18px] w-[18px] shrink-0 text-night-400" aria-hidden="true" />
             <input
@@ -69,37 +69,37 @@ function AllDocuments() {
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Rechercher un document"
+              placeholder={td('search')}
               className="h-full min-w-0 flex-1 bg-transparent text-[14px] text-night-900 outline-none placeholder:text-night-400"
             />
           </div>
-          <Link href={filtersHref} aria-label={activeFilters ? `Filtres (${activeFilters} actifs)` : 'Filtres'} className={`${headerIconBtn} relative h-12 w-12 border border-night-100 bg-white shadow-soft`}>
+          <Link href={filtersHref} aria-label={activeFilters ? t('filtersActive', { count: activeFilters }) : t('filters')} className={`${headerIconBtn} relative h-12 w-12 border border-night-100 bg-white shadow-soft`}>
             <ListFilter className="h-5 w-5" aria-hidden="true" />
           </Link>
         </div>
 
         <div className="mt-3 flex items-center gap-1 text-[13px]">
-          <label htmlFor="sort" className="text-night-600">Trier par :</label>
+          <label htmlFor="sort" className="text-night-600">{t('sortBy')}</label>
           <select
             id="sort"
             value={sort}
             onChange={(e) => setSort(e.target.value as Sort)}
             className="h-11 rounded-lg bg-transparent pr-1 font-bold text-night-900 outline-none"
           >
-            {SORTS.map((s) => <option key={s.k} value={s.k}>{s.label}</option>)}
+            {SORTS.map((s) => <option key={s} value={s}>{t(`sorts.${s}`)}</option>)}
           </select>
         </div>
 
-        <p className="sr-only" role="status" aria-live="polite">{list.length} document{list.length > 1 ? 's' : ''} affiché{list.length > 1 ? 's' : ''}</p>
+        <p className="sr-only" role="status" aria-live="polite">{t('shown', { count: list.length })}</p>
 
         {loading ? (
-          <LoadingState compact title="Chargement des documents" description="" />
+          <LoadingState compact title={td('loading')} description="" />
         ) : error ? (
-          <ErrorState compact description={error.message} primary={{ label: 'Réessayer', onClick: () => void refresh() }} secondary={{ label: 'Retour aux documents', href: '/app/coffre/documents' }} />
+          <ErrorState compact description={error.message} primary={{ label: tc('retry'), onClick: () => void refresh() }} secondary={{ label: t('backToDocs'), href: '/app/coffre/documents' }} />
         ) : list.length === 0 ? (
           <div className="mt-6 rounded-2xl border border-dashed border-night-200 p-8 text-center">
-            <p className="text-[14px] font-bold text-night-900">Aucun document trouvé</p>
-            <p className="mt-1 text-[13px] text-night-500">Modifiez votre recherche ou vos filtres.</p>
+            <p className="text-[14px] font-bold text-night-900">{t('emptyTitle')}</p>
+            <p className="mt-1 text-[13px] text-night-500">{t('emptyText')}</p>
           </div>
         ) : (
           <ul className="space-y-2.5 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0">
@@ -116,8 +116,9 @@ function AllDocuments() {
 }
 
 export default function AllDocumentsPage() {
+  const tc = useTranslations('vault.common')
   return (
-    <Suspense fallback={<div className="p-6 text-center text-sm text-night-500" role="status">Chargement…</div>}>
+    <Suspense fallback={<div className="p-6 text-center text-sm text-night-500" role="status">{tc('loading')}</div>}>
       <AllDocuments />
     </Suspense>
   )

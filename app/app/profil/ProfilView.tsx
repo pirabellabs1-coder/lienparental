@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import { Brain, CalendarDays, ChevronRight, CircleHelp, Cloud, LockKeyhole, SlidersHorizontal, UserRound } from 'lucide-react'
 import { ConfirmDialog } from '@/components/ui'
 import { cn } from '@/lib/cn'
@@ -18,7 +19,7 @@ import {
 } from '@/components/profil/kit'
 import { ProfileAvatar } from '@/components/profil/ProfileAvatar'
 import { profile } from '@/components/profil/data'
-import { PLAN_NAME, type PlanId } from '@/components/profil/pricing'
+import type { PlanId } from '@/components/profil/pricing'
 import { formatBytes } from '@/components/profil/storage'
 import { signOutAndRedirect, useAccountProfile } from '@/lib/auth/browser'
 import { useUnreadNotificationsCount } from '@/lib/data/notifications'
@@ -38,8 +39,11 @@ export type ProfilViewProps = {
 }
 
 export function ProfilView({ live, plan, storage, coach, subscriptionDate, status }: ProfilViewProps) {
+  const t = useTranslations('account.profile.home')
+  const tb = useTranslations('billing.common.plan')
+  const locale = useLocale()
   const isPremium = plan !== 'gratuit'
-  const planName = PLAN_NAME[plan]
+  const planName = tb(plan)
   const abonnementHref = '/app/abonnement'
   const unread = useUnreadNotificationsCount()
   const [logoutOpen, setLogoutOpen] = useState(false)
@@ -53,7 +57,7 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate, statu
       <BrandHeader notifications={unread} />
 
       <div className="space-y-5 px-5 pb-8 pt-3">
-        <PageTitle title="Mon profil" subtitle="Gérez vos informations et votre compte." />
+        <PageTitle title={t('title')} subtitle={t('subtitle')} />
 
         {/* Carte identité */}
         <Link
@@ -65,12 +69,12 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate, statu
             <span className="block truncate text-[17px] font-bold text-night-900">{fullName}</span>
             <span className="mt-1.5 flex items-center gap-2 text-[12.5px] text-night-800">
               <span aria-hidden className="h-2 w-2 rounded-full bg-leaf-500" />
-              Membre depuis {account.memberSince}
+              {t('memberSince', { date: account.memberSince })}
             </span>
             <span className="mt-1.5 block truncate text-[12.5px] text-night-800">{account.email}</span>
           </span>
           <ChevronRight className="h-5 w-5 shrink-0 text-night-900" aria-hidden />
-          <span className="sr-only">Modifier mes informations</span>
+          <span className="sr-only">{t('editInfo')}</span>
         </Link>
 
         {/* Carte formule */}
@@ -88,10 +92,10 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate, statu
                   {status ? (
                     <span className={cn('inline-flex items-center rounded-md border px-2 py-0.5 text-[11.5px] font-bold', TONE_BADGE[status.tone])}>{status.label}</span>
                   ) : (
-                    <Pill tone="leafSoft">Actif</Pill>
+                    <Pill tone="leafSoft">{t('active')}</Pill>
                   )}
                 </span>
-                <span className="mt-1 block text-[12.5px] text-night-800">{status ? status.headline : 'Votre abonnement est actif.'}</span>
+                <span className="mt-1 block text-[12.5px] text-night-800">{status ? status.headline : t('activeHeadline')}</span>
                 <span className="mt-2.5 flex items-center justify-between gap-2 text-[12.5px] text-night-800">
                   {subscriptionDate ? (
                     <span className="inline-flex items-center gap-2">
@@ -99,7 +103,7 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate, statu
                       {subscriptionDate.label} {subscriptionDate.date}
                     </span>
                   ) : (
-                    <span>Voir le détail de l’abonnement</span>
+                    <span>{t('subscriptionDetail')}</span>
                   )}
                   <ChevronRight className="h-5 w-5 text-night-900" aria-hidden />
                 </span>
@@ -108,95 +112,95 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate, statu
           </Link>
         ) : (
           <section aria-labelledby="plan-title" className="rounded-xl2 border border-night-100 bg-night-50/80 p-4 shadow-soft">
-            <Pill tone="night" className="uppercase tracking-wide">Gratuit</Pill>
+            <Pill tone="night" className="uppercase tracking-wide">{t('free')}</Pill>
             <div className="mt-3 flex items-center gap-4">
               <CrownIcon variant="outline" className="h-12 w-14 shrink-0 text-night-900" />
               <div className="min-w-0 flex-1">
-                <h2 id="plan-title" className="text-[15px] font-bold text-night-900">Compte gratuit</h2>
+                <h2 id="plan-title" className="text-[15px] font-bold text-night-900">{t('freeTitle')}</h2>
                 <p className="mt-1 text-[12.5px] leading-relaxed text-night-800">
-                  Accédez aux fonctionnalités de base.
+                  {t('freeText1')}
                   <br />
-                  Passez à Premium pour plus d’espace et toutes les fonctionnalités.
+                  {t('freeText2')}
                 </p>
               </div>
             </div>
             <Link href="/app/abonnement?formule=premium" className={cn(btn.primary, "relative mt-4 text-[14px]")}>
-              Voir les formules
+              {t('seePlans')}
               <ChevronRight className="absolute right-4 h-5 w-5" aria-hidden />
             </Link>
           </section>
         )}
 
         <section aria-labelledby="sec-compte">
-          <SectionLabel id="sec-compte">Mon compte</SectionLabel>
+          <SectionLabel id="sec-compte">{t('sections.account')}</SectionLabel>
           <ListGroup>
-            <ListRow href="/app/profil/informations" icon={<UserRound className="h-6 w-6" strokeWidth={1.7} />} title="Informations personnelles" subtitle="Gérez vos informations et coordonnées" />
-            <ListRow href="/app/profil/securite" icon={<LockKeyhole className="h-6 w-6" strokeWidth={1.7} />} title="Sécurité" subtitle="Mot de passe, authentification et sessions" />
-            <ListRow href="/app/profil/preferences" icon={<SlidersHorizontal className="h-6 w-6" strokeWidth={1.7} />} title="Préférences" subtitle="Notifications, langue et affichage" />
+            <ListRow href="/app/profil/informations" icon={<UserRound className="h-6 w-6" strokeWidth={1.7} />} title={t('rows.info')} subtitle={t('rows.infoSub')} />
+            <ListRow href="/app/profil/securite" icon={<LockKeyhole className="h-6 w-6" strokeWidth={1.7} />} title={t('rows.security')} subtitle={t('rows.securitySub')} />
+            <ListRow href="/app/profil/preferences" icon={<SlidersHorizontal className="h-6 w-6" strokeWidth={1.7} />} title={t('rows.prefs')} subtitle={t('rows.prefsSub')} />
           </ListGroup>
         </section>
 
         <section aria-labelledby="sec-abo">
-          <SectionLabel id="sec-abo">Mon abonnement</SectionLabel>
+          <SectionLabel id="sec-abo">{t('sections.subscription')}</SectionLabel>
           <ListGroup>
             {isPremium ? (
               <>
-                <ListRow href={abonnementHref} icon={<CrownIcon className="h-6 w-7" />} title="Mon abonnement" subtitle="Formule, paiement, factures, changement ou résiliation" />
+                <ListRow href={abonnementHref} icon={<CrownIcon className="h-6 w-7" />} title={t('rows.subscription')} subtitle={t('rows.subscriptionSub')} />
               </>
             ) : (
-              <ListRow href="/app/abonnement" icon={<CrownIcon variant="outline" className="h-6 w-7 text-night-900" />} title="Mon abonnement" subtitle="Offre Gratuite : voir les formules et s’abonner" />
+              <ListRow href="/app/abonnement" icon={<CrownIcon variant="outline" className="h-6 w-7 text-night-900" />} title={t('rows.subscription')} subtitle={t('rows.subscriptionFreeSub')} />
             )}
           </ListGroup>
         </section>
 
         <section aria-labelledby="sec-stockage">
-          <SectionLabel id="sec-stockage">Stockage</SectionLabel>
+          <SectionLabel id="sec-stockage">{t('sections.storage')}</SectionLabel>
           <Link
             href="/app/profil/stockage"
             className="flex items-center gap-3 rounded-xl2 border border-night-100 bg-white px-4 py-3.5 shadow-soft transition hover:border-night-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
           >
             <Cloud className="h-6 w-6 shrink-0 text-night-900" strokeWidth={1.7} aria-hidden />
             <span className="ml-1 min-w-0 flex-1">
-              <span className="block text-[14px] font-bold text-night-900">Espace utilisé</span>
+              <span className="block text-[14px] font-bold text-night-900">{t('storageUsed')}</span>
               {storage ? (
                 <>
-                  <span className="mt-0.5 block text-[12.5px] text-night-700">{formatBytes(storage.usedBytes)} / {formatBytes(storage.maxBytes)}</span>
-                  <ProgressBar className="mt-2.5" value={storage.usedBytes} max={storage.maxBytes} label="Espace de stockage utilisé" />
+                  <span className="mt-0.5 block text-[12.5px] text-night-700">{formatBytes(storage.usedBytes, locale)} / {formatBytes(storage.maxBytes, locale)}</span>
+                  <ProgressBar className="mt-2.5" value={storage.usedBytes} max={storage.maxBytes} label={t('storageAria')} />
                 </>
               ) : (
-                <span className="mt-0.5 block text-[12.5px] text-night-700">Consommation indisponible pour le moment. Réessayez plus tard.</span>
+                <span className="mt-0.5 block text-[12.5px] text-night-700">{t('storageUnavailable')}</span>
               )}
             </span>
           </Link>
         </section>
 
         <section aria-labelledby="sec-coach">
-          <SectionLabel id="sec-coach">Coach IA</SectionLabel>
+          <SectionLabel id="sec-coach">{t('sections.coach')}</SectionLabel>
           <div className="flex items-center gap-3 rounded-xl2 border border-night-100 bg-white px-4 py-3.5 shadow-soft">
             <Brain className="h-6 w-6 shrink-0 text-night-900" strokeWidth={1.7} aria-hidden />
             <div className="ml-1 min-w-0 flex-1">
-              <p className="text-[14px] font-bold text-night-900">Utilisation actuelle</p>
+              <p className="text-[14px] font-bold text-night-900">{t('coachUsage')}</p>
               {coach ? (
                 <>
-                  <p className="mt-0.5 text-[12.5px] text-night-700">{coach.used} / {coach.quota} analyses{live ? ' sur 30 jours' : ''}</p>
-                  <ProgressBar className="mt-2.5" value={coach.used} max={coach.quota} label="Analyses du Coach IA utilisées" />
+                  <p className="mt-0.5 text-[12.5px] text-night-700">{live ? t('coachCount30', { used: coach.used, quota: coach.quota }) : t('coachCount', { used: coach.used, quota: coach.quota })}</p>
+                  <ProgressBar className="mt-2.5" value={coach.used} max={coach.quota} label={t('coachAria')} />
                 </>
               ) : (
-                <p className="mt-0.5 text-[12.5px] text-night-700">Utilisation indisponible pour le moment. Réessayez plus tard.</p>
+                <p className="mt-0.5 text-[12.5px] text-night-700">{t('coachUnavailable')}</p>
               )}
             </div>
           </div>
         </section>
 
         <section aria-labelledby="sec-aide">
-          <SectionLabel id="sec-aide">Assistance</SectionLabel>
+          <SectionLabel id="sec-aide">{t('sections.help')}</SectionLabel>
           <ListGroup>
-            <ListRow href="/app/aide" icon={<CircleHelp className="h-6 w-6" strokeWidth={1.7} />} title="Centre d'aide" subtitle="FAQ, guides et contact support" />
+            <ListRow href="/app/aide" icon={<CircleHelp className="h-6 w-6" strokeWidth={1.7} />} title={t('rows.help')} subtitle={t('rows.helpSub')} />
           </ListGroup>
         </section>
 
         <button type="button" onClick={() => setLogoutOpen(true)} className={btn.secondary}>
-          Se déconnecter
+          {t('logout.button')}
         </button>
       </div>
 
@@ -209,9 +213,9 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate, statu
           void signOutAndRedirect('/onboarding/connexion')
         }}
         loading={loggingOut}
-        title="Se déconnecter ?"
-        description="Vous devrez saisir vos identifiants pour revenir."
-        confirmLabel="Déconnexion"
+        title={t('logout.title')}
+        description={t('logout.description')}
+        confirmLabel={t('logout.confirm')}
         tone="danger"
       />
     </>

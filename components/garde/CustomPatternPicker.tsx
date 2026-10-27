@@ -1,10 +1,11 @@
 'use client'
 
+import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
+import { weekdayNames } from '@/components/calendrier/useCalFormat'
 import { NEUTRAL_GARDE_NAMES, type GardeNames } from '@/lib/garde'
 
-const DAYS = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim']
-const DAYS_LONG = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche']
+// Noms des jours (lundi en premier) : weekdayNames(locale) (Intl, langue active).
 
 type Props = {
   value: boolean[]
@@ -17,20 +18,23 @@ type Props = {
 
 /** Cycle de 14 jours : chaque bouton bascule « chez vous » / « chez l'autre parent ». */
 export function CustomPatternPicker({ value, onChange, error, errorId, names = NEUTRAL_GARDE_NAMES }: Props) {
-  const otherShort = names.coParentKnown ? `${names.coParent.slice(0, 3)}.` : 'Autre'
+  const t = useTranslations('calendar.custody')
+  const days = weekdayNames(useLocale())
+  const who = { coParent: names.coParent, known: names.coParentKnown ? 'yes' : 'no' }
+  const otherShort = names.coParentKnown ? `${names.coParent.slice(0, 3)}.` : t('picker.otherShort')
   const toggle = (i: number) => onChange(value.map((v, j) => (j === i ? !v : v)))
 
   return (
     <fieldset aria-describedby={error ? errorId : undefined}>
-      <legend className="text-[13px] font-bold text-night-900">Jours chez vous</legend>
+      <legend className="text-[13px] font-bold text-night-900">{t('picker.legend')}</legend>
       <p className="mt-1 text-xs text-night-600">
-        Touchez un jour pour l&apos;attribuer. Le cycle de deux semaines se répète ensuite.
+        {t('picker.hint')}
       </p>
       {[0, 1].map((w) => (
         <div key={w} className="mt-3">
-          <p className="mb-1.5 text-xs font-semibold text-night-700">Semaine {w + 1}</p>
+          <p className="mb-1.5 text-xs font-semibold text-night-700">{t('picker.week', { n: w + 1 })}</p>
           <div className="grid grid-cols-7 gap-1.5">
-            {DAYS.map((d, i) => {
+            {days.map(({ short: d, long }, i) => {
               const idx = w * 7 + i
               const mine = value[idx]
               return (
@@ -38,7 +42,7 @@ export function CustomPatternPicker({ value, onChange, error, errorId, names = N
                   key={d}
                   type="button"
                   aria-pressed={mine}
-                  aria-label={`Semaine ${w + 1}, ${DAYS_LONG[i]} : ${mine ? 'chez vous' : `chez ${names.coParent}`}`}
+                  aria-label={t('picker.dayLabel', { n: w + 1, day: long, where: mine ? t('atMine') : t('atOther', who) })}
                   onClick={() => toggle(idx)}
                   className={cn(
                     'flex h-12 flex-col items-center justify-center rounded-xl border text-[12px] font-semibold transition-colors',
@@ -47,7 +51,7 @@ export function CustomPatternPicker({ value, onChange, error, errorId, names = N
                   )}
                 >
                   {d}
-                  <span aria-hidden="true" className="text-[10px] font-medium">{mine ? 'Vous' : otherShort}</span>
+                  <span aria-hidden="true" className="text-[10px] font-medium">{mine ? t('picker.me') : otherShort}</span>
                 </button>
               )
             })}

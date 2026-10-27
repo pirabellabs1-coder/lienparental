@@ -2,6 +2,7 @@
 
 import { Fragment, useCallback, useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import {
   BookOpen, CalendarDays, CornerDownLeft, FileText, History, LayoutGrid, Lock,
@@ -27,34 +28,38 @@ const PER_SECTION = 5
 
 type SectionKey = 'documents' | 'journal' | 'calendrier' | 'temoignages' | 'pages'
 
-const SECTIONS: Record<SectionKey, { label: string; icon: LucideIcon }> = {
-  documents: { label: 'Documents', icon: FileText },
-  journal: { label: 'Journal', icon: BookOpen },
-  calendrier: { label: 'Calendrier', icon: CalendarDays },
-  temoignages: { label: 'Témoignages', icon: MessageSquareQuote },
-  pages: { label: 'Pages', icon: LayoutGrid },
+type T = ReturnType<typeof useTranslations>
+
+// Libellés traduits au rendu : account.search.sections.{key}.
+const SECTIONS: Record<SectionKey, { icon: LucideIcon }> = {
+  documents: { icon: FileText },
+  journal: { icon: BookOpen },
+  calendrier: { icon: CalendarDays },
+  temoignages: { icon: MessageSquareQuote },
+  pages: { icon: LayoutGrid },
 }
 const SECTION_ORDER: SectionKey[] = ['documents', 'journal', 'calendrier', 'temoignages', 'pages']
 
-const PAGES: { label: string; href: string; keywords?: string }[] = [
-  { label: 'Accueil', href: '/app', keywords: 'tableau de bord dashboard' },
-  { label: 'Journal', href: '/app/journal', keywords: 'notes chronologie' },
-  { label: 'Calendrier', href: '/app/calendrier', keywords: 'agenda planning rendez-vous' },
-  { label: 'Coffre-fort', href: '/app/coffre', keywords: 'documents preuves' },
-  { label: 'Coach IA', href: '/app/coach', keywords: 'assistant conseil' },
-  { label: 'Mes enfants', href: '/app/enfants', keywords: 'enfant famille' },
-  { label: 'Profil', href: '/app/profil', keywords: 'compte' },
-  { label: 'Sécurité', href: '/app/profil/securite', keywords: 'mot de passe connexion' },
-  { label: 'Préférences', href: '/app/profil/preferences', keywords: 'apparence taille du texte notifications langue' },
-  { label: 'Centre d’aide', href: '/app/aide', keywords: 'aide faq support contact' },
-  { label: 'Planning de garde', href: '/app/garde', keywords: 'garde alternance' },
-  { label: 'Finances (Journal)', href: '/app/journal?filtre=finances', keywords: 'finances depenses paiements argent pension frais' },
+// Libellés traduits (account.search.pages.{key}) ; mots-clés français conservés + mots-clés traduits
+// (account.search.keywords.{key}) pour chercher dans les deux langues.
+const PAGES: { key: string; href: string; keywords?: string }[] = [
+  { key: 'home', href: '/app', keywords: 'tableau de bord dashboard' },
+  { key: 'journal', href: '/app/journal', keywords: 'notes chronologie' },
+  { key: 'calendar', href: '/app/calendrier', keywords: 'agenda planning rendez-vous' },
+  { key: 'vault', href: '/app/coffre', keywords: 'documents preuves' },
+  { key: 'coach', href: '/app/coach', keywords: 'assistant conseil' },
+  { key: 'children', href: '/app/enfants', keywords: 'enfant famille' },
+  { key: 'profile', href: '/app/profil', keywords: 'compte' },
+  { key: 'security', href: '/app/profil/securite', keywords: 'mot de passe connexion' },
+  { key: 'preferences', href: '/app/profil/preferences', keywords: 'apparence taille du texte notifications langue' },
+  { key: 'help', href: '/app/aide', keywords: 'aide faq support contact' },
+  { key: 'custody', href: '/app/garde', keywords: 'garde alternance' },
+  { key: 'finances', href: '/app/journal?filtre=finances', keywords: 'finances depenses paiements argent pension frais' },
 ]
 const QUICK_LINKS = ['/app/journal', '/app/calendrier', '/app/coffre', '/app/coach', '/app/aide']
 
-const JOURNAL_TYPE_LABEL: Record<string, string> = {
-  visite: 'Visite', appel: 'Appel', message: 'Message', sante: 'Santé', depense: 'Dépense', autre: 'Autre',
-}
+// Types de journal traduits : account.search.journalTypes.{type} (repli : « Note »).
+const JOURNAL_TYPES = new Set(['visite', 'appel', 'message', 'sante', 'depense', 'autre'])
 
 type Item = {
   id: string
@@ -168,7 +173,7 @@ async function loadLiveSource(vaultOpen: boolean): Promise<IndexSource> {
  * `vaultOpen` : documents et témoignages (coffre-fort) indexés UNIQUEMENT si le coffre est
  * déverrouillé ; sinon ils ne sont ni chargés ni cherchés (fail closed pendant la vérification).
  */
-function buildIndex(vaultOpen: boolean, src: IndexSource): Item[] {
+function buildIndex(vaultOpen: boolean, src: IndexSource, t: T): Item[] {
   const items: Item[] = []
   const push = (section: SectionKey, id: string, title: string, href: string, subtitle: string | undefined, extra: (string | undefined)[]) => {
     items.push({
@@ -186,7 +191,7 @@ function buildIndex(vaultOpen: boolean, src: IndexSource): Item[] {
   }
   for (const j of src.journal) {
     push('journal', j.id, j.title, `/app/journal/${j.id}`,
-      [JOURNAL_TYPE_LABEL[j.type] ?? 'Note', frDate(j.date, 'short'), j.heure].filter(Boolean).join(' · '),
+      [JOURNAL_TYPES.has(j.type) ? t(`journalTypes.${j.type}`) : t('journalTypes.note'), frDate(j.date, 'short'), j.heure].filter(Boolean).join(' · '),
       [j.description, j.lieu])
   }
   for (const e of src.events) {
@@ -195,12 +200,12 @@ function buildIndex(vaultOpen: boolean, src: IndexSource): Item[] {
       [e.location, e.description])
   }
   for (const r of vaultOpen ? src.requests : []) {
-    const status = r.status === 'termine' ? 'Terminée' : 'En attente'
+    const status = r.status === 'termine' ? t('requestDone') : t('requestPending')
     push('temoignages', r.id, r.subject, `/app/coffre/temoignages/${r.id}`,
-      `${status} · ${receivedCount(r)}/${r.witnesses.length} reçu${receivedCount(r) > 1 ? 's' : ''}`,
+      `${status} · ${t('received', { count: receivedCount(r), total: r.witnesses.length })}`,
       [r.context, ...r.parents, ...r.enfants])
   }
-  for (const p of PAGES) push('pages', p.href, p.label, p.href, undefined, [p.keywords])
+  for (const p of PAGES) push('pages', p.href, t(`pages.${p.key}`), p.href, undefined, [p.keywords, t(`keywords.${p.key}`)])
   return items
 }
 
@@ -231,6 +236,7 @@ const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),[tabinde
 /* ----- Composant ---------------------------------------------------------- */
 
 export function CommandPalette() {
+  const t = useTranslations('account.search')
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -294,7 +300,7 @@ export function CommandPalette() {
     return () => { alive = false }
   }, [open, vaultOpen])
   const source = LIVE ? liveSource : DEMO_SOURCE
-  const index = useMemo(() => (open ? buildIndex(vaultOpen, source) : []), [open, vaultOpen, source])
+  const index = useMemo(() => (open ? buildIndex(vaultOpen, source, t) : []), [open, vaultOpen, source, t])
 
   const phrase = fold(query.trim()).replace(/\s+/g, ' ')
   const terms = useMemo(() => (phrase ? Array.from(new Set(phrase.split(' '))).filter(Boolean) : []), [phrase])
@@ -317,11 +323,11 @@ export function CommandPalette() {
       const out: Group[] = []
       if (recents.length > 0) {
         out.push({
-          key: 'recent', label: 'Recherches récentes', icon: History,
+          key: 'recent', label: t('recent'), icon: History,
           rows: recents.map(q => ({ kind: 'recent' as const, key: `recent:${q}`, query: q })),
         })
       }
-      out.push({ key: 'quick', label: 'Accès rapides', icon: LayoutGrid, rows: quickRows })
+      out.push({ key: 'quick', label: t('quick'), icon: LayoutGrid, rows: quickRows })
       return out
     }
     const buckets = new Map<SectionKey, { item: Item; s: number }[]>()
@@ -337,14 +343,14 @@ export function CommandPalette() {
       if (!b || b.length === 0) return []
       b.sort((a, c) => a.s - c.s)
       return [{
-        key, label: SECTIONS[key].label, icon: SECTIONS[key].icon,
+        key, label: t(`sections.${key}`), icon: SECTIONS[key].icon,
         rows: b.slice(0, PER_SECTION).map(({ item }) => ({ kind: 'item' as const, key: item.id, item })),
       }]
     })
-  }, [phrase, terms, index, recents, quickRows])
+  }, [phrase, terms, index, recents, quickRows, t])
 
   const noResults = Boolean(phrase) && groups.length === 0
-  const visibleGroups: Group[] = noResults ? [{ key: 'quick', label: 'Accès rapides', icon: LayoutGrid, rows: quickRows }] : groups
+  const visibleGroups: Group[] = noResults ? [{ key: 'quick', label: t('quick'), icon: LayoutGrid, rows: quickRows }] : groups
   const flat = visibleGroups.flatMap(g => g.rows)
   const resultCount = noResults ? 0 : flat.length
 
@@ -415,11 +421,11 @@ export function CommandPalette() {
           'sm:shadow-[0_24px_60px_-20px_rgba(11,45,91,0.35)]',
         )}
       >
-        <h2 id={titleId} className="sr-only">Recherche globale</h2>
+        <h2 id={titleId} className="sr-only">{t('dialogTitle')}</h2>
 
         <div className="flex items-center gap-2 border-b border-night-100 px-3 sm:px-4">
           <Search aria-hidden className="h-5 w-5 shrink-0 text-night-400" strokeWidth={2} />
-          <label htmlFor={`${uid}-input`} className="sr-only">Rechercher dans Lien Parental</label>
+          <label htmlFor={`${uid}-input`} className="sr-only">{t('inputLabel')}</label>
           <input
             ref={inputRef}
             id={`${uid}-input`}
@@ -436,14 +442,14 @@ export function CommandPalette() {
             value={query}
             onChange={e => setQuery(e.target.value)}
             onKeyDown={onInputKeyDown}
-            placeholder="Rechercher un document, un événement, un témoignage…"
+            placeholder={t('placeholder')}
             className="h-14 min-w-0 flex-1 bg-transparent text-[16px] text-night-900 placeholder:text-night-500 focus:outline-none focus-visible:shadow-none"
           />
           {query && (
             <button
               type="button"
               onClick={() => { setQuery(''); inputRef.current?.focus() }}
-              aria-label="Effacer la recherche"
+              aria-label={t('clear')}
               className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-night-500 hover:bg-night-50 hover:text-night-900"
             >
               <X aria-hidden className="h-4 w-4" strokeWidth={2.4} />
@@ -452,26 +458,26 @@ export function CommandPalette() {
           <button
             type="button"
             onClick={close}
-            aria-label="Fermer la recherche"
+            aria-label={t('close')}
             className="inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-xl px-2 text-[14px] font-semibold text-leaf-600 hover:text-leaf-700 sm:px-1"
           >
-            <span aria-hidden className="sm:hidden">Annuler</span>
-            <kbd aria-hidden className="hidden rounded-md border border-night-200 bg-night-50 px-1.5 py-0.5 font-sans text-[11.5px] font-semibold text-night-600 sm:inline">Échap</kbd>
+            <span aria-hidden className="sm:hidden">{t('cancel')}</span>
+            <kbd aria-hidden className="hidden rounded-md border border-night-200 bg-night-50 px-1.5 py-0.5 font-sans text-[11.5px] font-semibold text-night-600 sm:inline">{t('keys.esc')}</kbd>
           </button>
         </div>
 
         <p className="sr-only" role="status" aria-live="polite">
-          {phrase ? (resultCount === 0 ? `Aucun résultat pour ${query.trim()}` : `${resultCount} résultat${resultCount > 1 ? 's' : ''}`) : ''}
+          {phrase ? (resultCount === 0 ? t('noResultsFor', { query: query.trim() }) : t('resultCount', { count: resultCount })) : ''}
         </p>
 
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 pb-3 pt-2 sm:flex-initial">
           {noResults && (
             <div className="px-3 pb-2 pt-6 text-center">
               <p className="text-[15px] font-semibold text-night-900">
-                Aucun résultat pour « <span className="break-words">{query.trim()}</span> »
+                {t.rich('noResultsQuoted', { query: query.trim(), q: (chunks) => <span className="break-words">{chunks}</span> })}
               </p>
               <p className="mt-1 text-[13px] text-night-500">
-                {vaultOpen ? 'Vérifiez l’orthographe ou essayez un autre mot.' : 'Vos documents et témoignages ne sont pas inclus tant que le coffre est verrouillé.'}
+                {vaultOpen ? t('noResultsHint') : t('noResultsLocked')}
               </p>
             </div>
           )}
@@ -480,7 +486,7 @@ export function CommandPalette() {
             <div className="mx-1 mb-1 mt-1 flex items-center gap-3 rounded-xl border border-night-100 bg-night-50/60 px-3 py-2.5">
               <Lock aria-hidden className="h-4 w-4 shrink-0 text-night-700" strokeWidth={2.2} />
               <p className="min-w-0 flex-1 text-[13px] leading-snug text-night-800">
-                {vault === 'loading' ? 'Vérification du coffre-fort…' : 'Déverrouillez le coffre pour chercher dans vos documents et témoignages.'}
+                {vault === 'loading' ? t('vaultChecking') : t('vaultLocked')}
               </p>
               {vault !== 'loading' && (
                 <Link
@@ -488,13 +494,13 @@ export function CommandPalette() {
                   onClick={close}
                   className="inline-flex min-h-[44px] shrink-0 items-center rounded-lg px-2 text-[13px] font-bold text-leaf-600 hover:bg-leaf-50 hover:text-leaf-700"
                 >
-                  Déverrouiller
+                  {t('unlock')}
                 </Link>
               )}
             </div>
           )}
 
-          <div role="listbox" id={listboxId} aria-label="Résultats de recherche">
+          <div role="listbox" id={listboxId} aria-label={t('results')}>
             {visibleGroups.map(g => {
               const headId = `${uid}-g-${g.key}`
               const GIcon = g.icon
@@ -559,16 +565,16 @@ export function CommandPalette() {
                 onClick={clearRecents}
                 className="inline-flex min-h-[44px] items-center rounded-xl px-2 text-[13px] font-semibold text-night-600 hover:bg-night-50 hover:text-night-900"
               >
-                Effacer les recherches récentes
+                {t('clearRecent')}
               </button>
             </div>
           )}
         </div>
 
         <div aria-hidden className="hidden items-center gap-4 border-t border-night-100 bg-night-50/50 px-4 py-2.5 text-[12px] text-night-500 sm:flex">
-          <span className="inline-flex items-center gap-1.5"><Kbd>↑</Kbd><Kbd>↓</Kbd> naviguer</span>
-          <span className="inline-flex items-center gap-1.5"><Kbd>Entrée</Kbd> ouvrir</span>
-          <span className="inline-flex items-center gap-1.5"><Kbd>Échap</Kbd> fermer</span>
+          <span className="inline-flex items-center gap-1.5"><Kbd>↑</Kbd><Kbd>↓</Kbd> {t('keys.navigate')}</span>
+          <span className="inline-flex items-center gap-1.5"><Kbd>{t('keys.enter')}</Kbd> {t('keys.open')}</span>
+          <span className="inline-flex items-center gap-1.5"><Kbd>{t('keys.esc')}</Kbd> {t('keys.close')}</span>
         </div>
       </div>
     </div>

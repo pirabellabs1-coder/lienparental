@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useId, useRef, type ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
@@ -21,6 +22,7 @@ type Props = {
  * centrée sur ordinateur.
  */
 export function Sheet({ open, onClose, title, eyebrow, description, children, className }: Props) {
+  const t = useTranslations('messaging.sheet')
   const ref = useRef<HTMLDialogElement>(null)
   const uid = useId()
   const titleId = `${uid}-title`
@@ -71,7 +73,7 @@ export function Sheet({ open, onClose, title, eyebrow, description, children, cl
             <button
               type="button"
               onClick={onClose}
-              aria-label="Fermer"
+              aria-label={t('close')}
               className="-mr-2 -mt-1 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-night-700 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
             >
               <X className="h-5 w-5" aria-hidden="true" />

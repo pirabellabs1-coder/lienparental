@@ -72,7 +72,8 @@ export const accountInfoSchema = z.object({
 })
 
 export const preferencesSchema = z.object({
-  langue: z.enum(['fr', 'en', 'es']),
+  // fr/en/pt = langues de l'application ; 'es' toléré pour les anciennes préférences enregistrées.
+  langue: z.enum(['fr', 'en', 'pt', 'es']),
   fuseau: trimmed(64),
   formatDate: z.enum(['dd/mm/yyyy', 'mm/dd/yyyy', 'yyyy-mm-dd']),
   formatHeure: z.enum(['24', '12']),

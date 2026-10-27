@@ -1,10 +1,12 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import {
-  eventsOnDay, fmtDayLong, getMonthMatrix, isSameDay, toDateKey, WEEKDAY_SHORT_FR, type CalendarEvent,
+  eventsOnDay, getMonthMatrix, isSameDay, toDateKey, type CalendarEvent,
 } from '@/lib/calendrier'
 import { typeStyle } from './eventTypeStyles'
+import { useCalFormat } from './useCalFormat'
 
 // Jours = Dates à midi UTC (lib/calendrier → dayOf / todayDay), lues en UTC.
 type Props = {
@@ -18,13 +20,15 @@ type Props = {
 
 /** Grille mensuelle épurée : jours, pastilles colorées, jour sélectionné en cercle vert plein. */
 export function MonthGrid({ month, selected, onSelect, events, today }: Props) {
+  const t = useTranslations('calendar.month')
+  const f = useCalFormat()
   const matrix = getMonthMatrix(month, true)
   const currentMonth = month.getUTCMonth()
 
   return (
     <div>
       <div aria-hidden="true" className="grid grid-cols-7 pb-1.5">
-        {WEEKDAY_SHORT_FR.map((d) => (
+        {f.weekdays.map(({ short: d }) => (
           <span key={d} className="text-center text-[10px] font-semibold uppercase tracking-wide text-night-500 md:text-[11px]">
             {d}
           </span>
@@ -37,9 +41,7 @@ export function MonthGrid({ month, selected, onSelect, events, today }: Props) {
           const isSelected = isSameDay(day, selected)
           const isToday = today ? isSameDay(day, today) : false
           const dayEvents = eventsOnDay(events, day)
-          const label =
-            fmtDayLong(day) +
-            (dayEvents.length ? `, ${dayEvents.length} événement${dayEvents.length > 1 ? 's' : ''}` : '')
+          const label = f.dayLong(day) + (dayEvents.length ? t('dayEvents', { count: dayEvents.length }) : '')
 
           return (
             <button

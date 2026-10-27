@@ -9,9 +9,9 @@ import {
   DOC_ACCEPT,
   IMAGE_ACCEPT,
   draftFromFile,
+  fileErrorCode,
   saveDraft,
   setPendingFile,
-  validateFile,
 } from '@/components/coach/session'
 import { cn } from '@/lib/cn'
 
@@ -36,6 +36,7 @@ function getRecognition(): RecognitionCtor | null {
 // M03 — Accès rapide au Coach parental IA.
 export function CoachQuickAccess() {
   const t = useTranslations('dash')
+  const tc = useTranslations('coach.common')
   const locale = useLocale()
   const router = useRouter()
   const [value, setValue] = useState('')
@@ -63,8 +64,8 @@ export function CoachQuickAccess() {
 
   const onFile = (file: File | undefined, kind: 'image' | 'doc') => {
     if (!file) return
-    const err = validateFile(file, kind)
-    if (err) return setError(err)
+    const code = fileErrorCode(file, kind)
+    if (code) return setError(tc(`fileErrors.${code}`))
     setError('')
     setPendingFile(file)
     saveDraft(draftFromFile(file))
