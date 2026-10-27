@@ -2,6 +2,35 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { DEMO_COOKIE, DEMO_MODE, isDemoAccountId } from '@/lib/demo-auth'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { redirectWithSession, updateSession } from '@/lib/supabase/middleware'
+import { ADMIN_ENTRY_PREFIX, ADMIN_GATE_COOKIE, adminGateConfigured, adminGateProof, hasAdminGate, isValidAdminEntry } from '@/lib/admin/gate'
+
+const isAdminPath = (p: string) => p === '/admin' || p.startsWith('/admin/')
+
+/**
+ * Porte d'accès masqué à l'administration (couche d'obscurité EN PLUS de l'auth + rôle + 2FA).
+ * - Lien secret `/console/<secret>` : pose le cookie de porte puis redirige vers /admin.
+ * - /admin sans ce cookie : « page introuvable » (404), l'espace reste invisible.
+ * Renvoie une réponse à retourner immédiatement, ou null pour laisser passer.
+ * Inactif si ADMIN_GATE_SECRET n'est pas configuré (démo, local).
+ */
+async function adminGate(req: NextRequest): Promise<NextResponse | null> {
+  if (!adminGateConfigured()) return null
+  const p = req.nextUrl.pathname
+  const notFound = () => NextResponse.rewrite(new URL('/__introuvable', req.url))
+  if (p.startsWith(ADMIN_ENTRY_PREFIX)) {
+    const token = decodeURIComponent(p.slice(ADMIN_ENTRY_PREFIX.length))
+    if (await isValidAdminEntry(token)) {
+      const res = NextResponse.redirect(new URL('/admin', req.url))
+      res.cookies.set(ADMIN_GATE_COOKIE, await adminGateProof(), { httpOnly: true, secure: true, sameSite: 'lax', path: '/', maxAge: 60 * 60 * 24 * 30 })
+      return res
+    }
+    return notFound()
+  }
+  if (isAdminPath(p) && !(await hasAdminGate(req.cookies.get(ADMIN_GATE_COOKIE)?.value))) {
+    return notFound()
+  }
+  return null
+}
 
 const isProtected = (pathname: string) =>
   pathname === '/app' || pathname.startsWith('/app/') || pathname === '/admin' || pathname.startsWith('/admin/')
@@ -130,6 +159,11 @@ function notConfigured(req: NextRequest) {
 }
 
 export async function middleware(req: NextRequest) {
+  // Porte d'accès masqué : s'applique avant tout, y compris avant la redirection de connexion,
+  // pour que /admin reste invisible (404) à qui n'a pas le lien secret.
+  const gated = await adminGate(req)
+  if (gated) return gated
+
   if (SUPABASE_ENABLED) return supabaseMiddleware(req)
   if (DEMO_MODE) return demoMiddleware(req)
   if (process.env.NODE_ENV === 'production' && isUnavailableWithoutBackend(req.nextUrl.pathname)) {
