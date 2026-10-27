@@ -18,5 +18,73 @@
     "label": "Choose language",
     "current": "Current language: {name}",
     "switchTo": "Switch to {name}"
+  },
+  "home": {
+    "hero": {
+      "badge": "The app for separated parents",
+      "titleStart": "Everything for your child, ",
+      "titleHighlight": "finally in one place.",
+      "subtitle": "Organize, communicate, keep everything safe and move forward with confidence in your life as a separated parent, with simple, practical and reliable tools suited to your situation.",
+      "benefitCalm": "More peace of mind every day",
+      "benefitComm": "Better communication",
+      "benefitChild": "Always in your child’s best interest",
+      "ctaCreate": "Create a free account",
+      "watchVideo": "Watch the video",
+      "downloadTitle": "Download the app",
+      "installMobilePre": "Install for free on",
+      "installMobile": "iPhone and Android",
+      "installAlsoPre": "Also on",
+      "installDesktop": "Computer",
+      "noStore": "No app store needed: install directly from your browser in just a few seconds.",
+      "signatureLine": "Inform, Support, Protect,",
+      "signatureHighlight": "the parent-child bond",
+      "promiseCard": "A tool designed for every parent, for the good of their children",
+      "photoAlt": "A father tenderly hugging his daughter, both smiling",
+      "phoneAlt": "The Lien Parental app home screen: child tracking, the Parenting guide, expenses, health, testimonials and messaging"
+    },
+    "modulesNav": "Lien Parental modules",
+    "moduleBar": {
+      "guide": "Parenting guide",
+      "agenda": "Shared calendar",
+      "depenses": "Expenses & payments",
+      "sante": "Children’s health",
+      "coffre": "Secure vault",
+      "temoignages": "Testimonials",
+      "jaf": "My court file",
+      "coach": "AI parenting coach"
+    },
+    "why": {
+      "title": "Why choose Lien Parental?",
+      "lead": "Because being a separated parent already takes so much, Lien Parental makes the essentials simpler.",
+      "stressTitle": "Less stress",
+      "stressText": "Appointments, expenses, documents: everything in one place. No more searching — you plan ahead.",
+      "commTitle": "Calmer communication",
+      "commText": "Written, clear and dated exchanges, plus the AI Coach to help you find the right tone.",
+      "docsTitle": "Your documents kept safe",
+      "docsText": "Rulings, certificates, invoices: encrypted, filed in the vault and found in an instant.",
+      "childTitle": "Always in your child’s best interest",
+      "childText": "Every tool is designed to preserve your child’s bond with both parents."
+    }
+  },
+  "footer": {
+    "tagline": "The app for separated parents: organize, communicate, keep records and understand your steps, in the child’s best interest.",
+    "navLabel": "Footer",
+    "about": "About",
+    "features": "Features",
+    "guide": "Parenting guide",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "legalMentions": "Legal notice",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "install": "Install the app",
+    "blog": "Blog",
+    "territoriesTitle": "France and overseas territories",
+    "territoriesSub": "Parenting guide territories",
+    "available": "Available",
+    "soon": "Coming soon",
+    "rights": "© {year} Lien Parental. Secure hosting in Europe.",
+    "disclaimer": "Lien Parental is not a substitute for a lawyer."
   }
 }

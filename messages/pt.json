@@ -18,5 +18,73 @@
     "label": "Escolher idioma",
     "current": "Idioma atual: {name}",
     "switchTo": "Mudar para {name}"
+  },
+  "home": {
+    "hero": {
+      "badge": "O aplicativo para pais separados",
+      "titleStart": "Tudo para o seu filho, ",
+      "titleHighlight": "enfim num só lugar.",
+      "subtitle": "Organize, comunique-se, guarde tudo com segurança e siga em frente com tranquilidade na sua vida de pai ou mãe separado, com ferramentas simples, práticas e confiáveis, adaptadas à sua situação.",
+      "benefitCalm": "Mais tranquilidade no dia a dia",
+      "benefitComm": "Uma comunicação melhor",
+      "benefitChild": "Sempre no interesse do seu filho",
+      "ctaCreate": "Criar uma conta gratuita",
+      "watchVideo": "Ver o vídeo",
+      "downloadTitle": "Baixe o aplicativo",
+      "installMobilePre": "Instale gratuitamente no",
+      "installMobile": "iPhone e Android",
+      "installAlsoPre": "Também no",
+      "installDesktop": "Computador",
+      "noStore": "Sem passar por uma loja: instalação direta pelo seu navegador, em alguns segundos.",
+      "signatureLine": "Informar, Acompanhar, Preservar,",
+      "signatureHighlight": "o vínculo entre pais e filhos",
+      "promiseCard": "Uma ferramenta pensada para todos os pais, a serviço das crianças",
+      "photoAlt": "Um pai abraça carinhosamente a filha, ambos sorrindo",
+      "phoneAlt": "A tela inicial do aplicativo Lien Parental: acompanhamento da criança, o Guia parental, as despesas, a saúde, os depoimentos e as mensagens"
+    },
+    "modulesNav": "Módulos do Lien Parental",
+    "moduleBar": {
+      "guide": "Guia parental",
+      "agenda": "Agenda compartilhada",
+      "depenses": "Despesas e pagamentos",
+      "sante": "Saúde das crianças",
+      "coffre": "Cofre seguro",
+      "temoignages": "Depoimentos",
+      "jaf": "Meu processo judicial",
+      "coach": "Coach parental com IA"
+    },
+    "why": {
+      "title": "Por que escolher o Lien Parental?",
+      "lead": "Porque ser pai ou mãe separado já exige muito, o Lien Parental simplifica o essencial para você.",
+      "stressTitle": "Menos estresse",
+      "stressText": "Compromissos, despesas, documentos: tudo num só lugar. Você não procura mais, você se antecipa.",
+      "commTitle": "Uma comunicação mais tranquila",
+      "commText": "Conversas escritas, claras e datadas, e o Coach com IA para encontrar o tom certo.",
+      "docsTitle": "Seus documentos em segurança",
+      "docsText": "Sentenças, certidões, faturas: criptografados, organizados no cofre e encontrados num instante.",
+      "childTitle": "Sempre no interesse do seu filho",
+      "childText": "Cada ferramenta é pensada para preservar o vínculo do seu filho com os dois pais."
+    }
+  },
+  "footer": {
+    "tagline": "O aplicativo para pais separados: organizar, comunicar, guardar e entender seus trâmites, no interesse da criança.",
+    "navLabel": "Rodapé",
+    "about": "Sobre",
+    "features": "Funcionalidades",
+    "guide": "Guia parental",
+    "pricing": "Preços",
+    "faq": "Perguntas frequentes",
+    "contact": "Contato",
+    "legalMentions": "Avisos legais",
+    "privacy": "Política de privacidade",
+    "terms": "Termos de uso",
+    "install": "Instalar o aplicativo",
+    "blog": "Blog",
+    "territoriesTitle": "França e territórios ultramarinos",
+    "territoriesSub": "Territórios do Guia parental",
+    "available": "Disponível",
+    "soon": "Em breve",
+    "rights": "© {year} Lien Parental. Hospedagem segura na Europa.",
+    "disclaimer": "O Lien Parental não substitui um advogado."
   }
 }

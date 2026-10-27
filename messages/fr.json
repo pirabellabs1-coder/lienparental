@@ -18,5 +18,73 @@
     "label": "Choisir la langue",
     "current": "Langue actuelle : {name}",
     "switchTo": "Passer en {name}"
+  },
+  "home": {
+    "hero": {
+      "badge": "L’application des parents séparés",
+      "titleStart": "Tout pour votre enfant, ",
+      "titleHighlight": "enfin au même endroit.",
+      "subtitle": "Organisez, communiquez, conservez et avancez sereinement dans votre vie de parent séparé, avec des outils simples, pratiques et fiables, adaptés à votre situation.",
+      "benefitCalm": "Plus de sérénité au quotidien",
+      "benefitComm": "Une meilleure communication",
+      "benefitChild": "Toujours dans l’intérêt de votre enfant",
+      "ctaCreate": "Créer un compte gratuitement",
+      "watchVideo": "Voir la vidéo",
+      "downloadTitle": "Téléchargez l’application",
+      "installMobilePre": "Installer gratuitement sur",
+      "installMobile": "iPhone et Android",
+      "installAlsoPre": "Aussi sur",
+      "installDesktop": "Ordinateur",
+      "noStore": "Sans passer par un store : installation directe depuis votre navigateur, en quelques secondes.",
+      "signatureLine": "Informer, Accompagner, Préserver,",
+      "signatureHighlight": "le lien parent-enfant",
+      "promiseCard": "Un outil pensé pour tous les parents, au service des enfants",
+      "photoAlt": "Un père serre tendrement sa fille dans ses bras, tous deux souriants",
+      "phoneAlt": "L’accueil de l’application Lien Parental : l’enfant suivi, le Guide parental, les dépenses, la santé, les témoignages et la messagerie"
+    },
+    "modulesNav": "Les modules de Lien Parental",
+    "moduleBar": {
+      "guide": "Guide parental",
+      "agenda": "Agenda partagé",
+      "depenses": "Dépenses et paiements",
+      "sante": "Santé des enfants",
+      "coffre": "Coffre-fort sécurisé",
+      "temoignages": "Témoignages",
+      "jaf": "Mon dossier JAF",
+      "coach": "Coach parental IA"
+    },
+    "why": {
+      "title": "Pourquoi choisir Lien Parental ?",
+      "lead": "Parce qu’être parent séparé demande déjà beaucoup, Lien Parental vous simplifie l’essentiel.",
+      "stressTitle": "Moins de stress",
+      "stressText": "Rendez-vous, dépenses, documents : tout est au même endroit. Vous ne cherchez plus, vous anticipez.",
+      "commTitle": "Une communication apaisée",
+      "commText": "Des échanges écrits, clairs et datés, et le Coach IA pour trouver le bon ton.",
+      "docsTitle": "Vos documents en sécurité",
+      "docsText": "Jugements, certificats, factures : chiffrés, classés dans le coffre-fort et retrouvés en un instant.",
+      "childTitle": "Toujours dans l’intérêt de votre enfant",
+      "childText": "Chaque outil est pensé pour préserver le lien de votre enfant avec ses deux parents."
+    }
+  },
+  "footer": {
+    "tagline": "L’application des parents séparés : organiser, communiquer, conserver et comprendre ses démarches, dans l’intérêt de l’enfant.",
+    "navLabel": "Pied de page",
+    "about": "À propos",
+    "features": "Fonctionnalités",
+    "guide": "Guide parental",
+    "pricing": "Tarifs",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "legalMentions": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d’utilisation",
+    "install": "Installer l’application",
+    "blog": "Blog",
+    "territoriesTitle": "France et DOM-TOM",
+    "territoriesSub": "Territoires du Guide parental",
+    "available": "Disponible",
+    "soon": "Bientôt",
+    "rights": "© {year} Lien Parental. Hébergement sécurisé en Europe.",
+    "disclaimer": "Lien Parental ne remplace pas un avocat."
   }
 }
