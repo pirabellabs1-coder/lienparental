@@ -2,6 +2,7 @@
 
 import type { FormEvent, ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { ProgressDots } from './ProgressDots'
@@ -41,6 +42,7 @@ export function OnboardingScreen({
   className,
 }: Props) {
   const router = useRouter()
+  const t = useTranslations('onb')
   const onBack =
     back === false
       ? null
@@ -63,7 +65,7 @@ export function OnboardingScreen({
         <button
           type="button"
           onClick={onBack}
-          aria-label="Retour"
+          aria-label={t('back')}
           className="-ml-2.5 grid h-11 w-11 shrink-0 place-items-center rounded-full text-night-900 transition-colors hover:bg-night-50"
         >
           <ArrowLeft className="h-[22px] w-[22px]" aria-hidden="true" />

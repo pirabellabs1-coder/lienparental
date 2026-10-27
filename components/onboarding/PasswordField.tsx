@@ -1,16 +1,17 @@
 'use client'
 
 import { forwardRef, useId, useMemo, useState, type InputHTMLAttributes } from 'react'
+import { useTranslations } from 'next-intl'
 import { Check, Eye, EyeOff } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { FieldLabel, fieldControl } from './fields'
 
-type Rule = { label: string; test: (v: string) => boolean }
+type Rule = { labelKey: 'rule8' | 'ruleCase' | 'ruleDigit'; test: (v: string) => boolean }
 
 export const PASSWORD_RULES: Rule[] = [
-  { label: '8 caractères minimum', test: (v) => v.length >= 8 },
-  { label: '1 minuscule et 1 majuscule', test: (v) => /[a-z]/.test(v) && /[A-Z]/.test(v) },
-  { label: '1 chiffre', test: (v) => /[0-9]/.test(v) },
+  { labelKey: 'rule8', test: (v) => v.length >= 8 },
+  { labelKey: 'ruleCase', test: (v) => /[a-z]/.test(v) && /[A-Z]/.test(v) },
+  { labelKey: 'ruleDigit', test: (v) => /[0-9]/.test(v) },
 ]
 
 export function passwordStrength(value: string): 0 | 1 | 2 | 3 {
@@ -29,7 +30,7 @@ type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & {
 
 export const PasswordField = forwardRef<HTMLInputElement, Props>(function PasswordField(
   {
-    label = 'Mot de passe',
+    label,
     showRules = false,
     showStrength = false,
     value,
@@ -42,6 +43,7 @@ export const PasswordField = forwardRef<HTMLInputElement, Props>(function Passwo
   },
   ref,
 ) {
+  const t = useTranslations('onb.password')
   const [visible, setVisible] = useState(false)
   const reactId = useId()
   const id = idProp || `pwd-${reactId}`
@@ -49,12 +51,12 @@ export const PasswordField = forwardRef<HTMLInputElement, Props>(function Passwo
   const errId = `${id}-err`
 
   const score = useMemo(() => passwordStrength(value), [value])
-  const strengthLabel = score === 0 ? '' : score === 1 ? 'Faible' : score === 2 ? 'Moyen' : 'Fort'
+  const strengthLabel = score === 0 ? '' : score === 1 ? t('weak') : score === 2 ? t('medium') : t('strong')
   const strengthColor = score === 1 ? 'bg-alert-500' : score === 2 ? 'bg-gold-300' : 'bg-leaf-500'
 
   return (
     <div className={cn('w-full', className)}>
-      <FieldLabel htmlFor={id} label={label} />
+      <FieldLabel htmlFor={id} label={label ?? t('label')} />
 
       <div className="relative">
         <input
@@ -74,7 +76,7 @@ export const PasswordField = forwardRef<HTMLInputElement, Props>(function Passwo
         <button
           type="button"
           onClick={() => setVisible((v) => !v)}
-          aria-label="Afficher le mot de passe"
+          aria-label={t('show')}
           aria-pressed={visible}
           aria-controls={id}
           className="absolute right-0.5 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-xl text-night-500 transition-colors hover:text-night-900"
@@ -99,7 +101,7 @@ export const PasswordField = forwardRef<HTMLInputElement, Props>(function Passwo
           {PASSWORD_RULES.map((r) => {
             const ok = r.test(value)
             return (
-              <li key={r.label} className={cn('flex items-center gap-2.5', ok ? 'text-night-900' : 'text-night-500')}>
+              <li key={r.labelKey} className={cn('flex items-center gap-2.5', ok ? 'text-night-900' : 'text-night-500')}>
                 <span
                   aria-hidden="true"
                   className={cn(
@@ -110,8 +112,8 @@ export const PasswordField = forwardRef<HTMLInputElement, Props>(function Passwo
                   <Check className="h-3 w-3" strokeWidth={3.2} />
                 </span>
                 <span>
-                  {r.label}
-                  <span className="sr-only">{ok ? ' : respecté' : ' : non respecté'}</span>
+                  {t(r.labelKey)}
+                  <span className="sr-only">{ok ? t('met') : t('notMet')}</span>
                 </span>
               </li>
             )

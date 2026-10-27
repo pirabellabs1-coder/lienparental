@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Suspense, useEffect, useState, type FormEvent } from 'react'
 import { KeyRound } from 'lucide-react'
 import { cn } from '@/lib/cn'
@@ -22,12 +23,6 @@ import { reportSignIn } from '@/lib/notify/client'
 
 const primaryBtn = 'inline-flex h-12 w-full items-center justify-center rounded-xl bg-leaf-500 font-semibold text-white shadow-[0_8px_20px_-10px_rgba(46,125,50,0.55)] transition-[transform,background-color] hover:bg-leaf-600 active:scale-[0.98] disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2'
 
-const LINK_ERRORS: Record<string, string> = {
-  lien: 'Ce lien n’est plus valide ou a déjà été utilisé. Connectez-vous ou demandez un nouveau lien.',
-  google: 'La connexion avec Google n’a pas abouti. Réessayez ou connectez-vous avec votre e-mail.',
-  compte: 'Ce compte est en cours de suppression. Contactez le support pour le récupérer.',
-}
-
 /** Cible après connexion : uniquement /app/* ou /admin/* (pas de redirection ouverte). */
 function targetFor(suite: string | null, isAdmin: boolean) {
   if (suite?.startsWith('/admin')) return isAdmin ? safeNext(suite, '/admin') : '/app'
@@ -41,9 +36,11 @@ const googleNext = (suite: string | null) => (suite?.startsWith('/app') || suite
 function Connexion() {
   const router = useRouter()
   const params = useSearchParams()
+  const t = useTranslations('onb.login')
+  const linkErrors: Record<string, string> = { lien: t('linkErrLien'), google: t('linkErrGoogle'), compte: t('linkErrCompte') }
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState<string | null>(() => LINK_ERRORS[params.get('erreur') ?? ''] ?? null)
+  const [error, setError] = useState<string | null>(() => linkErrors[params.get('erreur') ?? ''] ?? null)
   const [loading, setLoading] = useState(false)
   // Étape 2FA (Supabase) : code TOTP à 6 chiffres.
   const [phase, setPhase] = useState<'credentials' | 'mfa'>('credentials')
@@ -94,7 +91,7 @@ function Connexion() {
   const signInSupabase = async () => {
     const parsed = emailSchema.safeParse(email)
     if (!parsed.success || !password) {
-      setError('Veuillez saisir une adresse e-mail valide et votre mot de passe.')
+      setError(t('invalid'))
       return
     }
     setLoading(true)
@@ -148,12 +145,12 @@ function Connexion() {
       return
     }
     if (!emailSchema.safeParse(email).success || !password) {
-      setError('Veuillez saisir une adresse e-mail valide et votre mot de passe.')
+      setError(t('invalid'))
       return
     }
     const account = DEMO_MODE ? findDemoAccount(email, password) : null
     if (!account) {
-      setError('E-mail ou mot de passe incorrect.')
+      setError(t('demoWrong'))
       return
     }
     setError(null)
@@ -165,16 +162,16 @@ function Connexion() {
       <OnboardingScreen
         step={5}
         back={false}
-        title="Double authentification"
-        subtitle="Saisissez le code à 6 chiffres affiché par votre application d’authentification."
+        title={t('mfaTitle')}
+        subtitle={t('mfaSubtitle')}
         onSubmit={onSubmit}
         footer={
           <>
             <button type="submit" className={primaryBtn} disabled={loading || code.length !== 6} aria-busy={loading}>
-              {loading ? 'Vérification…' : 'Vérifier'}
+              {loading ? t('verifying') : t('verify')}
             </button>
             <button type="button" onClick={cancelMfa} className={cn(linkLeaf, 'inline-flex min-h-[44px] w-full items-center justify-center text-[13px]')}>
-              Utiliser un autre compte
+              {t('otherAccount')}
             </button>
           </>
         }
@@ -186,10 +183,10 @@ function Connexion() {
           disabled={loading}
           error={!!error}
           autoFocus
-          ariaLabel="Code de double authentification"
+          ariaLabel={t('mfaTitle')}
           describedBy="mfa-help"
         />
-        <p id="mfa-help" className="sr-only">Le code change toutes les 30 secondes dans votre application.</p>
+        <p id="mfa-help" className="sr-only">{t('mfaHelp')}</p>
         <div className="mt-4 min-h-[20px]" aria-live="polite">
           {error && <p role="alert" className="text-sm font-semibold text-alert-600">{error}</p>}
         </div>
@@ -201,24 +198,24 @@ function Connexion() {
     <OnboardingScreen
       step={5}
       back="/"
-      title="Se connecter"
+      title={t('title')}
       subtitle={
         <>
-          Bienvenue de retour !<br />
-          Connectez-vous pour accéder à votre compte.
+          {t('subtitleA')}<br />
+          {t('subtitleB')}
         </>
       }
       onSubmit={onSubmit}
       footer={
         <>
           <button type="submit" className={primaryBtn} disabled={loading} aria-busy={loading}>
-            {loading ? 'Connexion…' : 'Se connecter'}
+            {loading ? t('submitting') : t('submit')}
           </button>
           <p className="pt-2 text-center text-[13px] text-night-600">
-            Vous n’avez pas encore de compte ?
+            {t('noAccount')}
             <br />
             <Link href="/onboarding/inscription" className={cn(linkLeaf, 'inline-flex min-h-[40px] items-center')}>
-              Créer un compte
+              {t('createAccount')}
             </Link>
           </p>
         </>
@@ -228,26 +225,26 @@ function Connexion() {
         <GoogleButton next={googleNext(params.get('suite'))} />
         <OrSeparator />
         <TextField
-          label="E-mail"
+          label={t('email')}
           type="email"
           inputMode="email"
           autoComplete="email"
           autoCapitalize="none"
           spellCheck={false}
-          placeholder="exemple@email.com"
+          placeholder={t('emailPlaceholder')}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           aria-invalid={error ? true : undefined}
         />
         <PasswordField
-          label="Mot de passe"
+          label={t('password')}
           value={password}
           onValueChange={setPassword}
           autoComplete="current-password"
-          placeholder="Votre mot de passe"
+          placeholder={t('passwordPlaceholder')}
         />
         <Link href="/mot-de-passe-oublie" className={cn(linkLeaf, '-mt-1 inline-flex min-h-[44px] items-center text-[13px] underline')}>
-          Mot de passe oublié ?
+          {t('forgot')}
         </Link>
         {error && (
           <p role="alert" className="text-sm font-semibold text-alert-600">
@@ -258,9 +255,9 @@ function Connexion() {
         {DEMO_MODE && (
           <section aria-labelledby="demo-title" className="rounded-2xl border border-dashed border-leaf-300 bg-leaf-50/60 p-4">
             <h2 id="demo-title" className="flex items-center gap-2 text-[13.5px] font-bold text-night-900">
-              <KeyRound className="h-4 w-4 text-leaf-600" aria-hidden /> Comptes de démonstration
+              <KeyRound className="h-4 w-4 text-leaf-600" aria-hidden /> {t('demoTitle')}
             </h2>
-            <p className="mt-1 text-[12px] text-night-600">Session temporaire de 8 heures. Mot de passe : Demo2026!</p>
+            <p className="mt-1 text-[12px] text-night-600">{t('demoNote')}</p>
             <ul className="mt-3 space-y-2">
               {DEMO_ACCOUNTS.map(a => (
                 <li key={a.id}>
@@ -273,7 +270,7 @@ function Connexion() {
                       <span className="block text-[13px] font-semibold text-night-900">{a.label}</span>
                       <span className="block truncate text-[12px] text-night-600">{a.email}</span>
                     </span>
-                    <span className="shrink-0 text-[12.5px] font-semibold text-leaf-600">Se connecter</span>
+                    <span className="shrink-0 text-[12.5px] font-semibold text-leaf-600">{t('demoSignin')}</span>
                   </button>
                 </li>
               ))}

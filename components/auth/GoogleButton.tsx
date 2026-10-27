@@ -13,12 +13,11 @@
  * le bouton reste visible et l'explique.
  */
 import { useEffect, useId, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { SUPABASE_ANON_KEY, SUPABASE_ENABLED, SUPABASE_URL } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
 import { appUrl, safeNext } from '@/lib/auth/redirect'
-
-const UNAVAILABLE = 'Connexion Google disponible une fois le service configuré.'
 
 type Props = {
   /** Chemin interne après connexion (filtré par safeNext côté client ET serveur). */
@@ -52,6 +51,7 @@ export function GoogleLogo({ className }: { className?: string }) {
 }
 
 export function GoogleButton({ next = '/app', className }: Props) {
+  const t = useTranslations('onb.google')
   const noteId = useId()
   const [available, setAvailable] = useState<boolean>(SUPABASE_ENABLED)
   const [loading, setLoading] = useState(false)
@@ -80,11 +80,11 @@ export function GoogleButton({ next = '/app', className }: Props) {
     // En cas de succès, le navigateur part vers Google : on reste en chargement.
     if (err) {
       setLoading(false)
-      setError('La connexion avec Google n’a pas pu démarrer. Réessayez.')
+      setError(t('error'))
     }
   }
 
-  const note = !available ? UNAVAILABLE : error
+  const note = !available ? t('unavailable') : error
 
   return (
     <div className={cn('w-full', className)}>
@@ -105,7 +105,7 @@ export function GoogleButton({ next = '/app', className }: Props) {
         )}
       >
         <GoogleLogo className="h-5 w-5 shrink-0" />
-        <span>{loading ? 'Redirection vers Google…' : 'Continuer avec Google'}</span>
+        <span>{loading ? t('redirecting') : t('continue')}</span>
       </button>
       <p id={noteId} role={error ? 'alert' : 'status'} className={cn('min-h-0 text-center text-[12.5px]', note && 'mt-2', error ? 'font-semibold text-alert-600' : 'text-night-600')}>
         {note}
@@ -116,10 +116,11 @@ export function GoogleButton({ next = '/app', className }: Props) {
 
 /** Séparateur « ou » entre le bouton Google et le formulaire e-mail. */
 export function OrSeparator({ className }: { className?: string }) {
+  const t = useTranslations('onb')
   return (
-    <div className={cn('flex items-center gap-3', className)} role="separator" aria-label="ou">
+    <div className={cn('flex items-center gap-3', className)} role="separator" aria-label={t('or')}>
       <span className="h-px flex-1 bg-[#E5E7EB]" aria-hidden="true" />
-      <span className="text-[12.5px] font-medium text-night-600" aria-hidden="true">ou</span>
+      <span className="text-[12.5px] font-medium text-night-600" aria-hidden="true">{t('or')}</span>
       <span className="h-px flex-1 bg-[#E5E7EB]" aria-hidden="true" />
     </div>
   )

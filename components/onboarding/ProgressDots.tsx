@@ -1,3 +1,5 @@
+'use client'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 /**
@@ -24,6 +26,7 @@ type Props = {
  * as in the mockups. Visual dots are decorative; the counter carries the accessible text.
  */
 export function ProgressDots({ current, total = ONBOARDING_TOTAL_STEPS, dots = 4, hideCounter = false, tone = 'leaf', className }: Props) {
+  const t = useTranslations('onb')
   const safe = Math.min(Math.max(current, 1), total)
   const activeDot = Math.min(safe, dots)
   return (
@@ -41,7 +44,7 @@ export function ProgressDots({ current, total = ONBOARDING_TOTAL_STEPS, dots = 4
       </div>
       {hideCounter ? (
         <span className="sr-only">
-          Étape {safe} sur {total}
+          {t('step', { step: safe, total })}
         </span>
       ) : (
         <p className="text-xs font-semibold tabular-nums text-night-600">
@@ -49,7 +52,7 @@ export function ProgressDots({ current, total = ONBOARDING_TOTAL_STEPS, dots = 4
             {safe} / {total}
           </span>
           <span className="sr-only">
-            Étape {safe} sur {total}
+            {t('step', { step: safe, total })}
           </span>
         </p>
       )}
