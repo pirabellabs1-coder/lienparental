@@ -1,6 +1,7 @@
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { ArrowRight, Check } from 'lucide-react'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
@@ -16,20 +17,21 @@ function countGuyaneSheets(): number {
   }
 }
 
-export function Guide() {
+export async function Guide() {
+  const t = await getTranslations('guide')
   const sheets = countGuyaneSheets()
   const POINTS = [
-    sheets > 0 ? `École, santé, aides, logement, séparation : ${sheets} fiches pour la Guyane` : 'École, santé, aides, logement, séparation',
-    'Les documents à réunir et les étapes, dans l’ordre',
-    'Un rappel, un document ou une dépense ajoutés en un geste',
+    sheets > 0 ? t('pointSheets', { count: sheets }) : t('pointSheetsNoCount'),
+    t('point2'),
+    t('point3'),
   ]
   return (
     <section id="guide" aria-labelledby="guide-title" className={cn(SECTION, 'bg-[#F4F6F9]')}>
       <div className={cn(CONTAINER, 'grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_auto] lg:gap-20 [&>*]:min-w-0')}>
         <div>
-          <h2 id="guide-title" className={H2}>Le Guide parental</h2>
+          <h2 id="guide-title" className={H2}>{t('title')}</h2>
           <p className={cn(LEAD, 'mt-4 max-w-[52ch]')}>
-            Toutes les informations essentielles pour les parents, réunies au même endroit, là où vous vivez. Chaque fiche vous dit quoi faire, avec quels documents, et où.
+            {t('lead')}
           </p>
           <ul className="mt-7 space-y-3.5">
             {POINTS.map(p => (
@@ -40,27 +42,27 @@ export function Guide() {
             ))}
           </ul>
 
-          <h3 className="mt-10 text-[15px] font-bold text-night-900">Un guide par territoire</h3>
+          <h3 className="mt-10 text-[15px] font-bold text-night-900">{t('territoryTitle')}</h3>
           <ul className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-            {TERRITORIES.map(t => (
-              <li key={t.code} className={cn('flex items-center gap-3 rounded-2xl p-3 ring-1', t.available ? 'bg-leaf-50 ring-leaf-300' : 'bg-white ring-[#E5E7EB]')}>
-                <TerritoryShape path={t.path} available={t.available} className="h-10 w-10 shrink-0" />
+            {TERRITORIES.map(terr => (
+              <li key={terr.code} className={cn('flex items-center gap-3 rounded-2xl p-3 ring-1', terr.available ? 'bg-leaf-50 ring-leaf-300' : 'bg-white ring-[#E5E7EB]')}>
+                <TerritoryShape path={terr.path} available={terr.available} className="h-10 w-10 shrink-0" />
                 <span className="flex min-w-0 flex-col leading-tight">
-                  <span className="text-[14.5px] font-semibold text-night-900">{t.name}</span>
-                  <span className={cn('mt-0.5 text-[13.5px]', t.available ? 'font-semibold text-leaf-700' : 'text-night-600')}>{t.available ? 'Disponible' : 'Bientôt'}</span>
+                  <span className="text-[14.5px] font-semibold text-night-900">{terr.name}</span>
+                  <span className={cn('mt-0.5 text-[13.5px]', terr.available ? 'font-semibold text-leaf-700' : 'text-night-600')}>{terr.available ? t('available') : t('soon')}</span>
                 </span>
               </li>
             ))}
           </ul>
 
           <Link href="/app/guide" className={cn(BTN_PRIMARY, 'mt-10')}>
-            Découvrir le Guide parental<ArrowRight className="h-4 w-4" aria-hidden />
+            {t('cta')}<ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>
 
         <PhoneFrame
           src="/images/app/mobile-guide.png"
-          alt="L’écran Guide parental de l’application : recherche de démarche et parcours pas à pas"
+          alt={t('phoneAlt')}
           sizes="260px"
           className="mx-auto w-[220px] lg:w-[260px]"
         />

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { getTranslations } from 'next-intl/server'
 import { cn } from '@/lib/cn'
 import { CONTAINER } from './ui'
 
@@ -14,17 +15,18 @@ const PARTNERS: Partner[] = [
 
 const SLOTS = 6
 
-export function Partners() {
+export async function Partners() {
+  const t = await getTranslations('partners')
   const empty = Math.max(0, SLOTS - PARTNERS.length)
   return (
     <section aria-labelledby="partners-title" className="pb-4 pt-12 lg:pt-16">
       <div className={CONTAINER}>
         <h2 id="partners-title" className="text-center text-[13px] font-semibold uppercase tracking-[0.14em] text-night-600">
-          {PARTNERS.length ? 'Nos partenaires' : 'Partenaires de Lien Parental'}
+          {PARTNERS.length ? t('titleActive') : t('titlePlaceholder')}
         </h2>
         {!PARTNERS.length && (
           <p className="mx-auto mt-2 max-w-[60ch] text-center text-[14.5px] text-night-600">
-            Des partenariats sont en préparation avec les acteurs de la famille. Leurs logos apparaîtront ici.
+            {t('placeholder')}
           </p>
         )}
         <ul className="mt-6 grid grid-cols-3 gap-3 sm:grid-cols-6 sm:gap-4">
@@ -49,7 +51,7 @@ export function Partners() {
                 'flex h-16 items-center justify-center rounded-2xl border border-dashed border-night-200 bg-white/60 text-[12.5px] font-medium text-night-500 sm:h-20',
               )}
             >
-              Logo partenaire
+              {t('slot')}
             </li>
           ))}
         </ul>
