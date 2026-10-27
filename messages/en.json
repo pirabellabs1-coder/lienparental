@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "Home",
+    "features": "Features",
+    "guide": "Parenting guide",
+    "pricing": "Pricing",
+    "testimonials": "Testimonials",
+    "faq": "FAQ",
+    "blog": "Blog"
+  },
+  "header": {
+    "login": "Log in",
+    "signup": "Create an account",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "lang": {
+    "label": "Choose language",
+    "current": "Current language: {name}",
+    "switchTo": "Switch to {name}"
+  }
+}

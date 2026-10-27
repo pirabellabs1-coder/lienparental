@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from 'next'
 import { Allura, Montserrat } from 'next/font/google'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 import './globals.css'
 import { DisplayPrefs } from '@/components/a11y/DisplayPrefs'
+import { isLocale, LOCALE_META } from '@/lib/i18n/config'
 
 // Typographies du guide d'identité : Montserrat (titres et textes), Allura (signature « Parental »).
 // Auto-hébergées par next/font : pas d'appel à Google au chargement, pas de saut de mise en page.
@@ -34,12 +37,20 @@ export const viewport: Viewport = {
   themeColor: [{ media: '(prefers-color-scheme: light)', color: '#0b2d5b' }, { media: '(prefers-color-scheme: dark)', color: '#060f26' }],
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Locale résolue par next-intl (cookie lp_locale, repli français) : pilote <html lang>,
+  // le format des dates/nombres et les messages fournis aux composants client.
+  const locale = await getLocale()
+  const messages = await getMessages()
+  const htmlLang = isLocale(locale) ? LOCALE_META[locale].htmlLang : 'fr'
+
   return (
-    <html lang="fr" suppressHydrationWarning className={`${montserrat.variable} ${allura.variable}`}>
+    <html lang={htmlLang} suppressHydrationWarning className={`${montserrat.variable} ${allura.variable}`}>
       <body className="min-h-dvh pwa-safe">
-        <DisplayPrefs />
-        {children}
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <DisplayPrefs />
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   )

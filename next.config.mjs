@@ -1,5 +1,9 @@
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import createNextIntlPlugin from 'next-intl/plugin'
+
+// i18n (next-intl) : charge i18n/request.ts pour résoudre la locale (cookie) par requête.
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 
 /** @type {import('next').NextConfig} */
 
@@ -49,4 +53,4 @@ const nextConfig = {
     ]
   },
 }
-export default nextConfig
+export default withNextIntl(nextConfig)
