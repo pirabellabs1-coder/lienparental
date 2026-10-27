@@ -15,7 +15,7 @@ import {
   TESTIMONY_LINK_BASE,
   type ReceivedTestimony, type TestimonyRequest, type VaultTone, type Witness,
 } from '@/lib/mock-vault'
-import { DataError, LIVE, db, requireUserId, toDataError } from './core'
+import { DataError, LIVE, dataMsg, db, requireUserId, toDataError } from './core'
 import { dayKeyInTz, timeInTz } from '@/lib/tz'
 
 type RequestRow = {
@@ -115,7 +115,7 @@ export async function listTestimonyRequests(): Promise<TestimonyRequest[]> {
     return {
       id: r.id,
       token: r.token,
-      subject: r.subject || r.temoin_nom_pref || 'Témoignage',
+      subject: r.subject || r.temoin_nom_pref || dataMsg('testimonies.defaultSubject'),
       icon: received.length === 0 ? 'users' : finished ? 'check' : 'hourglass',
       tone: finished ? 'green' : 'violet',
       createdAt: invitedAt,
@@ -144,7 +144,7 @@ export async function listReceivedTestimonies(): Promise<ReceivedTestimonyRecord
     const n = (rank.get(t.request_id) ?? 0) + 1
     rank.set(t.request_id, n)
     const at = new Date(t.sent_at)
-    const author = witnessName(t.temoin) ?? `Témoin ${n}`
+    const author = witnessName(t.temoin) ?? dataMsg('testimonies.witnessN', { n })
     const initials = author.split(/\s+/).map((w) => w.charAt(0)).join('').slice(0, 2).toUpperCase() || 'T'
     const blocks = t.texte_envoye.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean)
     const summary = (blocks[0] ?? t.texte_envoye).replace(/\s+/g, ' ').slice(0, 400)
@@ -156,8 +156,8 @@ export async function listReceivedTestimonies(): Promise<ReceivedTestimonyRecord
       tone: AVATAR_TONES[(n - 1) % AVATAR_TONES.length],
       receivedAt: dayKeyInTz(at),
       receivedTime: timeInTz(at),
-      relation: t.temoin?.lien || 'Non précisé',
-      knownSince: t.temoin?.duree || 'Non précisé',
+      relation: t.temoin?.lien || dataMsg('testimonies.notSpecified'),
+      knownSince: t.temoin?.duree || dataMsg('testimonies.notSpecified'),
       summary,
       facts: blocks.slice(1, 30).map((b) => b.replace(/\s+/g, ' ')),
       decision: decisions.get(t.id),
@@ -175,18 +175,18 @@ export async function reviewTestimony(id: string, decision: 'confirme' | 'refuse
   if (error) throw toDataError(error, 'testimonyReviews.upsert')
 }
 
-const createSchema = z.object({
-  subject: z.string().trim().min(1, 'Indiquez le titre de la demande.').max(90),
+const createSchema = () => z.object({
+  subject: z.string().trim().min(1, dataMsg('testimonies.subjectRequired')).max(90),
   context: z.string().trim().max(600).optional(),
-  parents: z.array(z.string().trim().min(1).max(60)).min(1, 'Ajoutez au moins un parent.').max(10),
-  enfants: z.array(z.string().trim().min(1).max(60)).min(1, 'Ajoutez au moins un enfant.').max(10),
+  parents: z.array(z.string().trim().min(1).max(60)).min(1, dataMsg('testimonies.parentRequired')).max(10),
+  enfants: z.array(z.string().trim().min(1).max(60)).min(1, dataMsg('testimonies.childRequired')).max(10),
 })
-export type CreateTestimonyRequestInput = z.infer<typeof createSchema>
+export type CreateTestimonyRequestInput = z.infer<ReturnType<typeof createSchema>>
 
 /** Crée une demande via l'API serveur (jeton généré serveur). */
 export async function createTestimonyRequest(input: CreateTestimonyRequestInput): Promise<{ id: string; token: string; createdAt: string }> {
-  const p = createSchema.safeParse(input)
-  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? 'Informations invalides.', 'invalid')
+  const p = createSchema().safeParse(input)
+  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? dataMsg('errors.invalidShort'), 'invalid')
   let res: Response
   try {
     res = await fetch('/api/temoignages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p.data) })
@@ -195,7 +195,7 @@ export async function createTestimonyRequest(input: CreateTestimonyRequestInput)
   }
   const body = (await res.json().catch(() => null)) as { id?: string; token?: string; created_at?: string; error?: { message?: string } } | null
   if (!res.ok || !body?.id || !body.token) {
-    throw new DataError(body?.error?.message ?? 'La demande n’a pas pu être créée. Réessayez.', `http_${res.status}`)
+    throw new DataError(body?.error?.message ?? dataMsg('testimonies.createFailed'), `http_${res.status}`)
   }
   return { id: body.id, token: body.token, createdAt: body.created_at ?? new Date().toISOString() }
 }

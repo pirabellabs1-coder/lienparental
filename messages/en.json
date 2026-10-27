@@ -112,7 +112,48 @@
     "msgMedia": "Messages, photos and documents",
     "msgHistory": "History kept",
     "msgRespect": "A respectful space",
-    "hostedEurope": "Data hosted in Europe"
+    "hostedEurope": "Data hosted in Europe",
+    "dialog": {
+      "title": "Discover Lien Parental",
+      "close": "Close",
+      "unsupported": "Your browser cannot play this video.",
+      "download": "Download the video",
+      "soon": "Video coming soon",
+      "meanwhile": "In the meantime, discover the app in pictures: these are real screenshots of Lien Parental.",
+      "counter": "{n} of {total}",
+      "prev": "Previous screenshot",
+      "next": "Next screenshot",
+      "list": "Screenshots",
+      "show": "Show: {title}",
+      "alt": "App screenshot: {title}",
+      "captions": "English"
+    },
+    "slides": {
+      "accueil": {
+        "title": "Your home screen",
+        "text": "Your child, the Parenting guide, expenses, health and the AI Coach at a glance."
+      },
+      "journal": {
+        "title": "The Journal",
+        "text": "Visits, calls, health and expenses, dated and filed, with receipts."
+      },
+      "calendrier": {
+        "title": "The calendar",
+        "text": "Appointments, reminders and events for each child."
+      },
+      "coffre": {
+        "title": "The Vault",
+        "text": "Rulings, certificates, invoices: organized and protected."
+      },
+      "temoignages": {
+        "title": "Testimonies",
+        "text": "Ask a relative for a written statement and track it until it is signed."
+      },
+      "coach": {
+        "title": "The AI parenting coach",
+        "text": "Rephrase a message, prepare a conversation, find the right tone."
+      }
+    }
   },
   "homeMessaging": {
     "badge": "Messaging between parents",
@@ -422,6 +463,47 @@
     "tipCarousel": "Tips of the day",
     "slide": "{n} of {total}",
     "chooseTip": "Choose a tip",
-    "tipN": "Tip {n}: {title}"
+    "tipN": "Tip {n}: {title}",
+    "countdown": {
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "inDays": "In {n} days",
+      "yesterday": "Yesterday",
+      "daysAgo": "{n} days ago"
+    },
+    "demoModels": {
+      "m_1": {
+        "title": "Court file",
+        "category": "Full template"
+      },
+      "m_2": {
+        "title": "Letter to the school",
+        "category": "Communication"
+      },
+      "m_3": {
+        "title": "Timeline",
+        "category": "Of events"
+      },
+      "m_4": {
+        "title": "Proof of residence",
+        "category": "Template"
+      }
+    }
+  },
+  "meta": {
+    "rootTitle": "Lien Parental: inform, support and protect the parent-child bond",
+    "rootDescription": "Lien Parental supports separated parents: encrypted vault, journal, calendar, timestamped testimonies and an AI parenting coach. Secure hosting in Europe.",
+    "ogDescription": "Communicate calmly, get organized easily and find everything about your child in one place.",
+    "homeTitle": "Lien Parental: everything for your child, finally in one place",
+    "homeDescription": "The app for separated parents: shared calendar, expenses and payments, children’s health, secure vault, testimonies, court file, AI parenting coach and Parenting guide (French Guiana). Free to start, installable as a PWA.",
+    "appTitle": "App"
+  },
+  "publicAside": {
+    "photoAlt": "A father hugs his daughter, both laughing",
+    "backHome": "Back to the Lien Parental home page",
+    "headline": "A calm space for what matters most: your children.",
+    "encrypted": "Encrypted data",
+    "europe": "Hosted in Europe",
+    "noCommitment": "No commitment"
   }
 }

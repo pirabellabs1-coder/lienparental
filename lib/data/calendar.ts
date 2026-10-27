@@ -16,7 +16,7 @@
 import { z } from 'zod'
 import { EVENTS, FAMILY_DEMO_EVENTS, eveReminderAt, getEventById, type CalendarEvent, type EventTypeKey, type ReminderKey } from '@/lib/calendrier'
 import { wallTimeToIso } from '@/lib/tz'
-import { DataError, LIVE, db, requireUserId, toDataError, useAsyncData, uuid } from './core'
+import { DataError, LIVE, dataMsg, db, requireUserId, toDataError, useAsyncData, uuid } from './core'
 import { pushCalendarSync } from '@/lib/integrations/google/client'
 import { kickNotifications } from '@/lib/notify/client'
 import { familyAuthorNames, sharedByLabel } from './family'
@@ -90,14 +90,14 @@ async function viewer(): Promise<Viewer> {
 }
 
 /** Seul l'auteur modifie ou supprime un événement (filtre user_id, en plus de la RLS propriétaire). */
-const NOT_AUTHOR = 'Cet événement a été partagé par un autre parent : seul son auteur peut le modifier ou le supprimer.'
+const NOT_AUTHOR = () => dataMsg('calendar.notAuthor')
 
 const TYPES = ['visite', 'appel', 'message', 'sante', 'rdv', 'ecole', 'activite', 'sortie', 'repas', 'deplacement', 'anniversaire', 'autre'] as const
 
-const inputSchema = z.object({
+const inputSchema = () => z.object({
   type: z.enum(TYPES),
-  title: z.string().trim().min(1, "Donnez un titre à l'événement.").max(120),
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'La date est requise.'),
+  title: z.string().trim().min(1, dataMsg('calendar.titleRequired')).max(120),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, dataMsg('calendar.dateRequired')),
   time: z.string().regex(/^\d{2}:\d{2}$/).optional().or(z.literal('')),
   /** Durée en minutes (défaut 60). */
   durationMin: z.number().int().min(0).max(24 * 60 * 14).optional(),
@@ -108,11 +108,11 @@ const inputSchema = z.object({
   /** Partage avec la famille (0340). Absent : défaut de la base (true à la création). */
   familyShared: z.boolean().optional(),
 })
-export type EventInput = z.infer<typeof inputSchema>
+export type EventInput = z.infer<ReturnType<typeof inputSchema>>
 
 function toRow(input: EventInput) {
-  const p = inputSchema.safeParse(input)
-  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? 'Certaines informations sont invalides.', 'invalid')
+  const p = inputSchema().safeParse(input)
+  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? dataMsg('errors.invalid'), 'invalid')
   const v = p.data
   // Saisie = heure murale DEFAULT_TZ.
   const start = wallTimeToIso(v.date, v.time || '09:00')
@@ -144,7 +144,7 @@ async function withHealthChild(input: EventInput): Promise<EventInput> {
   if (error) throw toDataError(error, 'calendar.healthChild')
   const ids = ((data ?? []) as { id: string }[]).map((c) => c.id)
   if (ids.length === 1) return { ...input, childIds: ids }
-  if (ids.length > 1) throw new DataError(SANTE_CHILD_REQUIRED, 'invalid')
+  if (ids.length > 1) throw new DataError(dataMsg('calendar.healthChildRequired'), 'invalid')
   return input
 }
 
@@ -200,28 +200,28 @@ export async function createEvent(input: EventInput): Promise<string | null> {
 export async function updateEvent(id: string, input: EventInput): Promise<void> {
   let row = toRow(input)
   if (!LIVE) {
-    if (demoEvent(id)?.sharedBy) throw new DataError(NOT_AUTHOR, 'not_author')
+    if (demoEvent(id)?.sharedBy) throw new DataError(NOT_AUTHOR(), 'not_author')
     return
   }
   row = toRow(await withHealthChild(input))
   const userId = await requireUserId()
   const { data, error } = await db().from('calendar_events').update(row).eq('id', id).eq('user_id', userId).select('id')
   if (error) throw toDataError(error, 'calendar.update')
-  if (!data || data.length === 0) throw new DataError(NOT_AUTHOR, 'not_author')
+  if (!data || data.length === 0) throw new DataError(NOT_AUTHOR(), 'not_author')
   pushCalendarSync(id, 'upsert')
   kickNotifications()
 }
 
 export async function removeEvent(id: string): Promise<void> {
   if (!LIVE) {
-    if (demoEvent(id)?.sharedBy) throw new DataError(NOT_AUTHOR, 'not_author')
+    if (demoEvent(id)?.sharedBy) throw new DataError(NOT_AUTHOR(), 'not_author')
     return
   }
   const userId = await requireUserId()
   const { data, error } = await db()
     .from('calendar_events').update({ deleted_at: new Date().toISOString() }).eq('id', id).eq('user_id', userId).select('id')
   if (error) throw toDataError(error, 'calendar.remove')
-  if (!data || data.length === 0) throw new DataError(NOT_AUTHOR, 'not_author')
+  if (!data || data.length === 0) throw new DataError(NOT_AUTHOR(), 'not_author')
   pushCalendarSync(id, 'delete')
   kickNotifications()
 }

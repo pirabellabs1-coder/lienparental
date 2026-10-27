@@ -4,6 +4,7 @@
  * Aucun effet en mode démonstration (Supabase non configuré).
  */
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
+import { libT } from '@/lib/i18n/runtime'
 
 let kickTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -96,12 +97,11 @@ export class PushError extends Error {}
 
 /** Demande la permission (geste utilisateur requis), abonne ce navigateur et l'enregistre côté serveur. */
 export async function enablePushOnThisDevice(): Promise<void> {
-  if (pushSupport() !== 'supported') throw new PushError('Les notifications ne sont pas disponibles sur ce navigateur.')
+  if (pushSupport() !== 'supported') throw new PushError(libT('shared.notify')('unsupported'))
   const permission = await Notification.requestPermission()
   if (permission !== 'granted') {
-    throw new PushError(permission === 'denied'
-      ? 'Les notifications sont bloquées pour ce site. Autorisez-les dans les réglages du navigateur, puis réessayez.'
-      : 'Autorisation non accordée.')
+    const t = libT('shared.notify')
+    throw new PushError(permission === 'denied' ? t('blocked') : t('notGranted'))
   }
   const reg = await registration()
   const sub = (await reg.pushManager.getSubscription())
@@ -114,7 +114,7 @@ export async function enablePushOnThisDevice(): Promise<void> {
   })
   if (!res.ok) {
     const body = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
-    throw new PushError(body?.error?.message ?? 'Activation impossible pour le moment. Réessayez dans un instant.')
+    throw new PushError(body?.error?.message ?? libT('shared.notify')('enableFailed'))
   }
 }
 

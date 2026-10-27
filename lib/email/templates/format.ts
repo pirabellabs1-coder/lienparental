@@ -1,11 +1,13 @@
 // lib/email/templates/format.ts — Formatage partagé des templates de facturation.
 
-/** ISO 8601 → "12 août 2026" (America/Cayenne). Renvoie la valeur brute si invalide. */
-export function formatDateFr(iso: string): string {
+import { dateLocale, type Locale } from '../i18n'
+
+/** ISO 8601 → "12 août 2026" (America/Cayenne), dans la langue du destinataire. Renvoie la valeur brute si invalide. */
+export function formatDateFr(iso: string, locale: Locale = 'fr'): string {
   try {
     const d = new Date(iso)
     if (Number.isNaN(d.getTime())) return iso
-    return new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeZone: 'America/Cayenne' }).format(d)
+    return new Intl.DateTimeFormat(dateLocale(locale), { dateStyle: 'long', timeZone: 'America/Cayenne' }).format(d)
   } catch {
     return iso
   }

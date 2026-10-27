@@ -9,6 +9,9 @@ import {
   browserSupportsWebAuthn, platformAuthenticatorIsAvailable, startAuthentication, startRegistration,
   type PublicKeyCredentialCreationOptionsJSON, type PublicKeyCredentialRequestOptionsJSON,
 } from '@simplewebauthn/browser'
+import { libT } from '@/lib/i18n/runtime'
+
+const wt = (key: string) => libT('shared.vaultLock.webauthn')(key)
 
 export class WebauthnError extends Error {
   constructor(public kind: 'cancelled' | 'already_registered' | 'unsupported' | 'security' | 'failed', message: string, public browserUnsupported = false) {
@@ -38,15 +41,15 @@ export async function platformAuthenticatorAvailable(): Promise<boolean> {
 function mapError(e: unknown): WebauthnError {
   // WebAuthnError (bibliothèque) reprend le nom de la DOMException d'origine.
   const name = e instanceof Error ? e.name : ''
-  if (name === 'NotAllowedError' || name === 'AbortError') return new WebauthnError('cancelled', 'Opération annulée ou délai dépassé.')
-  if (name === 'InvalidStateError') return new WebauthnError('already_registered', 'Cet appareil est déjà enregistré.')
-  if (name === 'NotSupportedError') return new WebauthnError('unsupported', 'Cet appareil ne propose pas d’empreinte ni de reconnaissance faciale.')
-  if (name === 'SecurityError') return new WebauthnError('security', 'Empreinte indisponible sur cette adresse (HTTPS requis).')
-  return new WebauthnError('failed', 'L’empreinte n’a pas pu être utilisée.')
+  if (name === 'NotAllowedError' || name === 'AbortError') return new WebauthnError('cancelled', wt('cancelled'))
+  if (name === 'InvalidStateError') return new WebauthnError('already_registered', wt('alreadyRegistered'))
+  if (name === 'NotSupportedError') return new WebauthnError('unsupported', wt('unsupported'))
+  if (name === 'SecurityError') return new WebauthnError('security', wt('security'))
+  return new WebauthnError('failed', wt('failed'))
 }
 
 export async function createCredential(optionsJSON: unknown) {
-  if (!webauthnSupported()) throw new WebauthnError('unsupported', 'Ce navigateur ne prend pas en charge l’empreinte.', true)
+  if (!webauthnSupported()) throw new WebauthnError('unsupported', wt('unsupportedBrowser'), true)
   try {
     return await startRegistration({ optionsJSON: optionsJSON as PublicKeyCredentialCreationOptionsJSON })
   } catch (e) {
@@ -55,7 +58,7 @@ export async function createCredential(optionsJSON: unknown) {
 }
 
 export async function getAssertion(optionsJSON: unknown) {
-  if (!webauthnSupported()) throw new WebauthnError('unsupported', 'Ce navigateur ne prend pas en charge l’empreinte.', true)
+  if (!webauthnSupported()) throw new WebauthnError('unsupported', wt('unsupportedBrowser'), true)
   try {
     return await startAuthentication({ optionsJSON: optionsJSON as PublicKeyCredentialRequestOptionsJSON })
   } catch (e) {
@@ -64,7 +67,7 @@ export async function getAssertion(optionsJSON: unknown) {
 }
 
 /** Nom proposé par défaut pour l'appareil courant. */
-export function guessDeviceName(labels: { thisDevice: string; android: string; windows: string } = { thisDevice: 'Cet appareil', android: 'Téléphone Android', windows: 'PC Windows (Windows Hello)' }): string {
+export function guessDeviceName(labels: { thisDevice: string; android: string; windows: string } = { thisDevice: wt('thisDevice'), android: wt('android'), windows: wt('windows') }): string {
   if (typeof navigator === 'undefined') return labels.thisDevice
   const ua = navigator.userAgent
   if (/iPhone/.test(ua)) return 'iPhone (Face ID / Touch ID)'

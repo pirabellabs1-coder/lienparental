@@ -5,12 +5,13 @@
  *            'attestation-hebergement' | 'temoignage'
  */
 import { NextResponse, type NextRequest } from 'next/server';
+import { getTranslations } from 'next-intl/server';
 import React from 'react';
 import { z } from 'zod';
 
 import { pdfResponse, renderPdfToBuffer } from '@/lib/pdf/render';
 import { templateMap, type TemplateKey } from '@/lib/pdf/schemas';
-import { DENIED_MESSAGES, requireAuthedUser } from '@/lib/auth/guard';
+import { requireAuthedUser } from '@/lib/auth/guard';
 
 import { DossierJAF } from '@/lib/pdf/templates/DossierJAF';
 import { LettreEcole } from '@/lib/pdf/templates/LettreEcole';
@@ -50,11 +51,13 @@ export async function POST(
   // --- auth (session revalidée + aal2 si 2FA) -----------------------
   // Démo (sans Supabase) : 503, le navigateur génère alors le PDF lui-même
   // (repli de app/app/dossier/page.tsx), comme auparavant.
+  const t = await getTranslations('server.pdf');
+  const tc = await getTranslations('server.common');
   const auth = await requireAuthedUser();
   if (!auth.ok) {
     const status = auth.reason === 'disabled' ? 503 : auth.reason === 'mfa_required' ? 403 : 401;
     return NextResponse.json(
-      { error: DENIED_MESSAGES[auth.reason], code: auth.reason },
+      { error: tc(`denied.${auth.reason}`), code: auth.reason },
       { status, headers: { 'Cache-Control': 'no-store' } }
     );
   }
@@ -63,7 +66,7 @@ export async function POST(
   const cl = req.headers.get('content-length');
   if (cl && Number(cl) > MAX_BODY_BYTES) {
     return NextResponse.json(
-      { error: 'Payload trop volumineux' },
+      { error: t('payloadTooLarge') },
       { status: 413 }
     );
   }
@@ -72,7 +75,7 @@ export async function POST(
 
   if (!isTemplateKey(template)) {
     return NextResponse.json(
-      { error: 'Template inconnu', template, allowed: ALLOWED },
+      { error: t('unknownTemplate'), template, allowed: ALLOWED },
       { status: 400 }
     );
   }
@@ -82,7 +85,7 @@ export async function POST(
     body = await req.json();
   } catch {
     return NextResponse.json(
-      { error: 'Corps JSON invalide' },
+      { error: t('invalidJson') },
       { status: 400 }
     );
   }
@@ -90,7 +93,7 @@ export async function POST(
   const payload = (body as { data?: unknown })?.data;
   if (payload === undefined) {
     return NextResponse.json(
-      { error: 'Clé "data" manquante dans le corps.' },
+      { error: t('missingData') },
       { status: 400 }
     );
   }
@@ -100,7 +103,7 @@ export async function POST(
   if (!parsed.success) {
     return NextResponse.json(
       {
-        error: 'Payload invalide',
+        error: t('invalidPayload'),
         issues: parsed.error.issues,
       },
       { status: 400 }
@@ -134,7 +137,7 @@ export async function POST(
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Erreur de rendu';
     return NextResponse.json(
-      { error: 'Échec du rendu PDF', detail: message },
+      { error: t('renderFailed'), detail: message },
       { status: 500 }
     );
   }

@@ -1,6 +1,7 @@
 import { z } from 'zod'
+import { getTranslations } from 'next-intl/server'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { DENIED_MESSAGES, requireAuthedUser } from '@/lib/auth/guard'
+import { requireAuthedUser } from '@/lib/auth/guard'
 import { jsonError, jsonOk, secureToken32 } from '@/lib/data/server/http'
 import { rateLimit, userKey } from '@/lib/data/server/rate-limit'
 import { requireVaultUnlocked, vaultDeniedResponse } from '@/lib/vault-lock'
@@ -21,24 +22,26 @@ const bodySchema = z.object({
 }).strict()
 
 export async function POST(req: Request) {
+  const t = await getTranslations('server.temoignages')
+  const tc = await getTranslations('server.common')
   // Coffre-fort verrouillé : ces données en proviennent (chantier D).
   const vault = await requireVaultUnlocked()
   if (!vault.ok) return vaultDeniedResponse(vault)
-  if (!SUPABASE_ENABLED) return jsonError(503, 'not_configured', 'Le stockage en ligne n’est pas configuré.')
+  if (!SUPABASE_ENABLED) return jsonError(503, 'not_configured', t('storageNotConfigured'))
 
   const auth = await requireAuthedUser()
   if (!auth.ok) {
     return auth.reason === 'mfa_required'
-      ? jsonError(403, 'mfa_required', DENIED_MESSAGES.mfa_required)
-      : jsonError(401, 'unauthenticated', DENIED_MESSAGES.unauthenticated)
+      ? jsonError(403, 'mfa_required', tc('denied.mfa_required'))
+      : jsonError(401, 'unauthenticated', tc('denied.unauthenticated'))
   }
   const { supabase, user } = auth
 
   const rl = await rateLimit(userKey('temoignages:create', user.id), 20, 60 * 60 * 1000)
-  if (!rl.ok) return jsonError(429, 'rate_limited', 'Trop de demandes créées. Réessayez plus tard.', { 'Retry-After': String(rl.retryAfter) })
+  if (!rl.ok) return jsonError(429, 'rate_limited', t('tooManyCreated'), { 'Retry-After': String(rl.retryAfter) })
 
   const parsed = bodySchema.safeParse(await req.json().catch(() => null))
-  if (!parsed.success) return jsonError(422, 'invalid', 'Informations de la demande invalides.')
+  if (!parsed.success) return jsonError(422, 'invalid', t('invalidPayload'))
   const v = parsed.data
 
   const expiresAt = new Date(Date.now() + EXPIRY_DAYS * 86_400_000).toISOString()
@@ -67,8 +70,8 @@ export async function POST(req: Request) {
     }
     if ((error as { code?: string } | null)?.code !== '23505') {
       console.warn('[api/temoignages] insert échoué', (error as { code?: string } | null)?.code ?? 'unknown')
-      return jsonError(500, 'db_error', 'La demande n’a pas pu être créée. Réessayez.')
+      return jsonError(500, 'db_error', t('createFailed'))
     }
   }
-  return jsonError(500, 'db_error', 'La demande n’a pas pu être créée. Réessayez.')
+  return jsonError(500, 'db_error', t('createFailed'))
 }

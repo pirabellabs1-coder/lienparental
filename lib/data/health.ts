@@ -11,7 +11,7 @@
  * Journal `sante` sont lus par l'écran via leurs couches respectives, filtrés sur l'enfant.
  */
 import { z } from 'zod'
-import { DataError, LIVE, useAsyncData } from './core'
+import { DataError, LIVE, dataMsg, useAsyncData } from './core'
 import { addDaysToKey } from '@/lib/tz'
 
 export type Vaccination = {
@@ -42,21 +42,26 @@ export type HealthKind = 'vaccination' | 'traitement'
 
 // --- Validation (miroir de la route serveur, qui reste l'autorité) ----------
 
-const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date invalide.')
-const optDay = day.optional().or(z.literal('').transform(() => undefined))
+// Messages résolus à chaque validation (langue de l'interface) : z.lazy reconstruit le schéma.
+const day = () => z.string().regex(/^\d{4}-\d{2}-\d{2}$/, dataMsg('health.invalidDate'))
+const optDay = () => day().optional().or(z.literal('').transform(() => undefined))
+const maxChars = (max: number) => dataMsg('health.maxChars', { max })
 
-export const vaccinationInput = z.object({
-  nom: z.string().trim().min(1, 'Indiquez le nom du vaccin.').max(80, '80 caractères maximum.'),
-  date: z.string().min(1, 'Indiquez la date de vaccination.').regex(/^\d{4}-\d{2}-\d{2}$/, 'Date invalide.'),
-  rappel: optDay,
-}).refine((v) => !v.rappel || v.rappel > v.date, { message: 'Le rappel doit être postérieur à la vaccination.', path: ['rappel'] })
+const buildVaccinationInput = () => z.object({
+  nom: z.string().trim().min(1, dataMsg('health.vaccineNameRequired')).max(80, maxChars(80)),
+  date: z.string().min(1, dataMsg('health.vaccineDateRequired')).regex(/^\d{4}-\d{2}-\d{2}$/, dataMsg('health.invalidDate')),
+  rappel: optDay(),
+}).refine((v) => !v.rappel || v.rappel > v.date, { message: dataMsg('health.boosterAfterVaccine'), path: ['rappel'] })
 
-export const treatmentInput = z.object({
-  nom: z.string().trim().min(1, 'Indiquez le nom du traitement.').max(80, '80 caractères maximum.'),
-  posologie: z.string().trim().max(160, '160 caractères maximum.').optional(),
-  debut: z.string().min(1, 'Indiquez la date de début.').regex(/^\d{4}-\d{2}-\d{2}$/, 'Date invalide.'),
-  fin: optDay,
-}).refine((t) => !t.fin || t.fin >= t.debut, { message: 'La fin doit être après le début.', path: ['fin'] })
+const buildTreatmentInput = () => z.object({
+  nom: z.string().trim().min(1, dataMsg('health.treatmentNameRequired')).max(80, maxChars(80)),
+  posologie: z.string().trim().max(160, maxChars(160)).optional(),
+  debut: z.string().min(1, dataMsg('health.startDateRequired')).regex(/^\d{4}-\d{2}-\d{2}$/, dataMsg('health.invalidDate')),
+  fin: optDay(),
+}).refine((t) => !t.fin || t.fin >= t.debut, { message: dataMsg('health.endAfterStart'), path: ['fin'] })
+
+export const vaccinationInput = z.lazy(buildVaccinationInput)
+export const treatmentInput = z.lazy(buildTreatmentInput)
 
 export type VaccinationInput = z.input<typeof vaccinationInput>
 export type TreatmentInput = z.input<typeof treatmentInput>
@@ -113,15 +118,15 @@ async function call<T>(childId: string, init?: RequestInit): Promise<T> {
   try {
     res = await fetch(url(childId), { cache: 'no-store', ...init, headers: { 'Content-Type': 'application/json', ...(init?.headers ?? {}) } })
   } catch {
-    throw new DataError('Connexion impossible. Vérifiez votre réseau.', 'network')
+    throw new DataError(dataMsg('errors.network'), 'network')
   }
   const body = (await res.json().catch(() => null)) as (T & { error?: { message?: string } }) | null
-  if (!res.ok) throw new DataError(body?.error?.message ?? 'Une erreur est survenue. Réessayez dans un instant.', `http_${res.status}`)
+  if (!res.ok) throw new DataError(body?.error?.message ?? dataMsg('errors.generic'), `http_${res.status}`)
   return body as T
 }
 
 function invalid(e: z.ZodError): DataError {
-  return new DataError(e.issues[0]?.message ?? 'Certaines informations sont invalides.', 'invalid')
+  return new DataError(e.issues[0]?.message ?? dataMsg('errors.invalid'), 'invalid')
 }
 
 // --- API ------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 import { fail, isSameOrigin, apiError, limitBilling, logError, readBody, requireBillingUser, seeOther, wantsJson } from '@/lib/billing/http'
@@ -22,7 +23,8 @@ export const dynamic = 'force-dynamic'
 const BACK = '/app/abonnement'
 
 export async function POST(req: Request) {
-  if (!isSameOrigin(req)) return apiError(403, 'invalid_origin', 'Requête refusée.')
+  const t = await getTranslations('server.stripe')
+  if (!isSameOrigin(req)) return apiError(403, 'invalid_origin', t('refused'))
   const auth = await requireBillingUser()
   if ('error' in auth) return fail(req, auth.error.status, auth.error.code, auth.error.message, BACK)
   const limited = await limitBilling('change-plan', auth.user.id)
@@ -30,16 +32,16 @@ export async function POST(req: Request) {
 
   const body = await readBody(req)
   const cycle = parseCycleStrict(body.cycle)
-  if (!cycle) return fail(req, 400, 'invalid_cycle', 'Formule inconnue.', BACK)
+  if (!cycle) return fail(req, 400, 'invalid_cycle', t('unknownPlan'), BACK)
   const formule = parsePlanStrict(body.formule)
-  if (!formule) return fail(req, 400, 'invalid_plan', 'Formule inconnue.', BACK)
+  if (!formule) return fail(req, 400, 'invalid_plan', t('unknownPlan'), BACK)
   // Identifiant propre à chaque clic (clé d'idempotence Stripe) ; formulaire sans JS : généré ici.
   const requestId = body.request_id === undefined ? crypto.randomUUID() : parseRequestId(body.request_id)
-  if (!requestId) return fail(req, 400, 'invalid_body', 'Requête invalide.', BACK)
+  if (!requestId) return fail(req, 400, 'invalid_body', t('invalidBody'), BACK)
 
   try {
     const res = await changePlan(auth.user.id, { plan: formule, cycle }, requestId)
-    if (!res.ok) return fail(req, res.status, res.code, res.message, BACK)
+    if (!res.ok) return fail(req, res.status, res.code, (t.has(`lib.${res.code}`) ? t(`lib.${res.code}`) : res.message), BACK)
     // Droits recalculés partout (layout, profil, quotas) au prochain rendu.
     revalidatePath('/app', 'layout')
     if (wantsJson(req)) {
@@ -51,6 +53,6 @@ export async function POST(req: Request) {
     return seeOther(`/app/abonnement?info=${res.status}`)
   } catch (err) {
     logError('change-plan', err)
-    return fail(req, 503, 'stripe_unavailable', 'Changement momentanément impossible. Réessayez dans un instant.', BACK)
+    return fail(req, 503, 'stripe_unavailable', t('changeUnavailable'), BACK)
   }
 }

@@ -3,6 +3,7 @@
 import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
 import { escapeHtml, safeUrl } from '../escape'
+import { emailT, greeting, type Locale } from '../i18n'
 
 export type ResetPasswordProps = {
   prenom: string
@@ -10,35 +11,39 @@ export type ResetPasswordProps = {
   url: string
 }
 
+/** Objet en français (historique) ; l'objet traduit est renvoyé par resetPasswordEmail(props, locale). */
 export const resetPasswordSubject = 'Réinitialisation de votre mot de passe Lien Parental'
 
-export function resetPasswordEmail(props: ResetPasswordProps): { subject: string; html: string } {
+export function resetPasswordEmail(props: ResetPasswordProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
   const prenom = escapeHtml(props.prenom?.trim() || '')
   const url = safeUrl(props.url)
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
+    <p style="margin:0 0 16px 0;">${greeting(tr, prenom)}</p>
     <p style="margin:0 0 16px 0;">
-      Vous avez demandé à réinitialiser le mot de passe de votre compte Lien Parental.
-      Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe.
+      ${tr('resetPassword.intro1')}
+      ${tr('resetPassword.intro2')}
     </p>
     <p style="margin:0 0 16px 0;color:${t.colors.textMuted};font-size:14px;">
-      Ce lien est valable 60 minutes et ne peut être utilisé qu'une seule fois.
+      ${tr('resetPassword.validity')}
     </p>
   `
 
+  const mail = `<a href="mailto:${t.supportEmail}" style="color:${t.colors.textMuted};">${t.supportEmail}</a>`
   const footer = `
-    Si vous n'êtes pas à l'origine de cette demande, ignorez cet email : votre mot de passe actuel reste inchangé.
-    En cas de doute, contactez-nous à <a href="mailto:${t.supportEmail}" style="color:${t.colors.textMuted};">${t.supportEmail}</a>.
+    ${tr('resetPassword.footer1')}
+    ${tr('resetPassword.footer2', { email: mail })}
   `
 
   return {
-    subject: resetPasswordSubject,
+    subject: tr('resetPassword.subject'),
     html: baseLayout({
-      preheader: 'Lien de réinitialisation valable 60 minutes.',
-      title: 'Réinitialiser votre mot de passe',
+      locale,
+      preheader: tr('resetPassword.preheader'),
+      title: tr('resetPassword.title'),
       body,
-      cta: { label: 'Choisir un nouveau mot de passe', href: url },
+      cta: { label: tr('resetPassword.cta'), href: url },
       footer,
     }),
   }

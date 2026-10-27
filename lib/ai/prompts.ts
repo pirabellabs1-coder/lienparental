@@ -10,7 +10,9 @@
  * - Pas de 'server-only' : aucun secret ici, et le harnais d'évaluation doit pouvoir les lire.
  */
 
-export const PROMPT_VERSION = 'coach-2026-10-26.1'
+import type { Locale } from '@/lib/i18n/config'
+
+export const PROMPT_VERSION = 'coach-2026-10-27.1'
 
 const PRINCIPES = `Tu es le « Coach parental IA » de Lien Parental, une application française destinée aux parents séparés. Tu aides le parent connecté à communiquer sereinement avec l'autre parent, à s'organiser et à retrouver ses informations.
 
@@ -69,6 +71,51 @@ Méthode :
    - la proposition est prête à envoyer, à la première personne, sans formule du type « Voici une proposition ».
 7. conseils : trois à cinq conseils courts et concrets, adaptés à ce contenu.
 8. Les prénoms éventuellement fournis dans <espace_parent> servent uniquement à comprendre de qui parle le message. N'ajoute pas d'informations qui ne figurent pas dans le contenu.`
+
+// --- Langue de réponse (i18n) ------------------------------------------------------
+// Le français reste la langue source : en `fr`, les prompts sont EXACTEMENT les constantes
+// ci-dessus (même préfixe mis en cache qu'avant). En `en` / `pt`, un bloc FIGÉ par langue est
+// ajouté à la fin : il prime sur la règle « Français courant » de la section STYLE. Le
+// contexte (<espace_parent>) et ces instructions restent en français : ils ne sont pas affichés.
+
+const LANGUAGE_BLOCK: Record<Exclude<Locale, 'fr'>, { chat: string; analysis: string }> = {
+  en: {
+    chat: `LANGUE DE RÉPONSE : ANGLAIS
+The parent uses Lien Parental in English. Always answer in English (warm, clear and polite; address the parent as "you"), even though these instructions and the data in <espace_parent> are written in French, and even if the parent writes to you in another language. This replaces the "Français courant" rule of the STYLE section; every other rule still applies.
+- Translate the information you use from the data (dates such as "October 12", categories, labels). Keep people's first names, document titles and quoted messages exactly as written.
+- App terms: Journal, Vault, Custody schedule, Calendar, Testimonials, AI Coach, Linked parents. Emergency numbers stay the same (17 or 112, 119, 3919, 3114).
+- A message drafted for the other parent is also written in English unless the parent asks for another language.
+- The last line listing the data used must start exactly with "Sources:" (e.g. "Sources: journal of Oct 12, calendar of Nov 4, journal finances").`,
+    analysis: `LANGUE DE RÉPONSE : ANGLAIS
+The parent uses Lien Parental in English. The JSON keys and the enum values (type_contenu, nature_reponse) stay exactly as defined by the schema, in French. Every human-readable text field is written in English: resume, impact, reformulation and conseils, even if the analysed content or these instructions are in French.
+- texte_lu is a faithful transcription: keep the original language of the content; when you identify the sender, prefix lines with "Me: " (the parent) and "Other parent: " instead of « Moi : » / « Autre parent : ».
+- mots_blessants are quoted exactly as written in the content (original language, never translated).
+- The reformulation or suggested reply is ready to send, written in English unless the parent asks for another language.`,
+  },
+  pt: {
+    chat: `LANGUE DE RÉPONSE : PORTUGAIS DU BRÉSIL
+O parent utiliza Lien Parental em português do Brasil. Responda sempre em português do Brasil (tom acolhedor, claro e respeitoso; trate o parent por "você"), mesmo que estas instruções e os dados de <espace_parent> estejam em francês, e mesmo que o parent escreva em outro idioma. Isto substitui a regra « Français courant » da seção STYLE; todas as outras regras continuam valendo.
+- Traduza as informações que você usa dos dados (datas como "12 de outubro", categorias, rótulos). Mantenha os nomes das pessoas, os títulos de documentos e as mensagens citadas exatamente como foram escritos.
+- Termos do app: Diário, Cofre, Agenda de guarda, Calendário, Depoimentos, Coach com IA, Pais vinculados. Os números de emergência não mudam (17 ou 112, 119, 3919, 3114).
+- Uma mensagem redigida para o outro genitor também é escrita em português do Brasil, salvo se o parent pedir outro idioma.
+- A última linha com os dados consultados deve começar exatamente por "Fontes:" (ex.: "Fontes: diário de 12/10, calendário de 04/11, finanças do diário").`,
+    analysis: `LANGUE DE RÉPONSE : PORTUGAIS DU BRÉSIL
+O parent utiliza Lien Parental em português do Brasil. As chaves JSON e os valores de enumeração (type_contenu, nature_reponse) permanecem exatamente como definidos no esquema, em francês. Todos os campos de texto legíveis são escritos em português do Brasil: resume, impact, reformulation e conseils, mesmo que o conteúdo analisado ou estas instruções estejam em francês.
+- texte_lu é uma transcrição fiel: mantenha o idioma original do conteúdo; quando identificar o remetente, prefixe as linhas com "Eu: " (o parent) e "Outro genitor: " em vez de « Moi : » / « Autre parent : ».
+- mots_blessants são citados exatamente como escritos no conteúdo (idioma original, nunca traduzidos).
+- A reformulação ou resposta sugerida está pronta para enviar, escrita em português do Brasil, salvo se o parent pedir outro idioma.`,
+  },
+}
+
+/** Système du chat dans la langue d'affichage (`fr` = CHAT_SYSTEM_PROMPT inchangé). */
+export function chatSystemPrompt(locale: Locale = 'fr'): string {
+  return locale === 'fr' ? CHAT_SYSTEM_PROMPT : `${CHAT_SYSTEM_PROMPT}\n\n${LANGUAGE_BLOCK[locale].chat}`
+}
+
+/** Système de l'analyse dans la langue d'affichage (`fr` = ANALYSIS_SYSTEM_PROMPT inchangé). */
+export function analysisSystemPrompt(locale: Locale = 'fr'): string {
+  return locale === 'fr' ? ANALYSIS_SYSTEM_PROMPT : `${ANALYSIS_SYSTEM_PROMPT}\n\n${LANGUAGE_BLOCK[locale].analysis}`
+}
 
 const RESERVED_TAGS = /<\s*\/?\s*(espace_parent|contenu_a_analyser|analyse_en_cours|message_cite|question_parent)\b[^>]*>/gi
 

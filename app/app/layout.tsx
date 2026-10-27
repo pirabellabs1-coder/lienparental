@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { BottomNav } from '@/components/mobile/BottomNav'
 import { DesktopSidebar } from '@/components/mobile/DesktopSidebar'
 import { SearchProvider } from '@/components/search/SearchProvider'
@@ -7,8 +8,8 @@ import { getCurrentUser } from '@/lib/auth/session'
 import { getEffectivePlan } from '@/lib/billing/entitlements'
 import type { PlanId } from '@/components/profil/pricing'
 
-export const metadata: Metadata = {
-  title: 'Application',
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations('meta'))('appTitle') }
 }
 
 // Téléphone : plein écran + barre d'onglets (dont « Menu »). Tablette et ordinateur : menu latéral ; colonne centrée dès lg.

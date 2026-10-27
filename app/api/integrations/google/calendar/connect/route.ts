@@ -4,6 +4,7 @@
  * Pose un cookie HttpOnly chiffré (state, code_verifier, nonce, utilisateur, cible ; 10 min)
  * et renvoie l'URL d'autorisation Google vers laquelle le navigateur se rend.
  */
+import { getTranslations } from 'next-intl/server'
 import { NextResponse, type NextRequest } from 'next/server'
 import { z } from 'zod'
 import { jsonError } from '@/lib/data/server/http'
@@ -19,19 +20,20 @@ export const dynamic = 'force-dynamic'
 const bodySchema = z.object({ target: z.enum(['dedicated', 'primary']).default('dedicated') }).strict()
 
 export async function POST(req: NextRequest) {
+  const t = await getTranslations('server.google')
   if (!sameOrigin(req)) return crossSite()
   const ctx = await guard()
   if (ctx.kind === 'denied') return ctx.response
   const cfg = googleOAuthConfig()
   if (ctx.kind === 'demo' || !cfg || !googleCalendarConfigured()) {
-    return jsonError(503, 'not_configured', 'La connexion à Google Agenda n’est pas encore configurée.')
+    return jsonError(503, 'not_configured', t('notConfiguredYet'))
   }
 
   const limited = await rateLimit(userKey('gcal:connect', ctx.user.id), 10, 10 * 60_000)
-  if (!limited.ok) return jsonError(429, 'rate_limited', 'Trop de tentatives. Réessayez dans quelques minutes.', { 'Retry-After': String(limited.retryAfter) })
+  if (!limited.ok) return jsonError(429, 'rate_limited', t('tooManyAttemptsLater'), { 'Retry-After': String(limited.retryAfter) })
 
   const parsed = bodySchema.safeParse(await req.json().catch(() => ({})))
-  if (!parsed.success) return jsonError(400, 'invalid_payload', 'Choix d’agenda invalide.')
+  if (!parsed.success) return jsonError(400, 'invalid_payload', t('invalidTarget'))
 
   const state = randomValue(32)
   const verifier = randomValue(48) // 64 caractères base64url (RFC 7636 : 43 à 128)

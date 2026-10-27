@@ -20,6 +20,8 @@ import { mockCoachCycles, mockCoachLog, mockCoachUsage } from '@/lib/mock-data'
 import type { PlanId } from '@/components/profil/pricing'
 import { getEffectivePlan } from '@/lib/billing/entitlements'
 import { ANALYSIS_QUOTA_BY_PLAN } from '@/lib/billing/plans'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { defaultLocale, intlLocale, isLocale, type Locale } from '@/lib/i18n/config'
 import {
   CYCLE_DAYS, aiServiceDb, cancelPending, cycleRows, insertPending, newAnalysisUuid, type CoachKind, type StoredAnalysis,
 } from './analyses'
@@ -154,14 +156,70 @@ export type UsageOverview = QuotaStatus & {
   resetInDays: number | null
   resetDateLabel: string | null
   cycles: Array<{ label: string; startLabel: string; used: number; current: boolean }>
+  /**
+   * `status` est un CODE stable ('Terminée' | 'Supprimée'), traduit au rendu par l'interface
+   * (HistoriqueClient) : il n'est pas localisé ici. `title` et `dateLabel` le sont.
+   */
   log: Array<{ id: string; title: string; dateLabel: string; status: 'Terminée' | 'Supprimée' }>
 }
 
-const fmtLong = new Intl.DateTimeFormat('fr-FR', { timeZone: 'America/Cayenne', day: '2-digit', month: 'long', year: 'numeric' })
-const fmtShort = new Intl.DateTimeFormat('fr-FR', { timeZone: 'America/Cayenne', day: '2-digit', month: 'short' })
-const fmtLog = new Intl.DateTimeFormat('fr-FR', { timeZone: 'America/Cayenne', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+const TZ = 'America/Cayenne'
+const fmtLong = new Intl.DateTimeFormat('fr-FR', { timeZone: TZ, day: '2-digit', month: 'long', year: 'numeric' })
+const fmtShort = new Intl.DateTimeFormat('fr-FR', { timeZone: TZ, day: '2-digit', month: 'short' })
+const fmtLog = new Intl.DateTimeFormat('fr-FR', { timeZone: TZ, day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
 
-export async function getUsageOverview(user: CurrentUser): Promise<UsageOverview> {
+/** Formateurs de dates de la vue « utilisation » ; le français garde exactement le rendu historique. */
+function usageFormatters(locale: Locale) {
+  if (locale === 'fr') {
+    return {
+      long: (d: Date) => fmtLong.format(d),
+      short: (d: Date) => fmtShort.format(d).replace('.', ''),
+      log: (d: Date) => fmtLog.format(d).replace(',', ' •'),
+    }
+  }
+  const intl = intlLocale(locale)
+  const long = new Intl.DateTimeFormat(intl, { timeZone: TZ, day: '2-digit', month: 'long', year: 'numeric' })
+  const short = new Intl.DateTimeFormat(intl, { timeZone: TZ, day: '2-digit', month: 'short' })
+  const day = new Intl.DateTimeFormat(intl, { timeZone: TZ, day: 'numeric', month: 'short', year: 'numeric' })
+  const time = new Intl.DateTimeFormat(intl, { timeZone: TZ, hour: '2-digit', minute: '2-digit' })
+  return {
+    long: (d: Date) => long.format(d),
+    short: (d: Date) => short.format(d).replace('.', ''),
+    log: (d: Date) => `${day.format(d)} • ${time.format(d)}`,
+  }
+}
+
+/** Locale de la requête en cours (cookie lp_locale) ; français hors requête. */
+async function requestLocale(): Promise<Locale> {
+  try {
+    const l = await getLocale()
+    return isLocale(l) ? l : defaultLocale
+  } catch {
+    return defaultLocale
+  }
+}
+
+/** Libellés de la vue « utilisation » (français historique si le catalogue est indisponible). */
+async function usageLabels(locale: Locale): Promise<{ current: string; cycleN: (n: number) => string; deleted: string }> {
+  if (locale !== 'fr') {
+    try {
+      const t = await getTranslations({ locale, namespace: 'ai.quota' })
+      return { current: t('cycleCurrent'), cycleN: (n) => t('cycleN', { n }), deleted: t('deletedTitle') }
+    } catch {
+      // repli français
+    }
+  }
+  return { current: 'Cycle actuel', cycleN: (n) => `Cycle -${n}`, deleted: 'Analyse supprimée' }
+}
+
+/**
+ * Vue « utilisation ». `locale` (optionnel) : langue des libellés et dates ; par défaut la
+ * langue de la requête en cours (français hors requête).
+ */
+export async function getUsageOverview(user: CurrentUser, locale?: Locale): Promise<UsageOverview> {
+  const loc = locale ?? (await requestLocale())
+  const fmt = usageFormatters(loc)
+  const labels = await usageLabels(loc)
   const status = await getQuotaStatus(user)
   const now = Date.now()
   const sixCycles = new Date(now - 6 * CYCLE_DAYS * DAY_MS)
@@ -173,8 +231,8 @@ export async function getUsageOverview(user: CurrentUser): Promise<UsageOverview
     const end = now - back * CYCLE_DAYS * DAY_MS
     const start = end - CYCLE_DAYS * DAY_MS
     return {
-      label: back === 0 ? 'Cycle actuel' : `Cycle -${back}`,
-      startLabel: fmtShort.format(new Date(start)).replace('.', ''),
+      label: back === 0 ? labels.current : labels.cycleN(back),
+      startLabel: fmt.short(new Date(start)),
       used: usage.filter((t) => t > start && t <= end).length,
       current: back === 0,
     }
@@ -182,12 +240,12 @@ export async function getUsageOverview(user: CurrentUser): Promise<UsageOverview
   const windowStart = now - CYCLE_DAYS * DAY_MS
   const log = rows
     .filter((r) => new Date(r.cycle).getTime() > windowStart)
-    .map((r) => ({ id: r.id, title: r.status === 'deleted' ? 'Analyse supprimée' : r.title, dateLabel: fmtLog.format(new Date(r.cycle)).replace(',', ' •'), status: r.status === 'deleted' ? ('Supprimée' as const) : ('Terminée' as const) }))
+    .map((r) => ({ id: r.id, title: r.status === 'deleted' ? labels.deleted : r.title, dateLabel: fmt.log(new Date(r.cycle)), status: r.status === 'deleted' ? ('Supprimée' as const) : ('Terminée' as const) }))
   const release = status.nextReleaseAt ? new Date(status.nextReleaseAt) : null
   return {
     ...status,
     resetInDays: release ? Math.max(0, Math.ceil((release.getTime() - now) / DAY_MS)) : null,
-    resetDateLabel: release ? fmtLong.format(release) : null,
+    resetDateLabel: release ? fmt.long(release) : null,
     cycles,
     log,
   }
@@ -207,13 +265,13 @@ export type CoachUsageView = {
   live: boolean
 }
 
-export async function loadCoachUsage(): Promise<CoachUsageView> {
+export async function loadCoachUsage(locale?: Locale): Promise<CoachUsageView> {
   const user = SUPABASE_ENABLED ? await getCurrentUser() : null
   if (!user) {
     return { used: mockCoachUsage.used, total: mockCoachUsage.total, resetInDays: mockCoachUsage.resetInDays, resetDateLabel: mockCoachUsage.resetDateLabel, cycles: mockCoachCycles, log: mockCoachLog, live: false }
   }
   try {
-    const o = await getUsageOverview(user)
+    const o = await getUsageOverview(user, locale)
     return { used: o.used, total: o.quota, resetInDays: o.resetInDays, resetDateLabel: o.resetDateLabel, cycles: o.cycles, log: o.log, live: true }
   } catch {
     const { quota } = await planQuota(user)

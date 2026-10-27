@@ -10,7 +10,7 @@
 import { useMemo } from 'react'
 import { z } from 'zod'
 import { childProfileStatus, mockChildren, ageFromBirthDate, type Child } from '@/lib/mock-data'
-import { DataError, LIVE, db, requireUserId, toDataError, useAsyncData } from './core'
+import { DataError, LIVE, dataMsg, db, requireUserId, toDataError, useAsyncData } from './core'
 
 // --- Lignes Supabase (sous-ensemble utilisé) --------------------------------
 
@@ -57,18 +57,18 @@ function fromRow(r: ChildRow, medical?: ChildMedical): Child {
 
 // --- Validation -------------------------------------------------------------
 
-const isoDay = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date invalide')
+const isoDay = () => z.string().regex(/^\d{4}-\d{2}-\d{2}$/, dataMsg('children.invalidDate'))
 const shortText = (max: number) => z.string().trim().max(max)
 
-const createSchema = z.object({
-  prenom: shortText(60).min(1, 'Le prénom est requis.'),
-  dateNaissance: isoDay,
+const createSchema = () => z.object({
+  prenom: shortText(60).min(1, dataMsg('children.firstNameRequired')),
+  dateNaissance: isoDay(),
   classe: shortText(40).optional(),
 })
 
-const updateSchema = z.object({
+const updateSchema = () => z.object({
   prenom: shortText(60).min(1).optional(),
-  dateNaissance: isoDay.optional(),
+  dateNaissance: isoDay().optional(),
   classe: shortText(40).optional(),
   langue: shortText(40).optional(),
   taille: z.number().int().min(20).max(250).optional(),
@@ -84,7 +84,7 @@ const updateSchema = z.object({
 })
 
 function invalid(e: z.ZodError): DataError {
-  return new DataError(e.issues[0]?.message && e.issues[0].message !== 'Required' ? e.issues[0].message : 'Certaines informations sont invalides.', 'invalid')
+  return new DataError(e.issues[0]?.message && e.issues[0].message !== 'Required' ? e.issues[0].message : dataMsg('errors.invalid'), 'invalid')
 }
 
 // --- Démo : surcharges sessionStorage ---------------------------------------
@@ -148,7 +148,7 @@ async function fetchMedical(id: string): Promise<ChildMedical | undefined> {
 }
 
 export async function createChild(input: { prenom: string; dateNaissance: string; classe?: string }): Promise<Child | null> {
-  const parsed = createSchema.safeParse(input)
+  const parsed = createSchema().safeParse(input)
   if (!parsed.success) throw invalid(parsed.error)
   // Démo : comportement historique (aucune persistance de création).
   if (!LIVE) return null
@@ -169,7 +169,7 @@ export async function updateChild(id: string, patch: Partial<Child>): Promise<vo
     return
   }
   const clean = Object.fromEntries(Object.entries(patch).filter(([, v]) => v !== undefined))
-  const parsed = updateSchema.safeParse(clean)
+  const parsed = updateSchema().safeParse(clean)
   if (!parsed.success) throw invalid(parsed.error)
   const v = parsed.data
 
@@ -184,7 +184,7 @@ export async function updateChild(id: string, patch: Partial<Child>): Promise<vo
   if ('couleurCheveux' in patch) row.couleur_cheveux = v.couleurCheveux || null
 
   const current = await getChild(id)
-  if (!current) throw new DataError('Ce profil n’existe pas ou a été supprimé.', 'not_found')
+  if (!current) throw new DataError(dataMsg('children.notFound'), 'not_found')
 
   const touchesMedical = MEDICAL_KEYS.some((k) => k in patch)
   if (touchesMedical) {
@@ -205,7 +205,7 @@ export async function updateChild(id: string, patch: Partial<Child>): Promise<vo
     })
     if (!res.ok) {
       const body = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
-      throw new DataError(body?.error?.message ?? 'Les informations médicales n’ont pas pu être enregistrées.', `http_${res.status}`)
+      throw new DataError(body?.error?.message ?? dataMsg('children.medicalSaveFailed'), `http_${res.status}`)
     }
   }
 

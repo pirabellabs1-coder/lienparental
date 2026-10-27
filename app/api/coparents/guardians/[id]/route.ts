@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { familyContext, limited, readJson, rpcError } from '@/lib/coparents/server/context'
 import { notifyGuardianRemoved } from '@/lib/coparents/server/email'
@@ -13,28 +14,30 @@ type Ctx = { params: Promise<{ id: string }> }
 export async function PATCH(req: Request, { params }: Ctx) {
   const ctx = await familyContext(req)
   if ('error' in ctx) return ctx.error
+  const t = await getTranslations('server.coparents')
   const { id } = await params
-  if (!uuidSchema.safeParse(id).success) return jsonError(404, 'not_found', 'Lien introuvable.')
+  if (!uuidSchema.safeParse(id).success) return jsonError(404, 'not_found', t('linkNotFound'))
   const tooMany = await limited(ctx.user.id, 'write', 60, 60_000)
   if (tooMany) return tooMany
   const parsed = roleChangeSchema.safeParse(await readJson(req))
-  if (!parsed.success) return jsonError(422, 'invalid', 'Rôle invalide.')
+  if (!parsed.success) return jsonError(422, 'invalid', t('hints.invalid_role'))
 
   const { error } = await ctx.db.rpc('set_child_guardian_role', { p_guardian_id: id, p_role: parsed.data.role })
-  if (error) return rpcError(error, 'guardian.role', 'Lien introuvable.')
+  if (error) return rpcError(error, 'guardian.role', t('linkNotFound'))
   return jsonOk({ ok: true })
 }
 
 export async function DELETE(req: Request, { params }: Ctx) {
   const ctx = await familyContext(req)
   if ('error' in ctx) return ctx.error
+  const t = await getTranslations('server.coparents')
   const { id } = await params
-  if (!uuidSchema.safeParse(id).success) return jsonError(404, 'not_found', 'Lien introuvable.')
+  if (!uuidSchema.safeParse(id).success) return jsonError(404, 'not_found', t('linkNotFound'))
   const tooMany = await limited(ctx.user.id, 'write', 60, 60_000)
   if (tooMany) return tooMany
 
   const { data, error } = await ctx.db.rpc('revoke_child_guardian', { p_guardian_id: id })
-  if (error) return rpcError(error, 'guardian.revoke', 'Lien introuvable.')
+  if (error) return rpcError(error, 'guardian.revoke', t('linkNotFound'))
   const r = (data ?? {}) as { user_id?: string; child_id?: string; reason?: string }
 
   if (r.reason === 'removed' && r.user_id && r.child_id) {

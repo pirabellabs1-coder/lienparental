@@ -12,6 +12,7 @@
  *   {{cle}}               → variable déclarée dans « Champs »
  * Aucun HTML n'est interprété : le texte est toujours rendu comme du texte.
  */
+import { libT } from '@/lib/i18n/runtime'
 import { z } from 'zod'
 
 export const TEMPLATE_CATEGORIES = [
@@ -211,20 +212,22 @@ export function lines(s: string): string[] {
 
 /** Schéma zod des valeurs d'un modèle (bornées, typées, champs obligatoires). */
 export function valuesSchemaFor(fields: TemplateField[]) {
+  // Messages destinés au parent : langue de l'interface (libT, français côté serveur).
+  const t = libT('shared.templates.values')
   const shape: Record<string, z.ZodTypeAny> = {}
   for (const f of fields) {
     let s: z.ZodTypeAny
     const max = f.type === 'texte_long' ? 4000 : 300
-    const base = z.string().trim().max(max, `${max} caractères au maximum.`)
+    const base = z.string().trim().max(max, t('maxChars', { max: String(max) }))
     switch (f.type) {
-      case 'date': s = base.regex(/^(\d{4}-\d{2}-\d{2})?$/, 'Date invalide.'); break
-      case 'email': s = base.refine((v) => !v || z.string().email().safeParse(v).success, 'Adresse e-mail invalide.'); break
-      case 'telephone': s = base.regex(/^[0-9 +().-]*$/, 'Numéro invalide.'); break
-      case 'nombre': s = base.regex(/^(-?\d+([.,]\d+)?)?$/, 'Nombre attendu.'); break
-      case 'choix': s = base.refine((v) => !v || f.options.includes(v), 'Choisissez une option de la liste.'); break
+      case 'date': s = base.regex(/^(\d{4}-\d{2}-\d{2})?$/, t('invalidDate')); break
+      case 'email': s = base.refine((v) => !v || z.string().email().safeParse(v).success, t('invalidEmail')); break
+      case 'telephone': s = base.regex(/^[0-9 +().-]*$/, t('invalidPhone')); break
+      case 'nombre': s = base.regex(/^(-?\d+([.,]\d+)?)?$/, t('numberExpected')); break
+      case 'choix': s = base.refine((v) => !v || f.options.includes(v), t('chooseOption')); break
       default: s = base
     }
-    shape[f.key] = f.obligatoire ? s.refine((v: string) => v.length > 0, 'Champ obligatoire.') : s.optional().default('')
+    shape[f.key] = f.obligatoire ? s.refine((v: string) => v.length > 0, t('required')) : s.optional().default('')
   }
   return z.object(shape)
 }

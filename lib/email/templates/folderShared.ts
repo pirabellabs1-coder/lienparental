@@ -2,6 +2,7 @@
 
 import { baseLayout } from '../layout'
 import { escapeHtml } from '../escape'
+import { emailT, greeting, type Locale } from '../i18n'
 import { appLink, P, preferencesFooter } from './notificationParts'
 
 export type FolderSharedProps = {
@@ -10,21 +11,23 @@ export type FolderSharedProps = {
   folderId: string
 }
 
-export function folderSharedEmail(props: FolderSharedProps): { subject: string; html: string } {
+export function folderSharedEmail(props: FolderSharedProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
   const prenom = escapeHtml(props.prenom?.trim() || '')
-  const who = props.ownerPrenom?.trim() || 'Un parent'
+  const who = props.ownerPrenom?.trim() || tr('common.aParent')
   const body = `
-    <p style="${P}">Bonjour${prenom ? ` ${prenom}` : ''},</p>
-    <p style="margin:0;">${escapeHtml(who)} a partagé un dossier de son coffre-fort avec vous, en lecture seule.</p>
+    <p style="${P}">${greeting(tr, prenom)}</p>
+    <p style="margin:0;">${tr('folderShared.body', { name: escapeHtml(who) })}</p>
   `
   return {
-    subject: `${who} a partagé un dossier avec vous`,
+    subject: tr('folderShared.subject', { name: who }),
     html: baseLayout({
-      preheader: `Un dossier partagé par ${who} vous attend.`,
-      title: 'Dossier partagé',
+      locale,
+      preheader: tr('folderShared.preheader', { name: who }),
+      title: tr('folderShared.title'),
       body,
-      cta: { label: 'Ouvrir le dossier', href: appLink(`/app/coffre/dossiers/${encodeURIComponent(props.folderId)}`) },
-      footer: preferencesFooter(),
+      cta: { label: tr('folderShared.cta'), href: appLink(`/app/coffre/dossiers/${encodeURIComponent(props.folderId)}`) },
+      footer: preferencesFooter('', locale),
     }),
   }
 }

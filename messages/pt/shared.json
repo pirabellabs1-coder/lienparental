@@ -1,0 +1,408 @@
+{
+  "shared": {
+    "billing": {
+      "errors": {
+        "already_subscribed": "Você já tem uma assinatura ativa: mude de plano em Minha assinatura.",
+        "billing_disabled": "O pagamento online ainda não está disponível.",
+        "cancel_pending": "Desfaça primeiro o cancelamento para mudar de plano.",
+        "generic": "Ocorreu um erro. Tente novamente em instantes.",
+        "invalid_body": "Solicitação inválida. Recarregue a página e tente novamente.",
+        "invalid_cycle": "Plano desconhecido. Escolha Mensal ou Anual.",
+        "invalid_origin": "Solicitação recusada. Recarregue a página e tente novamente.",
+        "invalid_plan": "Plano desconhecido. Escolha Premium ou Coparentalité+.",
+        "invalid_state": "Esta ação não é possível no momento. Recarregue a página.",
+        "misconfigured": "O serviço de pagamento está temporariamente indisponível.",
+        "network": "Não foi possível conectar. Verifique sua rede e tente novamente.",
+        "no_customer": "Nenhuma forma de pagamento cadastrada ainda.",
+        "no_subscription": "Nenhuma assinatura ativa.",
+        "payment_failed": "O pagamento da diferença foi recusado. Verifique sua forma de pagamento e tente novamente.",
+        "rate_limited": "Muitas solicitações. Aguarde um instante e tente novamente.",
+        "session_not_found": "Sessão de pagamento não encontrada para esta conta.",
+        "stripe_unavailable": "O serviço de pagamento está temporariamente indisponível. Tente novamente em instantes.",
+        "subscription_not_active": "Regularize primeiro seu pagamento para mudar de plano.",
+        "unauthenticated": "Sua sessão expirou. Entre novamente e tente outra vez."
+      }
+    },
+    "calendar": {
+      "types": {
+        "activite": "Atividade",
+        "anniversaire": "Aniversário",
+        "appel": "Chamada de vídeo",
+        "autre": "Outro",
+        "deplacement": "Deslocamento",
+        "ecole": "Escola",
+        "message": "Mensagem",
+        "rdv": "Consulta",
+        "repas": "Refeição",
+        "sante": "Saúde",
+        "sortie": "Passeio",
+        "visite": "Visita"
+      }
+    },
+    "confirm": {
+      "copy": {
+        "default": {
+          "action": "Continuar",
+          "text": "Continue para concluir a operação solicitada.",
+          "title": "Confirmação"
+        },
+        "email_change": {
+          "action": "Confirmar",
+          "text": "Continue para confirmar a alteração do endereço de e-mail da sua conta.",
+          "title": "Confirme o novo endereço"
+        },
+        "recovery": {
+          "action": "Continuar",
+          "text": "Continue para escolher uma nova senha.",
+          "title": "Redefina sua senha"
+        },
+        "signup": {
+          "action": "Confirmar meu endereço",
+          "text": "Última etapa: confirme seu endereço de e-mail para ativar sua conta Lien Parental.",
+          "title": "Confirme seu endereço"
+        }
+      },
+      "invalid": {
+        "back": "Voltar para o login",
+        "text": "Este link está incompleto ou expirou. Solicite um novo.",
+        "title": "Link inválido"
+      },
+      "metaTitle": "Confirmação"
+    },
+    "dashboard": {
+      "addedOn": "Adicionado em {date}"
+    },
+    "data": {
+      "calendar": {
+        "dateRequired": "A data é obrigatória.",
+        "healthChildRequired": "Escolha a criança desta consulta de saúde.",
+        "notAuthor": "Este evento foi compartilhado por outro pai/mãe: somente o autor pode editá-lo ou excluí-lo.",
+        "titleRequired": "Dê um título ao evento."
+      },
+      "children": {
+        "firstNameRequired": "O primeiro nome é obrigatório.",
+        "invalidDate": "Data inválida",
+        "medicalSaveFailed": "Não foi possível salvar as informações médicas.",
+        "notFound": "Este perfil não existe ou foi excluído."
+      },
+      "errors": {
+        "duplicate": "Este item já existe.",
+        "fileTooLarge": "Arquivo muito grande.",
+        "forbidden": "Acesso negado. Entre novamente e tente outra vez.",
+        "generic": "Ocorreu um erro. Tente novamente em instantes.",
+        "invalid": "Algumas informações são inválidas.",
+        "invalidShort": "Informações inválidas.",
+        "network": "Não foi possível conectar. Verifique sua rede.",
+        "notConfigured": "O armazenamento online não está configurado.",
+        "notFound": "Item não encontrado.",
+        "relatedNotFound": "Item vinculado não encontrado.",
+        "sessionExpired": "Sua sessão expirou. Entre novamente."
+      },
+      "family": {
+        "linkedParent": "um pai/mãe vinculado(a)"
+      },
+      "folders": {
+        "alreadyShared": "Esta pasta já está compartilhada com este pai/mãe.",
+        "cycle": "Uma pasta não pode ser colocada dentro dela mesma.",
+        "folderInvalid": "Pasta inválida.",
+        "gone": "Esta pasta não existe mais. Atualize a página.",
+        "maxDepth": "No máximo {max} níveis de pastas.",
+        "nameInvalid": "Nome de pasta inválido.",
+        "nameMax": "No máximo {max} caracteres.",
+        "nameRequired": "Informe um nome de pasta.",
+        "nameTaken": "Já existe uma pasta com este nome neste local.",
+        "notAuthorMove": "Este documento foi compartilhado por outro pai/mãe: somente o autor pode organizá-lo.",
+        "ownerDelete": "Somente o proprietário da pasta pode excluí-la.",
+        "ownerRename": "Somente o proprietário da pasta pode renomeá-la.",
+        "parentInvalid": "Pasta principal inválida.",
+        "shareAlreadyStopped": "Este compartilhamento já foi encerrado.",
+        "shareInvalid": "Compartilhamento inválido.",
+        "shareNotLinked": "Não é possível compartilhar: este pai/mãe não está (ou não está mais) vinculado a você."
+      },
+      "garde": {
+        "invalidConfig": "Configuração de guarda inválida."
+      },
+      "health": {
+        "boosterAfterVaccine": "O reforço deve ser posterior à vacinação.",
+        "endAfterStart": "O fim deve ser depois do início.",
+        "invalidDate": "Data inválida.",
+        "maxChars": "Máximo de {max} caracteres.",
+        "startDateRequired": "Informe a data de início.",
+        "treatmentNameRequired": "Informe o nome do tratamento.",
+        "vaccineDateRequired": "Informe a data da vacinação.",
+        "vaccineNameRequired": "Informe o nome da vacina."
+      },
+      "journal": {
+        "badJustificatif": "Comprovante “{name}”: {error}",
+        "expenseRequired": "Informe o valor, a categoria e a forma de pagamento.",
+        "fileBadType": "“{name}”: formato não suportado (imagens ou PDF).",
+        "fileTooLarge": "“{name}” excede 10 MB.",
+        "finance": {
+          "amountInvalid": "Valor inválido.",
+          "amountPositive": "O valor deve ser maior que 0.",
+          "amountRequired": "Informe um valor.",
+          "amountTooHigh": "Valor muito alto (máximo de 100.000).",
+          "categoryRequired": "Escolha uma categoria.",
+          "dueInvalid": "Data de vencimento inválida.",
+          "fileFormat": "Formato não suportado. Use uma foto (JPG, PNG, WebP, HEIC) ou um PDF.",
+          "fileTooBig": "Arquivo muito grande (máximo de 10 MB).",
+          "modeRequired": "Escolha uma forma de pagamento.",
+          "paidRange": "O valor pago deve ser maior que 0 e menor que o valor total.",
+          "paidRequired": "Informe o valor já pago.",
+          "percentRange": "Porcentagem entre 0 e 100.",
+          "shareRequired": "Informe a sua parte.",
+          "shareTooHigh": "A sua parte não pode exceder o valor total."
+        },
+        "nextDueAfterDate": "O próximo vencimento deve ser posterior à data da despesa.",
+        "notFound": "Evento não encontrado.",
+        "titleRequired": "Dê um título a este evento.",
+        "tooManyFiles": "Máximo de {max} arquivos por evento.",
+        "tooManyJustificatifs": "Máximo de {max} comprovantes por despesa.",
+        "uploadFailed": "O envio dos arquivos falhou."
+      },
+      "testimonies": {
+        "childRequired": "Adicione pelo menos uma criança.",
+        "createFailed": "Não foi possível criar a solicitação. Tente novamente.",
+        "defaultSubject": "Depoimento",
+        "notSpecified": "Não informado",
+        "parentRequired": "Adicione pelo menos um pai/mãe.",
+        "subjectRequired": "Informe o título da solicitação.",
+        "witnessN": "Testemunha {n}"
+      },
+      "vault": {
+        "badType": "Formato não suportado. Formatos aceitos: PDF, JPG, PNG, DOCX, DOC.",
+        "categoryInvalid": "Categoria inválida.",
+        "categoryNameRequired": "Informe um nome de categoria.",
+        "categoryTaken": "Já existe uma categoria com este nome.",
+        "contentMismatch": "O conteúdo do arquivo não corresponde à sua extensão.",
+        "demoFiles": "Os arquivos não estão disponíveis no modo de demonstração.",
+        "docDateRequired": "Informe a data do documento.",
+        "docNameInvalid": "Nome de documento inválido.",
+        "docNameRequired": "Informe o nome do documento.",
+        "downloadFailed": "Não é possível baixar no momento.",
+        "empty": "O arquivo está vazio.",
+        "expired": "Expirado",
+        "expiresInDays": "Expira em {n} dias",
+        "expiresInHours": "Expira em {n} h",
+        "expiresInMin": "Expira em {n} min",
+        "notAuthor": "Este documento foi compartilhado por outro pai/mãe: somente o autor pode editá-lo.",
+        "restoreFailed": "Não foi possível restaurar (prazo de 30 dias excedido?).",
+        "tooLarge": "Arquivo muito grande. Tamanho máx. 20 MB.",
+        "uploadFailed": "O envio do arquivo falhou. Tente novamente."
+      }
+    },
+    "family": {
+      "generic": "Ocorreu um erro. Tente novamente em instantes.",
+      "invitation": {
+        "fromMe": "Estou convidando você",
+        "fromName": "{name} está convidando você",
+        "message": "Olá, {from} a participar do espaço compartilhado das crianças no Lien Parental: {url} (link pessoal, válido por 7 dias, para abrir com o seu e-mail convidado)."
+      },
+      "inviteInvalid": "Convite inválido ou expirado.",
+      "network": "Não foi possível conectar. Verifique sua rede."
+    },
+    "format": {
+      "size": {
+        "bytes": "{n} B",
+        "kb": "{n} KB",
+        "mb": "{n} MB"
+      },
+      "unknownDate": "data desconhecida"
+    },
+    "guide": {
+      "loadFailed": "Não foi possível carregar seu progresso.",
+      "notReady": "O progresso ainda está carregando, tente novamente em instantes.",
+      "saveFailed": "Não foi possível salvar o progresso."
+    },
+    "messages": {
+      "attachment": {
+        "badType": "Formato não aceito. Escolha uma imagem (JPG, PNG, WebP, HEIC) ou um PDF.",
+        "empty": "Este arquivo está vazio.",
+        "label": "Anexo",
+        "tooLarge": "Arquivo muito grande: máximo de 10 MB."
+      },
+      "attachmentNamed": "Anexo: {name}",
+      "conversation": "Conversa",
+      "errors": {
+        "archiveFailed": "Não foi possível arquivar a conversa.",
+        "attachmentSendFailed": "Não foi possível enviar o anexo.",
+        "bodyTooLong": "Mensagem muito longa (máximo de {max} caracteres).",
+        "createFailed": "Não foi possível criar a conversa.",
+        "inviteCancelFailed": "Não foi possível cancelar o convite.",
+        "inviteCreateFailed": "Não foi possível criar o convite.",
+        "inviteInvalid": "Convite inválido ou expirado.",
+        "noAttachment": "Esta mensagem não contém anexo para guardar.",
+        "parentNotLinked": "Este pai/mãe não está vinculado(a) à sua conta.",
+        "participantNotLinked": "Este contato não está vinculado à sua conta.",
+        "sendFailed": "Não foi possível enviar a mensagem.",
+        "sessionExpired": "Sessão expirada. Entre novamente.",
+        "titleTooLong": "Assunto muito longo (máximo de {max} caracteres).",
+        "tooManyConversations": "Muitas conversas criadas hoje. Tente novamente amanhã.",
+        "unarchiveFailed": "Não foi possível desarquivar a conversa.",
+        "voiceSendFailed": "Não foi possível enviar a mensagem de voz."
+      },
+      "namesAnd": "{names} e {last}",
+      "otherParent": "Outro pai/mãe",
+      "voice": {
+        "badType": "Formato de áudio não suportado por este navegador.",
+        "empty": "Gravação vazia. Verifique seu microfone.",
+        "tooLarge": "Mensagem de voz muito grande.",
+        "tooLong": "Mensagem de voz muito longa: máximo de 3 minutos.",
+        "tooShort": "Mensagem de voz muito curta."
+      },
+      "voiceNote": "Mensagem de voz"
+    },
+    "notify": {
+      "blocked": "As notificações estão bloqueadas para este site. Permita-as nas configurações do navegador e tente novamente.",
+      "enableFailed": "Não foi possível ativar no momento. Tente novamente em instantes.",
+      "notGranted": "Permissão não concedida.",
+      "unsupported": "As notificações não estão disponíveis neste navegador."
+    },
+    "shares": {
+      "generic": "Ocorreu um erro. Tente novamente.",
+      "scope": {
+        "documents": "{count, plural, one {{n} documento} other {{n} documentos}}",
+        "journal": "diário",
+        "messages": "mensagens",
+        "none": "nenhum conteúdo",
+        "testimonies": "{count, plural, one {{n} depoimento} other {{n} depoimentos}}"
+      },
+      "sessionExpired": "Sessão expirada. Entre novamente."
+    },
+    "states": {
+      "background": "Continuar em segundo plano",
+      "cancel": "Cancelar",
+      "defaultFileName": "Documento.pdf",
+      "deleting": {
+        "files": "{count, plural, one {{n} arquivo sendo excluído} other {{n} arquivos sendo excluídos}}",
+        "items": "Itens sendo excluídos"
+      },
+      "downloading": "Baixando…",
+      "empty": {
+        "description": "Comece adicionando seu primeiro item para vê-lo aparecer aqui.",
+        "title": "Nenhum dado disponível"
+      },
+      "error": {
+        "backHome": "Voltar ao início",
+        "code": "Código de erro: {code}",
+        "description": "Não foi possível realizar esta ação.",
+        "title": "Ops, ocorreu um erro"
+      },
+      "loading": {
+        "description": "Aguarde alguns instantes, estamos preparando o seu espaço.",
+        "title": "Carregando"
+      },
+      "maintenance": {
+        "description": "Estamos melhorando sua experiência. Tente novamente mais tarde.",
+        "note": "Voltaremos em breve.",
+        "retryLater": "Tentar mais tarde",
+        "title": "Aplicativo em manutenção"
+      },
+      "offline": {
+        "description": "Verifique sua conexão e tente novamente para acessar seus dados.",
+        "note": "Alguns recursos podem ficar limitados sem conexão.",
+        "title": "Sem conexão com a internet",
+        "workOffline": "Trabalhar offline"
+      },
+      "operations": {
+        "importation": {
+          "description": "Seus arquivos estão sendo importados para o seu cofre.",
+          "title": "Importando"
+        },
+        "mise-a-jour": {
+          "cancel": "Cancelar a atualização",
+          "description": "Estamos melhorando seu aplicativo para uma experiência melhor.",
+          "title": "Atualizando"
+        },
+        "sauvegarde": {
+          "description": "Estamos fazendo o backup dos seus dados com segurança.",
+          "title": "Fazendo backup"
+        },
+        "suppression": {
+          "description": "Aguarde enquanto excluímos seus itens.",
+          "title": "Excluindo"
+        },
+        "synchronisation": {
+          "description": "Seus dados estão sendo sincronizados em todos os seus dispositivos.",
+          "title": "Sincronizando"
+        }
+      },
+      "progressOf": "{current} de {total}",
+      "retry": "Tentar novamente",
+      "stay": "Ficar nesta página",
+      "success": {
+        "continue": "Continuar",
+        "description": "Sua ação foi concluída com sucesso.",
+        "title": "Operação concluída!"
+      },
+      "upToDate": {
+        "description": "Você está usando a versão mais recente do Lien Parental.",
+        "note": "Você conta com os recursos e correções mais recentes.",
+        "perfect": "Perfeito!",
+        "title": "Tudo está atualizado!"
+      },
+      "version": "Versão {version}"
+    },
+    "templates": {
+      "values": {
+        "chooseOption": "Escolha uma opção da lista.",
+        "invalidDate": "Data inválida.",
+        "invalidEmail": "Endereço de e-mail inválido.",
+        "invalidPhone": "Número inválido.",
+        "maxChars": "No máximo {max} caracteres.",
+        "numberExpected": "Informe um número.",
+        "required": "Campo obrigatório."
+      }
+    },
+    "topBar": {
+      "back": "Voltar",
+      "notifications": "Notificações",
+      "notificationsUnread": "Notificações, {count} não lidas"
+    },
+    "vault": {
+      "folders": {
+        "docsHere": "{count, plural, one {{n} documento aqui} other {{n} documentos aqui}}",
+        "sharedWith": "Compartilhado com {names}",
+        "subfolders": "{count, plural, one {{n} subpasta} other {{n} subpastas}}"
+      },
+      "save": {
+        "added": "Anexo adicionado ao cofre",
+        "addedInFolder": "Anexo adicionado ao cofre, pasta “{folder}”",
+        "addedNotPlaced": "Adicionado ao cofre, mas não na pasta escolhida",
+        "already": "Já está no seu cofre",
+        "alreadyInFolder": "Já está no seu cofre (pasta “{folder}”)"
+      }
+    },
+    "vaultLock": {
+      "forbiddenOrigin": "Origem da solicitação recusada.",
+      "gate": {
+        "lockedTitle": "Cofre bloqueado",
+        "mfaTitle": "Confirmação necessária",
+        "notConfiguredMessage": "O bloqueio do cofre ainda não está configurado neste servidor. Entre em contato com o suporte.",
+        "reconnect": "Entrar novamente",
+        "sessionMessage": "Entre novamente para acessar o cofre.",
+        "sessionTitle": "Sessão expirada",
+        "unavailableMessage": "Não foi possível verificar o bloqueio do cofre. Tente novamente em instantes.",
+        "unavailableTitle": "Cofre indisponível"
+      },
+      "invalidData": "Dados inválidos.",
+      "invalidRequest": "Solicitação inválida.",
+      "mfaRequired": "Confirme sua identidade com seu código de autenticação em dois fatores.",
+      "notConfigured": "O bloqueio do cofre não está configurado neste servidor.",
+      "payloadTooLarge": "Solicitação muito grande.",
+      "sessionExpired": "Sua sessão expirou. Entre novamente.",
+      "tooManyAttempts": "Muitas tentativas. Aguarde um instante.",
+      "webauthn": {
+        "alreadyRegistered": "Este dispositivo já está registrado.",
+        "android": "Celular Android",
+        "cancelled": "Operação cancelada ou tempo esgotado.",
+        "failed": "Não foi possível usar a impressão digital.",
+        "security": "Impressão digital indisponível neste endereço (HTTPS obrigatório).",
+        "thisDevice": "Este dispositivo",
+        "unsupported": "Este dispositivo não oferece impressão digital nem reconhecimento facial.",
+        "unsupportedBrowser": "Este navegador não suporta impressão digital.",
+        "windows": "PC Windows (Windows Hello)"
+      }
+    }
+  }
+}

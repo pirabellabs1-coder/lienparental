@@ -8,6 +8,7 @@
  */
 import { useCallback, useEffect, useSyncExternalStore } from 'react'
 import { DataError, LIVE, db, requireUserId, toDataError } from '@/lib/data/core'
+import { libT } from '@/lib/i18n/runtime'
 import { PROGRESS_STATUSES, type ProgressRefType, type ProgressStatus } from './types'
 
 const STORAGE_KEY = 'lp_guide_progress_v2'
@@ -78,7 +79,7 @@ function load(territoire: string): Promise<void> {
     } catch (e) {
       // Échec : pas d'état « vide » trompeur. On expose l'erreur et on autorise un nouvel essai.
       loads.delete(territoire)
-      setStatus(territoire, { ready: false, error: toDataError(e, 'guide_progress.select', 'Votre progression n’a pas pu être chargée.').message })
+      setStatus(territoire, { ready: false, error: toDataError(e, 'guide_progress.select', libT('shared.guide')('loadFailed')).message })
     }
   })()
   loads.set(territoire, p)
@@ -96,7 +97,7 @@ async function persist(territoire: string, refType: ProgressRefType, slug: strin
     )
     if (error) throw error
   } catch (e) {
-    throw toDataError(e, 'guide_progress.upsert', 'La progression n’a pas pu être enregistrée.')
+    throw toDataError(e, 'guide_progress.upsert', libT('shared.guide')('saveFailed'))
   }
 }
 
@@ -126,7 +127,7 @@ export function useGuideProgress(territoire: string) {
   )
 
   const set = useCallback(async (refType: ProgressRefType, slug: string, element: string, statut: ProgressStatus) => {
-    if (!status.get(territoire)?.ready) throw new DataError('Progression en cours de chargement, réessayez dans un instant.', 'not_ready')
+    if (!status.get(territoire)?.ready) throw new DataError(libT('shared.guide')('notReady'), 'not_ready')
     const k = keyOf(territoire, refType, slug, element)
     const previous = state[k]
     state = { ...state, [k]: statut }

@@ -3,6 +3,7 @@
 
 import { emailTheme as t } from './theme'
 import { escapeHtml } from './escape'
+import { emailT, htmlLang, type Locale } from './i18n'
 
 export type BaseLayoutOptions = {
   /** Texte masqué affiché en aperçu (Gmail, Apple Mail…). TEXTE BRUT : échappé ici. */
@@ -15,6 +16,8 @@ export type BaseLayoutOptions = {
   cta?: { label: string; href: string }
   /** Texte additionnel en pied de page (sous le CTA, avant le footer légal). */
   footer?: string
+  /** Langue du destinataire (attribut lang, pied de page légal). Défaut : français. */
+  locale?: Locale
 }
 
 /**
@@ -31,13 +34,15 @@ export function baseLayout(opts: BaseLayoutOptions): string {
   const title = escapeHtml(opts.title)
   const body = opts.body
   const extraFooter = opts.footer ?? ''
+  const locale = opts.locale ?? 'fr'
+  const tr = emailT(locale)
 
   const ctaHtml = opts.cta
     ? renderCta(opts.cta.label, opts.cta.href)
     : ''
 
   return `<!doctype html>
-<html lang="fr" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<html lang="${htmlLang(locale)}" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -96,12 +101,12 @@ export function baseLayout(opts: BaseLayoutOptions): string {
           <tr>
             <td style="padding:24px 8px;font-family:${t.font};font-size:12px;line-height:18px;color:${t.colors.footerText};text-align:center;">
               <p style="margin:0 0 8px 0;">
-                Vous recevez cet e-mail car vous avez un compte sur ${t.brandName}.
+                ${tr('layout.reason', { brand: t.brandName })}
               </p>
               <p style="margin:0 0 8px 0;">
-                <a href="${t.unsubscribeUrlPlaceholder}" style="color:${t.colors.footerText};text-decoration:underline;">Gérer mes notifications</a>
+                <a href="${t.unsubscribeUrlPlaceholder}" style="color:${t.colors.footerText};text-decoration:underline;">${tr('layout.manage')}</a>
                 &nbsp;·&nbsp;
-                <a href="${t.legalUrl}" style="color:${t.colors.footerText};text-decoration:underline;">Mentions légales</a>
+                <a href="${t.legalUrl}" style="color:${t.colors.footerText};text-decoration:underline;">${tr('layout.legal')}</a>
               </p>
               <p style="margin:0;">
                 ${t.addressPlaceholder}

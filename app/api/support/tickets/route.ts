@@ -10,10 +10,11 @@
  * - Limite : 5 tickets / 10 min / utilisateur.
  */
 import { NextResponse, type NextRequest } from 'next/server'
+import { getTranslations } from 'next-intl/server'
 import { randomUUID } from 'node:crypto'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { DEMO_MODE } from '@/lib/demo-auth'
-import { requireAuthedUser, DENIED_MESSAGES } from '@/lib/auth/guard'
+import { requireAuthedUser } from '@/lib/auth/guard'
 import { getCurrentUser } from '@/lib/auth/session'
 import { sameOrigin, readJson } from '@/lib/contenus/api'
 import { zodIssues } from '@/lib/contenus/types'
@@ -28,15 +29,17 @@ function fail(status: number, code: string, message: string, issues?: { path: st
 }
 
 export async function POST(req: NextRequest) {
-  if (!sameOrigin(req)) return fail(403, 'bad_origin', 'Requête refusée (origine inattendue).')
+  const t = await getTranslations('server.support')
+  const tc = await getTranslations('server.common')
+  if (!sameOrigin(req)) return fail(403, 'bad_origin', t('badOrigin'))
 
   if (!SUPABASE_ENABLED) {
-    if (!DEMO_MODE) return fail(503, 'not_configured', DENIED_MESSAGES.disabled)
+    if (!DEMO_MODE) return fail(503, 'not_configured', tc('denied.disabled'))
     const me = await getCurrentUser()
-    if (!me) return fail(401, 'unauthenticated', DENIED_MESSAGES.unauthenticated)
+    if (!me) return fail(401, 'unauthenticated', tc('denied.unauthenticated'))
     const parsed = newTicketSchema.safeParse(await readJson(req))
-    if (!parsed.success) return fail(422, 'invalid', 'Vérifiez les champs du formulaire.', zodIssues(parsed.error))
-    if (!(await rateLimit(userKey('support-ticket', me.id), 5, 10 * 60_000)).ok) return fail(429, 'rate_limited', 'Trop de demandes envoyées. Patientez quelques minutes.')
+    if (!parsed.success) return fail(422, 'invalid', t('checkFields'), zodIssues(parsed.error))
+    if (!(await rateLimit(userKey('support-ticket', me.id), 5, 10 * 60_000)).ok) return fail(429, 'rate_limited', t('rateLimited'))
     const now = new Date().toISOString()
     const id = randomUUID()
     opsDemo().tickets.unshift({
@@ -51,13 +54,13 @@ export async function POST(req: NextRequest) {
   const auth = await requireAuthedUser()
   if (!auth.ok) {
     return auth.reason === 'mfa_required'
-      ? fail(403, 'mfa_required', DENIED_MESSAGES.mfa_required)
-      : fail(401, 'unauthenticated', DENIED_MESSAGES.unauthenticated)
+      ? fail(403, 'mfa_required', tc('denied.mfa_required'))
+      : fail(401, 'unauthenticated', tc('denied.unauthenticated'))
   }
   const parsed = newTicketSchema.safeParse(await readJson(req))
-  if (!parsed.success) return fail(422, 'invalid', 'Vérifiez les champs du formulaire.', zodIssues(parsed.error))
+  if (!parsed.success) return fail(422, 'invalid', t('checkFields'), zodIssues(parsed.error))
   if (!(await rateLimit(userKey('support-ticket', auth.user.id), 5, 10 * 60_000)).ok) {
-    return fail(429, 'rate_limited', 'Trop de demandes envoyées. Patientez quelques minutes.')
+    return fail(429, 'rate_limited', t('rateLimited'))
   }
 
   const { data, error } = await auth.supabase
@@ -67,7 +70,7 @@ export async function POST(req: NextRequest) {
     .single()
   if (error || !data) {
     console.warn('[support] création du ticket impossible (code %s)', error?.code ?? 'inconnu')
-    return fail(503, 'unavailable', 'Votre message n’a pas pu être envoyé. Réessayez dans un instant.')
+    return fail(503, 'unavailable', t('sendFailed'))
   }
   return NextResponse.json({ data: { id: data.id } }, { status: 201, headers: { 'Cache-Control': 'no-store' } })
 }

@@ -52,11 +52,21 @@ export function getAnthropic(): Anthropic {
   return singleton
 }
 
-// --- Erreurs -> messages français ------------------------------------------
+// --- Erreurs -> messages (français par défaut) -------------------------------
 
 export type AiFailure = { status: number; code: string; message: string; retryAfter?: number }
 
-export function mapAiError(err: unknown): AiFailure {
+/**
+ * Erreur fournisseur -> statut, code et message. `translate` (optionnel) reçoit le code
+ * (ex. 'ai_timeout') et renvoie le message dans la langue de l'utilisateur ; sans lui,
+ * le message français historique est conservé. Codes et statuts inchangés.
+ */
+export function mapAiError(err: unknown, translate?: (code: string) => string): AiFailure {
+  const f = mapAiErrorFr(err)
+  return translate ? { ...f, message: translate(f.code) } : f
+}
+
+function mapAiErrorFr(err: unknown): AiFailure {
   if (err instanceof Anthropic.APIUserAbortError) {
     return { status: 499, code: 'aborted', message: 'Demande annulée.' }
   }

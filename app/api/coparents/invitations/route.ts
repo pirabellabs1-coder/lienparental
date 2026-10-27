@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { familyContext, limited, readJson, rpcError } from '@/lib/coparents/server/context'
 import { mailInvitation } from '@/lib/coparents/server/invite'
@@ -11,13 +12,16 @@ export const dynamic = 'force-dynamic'
 export async function POST(req: Request) {
   const ctx = await familyContext(req)
   if ('error' in ctx) return ctx.error
+  const t = await getTranslations('server.coparents')
   const tooMany = await limited(ctx.user.id, 'invite', 10, 10 * 60_000)
   if (tooMany) return tooMany
 
   const parsed = createInvitationSchema.safeParse(await readJson(req))
   if (!parsed.success) {
     const msg = parsed.error.issues[0]?.message
-    return jsonError(422, 'invalid', msg && msg !== 'Required' && !msg.startsWith('Invalid') ? msg : 'Certaines informations sont invalides.')
+    return jsonError(422, 'invalid', msg && t.has(`validation.${msg}`)
+      ? t(`validation.${msg}`)
+      : msg && msg !== 'Required' && !msg.startsWith('Invalid') ? msg : t('invalid'))
   }
   const { email, role, childIds } = parsed.data
 
@@ -26,7 +30,7 @@ export async function POST(req: Request) {
   })
   if (error) return rpcError(error, 'invitation.create')
   const row = (data as { invitation_id: string; token: string; expires_at: string }[] | null)?.[0]
-  if (!row) return jsonError(500, 'db_error', 'L’invitation n’a pas pu être créée.')
+  if (!row) return jsonError(500, 'db_error', t('invitationCreateFailed'))
 
   const emailStatus = await mailInvitation(ctx, {
     invitationId: row.invitation_id, email, role, token: row.token, expiresAt: row.expires_at, childIds, sendNumber: 1,

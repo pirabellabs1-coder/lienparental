@@ -1,4 +1,5 @@
 import 'server-only'
+import { getTranslations } from 'next-intl/server'
 import { NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/auth/session'
 import { rateLimit, rateLimitedResponse, userKey } from '@/lib/data/server/rate-limit'
@@ -59,9 +60,10 @@ export type GuardError = { status: number; code: string; message: string }
  * Les comptes de démonstration (ids non-UUID) sont refusés.
  */
 export async function requireBillingUser(): Promise<{ user: BillingUser } | { error: GuardError }> {
-  if (!BILLING_LIVE) return { error: { status: 503, code: 'billing_disabled', message: 'Le paiement en ligne n’est pas encore disponible.' } }
+  const t = await getTranslations('server.common')
+  if (!BILLING_LIVE) return { error: { status: 503, code: 'billing_disabled', message: t('billingDisabled') } }
   const user = await getCurrentUser()
-  if (!user || !isUuid(user.id)) return { error: { status: 401, code: 'unauthenticated', message: 'Connexion requise.' } }
+  if (!user || !isUuid(user.id)) return { error: { status: 401, code: 'unauthenticated', message: t('loginRequired') } }
   return { user: { id: user.id, email: user.email, prenom: user.prenom, nom: user.nom } }
 }
 
@@ -95,5 +97,5 @@ export async function limitBilling(action: BillingRateAction, userId: string): P
   // partagé est indisponible plutôt qu'un repli mémoire par instance.
   const rl = await rateLimit(userKey(`billing:${action}`, userId), limit, windowMs, { failClosed: FAIL_CLOSED.has(action) })
   if (rl.ok) return null
-  return rateLimitedResponse(rl, 'Trop de demandes. Patientez un instant puis réessayez.')
+  return rateLimitedResponse(rl, (await getTranslations('server.common'))('rateLimitedRetry'))
 }

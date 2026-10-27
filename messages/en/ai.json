@@ -1,0 +1,62 @@
+{
+  "ai": {
+    "errors": {
+      "unauthenticated": "Sign in to use the AI Coach.",
+      "notConfiguredChat": "The AI Coach is not available yet: the answer service is not configured.",
+      "notConfiguredAnalyze": "The AI Coach is not available yet: the analysis service is not configured.",
+      "rateLimitedChat": "Too many messages in a short time. Please wait a moment.",
+      "rateLimitedAnalyze": "Too many requests in a short time. Please wait a moment.",
+      "chatTooLong": "Conversation too long.",
+      "badRequest": "Invalid request.",
+      "invalidChatBody": "Invalid message: it must end with your question (4,000 characters maximum per message).",
+      "invalidMessage": "Invalid message.",
+      "analysisNotFound": "This analysis cannot be found or has been deleted.",
+      "chatDailyLimit": "You have reached the limit of {limit} messages for today. The counter resets tomorrow.",
+      "emptyAnswer": "The AI Coach could not answer. Please rephrase your question.",
+      "refusal": "The AI Coach cannot process this request. Try rephrasing it. If the situation is difficult, a family mediator or a lawyer can support you. In an emergency: 17 or 112, 119 for a child in danger.",
+      "truncatedNote": "(Answer cut off because it was too long. Ask for a shorter version if needed.)",
+      "aborted": "Request cancelled.",
+      "ai_timeout": "The AI Coach is taking too long to answer. Please try again in a moment.",
+      "ai_unreachable": "The AI Coach cannot be reached right now. Please try again in a moment.",
+      "ai_busy": "The AI Coach is very busy. Please try again in a minute.",
+      "ai_misconfigured": "The AI Coach is unavailable for now.",
+      "ai_bad_request": "This content cannot be analyzed. Check the file (format, readability) and try again.",
+      "ai_unavailable": "The AI Coach is temporarily unavailable. Please try again in a moment.",
+      "internal": "Something went wrong. Please try again in a moment."
+    },
+    "analyze": {
+      "textTooLong": "Message too long ({max} characters maximum).",
+      "emptyInput": "Add a message, a screenshot or a document.",
+      "fileTooLarge": "File too large (10 MB maximum).",
+      "imageTooLarge": "Image too large (5 MB maximum).",
+      "unsupportedWord": "Word documents are not supported yet: save it as a PDF and try again.",
+      "unsupportedType": "Unsupported format. Accepted formats: JPG or PNG image, PDF, text.",
+      "badContentType": "Invalid request format.",
+      "truncated": "The content is too long to be analyzed in one go. Try a shorter excerpt.",
+      "invalidOutput": "The analysis could not be completed. Please try again in a moment.",
+      "quotaExceededPaid": "You have used your {quota} analyses for this 30-day cycle.",
+      "quotaExceededFree": "You have used your {quota} free analyses for this 30-day cycle. Upgrade to Premium to get 10.",
+      "disclaimer": "The AI Coach does not give legal advice.",
+      "titles": {
+        "message": "Written message",
+        "capture": "Screenshot",
+        "pdf": "PDF document",
+        "document": "Text document"
+      }
+    },
+    "history": {
+      "unauthenticated": "Sign in to access your analyses.",
+      "badId": "Invalid identifier.",
+      "notFound": "This analysis cannot be found or has been deleted.",
+      "notFoundShort": "This analysis cannot be found.",
+      "rateLimited": "Too many requests. Please wait a moment.",
+      "tooLarge": "Request too large.",
+      "badRequest": "Invalid request."
+    },
+    "quota": {
+      "cycleCurrent": "Current cycle",
+      "cycleN": "Cycle -{n}",
+      "deletedTitle": "Deleted analysis"
+    }
+  }
+}

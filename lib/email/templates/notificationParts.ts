@@ -2,6 +2,7 @@
 
 import { emailTheme as t } from '../theme'
 import { safeUrl } from '../escape'
+import { emailT, type Locale } from '../i18n'
 
 /** Origine de l'application (NEXT_PUBLIC_APP_URL), repli sur le domaine de production. */
 export function appOrigin(): string {
@@ -18,9 +19,11 @@ export function appLink(path: string): string {
 }
 
 /** Pied de carte : lien vers les préférences de notification. */
-export function preferencesFooter(extra = ''): string {
+export function preferencesFooter(extra = '', locale: Locale = 'fr'): string {
+  const tr = emailT(locale)
   const href = appLink('/app/profil/preferences/notifications')
-  return `${extra ? `${extra} ` : ''}Vous pouvez choisir les notifications reçues dans <a href="${href}" style="color:${t.colors.link};">vos préférences</a>.`
+  const link = `<a href="${href}" style="color:${t.colors.link};">${tr('common.preferencesLink')}</a>`
+  return `${extra ? `${extra} ` : ''}${tr('common.preferencesFooter', { link })}`
 }
 
 export const P = 'margin:0 0 16px 0;'

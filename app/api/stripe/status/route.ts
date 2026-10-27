@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { syncFromCheckoutSession } from '@/lib/billing/checkout-return'
@@ -22,11 +23,12 @@ export const dynamic = 'force-dynamic'
 const NO_STORE = { 'Cache-Control': 'private, no-store' }
 
 export async function GET(req: Request) {
+  const t = await getTranslations('server.stripe')
   const sessionParam = new URL(req.url).searchParams.get('session_id')
 
   if (DEMO_BILLING) {
     const demo = await getDemoBilling()
-    if (!demo) return apiError(401, 'unauthenticated', 'Connexion requise.')
+    if (!demo) return apiError(401, 'unauthenticated', t('signInRequired'))
     return NextResponse.json({ mode: 'demo', state: demo.plan === 'gratuit' ? 'none' : 'active', plan: demo.plan }, { headers: NO_STORE })
   }
 
@@ -38,7 +40,7 @@ export async function GET(req: Request) {
   try {
     if (sessionParam !== null) {
       const res = await syncFromCheckoutSession(auth.user.id, sessionParam)
-      if (res.state === 'not_found') return apiError(404, 'session_not_found', 'Session de paiement introuvable.')
+      if (res.state === 'not_found') return apiError(404, 'session_not_found', t('sessionNotFound'))
       if (res.state === 'active') revalidatePath('/app', 'layout')
       return NextResponse.json({ mode: 'live', state: res.state, plan: res.state === 'active' ? res.plan : 'gratuit' }, { headers: NO_STORE })
     }
@@ -47,6 +49,6 @@ export async function GET(req: Request) {
     return NextResponse.json({ mode: 'live', state: plan === 'gratuit' ? 'none' : 'active', plan }, { headers: NO_STORE })
   } catch (err) {
     logError('status', err)
-    return apiError(503, 'stripe_unavailable', 'Statut momentanément indisponible.')
+    return apiError(503, 'stripe_unavailable', t('statusUnavailable'))
   }
 }

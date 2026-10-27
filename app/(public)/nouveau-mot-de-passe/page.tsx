@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState, type FormEvent } from 'react'
 import { ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/cn'
@@ -13,8 +13,9 @@ import { btn, linkLeaf } from '@/components/onboarding/styles'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
 import { kickNotifications } from '@/lib/notify/client'
+import { applyLocale } from '@/lib/i18n/actions'
 import { authErrorMessage } from '@/lib/auth/errors'
-import { passwordSchema } from '@/lib/auth/validation'
+import { firstIssue, passwordSchema } from '@/lib/auth/validation'
 
 type Phase = 'checking' | 'invalid' | 'mfa' | 'form' | 'done'
 
@@ -24,6 +25,7 @@ type Phase = 'checking' | 'invalid' | 'mfa' | 'form' | 'done'
 export default function NouveauMotDePassePage() {
   const router = useRouter()
   const t = useTranslations('public.password.reset')
+  const locale = useLocale()
   const [phase, setPhase] = useState<Phase>(SUPABASE_ENABLED ? 'checking' : 'form')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
@@ -75,7 +77,7 @@ export default function NouveauMotDePassePage() {
     if (!SUPABASE_ENABLED) { setPhase('done'); return }
 
     const parsed = passwordSchema.safeParse(password)
-    if (!parsed.success) { setError(parsed.error.issues[0]?.message ?? t('errInvalid')); return }
+    if (!parsed.success) { setError(parsed.error.issues.length ? firstIssue(parsed.error) : t('errInvalid')); return }
     setLoading(true)
     const supabase = createClient()
     const { error: err } = await supabase.auth.updateUser({ password: parsed.data })
@@ -86,6 +88,8 @@ export default function NouveauMotDePassePage() {
     }
     // Toute autre session (éventuellement compromise) doit se reconnecter.
     await supabase.auth.signOut({ scope: 'others' }).catch(() => undefined)
+    // Inscription : adresse prouvée, le compte prend la langue d'affichage du visiteur.
+    if (signup) await applyLocale(locale).catch(() => undefined)
     kickNotifications() // alerte « mot de passe modifié »
     setPassword('')
     setConfirm('')

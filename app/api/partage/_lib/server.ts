@@ -14,6 +14,7 @@ import 'server-only'
 import { createHmac, randomBytes, randomInt, scrypt as scryptCb, timingSafeEqual } from 'node:crypto'
 import { promisify } from 'node:util'
 import { z } from 'zod'
+import { getTranslations } from 'next-intl/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createServiceClient } from '@/lib/supabase/server'
@@ -279,7 +280,7 @@ export async function logAccess(share: ResolvedShare, ua: string | null, success
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
-const JOURNAL_LABELS: Record<string, string> = { visite: 'Visite', appel: 'Appel', message: 'Message', sante: 'Santé', autre: 'Autre' }
+const JOURNAL_TYPES = new Set(['visite', 'appel', 'message', 'sante', 'autre'])
 
 const hhmm = (d: Date) => d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Cayenne' })
 const ymdParis = (d: Date) => d.toLocaleDateString('sv-SE', { timeZone: 'America/Cayenne' })
@@ -292,6 +293,7 @@ export async function buildShareContent(share: ResolvedShare): Promise<ShareCont
   const meta = { label: share.label, createdAt: share.createdAt, expiresAt: share.expiresAt, owner: share.ownerName }
   if (!SUPABASE_ENABLED) return buildDemoShareContent(share.scope, meta)
 
+  const t = await getTranslations('server.partage.content')
   const db = service()
   const { scope } = share
   const uid = share.userId
@@ -331,21 +333,21 @@ export async function buildShareContent(share: ResolvedShare): Promise<ShareCont
     .map((r) => {
       const d = new Date(r.occurred_at)
       return {
-        id: r.id, date: ymdParis(d), heure: hhmm(d), type: JOURNAL_LABELS[r.type] ?? 'Autre', titre: r.titre,
+        id: r.id, date: ymdParis(d), heure: hhmm(d), type: t(`journalTypes.${JOURNAL_TYPES.has(r.type) ? r.type : 'autre'}`), titre: r.titre,
         description: r.description ?? undefined, lieu: r.lieu ?? undefined,
       }
     })
 
   const documents = ((docsRes.data ?? []) as Array<{ id: string; name: string; mime: string; size_bytes: number; created_at: string }>)
     .map((r) => ({
-      id: r.id, name: r.name, ext: (r.name.split('.').pop() ?? '').toUpperCase().slice(0, 5) || (r.mime === 'application/pdf' ? 'PDF' : 'FICHIER'),
+      id: r.id, name: r.name, ext: (r.name.split('.').pop() ?? '').toUpperCase().slice(0, 5) || (r.mime === 'application/pdf' ? 'PDF' : t('fileExt')),
       sizeBytes: r.size_bytes, date: r.created_at.slice(0, 10),
     }))
 
   const testimonies = ((tmgRes.data ?? []) as Array<{ id: string; temoin: { prenom?: string; nom?: string; lien?: string } | null; texte_envoye: string; sent_at: string }>)
     .map((r) => ({
       id: r.id,
-      author: `${r.temoin?.prenom ?? ''} ${r.temoin?.nom ? r.temoin.nom.charAt(0) + '.' : ''}`.trim() || 'Témoin',
+      author: `${r.temoin?.prenom ?? ''} ${r.temoin?.nom ? r.temoin.nom.charAt(0) + '.' : ''}`.trim() || t('witness'),
       relation: r.temoin?.lien ?? '',
       date: r.sent_at.slice(0, 10),
       summary: r.texte_envoye,
@@ -362,11 +364,11 @@ export async function buildShareContent(share: ResolvedShare): Promise<ShareCont
       db.from('users').select('id, prenom, nom').in('id', [conv.parent_a, conv.parent_b]),
     ])
     const names = new Map(((usersRes.data ?? []) as Array<{ id: string; prenom: string | null; nom: string | null }>)
-      .map((u) => [u.id, `${u.prenom ?? ''} ${u.nom ?? ''}`.trim() || 'Parent']))
+      .map((u) => [u.id, `${u.prenom ?? ''} ${u.nom ?? ''}`.trim() || t('parent')]))
     messages = ((msgRes.data ?? []) as Array<{ id: string; sender_id: string; body: string; attachment_meta: { name?: string } | null; created_at: string }>)
       .filter((m) => inPeriod(m.created_at))
       .map((m) => ({
-        id: m.id, sender: names.get(m.sender_id) ?? 'Parent', fromOwner: m.sender_id === uid, body: m.body,
+        id: m.id, sender: names.get(m.sender_id) ?? t('parent'), fromOwner: m.sender_id === uid, body: m.body,
         createdAt: m.created_at, attachmentName: m.attachment_meta?.name,
       }))
   }

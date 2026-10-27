@@ -29,7 +29,7 @@ import {
   type VaultCategory, type VaultDocument, type VaultFileType, type VaultIconKey, type VaultTone,
 } from '@/lib/mock-vault'
 import {
-  DOCUMENTS_BUCKET, DataError, LIVE, db, randomToken, requireUserId,
+  DOCUMENTS_BUCKET, DataError, LIVE, dataMsg, db, randomToken, requireUserId,
   safeFileName, toDataError, uuid,
 } from './core'
 import { dayKeyInTz, timeInTz } from '@/lib/tz'
@@ -95,7 +95,7 @@ async function viewer(): Promise<Viewer> {
   return { userId, names }
 }
 
-const NOT_AUTHOR = 'Ce document a été partagé par un autre parent : seul son auteur peut le modifier.'
+const NOT_AUTHOR = () => dataMsg('vault.notAuthor')
 
 /** Document enrichi pour les écrans « corbeille » et le téléchargement. */
 export type VaultDocumentRecord = VaultDocument & { storagePath?: string; deletedAt?: string }
@@ -244,16 +244,16 @@ export async function listCategories(): Promise<VaultCategory[]> {
   return ((data ?? []) as CategoryRow[]).map((r) => categoryFromRow(r, counts.get(r.id) ?? 0))
 }
 
-const categorySchema = z.object({
-  name: z.string().trim().min(1, 'Indiquez un nom de catégorie.').max(40),
+const categorySchema = () => z.object({
+  name: z.string().trim().min(1, dataMsg('vault.categoryNameRequired')).max(40),
   icon: z.enum(ICONS as [VaultIconKey, ...VaultIconKey[]]),
   tone: z.enum(TONES as [VaultTone, ...VaultTone[]]),
   visibleInFilters: z.boolean(),
 })
 
 export async function createCategory(input: Pick<VaultCategory, 'name' | 'icon' | 'tone' | 'visibleInFilters'>): Promise<VaultCategory> {
-  const p = categorySchema.safeParse(input)
-  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? 'Catégorie invalide.', 'invalid')
+  const p = categorySchema().safeParse(input)
+  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? dataMsg('vault.categoryInvalid'), 'invalid')
   const userId = await requireUserId()
   const { data, error } = await db()
     .from('categories')
@@ -261,7 +261,7 @@ export async function createCategory(input: Pick<VaultCategory, 'name' | 'icon' 
     .select(CAT_COLUMNS)
     .single()
   if (error) {
-    if ((error as { code?: string }).code === '23505') throw new DataError('Une catégorie porte déjà ce nom.', '23505')
+    if ((error as { code?: string }).code === '23505') throw new DataError(dataMsg('vault.categoryTaken'), '23505')
     throw toDataError(error, 'vault.createCategory')
   }
   return categoryFromRow(data as CategoryRow, 0)
@@ -326,20 +326,20 @@ export async function getDocument(id: string): Promise<VaultDocumentRecord | nul
 export function validateVaultFile(file: File): string {
   const ext = extOf(file.name)
   const mime = EXT_MIME[ext]
-  if (!mime) throw new DataError('Format non pris en charge. Formats acceptés : PDF, JPG, PNG, DOCX, DOC.', 'bad_type')
+  if (!mime) throw new DataError(dataMsg('vault.badType'), 'bad_type')
   // Le type déclaré par le navigateur doit être cohérent avec l'extension (s'il est fourni).
   if (file.type && file.type !== mime && !(ext === 'jpg' && file.type === 'image/jpeg')) {
-    throw new DataError('Le contenu du fichier ne correspond pas à son extension.', 'bad_type')
+    throw new DataError(dataMsg('vault.contentMismatch'), 'bad_type')
   }
-  if (file.size <= 0) throw new DataError('Le fichier est vide.', 'empty')
-  if (file.size > VAULT_MAX_BYTES) throw new DataError('Fichier trop volumineux. Taille max. 20 Mo.', 'too_large')
+  if (file.size <= 0) throw new DataError(dataMsg('vault.empty'), 'empty')
+  if (file.size > VAULT_MAX_BYTES) throw new DataError(dataMsg('vault.tooLarge'), 'too_large')
   return mime
 }
 
-const uploadMetaSchema = z.object({
-  name: z.string().trim().min(1, 'Indiquez le nom du document.').max(120),
+const uploadMetaSchema = () => z.object({
+  name: z.string().trim().min(1, dataMsg('vault.docNameRequired')).max(120),
   description: z.string().trim().max(280).optional(),
-  docDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Indiquez la date du document.'),
+  docDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, dataMsg('vault.docDateRequired')),
   source: z.string().trim().max(120).optional(),
   confidentialite: z.enum(['prive', 'partage']),
   categoryId: z.string().uuid().nullable(),
@@ -348,18 +348,18 @@ const uploadMetaSchema = z.object({
   /** Dossier de destination (0410) ; absent = racine. */
   folderId: z.string().uuid().nullable().optional(),
 })
-export type UploadMeta = z.infer<typeof uploadMetaSchema>
+export type UploadMeta = z.infer<ReturnType<typeof uploadMetaSchema>>
 
 /** Envoie le fichier dans Storage puis crée la ligne `documents` (rollback Storage si l'insert échoue). */
 export async function uploadDocument(file: File, meta: UploadMeta): Promise<VaultDocumentRecord> {
   const mime = validateVaultFile(file)
-  const p = uploadMetaSchema.safeParse(meta)
-  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? 'Informations invalides.', 'invalid')
+  const p = uploadMetaSchema().safeParse(meta)
+  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? dataMsg('errors.invalidShort'), 'invalid')
   const userId = await requireUserId()
   const path = `${userId}/${uuid()}-${safeFileName(file.name)}`
 
   const { error: upErr } = await db().storage.from(DOCUMENTS_BUCKET).upload(path, file, { contentType: mime, upsert: false, cacheControl: '0' })
-  if (upErr) throw toDataError(upErr, 'vault.upload', 'L’envoi du fichier a échoué. Réessayez.')
+  if (upErr) throw toDataError(upErr, 'vault.upload', dataMsg('vault.uploadFailed'))
 
   const { data, error } = await db()
     .from('documents')
@@ -388,12 +388,12 @@ export async function uploadDocument(file: File, meta: UploadMeta): Promise<Vaul
 
 export async function renameDocument(id: string, name: string): Promise<void> {
   const n = z.string().trim().min(1).max(120).safeParse(name)
-  if (!n.success) throw new DataError('Nom de document invalide.', 'invalid')
+  if (!n.success) throw new DataError(dataMsg('vault.docNameInvalid'), 'invalid')
   if (!LIVE) return
   const userId = await requireUserId()
   const { data, error } = await db().from('documents').update({ name: n.data }).eq('id', id).eq('user_id', userId).select('id')
   if (error) throw toDataError(error, 'vault.rename')
-  if (!data || data.length === 0) throw new DataError(NOT_AUTHOR, 'not_author')
+  if (!data || data.length === 0) throw new DataError(NOT_AUTHOR(), 'not_author')
 }
 
 export async function moveDocument(id: string, categoryId: string): Promise<void> {
@@ -401,7 +401,7 @@ export async function moveDocument(id: string, categoryId: string): Promise<void
   const userId = await requireUserId()
   const { data, error } = await db().from('documents').update({ category_id: categoryId || null }).eq('id', id).eq('user_id', userId).select('id')
   if (error) throw toDataError(error, 'vault.move')
-  if (!data || data.length === 0) throw new DataError(NOT_AUTHOR, 'not_author')
+  if (!data || data.length === 0) throw new DataError(NOT_AUTHOR(), 'not_author')
 }
 
 /** Mise à la corbeille (30 jours). */
@@ -412,7 +412,7 @@ export async function trashDocument(id: string): Promise<void> {
 
 export async function restoreDocument(id: string): Promise<void> {
   const { error } = await db().rpc('restore_document', { p_document_id: id })
-  if (error) throw toDataError(error, 'vault.restore', 'Restauration impossible (délai de 30 jours dépassé ?).')
+  if (error) throw toDataError(error, 'vault.restore', dataMsg('vault.restoreFailed'))
 }
 
 /** Suppression définitive depuis la corbeille : ligne puis fichier. */
@@ -438,17 +438,17 @@ export function documentFileRoute(id: string, mode: 'telecharger' | 'apercu' = '
  * document partagé) ; les refus arrivent ici en DataError françaises (coffre verrouillé…).
  */
 export async function documentFileUrl(doc: Pick<VaultDocumentRecord, 'id'>, mode: 'telecharger' | 'apercu' = 'telecharger'): Promise<string> {
-  if (!LIVE) throw new DataError('Les fichiers ne sont pas disponibles en mode démonstration.', 'demo')
+  if (!LIVE) throw new DataError(dataMsg('vault.demoFiles'), 'demo')
   let res: Response
   try {
     res = await fetch(`${documentFileRoute(doc.id, mode)}&format=json`, { credentials: 'same-origin', cache: 'no-store' })
   } catch {
-    throw new DataError('Connexion impossible. Vérifiez votre réseau.', 'network')
+    throw new DataError(dataMsg('errors.network'), 'network')
   }
   const body = (await res.json().catch(() => null)) as { url?: string; error?: { code?: string; message?: string } } | null
   if (!res.ok || !body?.url) {
     const code = body?.error?.code ?? String(res.status)
-    throw new DataError(body?.error?.message ?? 'Téléchargement impossible pour le moment.', code)
+    throw new DataError(body?.error?.message ?? dataMsg('vault.downloadFailed'), code)
   }
   return body.url
 }
@@ -538,10 +538,10 @@ export async function revokeShare(id: string): Promise<void> {
 /** « Expire dans 2 jours » / « dans 3 h » / « dans 15 min ». */
 export function expiresInLabel(iso: string, now = Date.now()): string {
   const ms = new Date(iso).getTime() - now
-  if (ms <= 0) return 'Expiré'
+  if (ms <= 0) return dataMsg('vault.expired')
   const min = Math.round(ms / 60_000)
-  if (min < 60) return `Expire dans ${min} min`
+  if (min < 60) return dataMsg('vault.expiresInMin', { n: min })
   const h = Math.round(min / 60)
-  if (h < 48) return `Expire dans ${h} h`
-  return `Expire dans ${Math.round(h / 24)} jours`
+  if (h < 48) return dataMsg('vault.expiresInHours', { n: h })
+  return dataMsg('vault.expiresInDays', { n: Math.round(h / 24) })
 }

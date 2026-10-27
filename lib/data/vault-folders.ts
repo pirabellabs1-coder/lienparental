@@ -19,7 +19,7 @@
 import { z } from 'zod'
 import { VAULT_DOCS } from '@/lib/mock-vault'
 import { DEMO_ME, DEMO_OTHER } from '@/components/messages/seed'
-import { DataError, LIVE, db, requireUserId, toDataError } from './core'
+import { DataError, LIVE, dataMsg, db, requireUserId, toDataError } from './core'
 import { familyAuthorNames, sharedByLabel } from './family'
 import { kickNotifications } from '@/lib/notify/client'
 import type { VaultDocumentRecord } from './vault'
@@ -41,8 +41,8 @@ export type VaultSettings = { autoImportMessages: boolean; autoImportFolderId: s
 
 export const DEFAULT_VAULT_SETTINGS: VaultSettings = { autoImportMessages: false, autoImportFolderId: null }
 
-const nameSchema = z.string().trim().min(1, 'Indiquez un nom de dossier.').max(FOLDER_NAME_MAX, `${FOLDER_NAME_MAX} caractères au maximum.`)
-  .refine((v) => !/[\u0000-\u001f\u007f]/.test(v), 'Nom de dossier invalide.')
+const nameSchema = () => z.string().trim().min(1, dataMsg('folders.nameRequired')).max(FOLDER_NAME_MAX, dataMsg('folders.nameMax', { max: FOLDER_NAME_MAX }))
+  .refine((v) => !/[\u0000-\u001f\u007f]/.test(v), dataMsg('folders.nameInvalid'))
 const idSchema = z.string().uuid()
 
 type FolderRow = { id: string; user_id: string; parent_id: string | null; name: string }
@@ -52,10 +52,10 @@ type SettingsRow = { auto_import_messages: boolean; auto_import_folder_id: strin
 /** Erreurs Postgres des garde-fous 0410 → messages français. */
 function folderError(err: unknown, op: string): DataError {
   const e = (err ?? {}) as { code?: string; hint?: string }
-  if (e.code === '23505') return new DataError('Un dossier porte déjà ce nom à cet endroit.', e.code)
-  if (e.hint === 'vault_folder_depth') return new DataError(`Pas plus de ${FOLDER_MAX_DEPTH} niveaux de dossiers.`, 'depth')
-  if (e.hint === 'vault_folder_cycle') return new DataError('Un dossier ne peut pas être rangé dans lui-même.', 'cycle')
-  if (e.code === '23503') return new DataError('Ce dossier n’existe plus. Actualisez la page.', e.code)
+  if (e.code === '23505') return new DataError(dataMsg('folders.nameTaken'), e.code)
+  if (e.hint === 'vault_folder_depth') return new DataError(dataMsg('folders.maxDepth', { max: FOLDER_MAX_DEPTH }), 'depth')
+  if (e.hint === 'vault_folder_cycle') return new DataError(dataMsg('folders.cycle'), 'cycle')
+  if (e.code === '23503') return new DataError(dataMsg('folders.gone'), e.code)
   return toDataError(err, op)
 }
 
@@ -164,18 +164,18 @@ export async function listFolders(): Promise<VaultFolder[]> {
 }
 
 export async function createFolder(name: string, parentId: string | null): Promise<VaultFolder> {
-  const n = nameSchema.safeParse(name)
-  if (!n.success) throw new DataError(n.error.issues[0]?.message ?? 'Nom de dossier invalide.', 'invalid')
+  const n = nameSchema().safeParse(name)
+  if (!n.success) throw new DataError(n.error.issues[0]?.message ?? dataMsg('folders.nameInvalid'), 'invalid')
   if (!LIVE) {
     const s = demoRead()
     const clash = s.folders.some((f) => f.mine && f.parentId === parentId && f.name.toLocaleLowerCase('fr') === n.data.toLocaleLowerCase('fr'))
-    if (clash) throw new DataError('Un dossier porte déjà ce nom à cet endroit.', '23505')
-    if (folderPath(s.folders, parentId).length >= FOLDER_MAX_DEPTH) throw new DataError(`Pas plus de ${FOLDER_MAX_DEPTH} niveaux de dossiers.`, 'depth')
+    if (clash) throw new DataError(dataMsg('folders.nameTaken'), '23505')
+    if (folderPath(s.folders, parentId).length >= FOLDER_MAX_DEPTH) throw new DataError(dataMsg('folders.maxDepth', { max: FOLDER_MAX_DEPTH }), 'depth')
     const f: VaultFolder = { id: demoId('f'), name: n.data, parentId, ownerId: DEMO_ME.id, mine: true }
     demoWrite({ ...s, folders: [...s.folders, f] })
     return f
   }
-  if (parentId !== null && !idSchema.safeParse(parentId).success) throw new DataError('Dossier parent invalide.', 'invalid')
+  if (parentId !== null && !idSchema.safeParse(parentId).success) throw new DataError(dataMsg('folders.parentInvalid'), 'invalid')
   const userId = await requireUserId()
   const { data, error } = await db()
     .from('vault_folders')
@@ -188,21 +188,21 @@ export async function createFolder(name: string, parentId: string | null): Promi
 }
 
 export async function renameFolder(id: string, name: string): Promise<void> {
-  const n = nameSchema.safeParse(name)
-  if (!n.success) throw new DataError(n.error.issues[0]?.message ?? 'Nom de dossier invalide.', 'invalid')
+  const n = nameSchema().safeParse(name)
+  if (!n.success) throw new DataError(n.error.issues[0]?.message ?? dataMsg('folders.nameInvalid'), 'invalid')
   if (!LIVE) {
     const s = demoRead()
     const target = s.folders.find((f) => f.id === id && f.mine)
     if (!target) throw new DataError('Dossier introuvable.', 'P0002')
     const clash = s.folders.some((f) => f.mine && f.id !== id && f.parentId === target.parentId && f.name.toLocaleLowerCase('fr') === n.data.toLocaleLowerCase('fr'))
-    if (clash) throw new DataError('Un dossier porte déjà ce nom à cet endroit.', '23505')
+    if (clash) throw new DataError(dataMsg('folders.nameTaken'), '23505')
     demoWrite({ ...s, folders: s.folders.map((f) => (f.id === id ? { ...f, name: n.data } : f)) })
     return
   }
   const userId = await requireUserId()
   const { data, error } = await db().from('vault_folders').update({ name: n.data }).eq('id', id).eq('user_id', userId).select('id')
   if (error) throw folderError(error, 'vault.renameFolder')
-  if (!data || data.length === 0) throw new DataError('Seul le propriétaire du dossier peut le renommer.', 'not_owner')
+  if (!data || data.length === 0) throw new DataError(dataMsg('folders.ownerRename'), 'not_owner')
 }
 
 /** Supprime un dossier et ses sous-dossiers ; leurs documents reviennent à la racine du coffre. */
@@ -230,7 +230,7 @@ export async function deleteFolder(id: string): Promise<void> {
   const userId = await requireUserId()
   const { data, error } = await db().from('vault_folders').delete().eq('id', id).eq('user_id', userId).select('id')
   if (error) throw folderError(error, 'vault.deleteFolder')
-  if (!data || data.length === 0) throw new DataError('Seul le propriétaire du dossier peut le supprimer.', 'not_owner')
+  if (!data || data.length === 0) throw new DataError(dataMsg('folders.ownerDelete'), 'not_owner')
 }
 
 /** Range un de MES documents dans un de MES dossiers (null = racine). */
@@ -241,11 +241,11 @@ export async function moveDocumentToFolder(documentId: string, folderId: string 
     demoWrite({ ...s, docFolders: { ...s.docFolders, [documentId]: folderId } })
     return
   }
-  if (folderId !== null && !idSchema.safeParse(folderId).success) throw new DataError('Dossier invalide.', 'invalid')
+  if (folderId !== null && !idSchema.safeParse(folderId).success) throw new DataError(dataMsg('folders.folderInvalid'), 'invalid')
   const userId = await requireUserId()
   const { data, error } = await db().from('documents').update({ folder_id: folderId }).eq('id', documentId).eq('user_id', userId).select('id')
   if (error) throw folderError(error, 'vault.moveToFolder')
-  if (!data || data.length === 0) throw new DataError('Ce document a été partagé par un autre parent : seul son auteur peut le ranger.', 'not_author')
+  if (!data || data.length === 0) throw new DataError(dataMsg('folders.notAuthorMove'), 'not_author')
 }
 
 // --- Partages ---------------------------------------------------------------------
@@ -273,7 +273,7 @@ export async function listSharedWithMe(): Promise<SharedWithMe[]> {
   if (!LIVE) {
     return demoRead().folders
       .filter((f) => !f.mine && f.parentId === null)
-      .map((f) => ({ shareId: `s_${f.id}`, folderId: f.id, ownerId: f.ownerId, ownerPrenom: f.ownerPrenom ?? 'un parent lié', createdAt: '2026-09-12T19:00:00.000Z' }))
+      .map((f) => ({ shareId: `s_${f.id}`, folderId: f.id, ownerId: f.ownerId, ownerPrenom: f.ownerPrenom ?? dataMsg('family.linkedParent'), createdAt: '2026-09-12T19:00:00.000Z' }))
   }
   const [me, names] = await Promise.all([requireUserId(), familyAuthorNames()])
   const { data, error } = await db()
@@ -295,13 +295,13 @@ export async function shareFolder(folderId: string, grantee: { userId: string; p
   if (!LIVE) {
     const s = demoRead()
     if (s.shares.some((x) => x.folderId === folderId && x.granteeId === grantee.userId)) {
-      throw new DataError('Ce dossier est déjà partagé avec ce parent.', '23505')
+      throw new DataError(dataMsg('folders.alreadyShared'), '23505')
     }
     const share: FolderShare = { id: demoId('s'), folderId, granteeId: grantee.userId, granteePrenom: grantee.prenom, createdAt: new Date().toISOString() }
     demoWrite({ ...s, shares: [...s.shares, share] })
     return share
   }
-  if (!idSchema.safeParse(folderId).success || !idSchema.safeParse(grantee.userId).success) throw new DataError('Partage invalide.', 'invalid')
+  if (!idSchema.safeParse(folderId).success || !idSchema.safeParse(grantee.userId).success) throw new DataError(dataMsg('folders.shareInvalid'), 'invalid')
   const me = await requireUserId()
   const { data, error } = await db()
     .from('vault_folder_shares')
@@ -310,8 +310,8 @@ export async function shareFolder(folderId: string, grantee: { userId: string; p
     .single()
   if (error) {
     const code = (error as { code?: string }).code
-    if (code === '23505') throw new DataError('Ce dossier est déjà partagé avec ce parent.', code)
-    if (code === '42501') throw new DataError('Partage impossible : ce parent n’est pas (ou plus) lié à vous.', code)
+    if (code === '23505') throw new DataError(dataMsg('folders.alreadyShared'), code)
+    if (code === '42501') throw new DataError(dataMsg('folders.shareNotLinked'), code)
     throw folderError(error, 'vault.shareFolder')
   }
   const r = data as ShareRow
@@ -335,7 +335,7 @@ export async function unshareFolder(shareId: string): Promise<void> {
     .is('revoked_at', null)
     .select('id')
   if (error) throw toDataError(error, 'vault.unshareFolder')
-  if (!data || data.length === 0) throw new DataError('Ce partage est déjà arrêté.', 'P0002')
+  if (!data || data.length === 0) throw new DataError(dataMsg('folders.shareAlreadyStopped'), 'P0002')
 }
 
 // --- Documents d'un dossier (démo) -----------------------------------------------------
@@ -363,7 +363,7 @@ export async function saveVaultSettings(next: VaultSettings): Promise<VaultSetti
     demoWrite({ ...s, settings })
     return settings
   }
-  if (folderId !== null && !idSchema.safeParse(folderId).success) throw new DataError('Dossier invalide.', 'invalid')
+  if (folderId !== null && !idSchema.safeParse(folderId).success) throw new DataError(dataMsg('folders.folderInvalid'), 'invalid')
   const userId = await requireUserId()
   const { data, error } = await db()
     .from('vault_settings')

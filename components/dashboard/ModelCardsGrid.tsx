@@ -27,9 +27,13 @@ const CATEGORY_KEY_BY_LABEL: Record<string, string> = { Juridique: 'juridique', 
 // M03 — Documents prêts à l'emploi : 4 tuiles + « Plus de modèles ».
 export function ModelCardsGrid({ models }: { models: ModelCard[] }) {
   const tr = useTranslations('coach.templates')
-  const categoryLabel = (c: string) => {
-    const key = CATEGORY_KEY_BY_LABEL[c]
-    return key ? tr(`categories.${key}`) : c
+  const td = useTranslations('dash.demoModels')
+  // Cartes de démonstration (ids m_1…m_4) : textes du catalogue ; modèles réels : titre publié.
+  const isDemo = (id: string) => td.has(`${id}.title`)
+  const categoryLabel = (m: ModelCard) => {
+    if (isDemo(m.id)) return td(`${m.id}.category`)
+    const key = CATEGORY_KEY_BY_LABEL[m.category ?? '']
+    return key ? tr(`categories.${key}`) : m.category
   }
   return (
     <ul className="-mx-2 grid grid-cols-5 divide-x divide-night-100">
@@ -44,8 +48,8 @@ export function ModelCardsGrid({ models }: { models: ModelCard[] }) {
               <span className={cn('grid h-12 w-12 place-items-center rounded-xl2', ACCENTS[m.accent])} aria-hidden="true">
                 <Icon className="h-6 w-6" strokeWidth={1.8} />
               </span>
-              <span lang="fr" className="mt-1 text-[10.5px] font-bold leading-tight text-night-900 [hyphens:auto]">{m.title}</span>
-              {m.category && <span className="text-[10px] leading-tight text-night-600">{categoryLabel(m.category)}</span>}
+              <span lang={isDemo(m.id) ? undefined : 'fr'} className="mt-1 text-[10.5px] font-bold leading-tight text-night-900 [hyphens:auto]">{isDemo(m.id) ? td(`${m.id}.title`) : m.title}</span>
+              {m.category && <span className="text-[10px] leading-tight text-night-600">{categoryLabel(m)}</span>}
             </Link>
           </li>
         )

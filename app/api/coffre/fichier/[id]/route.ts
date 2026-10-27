@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server'
+import { getTranslations } from 'next-intl/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { z } from 'zod'
-import { DENIED_MESSAGES, requireAuthedUser } from '@/lib/auth/guard'
+import { requireAuthedUser } from '@/lib/auth/guard'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { rateLimit, rateLimitedResponse, userKey } from '@/lib/data/server/rate-limit'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
@@ -38,8 +39,6 @@ type DocRow = {
   family_shared: boolean | null; folder_id: string | null
 }
 
-const NOT_FOUND = 'Document introuvable ou inaccessible.'
-
 /** Chemin rangé sous le dossier du propriétaire, sans traversée ni caractère de contrôle. */
 function ownedPath(path: string, ownerId: string): boolean {
   return path.startsWith(`${ownerId}/`)
@@ -59,29 +58,32 @@ function downloadName(d: DocRow): string {
 }
 
 export async function GET(req: Request, { params }: Ctx) {
+  const t = await getTranslations('server.coffre')
+  const tc = await getTranslations('server.common')
+  const NOT_FOUND = t('notFound')
   const { id } = await params
   if (!z.string().uuid().safeParse(id).success) return jsonError(404, 'not_found', NOT_FOUND)
   const url = new URL(req.url)
   const q = querySchema.safeParse({ mode: url.searchParams.get('mode') ?? undefined, format: url.searchParams.get('format') ?? undefined })
-  if (!q.success) return jsonError(422, 'invalid', 'Requête invalide.')
+  if (!q.success) return jsonError(422, 'invalid', t('invalidRequest'))
 
   // Démonstration : aucun fichier réel n'est stocké.
-  if (!SUPABASE_ENABLED) return jsonError(404, 'demo', 'Les fichiers ne sont pas disponibles en mode démonstration.')
+  if (!SUPABASE_ENABLED) return jsonError(404, 'demo', t('demo'))
 
   const auth = await requireAuthedUser()
   if (!auth.ok) {
     return auth.reason === 'mfa_required'
-      ? jsonError(403, 'mfa_required', DENIED_MESSAGES.mfa_required)
-      : jsonError(401, 'unauthenticated', DENIED_MESSAGES.unauthenticated)
+      ? jsonError(403, 'mfa_required', tc('denied.mfa_required'))
+      : jsonError(401, 'unauthenticated', tc('denied.unauthenticated'))
   }
   const { supabase, user } = auth
 
   const vault = await requireVaultUnlocked()
   if (!vault.ok) return vaultDeniedResponse(vault)
-  if (vault.principal.userId !== user.id) return jsonError(401, 'unauthenticated', DENIED_MESSAGES.unauthenticated)
+  if (vault.principal.userId !== user.id) return jsonError(401, 'unauthenticated', tc('denied.unauthenticated'))
 
   const rl = await rateLimit(userKey('coffre:fichier', user.id), 60, 60_000, { failClosed: true })
-  if (!rl.ok) return rateLimitedResponse(rl, 'Trop de demandes. Patientez un instant.')
+  if (!rl.ok) return rateLimitedResponse(rl, t('rateLimited'))
 
   // Colonnes récentes (family_shared, 0340) absentes des types générés : client non typé.
   const db = supabase as unknown as SupabaseClient
@@ -93,7 +95,7 @@ export async function GET(req: Request, { params }: Ctx) {
     .maybeSingle()
   if (error) {
     console.warn(`[coffre/fichier] lecture a échoué (code ${error.code ?? 'inconnu'})`)
-    return jsonError(503, 'unavailable', 'Fichier momentanément indisponible. Réessayez.')
+    return jsonError(503, 'unavailable', t('unavailable'))
   }
   const d = data as DocRow | null
   // Propriétaire, document explicitement partagé et visible par la RLS famille (gardien actif),
@@ -104,7 +106,7 @@ export async function GET(req: Request, { params }: Ctx) {
     const { data: ids, error: fErr } = await db.rpc('vault_shared_folder_ids')
     if (fErr) {
       console.warn(`[coffre/fichier] dossiers partagés indisponibles (code ${fErr.code ?? 'inconnu'})`)
-      return jsonError(503, 'unavailable', 'Fichier momentanément indisponible. Réessayez.')
+      return jsonError(503, 'unavailable', t('unavailable'))
     }
     if (!Array.isArray(ids) || !(ids as unknown[]).includes(d.folder_id)) return jsonError(404, 'not_found', NOT_FOUND)
   }
@@ -120,7 +122,7 @@ export async function GET(req: Request, { params }: Ctx) {
     .createSignedUrl(d.storage_path, SIGNED_SECONDS, inline ? undefined : { download: downloadName(d) })
   if (sErr || !signed?.signedUrl) {
     console.warn('[coffre/fichier] signature refusée ou indisponible')
-    return jsonError(503, 'unavailable', 'Fichier momentanément indisponible. Réessayez.')
+    return jsonError(503, 'unavailable', t('unavailable'))
   }
 
   if (q.data.format === 'json') {

@@ -15,6 +15,7 @@
  * DELETE /api/vault-lock/pin : supprime le code (coffre déverrouillé requis ; refusé si
  * c'est la dernière méthode de déverrouillage).
  */
+import { getTranslations } from 'next-intl/server'
 import { z } from 'zod'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { isWeakPin } from '@/lib/vault-lock/config'
@@ -30,17 +31,20 @@ import { flushForActor } from '@/lib/notify/jobs'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-const digits = z.string().regex(/^\d{6}$/, 'Le code comporte 6 chiffres.')
-const schema = z.object({
+const schemaFor = (t: (key: string) => string) => {
+  const digits = z.string().regex(/^\d{6}$/, t('pinFormat'))
+  return z.object({
   pin: digits,
   currentPin: digits.optional(),
   password: z.string().min(1).max(256).optional(),
-}).strict()
+  }).strict()
+}
 
 export async function PUT(req: Request) {
+  const t = await getTranslations('server.vaultLock')
   const g = await guardMutation(req, 'pin', 10)
   if (!g.ok) return g.res
-  const body = await readJson(req, schema)
+  const body = await readJson(req, schemaFor(t))
   if (!body.ok) return body.res
   const p = g.principal
   const store = vaultStore(p.mode)
@@ -48,7 +52,7 @@ export async function PUT(req: Request) {
 
   // Les codes trop simples sont refusés (sauf le code de démonstration documenté).
   if (isWeakPin(pin) && p.mode !== 'demo') {
-    return jsonError(422, 'weak_pin', 'Ce code est trop simple. Évitez les chiffres identiques ou qui se suivent.')
+    return jsonError(422, 'weak_pin', t('weakPin'))
   }
 
   try {
@@ -77,12 +81,12 @@ export async function PUT(req: Request) {
     if (!proven) {
       if (!p.hasPassword) {
         return jsonError(403, 'reauth_required', settings.pinHash
-          ? 'Saisissez votre code actuel, ou confirmez votre identité avec votre empreinte ou en vous reconnectant avec Google (moins de 5 minutes).'
-          : 'Pour choisir un code, confirmez votre identité : empreinte, ou reconnexion avec Google (moins de 5 minutes).')
+          ? t('reauthWithPin')
+          : t('reauthNoPin'))
       }
       return jsonError(403, 'proof_required', settings.pinHash
-        ? 'Saisissez votre code actuel ou le mot de passe de votre compte.'
-        : 'Confirmez avec le mot de passe de votre compte.')
+        ? t('proofWithPin')
+        : t('proofNoPin'))
     }
 
     const next = await store.updateSettings(p.userId, { pinHash: await hashPin(pin), bumpEpoch: true })
@@ -97,6 +101,7 @@ export async function PUT(req: Request) {
 }
 
 export async function DELETE(req: Request) {
+  const t = await getTranslations('server.vaultLock')
   const g = await guardMutation(req, 'pin', 10)
   if (!g.ok) return g.res
   const p = g.principal
@@ -104,11 +109,11 @@ export async function DELETE(req: Request) {
   try {
     const settings = await store.getSettings(p.userId)
     if (settings.enabled && !(await readUnlock(p, settings))) {
-      return jsonError(403, 'vault_locked', 'Déverrouillez le coffre-fort pour modifier ces réglages.')
+      return jsonError(403, 'vault_locked', t('unlockToEditSettings'))
     }
     const passkeys = await store.listPasskeys(p.userId)
     if (settings.enabled && !p.hasPassword && passkeys.length === 0) {
-      return jsonError(409, 'last_method', 'Ce code est votre seule méthode de déverrouillage : enregistrez d’abord votre empreinte.')
+      return jsonError(409, 'last_method', t('lastMethodPin'))
     }
     const next = await store.updateSettings(p.userId, { pinHash: null, bumpEpoch: true })
     if (next.enabled) await issueUnlock(p, next)

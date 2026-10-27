@@ -7,6 +7,11 @@ import { useEffect, useState } from 'react'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
 import { endDemoSession } from '@/lib/demo-auth'
+import { intlLocale } from '@/lib/i18n/config'
+import { clientLocale, libT } from '@/lib/i18n/runtime'
+
+/** Libellé traduit du namespace `auth.browser` (langue de <html lang>). */
+const msg = (key: 'sessionExpired' | 'imageUnreadable' | 'uploadFailed' | 'loadProfileFailed') => libT('auth.browser')(key)
 
 /** Déconnexion de CET appareil puis retour à l'écran de connexion. */
 export async function signOutAndRedirect(to = '/onboarding/connexion') {
@@ -71,13 +76,13 @@ export type UploadResult = { ok: true; path: string } | { ok: false; error: stri
 export async function uploadAvatar(source: string | Blob, name = 'avatar'): Promise<UploadResult> {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return { ok: false, error: 'Votre session a expiré. Reconnectez-vous.' }
+  if (!user) return { ok: false, error: msg('sessionExpired') }
 
   let blob: Blob
   try {
     blob = await prepareAvatar(source)
   } catch {
-    return { ok: false, error: 'Cette image ne peut pas être lue. Choisissez une photo JPG ou PNG.' }
+    return { ok: false, error: msg('imageUnreadable') }
   }
   const path = `${user.id}/${name}.jpg`
   const { error } = await supabase.storage.from(AVATAR_BUCKET).upload(path, blob, {
@@ -85,7 +90,7 @@ export async function uploadAvatar(source: string | Blob, name = 'avatar'): Prom
     contentType: 'image/jpeg',
     cacheControl: '0',
   })
-  if (error) return { ok: false, error: 'L’envoi de la photo a échoué. Réessayez.' }
+  if (error) return { ok: false, error: msg('uploadFailed') }
   return { ok: true, path }
 }
 
@@ -115,7 +120,7 @@ export type DisplayProfile = {
 
 function monthYear(iso: string) {
   try {
-    return new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric' }).format(new Date(iso))
+    return new Intl.DateTimeFormat(intlLocale(clientLocale()), { month: 'long', year: 'numeric' }).format(new Date(iso))
   } catch {
     return ''
   }
@@ -136,7 +141,7 @@ export function useAccountProfile(fallback: DisplayProfile) {
     ;(async () => {
       const supabase = createClient()
       const { data: { user } } = await supabase.auth.getUser()
-      if (!user) { if (!cancelled) { setLoading(false); setError('Votre session a expiré. Reconnectez-vous.') } return }
+      if (!user) { if (!cancelled) { setLoading(false); setError(msg('sessionExpired')) } return }
       const { data, error: e } = await supabase
         .from('users')
         .select('prenom, nom, email, photo_url, created_at, telephone, adresse, code_postal, ville, pays, date_naissance, genre, situation_familiale')
@@ -144,7 +149,7 @@ export function useAccountProfile(fallback: DisplayProfile) {
         .maybeSingle()
       if (cancelled) return
       if (e || !data) {
-        setError('Impossible de charger votre profil.')
+        setError(msg('loadProfileFailed'))
         setProfile({ ...fallback, prenom: '', nom: '', email: user.email ?? '', avatarUrl: undefined, memberSince: monthYear(user.created_at) })
         setLoading(false)
         return

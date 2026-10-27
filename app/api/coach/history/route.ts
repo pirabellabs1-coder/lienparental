@@ -6,6 +6,7 @@
  *   DELETE { id } | { all: true, archived } -> { deleted }
  * La suppression efface le contenu ; le quota du cycle reste décompté (voir lib/ai/analyses.ts).
  */
+import { getTranslations } from 'next-intl/server'
 import { getCurrentUser } from '@/lib/auth/session'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { rateLimit, userKey } from '@/lib/data/server/rate-limit'
@@ -28,14 +29,15 @@ async function readJson(req: Request): Promise<unknown> {
 }
 
 export async function GET(req: Request) {
+  const t = await getTranslations('ai.history')
   const user = await getCurrentUser()
-  if (!user) return jsonError(401, 'unauthenticated', 'Connectez-vous pour accéder à vos analyses.')
+  if (!user) return jsonError(401, 'unauthenticated', t('unauthenticated'))
   const url = new URL(req.url)
   const id = url.searchParams.get('id')
   if (id) {
-    if (!/^[A-Za-z0-9_-]{1,64}$/.test(id)) return jsonError(400, 'bad_id', 'Identifiant invalide.')
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(id)) return jsonError(400, 'bad_id', t('badId'))
     const a = await getAnalysis(user, id)
-    if (!a || !a.result) return jsonError(404, 'not_found', 'Cette analyse est introuvable ou a été supprimée.')
+    if (!a || !a.result) return jsonError(404, 'not_found', t('notFound'))
     return jsonOk({ analysis: { ...summary(a), result: a.result, messages: a.messages } })
   }
   const items = await listAnalyses(user, url.searchParams.get('archived') === '1')
@@ -43,34 +45,36 @@ export async function GET(req: Request) {
 }
 
 export async function PATCH(req: Request) {
+  const t = await getTranslations('ai.history')
   const user = await getCurrentUser()
-  if (!user) return jsonError(401, 'unauthenticated', 'Connectez-vous pour accéder à vos analyses.')
-  if (!(await rateLimit(userKey('coach-history', user.id), 60, 60_000)).ok) return jsonError(429, 'rate_limited', 'Trop de demandes. Patientez un instant.')
+  if (!user) return jsonError(401, 'unauthenticated', t('unauthenticated'))
+  if (!(await rateLimit(userKey('coach-history', user.id), 60, 60_000)).ok) return jsonError(429, 'rate_limited', t('rateLimited'))
   let body: unknown
   try {
     body = await readJson(req)
   } catch (e) {
-    return (e as Error).message === 'too_large' ? jsonError(413, 'payload_too_large', 'Requête trop volumineuse.') : jsonError(400, 'bad_json', 'Requête invalide.')
+    return (e as Error).message === 'too_large' ? jsonError(413, 'payload_too_large', t('tooLarge')) : jsonError(400, 'bad_json', t('badRequest'))
   }
   const parsed = HistoryPatchSchema.safeParse(body)
-  if (!parsed.success) return jsonError(422, 'invalid_body', 'Requête invalide.')
+  if (!parsed.success) return jsonError(422, 'invalid_body', t('badRequest'))
   const ok = await setArchived(user, parsed.data.id, parsed.data.archived)
-  if (!ok) return jsonError(404, 'not_found', 'Cette analyse est introuvable.')
+  if (!ok) return jsonError(404, 'not_found', t('notFoundShort'))
   return jsonOk({ ok: true })
 }
 
 export async function DELETE(req: Request) {
+  const t = await getTranslations('ai.history')
   const user = await getCurrentUser()
-  if (!user) return jsonError(401, 'unauthenticated', 'Connectez-vous pour accéder à vos analyses.')
-  if (!(await rateLimit(userKey('coach-history', user.id), 60, 60_000)).ok) return jsonError(429, 'rate_limited', 'Trop de demandes. Patientez un instant.')
+  if (!user) return jsonError(401, 'unauthenticated', t('unauthenticated'))
+  if (!(await rateLimit(userKey('coach-history', user.id), 60, 60_000)).ok) return jsonError(429, 'rate_limited', t('rateLimited'))
   let body: unknown
   try {
     body = await readJson(req)
   } catch (e) {
-    return (e as Error).message === 'too_large' ? jsonError(413, 'payload_too_large', 'Requête trop volumineuse.') : jsonError(400, 'bad_json', 'Requête invalide.')
+    return (e as Error).message === 'too_large' ? jsonError(413, 'payload_too_large', t('tooLarge')) : jsonError(400, 'bad_json', t('badRequest'))
   }
   const parsed = HistoryDeleteSchema.safeParse(body)
-  if (!parsed.success) return jsonError(422, 'invalid_body', 'Requête invalide.')
+  if (!parsed.success) return jsonError(422, 'invalid_body', t('badRequest'))
   const deleted = await deleteAnalyses(user, parsed.data)
   return jsonOk({ deleted })
 }

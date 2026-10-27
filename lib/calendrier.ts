@@ -2,6 +2,7 @@
 // Supabase plug-in point : remplacer EVENTS par un fetch Supabase (table `events`)
 // filtré par household + range de dates. Les helpers date/heure restent purs.
 
+import { intlLocale } from '@/lib/i18n/config'
 import {
   DEFAULT_TZ, addDaysToKey, dateToDayKey, dayKeyInTz, dayKeyToDate, timeInTz, todayKey, wallTimeToIso,
   type InstantInput,
@@ -160,22 +161,25 @@ export function capitalize(s: string): string {
 
 const DAY_FMT = { timeZone: 'UTC' } as const
 
-export function fmtMonthYear(d: Date): string {
-  return d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', ...DAY_FMT })
+/** `locale` optionnelle (fr | en | pt ou BCP 47) ; fr-FR par défaut. */
+const dateLoc = (locale?: string) => (!locale ? 'fr-FR' : locale.length === 2 ? intlLocale(locale) : locale)
+
+export function fmtMonthYear(d: Date, locale?: string): string {
+  return d.toLocaleDateString(dateLoc(locale), { month: 'long', year: 'numeric', ...DAY_FMT })
 }
 
-export function fmtDayLong(d: Date): string {
-  return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', ...DAY_FMT })
+export function fmtDayLong(d: Date, locale?: string): string {
+  return d.toLocaleDateString(dateLoc(locale), { weekday: 'long', day: 'numeric', month: 'long', ...DAY_FMT })
 }
 
 /** « Dimanche 12 mai 2024 » */
-export function fmtDateFull(d: Date): string {
-  return capitalize(d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', ...DAY_FMT }))
+export function fmtDateFull(d: Date, locale?: string): string {
+  return capitalize(d.toLocaleDateString(dateLoc(locale), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', ...DAY_FMT }))
 }
 
 /** « 12 mai 2024 » */
-export function fmtDateMedium(d: Date): string {
-  return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', ...DAY_FMT })
+export function fmtDateMedium(d: Date, locale?: string): string {
+  return d.toLocaleDateString(dateLoc(locale), { day: 'numeric', month: 'long', year: 'numeric', ...DAY_FMT })
 }
 
 /** Heure murale "HH:mm" d'un instant, dans DEFAULT_TZ. */

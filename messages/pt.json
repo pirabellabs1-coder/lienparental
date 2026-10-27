@@ -112,7 +112,48 @@
     "msgMedia": "Mensagens, fotos e documentos",
     "msgHistory": "Histórico preservado",
     "msgRespect": "Um ambiente respeitoso",
-    "hostedEurope": "Dados hospedados na Europa"
+    "hostedEurope": "Dados hospedados na Europa",
+    "dialog": {
+      "title": "Conheça o Lien Parental",
+      "close": "Fechar",
+      "unsupported": "Seu navegador não reproduz este vídeo.",
+      "download": "Baixar o vídeo",
+      "soon": "Vídeo disponível em breve",
+      "meanwhile": "Enquanto isso, conheça o aplicativo em imagens: são capturas reais do Lien Parental.",
+      "counter": "{n} de {total}",
+      "prev": "Captura anterior",
+      "next": "Próxima captura",
+      "list": "Capturas",
+      "show": "Mostrar: {title}",
+      "alt": "Captura do aplicativo: {title}",
+      "captions": "Português"
+    },
+    "slides": {
+      "accueil": {
+        "title": "Sua tela inicial",
+        "text": "O seu filho, o Guia parental, as despesas, a saúde e o Coach com IA num piscar de olhos."
+      },
+      "journal": {
+        "title": "O Diário",
+        "text": "Visitas, chamadas, saúde e despesas, datadas e organizadas, com comprovantes."
+      },
+      "calendrier": {
+        "title": "O calendário",
+        "text": "Compromissos, lembretes e eventos de cada criança."
+      },
+      "coffre": {
+        "title": "O Cofre",
+        "text": "Sentenças, certificados, faturas: organizados e protegidos."
+      },
+      "temoignages": {
+        "title": "Os depoimentos",
+        "text": "Peça uma declaração a um familiar e acompanhe até a assinatura."
+      },
+      "coach": {
+        "title": "O Coach parental com IA",
+        "text": "Reformular uma mensagem, preparar uma conversa, encontrar o tom certo."
+      }
+    }
   },
   "homeMessaging": {
     "badge": "Mensagens entre os pais",
@@ -422,6 +463,47 @@
     "tipCarousel": "Dicas do dia",
     "slide": "{n} de {total}",
     "chooseTip": "Escolher uma dica",
-    "tipN": "Dica {n}: {title}"
+    "tipN": "Dica {n}: {title}",
+    "countdown": {
+      "today": "Hoje",
+      "tomorrow": "Amanhã",
+      "inDays": "Em {n} dias",
+      "yesterday": "Ontem",
+      "daysAgo": "Há {n} dias"
+    },
+    "demoModels": {
+      "m_1": {
+        "title": "Processo judicial",
+        "category": "Modelo completo"
+      },
+      "m_2": {
+        "title": "Carta para a escola",
+        "category": "Comunicação"
+      },
+      "m_3": {
+        "title": "Cronologia",
+        "category": "Dos eventos"
+      },
+      "m_4": {
+        "title": "Declaração de residência",
+        "category": "Modelo"
+      }
+    }
+  },
+  "meta": {
+    "rootTitle": "Lien Parental: informar, apoiar e preservar o vínculo entre pais e filhos",
+    "rootDescription": "O Lien Parental apoia pais separados: cofre criptografado, diário, calendário, depoimentos com data e hora e coach parental com IA. Hospedagem segura na Europa.",
+    "ogDescription": "Comunique-se com tranquilidade, organize-se com facilidade e encontre tudo sobre o seu filho.",
+    "homeTitle": "Lien Parental: tudo para o seu filho, enfim num só lugar",
+    "homeDescription": "O aplicativo dos pais separados: agenda compartilhada, despesas e pagamentos, saúde dos filhos, cofre seguro, depoimentos, processo judicial, coach parental com IA e Guia parental (Guiana Francesa). Gratuito para começar, instalável como PWA.",
+    "appTitle": "Aplicativo"
+  },
+  "publicAside": {
+    "photoAlt": "Um pai abraça a filha, os dois sorriem",
+    "backHome": "Voltar à página inicial do Lien Parental",
+    "headline": "Um espaço tranquilo para o que mais importa: seus filhos.",
+    "encrypted": "Dados criptografados",
+    "europe": "Hospedado na Europa",
+    "noCommitment": "Sem fidelidade"
   }
 }

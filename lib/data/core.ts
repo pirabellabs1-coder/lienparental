@@ -15,8 +15,17 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
+import { libT } from '@/lib/i18n/runtime'
 
 export const LIVE = SUPABASE_ENABLED
+
+/**
+ * Message affichable de la couche de données, dans la langue de l'interface
+ * (catalogue `shared.data`, français côté serveur). Résolu à l'appel, jamais au chargement du module.
+ */
+export function dataMsg(key: string, values?: Record<string, string | number>): string {
+  return libT('shared.data')(key, values)
+}
 
 /** Bucket Storage privé des documents (coffre-fort, images du journal, justificatifs). */
 export const DOCUMENTS_BUCKET = 'documents'
@@ -27,7 +36,7 @@ let browserClient: SupabaseClient | null = null
 
 /** Client Supabase navigateur (singleton). À n'appeler que si `LIVE`. */
 export function db(): SupabaseClient {
-  if (!LIVE) throw new DataError('Le stockage en ligne n’est pas configuré.', 'not_configured')
+  if (!LIVE) throw new DataError(dataMsg('errors.notConfigured'), 'not_configured')
   if (!browserClient) browserClient = createClient() as unknown as SupabaseClient
   return browserClient
 }
@@ -48,27 +57,27 @@ type PgLikeError = { code?: string; message?: string; status?: number; statusCod
  * Convertit une erreur Supabase/Postgres/réseau en DataError française.
  * Journalise uniquement l'opération et le code (jamais le contenu ni l'identité).
  */
-export function toDataError(err: unknown, op: string, fallback = 'Une erreur est survenue. Réessayez dans un instant.'): DataError {
+export function toDataError(err: unknown, op: string, fallback?: string): DataError {
   if (err instanceof DataError) return err
   const e = (err ?? {}) as PgLikeError
   const code = String(e.code ?? e.statusCode ?? e.status ?? 'unknown')
   console.warn(`[data] ${op} a échoué (code ${code})`)
-  if (code === '23505') return new DataError('Cet élément existe déjà.', code)
-  if (code === '23503') return new DataError('Élément lié introuvable.', code)
-  if (code === '23514' || code === '22P02' || code === '22023') return new DataError('Certaines informations sont invalides.', code)
+  if (code === '23505') return new DataError(dataMsg('errors.duplicate'), code)
+  if (code === '23503') return new DataError(dataMsg('errors.relatedNotFound'), code)
+  if (code === '23514' || code === '22P02' || code === '22023') return new DataError(dataMsg('errors.invalid'), code)
   if (code === '42501' || code === 'PGRST301' || code === '401' || code === '403') {
-    return new DataError('Accès refusé. Reconnectez-vous puis réessayez.', code)
+    return new DataError(dataMsg('errors.forbidden'), code)
   }
-  if (code === 'P0002' || code === 'PGRST116' || code === '404') return new DataError('Élément introuvable.', code)
-  if (code === '413') return new DataError('Fichier trop volumineux.', code)
-  if (err instanceof TypeError) return new DataError('Connexion impossible. Vérifiez votre réseau.', 'network')
-  return new DataError(fallback, code)
+  if (code === 'P0002' || code === 'PGRST116' || code === '404') return new DataError(dataMsg('errors.notFound'), code)
+  if (code === '413') return new DataError(dataMsg('errors.fileTooLarge'), code)
+  if (err instanceof TypeError) return new DataError(dataMsg('errors.network'), 'network')
+  return new DataError(fallback ?? dataMsg('errors.generic'), code)
 }
 
 /** Identifiant de l'utilisateur connecté (revalidé auprès de Supabase Auth). */
 export async function requireUserId(): Promise<string> {
   const { data, error } = await db().auth.getUser()
-  if (error || !data.user) throw new DataError('Votre session a expiré. Reconnectez-vous.', 'no_session')
+  if (error || !data.user) throw new DataError(dataMsg('errors.sessionExpired'), 'no_session')
   return data.user.id
 }
 

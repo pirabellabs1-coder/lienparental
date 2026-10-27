@@ -9,10 +9,15 @@ import 'server-only'
  * destinataire n'a pas désactivé les e-mails (preferences.notif_email).
  * Exception : l'alerte « nouvel adulte lié » au titulaire (M2, audit v3) est
  * une notification de sécurité, envoyée même si notif_email est désactivé.
+ *
+ * Langue : celle du destinataire (preferences.langue). Invitation : langue du compte
+ * de l'adresse invitée s'il existe, sinon celle de l'invitant (cookie lp_locale de sa requête).
  */
 import { baseLayout } from '@/lib/email/layout'
 import { escapeHtml, safeUrl } from '@/lib/email/escape'
 import { sendEmail } from '@/lib/email/send'
+import { dateLocale, emailT, greeting, toLocale, type EmailT, type Locale } from '@/lib/email/i18n'
+import { localeForEmail, requestLocale } from '@/lib/email/locale'
 import { createServiceClient } from '@/lib/supabase/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { GuardianRole } from '../types'
@@ -21,21 +26,16 @@ import { appUrl } from './context'
 
 export type MailStatus = 'sent' | 'skipped' | 'failed'
 
-const ROLE_SENTENCE: Record<GuardianRole, string> = {
-  parent: 'en tant que parent : vous aurez accès à la fiche, à la santé, au calendrier ainsi qu’aux documents et dépenses partagés.',
-  proche: 'en tant que proche : vous pourrez consulter le prénom, la classe et le calendrier partagé.',
-}
-
-function list(names: string[]): string {
+function list(names: string[], tr: EmailT): string {
   if (names.length <= 1) return names[0] ?? ''
-  return `${names.slice(0, -1).join(', ')} et ${names[names.length - 1]}`
+  return tr('family.listAnd', { list: names.slice(0, -1).join(', '), last: names[names.length - 1]! })
 }
 
-function frDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: DEFAULT_TZ })
+function longDate(iso: string, locale: Locale): string {
+  return new Date(iso).toLocaleDateString(dateLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: DEFAULT_TZ })
 }
 
-export async function sendFamilyInvitationEmail(args: {
+export type FamilyInvitationArgs = {
   to: string
   inviterPrenom: string
   role: GuardianRole
@@ -43,32 +43,48 @@ export async function sendFamilyInvitationEmail(args: {
   link: string
   expiresAt: string
   idempotencyKey: string
-}): Promise<MailStatus> {
-  const inviter = escapeHtml(args.inviterPrenom || 'Un parent')
-  const kids = escapeHtml(list(args.childPrenoms) || 'votre enfant')
+}
+
+/** Rendu (pur) de l'invitation dans une langue donnée. */
+export function familyInvitationEmail(args: Omit<FamilyInvitationArgs, 'to' | 'idempotencyKey'>, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
+  const inviter = escapeHtml(args.inviterPrenom || tr('common.aParent'))
+  const kids = escapeHtml(list(args.childPrenoms, tr) || tr('family.yourChild'))
   const href = safeUrl(args.link, `${appUrl()}/app/coparents`)
+  const roleSentence = args.role === 'proche' ? tr('family.inviteRoleProche') : tr('family.inviteRoleParent')
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour,</p>
-    <p style="margin:0 0 16px 0;">${inviter} vous invite à rejoindre l’espace partagé de ${kids} sur Lien Parental, ${escapeHtml(ROLE_SENTENCE[args.role])}</p>
-    <p style="margin:0 0 16px 0;">Le Journal personnel, le Coach IA et les documents non partagés de chacun restent privés.</p>
-    <p style="margin:0;">Ce lien est personnel : il ne fonctionne qu’avec un compte vérifié à cette adresse e-mail. Il expire le ${escapeHtml(frDate(args.expiresAt))}.</p>
+    <p style="margin:0 0 16px 0;">${tr('common.hello')}</p>
+    <p style="margin:0 0 16px 0;">${tr('family.inviteBody', { inviter, kids, roleSentence: escapeHtml(roleSentence) })}</p>
+    <p style="margin:0 0 16px 0;">${tr('family.invitePrivate')}</p>
+    <p style="margin:0;">${tr('family.invitePersonal', { date: escapeHtml(longDate(args.expiresAt, locale)) })}</p>
   `
+  return {
+    subject: tr('family.inviteSubject', { inviter: args.inviterPrenom || tr('common.aParent') }),
+    html: baseLayout({
+      locale,
+      preheader: tr('family.invitePreheader', { kids: list(args.childPrenoms, tr) }),
+      title: tr('family.inviteTitle'),
+      body,
+      cta: { label: tr('family.inviteCta'), href },
+      footer: tr('family.inviteFooter'),
+    }),
+  }
+}
+
+export async function sendFamilyInvitationEmail(args: FamilyInvitationArgs): Promise<MailStatus> {
+  // Destinataire déjà inscrit : sa langue ; sinon celle de l'invitant (requête en cours).
+  const locale = (await localeForEmail(args.to)) ?? (await requestLocale()) ?? 'fr'
+  const mail = familyInvitationEmail(args, locale)
   const res = await sendEmail({
     to: args.to,
-    subject: `${args.inviterPrenom || 'Un parent'} vous invite sur Lien Parental`,
-    html: baseLayout({
-      preheader: `Invitation à l’espace partagé de ${list(args.childPrenoms)}`,
-      title: 'Invitation à un espace partagé',
-      body,
-      cta: { label: 'Voir l’invitation', href },
-      footer: 'Si vous ne connaissez pas cette personne, ignorez simplement ce message.',
-    }),
+    subject: mail.subject,
+    html: mail.html,
     idempotencyKey: args.idempotencyKey,
   })
   return !res.ok ? 'failed' : res.skipped ? 'skipped' : 'sent'
 }
 
-type Recipient = { email: string; prenom: string }
+type Recipient = { email: string; prenom: string; locale: Locale }
 
 /** E-mail + préférence d'un utilisateur (service_role). null = ne pas envoyer. */
 async function recipient(userId: string, opts: { security?: boolean } = {}): Promise<Recipient | null> {
@@ -81,27 +97,58 @@ async function recipient(userId: string, opts: { security?: boolean } = {}): Pro
   }
   const [{ data: u }, { data: p }] = await Promise.all([
     admin.from('users').select('email, prenom, deleted_at').eq('id', userId).maybeSingle(),
-    admin.from('preferences').select('notif_email').eq('user_id', userId).maybeSingle(),
+    admin.from('preferences').select('notif_email, langue').eq('user_id', userId).maybeSingle(),
   ])
   const user = u as { email?: string; prenom?: string; deleted_at?: string | null } | null
+  const pref = p as { notif_email?: boolean; langue?: string | null } | null
   if (!user?.email || user.deleted_at) return null
-  if (!opts.security && (p as { notif_email?: boolean } | null)?.notif_email === false) return null
-  return { email: user.email, prenom: user.prenom ?? '' }
+  if (!opts.security && pref?.notif_email === false) return null
+  return { email: user.email, prenom: user.prenom ?? '', locale: toLocale(pref?.langue) }
+}
+
+/** Rendu (pur) de « accès retiré ». */
+export function guardianRemovedEmail(args: { prenom: string; childPrenom: string }, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
+  const body = `
+    <p style="margin:0 0 16px 0;">${greeting(tr, args.prenom ? escapeHtml(args.prenom) : '')}</p>
+    <p style="margin:0;">${tr('family.removedBody', { child: escapeHtml(args.childPrenom || tr('family.theChild')) })}</p>
+  `
+  return {
+    subject: tr('family.removedSubject'),
+    html: baseLayout({ locale, title: tr('family.removedTitle'), body }),
+  }
 }
 
 export async function notifyGuardianRemoved(args: { userId: string; childPrenom: string; idempotencyKey: string }) {
   const to = await recipient(args.userId)
   if (!to) return
-  const body = `
-    <p style="margin:0 0 16px 0;">Bonjour${to.prenom ? ` ${escapeHtml(to.prenom)}` : ''},</p>
-    <p style="margin:0;">Votre accès à l’espace partagé de ${escapeHtml(args.childPrenom || 'l’enfant')} a été retiré. Vos propres données (Journal, documents, Coach IA) ne sont pas concernées et restent dans votre espace.</p>
-  `
+  const mail = guardianRemovedEmail({ prenom: to.prenom, childPrenom: args.childPrenom }, to.locale)
   await sendEmail({
     to: to.email,
-    subject: 'Accès à un espace partagé retiré',
-    html: baseLayout({ title: 'Accès retiré', body }),
+    subject: mail.subject,
+    html: mail.html,
     idempotencyKey: args.idempotencyKey,
   }).catch(() => undefined)
+}
+
+/** Rendu (pur) de l'alerte « nouvel adulte lié » au titulaire. `inviterPrenom` vide : « un autre parent ». */
+export function ownerNewAdultEmail(
+  args: { prenom: string; newPrenom: string; childPrenoms: string[]; role: GuardianRole; inviterPrenom: string },
+  locale: Locale = 'fr',
+): { subject: string; html: string } {
+  const tr = emailT(locale)
+  const who = escapeHtml(args.newPrenom || tr('family.someoneAdult'))
+  const by = escapeHtml(args.inviterPrenom || tr('family.anotherParent'))
+  const role = args.role === 'parent' ? tr('family.roleParent') : tr('family.roleProche')
+  const body = `
+        <p style="margin:0 0 16px 0;">${greeting(tr, args.prenom ? escapeHtml(args.prenom) : '')}</p>
+        <p style="margin:0 0 16px 0;">${tr('family.ownerBody', { who, kids: escapeHtml(list(args.childPrenoms, tr)), role, by })}</p>
+        <p style="margin:0;">${tr('family.ownerCanRemove')}</p>
+      `
+  return {
+    subject: tr('family.ownerSubject'),
+    html: baseLayout({ locale, title: tr('family.ownerTitle'), body, cta: { label: tr('common.manageFamily'), href: `${appUrl()}/app/coparents` } }),
+  }
 }
 
 /**
@@ -136,20 +183,18 @@ export async function notifyOwnersNewAdult(args: {
       if (k.user_id === args.inviterId || k.user_id === args.newUserId) continue
       byOwner.set(k.user_id, [...(byOwner.get(k.user_id) ?? []), k.prenom])
     }
-    const who = escapeHtml(args.newPrenom || 'Un adulte')
-    const by = escapeHtml((inviter as { prenom?: string } | null)?.prenom || 'un autre parent')
+    const inviterPrenom = (inviter as { prenom?: string } | null)?.prenom || ''
     for (const [ownerId, names] of byOwner) {
       const to = await recipient(ownerId, { security: true })
       if (!to) continue
-      const body = `
-        <p style="margin:0 0 16px 0;">Bonjour${to.prenom ? ` ${escapeHtml(to.prenom)}` : ''},</p>
-        <p style="margin:0 0 16px 0;">${who} a désormais accès à l’espace partagé de ${escapeHtml(list(names))} en tant que ${args.role === 'parent' ? 'parent' : 'proche'}, sur invitation de ${by}.</p>
-        <p style="margin:0;">Si vous n’êtes pas d’accord, vous pouvez retirer cet accès à tout moment depuis la page Famille.</p>
-      `
+      const mail = ownerNewAdultEmail(
+        { prenom: to.prenom, newPrenom: args.newPrenom, childPrenoms: names, role: args.role, inviterPrenom },
+        to.locale,
+      )
       await sendEmail({
         to: to.email,
-        subject: 'Un nouvel adulte a accès à la fiche de votre enfant',
-        html: baseLayout({ title: 'Nouvel adulte lié', body, cta: { label: 'Gérer la famille', href: `${appUrl()}/app/coparents` } }),
+        subject: mail.subject,
+        html: mail.html,
         idempotencyKey: `family-owner-alert:${args.invitationId}:${ownerId}`,
       }).catch(() => undefined)
     }

@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { familyContext, limited, rpcError } from '@/lib/coparents/server/context'
 import { uuidSchema } from '@/lib/coparents/validation'
@@ -10,12 +11,13 @@ type Ctx = { params: Promise<{ id: string }> }
 export async function DELETE(req: Request, { params }: Ctx) {
   const ctx = await familyContext(req)
   if ('error' in ctx) return ctx.error
+  const t = await getTranslations('server.coparents')
   const { id } = await params
-  if (!uuidSchema.safeParse(id).success) return jsonError(404, 'not_found', 'Invitation introuvable.')
+  if (!uuidSchema.safeParse(id).success) return jsonError(404, 'not_found', t('invitationNotFound'))
   const tooMany = await limited(ctx.user.id, 'write', 60, 60_000)
   if (tooMany) return tooMany
 
   const { error } = await ctx.db.rpc('cancel_family_invitation', { p_invitation_id: id })
-  if (error) return rpcError(error, 'invitation.cancel', 'Invitation introuvable ou déjà traitée.')
+  if (error) return rpcError(error, 'invitation.cancel', t('invitationNotFoundOrHandled'))
   return jsonOk({ ok: true })
 }

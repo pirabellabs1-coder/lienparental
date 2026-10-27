@@ -24,7 +24,7 @@ import {
   type DepenseJustificatif, type JournalDepense,
 } from '@/lib/journal-finances'
 import {
-  DOCUMENTS_BUCKET, DataError, LIVE, SIGNED_URL_TTL, db, requireUserId,
+  DOCUMENTS_BUCKET, DataError, LIVE, SIGNED_URL_TTL, dataMsg, db, requireUserId,
   safeFileName, toDataError, useAsyncData, uuid,
 } from './core'
 import { kickNotifications } from '@/lib/notify/client'
@@ -144,27 +144,55 @@ function fromRow(r: JournalRow): JournalRecord {
   }
 }
 
-const inputSchema = z
+/**
+ * Messages de validation de lib/journal-finances (partagé, restés en français) → texte traduit.
+ * Message inconnu : renvoyé tel quel.
+ */
+const FINANCE_ERRORS: Record<string, string> = {
+  'Indiquez un montant.': 'amountRequired',
+  'Montant invalide.': 'amountInvalid',
+  'Le montant doit être supérieur à 0.': 'amountPositive',
+  'Montant trop élevé (100 000 maximum).': 'amountTooHigh',
+  'Choisissez une catégorie.': 'categoryRequired',
+  'Choisissez un mode de paiement.': 'modeRequired',
+  'Indiquez le montant déjà payé.': 'paidRequired',
+  'Le montant payé doit être supérieur à 0 et inférieur au montant total.': 'paidRange',
+  'Indiquez votre part.': 'shareRequired',
+  'Pourcentage entre 0 et 100.': 'percentRange',
+  'Votre part ne peut pas dépasser le montant total.': 'shareTooHigh',
+  'Date d’échéance invalide.': 'dueInvalid',
+  'Format non pris en charge. Utilisez une photo (JPG, PNG, WebP, HEIC) ou un PDF.': 'fileFormat',
+  'Fichier trop volumineux (10 Mo maximum).': 'fileTooBig',
+}
+function financeMsg(m: string | undefined | null): string | undefined {
+  if (!m) return undefined
+  const key = FINANCE_ERRORS[m]
+  if (key) return dataMsg(`journal.finance.${key}`)
+  const max = /^(\d+) caractères maximum\.$/.exec(m)
+  return max ? dataMsg('health.maxChars', { max: max[1] }) : m
+}
+
+const inputSchema = () => z
   .object({
     type: z.enum(['visite', 'appel', 'message', 'sante', 'depense', 'autre']),
-    titre: z.string().trim().min(1, 'Donnez un titre à cet événement.').max(120),
+    titre: z.string().trim().min(1, dataMsg('journal.titleRequired')).max(120),
     description: z.string().trim().max(2000).optional(),
     lieu: z.string().trim().max(200).optional(),
-    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'La date est requise.'),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, dataMsg('calendar.dateRequired')),
     heure: z.string().regex(/^\d{2}:\d{2}$/).optional().or(z.literal('')),
     childIds: z.array(z.string()).max(20),
     depense: depenseSchema.optional(),
   })
   .superRefine((v, ctx) => {
     if (v.type === 'depense' && !v.depense) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['depense'], message: 'Renseignez le montant, la catégorie et le mode de paiement.' })
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['depense'], message: dataMsg('journal.expenseRequired') })
     }
     if (v.depense?.echeanceSuivante && v.depense.echeanceSuivante <= v.date) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['depense', 'echeanceSuivante'], message: 'L’échéance suivante doit être postérieure à la date de la dépense.' })
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ['depense', 'echeanceSuivante'], message: dataMsg('journal.nextDueAfterDate') })
     }
   })
-export type JournalInput = z.input<typeof inputSchema>
-type ValidInput = z.output<typeof inputSchema>
+export type JournalInput = z.input<ReturnType<typeof inputSchema>>
+type ValidInput = z.output<ReturnType<typeof inputSchema>>
 
 /** Heure par défaut d'une dépense saisie sans heure : midi (DEFAULT_TZ), loin de tout changement de jour. */
 export const DEPENSE_DEFAULT_TIME = '12:00'
@@ -175,24 +203,24 @@ function occurredAt(v: Pick<ValidInput, 'type' | 'date' | 'heure'>): string {
 }
 
 function validate(input: JournalInput): ValidInput {
-  const p = inputSchema.safeParse(input)
-  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? 'Certaines informations sont invalides.', 'invalid')
+  const p = inputSchema().safeParse(input)
+  if (!p.success) throw new DataError(financeMsg(p.error.issues[0]?.message) ?? dataMsg('errors.invalid'), 'invalid')
   return p.data
 }
 
 function checkFiles(files: File[], existing = 0) {
-  if (files.length + existing > JOURNAL_MAX_FILES) throw new DataError(`${JOURNAL_MAX_FILES} fichiers maximum par événement.`, 'too_many_files')
+  if (files.length + existing > JOURNAL_MAX_FILES) throw new DataError(dataMsg('journal.tooManyFiles', { max: JOURNAL_MAX_FILES }), 'too_many_files')
   for (const f of files) {
-    if (!ALLOWED_MIME.test(f.type)) throw new DataError(`« ${f.name} » : format non pris en charge (images ou PDF).`, 'bad_type')
-    if (f.size > JOURNAL_MAX_FILE_BYTES) throw new DataError(`« ${f.name} » dépasse 10 Mo.`, 'too_large')
+    if (!ALLOWED_MIME.test(f.type)) throw new DataError(dataMsg('journal.fileBadType', { name: f.name }), 'bad_type')
+    if (f.size > JOURNAL_MAX_FILE_BYTES) throw new DataError(dataMsg('journal.fileTooLarge', { name: f.name }), 'too_large')
   }
 }
 
 function checkJustificatifs(files: File[], kept = 0) {
-  if (files.length + kept > MAX_JUSTIFICATIFS) throw new DataError(`${MAX_JUSTIFICATIFS} justificatifs maximum par dépense.`, 'too_many_files')
+  if (files.length + kept > MAX_JUSTIFICATIFS) throw new DataError(dataMsg('journal.tooManyJustificatifs', { max: MAX_JUSTIFICATIFS }), 'too_many_files')
   for (const f of files) {
     const err = justificatifError(f)
-    if (err) throw new DataError(`Justificatif « ${f.name} » : ${err}`, 'bad_justificatif')
+    if (err) throw new DataError(dataMsg('journal.badJustificatif', { name: f.name, error: financeMsg(err) ?? err }), 'bad_justificatif')
   }
 }
 
@@ -234,7 +262,7 @@ async function uploadMedia(userId: string, files: File[]): Promise<Media[]> {
   } catch (e) {
     // Pas d'orphelins : on retire ce qui a déjà été envoyé.
     if (out.length) await db().storage.from(DOCUMENTS_BUCKET).remove(out.map((m) => m.path))
-    throw toDataError(e, 'journal.upload', 'L’envoi des fichiers a échoué.')
+    throw toDataError(e, 'journal.upload', dataMsg('journal.uploadFailed'))
   }
 }
 
@@ -456,7 +484,7 @@ export async function updateJournal(
     const i = list.findIndex((e) => e.id === id)
     // Entrée de démonstration d'origine : la modification est conservée en copie de session.
     const prev = i >= 0 ? list[i] : getJournalEntry(id)
-    if (!prev) throw new DataError('Événement introuvable.', 'not_found')
+    if (!prev) throw new DataError(dataMsg('journal.notFound'), 'not_found')
     const kept = keptJustifs(prev.depense ? allJustificatifs(prev.depense) : [], change.keep)
     checkJustificatifs(newJustifs, kept.length)
     const next = demoRecord(id, v, [], [...kept, ...newJustifs.map(fileToJustif)])
@@ -467,7 +495,7 @@ export async function updateJournal(
     return
   }
   const current = await getJournal(id)
-  if (!current) throw new DataError('Événement introuvable.', 'not_found')
+  if (!current) throw new DataError(dataMsg('journal.notFound'), 'not_found')
   checkFiles(files, current.media?.length ?? 0)
   const kept = keptJustifs(current.depense ? allJustificatifs(current.depense) : [], change.keep)
   checkJustificatifs(newJustifs, kept.length)
@@ -521,7 +549,7 @@ export async function updateJournal(
 export async function addJournalFiles(id: string, files: File[]): Promise<void> {
   if (!LIVE || files.length === 0) return
   const current = await getJournal(id)
-  if (!current) throw new DataError('Événement introuvable.', 'not_found')
+  if (!current) throw new DataError(dataMsg('journal.notFound'), 'not_found')
   checkFiles(files, current.media?.length ?? 0)
   const userId = await requireUserId()
   const added = await uploadMedia(userId, files)

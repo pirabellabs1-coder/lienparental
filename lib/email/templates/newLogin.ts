@@ -3,6 +3,7 @@
 import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
 import { escapeHtml, safeUrl } from '../escape'
+import { dateLocale, emailT, greeting, type Locale } from '../i18n'
 
 export type NewLoginProps = {
   prenom: string
@@ -16,13 +17,14 @@ export type NewLoginProps = {
   dateIso: string
 }
 
+/** Objet en français (historique) ; l'objet traduit est renvoyé par newLoginEmail(props, locale). */
 export const newLoginSubject = 'Nouvelle connexion à votre compte Lien Parental'
 
-function formatDateFr(iso: string): string {
+function formatDate(iso: string, locale: Locale): string {
   try {
     const d = new Date(iso)
     if (Number.isNaN(d.getTime())) return iso
-    return new Intl.DateTimeFormat('fr-FR', {
+    return new Intl.DateTimeFormat(dateLocale(locale), {
       dateStyle: 'full',
       timeStyle: 'short',
       timeZone: 'America/Cayenne',
@@ -32,9 +34,10 @@ function formatDateFr(iso: string): string {
   }
 }
 
-export function newLoginEmail(props: NewLoginProps): { subject: string; html: string } {
+export function newLoginEmail(props: NewLoginProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
   const prenom = escapeHtml(props.prenom?.trim() || '')
-  const date = escapeHtml(formatDateFr(props.dateIso))
+  const date = escapeHtml(formatDate(props.dateIso, locale))
   const appareil = escapeHtml(props.appareil)
   const lieu = props.lieu?.trim() ? escapeHtml(props.lieu.trim()) : ''
   const systeme = escapeHtml(props.systeme)
@@ -42,6 +45,11 @@ export function newLoginEmail(props: NewLoginProps): { subject: string; html: st
     (process.env.NEXT_PUBLIC_APP_URL ?? '') + '/app/profil/securite',
     'https://lienparental.fr/app/profil/securite'
   )
+
+  // Français : mise en forme historique conservée à l'identique ; autres langues : pas d'espace avant le deux-points.
+  const secureLabel = locale === 'fr' ? `
+        ${tr('newLogin.secure')}
+      ` : tr('newLogin.secure')
 
   const row = (label: string, value: string) => `
     <tr>
@@ -51,32 +59,33 @@ export function newLoginEmail(props: NewLoginProps): { subject: string; html: st
   `
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
+    <p style="margin:0 0 16px 0;">${greeting(tr, prenom)}</p>
     <p style="margin:0 0 16px 0;">
-      Nous avons détecté une nouvelle connexion à votre compte Lien Parental. Si c'était bien vous, aucune action n'est nécessaire.
+      ${tr('newLogin.intro')}
     </p>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:16px 0;border-top:1px solid ${t.colors.border};border-bottom:1px solid ${t.colors.border};">
-      ${row('Appareil', appareil)}
-      ${row('Système', systeme)}
-      ${lieu ? row('Lieu', lieu) : ''}
-      ${row('Date', date)}
+      ${row(tr('newLogin.device'), appareil)}
+      ${row(tr('newLogin.system'), systeme)}
+      ${lieu ? row(tr('newLogin.place'), lieu) : ''}
+      ${row(tr('newLogin.date'), date)}
     </table>
     <p style="margin:0 0 8px 0;color:${t.colors.alert};font-weight:600;">
-      Ce n'était pas vous ?
+      ${tr('newLogin.notYou')}
     </p>
     <p style="margin:0;">
-      <a href="${notYouUrl}" style="color:${t.colors.alert};text-decoration:underline;font-weight:600;">
-        Sécuriser mon compte immédiatement
-      </a> :
-      nous vous aiderons à révoquer les sessions actives et à changer votre mot de passe.
+      <a href="${notYouUrl}" style="color:${t.colors.alert};text-decoration:underline;font-weight:600;">${secureLabel}</a>${tr('common.colon')}
+      ${tr('newLogin.secureAfter')}
     </p>
   `
 
   return {
-    subject: newLoginSubject,
+    subject: tr('newLogin.subject'),
     html: baseLayout({
-      preheader: props.lieu?.trim() ? `Nouvelle connexion depuis ${props.appareil} (${props.lieu.trim()}).` : `Nouvelle connexion depuis ${props.appareil}.`,
-      title: 'Nouvelle connexion détectée',
+      locale,
+      preheader: props.lieu?.trim()
+        ? tr('newLogin.preheaderPlace', { device: props.appareil, place: props.lieu.trim() })
+        : tr('newLogin.preheader', { device: props.appareil }),
+      title: tr('newLogin.title'),
       body,
     }),
   }

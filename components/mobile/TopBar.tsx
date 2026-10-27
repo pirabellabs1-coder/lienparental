@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { ArrowLeft, Bell } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
@@ -27,6 +28,7 @@ export function TopBar({
   rightSlot,
   className,
 }: Props) {
+  const t = useTranslations('shared.topBar')
   const router = useRouter()
   const handleBack = () => (backHref ? router.push(backHref) : router.back())
 
@@ -41,7 +43,7 @@ export function TopBar({
             <button
               type="button"
               onClick={handleBack}
-              aria-label="Retour"
+              aria-label={t('back')}
               className="-ml-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 hover:bg-night-50"
             >
               <ArrowLeft className="h-[22px] w-[22px]" aria-hidden />
@@ -61,7 +63,7 @@ export function TopBar({
           {showBell && (
             <Link
               href="/app/notifications"
-              aria-label={notificationsCount > 0 ? `Notifications, ${notificationsCount} non lues` : 'Notifications'}
+              aria-label={notificationsCount > 0 ? t('notificationsUnread', { count: String(notificationsCount) }) : t('notifications')}
               className="relative inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 hover:bg-night-50"
             >
               <Bell className="h-[22px] w-[22px]" aria-hidden />

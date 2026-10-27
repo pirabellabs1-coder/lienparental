@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { getTranslations } from 'next-intl/server'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { isPlausibleToken, jsonError } from '@/lib/data/server/http'
 import { clientIp, ipKey, rateLimit, rateLimitedResponse } from '@/lib/data/server/rate-limit'
@@ -12,28 +13,28 @@ import { isOwnedStoragePath } from '@/app/api/partage/_lib/server'
 
 export const dynamic = 'force-dynamic'
 
-const GONE = 'Ce lien de partage n’est plus valide (expiré ou révoqué).'
-
 type Ctx = { params: Promise<{ token: string }> }
 
 export async function GET(req: Request, ctx: Ctx) {
-  if (!SUPABASE_ENABLED) return jsonError(503, 'not_configured', 'Service indisponible.')
+  const t = await getTranslations('server.partages')
+  const GONE = t('documentLinkGone')
+  if (!SUPABASE_ENABLED) return jsonError(503, 'not_configured', t('serviceUnavailableShort'))
   // Fail-closed : jetons d'accès à des documents du coffre.
   const rl = await rateLimit(ipKey('partages:open', clientIp(req.headers)), 30, 60_000, { failClosed: true })
-  if (!rl.ok) return rateLimitedResponse(rl, 'Trop de tentatives. Réessayez plus tard.')
+  if (!rl.ok) return rateLimitedResponse(rl, t('tooManyAttempts'))
 
   const { token } = await ctx.params
   if (!isPlausibleToken(token)) return jsonError(404, 'not_found', GONE)
 
   const svc = serviceClientOrNull()
-  if (!svc) return jsonError(503, 'unavailable', 'Service momentanément indisponible.')
+  if (!svc) return jsonError(503, 'unavailable', t('serviceUnavailable'))
 
   const { data: share, error } = await svc
     .from('shares')
     .select('id, user_id, document_id, expires_at, revoked_at, download_count, max_downloads')
     .eq('token', token)
     .maybeSingle()
-  if (error) return jsonError(503, 'unavailable', 'Service momentanément indisponible.')
+  if (error) return jsonError(503, 'unavailable', t('serviceUnavailable'))
   const s = share as { id: string; user_id: string; document_id: string; expires_at: string; revoked_at: string | null; download_count: number; max_downloads: number | null } | null
   if (!s || s.revoked_at || new Date(s.expires_at).getTime() <= Date.now()) return jsonError(404, 'not_found', GONE)
   if (s.max_downloads !== null && s.download_count >= s.max_downloads) return jsonError(410, 'exhausted', GONE)
@@ -60,12 +61,12 @@ export async function GET(req: Request, ctx: Ctx) {
     .eq('id', s.id)
     .eq('download_count', s.download_count)
     .select('id')
-  if (!bumped || bumped.length === 0) return jsonError(409, 'retry', 'Réessayez dans un instant.')
+  if (!bumped || bumped.length === 0) return jsonError(409, 'retry', t('retrySoon'))
 
   const ext = d.storage_path.split('.').pop() ?? ''
   const filename = ext && !d.name.toLowerCase().endsWith(`.${ext}`) ? `${d.name}.${ext}` : d.name
   const { data: signed, error: sErr } = await svc.storage.from('documents').createSignedUrl(d.storage_path, 900, { download: filename })
-  if (sErr || !signed?.signedUrl) return jsonError(503, 'unavailable', 'Téléchargement momentanément indisponible.')
+  if (sErr || !signed?.signedUrl) return jsonError(503, 'unavailable', t('downloadUnavailable'))
 
   return NextResponse.redirect(signed.signedUrl, {
     status: 302,

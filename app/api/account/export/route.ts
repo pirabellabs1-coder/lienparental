@@ -13,11 +13,12 @@
  * Réponses : 200 application/json (pièce jointe) | 401 | 403 | 429 | 5xx { error: { code, message } }.
  */
 import { NextResponse } from 'next/server'
+import { getTranslations } from 'next-intl/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createServiceClient, type TypedSupabaseClient } from '@/lib/supabase/server'
 import type { Database } from '@/lib/supabase/types'
-import { DENIED_MESSAGES, requireAuthedUser } from '@/lib/auth/guard'
+import { requireAuthedUser } from '@/lib/auth/guard'
 import { requireVaultUnlocked, vaultDeniedResponse } from '@/lib/vault-lock'
 
 export const dynamic = 'force-dynamic'
@@ -74,13 +75,15 @@ export async function GET() {
   // Coffre-fort verrouillé : ces données en proviennent (chantier D).
   const vault = await requireVaultUnlocked()
   if (!vault.ok) return vaultDeniedResponse(vault)
-  if (!SUPABASE_ENABLED) return fail(501, 'demo_mode', DENIED_MESSAGES.disabled)
+  const t = await getTranslations('server.account')
+  const tc = await getTranslations('server.common')
+  if (!SUPABASE_ENABLED) return fail(501, 'demo_mode', tc('denied.disabled'))
 
   const ctx = await requireAuthedUser()
   if (!ctx.ok) {
     return ctx.reason === 'mfa_required'
-      ? fail(403, 'mfa_required', DENIED_MESSAGES.mfa_required)
-      : fail(401, 'unauthenticated', DENIED_MESSAGES.unauthenticated)
+      ? fail(403, 'mfa_required', tc('denied.mfa_required'))
+      : fail(401, 'unauthenticated', tc('denied.unauthenticated'))
   }
   const { supabase, user } = ctx
 
@@ -105,7 +108,7 @@ export async function GET() {
       const wait = new Date(last.created_at).getTime() + EXPORT_INTERVAL_MS - Date.now()
       if (wait > 0) {
         const days = Math.ceil(wait / (24 * 60 * 60 * 1000))
-        return fail(429, 'export_rate_limited', `Vous avez déjà exporté vos données récemment. Nouvel export possible dans ${days} jour${days > 1 ? 's' : ''}.`, {
+        return fail(429, 'export_rate_limited', t('exportRateLimited', { days }), {
           'Retry-After': String(Math.ceil(wait / 1000)),
         })
       }
@@ -114,9 +117,9 @@ export async function GET() {
 
   const data: Record<string, unknown[]> = {}
   try {
-    for (const t of TABLES) data[t.table] = await fetchAll(supabase, t, user.id)
+    for (const table of TABLES) data[table.table] = await fetchAll(supabase, table, user.id)
   } catch {
-    return fail(500, 'export_failed', 'L’export a échoué. Réessayez dans un instant.')
+    return fail(500, 'export_failed', t('exportFailed'))
   }
 
   if (admin) {

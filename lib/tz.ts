@@ -10,6 +10,7 @@
  *   - une date « jour seul » ("yyyy-mm-dd") n'est PAS un instant : on la manipule comme
  *     chaîne, ou comme Date à midi UTC (`dayKeyToDate`) formatée avec `timeZone: 'UTC'`.
  */
+import { intlLocale } from '@/lib/i18n/config'
 
 export const DEFAULT_TZ = 'America/Cayenne' // UTC-3, sans heure d'été
 
@@ -155,7 +156,11 @@ export function dayRangeBoundsInTz(fromDay: string, toDay: string, tz: string = 
   return { from: wallTimeToIso(fromDay, '00:00', tz), to: wallTimeToIso(addDaysToKey(toDay, 1), '00:00', tz) }
 }
 
-/** Formate une date « jour seul » ("yyyy-mm-dd") en fr-FR, sans glissement de jour. */
-export function fmtDayKey(key: string, opts: Intl.DateTimeFormatOptions): string {
-  return dayKeyToDate(key).toLocaleDateString('fr-FR', { ...opts, timeZone: 'UTC' })
+/**
+ * Formate une date « jour seul » ("yyyy-mm-dd") sans glissement de jour.
+ * fr-FR par défaut ; `locale` optionnelle : langue de l'app (fr | en | pt) ou locale BCP 47.
+ */
+export function fmtDayKey(key: string, opts: Intl.DateTimeFormatOptions, locale?: string): string {
+  const loc = !locale ? 'fr-FR' : locale.length === 2 ? intlLocale(locale) : locale
+  return dayKeyToDate(key).toLocaleDateString(loc, { ...opts, timeZone: 'UTC' })
 }

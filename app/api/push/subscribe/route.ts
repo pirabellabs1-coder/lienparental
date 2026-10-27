@@ -11,10 +11,11 @@
  */
 import { createHash } from 'node:crypto'
 import { z } from 'zod'
+import { getTranslations } from 'next-intl/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { jsonError, jsonOk, rejectCrossSiteJson } from '@/lib/data/server/http'
 import { rateLimit, rateLimitedResponse, userKey } from '@/lib/data/server/rate-limit'
-import { DENIED_MESSAGES, requireAuthedUser } from '@/lib/auth/guard'
+import { requireAuthedUser } from '@/lib/auth/guard'
 import { parseUserAgent } from '@/lib/notify/device'
 import { pushConfigured } from '@/lib/notify/push'
 import { serviceDb } from '@/lib/notify/server'
@@ -31,7 +32,8 @@ async function authed() {
   const ctx = await requireAuthedUser()
   if (!ctx.ok) {
     const status = ctx.reason === 'disabled' ? 501 : ctx.reason === 'mfa_required' ? 403 : 401
-    return { error: jsonError(status, ctx.reason, DENIED_MESSAGES[ctx.reason]) }
+    const tc = await getTranslations('server.common')
+    return { error: jsonError(status, ctx.reason, tc(`denied.${ctx.reason}`)) }
   }
   return { ctx, db: ctx.supabase as unknown as SupabaseClient }
 }
@@ -43,13 +45,14 @@ async function readBody(req: Request): Promise<unknown> {
 export async function GET() {
   const a = await authed()
   if ('error' in a) return a.error
+  const t = await getTranslations('server.push')
   const { data, error } = await a.db
     .from('push_subscriptions')
     .select('id, endpoint, device_label, created_at')
     .order('created_at', { ascending: false })
-  if (error) return jsonError(500, 'read_failed', 'Impossible de charger vos appareils.')
+  if (error) return jsonError(500, 'read_failed', t('readFailed'))
   const devices = ((data ?? []) as { id: string; endpoint: string; device_label: string | null; created_at: string }[])
-    .map(d => ({ id: d.id, label: d.device_label ?? 'Appareil', createdAt: d.created_at, endpointHash: endpointHash(d.endpoint) }))
+    .map(d => ({ id: d.id, label: d.device_label ?? t('deviceFallback'), createdAt: d.created_at, endpointHash: endpointHash(d.endpoint) }))
   return jsonOk({ configured: pushConfigured(), devices })
 }
 
@@ -58,20 +61,21 @@ export async function POST(req: Request) {
   if (rejected) return rejected
   const a = await authed()
   if ('error' in a) return a.error
-  if (!pushConfigured()) return jsonError(503, 'push_not_configured', 'Les notifications sur appareil ne sont pas encore disponibles.')
+  const t = await getTranslations('server.push')
+  if (!pushConfigured()) return jsonError(503, 'push_not_configured', t('notConfigured'))
   const rl = await rateLimit(userKey('push-subscribe', a.ctx.user.id), 20, 60 * 60_000)
   if (!rl.ok) return rateLimitedResponse(rl)
 
   const parsed = subscriptionSchema.safeParse(await readBody(req))
-  if (!parsed.success) return jsonError(422, 'invalid_subscription', parsed.error.issues[0]?.message ?? 'Abonnement invalide.')
+  if (!parsed.success) return jsonError(422, 'invalid_subscription', parsed.error.issues[0]?.message ?? t('invalidSubscription'))
 
   const admin = serviceDb()
-  if (!admin) return jsonError(503, 'service_unavailable', 'Service momentanément indisponible.')
+  if (!admin) return jsonError(503, 'service_unavailable', t('serviceUnavailable'))
 
   const { count } = await a.db.from('push_subscriptions').select('id', { count: 'exact', head: true })
   if ((count ?? 0) >= MAX_DEVICES) {
     const { data: same } = await a.db.from('push_subscriptions').select('id').eq('endpoint', parsed.data.endpoint).maybeSingle()
-    if (!same) return jsonError(409, 'too_many_devices', `Vous pouvez activer les notifications sur ${MAX_DEVICES} appareils au plus. Retirez-en un d’abord.`)
+    if (!same) return jsonError(409, 'too_many_devices', t('tooManyDevices', { max: MAX_DEVICES }))
   }
 
   const label = parseUserAgent(req.headers.get('user-agent')).label
@@ -86,7 +90,7 @@ export async function POST(req: Request) {
     },
     { onConflict: 'endpoint' },
   )
-  if (error) return jsonError(500, 'save_failed', 'Activation impossible pour le moment. Réessayez dans un instant.')
+  if (error) return jsonError(500, 'save_failed', t('saveFailed'))
   return jsonOk({ ok: true, endpointHash: endpointHash(parsed.data.endpoint) })
 }
 
@@ -100,12 +104,13 @@ export async function DELETE(req: Request) {
   if (rejected) return rejected
   const a = await authed()
   if ('error' in a) return a.error
+  const t = await getTranslations('server.push')
   const parsed = deleteSchema.safeParse(await readBody(req))
-  if (!parsed.success) return jsonError(422, 'invalid_body', 'Requête invalide.')
+  if (!parsed.success) return jsonError(422, 'invalid_body', t('invalidRequest'))
   const q = a.db.from('push_subscriptions').delete()
   const { error } = 'id' in parsed.data
     ? await q.eq('id', parsed.data.id).eq('user_id', a.ctx.user.id)
     : await q.eq('endpoint', parsed.data.endpoint).eq('user_id', a.ctx.user.id)
-  if (error) return jsonError(500, 'delete_failed', 'Suppression impossible pour le moment.')
+  if (error) return jsonError(500, 'delete_failed', t('deleteFailed'))
   return jsonOk({ ok: true })
 }

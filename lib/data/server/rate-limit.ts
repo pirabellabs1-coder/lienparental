@@ -1,4 +1,5 @@
 import 'server-only'
+import { getTranslations } from 'next-intl/server'
 /**
  * Limiteur de débit PARTAGÉ entre instances serverless (Vercel), adossé à
  * Postgres (Supabase) : table `rate_limits` + fonction atomique
@@ -114,15 +115,16 @@ export async function rateLimit(key: string, limit: number, windowMs: number, op
  * Réponse JSON standard pour un refus du limiteur :
  * 429 + Retry-After (quota), ou 503 + Retry-After (limiteur indisponible, fail-closed).
  */
-export function rateLimitedResponse(
+export async function rateLimitedResponse(
   rl: Extract<RateLimitResult, { ok: false }>,
-  message = 'Trop de demandes. Patientez un instant.',
+  message?: string,
   headers?: Record<string, string>,
 ) {
+  const t = await getTranslations('server.common')
   const h = { ...headers, 'Retry-After': String(rl.retryAfter) }
   return rl.reason === 'unavailable'
-    ? jsonError(503, 'unavailable', 'Service momentanément indisponible. Réessayez dans un instant.', h)
-    : jsonError(429, 'rate_limited', message, h)
+    ? jsonError(503, 'unavailable', t('unavailable'), h)
+    : jsonError(429, 'rate_limited', message ?? t('rateLimited'), h)
 }
 
 /**

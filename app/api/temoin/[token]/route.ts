@@ -1,9 +1,10 @@
 import { z } from 'zod'
+import { getTranslations } from 'next-intl/server'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { isPlausibleToken, jsonError, jsonOk } from '@/lib/data/server/http'
 import { clientIp, ipHash, ipKey, rateLimit, rateLimitedResponse, tokenKey } from '@/lib/data/server/rate-limit'
 import {
-  NOT_FOUND_MESSAGE, WITNESS_BUCKET, WITNESS_MAX_FILES, WITNESS_MAX_SUBMISSIONS,
+  WITNESS_BUCKET, WITNESS_MAX_FILES, WITNESS_MAX_SUBMISSIONS,
   resolveRequest, serviceClientOrNull,
 } from '@/lib/data/server/witness'
 import { addToVaultFromSource } from '@/lib/vault/from-source'
@@ -36,31 +37,34 @@ const payloadSchema = z.object({
   certified: z.literal(true),
 }).strict()
 
-async function guard(req: Request, ctx: Ctx, kind: 'read' | 'write') {
-  if (!SUPABASE_ENABLED) return { error: jsonError(503, 'not_configured', 'Service indisponible.') } as const
+type T = Awaited<ReturnType<typeof getTranslations>>
+
+async function guard(req: Request, ctx: Ctx, kind: 'read' | 'write', t: T) {
+  if (!SUPABASE_ENABLED) return { error: jsonError(503, 'not_configured', t('serviceUnavailableShort')) } as const
   const ip = clientIp(req.headers)
   // Fail-closed : balayage de jetons témoin (503 si le compteur partagé est indisponible).
   const rl = kind === 'read'
     ? await rateLimit(ipKey('temoin:read', ip), 30, 60_000, { failClosed: true })
     : await rateLimit(ipKey('temoin:write', ip), 5, 10 * 60_000, { failClosed: true })
   if (!rl.ok) {
-    return { error: rateLimitedResponse(rl, 'Trop de tentatives. Patientez quelques minutes puis réessayez.') } as const
+    return { error: await rateLimitedResponse(rl, t('tooManyAttempts')) } as const
   }
   const { token } = await ctx.params
-  if (!isPlausibleToken(token)) return { error: jsonError(404, 'not_found', NOT_FOUND_MESSAGE) } as const
+  if (!isPlausibleToken(token)) return { error: jsonError(404, 'not_found', t('linkNotFound')) } as const
   return { token, ip } as const
 }
 
 export async function GET(req: Request, ctx: Ctx) {
-  const g = await guard(req, ctx, 'read')
+  const t = await getTranslations('server.temoin')
+  const g = await guard(req, ctx, 'read', t)
   if ('error' in g) return g.error
   let r
   try {
     r = await resolveRequest(g.token)
   } catch {
-    return jsonError(503, 'unavailable', 'Service momentanément indisponible. Réessayez plus tard.')
+    return jsonError(503, 'unavailable', t('serviceUnavailable'))
   }
-  if (!r) return jsonError(404, 'not_found', NOT_FOUND_MESSAGE)
+  if (!r) return jsonError(404, 'not_found', t('linkNotFound'))
 
   // Suivi « ouvert » côté parent (best effort, n'expose rien).
   const svc = serviceClientOrNull()
@@ -72,35 +76,36 @@ export async function GET(req: Request, ctx: Ctx) {
 
   return jsonOk({
     parentPrenom: r.parentPrenom,
-    parents: r.parents.map((nom, i) => ({ id: `p_${i + 1}`, nom, role: `Parent ${i + 1}` })),
-    enfants: r.enfants.map((nom, i) => ({ id: `e_${i + 1}`, nom, role: `Enfant ${i + 1}` })),
+    parents: r.parents.map((nom, i) => ({ id: `p_${i + 1}`, nom, role: t('parentRole', { n: i + 1 }) })),
+    enfants: r.enfants.map((nom, i) => ({ id: `e_${i + 1}`, nom, role: t('childRole', { n: i + 1 }) })),
     expiresAt: r.expiresAt,
   })
 }
 
 export async function POST(req: Request, ctx: Ctx) {
-  const g = await guard(req, ctx, 'write')
+  const t = await getTranslations('server.temoin')
+  const g = await guard(req, ctx, 'write', t)
   if ('error' in g) return g.error
   const perToken = await rateLimit(tokenKey('temoin:write-token', g.token), WITNESS_MAX_SUBMISSIONS, 60 * 60_000, { failClosed: true })
-  if (!perToken.ok) return rateLimitedResponse(perToken, 'Trop d’envois sur ce lien. Réessayez plus tard.')
+  if (!perToken.ok) return rateLimitedResponse(perToken, t('tooManySubmissions'))
 
   const len = Number(req.headers.get('content-length') ?? 0)
-  if (len > 256 * 1024) return jsonError(413, 'too_large', 'Témoignage trop volumineux.')
+  if (len > 256 * 1024) return jsonError(413, 'too_large', t('tooLarge'))
 
   const parsed = payloadSchema.safeParse(await req.json().catch(() => null))
-  if (!parsed.success) return jsonError(422, 'invalid', 'Le témoignage est incomplet ou invalide.')
+  if (!parsed.success) return jsonError(422, 'invalid', t('invalidPayload'))
   const v = parsed.data
 
   let r
   try {
     r = await resolveRequest(g.token)
   } catch {
-    return jsonError(503, 'unavailable', 'Service momentanément indisponible. Réessayez plus tard.')
+    return jsonError(503, 'unavailable', t('serviceUnavailable'))
   }
-  if (!r) return jsonError(404, 'not_found', NOT_FOUND_MESSAGE)
+  if (!r) return jsonError(404, 'not_found', t('linkNotFound'))
 
   const svc = serviceClientOrNull()
-  if (!svc) return jsonError(503, 'unavailable', 'Service momentanément indisponible. Réessayez plus tard.')
+  if (!svc) return jsonError(503, 'unavailable', t('serviceUnavailable'))
 
   // Pièces jointes : uniquement des objets déposés par /upload POUR CETTE DEMANDE.
   // Taille et type sont relus côté Storage, jamais repris du client.
@@ -108,11 +113,11 @@ export async function POST(req: Request, ctx: Ctx) {
   if (v.attachments.length > 0) {
     const pattern = new RegExp(`^${r.id}/[0-9a-f-]{36}\\.(pdf|jpg|png|webp)$`)
     const { data: objects, error } = await svc.storage.from(WITNESS_BUCKET).list(r.id, { limit: 100 })
-    if (error) return jsonError(503, 'unavailable', 'Vérification des pièces jointes impossible.')
+    if (error) return jsonError(503, 'unavailable', t('attachmentsCheckFailed'))
     for (const a of v.attachments) {
-      if (!pattern.test(a.path)) return jsonError(422, 'invalid_attachment', 'Pièce jointe invalide.')
+      if (!pattern.test(a.path)) return jsonError(422, 'invalid_attachment', t('attachmentInvalid'))
       const obj = (objects ?? []).find((o) => `${r.id}/${o.name}` === a.path)
-      if (!obj) return jsonError(422, 'invalid_attachment', 'Pièce jointe introuvable. Ajoutez-la à nouveau.')
+      if (!obj) return jsonError(422, 'invalid_attachment', t('attachmentNotFound'))
       const meta = (obj.metadata ?? {}) as { size?: number; mimetype?: string }
       attachments.push({ path: a.path, mime: meta.mimetype ?? 'application/octet-stream', size: Number(meta.size ?? 0), name: a.name })
     }
@@ -140,14 +145,14 @@ export async function POST(req: Request, ctx: Ctx) {
   for (let attempt = 0; attempt < 3 && !id; attempt++) {
     const { data, error } = await svc.rpc('record_testimony_submission', rpcArgs)
     if (!error) { id = data as string; break }
-    if (error.code === 'P0002') return jsonError(404, 'not_found', NOT_FOUND_MESSAGE)
-    if (error.code === '54000') return jsonError(409, 'limit_reached', 'Ce lien a atteint le nombre maximal de témoignages.')
+    if (error.code === 'P0002') return jsonError(404, 'not_found', t('linkNotFound'))
+    if (error.code === '54000') return jsonError(409, 'limit_reached', t('limitReached'))
     if (error.code !== '23505') {
       console.warn('[api/temoin] RPC record_testimony_submission', error.code ?? 'unknown')
-      return jsonError(500, 'db_error', 'L’envoi a échoué. Réessayez dans un instant.')
+      return jsonError(500, 'db_error', t('submitFailed'))
     }
   }
-  if (!id) return jsonError(503, 'busy', 'Service très sollicité. Réessayez dans un instant.')
+  if (!id) return jsonError(503, 'busy', t('busy'))
 
   const testimonyId = id
   const { data: ref } = await svc.from('testimonies').select('reference').eq('id', testimonyId).maybeSingle()

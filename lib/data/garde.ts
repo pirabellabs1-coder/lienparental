@@ -8,7 +8,7 @@
 import { z } from 'zod'
 import { defaultGardeConfig, normalizeZone, ZONE_OPTIONS, type GardeConfig, type ZoneScolaire } from '@/lib/garde'
 import { loadGardeConfig as loadLocal, saveGardeConfig as saveLocal } from '@/components/garde/store'
-import { DataError, LIVE, db, requireUserId, toDataError } from './core'
+import { DataError, LIVE, db, requireUserId, toDataError, dataMsg } from './core'
 import { kickNotifications } from '@/lib/notify/client'
 
 const parent = z.enum(['moi', 'autre'])
@@ -47,7 +47,7 @@ export async function fetchGardeConfig(today: Date): Promise<GardeConfig> {
 /** Enregistre (upsert idempotent sur user_id). */
 export async function storeGardeConfig(config: GardeConfig): Promise<void> {
   const p = configSchema.safeParse(config)
-  if (!p.success) throw new DataError('Configuration de garde invalide.', 'invalid')
+  if (!p.success) throw new DataError(dataMsg('garde.invalidConfig'), 'invalid')
   if (!LIVE) {
     saveLocal(config)
     return

@@ -1,3 +1,6 @@
+import { intlLocale, isLocale } from '@/lib/i18n/config'
+import { libT } from '@/lib/i18n/runtime'
+
 export type Category = { id: string; name: string; icon: string; color: 'night'|'leaf'|'iris'|'gold'|'alert'; count: number }
 export type VaultDoc = {
   id: string; name: string; mime: 'pdf'|'jpg'|'png'|'docx'; size: number; createdAt: string;
@@ -116,10 +119,16 @@ export const VAULT_SOURCES = [
 const MONTHS_LONG = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
 const MONTHS_SHORT = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.']
 
-/** Formatage déterministe (identique serveur / client) d'une date YYYY-MM-DD. */
-export function frDate(ymd: string, style: 'long' | 'short' = 'long') {
+/**
+ * Formatage déterministe (identique serveur / client) d'une date YYYY-MM-DD.
+ * `locale` optionnelle (fr | en | pt) : hors français, Intl dans la langue demandée (UTC, sans glissement).
+ */
+export function frDate(ymd: string, style: 'long' | 'short' = 'long', locale?: string) {
   const [y, m, d] = ymd.split('-').map(Number)
   if (!y || !m || !d) return ymd
+  if (locale && locale !== 'fr') {
+    return new Date(Date.UTC(y, m - 1, d, 12)).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: style, year: 'numeric', timeZone: 'UTC' })
+  }
   const month = (style === 'long' ? MONTHS_LONG : MONTHS_SHORT)[m - 1]
   return `${d} ${month} ${y}`
 }
@@ -128,8 +137,15 @@ export function frNumericDate(ymd: string) {
   const [y, m, d] = ymd.split('-')
   return d && m && y ? `${d}/${m}/${y}` : ymd
 }
-/** « 1,2 Mo » — virgule décimale à la française. */
-export function frSize(bytes: number) {
+/** « 1,2 Mo » — virgule décimale à la française. `locale` optionnelle (en : « 1.2 MB », pt : « 1,2 MB »). */
+export function frSize(bytes: number, locale?: string) {
+  if (locale && locale !== 'fr') {
+    const t = libT('shared.format.size', isLocale(locale) ? locale : 'fr')
+    if (bytes < 1024) return t('bytes', { n: String(bytes) })
+    if (bytes < 1_048_576) return t('kb', { n: String(Math.round(bytes / 1024)) })
+    const mb = (bytes / 1_048_576).toFixed(1)
+    return t('mb', { n: locale === 'en' ? mb : mb.replace('.', ',') })
+  }
   if (bytes < 1024) return `${bytes} o`
   if (bytes < 1_048_576) return `${Math.round(bytes / 1024)} Ko`
   return `${(bytes / 1_048_576).toFixed(1).replace('.', ',')} Mo`

@@ -7,7 +7,8 @@ import 'server-only'
  */
 import type { NextRequest } from 'next/server'
 import type { SupabaseClient, User } from '@supabase/supabase-js'
-import { requireAuthedUser } from '@/lib/auth/guard'
+import { getTranslations } from 'next-intl/server'
+import { deniedMessage, requireAuthedUser } from '@/lib/auth/guard'
 import { getCurrentUser } from '@/lib/auth/session'
 import { jsonError } from '@/lib/data/server/http'
 import { appUrl } from '@/lib/auth/redirect'
@@ -20,16 +21,17 @@ export type GoogleRouteContext =
 export async function guard(): Promise<GoogleRouteContext> {
   const ctx = await requireAuthedUser()
   if (ctx.ok) return { kind: 'live', user: ctx.user, db: ctx.supabase as unknown as SupabaseClient }
+  const t = await getTranslations('server.google')
   if (ctx.reason === 'disabled') {
     // Mode démonstration : session de recette (cookie lp_demo), aucune intégration réelle.
     return (await getCurrentUser())
       ? { kind: 'demo' }
-      : { kind: 'denied', response: jsonError(401, 'unauthenticated', 'Session expirée. Reconnectez-vous.') }
+      : { kind: 'denied', response: jsonError(401, 'unauthenticated', t('sessionExpired')) }
   }
   if (ctx.reason === 'mfa_required') {
-    return { kind: 'denied', response: jsonError(403, 'mfa_required', 'Confirmez votre identité avec votre code de double authentification.') }
+    return { kind: 'denied', response: jsonError(403, 'mfa_required', await deniedMessage('mfa_required')) }
   }
-  return { kind: 'denied', response: jsonError(401, 'unauthenticated', 'Session expirée. Reconnectez-vous.') }
+  return { kind: 'denied', response: jsonError(401, 'unauthenticated', t('sessionExpired')) }
 }
 
 /** Refuse une requête mutante venant d'un autre site (Origin / Sec-Fetch-Site). */
@@ -41,6 +43,7 @@ export function sameOrigin(req: NextRequest): boolean {
   return origin === req.nextUrl.origin || origin === appUrl()
 }
 
-export function crossSite() {
-  return jsonError(403, 'cross_site', 'Requête refusée.')
+export async function crossSite() {
+  const t = await getTranslations('server.google')
+  return jsonError(403, 'cross_site', t('crossSite'))
 }

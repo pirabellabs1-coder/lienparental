@@ -1,0 +1,408 @@
+{
+  "shared": {
+    "billing": {
+      "errors": {
+        "already_subscribed": "You already have an active subscription: change plans from My subscription.",
+        "billing_disabled": "Online payment is not available yet.",
+        "cancel_pending": "Undo the cancellation first to change plans.",
+        "generic": "Something went wrong. Please try again in a moment.",
+        "invalid_body": "Invalid request. Reload the page, then retry.",
+        "invalid_cycle": "Unknown plan. Choose Monthly or Yearly.",
+        "invalid_origin": "Request refused. Reload the page, then retry.",
+        "invalid_plan": "Unknown plan. Choose Premium or Coparentalité+.",
+        "invalid_state": "This action isn’t possible right now. Reload the page.",
+        "misconfigured": "The payment service is temporarily unavailable.",
+        "network": "Unable to connect. Check your network, then retry.",
+        "no_customer": "No payment method saved yet.",
+        "no_subscription": "No active subscription.",
+        "payment_failed": "Payment of the difference was declined. Check your payment method, then retry.",
+        "rate_limited": "Too many requests. Wait a moment, then retry.",
+        "session_not_found": "Payment session not found for this account.",
+        "stripe_unavailable": "The payment service is temporarily unavailable. Please try again in a moment.",
+        "subscription_not_active": "Settle your payment first to change plans.",
+        "unauthenticated": "Your session has expired. Sign in again, then retry."
+      }
+    },
+    "calendar": {
+      "types": {
+        "activite": "Activity",
+        "anniversaire": "Birthday",
+        "appel": "Video call",
+        "autre": "Other",
+        "deplacement": "Trip",
+        "ecole": "School",
+        "message": "Message",
+        "rdv": "Appointment",
+        "repas": "Meal",
+        "sante": "Health",
+        "sortie": "Outing",
+        "visite": "Visit"
+      }
+    },
+    "confirm": {
+      "copy": {
+        "default": {
+          "action": "Continue",
+          "text": "Continue to complete the requested operation.",
+          "title": "Confirmation"
+        },
+        "email_change": {
+          "action": "Confirm",
+          "text": "Continue to confirm the change of your account’s email address.",
+          "title": "Confirm the new address"
+        },
+        "recovery": {
+          "action": "Continue",
+          "text": "Continue to choose a new password.",
+          "title": "Reset your password"
+        },
+        "signup": {
+          "action": "Confirm my address",
+          "text": "Last step: confirm your email address to activate your Lien Parental account.",
+          "title": "Confirm your address"
+        }
+      },
+      "invalid": {
+        "back": "Back to sign in",
+        "text": "This link is incomplete or has expired. Request a new one.",
+        "title": "Invalid link"
+      },
+      "metaTitle": "Confirmation"
+    },
+    "dashboard": {
+      "addedOn": "Added on {date}"
+    },
+    "data": {
+      "calendar": {
+        "dateRequired": "The date is required.",
+        "healthChildRequired": "Choose the child this health appointment is for.",
+        "notAuthor": "This event was shared by another parent: only its author can edit or delete it.",
+        "titleRequired": "Give the event a title."
+      },
+      "children": {
+        "firstNameRequired": "First name is required.",
+        "invalidDate": "Invalid date",
+        "medicalSaveFailed": "The medical information could not be saved.",
+        "notFound": "This profile doesn’t exist or has been deleted."
+      },
+      "errors": {
+        "duplicate": "This item already exists.",
+        "fileTooLarge": "File is too large.",
+        "forbidden": "Access denied. Please sign in again and retry.",
+        "generic": "Something went wrong. Please try again in a moment.",
+        "invalid": "Some information is invalid.",
+        "invalidShort": "Invalid information.",
+        "network": "Unable to connect. Check your network.",
+        "notConfigured": "Online storage is not configured.",
+        "notFound": "Item not found.",
+        "relatedNotFound": "Linked item not found.",
+        "sessionExpired": "Your session has expired. Please sign in again."
+      },
+      "family": {
+        "linkedParent": "a linked parent"
+      },
+      "folders": {
+        "alreadyShared": "This folder is already shared with this parent.",
+        "cycle": "A folder cannot be placed inside itself.",
+        "folderInvalid": "Invalid folder.",
+        "gone": "This folder no longer exists. Refresh the page.",
+        "maxDepth": "No more than {max} folder levels.",
+        "nameInvalid": "Invalid folder name.",
+        "nameMax": "{max} characters maximum.",
+        "nameRequired": "Enter a folder name.",
+        "nameTaken": "A folder with this name already exists here.",
+        "notAuthorMove": "This document was shared by another parent: only its author can file it.",
+        "ownerDelete": "Only the folder’s owner can delete it.",
+        "ownerRename": "Only the folder’s owner can rename it.",
+        "parentInvalid": "Invalid parent folder.",
+        "shareAlreadyStopped": "This share has already been stopped.",
+        "shareInvalid": "Invalid share.",
+        "shareNotLinked": "Unable to share: this parent is not (or no longer) linked to you."
+      },
+      "garde": {
+        "invalidConfig": "Invalid custody settings."
+      },
+      "health": {
+        "boosterAfterVaccine": "The booster must be after the vaccination.",
+        "endAfterStart": "The end must be after the start.",
+        "invalidDate": "Invalid date.",
+        "maxChars": "{max} characters maximum.",
+        "startDateRequired": "Enter the start date.",
+        "treatmentNameRequired": "Enter the treatment name.",
+        "vaccineDateRequired": "Enter the vaccination date.",
+        "vaccineNameRequired": "Enter the vaccine name."
+      },
+      "journal": {
+        "badJustificatif": "Receipt “{name}”: {error}",
+        "expenseRequired": "Enter the amount, the category and the payment method.",
+        "fileBadType": "“{name}”: unsupported format (images or PDF).",
+        "fileTooLarge": "“{name}” exceeds 10 MB.",
+        "finance": {
+          "amountInvalid": "Invalid amount.",
+          "amountPositive": "The amount must be greater than 0.",
+          "amountRequired": "Enter an amount.",
+          "amountTooHigh": "Amount too high (100,000 maximum).",
+          "categoryRequired": "Choose a category.",
+          "dueInvalid": "Invalid due date.",
+          "fileFormat": "Unsupported format. Use a photo (JPG, PNG, WebP, HEIC) or a PDF.",
+          "fileTooBig": "File too large (10 MB maximum).",
+          "modeRequired": "Choose a payment method.",
+          "paidRange": "The amount paid must be greater than 0 and less than the total amount.",
+          "paidRequired": "Enter the amount already paid.",
+          "percentRange": "Percentage between 0 and 100.",
+          "shareRequired": "Enter your share.",
+          "shareTooHigh": "Your share cannot exceed the total amount."
+        },
+        "nextDueAfterDate": "The next due date must be after the expense date.",
+        "notFound": "Event not found.",
+        "titleRequired": "Give this event a title.",
+        "tooManyFiles": "{max} files maximum per event.",
+        "tooManyJustificatifs": "{max} receipts maximum per expense.",
+        "uploadFailed": "The file upload failed."
+      },
+      "testimonies": {
+        "childRequired": "Add at least one child.",
+        "createFailed": "The request could not be created. Please try again.",
+        "defaultSubject": "Testimonial",
+        "notSpecified": "Not specified",
+        "parentRequired": "Add at least one parent.",
+        "subjectRequired": "Enter the request title.",
+        "witnessN": "Witness {n}"
+      },
+      "vault": {
+        "badType": "Unsupported format. Accepted formats: PDF, JPG, PNG, DOCX, DOC.",
+        "categoryInvalid": "Invalid category.",
+        "categoryNameRequired": "Enter a category name.",
+        "categoryTaken": "A category with this name already exists.",
+        "contentMismatch": "The file’s content does not match its extension.",
+        "demoFiles": "Files are not available in demo mode.",
+        "docDateRequired": "Enter the document date.",
+        "docNameInvalid": "Invalid document name.",
+        "docNameRequired": "Enter the document name.",
+        "downloadFailed": "Download unavailable right now.",
+        "empty": "The file is empty.",
+        "expired": "Expired",
+        "expiresInDays": "Expires in {n} days",
+        "expiresInHours": "Expires in {n} h",
+        "expiresInMin": "Expires in {n} min",
+        "notAuthor": "This document was shared by another parent: only its author can edit it.",
+        "restoreFailed": "Unable to restore (30-day limit exceeded?).",
+        "tooLarge": "File too large. Max size 20 MB.",
+        "uploadFailed": "The file upload failed. Please try again."
+      }
+    },
+    "family": {
+      "generic": "Something went wrong. Please try again in a moment.",
+      "invitation": {
+        "fromMe": "I’m inviting you",
+        "fromName": "{name} is inviting you",
+        "message": "Hello, {from} to join the children’s shared space on Lien Parental: {url} (personal link, valid for 7 days, to open with your invited email address)."
+      },
+      "inviteInvalid": "Invalid or expired invitation.",
+      "network": "Unable to connect. Check your network."
+    },
+    "format": {
+      "size": {
+        "bytes": "{n} B",
+        "kb": "{n} KB",
+        "mb": "{n} MB"
+      },
+      "unknownDate": "unknown date"
+    },
+    "guide": {
+      "loadFailed": "Your progress could not be loaded.",
+      "notReady": "Progress is still loading, please try again in a moment.",
+      "saveFailed": "Your progress could not be saved."
+    },
+    "messages": {
+      "attachment": {
+        "badType": "Format not accepted. Choose an image (JPG, PNG, WebP, HEIC) or a PDF.",
+        "empty": "This file is empty.",
+        "label": "Attachment",
+        "tooLarge": "File too large: 10 MB maximum."
+      },
+      "attachmentNamed": "Attachment: {name}",
+      "conversation": "Conversation",
+      "errors": {
+        "archiveFailed": "The conversation could not be archived.",
+        "attachmentSendFailed": "The attachment could not be sent.",
+        "bodyTooLong": "Message too long ({max} characters maximum).",
+        "createFailed": "The conversation could not be created.",
+        "inviteCancelFailed": "The invitation could not be cancelled.",
+        "inviteCreateFailed": "The invitation could not be created.",
+        "inviteInvalid": "Invalid or expired invitation.",
+        "noAttachment": "This message has no attachment to file.",
+        "parentNotLinked": "This parent is not linked to your account.",
+        "participantNotLinked": "This contact is not linked to your account.",
+        "sendFailed": "The message could not be sent.",
+        "sessionExpired": "Session expired. Please sign in again.",
+        "titleTooLong": "Subject too long ({max} characters maximum).",
+        "tooManyConversations": "Too many conversations created today. Try again tomorrow.",
+        "unarchiveFailed": "The conversation could not be unarchived.",
+        "voiceSendFailed": "The voice note could not be sent."
+      },
+      "namesAnd": "{names} and {last}",
+      "otherParent": "Other parent",
+      "voice": {
+        "badType": "Audio format not supported by this browser.",
+        "empty": "Empty recording. Check your microphone.",
+        "tooLarge": "Voice note too large.",
+        "tooLong": "Voice note too long: 3 minutes maximum.",
+        "tooShort": "Voice note too short."
+      },
+      "voiceNote": "Voice note"
+    },
+    "notify": {
+      "blocked": "Notifications are blocked for this site. Allow them in your browser settings, then try again.",
+      "enableFailed": "Unable to enable right now. Please try again in a moment.",
+      "notGranted": "Permission not granted.",
+      "unsupported": "Notifications are not available on this browser."
+    },
+    "shares": {
+      "generic": "Something went wrong. Please try again.",
+      "scope": {
+        "documents": "{count, plural, one {{n} document} other {{n} documents}}",
+        "journal": "journal",
+        "messages": "messages",
+        "none": "no content",
+        "testimonies": "{count, plural, one {{n} testimonial} other {{n} testimonials}}"
+      },
+      "sessionExpired": "Session expired. Please sign in again."
+    },
+    "states": {
+      "background": "Continue in the background",
+      "cancel": "Cancel",
+      "defaultFileName": "Document.pdf",
+      "deleting": {
+        "files": "{count, plural, one {{n} file being deleted} other {{n} files being deleted}}",
+        "items": "Items being deleted"
+      },
+      "downloading": "Downloading…",
+      "empty": {
+        "description": "Start by adding your first item to see it appear here.",
+        "title": "No data available"
+      },
+      "error": {
+        "backHome": "Back to home",
+        "code": "Error code: {code}",
+        "description": "We couldn’t complete this action.",
+        "title": "Oops, something went wrong"
+      },
+      "loading": {
+        "description": "Please wait a moment while we prepare your space.",
+        "title": "Loading"
+      },
+      "maintenance": {
+        "description": "We’re improving your experience. Please try again later.",
+        "note": "We’ll be back very soon.",
+        "retryLater": "Try again later",
+        "title": "App under maintenance"
+      },
+      "offline": {
+        "description": "Check your connection and try again to access your data.",
+        "note": "Some features may be limited while offline.",
+        "title": "No internet connection",
+        "workOffline": "Work offline"
+      },
+      "operations": {
+        "importation": {
+          "description": "Your files are being imported into your vault.",
+          "title": "Importing"
+        },
+        "mise-a-jour": {
+          "cancel": "Cancel the update",
+          "description": "We’re improving your app for a better experience.",
+          "title": "Updating"
+        },
+        "sauvegarde": {
+          "description": "We’re backing up your data securely.",
+          "title": "Backing up"
+        },
+        "suppression": {
+          "description": "Please wait while we delete your items.",
+          "title": "Deleting"
+        },
+        "synchronisation": {
+          "description": "Your data is being synced across all your devices.",
+          "title": "Syncing"
+        }
+      },
+      "progressOf": "{current} of {total}",
+      "retry": "Try again",
+      "stay": "Stay on this page",
+      "success": {
+        "continue": "Continue",
+        "description": "Your action was completed successfully.",
+        "title": "Done!"
+      },
+      "upToDate": {
+        "description": "You’re using the latest version of Lien Parental.",
+        "note": "You have the latest features and fixes.",
+        "perfect": "Perfect!",
+        "title": "Everything is up to date!"
+      },
+      "version": "Version {version}"
+    },
+    "templates": {
+      "values": {
+        "chooseOption": "Choose an option from the list.",
+        "invalidDate": "Invalid date.",
+        "invalidEmail": "Invalid email address.",
+        "invalidPhone": "Invalid number.",
+        "maxChars": "{max} characters maximum.",
+        "numberExpected": "A number is expected.",
+        "required": "Required field."
+      }
+    },
+    "topBar": {
+      "back": "Back",
+      "notifications": "Notifications",
+      "notificationsUnread": "Notifications, {count} unread"
+    },
+    "vault": {
+      "folders": {
+        "docsHere": "{count, plural, one {{n} document here} other {{n} documents here}}",
+        "sharedWith": "Shared with {names}",
+        "subfolders": "{count, plural, one {{n} subfolder} other {{n} subfolders}}"
+      },
+      "save": {
+        "added": "Attachment added to the vault",
+        "addedInFolder": "Attachment added to the vault, folder “{folder}”",
+        "addedNotPlaced": "Added to the vault, but not in the chosen folder",
+        "already": "Already in your vault",
+        "alreadyInFolder": "Already in your vault (folder “{folder}”)"
+      }
+    },
+    "vaultLock": {
+      "forbiddenOrigin": "Request origin refused.",
+      "gate": {
+        "lockedTitle": "Vault locked",
+        "mfaTitle": "Confirmation required",
+        "notConfiguredMessage": "Vault locking is not yet configured on this server. Contact support.",
+        "reconnect": "Sign in again",
+        "sessionMessage": "Sign in again to access the vault.",
+        "sessionTitle": "Session expired",
+        "unavailableMessage": "Unable to check the vault lock. Please try again in a moment.",
+        "unavailableTitle": "Vault unavailable"
+      },
+      "invalidData": "Invalid data.",
+      "invalidRequest": "Invalid request.",
+      "mfaRequired": "Confirm your identity with your two-factor authentication code.",
+      "notConfigured": "Vault locking is not configured on this server.",
+      "payloadTooLarge": "Request too large.",
+      "sessionExpired": "Your session has expired. Please sign in again.",
+      "tooManyAttempts": "Too many attempts. Please wait a moment.",
+      "webauthn": {
+        "alreadyRegistered": "This device is already registered.",
+        "android": "Android phone",
+        "cancelled": "Operation cancelled or timed out.",
+        "failed": "The fingerprint could not be used.",
+        "security": "Fingerprint unavailable on this address (HTTPS required).",
+        "thisDevice": "This device",
+        "unsupported": "This device offers neither fingerprint nor face recognition.",
+        "unsupportedBrowser": "This browser does not support fingerprint sign-in.",
+        "windows": "Windows PC (Windows Hello)"
+      }
+    }
+  }
+}

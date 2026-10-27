@@ -3,6 +3,7 @@
 import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
 import { escapeHtml, safeUrl, STRIPE_LINK_HOSTS } from '../escape'
+import { emailT, greeting, type Locale } from '../i18n'
 import { formatDateFr } from './format'
 
 export type PaymentFailedProps = {
@@ -15,9 +16,11 @@ export type PaymentFailedProps = {
   invoiceUrl?: string | null
 }
 
+/** Objet en français (historique) ; l'objet traduit est renvoyé par paymentFailedEmail(props, locale). */
 export const paymentFailedSubject = 'Échec du paiement de votre abonnement Lien Parental'
 
-export function paymentFailedEmail(props: PaymentFailedProps): { subject: string; html: string } {
+export function paymentFailedEmail(props: PaymentFailedProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
   const prenom = escapeHtml(props.prenom?.trim() || '')
   const montant = escapeHtml(props.montant)
   // Le portail Stripe exige une session authentifiée : le lien mène à l'écran
@@ -29,28 +32,31 @@ export function paymentFailedEmail(props: PaymentFailedProps): { subject: string
   const invoiceUrl = props.invoiceUrl ? safeUrl(props.invoiceUrl, '', STRIPE_LINK_HOSTS) : ''
 
   const next = props.nextAttemptIso
-    ? `<p style="margin:0 0 16px 0;">Une nouvelle tentative aura lieu automatiquement le <strong>${escapeHtml(formatDateFr(props.nextAttemptIso))}</strong>. Vos avantages Premium restent actifs d'ici là.</p>`
-    : `<p style="margin:0 0 16px 0;color:${t.colors.alert};font-weight:600;">C'était la dernière tentative : sans régularisation, votre compte repassera à l'offre gratuite. Vos données restent conservées et consultables.</p>`
+    ? `<p style="margin:0 0 16px 0;">${tr('paymentFailed.nextAttempt', { date: `<strong>${escapeHtml(formatDateFr(props.nextAttemptIso, locale))}</strong>` })}</p>`
+    : `<p style="margin:0 0 16px 0;color:${t.colors.alert};font-weight:600;">${tr('paymentFailed.lastAttempt')}</p>`
 
+  const payLink = `<a href="${invoiceUrl}" style="color:${t.colors.link};">${tr('paymentFailed.payOnlineLink')}</a>`
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
+    <p style="margin:0 0 16px 0;">${greeting(tr, prenom)}</p>
     <p style="margin:0 0 16px 0;">
-      Nous n'avons pas pu prélever <strong>${montant}</strong> pour votre abonnement Premium
-      (carte expirée, plafond atteint ou refus de la banque, par exemple).
+      ${tr('paymentFailed.intro1', { amount: `<strong>${montant}</strong>` })}
+      ${tr('paymentFailed.intro2')}
     </p>
     ${next}
-    <p style="margin:0 0 8px 0;">Pour éviter toute interruption, mettez à jour votre moyen de paiement.</p>
-    ${invoiceUrl ? `<p style="margin:0;font-size:14px;">Vous pouvez aussi <a href="${invoiceUrl}" style="color:${t.colors.link};">régler la facture en ligne</a>.</p>` : ''}
+    <p style="margin:0 0 8px 0;">${tr('paymentFailed.update')}</p>
+    ${invoiceUrl ? `<p style="margin:0;font-size:14px;">${tr('paymentFailed.payOnline', { link: payLink })}</p>` : ''}
   `
 
+  const mail = `<a href="mailto:${t.supportEmail}" style="color:${t.colors.textMuted};">${t.supportEmail}</a>`
   return {
-    subject: paymentFailedSubject,
+    subject: tr('paymentFailed.subject'),
     html: baseLayout({
-      preheader: `Le paiement de ${props.montant} n'a pas abouti.`,
-      title: 'Votre paiement n’a pas abouti',
+      locale,
+      preheader: tr('paymentFailed.preheader', { amount: props.montant }),
+      title: tr('paymentFailed.title'),
       body,
-      cta: { label: 'Mettre à jour mon moyen de paiement', href: manageUrl },
-      footer: `Besoin d'aide ? Écrivez-nous à <a href="mailto:${t.supportEmail}" style="color:${t.colors.textMuted};">${t.supportEmail}</a>.`,
+      cta: { label: tr('paymentFailed.cta'), href: manageUrl },
+      footer: tr('paymentFailed.footer', { email: mail }),
     }),
   }
 }

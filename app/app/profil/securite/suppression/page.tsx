@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { AlertTriangle, Download, Trash2 } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { Button, Card, Checkbox, ConfirmDialog, Input } from '@/components/ui'
@@ -21,10 +21,13 @@ async function readError(res: Response, fallback: string) {
 }
 
 // Mot de confirmation vérifié aussi côté serveur : identique dans toutes les langues.
-const CONFIRM_WORD = 'SUPPRIMER'
+// Mot de confirmation dans la langue de l'interface (le serveur accepte les trois).
+const CONFIRM_WORDS = { fr: 'SUPPRIMER', en: 'DELETE', pt: 'EXCLUIR' } as const
 
 export default function SuppressionPage() {
   const t = useTranslations('account.security.deletion')
+  const locale = useLocale()
+  const CONFIRM_WORD = CONFIRM_WORDS[locale as keyof typeof CONFIRM_WORDS] ?? CONFIRM_WORDS.fr
   const router = useRouter()
   const [checks, setChecks] = useState({
     coffre: false,

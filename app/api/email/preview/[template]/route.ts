@@ -1,5 +1,5 @@
 // app/api/email/preview/[template]/route.ts — Prévisualisation DEV uniquement des templates email.
-// GET /api/email/preview/<template>?... → renvoie le HTML pour inspection navigateur.
+// GET /api/email/preview/<template>?locale=fr|en|pt → renvoie le HTML pour inspection navigateur (défaut : fr).
 
 import { NextResponse } from 'next/server'
 import { verificationEmail } from '@/lib/email/templates/verification'
@@ -19,93 +19,119 @@ import { folderSharedEmail } from '@/lib/email/templates/folderShared'
 import { calendarReminderEmail } from '@/lib/email/templates/calendarReminder'
 import { calendarSharedEmail } from '@/lib/email/templates/calendarShared'
 import { accountExistsEmail } from '@/lib/email/templates/accountExists'
+import { familyInvitationEmail, guardianRemovedEmail, ownerNewAdultEmail } from '@/lib/coparents/server/email'
+import { deviceText, securityText, whenLabel } from '@/lib/notify/content'
+import { emailT, toLocale, type Locale } from '@/lib/email/i18n'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 type Rendered = { subject: string; html: string }
 
-const samples: Record<string, () => Rendered> = {
-  verification: () =>
-    verificationEmail({ prenom: 'Camille', code: '482615' }),
-  'reset-password': () =>
+const DAY = 24 * 60 * 60 * 1000
+const inDays = (n: number) => new Date(Date.now() + n * DAY).toISOString()
+/** 12 nov. 10h (heure de Guyane) de l'année en cours : exemple de date d'événement. */
+const EVENT_AT = `${new Date().getFullYear()}-11-12T13:00:00Z`
+
+const samples: Record<string, (l: Locale) => Rendered> = {
+  verification: (l) =>
+    verificationEmail({ prenom: 'Camille', code: '482615' }, l),
+  'reset-password': (l) =>
     resetPasswordEmail({
       prenom: 'Camille',
       url: 'https://lienparental.fr/reset?token=exemple-de-token-signe-abc123',
-    }),
-  'new-login': () =>
+    }, l),
+  'new-login': (l) =>
     newLoginEmail({
       prenom: 'Camille',
       appareil: 'iPhone 15',
       lieu: 'Lyon, France',
-      systeme: 'Safari sur iOS 17.4',
+      systeme: deviceText('Safari sur iOS 17.4', l),
       dateIso: new Date().toISOString(),
-    }),
-  'testimony-received': () =>
+    }, l),
+  'testimony-received': (l) =>
     testimonyReceivedEmail({
       prenom: 'Camille',
       temoinNom: 'Mme Dupont (institutrice)',
       titreDemande: 'Dossier scolarité trimestre 2',
       reference: 'DEM-2026-0017',
       urlCoffre: 'https://lienparental.fr/coffre/demandes/DEM-2026-0017',
-    }),
-  'testimony-reminder': () =>
+    }, l),
+  'testimony-reminder': (l) =>
     testimonyReminderEmail({
       prenomTemoin: 'Madame Dupont',
       parentNom: 'Camille Martin',
       titreDemande: 'Dossier scolarité trimestre 2',
       url: 'https://lienparental.fr/temoin/depot?token=xyz',
-      dateLimite: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-    }),
-  invoice: () =>
+      dateLimite: inDays(7),
+    }, l),
+  invoice: (l) =>
     invoiceEmail({
       prenom: 'Camille',
       montant: '11,99 €',
       cycle: 'mensuel',
-      nextPeriodEnd: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+      nextPeriodEnd: inDays(30),
       invoiceUrl: 'https://invoice.stripe.com/i/exemple',
-    }),
-  welcome: () => welcomeEmail({ prenom: 'Camille' }),
-  'subscription-confirmed': () =>
+    }, l),
+  welcome: (l) => welcomeEmail({ prenom: 'Camille' }, l),
+  'subscription-confirmed': (l) =>
     subscriptionConfirmedEmail({
       prenom: 'Camille',
       formule: 'Premium annuel',
       montant: '99,00 €',
-      nextPaymentIso: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+      nextPaymentIso: inDays(365),
       invoiceUrl: 'https://invoice.stripe.com/i/exemple',
-    }),
-  'payment-failed': () =>
+    }, l),
+  'payment-failed': (l) =>
     paymentFailedEmail({
       prenom: 'Camille',
       montant: '11,99 €',
-      nextAttemptIso: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
+      nextAttemptIso: inDays(3),
       invoiceUrl: 'https://invoice.stripe.com/i/exemple',
-    }),
-  'payment-failed-final': () =>
-    paymentFailedEmail({ prenom: 'Camille', montant: '11,99 €', nextAttemptIso: null }),
-  'subscription-canceled': () =>
+    }, l),
+  'payment-failed-final': (l) =>
+    paymentFailedEmail({ prenom: 'Camille', montant: '11,99 €', nextAttemptIso: null }, l),
+  'subscription-canceled': (l) =>
     subscriptionCanceledEmail({
       prenom: 'Camille',
       kind: 'scheduled',
-      endIso: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000).toISOString(),
-    }),
-  'subscription-ended': () =>
-    subscriptionCanceledEmail({ prenom: 'Camille', kind: 'ended', endIso: new Date().toISOString() }),
-  'message-waiting': () =>
-    messageWaitingEmail({ prenom: 'Camille', senders: ['Thomas'], count: 3, conversationId: '00000000-0000-0000-0000-000000000001' }),
-  'security-change': () =>
-    securityChangeEmail({ prenom: 'Camille', title: 'Votre mot de passe a été modifié', message: 'Le mot de passe de votre compte Lien Parental vient d’être modifié.', dateIso: new Date().toISOString() }),
-  'invite-accepted': () => inviteAcceptedEmail({ prenom: 'Camille', inviteePrenom: 'Thomas', role: 'parent' }),
-  'folder-shared': () => folderSharedEmail({ prenom: 'Camille', ownerPrenom: 'Thomas', folderId: '00000000-0000-0000-0000-000000000002' }),
-  'calendar-reminder': () =>
-    calendarReminderEmail({ prenom: 'Camille', titre: 'Kermesse de l’école', whenLabel: 'le 12 nov. à 10h', eventId: '00000000-0000-0000-0000-000000000003' }),
-  'account-exists': () => accountExistsEmail({ prenom: 'Camille' }),
-  'calendar-shared': () =>
-    calendarSharedEmail({ prenom: 'Camille', sentence: 'Julie a ajouté « Rendez-vous pédiatre de Lina » le 12 nov. à 10h', action: 'created', eventId: '00000000-0000-0000-0000-000000000003' }),
+      endIso: inDays(20),
+    }, l),
+  'subscription-ended': (l) =>
+    subscriptionCanceledEmail({ prenom: 'Camille', kind: 'ended', endIso: new Date().toISOString() }, l),
+  'message-waiting': (l) =>
+    messageWaitingEmail({ prenom: 'Camille', senders: ['Thomas'], count: 3, conversationId: '00000000-0000-0000-0000-000000000001' }, l),
+  'security-change': (l) => {
+    const s = securityText('password_changed', l)
+    return securityChangeEmail({ prenom: 'Camille', title: s.title, message: s.message, dateIso: new Date().toISOString() }, l)
+  },
+  'invite-accepted': (l) => inviteAcceptedEmail({ prenom: 'Camille', inviteePrenom: 'Thomas', role: 'parent' }, l),
+  'folder-shared': (l) => folderSharedEmail({ prenom: 'Camille', ownerPrenom: 'Thomas', folderId: '00000000-0000-0000-0000-000000000002' }, l),
+  'calendar-reminder': (l) =>
+    calendarReminderEmail({ prenom: 'Camille', titre: 'Kermesse de l’école', whenLabel: whenLabel(EVENT_AT, false, l), eventId: '00000000-0000-0000-0000-000000000003' }, l),
+  'account-exists': (l) => accountExistsEmail({ prenom: 'Camille' }, l),
+  'calendar-shared': (l) =>
+    calendarSharedEmail({
+      prenom: 'Camille',
+      sentence: emailT(l)('notify.calendarCreated', { who: 'Julie', title: emailT(l)('notify.healthOf', { child: 'Lina' }), when: whenLabel(EVENT_AT, false, l) }),
+      action: 'created',
+      eventId: '00000000-0000-0000-0000-000000000003',
+    }, l),
+  'family-invitation': (l) =>
+    familyInvitationEmail({
+      inviterPrenom: 'Julie',
+      role: 'parent',
+      childPrenoms: ['Lina', 'Noah'],
+      link: 'https://lienparental.fr/app/coparents/invitation?token=exemple',
+      expiresAt: inDays(7),
+    }, l),
+  'guardian-removed': (l) => guardianRemovedEmail({ prenom: 'Camille', childPrenom: 'Lina' }, l),
+  'owner-new-adult': (l) =>
+    ownerNewAdultEmail({ prenom: 'Camille', newPrenom: 'Thomas', childPrenoms: ['Lina'], role: 'proche', inviterPrenom: 'Julie' }, l),
 }
 
 export async function GET(
-  _req: Request,
+  req: Request,
   ctx: { params: Promise<{ template: string }> }
 ): Promise<Response> {
   if (process.env.NODE_ENV === 'production') {
@@ -119,12 +145,14 @@ export async function GET(
       {
         error: 'Template inconnu',
         available: Object.keys(samples),
+        locales: ['fr', 'en', 'pt'],
       },
       { status: 404 }
     )
   }
 
-  const { html } = render()
+  const locale = toLocale(new URL(req.url).searchParams.get('locale'))
+  const { html } = render(locale)
   return new NextResponse(html, {
     status: 200,
     headers: {

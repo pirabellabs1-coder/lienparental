@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { createServiceClient } from '@/lib/supabase/server'
@@ -24,13 +25,14 @@ type ChildRow = { id: string; user_id: string; date_naissance: string; infos_med
 export async function POST(req: Request) {
   const ctx = await familyContext(req)
   if ('error' in ctx) return ctx.error
+  const t = await getTranslations('server.coparents')
   const tooMany = await limited(ctx.user.id, 'merge', 5, 10 * 60_000)
   if (tooMany) return tooMany
 
   const parsed = mergeSchema.safeParse(await readJson(req))
-  if (!parsed.success) return jsonError(422, 'invalid', 'Confirmez qu’il s’agit bien du même enfant.')
+  if (!parsed.success) return jsonError(422, 'invalid', t('mergeConfirm'))
   const { dropChildId, keepChildId } = parsed.data
-  if (dropChildId === keepChildId) return jsonError(422, 'invalid', 'Fusion invalide.')
+  if (dropChildId === keepChildId) return jsonError(422, 'invalid', t('mergeInvalid'))
 
   const { data: kids, error: kErr } = await ctx.db
     .from('children').select('id, user_id, date_naissance, infos_medicales')
@@ -38,29 +40,29 @@ export async function POST(req: Request) {
   if (kErr) return rpcError(kErr, 'merge.children')
   const drop = ((kids ?? []) as ChildRow[]).find((c) => c.id === dropChildId)
   const keep = ((kids ?? []) as ChildRow[]).find((c) => c.id === keepChildId)
-  if (!drop || !keep) return jsonError(404, 'not_found', 'Fiche introuvable.')
-  if (drop.user_id !== ctx.user.id) return jsonError(403, 'forbidden', 'Seule votre propre fiche peut être fusionnée.')
+  if (!drop || !keep) return jsonError(404, 'not_found', t('childRecordNotFound'))
+  if (drop.user_id !== ctx.user.id) return jsonError(403, 'forbidden', t('mergeOwnOnly'))
   if (drop.date_naissance !== keep.date_naissance) {
-    return jsonError(422, 'birthdate_mismatch', 'Les dates de naissance ne correspondent pas : ces fiches ne peuvent pas être fusionnées.')
+    return jsonError(422, 'birthdate_mismatch', t('hints.birthdate_mismatch'))
   }
 
   let admin: SupabaseClient
   try {
     admin = createServiceClient() as unknown as SupabaseClient
   } catch {
-    return jsonError(503, 'not_configured', 'La fusion des fiches n’est pas configurée sur ce serveur.')
+    return jsonError(503, 'not_configured', t('mergeNotConfigured'))
   }
 
   // Seules MES entrées sont déplacées (celles d'autres adultes restent sur ma fiche archivée).
   const all = await loadHealthRows(ctx.db, dropChildId)
-  if (!all) return jsonError(500, 'db_error', 'Lecture des informations de santé impossible.')
+  if (!all) return jsonError(500, 'db_error', t('healthReadFailed'))
   const rows = all.filter((r) => r.user_id === ctx.user.id)
   // Infos médicales générales : reprises seulement si la fiche conservée n'en a pas ET
   // que j'en suis titulaire (un gardien ne peut pas les écrire, garde 0340).
   const copyMedical = keep.user_id === ctx.user.id && keep.infos_medicales == null && drop.infos_medicales != null
   const needsCrypto = rows.length > 0 || copyMedical
   if (needsCrypto && !medicalCryptoReady()) {
-    return jsonError(503, 'encryption_not_configured', 'Le chiffrement des données de santé n’est pas configuré : fusion impossible pour le moment.')
+    return jsonError(503, 'encryption_not_configured', t('encryptionNotConfigured'))
   }
 
   const health = rows.map((r) => ({ kind: r.kind, id: r.id, payload: rewrapHealthRow(dropChildId, keepChildId, r) }))
@@ -78,7 +80,7 @@ export async function POST(req: Request) {
     p_health: health,
     p_keep_medical: keepMedical,
   })
-  if (error) return rpcError(error, 'merge', 'Fiche introuvable.')
+  if (error) return rpcError(error, 'merge', t('childRecordNotFound'))
   const r = (data ?? {}) as { kept_child_id?: string; health_moved?: number; references_updated?: number; guardians_revoked?: number }
   const body: MergeResult = {
     keptChildId: r.kept_child_id ?? keepChildId,

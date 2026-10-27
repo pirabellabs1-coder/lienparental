@@ -7,16 +7,18 @@
  *  - revalide l'identité (auth.getUser + niveau MFA) ; l'id vient du jeton, jamais du client ;
  *  - valide l'entrée avec zod ;
  *  - écrit via le client RLS de l'utilisateur (aucune service_role ici) ;
- *  - renvoie un résultat sérialisable avec un message français, sans détail technique.
+ *  - renvoie un résultat sérialisable avec un message dans la langue de l'utilisateur
+ *    (cookie lp_locale, catalogue messages/{locale}/auth.json), sans détail technique.
  *
  * Les appels Auth « interactifs » (signUp, signIn, verifyOtp, resend, reset) restent
  * dans le navigateur : GoTrue applique ainsi ses limites de débit par IP réelle
  * de l'utilisateur, et non par IP du serveur (qui serait partagée par tous).
  */
 import { revalidatePath } from 'next/cache'
+import { getTranslations } from 'next-intl/server'
 import type { PreferenceRow } from '@/lib/supabase/types'
-import { authErrorMessage, RATE_LIMIT_MESSAGE } from './errors'
-import { DENIED_MESSAGES, requireAuthedUser } from './guard'
+import { authErrorMessage, rateLimitMessage, type AuthTranslate } from './errors'
+import { deniedMessage, requireAuthedUser } from './guard'
 import {
   accountInfoSchema,
   changePasswordSchema,
@@ -34,11 +36,24 @@ export type ActionResult<T = undefined> =
   | ({ ok: true } & (T extends undefined ? object : { data: T }))
   | { ok: false; error: string; reason?: 'unauthenticated' | 'mfa_required' | 'disabled' }
 
-const GENERIC = 'Enregistrement impossible pour le moment. Réessayez dans un instant.'
+/** Traducteur `auth.<namespace>` de la requête en cours (suit le cookie de l'utilisateur). */
+async function tr(namespace: 'actions' | 'validation' | 'errors'): Promise<AuthTranslate> {
+  return (await getTranslations(`auth.${namespace}`)) as unknown as AuthTranslate
+}
+
+/** Message générique d'échec d'enregistrement, traduit. */
+async function generic(): Promise<string> {
+  return (await tr('actions'))('saveFailed')
+}
+
+/** Premier message d'erreur zod, traduit dans la langue de la requête. */
+async function issue(error: Parameters<typeof firstIssue>[0]): Promise<string> {
+  return firstIssue(error, await tr('validation'))
+}
 
 async function authed() {
   const ctx = await requireAuthedUser()
-  if (!ctx.ok) return { denied: { ok: false as const, error: DENIED_MESSAGES[ctx.reason], reason: ctx.reason } }
+  if (!ctx.ok) return { denied: { ok: false as const, error: await deniedMessage(ctx.reason), reason: ctx.reason } }
   return { ctx }
 }
 
@@ -51,15 +66,15 @@ export async function saveOnboardingProfile(input: { prenom: string; nom: string
   const { ctx, denied } = await authed()
   if (denied) return denied
   const parsed = profileNamesSchema.extend({ photoPath: avatarPathSchema.nullable().optional() }).safeParse(input)
-  if (!parsed.success) return { ok: false, error: firstIssue(parsed.error) }
+  if (!parsed.success) return { ok: false, error: await issue(parsed.error) }
   const { prenom, nom, photoPath } = parsed.data
-  if (!ownsPath(ctx.user.id, photoPath)) return { ok: false, error: 'Photo invalide.' }
+  if (!ownsPath(ctx.user.id, photoPath)) return { ok: false, error: (await tr('actions'))('photoInvalid') }
 
   const patch: { prenom: string; nom: string; photo_url?: string | null } = { prenom, nom }
   if (photoPath !== undefined) patch.photo_url = photoPath
 
   const { error } = await ctx.supabase.from('users').update(patch).eq('id', ctx.user.id)
-  if (error) return { ok: false, error: GENERIC }
+  if (error) return { ok: false, error: await generic() }
   return { ok: true }
 }
 
@@ -74,9 +89,9 @@ export async function saveOnboardingChild(input: {
   const { ctx, denied } = await authed()
   if (denied) return denied
   const parsed = childSchema.safeParse(input)
-  if (!parsed.success) return { ok: false, error: firstIssue(parsed.error) }
+  if (!parsed.success) return { ok: false, error: await issue(parsed.error) }
   const c = parsed.data
-  if (!ownsPath(ctx.user.id, c.photoPath)) return { ok: false, error: 'Photo invalide.' }
+  if (!ownsPath(ctx.user.id, c.photoPath)) return { ok: false, error: (await tr('actions'))('photoInvalid') }
 
   const row = {
     user_id: ctx.user.id,
@@ -93,7 +108,7 @@ export async function saveOnboardingChild(input: {
     : ctx.supabase.from('children').insert(row).select('id').single()
 
   const { data, error } = await query
-  if (error || !data) return { ok: false, error: GENERIC }
+  if (error || !data) return { ok: false, error: await generic() }
 
   // Premier enfant = enfant actif par défaut (sans écraser un choix existant).
   await ctx.supabase.from('preferences').update({ active_child_id: data.id }).eq('user_id', ctx.user.id).is('active_child_id', null)
@@ -103,9 +118,9 @@ export async function saveOnboardingChild(input: {
 export async function removeOnboardingChild(id: string): Promise<ActionResult> {
   const { ctx, denied } = await authed()
   if (denied) return denied
-  if (typeof id !== 'string' || !/^[0-9a-f-]{36}$/i.test(id)) return { ok: false, error: 'Enfant introuvable.' }
+  if (typeof id !== 'string' || !/^[0-9a-f-]{36}$/i.test(id)) return { ok: false, error: (await tr('actions'))('childNotFound') }
   const { error } = await ctx.supabase.from('children').delete().eq('id', id).eq('user_id', ctx.user.id)
-  if (error) return { ok: false, error: GENERIC }
+  if (error) return { ok: false, error: await generic() }
   return { ok: true }
 }
 
@@ -117,9 +132,9 @@ export async function saveAccountInfo(
   const { ctx, denied } = await authed()
   if (denied) return denied
   const parsed = accountInfoSchema.safeParse(input)
-  if (!parsed.success) return { ok: false, error: firstIssue(parsed.error) }
+  if (!parsed.success) return { ok: false, error: await issue(parsed.error) }
   const v = parsed.data
-  if (!ownsPath(ctx.user.id, v.photoPath)) return { ok: false, error: 'Photo invalide.' }
+  if (!ownsPath(ctx.user.id, v.photoPath)) return { ok: false, error: (await tr('actions'))('photoInvalid') }
 
   const { error } = await ctx.supabase
     .from('users')
@@ -137,7 +152,7 @@ export async function saveAccountInfo(
       ...(v.photoPath !== undefined ? { photo_url: v.photoPath } : {}),
     })
     .eq('id', ctx.user.id)
-  if (error) return { ok: false, error: GENERIC }
+  if (error) return { ok: false, error: await generic() }
 
   if (prefs) {
     const p = preferencesSchema
@@ -183,7 +198,7 @@ async function mergePreferences(ctx: Ctx, p: Partial<PreferencesInput>): Promise
   const { error } = current
     ? await ctx.supabase.from('preferences').update(row).eq('user_id', ctx.user.id)
     : await ctx.supabase.from('preferences').insert({ user_id: ctx.user.id, ...row })
-  if (error) return { ok: false, error: GENERIC }
+  if (error) return { ok: false, error: await generic() }
   return { ok: true }
 }
 
@@ -195,7 +210,7 @@ export async function loadPreferences(): Promise<ActionResult<Partial<Preference
     .select('theme, langue, notif_push, notif_email, notif_rappels, ui')
     .eq('user_id', ctx.user.id)
     .maybeSingle()
-  if (error) return { ok: false, error: 'Impossible de charger vos préférences.' }
+  if (error) return { ok: false, error: (await tr('actions'))('loadPreferencesFailed') }
   if (!data) return { ok: true, data: {} }
 
   // On revalide ce qui sort de la base (jsonb libre) avant de le renvoyer à l'UI.
@@ -220,7 +235,7 @@ export async function savePreferences(input: unknown): Promise<ActionResult> {
   const { ctx, denied } = await authed()
   if (denied) return denied
   const parsed = preferencesSchema.safeParse(input)
-  if (!parsed.success) return { ok: false, error: 'Préférences invalides.' }
+  if (!parsed.success) return { ok: false, error: (await tr('actions'))('preferencesInvalid') }
   return mergePreferences(ctx, parsed.data)
 }
 
@@ -229,15 +244,15 @@ export async function changePassword(input: { current: string; next: string }): 
   const { ctx, denied } = await authed()
   if (denied) return denied
   const parsed = changePasswordSchema.safeParse(input)
-  if (!parsed.success) return { ok: false, error: firstIssue(parsed.error) }
+  if (!parsed.success) return { ok: false, error: await issue(parsed.error) }
 
   const check = await verifyPassword(ctx.user.email ?? '', parsed.data.current)
-  if (check === 'invalid') return { ok: false, error: 'Mot de passe actuel incorrect.' }
-  if (check === 'rate_limited') return { ok: false, error: RATE_LIMIT_MESSAGE }
-  if (check === 'error') return { ok: false, error: 'Vérification impossible pour le moment. Réessayez dans un instant.' }
+  if (check === 'invalid') return { ok: false, error: (await tr('actions'))('currentPasswordWrong') }
+  if (check === 'rate_limited') return { ok: false, error: rateLimitMessage(await tr('errors')) }
+  if (check === 'error') return { ok: false, error: (await tr('actions'))('verifyUnavailable') }
 
   const { error } = await ctx.supabase.auth.updateUser({ password: parsed.data.next })
-  if (error) return { ok: false, error: authErrorMessage(error, 'update-password') }
+  if (error) return { ok: false, error: authErrorMessage(error, 'update-password', await tr('errors')) }
 
   // Les autres appareils doivent se reconnecter avec le nouveau mot de passe.
   await ctx.supabase.auth.signOut({ scope: 'others' }).catch(() => undefined)

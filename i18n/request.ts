@@ -9,7 +9,7 @@ import { defaultLocale, isLocale, LOCALE_COOKIE } from '@/lib/i18n/config'
  * parallèle sans se marcher dessus. Le catalogue « cœur » (messages/{locale}.json) garde le
  * site public, l'onboarding, la navigation et le tableau de bord.
  */
-const MODULES = ['messaging', 'calendar', 'vault', 'family', 'coach', 'account', 'billing', 'public', 'media'] as const
+const MODULES = ['messaging', 'calendar', 'vault', 'family', 'coach', 'account', 'billing', 'public', 'media', 'auth', 'server', 'shared', 'email', 'ai'] as const
 
 type Tree = AbstractIntlMessages
 const isTree = (v: unknown): v is Tree => !!v && typeof v === 'object' && !Array.isArray(v)

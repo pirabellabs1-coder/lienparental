@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Lock, Globe2, BadgeCheck } from 'lucide-react'
+import { getTranslations } from 'next-intl/server'
 import { Logo } from '@/components/brand/Logo'
 
 /**
@@ -11,30 +12,31 @@ import { Logo } from '@/components/brand/Logo'
  * - Ordinateur : écran partagé, photo à gauche, formulaire à droite.
  * Note : un compte non vérifié ne peut accéder ni au coffre ni créer de témoignage (à appliquer côté backend).
  */
-export default function PublicLayout({ children }: { children: ReactNode }) {
+export default async function PublicLayout({ children }: { children: ReactNode }) {
+  const t = await getTranslations('publicAside')
   return (
     <div className="min-h-dvh bg-white pwa-safe md:bg-[#f6f7fb] lg:grid lg:grid-cols-[1.05fr_1fr] lg:bg-white">
       <aside className="relative hidden overflow-hidden lg:block" aria-hidden="false">
         <Image
           src="/images/hero-pere-fille.jpg"
-          alt="Un père serre sa fille dans ses bras, tous deux rient"
+          alt={t('photoAlt')}
           fill
           priority
           sizes="55vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-night-950/85 via-night-950/25 to-night-950/10" />
-        <Link href="/" className="absolute left-10 top-10 rounded-2xl bg-white/90 px-4 py-2.5 backdrop-blur" aria-label="Retour à l’accueil Lien Parental">
+        <Link href="/" className="absolute left-10 top-10 rounded-2xl bg-white/90 px-4 py-2.5 backdrop-blur" aria-label={t('backHome')}>
           <Logo size="sm" layout="inline" />
         </Link>
         <div className="absolute inset-x-10 bottom-12 text-white">
           <p className="max-w-md text-[32px] font-extrabold leading-[1.15] tracking-[-0.03em]">
-            Un espace serein pour ce qui compte le plus : vos enfants.
+            {t('headline')}
           </p>
           <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-[14px] font-medium text-white/85">
-            <li className="flex items-center gap-2"><Lock className="h-4 w-4" strokeWidth={1.75} aria-hidden />Données chiffrées</li>
-            <li className="flex items-center gap-2"><Globe2 className="h-4 w-4" strokeWidth={1.75} aria-hidden />Hébergé en Europe</li>
-            <li className="flex items-center gap-2"><BadgeCheck className="h-4 w-4" strokeWidth={1.75} aria-hidden />Sans engagement</li>
+            <li className="flex items-center gap-2"><Lock className="h-4 w-4" strokeWidth={1.75} aria-hidden />{t('encrypted')}</li>
+            <li className="flex items-center gap-2"><Globe2 className="h-4 w-4" strokeWidth={1.75} aria-hidden />{t('europe')}</li>
+            <li className="flex items-center gap-2"><BadgeCheck className="h-4 w-4" strokeWidth={1.75} aria-hidden />{t('noCommitment')}</li>
           </ul>
         </div>
       </aside>

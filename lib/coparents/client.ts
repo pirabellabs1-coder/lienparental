@@ -7,6 +7,7 @@
  */
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import * as demo from './demo'
+import { libT } from '@/lib/i18n/runtime'
 import { createInvitationSchema, familyTokenSchema } from './validation'
 import type {
   AcceptResult, FamilyOverview, GuardianRole, InvitationPreview, IssuedInvitation, LinkedParent,
@@ -38,11 +39,11 @@ async function api<T>(path: string, init?: RequestInit & { json?: unknown }): Pr
       body: init?.json !== undefined ? JSON.stringify(init.json) : init?.body,
     })
   } catch {
-    throw new FamilyError('Connexion impossible. Vérifiez votre réseau.', 'network')
+    throw new FamilyError(libT('shared.family')('network'), 'network')
   }
   const body = (await res.json().catch(() => null)) as (T & ErrorBody) | null
   if (!res.ok) {
-    throw new FamilyError(body?.error?.message ?? 'Une erreur est survenue. Réessayez dans un instant.', body?.error?.code ?? String(res.status), res.status)
+    throw new FamilyError(body?.error?.message ?? libT('shared.family')('generic'), body?.error?.code ?? String(res.status), res.status)
   }
   return body as T
 }
@@ -94,7 +95,7 @@ export function cancelFamilyInvitation(id: string): Promise<void> {
 export function acceptFamilyInvitation(ref: { token: string } | { id: string }): Promise<AcceptResult> {
   return wrap(async () => {
     if ('token' in ref && !familyTokenSchema.safeParse(ref.token).success) {
-      throw new FamilyError('Invitation invalide ou expirée.', 'not_found', 404)
+      throw new FamilyError(libT('shared.family')('inviteInvalid'), 'not_found', 404)
     }
     if (FAMILY_LIVE) return api<AcceptResult>('/api/coparents/invitations/accept', { method: 'POST', json: ref })
     return 'id' in ref ? demo.demoAccept(ref.id) : { childIds: [], role: 'parent' as const, conversationId: null }
@@ -168,8 +169,8 @@ export async function listLinkedParents(): Promise<LinkedParent[]> {
 // --- Partage du lien ---------------------------------------------------------
 
 export function invitationMessage(senderPrenom: string, url: string): string {
-  const from = senderPrenom ? `${senderPrenom} t'invite` : 'Je t’invite'
-  return `Bonjour, ${from} à rejoindre l’espace partagé des enfants sur Lien Parental : ${url} (lien personnel, valable 7 jours, à ouvrir avec ton adresse e-mail invitée).`
+  const t = libT('shared.family.invitation')
+  return t('message', { from: senderPrenom ? t('fromName', { name: senderPrenom }) : t('fromMe'), url })
 }
 
 export function shareTargets(message: string, email?: string) {

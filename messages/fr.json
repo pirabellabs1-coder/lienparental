@@ -112,7 +112,48 @@
     "msgMedia": "Messages, photos et documents",
     "msgHistory": "Historique conservé",
     "msgRespect": "Un cadre respectueux",
-    "hostedEurope": "Données hébergées en Europe"
+    "hostedEurope": "Données hébergées en Europe",
+    "dialog": {
+      "title": "Découvrez Lien Parental",
+      "close": "Fermer",
+      "unsupported": "Votre navigateur ne lit pas cette vidéo.",
+      "download": "Télécharger la vidéo",
+      "soon": "Vidéo bientôt disponible",
+      "meanwhile": "En attendant, découvrez l’application en images : ce sont de vraies captures de Lien Parental.",
+      "counter": "{n} sur {total}",
+      "prev": "Capture précédente",
+      "next": "Capture suivante",
+      "list": "Captures",
+      "show": "Afficher : {title}",
+      "alt": "Capture de l’application : {title}",
+      "captions": "Français"
+    },
+    "slides": {
+      "accueil": {
+        "title": "Votre accueil",
+        "text": "L’enfant suivi, le Guide parental, les dépenses, la santé et le Coach IA en un coup d’œil."
+      },
+      "journal": {
+        "title": "Le Journal",
+        "text": "Visites, appels, santé et dépenses, datés et classés, avec justificatifs."
+      },
+      "calendrier": {
+        "title": "Le calendrier",
+        "text": "Rendez-vous, rappels et événements de chaque enfant."
+      },
+      "coffre": {
+        "title": "Le coffre-fort",
+        "text": "Jugements, certificats, factures : rangés et protégés."
+      },
+      "temoignages": {
+        "title": "Les témoignages",
+        "text": "Demandez une attestation à un proche, suivie jusqu’à sa signature."
+      },
+      "coach": {
+        "title": "Le Coach parental IA",
+        "text": "Reformuler un message, préparer un échange, trouver le bon ton."
+      }
+    }
   },
   "homeMessaging": {
     "badge": "Messagerie entre parents",
@@ -422,6 +463,47 @@
     "tipCarousel": "Conseils du jour",
     "slide": "{n} sur {total}",
     "chooseTip": "Choisir un conseil",
-    "tipN": "Conseil {n} : {title}"
+    "tipN": "Conseil {n} : {title}",
+    "countdown": {
+      "today": "Aujourd'hui",
+      "tomorrow": "Demain",
+      "inDays": "Dans {n} jours",
+      "yesterday": "Hier",
+      "daysAgo": "Il y a {n} jours"
+    },
+    "demoModels": {
+      "m_1": {
+        "title": "Dossier JAF",
+        "category": "Modèle complet"
+      },
+      "m_2": {
+        "title": "Lettre à l'école",
+        "category": "Communication"
+      },
+      "m_3": {
+        "title": "Chronologie",
+        "category": "Des événements"
+      },
+      "m_4": {
+        "title": "Attestation d'hébergement",
+        "category": "Modèle"
+      }
+    }
+  },
+  "meta": {
+    "rootTitle": "Lien Parental : informer, accompagner, préserver le lien parent-enfant",
+    "rootDescription": "Lien Parental accompagne les parents séparés : coffre-fort chiffré, journal, calendrier, témoignages horodatés et coach parental IA. Hébergement sécurisé en Europe.",
+    "ogDescription": "Communiquer sereinement, s’organiser facilement, retrouver tout ce qui concerne votre enfant.",
+    "homeTitle": "Lien Parental : tout pour votre enfant, enfin au même endroit",
+    "homeDescription": "L’application des parents séparés : agenda partagé, dépenses et paiements, santé des enfants, coffre-fort sécurisé, témoignages, dossier JAF, Coach parental IA et Guide parental (Guyane). Gratuit pour commencer, installable en PWA.",
+    "appTitle": "Application"
+  },
+  "publicAside": {
+    "photoAlt": "Un père serre sa fille dans ses bras, tous deux rient",
+    "backHome": "Retour à l’accueil Lien Parental",
+    "headline": "Un espace serein pour ce qui compte le plus : vos enfants.",
+    "encrypted": "Données chiffrées",
+    "europe": "Hébergé en Europe",
+    "noCommitment": "Sans engagement"
   }
 }

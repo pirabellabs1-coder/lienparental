@@ -1,13 +1,14 @@
 import { randomUUID } from 'node:crypto'
 import { z } from 'zod'
+import { getTranslations } from 'next-intl/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { DENIED_MESSAGES, requireAuthedUser } from '@/lib/auth/guard'
+import { requireAuthedUser } from '@/lib/auth/guard'
 import { cleanDate } from '@/lib/prefill'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { rateLimit, userKey } from '@/lib/data/server/rate-limit'
 import { encryptMedical, medicalCryptoReady } from '@/lib/data/server/medical-crypto'
-import { HEALTH_NOT_SHARED_MESSAGE, isProcheOf, loadHealthRows, openHealthRow } from '@/lib/coparents/server/health'
+import { isProcheOf, loadHealthRows, openHealthRow } from '@/lib/coparents/server/health'
 
 // Espace Santé d'un enfant : vaccinations et traitements (données de santé, RGPD art. 9).
 // Chiffrement AES-256-GCM exclusivement côté serveur (même clé dérivée par utilisateur que
@@ -78,15 +79,17 @@ type Ctx = { params: Promise<{ id: string }> }
 const aad = (childId: string, kind: Kind, rowId: string) => `${childId}:${kind}:${rowId}`
 
 async function authed(ctx: Ctx) {
-  if (!SUPABASE_ENABLED) return { error: jsonError(503, 'not_configured', 'Le stockage en ligne n’est pas configuré.') } as const
+  const t = await getTranslations('server.enfants')
+  const tc = await getTranslations('server.common')
+  if (!SUPABASE_ENABLED) return { error: jsonError(503, 'not_configured', t('notConfigured')) } as const
   const { id } = await ctx.params
-  if (!z.string().uuid().safeParse(id).success) return { error: jsonError(404, 'not_found', 'Profil introuvable.') } as const
+  if (!z.string().uuid().safeParse(id).success) return { error: jsonError(404, 'not_found', t('profileNotFound')) } as const
   // Session revalidée + aal2 exigé si la 2FA est activée (données de santé).
   const auth = await requireAuthedUser()
   if (!auth.ok) {
     return auth.reason === 'mfa_required'
-      ? { error: jsonError(403, 'mfa_required', DENIED_MESSAGES.mfa_required) } as const
-      : { error: jsonError(401, 'unauthenticated', DENIED_MESSAGES.unauthenticated) } as const
+      ? { error: jsonError(403, 'mfa_required', tc('denied.mfa_required')) } as const
+      : { error: jsonError(401, 'unauthenticated', tc('denied.unauthenticated')) } as const
   }
   const { supabase, user } = auth
   // Les tables 0260 ne sont pas encore dans les types générés.
@@ -95,17 +98,19 @@ async function authed(ctx: Ctx) {
   // Un proche ne voit pas la ligne → 403 explicite ; un tiers → 404 propre.
   const { data: child, error } = await raw
     .from('children').select('id, user_id').eq('id', id).is('deleted_at', null).maybeSingle()
-  if (error) return { error: jsonError(500, 'db_error', 'Lecture impossible pour le moment.') } as const
+  if (error) return { error: jsonError(500, 'db_error', t('readFailed')) } as const
   if (!child) {
-    if (await isProcheOf(raw, id)) return { error: jsonError(403, 'health_not_shared', HEALTH_NOT_SHARED_MESSAGE) } as const
-    return { error: jsonError(404, 'not_found', 'Profil introuvable.') } as const
+    if (await isProcheOf(raw, id)) return { error: jsonError(403, 'health_not_shared', t('healthNotShared')) } as const
+    return { error: jsonError(404, 'not_found', t('profileNotFound')) } as const
   }
   return { db: raw, user, id, isOwner: (child as { user_id: string }).user_id === user.id } as const
 }
 
 async function limited(userId: string) {
   const r = await rateLimit(userKey('sante', userId), 60, 60_000)
-  return r.ok ? null : jsonError(429, 'rate_limited', 'Trop de modifications rapprochées. Réessayez dans un instant.', { 'Retry-After': String(r.retryAfter) })
+  if (r.ok) return null
+  const t = await getTranslations('server.enfants')
+  return jsonError(429, 'rate_limited', t('tooManyChanges'), { 'Retry-After': String(r.retryAfter) })
 }
 
 export async function GET(_req: Request, ctx: Ctx) {
@@ -116,7 +121,7 @@ export async function GET(_req: Request, ctx: Ctx) {
   // Toutes les entrées visibles (les miennes + celles des autres parents liés, RLS 0340),
   // chacune déchiffrée avec la clé de SON AUTEUR (lib/coparents/server/health.ts).
   const rows = await loadHealthRows(a.db, a.id)
-  if (!rows) return jsonError(500, 'db_error', 'Lecture impossible pour le moment.')
+  if (!rows) return jsonError(500, 'db_error', (await getTranslations('server.enfants'))('readFailed'))
 
   let unreadable = 0
   const vaccinations: object[] = []
@@ -139,11 +144,12 @@ export async function POST(req: Request, ctx: Ctx) {
   if ('error' in a) return a.error
   const tooMany = await limited(a.user.id)
   if (tooMany) return tooMany
+  const t = await getTranslations('server.enfants')
   if (!medicalCryptoReady()) {
-    return jsonError(503, 'encryption_not_configured', 'Le chiffrement des données de santé n’est pas configuré : information non enregistrée.')
+    return jsonError(503, 'encryption_not_configured', t('healthEncryptionMissing'))
   }
   const parsed = createSchema.safeParse(await req.json().catch(() => null))
-  if (!parsed.success) return jsonError(422, 'invalid', 'Informations de santé invalides.')
+  if (!parsed.success) return jsonError(422, 'invalid', t('healthInvalid'))
 
   const { kind, item } = parsed.data
   const rowId = randomUUID()
@@ -153,7 +159,7 @@ export async function POST(req: Request, ctx: Ctx) {
     .insert({ id: rowId, user_id: a.user.id, child_id: a.id, payload })
     .select('id, created_at')
     .single()
-  if (error || !data) return jsonError(500, 'db_error', 'Enregistrement impossible pour le moment.')
+  if (error || !data) return jsonError(500, 'db_error', t('saveFailed'))
   const row = data as { id: string; created_at: string }
   return jsonOk({ item: { id: row.id, ...item, createdAt: row.created_at } }, 201)
 }
@@ -163,8 +169,9 @@ export async function DELETE(req: Request, ctx: Ctx) {
   if ('error' in a) return a.error
   const tooMany = await limited(a.user.id)
   if (tooMany) return tooMany
+  const t = await getTranslations('server.enfants')
   const parsed = deleteSchema.safeParse(await req.json().catch(() => null))
-  if (!parsed.success) return jsonError(422, 'invalid', 'Requête invalide.')
+  if (!parsed.success) return jsonError(422, 'invalid', t('invalidRequest'))
 
   // Suppression réelle (minimisation RGPD : une donnée de santé retirée n'est pas conservée).
   const { data, error } = await a.db
@@ -174,7 +181,7 @@ export async function DELETE(req: Request, ctx: Ctx) {
     .eq('child_id', a.id)
     .eq('user_id', a.user.id)
     .select('id')
-  if (error) return jsonError(500, 'db_error', 'Suppression impossible pour le moment.')
-  if (!data || data.length === 0) return jsonError(404, 'not_found', 'Élément introuvable.')
+  if (error) return jsonError(500, 'db_error', t('deleteFailed'))
+  if (!data || data.length === 0) return jsonError(404, 'not_found', t('itemNotFound'))
   return jsonOk({ ok: true })
 }

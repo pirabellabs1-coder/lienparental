@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { cookies } from 'next/headers'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
@@ -21,10 +22,9 @@ import { FinalBanner } from '@/components/accueil/FinalBanner'
 import { DEMO_COOKIE } from '@/lib/demo-auth'
 
 // Page d'accueil : maquette du client (octobre 2026), fond clair et sections dans l'ordre de la maquette.
-export const metadata: Metadata = {
-  title: 'Lien Parental : tout pour votre enfant, enfin au même endroit',
-  description:
-    'L’application des parents séparés : agenda partagé, dépenses et paiements, santé des enfants, coffre-fort sécurisé, témoignages, dossier JAF, Coach parental IA et Guide parental (Guyane). Gratuit pour commencer, installable en PWA.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('meta')
+  return { title: t('homeTitle'), description: t('homeDescription') }
 }
 
 // Vidéo de présentation : déposer public/video/presentation.mp4 (+ presentation.fr.vtt pour les sous-titres).

@@ -3,6 +3,7 @@
 
 import { baseLayout } from '../layout'
 import { escapeHtml } from '../escape'
+import { emailT, greeting, type Locale } from '../i18n'
 import { appLink, P, preferencesFooter } from './notificationParts'
 
 export type MessageWaitingProps = {
@@ -13,32 +14,35 @@ export type MessageWaitingProps = {
   conversationId: string
 }
 
-export function sendersLabel(senders: string[]): string {
+export function sendersLabel(senders: string[], locale: Locale = 'fr'): string {
+  const tr = emailT(locale)
   const names = senders.map(s => s.trim()).filter(Boolean)
-  if (names.length === 0) return 'Un parent'
+  if (names.length === 0) return tr('common.aParent')
   if (names.length === 1) return names[0]!
-  if (names.length === 2) return `${names[0]} et ${names[1]}`
-  return `${names[0]} et ${names.length - 1} autres personnes`
+  if (names.length === 2) return tr('messageWaiting.sendersTwo', { first: names[0]!, second: names[1]! })
+  return tr('messageWaiting.sendersMany', { first: names[0]!, others: String(names.length - 1) })
 }
 
-export function messageWaitingEmail(props: MessageWaitingProps): { subject: string; html: string } {
-  const who = sendersLabel(props.senders)
+export function messageWaitingEmail(props: MessageWaitingProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
+  const who = sendersLabel(props.senders, locale)
   const count = Math.max(1, Math.floor(props.count))
-  const what = count > 1 ? `${count} messages non lus` : '1 message non lu'
+  const what = tr('messageWaiting.unread', { count })
   const prenom = escapeHtml(props.prenom?.trim() || '')
   const url = appLink(`/app/messages/${encodeURIComponent(props.conversationId)}`)
   const body = `
-    <p style="${P}">Bonjour${prenom ? ` ${prenom}` : ''},</p>
-    <p style="margin:0;">${escapeHtml(who)} vous a écrit. Vous avez ${escapeHtml(what)} dans cette conversation.</p>
+    <p style="${P}">${greeting(tr, prenom)}</p>
+    <p style="margin:0;">${tr('messageWaiting.body', { name: escapeHtml(who), what: escapeHtml(what) })}</p>
   `
   return {
-    subject: `${who} vous a écrit sur Lien Parental`,
+    subject: tr('messageWaiting.subject', { name: who }),
     html: baseLayout({
-      preheader: `${what} de ${who}.`,
-      title: 'Vous avez un message',
+      locale,
+      preheader: tr('messageWaiting.preheader', { what, name: who }),
+      title: tr('messageWaiting.title'),
       body,
-      cta: { label: 'Lire la conversation', href: url },
-      footer: preferencesFooter('Au plus un e-mail par conversation toutes les 30 minutes.'),
+      cta: { label: tr('messageWaiting.cta'), href: url },
+      footer: preferencesFooter(tr('messageWaiting.footerExtra'), locale),
     }),
   }
 }

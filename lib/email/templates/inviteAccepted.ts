@@ -2,6 +2,7 @@
 
 import { baseLayout } from '../layout'
 import { escapeHtml } from '../escape'
+import { emailT, greeting, type Locale } from '../i18n'
 import { appLink, P, preferencesFooter } from './notificationParts'
 
 export type InviteAcceptedProps = {
@@ -10,21 +11,24 @@ export type InviteAcceptedProps = {
   role: 'parent' | 'proche'
 }
 
-export function inviteAcceptedEmail(props: InviteAcceptedProps): { subject: string; html: string } {
+export function inviteAcceptedEmail(props: InviteAcceptedProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
   const prenom = escapeHtml(props.prenom?.trim() || '')
-  const who = props.inviteePrenom?.trim() || 'La personne invitée'
+  const who = props.inviteePrenom?.trim() || tr('inviteAccepted.someone')
+  const role = props.role === 'proche' ? tr('inviteAccepted.roleProche') : tr('inviteAccepted.roleParent')
   const body = `
-    <p style="${P}">Bonjour${prenom ? ` ${prenom}` : ''},</p>
-    <p style="margin:0;">${escapeHtml(who)} a accepté votre invitation (${props.role === 'proche' ? 'proche' : 'parent'}). Vous pouvez gérer les adultes liés et leurs rôles à tout moment.</p>
+    <p style="${P}">${greeting(tr, prenom)}</p>
+    <p style="margin:0;">${tr('inviteAccepted.body', { name: escapeHtml(who), role })}</p>
   `
   return {
-    subject: `${who} a accepté votre invitation`,
+    subject: tr('inviteAccepted.subject', { name: who }),
     html: baseLayout({
-      preheader: `${who} a rejoint votre espace partagé.`,
-      title: 'Invitation acceptée',
+      locale,
+      preheader: tr('inviteAccepted.preheader', { name: who }),
+      title: tr('inviteAccepted.title'),
       body,
-      cta: { label: 'Gérer la famille', href: appLink('/app/coparents') },
-      footer: preferencesFooter(),
+      cta: { label: tr('common.manageFamily'), href: appLink('/app/coparents') },
+      footer: preferencesFooter('', locale),
     }),
   }
 }

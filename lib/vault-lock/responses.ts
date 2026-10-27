@@ -1,14 +1,17 @@
 import 'server-only'
 import { randomBytes } from 'node:crypto'
 import { NextResponse } from 'next/server'
+import { getTranslations } from 'next-intl/server'
 import { jsonError } from '@/lib/data/server/http'
 import type { FactorResult } from './verify'
 
-function waitText(until: number): string {
+type Translate = (key: string, values?: Record<string, string | number>) => string
+
+function waitText(t: Translate, until: number): string {
   const s = Math.max(1, Math.ceil((until - Date.now()) / 1000))
-  if (s < 60) return `${s} seconde${s > 1 ? 's' : ''}`
+  if (s < 60) return t('waitSeconds', { count: s })
   const m = Math.ceil(s / 60)
-  return `${m} minute${m > 1 ? 's' : ''}`
+  return t('waitMinutes', { count: m })
 }
 
 /** Même enveloppe que jsonError, avec un objet `details` (essais restants, fin du blocage). */
@@ -20,25 +23,25 @@ function errorWithDetails(status: number, code: string, message: string, details
   )
 }
 
-/** Traduit un échec de facteur en réponse HTTP. */
-export function factorFailure(r: Exclude<FactorResult, { ok: true }>, what: 'pin' | 'password') {
+/** Traduit un échec de facteur en réponse HTTP (langue de l'utilisateur : appel pendant une requête). */
+export async function factorFailure(r: Exclude<FactorResult, { ok: true }>, what: 'pin' | 'password') {
+  const t = await getTranslations('server.vaultLock')
   switch (r.code) {
     case 'locked_out': {
       const retry = String(Math.max(1, Math.ceil((r.lockedUntil - Date.now()) / 1000)))
-      return errorWithDetails(429, 'locked_out', `Trop d’essais. Réessayez dans ${waitText(r.lockedUntil)}.`,
+      return errorWithDetails(429, 'locked_out', t('lockedOut', { wait: waitText(t, r.lockedUntil) }),
         { lockedUntil: r.lockedUntil, attemptsLeft: 0, scope: what }, { 'Retry-After': retry })
     }
     case 'invalid': {
-      const label = what === 'pin' ? 'Code incorrect.' : 'Mot de passe incorrect.'
       const left = r.attemptsLeft
       return errorWithDetails(401, what === 'pin' ? 'invalid_pin' : 'invalid_password',
-        `${label} Il vous reste ${left} essai${left > 1 ? 's' : ''}.`, { lockedUntil: null, attemptsLeft: left, scope: what })
+        t(what === 'pin' ? 'invalidPin' : 'invalidPassword', { left }), { lockedUntil: null, attemptsLeft: left, scope: what })
     }
     case 'no_pin':
-      return jsonError(409, 'no_pin', 'Aucun code n’est défini pour ce compte.')
+      return jsonError(409, 'no_pin', t('noPin'))
     case 'provider_rate_limited':
-      return jsonError(429, 'rate_limited', 'Trop de tentatives. Patientez quelques minutes.')
+      return jsonError(429, 'rate_limited', t('providerRateLimited'))
     case 'error':
-      return jsonError(503, 'verification_unavailable', 'Vérification impossible pour le moment. Réessayez.')
+      return jsonError(503, 'verification_unavailable', t('verificationUnavailable'))
   }
 }

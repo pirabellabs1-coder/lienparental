@@ -1,0 +1,408 @@
+{
+  "shared": {
+    "billing": {
+      "errors": {
+        "already_subscribed": "Vous avez déjà un abonnement en cours : changez de formule depuis Mon abonnement.",
+        "billing_disabled": "Le paiement en ligne n’est pas encore disponible.",
+        "cancel_pending": "Annulez d’abord la résiliation pour changer de formule.",
+        "generic": "Une erreur est survenue. Réessayez dans un instant.",
+        "invalid_body": "Requête invalide. Rechargez la page puis réessayez.",
+        "invalid_cycle": "Formule inconnue. Choisissez Mensuel ou Annuel.",
+        "invalid_origin": "Requête refusée. Rechargez la page puis réessayez.",
+        "invalid_plan": "Formule inconnue. Choisissez Premium ou Coparentalité+.",
+        "invalid_state": "Cette action n’est pas possible pour le moment. Rechargez la page.",
+        "misconfigured": "Le service de paiement est momentanément indisponible.",
+        "network": "Connexion impossible. Vérifiez votre réseau puis réessayez.",
+        "no_customer": "Aucun moyen de paiement n’est encore enregistré.",
+        "no_subscription": "Aucun abonnement en cours.",
+        "payment_failed": "Le paiement de la différence a été refusé. Vérifiez votre moyen de paiement puis réessayez.",
+        "rate_limited": "Trop de demandes. Patientez un instant puis réessayez.",
+        "session_not_found": "Session de paiement introuvable pour ce compte.",
+        "stripe_unavailable": "Le service de paiement est momentanément indisponible. Réessayez dans un instant.",
+        "subscription_not_active": "Régularisez d’abord votre paiement pour changer de formule.",
+        "unauthenticated": "Votre session a expiré. Reconnectez-vous puis réessayez."
+      }
+    },
+    "calendar": {
+      "types": {
+        "activite": "Activité",
+        "anniversaire": "Anniversaire",
+        "appel": "Appel vidéo",
+        "autre": "Autre",
+        "deplacement": "Déplacement",
+        "ecole": "École",
+        "message": "Message",
+        "rdv": "Rendez-vous",
+        "repas": "Repas",
+        "sante": "Santé",
+        "sortie": "Sortie",
+        "visite": "Visite"
+      }
+    },
+    "confirm": {
+      "copy": {
+        "default": {
+          "action": "Continuer",
+          "text": "Continuez pour terminer l’opération demandée.",
+          "title": "Confirmation"
+        },
+        "email_change": {
+          "action": "Confirmer",
+          "text": "Continuez pour confirmer le changement d’adresse e-mail de votre compte.",
+          "title": "Confirmer la nouvelle adresse"
+        },
+        "recovery": {
+          "action": "Continuer",
+          "text": "Continuez pour choisir un nouveau mot de passe.",
+          "title": "Réinitialiser votre mot de passe"
+        },
+        "signup": {
+          "action": "Confirmer mon adresse",
+          "text": "Dernière étape : confirmez votre adresse e-mail pour activer votre compte Lien Parental.",
+          "title": "Confirmer votre adresse"
+        }
+      },
+      "invalid": {
+        "back": "Retour à la connexion",
+        "text": "Ce lien est incomplet ou a expiré. Demandez-en un nouveau.",
+        "title": "Lien invalide"
+      },
+      "metaTitle": "Confirmation"
+    },
+    "dashboard": {
+      "addedOn": "Ajouté le {date}"
+    },
+    "data": {
+      "calendar": {
+        "dateRequired": "La date est requise.",
+        "healthChildRequired": "Choisissez l’enfant concerné par ce rendez-vous santé.",
+        "notAuthor": "Cet événement a été partagé par un autre parent : seul son auteur peut le modifier ou le supprimer.",
+        "titleRequired": "Donnez un titre à l'événement."
+      },
+      "children": {
+        "firstNameRequired": "Le prénom est requis.",
+        "invalidDate": "Date invalide",
+        "medicalSaveFailed": "Les informations médicales n’ont pas pu être enregistrées.",
+        "notFound": "Ce profil n’existe pas ou a été supprimé."
+      },
+      "errors": {
+        "duplicate": "Cet élément existe déjà.",
+        "fileTooLarge": "Fichier trop volumineux.",
+        "forbidden": "Accès refusé. Reconnectez-vous puis réessayez.",
+        "generic": "Une erreur est survenue. Réessayez dans un instant.",
+        "invalid": "Certaines informations sont invalides.",
+        "invalidShort": "Informations invalides.",
+        "network": "Connexion impossible. Vérifiez votre réseau.",
+        "notConfigured": "Le stockage en ligne n’est pas configuré.",
+        "notFound": "Élément introuvable.",
+        "relatedNotFound": "Élément lié introuvable.",
+        "sessionExpired": "Votre session a expiré. Reconnectez-vous."
+      },
+      "family": {
+        "linkedParent": "un parent lié"
+      },
+      "folders": {
+        "alreadyShared": "Ce dossier est déjà partagé avec ce parent.",
+        "cycle": "Un dossier ne peut pas être rangé dans lui-même.",
+        "folderInvalid": "Dossier invalide.",
+        "gone": "Ce dossier n’existe plus. Actualisez la page.",
+        "maxDepth": "Pas plus de {max} niveaux de dossiers.",
+        "nameInvalid": "Nom de dossier invalide.",
+        "nameMax": "{max} caractères au maximum.",
+        "nameRequired": "Indiquez un nom de dossier.",
+        "nameTaken": "Un dossier porte déjà ce nom à cet endroit.",
+        "notAuthorMove": "Ce document a été partagé par un autre parent : seul son auteur peut le ranger.",
+        "ownerDelete": "Seul le propriétaire du dossier peut le supprimer.",
+        "ownerRename": "Seul le propriétaire du dossier peut le renommer.",
+        "parentInvalid": "Dossier parent invalide.",
+        "shareAlreadyStopped": "Ce partage est déjà arrêté.",
+        "shareInvalid": "Partage invalide.",
+        "shareNotLinked": "Partage impossible : ce parent n’est pas (ou plus) lié à vous."
+      },
+      "garde": {
+        "invalidConfig": "Configuration de garde invalide."
+      },
+      "health": {
+        "boosterAfterVaccine": "Le rappel doit être postérieur à la vaccination.",
+        "endAfterStart": "La fin doit être après le début.",
+        "invalidDate": "Date invalide.",
+        "maxChars": "{max} caractères maximum.",
+        "startDateRequired": "Indiquez la date de début.",
+        "treatmentNameRequired": "Indiquez le nom du traitement.",
+        "vaccineDateRequired": "Indiquez la date de vaccination.",
+        "vaccineNameRequired": "Indiquez le nom du vaccin."
+      },
+      "journal": {
+        "badJustificatif": "Justificatif « {name} » : {error}",
+        "expenseRequired": "Renseignez le montant, la catégorie et le mode de paiement.",
+        "fileBadType": "« {name} » : format non pris en charge (images ou PDF).",
+        "fileTooLarge": "« {name} » dépasse 10 Mo.",
+        "finance": {
+          "amountInvalid": "Montant invalide.",
+          "amountPositive": "Le montant doit être supérieur à 0.",
+          "amountRequired": "Indiquez un montant.",
+          "amountTooHigh": "Montant trop élevé (100 000 maximum).",
+          "categoryRequired": "Choisissez une catégorie.",
+          "dueInvalid": "Date d’échéance invalide.",
+          "fileFormat": "Format non pris en charge. Utilisez une photo (JPG, PNG, WebP, HEIC) ou un PDF.",
+          "fileTooBig": "Fichier trop volumineux (10 Mo maximum).",
+          "modeRequired": "Choisissez un mode de paiement.",
+          "paidRange": "Le montant payé doit être supérieur à 0 et inférieur au montant total.",
+          "paidRequired": "Indiquez le montant déjà payé.",
+          "percentRange": "Pourcentage entre 0 et 100.",
+          "shareRequired": "Indiquez votre part.",
+          "shareTooHigh": "Votre part ne peut pas dépasser le montant total."
+        },
+        "nextDueAfterDate": "L’échéance suivante doit être postérieure à la date de la dépense.",
+        "notFound": "Événement introuvable.",
+        "titleRequired": "Donnez un titre à cet événement.",
+        "tooManyFiles": "{max} fichiers maximum par événement.",
+        "tooManyJustificatifs": "{max} justificatifs maximum par dépense.",
+        "uploadFailed": "L’envoi des fichiers a échoué."
+      },
+      "testimonies": {
+        "childRequired": "Ajoutez au moins un enfant.",
+        "createFailed": "La demande n’a pas pu être créée. Réessayez.",
+        "defaultSubject": "Témoignage",
+        "notSpecified": "Non précisé",
+        "parentRequired": "Ajoutez au moins un parent.",
+        "subjectRequired": "Indiquez le titre de la demande.",
+        "witnessN": "Témoin {n}"
+      },
+      "vault": {
+        "badType": "Format non pris en charge. Formats acceptés : PDF, JPG, PNG, DOCX, DOC.",
+        "categoryInvalid": "Catégorie invalide.",
+        "categoryNameRequired": "Indiquez un nom de catégorie.",
+        "categoryTaken": "Une catégorie porte déjà ce nom.",
+        "contentMismatch": "Le contenu du fichier ne correspond pas à son extension.",
+        "demoFiles": "Les fichiers ne sont pas disponibles en mode démonstration.",
+        "docDateRequired": "Indiquez la date du document.",
+        "docNameInvalid": "Nom de document invalide.",
+        "docNameRequired": "Indiquez le nom du document.",
+        "downloadFailed": "Téléchargement impossible pour le moment.",
+        "empty": "Le fichier est vide.",
+        "expired": "Expiré",
+        "expiresInDays": "Expire dans {n} jours",
+        "expiresInHours": "Expire dans {n} h",
+        "expiresInMin": "Expire dans {n} min",
+        "notAuthor": "Ce document a été partagé par un autre parent : seul son auteur peut le modifier.",
+        "restoreFailed": "Restauration impossible (délai de 30 jours dépassé ?).",
+        "tooLarge": "Fichier trop volumineux. Taille max. 20 Mo.",
+        "uploadFailed": "L’envoi du fichier a échoué. Réessayez."
+      }
+    },
+    "family": {
+      "generic": "Une erreur est survenue. Réessayez dans un instant.",
+      "invitation": {
+        "fromMe": "Je t’invite",
+        "fromName": "{name} t'invite",
+        "message": "Bonjour, {from} à rejoindre l’espace partagé des enfants sur Lien Parental : {url} (lien personnel, valable 7 jours, à ouvrir avec ton adresse e-mail invitée)."
+      },
+      "inviteInvalid": "Invitation invalide ou expirée.",
+      "network": "Connexion impossible. Vérifiez votre réseau."
+    },
+    "format": {
+      "size": {
+        "bytes": "{n} o",
+        "kb": "{n} Ko",
+        "mb": "{n} Mo"
+      },
+      "unknownDate": "date inconnue"
+    },
+    "guide": {
+      "loadFailed": "Votre progression n’a pas pu être chargée.",
+      "notReady": "Progression en cours de chargement, réessayez dans un instant.",
+      "saveFailed": "La progression n’a pas pu être enregistrée."
+    },
+    "messages": {
+      "attachment": {
+        "badType": "Format non accepté. Choisissez une image (JPG, PNG, WebP, HEIC) ou un PDF.",
+        "empty": "Ce fichier est vide.",
+        "label": "Pièce jointe",
+        "tooLarge": "Fichier trop volumineux : 10 Mo maximum."
+      },
+      "attachmentNamed": "Pièce jointe : {name}",
+      "conversation": "Conversation",
+      "errors": {
+        "archiveFailed": "La conversation n'a pas pu être archivée.",
+        "attachmentSendFailed": "La pièce jointe n'a pas pu être envoyée.",
+        "bodyTooLong": "Message trop long ({max} caractères maximum).",
+        "createFailed": "La discussion n'a pas pu être créée.",
+        "inviteCancelFailed": "L'invitation n'a pas pu être annulée.",
+        "inviteCreateFailed": "L'invitation n'a pas pu être créée.",
+        "inviteInvalid": "Invitation invalide ou expirée.",
+        "noAttachment": "Ce message ne contient pas de pièce jointe à ranger.",
+        "parentNotLinked": "Ce parent n’est pas lié à votre compte.",
+        "participantNotLinked": "Interlocuteur non lié à votre compte.",
+        "sendFailed": "Le message n'a pas pu être envoyé.",
+        "sessionExpired": "Session expirée. Reconnectez-vous.",
+        "titleTooLong": "Sujet trop long ({max} caractères maximum).",
+        "tooManyConversations": "Trop de conversations créées aujourd’hui. Réessayez demain.",
+        "unarchiveFailed": "La conversation n'a pas pu être désarchivée.",
+        "voiceSendFailed": "La note vocale n'a pas pu être envoyée."
+      },
+      "namesAnd": "{names} et {last}",
+      "otherParent": "Autre parent",
+      "voice": {
+        "badType": "Format audio non pris en charge par ce navigateur.",
+        "empty": "Enregistrement vide. Vérifiez votre micro.",
+        "tooLarge": "Note vocale trop volumineuse.",
+        "tooLong": "Note vocale trop longue : 3 minutes maximum.",
+        "tooShort": "Note vocale trop courte."
+      },
+      "voiceNote": "Note vocale"
+    },
+    "notify": {
+      "blocked": "Les notifications sont bloquées pour ce site. Autorisez-les dans les réglages du navigateur, puis réessayez.",
+      "enableFailed": "Activation impossible pour le moment. Réessayez dans un instant.",
+      "notGranted": "Autorisation non accordée.",
+      "unsupported": "Les notifications ne sont pas disponibles sur ce navigateur."
+    },
+    "shares": {
+      "generic": "Une erreur est survenue. Réessayez.",
+      "scope": {
+        "documents": "{count, plural, one {{n} document} other {{n} documents}}",
+        "journal": "journal",
+        "messages": "messages",
+        "none": "aucun contenu",
+        "testimonies": "{count, plural, one {{n} témoignage} other {{n} témoignages}}"
+      },
+      "sessionExpired": "Session expirée. Reconnectez-vous."
+    },
+    "states": {
+      "background": "Continuer en arrière-plan",
+      "cancel": "Annuler",
+      "defaultFileName": "Document.pdf",
+      "deleting": {
+        "files": "{count, plural, one {{n} fichier en cours de suppression} other {{n} fichiers en cours de suppression}}",
+        "items": "Éléments en cours de suppression"
+      },
+      "downloading": "Téléchargement en cours…",
+      "empty": {
+        "description": "Commencez par ajouter votre premier élément pour le voir apparaître ici.",
+        "title": "Aucune donnée disponible"
+      },
+      "error": {
+        "backHome": "Retour à l'accueil",
+        "code": "Code d'erreur : {code}",
+        "description": "Nous n'avons pas pu effectuer cette action.",
+        "title": "Oups, une erreur est survenue"
+      },
+      "loading": {
+        "description": "Veuillez patienter quelques instants, nous préparons votre espace.",
+        "title": "Chargement en cours"
+      },
+      "maintenance": {
+        "description": "Nous améliorons votre expérience. Merci de réessayer plus tard.",
+        "note": "Nous serons de retour très bientôt.",
+        "retryLater": "Réessayer plus tard",
+        "title": "Application en maintenance"
+      },
+      "offline": {
+        "description": "Vérifiez votre connexion et réessayez pour accéder à vos données.",
+        "note": "Certaines fonctionnalités peuvent être limitées hors connexion.",
+        "title": "Pas de connexion Internet",
+        "workOffline": "Travailler hors ligne"
+      },
+      "operations": {
+        "importation": {
+          "description": "Vos fichiers sont en cours d’importation dans votre coffre-fort.",
+          "title": "Importation en cours"
+        },
+        "mise-a-jour": {
+          "cancel": "Annuler la mise à jour",
+          "description": "Nous améliorons votre application pour une meilleure expérience.",
+          "title": "Mise à jour en cours"
+        },
+        "sauvegarde": {
+          "description": "Nous sauvegardons vos données en toute sécurité.",
+          "title": "Sauvegarde en cours"
+        },
+        "suppression": {
+          "description": "Veuillez patienter pendant que nous supprimons vos éléments.",
+          "title": "Suppression en cours"
+        },
+        "synchronisation": {
+          "description": "Vos données sont en cours de synchronisation sur tous vos appareils.",
+          "title": "Synchronisation en cours"
+        }
+      },
+      "progressOf": "{current} sur {total}",
+      "retry": "Réessayer",
+      "stay": "Rester sur cette page",
+      "success": {
+        "continue": "Continuer",
+        "description": "Votre action a été effectuée avec succès.",
+        "title": "Opération réussie !"
+      },
+      "upToDate": {
+        "description": "Vous utilisez la dernière version de Lien Parental.",
+        "note": "Vous bénéficiez des dernières fonctionnalités et correctifs.",
+        "perfect": "Parfait !",
+        "title": "Tout est à jour !"
+      },
+      "version": "Version {version}"
+    },
+    "templates": {
+      "values": {
+        "chooseOption": "Choisissez une option de la liste.",
+        "invalidDate": "Date invalide.",
+        "invalidEmail": "Adresse e-mail invalide.",
+        "invalidPhone": "Numéro invalide.",
+        "maxChars": "{max} caractères au maximum.",
+        "numberExpected": "Nombre attendu.",
+        "required": "Champ obligatoire."
+      }
+    },
+    "topBar": {
+      "back": "Retour",
+      "notifications": "Notifications",
+      "notificationsUnread": "Notifications, {count} non lues"
+    },
+    "vault": {
+      "folders": {
+        "docsHere": "{count, plural, one {{n} document ici} other {{n} documents ici}}",
+        "sharedWith": "Partagé avec {names}",
+        "subfolders": "{count, plural, one {{n} sous-dossier} other {{n} sous-dossiers}}"
+      },
+      "save": {
+        "added": "Pièce jointe ajoutée au coffre-fort",
+        "addedInFolder": "Pièce jointe ajoutée au coffre-fort, dossier « {folder} »",
+        "addedNotPlaced": "Ajouté au coffre-fort, mais pas dans le dossier choisi",
+        "already": "Déjà dans votre coffre-fort",
+        "alreadyInFolder": "Déjà dans votre coffre-fort (dossier « {folder} »)"
+      }
+    },
+    "vaultLock": {
+      "forbiddenOrigin": "Origine de la requête refusée.",
+      "gate": {
+        "lockedTitle": "Coffre-fort verrouillé",
+        "mfaTitle": "Confirmation requise",
+        "notConfiguredMessage": "Le verrouillage du coffre-fort n’est pas encore configuré sur ce serveur. Contactez le support.",
+        "reconnect": "Me reconnecter",
+        "sessionMessage": "Reconnectez-vous pour accéder au coffre-fort.",
+        "sessionTitle": "Session expirée",
+        "unavailableMessage": "Impossible de vérifier le verrou du coffre-fort. Réessayez dans un instant.",
+        "unavailableTitle": "Coffre-fort indisponible"
+      },
+      "invalidData": "Données invalides.",
+      "invalidRequest": "Requête invalide.",
+      "mfaRequired": "Confirmez votre identité avec votre code de double authentification.",
+      "notConfigured": "Le verrouillage du coffre-fort n’est pas configuré sur ce serveur.",
+      "payloadTooLarge": "Requête trop volumineuse.",
+      "sessionExpired": "Votre session a expiré. Reconnectez-vous.",
+      "tooManyAttempts": "Trop de tentatives. Patientez un instant.",
+      "webauthn": {
+        "alreadyRegistered": "Cet appareil est déjà enregistré.",
+        "android": "Téléphone Android",
+        "cancelled": "Opération annulée ou délai dépassé.",
+        "failed": "L’empreinte n’a pas pu être utilisée.",
+        "security": "Empreinte indisponible sur cette adresse (HTTPS requis).",
+        "thisDevice": "Cet appareil",
+        "unsupported": "Cet appareil ne propose pas d’empreinte ni de reconnaissance faciale.",
+        "unsupportedBrowser": "Ce navigateur ne prend pas en charge l’empreinte.",
+        "windows": "PC Windows (Windows Hello)"
+      }
+    }
+  }
+}

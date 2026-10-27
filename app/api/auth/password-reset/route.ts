@@ -11,8 +11,9 @@ import { after } from 'next/server'
 import { jsonError, jsonOk, rejectCrossSiteJson } from '@/lib/data/server/http'
 import { clientIp } from '@/lib/data/server/rate-limit'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { prepareReset } from '@/lib/auth/email-flows'
+import { prepareReset, type FlowDeps } from '@/lib/auth/email-flows'
 import { serverFlowDeps } from '@/lib/auth/email-flows-server'
+import { localeForUser, requestLocale } from '@/lib/email/locale'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -27,7 +28,12 @@ export async function POST(req: Request) {
   const deps = serverFlowDeps()
   if (!deps) return jsonError(503, 'unavailable', 'Service momentanément indisponible. Réessayez dans un instant.')
 
-  const { result, deliver } = await prepareReset(deps, body, clientIp(req.headers))
+  // Langue des e-mails : compte confirmé → sa langue ; sinon langue d'affichage du visiteur (cookie lp_locale).
+  const localeDeps: FlowDeps = {
+    ...deps,
+    userLocale: (userId) => localeForUser(userId),
+  }
+  const { result, deliver } = await prepareReset(localeDeps, body, clientIp(req.headers), await requestLocale())
   if (deliver) after(deliver)
   if (result.status === 200) return jsonOk(result.body)
   return jsonError(result.status, result.code, result.message, 'retryAfter' in result ? { 'Retry-After': String(result.retryAfter) } : undefined)

@@ -1,7 +1,8 @@
 // Schémas zod des requêtes /api/coparents/** (validés côté serveur ; réutilisés côté client).
+// Les messages d'erreur sont des CODES, traduits par la route (server.coparents.validation.<code>).
 import { z } from 'zod'
 
-export const emailSchema = z.string().trim().toLowerCase().max(254).regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Adresse e-mail invalide.')
+export const emailSchema = z.string().trim().toLowerCase().max(254).regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'invalidEmail')
 export const guardianRoleSchema = z.enum(['parent', 'proche'])
 export const uuidSchema = z.string().uuid()
 /** Jeton d'invitation famille : 64 caractères hexadécimaux (0340). */
@@ -10,7 +11,7 @@ export const familyTokenSchema = z.string().regex(/^[0-9a-f]{64}$/)
 export const createInvitationSchema = z.object({
   email: emailSchema,
   role: guardianRoleSchema,
-  childIds: z.array(uuidSchema).min(1, 'Choisissez au moins un enfant.').max(20),
+  childIds: z.array(uuidSchema).min(1, 'chooseChild').max(20),
 }).strict()
 
 export const acceptSchema = z.union([

@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { NextResponse } from 'next/server'
 import { appOrigin, STRIPE_TAX_ENABLED } from '@/lib/billing/config'
 import { apiError, fail, isSameOrigin, limitBilling, logError, readBody, requireBillingUser, seeOther, wantsJson } from '@/lib/billing/http'
@@ -25,9 +26,10 @@ export const dynamic = 'force-dynamic'
 const BACK = '/app/abonnement'
 
 export async function POST(req: Request) {
+  const t = await getTranslations('server.stripe')
   const base = appOrigin()
-  if (!base) return apiError(500, 'misconfigured', 'Service momentanément indisponible.')
-  if (!isSameOrigin(req)) return apiError(403, 'invalid_origin', 'Requête refusée.')
+  if (!base) return apiError(500, 'misconfigured', t('lib.misconfigured'))
+  if (!isSameOrigin(req)) return apiError(403, 'invalid_origin', t('refused'))
 
   const auth = await requireBillingUser()
   if ('error' in auth) return fail(req, auth.error.status, auth.error.code, auth.error.message, BACK)
@@ -37,17 +39,17 @@ export async function POST(req: Request) {
 
   const body = await readBody(req)
   const cycle = parseCycleStrict(body.cycle)
-  if (!cycle) return fail(req, 400, 'invalid_cycle', 'Formule inconnue.', BACK)
+  if (!cycle) return fail(req, 400, 'invalid_cycle', t('unknownPlan'), BACK)
   const formule = parsePlanStrict(body.formule)
-  if (!formule) return fail(req, 400, 'invalid_plan', 'Formule inconnue.', BACK)
+  if (!formule) return fail(req, 400, 'invalid_plan', t('unknownPlan'), BACK)
   const price = priceIdForOffer({ plan: formule, cycle })
-  if (!price) return fail(req, 503, 'misconfigured', 'Service momentanément indisponible.', BACK)
+  if (!price) return fail(req, 503, 'misconfigured', t('lib.misconfigured'), BACK)
 
   try {
     // Un seul abonnement par compte : on renvoie vers la gestion plutôt que d'en créer un second.
     const existing = await getSubscription(user.id)
     if (existing && isBlockingStatus(existing.status)) {
-      if (wantsJson(req)) return apiError(409, 'already_subscribed', 'Vous avez déjà un abonnement en cours.')
+      if (wantsJson(req)) return apiError(409, 'already_subscribed', t('alreadySubscribed'))
       return seeOther('/app/abonnement')
     }
 
@@ -91,11 +93,11 @@ export async function POST(req: Request) {
         : {}),
     })
 
-    if (!session.url) return fail(req, 503, 'stripe_unavailable', 'Paiement momentanément indisponible.', BACK)
+    if (!session.url) return fail(req, 503, 'stripe_unavailable', t('paymentUnavailableShort'), BACK)
     if (wantsJson(req)) return NextResponse.json({ url: session.url }, { headers: { 'Cache-Control': 'no-store' } })
     return seeOther(session.url)
   } catch (err) {
     logError('checkout', err)
-    return fail(req, 503, 'stripe_unavailable', 'Paiement momentanément indisponible. Réessayez dans un instant.', BACK)
+    return fail(req, 503, 'stripe_unavailable', t('paymentUnavailable'), BACK)
   }
 }

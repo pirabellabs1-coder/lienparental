@@ -9,7 +9,7 @@
  * Aucune donnée n'est écrite ici ; la RLS reste le garde-fou.
  */
 import { useEffect, useState } from 'react'
-import { LIVE, db } from './core'
+import { LIVE, dataMsg, db } from './core'
 
 const TTL = 60_000
 let namesCache: { at: number; value: Promise<Map<string, string>> } | null = null
@@ -32,7 +32,7 @@ export function familyAuthorNames(): Promise<Map<string, string>> {
 
 /** Libellé de l'auteur : prénom s'il est connu, sinon formulation neutre. */
 export function sharedByLabel(prenom: string | undefined): string {
-  return prenom && prenom.length > 0 ? prenom : 'un parent lié'
+  return prenom && prenom.length > 0 ? prenom : dataMsg('family.linkedParent')
 }
 
 async function loadSharedChildIds(): Promise<string[]> {

@@ -1,3 +1,5 @@
+import { getLocale, getTranslations } from 'next-intl/server'
+import { intlLocale } from '@/lib/i18n/config'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { familyContext, limited, readJson, rpcError } from '@/lib/coparents/server/context'
 import { sharingPatchSchema, uuidSchema } from '@/lib/coparents/validation'
@@ -14,23 +16,25 @@ import { requireVaultUnlocked, vaultDeniedResponse } from '@/lib/vault-lock'
 // catégorie, le titre et la date deviennent visibles des parents liés.
 export const dynamic = 'force-dynamic'
 
-const fmtAmount = (cents: number, currency: string) =>
-  new Intl.NumberFormat('fr-FR', { style: 'currency', currency: currency || 'EUR' }).format(cents / 100)
+const fmtAmount = (cents: number, currency: string, locale: string) =>
+  new Intl.NumberFormat(locale, { style: 'currency', currency: currency || 'EUR' }).format(cents / 100)
 
 export async function GET(req: Request) {
   const ctx = await familyContext()
   if ('error' in ctx) return ctx.error
+  const t = await getTranslations('server.coparents')
   const tooMany = await limited(ctx.user.id, 'read', 120, 60_000)
   if (tooMany) return tooMany
   const childId = new URL(req.url).searchParams.get('childId') ?? ''
-  if (!uuidSchema.safeParse(childId).success) return jsonError(404, 'not_found', 'Enfant introuvable.')
+  if (!uuidSchema.safeParse(childId).success) return jsonError(404, 'not_found', t('childNotFound'))
 
   // L'enfant doit m'être accessible en tant que titulaire ou parent (RLS 0340).
   const { data: child, error: cErr } = await ctx.db.from('children').select('id').eq('id', childId).is('deleted_at', null).maybeSingle()
   if (cErr) return rpcError(cErr, 'sharing.child')
-  if (!child) return jsonError(404, 'not_found', 'Enfant introuvable.')
+  if (!child) return jsonError(404, 'not_found', t('childNotFound'))
 
   const since = new Date(Date.now() - 86_400_000).toISOString()
+  const numLocale = intlLocale(await getLocale())
   const vault = await requireVaultUnlocked()
   const documentsLocked = !vault.ok
   const [docs, exps, evts] = await Promise.all([
@@ -58,7 +62,7 @@ export async function GET(req: Request) {
     expenses: ((exps.data ?? []) as { id: string; titre: string; occurred_at: string; journal_expenses: Exp | Exp[] | null }[])
       .flatMap<SharingItem>((e) => {
         const x = Array.isArray(e.journal_expenses) ? e.journal_expenses[0] : e.journal_expenses
-        return x ? [{ kind: 'expense', id: e.id, label: e.titre, date: e.occurred_at, detail: fmtAmount(x.amount_cents, x.currency), shared: x.family_shared }] : []
+        return x ? [{ kind: 'expense', id: e.id, label: e.titre, date: e.occurred_at, detail: fmtAmount(x.amount_cents, x.currency, numLocale), shared: x.family_shared }] : []
       }),
     events: ((evts.data ?? []) as { id: string; titre: string; start_at: string; family_shared: boolean }[])
       .map<SharingItem>((e) => ({ kind: 'event', id: e.id, label: e.titre, date: e.start_at, shared: e.family_shared })),
@@ -69,10 +73,11 @@ export async function GET(req: Request) {
 export async function PATCH(req: Request) {
   const ctx = await familyContext(req)
   if ('error' in ctx) return ctx.error
+  const t = await getTranslations('server.coparents')
   const tooMany = await limited(ctx.user.id, 'write', 120, 60_000)
   if (tooMany) return tooMany
   const parsed = sharingPatchSchema.safeParse(await readJson(req))
-  if (!parsed.success) return jsonError(422, 'invalid', 'Requête invalide.')
+  if (!parsed.success) return jsonError(422, 'invalid', t('hints.invalid_payload'))
   const { kind, id, shared } = parsed.data
   if (kind === 'document') {
     const vault = await requireVaultUnlocked()
@@ -86,6 +91,6 @@ export async function PATCH(req: Request) {
       : ctx.db.from('calendar_events').update({ family_shared: shared }).eq('id', id).eq('user_id', ctx.user.id).is('deleted_at', null).select('id')
   const { data, error } = await q
   if (error) return rpcError(error, `sharing.${kind}`)
-  if (!data || data.length === 0) return jsonError(404, 'not_found', 'Élément introuvable.')
+  if (!data || data.length === 0) return jsonError(404, 'not_found', t('notFound'))
   return jsonOk({ ok: true, shared })
 }

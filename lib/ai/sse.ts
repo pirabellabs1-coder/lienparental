@@ -9,7 +9,7 @@ export type SseSend = (event: string, data: unknown) => void
 
 export function sseResponse(
   run: (send: SseSend, signal: AbortSignal) => Promise<void>,
-  init?: { headers?: Record<string, string> },
+  init?: { headers?: Record<string, string>; /** Message de l'erreur interne (traduit) ; défaut : français. */ errorMessage?: string },
 ): Response {
   const encoder = new TextEncoder()
   const abort = new AbortController()
@@ -29,7 +29,7 @@ export function sseResponse(
       const send: SseSend = (event, data) => write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`)
       ping = setInterval(() => write(': ping\n\n'), 15_000)
       run(send, abort.signal)
-        .catch(() => send('error', { code: 'internal', message: 'Une erreur est survenue. Réessayez dans un instant.' }))
+        .catch(() => send('error', { code: 'internal', message: init?.errorMessage ?? 'Une erreur est survenue. Réessayez dans un instant.' }))
         .finally(() => {
           clearInterval(ping)
           if (!closed) {

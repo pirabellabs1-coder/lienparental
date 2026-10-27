@@ -3,12 +3,13 @@
 import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
 import { escapeHtml, safeUrl, STRIPE_LINK_HOSTS } from '../escape'
+import { cycleLabel, dateLocale, emailT, greeting, type Locale } from '../i18n'
 
 export type InvoiceProps = {
   prenom: string
   /** Montant déjà formaté (ex: "9,99 €") ou en centimes selon l'appelant. */
   montant: string
-  /** Cycle de facturation (ex: "mensuel", "annuel"). */
+  /** Cycle de facturation (ex: "mensuel", "annuel" : traduits ; autre valeur affichée telle quelle). */
   cycle: string
   /** Fin de la prochaine période au format ISO 8601. */
   nextPeriodEnd: string
@@ -16,23 +17,26 @@ export type InvoiceProps = {
   invoiceUrl: string
 }
 
+/** Objet en français (historique) ; l'objet traduit est renvoyé par invoiceEmail(props, locale). */
 export const invoiceSubject = 'Votre reçu Lien Parental'
 
-function formatDateFr(iso: string): string {
+function formatDate(iso: string, locale: Locale): string {
   try {
     const d = new Date(iso)
     if (Number.isNaN(d.getTime())) return iso
-    return new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long' }).format(d)
+    return new Intl.DateTimeFormat(dateLocale(locale), { dateStyle: 'long' }).format(d)
   } catch {
     return iso
   }
 }
 
-export function invoiceEmail(props: InvoiceProps): { subject: string; html: string } {
+export function invoiceEmail(props: InvoiceProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
   const prenom = escapeHtml(props.prenom?.trim() || '')
-  const dateFin = escapeHtml(formatDateFr(props.nextPeriodEnd))
+  const dateFin = escapeHtml(formatDate(props.nextPeriodEnd, locale))
   const montant = escapeHtml(props.montant)
-  const cycle = escapeHtml(props.cycle)
+  const cycleText = cycleLabel(tr, props.cycle)
+  const cycle = escapeHtml(cycleText)
   const invoiceUrl = safeUrl(props.invoiceUrl, undefined, STRIPE_LINK_HOSTS)
 
   const row = (label: string, value: string) => `
@@ -43,32 +47,33 @@ export function invoiceEmail(props: InvoiceProps): { subject: string; html: stri
   `
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
+    <p style="margin:0 0 16px 0;">${greeting(tr, prenom)}</p>
     <p style="margin:0 0 16px 0;">
-      Nous confirmons la réception de votre paiement. Merci pour votre confiance.
+      ${tr('invoice.intro')}
     </p>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:16px 0;">
-      ${row('Montant', montant)}
-      ${row('Cycle', cycle)}
-      ${row('Prochaine échéance', dateFin)}
+      ${row(tr('invoice.amount'), montant)}
+      ${row(tr('invoice.cycle'), cycle)}
+      ${row(tr('invoice.nextDue'), dateFin)}
     </table>
     <p style="margin:16px 0 0 0;color:${t.colors.textMuted};font-size:14px;">
-      Votre facture détaillée est disponible via le bouton ci-dessous. Vous pouvez la télécharger au format PDF depuis la page hébergée par Stripe.
+      ${tr('invoice.details')}
     </p>
   `
 
   const footer = `
-    Pour toute question de facturation, écrivez-nous à
+    ${tr('invoice.footerLead')}
     <a href="mailto:${t.supportEmail}" style="color:${t.colors.textMuted};">${t.supportEmail}</a>.
   `
 
   return {
-    subject: invoiceSubject,
+    subject: tr('invoice.subject'),
     html: baseLayout({
-      preheader: `Reçu Lien Parental : ${props.montant} (${props.cycle}).`,
-      title: 'Reçu de paiement',
+      locale,
+      preheader: tr('invoice.preheader', { amount: props.montant, cycle: cycleText }),
+      title: tr('invoice.title'),
       body,
-      cta: { label: 'Télécharger la facture', href: invoiceUrl },
+      cta: { label: tr('invoice.cta'), href: invoiceUrl },
       footer,
     }),
   }

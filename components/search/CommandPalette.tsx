@@ -2,7 +2,7 @@
 
 import { Fragment, useCallback, useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
 import {
   BookOpen, CalendarDays, CornerDownLeft, FileText, History, LayoutGrid, Lock,
@@ -173,7 +173,7 @@ async function loadLiveSource(vaultOpen: boolean): Promise<IndexSource> {
  * `vaultOpen` : documents et témoignages (coffre-fort) indexés UNIQUEMENT si le coffre est
  * déverrouillé ; sinon ils ne sont ni chargés ni cherchés (fail closed pendant la vérification).
  */
-function buildIndex(vaultOpen: boolean, src: IndexSource, t: T): Item[] {
+function buildIndex(vaultOpen: boolean, src: IndexSource, t: T, locale: string, typeLabel: (type: string) => string): Item[] {
   const items: Item[] = []
   const push = (section: SectionKey, id: string, title: string, href: string, subtitle: string | undefined, extra: (string | undefined)[]) => {
     items.push({
@@ -186,17 +186,17 @@ function buildIndex(vaultOpen: boolean, src: IndexSource, t: T): Item[] {
   for (const d of vaultOpen ? src.docs : []) {
     const cat = src.categoryName(d.categoryId)
     push('documents', d.id, d.name, `/app/coffre/documents/${d.id}`,
-      [cat, frDate(d.docDate, 'short')].filter(Boolean).join(' · '),
+      [cat, frDate(d.docDate, 'short', locale)].filter(Boolean).join(' · '),
       [d.description, d.source, d.ext])
   }
   for (const j of src.journal) {
     push('journal', j.id, j.title, `/app/journal/${j.id}`,
-      [JOURNAL_TYPES.has(j.type) ? t(`journalTypes.${j.type}`) : t('journalTypes.note'), frDate(j.date, 'short'), j.heure].filter(Boolean).join(' · '),
+      [JOURNAL_TYPES.has(j.type) ? t(`journalTypes.${j.type}`) : t('journalTypes.note'), frDate(j.date, 'short', locale), j.heure].filter(Boolean).join(' · '),
       [j.description, j.lieu])
   }
   for (const e of src.events) {
     push('calendrier', e.id, e.title, `/app/calendrier/${e.id}`,
-      [getEventType(e.type).label, fmtDateMedium(dayOf(e.start)), fmtTime(e.start)].join(' · '),
+      [typeLabel(e.type), fmtDateMedium(dayOf(e.start), locale), fmtTime(e.start)].join(' · '),
       [e.location, e.description])
   }
   for (const r of vaultOpen ? src.requests : []) {
@@ -237,6 +237,8 @@ const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),[tabinde
 
 export function CommandPalette() {
   const t = useTranslations('account.search')
+  const tTypes = useTranslations('shared.calendar.types')
+  const locale = useLocale()
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -300,7 +302,12 @@ export function CommandPalette() {
     return () => { alive = false }
   }, [open, vaultOpen])
   const source = LIVE ? liveSource : DEMO_SOURCE
-  const index = useMemo(() => (open ? buildIndex(vaultOpen, source, t) : []), [open, vaultOpen, source, t])
+  const index = useMemo(() => {
+    if (!open) return []
+    // Type connu : libellé traduit ; sinon libellé de lib/calendrier (repli français).
+    const typeLabel = (type: string) => (tTypes.has(type) ? tTypes(type) : getEventType(type as CalendarEvent['type']).label)
+    return buildIndex(vaultOpen, source, t, locale, typeLabel)
+  }, [open, vaultOpen, source, t, tTypes, locale])
 
   const phrase = fold(query.trim()).replace(/\s+/g, ' ')
   const terms = useMemo(() => (phrase ? Array.from(new Set(phrase.split(' '))).filter(Boolean) : []), [phrase])

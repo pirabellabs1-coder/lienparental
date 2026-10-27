@@ -1,10 +1,13 @@
 /**
- * Traduction des erreurs Supabase Auth en messages français clairs.
- * Utilisable côté client ET serveur (aucune dépendance runtime).
+ * Traduction des erreurs Supabase Auth en messages clairs, dans la langue de l'utilisateur
+ * (catalogue `auth.errors`, messages/{fr,en,pt}/auth.json).
+ * Utilisable côté client ET serveur (seule dépendance : le traducteur synchrone libT).
  *
  * Règle : on ne renvoie jamais le message brut de GoTrue à l'utilisateur
  * (anglais, parfois technique) et on ne journalise jamais l'e-mail.
  */
+
+import { libT } from '@/lib/i18n/runtime'
 
 export type AuthContext =
   | 'signin'
@@ -18,55 +21,90 @@ export type AuthContext =
 
 type ErrorLike = { code?: string; status?: number; message?: string; name?: string }
 
+/**
+ * Traducteur d'un namespace `auth.*` : `libT('auth.errors')` (navigateur / repli français côté
+ * serveur) ou `await getTranslations('auth.errors')` (code serveur pendant une requête).
+ */
+export type AuthTranslate = (key: string, values?: Record<string, string | number>) => string
+
+/** Traducteur synchrone d'un namespace `auth.*` (langue de <html lang>, français côté serveur). */
+export function authT(namespace: string): AuthTranslate {
+  const t = libT(namespace)
+  return (key, values) => (t as unknown as AuthTranslate)(key, values)
+}
+
+/**
+ * Version française figée (routes API, qui gardent leurs messages en français).
+ * Dans du code affiché à l'utilisateur, préférer `rateLimitMessage()`.
+ */
 export const RATE_LIMIT_MESSAGE =
   'Trop de tentatives en peu de temps. Patientez quelques minutes avant de réessayer.'
 
+export function rateLimitMessage(t: AuthTranslate = authT('auth.errors')): string {
+  return t('rateLimit')
+}
+
+/** Code GoTrue → clé du catalogue `auth.errors`. */
 const BY_CODE: Record<string, string> = {
-  invalid_credentials: 'E-mail ou mot de passe incorrect.',
-  email_not_confirmed: 'Votre adresse e-mail n’est pas encore vérifiée. Saisissez le code reçu par e-mail.',
-  user_already_exists: 'Un compte existe déjà avec cette adresse e-mail. Connectez-vous ou réinitialisez votre mot de passe.',
-  email_exists: 'Un compte existe déjà avec cette adresse e-mail. Connectez-vous ou réinitialisez votre mot de passe.',
-  otp_expired: 'Ce code a expiré ou n’est pas valide. Demandez un nouveau code.',
-  otp_disabled: 'La vérification par code est indisponible pour le moment.',
-  weak_password: 'Ce mot de passe est trop faible ou trop courant. Choisissez-en un autre.',
-  same_password: 'Le nouveau mot de passe doit être différent de l’actuel.',
-  over_request_rate_limit: RATE_LIMIT_MESSAGE,
-  over_email_send_rate_limit: 'Trop d’e-mails envoyés à cette adresse. Patientez quelques minutes avant de redemander un code.',
-  over_sms_send_rate_limit: RATE_LIMIT_MESSAGE,
-  mfa_verification_failed: 'Code de vérification incorrect. Vérifiez votre application d’authentification.',
-  mfa_challenge_expired: 'Le code a expiré. Saisissez le nouveau code affiché par votre application.',
-  mfa_factor_name_conflict: 'Une configuration de double authentification est déjà en cours. Réessayez.',
-  insufficient_aal: 'Confirmez votre identité avec votre code de double authentification pour continuer.',
-  reauthentication_needed: 'Pour des raisons de sécurité, reconnectez-vous puis recommencez.',
-  session_not_found: 'Votre session a expiré. Reconnectez-vous.',
-  session_expired: 'Votre session a expiré. Reconnectez-vous.',
-  refresh_token_not_found: 'Votre session a expiré. Reconnectez-vous.',
-  user_not_found: 'Votre session a expiré. Reconnectez-vous.',
-  user_banned: 'Ce compte est désactivé. Contactez le support si vous pensez qu’il s’agit d’une erreur.',
-  signup_disabled: 'Les inscriptions sont momentanément fermées.',
-  email_address_invalid: 'Cette adresse e-mail n’est pas acceptée. Vérifiez-la ou utilisez-en une autre.',
-  email_address_not_authorized: 'L’envoi d’e-mails vers cette adresse n’est pas autorisé pour le moment.',
-  validation_failed: 'Certaines informations sont invalides. Vérifiez le formulaire.',
-  bad_jwt: 'Votre session a expiré. Reconnectez-vous.',
+  invalid_credentials: 'invalidCredentials',
+  email_not_confirmed: 'emailNotConfirmed',
+  user_already_exists: 'userExists',
+  email_exists: 'userExists',
+  otp_expired: 'otpExpired',
+  otp_disabled: 'otpDisabled',
+  weak_password: 'weakPassword',
+  same_password: 'samePassword',
+  over_request_rate_limit: 'rateLimit',
+  over_email_send_rate_limit: 'emailSendRateLimit',
+  over_sms_send_rate_limit: 'rateLimit',
+  mfa_verification_failed: 'mfaFailed',
+  mfa_challenge_expired: 'mfaExpired',
+  mfa_factor_name_conflict: 'mfaConflict',
+  insufficient_aal: 'insufficientAal',
+  reauthentication_needed: 'reauthNeeded',
+  session_not_found: 'sessionExpired',
+  session_expired: 'sessionExpired',
+  refresh_token_not_found: 'sessionExpired',
+  user_not_found: 'sessionExpired',
+  user_banned: 'userBanned',
+  signup_disabled: 'signupDisabled',
+  email_address_invalid: 'emailInvalid',
+  email_address_not_authorized: 'emailNotAuthorized',
+  validation_failed: 'validationFailed',
+  bad_jwt: 'sessionExpired',
 }
 
+/** Contexte → clé de repli dans `auth.errors.fallback`. */
 const FALLBACK: Record<AuthContext, string> = {
-  signin: 'Connexion impossible pour le moment. Réessayez dans un instant.',
-  signup: 'La création du compte a échoué. Réessayez dans un instant.',
-  otp: 'Code invalide ou expiré.',
-  resend: 'Impossible d’envoyer un nouveau code pour le moment.',
-  reset: 'Impossible d’envoyer le lien pour le moment.',
-  'update-password': 'Impossible de modifier le mot de passe pour le moment.',
-  mfa: 'Code de vérification incorrect.',
-  generic: 'Une erreur est survenue. Réessayez dans un instant.',
+  signin: 'fallback.signin',
+  signup: 'fallback.signup',
+  otp: 'fallback.otp',
+  resend: 'fallback.resend',
+  reset: 'fallback.reset',
+  'update-password': 'fallback.updatePassword',
+  mfa: 'fallback.mfa',
+  generic: 'fallback.generic',
 }
 
-export function authErrorMessage(error: unknown, context: AuthContext = 'generic'): string {
+/**
+ * Message affichable pour une erreur Supabase Auth.
+ * `t` : traducteur du namespace `auth.errors` (par défaut libT, langue du navigateur ;
+ * côté serveur pendant une requête, passer `await getTranslations('auth.errors')`).
+ */
+export function authErrorMessage(
+  error: unknown,
+  context: AuthContext = 'generic',
+  t: AuthTranslate = authT('auth.errors'),
+): string {
+  return t(authErrorKey(error, context))
+}
+
+function authErrorKey(error: unknown, context: AuthContext): string {
   if (!error || typeof error !== 'object') return FALLBACK[context]
   const e = error as ErrorLike
 
   if (e.status === 429) {
-    return e.code === 'over_email_send_rate_limit' ? BY_CODE.over_email_send_rate_limit : RATE_LIMIT_MESSAGE
+    return e.code === 'over_email_send_rate_limit' ? BY_CODE.over_email_send_rate_limit : 'rateLimit'
   }
   if (e.code && BY_CODE[e.code]) return BY_CODE[e.code]
 
@@ -75,10 +113,8 @@ export function authErrorMessage(error: unknown, context: AuthContext = 'generic
   if (msg.includes('invalid login credentials')) return BY_CODE.invalid_credentials
   if (msg.includes('already registered')) return BY_CODE.user_already_exists
   if (msg.includes('expired') || (context === 'otp' && msg.includes('invalid'))) return BY_CODE.otp_expired
-  if (msg.includes('rate limit')) return RATE_LIMIT_MESSAGE
-  if (msg.includes('failed to fetch') || msg.includes('network')) {
-    return 'Connexion au serveur impossible. Vérifiez votre connexion internet.'
-  }
+  if (msg.includes('rate limit')) return 'rateLimit'
+  if (msg.includes('failed to fetch') || msg.includes('network')) return 'network'
   return FALLBACK[context]
 }
 

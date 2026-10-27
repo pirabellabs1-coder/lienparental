@@ -15,7 +15,8 @@
  */
 import { z } from 'zod'
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { DENIED_MESSAGES, requireAuthedUser } from '@/lib/auth/guard'
+import { getTranslations } from 'next-intl/server'
+import { deniedMessage, requireAuthedUser } from '@/lib/auth/guard'
 import { createServiceClient } from '@/lib/supabase/server'
 import { rateLimit, userKey } from '@/lib/data/server/rate-limit'
 import { requireVaultUnlocked } from '@/lib/vault-lock'
@@ -180,12 +181,13 @@ async function processPendingVaultImports(admin: SupabaseClient, conversationId:
  * `categoryName` : catégorie choisie par l'expéditeur pour SA copie.
  */
 export async function syncConversationVault(input: unknown): Promise<SyncVaultResult> {
+  const t = await getTranslations('server.messages')
   const parsed = inputSchema.safeParse(input)
-  if (!parsed.success) return { ok: false, error: 'Requête invalide.' }
+  if (!parsed.success) return { ok: false, error: t('invalidRequest') }
   const { conversationId, messageId, categoryName } = parsed.data
 
   const auth = await requireAuthedUser()
-  if (!auth.ok) return { ok: false, error: DENIED_MESSAGES[auth.reason] }
+  if (!auth.ok) return { ok: false, error: await deniedMessage(auth.reason) }
   const userClient = auth.supabase as unknown as SupabaseClient
   const me = auth.user.id
 
@@ -196,13 +198,13 @@ export async function syncConversationVault(input: unknown): Promise<SyncVaultRe
     .eq('conversation_id', conversationId)
     .eq('user_id', me)
     .maybeSingle()
-  if (mErr || !member) return { ok: false, error: 'Conversation introuvable.' }
+  if (mErr || !member) return { ok: false, error: t('conversationNotFound') }
 
   let admin: SupabaseClient
   try {
     admin = createServiceClient() as unknown as SupabaseClient
   } catch {
-    return { ok: false, error: "Le rangement automatique dans le coffre-fort n'est pas configuré." }
+    return { ok: false, error: t('autoImportNotConfigured') }
   }
 
   if (messageId && categoryName) {
@@ -223,7 +225,7 @@ export async function syncConversationVault(input: unknown): Promise<SyncVaultRe
     .eq('conversation_id', conversationId)
     .eq('user_id', me)
     .limit(1000)
-  if (lErr) return { ok: false, error: 'État du coffre-fort indisponible.' }
+  if (lErr) return { ok: false, error: t('vaultStateUnavailable') }
   return {
     ok: true,
     links: ((links ?? []) as LinkRow[])
@@ -249,18 +251,19 @@ const saveSchema = z.object({
  *     révèle rien du coffre et ne peut rien exposer à l'autre parent.
  */
 export async function saveAttachmentToVault(input: unknown): Promise<SaveToVaultResult> {
+  const t = await getTranslations('server.messages')
   const parsed = saveSchema.safeParse(input)
-  if (!parsed.success) return { ok: false, error: 'Requête invalide.' }
+  if (!parsed.success) return { ok: false, error: t('invalidRequest') }
   const { conversationId, messageId, folderId } = parsed.data
 
   const auth = await requireAuthedUser()
-  if (!auth.ok) return { ok: false, error: DENIED_MESSAGES[auth.reason] }
+  if (!auth.ok) return { ok: false, error: await deniedMessage(auth.reason) }
   const userClient = auth.supabase as unknown as SupabaseClient
   const me = auth.user.id
 
   // Même règle que la route des fichiers du coffre : limiteur indisponible = refus.
   const rl = await rateLimit(userKey('messages:coffre', me), 30, 60_000, { failClosed: true })
-  if (!rl.ok) return { ok: false, error: 'Trop de demandes ou service momentanément indisponible. Patientez un instant.' }
+  if (!rl.ok) return { ok: false, error: t('rateLimited') }
 
   if (folderId) {
     const vault = await requireVaultUnlocked()
@@ -268,7 +271,7 @@ export async function saveAttachmentToVault(input: unknown): Promise<SaveToVault
       return {
         ok: false,
         code: 'vault_locked',
-        error: 'Déverrouillez votre coffre-fort pour choisir un dossier, ou ajoutez la pièce sans dossier.',
+        error: t('unlockToChooseFolder'),
       }
     }
   }
@@ -282,9 +285,9 @@ export async function saveAttachmentToVault(input: unknown): Promise<SaveToVault
     .eq('conversation_id', conversationId)
     .maybeSingle()
   const m = msg as MsgRow | null
-  if (mErr || !m) return { ok: false, error: 'Message introuvable.' }
+  if (mErr || !m) return { ok: false, error: t('messageNotFound') }
   if (!m.attachment_path || !isMessageAttachmentPath(m.attachment_path, conversationId)) {
-    return { ok: false, error: 'Ce message ne contient pas de pièce jointe à ranger.' }
+    return { ok: false, error: t('noAttachment') }
   }
 
   // Dossier : uniquement un des miens (RLS + filtre explicite).
@@ -295,14 +298,14 @@ export async function saveAttachmentToVault(input: unknown): Promise<SaveToVault
       .eq('id', folderId)
       .eq('user_id', me)
       .maybeSingle()
-    if (fErr || !folder) return { ok: false, error: 'Dossier introuvable. Choisissez un autre emplacement.' }
+    if (fErr || !folder) return { ok: false, error: t('folderNotFound') }
   }
 
   let admin: SupabaseClient
   try {
     admin = createServiceClient() as unknown as SupabaseClient
   } catch {
-    return { ok: false, error: "Le rangement dans le coffre-fort n'est pas configuré." }
+    return { ok: false, error: t('saveNotConfigured') }
   }
 
   const [{ data: conv }, { data: users }] = await Promise.all([
@@ -317,10 +320,10 @@ export async function saveAttachmentToVault(input: unknown): Promise<SaveToVault
     res = await importAttachment(admin, { userId: me, m, conversationId, title, names, categoryName: 'Courriers' })
   } catch (err) {
     if (err instanceof VaultImportQuotaError) {
-      return { ok: false, error: "Limite quotidienne d'ajout au coffre-fort atteinte pour cet expéditeur. Réessayez demain." }
+      return { ok: false, error: t('dailyLimit') }
     }
     console.warn('[messages] mise au coffre impossible', err instanceof Error ? err.message : 'unknown')
-    return { ok: false, error: "La pièce jointe n'a pas pu être ajoutée au coffre-fort. Réessayez." }
+    return { ok: false, error: t('saveFailed') }
   }
 
   // Rangement : seulement un document créé à l'instant (jamais de déplacement).

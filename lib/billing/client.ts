@@ -1,5 +1,6 @@
 // Helpers navigateur des écrans abonnement (aucune dépendance serveur).
 // Les routes /api/stripe/* renvoient { error: { code, message, correlation_id } } en cas d'échec.
+import { libT } from '@/lib/i18n/runtime'
 
 export const BILLING_ERROR_MESSAGES: Record<string, string> = {
   billing_disabled: 'Le paiement en ligne n’est pas encore disponible.',
@@ -22,8 +23,11 @@ export const BILLING_ERROR_MESSAGES: Record<string, string> = {
   network: 'Connexion impossible. Vérifiez votre réseau puis réessayez.',
 }
 
+/** Message d'erreur dans la langue de l'interface (repli : table française ci-dessus). */
 export function billingErrorMessage(code: string | null | undefined): string {
-  return (code && BILLING_ERROR_MESSAGES[code]) || 'Une erreur est survenue. Réessayez dans un instant.'
+  const t = libT('shared.billing.errors')
+  if (code && BILLING_ERROR_MESSAGES[code]) return t.has(code) ? t(code) : BILLING_ERROR_MESSAGES[code]
+  return t('generic')
 }
 
 export type PostResult<T> = { ok: true; data: T } | { ok: false; code: string; message: string }

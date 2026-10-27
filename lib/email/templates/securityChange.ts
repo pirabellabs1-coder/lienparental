@@ -3,40 +3,43 @@
 import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
 import { escapeHtml } from '../escape'
+import { dateLocale, emailT, greeting, type Locale } from '../i18n'
 import { appLink, P } from './notificationParts'
 import { DEFAULT_TZ } from '@/lib/tz'
 
 export type SecurityChangeProps = {
   prenom: string
-  /** Titre court, ex. « Votre mot de passe a été modifié ». */
+  /** Titre court, ex. « Votre mot de passe a été modifié » (déjà dans la langue du destinataire). */
   title: string
-  /** Phrase d'explication (texte brut). */
+  /** Phrase d'explication (texte brut, déjà dans la langue du destinataire). */
   message: string
   dateIso: string
 }
 
-function formatDateFr(iso: string): string {
+function formatDate(iso: string, locale: Locale): string {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return iso
-  return new Intl.DateTimeFormat('fr-FR', { dateStyle: 'full', timeStyle: 'short', timeZone: DEFAULT_TZ }).format(d)
+  return new Intl.DateTimeFormat(dateLocale(locale), { dateStyle: 'full', timeStyle: 'short', timeZone: DEFAULT_TZ }).format(d)
 }
 
-export function securityChangeEmail(props: SecurityChangeProps): { subject: string; html: string } {
+export function securityChangeEmail(props: SecurityChangeProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
   const prenom = escapeHtml(props.prenom?.trim() || '')
   const body = `
-    <p style="${P}">Bonjour${prenom ? ` ${prenom}` : ''},</p>
+    <p style="${P}">${greeting(tr, prenom)}</p>
     <p style="${P}">${escapeHtml(props.message)}</p>
-    <p style="${P}color:${t.colors.textMuted};font-size:14px;">Date et heure (heure de Guyane) : ${escapeHtml(formatDateFr(props.dateIso))}</p>
-    <p style="margin:0;color:${t.colors.alert};font-weight:600;">Ce n'était pas vous ? Sécurisez votre compte sans attendre : changez votre mot de passe et déconnectez les autres appareils.</p>
+    <p style="${P}color:${t.colors.textMuted};font-size:14px;">${tr('securityChange.dateLine', { date: escapeHtml(formatDate(props.dateIso, locale)) })}</p>
+    <p style="margin:0;color:${t.colors.alert};font-weight:600;">${tr('securityChange.notYou')}</p>
   `
   return {
     subject: props.title,
     html: baseLayout({
+      locale,
       preheader: props.title,
       title: props.title,
       body,
-      cta: { label: 'Vérifier ma sécurité', href: appLink('/app/profil/securite') },
-      footer: 'Les alertes de sécurité sont toujours envoyées, quelles que soient vos préférences.',
+      cta: { label: tr('securityChange.cta'), href: appLink('/app/profil/securite') },
+      footer: tr('securityChange.footer'),
     }),
   }
 }

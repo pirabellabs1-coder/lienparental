@@ -3,6 +3,7 @@
 import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
 import { escapeHtml, safeUrl } from '../escape'
+import { emailT, greeting, type Locale } from '../i18n'
 
 export type VerificationProps = {
   prenom: string
@@ -14,18 +15,20 @@ export type VerificationProps = {
   url?: string
 }
 
+/** Objet en français (historique) ; l'objet traduit est renvoyé par verificationEmail(props, locale). */
 export const verificationSubject = 'Votre code de vérification Lien Parental'
 
-export function verificationEmail(props: VerificationProps): { subject: string; html: string } {
+export function verificationEmail(props: VerificationProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
   const expire = props.expireMinutes ?? 60
   const prenom = escapeHtml(props.prenom?.trim() || '')
   const code = escapeHtml((props.code || '').toString())
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
+    <p style="margin:0 0 16px 0;">${greeting(tr, prenom)}</p>
     <p style="margin:0 0 16px 0;">
-      Voici votre code de vérification pour finaliser la création de votre compte Lien Parental.
-      Saisissez-le dans l'application pour confirmer votre adresse email.
+      ${tr('verification.intro1')}
+      ${tr('verification.intro2')}
     </p>
     <div style="margin:24px 0;padding:20px;background:${t.colors.pageBg};border:1px solid ${t.colors.border};border-radius:8px;text-align:center;">
       <div style="font-family:${t.font};font-size:32px;letter-spacing:8px;font-weight:700;color:${t.colors.night};">
@@ -33,20 +36,21 @@ export function verificationEmail(props: VerificationProps): { subject: string; 
       </div>
     </div>
     <p style="margin:0 0 12px 0;color:${t.colors.textMuted};font-size:14px;">
-      Ce code expire dans ${expire} minutes. Si vous ne le trouvez pas, pensez à vérifier vos spams.
+      ${tr('verification.expires', { minutes: String(expire) })}
     </p>
     <p style="margin:0;color:${t.colors.textMuted};font-size:14px;">
-      Si vous n'avez pas demandé ce code, vous pouvez ignorer cet email en toute sécurité.
+      ${tr('verification.ignore')}
     </p>
   `
 
   return {
-    subject: verificationSubject,
+    subject: tr('verification.subject'),
     html: baseLayout({
-      preheader: `Votre code : ${props.code} (valable ${expire} minutes).`,
-      title: 'Vérifiez votre adresse email',
+      locale,
+      preheader: tr('verification.preheader', { code: String(props.code), minutes: String(expire) }),
+      title: tr('verification.title'),
       body,
-      ...(props.url ? { cta: { label: 'Confirmer mon adresse', href: safeUrl(props.url) } } : {}),
+      ...(props.url ? { cta: { label: tr('verification.cta'), href: safeUrl(props.url) } } : {}),
     }),
   }
 }

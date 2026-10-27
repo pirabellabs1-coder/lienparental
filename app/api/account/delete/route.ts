@@ -1,6 +1,6 @@
 /**
  * POST /api/account/delete
- * Body JSON : { "password": string, "confirm": "SUPPRIMER" }
+ * Body JSON : { "password": string, "confirm": "SUPPRIMER" | "DELETE" | "EXCLUIR" }
  *
  * Suppression de compte — politique docs/SECURITY.md §7 (30 jours) :
  *  1. Authentification revalidée (getUser + aal2 si 2FA) — 401 / 403.
@@ -20,9 +20,10 @@
  * Réponses : 200 { ok: true } | 4xx/5xx { error: { code, message } } (jamais de PII).
  */
 import { NextResponse, type NextRequest } from 'next/server'
+import { getTranslations } from 'next-intl/server'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createServiceClient } from '@/lib/supabase/server'
-import { requireAuthedUser, DENIED_MESSAGES } from '@/lib/auth/guard'
+import { requireAuthedUser } from '@/lib/auth/guard'
 import { deleteAccountSchema, firstIssue } from '@/lib/auth/validation'
 import { verifyPassword } from '@/lib/auth/verify-password'
 import { RATE_LIMIT_MESSAGE } from '@/lib/auth/errors'
@@ -36,35 +37,37 @@ function fail(status: number, code: string, message: string) {
 }
 
 export async function POST(req: NextRequest) {
-  if (!SUPABASE_ENABLED) return fail(501, 'demo_mode', DENIED_MESSAGES.disabled)
+  const t = await getTranslations('server.account')
+  const tc = await getTranslations('server.common')
+  if (!SUPABASE_ENABLED) return fail(501, 'demo_mode', tc('denied.disabled'))
 
   const ctx = await requireAuthedUser()
   if (!ctx.ok) {
     return ctx.reason === 'mfa_required'
-      ? fail(403, 'mfa_required', DENIED_MESSAGES.mfa_required)
-      : fail(401, 'unauthenticated', DENIED_MESSAGES.unauthenticated)
+      ? fail(403, 'mfa_required', tc('denied.mfa_required'))
+      : fail(401, 'unauthenticated', tc('denied.unauthenticated'))
   }
 
   let body: unknown
   try {
     body = await req.json()
   } catch {
-    return fail(400, 'invalid_body', 'Requête invalide.')
+    return fail(400, 'invalid_body', t('invalidRequest'))
   }
   const parsed = deleteAccountSchema.safeParse(body)
   if (!parsed.success) return fail(422, 'validation_failed', firstIssue(parsed.error))
 
   const { user } = ctx
   const check = await verifyPassword(user.email ?? '', parsed.data.password)
-  if (check === 'invalid') return fail(401, 'invalid_password', 'Mot de passe incorrect.')
+  if (check === 'invalid') return fail(401, 'invalid_password', t('wrongPassword'))
   if (check === 'rate_limited') return fail(429, 'rate_limited', RATE_LIMIT_MESSAGE)
-  if (check === 'error') return fail(503, 'auth_unavailable', 'Vérification impossible pour le moment. Réessayez dans un instant.')
+  if (check === 'error') return fail(503, 'auth_unavailable', t('verificationUnavailable'))
 
   let admin
   try {
     admin = createServiceClient()
   } catch {
-    return fail(503, 'service_unavailable', 'La suppression est momentanément indisponible. Contactez le support.')
+    return fail(503, 'service_unavailable', t('deleteUnavailable'))
   }
 
   // Résiliation Stripe immédiate, révocation Google, anonymisation, avatar, soft delete GoTrue
@@ -72,10 +75,10 @@ export async function POST(req: NextRequest) {
   const res = await softDeleteAccount(admin, user.id)
   if (!res.ok) {
     if (res.code === 'billing_unavailable') {
-      return fail(503, 'billing_unavailable', 'La résiliation de votre abonnement a échoué. Réessayez dans un instant ou contactez le support.')
+      return fail(503, 'billing_unavailable', t('billingUnavailable'))
     }
-    if (res.code === 'delete_failed') return fail(500, 'delete_failed', 'La suppression a échoué. Réessayez ou contactez le support.')
-    return fail(500, 'delete_partial', 'La suppression n’a pas pu être finalisée. Notre équipe a été prévenue.')
+    if (res.code === 'delete_failed') return fail(500, 'delete_failed', t('deleteFailed'))
+    return fail(500, 'delete_partial', t('deletePartial'))
   }
   const sub = res.hadActiveSubscription
   const stripeCanceled = res.stripeCanceled

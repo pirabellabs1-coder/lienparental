@@ -8,6 +8,7 @@
  * vivent exclusivement côté serveur (app/api/partage/_lib/server.ts).
  */
 import { mockChildren, journalTypeLabels } from '@/lib/mock-data'
+import { libT } from '@/lib/i18n/runtime'
 import { RECEIVED_TESTIMONIES, VAULT_DOCS } from '@/lib/mock-vault'
 import { getJournalEntries } from '@/components/journal/journalData'
 import { DEMO_ME, DEMO_ME_ID, DEMO_OTHER, demoSeedMessages } from '@/components/messages/seed'
@@ -82,12 +83,13 @@ export function shareStatus(s: Pick<ShareSummary, 'expiresAt' | 'revokedAt'>, no
 }
 
 export function scopeSummary(scope: ShareScope): string {
+  const t = libT('shared.shares.scope')
   const parts: string[] = []
-  if (scope.journal) parts.push('journal')
-  if (scope.documentIds.length) parts.push(`${scope.documentIds.length} document${scope.documentIds.length > 1 ? 's' : ''}`)
-  if (scope.testimonyIds.length) parts.push(`${scope.testimonyIds.length} témoignage${scope.testimonyIds.length > 1 ? 's' : ''}`)
-  if (scope.messages) parts.push('messages')
-  return parts.length ? parts.join(', ') : 'aucun contenu'
+  if (scope.journal) parts.push(t('journal'))
+  if (scope.documentIds.length) parts.push(t('documents', { count: scope.documentIds.length, n: String(scope.documentIds.length) }))
+  if (scope.testimonyIds.length) parts.push(t('testimonies', { count: scope.testimonyIds.length, n: String(scope.testimonyIds.length) }))
+  if (scope.messages) parts.push(t('messages'))
+  return parts.length ? parts.join(', ') : t('none')
 }
 
 // --- Appels client -------------------------------------------------------------
@@ -101,7 +103,7 @@ async function api<T>(input: string, init?: RequestInit): Promise<T> {
   const json: unknown = await res.json().catch(() => null)
   if (!res.ok) {
     const msg = (json as { error?: { message?: string } } | null)?.error?.message
-    throw new Error(msg || (res.status === 401 ? 'Session expirée. Reconnectez-vous.' : 'Une erreur est survenue. Réessayez.'))
+    throw new Error(msg || libT('shared.shares')(res.status === 401 ? 'sessionExpired' : 'generic'))
   }
   return json as T
 }

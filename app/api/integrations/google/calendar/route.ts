@@ -5,6 +5,7 @@
  *   DELETE : déconnexion (révocation chez Google + effacement des jetons).
  * 401 sans session, 403 si la double authentification n'est pas validée.
  */
+import { getTranslations } from 'next-intl/server'
 import type { NextRequest } from 'next/server'
 import { z } from 'zod'
 import { jsonError, jsonOk } from '@/lib/data/server/http'
@@ -19,6 +20,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 export async function GET() {
+  const t = await getTranslations('server.google')
   const ctx = await guard()
   if (ctx.kind === 'denied') return ctx.response
   if (ctx.kind === 'demo') return jsonOk<GoogleCalendarState>({ mode: 'demo', configured: false })
@@ -49,7 +51,7 @@ export async function GET() {
       },
     })
   } catch {
-    return jsonError(500, 'status_failed', 'Impossible de lire l’état de la synchronisation.')
+    return jsonError(500, 'status_failed', t('statusFailed'))
   }
 }
 
@@ -60,25 +62,26 @@ const prefsSchema = z.object({
 }).strict()
 
 export async function PATCH(req: NextRequest) {
+  const t = await getTranslations('server.google')
   if (!sameOrigin(req)) return crossSite()
   const ctx = await guard()
   if (ctx.kind === 'denied') return ctx.response
-  if (ctx.kind === 'demo' || !googleCalendarConfigured()) return jsonError(409, 'not_configured', 'La connexion à Google Agenda n’est pas configurée.')
+  if (ctx.kind === 'demo' || !googleCalendarConfigured()) return jsonError(409, 'not_configured', t('notConfigured'))
 
   const limited = await rateLimit(userKey('gcal:prefs', ctx.user.id), 20, 10 * 60_000)
-  if (!limited.ok) return jsonError(429, 'rate_limited', 'Trop de modifications. Réessayez dans quelques minutes.', { 'Retry-After': String(limited.retryAfter) })
-  if (Number(req.headers.get('content-length') ?? 0) > 4096) return jsonError(413, 'payload_too_large', 'Requête trop volumineuse.')
+  if (!limited.ok) return jsonError(429, 'rate_limited', t('tooManyChanges'), { 'Retry-After': String(limited.retryAfter) })
+  if (Number(req.headers.get('content-length') ?? 0) > 4096) return jsonError(413, 'payload_too_large', t('payloadTooLarge'))
 
   const parsed = prefsSchema.safeParse(await req.json().catch(() => null))
-  if (!parsed.success) return jsonError(400, 'invalid_payload', 'Préférences invalides.')
+  if (!parsed.success) return jsonError(400, 'invalid_payload', t('invalidPrefs'))
 
   try {
     const conn = await store.getConnection(ctx.user.id)
-    if (!conn || conn.status !== 'active') return jsonError(409, 'not_connected', 'Aucun agenda Google n’est connecté.')
+    if (!conn || conn.status !== 'active') return jsonError(409, 'not_connected', t('notConnected'))
     const { syncTypes, maskMode, target } = parsed.data
     // Changer d'agenda peut exiger une autorisation que Google n'a pas encore donnée.
     if (target && target !== conn.target && !scopesAllow(conn.scopes, target)) {
-      return jsonError(409, 'reconnect_required', 'Ce choix demande une nouvelle autorisation Google.')
+      return jsonError(409, 'reconnect_required', t('reconnectRequired'))
     }
     const patch: Partial<store.ConnectionRow> = {}
     if (syncTypes) patch.sync_types = [...new Set(syncTypes.map(uiToDbType))]
@@ -91,20 +94,21 @@ export async function PATCH(req: NextRequest) {
     const queued = await enqueueUpcoming(ctx.user.id, ctx.db)
     return jsonOk({ ok: true, queued })
   } catch {
-    return jsonError(500, 'prefs_failed', 'Les préférences n’ont pas pu être enregistrées.')
+    return jsonError(500, 'prefs_failed', t('prefsFailed'))
   }
 }
 
 export async function DELETE(req: NextRequest) {
+  const t = await getTranslations('server.google')
   if (!sameOrigin(req)) return crossSite()
   const ctx = await guard()
   if (ctx.kind === 'denied') return ctx.response
-  if (ctx.kind === 'demo' || !googleCalendarConfigured()) return jsonError(409, 'not_configured', 'La connexion à Google Agenda n’est pas configurée.')
+  if (ctx.kind === 'demo' || !googleCalendarConfigured()) return jsonError(409, 'not_configured', t('notConfigured'))
 
   try {
     const { revoked } = await disconnect(ctx.user.id)
     return jsonOk({ ok: true, revoked })
   } catch {
-    return jsonError(500, 'disconnect_failed', 'La déconnexion a échoué. Réessayez.')
+    return jsonError(500, 'disconnect_failed', t('disconnectFailed'))
   }
 }

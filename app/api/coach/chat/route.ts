@@ -13,13 +13,15 @@
  * Quota : non décompté des analyses ; limite douce de 50 messages / jour.
  */
 import type Anthropic from '@anthropic-ai/sdk'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { defaultLocale, isLocale, type Locale } from '@/lib/i18n/config'
 import { getCurrentUser } from '@/lib/auth/session'
 import { AI_ENABLED, SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { jsonError } from '@/lib/data/server/http'
 import { rateLimit, userKey } from '@/lib/data/server/rate-limit'
 import { AI_MODEL, CHAT_EFFORT, CHAT_MAX_TOKENS, fallbackParams, fallbackServed, getAnthropic, logAiCall, mapAiError } from '@/lib/ai/client'
 import { buildContextText } from '@/lib/ai/context'
-import { CHAT_SYSTEM_PROMPT, PROMPT_VERSION, REFUSAL_MESSAGE_FR, TRUNCATED_NOTE_FR, neutralizeTags } from '@/lib/ai/prompts'
+import { PROMPT_VERSION, chatSystemPrompt, neutralizeTags } from '@/lib/ai/prompts'
 import { CHAT_MAX_TOTAL_CHARS, CHAT_MAX_TURNS, ChatBodySchema, type ChatTurn } from '@/lib/ai/schemas'
 import { appendAnalysisMessages, getAnalysis, type StoredAnalysis } from '@/lib/ai/analyses'
 import { consumeChatMessage, refundChatMessage } from '@/lib/ai/quota'
@@ -67,45 +69,50 @@ function analysisBlock(a: StoredAnalysis): string {
 }
 
 export async function POST(req: Request) {
+  // Langue d'affichage (cookie lp_locale) : messages d'erreur, consigne de langue du prompt, démo.
+  const rawLocale = await getLocale().catch(() => defaultLocale)
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale
+  const t = await getTranslations({ locale, namespace: 'ai.errors' })
+
   const user = await getCurrentUser()
-  if (!user) return jsonError(401, 'unauthenticated', 'Connectez-vous pour utiliser le Coach IA.')
+  if (!user) return jsonError(401, 'unauthenticated', t('unauthenticated'))
   // Compte réel sans clé d'IA : pas de réponse simulée (prénoms et faits fictifs), message explicite.
-  if (!AI_ENABLED && SUPABASE_ENABLED) return jsonError(503, 'ai_not_configured', 'Le Coach IA n’est pas encore disponible : le service de réponse n’est pas configuré.')
+  if (!AI_ENABLED && SUPABASE_ENABLED) return jsonError(503, 'ai_not_configured', t('notConfiguredChat'))
 
   const rl = await rateLimit(userKey('coach-chat', user.id), 12, 60_000)
-  if (!rl.ok) return jsonError(429, 'rate_limited', 'Trop de messages rapprochés. Patientez un instant.', { 'Retry-After': String(rl.retryAfter) })
+  if (!rl.ok) return jsonError(429, 'rate_limited', t('rateLimitedChat'), { 'Retry-After': String(rl.retryAfter) })
 
-  if (Number(req.headers.get('content-length') ?? '0') > MAX_BODY) return jsonError(413, 'payload_too_large', 'Conversation trop longue.')
+  if (Number(req.headers.get('content-length') ?? '0') > MAX_BODY) return jsonError(413, 'payload_too_large', t('chatTooLong'))
   const raw = await req.text().catch(() => '')
-  if (raw.length > MAX_BODY) return jsonError(413, 'payload_too_large', 'Conversation trop longue.')
+  if (raw.length > MAX_BODY) return jsonError(413, 'payload_too_large', t('chatTooLong'))
   let json: unknown
   try {
     json = JSON.parse(raw)
   } catch {
-    return jsonError(400, 'bad_json', 'Requête invalide.')
+    return jsonError(400, 'bad_json', t('badRequest'))
   }
   const parsed = ChatBodySchema.safeParse(json)
-  if (!parsed.success) return jsonError(422, 'invalid_body', 'Message invalide : il doit se terminer par votre question (4000 caractères maximum par message).')
+  if (!parsed.success) return jsonError(422, 'invalid_body', t('invalidChatBody'))
 
   const history = trimHistory(parsed.data.messages)
   const question = history[history.length - 1]
-  if (!question || question.role !== 'user') return jsonError(422, 'invalid_body', 'Message invalide.')
+  if (!question || question.role !== 'user') return jsonError(422, 'invalid_body', t('invalidMessage'))
   const includeMedical = parsed.data.includeMedical === true
 
   let analysis: StoredAnalysis | null = null
   if (parsed.data.analysisId) {
     analysis = await getAnalysis(user, parsed.data.analysisId)
-    if (!analysis) return jsonError(404, 'analysis_not_found', 'Cette analyse est introuvable ou a été supprimée.')
+    if (!analysis) return jsonError(404, 'analysis_not_found', t('analysisNotFound'))
   }
 
   const quota = consumeChatMessage(user.id)
   if (!quota.ok) {
-    return jsonError(429, 'chat_daily_limit', `Vous avez atteint la limite de ${quota.limit} messages pour aujourd’hui. Le compteur repart demain.`)
+    return jsonError(429, 'chat_daily_limit', t('chatDailyLimit', { limit: quota.limit }))
   }
 
   // --- Mode démonstration --------------------------------------------------------------
   if (!AI_ENABLED) {
-    const answer = mockChatAnswer(question.content, { aboutAnalysis: Boolean(analysis), userId: user.id })
+    const answer = mockChatAnswer(question.content, { aboutAnalysis: Boolean(analysis), userId: user.id, locale })
     return sseResponse(async (send, signal) => {
       await sleep(450, signal)
       for (const chunk of answer.match(/\S+\s*/g) ?? []) {
@@ -114,13 +121,14 @@ export async function POST(req: Request) {
         await sleep(28, signal)
       }
       send('done', { stopReason: 'end_turn', demo: true, truncated: false })
-    })
+    }, { errorMessage: t('internal') })
   }
 
   let contextText: string
   try {
     contextText = await buildContextText(user, { includeMedical, scope: 'full' })
   } catch {
+    // Destiné au modèle (non affiché) : reste en français comme le reste du contexte.
     contextText = '(Les données de votre espace sont momentanément indisponibles.)'
   }
 
@@ -147,7 +155,7 @@ export async function POST(req: Request) {
         {
           model: AI_MODEL,
           max_tokens: CHAT_MAX_TOKENS,
-          system: [{ type: 'text', text: CHAT_SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
+          system: [{ type: 'text', text: chatSystemPrompt(locale), cache_control: { type: 'ephemeral' } }],
           messages,
           output_config: { effort: CHAT_EFFORT },
           ...fallbackParams(),
@@ -169,19 +177,19 @@ export async function POST(req: Request) {
 
       if (final.stop_reason === 'refusal') {
         // Texte partiel éventuel à écarter (refus en cours de flux).
-        send('refusal', { message: REFUSAL_MESSAGE_FR })
+        send('refusal', { message: t('refusal') })
         send('done', { stopReason: 'refusal', demo: false, truncated: false })
         return
       }
       const truncated = final.stop_reason === 'max_tokens'
       if (truncated) {
-        const note = `${text ? '\n\n' : ''}${TRUNCATED_NOTE_FR}`
+        const note = `${text ? '\n\n' : ''}${t('truncatedNote')}`
         text += note
         send('delta', { t: note })
       }
       if (!text.trim()) {
         refundChatMessage(user.id)
-        send('error', { code: 'empty', message: 'Le Coach IA n’a pas pu répondre. Reformulez votre question.' })
+        send('error', { code: 'empty', message: t('emptyAnswer') })
         return
       }
       send('done', { stopReason: final.stop_reason, demo: false, truncated })
@@ -193,10 +201,10 @@ export async function POST(req: Request) {
         ]).catch(() => undefined)
       }
     } catch (err) {
-      const f = mapAiError(err)
+      const f = mapAiError(err, (code) => t(code))
       refundChatMessage(user.id)
       logAiCall({ route: 'chat', model: AI_MODEL, promptVersion: PROMPT_VERSION, effort: CHAT_EFFORT, latencyMs: Date.now() - started, ttftMs: ttft, stopReason: null, error: f.code })
       if (f.code !== 'aborted') send('error', { code: f.code, message: f.message })
     }
-  })
+  }, { errorMessage: t('internal') })
 }

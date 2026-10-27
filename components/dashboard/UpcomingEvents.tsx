@@ -1,8 +1,9 @@
 'use client'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { CalendarDays, FileHeart, School, Scale, Video } from 'lucide-react'
-import { countdownLabel, formatWeekdayDate, type AppEvent } from '@/lib/mock-data'
+import { daysUntil, type AppEvent } from '@/lib/mock-data'
+import { intlLocale } from '@/lib/i18n/config'
 
 const TYPE_META: Record<AppEvent['type'], { icon: typeof CalendarDays; tone: string }> = {
   garde: { icon: CalendarDays, tone: 'text-leaf-600' },
@@ -16,6 +17,20 @@ const TYPE_META: Record<AppEvent['type'], { icon: typeof CalendarDays; tone: str
 // M03 — Prochains événements (3 prochains, compte à rebours).
 export function UpcomingEvents({ events }: { events: AppEvent[] }) {
   const t = useTranslations('dash')
+  const locale = useLocale()
+  // « Mardi 27 octobre 2026 » / « Tuesday, October 27, 2026 » selon la langue.
+  const weekdayDate = (iso: string) => {
+    const s = new Date(iso).toLocaleDateString(intlLocale(locale), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+  const countdown = (iso: string) => {
+    const d = daysUntil(iso)
+    if (d === 0) return t('countdown.today')
+    if (d === 1) return t('countdown.tomorrow')
+    if (d > 1) return t('countdown.inDays', { n: d })
+    if (d === -1) return t('countdown.yesterday')
+    return t('countdown.daysAgo', { n: Math.abs(d) })
+  }
   if (events.length === 0) {
     return (
       <div className="rounded-xl2 border border-night-100 bg-white p-4 text-[13px] text-night-700 shadow-soft">
@@ -41,7 +56,7 @@ export function UpcomingEvents({ events }: { events: AppEvent[] }) {
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[13.5px] font-bold text-night-900">{e.title}</p>
                 <p className="mt-0.5 truncate text-[12px] text-night-700">
-                  {formatWeekdayDate(e.date)}
+                  {weekdayDate(e.date)}
                   {e.timeLabel && (
                     <>
                       <span aria-hidden="true"> • </span>
@@ -52,7 +67,7 @@ export function UpcomingEvents({ events }: { events: AppEvent[] }) {
                 </p>
               </div>
               <span className="shrink-0 rounded-md bg-leaf-50 px-2 py-1 text-[11px] font-bold text-leaf-600">
-                {countdownLabel(e.date)}
+                {countdown(e.date)}
               </span>
             </Link>
           </li>

@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server'
 import { NextResponse } from 'next/server'
 import { apiError, limitBilling, logError, requireBillingUser } from '@/lib/billing/http'
 import { listInvoices } from '@/lib/billing/overview'
@@ -12,6 +13,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 export async function GET(req: Request) {
+  const t = await getTranslations('server.stripe')
   const auth = await requireBillingUser()
   if ('error' in auth) return apiError(auth.error.status, auth.error.code, auth.error.message)
   const limited = await limitBilling('invoices', auth.user.id)
@@ -21,13 +23,13 @@ export async function GET(req: Request) {
   const limitRaw = Number.parseInt(params.get('limit') ?? '12', 10)
   const limit = Number.isFinite(limitRaw) ? Math.min(Math.max(limitRaw, 1), 50) : 12
   const cursor = params.get('cursor')
-  if (cursor && !/^in_[A-Za-z0-9]{6,64}$/.test(cursor)) return apiError(400, 'invalid_cursor', 'Curseur invalide.')
+  if (cursor && !/^in_[A-Za-z0-9]{6,64}$/.test(cursor)) return apiError(400, 'invalid_cursor', t('invalidCursor'))
 
   try {
     const page = await listInvoices(auth.user.id, { limit, startingAfter: cursor })
     return NextResponse.json(page, { headers: { 'Cache-Control': 'private, no-store' } })
   } catch (err) {
     logError('invoices', err)
-    return apiError(503, 'stripe_unavailable', 'Factures momentanément indisponibles.')
+    return apiError(503, 'stripe_unavailable', t('invoicesUnavailable'))
   }
 }

@@ -12,12 +12,15 @@
  */
 import { decideChannels, isSecurityChange, type Channel, type NotifPrefs, type NotifyEvent } from './events'
 import { renderNotification, type Facts } from './content'
+import type { Locale } from '@/lib/email/i18n'
 
 export type Recipient = {
   email: string | null
   prenom: string
   deleted: boolean
   prefs: NotifPrefs
+  /** Langue du destinataire (preferences.langue) : textes in-app, push et e-mail. Absente : français. */
+  locale?: Locale
 }
 
 export type PushMessage = { title: string; body: string; url: string; tag: string }
@@ -73,7 +76,7 @@ export async function dispatch(deps: DispatchDeps, input: DispatchInput): Promis
     const facts = await deps.loadFacts(input.userId, input.event, payload)
     if (!facts) return { status: 'skipped', delivered, failed, reason: 'gone' }
 
-    const r = renderNotification(facts, recipient.prenom, input.now)
+    const r = renderNotification(facts, recipient.prenom, input.now, recipient.locale ?? 'fr')
     const channels = decideChannels(input.event, recipient.prefs, { topic: r.topic, emailEligible: r.emailEligible })
 
     for (const ch of channels) {

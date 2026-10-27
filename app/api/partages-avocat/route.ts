@@ -8,6 +8,7 @@ import { randomUUID } from 'node:crypto'
 import type { NextRequest } from 'next/server'
 import { z } from 'zod'
 import type { SupabaseClient } from '@supabase/supabase-js'
+import { getTranslations } from 'next-intl/server'
 import { getCurrentUser } from '@/lib/auth/session'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/server'
@@ -24,8 +25,8 @@ export const dynamic = 'force-dynamic'
 
 const MAX_BODY_BYTES = 32 * 1024
 
-const createSchema = z.object({
-  label: z.string().trim().min(1, 'Indiquez le destinataire').max(80),
+const createSchema = (t: Awaited<ReturnType<typeof getTranslations>>) => z.object({
+  label: z.string().trim().min(1, t('labelRequired')).max(80),
   expiry: z.enum(['24h', '7j', '30j']),
   withCode: z.boolean(),
   scope: scopeSchema,
@@ -60,11 +61,12 @@ async function userClient(): Promise<SupabaseClient> {
 }
 
 export async function GET() {
+  const t = await getTranslations('server.partages')
   // Coffre-fort verrouillé : ces données en proviennent (chantier D).
   const vault = await requireVaultUnlocked()
   if (!vault.ok) return vaultDeniedResponse(vault)
   const user = await getCurrentUser()
-  if (!user) return jsonError(401, 'unauthenticated', 'Session expirée. Reconnectez-vous.')
+  if (!user) return jsonError(401, 'unauthenticated', t('sessionExpired'))
 
   if (!SUPABASE_ENABLED) {
     const shares = [...demoShares().values()]
@@ -77,33 +79,34 @@ export async function GET() {
   const { data, error } = await (await userClient())
     .from('lawyer_shares').select(COLUMNS)
     .order('created_at', { ascending: false }).limit(50)
-  if (error) return jsonError(500, 'list_failed', 'Impossible de charger vos partages.')
+  if (error) return jsonError(500, 'list_failed', t('listFailed'))
   return jsonOk({ shares: ((data ?? []) as ShareRow[]).map(fromRow) })
 }
 
 export async function POST(req: NextRequest) {
+  const t = await getTranslations('server.partages')
   // Coffre-fort verrouillé : ces données en proviennent (chantier D).
   const vault = await requireVaultUnlocked()
   if (!vault.ok) return vaultDeniedResponse(vault)
   const user = await getCurrentUser()
-  if (!user) return jsonError(401, 'unauthenticated', 'Session expirée. Reconnectez-vous.')
+  if (!user) return jsonError(401, 'unauthenticated', t('sessionExpired'))
 
   const limited = await rateLimit(userKey('partages-avocat:create', user.id), 20, 60 * 60_000)
   if (!limited.ok) {
-    return jsonError(429, 'rate_limited', 'Trop de partages créés. Réessayez plus tard.', { 'Retry-After': String(limited.retryAfter) })
+    return jsonError(429, 'rate_limited', t('tooManyCreated'), { 'Retry-After': String(limited.retryAfter) })
   }
 
   const cl = Number(req.headers.get('content-length') ?? 0)
-  if (cl > MAX_BODY_BYTES) return jsonError(413, 'payload_too_large', 'Requête trop volumineuse.')
+  if (cl > MAX_BODY_BYTES) return jsonError(413, 'payload_too_large', t('payloadTooLarge'))
 
   const body: unknown = await req.json().catch(() => null)
-  const parsed = createSchema.safeParse(body)
+  const parsed = createSchema(t).safeParse(body)
   if (!parsed.success) {
-    return jsonError(400, 'invalid_payload', parsed.error.issues[0]?.message ?? 'Informations invalides.')
+    return jsonError(400, 'invalid_payload', parsed.error.issues[0]?.message ?? t('invalidPayload'))
   }
   const { label, expiry, withCode, scope } = parsed.data
   const hasContent = scope.journal !== null || scope.documentIds.length > 0 || scope.testimonyIds.length > 0 || scope.messages
-  if (!hasContent) return jsonError(400, 'empty_scope', 'Choisissez au moins un contenu à partager.')
+  if (!hasContent) return jsonError(400, 'empty_scope', t('emptyScope'))
 
   const now = new Date()
   const ms = EXPIRY_OPTIONS.find((o) => o.value === expiry)!.ms
@@ -128,7 +131,7 @@ export async function POST(req: NextRequest) {
     .insert({ user_id: user.id, token, label, scope, expires_at: expiresAt, access_code_hash: accessCodeHash })
     .select(COLUMNS)
     .single()
-  if (error || !data) return jsonError(500, 'create_failed', "Le partage n'a pas pu être créé.")
+  if (error || !data) return jsonError(500, 'create_failed', t('createFailed'))
   // Le code n'est renvoyé qu'une seule fois : seul son hachage est conservé.
   const result: CreateShareResult = { share: fromRow(data as ShareRow), code }
   return jsonOk(result, 201)

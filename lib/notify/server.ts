@@ -17,6 +17,7 @@ import { prefsFromRow, isSecurityChange, type Channel, type NotifyEvent } from '
 import type { Facts } from './content'
 import { maskEmail } from './device'
 import { sendPushToUser } from './push'
+import { toLocale } from '@/lib/email/i18n'
 
 const str = (v: unknown): string => (typeof v === 'string' ? v : '')
 const UUID = /^[0-9a-f-]{36}$/i
@@ -51,7 +52,7 @@ export function realDeps(db: SupabaseClient): DispatchDeps {
     async loadRecipient(userId) {
       const [{ data: u, error }, { data: p }] = await Promise.all([
         db.from('users').select('email, prenom, deleted_at').eq('id', userId).maybeSingle(),
-        db.from('preferences').select('notif_push, notif_email, notif_rappels, ui').eq('user_id', userId).maybeSingle(),
+        db.from('preferences').select('notif_push, notif_email, notif_rappels, ui, langue').eq('user_id', userId).maybeSingle(),
       ])
       if (error) throw new Error(`recipient_${error.code ?? 'error'}`)
       const user = u as { email?: string | null; prenom?: string | null; deleted_at?: string | null } | null
@@ -61,6 +62,8 @@ export function realDeps(db: SupabaseClient): DispatchDeps {
         prenom: (user.prenom ?? '').trim(),
         deleted: Boolean(user.deleted_at),
         prefs: prefsFromRow(p as Parameters<typeof prefsFromRow>[0]),
+        // Langue du destinataire (fr | en | pt ; toute autre valeur → fr).
+        locale: toLocale((p as { langue?: string | null } | null)?.langue),
       }
     },
 

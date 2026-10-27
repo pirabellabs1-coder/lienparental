@@ -2,6 +2,8 @@
 // Aucune dépendance serveur : importable depuis un composant 'use client'.
 import type { Cycle, Offer, PaidPlan, PlanId } from '@/components/profil/pricing'
 import type { SubscriptionStatus } from '@/lib/supabase/types'
+import { intlLocale, type Locale } from '@/lib/i18n/config'
+import { libT } from '@/lib/i18n/runtime'
 
 export type BillingCard = { brand: string; last4: string }
 
@@ -61,11 +63,16 @@ export const STATUS_LABEL: Record<SubscriptionStatus, string> = {
   paused: 'En pause',
 }
 
-export function formatDateFr(iso: string | null | undefined): string {
-  if (!iso) return 'date inconnue'
+/**
+ * Date longue (fuseau Guyane). Français par défaut (logique de facturation, tests) ;
+ * `locale` optionnelle (fr | en | pt) pour un affichage dans la langue de l'utilisateur.
+ */
+export function formatDateFr(iso: string | null | undefined, locale?: Locale): string {
+  const unknown = () => (locale ? libT('shared.format', locale)('unknownDate') : 'date inconnue')
+  if (!iso) return unknown()
   const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return 'date inconnue'
-  return new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeZone: 'America/Cayenne' }).format(d)
+  if (Number.isNaN(d.getTime())) return unknown()
+  return new Intl.DateTimeFormat(locale ? intlLocale(locale) : 'fr-FR', { dateStyle: 'long', timeZone: 'America/Cayenne' }).format(d)
 }
 
 export function formatCardBrand(brand: string): string {

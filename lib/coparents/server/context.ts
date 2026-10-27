@@ -8,7 +8,8 @@ import 'server-only'
 import type { SupabaseClient, User } from '@supabase/supabase-js'
 import type { NextResponse } from 'next/server'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { DENIED_MESSAGES, requireAuthedUser } from '@/lib/auth/guard'
+import { getTranslations } from 'next-intl/server'
+import { deniedMessage, requireAuthedUser } from '@/lib/auth/guard'
 import { jsonError } from '@/lib/data/server/http'
 import { rateLimit, userKey } from '@/lib/data/server/rate-limit'
 import { sameOrigin } from '@/lib/contenus/api'
@@ -24,16 +25,18 @@ const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS'])
  */
 export async function familyContext(req?: Request): Promise<FamilyCtx | { error: NextResponse }> {
   if (req && !SAFE_METHODS.has(req.method.toUpperCase()) && !sameOrigin(req)) {
-    return { error: jsonError(403, 'bad_origin', 'Requête refusée (origine inattendue).') }
+    const t = await getTranslations('server.coparents')
+    return { error: jsonError(403, 'bad_origin', t('badOrigin')) }
   }
   if (!SUPABASE_ENABLED) {
-    return { error: jsonError(503, 'not_configured', 'La liaison des parents nécessite un compte réel (mode démonstration).') }
+    const t = await getTranslations('server.coparents')
+    return { error: jsonError(503, 'not_configured', t('notConfigured')) }
   }
   const auth = await requireAuthedUser()
   if (!auth.ok) {
     return auth.reason === 'mfa_required'
-      ? { error: jsonError(403, 'mfa_required', DENIED_MESSAGES.mfa_required) }
-      : { error: jsonError(401, 'unauthenticated', DENIED_MESSAGES.unauthenticated) }
+      ? { error: jsonError(403, 'mfa_required', await deniedMessage('mfa_required')) }
+      : { error: jsonError(401, 'unauthenticated', await deniedMessage('unauthenticated')) }
   }
   // Les RPC 0340 ne figurent pas dans les types générés.
   return { db: auth.supabase as unknown as SupabaseClient, user: auth.user }
@@ -42,7 +45,9 @@ export async function familyContext(req?: Request): Promise<FamilyCtx | { error:
 /** null si la requête est autorisée, sinon une réponse 429 (compteur partagé, fail-open). */
 export async function limited(userId: string, bucket: string, limit: number, windowMs: number): Promise<NextResponse | null> {
   const r = await rateLimit(userKey(`coparents:${bucket}`, userId), limit, windowMs)
-  return r.ok ? null : jsonError(429, 'rate_limited', 'Trop de demandes rapprochées. Réessayez dans un instant.', { 'Retry-After': String(r.retryAfter) })
+  if (r.ok) return null
+  const t = await getTranslations('server.coparents')
+  return jsonError(429, 'rate_limited', t('rateLimited'), { 'Retry-After': String(r.retryAfter) })
 }
 
 export async function readJson(req: Request): Promise<unknown> {
@@ -53,40 +58,42 @@ export async function readJson(req: Request): Promise<unknown> {
 
 type PgError = { code?: string; hint?: string | null; message?: string }
 
-const HINTS: Record<string, [number, string]> = {
-  mfa_required: [403, DENIED_MESSAGES.mfa_required],
-  not_allowed: [403, 'Vous n’avez pas les droits nécessaires pour cette action.'],
-  owner_only: [403, 'Seul le parent titulaire de la fiche peut ajouter un autre parent. Vous pouvez inviter un proche, ou demander au titulaire d’envoyer l’invitation.'],
-  invalid_email: [422, 'Adresse e-mail invalide.'],
-  invalid_role: [422, 'Rôle invalide.'],
-  invalid_children: [422, 'Choisissez au moins un enfant.'],
-  self_invite: [422, 'Vous ne pouvez pas vous inviter vous-même.'],
-  birthdate_mismatch: [422, 'Les dates de naissance ne correspondent pas : ces fiches ne peuvent pas être fusionnées.'],
-  merge_incomplete: [409, 'Les informations de santé ont changé pendant la fusion. Réessayez.'],
-  invalid_payload: [422, 'Requête invalide.'],
-  cooldown: [429, 'Patientez une minute avant de renvoyer l’invitation.'],
-  too_many: [429, 'Limite atteinte pour aujourd’hui. Réessayez demain.'],
+/** Indice SQL → statut HTTP ; message : server.coparents.hints.<indice> (mfa_required : message d'authentification). */
+const HINTS: Record<string, number> = {
+  mfa_required: 403,
+  not_allowed: 403,
+  owner_only: 403,
+  invalid_email: 422,
+  invalid_role: 422,
+  invalid_children: 422,
+  self_invite: 422,
+  birthdate_mismatch: 422,
+  merge_incomplete: 409,
+  invalid_payload: 422,
+  cooldown: 429,
+  too_many: 429,
 }
 
 /**
  * Erreur Postgres/PostgREST → réponse JSON. Journalise l'opération et le code
  * uniquement (jamais d'e-mail, de jeton ni de contenu).
  */
-export function rpcError(err: unknown, op: string, notFound = 'Élément introuvable.'): NextResponse {
+export async function rpcError(err: unknown, op: string, notFound?: string): Promise<NextResponse> {
   const e = (err ?? {}) as PgError
   const code = String(e.code ?? 'unknown')
   const hint = e.hint ?? ''
-  if (hint && HINTS[hint]) {
-    const [status, message] = HINTS[hint]
-    return jsonError(status, hint, message)
+  const t = await getTranslations('server.coparents')
+  if (hint && Object.prototype.hasOwnProperty.call(HINTS, hint)) {
+    const message = hint === 'mfa_required' ? await deniedMessage('mfa_required') : t(`hints.${hint}`)
+    return jsonError(HINTS[hint], hint, message)
   }
-  if (code === '23505') return jsonError(409, 'already_pending', 'Une invitation est déjà en attente pour cette adresse : renvoyez-la ou annulez-la.')
-  if (code === 'P0002' || code === 'PGRST116') return jsonError(404, 'not_found', notFound)
-  if (code === '42501') return jsonError(403, 'forbidden', 'Vous n’avez pas les droits nécessaires pour cette action.')
-  if (code === '22023' || code === '22P02' || code === '23514') return jsonError(422, 'invalid', 'Certaines informations sont invalides.')
-  if (code === '54000') return jsonError(429, 'too_many', 'Limite atteinte. Réessayez plus tard.')
+  if (code === '23505') return jsonError(409, 'already_pending', t('alreadyPending'))
+  if (code === 'P0002' || code === 'PGRST116') return jsonError(404, 'not_found', notFound ?? t('notFound'))
+  if (code === '42501') return jsonError(403, 'forbidden', t('hints.not_allowed'))
+  if (code === '22023' || code === '22P02' || code === '23514') return jsonError(422, 'invalid', t('invalid'))
+  if (code === '54000') return jsonError(429, 'too_many', t('tooManyLater'))
   console.warn(`[api/coparents] ${op} a échoué (code ${code})`)
-  return jsonError(500, 'db_error', 'Opération impossible pour le moment. Réessayez dans un instant.')
+  return jsonError(500, 'db_error', t('dbError'))
 }
 
 /** URL publique de l'application (jamais déduite de l'en-tête Host). */

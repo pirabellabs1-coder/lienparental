@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useId, type ReactNode } from 'react'
+import { useTranslations } from 'next-intl'
 import {
   CircleCheck, CloudOff, Wrench, Settings, Wifi, Clock, Cloud, RefreshCw, CloudUpload,
   Trash2, FileDown, FileText, ShieldCheck,
@@ -250,16 +251,15 @@ type BaseProps = {
 }
 
 export function LoadingState({
-  title = 'Chargement en cours',
-  description = 'Veuillez patienter quelques instants, nous préparons votre espace.',
-  headingLevel, compact, className,
+  title, description, headingLevel, compact, className,
 }: BaseProps) {
+  const t = useTranslations('shared.states')
   return (
     <StateScreen
       live="status"
       icon={<DotsSpinner />}
-      title={title}
-      description={description}
+      title={title ?? t('loading.title')}
+      description={description ?? t('loading.description')}
       headingLevel={headingLevel}
       compact={compact}
       className={className}
@@ -268,20 +268,18 @@ export function LoadingState({
 }
 
 export function SuccessState({
-  title = 'Opération réussie !',
-  description = 'Votre action a été effectuée avec succès.',
-  primary = { label: 'Continuer', href: '/app' },
-  secondary, action, headingLevel, compact, className,
+  title, description, primary, secondary, action, headingLevel, compact, className,
 }: BaseProps) {
+  const t = useTranslations('shared.states')
   return (
     <StateScreen
       live="status"
       tone="leaf"
       decor="confetti"
       icon={<CircleCheck className="h-12 w-12" strokeWidth={1.8} />}
-      title={title}
-      description={description}
-      primary={action ?? primary}
+      title={title ?? t('success.title')}
+      description={description ?? t('success.description')}
+      primary={action ?? primary ?? { label: t('success.continue'), href: '/app' }}
       secondary={secondary}
       headingLevel={headingLevel}
       compact={compact}
@@ -291,67 +289,59 @@ export function SuccessState({
 }
 
 export function ErrorState({
-  title = 'Oups, une erreur est survenue',
-  description = "Nous n'avons pas pu effectuer cette action.",
-  code,
-  primary = { label: 'Réessayer', reload: true },
-  secondary = { label: "Retour à l'accueil", href: '/app' },
-  action, headingLevel, compact, className,
+  title, description, code, primary, secondary, action, headingLevel, compact, className,
 }: BaseProps & { code?: string | number }) {
+  const t = useTranslations('shared.states')
   return (
     <StateScreen
       live="alert"
       tone="alert"
       icon={<ErrorTriangle />}
-      title={title}
-      description={description}
-      primary={action ?? primary}
+      title={title ?? t('error.title')}
+      description={description ?? t('error.description')}
+      primary={action ?? primary ?? { label: t('retry'), reload: true }}
       primaryVariant="danger"
-      secondary={secondary}
+      secondary={secondary ?? { label: t('error.backHome'), href: '/app' }}
       headingLevel={headingLevel}
       compact={compact}
       className={className}
     >
-      {code != null && <StateNote>Code d&apos;erreur : {code}</StateNote>}
+      {code != null && <StateNote>{t('error.code', { code: String(code) })}</StateNote>}
     </StateScreen>
   )
 }
 
 export function OfflineState({
-  title = 'Pas de connexion Internet',
-  description = 'Vérifiez votre connexion et réessayez pour accéder à vos données.',
-  primary = { label: 'Réessayer', reload: true },
-  secondary = { label: 'Travailler hors ligne', back: true, href: '/' },
-  action, headingLevel, compact, className,
+  title, description, primary, secondary, action, headingLevel, compact, className,
 }: BaseProps) {
+  const t = useTranslations('shared.states')
   return (
     <StateScreen
       icon={<CloudOff className="h-12 w-12" strokeWidth={1.6} />}
-      title={title}
-      description={description}
-      primary={action ?? primary}
-      secondary={secondary}
+      title={title ?? t('offline.title')}
+      description={description ?? t('offline.description')}
+      primary={action ?? primary ?? { label: t('retry'), reload: true }}
+      secondary={secondary ?? { label: t('offline.workOffline'), back: true, href: '/' }}
       headingLevel={headingLevel}
       compact={compact}
       className={className}
     >
       <StateNote icon={<Wifi className="h-5 w-5" />}>
-        Certaines fonctionnalités peuvent être limitées hors connexion.
+        {t('offline.note')}
       </StateNote>
     </StateScreen>
   )
 }
 
 export function EmptyState({
-  title = 'Aucune donnée disponible',
-  description = 'Commencez par ajouter votre premier élément pour le voir apparaître ici.',
-  icon, primary, secondary, action, headingLevel, compact, className,
+  title, description, icon, primary, secondary, action, headingLevel, compact, className,
 }: BaseProps) {
+  const t = useTranslations('shared.states')
   return (
     <StateScreen
       icon={icon ?? <EmptyTray />}
-      title={title}
-      description={description}
+      title={title ?? t('empty.title')}
+      description={description ?? t('empty.description')}
       primary={action ?? primary}
       secondary={secondary}
       headingLevel={headingLevel}
@@ -362,51 +352,46 @@ export function EmptyState({
 }
 
 export function MaintenanceState({
-  title = 'Application en maintenance',
-  description = 'Nous améliorons votre expérience. Merci de réessayer plus tard.',
-  primary = { label: 'Réessayer plus tard', reload: true },
-  action, headingLevel, compact, className,
+  title, description, primary, action, headingLevel, compact, className,
 }: BaseProps) {
+  const t = useTranslations('shared.states')
   return (
     <StateScreen
       icon={<MaintenanceIcon />}
-      title={title}
-      description={description}
-      primary={action ?? primary}
+      title={title ?? t('maintenance.title')}
+      description={description ?? t('maintenance.description')}
+      primary={action ?? primary ?? { label: t('maintenance.retryLater'), reload: true }}
       headingLevel={headingLevel}
       compact={compact}
       className={className}
     >
-      <StateNote icon={<Clock className="h-5 w-5" />}>Nous serons de retour très bientôt.</StateNote>
+      <StateNote icon={<Clock className="h-5 w-5" />}>{t('maintenance.note')}</StateNote>
     </StateScreen>
   )
 }
 
 export function UpToDateState({
-  title = 'Tout est à jour !',
-  description = 'Vous utilisez la dernière version de Lien Parental.',
-  version = '1.8.0',
-  primary = { label: 'Parfait !', href: '/app' },
-  action, headingLevel, compact, className,
+  title, description, version = '1.8.0', primary, action, headingLevel, compact, className,
 }: BaseProps & { version?: string }) {
+  const t = useTranslations('shared.states')
   return (
     <StateScreen
       live="status"
       tone="leaf"
       decor="dots"
       icon={<CircleCheck className="h-12 w-12" strokeWidth={1.8} />}
-      title={title}
-      description={description}
-      primary={action ?? primary}
+      title={title ?? t('upToDate.title')}
+      description={description ?? t('upToDate.description')}
+      primary={action ?? primary ?? { label: t('upToDate.perfect'), href: '/app' }}
       headingLevel={headingLevel}
       compact={compact}
       className={className}
     >
       <div className="rounded-2xl border border-leaf-100 bg-leaf-50/60 px-5 py-5 text-center">
         <ShieldCheck aria-hidden="true" className="mx-auto h-6 w-6 text-leaf-600" strokeWidth={1.8} />
-        <p className="mt-2 text-[12px] font-bold text-night-900">Version {version}</p>
+        <p className="mt-2 text-[12px] font-bold text-night-900">{t('version', { version })}</p>
         <p className="mt-1 text-[12px] leading-relaxed text-night-600">
-          Vous bénéficiez des dernières fonctionnalités et correctifs.
+          {t('upToDate.note')}
         </p>
       </div>
     </StateScreen>
@@ -417,39 +402,29 @@ export function UpToDateState({
 
 export type OperationKind = 'synchronisation' | 'sauvegarde' | 'suppression' | 'importation' | 'mise-a-jour'
 
+// Titre, description et libellé d'annulation : shared.states.operations.{kind}, traduits au rendu.
 const OPERATIONS: Record<OperationKind, {
-  title: string
-  description: string
   tone: StateTone
   bar: string
   icon: ReactNode
   layout: 'plain' | 'danger' | 'file' | 'version'
-  cancelLabel: string
+  /** Libellé d'annulation propre (clé `cancel` de l'opération), sinon « Annuler ». */
+  ownCancel?: boolean
 }> = {
   synchronisation: {
-    title: 'Synchronisation en cours',
-    description: 'Vos données sont en cours de synchronisation sur tous vos appareils.',
-    tone: 'neutral', bar: 'bg-leaf-500', icon: <SyncCloud />, layout: 'plain', cancelLabel: 'Annuler',
+    tone: 'neutral', bar: 'bg-leaf-500', icon: <SyncCloud />, layout: 'plain',
   },
   sauvegarde: {
-    title: 'Sauvegarde en cours',
-    description: 'Nous sauvegardons vos données en toute sécurité.',
-    tone: 'leaf', bar: 'bg-leaf-500', icon: <CloudUpload className="h-12 w-12" strokeWidth={1.7} />, layout: 'plain', cancelLabel: 'Annuler',
+    tone: 'leaf', bar: 'bg-leaf-500', icon: <CloudUpload className="h-12 w-12" strokeWidth={1.7} />, layout: 'plain',
   },
   suppression: {
-    title: 'Suppression en cours',
-    description: 'Veuillez patienter pendant que nous supprimons vos éléments.',
-    tone: 'alert', bar: 'bg-alert-500', icon: <Trash2 className="h-11 w-11" strokeWidth={1.7} />, layout: 'danger', cancelLabel: 'Annuler',
+    tone: 'alert', bar: 'bg-alert-500', icon: <Trash2 className="h-11 w-11" strokeWidth={1.7} />, layout: 'danger',
   },
   importation: {
-    title: 'Importation en cours',
-    description: 'Vos fichiers sont en cours d’importation dans votre coffre-fort.',
-    tone: 'iris', bar: 'bg-iris-500', icon: <FileDown className="h-11 w-11 text-night-700" strokeWidth={1.7} />, layout: 'file', cancelLabel: 'Annuler',
+    tone: 'iris', bar: 'bg-iris-500', icon: <FileDown className="h-11 w-11 text-night-700" strokeWidth={1.7} />, layout: 'file',
   },
   'mise-a-jour': {
-    title: 'Mise à jour en cours',
-    description: 'Nous améliorons votre application pour une meilleure expérience.',
-    tone: 'blue', bar: 'bg-blue-600', icon: <Settings className="h-12 w-12 text-blue-500" fill="currentColor" stroke="white" strokeWidth={1.4} />, layout: 'version', cancelLabel: 'Annuler la mise à jour',
+    tone: 'blue', bar: 'bg-blue-600', icon: <Settings className="h-12 w-12 text-blue-500" fill="currentColor" stroke="white" strokeWidth={1.4} />, layout: 'version', ownCancel: true,
   },
 }
 
@@ -506,7 +481,14 @@ export function ProgressOperation({
   kind, value, title, description, current, total, fileName, fileSize, remainingLabel,
   version = '1.8.0', onStay, onBackground, onCancel, cancelLabel, headingLevel = 2, className,
 }: ProgressOperationProps) {
-  const cfg = OPERATIONS[kind]
+  const t = useTranslations('shared.states')
+  const base = OPERATIONS[kind]
+  const cfg = {
+    ...base,
+    title: t(`operations.${kind}.title`),
+    description: t(`operations.${kind}.description`),
+    cancelLabel: base.ownCancel ? t(`operations.${kind}.cancel`) : t('cancel'),
+  }
   const titleId = useId()
   const pct = Math.round(Math.max(0, Math.min(100, value)))
   // Annonce lecteur d'écran par paliers de 10 % (évite le bavardage).
@@ -529,13 +511,13 @@ export function ProgressOperation({
       <div className="rounded-2xl border border-alert-100 bg-alert-50/60 px-4 py-4">
         <p className="flex items-center gap-2.5 text-[12px] font-medium text-night-900">
           <Trash2 aria-hidden="true" className="h-[18px] w-[18px] text-alert-500" />
-          {total != null ? `${total} fichier${total > 1 ? 's' : ''} en cours de suppression` : 'Éléments en cours de suppression'}
+          {total != null ? t('deleting.files', { count: total, n: String(total) }) : t('deleting.items')}
         </p>
         <ProgressBar
           value={pct}
           color={cfg.bar}
           labelledBy={titleId}
-          valueText={countText ? `${current} sur ${total}` : undefined}
+          valueText={countText ? t('progressOf', { current: String(current), total: String(total) }) : undefined}
           className="mt-3.5 bg-white"
         />
         <p className="mt-3 text-center text-[12px] font-semibold tabular-nums text-night-800">{countText ?? `${pct} %`}</p>
@@ -549,7 +531,7 @@ export function ProgressOperation({
             <FileText className="h-7 w-7" strokeWidth={1.6} />
           </span>
           <div className="min-w-0">
-            <p className="truncate text-[12px] font-semibold text-night-900">{fileName ?? 'Document.pdf'}</p>
+            <p className="truncate text-[12px] font-semibold text-night-900">{fileName ?? t('defaultFileName')}</p>
             {fileSize && <p className="text-[11px] text-night-600">{fileSize}</p>}
           </div>
         </div>
@@ -561,8 +543,8 @@ export function ProgressOperation({
   } else {
     panel = (
       <div className="rounded-2xl border border-blue-100 bg-blue-50/40 px-4 py-4 text-left">
-        <p className="text-[12px] font-bold text-night-900">Version {version}</p>
-        <p className="mt-1 text-[11px] text-night-600">Téléchargement en cours…</p>
+        <p className="text-[12px] font-bold text-night-900">{t('version', { version })}</p>
+        <p className="mt-1 text-[11px] text-night-600">{t('downloading')}</p>
         <ProgressBar value={pct} color={cfg.bar} labelledBy={titleId} className="mt-3.5 bg-white" />
         {pctLabel}
       </div>
@@ -581,17 +563,17 @@ export function ProgressOperation({
       <div className="mt-8 w-full">{panel}</div>
 
       <p role="status" aria-live="polite" className="sr-only">
-        {(title ?? cfg.title)} : {countText ? `${current} sur ${total}` : `${milestone} %`}
+        {(title ?? cfg.title)} : {countText ? t('progressOf', { current: String(current), total: String(total) }) : `${milestone} %`}
       </p>
 
       <div className="mt-6 flex w-full flex-col gap-3">
         {plain ? (
           <>
             {onStay !== undefined && (
-              <button type="button" onClick={onStay} className={cn(btn, actionClass.leaf)}>Rester sur cette page</button>
+              <button type="button" onClick={onStay} className={cn(btn, actionClass.leaf)}>{t('stay')}</button>
             )}
             {onBackground && (
-              <button type="button" onClick={onBackground} className={cn(btn, actionClass.outline)}>Continuer en arrière-plan</button>
+              <button type="button" onClick={onBackground} className={cn(btn, actionClass.outline)}>{t('background')}</button>
             )}
             {onCancel && (
               <button type="button" onClick={onCancel} className={cn(btn, actionClass.outline)}>{cancelLabel ?? cfg.cancelLabel}</button>
@@ -603,7 +585,7 @@ export function ProgressOperation({
               <button type="button" onClick={onCancel} className={cn(btn, actionClass.outline)}>{cancelLabel ?? cfg.cancelLabel}</button>
             )}
             {onBackground && (
-              <button type="button" onClick={onBackground} className={cn(btn, actionClass.outline)}>Continuer en arrière-plan</button>
+              <button type="button" onClick={onBackground} className={cn(btn, actionClass.outline)}>{t('background')}</button>
             )}
           </>
         )}

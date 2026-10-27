@@ -1,7 +1,9 @@
 /**
  * Dossiers du coffre-fort (0410) : types et aides PURES (aucune dépendance navigateur ni
  * Supabase), testées par tests/vault-folders.test.ts. Réexportées par lib/data/vault-folders.
+ * Libellés : catalogue `shared.vault` via libT (langue de l'interface, français hors navigateur).
  */
+import { libT } from '@/lib/i18n/runtime'
 
 export type VaultFolder = {
   id: string
@@ -68,12 +70,13 @@ export function folderSubtreeIds(folders: VaultFolder[], id: string): Set<string
 /** « 2 sous-dossiers · 3 documents ici · Partagé avec Thomas » (documents directement dans le dossier). */
 export function folderSubtitle(f: VaultFolder, folders: VaultFolder[], docCount: number, shares: FolderShare[]): string {
   const subs = folders.filter((x) => x.parentId === f.id).length
+  const t = libT('shared.vault.folders')
   const parts = [
-    subs > 0 ? `${subs} sous-dossier${subs > 1 ? 's' : ''}` : null,
-    `${docCount} document${docCount > 1 ? 's' : ''} ici`,
+    subs > 0 ? t('subfolders', { count: subs, n: String(subs) }) : null,
+    t('docsHere', { count: docCount, n: String(docCount) }),
   ]
   const with_ = shares.filter((s) => s.folderId === f.id).map((s) => s.granteePrenom)
-  if (with_.length) parts.push(`Partagé avec ${with_.join(', ')}`)
+  if (with_.length) parts.push(t('sharedWith', { names: with_.join(', ') }))
   return parts.filter(Boolean).join(' · ')
 }
 
@@ -113,9 +116,10 @@ export type SaveOutcome = {
 }
 
 export function saveOutcomeMessage(o: SaveOutcome): string {
+  const t = libT('shared.vault.save')
   if (!o.created) {
-    return o.folderName ? `Déjà dans votre coffre-fort (dossier « ${o.folderName} »)` : 'Déjà dans votre coffre-fort'
+    return o.folderName ? t('alreadyInFolder', { folder: o.folderName }) : t('already')
   }
-  if (o.placed === false) return 'Ajouté au coffre-fort, mais pas dans le dossier choisi'
-  return o.folderName ? `Pièce jointe ajoutée au coffre-fort, dossier « ${o.folderName} »` : 'Pièce jointe ajoutée au coffre-fort'
+  if (o.placed === false) return t('addedNotPlaced')
+  return o.folderName ? t('addedInFolder', { folder: o.folderName }) : t('added')
 }

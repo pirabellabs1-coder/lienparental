@@ -10,6 +10,7 @@
  *   5. portées accordées suffisantes, ID token (iss, aud, exp, nonce).
  * Puis jetons chiffrés en base et renvoi des événements à venir en file.
  */
+import { getTranslations } from 'next-intl/server'
 import { NextResponse, type NextRequest } from 'next/server'
 import { z } from 'zod'
 import { jsonError } from '@/lib/data/server/http'
@@ -45,6 +46,7 @@ function back(req: NextRequest, code: string) {
 }
 
 export async function GET(req: NextRequest) {
+  const t = await getTranslations('server.google')
   const ctx = await guard()
   if (ctx.kind === 'denied') {
     // Navigation de navigateur : retour à la connexion ; appel programmatique : 401/403 JSON.
@@ -57,7 +59,7 @@ export async function GET(req: NextRequest) {
   if (ctx.kind === 'demo' || !cfg || !googleCalendarConfigured()) return back(req, 'non_configure')
 
   const limited = await rateLimit(userKey('gcal:callback', ctx.user.id), 10, 10 * 60_000)
-  if (!limited.ok) return jsonError(429, 'rate_limited', 'Trop de tentatives.', { 'Retry-After': String(limited.retryAfter) })
+  if (!limited.ok) return jsonError(429, 'rate_limited', t('tooManyAttempts'), { 'Retry-After': String(limited.retryAfter) })
 
   const sp = req.nextUrl.searchParams
   const raw = req.cookies.get(STATE_COOKIE)?.value

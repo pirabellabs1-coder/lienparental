@@ -48,7 +48,7 @@ const cut = (s: string, max: number) => (s.length > max ? `${s.slice(0, max - 1)
 export const LEGAL_DISCLAIMER = 'Le Coach IA ne donne pas de conseil juridique.'
 
 /** Bornes appliquées après parsing : on ne fait jamais confiance aveuglément à la sortie du modèle. */
-export function normalizeAnalysis(raw: AnalysisOutput): AnalysisResult {
+export function normalizeAnalysis(raw: AnalysisOutput, disclaimer: string = LEGAL_DISCLAIMER): AnalysisResult {
   return {
     type_contenu: raw.type_contenu,
     texte_lu: cut(raw.texte_lu.trim(), 6000),
@@ -62,7 +62,7 @@ export function normalizeAnalysis(raw: AnalysisOutput): AnalysisResult {
     nature_reponse: raw.nature_reponse,
     reformulation: cut(raw.reformulation.trim(), 2500),
     conseils: raw.conseils.map((c) => cut(c.trim(), 240)).filter(Boolean).slice(0, 6),
-    disclaimer: LEGAL_DISCLAIMER,
+    disclaimer,
   }
 }
 

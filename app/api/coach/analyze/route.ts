@@ -15,6 +15,8 @@
  * Quota : une analyse réussie = 1 unité (réservée avant l'appel, rendue en cas d'échec ou de refus).
  */
 import type Anthropic from '@anthropic-ai/sdk'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { defaultLocale, isLocale, type Locale } from '@/lib/i18n/config'
 import { betaZodOutputFormat } from '@anthropic-ai/sdk/helpers/beta/zod'
 import { getCurrentUser } from '@/lib/auth/session'
 import { AI_ENABLED, SUPABASE_ENABLED } from '@/lib/supabase/config'
@@ -32,7 +34,7 @@ import {
   mapAiError,
 } from '@/lib/ai/client'
 import { buildContextText } from '@/lib/ai/context'
-import { ANALYSIS_SYSTEM_PROMPT, PROMPT_VERSION, REFUSAL_MESSAGE_FR, neutralizeTags } from '@/lib/ai/prompts'
+import { PROMPT_VERSION, analysisSystemPrompt, neutralizeTags } from '@/lib/ai/prompts'
 import { AnalysisOutputSchema, normalizeAnalysis } from '@/lib/ai/schemas'
 import { completeAnalysis, insertPending, type CoachKind } from '@/lib/ai/analyses'
 import { getQuotaStatus, releaseAnalysis, reserveAnalysis } from '@/lib/ai/quota'
@@ -60,39 +62,41 @@ function fileTitle(name: string, fallback: string): string {
   return base || fallback
 }
 
-async function prepare(form: FormData): Promise<Prepared | Response> {
+type AnalyzeT = (key: string, values?: Record<string, string | number>) => string
+
+async function prepare(form: FormData, t: AnalyzeT): Promise<Prepared | Response> {
   const rawText = form.get('text')
   const text = typeof rawText === 'string' ? rawText.trim() : ''
-  if (text.length > MAX_TEXT) return jsonError(413, 'text_too_long', `Message trop long (${MAX_TEXT} caractères maximum).`)
+  if (text.length > MAX_TEXT) return jsonError(413, 'text_too_long', t('textTooLong', { max: MAX_TEXT }))
   const file = form.get('file')
 
   if (!(file instanceof File) || file.size === 0) {
-    if (!text) return jsonError(422, 'empty', 'Ajoutez un message, une capture d’écran ou un document.')
-    return { kind: 'message', title: 'Message écrit', text }
+    if (!text) return jsonError(422, 'empty', t('emptyInput'))
+    return { kind: 'message', title: t('titles.message'), text }
   }
 
-  if (file.size > MAX_PDF) return jsonError(413, 'file_too_large', 'Fichier trop volumineux (10 Mo maximum).')
+  if (file.size > MAX_PDF) return jsonError(413, 'file_too_large', t('fileTooLarge'))
   const buf = Buffer.from(await file.arrayBuffer())
   const sniffed = sniffMime(buf.subarray(0, 16))
 
   if (sniffed === 'image/jpeg' || sniffed === 'image/png') {
-    if (buf.length > MAX_IMAGE) return jsonError(413, 'image_too_large', 'Image trop volumineuse (5 Mo maximum).')
-    return { kind: 'capture', title: fileTitle(file.name, 'Capture d’écran'), mediaType: sniffed, data: buf.toString('base64'), text: text || undefined }
+    if (buf.length > MAX_IMAGE) return jsonError(413, 'image_too_large', t('imageTooLarge'))
+    return { kind: 'capture', title: fileTitle(file.name, t('titles.capture')), mediaType: sniffed, data: buf.toString('base64'), text: text || undefined }
   }
   if (sniffed === 'application/pdf') {
-    return { kind: 'pdf', title: fileTitle(file.name, 'Document PDF'), data: buf.toString('base64'), text: text || undefined }
+    return { kind: 'pdf', title: fileTitle(file.name, t('titles.pdf')), data: buf.toString('base64'), text: text || undefined }
   }
   if (/\.docx?$/i.test(file.name) || buf.subarray(0, 4).toString('hex') === '504b0304') {
-    return jsonError(415, 'unsupported_word', 'Les documents Word ne sont pas encore pris en charge : enregistrez-le en PDF puis réessayez.')
+    return jsonError(415, 'unsupported_word', t('unsupportedWord'))
   }
   // Texte brut : UTF-8 valide, sans octets de contrôle binaires.
   if (/\.txt$/i.test(file.name) && buf.length <= MAX_PLAIN) {
     const plain = new TextDecoder('utf-8', { fatal: false }).decode(buf)
     if (!/[\u0000-\u0008\u000e-\u001f]/.test(plain) && !plain.includes('�')) {
-      return { kind: 'document', title: fileTitle(file.name, 'Document texte'), plain: plain.slice(0, 20_000), text: text || undefined }
+      return { kind: 'document', title: fileTitle(file.name, t('titles.document')), plain: plain.slice(0, 20_000), text: text || undefined }
     }
   }
-  return jsonError(415, 'unsupported_type', 'Format non pris en charge. Formats acceptés : image JPG ou PNG, PDF, texte.')
+  return jsonError(415, 'unsupported_type', t('unsupportedType'))
 }
 
 function buildUserContent(p: Prepared, contextText: string): Anthropic.Beta.BetaContentBlockParam[] {
@@ -120,32 +124,38 @@ function buildUserContent(p: Prepared, contextText: string): Anthropic.Beta.Beta
 const CHECK_KEYS = ['"agressivite"', '"mots_blessants"', '"clarte"', '"respect"', '"impact"'] as const
 
 export async function POST(req: Request) {
+  // Langue d'affichage (cookie lp_locale) : messages, consigne de langue du prompt, démo.
+  const rawLocale = await getLocale().catch(() => defaultLocale)
+  const locale: Locale = isLocale(rawLocale) ? rawLocale : defaultLocale
+  const t = await getTranslations({ locale, namespace: 'ai.errors' })
+  const ta = await getTranslations({ locale, namespace: 'ai.analyze' })
+
   const user = await getCurrentUser()
-  if (!user) return jsonError(401, 'unauthenticated', 'Connectez-vous pour utiliser le Coach IA.')
+  if (!user) return jsonError(401, 'unauthenticated', t('unauthenticated'))
   // Compte réel sans clé d'IA : pas d'analyse simulée (données fictives), message explicite.
-  if (!AI_ENABLED && SUPABASE_ENABLED) return jsonError(503, 'ai_not_configured', 'Le Coach IA n’est pas encore disponible : le service d’analyse n’est pas configuré.')
+  if (!AI_ENABLED && SUPABASE_ENABLED) return jsonError(503, 'ai_not_configured', t('notConfiguredAnalyze'))
 
   const rl = await rateLimit(userKey('coach-analyze', user.id), 6, 60_000)
-  if (!rl.ok) return jsonError(429, 'rate_limited', 'Trop de demandes rapprochées. Patientez un instant.', { 'Retry-After': String(rl.retryAfter) })
+  if (!rl.ok) return jsonError(429, 'rate_limited', t('rateLimitedAnalyze'), { 'Retry-After': String(rl.retryAfter) })
 
   const declared = Number(req.headers.get('content-length') ?? '0')
-  if (declared > MAX_BODY) return jsonError(413, 'payload_too_large', 'Fichier trop volumineux (10 Mo maximum).')
+  if (declared > MAX_BODY) return jsonError(413, 'payload_too_large', ta('fileTooLarge'))
   if (!(req.headers.get('content-type') ?? '').includes('multipart/form-data')) {
-    return jsonError(415, 'bad_content_type', 'Format de requête invalide.')
+    return jsonError(415, 'bad_content_type', ta('badContentType'))
   }
 
   let form: FormData
   try {
     form = await req.formData()
   } catch {
-    return jsonError(400, 'bad_form', 'Requête invalide.')
+    return jsonError(400, 'bad_form', t('badRequest'))
   }
-  const prepared = await prepare(form)
+  const prepared = await prepare(form, (key, values) => ta(key as Parameters<typeof ta>[0], values))
   if (prepared instanceof Response) return prepared
 
   // --- Mode démonstration : pas de clé API -> réponse simulée -------------------
   if (!AI_ENABLED) {
-    const result = mockAnalysis(prepared.kind, prepared.kind === 'message' ? prepared.text : undefined)
+    const result = mockAnalysis(prepared.kind, prepared.kind === 'message' ? prepared.text : undefined, locale)
     let id = `demo_${Date.now().toString(36)}`
     if (!SUPABASE_ENABLED) {
       const stored = await insertPending(user, { kind: prepared.kind, title: prepared.title, demo: true })
@@ -160,7 +170,7 @@ export async function POST(req: Request) {
         send('progress', { done: i })
       }
       send('done', { id, result, demo: true, quota: { used: quota.used, quota: quota.quota, remaining: quota.remaining } })
-    })
+    }, { errorMessage: t('internal') })
   }
 
   // --- Quota ------------------------------------------------------------------------
@@ -171,10 +181,7 @@ export async function POST(req: Request) {
       {
         error: {
           code: 'quota_exceeded',
-          message:
-            s.plan !== 'gratuit'
-              ? `Vous avez utilisé vos ${s.quota} analyses de ce cycle de 30 jours.`
-              : `Vous avez utilisé vos ${s.quota} analyses gratuites de ce cycle de 30 jours. Passez à Premium pour en obtenir 10.`,
+          message: s.plan !== 'gratuit' ? ta('quotaExceededPaid', { quota: s.quota }) : ta('quotaExceededFree', { quota: s.quota }),
         },
         quota: { used: s.used, quota: s.quota, remaining: 0, nextReleaseAt: s.nextReleaseAt },
       },
@@ -187,7 +194,7 @@ export async function POST(req: Request) {
   try {
     contextText = await buildContextText(user, { includeMedical: false, scope: 'minimal' })
   } catch {
-    contextText = 'Aucune information complémentaire disponible.'
+    contextText = 'Aucune information complémentaire disponible.' // destiné au modèle (non affiché)
   }
 
   return sseResponse(async (send, signal) => {
@@ -200,7 +207,7 @@ export async function POST(req: Request) {
         {
           model: AI_MODEL,
           max_tokens: ANALYSIS_MAX_TOKENS,
-          system: [{ type: 'text', text: ANALYSIS_SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
+          system: [{ type: 'text', text: analysisSystemPrompt(locale), cache_control: { type: 'ephemeral' } }],
           messages: [{ role: 'user', content: buildUserContent(prepared, contextText) }],
           output_config: { effort: ANALYSIS_EFFORT, format: betaZodOutputFormat(AnalysisOutputSchema) },
           ...fallbackParams(),
@@ -240,32 +247,32 @@ export async function POST(req: Request) {
       })
 
       if (final.stop_reason === 'refusal') {
-        send('error', { code: 'refusal', message: REFUSAL_MESSAGE_FR })
+        send('error', { code: 'refusal', message: t('refusal') })
         return
       }
       if (final.stop_reason === 'max_tokens') {
-        send('error', { code: 'truncated', message: 'Le contenu est trop long pour être analysé en une fois. Essayez avec un extrait plus court.' })
+        send('error', { code: 'truncated', message: ta('truncated') })
         return
       }
       const parsed = final.parsed_output ?? null
       const valid = parsed ? AnalysisOutputSchema.safeParse(parsed) : AnalysisOutputSchema.safeParse(safeJson(json))
       if (!valid.success) {
-        send('error', { code: 'invalid_output', message: 'L’analyse n’a pas pu aboutir. Réessayez dans un instant.' })
+        send('error', { code: 'invalid_output', message: ta('invalidOutput') })
         return
       }
-      const result = normalizeAnalysis(valid.data)
+      const result = normalizeAnalysis(valid.data, ta('disclaimer'))
       await completeAnalysis(user, analysisId, prepared.kind, result)
       charged = true
       const quota = await getQuotaStatus(user)
       send('done', { id: analysisId, result, demo: false, quota: { used: quota.used, quota: quota.quota, remaining: quota.remaining } })
     } catch (err) {
-      const f = mapAiError(err)
+      const f = mapAiError(err, (code) => t(code as Parameters<typeof t>[0]))
       logAiCall({ route: 'analyze', model: AI_MODEL, promptVersion: PROMPT_VERSION, effort: ANALYSIS_EFFORT, latencyMs: Date.now() - started, stopReason: null, error: f.code })
       send('error', { code: f.code, message: f.message })
     } finally {
       if (!charged) await releaseAnalysis(user, analysisId)
     }
-  })
+  }, { errorMessage: t('internal') })
 }
 
 function safeJson(s: string): unknown {

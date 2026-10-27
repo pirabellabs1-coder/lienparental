@@ -3,6 +3,7 @@
 import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
 import { escapeHtml, safeUrl } from '../escape'
+import { emailT, greeting, type Locale } from '../i18n'
 import { formatDateFr } from './format'
 
 export type SubscriptionCanceledProps = {
@@ -16,45 +17,51 @@ export type SubscriptionCanceledProps = {
   endIso: string | null
 }
 
-export function subscriptionCanceledEmail(props: SubscriptionCanceledProps): { subject: string; html: string } {
+export function subscriptionCanceledEmail(props: SubscriptionCanceledProps, locale: Locale = 'fr'): { subject: string; html: string } {
+  const tr = emailT(locale)
   const prenom = escapeHtml(props.prenom?.trim() || '')
-  const end = props.endIso ? escapeHtml(formatDateFr(props.endIso)) : ''
+  const end = props.endIso ? escapeHtml(formatDateFr(props.endIso, locale)) : ''
   const url = safeUrl(
     `${process.env.NEXT_PUBLIC_APP_URL ?? ''}/app/profil/abonnement`,
     'https://lienparental.fr/app/profil/abonnement',
   )
 
   const scheduled = props.kind === 'scheduled'
-  const subject = scheduled ? 'Confirmation de votre résiliation' : 'Votre abonnement Premium a pris fin'
+  const subject = scheduled ? tr('subscriptionCanceled.subjectScheduled') : tr('subscriptionCanceled.subjectEnded')
+  const strong = `<strong>${end}</strong>`
 
   const body = scheduled
     ? `
-      <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
+      <p style="margin:0 0 16px 0;">${greeting(tr, prenom)}</p>
       <p style="margin:0 0 16px 0;">
-        Nous confirmons la résiliation de votre abonnement Premium. Aucun nouveau prélèvement ne sera effectué.
+        ${tr('subscriptionCanceled.scheduledIntro')}
       </p>
       <p style="margin:0 0 16px 0;">
-        Vos avantages Premium restent actifs${end ? ` jusqu'au <strong>${end}</strong>` : ' jusqu’à la fin de la période en cours'}.
-        Vous pouvez annuler cette résiliation à tout moment d'ici là.
+        ${end ? tr('subscriptionCanceled.activeUntil', { date: strong }) : tr('subscriptionCanceled.activeUntilPeriodEnd')}
+        ${tr('subscriptionCanceled.cancelAnytime')}
       </p>`
     : `
-      <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
+      <p style="margin:0 0 16px 0;">${greeting(tr, prenom)}</p>
       <p style="margin:0 0 16px 0;">
-        Votre abonnement Premium a pris fin${end ? ` le <strong>${end}</strong>` : ''}. Votre compte est repassé à l'offre gratuite.
+        ${end ? tr('subscriptionCanceled.endedOn', { date: strong }) : tr('subscriptionCanceled.ended')}
       </p>
       <p style="margin:0 0 16px 0;">
-        Toutes vos données restent conservées et consultables. Au-delà des limites de l'offre gratuite,
-        l'ajout de nouveaux contenus nécessite de vous réabonner.
+        ${tr('subscriptionCanceled.dataKept1')}
+        ${tr('subscriptionCanceled.dataKept2')}
       </p>`
 
+  const mail = `<a href="mailto:${t.supportEmail}" style="color:${t.colors.textMuted};">${t.supportEmail}</a>`
   return {
     subject,
     html: baseLayout({
-      preheader: scheduled ? `Premium actif jusqu'au ${props.endIso ? formatDateFr(props.endIso) : 'terme de la période'}.` : 'Votre compte est repassé à l’offre gratuite.',
-      title: scheduled ? 'Résiliation enregistrée' : 'Abonnement terminé',
+      locale,
+      preheader: scheduled
+        ? tr('subscriptionCanceled.preheaderScheduled', { date: props.endIso ? formatDateFr(props.endIso, locale) : tr('subscriptionCanceled.periodEnd') })
+        : tr('subscriptionCanceled.preheaderEnded'),
+      title: scheduled ? tr('subscriptionCanceled.titleScheduled') : tr('subscriptionCanceled.titleEnded'),
       body,
-      cta: { label: scheduled ? 'Gérer mon abonnement' : 'Me réabonner', href: url },
-      footer: `Une question ? <a href="mailto:${t.supportEmail}" style="color:${t.colors.textMuted};">${t.supportEmail}</a>`,
+      cta: { label: scheduled ? tr('common.manageSubscription') : tr('subscriptionCanceled.ctaResubscribe'), href: url },
+      footer: tr('subscriptionCanceled.footer', { email: mail }),
     }),
   }
 }

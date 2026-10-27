@@ -1,0 +1,62 @@
+{
+  "ai": {
+    "errors": {
+      "unauthenticated": "Connectez-vous pour utiliser le Coach IA.",
+      "notConfiguredChat": "Le Coach IA n’est pas encore disponible : le service de réponse n’est pas configuré.",
+      "notConfiguredAnalyze": "Le Coach IA n’est pas encore disponible : le service d’analyse n’est pas configuré.",
+      "rateLimitedChat": "Trop de messages rapprochés. Patientez un instant.",
+      "rateLimitedAnalyze": "Trop de demandes rapprochées. Patientez un instant.",
+      "chatTooLong": "Conversation trop longue.",
+      "badRequest": "Requête invalide.",
+      "invalidChatBody": "Message invalide : il doit se terminer par votre question (4000 caractères maximum par message).",
+      "invalidMessage": "Message invalide.",
+      "analysisNotFound": "Cette analyse est introuvable ou a été supprimée.",
+      "chatDailyLimit": "Vous avez atteint la limite de {limit} messages pour aujourd’hui. Le compteur repart demain.",
+      "emptyAnswer": "Le Coach IA n’a pas pu répondre. Reformulez votre question.",
+      "refusal": "Le Coach IA ne peut pas traiter cette demande. Essayez de la reformuler. Si la situation est difficile, un médiateur familial ou un avocat pourra vous accompagner. En cas de danger : 17 ou 112, 119 pour un enfant en danger.",
+      "truncatedNote": "(Réponse interrompue car trop longue. Demandez une version plus courte si besoin.)",
+      "aborted": "Demande annulée.",
+      "ai_timeout": "Le Coach IA met trop de temps à répondre. Réessayez dans un instant.",
+      "ai_unreachable": "Le Coach IA est momentanément injoignable. Réessayez dans un instant.",
+      "ai_busy": "Le Coach IA est très sollicité. Réessayez dans une minute.",
+      "ai_misconfigured": "Le Coach IA est indisponible pour le moment.",
+      "ai_bad_request": "Ce contenu ne peut pas être analysé. Vérifiez le fichier (format, lisibilité) et réessayez.",
+      "ai_unavailable": "Le Coach IA est momentanément indisponible. Réessayez dans un instant.",
+      "internal": "Une erreur est survenue. Réessayez dans un instant."
+    },
+    "analyze": {
+      "textTooLong": "Message trop long ({max} caractères maximum).",
+      "emptyInput": "Ajoutez un message, une capture d’écran ou un document.",
+      "fileTooLarge": "Fichier trop volumineux (10 Mo maximum).",
+      "imageTooLarge": "Image trop volumineuse (5 Mo maximum).",
+      "unsupportedWord": "Les documents Word ne sont pas encore pris en charge : enregistrez-le en PDF puis réessayez.",
+      "unsupportedType": "Format non pris en charge. Formats acceptés : image JPG ou PNG, PDF, texte.",
+      "badContentType": "Format de requête invalide.",
+      "truncated": "Le contenu est trop long pour être analysé en une fois. Essayez avec un extrait plus court.",
+      "invalidOutput": "L’analyse n’a pas pu aboutir. Réessayez dans un instant.",
+      "quotaExceededPaid": "Vous avez utilisé vos {quota} analyses de ce cycle de 30 jours.",
+      "quotaExceededFree": "Vous avez utilisé vos {quota} analyses gratuites de ce cycle de 30 jours. Passez à Premium pour en obtenir 10.",
+      "disclaimer": "Le Coach IA ne donne pas de conseil juridique.",
+      "titles": {
+        "message": "Message écrit",
+        "capture": "Capture d’écran",
+        "pdf": "Document PDF",
+        "document": "Document texte"
+      }
+    },
+    "history": {
+      "unauthenticated": "Connectez-vous pour accéder à vos analyses.",
+      "badId": "Identifiant invalide.",
+      "notFound": "Cette analyse est introuvable ou a été supprimée.",
+      "notFoundShort": "Cette analyse est introuvable.",
+      "rateLimited": "Trop de demandes. Patientez un instant.",
+      "tooLarge": "Requête trop volumineuse.",
+      "badRequest": "Requête invalide."
+    },
+    "quota": {
+      "cycleCurrent": "Cycle actuel",
+      "cycleN": "Cycle -{n}",
+      "deletedTitle": "Analyse supprimée"
+    }
+  }
+}

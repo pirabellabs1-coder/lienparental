@@ -8,6 +8,19 @@ import 'server-only'
 import { DEFAULT_BACKGROUND_SECONDS, DEFAULT_TIMEOUT_MINUTES, MAX_PIN_ATTEMPTS, type VaultStatus } from './config'
 import { resolvePrincipal, vaultLockConfigured, type VaultPrincipal } from './context'
 import { buildStatus } from './session'
+import { getTranslations } from 'next-intl/server'
+import { libT } from '@/lib/i18n/runtime'
+
+/** Textes de la garde dans la langue de la requête ; repli français (fail closed, jamais d'exception). */
+async function vaultLockT(): Promise<(key: string) => string> {
+  try {
+    const t = await getTranslations('shared.vaultLock')
+    return (key: string) => t(key as never)
+  } catch {
+    const t = libT('shared.vaultLock', 'fr')
+    return (key: string) => t(key)
+  }
+}
 
 /** État « verrou non configuré » : ouvert, sans verrou, aucun réglage modifiable. */
 function unconfiguredStatus(p: VaultPrincipal): VaultStatus {
@@ -24,21 +37,23 @@ export type GateBlocked = { title: string; message: string; href?: string; cta?:
 export async function loadVaultGateState(): Promise<{ status: VaultStatus | null; blocked: GateBlocked | null }> {
   const configured = vaultLockConfigured()
   const p = await resolvePrincipal({ allowUnconfigured: !configured }).catch(() => null)
-  if (!p) return { status: null, blocked: { title: 'Coffre-fort indisponible', message: 'Impossible de vérifier le verrou du coffre-fort. Réessayez dans un instant.' } }
+  const t = await vaultLockT()
+  const unavailable = (): GateBlocked => ({ title: t('gate.unavailableTitle'), message: t('gate.unavailableMessage') })
+  if (!p) return { status: null, blocked: unavailable() }
   if (!p.ok) {
     switch (p.reason) {
       case 'not_configured':
-        return { status: null, blocked: { title: 'Coffre-fort verrouillé', message: 'Le verrouillage du coffre-fort n’est pas encore configuré sur ce serveur. Contactez le support.' } }
+        return { status: null, blocked: { title: t('gate.lockedTitle'), message: t('gate.notConfiguredMessage') } }
       case 'mfa_required':
-        return { status: null, blocked: { title: 'Confirmation requise', message: 'Confirmez votre identité avec votre code de double authentification.', href: '/onboarding/connexion?suite=/app/coffre', cta: 'Me reconnecter' } }
+        return { status: null, blocked: { title: t('gate.mfaTitle'), message: t('mfaRequired'), href: '/onboarding/connexion?suite=/app/coffre', cta: t('gate.reconnect') } }
       default:
-        return { status: null, blocked: { title: 'Session expirée', message: 'Reconnectez-vous pour accéder au coffre-fort.', href: '/onboarding/connexion?suite=/app/coffre', cta: 'Me reconnecter' } }
+        return { status: null, blocked: { title: t('gate.sessionTitle'), message: t('gate.sessionMessage'), href: '/onboarding/connexion?suite=/app/coffre', cta: t('gate.reconnect') } }
     }
   }
   if (!configured) return { status: unconfiguredStatus(p), blocked: null }
   try {
     return { status: await buildStatus(p), blocked: null }
   } catch {
-    return { status: null, blocked: { title: 'Coffre-fort indisponible', message: 'Impossible de vérifier le verrou du coffre-fort. Réessayez dans un instant.' } }
+    return { status: null, blocked: unavailable() }
   }
 }

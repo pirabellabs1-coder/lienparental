@@ -1,0 +1,331 @@
+{
+  "email": {
+    "common": {
+      "hello": "Olá,",
+      "helloName": "Olá, {name},",
+      "aParent": "Um responsável",
+      "viewEvent": "Ver o evento",
+      "manageFamily": "Gerenciar a família",
+      "manageSubscription": "Gerenciar minha assinatura",
+      "preferencesFooter": "Você pode escolher quais notificações recebe em {link}.",
+      "preferencesLink": "suas preferências",
+      "colon": ":"
+    },
+    "layout": {
+      "reason": "Você recebe este e-mail porque tem uma conta no {brand}.",
+      "manage": "Gerenciar minhas notificações",
+      "legal": "Aviso legal"
+    },
+    "billing": {
+      "cycles": {
+        "mensuel": "mensal",
+        "annuel": "anual"
+      },
+      "plans": {
+        "premium_mensuel": "Premium mensal",
+        "premium_annuel": "Premium anual",
+        "coparentalite_mensuel": "Coparentalité+ mensal",
+        "coparentalite_annuel": "Coparentalité+ anual"
+      }
+    },
+    "verification": {
+      "subject": "Seu código de verificação Lien Parental",
+      "intro1": "Aqui está seu código de verificação para concluir a criação da sua conta Lien Parental.",
+      "intro2": "Digite-o no aplicativo para confirmar seu endereço de e-mail.",
+      "expires": "Este código expira em {minutes} minutos. Se não o encontrar, verifique sua pasta de spam.",
+      "ignore": "Se você não solicitou este código, pode ignorar este e-mail com segurança.",
+      "preheader": "Seu código: {code} (válido por {minutes} minutos).",
+      "title": "Verifique seu endereço de e-mail",
+      "cta": "Confirmar meu endereço"
+    },
+    "resetPassword": {
+      "subject": "Redefinição da sua senha Lien Parental",
+      "intro1": "Você pediu para redefinir a senha da sua conta Lien Parental.",
+      "intro2": "Clique no botão abaixo para escolher uma nova senha.",
+      "validity": "Este link é válido por 60 minutos e só pode ser usado uma vez.",
+      "footer1": "Se você não fez esta solicitação, ignore este e-mail: sua senha atual continua a mesma.",
+      "footer2": "Em caso de dúvida, fale conosco em {email}.",
+      "preheader": "Link de redefinição válido por 60 minutos.",
+      "title": "Redefinir sua senha",
+      "cta": "Escolher uma nova senha"
+    },
+    "accountExists": {
+      "subject": "Você já tem uma conta Lien Parental",
+      "intro": "Alguém (provavelmente você) tentou criar uma conta Lien Parental com este endereço de e-mail. Você já tem uma conta: basta entrar.",
+      "forgot": "Esqueceu a senha? {link}. Se você não fez esta solicitação, ignore esta mensagem: nada foi alterado.",
+      "forgotLink": "Escolha uma nova",
+      "preheader": "Você já tem uma conta: entre.",
+      "title": "Você já tem uma conta",
+      "cta": "Entrar"
+    },
+    "welcome": {
+      "subject": "Bem-vindo(a) ao Lien Parental",
+      "intro1": "Sua conta Lien Parental está pronta. Você já pode manter seu diário, organizar a agenda",
+      "intro2": "de guarda e guardar seus documentos importantes no seu cofre.",
+      "bullet1": "Registre as conversas e os momentos importantes, com data e hora.",
+      "bullet2": "Compartilhe uma agenda clara com o outro responsável.",
+      "bullet3": "Prepare suas cartas e processos a partir de modelos.",
+      "closing": "Estamos felizes em acompanhar você.",
+      "preheader": "Sua conta Lien Parental está pronta.",
+      "title": "Bem-vindo(a) ao Lien Parental",
+      "cta": "Acessar meu espaço"
+    },
+    "newLogin": {
+      "subject": "Novo acesso à sua conta Lien Parental",
+      "intro": "Detectamos um novo acesso à sua conta Lien Parental. Se foi você, nenhuma ação é necessária.",
+      "device": "Aparelho",
+      "system": "Sistema",
+      "place": "Local",
+      "date": "Data",
+      "notYou": "Não foi você?",
+      "secure": "Proteger minha conta agora",
+      "secureAfter": "vamos ajudar você a encerrar as sessões ativas e a mudar sua senha.",
+      "preheader": "Novo acesso a partir de {device}.",
+      "preheaderPlace": "Novo acesso a partir de {device} ({place}).",
+      "title": "Novo acesso detectado"
+    },
+    "securityChange": {
+      "dateLine": "Data e hora (horário da Guiana Francesa): {date}",
+      "notYou": "Não foi você? Proteja sua conta sem demora: mude sua senha e desconecte os outros aparelhos.",
+      "cta": "Verificar minha segurança",
+      "footer": "Os alertas de segurança são sempre enviados, quaisquer que sejam suas preferências."
+    },
+    "invoice": {
+      "subject": "Seu recibo Lien Parental",
+      "intro": "Confirmamos o recebimento do seu pagamento. Obrigado pela confiança.",
+      "amount": "Valor",
+      "cycle": "Ciclo",
+      "nextDue": "Próximo vencimento",
+      "details": "Sua fatura detalhada está disponível no botão abaixo. Você pode baixá-la em PDF na página hospedada pela Stripe.",
+      "footerLead": "Para qualquer dúvida sobre cobrança, escreva para",
+      "preheader": "Recibo Lien Parental: {amount} ({cycle}).",
+      "title": "Recibo de pagamento",
+      "cta": "Baixar a fatura"
+    },
+    "subscriptionConfirmed": {
+      "subject": "Sua assinatura Premium está ativa",
+      "subjectCopa": "Sua assinatura Coparentalité+ está ativa",
+      "intro": "Obrigado pela confiança: sua assinatura {plan} está ativa.",
+      "features": "Todos os recursos Premium já estão disponíveis no seu espaço.",
+      "featuresCopa": "Todos os recursos Premium e Coparentalité+ já estão disponíveis no seu espaço.",
+      "plan": "Plano",
+      "amount": "Valor",
+      "nextPayment": "Próxima cobrança",
+      "viewInvoice": "Ver minha fatura",
+      "manageHint": "Você pode mudar de plano ou cancelar a qualquer momento em Perfil &gt; Assinatura.",
+      "preheader": "{plan}, próxima cobrança em {date}.",
+      "title": "Assinatura confirmada"
+    },
+    "paymentFailed": {
+      "subject": "Falha no pagamento da sua assinatura Lien Parental",
+      "nextAttempt": "Uma nova tentativa será feita automaticamente em {date}. Seus benefícios Premium continuam ativos até lá.",
+      "lastAttempt": "Esta foi a última tentativa: sem regularização, sua conta voltará ao plano gratuito. Seus dados continuam guardados e acessíveis.",
+      "intro1": "Não conseguimos cobrar {amount} pela sua assinatura Premium",
+      "intro2": "(cartão vencido, limite atingido ou recusa do banco, por exemplo).",
+      "update": "Para evitar qualquer interrupção, atualize sua forma de pagamento.",
+      "payOnline": "Você também pode {link}.",
+      "payOnlineLink": "pagar a fatura on-line",
+      "preheader": "O pagamento de {amount} não foi concluído.",
+      "title": "Seu pagamento não foi concluído",
+      "cta": "Atualizar minha forma de pagamento",
+      "footer": "Precisa de ajuda? Escreva para {email}."
+    },
+    "subscriptionCanceled": {
+      "subjectScheduled": "Confirmação do seu cancelamento",
+      "subjectEnded": "Sua assinatura Premium terminou",
+      "scheduledIntro": "Confirmamos o cancelamento da sua assinatura Premium. Nenhuma nova cobrança será feita.",
+      "activeUntil": "Seus benefícios Premium continuam ativos até {date}.",
+      "activeUntilPeriodEnd": "Seus benefícios Premium continuam ativos até o fim do período atual.",
+      "cancelAnytime": "Você pode desfazer este cancelamento a qualquer momento até lá.",
+      "endedOn": "Sua assinatura Premium terminou em {date}. Sua conta voltou ao plano gratuito.",
+      "ended": "Sua assinatura Premium terminou. Sua conta voltou ao plano gratuito.",
+      "dataKept1": "Todos os seus dados continuam guardados e acessíveis. Além dos limites do plano gratuito,",
+      "dataKept2": "adicionar novos conteúdos exige uma nova assinatura.",
+      "preheaderScheduled": "Premium ativo até {date}.",
+      "periodEnd": "o fim do período",
+      "preheaderEnded": "Sua conta voltou ao plano gratuito.",
+      "titleScheduled": "Cancelamento registrado",
+      "titleEnded": "Assinatura encerrada",
+      "ctaResubscribe": "Assinar novamente",
+      "footer": "Alguma dúvida? {email}"
+    },
+    "testimonyReceived": {
+      "subject": "Um novo depoimento chegou ao seu cofre",
+      "intro": "Boa notícia: {name} acaba de enviar um depoimento para o seu cofre seguro.",
+      "request": "Solicitação",
+      "reference": "Referência: {reference}",
+      "stored": "Ele está guardado no seu cofre, visível apenas para você. Leve o tempo que precisar para lê-lo, não há pressa.",
+      "preheader": "{name} enviou um depoimento para “{title}”.",
+      "title": "Novo depoimento recebido",
+      "cta": "Ver no meu cofre"
+    },
+    "testimonyReminder": {
+      "subject": "Lembrete: um responsável aguarda seu depoimento",
+      "intro": "{parent} pediu seu depoimento no contexto de um processo familiar importante: {title}.",
+      "value": "Seu olhar, mesmo em poucas linhas, pode fazer uma verdadeira diferença. O envio é seguro e confidencial: apenas o responsável em questão terá acesso ao seu depoimento.",
+      "deadline": "Por favor, envie seu depoimento antes de {date}.",
+      "footer": "Não deseja dar um depoimento? Você pode ignorar este e-mail; nenhum outro lembrete será enviado após o prazo.",
+      "preheader": "{parent} aguarda seu depoimento antes de {date}.",
+      "title": "Um depoimento é aguardado",
+      "cta": "Enviar meu depoimento"
+    },
+    "messageWaiting": {
+      "sendersTwo": "{first} e {second}",
+      "sendersMany": "{first} e outras {others} pessoas",
+      "unread": "{count, plural, one {1 mensagem não lida} other {{count} mensagens não lidas}}",
+      "body": "Você recebeu mensagens de {name}. Você tem {what} nesta conversa.",
+      "subject": "Nova mensagem de {name} no Lien Parental",
+      "preheader": "{what} de {name}.",
+      "title": "Você tem uma mensagem",
+      "cta": "Ler a conversa",
+      "footerExtra": "No máximo um e-mail por conversa a cada 30 minutos."
+    },
+    "inviteAccepted": {
+      "someone": "A pessoa convidada",
+      "body": "{name} aceitou seu convite ({role}). Você pode gerenciar os adultos vinculados e seus papéis a qualquer momento.",
+      "roleParent": "responsável",
+      "roleProche": "familiar próximo",
+      "subject": "{name} aceitou seu convite",
+      "preheader": "{name} entrou no seu espaço compartilhado.",
+      "title": "Convite aceito"
+    },
+    "folderShared": {
+      "body": "{name} compartilhou com você uma pasta do cofre, somente leitura.",
+      "subject": "{name} compartilhou uma pasta com você",
+      "preheader": "Uma pasta compartilhada por {name} está esperando por você.",
+      "title": "Pasta compartilhada",
+      "cta": "Abrir a pasta"
+    },
+    "calendarReminder": {
+      "defaultTitle": "Evento",
+      "body": "Lembrete: “{title}” {when}.",
+      "subject": "Lembrete: {title} {when}",
+      "preheader": "“{title}” {when}.",
+      "title": "Lembrete da agenda"
+    },
+    "calendarShared": {
+      "titleCreated": "Novo evento compartilhado",
+      "titleUpdated": "Evento compartilhado alterado",
+      "titleDeleted": "Evento compartilhado cancelado",
+      "openCalendar": "Abrir a agenda"
+    },
+    "family": {
+      "listAnd": "{list} e {last}",
+      "yourChild": "seu filho(a)",
+      "theChild": "a criança",
+      "someoneAdult": "Um adulto",
+      "anotherParent": "outro responsável",
+      "roleParent": "responsável",
+      "roleProche": "familiar próximo",
+      "inviteRoleParent": "como responsável: você terá acesso à ficha, à saúde, à agenda e aos documentos e despesas compartilhados.",
+      "inviteRoleProche": "como familiar próximo: você poderá consultar o nome, a turma e a agenda compartilhada.",
+      "inviteBody": "{inviter} convida você para o espaço compartilhado de {kids} no Lien Parental, {roleSentence}",
+      "invitePrivate": "O Diário pessoal, o Coach com IA e os documentos não compartilhados de cada um continuam privados.",
+      "invitePersonal": "Este link é pessoal: ele só funciona com uma conta verificada neste endereço de e-mail. Ele expira em {date}.",
+      "inviteSubject": "{inviter} convida você para o Lien Parental",
+      "invitePreheader": "Convite para o espaço compartilhado de {kids}",
+      "inviteTitle": "Convite para um espaço compartilhado",
+      "inviteCta": "Ver o convite",
+      "inviteFooter": "Se você não conhece esta pessoa, simplesmente ignore esta mensagem.",
+      "removedBody": "Seu acesso ao espaço compartilhado de {child} foi removido. Seus próprios dados (Diário, documentos, Coach com IA) não são afetados e continuam no seu espaço.",
+      "removedSubject": "Acesso a um espaço compartilhado removido",
+      "removedTitle": "Acesso removido",
+      "ownerBody": "{who} agora tem acesso ao espaço compartilhado de {kids} como {role}, a convite de {by}.",
+      "ownerCanRemove": "Se você não concordar, pode remover este acesso a qualquer momento na página Família.",
+      "ownerSubject": "Um novo adulto tem acesso à ficha do seu filho(a)",
+      "ownerTitle": "Novo adulto vinculado"
+    },
+    "notify": {
+      "whenAllDay": "em {day}",
+      "whenTimed": "em {day} às {time}",
+      "anEvent": "um evento",
+      "health": "Consulta de saúde",
+      "healthOf": "Consulta de saúde de {child}",
+      "ifNotYouSecure": "Se não foi você, proteja sua conta.",
+      "ifNotYouOpen": "Se não foi você, abra o aplicativo.",
+      "newEmail": "{message} Novo endereço: {email}.",
+      "security": {
+        "password_changed": {
+          "title": "Sua senha foi alterada",
+          "message": "A senha da sua conta Lien Parental acaba de ser alterada."
+        },
+        "password_set": {
+          "title": "Uma senha foi definida",
+          "message": "Uma senha acaba de ser definida para sua conta Lien Parental."
+        },
+        "email_change_requested": {
+          "title": "Alteração de e-mail solicitada",
+          "message": "Foi solicitada a alteração do endereço de e-mail da sua conta."
+        },
+        "email_changed": {
+          "title": "Seu endereço de e-mail foi alterado",
+          "message": "O endereço de e-mail da sua conta Lien Parental foi alterado."
+        },
+        "mfa_enabled": {
+          "title": "Autenticação em dois fatores ativada",
+          "message": "A autenticação em dois fatores acaba de ser ativada na sua conta."
+        },
+        "mfa_disabled": {
+          "title": "Autenticação em dois fatores desativada",
+          "message": "A autenticação em dois fatores acaba de ser desativada na sua conta."
+        },
+        "vault_code_changed": {
+          "title": "Código do cofre alterado",
+          "message": "O código do seu cofre acaba de ser alterado."
+        },
+        "vault_code_removed": {
+          "title": "Código do cofre removido",
+          "message": "O código do seu cofre acaba de ser removido."
+        },
+        "account_deletion_requested": {
+          "title": "Exclusão da sua conta solicitada",
+          "message": "A exclusão da sua conta Lien Parental foi solicitada. Seus dados serão apagados definitivamente em 30 dias. Fale com o suporte para cancelar."
+        }
+      },
+      "calendarDeleted": "{who} cancelou “{title}” previsto {when}",
+      "calendarUpdated": "{who} alterou “{title}”: {when}",
+      "calendarCreated": "{who} adicionou “{title}” {when}",
+      "loginTitle": "Novo acesso à sua conta",
+      "loginBody": "Acesso a partir de {device} ({system}). Se não foi você, proteja sua conta.",
+      "loginPush": "A partir de {system}. Não foi você? Abra o aplicativo.",
+      "wroteYou": "Nova mensagem de {who}",
+      "messageBody": "Nova mensagem nas suas mensagens.",
+      "messagePush": "Abra para ler a mensagem.",
+      "unreadBody": "{count, plural, one {{count} mensagem não lida.} other {{count} mensagens não lidas.}}",
+      "unreadPush": "Mensagens não lidas.",
+      "inviteTitle": "{who} aceitou seu convite",
+      "inviteBody": "Seu espaço agora é compartilhado.",
+      "folderTitle": "{who} compartilhou uma pasta com você",
+      "folderBody": "Pasta do cofre, somente leitura.",
+      "folderPush": "Abra para consultá-la.",
+      "testimonyTitle": "Novo depoimento recebido",
+      "testimonyBody": "Um depoimento chegou ao seu cofre.",
+      "aWitness": "Uma testemunha",
+      "testimonyRequest": "Solicitação de depoimento",
+      "noReference": "Não informada",
+      "reminderTitle": "Lembrete: “{title}”",
+      "reminderBody": "Previsto {when}.",
+      "sharedDeleted": "Evento cancelado",
+      "sharedUpdated": "Evento alterado",
+      "sharedCreated": "Novo evento compartilhado",
+      "gardeUpdated": "{who} atualizou a agenda de guarda",
+      "expenseCreated": "{who} adicionou uma despesa compartilhada",
+      "expenseUpdated": "{who} alterou uma despesa compartilhada",
+      "gardeBody": "Agenda de guarda",
+      "expenseBody": "Despesas compartilhadas",
+      "activityPush": "Abra para ver os detalhes.",
+      "welcomeTitle": "Bem-vindo(a) ao Lien Parental",
+      "welcomeBody": "Sua conta está pronta."
+    },
+    "device": {
+      "Appareil": "Aparelho",
+      "Ordinateur": "Computador",
+      "TelephoneAndroid": "Celular Android",
+      "TabletteAndroid": "Tablet Android",
+      "AppareilNonIdentifie": "Aparelho não identificado",
+      "Navigateur": "Navegador",
+      "NavigateurNonIdentifie": "Navegador não identificado",
+      "on": "{browser} no {os}"
+    }
+  }
+}

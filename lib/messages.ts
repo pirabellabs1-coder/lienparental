@@ -16,6 +16,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
+import { libT } from '@/lib/i18n/runtime'
 import { kickNotifications } from '@/lib/notify/client'
 import { saveAttachmentToVault, syncConversationVault } from '@/app/app/messages/actions'
 import { getVaultSettings, listFolders, type SaveOutcome } from '@/lib/data/vault-folders'
@@ -113,6 +114,11 @@ export const MIN_VOICE_MS = 500
 export const DEFAULT_VAULT_CATEGORY = 'Courriers'
 const BUCKET = 'message-attachments'
 
+/** Texte affiché (catalogue `shared.messages`), dans la langue de l'interface ; français côté serveur. */
+function mt(key: string, values?: Record<string, string | number>): string {
+  return libT('shared.messages')(key, values)
+}
+
 /** Type MIME sans paramètres (« audio/webm;codecs=opus » -> « audio/webm »). */
 export function baseMime(mime: string): string {
   return mime.split(';')[0].trim().toLowerCase()
@@ -121,33 +127,33 @@ export function baseMime(mime: string): string {
 /** Message d'erreur lisible, ou null si la pièce jointe est acceptée. */
 export function validateAttachment(file: File): string | null {
   if (!(ALLOWED_ATTACHMENT_MIME as readonly string[]).includes(file.type)) {
-    return 'Format non accepté. Choisissez une image (JPG, PNG, WebP, HEIC) ou un PDF.'
+    return mt('attachment.badType')
   }
-  if (file.size > MAX_ATTACHMENT_BYTES) return 'Fichier trop volumineux : 10 Mo maximum.'
-  if (file.size === 0) return 'Ce fichier est vide.'
+  if (file.size > MAX_ATTACHMENT_BYTES) return mt('attachment.tooLarge')
+  if (file.size === 0) return mt('attachment.empty')
   return null
 }
 
 /** Contrôle d'une note vocale avant envoi. */
 export function validateVoice(file: Blob, durationMs: number): string | null {
-  if (!(ALLOWED_AUDIO_MIME as readonly string[]).includes(baseMime(file.type))) return 'Format audio non pris en charge par ce navigateur.'
-  if (durationMs < MIN_VOICE_MS) return 'Note vocale trop courte.'
-  if (durationMs > MAX_VOICE_MS + 1000) return 'Note vocale trop longue : 3 minutes maximum.'
-  if (file.size === 0) return 'Enregistrement vide. Vérifiez votre micro.'
-  if (file.size > MAX_ATTACHMENT_BYTES) return 'Note vocale trop volumineuse.'
+  if (!(ALLOWED_AUDIO_MIME as readonly string[]).includes(baseMime(file.type))) return mt('voice.badType')
+  if (durationMs < MIN_VOICE_MS) return mt('voice.tooShort')
+  if (durationMs > MAX_VOICE_MS + 1000) return mt('voice.tooLong')
+  if (file.size === 0) return mt('voice.empty')
+  if (file.size > MAX_ATTACHMENT_BYTES) return mt('voice.tooLarge')
   return null
 }
 
 export function displayName(p: Pick<Participant, 'prenom' | 'nom'>): string {
-  return `${p.prenom} ${p.nom}`.trim() || 'Autre parent'
+  return `${p.prenom} ${p.nom}`.trim() || mt('otherParent')
 }
 
 /** « Thomas Martin », « Thomas et Karim »... */
 export function participantsLabel(list: Participant[]): string {
-  if (list.length === 0) return 'Conversation'
+  if (list.length === 0) return mt('conversation')
   if (list.length === 1) return displayName(list[0])
   const names = list.map((p) => p.prenom || displayName(p))
-  return `${names.slice(0, -1).join(', ')} et ${names[names.length - 1]}`
+  return mt('namesAnd', { names: names.slice(0, -1).join(', '), last: names[names.length - 1] })
 }
 
 /** Titre affiché : le sujet, sinon les interlocuteurs. */
@@ -162,9 +168,9 @@ export function durationLabel(ms: number): string {
 
 /** Aperçu textuel d'un message (liste, notifications). */
 export function previewText(m: Pick<ConversationPreview, 'body' | 'kind' | 'attachmentName'>): string {
-  if (m.kind === 'audio') return 'Note vocale'
+  if (m.kind === 'audio') return mt('voiceNote')
   if (m.body) return m.body
-  if (m.kind === 'attachment') return m.attachmentName ? `Pièce jointe : ${m.attachmentName}` : 'Pièce jointe'
+  if (m.kind === 'attachment') return m.attachmentName ? mt('attachmentNamed', { name: m.attachmentName }) : mt('attachment.label')
   return ''
 }
 
@@ -227,7 +233,7 @@ function fromRow(r: MessageRow): Message {
     attachment: r.attachment_path
       ? {
           path: r.attachment_path,
-          name: r.attachment_meta?.name ?? (kind === 'audio' ? 'Note vocale' : 'Pièce jointe'),
+          name: r.attachment_meta?.name ?? (kind === 'audio' ? mt('voiceNote') : mt('attachment.label')),
           mime: r.attachment_meta?.mime ?? 'application/octet-stream',
           size: r.attachment_meta?.size ?? 0,
         }
@@ -262,7 +268,7 @@ function fromInviteRow(r: InviteRow): CoparentInvite {
 
 async function currentParticipant(): Promise<Participant> {
   const { data: { user }, error } = await sb().auth.getUser()
-  if (error || !user) throw new Error('Session expirée. Reconnectez-vous.')
+  if (error || !user) throw new Error(mt('errors.sessionExpired'))
   const { data } = await sb().from('users').select('prenom, nom').eq('id', user.id).maybeSingle()
   const profile = data as { prenom: string | null; nom: string | null } | null
   return { id: user.id, prenom: profile?.prenom ?? '', nom: profile?.nom ?? '' }
@@ -313,7 +319,7 @@ function seedStore(): DemoStore {
       ...v,
       documentId: `demo_doc_${v.messageId}`,
       addedAt: m?.createdAt ?? new Date().toISOString(),
-      name: m?.attachment?.name ?? 'Pièce jointe',
+      name: m?.attachment?.name ?? mt('attachment.label'),
       senderId: m?.senderId ?? DEMO_ME.id,
     }
   })
@@ -504,12 +510,12 @@ export async function createConversation(input: { participantIds: string[]; titl
   if (ids.length === 0) throw new Error('Choisissez au moins un interlocuteur.')
   if (ids.length > 5) throw new Error('Cinq interlocuteurs au maximum.')
   const raw = (input.title ?? '').replace(/\s+/g, ' ').trim()
-  if (raw.length > MAX_TITLE_CHARS) throw new Error(`Sujet trop long (${MAX_TITLE_CHARS} caractères maximum).`)
+  if (raw.length > MAX_TITLE_CHARS) throw new Error(mt('errors.titleTooLong', { max: String(MAX_TITLE_CHARS) }))
   const title = raw || null
 
   if (!SUPABASE_ENABLED) {
     const linked = await listMessageableParents({ previewInvite: false })
-    if (!ids.every((id) => linked.some((p) => p.id === id))) throw new Error('Interlocuteur non lié à votre compte.')
+    if (!ids.every((id) => linked.some((p) => p.id === id))) throw new Error(mt('errors.participantNotLinked'))
     const s = demoRead()
     const wanted = [...ids, DEMO_ME.id].sort().join(',')
     const existing = s.conversations.find(
@@ -530,9 +536,9 @@ export async function createConversation(input: { participantIds: string[]; titl
   const { data, error } = await sb().rpc('create_conversation', { p_participant_ids: ids, p_title: title })
   if (error || typeof data !== 'string') {
     const code = (error as { code?: string } | null)?.code
-    if (code === '42501') throw new Error('Ce parent n’est pas lié à votre compte.')
-    if (code === '54000') throw new Error('Trop de conversations créées aujourd’hui. Réessayez demain.')
-    throw new Error("La discussion n'a pas pu être créée.")
+    if (code === '42501') throw new Error(mt('errors.parentNotLinked'))
+    if (code === '54000') throw new Error(mt('errors.tooManyConversations'))
+    throw new Error(mt('errors.createFailed'))
   }
   return data
 }
@@ -553,7 +559,7 @@ export async function setConversationArchived(id: string, archived: boolean): Pr
     .update({ archived_at: archived ? new Date().toISOString() : null })
     .eq('conversation_id', id)
     .eq('user_id', me.id)
-  if (error) throw new Error(archived ? "La conversation n'a pas pu être archivée." : "La conversation n'a pas pu être désarchivée.")
+  if (error) throw new Error(archived ? mt('errors.archiveFailed') : mt('errors.unarchiveFailed'))
 }
 
 // --- API publique : messages -------------------------------------------------
@@ -597,7 +603,7 @@ export async function sendMessage(
   const isAudio = opts.audioDurationMs !== undefined
   if (!state.conversationId) throw new Error("Aucune conversation : invitez d'abord l'autre parent.")
   if (!text && !file) throw new Error('Le message est vide.')
-  if (text.length > MAX_BODY_CHARS) throw new Error(`Message trop long (${MAX_BODY_CHARS} caractères maximum).`)
+  if (text.length > MAX_BODY_CHARS) throw new Error(mt('errors.bodyTooLong', { max: String(MAX_BODY_CHARS) }))
   if (file) {
     const err = isAudio ? validateVoice(file, opts.audioDurationMs ?? 0) : validateAttachment(file)
     if (err) throw new Error(err)
@@ -651,7 +657,7 @@ export async function sendMessage(
     const mime = baseMime(file.type)
     attachmentPath = `${conversationId}/${crypto.randomUUID()}.${extFor(mime, file.name)}`
     const up = await sb().storage.from(BUCKET).upload(attachmentPath, file, { contentType: mime, upsert: false })
-    if (up.error) throw new Error(isAudio ? "La note vocale n'a pas pu être envoyée." : "La pièce jointe n'a pas pu être envoyée.")
+    if (up.error) throw new Error(isAudio ? mt('errors.voiceSendFailed') : mt('errors.attachmentSendFailed'))
     attachmentMeta = { name: isAudio ? 'Note vocale' : file.name.slice(0, 200), mime, size: file.size }
   }
 
@@ -668,7 +674,7 @@ export async function sendMessage(
     })
     .select(MESSAGE_COLUMNS)
     .single()
-  if (error || !data) throw new Error("Le message n'a pas pu être envoyé.")
+  if (error || !data) throw new Error(mt('errors.sendFailed'))
   kickNotifications() // « X vous a écrit » livré tout de suite aux autres participants
   return fromRow(data as MessageRow)
 }
@@ -758,7 +764,7 @@ export async function saveToVault(
   if (!SUPABASE_ENABLED) {
     const s = demoRead()
     const m = s.messages[conversationId]?.find((x) => x.id === messageId)
-    if (!m?.attachment) throw new Error('Ce message ne contient pas de pièce jointe à ranger.')
+    if (!m?.attachment) throw new Error(mt('errors.noAttachment'))
     const existing = s.vault.find((v) => v.messageId === messageId)
     const folderName = async (id: string | null | undefined) =>
       id ? (await listFolders().catch(() => [])).find((f) => f.id === id)?.name ?? null : null
@@ -891,7 +897,7 @@ export async function createInvite(email: string): Promise<CoparentInvite> {
     .insert({ user_id: me.id, invitee_email: e })
     .select('id, invitee_email, token, status, created_at, expires_at')
     .single()
-  if (error || !data) throw new Error("L'invitation n'a pas pu être créée.")
+  if (error || !data) throw new Error(mt('errors.inviteCreateFailed'))
   return fromInviteRow(data as InviteRow)
 }
 
@@ -902,15 +908,15 @@ export async function cancelInvite(inviteId: string): Promise<void> {
     return
   }
   const { error } = await sb().from('coparent_links').delete().eq('id', inviteId).eq('status', 'pending')
-  if (error) throw new Error("L'invitation n'a pas pu être annulée.")
+  if (error) throw new Error(mt('errors.inviteCancelFailed'))
 }
 
 /** Accepte une invitation reçue ; retourne l'identifiant de la conversation. */
 export async function acceptInvite(token: string): Promise<string> {
-  if (!/^[a-f0-9]{32}$/i.test(token)) throw new Error('Invitation invalide ou expirée.')
+  if (!/^[a-f0-9]{32}$/i.test(token)) throw new Error(mt('errors.inviteInvalid'))
   if (!SUPABASE_ENABLED) return DEMO_CONVERSATION_ID
   const { data, error } = await sb().rpc('accept_coparent_invite', { p_token: token })
-  if (error || typeof data !== 'string') throw new Error('Invitation invalide ou expirée.')
+  if (error || typeof data !== 'string') throw new Error(mt('errors.inviteInvalid'))
   kickNotifications()
   return data
 }
