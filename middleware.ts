@@ -119,15 +119,10 @@ async function supabaseMiddleware(req: NextRequest) {
       url.search = ''
       return redirectWithSession(response, url)
     }
-    // M7 (audit v3) : l'administration exige une session aal2, même sans facteur
-    // enregistré (sinon : enrôlement de la double authentification).
-    if (aal.currentLevel !== 'aal2') {
-      const url = req.nextUrl.clone()
-      url.pathname = '/app/profil/securite/2fa'
-      url.search = ''
-      url.searchParams.set('raison', 'admin')
-      return redirectWithSession(response, url)
-    }
+    // La 2FA n'est PAS imposée pour l'admin : l'accès repose sur le lien secret
+    // (porte masquée) + authentification + rôle admin vérifié en base. La 2FA
+    // reste disponible et recommandée (Profil → Sécurité) ; si un facteur est
+    // enregistré, la vérification aal2 standard ci-dessus s'applique toujours.
   }
   return response
 }
