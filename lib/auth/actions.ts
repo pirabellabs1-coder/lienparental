@@ -28,6 +28,7 @@ import {
   type PreferencesInput,
 } from './validation'
 import { verifyPassword } from './verify-password'
+import { flushForActor } from '@/lib/notify/jobs'
 
 export type ActionResult<T = undefined> =
   | ({ ok: true } & (T extends undefined ? object : { data: T }))
@@ -240,5 +241,7 @@ export async function changePassword(input: { current: string; next: string }): 
 
   // Les autres appareils doivent se reconnecter avec le nouveau mot de passe.
   await ctx.supabase.auth.signOut({ scope: 'others' }).catch(() => undefined)
+  // Alerte « mot de passe modifié » (déposée par le déclencheur 0440) livrée tout de suite.
+  await flushForActor(ctx.user.id).catch(() => null)
   return { ok: true }
 }

@@ -29,14 +29,14 @@ function formatDateFr(iso: string): string {
 }
 
 export function testimonyReminderEmail(props: TestimonyReminderProps): { subject: string; html: string } {
-  const prenom = escapeHtml(props.prenomTemoin?.trim() || 'bonjour')
+  const prenom = escapeHtml(props.prenomTemoin?.trim() || '')
   const date = escapeHtml(formatDateFr(props.dateLimite))
   const parentNom = escapeHtml(props.parentNom)
   const titreDemande = escapeHtml(props.titreDemande)
   const url = safeUrl(props.url)
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
     <p style="margin:0 0 16px 0;">
       <strong style="color:${t.colors.night};">${parentNom}</strong> vous a sollicité pour témoigner dans le cadre d'une démarche familiale importante : <em>${titreDemande}</em>.
     </p>
@@ -55,7 +55,7 @@ export function testimonyReminderEmail(props: TestimonyReminderProps): { subject
   return {
     subject: testimonyReminderSubject,
     html: baseLayout({
-      preheader: `${parentNom} attend votre témoignage avant le ${date}.`,
+      preheader: `${props.parentNom} attend votre témoignage avant le ${formatDateFr(props.dateLimite)}.`,
       title: 'Un témoignage est attendu',
       body,
       cta: { label: 'Déposer mon témoignage', href: url },

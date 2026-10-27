@@ -12,7 +12,7 @@
  * Bump CACHE_V whenever the precache list changes — the old cache is cleared on activate.
  */
 
-const CACHE_V = 'lp-v3';
+const CACHE_V = 'lp-v4';
 const RUNTIME = `${CACHE_V}-runtime`;
 const SHELL   = `${CACHE_V}-shell`;
 
@@ -78,13 +78,17 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2) Same-origin assets → stale-while-revalidate
+  // 2) Same-origin per-user data (/api/*, /app/* RSC payloads…) → network only, never cached
+  //    (e.g. GET /api/push/subscribe returns the signed-in user's devices).
+  if (sameOrigin && isPrivatePath(url.pathname)) return;
+
+  // 3) Same-origin assets → stale-while-revalidate
   if (sameOrigin) {
     event.respondWith(staleWhileRevalidate(req));
     return;
   }
 
-  // 3) Third-party → network-only (don't pollute our caches)
+  // 4) Third-party → network-only (don't pollute our caches)
   // (letting the browser handle it is enough — no respondWith)
 });
 
@@ -157,3 +161,49 @@ async function staleWhileRevalidate(req) {
     .catch(() => cached); // if network dies, fall back to cached
   return cached || network;
 }
+
+/* ------------------------------------------------------------------- push */
+// Notifications Web Push (lib/notify/push.ts). La charge ne contient jamais de
+// contenu sensible : un titre court, une phrase et un lien interne /app/…
+const PUSH_ICON = '/icons/icon-192.png';
+
+function safeAppPath(value) {
+  if (typeof value !== 'string') return '/app/notifications';
+  // Chemin interne uniquement : jamais d'URL absolue ni de //hôte.
+  return /^\/app(\/[\w\-./?=&%]*)?$/.test(value) && !value.includes('//') ? value : '/app/notifications';
+}
+
+self.addEventListener('push', (event) => {
+  let data = {};
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch {
+    data = {};
+  }
+  const title = typeof data.title === 'string' && data.title ? data.title.slice(0, 120) : 'Lien Parental';
+  const options = {
+    body: typeof data.body === 'string' ? data.body.slice(0, 240) : '',
+    icon: PUSH_ICON,
+    badge: PUSH_ICON,
+    lang: 'fr',
+    tag: typeof data.tag === 'string' && data.tag ? data.tag.slice(0, 64) : undefined,
+    renotify: Boolean(data.tag),
+    data: { url: safeAppPath(data.url) },
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const target = new URL(safeAppPath(event.notification.data && event.notification.data.url), self.location.origin).href;
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+      for (const client of list) {
+        if (new URL(client.url).origin === self.location.origin && 'focus' in client) {
+          return client.focus().then((c) => (c && 'navigate' in c ? c.navigate(target) : undefined)).catch(() => self.clients.openWindow(target));
+        }
+      }
+      return self.clients.openWindow(target);
+    })
+  );
+});

@@ -10,11 +10,13 @@ import { btn } from '@/components/onboarding/styles'
 import { useOnboardingDraft } from '@/components/onboarding/draft'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
+import { kickNotifications, reportSignIn } from '@/lib/notify/client'
+import { takePendingPassword } from '@/lib/auth/pending-password'
 import { authErrorMessage, isRateLimited } from '@/lib/auth/errors'
 
 // Étape 7 — Vérification de l'e-mail par code à 6 chiffres.
 // Supabase : verifyOtp({ type: 'signup' }) ; durée de validité du code = « Email OTP Expiration »
-// du projet (15 min recommandées) ; GoTrue limite aussi les vérifications par IP.
+// du projet (1 h, valeur par défaut, annoncée dans l'e-mail) ; GoTrue limite aussi les vérifications par IP.
 // Les 5 essais ci-dessous sont une limite d'interface complémentaire.
 const RESEND_DELAY = 45
 const MAX_ATTEMPTS = 5
@@ -49,9 +51,20 @@ export default function VerificationPage() {
     setInfo(null)
     if (SUPABASE_ENABLED) {
       if (!draft.email) return
-      const { error: err } = await createClient().auth.resend({ type: 'signup', email: draft.email })
-      if (err) {
-        setError(authErrorMessage(err, 'resend'))
+      // Nouveau code par NOTRE e-mail (POST /api/auth/signup, generateLink) ; réponse neutre.
+      try {
+        const res = await fetch('/api/auth/signup', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin',
+          body: JSON.stringify({ email: draft.email, resend: true }),
+        })
+        if (!res.ok) {
+          const data = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
+          setError(data?.error?.message ?? 'Envoi impossible pour le moment. Réessayez dans un instant.')
+          setCountdown(RESEND_DELAY)
+          return
+        }
+      } catch {
+        setError('Connexion impossible. Vérifiez votre réseau puis réessayez.')
         setCountdown(RESEND_DELAY)
         return
       }
@@ -80,9 +93,18 @@ export default function VerificationPage() {
     if (SUPABASE_ENABLED) {
       if (!draft.email) return
       setVerifying(true)
-      const { error: err } = await createClient().auth.verifyOtp({ email: draft.email, token: value, type: 'signup' })
+      const supabase = createClient()
+      const { error: err } = await supabase.auth.verifyOtp({ email: draft.email, token: value, type: 'signup' })
       if (!err) {
-        // Session ouverte (cookies) : le profil public.users a été créé par le trigger 0200.
+        // Adresse prouvée, session ouverte. Le compte a un mot de passe aléatoire (créé par le serveur) :
+        // on pose maintenant celui choisi à l'inscription, puis on ferme toute autre session.
+        await reportSignIn()
+        kickNotifications()
+        const chosen = takePendingPassword(draft.email)
+        if (!chosen) { router.push('/nouveau-mot-de-passe?inscription=1'); return }
+        const { error: pwErr } = await supabase.auth.updateUser({ password: chosen })
+        if (pwErr) { router.push('/nouveau-mot-de-passe?inscription=1'); return }
+        await supabase.auth.signOut({ scope: 'others' }).catch(() => undefined)
         router.push('/onboarding/profil')
         return
       }
@@ -161,7 +183,7 @@ export default function VerificationPage() {
         describedBy="otp-help"
       />
       <p id="otp-help" className="sr-only">
-        Saisissez le code reçu par e-mail. Il est valable 15 minutes.
+        Saisissez le code reçu par e-mail. Il est valable 1 heure.
       </p>
 
       <div className="mt-4 min-h-[20px]" aria-live="polite">

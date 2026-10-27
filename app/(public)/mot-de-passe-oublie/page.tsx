@@ -8,9 +8,6 @@ import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
 import { TextField } from '@/components/onboarding/fields'
 import { btn } from '@/components/onboarding/styles'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { createClient } from '@/lib/supabase/client'
-import { authErrorMessage, isRateLimited } from '@/lib/auth/errors'
-import { appUrl } from '@/lib/auth/redirect'
 import { emailSchema } from '@/lib/auth/validation'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -23,7 +20,7 @@ export default function MotDePasseOubliePage() {
   const [error, setError] = useState<string | undefined>()
   const [loading, setLoading] = useState(false)
 
-  // Retour d'un lien de réinitialisation expiré (/auth/confirm → ?erreur=lien).
+  // Retour d'un lien de réinitialisation expiré (/auth/confirm, POST → ?erreur=lien).
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get('erreur') === 'lien') {
       setError('Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau.')
@@ -41,14 +38,24 @@ export default function MotDePasseOubliePage() {
       const parsed = emailSchema.safeParse(email)
       if (!parsed.success) { setError('Indiquez une adresse e-mail valide.'); return }
       setLoading(true)
-      const { error: err } = await createClient().auth.resetPasswordForEmail(parsed.data, {
-        redirectTo: `${appUrl()}/auth/confirm?next=/nouveau-mot-de-passe`,
-      })
+      // Lien envoyé par NOTRE e-mail (POST /api/auth/password-reset, generateLink recovery).
+      // Réponse identique que le compte existe ou non ; seules les limites de débit et les pannes sont signalées.
+      let err: string | null = null
+      try {
+        const res = await fetch('/api/auth/password-reset', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin',
+          body: JSON.stringify({ email: parsed.data }),
+        })
+        if (!res.ok) {
+          const data = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
+          err = data?.error?.message ?? 'Envoi impossible pour le moment. Réessayez dans un instant.'
+        }
+      } catch {
+        err = 'Connexion impossible. Vérifiez votre réseau puis réessayez.'
+      }
       setLoading(false)
-      // Réponse identique que le compte existe ou non ; seules les limites de débit
-      // et les pannes réseau sont signalées.
-      if (err && (isRateLimited(err) || err.status === undefined || err.status >= 500)) {
-        setError(authErrorMessage(err, 'reset'))
+      if (err) {
+        setError(err)
         return
       }
     }

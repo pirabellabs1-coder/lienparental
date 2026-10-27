@@ -33,7 +33,7 @@ const TEMPLATES: Tpl[] = [
     body:
       p(`Pour confirmer votre adresse e-mail, saisissez ce code dans l'application :`) +
       code +
-      small(`Ce code est valable 15 minutes. Vous pouvez aussi confirmer votre adresse avec le bouton ci-dessous.`),
+      small(`Ce code est valable 1 heure. Vous pouvez aussi confirmer votre adresse avec le bouton ci-dessous.`),
     cta: { label: 'Confirmer mon adresse', href: confirmUrl('signup', '/onboarding/profil') },
     footer: notYou,
   },
@@ -104,7 +104,7 @@ Générés par \`npx --yes tsx scripts/gen-supabase-emails.ts\` à partir de \`l
 |---|---|---|
 ${TEMPLATES.map(x => `| ${({ 'confirmation.html': 'Confirm signup', 'recovery.html': 'Reset password', 'email_change.html': 'Change email address', 'magic_link.html': 'Magic link', 'invite.html': 'Invite user', 'reauthentication.html': 'Reauthentication' } as Record<string, string>)[x.file]} | \`${x.file}\` | ${x.subject} |`).join('\n')}
 
-Prérequis : Auth > URL Configuration contient \`https://lienparental.fr/auth/confirm\` dans les Redirect URLs, et « Email OTP Expiration » vaut 900 s (15 min).
+Prérequis : Auth > URL Configuration contient \`https://lienparental.fr/auth/confirm\` dans les Redirect URLs, et « Email OTP Expiration » vaut 3600 s (1 heure, valeur par défaut) : le code d'inscription et le lien de réinitialisation partagent ce réglage.
 `
 writeFileSync(join(OUT, 'README.md'), readme)
 console.log('ok', TEMPLATES.length, 'modèles dans', OUT)

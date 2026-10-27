@@ -80,9 +80,10 @@ select id, public from storage.buckets;   -- 3 buckets, public = false
 - **Enable Email provider** : activé. **Confirm email** : activé.
 - **Secure email change** : activé (confirmation sur l'ancienne ET la nouvelle adresse).
 - **Secure password change** : activé.
-- **Email OTP Length** : `6` (l'écran de vérification a 6 cases). **Email OTP Expiration** : `900` s (15 min, affiché dans l'app).
+- **Email OTP Length** : `6` (l'écran de vérification a 6 cases). **Email OTP Expiration** : `3600` s (1 heure, valeur par défaut), réglage PARTAGÉ par le code d'inscription et le lien de réinitialisation (nos e-mails et l'app annoncent « 1 heure »). `900` s serait plus strict ; si le propriétaire choisit cette valeur, il faut changer les textes (template `verification`, écran de vérification, `resetPassword`, `scripts/gen-supabase-emails.ts`).
 - **Password requirements** (Authentication > Policies / Passwords) : longueur minimale `8`, exiger
-  « lowercase, uppercase letters and digits » au minimum — c'est la vérification **côté serveur** des règles affichées.
+  « lowercase, uppercase letters and digits » — c'est la vérification **côté serveur** des règles affichées, identiques à
+  `passwordSchema` (`lib/auth/validation.ts`) et `PASSWORD_RULES` : à modifier ensemble.
   Activer aussi **Leaked password protection** (plan Pro).
 
 ### 1.5 Authentication > Email Templates
@@ -284,6 +285,9 @@ tableau de bord d'accueil (`/app`) et palette de recherche.
 
 ## 2. Stripe
 
+> **Procédure recommandée : [docs/STRIPE.md](STRIPE.md)** (script `scripts/stripe-setup.ts` qui crée produits, prix,
+> webhook et portail, puis affiche les variables). Les étapes manuelles ci-dessous restent valables.
+
 La facturation réelle s'active quand **Stripe et Supabase** sont configurés (`STRIPE_SECRET_KEY` + clés Supabase).
 Aucune carte n'est saisie dans l'application : le paiement se fait sur Stripe Checkout, la gestion de la carte sur le portail client Stripe.
 
@@ -398,7 +402,7 @@ Parcours de recette (cartes de test : https://docs.stripe.com/testing) :
 | Montée vers Coparentalité+ | « Passer à Coparentalité+ » | Facture de prorata payée immédiatement, `subscriptions.plan = coparentalite_*`, `users.plan = coparentalite` ; un parent lié voit le quota Coach IA Premium |
 | Montée refusée | `4000 0000 0000 0341` comme carte par défaut | 402 « paiement de la différence refusé », formule inchangée |
 | Descente vers Premium | « Changer de formule » | Effet immédiat, crédit visible sur la facture suivante, `users.plan = premium` |
-| Abonnement Coparentalité+ direct | `/app/premium?formule=coparentalite` | Checkout sur le Price Coparentalité+, e-mail « Votre abonnement Coparentalité+ est actif » |
+| Abonnement Coparentalité+ direct | `/app/abonnement?formule=coparentalite` | Checkout sur le Price Coparentalité+, e-mail « Votre abonnement Coparentalité+ est actif » |
 
 Pour simuler le temps (renouvellements, fin de période) : **Test clocks** (Facturation > Horloges de test).
 
@@ -410,7 +414,7 @@ Pour simuler le temps (renouvellements, fin de période) : **Test clocks** (Fact
 - Résiliation depuis le portail : autorisée, **« À la fin de la période de facturation »** (cohérent avec l'app).
 - Changement d'offre depuis le portail : **désactivé** (l'app gère Premium ↔ Coparentalité+ et mensuel ↔ annuel, avec les règles de prorata ci-dessus).
   Si vous l'activez malgré tout, y ajouter les **deux produits** : le webhook reflète correctement les quatre Prices.
-- Langue : français. Lien de retour : géré par l'app (`/app/profil/abonnement`).
+- Langue : français. Lien de retour : géré par l'app (`/app/abonnement?info=portal`, qui resynchronise l'abonnement).
 - Optionnel : si plusieurs configurations existent, renseigner `STRIPE_PORTAL_CONFIGURATION=bpc_...`.
 
 ### 2.6 Relances et passage à l'offre gratuite

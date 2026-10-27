@@ -78,6 +78,12 @@ export function htmlToText(html: string): string {
     .trim()
 }
 
+/** Objet sur une seule ligne : aucun caractère de contrôle (CR / LF / NUL…) issu d'un prénom ou d'un titre. */
+export function cleanSubject(subject: string): string {
+  // eslint-disable-next-line no-control-regex
+  return subject.replace(/[\r\n\u0000-\u001f\u007f]+/g, ' ').trim().slice(0, 250)
+}
+
 export async function sendEmail(args: SendEmailArgs): Promise<SendEmailResult> {
   const client = EMAIL_ENABLED ? getClient() : null
   const from = args.from ?? process.env.MAIL_FROM
@@ -93,13 +99,14 @@ export async function sendEmail(args: SendEmailArgs): Promise<SendEmailResult> {
   }
 
   const text = args.text ?? htmlToText(args.html)
+  const subject = cleanSubject(args.subject)
 
   try {
     const res = await client.emails.send(
       {
         from,
         to: args.to,
-        subject: args.subject,
+        subject,
         html: args.html,
         text,
         replyTo: args.replyTo,

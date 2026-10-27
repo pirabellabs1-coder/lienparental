@@ -56,8 +56,6 @@ export function ConfirmDialog({
           </Button>
         </>
       }
-    >
-      <span className="sr-only">{description}</span>
-    </Modal>
+    />
   )
 }

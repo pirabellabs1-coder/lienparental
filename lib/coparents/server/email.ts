@@ -2,7 +2,8 @@ import 'server-only'
 /**
  * E-mails de la liaison des parents. Passent par lib/email/send.ts :
  * sans RESEND_API_KEY, aucun envoi et une ligne de journal expurgée.
- * Les notifications « acceptée / retiré » ne partent que si
+ * « Invitation acceptée » : lib/notify (déclencheur 0440, in-app + push + e-mail).
+ * La notification « retiré » ne part que si
  * SUPABASE_SERVICE_ROLE_KEY est configurée (lecture de l'e-mail du
  * destinataire, users n'étant lisible que par son propriétaire) et si le
  * destinataire n'a pas désactivé les e-mails (preferences.notif_email).
@@ -88,27 +89,11 @@ async function recipient(userId: string, opts: { security?: boolean } = {}): Pro
   return { email: user.email, prenom: user.prenom ?? '' }
 }
 
-export async function notifyInvitationAccepted(args: { inviterId: string; inviteePrenom: string; role: GuardianRole; idempotencyKey: string }) {
-  const to = await recipient(args.inviterId)
-  if (!to) return
-  const who = escapeHtml(args.inviteePrenom || 'La personne invitée')
-  const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${escapeHtml(to.prenom || '')},</p>
-    <p style="margin:0;">${who} a accepté votre invitation (${args.role === 'parent' ? 'parent' : 'proche'}). Vous pouvez gérer les adultes liés et leurs rôles à tout moment.</p>
-  `
-  await sendEmail({
-    to: to.email,
-    subject: 'Invitation acceptée sur Lien Parental',
-    html: baseLayout({ title: 'Invitation acceptée', body, cta: { label: 'Gérer la famille', href: `${appUrl()}/app/coparents` } }),
-    idempotencyKey: args.idempotencyKey,
-  }).catch(() => undefined)
-}
-
 export async function notifyGuardianRemoved(args: { userId: string; childPrenom: string; idempotencyKey: string }) {
   const to = await recipient(args.userId)
   if (!to) return
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${escapeHtml(to.prenom || '')},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${to.prenom ? ` ${escapeHtml(to.prenom)}` : ''},</p>
     <p style="margin:0;">Votre accès à l’espace partagé de ${escapeHtml(args.childPrenom || 'l’enfant')} a été retiré. Vos propres données (Journal, documents, Coach IA) ne sont pas concernées et restent dans votre espace.</p>
   `
   await sendEmail({
@@ -157,7 +142,7 @@ export async function notifyOwnersNewAdult(args: {
       const to = await recipient(ownerId, { security: true })
       if (!to) continue
       const body = `
-        <p style="margin:0 0 16px 0;">Bonjour ${escapeHtml(to.prenom || '')},</p>
+        <p style="margin:0 0 16px 0;">Bonjour${to.prenom ? ` ${escapeHtml(to.prenom)}` : ''},</p>
         <p style="margin:0 0 16px 0;">${who} a désormais accès à l’espace partagé de ${escapeHtml(list(names))} en tant que ${args.role === 'parent' ? 'parent' : 'proche'}, sur invitation de ${by}.</p>
         <p style="margin:0;">Si vous n’êtes pas d’accord, vous pouvez retirer cet accès à tout moment depuis la page Famille.</p>
       `

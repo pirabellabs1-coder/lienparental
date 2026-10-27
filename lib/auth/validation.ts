@@ -15,13 +15,16 @@ export const emailSchema = z
   .max(254, 'Adresse e-mail trop longue.')
   .email('Indiquez une adresse e-mail valide.')
 
-/** Mêmes règles que components/onboarding/PasswordField (PASSWORD_RULES). */
+/**
+ * Mêmes règles que components/onboarding/PasswordField (PASSWORD_RULES) ET que la politique
+ * GoTrue du projet (docs/MISE_EN_SERVICE.md §1.4 : 8 caractères, minuscule, majuscule, chiffre).
+ */
 export const passwordSchema = z
   .string()
   .min(8, '8 caractères minimum.')
   .max(72, '72 caractères maximum.') // limite bcrypt de GoTrue
-  .refine(v => /[A-Z]/.test(v), '1 lettre majuscule minimum.')
-  .refine(v => /[0-9]/.test(v) || /[^A-Za-z0-9]/.test(v), '1 chiffre ou un symbole minimum.')
+  .refine(v => /[a-z]/.test(v) && /[A-Z]/.test(v), '1 lettre minuscule et 1 lettre majuscule minimum.')
+  .refine(v => /[0-9]/.test(v), '1 chiffre minimum.')
 
 export const otpSchema = z.string().regex(/^\d{6}$/, 'Le code contient 6 chiffres.')
 

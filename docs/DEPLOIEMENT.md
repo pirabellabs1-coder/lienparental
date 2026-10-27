@@ -20,7 +20,7 @@ Le détail de chaque service (Stripe, Google, e-mails, IA…) est dans `docs/MIS
 ## 2. Vercel (offre Pro, nécessaire pour la tâche planifiée toutes les 5 min)
 1. Importer le dépôt, framework Next.js, Node ≥ 20.10. `vercel.json` (racine du dépôt) fixe la configuration :
    - `"regions": ["cdg1"]` : les fonctions serveur (pages dynamiques, routes `/api`) s'exécutent à **Paris**. La base est en Irlande (`eu-west-1`) : compter ~15-20 ms par aller-retour fonction → base. Ne pas changer de région sans mettre à jour la politique de confidentialité. Le middleware (Edge) et le cache des fichiers statiques restent servis par le réseau mondial de Vercel.
-   - `crons` : `GET /api/integrations/google/calendar/cron` toutes les 5 min (`*/5 * * * *`), production uniquement.
+   - `crons` : `GET /api/integrations/google/calendar/cron` et `GET /api/cron/notifications` (rappels, e-mails groupés, file des notifications : `docs/NOTIFICATIONS.md`) toutes les 5 min (`*/5 * * * *`), production uniquement.
 2. Variables d'environnement (Production) : reprendre **toutes** celles de `.env.example`, en particulier :
    - Supabase : `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
    - Domaine : `NEXT_PUBLIC_APP_URL` et `NEXT_PUBLIC_SITE_URL` = `https://lienparental.fr`, `WEBAUTHN_RP_ID=lienparental.fr`, `WEBAUTHN_ORIGIN=https://lienparental.fr`
@@ -32,13 +32,22 @@ Le détail de chaque service (Stripe, Google, e-mails, IA…) est dans `docs/MIS
      | Variable | Rôle | Sans elle |
      |---|---|---|
      | `LAWYER_SHARE_SECRET` | secret HMAC des clés d'accès des partages avocat (`app/api/partage`) | repli `APP_ENCRYPTION_KEY`, sinon secret par instance (accès perdus à chaque redémarrage) |
-     | `IP_HASH_SALT` | sel des empreintes d'IP (preuve d'un témoignage, clés du limiteur 0390) | repli `APP_ENCRYPTION_KEY` |
+     | `IP_HASH_SALT` | sel des empreintes d’IP (preuve d’un témoignage, clés du limiteur 0390) et de l’identifiant d’appareil (alerte « nouvel appareil », obligatoire) | repli `APP_ENCRYPTION_KEY` ; aucun des deux : pas d’alerte « nouvel appareil » |
      | `NEXT_PUBLIC_DON_URL` | lien du bouton de `/don` (HelloAsso, Stripe Payment Link…) | « La page de don ouvre très bientôt » |
      | `STRIPE_TAX` | `on` active Stripe Tax au paiement (à activer d'abord dans Stripe) | pas de taxe automatique |
      | `STRIPE_PORTAL_CONFIGURATION` | identifiant `bpc_…` du portail client | configuration par défaut du compte Stripe |
      | `BILLING_GRACE_DAYS` | jours d'avantages conservés après un impayé (0 à 60) | 14 |
 
-   - À ne **pas** saisir (lues nulle part) : `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `OCR_API_KEY`, `VAPID_*`.
+     | `NEXT_PUBLIC_VAPID_PUBLIC_KEY` | clé publique VAPID (Web Push), lue par le navigateur | pas de notification sur appareil (in-app et e-mails inchangés) |
+     | `VAPID_PRIVATE_KEY` | clé privée VAPID, serveur uniquement | idem |
+     | `VAPID_SUBJECT` | contact VAPID, `mailto:contact@lienparental.fr` | idem |
+
+     **Ordre** : appliquer la migration `0440_notifications.sql` AVANT de déployer le code qui l'utilise (routes
+     `/api/cron/notifications`, `/api/push/subscribe`, `/api/auth/login-check`), sinon ces routes échouent
+     (fonctions SQL absentes). `IP_HASH_SALT` est obligatoire pour l'alerte « nouvel appareil ».
+
+     Paire VAPID : `npx web-push generate-vapid-keys`, une seule fois (la changer oblige chaque appareil à réactiver les notifications). Détails : `docs/NOTIFICATIONS.md`.
+   - À ne **pas** saisir (lues nulle part) : `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `OCR_API_KEY`.
 3. Tâche planifiée : rien à faire dans l'interface, elle est déclarée dans `vercel.json`. Vercel envoie **automatiquement** l'en-tête `Authorization: Bearer $CRON_SECRET` dès que `CRON_SECRET` est définie (sans elle, la route répond 503). Offre **Pro** requise pour la fréquence de 5 min (Hobby : une exécution par jour, le déploiement échoue avec une fréquence plus élevée). Contrôle : Settings > Cron Jobs, puis `curl -i -H "Authorization: Bearer $CRON_SECRET" https://lienparental.fr/api/integrations/google/calendar/cron` → 200, sans en-tête → 401.
 
 ## 3. Domaine lienparental.fr

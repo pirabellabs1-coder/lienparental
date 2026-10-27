@@ -1,7 +1,7 @@
 import 'server-only'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { createServiceClient } from '@/lib/supabase/server'
-import type { PaymentStatus, SubscriptionPlan, SubscriptionStatus } from '@/lib/supabase/types'
+import type { PaymentStatus } from '@/lib/supabase/types'
 
 /**
  * Client service_role pour la facturation (bypass RLS : webhooks, routes
@@ -15,19 +15,7 @@ export function billingDb(): SupabaseClient {
   return createServiceClient() as unknown as SupabaseClient
 }
 
-export type SubscriptionRecord = {
-  id: string
-  user_id: string
-  stripe_customer_id: string
-  stripe_subscription_id: string
-  plan: SubscriptionPlan
-  status: SubscriptionStatus
-  current_period_start: string | null
-  current_period_end: string | null
-  cancel_at_period_end: boolean
-  canceled_at: string | null
-  trial_end: string | null
-}
+export type { SubscriptionRecord } from './sync-core'
 
 export const SUBSCRIPTION_COLUMNS =
   'id, user_id, stripe_customer_id, stripe_subscription_id, plan, status, current_period_start, current_period_end, cancel_at_period_end, canceled_at, trial_end'

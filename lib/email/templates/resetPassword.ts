@@ -13,11 +13,11 @@ export type ResetPasswordProps = {
 export const resetPasswordSubject = 'Réinitialisation de votre mot de passe Lien Parental'
 
 export function resetPasswordEmail(props: ResetPasswordProps): { subject: string; html: string } {
-  const prenom = escapeHtml(props.prenom?.trim() || 'bonjour')
+  const prenom = escapeHtml(props.prenom?.trim() || '')
   const url = safeUrl(props.url)
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
     <p style="margin:0 0 16px 0;">
       Vous avez demandé à réinitialiser le mot de passe de votre compte Lien Parental.
       Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe.

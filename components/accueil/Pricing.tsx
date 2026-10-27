@@ -23,9 +23,12 @@ type Plan = {
   featured?: boolean
 }
 
-/** Boutons des formules payantes : vers l'abonnement si une session existe, sinon vers la création de compte. */
+/**
+ * Boutons des formules payantes : /abonner présélectionne la formule dans « Mon abonnement »
+ * (connecté) ou la mémorise pendant la création de compte (non connecté), voir app/abonner/route.ts.
+ */
 function plans(signedIn: boolean): Plan[] {
-  const paid = (formule: 'premium' | 'coparentalite') => (signedIn ? `/app/premium?formule=${formule}` : '/onboarding')
+  const paid = (formule: 'premium' | 'coparentalite') => `/abonner?formule=${formule}&cycle=mensuel`
   return [
     { key: 'gratuit', price: 0, note: 'Pour bien commencer', cta: { label: 'Créer un compte', href: '/onboarding' } },
     {
@@ -33,7 +36,7 @@ function plans(signedIn: boolean): Plan[] {
       price: PRICING.premium.monthly,
       period: '/ mois',
       note: `ou ${formatPrice(PRICING.premium.yearly)} par an, ${PRICING.premium.freeMonthsLabel}`,
-      cta: { label: PREMIUM_TRIAL_DAYS > 0 ? `Essayer ${PREMIUM_TRIAL_DAYS} jours gratuitement` : 'Passer à Premium', href: paid('premium') },
+      cta: { label: PREMIUM_TRIAL_DAYS > 0 ? `Essayer ${PREMIUM_TRIAL_DAYS} jours gratuitement` : signedIn ? 'S’abonner à Premium' : 'Passer à Premium', href: paid('premium') },
       featured: true,
     },
     ...(SHOW_COPARENTALITE_PLUS
@@ -42,7 +45,7 @@ function plans(signedIn: boolean): Plan[] {
           price: PRICING.coparentalite.monthly,
           period: '/ mois',
           note: `ou ${formatPrice(PRICING.coparentalite.yearly)} par an, ${PRICING.coparentalite.freeMonthsLabel}`,
-          cta: { label: 'Choisir cette formule', href: paid('coparentalite') },
+          cta: { label: signedIn ? 'S’abonner à Coparentalité+' : 'Choisir cette formule', href: paid('coparentalite') },
         }]
       : []),
   ]
@@ -61,7 +64,7 @@ export function Pricing({ signedIn = false }: { signedIn?: boolean }) {
     <div id="tarifs" className="scroll-mt-24">
       <div className="mx-auto max-w-[640px] text-center">
         <h2 id="pricing-title" className={H2}>Nos formules simples et transparentes</h2>
-        <p className={cn(LEAD, 'mx-auto mt-3 max-w-[52ch]')}>Gratuit pour commencer. Sans engagement, résiliable à tout moment depuis votre profil.</p>
+        <p className={cn(LEAD, 'mx-auto mt-3 max-w-[52ch]')}>Gratuit pour commencer. Sans engagement, résiliable à tout moment depuis Mon abonnement.</p>
       </div>
       <ul className={cn('mx-auto mt-12 grid max-w-[420px] grid-cols-1 gap-6 md:max-w-none md:items-stretch', PLANS.length === 3 ? 'lg:grid-cols-3' : 'md:grid-cols-2')}>
         {PLANS.map(p => (
@@ -74,7 +77,7 @@ export function Pricing({ signedIn = false }: { signedIn?: boolean }) {
           >
             {p.featured && (
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-leaf-500 px-3 py-1 text-[12px] font-bold text-white">
-                Le plus populaire
+                Le plus choisi
               </span>
             )}
             <h3 className="text-[20px] font-bold text-night-900">{PLAN_NAME[p.key]}</h3>
@@ -90,9 +93,10 @@ export function Pricing({ signedIn = false }: { signedIn?: boolean }) {
                 </li>
               ))}
             </ul>
-            <Link href={p.cta.href} className={cn(p.featured ? BTN_PRIMARY : BTN_OUTLINE, 'mt-8 w-full whitespace-nowrap px-4 text-center')}>
+            {/* <a> et non <Link> : /abonner est une route (redirection + cookie), jamais préchargée. */}
+            <a href={p.cta.href} className={cn(p.featured ? BTN_PRIMARY : BTN_OUTLINE, 'mt-8 w-full whitespace-nowrap px-4 text-center')}>
               {p.cta.label}
-            </Link>
+            </a>
           </li>
         ))}
       </ul>

@@ -18,7 +18,7 @@ export type PaymentFailedProps = {
 export const paymentFailedSubject = 'Échec du paiement de votre abonnement Lien Parental'
 
 export function paymentFailedEmail(props: PaymentFailedProps): { subject: string; html: string } {
-  const prenom = escapeHtml(props.prenom?.trim() || 'bonjour')
+  const prenom = escapeHtml(props.prenom?.trim() || '')
   const montant = escapeHtml(props.montant)
   // Le portail Stripe exige une session authentifiée : le lien mène à l'écran
   // Abonnement, d'où le bouton « Gérer mon moyen de paiement » ouvre le portail.
@@ -33,7 +33,7 @@ export function paymentFailedEmail(props: PaymentFailedProps): { subject: string
     : `<p style="margin:0 0 16px 0;color:${t.colors.alert};font-weight:600;">C'était la dernière tentative : sans régularisation, votre compte repassera à l'offre gratuite. Vos données restent conservées et consultables.</p>`
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
     <p style="margin:0 0 16px 0;">
       Nous n'avons pas pu prélever <strong>${montant}</strong> pour votre abonnement Premium
       (carte expirée, plafond atteint ou refus de la banque, par exemple).
@@ -46,7 +46,7 @@ export function paymentFailedEmail(props: PaymentFailedProps): { subject: string
   return {
     subject: paymentFailedSubject,
     html: baseLayout({
-      preheader: `Le paiement de ${montant} n'a pas abouti.`,
+      preheader: `Le paiement de ${props.montant} n'a pas abouti.`,
       title: 'Votre paiement n’a pas abouti',
       body,
       cta: { label: 'Mettre à jour mon moyen de paiement', href: manageUrl },

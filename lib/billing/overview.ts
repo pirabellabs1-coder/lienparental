@@ -9,6 +9,17 @@ import { getStripe, idOf } from './stripe'
 import { getCustomerId, getSubscription, planOf } from './subscription'
 import type { BillingCard, BillingView, InvoiceItem, InvoicesResponse } from './types'
 
+/** Lien de paiement Stripe d'une facture encore à régler (premier paiement non abouti, échec). */
+function payUrlOf(inv: string | Stripe.Invoice | null | undefined): string | null {
+  if (!inv || typeof inv === 'string' || inv.status !== 'open' || !inv.hosted_invoice_url) return null
+  try {
+    const u = new URL(inv.hosted_invoice_url)
+    return u.protocol === 'https:' && u.hostname.endsWith('stripe.com') ? u.toString() : null
+  } catch {
+    return null
+  }
+}
+
 function cardOf(pm: string | Stripe.PaymentMethod | null | undefined): BillingCard | null {
   if (!pm || typeof pm === 'string') return null
   if (pm.card) return { brand: pm.card.brand, last4: pm.card.last4 }
@@ -32,6 +43,8 @@ export function mockBillingView(plan: PlanId, cycle: Cycle = mockSubscription.cy
     amount: priceForPlan(formule, cycle),
     periodEnd: null,
     cancelAtPeriodEnd: false,
+    trialEnd: null,
+    payUrl: null,
     card: paid ? { brand: mockSubscription.card.brand, last4: mockSubscription.card.last4 } : null,
     pending: null,
     sharedPremium: false,
@@ -55,6 +68,8 @@ export async function getBillingOverview(userId: string): Promise<BillingView> {
     amount: local ? priceForPlan(localOffer.plan, localOffer.cycle) : null,
     periodEnd: local?.current_period_end ?? null,
     cancelAtPeriodEnd: local?.cancel_at_period_end ?? false,
+    trialEnd: local?.trial_end ?? null,
+    payUrl: null,
     card: null,
     pending: null,
     sharedPremium: false,
@@ -63,7 +78,7 @@ export async function getBillingOverview(userId: string): Promise<BillingView> {
 
   try {
     const sub = await getStripe().subscriptions.retrieve(local.stripe_subscription_id, {
-      expand: ['default_payment_method', 'customer.invoice_settings.default_payment_method', 'schedule'],
+      expand: ['default_payment_method', 'customer.invoice_settings.default_payment_method', 'schedule', 'latest_invoice'],
     })
     const price = sub.items.data[0]?.price
     const customer = typeof sub.customer === 'object' && !('deleted' in sub.customer && sub.customer.deleted)
@@ -71,7 +86,7 @@ export async function getBillingOverview(userId: string): Promise<BillingView> {
       : null
     const card = cardOf(sub.default_payment_method) ?? cardOf(customer?.invoice_settings?.default_payment_method)
 
-    const current = offerFromPrice(price)
+    const current = offerFromPrice(price) ?? localOffer
     let pending: Offer | null = null
     const schedule = typeof sub.schedule === 'object' ? sub.schedule : null
     if (schedule && schedule.status === 'active') {
@@ -94,6 +109,8 @@ export async function getBillingOverview(userId: string): Promise<BillingView> {
       amount: typeof price?.unit_amount === 'number' ? price.unit_amount / 100 : base.amount,
       periodEnd: new Date(sub.current_period_end * 1000).toISOString(),
       cancelAtPeriodEnd: sub.cancel_at_period_end,
+      trialEnd: sub.trial_end ? new Date(sub.trial_end * 1000).toISOString() : null,
+      payUrl: payUrlOf(sub.latest_invoice),
       card,
       pending,
     }

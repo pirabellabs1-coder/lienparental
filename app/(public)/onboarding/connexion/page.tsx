@@ -18,6 +18,7 @@ import { createClient } from '@/lib/supabase/client'
 import { authErrorMessage } from '@/lib/auth/errors'
 import { safeNext } from '@/lib/auth/redirect'
 import { emailSchema } from '@/lib/auth/validation'
+import { reportSignIn } from '@/lib/notify/client'
 
 const primaryBtn = 'inline-flex h-12 w-full items-center justify-center rounded-xl bg-leaf-500 font-semibold text-white shadow-[0_8px_20px_-10px_rgba(46,125,50,0.55)] transition-[transform,background-color] hover:bg-leaf-600 active:scale-[0.98] disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2'
 
@@ -61,6 +62,8 @@ function Connexion() {
 
   // --- Supabase ----------------------------------------------------------------
   const finish = async () => {
+    // Session complète (après le code 2FA s'il est exigé) : détection d'un nouvel appareil.
+    await reportSignIn()
     const supabase = createClient()
     const { data: isAdmin } = await supabase.rpc('is_admin')
     router.replace(targetFor(params.get('suite'), isAdmin === true))
@@ -197,7 +200,7 @@ function Connexion() {
   return (
     <OnboardingScreen
       step={5}
-      back="/onboarding"
+      back="/"
       title="Se connecter"
       subtitle={
         <>

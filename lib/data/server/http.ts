@@ -37,3 +37,37 @@ export function sniffMime(head: Uint8Array): 'application/pdf' | 'image/jpeg' | 
   if (b.length >= 12 && b[0] === 0x52 && b[1] === 0x49 && b[2] === 0x46 && b[3] === 0x46 && b[8] === 0x57 && b[9] === 0x45 && b[10] === 0x42 && b[11] === 0x50) return 'image/webp'
   return null
 }
+
+/** Origine attendue de l'application (NEXT_PUBLIC_APP_URL), sinon celle de la requête (développement). */
+function expectedOrigin(req: Request): string | null {
+  const raw = process.env.NEXT_PUBLIC_APP_URL
+  try {
+    if (raw) return new URL(raw).origin
+    return new URL(req.url).origin
+  } catch {
+    return null
+  }
+}
+
+/**
+ * Anti-CSRF : une mutation n'accepte que l'Origin exacte de l'application. Sans en-tête Origin
+ * (rare pour un POST navigateur), on exige Sec-Fetch-Site: same-origin.
+ */
+export function isSameOrigin(req: Request): boolean {
+  const expected = expectedOrigin(req)
+  const origin = req.headers.get('origin')
+  if (origin) return Boolean(expected) && origin === expected
+  return req.headers.get('sec-fetch-site') === 'same-origin'
+}
+
+/**
+ * Garde des POST JSON appelés par l'application (inscription, mot de passe oublié, détection de
+ * connexion, écoulement des notifications) : Content-Type application/json (un formulaire HTML
+ * tiers ne peut pas l'envoyer sans requête préliminaire CORS) ET même origine. null si accepté.
+ */
+export function rejectCrossSiteJson(req: Request): Response | null {
+  const type = (req.headers.get('content-type') ?? '').split(';')[0]!.trim().toLowerCase()
+  if (type !== 'application/json') return jsonError(415, 'unsupported_media_type', 'Requête invalide.')
+  if (!isSameOrigin(req)) return jsonError(403, 'invalid_origin', 'Requête refusée.')
+  return null
+}

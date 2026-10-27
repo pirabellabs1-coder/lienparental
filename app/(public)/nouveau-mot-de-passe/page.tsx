@@ -11,13 +11,15 @@ import { PasswordField, PASSWORD_RULES } from '@/components/onboarding/PasswordF
 import { btn, linkLeaf } from '@/components/onboarding/styles'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
+import { kickNotifications } from '@/lib/notify/client'
 import { authErrorMessage } from '@/lib/auth/errors'
 import { passwordSchema } from '@/lib/auth/validation'
 
 type Phase = 'checking' | 'invalid' | 'mfa' | 'form' | 'done'
 
-// Nouveau mot de passe — atteint via le lien e-mail (/auth/confirm, type=recovery)
-// qui ouvre une session de récupération. Même grammaire visuelle que l'onboarding.
+// Nouveau mot de passe : atteint via le lien e-mail (/auth/confirmer, type=recovery) qui ouvre une
+// session de récupération, ou à l'inscription (?inscription=1) : adresse confirmée par lien ou code,
+// le compte a un mot de passe aléatoire et l'utilisateur choisit le sien ici.
 export default function NouveauMotDePassePage() {
   const router = useRouter()
   const [phase, setPhase] = useState<Phase>(SUPABASE_ENABLED ? 'checking' : 'form')
@@ -28,8 +30,10 @@ export default function NouveauMotDePassePage() {
   const [loading, setLoading] = useState(false)
   const [factorId, setFactorId] = useState<string | null>(null)
   const [code, setCode] = useState('')
+  const [signup, setSignup] = useState(false)
 
   useEffect(() => {
+    setSignup(new URLSearchParams(window.location.search).get('inscription') === '1')
     if (!SUPABASE_ENABLED) return
     ;(async () => {
       const supabase = createClient()
@@ -80,6 +84,7 @@ export default function NouveauMotDePassePage() {
     }
     // Toute autre session (éventuellement compromise) doit se reconnecter.
     await supabase.auth.signOut({ scope: 'others' }).catch(() => undefined)
+    kickNotifications() // alerte « mot de passe modifié »
     setPassword('')
     setConfirm('')
     setLoading(false)
@@ -118,15 +123,15 @@ export default function NouveauMotDePassePage() {
               <ShieldCheck className="h-9 w-9" />
             </span>
           }
-          title="Mot de passe modifié"
-          subtitle={<span role="status">Votre nouveau mot de passe est enregistré.{SUPABASE_ENABLED && ' Les autres appareils ont été déconnectés.'}</span>}
+          title={signup ? 'Mot de passe enregistré' : 'Mot de passe modifié'}
+          subtitle={<span role="status">Votre {signup ? '' : 'nouveau '}mot de passe est enregistré.{SUPABASE_ENABLED && !signup && ' Les autres appareils ont été déconnectés.'}</span>}
           footer={
             <button
               type="button"
               className={cn(btn.primary, 'w-full')}
-              onClick={() => router.push(SUPABASE_ENABLED ? '/app' : '/onboarding/connexion')}
+              onClick={() => router.push(signup ? '/onboarding/profil' : SUPABASE_ENABLED ? '/app' : '/onboarding/connexion')}
             >
-              {SUPABASE_ENABLED ? 'Accéder à mon espace' : 'Retour à la connexion'}
+              {signup ? 'Continuer' : SUPABASE_ENABLED ? 'Accéder à mon espace' : 'Retour à la connexion'}
             </button>
           }
         />
@@ -169,8 +174,10 @@ export default function NouveauMotDePassePage() {
     <main className="flex flex-1 flex-col">
       <OnboardingScreen
         back="/onboarding/connexion"
-        title="Nouveau mot de passe"
-        subtitle="Choisissez un mot de passe que vous n’utilisez nulle part ailleurs."
+        title={signup ? 'Choisissez votre mot de passe' : 'Nouveau mot de passe'}
+        subtitle={signup
+          ? 'Votre adresse est confirmée. Choisissez le mot de passe de votre compte, que vous n’utilisez nulle part ailleurs.'
+          : 'Choisissez un mot de passe que vous n’utilisez nulle part ailleurs.'}
         onSubmit={onSubmit}
         footer={
           <>

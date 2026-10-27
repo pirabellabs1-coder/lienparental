@@ -11,6 +11,7 @@ import { SUMMARY_KEY, profile } from '@/components/profil/data'
 import { cn } from '@/lib/cn'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
+import { kickNotifications } from '@/lib/notify/client'
 import { loadPreferences, saveAccountInfo } from '@/lib/auth/actions'
 import { uploadAvatar, useAccountProfile } from '@/lib/auth/browser'
 import { authErrorMessage } from '@/lib/auth/errors'
@@ -182,6 +183,7 @@ export default function InformationsWizardPage() {
       )
       if (error) { setSaving(false); setSaveError(authErrorMessage(error)); setStep(3); return { ok: false } }
       emailPending = true
+      kickNotifications() // alerte « changement d'adresse demandé » à l'adresse actuelle
     }
     setSaving(false)
     return { ok: true, emailPending }

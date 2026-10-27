@@ -8,8 +8,8 @@ export type NewLoginProps = {
   prenom: string
   /** Nom de l'appareil (ex: "iPhone 14", "MacBook Pro"). */
   appareil: string
-  /** Localisation approximative (ex: "Lyon, France"). */
-  lieu: string
+  /** Localisation approximative (ex: "Lyon, France"). Omise : ligne masquée (aucune géolocalisation tierce). */
+  lieu?: string
   /** Système / navigateur (ex: "Safari sur iOS 17"). */
   systeme: string
   /** Date au format ISO 8601. */
@@ -33,14 +33,14 @@ function formatDateFr(iso: string): string {
 }
 
 export function newLoginEmail(props: NewLoginProps): { subject: string; html: string } {
-  const prenom = escapeHtml(props.prenom?.trim() || 'bonjour')
+  const prenom = escapeHtml(props.prenom?.trim() || '')
   const date = escapeHtml(formatDateFr(props.dateIso))
   const appareil = escapeHtml(props.appareil)
-  const lieu = escapeHtml(props.lieu)
+  const lieu = props.lieu?.trim() ? escapeHtml(props.lieu.trim()) : ''
   const systeme = escapeHtml(props.systeme)
   const notYouUrl = safeUrl(
-    (process.env.NEXT_PUBLIC_APP_URL ?? '') + '/compte/securite',
-    'https://lienparental.fr/compte/securite'
+    (process.env.NEXT_PUBLIC_APP_URL ?? '') + '/app/profil/securite',
+    'https://lienparental.fr/app/profil/securite'
   )
 
   const row = (label: string, value: string) => `
@@ -51,14 +51,14 @@ export function newLoginEmail(props: NewLoginProps): { subject: string; html: st
   `
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
     <p style="margin:0 0 16px 0;">
       Nous avons détecté une nouvelle connexion à votre compte Lien Parental. Si c'était bien vous, aucune action n'est nécessaire.
     </p>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:16px 0;border-top:1px solid ${t.colors.border};border-bottom:1px solid ${t.colors.border};">
       ${row('Appareil', appareil)}
       ${row('Système', systeme)}
-      ${row('Lieu', lieu)}
+      ${lieu ? row('Lieu', lieu) : ''}
       ${row('Date', date)}
     </table>
     <p style="margin:0 0 8px 0;color:${t.colors.alert};font-weight:600;">
@@ -75,7 +75,7 @@ export function newLoginEmail(props: NewLoginProps): { subject: string; html: st
   return {
     subject: newLoginSubject,
     html: baseLayout({
-      preheader: `Nouvelle connexion depuis ${appareil} (${lieu}).`,
+      preheader: props.lieu?.trim() ? `Nouvelle connexion depuis ${props.appareil} (${props.lieu.trim()}).` : `Nouvelle connexion depuis ${props.appareil}.`,
       title: 'Nouvelle connexion détectée',
       body,
     }),

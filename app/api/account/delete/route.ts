@@ -27,6 +27,7 @@ import { deleteAccountSchema, firstIssue } from '@/lib/auth/validation'
 import { verifyPassword } from '@/lib/auth/verify-password'
 import { RATE_LIMIT_MESSAGE } from '@/lib/auth/errors'
 import { softDeleteAccount } from '@/lib/account/deletion'
+import { flushForActor } from '@/lib/notify/jobs'
 
 export const dynamic = 'force-dynamic'
 
@@ -88,6 +89,9 @@ export async function POST(req: NextRequest) {
     entity_id: user.id,
     metadata: { purge_after_days: 30, had_active_subscription: !!sub, stripe_subscription_canceled: stripeCanceled },
   })
+
+  // Alerte « suppression demandée » (déclencheur 0440, envoyée à l'adresse d'origine) livrée tout de suite.
+  await flushForActor(user.id).catch(() => null)
 
   // Efface les cookies de session de ce navigateur (la session est déjà révoquée côté serveur).
   await ctx.supabase.auth.signOut({ scope: 'local' }).catch(() => undefined)

@@ -1,8 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 import { Crown } from 'lucide-react'
+import { PLAN_NAME, type PlanId } from '@/components/profil/pricing'
+import { onBillingChanged } from '@/lib/billing/client'
 import { Logo } from '@/components/brand/Logo'
 import { SearchTrigger } from '@/components/search/SearchTrigger'
 import { LogoutButton } from '@/components/auth/LogoutButton'
@@ -10,8 +13,13 @@ import { cn } from '@/lib/cn'
 import { NAV_MAIN as MAIN, NAV_SECONDARY as SECONDARY, NAV_TOOLS as TOOLS, activeNavHref, type NavItem } from './navItems'
 
 // Navigation tablette et ordinateur (≥ md). Sur téléphone : barre d'onglets du bas + menu complet.
-export function DesktopSidebar() {
+export function DesktopSidebar({ plan = 'gratuit' }: { plan?: PlanId }) {
   const pathname = usePathname()
+  const router = useRouter()
+  // Abonnement modifié dans un autre onglet : la carte (et les droits affichés) se mettent à jour.
+  useEffect(() => onBillingChanged(() => router.refresh()), [router])
+  const paid = plan !== 'gratuit'
+  const onBilling = pathname === '/app/abonnement' || pathname.startsWith('/app/abonnement/')
   const match = activeNavHref(pathname)
   const active = (href: string) => match === href
 
@@ -44,11 +52,19 @@ export function DesktopSidebar() {
           <li><LogoutButton variant="sidebar" /></li>
         </ul>
       </nav>
-      <Link href="/app/premium" className="mt-4 flex shrink-0 items-center gap-3 rounded-2xl bg-gold-50 p-4 ring-1 ring-gold-200/60 transition-colors hover:bg-gold-100/70">
-        <Crown className="h-6 w-6 shrink-0 text-gold-500" strokeWidth={1.7} aria-hidden />
+      {/* Abonné : raccourci « Mon abonnement » ; Gratuit : invitation à passer à Premium. */}
+      <Link
+        href={paid ? '/app/abonnement' : '/app/abonnement?formule=premium'}
+        aria-current={onBilling ? 'page' : undefined}
+        className={cn(
+          'mt-4 flex shrink-0 items-center gap-3 rounded-2xl p-4 ring-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500',
+          paid ? 'bg-night-50 ring-night-100 hover:bg-night-100/70' : 'bg-gold-50 ring-gold-200/60 hover:bg-gold-100/70',
+        )}
+      >
+        <Crown className={cn('h-6 w-6 shrink-0', paid ? 'text-night-900' : 'text-gold-600')} strokeWidth={1.7} aria-hidden />
         <span className="text-[13px] leading-snug">
-          <span className="block font-bold text-night-900">Passer à Premium</span>
-          <span className="text-night-600">10 Go et Coach IA étendu</span>
+          <span className="block font-bold text-night-900">{paid ? 'Mon abonnement' : 'Passer à Premium'}</span>
+          <span className="text-night-700">{paid ? `Formule ${PLAN_NAME[plan]}` : '10 Go et Coach IA étendu'}</span>
         </span>
       </Link>
     </aside>

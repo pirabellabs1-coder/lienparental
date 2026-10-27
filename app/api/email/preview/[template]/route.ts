@@ -12,6 +12,13 @@ import { welcomeEmail } from '@/lib/email/templates/welcome'
 import { subscriptionConfirmedEmail } from '@/lib/email/templates/subscriptionConfirmed'
 import { paymentFailedEmail } from '@/lib/email/templates/paymentFailed'
 import { subscriptionCanceledEmail } from '@/lib/email/templates/subscriptionCanceled'
+import { messageWaitingEmail } from '@/lib/email/templates/messageWaiting'
+import { securityChangeEmail } from '@/lib/email/templates/securityChange'
+import { inviteAcceptedEmail } from '@/lib/email/templates/inviteAccepted'
+import { folderSharedEmail } from '@/lib/email/templates/folderShared'
+import { calendarReminderEmail } from '@/lib/email/templates/calendarReminder'
+import { calendarSharedEmail } from '@/lib/email/templates/calendarShared'
+import { accountExistsEmail } from '@/lib/email/templates/accountExists'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -20,7 +27,7 @@ type Rendered = { subject: string; html: string }
 
 const samples: Record<string, () => Rendered> = {
   verification: () =>
-    verificationEmail({ prenom: 'Camille', code: '482615', expireMinutes: 15 }),
+    verificationEmail({ prenom: 'Camille', code: '482615' }),
   'reset-password': () =>
     resetPasswordEmail({
       prenom: 'Camille',
@@ -84,6 +91,17 @@ const samples: Record<string, () => Rendered> = {
     }),
   'subscription-ended': () =>
     subscriptionCanceledEmail({ prenom: 'Camille', kind: 'ended', endIso: new Date().toISOString() }),
+  'message-waiting': () =>
+    messageWaitingEmail({ prenom: 'Camille', senders: ['Thomas'], count: 3, conversationId: '00000000-0000-0000-0000-000000000001' }),
+  'security-change': () =>
+    securityChangeEmail({ prenom: 'Camille', title: 'Votre mot de passe a été modifié', message: 'Le mot de passe de votre compte Lien Parental vient d’être modifié.', dateIso: new Date().toISOString() }),
+  'invite-accepted': () => inviteAcceptedEmail({ prenom: 'Camille', inviteePrenom: 'Thomas', role: 'parent' }),
+  'folder-shared': () => folderSharedEmail({ prenom: 'Camille', ownerPrenom: 'Thomas', folderId: '00000000-0000-0000-0000-000000000002' }),
+  'calendar-reminder': () =>
+    calendarReminderEmail({ prenom: 'Camille', titre: 'Kermesse de l’école', whenLabel: 'le 12 nov. à 10h', eventId: '00000000-0000-0000-0000-000000000003' }),
+  'account-exists': () => accountExistsEmail({ prenom: 'Camille' }),
+  'calendar-shared': () =>
+    calendarSharedEmail({ prenom: 'Camille', sentence: 'Julie a ajouté « Rendez-vous pédiatre de Lina » le 12 nov. à 10h', action: 'created', eventId: '00000000-0000-0000-0000-000000000003' }),
 }
 
 export async function GET(

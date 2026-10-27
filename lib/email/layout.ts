@@ -2,11 +2,12 @@
 // Styles 100 % inline, tables pour la mise en page, VML pour les boutons Outlook.
 
 import { emailTheme as t } from './theme'
+import { escapeHtml } from './escape'
 
 export type BaseLayoutOptions = {
-  /** Texte masqué affiché en aperçu dans les clients mail (Gmail, Apple Mail…). */
+  /** Texte masqué affiché en aperçu (Gmail, Apple Mail…). TEXTE BRUT : échappé ici. */
   preheader?: string
-  /** Titre affiché en haut du contenu (H1). */
+  /** Titre affiché en haut du contenu (H1). TEXTE BRUT : échappé ici. */
   title: string
   /** Corps HTML déjà rendu (paragraphes, listes…). */
   body: string
@@ -25,8 +26,9 @@ function escapeAttr(s: string): string {
 }
 
 export function baseLayout(opts: BaseLayoutOptions): string {
-  const preheader = opts.preheader ?? ''
-  const title = opts.title
+  // Préheader et titre : texte brut (prénoms, noms saisis par les utilisateurs) → toujours échappés.
+  const preheader = escapeHtml(opts.preheader ?? '')
+  const title = escapeHtml(opts.title)
   const body = opts.body
   const extraFooter = opts.footer ?? ''
 
@@ -42,7 +44,7 @@ export function baseLayout(opts: BaseLayoutOptions): string {
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="color-scheme" content="light dark" />
 <meta name="supported-color-schemes" content="light dark" />
-<title>${escapeAttr(title)}</title>
+<title>${title}</title>
 <!--[if mso]>
 <style type="text/css">
   body, table, td, a { font-family: Arial, sans-serif !important; }

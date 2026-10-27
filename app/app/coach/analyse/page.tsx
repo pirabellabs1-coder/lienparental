@@ -164,9 +164,9 @@ export default function CoachAnalysePage() {
               {failure.message}
             </p>
             {failure.quota ? (
-              <Link href="/app/premium" className={btn.primary}>
+              <Link href="/app/abonnement?formule=premium&raison=coach" className={btn.primary}>
                 <Sparkles className="h-5 w-5" aria-hidden="true" />
-                Découvrir Premium
+                Passer à Premium
               </Link>
             ) : (
               <button type="button" onClick={() => setAttempt((a) => a + 1)} className={btn.primary}>

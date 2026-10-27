@@ -16,6 +16,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
+import { kickNotifications } from '@/lib/notify/client'
 import { saveAttachmentToVault, syncConversationVault } from '@/app/app/messages/actions'
 import { getVaultSettings, listFolders, type SaveOutcome } from '@/lib/data/vault-folders'
 import { listLinkedParents } from '@/lib/coparents/client'
@@ -668,6 +669,7 @@ export async function sendMessage(
     .select(MESSAGE_COLUMNS)
     .single()
   if (error || !data) throw new Error("Le message n'a pas pu être envoyé.")
+  kickNotifications() // « X vous a écrit » livré tout de suite aux autres participants
   return fromRow(data as MessageRow)
 }
 
@@ -909,5 +911,6 @@ export async function acceptInvite(token: string): Promise<string> {
   if (!SUPABASE_ENABLED) return DEMO_CONVERSATION_ID
   const { data, error } = await sb().rpc('accept_coparent_invite', { p_token: token })
   if (error || typeof data !== 'string') throw new Error('Invitation invalide ou expirée.')
+  kickNotifications()
   return data
 }

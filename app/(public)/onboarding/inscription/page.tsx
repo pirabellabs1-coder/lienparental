@@ -12,13 +12,22 @@ import { btn } from '@/components/onboarding/styles'
 import { GoogleButton, OrSeparator } from '@/components/auth/GoogleButton'
 import { readDraft, writeDraft } from '@/components/onboarding/draft'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { createClient } from '@/lib/supabase/client'
-import { authErrorMessage } from '@/lib/auth/errors'
-import { appUrl } from '@/lib/auth/redirect'
 import { emailSchema, nameSchema, passwordSchema } from '@/lib/auth/validation'
+import { setPendingPassword } from '@/lib/auth/pending-password'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-const EMAIL_TAKEN = 'Un compte existe déjà avec cette adresse e-mail. Connectez-vous ou réinitialisez votre mot de passe.'
+
+/** Appel JSON d'une route d'authentification : message d'erreur français ou null. */
+async function postAuth(url: string, body: unknown): Promise<string | null> {
+  try {
+    const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify(body) })
+    if (res.ok) return null
+    const data = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
+    return data?.error?.message ?? 'Service momentanément indisponible. Réessayez dans un instant.'
+  } catch {
+    return 'Connexion impossible. Vérifiez votre réseau puis réessayez.'
+  }
+}
 
 // Étape 6 — Créer votre compte (formule gratuite par défaut, à appliquer côté backend).
 export default function InscriptionPage() {
@@ -46,8 +55,10 @@ export default function InscriptionPage() {
   }
   const valid = !Object.values(errors).some(Boolean)
 
-  // Supabase : création du compte + envoi du code à 6 chiffres (modèle « Confirm signup » avec {{ .Token }}).
-  // Le mot de passe part directement vers Supabase Auth (TLS) et n'est jamais stocké côté navigateur.
+  // Supabase : le serveur crée le compte avec un mot de passe ALÉATOIRE (POST /api/auth/signup) et envoie
+  // le code par NOTRE e-mail. Le mot de passe choisi ne quitte pas le navigateur : gardé en mémoire, il est
+  // posé après vérification du code (anti pré-détournement de compte). Réponse neutre : adresse déjà
+  // inscrite ou non, on passe à l'étape code (le titulaire d'une adresse inscrite est prévenu par e-mail).
   const signUp = async () => {
     const parsed = {
       prenom: nameSchema.safeParse(prenom),
@@ -61,29 +72,16 @@ export default function InscriptionPage() {
     }
     setLoading(true)
     setServerError(null)
-    const { data, error } = await createClient().auth.signUp({
-      email: parsed.email.data,
-      password: parsed.password.data,
-      options: {
-        data: { prenom: parsed.prenom.data, nom: parsed.nom.data },
-        emailRedirectTo: `${appUrl()}/auth/callback?next=/onboarding/profil`,
-      },
-    })
-    if (error) {
+    const err = await postAuth('/api/auth/signup', { email: parsed.email.data })
+    if (err) {
       setLoading(false)
-      setServerError(authErrorMessage(error, 'signup'))
-      return
-    }
-    // Adresse déjà inscrite : GoTrue répond « succès » sans identité (anti-énumération).
-    if (data.user && (data.user.identities?.length ?? 0) === 0) {
-      setLoading(false)
-      setServerError(EMAIL_TAKEN)
+      setServerError(err)
       return
     }
     writeDraft({ prenom: parsed.prenom.data, nom: parsed.nom.data, email: parsed.email.data })
+    setPendingPassword(parsed.email.data, parsed.password.data)
     setPassword('')
-    // Confirmation e-mail désactivée dans Supabase : la session est déjà ouverte.
-    router.push(data.session ? '/onboarding/profil' : '/onboarding/verification')
+    router.push('/onboarding/verification')
   }
 
   const onSubmit = (e: FormEvent) => {
@@ -120,12 +118,6 @@ export default function InscriptionPage() {
           {serverError && (
             <p role="alert" className="text-center text-sm font-semibold text-alert-600">
               {serverError}
-              {serverError === EMAIL_TAKEN && (
-                <>
-                  {' '}
-                  <Link href="/onboarding/connexion" className="underline underline-offset-2">Se connecter</Link>
-                </>
-              )}
             </p>
           )}
           <button type="submit" className={cn(btn.primary, 'w-full')} disabled={loading} aria-busy={loading}>

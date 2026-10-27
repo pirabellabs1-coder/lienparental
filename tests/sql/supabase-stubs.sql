@@ -11,7 +11,8 @@ create schema if not exists extensions;
 create table auth.users(
   id uuid primary key, email text, email_confirmed_at timestamptz,
   raw_app_meta_data jsonb default '{}'::jsonb, raw_user_meta_data jsonb default '{}'::jsonb,
-  created_at timestamptz default now(), last_sign_in_at timestamptz, phone text, deleted_at timestamptz, banned_until timestamptz
+  created_at timestamptz default now(), last_sign_in_at timestamptz, phone text, deleted_at timestamptz, banned_until timestamptz,
+  encrypted_password text, email_change text
 );
 create table auth.mfa_factors(id uuid primary key default gen_random_uuid(), user_id uuid, status text, factor_type text);
 create table auth.sessions(id uuid primary key default gen_random_uuid(), user_id uuid, created_at timestamptz default now(), updated_at timestamptz, user_agent text, ip inet, aal text, not_after timestamptz, refreshed_at timestamp, tag text);

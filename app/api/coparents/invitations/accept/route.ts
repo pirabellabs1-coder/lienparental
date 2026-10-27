@@ -1,6 +1,7 @@
 import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { familyContext, limited, readJson, rpcError } from '@/lib/coparents/server/context'
-import { notifyInvitationAccepted, notifyOwnersNewAdult } from '@/lib/coparents/server/email'
+import { notifyOwnersNewAdult } from '@/lib/coparents/server/email'
+import { flushForActor } from '@/lib/notify/jobs'
 import { acceptSchema } from '@/lib/coparents/validation'
 import type { AcceptResult, GuardianRole } from '@/lib/coparents/types'
 
@@ -29,12 +30,9 @@ export async function POST(req: Request) {
   if (r.inviter_id && r.invitation_id) {
     const { data: me } = await ctx.db.from('users').select('prenom').eq('id', ctx.user.id).maybeSingle()
     const prenom = (me as { prenom?: string } | null)?.prenom ?? ''
-    await notifyInvitationAccepted({
-      inviterId: r.inviter_id,
-      inviteePrenom: prenom,
-      role: r.role ?? 'parent',
-      idempotencyKey: `family-accepted:${r.invitation_id}`,
-    })
+    // « Invitation acceptée » à l'invitant (in-app + push + e-mail) : déposée par le
+    // déclencheur 0440 (trg_notif_family_invite_accepted), livrée ici tout de suite.
+    await flushForActor(ctx.user.id).catch(() => null)
     // M2 : le titulaire de chaque fiche est prévenu de tout nouvel adulte lié.
     await notifyOwnersNewAdult({
       childIds: r.child_ids ?? [],

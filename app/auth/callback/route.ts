@@ -21,6 +21,7 @@ import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient, createServiceClient, type TypedSupabaseClient } from '@/lib/supabase/server'
 import { safeNext } from '@/lib/auth/redirect'
 import { hasRequiredAal } from '@/lib/auth/session'
+import { recordCurrentSignIn } from '@/lib/notify/login'
 
 export const dynamic = 'force-dynamic'
 
@@ -122,6 +123,13 @@ export async function GET(req: NextRequest) {
   const { error } = await supabase.auth.exchangeCodeForSession(code)
   if (error) return fail(motif)
 
-  if (!isGoogle) return NextResponse.redirect(new URL(next, origin))
-  return NextResponse.redirect(new URL(safeNext(await afterGoogle(supabase, next), '/app'), origin))
+  if (!isGoogle) {
+    // Lien e-mail (inscription, changement d'adresse) : session ouverte sur cet appareil.
+    if (await hasRequiredAal(supabase)) await recordCurrentSignIn(supabase, req.headers)
+    return NextResponse.redirect(new URL(next, origin))
+  }
+  const dest = await afterGoogle(supabase, next)
+  // Google sans 2FA (sinon l'étape code de /onboarding/connexion s'en charge) : détection d'un nouvel appareil.
+  if (!dest.startsWith('/onboarding/connexion') && (await hasRequiredAal(supabase))) await recordCurrentSignIn(supabase, req.headers)
+  return NextResponse.redirect(new URL(safeNext(dest, '/app'), origin))
 }

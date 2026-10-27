@@ -29,7 +29,7 @@ function formatDateFr(iso: string): string {
 }
 
 export function invoiceEmail(props: InvoiceProps): { subject: string; html: string } {
-  const prenom = escapeHtml(props.prenom?.trim() || 'bonjour')
+  const prenom = escapeHtml(props.prenom?.trim() || '')
   const dateFin = escapeHtml(formatDateFr(props.nextPeriodEnd))
   const montant = escapeHtml(props.montant)
   const cycle = escapeHtml(props.cycle)
@@ -43,7 +43,7 @@ export function invoiceEmail(props: InvoiceProps): { subject: string; html: stri
   `
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
     <p style="margin:0 0 16px 0;">
       Nous confirmons la réception de votre paiement. Merci pour votre confiance.
     </p>
@@ -65,7 +65,7 @@ export function invoiceEmail(props: InvoiceProps): { subject: string; html: stri
   return {
     subject: invoiceSubject,
     html: baseLayout({
-      preheader: `Reçu Lien Parental : ${montant} (${cycle}).`,
+      preheader: `Reçu Lien Parental : ${props.montant} (${props.cycle}).`,
       title: 'Reçu de paiement',
       body,
       cta: { label: 'Télécharger la facture', href: invoiceUrl },

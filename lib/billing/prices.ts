@@ -37,22 +37,25 @@ export function isOfferConfigured(offer: Offer): boolean {
 type PriceLike = Pick<Stripe.Price, 'id' | 'recurring'> & { metadata?: Stripe.Metadata | null }
 
 /**
- * Formule d'un Price Stripe. Correspondance exacte sur les quatre variables,
- * puis repli (Price remplacé côté Stripe sans mise à jour des variables) :
- * metadata `plan=coparentalite` du Price, sinon Premium ; cycle d'après
- * l'intervalle de récurrence.
+ * Formule d'un Price Stripe. Correspondance exacte sur les quatre variables, puis
+ * repli UNIQUEMENT sur les Prices créés par scripts/stripe-setup.ts (metadata
+ * `plan` = premium | coparentalite ET `lp_lookup_key`), cycle d'après la récurrence.
+ * Tout autre Price est INCONNU : null, jamais d'avantage accordé par défaut.
  */
-export function offerFromPrice(price: PriceLike | null | undefined): Offer {
-  if (!price) return { plan: 'premium', cycle: 'mensuel' }
+export function offerFromPrice(price: PriceLike | null | undefined): Offer | null {
+  if (!price) return null
   for (const plan of ['coparentalite', 'premium'] as const) {
     for (const cycle of ['mensuel', 'annuel'] as const) {
       if (price.id === envPrice(PRICE_ENV[plan][cycle])) return { plan, cycle }
     }
   }
-  return {
-    plan: price.metadata?.plan === 'coparentalite' ? 'coparentalite' : 'premium',
-    cycle: price.recurring?.interval === 'year' ? 'annuel' : 'mensuel',
+  const metaPlan = price.metadata?.plan
+  const interval = price.recurring?.interval
+  if ((metaPlan === 'premium' || metaPlan === 'coparentalite') && price.metadata?.lp_lookup_key && (interval === 'month' || interval === 'year')) {
+    return { plan: metaPlan, cycle: interval === 'year' ? 'annuel' : 'mensuel' }
   }
+  console.error('[billing] Price Stripe inconnu', { price: price.id })
+  return null
 }
 
 /** Formule d'un Price ID seul (phases de subscription schedule). */
@@ -66,10 +69,6 @@ export function offerFromPriceId(id: string | null | undefined): Offer | null {
   return null
 }
 
-/** Cycle d'un Price Stripe (historique). */
-export function cycleFromPrice(price: PriceLike | null | undefined): Cycle {
-  return offerFromPrice(price).cycle
-}
 
 export function planFromOffer(offer: Offer): SubscriptionPlan {
   return subscriptionPlanFor(offer)

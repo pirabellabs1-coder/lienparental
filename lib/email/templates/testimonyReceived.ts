@@ -19,14 +19,14 @@ export type TestimonyReceivedProps = {
 export const testimonyReceivedSubject = 'Un nouveau témoignage est arrivé dans votre coffre'
 
 export function testimonyReceivedEmail(props: TestimonyReceivedProps): { subject: string; html: string } {
-  const prenom = escapeHtml(props.prenom?.trim() || 'bonjour')
+  const prenom = escapeHtml(props.prenom?.trim() || '')
   const temoinNom = escapeHtml(props.temoinNom)
   const titreDemande = escapeHtml(props.titreDemande)
   const reference = escapeHtml(props.reference)
   const urlCoffre = safeUrl(props.urlCoffre)
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
     <p style="margin:0 0 16px 0;">
       Bonne nouvelle : <strong style="color:${t.colors.night};">${temoinNom}</strong> vient de déposer un témoignage dans votre coffre sécurisé.
     </p>
@@ -49,7 +49,7 @@ export function testimonyReceivedEmail(props: TestimonyReceivedProps): { subject
   return {
     subject: testimonyReceivedSubject,
     html: baseLayout({
-      preheader: `${temoinNom} a déposé un témoignage pour « ${titreDemande} ».`,
+      preheader: `${props.temoinNom} a déposé un témoignage pour « ${props.titreDemande} ».`,
       title: 'Nouveau témoignage reçu',
       body,
       cta: { label: 'Consulter dans mon coffre', href: urlCoffre },

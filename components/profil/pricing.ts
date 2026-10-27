@@ -117,7 +117,7 @@ export const PREMIUM_FEATURES = [
   'Calendrier partagé illimité',
   'Export PDF, Word et Canva',
   'Synchronisation multi-appareils',
-  'Support prioritaire',
+  'Assistance traitée avant l’offre Gratuite',
 ] as const
 
 /** Ce que Coparentalité+ ajoute à Premium. */
@@ -152,10 +152,22 @@ export const PLAN_FEATURES: Record<PlanId, readonly string[]> = {
   coparentalite: ['Tout Premium', ...COPARENTALITE_EXTRAS, 'Accès web et application installable (PWA)'],
 }
 
+/**
+ * Niveau d'assistance par formule : SOURCE UNIQUE des libellés, alignée sur la priorité
+ * réellement posée sur les tickets (lib/billing/plans.ts#supportPriorityFor et
+ * public.support_ticket_priority_for, 0380) : Gratuit basse, Premium normale,
+ * Coparentalité+ haute. Seule Coparentalité+ est « prioritaire ».
+ */
+export const SUPPORT_LABEL: Record<PlanId, string> = {
+  gratuit: 'Standard',
+  premium: 'Avant l’offre Gratuite',
+  coparentalite: 'Prioritaire, traitée en premier',
+}
+
 /** Valeur d'une cellule du comparatif : true = inclus, false = non inclus, texte = précision. */
 export type ComparisonValue = boolean | string
 
-/** Comparatif des trois formules (écran /app/premium, changement de formule, page d'accueil). */
+/** Comparatif des trois formules (Mon abonnement /app/abonnement, page d'accueil). */
 export const PLAN_COMPARISON: ReadonlyArray<{ label: string; values: Record<PlanId, ComparisonValue> }> = [
   { label: 'Coach IA', values: { gratuit: '3 analyses / mois', premium: '10 analyses / mois', coparentalite: '10 analyses / mois' } },
   { label: 'Coffre-fort sécurisé', values: { gratuit: `${PRICING.storage.free} Go`, premium: `${PRICING.storage.premium} Go`, coparentalite: `${PRICING.storage.coparentalite} Go` } },
@@ -165,7 +177,7 @@ export const PLAN_COMPARISON: ReadonlyArray<{ label: string; values: Record<Plan
   { label: 'Plusieurs parents (accès partagé)', values: { gratuit: false, premium: false, coparentalite: true } },
   { label: 'Suivi renforcé des dépenses', values: { gratuit: false, premium: false, coparentalite: true } },
   { label: 'Export avancé (avocat, médiateur)', values: { gratuit: false, premium: false, coparentalite: true } },
-  { label: 'Assistance', values: { gratuit: 'Standard', premium: 'Prioritaire', coparentalite: 'Prioritaire, traitée en premier' } },
+  { label: 'Assistance', values: SUPPORT_LABEL },
   { label: 'Accès web et application installable', values: { gratuit: true, premium: true, coparentalite: true } },
 ]
 
@@ -175,7 +187,7 @@ export const PREMIUM_INCLUDED = [
   'Exporter dans tous les formats',
   'Scanner illimité',
   'Coffre-fort sécurisé',
-  'Support prioritaire',
+  'Assistance traitée avant l’offre Gratuite',
 ] as const
 
 /** Libellés du stepper du tunnel d'abonnement. */

@@ -16,6 +16,10 @@ import { getCurrentUser, type CurrentUser } from '@/lib/auth/session'
 import { getEffectivePlan } from '@/lib/billing/entitlements'
 import { BILLING_LIVE } from '@/lib/billing/config'
 import { getBillingOverview } from '@/lib/billing/overview'
+import { describeStatus, type StatusTone } from '@/lib/billing/ui-state'
+
+/** Statut d'abonnement affiché sur le profil : même libellé que « Mon abonnement ». */
+export type ProfileStatus = { label: string; headline: string; tone: StatusTone }
 import { getQuotaStatus } from '@/lib/ai/quota'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { PRICING, type PlanId } from './pricing'
@@ -29,7 +33,7 @@ export type ProfileUsage = {
   storage: StorageUsage | null
   coach: { used: number; quota: number } | null
   /** Abonnement Stripe (facturation réelle uniquement). */
-  subscription: { periodEnd: string | null; cancelAtPeriodEnd: boolean } | null
+  subscription: { periodEnd: string | null; cancelAtPeriodEnd: boolean; status: ProfileStatus } | null
 }
 
 export function storageMaxBytes(plan: PlanId): number {
@@ -75,7 +79,8 @@ async function loadSubscription(user: CurrentUser): Promise<ProfileUsage['subscr
   if (!BILLING_LIVE) return null
   try {
     const v = await getBillingOverview(user.id)
-    return { periodEnd: v.periodEnd, cancelAtPeriodEnd: v.cancelAtPeriodEnd }
+    const s = describeStatus(v)
+    return { periodEnd: v.periodEnd, cancelAtPeriodEnd: v.cancelAtPeriodEnd, status: { label: s.label, headline: s.headline, tone: s.tone } }
   } catch {
     return null
   }

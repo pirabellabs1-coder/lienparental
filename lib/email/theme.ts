@@ -26,7 +26,7 @@ export const emailTheme = {
   brandDomain: 'lienparental.fr',
   supportEmail: 'contact@lienparental.fr',
   addressPlaceholder: 'Lien Parental · lienparental.fr',
-  unsubscribeUrlPlaceholder: 'https://lienparental.fr/app/profil/preferences',
+  unsubscribeUrlPlaceholder: 'https://lienparental.fr/app/profil/preferences/notifications',
   legalUrl: 'https://lienparental.fr/legal/mentions',
 } as const
 

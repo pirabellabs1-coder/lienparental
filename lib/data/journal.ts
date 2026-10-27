@@ -27,6 +27,7 @@ import {
   DOCUMENTS_BUCKET, DataError, LIVE, SIGNED_URL_TTL, db, requireUserId,
   safeFileName, toDataError, useAsyncData, uuid,
 } from './core'
+import { kickNotifications } from '@/lib/notify/client'
 import { addDaysToKey, dayKeyInTz, dayRangeBoundsInTz, shiftMonthKey, timeInTz, wallTimeToIso } from '@/lib/tz'
 
 type Media = { path: string; mime: string; size: number; name?: string }
@@ -434,6 +435,7 @@ export async function createJournal(
       await cleanup()
       throw toDataError(expErr, 'journal.createExpense')
     }
+    kickNotifications() // dépense partagée : l'autre parent est prévenu
   }
   return id
 }
@@ -507,6 +509,7 @@ export async function updateJournal(
       if (justifs.length) await db().storage.from(DOCUMENTS_BUCKET).remove(justifs.map((m) => m.path))
       throw toDataError(expErr, 'journal.updateExpense')
     }
+    kickNotifications()
   } else if (current.type === 'depense') {
     // L'entrée n'est plus une dépense : la ligne liée n'a plus de sens.
     const { error: delErr } = await db().from('journal_expenses').delete().eq('entry_id', id)

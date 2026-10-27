@@ -3,6 +3,7 @@ import type Stripe from 'stripe'
 import type { PaymentStatus } from '@/lib/supabase/types'
 import { billingDb, type PaymentUpsert } from './db'
 import { idOf } from './stripe'
+import { invoiceSubscriptionId } from './events'
 
 /**
  * Reflète une facture Stripe dans public.payments (une ligne par facture).
@@ -17,7 +18,7 @@ export async function recordInvoice(
   if (!invoice.id) return
   const db = billingDb()
 
-  const subscriptionStripeId = idOf(invoice.subscription)
+  const subscriptionStripeId = invoiceSubscriptionId(invoice)
   let subscriptionId: string | null = null
   if (subscriptionStripeId) {
     const { data } = await db

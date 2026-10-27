@@ -8,6 +8,7 @@ import { Banner, Pill, btn } from '@/components/profil/kit'
 import { cn } from '@/lib/cn'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createClient } from '@/lib/supabase/client'
+import { kickNotifications } from '@/lib/notify/client'
 import { authErrorMessage } from '@/lib/auth/errors'
 
 // Supabase : supabase.auth.mfa (TOTP) — enroll → QR + clé, challengeAndVerify, unenroll.
@@ -92,6 +93,7 @@ export default function TwoFactorPage() {
       setSecret('')
       setQr(null)
       setPhase('enabled')
+      kickNotifications() // alerte de sécurité « double authentification activée »
       return
     }
     await new Promise(r => setTimeout(r, 500))
@@ -114,6 +116,7 @@ export default function TwoFactorPage() {
     setFactorId(null)
     setCode('')
     setPhase('intro')
+    kickNotifications()
   }
 
   const enabled = phase === 'enabled'

@@ -17,7 +17,7 @@ export type SubscriptionCanceledProps = {
 }
 
 export function subscriptionCanceledEmail(props: SubscriptionCanceledProps): { subject: string; html: string } {
-  const prenom = escapeHtml(props.prenom?.trim() || 'bonjour')
+  const prenom = escapeHtml(props.prenom?.trim() || '')
   const end = props.endIso ? escapeHtml(formatDateFr(props.endIso)) : ''
   const url = safeUrl(
     `${process.env.NEXT_PUBLIC_APP_URL ?? ''}/app/profil/abonnement`,
@@ -29,7 +29,7 @@ export function subscriptionCanceledEmail(props: SubscriptionCanceledProps): { s
 
   const body = scheduled
     ? `
-      <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+      <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
       <p style="margin:0 0 16px 0;">
         Nous confirmons la résiliation de votre abonnement Premium. Aucun nouveau prélèvement ne sera effectué.
       </p>
@@ -38,7 +38,7 @@ export function subscriptionCanceledEmail(props: SubscriptionCanceledProps): { s
         Vous pouvez annuler cette résiliation à tout moment d'ici là.
       </p>`
     : `
-      <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+      <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
       <p style="margin:0 0 16px 0;">
         Votre abonnement Premium a pris fin${end ? ` le <strong>${end}</strong>` : ''}. Votre compte est repassé à l'offre gratuite.
       </p>
@@ -50,7 +50,7 @@ export function subscriptionCanceledEmail(props: SubscriptionCanceledProps): { s
   return {
     subject,
     html: baseLayout({
-      preheader: scheduled ? `Premium actif jusqu'au ${end || 'terme de la période'}.` : 'Votre compte est repassé à l’offre gratuite.',
+      preheader: scheduled ? `Premium actif jusqu'au ${props.endIso ? formatDateFr(props.endIso) : 'terme de la période'}.` : 'Votre compte est repassé à l’offre gratuite.',
       title: scheduled ? 'Résiliation enregistrée' : 'Abonnement terminé',
       body,
       cta: { label: scheduled ? 'Gérer mon abonnement' : 'Me réabonner', href: url },

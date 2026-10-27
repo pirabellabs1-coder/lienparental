@@ -1,11 +1,11 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
-import { ChevronRight, Download, ExternalLink } from 'lucide-react'
+import { Download, ExternalLink } from 'lucide-react'
 import { EmptyState } from '@/components/ui'
 import { Banner, btn } from '@/components/profil/kit'
 import { formatPrice } from '@/components/profil/pricing'
-import { billingErrorMessage, openBillingPortal } from '@/lib/billing/client'
+import { billingErrorMessage } from '@/lib/billing/client'
 import { formatDateFr, type InvoiceItem, type InvoicesResponse } from '@/lib/billing/types'
 import { cn } from '@/lib/cn'
 
@@ -39,7 +39,6 @@ export function InvoicesList({ live, mock }: { live: boolean; mock: MockInvoice[
   const [hasMore, setHasMore] = useState(false)
   const [state, setState] = useState<'idle' | 'loading' | 'error'>(live ? 'loading' : 'idle')
   const [error, setError] = useState<string | null>(null)
-  const [portalBusy, setPortalBusy] = useState(false)
 
   const load = useCallback(async (after: string | null) => {
     setState('loading')
@@ -67,21 +66,12 @@ export function InvoicesList({ live, mock }: { live: boolean; mock: MockInvoice[
     if (live) void load(null)
   }, [live, load])
 
-  async function portal() {
-    setPortalBusy(true)
-    const res = await openBillingPortal()
-    if (!res.ok) {
-      setPortalBusy(false)
-      setError(res.message)
-    }
-  }
-
   if (!live) {
     return (
       <>
         <table className="w-full text-[12.5px]">
           <caption className="sr-only">Paiements précédents</caption>
-          <thead className="sr-only"><tr><th scope="col">Date</th><th scope="col">Montant</th><th scope="col">Statut</th></tr></thead>
+          <thead className="sr-only"><tr><th scope="col">Date</th><th scope="col">Montant</th><th scope="col">Statut</th><th scope="col">Document</th></tr></thead>
           <tbody className="divide-y divide-night-100">
             {mock.map(inv => (
               <tr key={inv.id}>
@@ -90,11 +80,16 @@ export function InvoicesList({ live, mock }: { live: boolean; mock: MockInvoice[
                 <td className="py-3 text-right">
                   <span className="rounded-md bg-leaf-50 px-2 py-1 text-[11px] font-bold text-leaf-700">{inv.paid ? 'Payé' : 'En attente'}</span>
                 </td>
+                <td className="py-3 pl-2 text-right">
+                  <span className="inline-flex h-11 w-11 items-center justify-center text-night-500" title="PDF disponible avec un vrai paiement">
+                    <Download className="h-4 w-4" aria-hidden /><span className="sr-only">PDF non disponible en démonstration</span>
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <p className="mt-3 text-center text-[11.5px] text-night-600">Démonstration : factures fictives.</p>
+        <p className="mt-3 text-center text-[12px] text-night-700">Démonstration : factures fictives, aucun paiement réel.</p>
       </>
     )
   }
@@ -156,16 +151,6 @@ export function InvoicesList({ live, mock }: { live: boolean; mock: MockInvoice[
         <button type="button" onClick={() => { setError(null); void load(null) }} className={cn(btn.secondary, 'mt-3')}>Réessayer</button>
       )}
 
-      <button
-        type="button"
-        onClick={portal}
-        disabled={portalBusy}
-        aria-busy={portalBusy}
-        className="mt-3 flex min-h-[48px] w-full items-center justify-between rounded-xl2 border border-night-100 bg-white px-4 text-[13px] font-semibold text-night-900 shadow-soft hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 disabled:opacity-60"
-      >
-        {portalBusy ? 'Ouverture du portail sécurisé…' : 'Gérer la facturation sur Stripe'}
-        <ChevronRight className="h-5 w-5" aria-hidden />
-      </button>
     </div>
   )
 }

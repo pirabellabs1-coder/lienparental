@@ -1,25 +1,32 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { ShieldCheck } from 'lucide-react'
 import { Switch } from '@/components/ui'
 import { TitleBar, btn } from '@/components/profil/kit'
+import { PushDeviceCard } from '@/components/profil/PushDeviceCard'
 import { type Prefs } from '@/components/profil/usePrefs'
 import { useSyncedPrefs } from '../_lib/useSyncedPrefs'
 import { cn } from '@/lib/cn'
 
-const HOURS = Array.from({ length: 24 * 2 }, (_, i) => {
-  const h = String(Math.floor(i / 2)).padStart(2, '0')
-  const m = i % 2 ? '30' : '00'
-  return { value: `${h}:${m}`, label: `${h}:${m}` }
-})
-
 type BoolKey = { [K in keyof Prefs]: Prefs[K] extends boolean ? K : never }[keyof Prefs]
 
+// Thèmes : coupent l'appareil et l'e-mail du thème (l'historique in-app reste complet).
 const TOPICS: { key: BoolKey; label: string }[] = [
-  { key: 'onMessages', label: 'Nouveaux messages' },
-  { key: 'onGarde', label: 'Rappels de garde' },
-  { key: 'onCalendrier', label: 'Événements du calendrier' },
-  { key: 'onDocuments', label: 'Partages de documents' },
+  { key: 'onMessages', label: 'Messages' },
+  { key: 'onCalendrier', label: 'Calendrier partagé et rappels' },
+  { key: 'onGarde', label: 'Planning de garde et dépenses partagées' },
+  { key: 'onDocuments', label: 'Dossiers partagés et témoignages' },
+]
+
+// Matrice affichée (lib/notify/events.ts fait foi).
+const MATRIX: { label: string; device: boolean; email: string }[] = [
+  { label: 'Nouveau message', device: true, email: 'Si non lu après 5 min, 1 par 30 min au plus' },
+  { label: 'Événement partagé ajouté, modifié ou annulé', device: true, email: 'Si prévu dans les 14 jours' },
+  { label: 'Rappel avant un événement', device: true, email: 'Oui' },
+  { label: 'Dossier partagé, témoignage reçu', device: true, email: 'Oui' },
+  { label: 'Invitation acceptée', device: true, email: 'Oui' },
+  { label: 'Garde ou dépense modifiée par l’autre parent', device: true, email: 'Non' },
 ]
 
 export default function PreferencesNotificationsPage() {
@@ -39,31 +46,35 @@ export default function PreferencesNotificationsPage() {
       <TitleBar title="Notifications" backHref="/app/profil/preferences" subtitle="Choisissez comment et quand vous souhaitez être notifié." />
       <form onSubmit={submit} className="px-5 pb-8 pt-5">
         <div className="divide-y divide-night-100">
-          <Switch containerClassName="py-3.5" label={bold('Notifications push')} description="Recevez des notifications sur votre appareil." checked={prefs.notifPush} onChange={e => set('notifPush', e.target.checked)} />
-          <div className="py-3.5">
-            <Switch containerClassName="py-0" label={bold('Rappels journaliers')} description="Recevez un rappel chaque jour à l’heure choisie." checked={prefs.rappels} onChange={e => set('rappels', e.target.checked)} />
-            {prefs.rappels && (
-              <div className="mt-3">
-                <label htmlFor="rappel-heure" className="mb-1.5 ml-1 block text-[12px] text-night-800">Heure du rappel</label>
-                <div className="relative">
-                  <select
-                    id="rappel-heure"
-                    value={prefs.rappelHeure}
-                    onChange={e => set('rappelHeure', e.target.value)}
-                    className="min-h-[48px] w-full appearance-none rounded-xl2 border border-night-100 bg-white pl-4 pr-11 text-[14px] font-bold text-night-900 shadow-soft focus-visible:border-leaf-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-100"
-                  >
-                    {HOURS.map(h => <option key={h.value} value={h.value}>{h.label}</option>)}
-                  </select>
-                  <svg aria-hidden viewBox="0 0 24 24" className="pointer-events-none absolute right-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 fill-none stroke-night-900 stroke-2"><path d="m6 9 6 6 6-6" /></svg>
-                </div>
-              </div>
-            )}
+          <div className="pb-3.5">
+            <Switch
+              containerClassName="py-3.5"
+              label={bold('Notifications du navigateur')}
+              description="Alertes sur les appareils où vous les avez activées, même application fermée."
+              checked={prefs.notifPush}
+              onChange={e => set('notifPush', e.target.checked)}
+            />
+            <PushDeviceCard accountPushEnabled={prefs.notifPush} />
           </div>
-          <Switch containerClassName="py-3.5" label={bold('Notifications e-mail')} description="Recevez des notifications par e-mail." checked={prefs.notifEmail} onChange={e => set('notifEmail', e.target.checked)} />
+          <Switch
+            containerClassName="py-3.5"
+            label={bold('Notifications par e-mail')}
+            description="Messages restés non lus, partages, rappels et événements partagés proches."
+            checked={prefs.notifEmail}
+            onChange={e => set('notifEmail', e.target.checked)}
+          />
+          <Switch
+            containerClassName="py-3.5"
+            label={bold('Rappels du calendrier')}
+            description="Un rappel avant vos événements et ceux que l’autre parent partage avec vous."
+            checked={prefs.rappels}
+            onChange={e => set('rappels', e.target.checked)}
+          />
         </div>
 
-        <fieldset className="mt-1">
-          <legend className="mb-3 text-[14px] font-bold text-night-900">À notifier pour</legend>
+        <fieldset className="mt-4">
+          <legend className="mb-1 text-[14px] font-bold text-night-900">À notifier pour</legend>
+          <p className="mb-3 text-[12px] text-night-700">Un thème désactivé ne s’affiche plus que dans l’écran Notifications de l’application.</p>
           <div className="divide-y divide-night-100 rounded-xl2 border border-night-100 bg-white px-4 shadow-soft">
             {TOPICS.map(t => (
               <Switch
@@ -76,6 +87,42 @@ export default function PreferencesNotificationsPage() {
             ))}
           </div>
         </fieldset>
+
+        <div className="mt-6 flex gap-3 rounded-xl2 bg-night-50 p-4">
+          <ShieldCheck aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-leaf-600" />
+          <p className="text-[13px] leading-5 text-night-800">
+            Les alertes de sécurité (connexion depuis un nouvel appareil, mot de passe, adresse e-mail, double authentification,
+            code du coffre-fort, suppression du compte) sont toujours envoyées par e-mail et dans l’application, quels que soient ces réglages.
+          </p>
+        </div>
+
+        <details className="mt-4 rounded-xl2 border border-night-100 bg-white px-4 py-3 shadow-soft">
+          <summary className="cursor-pointer text-[13px] font-bold text-night-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
+            Ce que vous recevez, et où
+          </summary>
+          <div className="mt-3 overflow-x-auto">
+            <table className="w-full text-left text-[12px] text-night-800">
+              <caption className="sr-only">Canaux utilisés pour chaque type de notification</caption>
+              <thead>
+                <tr className="border-b border-night-100 text-night-900">
+                  <th scope="col" className="py-2 pr-2 font-bold">Événement</th>
+                  <th scope="col" className="py-2 pr-2 font-bold">Appareil</th>
+                  <th scope="col" className="py-2 font-bold">E-mail</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-night-100">
+                {MATRIX.map(r => (
+                  <tr key={r.label}>
+                    <th scope="row" className="py-2 pr-2 font-normal">{r.label}</th>
+                    <td className="py-2 pr-2">{r.device ? 'Oui' : 'Non'}</td>
+                    <td className="py-2">{r.email}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="mt-2 text-[12px] text-night-700">Tout apparaît aussi dans l’écran Notifications. Les notifications ne contiennent jamais le texte de vos messages ni le contenu de vos documents.</p>
+          </div>
+        </details>
 
         {error && <p role="alert" className="mt-6 text-sm font-medium text-alert-500">{error}</p>}
 

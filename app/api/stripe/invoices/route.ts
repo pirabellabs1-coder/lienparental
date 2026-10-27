@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { apiError, logError, requireBillingUser } from '@/lib/billing/http'
+import { apiError, limitBilling, logError, requireBillingUser } from '@/lib/billing/http'
 import { listInvoices } from '@/lib/billing/overview'
 
 /**
@@ -14,6 +14,8 @@ export const dynamic = 'force-dynamic'
 export async function GET(req: Request) {
   const auth = await requireBillingUser()
   if ('error' in auth) return apiError(auth.error.status, auth.error.code, auth.error.message)
+  const limited = await limitBilling('invoices', auth.user.id)
+  if (limited) return limited
 
   const params = new URL(req.url).searchParams
   const limitRaw = Number.parseInt(params.get('limit') ?? '12', 10)

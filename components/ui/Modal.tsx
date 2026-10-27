@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useId, useRef, type ReactNode } from 'react'
+import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
@@ -24,28 +24,35 @@ export function Modal({ open, onClose, title, description, children, footer, clo
   const titleId = useId()
   const descId = useId()
 
-  const handleKey = useCallback((e: KeyboardEvent) => {
-    if (!open) return
-    if (e.key === 'Escape') { e.preventDefault(); onClose() }
-    if (e.key === 'Tab' && dialogRef.current) {
-      const focusables = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)
-      if (focusables.length === 0) return
-      const first = focusables[0]
-      const last = focusables[focusables.length - 1]
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
-    }
-  }, [open, onClose])
+  // Dernières valeurs dans des refs : l'effet ne dépend que de `open`, un nouveau rendu
+  // du parent (onClose recréé, état « loading »…) ne vole donc jamais le focus.
+  const onCloseRef = useRef(onClose)
+  const initialFocus = useRef(initialFocusRef)
+  useEffect(() => {
+    onCloseRef.current = onClose
+    initialFocus.current = initialFocusRef
+  })
 
   useEffect(() => {
     if (!open) return
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { e.preventDefault(); onCloseRef.current() }
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE)
+        if (focusables.length === 0) return
+        const first = focusables[0]
+        const last = focusables[focusables.length - 1]
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+      }
+    }
     previousActive.current = document.activeElement as HTMLElement
     document.addEventListener('keydown', handleKey)
     const body = document.body
     const prev = body.style.overflow
     body.style.overflow = 'hidden'
     const t = setTimeout(() => {
-      const target = initialFocusRef?.current ?? dialogRef.current?.querySelector<HTMLElement>(FOCUSABLE) ?? dialogRef.current
+      const target = initialFocus.current?.current ?? dialogRef.current?.querySelector<HTMLElement>(FOCUSABLE) ?? dialogRef.current
       target?.focus()
     }, 10)
     return () => {
@@ -54,7 +61,7 @@ export function Modal({ open, onClose, title, description, children, footer, clo
       body.style.overflow = prev
       previousActive.current?.focus()
     }
-  }, [open, handleKey, initialFocusRef])
+  }, [open])
 
   if (!open) return null
 

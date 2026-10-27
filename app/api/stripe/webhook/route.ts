@@ -1,14 +1,17 @@
+import { revalidatePath } from 'next/cache'
 import { after, NextResponse } from 'next/server'
 import type Stripe from 'stripe'
 import { BILLING_LIVE } from '@/lib/billing/config'
+import { isHandledStripeEvent } from '@/lib/billing/events'
 import { getStripe } from '@/lib/billing/stripe'
 import { claimEvent, handleStripeEvent, markProcessed, releaseClaim } from '@/lib/billing/webhook'
 
 /**
  * POST /api/stripe/webhook — synchronisation des abonnements depuis Stripe.
  *
- * Événements traités : checkout.session.completed, customer.subscription.created|updated|deleted,
- * invoice.paid, invoice.payment_failed (les autres sont acquittés et ignorés).
+ * Événements traités : HANDLED_STRIPE_EVENTS (lib/billing/events.ts) = checkout.session.completed,
+ * customer.subscription.created|updated|deleted, invoice.paid, invoice.payment_failed
+ * (les autres sont acquittés et ignorés). scripts/stripe-setup.ts abonne l'endpoint à cette liste.
  * - Signature vérifiée sur le corps brut (STRIPE_WEBHOOK_SECRET).
  * - Idempotent : table stripe_events (Stripe livre au moins une fois, parfois en double).
  * - Réponse 200 dès l'état synchronisé ; les e-mails partent après la réponse (after()).
@@ -49,6 +52,8 @@ export async function POST(req: Request) {
   try {
     const deferred = await handleStripeEvent(event)
     await markProcessed(event.id)
+    // Droits recalculés (layout /app, profil, quotas) au prochain rendu.
+    if (isHandledStripeEvent(event.type)) revalidatePath('/app', 'layout')
     if (deferred.length > 0) {
       after(async () => {
         for (const task of deferred) {

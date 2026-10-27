@@ -9,6 +9,7 @@ import { z } from 'zod'
 import { defaultGardeConfig, normalizeZone, ZONE_OPTIONS, type GardeConfig, type ZoneScolaire } from '@/lib/garde'
 import { loadGardeConfig as loadLocal, saveGardeConfig as saveLocal } from '@/components/garde/store'
 import { DataError, LIVE, db, requireUserId, toDataError } from './core'
+import { kickNotifications } from '@/lib/notify/client'
 
 const parent = z.enum(['moi', 'autre'])
 const zones = ZONE_OPTIONS.map((o) => o.value) as [ZoneScolaire, ...ZoneScolaire[]]
@@ -54,4 +55,5 @@ export async function storeGardeConfig(config: GardeConfig): Promise<void> {
   const userId = await requireUserId()
   const { error } = await db().from('garde_configs').upsert({ user_id: userId, config: p.data, version: 1 }, { onConflict: 'user_id' })
   if (error) throw toDataError(error, 'garde.save')
+  kickNotifications()
 }

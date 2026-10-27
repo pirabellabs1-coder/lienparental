@@ -22,6 +22,7 @@ import { PLAN_NAME, type PlanId } from '@/components/profil/pricing'
 import { formatBytes } from '@/components/profil/storage'
 import { signOutAndRedirect, useAccountProfile } from '@/lib/auth/browser'
 import { useUnreadNotificationsCount } from '@/lib/data/notifications'
+import { TONE_BADGE, type StatusTone } from '@/lib/billing/ui-state'
 
 export type ProfilViewProps = {
   /** true : compte réel (valeurs lues côté serveur) ; false : démonstration. */
@@ -32,12 +33,14 @@ export type ProfilViewProps = {
   coach: { used: number; quota: number } | null
   /** Libellé de date de l'abonnement, ou null si inconnu (accès famille, facturation non branchée). */
   subscriptionDate: { label: string; date: string } | null
+  /** Statut (libellé et phrase) issu de describeStatus, comme sur « Mon abonnement ». */
+  status?: { label: string; headline: string; tone: StatusTone } | null
 }
 
-export function ProfilView({ live, plan, storage, coach, subscriptionDate }: ProfilViewProps) {
+export function ProfilView({ live, plan, storage, coach, subscriptionDate, status }: ProfilViewProps) {
   const isPremium = plan !== 'gratuit'
   const planName = PLAN_NAME[plan]
-  const abonnementHref = live ? '/app/profil/abonnement' : `/app/profil/abonnement?plan=${plan}`
+  const abonnementHref = '/app/abonnement'
   const unread = useUnreadNotificationsCount()
   const [logoutOpen, setLogoutOpen] = useState(false)
   const [loggingOut, setLoggingOut] = useState(false)
@@ -82,9 +85,13 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate }: Pro
               <span className="min-w-0 flex-1">
                 <span className="flex items-center justify-between gap-2">
                   <span className="text-[15px] font-bold text-night-900">Lien Parental {planName}</span>
-                  <Pill tone="gold">Actif</Pill>
+                  {status ? (
+                    <span className={cn('inline-flex items-center rounded-md border px-2 py-0.5 text-[11.5px] font-bold', TONE_BADGE[status.tone])}>{status.label}</span>
+                  ) : (
+                    <Pill tone="leafSoft">Actif</Pill>
+                  )}
                 </span>
-                <span className="mt-1 block text-[12.5px] text-night-800">Votre abonnement est actif.</span>
+                <span className="mt-1 block text-[12.5px] text-night-800">{status ? status.headline : 'Votre abonnement est actif.'}</span>
                 <span className="mt-2.5 flex items-center justify-between gap-2 text-[12.5px] text-night-800">
                   {subscriptionDate ? (
                     <span className="inline-flex items-center gap-2">
@@ -109,13 +116,12 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate }: Pro
                 <p className="mt-1 text-[12.5px] leading-relaxed text-night-800">
                   Accédez aux fonctionnalités de base.
                   <br />
-                  <Link href="/app/premium" className="font-semibold text-leaf-600 underline underline-offset-2">Passer à Premium</Link>{' '}
-                  pour plus d’avantages.
+                  Passez à Premium pour plus d’espace et toutes les fonctionnalités.
                 </p>
               </div>
             </div>
-            <Link href="/app/premium" className={cn(btn.primary, "relative mt-4 text-[14px]")}>
-              Découvrir Premium
+            <Link href="/app/abonnement?formule=premium" className={cn(btn.primary, "relative mt-4 text-[14px]")}>
+              Voir les formules
               <ChevronRight className="absolute right-4 h-5 w-5" aria-hidden />
             </Link>
           </section>
@@ -135,13 +141,10 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate }: Pro
           <ListGroup>
             {isPremium ? (
               <>
-                <ListRow href={abonnementHref} icon={<CrownIcon className="h-6 w-7" />} title="Gérer mon abonnement" subtitle="Voir, modifier ou annuler votre abonnement" />
-                {plan === 'premium' && (
-                  <ListRow href="/app/premium?formule=coparentalite" icon={<CrownIcon variant="outline" className="h-6 w-7 text-night-900" />} title="Découvrir Coparentalité+" subtitle="Les parents liés profitent aussi de Premium" />
-                )}
+                <ListRow href={abonnementHref} icon={<CrownIcon className="h-6 w-7" />} title="Mon abonnement" subtitle="Formule, paiement, factures, changement ou résiliation" />
               </>
             ) : (
-              <ListRow href="/app/premium" icon={<CrownIcon variant="outline" className="h-6 w-7 text-night-900" />} title="Passer à Premium" subtitle="Débloquez toutes les fonctionnalités" />
+              <ListRow href="/app/abonnement" icon={<CrownIcon variant="outline" className="h-6 w-7 text-night-900" />} title="Mon abonnement" subtitle="Offre Gratuite : voir les formules et s’abonner" />
             )}
           </ListGroup>
         </section>

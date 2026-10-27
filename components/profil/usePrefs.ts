@@ -33,7 +33,7 @@ export const DEFAULT_PREFS: Prefs = {
   onMessages: true,
   onGarde: true,
   onCalendrier: true,
-  onDocuments: false,
+  onDocuments: true,
   theme: 'clair',
   couleur: 'leaf',
   taille: 'moyenne',

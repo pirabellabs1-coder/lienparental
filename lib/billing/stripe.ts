@@ -1,11 +1,12 @@
 import 'server-only'
 import Stripe from 'stripe'
+import { STRIPE_API_VERSION } from './events'
 
 let _stripe: Stripe | null = null
 
 /**
- * Client Stripe unique par process. Version d'API = celle épinglée par le SDK
- * installé (pas de cast forcé). Timeout court + 2 retries réseau automatiques
+ * Client Stripe unique par process. Version d'API épinglée explicitement
+ * (STRIPE_API_VERSION = celle du SDK installé, identique à l'endpoint webhook). Timeout court + 2 retries réseau automatiques
  * (le SDK ajoute lui-même une Idempotency-Key aux retries des POST).
  */
 export function getStripe(): Stripe {
@@ -13,6 +14,7 @@ export function getStripe(): Stripe {
   if (!key) throw new Error('STRIPE_SECRET_KEY missing')
   if (!_stripe) {
     _stripe = new Stripe(key, {
+      apiVersion: STRIPE_API_VERSION,
       maxNetworkRetries: 2,
       timeout: 10_000,
       appInfo: { name: 'lien-parental' },

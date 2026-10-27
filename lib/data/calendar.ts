@@ -18,6 +18,7 @@ import { EVENTS, FAMILY_DEMO_EVENTS, eveReminderAt, getEventById, type CalendarE
 import { wallTimeToIso } from '@/lib/tz'
 import { DataError, LIVE, db, requireUserId, toDataError, useAsyncData, uuid } from './core'
 import { pushCalendarSync } from '@/lib/integrations/google/client'
+import { kickNotifications } from '@/lib/notify/client'
 import { familyAuthorNames, sharedByLabel } from './family'
 
 type DbType =
@@ -192,6 +193,7 @@ export async function createEvent(input: EventInput): Promise<string | null> {
   const { error } = await db().from('calendar_events').insert({ ...row, id, user_id: userId, ics_uid: `${id}@lienparental.fr` })
   if (error) throw toDataError(error, 'calendar.create')
   pushCalendarSync(id, 'upsert') // Google Agenda (chantier G), sans effet si non relié
+  kickNotifications() // événement partagé : l'autre parent est prévenu tout de suite
   return id
 }
 
@@ -207,6 +209,7 @@ export async function updateEvent(id: string, input: EventInput): Promise<void> 
   if (error) throw toDataError(error, 'calendar.update')
   if (!data || data.length === 0) throw new DataError(NOT_AUTHOR, 'not_author')
   pushCalendarSync(id, 'upsert')
+  kickNotifications()
 }
 
 export async function removeEvent(id: string): Promise<void> {
@@ -220,6 +223,7 @@ export async function removeEvent(id: string): Promise<void> {
   if (error) throw toDataError(error, 'calendar.remove')
   if (!data || data.length === 0) throw new DataError(NOT_AUTHOR, 'not_author')
   pushCalendarSync(id, 'delete')
+  kickNotifications()
 }
 
 // --- Hooks ------------------------------------------------------------------

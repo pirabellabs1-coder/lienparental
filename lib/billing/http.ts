@@ -1,8 +1,10 @@
 import 'server-only'
 import { NextResponse } from 'next/server'
 import { getCurrentUser } from '@/lib/auth/session'
+import { rateLimit, rateLimitedResponse, userKey } from '@/lib/data/server/rate-limit'
 import { appOrigin, BILLING_LIVE } from './config'
-import { isUuid } from './subscription'
+import { BILLING_RATE_LIMITS, type BillingRateAction } from './limits'
+import { isUuid } from './sync-core'
 import type { ApiError } from './types'
 
 /** Réponse d'erreur à enveloppe stable. Jamais de détail interne (message Stripe, SQL…). */
@@ -21,12 +23,7 @@ export function logError(scope: string, err: unknown): void {
   console.error(`[billing] ${scope}`, { type: e?.type, code: e?.code, message: e?.message })
 }
 
-/** Anti-CSRF : les mutations n'acceptent que l'Origin exacte de l'app. */
-export function isSameOrigin(req: Request): boolean {
-  const expected = appOrigin()
-  const origin = req.headers.get('origin')
-  return Boolean(expected && origin && origin === expected)
-}
+export { isSameOrigin } from '@/lib/data/server/http'
 
 /** Appelant fetch (JSON) vs formulaire HTML classique (redirection 303). */
 export function wantsJson(req: Request): boolean {
@@ -84,4 +81,19 @@ export function seeOther(url: string): NextResponse {
   const origin = appOrigin()
   const target = url.startsWith('/') && origin ? `${origin}${url}` : url
   return NextResponse.redirect(target, { status: 303 })
+}
+
+const FAIL_CLOSED = new Set<BillingRateAction>(['checkout', 'change-plan', 'cancel', 'portal'])
+
+/**
+ * Limite de débit par utilisateur (BILLING_RATE_LIMITS). Retourne la réponse de
+ * refus (429 / 503) ou null si la requête peut continuer.
+ */
+export async function limitBilling(action: BillingRateAction, userId: string): Promise<NextResponse | null> {
+  const { limit, windowMs } = BILLING_RATE_LIMITS[action]
+  // Mutations (paiement, changement, résiliation, portail) : refus 503 si le limiteur
+  // partagé est indisponible plutôt qu'un repli mémoire par instance.
+  const rl = await rateLimit(userKey(`billing:${action}`, userId), limit, windowMs, { failClosed: FAIL_CLOSED.has(action) })
+  if (rl.ok) return null
+  return rateLimitedResponse(rl, 'Trop de demandes. Patientez un instant puis réessayez.')
 }

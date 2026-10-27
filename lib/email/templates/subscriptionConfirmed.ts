@@ -20,7 +20,7 @@ export type SubscriptionConfirmedProps = {
 export const subscriptionConfirmedSubject = 'Votre abonnement Premium est actif'
 
 export function subscriptionConfirmedEmail(props: SubscriptionConfirmedProps): { subject: string; html: string } {
-  const prenom = escapeHtml(props.prenom?.trim() || 'bonjour')
+  const prenom = escapeHtml(props.prenom?.trim() || '')
   const formule = escapeHtml(props.formule)
   const montant = escapeHtml(props.montant)
   const next = escapeHtml(formatDateFr(props.nextPaymentIso))
@@ -35,7 +35,7 @@ export function subscriptionConfirmedEmail(props: SubscriptionConfirmedProps): {
   `
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
     <p style="margin:0 0 16px 0;">
       Merci pour votre confiance : votre abonnement <strong>${formule}</strong> est actif.
       ${props.formule.startsWith('Coparentalité+')
@@ -56,7 +56,7 @@ export function subscriptionConfirmedEmail(props: SubscriptionConfirmedProps): {
   return {
     subject: props.formule.startsWith('Coparentalité+') ? 'Votre abonnement Coparentalité+ est actif' : subscriptionConfirmedSubject,
     html: baseLayout({
-      preheader: `${formule}, prochain prélèvement le ${next}.`,
+      preheader: `${props.formule}, prochain prélèvement le ${formatDateFr(props.nextPaymentIso)}.`,
       title: 'Abonnement confirmé',
       body,
       cta: { label: 'Gérer mon abonnement', href: appUrl },

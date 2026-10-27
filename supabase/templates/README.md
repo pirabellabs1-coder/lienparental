@@ -13,4 +13,4 @@ Générés par `npx --yes tsx scripts/gen-supabase-emails.ts` à partir de `lib/
 | Invite user | `invite.html` | Vous êtes invité(e) sur Lien Parental |
 | Reauthentication | `reauthentication.html` | Votre code de sécurité Lien Parental |
 
-Prérequis : Auth > URL Configuration contient `https://lienparental.fr/auth/confirm` dans les Redirect URLs, et « Email OTP Expiration » vaut 900 s (15 min).
+Prérequis : Auth > URL Configuration contient `https://lienparental.fr/auth/confirm` dans les Redirect URLs, et « Email OTP Expiration » vaut 3600 s (1 heure, valeur par défaut) : le code d'inscription et le lien de réinitialisation partagent ce réglage.

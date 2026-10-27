@@ -9,8 +9,8 @@ type Rule = { label: string; test: (v: string) => boolean }
 
 export const PASSWORD_RULES: Rule[] = [
   { label: '8 caractères minimum', test: (v) => v.length >= 8 },
-  { label: '1 lettre majuscule', test: (v) => /[A-Z]/.test(v) },
-  { label: '1 chiffre ou un symbole', test: (v) => /[0-9]/.test(v) || /[^A-Za-z0-9]/.test(v) },
+  { label: '1 minuscule et 1 majuscule', test: (v) => /[a-z]/.test(v) && /[A-Z]/.test(v) },
+  { label: '1 chiffre', test: (v) => /[0-9]/.test(v) },
 ]
 
 export function passwordStrength(value: string): 0 | 1 | 2 | 3 {

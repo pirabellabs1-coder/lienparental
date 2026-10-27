@@ -21,6 +21,7 @@ import { VAULT_DOCS } from '@/lib/mock-vault'
 import { DEMO_ME, DEMO_OTHER } from '@/components/messages/seed'
 import { DataError, LIVE, db, requireUserId, toDataError } from './core'
 import { familyAuthorNames, sharedByLabel } from './family'
+import { kickNotifications } from '@/lib/notify/client'
 import type { VaultDocumentRecord } from './vault'
 
 // --- Types ------------------------------------------------------------------
@@ -314,6 +315,7 @@ export async function shareFolder(folderId: string, grantee: { userId: string; p
     throw folderError(error, 'vault.shareFolder')
   }
   const r = data as ShareRow
+  kickNotifications()
   return { id: r.id, folderId: r.folder_id, granteeId: r.grantee_id, granteePrenom: grantee.prenom, createdAt: r.created_at }
 }
 

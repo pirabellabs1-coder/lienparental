@@ -12,11 +12,11 @@ export type WelcomeProps = {
 export const welcomeSubject = 'Bienvenue sur Lien Parental'
 
 export function welcomeEmail(props: WelcomeProps): { subject: string; html: string } {
-  const prenom = escapeHtml(props.prenom?.trim() || 'bonjour')
+  const prenom = escapeHtml(props.prenom?.trim() || '')
   const url = safeUrl(props.url ?? `${process.env.NEXT_PUBLIC_APP_URL ?? ''}/app`, 'https://lienparental.fr/app')
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
     <p style="margin:0 0 16px 0;">
       Votre compte Lien Parental est prêt. Vous pouvez dès maintenant tenir votre journal, organiser le calendrier
       de garde et ranger vos documents importants dans votre coffre-fort.

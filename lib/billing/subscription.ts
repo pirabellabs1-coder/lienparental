@@ -1,47 +1,30 @@
 import 'server-only'
 import type Stripe from 'stripe'
 import type { SubscriptionStatus } from '@/lib/supabase/types'
-import { BILLING_GRACE_DAYS, BILLING_LIVE } from './config'
+import { BILLING_LIVE } from './config'
 import { billingDb, SUBSCRIPTION_COLUMNS, type SubscriptionRecord } from './db'
 import type { PlanId } from '@/components/profil/pricing'
 import { dbTierFor } from './plans'
-import { offerFromPlan, offerFromPrice, planFromOffer } from './prices'
+import { offerFromPrice, planFromOffer } from './prices'
 import { getStripe, idOf } from './stripe'
+import {
+  applySubscriptionSnapshot,
+  isBlockingStatus,
+  isUuid,
+  planOf,
+  resolveUserIdWith,
+  type BillingStore,
+  type SubscriptionSnapshot,
+  type UpsertResult,
+} from './sync-core'
+
+export { isBlockingStatus, isPremium, isUuid, planOf, type UpsertResult } from './sync-core'
 
 /** Niveau propre d'un utilisateur : 'gratuit' | 'premium' | 'coparentalite'. */
 export type UserPlan = PlanId
 
-const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-export const isUuid = (v: unknown): v is string => typeof v === 'string' && UUID_RE.test(v)
-
-/** Statuts pour lesquels un abonnement « existe encore » (on n'en crée pas un second). */
-const BLOCKING_STATUSES: readonly SubscriptionStatus[] = ['active', 'trialing', 'past_due', 'unpaid', 'paused']
-export function isBlockingStatus(status: SubscriptionStatus): boolean {
-  return BLOCKING_STATUSES.includes(status)
-}
-
 const toIso = (unix: number | null | undefined): string | null =>
   typeof unix === 'number' && unix > 0 ? new Date(unix * 1000).toISOString() : null
-
-/**
- * Règle d'accès Premium (CDC §6.1) :
- *  - active / trialing → Premium ;
- *  - past_due → Premium pendant BILLING_GRACE_DAYS après le début de la période
- *    impayée (Stripe relance la carte pendant ce temps) ;
- *  - tout le reste (unpaid, canceled, incomplete…) → Gratuit (lecture seule au-delà du quota gratuit).
- */
-export function isPremium(
-  sub: Pick<SubscriptionRecord, 'status' | 'current_period_start'> | null,
-  now: Date = new Date(),
-): boolean {
-  if (!sub) return false
-  if (sub.status === 'active' || sub.status === 'trialing') return true
-  if (sub.status === 'past_due') {
-    const start = sub.current_period_start ? Date.parse(sub.current_period_start) : now.getTime()
-    return now.getTime() < start + BILLING_GRACE_DAYS * 86_400_000
-  }
-  return false
-}
 
 /** Abonnement local (reflet Stripe) d'un utilisateur, ou null. */
 export async function getSubscription(userId: string): Promise<SubscriptionRecord | null> {
@@ -55,11 +38,6 @@ export async function getSubscription(userId: string): Promise<SubscriptionRecor
   return (data as SubscriptionRecord | null) ?? null
 }
 
-/** Niveau ouvert par un abonnement local (règle d'accès isPremium + formule souscrite). */
-export function planOf(sub: Pick<SubscriptionRecord, 'status' | 'current_period_start' | 'plan'> | null, now: Date = new Date()): UserPlan {
-  return sub && isPremium(sub, now) ? offerFromPlan(sub.plan).plan : 'gratuit'
-}
-
 /**
  * Niveau propre d'un utilisateur (son abonnement), hors accès partagé.
  * Pour les droits, utiliser getEffectivePlan (lib/billing/entitlements.ts).
@@ -67,6 +45,44 @@ export function planOf(sub: Pick<SubscriptionRecord, 'status' | 'current_period_
  */
 export async function getUserPlan(userId: string): Promise<UserPlan> {
   return planOf(await getSubscription(userId))
+}
+
+// --- Stockage Supabase (service_role) ---------------------------------------
+
+const supabaseStore: BillingStore = {
+  async userIdForCustomer(customerId) {
+    const { data, error } = await billingDb()
+      .from('billing_customers')
+      .select('user_id')
+      .eq('stripe_customer_id', customerId)
+      .maybeSingle()
+    if (error) throw new Error(`billing_customers read failed: ${error.code ?? 'unknown'}`)
+    return (data as { user_id: string } | null)?.user_id ?? null
+  },
+  async getByUser(userId) {
+    const { data, error } = await billingDb()
+      .from('subscriptions')
+      .select(SUBSCRIPTION_COLUMNS)
+      .eq('user_id', userId)
+      .maybeSingle()
+    if (error) throw new Error(`subscriptions read failed: ${error.code ?? 'unknown'}`)
+    return (data as SubscriptionRecord | null) ?? null
+  },
+  async apply(row, tier, observedAt) {
+    const { data, error } = await billingDb().rpc('billing_apply_subscription', { p_row: row, p_tier: tier, p_observed_at: observedAt })
+    if (error) throw new Error(`billing_apply_subscription failed: ${error.code ?? 'unknown'}`)
+    const res = data as { outcome: string; record?: SubscriptionRecord; previous?: SubscriptionRecord | null }
+    if (res.outcome === 'ok' && res.record) return { outcome: 'ok', record: res.record, previous: res.previous ?? null }
+    if (res.outcome === 'outdated' || res.outcome === 'stale' || res.outcome === 'unknown_user') return { outcome: res.outcome }
+    throw new Error('billing_apply_subscription: réponse inattendue')
+  },
+  async linkCustomer(userId, customerId) {
+    const { error } = await billingDb()
+      .from('billing_customers')
+      .upsert({ user_id: userId, stripe_customer_id: customerId }, { onConflict: 'user_id', ignoreDuplicates: true })
+    // 23505 : ce customer est déjà lié (à ce user ou, anomalie, à un autre) : on n'écrase rien.
+    if (error && error.code !== '23505') throw new Error(`billing_customers write failed: ${error.code ?? 'unknown'}`)
+  },
 }
 
 // --- Customers -----------------------------------------------------------
@@ -80,25 +96,6 @@ export async function getCustomerId(userId: string): Promise<string | null> {
     .maybeSingle()
   if (error) throw new Error(`billing_customers read failed: ${error.code ?? 'unknown'}`)
   return (data as { stripe_customer_id: string } | null)?.stripe_customer_id ?? null
-}
-
-async function userIdForCustomer(customerId: string): Promise<string | null> {
-  const { data, error } = await billingDb()
-    .from('billing_customers')
-    .select('user_id')
-    .eq('stripe_customer_id', customerId)
-    .maybeSingle()
-  if (error) throw new Error(`billing_customers read failed: ${error.code ?? 'unknown'}`)
-  return (data as { user_id: string } | null)?.user_id ?? null
-}
-
-/** Enregistre le lien user ↔ customer (premier arrivé gagne, jamais d'écrasement). */
-async function linkCustomer(userId: string, customerId: string): Promise<void> {
-  const { error } = await billingDb()
-    .from('billing_customers')
-    .upsert({ user_id: userId, stripe_customer_id: customerId }, { onConflict: 'user_id', ignoreDuplicates: true })
-  // 23505 : ce customer est déjà lié (à ce user ou, anomalie, à un autre) — on n'écrase rien.
-  if (error && error.code !== '23505') throw new Error(`billing_customers write failed: ${error.code ?? 'unknown'}`)
 }
 
 /**
@@ -120,102 +117,121 @@ export async function getOrCreateCustomer(user: { id: string; email: string; pre
     },
     { idempotencyKey: `customer-create-${user.id}` },
   )
-  await linkCustomer(user.id, customer.id)
+  await supabaseStore.linkCustomer(user.id, customer.id)
   // Relecture : en cas de course, c'est la ligne en base qui fait foi.
   return (await getCustomerId(user.id)) ?? customer.id
 }
 
 // --- Synchronisation depuis Stripe ----------------------------------------
 
-export type UpsertResult =
-  | { ok: true; userId: string; record: SubscriptionRecord; previous: SubscriptionRecord | null }
-  | { ok: false; reason: 'unknown_user' | 'stale' }
-
 /** Résout l'utilisateur applicatif d'un objet Stripe, sans jamais se fier à l'e-mail. */
-export async function resolveUserId(
-  metadataUserId: string | null | undefined,
-  customerId: string | null,
-  hint?: string | null,
-): Promise<string | null> {
-  if (customerId) {
-    const linked = await userIdForCustomer(customerId)
-    if (linked) return linked
-  }
-  if (isUuid(metadataUserId)) return metadataUserId
-  if (isUuid(hint)) return hint
-  return null
+export function resolveUserId(metadataUserId: string | null | undefined, customerId: string | null, hint?: string | null) {
+  return resolveUserIdWith(supabaseStore, metadataUserId, customerId, hint)
 }
 
-/**
- * Reflète un abonnement Stripe dans public.subscriptions et public.users.plan.
- * Idempotent : peut être rejoué sans effet de bord. L'appelant doit passer un
- * objet fraîchement relu chez Stripe (pas le payload d'un vieil événement) pour
- * ne pas dépendre de l'ordre de livraison des webhooks.
- */
-export async function upsertFromStripe(sub: Stripe.Subscription, userIdHint?: string | null): Promise<UpsertResult> {
-  const customerId = idOf(sub.customer)
-  if (!customerId) return { ok: false, reason: 'unknown_user' }
-  const userId = await resolveUserId(sub.metadata?.user_id, customerId, userIdHint)
-  if (!userId) return { ok: false, reason: 'unknown_user' }
-
-  const db = billingDb()
-  const { data: prevData, error: prevErr } = await db
-    .from('subscriptions')
-    .select(SUBSCRIPTION_COLUMNS)
-    .eq('user_id', userId)
-    .maybeSingle()
-  if (prevErr) throw new Error(`subscriptions read failed: ${prevErr.code ?? 'unknown'}`)
-  const previous = (prevData as SubscriptionRecord | null) ?? null
-
-  const status = sub.status as SubscriptionStatus
-  // Une seule ligne par utilisateur : un ancien abonnement terminé ne doit pas
-  // écraser l'abonnement en cours (réabonnement après résiliation).
-  if (previous && previous.stripe_subscription_id !== sub.id && isBlockingStatus(previous.status) && !isBlockingStatus(status)) {
-    return { ok: false, reason: 'stale' }
-  }
-
-  const price = sub.items.data[0]?.price
-  const row = {
-    user_id: userId,
-    stripe_customer_id: customerId,
-    stripe_subscription_id: sub.id,
-    plan: planFromOffer(offerFromPrice(price)),
-    status,
+/** Instantané minimal d'un objet Stripe.Subscription (exporté pour les tests d'intégration). */
+export function snapshotOf(sub: Stripe.Subscription): SubscriptionSnapshot {
+  return {
+    id: sub.id,
+    customerId: idOf(sub.customer),
+    status: sub.status as SubscriptionStatus,
+    plan: planOrNull(offerFromPrice(sub.items.data[0]?.price)),
+    metadataUserId: sub.metadata?.user_id ?? null,
     current_period_start: toIso(sub.current_period_start),
     current_period_end: toIso(sub.current_period_end),
     cancel_at_period_end: sub.cancel_at_period_end,
     canceled_at: toIso(sub.canceled_at),
     trial_end: toIso(sub.trial_end),
+    observedAt: new Date().toISOString(),
   }
+}
 
-  const { data, error } = await db
-    .from('subscriptions')
-    .upsert(row, { onConflict: 'user_id' })
-    .select(SUBSCRIPTION_COLUMNS)
-    .single()
-  if (error) {
-    // 23503 : l'utilisateur n'existe plus (compte supprimé) → rien à refléter.
-    if (error.code === '23503') return { ok: false, reason: 'unknown_user' }
-    throw new Error(`subscriptions upsert failed: ${error.code ?? 'unknown'}`)
+const planOrNull = (offer: ReturnType<typeof offerFromPrice>) => (offer ? planFromOffer(offer) : null)
+
+/** L'abonnement est-il toujours en cours chez Stripe ? (détection de doublon) */
+async function stillBlocking(subscriptionId: string): Promise<boolean> {
+  try {
+    const s = await getStripe().subscriptions.retrieve(subscriptionId)
+    return isBlockingStatus(s.status as SubscriptionStatus)
+  } catch (err) {
+    const e = err as { code?: string } | null
+    return e?.code !== 'resource_missing'
   }
-  const record = data as SubscriptionRecord
+}
 
-  await linkCustomer(userId, customerId)
+/**
+ * Second abonnement en cours pour un même compte (double Checkout) : résilié tout de
+ * suite et dernière facture remboursée. Idempotent (clés d'idempotence par abonnement).
+ */
+async function cancelDuplicate(duplicateId: string): Promise<void> {
+  const stripe = getStripe()
+  const dup = await stripe.subscriptions.retrieve(duplicateId, { expand: ['latest_invoice'] })
+  if (isBlockingStatus(dup.status as SubscriptionStatus)) {
+    await stripe.subscriptions.cancel(duplicateId, { prorate: false, invoice_now: false }, { idempotencyKey: `dup-cancel:${duplicateId}` })
+  }
+  const invoice = typeof dup.latest_invoice === 'object' ? dup.latest_invoice : null
+  const pi = idOf(invoice?.payment_intent as string | { id: string } | null | undefined)
+  if (invoice && invoice.status === 'paid' && invoice.amount_paid > 0 && pi) {
+    await stripe.refunds.create({ payment_intent: pi, reason: 'duplicate' }, { idempotencyKey: `dup-refund:${duplicateId}` })
+  }
+  console.error('[billing] ALERTE abonnement en double résilié et remboursé', { duplicate: duplicateId })
+}
 
-  // users.plan alimente le plan effectif SQL (effective_plan, 0380 : accès partagé
-  // de la famille, priorité support, quotas). Un admin reste admin.
-  const { error: planErr } = await db
-    .from('users')
-    .update({ plan: dbTierFor(planOf(record)) })
-    .eq('id', userId)
-    .neq('plan', 'admin')
-  if (planErr) throw new Error(`users.plan sync failed: ${planErr.code ?? 'unknown'}`)
-
-  return { ok: true, userId, record, previous }
+/**
+ * Reflète un abonnement Stripe dans public.subscriptions et public.users.plan.
+ * Idempotent (voir applySubscriptionSnapshot). L'appelant doit passer un objet
+ * fraîchement relu chez Stripe pour ne pas dépendre de l'ordre des webhooks.
+ */
+export async function upsertFromStripe(sub: Stripe.Subscription, userIdHint?: string | null): Promise<UpsertResult> {
+  const res = await applySubscriptionSnapshot(supabaseStore, snapshotOf(sub), userIdHint, { stillBlocking })
+  if (!res.ok && res.reason === 'duplicate') await cancelDuplicate(res.duplicateId)
+  return res
 }
 
 /** Relit l'abonnement chez Stripe puis le reflète (source de vérité = Stripe). */
 export async function syncSubscription(subscriptionId: string, userIdHint?: string | null): Promise<UpsertResult> {
   const sub = await getStripe().subscriptions.retrieve(subscriptionId)
   return upsertFromStripe(sub, userIdHint)
+}
+
+// --- Délai de grâce (tâche quotidienne) -------------------------------------
+
+export type GraceReport = { checked: number; synced: number; downgraded: number; errors: number }
+
+/**
+ * Applique le délai de grâce dans le temps (users.plan ne change sinon qu'à un webhook) :
+ * chaque abonnement past_due / unpaid, ou actif dont la période est dépassée de plus
+ * de 2 jours (webhook manqué), est relu chez Stripe et resynchronisé. Stripe
+ * injoignable : la règle de grâce est appliquée sur la ligne locale (planOf).
+ * Appelé par GET /api/stripe/cron (Vercel Cron, quotidien).
+ */
+export async function enforceBillingGrace(now = new Date()): Promise<GraceReport> {
+  const report: GraceReport = { checked: 0, synced: 0, downgraded: 0, errors: 0 }
+  if (!BILLING_LIVE) return report
+  const overdue = new Date(now.getTime() - 2 * 86_400_000).toISOString()
+  const { data, error } = await billingDb()
+    .from('subscriptions')
+    .select(`${SUBSCRIPTION_COLUMNS}, synced_at`)
+    .or(`status.in.(past_due,unpaid),and(status.in.(active,trialing),current_period_end.lt.${overdue})`)
+    .limit(500)
+  if (error) throw new Error(`subscriptions read failed: ${error.code ?? 'unknown'}`)
+
+  for (const row of (data ?? []) as (SubscriptionRecord & { synced_at: string | null })[]) {
+    report.checked++
+    try {
+      const res = await syncSubscription(row.stripe_subscription_id, row.user_id)
+      if (res.ok) report.synced++
+      if (res.ok && planOf(res.record, now) === 'gratuit' && planOf(row, now) !== 'gratuit') report.downgraded++
+    } catch {
+      try {
+        const { id: _id, synced_at, ...rest } = row
+        const tier = dbTierFor(planOf(row, now))
+        const res = await supabaseStore.apply(rest, tier, synced_at ?? now.toISOString())
+        if (res.outcome === 'ok' && tier === 'free') report.downgraded++
+      } catch {
+        report.errors++
+      }
+    }
+  }
+  return report
 }

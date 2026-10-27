@@ -2,7 +2,7 @@
 
 import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
-import { escapeHtml } from '../escape'
+import { escapeHtml, safeUrl } from '../escape'
 
 export type VerificationProps = {
   prenom: string
@@ -10,17 +10,19 @@ export type VerificationProps = {
   code: string
   /** Durée de validité en minutes (défaut : 15). */
   expireMinutes?: number
+  /** Lien de confirmation (page /auth/confirmer?token_hash=…&type=signup). Facultatif. */
+  url?: string
 }
 
 export const verificationSubject = 'Votre code de vérification Lien Parental'
 
 export function verificationEmail(props: VerificationProps): { subject: string; html: string } {
-  const expire = props.expireMinutes ?? 15
-  const prenom = escapeHtml(props.prenom?.trim() || 'bonjour')
+  const expire = props.expireMinutes ?? 60
+  const prenom = escapeHtml(props.prenom?.trim() || '')
   const code = escapeHtml((props.code || '').toString())
 
   const body = `
-    <p style="margin:0 0 16px 0;">Bonjour ${prenom},</p>
+    <p style="margin:0 0 16px 0;">Bonjour${prenom ? ` ${prenom}` : ''},</p>
     <p style="margin:0 0 16px 0;">
       Voici votre code de vérification pour finaliser la création de votre compte Lien Parental.
       Saisissez-le dans l'application pour confirmer votre adresse email.
@@ -41,9 +43,10 @@ export function verificationEmail(props: VerificationProps): { subject: string; 
   return {
     subject: verificationSubject,
     html: baseLayout({
-      preheader: `Votre code : ${code} (valable ${expire} minutes).`,
+      preheader: `Votre code : ${props.code} (valable ${expire} minutes).`,
       title: 'Vérifiez votre adresse email',
       body,
+      ...(props.url ? { cta: { label: 'Confirmer mon adresse', href: safeUrl(props.url) } } : {}),
     }),
   }
 }

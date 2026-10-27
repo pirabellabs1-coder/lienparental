@@ -14,6 +14,27 @@ function loginUrl(req: NextRequest) {
   return url
 }
 
+// --- Formule choisie avant inscription ------------------------------------
+// /abonner (lien des tarifs de la page d'accueil) pose ce cookie pour un visiteur
+// non connecté. À la première arrivée sur /app après connexion ou inscription, on
+// le renvoie sur « Mon abonnement » avec la formule présélectionnée, puis on l'efface.
+const PLAN_INTENT_COOKIE = 'lp_plan_intent'
+
+function planIntentUrl(req: NextRequest): URL | null {
+  if (req.nextUrl.pathname !== '/app') return null
+  const raw = req.cookies.get(PLAN_INTENT_COOKIE)?.value
+  if (!raw) return null
+  const m = /^(premium|coparentalite)\.(mensuel|annuel)$/.exec(raw)
+  const url = req.nextUrl.clone()
+  url.pathname = '/app/abonnement'
+  url.search = ''
+  if (m) {
+    url.searchParams.set('formule', m[1]!)
+    url.searchParams.set('cycle', m[2]!)
+  }
+  return url
+}
+
 // --- Authentification réelle (Supabase) --------------------------------
 async function supabaseMiddleware(req: NextRequest) {
   // Rafraîchit la session sur toutes les routes couvertes par le matcher.
@@ -29,6 +50,15 @@ async function supabaseMiddleware(req: NextRequest) {
     const url = loginUrl(req)
     url.searchParams.set('mfa', '1')
     return redirectWithSession(response, url)
+  }
+
+  // Formule choisie avant inscription : consommée seulement APRÈS la double authentification
+  // (un compte 2FA qui passe par l'étape code garde sa formule et sa périodicité).
+  const intent = planIntentUrl(req)
+  if (intent) {
+    const redirect = redirectWithSession(response, intent)
+    redirect.cookies.delete(PLAN_INTENT_COOKIE)
+    return redirect
   }
 
   if (pathname === '/admin' || pathname.startsWith('/admin/')) {
@@ -56,7 +86,7 @@ async function supabaseMiddleware(req: NextRequest) {
 // --- Mode démonstration (inchangé) -----------------------------------
 // Le cookie de démo n'est pas une preuve d'identité : recette uniquement.
 function demoMiddleware(req: NextRequest) {
-  const { pathname, searchParams } = req.nextUrl
+  const { pathname } = req.nextUrl
   if (!isProtected(pathname)) return NextResponse.next()
 
   const session = req.cookies.get(DEMO_COOKIE)?.value
@@ -68,11 +98,12 @@ function demoMiddleware(req: NextRequest) {
 
   if (!valid) return NextResponse.redirect(loginUrl(req))
 
-  // Le compte Premium voit directement les écrans Premium du profil.
-  if (session === 'parent-premium' && (pathname === '/app/profil' || pathname === '/app/profil/abonnement') && !searchParams.has('plan')) {
-    const url = req.nextUrl.clone()
-    url.searchParams.set('plan', 'premium')
-    return NextResponse.redirect(url)
+  // Formule choisie sur la page d'accueil avant connexion : retour direct sur l'abonnement.
+  const intent = planIntentUrl(req)
+  if (intent) {
+    const redirect = NextResponse.redirect(intent)
+    redirect.cookies.delete(PLAN_INTENT_COOKIE)
+    return redirect
   }
   return NextResponse.next()
 }

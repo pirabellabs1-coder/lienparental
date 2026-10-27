@@ -19,6 +19,10 @@ export type BillingView = {
   /** Date ISO de fin de période courante (= prochain prélèvement si non résilié). */
   periodEnd: string | null
   cancelAtPeriodEnd: boolean
+  /** Fin de la période d'essai (ISO), si l'abonnement est en essai. */
+  trialEnd: string | null
+  /** Page Stripe de la facture à régler (paiement à finaliser ou en échec), sinon null. */
+  payUrl: string | null
   card: BillingCard | null
   /** Changement de formule programmé au prochain cycle. */
   pending: Offer | null
@@ -48,9 +52,9 @@ export type ApiError = { error: { code: string; message: string; correlation_id:
 
 export const STATUS_LABEL: Record<SubscriptionStatus, string> = {
   active: 'Actif',
-  trialing: 'Période d’essai',
-  past_due: 'Paiement en retard',
-  unpaid: 'Impayé',
+  trialing: 'Essai',
+  past_due: 'Paiement en échec',
+  unpaid: 'Paiement en échec',
   canceled: 'Résilié',
   incomplete: 'Paiement à finaliser',
   incomplete_expired: 'Expiré',
@@ -58,9 +62,9 @@ export const STATUS_LABEL: Record<SubscriptionStatus, string> = {
 }
 
 export function formatDateFr(iso: string | null | undefined): string {
-  if (!iso) return '—'
+  if (!iso) return 'date inconnue'
   const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return '—'
+  if (Number.isNaN(d.getTime())) return 'date inconnue'
   return new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeZone: 'America/Cayenne' }).format(d)
 }
 

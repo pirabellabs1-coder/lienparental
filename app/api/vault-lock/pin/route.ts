@@ -25,6 +25,7 @@ import { RECENT_LOGIN_MS } from '@/lib/vault-lock/context'
 import { buildStatus, issueUnlock, readUnlock } from '@/lib/vault-lock/session'
 import { vaultStore } from '@/lib/vault-lock/store'
 import { checkPassword, checkPin } from '@/lib/vault-lock/verify'
+import { flushForActor } from '@/lib/notify/jobs'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -87,6 +88,8 @@ export async function PUT(req: Request) {
     const next = await store.updateSettings(p.userId, { pinHash: await hashPin(pin), bumpEpoch: true })
     await store.clearAttempts(p.userId, 'pin')
     if (next.enabled) await issueUnlock(p, next)
+    // Code remplacé : alerte de sécurité (déclencheur 0440) livrée tout de suite.
+    if (p.mode !== 'demo' && settings.pinHash) await flushForActor(p.userId).catch(() => null)
     return jsonOk({ status: await buildStatus(p) })
   } catch {
     return serverError()
@@ -109,6 +112,7 @@ export async function DELETE(req: Request) {
     }
     const next = await store.updateSettings(p.userId, { pinHash: null, bumpEpoch: true })
     if (next.enabled) await issueUnlock(p, next)
+    if (p.mode !== 'demo' && settings.pinHash) await flushForActor(p.userId).catch(() => null)
     return jsonOk({ status: await buildStatus(p) })
   } catch {
     return serverError()

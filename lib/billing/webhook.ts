@@ -11,44 +11,48 @@ import { formatCents } from '@/lib/email/templates/format'
 import { billingDb } from './db'
 import { recordInvoice } from './payments'
 import { offerFromPlan } from './prices'
+import { getStripe } from './stripe'
+import { invoiceSubscriptionId } from './events'
+import { claimEventWith, type Claim, type EventStore } from './claim-core'
 import { idOf } from './stripe'
-import { isBlockingStatus, isUuid, syncSubscription, type UpsertResult } from './subscription'
+import { isUuid, syncSubscription, type UpsertResult } from './subscription'
 
 // --- Idempotence ----------------------------------------------------------
 
-export type Claim = 'claimed' | 'done' | 'in_flight'
-const STALE_CLAIM_MS = 2 * 60_000
+export type { Claim } from './claim-core'
 
-/**
- * Réserve le traitement d'un événement (table stripe_events).
- *  - 'claimed'   : à traiter maintenant ;
- *  - 'done'      : déjà traité → 200 sans rien refaire ;
- *  - 'in_flight' : une autre livraison le traite → l'appelant renvoie 5xx, Stripe relivrera.
- */
-export async function claimEvent(event: Stripe.Event): Promise<Claim> {
-  const db = billingDb()
-  const { error } = await db.from('stripe_events').insert({ id: event.id, type: event.type })
-  if (!error) return 'claimed'
-  if (error.code !== '23505') throw new Error(`stripe_events insert failed: ${error.code ?? 'unknown'}`)
+const eventStore: EventStore = {
+  async insert(id, type) {
+    const { error } = await billingDb().from('stripe_events').insert({ id, type })
+    if (!error) return 'ok'
+    if (error.code === '23505') return 'duplicate'
+    throw new Error(`stripe_events insert failed: ${error.code ?? 'unknown'}`)
+  },
+  async get(id) {
+    const { data } = await billingDb().from('stripe_events').select('processed_at, received_at').eq('id', id).maybeSingle()
+    return (data as { processed_at: string | null; received_at: string } | null) ?? null
+  },
+  async takeOver(id, expected, nowIso) {
+    const { data } = await billingDb()
+      .from('stripe_events')
+      .update({ received_at: nowIso })
+      .eq('id', id)
+      .eq('received_at', expected)
+      .is('processed_at', null)
+      .select('id')
+    return !!data && data.length > 0
+  },
+}
 
-  const { data } = await db.from('stripe_events').select('processed_at, received_at').eq('id', event.id).maybeSingle()
-  const row = data as { processed_at: string | null; received_at: string } | null
-  if (!row || row.processed_at) return 'done'
-  if (Date.now() - Date.parse(row.received_at) < STALE_CLAIM_MS) return 'in_flight'
-
-  // Réclamation abandonnée (crash) : reprise atomique (compare-and-set sur received_at).
-  const { data: taken } = await db
-    .from('stripe_events')
-    .update({ received_at: new Date().toISOString() })
-    .eq('id', event.id)
-    .eq('received_at', row.received_at)
-    .is('processed_at', null)
-    .select('id')
-  return taken && taken.length > 0 ? 'claimed' : 'in_flight'
+/** Réserve le traitement d'un événement (voir lib/billing/claim-core.ts). */
+export function claimEvent(event: Stripe.Event): Promise<Claim> {
+  return claimEventWith(eventStore, event)
 }
 
 export async function markProcessed(eventId: string): Promise<void> {
-  await billingDb().from('stripe_events').update({ processed_at: new Date().toISOString() }).eq('id', eventId)
+  const { error } = await billingDb().from('stripe_events').update({ processed_at: new Date().toISOString() }).eq('id', eventId)
+  // Échec : l'appelant renvoie 500, Stripe relivre ; le retraitement est idempotent.
+  if (error) throw new Error(`stripe_events update failed: ${error.code ?? 'unknown'}`)
 }
 
 /** Échec de traitement : on libère la réclamation pour que le retry Stripe rejoue. */
@@ -57,6 +61,12 @@ export async function releaseClaim(eventId: string): Promise<void> {
 }
 
 // --- Traitement -----------------------------------------------------------
+
+/** Relit une facture chez Stripe (forme garantie par la version d'API du client). */
+async function retrieveInvoice(payload: { id?: string | null }): Promise<Stripe.Invoice> {
+  if (!payload.id) throw new Error('invoice without id')
+  return getStripe().invoices.retrieve(payload.id)
+}
 
 /** Tâche différée (e-mail) exécutée après la réponse 200 à Stripe. */
 export type Deferred = () => Promise<unknown>
@@ -111,9 +121,11 @@ export async function handleStripeEvent(event: Stripe.Event): Promise<Deferred[]
       }
 
       let kind: 'scheduled' | 'ended' | null = null
-      // « Terminé » seulement si l'utilisateur a réellement eu Premium (pas pour un
-      // Checkout abandonné qui expire en incomplete_expired).
-      if (event.type === 'customer.subscription.deleted' && res.previous && res.previous.stripe_subscription_id === payload.id && isBlockingStatus(res.previous.status)) {
+      // « Terminé » d'après l'ÉVÉNEMENT (pas l'état précédent en base, qui dépend de l'ordre
+      // de livraison) : un abonnement réellement payé se termine en `canceled` ; un Checkout
+      // abandonné finit en `incomplete_expired` et n'envoie rien. Un doublon résilié ne
+      // passe pas ici (synchronisation refusée plus haut).
+      if (event.type === 'customer.subscription.deleted' && payload.status === 'canceled') {
         kind = 'ended'
       }
       if (event.type === 'customer.subscription.updated') {
@@ -136,8 +148,9 @@ export async function handleStripeEvent(event: Stripe.Event): Promise<Deferred[]
     }
 
     case 'invoice.paid': {
-      const invoice = event.data.object
-      const subId = idOf(invoice.subscription)
+      // Facture relue via le SDK (version d'API épinglée) : jamais les champs du payload brut.
+      const invoice = await retrieveInvoice(event.data.object)
+      const subId = invoiceSubscriptionId(invoice)
       if (!subId) break // facture hors abonnement : non gérée en V1
       const res = await syncSubscription(subId)
       if (!res.ok) {
@@ -173,8 +186,8 @@ export async function handleStripeEvent(event: Stripe.Event): Promise<Deferred[]
     }
 
     case 'invoice.payment_failed': {
-      const invoice = event.data.object
-      const subId = idOf(invoice.subscription)
+      const invoice = await retrieveInvoice(event.data.object)
+      const subId = invoiceSubscriptionId(invoice)
       if (!subId) break
       // past_due → reste Premium pendant la grâce ; unpaid/canceled → retour en gratuit (CDC §6.1).
       const res = await syncSubscription(subId)
