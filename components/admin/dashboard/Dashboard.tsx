@@ -7,7 +7,6 @@ import { fmtDayKey } from '@/lib/tz'
 import { fmtEur, fmtEurExact, fmtInt, fmtDateTime } from '@/lib/admin/stats/format'
 import { round2 } from '@/lib/admin/stats/compute'
 import type { DashboardData } from '@/lib/admin/stats/types'
-import { AlertsPanel } from './AlertsPanel'
 import { ChartCard } from './ChartCard'
 import { ColumnChart, Donut, Funnel, HBarList, Legend } from './charts'
 import { KpiGrid } from './KpiGrid'
@@ -120,8 +119,6 @@ export function Dashboard({ data }: { data: DashboardData }) {
 
   return (
     <div className="space-y-8">
-      <AlertsPanel alerts={data.alerts} />
-
       <TodayStrip today={data.today} />
 
       <KpiGrid kpis={data.kpis} />
