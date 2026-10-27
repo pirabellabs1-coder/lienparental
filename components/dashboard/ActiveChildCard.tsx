@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { Check, UserPlus, UserRound } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import type { Child } from '@/lib/mock-data'
@@ -14,6 +15,7 @@ type Props = {
 
 // M03 — Enfant actif : avatar, nom, âge • classe | « Changer d'enfant ».
 export function ActiveChildCard({ items, activeId, onChange }: Props) {
+  const t = useTranslations('dash')
   const [open, setOpen] = useState(false)
   const listId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
@@ -43,7 +45,7 @@ export function ActiveChildCard({ items, activeId, onChange }: Props) {
         className="flex items-center gap-3 rounded-xl2 border border-dashed border-night-200 bg-white p-4 text-[14px] font-semibold text-leaf-600"
       >
         <UserPlus className="h-5 w-5" aria-hidden="true" />
-        Ajouter un enfant
+        {t('addChild')}
       </Link>
     )
   }
@@ -65,10 +67,10 @@ export function ActiveChildCard({ items, activeId, onChange }: Props) {
         </span>
 
         <div className="min-w-0 flex-1">
-          <p className="sr-only">Enfant actif :</p>
+          <p className="sr-only">{t('activeChildSr')}</p>
           <p className="truncate text-[16px] font-bold text-night-900">{active.prenom}</p>
           <p className="mt-0.5 truncate text-[12.5px] text-night-700">
-            {active.age} ans <span aria-hidden="true" className="mx-1">•</span>
+            {t('ageLabel', { age: active.age })} <span aria-hidden="true" className="mx-1">•</span>
             <span className="sr-only">, </span>
             {active.classe}
           </p>
@@ -85,20 +87,12 @@ export function ActiveChildCard({ items, activeId, onChange }: Props) {
             className={switchClass}
           >
             <UserPlus className="h-6 w-6 shrink-0" strokeWidth={1.8} aria-hidden="true" />
-            <span>
-              Changer
-              <br />
-              d’enfant
-            </span>
+            <span>{t('switchChild')}</span>
           </button>
         ) : (
           <Link href="/app/enfants" className={switchClass}>
             <UserPlus className="h-6 w-6 shrink-0" strokeWidth={1.8} aria-hidden="true" />
-            <span>
-              Changer
-              <br />
-              d’enfant
-            </span>
+            <span>{t('switchChild')}</span>
           </Link>
         )}
       </div>
@@ -106,7 +100,7 @@ export function ActiveChildCard({ items, activeId, onChange }: Props) {
       {open && canSwitch && (
         <ul
           id={listId}
-          aria-label="Choisir un enfant"
+          aria-label={t('chooseChild')}
           className="absolute inset-x-0 top-full z-20 mt-1.5 overflow-hidden rounded-xl2 border border-night-100 bg-white shadow-card motion-safe:animate-fade-up"
         >
           {items.map((c) => {
@@ -128,7 +122,7 @@ export function ActiveChildCard({ items, activeId, onChange }: Props) {
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-[14px] font-semibold text-night-900">{c.prenom}</span>
                     <span className="block truncate text-[12px] text-night-600">
-                      {c.age} ans • {c.classe}
+                      {t('ageLabel', { age: c.age })} • {c.classe}
                     </span>
                   </span>
                   {selected && <Check className="h-4 w-4 text-leaf-500" aria-hidden="true" />}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Lightbulb } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import type { Tip } from '@/lib/mock-data'
@@ -9,6 +10,7 @@ type Props = { tips: Tip[] }
 
 // M03 — Conseil du jour : carte verte claire, carrousel à points.
 export function DailyTip({ tips }: Props) {
+  const tr = useTranslations('dash')
   const [index, setIndex] = useState(0)
   const scrollerRef = useRef<HTMLDivElement>(null)
 
@@ -41,7 +43,7 @@ export function DailyTip({ tips }: Props) {
   if (tips.length === 0) return null
 
   return (
-    <div aria-roledescription="carrousel" aria-label="Conseils du jour" className="rounded-xl2 bg-leaf-50 pb-1 pt-4">
+    <div aria-roledescription="carrousel" aria-label={tr('tipCarousel')} className="rounded-xl2 bg-leaf-50 pb-1 pt-4">
       <div
         ref={scrollerRef}
         className="flex snap-x snap-mandatory overflow-x-auto [&::-webkit-scrollbar]:hidden"
@@ -51,7 +53,7 @@ export function DailyTip({ tips }: Props) {
           <article
             key={t.id}
             aria-roledescription="diapositive"
-            aria-label={`${i + 1} sur ${tips.length}`}
+            aria-label={tr('slide', { n: i + 1, total: tips.length })}
             className="flex w-full shrink-0 snap-center gap-3.5 px-4"
           >
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-leaf-600 shadow-soft" aria-hidden="true">
@@ -66,12 +68,12 @@ export function DailyTip({ tips }: Props) {
       </div>
 
       {tips.length > 1 && (
-        <div className="mt-1 flex justify-center" role="group" aria-label="Choisir un conseil">
+        <div className="mt-1 flex justify-center" role="group" aria-label={tr('chooseTip')}>
           {tips.map((t, i) => (
             <button
               key={t.id}
               type="button"
-              aria-label={`Conseil ${i + 1} : ${t.title}`}
+              aria-label={tr('tipN', { n: i + 1, title: t.title })}
               aria-current={i === index ? 'true' : undefined}
               onClick={() => go(i)}
               className="grid h-8 w-5 place-items-center"

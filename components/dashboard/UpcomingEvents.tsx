@@ -1,4 +1,6 @@
+'use client'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { CalendarDays, FileHeart, School, Scale, Video } from 'lucide-react'
 import { countdownLabel, formatWeekdayDate, type AppEvent } from '@/lib/mock-data'
 
@@ -13,12 +15,13 @@ const TYPE_META: Record<AppEvent['type'], { icon: typeof CalendarDays; tone: str
 
 // M03 — Prochains événements (3 prochains, compte à rebours).
 export function UpcomingEvents({ events }: { events: AppEvent[] }) {
+  const t = useTranslations('dash')
   if (events.length === 0) {
     return (
       <div className="rounded-xl2 border border-night-100 bg-white p-4 text-[13px] text-night-700 shadow-soft">
-        Aucun événement à venir.{' '}
+        {t('noEvents')}{' '}
         <Link href="/app/calendrier/nouveau" className="font-semibold text-leaf-600 underline underline-offset-2">
-          Planifier un événement
+          {t('planEvent')}
         </Link>
       </div>
     )

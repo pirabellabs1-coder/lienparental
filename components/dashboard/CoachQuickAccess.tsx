@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { ArrowRight, Camera, Mic, Paperclip, Sparkles } from 'lucide-react'
 import { RobotMascot } from '@/components/coach/RobotMascot'
 import {
@@ -34,6 +35,8 @@ function getRecognition(): RecognitionCtor | null {
 
 // M03 — Accès rapide au Coach parental IA.
 export function CoachQuickAccess() {
+  const t = useTranslations('dash')
+  const locale = useLocale()
   const router = useRouter()
   const [value, setValue] = useState('')
   const [error, setError] = useState('')
@@ -76,7 +79,7 @@ export function CoachQuickAccess() {
     const Ctor = getRecognition()
     if (!Ctor) return
     const rec = new Ctor()
-    rec.lang = 'fr-FR'
+    rec.lang = locale === 'en' ? 'en-US' : locale === 'pt' ? 'pt-BR' : 'fr-FR'
     rec.interimResults = false
     rec.onresult = (e) => {
       const t = e.results[0]?.[0]?.transcript ?? ''
@@ -96,11 +99,11 @@ export function CoachQuickAccess() {
     <section aria-labelledby="coach-title" className="relative rounded-xl3 bg-iris-50 p-4 pt-5">
       <div className="pr-[110px]">
         <h2 id="coach-title" className="flex items-center gap-1.5 text-[19px] font-bold text-night-900">
-          Coach parental IA
+          {t('coachTitle')}
           <Sparkles className="h-[18px] w-[18px] text-night-900" strokeWidth={1.8} aria-hidden="true" />
         </h2>
         <p className="mt-2 text-[13px] leading-relaxed text-night-800">
-          Posez votre question au Coach et obtenez des réponses adaptées.
+          {t('coachLead')}
         </p>
       </div>
 
@@ -110,7 +113,7 @@ export function CoachQuickAccess() {
 
       <form onSubmit={submit} className="relative mt-4 rounded-xl2 bg-white px-3.5 pb-2.5 pt-3 shadow-soft">
         <label htmlFor={inputId} className="sr-only">
-          Votre question au Coach IA
+          {t('coachInputLabel')}
         </label>
         <input
           id={inputId}
@@ -118,17 +121,17 @@ export function CoachQuickAccess() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           maxLength={2000}
-          placeholder="Posez votre question…"
+          placeholder={t('coachPlaceholder')}
           autoComplete="off"
           aria-describedby={error ? errorId : undefined}
           className="h-9 w-full border-0 bg-transparent p-0 text-[14px] text-night-900 placeholder:text-night-400 focus:outline-none focus:ring-0"
         />
         <div className="mt-1.5 flex items-center justify-between border-t border-night-50 pt-1.5">
           <div className="-ml-2.5 flex items-center">
-            <button type="button" onClick={() => photoRef.current?.click()} aria-label="Ajouter une capture d’écran ou une photo" className={iconBtn}>
+            <button type="button" onClick={() => photoRef.current?.click()} aria-label={t('coachAddPhoto')} className={iconBtn}>
               <Camera className="h-5 w-5" strokeWidth={1.8} aria-hidden="true" />
             </button>
-            <button type="button" onClick={() => fileRef.current?.click()} aria-label="Joindre un document" className={iconBtn}>
+            <button type="button" onClick={() => fileRef.current?.click()} aria-label={t('coachAttach')} className={iconBtn}>
               <Paperclip className="h-5 w-5" strokeWidth={1.8} aria-hidden="true" />
             </button>
             <button
@@ -136,7 +139,7 @@ export function CoachQuickAccess() {
               onClick={toggleDictation}
               disabled={!canDictate}
               aria-pressed={listening}
-              aria-label={canDictate ? (listening ? 'Arrêter la dictée' : 'Dicter votre question') : 'Dictée indisponible sur ce navigateur'}
+              aria-label={canDictate ? (listening ? t('coachStopDictation') : t('coachDictate')) : t('coachDictateUnavailable')}
               className={cn(iconBtn, listening && 'bg-leaf-50 text-leaf-600')}
             >
               <Mic className={cn('h-5 w-5', listening && 'motion-safe:animate-pulse')} strokeWidth={1.8} aria-hidden="true" />
@@ -145,7 +148,7 @@ export function CoachQuickAccess() {
           <button
             type="submit"
             disabled={!value.trim()}
-            aria-label="Envoyer la question au Coach IA"
+            aria-label={t('coachSend')}
             className="grid h-11 w-11 place-items-center rounded-full bg-leaf-500 text-white shadow-[0_6px_14px_-6px_rgba(46,125,50,0.7)] transition hover:bg-leaf-600 active:scale-95 disabled:bg-leaf-500/60"
           >
             <ArrowRight className="h-5 w-5" strokeWidth={2.4} aria-hidden="true" />

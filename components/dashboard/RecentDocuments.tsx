@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Ellipsis, Eye, FilePen, FileText, FolderLock, WandSparkles } from 'lucide-react'
 import { ActionSheet } from '@/components/ui'
 import { saveDraft } from '@/components/coach/session'
@@ -15,14 +16,15 @@ const ACCENTS: Record<RecentlyViewedDoc['accent'], string> = {
 }
 
 // M03 — Mes documents récents (liste + menu ⋯).
-export function RecentDocuments({ docs, emptyLabel = 'Aucun document consulté récemment.' }: { docs: RecentlyViewedDoc[]; emptyLabel?: string }) {
+export function RecentDocuments({ docs, emptyLabel }: { docs: RecentlyViewedDoc[]; emptyLabel?: string }) {
+  const t = useTranslations('dash')
   const router = useRouter()
   const [menuFor, setMenuFor] = useState<RecentlyViewedDoc | null>(null)
 
   if (docs.length === 0) {
     return (
       <p className="rounded-xl2 border border-night-100 bg-white p-4 text-[13px] text-night-700 shadow-soft">
-        {emptyLabel}
+        {emptyLabel ?? t('noRecentDocs')}
       </p>
     )
   }
@@ -44,7 +46,7 @@ export function RecentDocuments({ docs, emptyLabel = 'Aucun document consulté r
               <button
                 type="button"
                 onClick={() => setMenuFor(d)}
-                aria-label={`Actions pour ${d.title}`}
+                aria-label={t('docActions', { title: d.title })}
                 aria-haspopup="dialog"
                 className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-night-900 hover:bg-night-50"
               >
@@ -62,13 +64,13 @@ export function RecentDocuments({ docs, emptyLabel = 'Aucun document consulté r
         actions={[
           {
             key: 'open',
-            label: 'Ouvrir',
+            label: t('docOpen'),
             icon: <Eye className="h-5 w-5" />,
             onClick: () => router.push(menuFor?.href ?? '/app/coffre/documents'),
           },
           {
             key: 'coach',
-            label: 'Analyser avec le Coach IA',
+            label: t('docAnalyze'),
             icon: <WandSparkles className="h-5 w-5" />,
             onClick: () => {
               if (!menuFor) return
@@ -78,7 +80,7 @@ export function RecentDocuments({ docs, emptyLabel = 'Aucun document consulté r
           },
           {
             key: 'vault',
-            label: 'Voir le coffre-fort',
+            label: t('docVault'),
             icon: <FolderLock className="h-5 w-5" />,
             onClick: () => router.push('/app/coffre'),
           },
