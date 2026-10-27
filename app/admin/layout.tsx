@@ -46,10 +46,14 @@ async function guardAdmin() {
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   await guardAdmin()
 
+  // Identité affichée dans la navigation (getCurrentUser est mémoïsé par requête).
+  const user = await getCurrentUser()
+  const identity = user ? { name: `${user.prenom} ${user.nom}`.trim(), email: user.email } : undefined
+
   return (
     <div className="min-h-screen bg-night-50/40 text-night-900">
-      <Sidebar />
-      <TopBar />
+      <Sidebar user={identity} />
+      <TopBar user={identity} />
       <main className="lg:pl-64">
         <div className="mx-auto w-full max-w-7xl px-4 lg:px-8 py-6 lg:py-10">{children}</div>
       </main>

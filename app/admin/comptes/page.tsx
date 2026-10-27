@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ChevronRight, Download } from 'lucide-react'
+import { ChevronRight, Download, Users } from 'lucide-react'
 import { pageAdminCtx } from '@/lib/contenus/api'
 import { RepoError } from '@/lib/contenus/repo'
 import { listAccounts, type AccountPage } from '@/lib/admin/ops/comptes'
@@ -34,6 +34,7 @@ export default async function ComptesPage({ searchParams }: { searchParams: SP }
   return (
     <div>
       <OpsHeader
+        icon={<Users className="h-5 w-5" aria-hidden="true" />}
         title="Comptes"
         description="Rechercher, consulter et gérer les comptes. Seules les informations nécessaires à l’assistance sont affichées."
         actions={
@@ -83,24 +84,32 @@ export default async function ComptesPage({ searchParams }: { searchParams: SP }
               <div className="hidden overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white shadow-soft md:block">
                 <table className="min-w-full text-[14px]">
                   <caption className="sr-only">Comptes (50 par page, du plus récent au plus ancien)</caption>
-                  <thead className="bg-night-50 text-left text-night-700">
+                  <thead className="border-b border-night-100 bg-night-50/70 text-left text-[11px] uppercase tracking-wider text-night-500">
                     <tr>
-                      <th scope="col" className="px-4 py-3 font-semibold">Compte</th>
-                      <th scope="col" className="px-4 py-3 font-semibold">Formule</th>
-                      <th scope="col" className="px-4 py-3 font-semibold">Statut</th>
-                      <th scope="col" className="px-4 py-3 font-semibold">Inscription</th>
-                      <th scope="col" className="px-4 py-3 font-semibold">Dernière connexion</th>
-                      <th scope="col" className="px-4 py-3 text-right font-semibold">Stockage</th>
-                      <th scope="col" className="px-4 py-3 text-right font-semibold">Enfants</th>
+                      <th scope="col" className="px-5 py-3 font-bold">Compte</th>
+                      <th scope="col" className="px-4 py-3 font-bold">Formule</th>
+                      <th scope="col" className="px-4 py-3 font-bold">Statut</th>
+                      <th scope="col" className="px-4 py-3 font-bold">Inscription</th>
+                      <th scope="col" className="px-4 py-3 font-bold">Dernière connexion</th>
+                      <th scope="col" className="px-4 py-3 text-right font-bold">Stockage</th>
+                      <th scope="col" className="px-4 py-3 text-right font-bold">Enfants</th>
                       <th scope="col" className="px-4 py-3"><span className="sr-only">Ouvrir</span></th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {page.rows.map((r) => (
-                      <tr key={r.id} className="border-t border-night-100 align-middle hover:bg-leaf-50/40">
-                        <td className="max-w-[280px] px-4 py-3">
-                          <p className="truncate font-semibold text-night-900">{[r.prenom, r.nom].filter(Boolean).join(' ') || 'Sans nom'}</p>
-                          <p className="truncate font-mono text-[12px] text-night-600">{r.email}</p>
+                  <tbody className="divide-y divide-night-100">
+                    {page.rows.map((r) => {
+                      const name = [r.prenom, r.nom].filter(Boolean).join(' ') || 'Sans nom'
+                      const initial = (r.prenom?.[0] ?? r.nom?.[0] ?? r.email[0] ?? '?').toLocaleUpperCase('fr')
+                      return (
+                      <tr key={r.id} className="align-middle transition-colors hover:bg-night-50/60">
+                        <td className="max-w-[300px] px-5 py-3">
+                          <div className="flex items-center gap-3">
+                            <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-night-100 text-[12.5px] font-bold text-night-600">{initial}</span>
+                            <span className="min-w-0">
+                              <span className="block truncate font-semibold text-night-900">{name}</span>
+                              <span className="block truncate font-mono text-[12px] text-night-500">{r.email}</span>
+                            </span>
+                          </div>
                         </td>
                         <td className="px-4 py-3"><Pill tone={PLAN_TONE[r.plan]}>{PLAN_LABEL[r.plan]}</Pill></td>
                         <td className="px-4 py-3"><Pill tone={STATUS_TONE[r.status]}>{STATUS_LABEL[r.status]}</Pill></td>
@@ -114,7 +123,7 @@ export default async function ComptesPage({ searchParams }: { searchParams: SP }
                           </Link>
                         </td>
                       </tr>
-                    ))}
+                    )})}
                   </tbody>
                 </table>
               </div>

@@ -7,7 +7,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArchiveRestore, Copy, Eye, EyeOff, MoreHorizontal, Pencil, Search, Trash2, ExternalLink } from 'lucide-react'
+import { Archive, ArchiveRestore, Clock, Copy, Eye, EyeOff, Inbox, MoreHorizontal, Pencil, Search, Trash2, ExternalLink } from 'lucide-react'
 import { ConfirmDialog } from '@/components/ui'
 import { cn } from '@/lib/cn'
 import { CONTENT_KIND_LABEL, type ContentKind, type ContentRecord, type ContentStatus } from '@/lib/contenus/types'
@@ -83,16 +83,17 @@ export function ContentList<K extends ContentKind>({
   return (
     <div>
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <div role="group" aria-label="Filtrer par statut" className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-1 [scrollbar-width:none]">
+        <div role="group" aria-label="Filtrer par statut" className="inline-flex max-w-full gap-0.5 overflow-x-auto rounded-full border border-night-100 bg-night-50/80 p-1 [scrollbar-width:none]">
           {filters.map((f) => (
             <button
               key={f.key} type="button" aria-pressed={filter === f.key} onClick={() => setFilter(f.key)}
               className={cn(
-                'inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full px-4 text-[13.5px] font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500',
-                filter === f.key ? 'bg-night-900 text-white' : 'bg-white text-night-700 ring-1 ring-inset ring-[#E5E7EB] hover:bg-night-50',
+                'inline-flex min-h-[38px] shrink-0 items-center gap-1.5 rounded-full px-3.5 text-[13px] font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500',
+                filter === f.key ? 'bg-white text-night-900 shadow-soft' : 'text-night-500 hover:text-night-800',
               )}
             >
-              {f.label}<span className={cn('tabular-nums', filter === f.key ? 'text-night-200' : 'text-night-500')}>{counts[f.key]}</span>
+              {f.label}
+              <span className={cn('inline-flex min-w-[18px] justify-center rounded-full px-1.5 text-[11px] font-bold tabular-nums', filter === f.key ? 'bg-leaf-100 text-leaf-700' : 'bg-night-100 text-night-500')}>{counts[f.key]}</span>
             </button>
           ))}
         </div>
@@ -108,30 +109,43 @@ export function ContentList<K extends ContentKind>({
       </p>
 
       {visible.length === 0 ? (
-        <div className="mt-2 rounded-2xl border border-dashed border-night-200 bg-white p-10 text-center text-[14px] text-night-600">
-          {rows.length === 0 ? emptyLabel ?? `Aucun élément pour le moment.` : 'Aucun résultat pour ce filtre.'}
+        <div className="mt-3 flex flex-col items-center gap-3 rounded-2xl border border-dashed border-night-200 bg-white p-12 text-center">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full bg-night-50 text-night-400">
+            <Inbox className="h-6 w-6" aria-hidden="true" />
+          </span>
+          <p className="text-[14px] text-night-600">
+            {rows.length === 0 ? emptyLabel ?? `Aucun élément pour le moment.` : 'Aucun résultat pour ce filtre.'}
+          </p>
         </div>
       ) : (
-        <ul className="mt-2 divide-y divide-[#E5E7EB] overflow-visible rounded-2xl border border-[#E5E7EB] bg-white shadow-soft" aria-label={`Liste des ${labels.many}`}>
+        <ul className="mt-3 divide-y divide-night-100 overflow-hidden rounded-2xl border border-night-100 bg-white shadow-soft" aria-label={`Liste des ${labels.many}`}>
           {visible.map((r) => {
             const pub = r.statut === 'publie' ? publicHref?.(r) ?? null : null
             const prev = previewHref?.(r) ?? null
+            const hasSlug = kind !== 'partenaire'
+            const metas: ReactNode[] = []
+            if (extra) metas.push(<span key="x">{extra.cell(r)}</span>)
+            metas.push(<span key="d" className="inline-flex items-center gap-1"><Clock className="h-3.5 w-3.5 text-night-400" aria-hidden="true" />{dateTimeFr(r.updatedAt)}</span>)
+            metas.push(<span key="v" className="tabular-nums">v{r.version}</span>)
             return (
-              <li key={r.id} className={cn('flex flex-col gap-3 p-4 md:flex-row md:items-center', busy === r.id && 'opacity-60')}>
+              <li key={r.id} className={cn('group flex flex-col gap-3 px-4 py-3.5 transition-colors hover:bg-night-50/60 md:flex-row md:items-center md:px-5', busy === r.id && 'opacity-60')}>
                 <div className="min-w-0 flex-1">
-                  <Link href={ADMIN_PATHS[kind].edit(r.id)} className="block rounded text-[15px] font-bold leading-snug text-night-900 hover:text-leaf-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
+                  <Link href={ADMIN_PATHS[kind].edit(r.id)} className="block rounded text-[15px] font-bold leading-snug text-night-900 transition-colors group-hover:text-leaf-700 hover:text-leaf-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
                     {r.titre}
                   </Link>
-                  <p className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-night-600">
-                    {kind !== 'partenaire' && <span className="font-mono text-[12px]">{r.slug}</span>}
-                    {extra && <span>{extra.cell(r)}</span>}
-                    <span>Modifié le {dateTimeFr(r.updatedAt)}</span>
-                    <span>v{r.version}</span>
+                  <p className="mt-1 flex flex-wrap items-center gap-y-1 text-[12.5px] text-night-500">
+                    {hasSlug && <span className="rounded-md bg-night-50 px-1.5 py-0.5 font-mono text-[11.5px] text-night-500 ring-1 ring-inset ring-night-100">{r.slug}</span>}
+                    {metas.map((node, i) => (
+                      <span key={i} className="inline-flex items-center">
+                        {(hasSlug || i > 0) && <span className="mx-2 text-night-300" aria-hidden="true">·</span>}
+                        {node}
+                      </span>
+                    ))}
                   </p>
                 </div>
                 <div className="flex items-center gap-2 md:justify-end">
                   <StatusPill statut={r.statut} publishedAt={r.publishedAt} />
-                  <Link href={ADMIN_PATHS[kind].edit(r.id)} className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border border-night-200 bg-white px-3 text-[13.5px] font-semibold text-night-900 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
+                  <Link href={ADMIN_PATHS[kind].edit(r.id)} className="inline-flex min-h-[40px] items-center gap-1.5 rounded-xl border border-night-200 bg-white px-3 text-[13.5px] font-semibold text-night-800 transition-colors hover:border-leaf-300 hover:bg-leaf-50 hover:text-leaf-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
                     <Pencil className="h-4 w-4" aria-hidden="true" /> Modifier<span className="sr-only"> « {r.titre} »</span>
                   </Link>
                   <RowMenu label={r.titre} disabled={busy !== null}>
@@ -203,7 +217,7 @@ function RowMenu({ label, disabled, children }: { label: string; disabled?: bool
     <div ref={ref} className="relative">
       <button
         ref={btn} type="button" disabled={disabled} aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((v) => !v)}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-night-200 bg-white text-night-800 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 disabled:opacity-50"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-night-200 bg-white text-night-600 transition-colors hover:bg-night-50 hover:text-night-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 disabled:opacity-50"
       >
         <MoreHorizontal className="h-5 w-5" aria-hidden="true" /><span className="sr-only">Autres actions pour « {label} »</span>
       </button>

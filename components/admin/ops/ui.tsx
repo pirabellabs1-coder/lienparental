@@ -32,14 +32,21 @@ export function fmtMb(mb: number): string {
 /** Identifiant raccourci (lisible, sans exposer plus que nécessaire). */
 export const shortId = (id: string) => (id.length > 12 ? `${id.slice(0, 8)}…` : id)
 
-export function OpsHeader({ title, description, actions }: { title: string; description?: ReactNode; actions?: ReactNode }) {
+export function OpsHeader({ title, description, actions, icon }: { title: string; description?: ReactNode; actions?: ReactNode; icon?: ReactNode }) {
   return (
-    <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-      <div className="min-w-0">
-        <h1 className="text-[26px] font-extrabold leading-tight tracking-[-0.01em] text-night-900 sm:text-[30px]">{title}</h1>
-        {description && <p className="mt-1 max-w-2xl text-[14px] text-night-600">{description}</p>}
+    <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex min-w-0 items-start gap-3.5">
+        {icon && (
+          <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl2 bg-leaf-50 text-leaf-600 ring-1 ring-inset ring-leaf-100">
+            {icon}
+          </span>
+        )}
+        <div className="min-w-0">
+          <h1 className="text-[24px] font-extrabold leading-tight tracking-[-0.01em] text-night-900 sm:text-[28px]">{title}</h1>
+          {description && <p className="mt-1 max-w-2xl text-[13.5px] leading-relaxed text-night-500">{description}</p>}
+        </div>
       </div>
-      {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
+      {actions && <div className="flex shrink-0 flex-wrap gap-2">{actions}</div>}
     </header>
   )
 }
