@@ -6,6 +6,26 @@ import { ADMIN_ENTRY_PREFIX, ADMIN_GATE_COOKIE, adminGateConfigured, adminGatePr
 
 const isAdminPath = (p: string) => p === '/admin' || p.startsWith('/admin/')
 
+const MUTATING = new Set(['POST', 'PUT', 'PATCH', 'DELETE'])
+// Routes d'API appelées par des tiers (authentifiées autrement) : exemptées du contrôle d'origine.
+const isThirdPartyApi = (p: string) => p === '/api/stripe/webhook' || p === '/api/stripe/cron' || p.startsWith('/api/cron/')
+
+/**
+ * Anti-CSRF uniforme (défense en profondeur, en plus de SameSite=Lax) : une mutation d'API
+ * déclenchée depuis un autre site est refusée. On se fie à Sec-Fetch-Site (envoyé par tous les
+ * navigateurs récents, non modifiable par JS), avec repli sur l'en-tête Origin ; en l'absence
+ * des deux (vieux navigateur en même origine), on laisse SameSite=Lax jouer son rôle.
+ */
+function isCrossSite(req: NextRequest): boolean {
+  const sfs = req.headers.get('sec-fetch-site')
+  if (sfs) return sfs !== 'same-origin' && sfs !== 'none'
+  const origin = req.headers.get('origin')
+  if (origin) {
+    try { return new URL(origin).host !== req.headers.get('host') } catch { return true }
+  }
+  return false
+}
+
 /**
  * Porte d'accès masqué à l'administration (couche d'obscurité EN PLUS de l'auth + rôle + 2FA).
  * - Lien secret `/console/<secret>` : pose le cookie de porte puis redirige vers /admin.
@@ -163,6 +183,15 @@ export async function middleware(req: NextRequest) {
   // pour que /admin reste invisible (404) à qui n'a pas le lien secret.
   const gated = await adminGate(req)
   if (gated) return gated
+
+  // Anti-CSRF : refuse toute mutation d'API venue d'un autre site (hors webhook Stripe et crons).
+  const { pathname } = req.nextUrl
+  if (pathname.startsWith('/api/') && MUTATING.has(req.method) && !isThirdPartyApi(pathname) && isCrossSite(req)) {
+    return NextResponse.json(
+      { error: { code: 'forbidden', message: 'Origine non autorisée.' } },
+      { status: 403, headers: { 'Cache-Control': 'no-store' } },
+    )
+  }
 
   if (SUPABASE_ENABLED) return supabaseMiddleware(req)
   if (DEMO_MODE) return demoMiddleware(req)

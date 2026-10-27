@@ -33,7 +33,10 @@ export async function updateSession(request: NextRequest): Promise<SessionContex
         setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
           response = NextResponse.next({ request })
-          cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options))
+          // En production : Secure forcé (HTTPS), SameSite=Lax par défaut.
+          const secure = process.env.NODE_ENV === 'production'
+          cookiesToSet.forEach(({ name, value, options }) =>
+            response.cookies.set(name, value, { ...options, secure: options.secure ?? secure, sameSite: options.sameSite ?? 'lax' }))
         },
       },
     }

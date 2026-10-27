@@ -2,7 +2,10 @@ import 'server-only'
 /**
  * Supabase server client (Next.js App Router).
  * À utiliser dans les Server Components, Route Handlers et Server Actions.
- * Les cookies HttpOnly transportent la session; aucune donnée sensible côté JS.
+ * Cookies de session gérés par @supabase/ssr : SameSite=Lax et, en production, Secure (HTTPS
+ * uniquement, forcé ci-dessous et par HSTS). Ils ne sont pas HttpOnly, car le client Supabase
+ * du navigateur doit lire la session ; la défense contre leur vol repose sur l'absence de XSS
+ * (CSP, rendu échappé) et sur SameSite. Aucune donnée métier sensible n'y transite (jetons d'auth).
  *
  * Typage : @supabase/ssr 0.5.x et supabase-js 2.1xx n'ont plus le même ordre
  * de génériques sur SupabaseClient ; on re-type explicitement le retour en
@@ -28,7 +31,10 @@ export async function createClient(): Promise<TypedSupabaseClient> {
         },
         setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
           try {
-            cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
+            // En production : Secure forcé (HTTPS uniquement), SameSite=Lax par défaut.
+            const secure = process.env.NODE_ENV === 'production'
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, { ...options, secure: options.secure ?? secure, sameSite: options.sameSite ?? 'lax' }))
           } catch {
             // Appel depuis un Server Component (sans écriture possible) :
             // on ignore. Le middleware se charge du rafraîchissement.
