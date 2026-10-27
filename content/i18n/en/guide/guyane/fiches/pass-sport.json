@@ -1,0 +1,63 @@
+{
+  "slug": "pass-sport",
+  "territoire": "guyane",
+  "categorie": "loisirs",
+  "titre": "Pass'Sport: a discount on sports club membership",
+  "resume": "€50 off membership of a sports club for 2026-2027, to be used before December 31, 2026: who is eligible, how to get the code and what to bring to the club.",
+  "aQuoiCaSert": "The Pass'Sport (a government sports grant for young people) reduces the cost of enrolling your child in a sports club or a partner gym. The club deducts €50 directly from the license or membership fee. If the fee is below €50, the club undertakes to give the young person the benefit of the difference (equipment, sportswear).",
+  "quiEstConcerne": [
+    "Young people aged 6 to 17 (inclusive) whose Caf (Caisse d'allocations familiales, the family benefits office) or MSA (Mutualité sociale agricole, the farmers' social security fund) family quotient is €699 or less.",
+    "Young people aged 6 to 19 (inclusive) receiving the AEEH (disabled child education allowance), and aged 16 to 30 (inclusive) receiving the AAH (adult disability allowance).",
+    "Students on grants under 28 (needs-based grant, annual Crous student services aid, regional grant for health and social care training)."
+  ],
+  "aSavoir": [
+    "Amount for 2026-2027: €50 per young person (€70 in 2025-2026).",
+    "Valid for enrollments made between September 1 and December 31, 2026.",
+    "Codes were emailed from September 9 to 13, 2026, to the address known to the Caf, the MSA or the Crous, with one email per eligible minor child. Remember to check your spam folder.",
+    "No email: check eligibility on the official website, then request the code online (FranceConnect recommended). It arrives by email within 72 hours at most.",
+    "Separated parents: eligibility depends on the family quotient of the main Caf beneficiary. The code is therefore sent to that parent's email address: share it if the other parent is enrolling the child.",
+    "An additional Caf grant for equipment has been announced for the 1st quarter of 2027 for beneficiaries aged 6 to 17 who activated their Pass'Sport at the start of the 2026 school year. Its amount has not been specified."
+  ],
+  "documents": [
+    { "id": "code-pass", "libelle": "Child's Pass'Sport code", "detail": "In the email received or obtained online. One code per child.", "coffre": "autres" },
+    { "id": "certificat", "libelle": "Medical certificate or health questionnaire, if the club asks for it", "detail": "The rules depend on the sport and the federation: ask the club.", "coffre": "sante" },
+    { "id": "dossier-club", "libelle": "Club registration form and the documents it asks for", "detail": "The list depends on the club: ask for it before you go.", "coffre": "autres" },
+    { "id": "licence", "libelle": "License or membership receipt showing the discount", "detail": "Keep it as proof of payment and of the discount applied.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Check your child's eligibility", "detail": "On the official Pass'Sport website." },
+    { "titre": "Get your code", "detail": "In the email you received, or by requesting it online." },
+    { "titre": "Choose a partner club", "detail": "List on the official website. A club not on the list may still be a partner: ask it directly." },
+    { "titre": "Check before you go", "detail": "Pass'Sport code written down or printed, club registration form filled in, medical certificate or health questionnaire if requested, means of payment for the remaining amount, enrollment before December 31, 2026." },
+    { "titre": "Show the code to the club when enrolling", "detail": "The club deducts €50 from the membership fee." },
+    { "titre": "Record the remaining cost in the Journal" }
+  ],
+  "ou": [
+    { "nom": "Official Pass'Sport website", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" },
+    { "nom": "France Services or your town's CCAS (municipal social welfare center)", "detail": "Free help with the online application." }
+  ],
+  "liens": [
+    { "titre": "Pass'Sport, young people and parents (sports.gouv.fr)", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" },
+    { "titre": "Pass'Sport 2026-2027, news (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Use the Pass'Sport before December 31, 2026", "evenement": "activite" },
+    { "type": "depense", "titre": "Sports club membership", "categorie": "activites" },
+    { "type": "calendrier", "titre": "Sports training", "evenement": "activite" },
+    { "type": "coffre", "titre": "Sports license", "categorie": "autres" },
+    { "type": "coffre", "titre": "Sports medical certificate", "categorie": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "December 31, 2026: last date to enroll with the 2026-2027 Pass'Sport" }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the list of partner clubs in French Guiana, on the official website or directly with the club.",
+    "The amount and terms of the Caf equipment grant announced for 2027 should be checked with the Caf de la Guyane."
+  ],
+  "motsCles": ["sport", "club", "Pass'Sport", "sports license", "activity", "discount"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, news item A15850 Pass'Sport 2026-2027", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-09-02" },
+    { "titre": "Pass'Sport, young people and parents", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" }
+  ]
+}

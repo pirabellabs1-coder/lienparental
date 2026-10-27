@@ -1,0 +1,122 @@
+{
+  "slug": "attestation-hebergement",
+  "titre": "Declaração de hospedagem (attestation d’hébergement)",
+  "categorie": "autre",
+  "description": "Declare sob palavra de honra que você hospeda uma pessoa na sua casa.",
+  "badge": "Nouveau",
+  "champs": [
+    {
+      "key": "nom_complet",
+      "label": "Seu nome e sobrenome",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Julie Martin",
+      "options": []
+    },
+    {
+      "key": "adresse",
+      "label": "Seu endereço",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "Número e rua",
+      "exemple": "12 rue des Palmistes",
+      "options": []
+    },
+    {
+      "key": "code_postal_ville",
+      "label": "CEP e cidade",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "97300 Cayenne",
+      "options": []
+    },
+    {
+      "key": "telephone",
+      "label": "Telefone",
+      "type": "telephone",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "email",
+      "label": "E-mail",
+      "type": "email",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "date_naissance",
+      "label": "Sua data de nascimento",
+      "type": "date",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "lieu_naissance",
+      "label": "Seu local de nascimento",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Cayenne",
+      "options": []
+    },
+    {
+      "key": "personne_hebergee",
+      "label": "Nome e sobrenome da pessoa hospedada",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Lina Martin",
+      "options": []
+    },
+    {
+      "key": "date_debut",
+      "label": "Hospedada desde",
+      "type": "date",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "ville",
+      "label": "Cidade onde você assina",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Cayenne",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Data da carta",
+      "type": "date",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    }
+  ],
+  "corps": "# Attestation sur l’honneur\n\nJe soussigné(e) {{nom_complet}}, né(e) le {{date_naissance}} à {{lieu_naissance}}, demeurant {{adresse}}, {{code_postal_ville}}, atteste sur l’honneur héberger à mon domicile {{personne_hebergee}} depuis le {{date_debut}}.\n\nCette attestation est établie pour servir et valoir ce que de droit.",
+  "miseEnPage": {
+    "type": "document",
+    "expediteur": "{{nom_complet}}\n{{adresse}}\n{{code_postal_ville}}\n{{telephone}}\n{{email}}",
+    "destinataire": "",
+    "lieuDate": "Fait à {{ville}}, le {{date}}",
+    "objet": "",
+    "signature": "{{nom_complet}}",
+    "piedDePage": "Attestation sur l’honneur",
+    "logo": true,
+    "police": "helvetica",
+    "taille": "normale",
+    "marges": "normales"
+  }
+}

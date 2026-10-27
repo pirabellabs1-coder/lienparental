@@ -1,0 +1,64 @@
+{
+  "slug": "prime-naissance-paje",
+  "territoire": "guyane",
+  "categorie": "naissance",
+  "titre": "Bônus de nascimento e auxílio básico (Paje)",
+  "resume": "Os dois benefícios da Caf ligados à chegada de um bebê: condições de renda, valores de 2026, datas de pagamento e o que declarar a tempo.",
+  "aQuoiCaSert": "A Paje (prestation d'accueil du jeune enfant, benefício da primeira infância) inclui, entre outros, o bônus de nascimento (prime à la naissance), pago uma vez durante a gravidez, e o auxílio básico (allocation de base), pago todo mês até a criança completar 3 anos. Eles ajudam a arcar com as despesas da chegada e dos cuidados de uma criança pequena. Os dois são pagos pela Caf (Caisse d'allocations familiales, órgão de benefícios familiares) e dependem de condições de renda.",
+  "quiEstConcerne": [
+    "Os futuros pais e os pais de uma criança com menos de 3 anos cuja renda não ultrapassa os tetos.",
+    "As famílias que moram na França, inclusive na Guiana Francesa, mais de 9 meses por ano."
+  ],
+  "aSavoir": [
+    "Bônus de nascimento: 1.093,11 € líquidos por criança esperada (service-public.gouv.fr, valor verificado em 1º de abril de 2026).",
+    "Para o bônus, a gravidez deve ser declarada antes do fim do 3º mês e o primeiro exame pré-natal deve ter sido feito. Ele é pago antes do último dia do mês civil seguinte ao 6º mês de gravidez.",
+    "Tetos 2026 (rendas líquidas por categoria de 2024) para 1 filho: 49.054 € para casal com duas rendas ou pai ou mãe solo, 37.118 € para casal com uma só renda. Mais 8.908 € por filho adicional.",
+    "Auxílio básico: 198,16 € por mês na taxa integral ou 99,08 € na taxa parcial, conforme a renda. É pago a partir do mês seguinte ao nascimento, até o mês anterior aos 3 anos da criança.",
+    "Nos departamentos ultramarinos, incluindo a Guiana Francesa, o auxílio básico não se acumula com os auxílios familiares (allocations familiales) ou seus acréscimos para um filho a cargo, nem com o complemento familiar (complément familial) (service-public.gouv.fr).",
+    "Pais separados: a Paje não é dividida entre os pais, mesmo em residência alternada. É paga integralmente ao genitor designado como beneficiário (service-public.gouv.fr)."
+  ],
+  "documents": [
+    { "id": "declaration-grossesse", "libelle": "Declaração de gravidez", "detail": "Feita pelo médico ou pela parteira no primeiro exame pré-natal, antes do fim do 3º mês. É enviada à Assurance Maladie (seguro de saúde público francês) e à Caf. Guarde a sua via ou o comprovante.", "coffre": "sante" },
+    { "id": "identite-parents", "libelle": "Documento de identidade ou autorização de residência de cada um dos pais", "detail": "Cópia de documento válido, pedida se você ainda não é beneficiário da Caf.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (dados bancários) do genitor beneficiário", "detail": "Em seu nome, para o pagamento.", "coffre": "finances" },
+    { "id": "avis-imposition", "libelle": "Aviso de imposto 2025 sobre a renda de 2024", "detail": "Cópia. Disponível no seu espaço impots.gouv.fr. A renda serve para verificar os tetos.", "coffre": "finances" },
+    { "id": "acte-naissance", "libelle": "Certidão de nascimento da criança ou livro de família (livret de famille) atualizado", "detail": "Cópia, para declarar o nascimento à Caf. Certidão gratuita em service-public.gouv.fr ou na prefeitura (mairie) do lugar de nascimento.", "coffre": "finances" },
+    { "id": "notification-caf", "libelle": "Notificações de direitos da Caf", "detail": "Disponíveis no seu espaço Mon Compte em caf.fr.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Faça o primeiro exame pré-natal antes do fim do 3º mês", "detail": "O profissional de saúde faz a declaração de gravidez. É ela que abre o direito ao bônus." },
+    { "titre": "Crie ou atualize o seu espaço em caf.fr", "detail": "Se você ainda não é beneficiário, faça um pedido de benefícios on-line. Informe a gravidez se a Caf não a recebeu." },
+    { "titre": "Confira antes de enviar o processo", "detail": "Declaração de gravidez bem transmitida, contatos e RIB atualizados, renda declarada, situação familiar exata (casal, pai ou mãe solo). Uma situação mal declarada pode atrasar ou distorcer o cálculo." },
+    { "titre": "Declare o nascimento à Caf", "detail": "No seu espaço on-line, seção mudança de situação, assim que a certidão de nascimento for lavrada." },
+    { "titre": "Acompanhe os pagamentos", "detail": "O bônus é pago antes do último dia do mês civil seguinte ao 6º mês de gravidez. O auxílio básico é pago todo mês a partir do mês seguinte ao nascimento." }
+  ],
+  "ou": [
+    { "nom": "Caf de la Guyane", "detail": "Atendimento com agendamento em Cayenne, Kourou e Saint-Laurent-du-Maroni. Procedimentos on-line no espaço Mon Compte.", "url": "https://caf.fr/allocataires/caf-de-la-guyane" }
+  ],
+  "liens": [
+    { "titre": "Bônus de nascimento (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550" },
+    { "titre": "Auxílio básico da Paje (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552" },
+    { "titre": "Residência alternada e benefícios familiares (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Primeiro exame pré-natal e declaração de gravidez antes do fim do 3º mês", "evenement": "sante" },
+    { "type": "rappel", "titre": "Declarar o nascimento à Caf", "evenement": "autre" },
+    { "type": "coffre", "titre": "Declaração de gravidez", "categorie": "sante" },
+    { "type": "coffre", "titre": "Notificação de direitos Paje da Caf", "categorie": "finances" }
+  ],
+  "datesLimites": [
+    { "libelle": "Declaração de gravidez antes do fim do 3º mês", "detail": "Condição para receber o bônus de nascimento." },
+    { "libelle": "Auxílio básico até o mês anterior aos 3 anos da criança" }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente com a Caf de la Guyane: as fichas nacionais não indicam valor ou teto próprio da Guiana Francesa, e a Caf escolhe entre o auxílio básico e os auxílios familiares conforme a regra de não acumulação aplicável nos departamentos ultramarinos (DOM)."
+  ],
+  "motsCles": ["Paje", "bônus de nascimento", "auxílio básico", "gravidez", "Caf", "bebê"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2550 Bônus de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F2552 Auxílio básico da Paje", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
+    { "titre": "Caf de la Guyane", "url": "https://caf.fr/allocataires/caf-de-la-guyane" }
+  ]
+}

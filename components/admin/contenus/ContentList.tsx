@@ -11,6 +11,7 @@ import { Archive, ArchiveRestore, Clock, Copy, Eye, EyeOff, Inbox, MoreHorizonta
 import { ConfirmDialog } from '@/components/ui'
 import { cn } from '@/lib/cn'
 import { CONTENT_KIND_LABEL, type ContentKind, type ContentRecord, type ContentStatus } from '@/lib/contenus/types'
+import { TRANSLATION_LOCALES, TRANSLATION_LOCALE_LABEL, translationStatus, type TranslationStatus } from '@/lib/contenus/i18n'
 import { ADMIN_PATHS, AdminApiError, contenusApi } from './client-api'
 import { StatusPill, dateTimeFr } from './StatusPill'
 import { inputCls } from './form'
@@ -41,6 +42,11 @@ export function ContentList<K extends ContentKind>({
   const labels = CONTENT_KIND_LABEL[kind]
 
   useEffect(() => setRows(records), [records])
+
+  // État des traductions par ligne (validation zod) : calculé une fois par liste, pas à chaque frappe.
+  const trStates = useMemo(() => new Map(rows.map((r) => [
+    r.id, TRANSLATION_LOCALES.map((l) => [l, translationStatus(kind, r.data, r.translations?.[l])] as const),
+  ])), [rows, kind])
 
   const counts = useMemo(() => {
     const c = { tous: rows.length, brouillon: 0, publie: 0, archive: 0 }
@@ -127,6 +133,7 @@ export function ContentList<K extends ContentKind>({
             if (extra) metas.push(<span key="x">{extra.cell(r)}</span>)
             metas.push(<span key="d" className="inline-flex items-center gap-1"><Clock className="h-3.5 w-3.5 text-night-400" aria-hidden="true" />{dateTimeFr(r.updatedAt)}</span>)
             metas.push(<span key="v" className="tabular-nums">v{r.version}</span>)
+            metas.push(<TranslationBadges key="tr" states={trStates.get(r.id) ?? []} />)
             return (
               <li key={r.id} className={cn('group flex flex-col gap-3 px-4 py-3.5 transition-colors hover:bg-night-50/60 md:flex-row md:items-center md:px-5', busy === r.id && 'opacity-60')}>
                 <div className="min-w-0 flex-1">
@@ -190,6 +197,27 @@ export function ContentList<K extends ContentKind>({
         }}
       />
     </div>
+  )
+}
+
+const TR_STATE: Record<TranslationStatus, { mark: string; label: string; cls: string }> = {
+  traduit: { mark: '✓', label: 'traduit', cls: 'bg-leaf-50 text-leaf-800 ring-leaf-200' },
+  manquant: { mark: '–', label: 'traduction manquante', cls: 'bg-night-50 text-night-500 ring-night-100' },
+  'a-revoir': { mark: '!', label: 'traduction à revoir (affichée en français)', cls: 'bg-gold-50 text-gold-800 ring-gold-200' },
+}
+
+/** Indicateur EN / PT d'une ligne : traduit, manquant ou à revoir (structure différente du français). */
+function TranslationBadges({ states }: { states: readonly (readonly [keyof typeof TRANSLATION_LOCALE_LABEL, TranslationStatus])[] }) {
+  return (
+    <span className="inline-flex items-center gap-1">
+      {states.map(([l, st]) => (
+        <span key={l} title={`${TRANSLATION_LOCALE_LABEL[l]} : ${TR_STATE[st].label}`}
+          className={cn('inline-flex items-center gap-0.5 rounded-md px-1.5 py-0.5 text-[11px] font-bold uppercase ring-1 ring-inset', TR_STATE[st].cls)}>
+          {l}<span aria-hidden="true">{TR_STATE[st].mark}</span>
+          <span className="sr-only">{` : ${TR_STATE[st].label}`}</span>
+        </span>
+      ))}
+    </span>
   )
 }
 

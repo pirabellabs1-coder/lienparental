@@ -1,0 +1,25 @@
+{
+  "slug": "je-viens-de-me-separer",
+  "territoire": "guyane",
+  "titre": "I have just separated",
+  "resume": "The essential procedures of the first weeks, to secure your rights and your children's arrangements.",
+  "ordre": 1,
+  "elements": [
+    { "id": "situation-caf", "titre": "Check my CAF situation (family benefits office)", "detail": "Report the separation so that your rights are recalculated on your own income alone.", "fiche": "declarer-separation-caf" },
+    { "id": "adresse-enfant", "titre": "Change the child's address", "detail": "Caf, school, social security, tax office: who to inform and with which supporting documents.", "fiche": "changer-adresse-enfant-separation" },
+    { "id": "mettre-a-jour-ecole", "titre": "Update the school", "detail": "Contact details, address and people authorized to pick up the child.", "fiche": "inscrire-enfant-ecole" },
+    { "id": "compte-bancaire", "titre": "Have my own bank account", "fiche": "compte-bancaire-droit-au-compte" },
+    { "id": "assurance-scolaire", "titre": "Check the school insurance", "detail": "Third-party liability and personal accident cover up to date.", "fiche": "assurance-scolaire" },
+    { "id": "mutuelle", "titre": "Check the top-up health insurance (mutuelle) covering the child", "fiche": "mutuelle-enfant" },
+    { "id": "documents-enfant", "titre": "Organize the child's documents", "detail": "ID, health record, certificates: keep them in the vault.", "fiche": "papiers-identite-mineur" },
+    { "id": "livret-famille", "titre": "Request a second family record book (livret de famille)", "fiche": "livret-de-famille" },
+    { "id": "rendez-vous", "titre": "Add important appointments", "detail": "Health, school, hearings: note them in the calendar with a reminder." },
+    { "id": "aides", "titre": "Check which benefits I am entitled to", "detail": "For example the allocation de soutien familial (family support allowance) if the other parent pays little or no child support.", "fiche": "allocation-soutien-familial" },
+    { "id": "pension-impayee", "titre": "If child support is not paid: the ARIPA (child support recovery agency)", "fiche": "pension-alimentaire-aripa" },
+    { "id": "mediation", "titre": "Find a mediation service", "detail": "A neutral third party to help you agree on the children's arrangements.", "fiche": "mediation-familiale" },
+    { "id": "aide-juridictionnelle", "titre": "Check whether I am entitled to legal aid (aide juridictionnelle)", "fiche": "aide-juridictionnelle" },
+    { "id": "jaf", "titre": "Apply to the family court judge (juge aux affaires familiales) if needed", "fiche": "saisir-juge-affaires-familiales" },
+    { "id": "voyage", "titre": "Child's travel: authorization to leave the country", "fiche": "autorisation-sortie-territoire" },
+    { "id": "decisions", "titre": "File important decisions and documents", "detail": "Judgments, agreements, letters: file them in the Court file folder of the vault." }
+  ]
+}

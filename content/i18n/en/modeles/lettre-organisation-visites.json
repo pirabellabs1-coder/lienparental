@@ -1,0 +1,139 @@
+{
+  "slug": "lettre-organisation-visites",
+  "titre": "Letter to the other parent: visiting arrangements",
+  "categorie": "communication",
+  "description": "Propose clear, calm arrangements for the child’s visits and handovers.",
+  "badge": "Populaire",
+  "champs": [
+    {
+      "key": "nom_complet",
+      "label": "Your first and last name",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Julie Martin",
+      "options": []
+    },
+    {
+      "key": "adresse",
+      "label": "Your address",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "Number and street",
+      "exemple": "12 rue des Palmistes",
+      "options": []
+    },
+    {
+      "key": "code_postal_ville",
+      "label": "Postal code and town",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "97300 Cayenne",
+      "options": []
+    },
+    {
+      "key": "telephone",
+      "label": "Phone",
+      "type": "telephone",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "email",
+      "label": "Email address",
+      "type": "email",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "autre_parent",
+      "label": "Other parent’s first name",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Marc",
+      "options": []
+    },
+    {
+      "key": "prenom_enfant",
+      "label": "Child’s first name",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Lina",
+      "options": []
+    },
+    {
+      "key": "jour",
+      "label": "Handover day",
+      "type": "choix",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Vendredi",
+      "options": [
+        "Lundi",
+        "Mardi",
+        "Mercredi",
+        "Jeudi",
+        "Vendredi",
+        "Samedi",
+        "Dimanche"
+      ]
+    },
+    {
+      "key": "heure",
+      "label": "Handover time",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "18 h",
+      "options": []
+    },
+    {
+      "key": "lieu",
+      "label": "Handover place",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "devant l’école",
+      "options": []
+    },
+    {
+      "key": "ville",
+      "label": "Town where you sign",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Cayenne",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Date of the letter",
+      "type": "date",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    }
+  ],
+  "corps": "{{autre_parent}},\n\nJe souhaite que nous puissions convenir ensemble d’une organisation stable pour les visites de {{prenom_enfant}} dans les semaines à venir.\n\nJe te propose que les transitions aient lieu le {{jour}} à {{heure}}, {{lieu}}, afin de limiter les trajets et de rassurer {{prenom_enfant}}.\n\nJe reste disponible pour en discuter et ajuster ce calendrier si besoin, dans l’intérêt de notre enfant.\n\nBien cordialement,",
+  "miseEnPage": {
+    "type": "lettre",
+    "expediteur": "{{nom_complet}}\n{{adresse}}\n{{code_postal_ville}}\n{{telephone}}\n{{email}}",
+    "destinataire": "{{autre_parent}}",
+    "lieuDate": "{{ville}}, le {{date}}",
+    "objet": "Organisation des visites de {{prenom_enfant}}",
+    "signature": "{{nom_complet}}",
+    "piedDePage": "",
+    "logo": true,
+    "police": "helvetica",
+    "taille": "normale",
+    "marges": "normales"
+  }
+}

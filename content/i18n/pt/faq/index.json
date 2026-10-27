@@ -1,0 +1,39 @@
+{
+  "categories": [
+    { "key": "prise-en-main", "label": "Primeiros passos" },
+    { "key": "confidentialite-securite", "label": "Privacidade e segurança" },
+    { "key": "coffre-fort", "label": "Cofre" },
+    { "key": "temoignages", "label": "Depoimentos" },
+    { "key": "coach-ia", "label": "Coach com IA" },
+    { "key": "abonnement", "label": "Assinatura" },
+    { "key": "compte", "label": "Conta" }
+  ],
+  "questions": [
+    { "slug": "qu-est-ce-que-lien-parental", "question": "O que é o Lien Parental?", "categoryKey": "prise-en-main" },
+    { "slug": "comment-creer-mon-compte", "question": "Como criar minha conta?", "categoryKey": "prise-en-main" },
+    { "slug": "installer-lien-parental-telephone", "question": "Como instalar o Lien Parental no meu celular?", "categoryKey": "prise-en-main" },
+
+    { "slug": "mes-donnees-sont-elles-chiffrees", "question": "Meus dados são criptografados?", "categoryKey": "confidentialite-securite" },
+    { "slug": "qui-peut-voir-mes-informations", "question": "Quem pode ver minhas informações?", "categoryKey": "confidentialite-securite" },
+    { "slug": "que-se-passe-t-il-si-je-perds-mon-mot-de-passe", "question": "O que acontece se eu perder minha senha?", "categoryKey": "confidentialite-securite" },
+
+    { "slug": "quels-documents-mettre-coffre-fort", "question": "Quais documentos posso guardar no cofre?", "categoryKey": "coffre-fort" },
+    { "slug": "taille-limite-fichiers", "question": "Existe um limite de tamanho para os arquivos?", "categoryKey": "coffre-fort" },
+    { "slug": "classer-documents-coffre-fort", "question": "Como organizar meus documentos no cofre?", "categoryKey": "coffre-fort" },
+
+    { "slug": "comment-ajouter-temoignage", "question": "Como adicionar um depoimento?", "categoryKey": "temoignages" },
+    { "slug": "qui-peut-ecrire-temoignage", "question": "Quem pode escrever um depoimento para mim?", "categoryKey": "temoignages" },
+    { "slug": "valeur-juridique-temoignages", "question": "Os depoimentos têm valor jurídico?", "categoryKey": "temoignages" },
+
+    { "slug": "que-fait-le-coach-ia", "question": "O que exatamente o Coach com IA faz?", "categoryKey": "coach-ia" },
+    { "slug": "coach-ia-donne-t-il-conseil-juridique", "question": "O Coach com IA dá conselhos jurídicos?", "categoryKey": "coach-ia" },
+    { "slug": "coach-ia-neutre-entre-parents", "question": "O Coach com IA é neutro entre os dois pais?", "categoryKey": "coach-ia" },
+
+    { "slug": "difference-gratuit-premium", "question": "Qual é a diferença entre a versão gratuita e o Premium?", "categoryKey": "abonnement" },
+    { "slug": "comment-resilier-abonnement", "question": "Como cancelar minha assinatura?", "categoryKey": "abonnement" },
+    { "slug": "remboursement-possible", "question": "Posso ser reembolsado?", "categoryKey": "abonnement" },
+
+    { "slug": "supprimer-mon-compte", "question": "Como excluir minha conta definitivamente?", "categoryKey": "compte" },
+    { "slug": "exporter-toutes-mes-donnees", "question": "Como exportar todos os meus dados?", "categoryKey": "compte" }
+  ]
+}

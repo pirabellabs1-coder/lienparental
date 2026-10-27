@@ -1,0 +1,113 @@
+{
+  "slug": "demande-mediation-familiale",
+  "titre": "Pedido de mediação familiar",
+  "categorie": "juridique",
+  "description": "Solicite um serviço de mediação familiar para retomar o diálogo em torno da criança.",
+  "badge": null,
+  "champs": [
+    {
+      "key": "nom_complet",
+      "label": "Seu nome e sobrenome",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Julie Martin",
+      "options": []
+    },
+    {
+      "key": "adresse",
+      "label": "Seu endereço",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "Número e rua",
+      "exemple": "12 rue des Palmistes",
+      "options": []
+    },
+    {
+      "key": "code_postal_ville",
+      "label": "CEP e cidade",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "97300 Cayenne",
+      "options": []
+    },
+    {
+      "key": "telephone",
+      "label": "Telefone",
+      "type": "telephone",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "email",
+      "label": "E-mail",
+      "type": "email",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "service",
+      "label": "Serviço de mediação familiar",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Service de médiation familiale de Cayenne",
+      "options": []
+    },
+    {
+      "key": "adresse_service",
+      "label": "Endereço do serviço",
+      "type": "texte",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "autre_parent",
+      "label": "Nome e sobrenome do outro genitor",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Marc Dupont",
+      "options": []
+    },
+    {
+      "key": "ville",
+      "label": "Cidade onde você assina",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Cayenne",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Data da carta",
+      "type": "date",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    }
+  ],
+  "corps": "Madame, Monsieur,\n\nJe souhaite engager une démarche de médiation familiale avec {{autre_parent}} afin de trouver un accord durable concernant l’organisation de la vie de notre enfant.\n\nJe vous remercie de bien vouloir me proposer un premier entretien d’information.\n\nVeuillez agréer, Madame, Monsieur, mes salutations distinguées.",
+  "miseEnPage": {
+    "type": "lettre",
+    "expediteur": "{{nom_complet}}\n{{adresse}}\n{{code_postal_ville}}\n{{telephone}}\n{{email}}",
+    "destinataire": "{{service}}\n{{adresse_service}}",
+    "lieuDate": "{{ville}}, le {{date}}",
+    "objet": "Demande de rendez-vous de médiation familiale",
+    "signature": "{{nom_complet}}",
+    "piedDePage": "",
+    "logo": true,
+    "police": "helvetica",
+    "taille": "normale",
+    "marges": "normales"
+  }
+}

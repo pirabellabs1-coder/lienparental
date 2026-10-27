@@ -1,0 +1,18 @@
+[
+  {
+    "id": "demo-assurance-scolaire",
+    "territoire": "guyane",
+    "categorie": "assurances",
+    "nom": "Example Insurance (fictitious name)",
+    "type": "sponsorise",
+    "description": "Fictitious example shown only in demo mode, to illustrate how a partner offer would appear. No real company is involved.",
+    "criteres": [
+      { "libelle": "Cover included", "valeur": "Third-party liability and personal accident (example)" },
+      { "libelle": "Period covered", "valeur": "All year round, in and out of school (example)" },
+      { "libelle": "Sign-up", "valeur": "Online (example)" },
+      { "libelle": "Cancellation", "valeur": "According to the terms and conditions (example)" }
+    ],
+    "lien": null,
+    "demo": true
+  }
+]

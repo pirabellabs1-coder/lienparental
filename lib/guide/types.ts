@@ -164,7 +164,10 @@ export type Territoire = z.infer<typeof territoireSchema>
 export type Partenaire = z.infer<typeof partenaireSchema>
 
 /** Vue allégée pour la recherche et les listes (envoyée au navigateur). */
-export type FicheResume = Pick<Fiche, 'slug' | 'categorie' | 'titre' | 'resume' | 'motsCles'>
+export type FicheResume = Pick<Fiche, 'slug' | 'categorie' | 'titre' | 'resume' | 'motsCles'> & {
+  /** Attribut `lang` si la fiche s'affiche dans une autre langue que l'interface (non traduite). */
+  lang?: string
+}
 
 // --- Progression --------------------------------------------------------------
 

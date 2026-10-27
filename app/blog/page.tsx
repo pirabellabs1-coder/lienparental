@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { listPosts, siteUrl } from '@/lib/blog/queries'
 import { BLOG_CATEGORIES } from '@/lib/blog/types'
@@ -35,7 +35,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 export default async function BlogPage({ searchParams }: Props) {
   const t = await getTranslations('public.blog')
   const sp = await searchParams
-  const all = await listPosts()
+  const all = await listPosts(await getLocale())
   const cat = BLOG_CATEGORIES.find((c) => c.key === one(sp.categorie))?.key
   const filtered = cat ? all.filter((p) => p.categorie === cat) : all
   const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))

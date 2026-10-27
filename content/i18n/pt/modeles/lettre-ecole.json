@@ -1,0 +1,122 @@
+{
+  "slug": "lettre-ecole",
+  "titre": "Carta à escola",
+  "categorie": "scolaire",
+  "description": "Informe a escola sobre a situação dos pais e peça que as informações sejam enviadas aos dois pais.",
+  "badge": null,
+  "champs": [
+    {
+      "key": "nom_complet",
+      "label": "Seu nome e sobrenome",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Julie Martin",
+      "options": []
+    },
+    {
+      "key": "adresse",
+      "label": "Seu endereço",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "Número e rua",
+      "exemple": "12 rue des Palmistes",
+      "options": []
+    },
+    {
+      "key": "code_postal_ville",
+      "label": "CEP e cidade",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "97300 Cayenne",
+      "options": []
+    },
+    {
+      "key": "telephone",
+      "label": "Telefone",
+      "type": "telephone",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "email",
+      "label": "E-mail",
+      "type": "email",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "etablissement",
+      "label": "Nome da escola",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "École élémentaire Jean Macé",
+      "options": []
+    },
+    {
+      "key": "prenom_enfant",
+      "label": "Nome e sobrenome da criança",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Lina Martin",
+      "options": []
+    },
+    {
+      "key": "classe",
+      "label": "Turma",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "CE2",
+      "options": []
+    },
+    {
+      "key": "coordonnees_autre_parent",
+      "label": "Dados de contato do outro genitor",
+      "type": "texte_long",
+      "obligatoire": true,
+      "aide": "Nome, endereço, telefone, e-mail",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "ville",
+      "label": "Cidade onde você assina",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Cayenne",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Data da carta",
+      "type": "date",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    }
+  ],
+  "corps": "Madame, Monsieur,\n\nJe vous informe que les parents de {{prenom_enfant}}, scolarisé(e) en classe de {{classe}}, sont séparés et exercent conjointement l’autorité parentale.\n\nJe vous remercie de bien vouloir adresser l’ensemble des informations scolaires aux deux parents, à leurs adresses respectives.\n\nJe vous prie d’agréer, Madame, Monsieur, mes salutations distinguées.\n\n---\n\n## Coordonnées des parents\n\n- Parent 1 : {{nom_complet}}, {{adresse}}, {{code_postal_ville}}\n- Parent 2 : {{coordonnees_autre_parent}}",
+  "miseEnPage": {
+    "type": "lettre",
+    "expediteur": "{{nom_complet}}\n{{adresse}}\n{{code_postal_ville}}\n{{telephone}}\n{{email}}",
+    "destinataire": "À l’attention de la direction\n{{etablissement}}",
+    "lieuDate": "{{ville}}, le {{date}}",
+    "objet": "Transmission des informations scolaires de {{prenom_enfant}}",
+    "signature": "{{nom_complet}}",
+    "piedDePage": "",
+    "logo": true,
+    "police": "helvetica",
+    "taille": "normale",
+    "marges": "normales"
+  }
+}

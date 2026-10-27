@@ -13,6 +13,7 @@ export const dynamic = 'force-dynamic'
 const bodySchema = z.object({ what: z.enum(['guide', 'modeles', 'blog', 'aide']) })
 
 const REVALIDATE = { guide: ['fiche'], modeles: ['modele'], blog: ['article'], aide: ['faq', 'conseil'] } as const
+// Les traductions des fichiers (content/i18n/<locale>/…) sont importées avec chaque contenu (lib/contenus/repo.importSeeds).
 
 export async function POST(req: NextRequest) {
   return adminRoute(req, async (ctx) => {

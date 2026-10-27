@@ -14,7 +14,8 @@ export type Block =
 
 export type ParsedDoc = { meta: Record<string, string>; blocks: Block[] }
 
-const FEEDBACK_LINE = /^cet article a-t-il été utile/i
+// Ligne d'appel au vote des fichiers du dépôt (français et traductions EN/PT) : remplacée par ArticleFeedback.
+const FEEDBACK_LINE = /^(cet article a-t-il été utile|was this (article|page) helpful|este artigo (te |lhe )?foi útil)/i
 
 export function parseMarkdown(src: string): ParsedDoc {
   const meta: Record<string, string> = {}

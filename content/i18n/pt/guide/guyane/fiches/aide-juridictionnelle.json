@@ -1,0 +1,80 @@
+{
+  "slug": "aide-juridictionnelle",
+  "territoire": "guyane",
+  "categorie": "aides",
+  "titre": "Pedir assistência jurídica gratuita (aide juridictionnelle)",
+  "resume": "Fazer o Estado pagar todo ou parte dos honorários de advogado e das custas, por exemplo perante o juiz de família: limites de 2026, formulário, documentos exatos e onde entregar o pedido em Cayenne.",
+  "aQuoiCaSert": "A assistência jurídica gratuita (aide juridictionnelle, AJ) cobre, total ou parcialmente, os honorários de advogado e as custas judiciais se a sua renda for modesta. Ela é útil num processo perante o juiz de família (juge aux affaires familiales, JAF): residência da criança, pensão alimentícia, autoridade parental. Você continua livre para escolher seu advogado.",
+  "quiEstConcerne": [
+    "Os pais cuja renda fiscal de referência (revenu fiscal de référence) e cujo patrimônio ficam abaixo dos limites, que movem ou respondem a um processo.",
+    "Os filhos menores ouvidos pelo juiz num processo que os envolve: a assistência é concedida sem análise de renda.",
+    "As vítimas de violência conjugal, que podem obter uma assistência provisória."
+  ],
+  "aSavoir": [
+    "Limites de 2026 para a assistência total (renda fiscal de referência): 12.957 € para 1 pessoa, 15.289 € para 2, 17.621 € para 3, 19.095 € para 4, 20.568 € para 5, 22.041 € para 6, 23.514 € para 7.",
+    "Se a sua renda ultrapassar um pouco o limite, é possível uma assistência parcial de 55% ou 25%. Para uma pessoa sozinha: até 15.316 € de renda fiscal de referência para 55%, até 19.433 € para 25%.",
+    "O patrimônio também conta (exceto a residência principal). Para 1 pessoa: no máximo 12.957 € de bens móveis (poupança) e 38.866 € de imóveis. Ultrapassar um limite de patrimônio exclui qualquer assistência.",
+    "Em caso de conflito com o outro genitor que faz parte do mesmo domicílio fiscal, a renda de cada um é analisada individualmente.",
+    "Verifique primeiro seus seguros (residencial, cartão bancário, proteção jurídica): se uma proteção jurídica já cobre as despesas, o pedido de AJ pode ser recusado. É preciso apresentar uma declaração de não cobertura.",
+    "As despesas feitas antes da decisão do escritório de assistência jurídica gratuita (bureau d'aide juridictionnelle) não são cobertas. Faça o pedido o quanto antes, antes da audiência.",
+    "A taxa de sustentação oral (droit de plaidoirie, 13 €) e eventuais condenações (indenizações, multas) não são cobertas pela AJ.",
+    "Recurso contra uma recusa: 15 dias após a notificação. Depois de concedida a AJ, a ação judicial deve ser iniciada dentro de um ano.",
+    "Em caso de urgência, pode ser concedida uma assistência provisória, com a renda verificada depois."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "Formulário de pedido de assistência jurídica gratuita (Cerfa n° 16146)", "detail": "Preenchido on-line no service-public.gouv.fr, impresso, datado e assinado. Obrigatório se o pedido for para outra pessoa, por exemplo seu filho menor.", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Cópia frente e verso do seu documento de identidade", "detail": "Carteira de identidade ou passaporte válido. Estrangeiro: título de residência ou documento equivalente.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Comprovante de endereço com menos de 3 meses (cópia)", "detail": "Conta, recibo de aluguel. Se você mora na casa de alguém: também uma declaração de hospedagem (attestation d'hébergement).", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Cópia do livro de família (livret de famille)", "detail": "Ou documento equivalente para estrangeiro. Livro perdido: segundo livro gratuito na prefeitura (mairie).", "coffre": "jaf" },
+    { "id": "avis-imposition", "libelle": "Último aviso de imposto (avis d'imposition) (cópia)", "detail": "Baixe no seu espaço em impots.gouv.fr. Na falta dele, comprovantes de renda dos últimos 6 meses.", "coffre": "finances" },
+    { "id": "changement-situation", "libelle": "Comprovante de mudança de situação familiar ou de renda", "detail": "Por exemplo separação recente, perda de emprego: declaração, sentença, notificação do France Travail.", "coffre": "jaf" },
+    { "id": "patrimoine", "libelle": "Comprovantes de poupança e de imóveis além da residência principal", "detail": "Extratos de cadernetas, imposto predial (taxe foncière), se tiver.", "coffre": "finances" },
+    { "id": "attestation-assurance", "libelle": "Declaração de não cobertura da sua seguradora (proteção jurídica)", "detail": "Peça à seguradora da casa, do carro ou do cartão bancário.", "coffre": "jaf" },
+    { "id": "pieces-affaire", "libelle": "Documentos do processo", "detail": "Conforme o caso: intimação para a audiência, sentença anterior, carta de aceite do advogado escolhido.", "coffre": "jaf" },
+    { "id": "decision-baj", "libelle": "Decisão do escritório de assistência jurídica gratuita", "detail": "Guarde e envie ao seu advogado.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Verifique seu seguro de proteção jurídica", "detail": "Ligue para a seguradora: se ela cobrir, a AJ não é necessária; caso contrário, peça uma declaração de não cobertura." },
+    { "titre": "Estime seu direito", "detail": "Compare sua renda fiscal de referência (no aviso de imposto) com os limites, ou use o simulador oficial no service-public.gouv.fr." },
+    { "titre": "Escolha um advogado, se quiser", "detail": "Você pode pedir a um advogado que aceite seu caso pela AJ e anexar a carta de aceite. Se ninguém aceitar, o presidente da Ordem dos Advogados (bâtonnier) pode designar um." },
+    { "titre": "Preencha o pedido", "detail": "Formulário Cerfa n° 16146 on-line no service-public.gouv.fr, ou pedido on-line em aidejuridictionnelle.justice.fr com FranceConnect, se a sua situação permitir." },
+    { "titre": "Confira antes de entregar ou enviar", "detail": "Formulário assinado, cópia do documento de identidade, comprovante de endereço com menos de 3 meses, livro de família, último aviso de imposto, declaração da seguradora, intimação ou sentença. Faça uma cópia completa do dossiê para você." },
+    { "titre": "Entregue ou envie o dossiê ao escritório de assistência jurídica gratuita", "detail": "Antes de acionar o juiz: escritório do tribunal judiciaire (tribunal judiciário) do seu domicílio. Depois: escritório do tribunal onde o caso tramita." },
+    { "titre": "Acompanhe a decisão", "detail": "Envie a decisão ao seu advogado. Em caso de recusa, você tem 15 dias para contestar." }
+  ],
+  "ou": [
+    { "nom": "Escritório de assistência jurídica gratuita do Tribunal judiciaire de Cayenne (tribunal de Cayenne)", "detail": "15 avenue du Général de Gaulle, 97300 Cayenne (diretório do Ministério da Justiça).", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-cayenne", "telephone": "+33 5 94 29 76 30" },
+    { "nom": "Pedido on-line de assistência jurídica gratuita", "detail": "Serviço gratuito com FranceConnect, para litígios perante os tribunais cíveis e penais (juridictions judiciaires).", "url": "https://www.aidejuridictionnelle.justice.fr/authentification" },
+    { "nom": "Allô Service Public", "detail": "Informações gratuitas, sem acesso aos dossiês individuais.", "telephone": "3939" }
+  ],
+  "liens": [
+    { "titre": "Assistência jurídica gratuita: condições e procedimentos (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074" },
+    { "titre": "Formulário de pedido de assistência jurídica gratuita (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444" },
+    { "titre": "Pedido on-line de assistência jurídica gratuita (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Pedido de assistência jurídica gratuita (cópia do dossiê)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Decisão do escritório de assistência jurídica gratuita", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Declaração de não cobertura da seguradora", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Assistência jurídica gratuita: recurso em até 15 dias", "evenement": "autre" },
+    { "type": "rappel", "titre": "Iniciar a ação dentro de um ano após a concessão da assistência", "evenement": "autre" },
+    { "type": "depense", "titre": "Taxa de sustentação oral (não coberta pela AJ)", "categorie": "frais-administratifs", "montant": 13, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074" }
+  ],
+  "datesLimites": [
+    { "libelle": "Antes da audiência", "detail": "As despesas feitas antes da decisão do escritório não são cobertas: faça o pedido o quanto antes." },
+    { "libelle": "15 dias", "detail": "Prazo de recurso contra uma decisão do escritório de assistência jurídica gratuita, a partir da notificação." },
+    { "libelle": "1 ano", "detail": "Prazo para entrar na justiça após a concessão da assistência." }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: horário de atendimento do escritório de assistência jurídica gratuita de Cayenne e possibilidade de entrega nos outros locais judiciais da Guiana Francesa (Saint-Laurent-du-Maroni).",
+    "O serviço oficial de pedido on-line foi indicado como reservado a certas situações: verifique se está aberto para um processo na Guiana Francesa; caso contrário, use o formulário em papel."
+  ],
+  "motsCles": ["assistência jurídica gratuita", "AJ", "advogado", "JAF", "custas judiciais", "cerfa 16146", "tribunal Cayenne"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F18074 Assistência jurídica gratuita (aide juridictionnelle)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-06-12" },
+    { "titre": "Service-public.gouv.fr, R1444 Formulário de pedido de assistência jurídica gratuita (Cerfa n° 16146*04)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-09-02" },
+    { "titre": "Service-public.gouv.fr, R66463 Pedido on-line de assistência jurídica gratuita", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463", "verifieLe": "2025-10-15" },
+    { "titre": "Justice.gouv.fr, diretório: Escritório de assistência jurídica gratuita do Tribunal judiciaire de Cayenne", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-cayenne" }
+  ]
+}

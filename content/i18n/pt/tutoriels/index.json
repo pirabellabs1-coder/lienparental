@@ -1,0 +1,10 @@
+{
+  "tutoriels": [
+    { "slug": "bien-demarrer", "title": "Primeiros passos", "duree_min": 5, "coverIcon": "rocket" },
+    { "slug": "utiliser-coach-ia", "title": "Usar o Coach com IA", "duree_min": 4, "coverIcon": "sparkles" },
+    { "slug": "importer-vos-documents", "title": "Importar seus documentos", "duree_min": 3, "coverIcon": "upload" },
+    { "slug": "ajouter-un-temoignage", "title": "Adicionar um depoimento", "duree_min": 4, "coverIcon": "user-check" },
+    { "slug": "exporter-dossier-jaf", "title": "Exportar seu processo judicial (JAF)", "duree_min": 3, "coverIcon": "folder-down" },
+    { "slug": "passer-a-premium", "title": "Passar para o Premium", "duree_min": 2, "coverIcon": "star" }
+  ]
+}

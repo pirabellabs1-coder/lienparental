@@ -4,6 +4,7 @@
  */
 import type { ContentData, ContentKind, ContentRecord, ContentStatus } from './types'
 import { describe } from './types'
+import { sanitizeTranslations } from './i18n-overlay'
 
 export const TABLE: Record<ContentKind, string> = {
   fiche: 'guide_fiches',
@@ -16,8 +17,11 @@ export const TABLE: Record<ContentKind, string> = {
   conseil: 'daily_tips',
 }
 
-/** Colonnes lues (jamais `*` : pas de colonne ajoutée plus tard exposée par mégarde). */
-const ENVELOPE = 'id, version, created_at, updated_at'
+/**
+ * Colonnes lues (jamais `*` : pas de colonne ajoutée plus tard exposée par mégarde).
+ * `translations` (0490_contenus_translations.sql) : { en?, pt? }, écrite à part (repo.saveTranslation).
+ */
+const ENVELOPE = 'id, version, created_at, updated_at, translations'
 export const COLUMNS: Record<ContentKind, string> = {
   fiche: `${ENVELOPE}, statut, published_at, territoire, slug, contenu`,
   parcours: `${ENVELOPE}, statut, published_at, territoire, slug, contenu`,
@@ -126,6 +130,7 @@ export function fromRow<K extends ContentKind>(kind: K, r: Row, data?: ContentDa
     updatedAt: str(r.updated_at),
     publishedAt: typeof r.published_at === 'string' ? r.published_at : null,
     data: d,
+    translations: sanitizeTranslations(r.translations),
   }
 }
 

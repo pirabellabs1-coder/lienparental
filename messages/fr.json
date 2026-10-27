@@ -460,6 +460,14 @@
     "testimonyLead": "Envoyez un formulaire à un témoin et recevez son témoignage dans votre coffre-fort.",
     "testimonyCreate": "Créer ma demande",
     "testimonyView": "Voir mes demandes de témoignage",
+    "tipCategory": {
+      "communication": "Communication",
+      "preuves": "Preuves",
+      "enfant": "Enfant",
+      "organisation": "Organisation",
+      "juridique": "Juridique",
+      "empathie": "Empathie"
+    },
     "tipCarousel": "Conseils du jour",
     "slide": "{n} sur {total}",
     "chooseTip": "Choisir un conseil",

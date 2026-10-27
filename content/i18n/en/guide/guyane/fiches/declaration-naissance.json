@@ -1,0 +1,68 @@
+{
+  "slug": "declaration-naissance",
+  "territoire": "guyane",
+  "categorie": "naissance",
+  "titre": "Registering my child's birth",
+  "resume": "A mandatory, free procedure at the town hall (mairie) of the place of birth, within 5 days, or 8 days in 15 towns of French Guiana. The exact documents to bring, and the family record book issued on this occasion.",
+  "aQuoiCaSert": "Registering the birth creates the child's birth certificate: without it, the child has no civil status. The certificate is drawn up immediately by the civil registrar. For a first child together, the town hall also issues the family record book (livret de famille), free of charge. It is the starting point for rights with the Caf (Caisse d'allocations familiales, the family benefits office) and the Assurance Maladie (French public health insurance). After the deadline, the town hall can no longer register the birth on its own: a court decision is needed.",
+  "quiEstConcerne": [
+    "The father, the second mother, or anyone who attended the birth (doctor, midwife, head of the facility).",
+    "If the mother gives birth alone in hospital, the facility registers the birth."
+  ],
+  "aSavoir": [
+    "Deadline: 5 days after the birth, not counting the day of birth. If the last day falls on a Saturday, Sunday or public holiday, it is moved to the next working day.",
+    "In French Guiana, the deadline is 8 days for births in the towns of Apatou, Awala-Yalimapo, Camopi, Grand-Santi, Iracoubo, Mana, Maripasoula, Ouanary, Papaïchton, Régina, Saint-Élie, Saint-Georges, Saint-Laurent-du-Maroni, Saül and Sinnamary.",
+    "In Cayenne, Kourou, Matoury, Rémire-Montjoly and the other towns, the deadline remains 5 days.",
+    "The birth is registered at the town hall of the place of birth, not necessarily the one where you live.",
+    "After the deadline, a court declaration is required, with a lawyer, before the tribunal judiciaire (judicial court). Late registration can also lead to criminal penalties.",
+    "Unmarried parents: the father must recognize the child (reconnaissance) for parentage to be established. He can do so when registering the birth or before the birth. The mother has nothing to do if her name is on the certificate.",
+    "Family record book: for a first child together, it is drawn up when the birth is registered and issued free of charge by the town hall of the place of birth, on presentation of an ID document."
+  ],
+  "documents": [
+    { "id": "certificat-accouchement", "libelle": "Medical certificate of birth (certificat d'accouchement)", "detail": "Original, given by the maternity unit or the midwife.", "coffre": "sante" },
+    { "id": "identite-parents", "libelle": "ID document of each parent", "detail": "Originals. ID card, passport or residence permit. Bring both parents' documents, even if only one goes, to avoid a second trip.", "coffre": "autres" },
+    { "id": "reconnaissance", "libelle": "Prenatal recognition certificate, if done before the birth", "detail": "Copy given by the town hall or the notary at the time of recognition. For a female couple, joint prenatal recognition made before a notary.", "coffre": "jaf" },
+    { "id": "choix-nom", "libelle": "Joint declaration choosing the child's surname, if you make one", "detail": "Signed by both parents. Form available at the town hall.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Family record book, if you already have one", "detail": "Original, to add the child.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Proof of address less than 3 months old", "detail": "Only if the parents are not married and the father has not yet recognized the child.", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Copies of the child's birth certificate", "detail": "Free. Request them after registration, at the town hall or online on service-public.gouv.fr.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Get the birth certificate from the maternity unit", "detail": "Also ask whether the maternity unit sends the registration to the town hall itself." },
+    { "titre": "Check before you go", "detail": "Birth certificate from the maternity unit, both parents' ID documents, prenatal recognition if there is one, surname declaration signed by both parents if you make one, existing family record book, proof of address less than 3 months old if the father has not yet recognized the child. Check the deadline: 5 or 8 days depending on the town." },
+    { "titre": "Go to the town hall of the place of birth within the deadline", "detail": "Civil registry office (état civil). An unmarried father who has not yet recognized the child can do so at the same time." },
+    { "titre": "Collect the birth certificate and the family record book", "detail": "Ask for several copies of the certificate: they are needed for the Caf, the Assurance Maladie and the mutuelle (top-up health insurance). For a first child together, the town hall issues the family record book." },
+    { "titre": "Report the birth to the Caf and the Assurance Maladie", "detail": "In your Caf account, under change of situation, and in your ameli account to add the child." }
+  ],
+  "ou": [
+    { "nom": "Town hall of the place of birth, civil registry office", "detail": "Registration, birth certificate and family record book." }
+  ],
+  "liens": [
+    { "titre": "Registering a birth (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961" },
+    { "titre": "Family record book at the birth of the first child (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991" },
+    { "titre": "Requesting a birth certificate (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427" },
+    { "titre": "Recognizing a child (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Register the birth at the town hall (5 or 8 days)", "evenement": "rdv" },
+    { "type": "coffre", "titre": "Child's birth certificate", "categorie": "autres" },
+    { "type": "coffre", "titre": "Copy of the family record book", "categorie": "autres" },
+    { "type": "coffre", "titre": "Maternity birth certificate", "categorie": "sante" },
+    { "type": "rappel", "titre": "Report the birth to the Caf and the Assurance Maladie", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "5 days after the birth (8 days in 15 towns of French Guiana)", "detail": "The day of birth is not counted. Moved to the next working day if the last day falls on a weekend or public holiday." }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: whether you can register directly at the maternity unit or have the facility send the registration, depending on the maternity unit and the town hall.",
+    "To be confirmed locally: opening hours of the civil registry office and Saturday sessions, depending on the town hall."
+  ],
+  "motsCles": ["birth", "baby", "civil status", "town hall", "birth certificate", "maternity", "family record book"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F961 Registering a birth", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961", "verifieLe": "2026-06-18" },
+    { "titre": "Service-public.gouv.fr, F11991 Family record book at the birth of the first child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-08-12" },
+    { "titre": "Service-public.gouv.fr, F1427 Requesting a birth certificate", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
+    { "titre": "Service-public.gouv.fr, F887 Recognizing a child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-01-27" }
+  ]
+}

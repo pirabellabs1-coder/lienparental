@@ -16,6 +16,7 @@ import { usePublishedTemplate } from '@/lib/modeles/client'
 import { templateCategoryLabel } from '@/lib/modeles/template'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
+import { contentLangAttr } from '@/lib/contenus/locale'
 
 const FAV_KEY = 'lp.modeles.favoris'
 const CATEGORY_KEYS = new Set<string>(['juridique', 'communication', 'scolaire', 'autre'])
@@ -80,6 +81,7 @@ function HeaderActions({ fav, onFav, onShare }: { fav: boolean; onFav: () => voi
 export default function ModeleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
   const tr = useTranslations('coach.templates')
+  const locale = useLocale()
   const ymdDate = useYmdDate()
   const { status, data } = usePublishedTemplate(slug)
   const { announce, node } = useAnnounce()
@@ -125,9 +127,9 @@ export default function ModeleDetailPage({ params }: { params: Promise<{ slug: s
           <span aria-hidden="true" className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-leaf-50 text-leaf-500">
             <FileText className="h-9 w-9" strokeWidth={1.8} />
           </span>
-          <h1 className="mt-4 max-w-[320px] text-[20px] font-extrabold leading-tight text-night-900 lg:max-w-none lg:text-[24px]">{t.titre}</h1>
+          <h1 className="mt-4 max-w-[320px] text-[20px] font-extrabold leading-tight text-night-900 lg:max-w-none lg:text-[24px]" lang={contentLangAttr(t.lang, locale)}>{t.titre}</h1>
           {t.badge && <StatusBadge kind={t.badge === 'Populaire' ? 'populaire' : 'nouveau'} className="mt-3" />}
-          <p className="mt-4 max-w-[310px] text-[13px] leading-relaxed text-night-700 lg:max-w-[640px]">{t.description}</p>
+          <p className="mt-4 max-w-[310px] text-[13px] leading-relaxed text-night-700 lg:max-w-[640px]" lang={contentLangAttr(t.lang, locale)}>{t.description}</p>
         </div>
 
         <section aria-labelledby="infos" className="mt-6 lg:max-w-[640px]">
@@ -146,7 +148,7 @@ export default function ModeleDetailPage({ params }: { params: Promise<{ slug: s
           <h2 id="remplir" className="text-[16px] font-extrabold text-night-900">{tr('detail.fillTitle')}</h2>
           <p className="mt-1 text-[13px] text-night-600">{tr('detail.fillHint')}</p>
           <div className="mt-4">
-            <ModeleGenerator template={t} />
+            <ModeleGenerator template={t} contentLang={t.lang} />
           </div>
         </section>
       </div>

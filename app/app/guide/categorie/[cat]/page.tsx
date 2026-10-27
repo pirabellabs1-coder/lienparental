@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { ChevronRight } from 'lucide-react'
 import { GuideHeader } from '@/components/guide/GuideHeader'
@@ -9,6 +9,7 @@ import { CategoryIcon } from '@/components/guide/icons'
 import { loadGuide } from '@/lib/guide/load'
 import { GUIDE_CATEGORIES, getCategory } from '@/lib/guide/types'
 import { categoryHref, ficheHref, homeHref } from '@/lib/guide/links'
+import { contentLangAttr } from '@/lib/contenus/locale'
 
 type Props = {
   params: Promise<{ cat: string }>
@@ -31,7 +32,8 @@ export default async function GuideCategoryPage({ params, searchParams }: Props)
   const category = getCategory(cat)
   if (!category) notFound()
   const t = await getTranslations('coach.guide')
-  const g = await loadGuide(sp.territoire)
+  const locale = await getLocale()
+  const g = await loadGuide(sp.territoire, locale)
   const { territoire } = g
   const fiches = g.fiches.filter((f) => f.categorie === category.key)
 
@@ -57,8 +59,8 @@ export default async function GuideCategoryPage({ params, searchParams }: Props)
                 className="group flex h-full items-start gap-3 rounded-2xl border border-night-100 bg-white p-4 transition-shadow duration-200 hover:shadow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500"
               >
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[15px] font-bold leading-snug text-night-900">{f.titre}</span>
-                  <span className="mt-1 block text-[13px] leading-snug text-night-600">{f.resume}</span>
+                  <span className="block text-[15px] font-bold leading-snug text-night-900" lang={contentLangAttr(f.lang, locale)}>{f.titre}</span>
+                  <span className="mt-1 block text-[13px] leading-snug text-night-600" lang={contentLangAttr(f.lang, locale)}>{f.resume}</span>
                   <span className="mt-2 block"><FicheStatusBadge slug={f.slug} territoire={territoire.code} /></span>
                 </span>
                 <ChevronRight className="mt-1 h-5 w-5 shrink-0 text-leaf-600 transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none" strokeWidth={1.75} aria-hidden="true" />

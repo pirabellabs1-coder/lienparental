@@ -32,7 +32,7 @@ export function FaqList({ faq }: { faq: FaqLink[] }) {
                 href={`/app/aide/faq/${x.slug}`}
                 className="flex min-h-[48px] items-center gap-3 py-2.5 text-[13px] font-bold text-night-900 hover:text-night-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
               >
-                <span className="flex-1">{x.question}</span>
+                <span className="flex-1" lang={x.lang}>{x.question}</span>
                 <ChevronRight className="h-5 w-5 shrink-0" aria-hidden />
               </Link>
             </li>

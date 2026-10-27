@@ -1,16 +1,18 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Lightbulb } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import type { Tip } from '@/lib/mock-data'
+import { contentLangAttr } from '@/lib/contenus/locale'
 
 type Props = { tips: Tip[] }
 
 // M03 — Conseil du jour : carte verte claire, carrousel à points.
 export function DailyTip({ tips }: Props) {
   const tr = useTranslations('dash')
+  const locale = useLocale()
   const [index, setIndex] = useState(0)
   const scrollerRef = useRef<HTMLDivElement>(null)
 
@@ -59,7 +61,7 @@ export function DailyTip({ tips }: Props) {
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white text-leaf-600 shadow-soft" aria-hidden="true">
               <Lightbulb className="h-5 w-5" strokeWidth={1.8} />
             </span>
-            <div className="min-w-0">
+            <div className="min-w-0" lang={contentLangAttr(t.lang, locale)}>
               <h3 className="text-[13.5px] font-bold text-night-900">{t.title}</h3>
               <p className="mt-1.5 text-[12.5px] leading-relaxed text-night-800">{t.body}</p>
             </div>

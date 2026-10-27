@@ -1,0 +1,17 @@
+{
+  "slug": "rentree-scolaire",
+  "territoire": "guyane",
+  "titre": "Back to school",
+  "resume": "Enrollment, canteen, insurance, financial aid: everything to prepare before the new school year.",
+  "ordre": 2,
+  "elements": [
+    { "id": "inscription", "titre": "Enroll my child in school", "fiche": "inscrire-enfant-ecole" },
+    { "id": "changement-ecole", "titre": "Change schools after a move", "detail": "Certificate of withdrawal (certificat de radiation) and both parents' agreement.", "fiche": "changer-ecole-en-cours-annee" },
+    { "id": "college-lycee", "titre": "Apply for a middle school or high school grant (bourse)", "fiche": "college-lycee-bourses" },
+    { "id": "vaccins", "titre": "Check that vaccinations are up to date", "detail": "Including yellow fever, mandatory in French Guiana from 12 months.", "fiche": "vaccinations-pmi" },
+    { "id": "cantine", "titre": "Sign up for the canteen and after-school care", "fiche": "cantine-periscolaire" },
+    { "id": "assurance", "titre": "Check the school insurance", "fiche": "assurance-scolaire" },
+    { "id": "ars", "titre": "Check the back-to-school allowance (allocation de rentrée scolaire)", "detail": "A declaration is required for 16-18 year olds.", "fiche": "allocation-rentree-scolaire" },
+    { "id": "activites", "titre": "Sign up for a sports activity with the Pass'Sport", "fiche": "pass-sport" }
+  ]
+}

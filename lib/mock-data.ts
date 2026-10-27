@@ -77,6 +77,8 @@ export type ModelCard = {
   accent: 'night' | 'leaf' | 'iris' | 'gold' | 'orange'
   /** Petite catégorie affichée sous le titre (tuiles du dashboard). */
   category?: string
+  /** Modèle publié : langue réellement affichée du titre (français si non traduit). */
+  lang?: 'fr' | 'en' | 'pt'
 }
 
 export type Tip = {
@@ -84,6 +86,8 @@ export type Tip = {
   title: string
   body: string
   tag: string
+  /** Conseil publié : langue réellement affichée (français si non traduit). */
+  lang?: 'fr' | 'en' | 'pt'
 }
 
 export const mockUser: User = {

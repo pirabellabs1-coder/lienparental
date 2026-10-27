@@ -1,6 +1,7 @@
 'use client'
 /** Appels aux routes /api/admin/contenus/** depuis le back-office (même origine, cookies de session). */
 import type { ContentKind, ContentRecord, ContentStatus, ContentVersion } from '@/lib/contenus/types'
+import type { TranslationLocale } from '@/lib/contenus/locale'
 
 export type Issue = { path: string; message: string }
 
@@ -36,13 +37,16 @@ export const contenusApi = {
     call<ContentRecord<K>>(base(kind), { method: 'POST', body: JSON.stringify({ data, statut, publishedAt }) }),
   update: <K extends ContentKind>(kind: K, id: string, version: number, patch: { data?: unknown; statut?: ContentStatus; publishedAt?: string | null }) =>
     call<ContentRecord<K>>(`${base(kind)}/${id}`, { method: 'PATCH', body: JSON.stringify({ version, ...patch }) }),
+  /** Traduction d'une langue : `data` = objet complet, `null` = supprimer. */
+  saveTranslation: <K extends ContentKind>(kind: K, id: string, version: number, locale: TranslationLocale, data: unknown | null) =>
+    call<ContentRecord<K>>(`${base(kind)}/${id}`, { method: 'PATCH', body: JSON.stringify({ version, translation: { locale, data } }) }),
   remove: (kind: ContentKind, id: string) => call<void>(`${base(kind)}/${id}`, { method: 'DELETE' }),
   duplicate: <K extends ContentKind>(kind: K, id: string) => call<ContentRecord<K>>(`${base(kind)}/${id}/dupliquer`, { method: 'POST' }),
   versions: (kind: ContentKind, id: string) => call<ContentVersion[]>(`${base(kind)}/${id}/versions`),
   restore: <K extends ContentKind>(kind: K, id: string, versionId: string, version: number) =>
     call<ContentRecord<K>>(`${base(kind)}/${id}/versions/${versionId}/restaurer`, { method: 'POST', body: JSON.stringify({ version }) }),
   importSeeds: (what: 'guide' | 'modeles' | 'blog' | 'aide') =>
-    call<{ created: number; skipped: number; errors: string[] }>('/api/admin/contenus/import', { method: 'POST', body: JSON.stringify({ what }) }),
+    call<{ created: number; skipped: number; errors: string[]; translated?: number }>('/api/admin/contenus/import', { method: 'POST', body: JSON.stringify({ what }) }),
   saveTerritoire: (t: { code: string; nom: string; disponible: boolean; ordre: number }) =>
     call<unknown>('/api/admin/guides/territoires', { method: 'POST', body: JSON.stringify(t) }),
   uploadImage: (file: File) => {

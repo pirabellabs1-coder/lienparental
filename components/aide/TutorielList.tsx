@@ -10,7 +10,8 @@ import type { TutoIcon } from '@/lib/aide/types'
 import { norm } from './AideHome'
 
 /** Entrée tutoriel minimale envoyée au client (jamais le contenu complet). */
-export type TutorielLink = { slug: string; titre: string; dureeMin: number; icone: TutoIcon }
+/** `lang` : attribut à poser si le titre s'affiche dans une autre langue que l'interface (non traduit). */
+export type TutorielLink = { slug: string; titre: string; dureeMin: number; icone: TutoIcon; lang?: string }
 
 const ICONS: Record<TutoIcon, { icon: React.ReactNode; tone: string }> = {
   rocket: { icon: <Rocket className="h-6 w-6" strokeWidth={1.7} />, tone: 'bg-night-50 text-night-700' },
@@ -49,7 +50,7 @@ export function TutorielList({ tutoriels }: { tutoriels: TutorielLink[] }) {
                 >
                   <span aria-hidden className={cn('inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-xl2', v.tone)}>{v.icon}</span>
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[13.5px] font-bold text-night-900">{tuto.titre}</span>
+                    <span className="block text-[13.5px] font-bold text-night-900" lang={tuto.lang}>{tuto.titre}</span>
                     <span className="mt-1 block text-[12px] text-night-700">{t('minutes', { n: tuto.dureeMin })}</span>
                   </span>
                   <ChevronRight className="h-5 w-5 shrink-0 text-night-900" aria-hidden />

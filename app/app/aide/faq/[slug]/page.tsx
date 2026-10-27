@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronLeft } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { ArticleFeedback } from '@/components/profil/ArticleFeedback'
 import { MarkdownBlocks, parseMarkdown } from '@/components/profil/markdown'
 import { getHelpFaq, getHelpFaqBySlug } from '@/lib/aide/public'
+import { contentLangAttr } from '@/lib/contenus/locale'
 
 export const revalidate = 300
 
@@ -14,7 +15,8 @@ export async function generateStaticParams() {
 
 export default async function FaqDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const faq = await getHelpFaqBySlug(slug)
+  const locale = await getLocale()
+  const faq = await getHelpFaqBySlug(slug, locale)
   if (!faq) notFound()
   const { blocks } = parseMarkdown(faq.reponse)
   const t = await getTranslations('public.help.faq')
@@ -25,8 +27,10 @@ export default async function FaqDetailPage({ params }: { params: Promise<{ slug
         <ChevronLeft className="h-4 w-4" aria-hidden />
         {t('title')}
       </Link>
-      <h1 className="mb-4 mt-1 text-[19px] font-extrabold leading-snug text-night-900">{faq.question}</h1>
-      <MarkdownBlocks blocks={blocks} />
+      <div lang={contentLangAttr(faq.lang, locale)}>
+        <h1 className="mb-4 mt-1 text-[19px] font-extrabold leading-snug text-night-900">{faq.question}</h1>
+        <MarkdownBlocks blocks={blocks} />
+      </div>
       <ArticleFeedback slug={slug} />
     </article>
   )

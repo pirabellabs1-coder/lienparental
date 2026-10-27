@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { getPost, listPosts, relatedPosts, siteUrl } from '@/lib/blog/queries'
 import { markdownToText } from '@/lib/blog/markdown'
 import { blogCategoryLabel } from '@/lib/blog/types'
+import { INTL_LOCALE } from '@/lib/i18n/config'
 import { ArticleView } from '../_components/ArticleView'
 import { JsonLd } from '../_components/JsonLd'
 
@@ -17,9 +18,12 @@ export async function generateStaticParams() {
 
 const absolute = (u: string) => (u.startsWith('/') ? `${siteUrl()}${u}` : u)
 
+/** Langue de l'article affiché (traduction ou français), pour Open Graph et JSON-LD. */
+const ogLocale = (lang: 'fr' | 'en' | 'pt' = 'fr') => INTL_LOCALE[lang].replace('-', '_')
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const post = await getPost(slug)
+  const post = await getPost(slug, await getLocale())
   if (!post) return { title: (await getTranslations('public.blog'))('notFound'), robots: { index: false } }
   const title = post.seoTitre || post.titre
   const description = post.seoDescription || post.extrait || markdownToText(post.contenu).slice(0, 160)
@@ -36,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `${siteUrl()}/blog/${post.slug}`,
       siteName: 'Lien Parental',
-      locale: 'fr_FR',
+      locale: ogLocale(post.lang),
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       authors: [post.auteur],
@@ -50,9 +54,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogArticlePage({ params }: Props) {
   const { slug } = await params
-  const post = await getPost(slug)
+  const locale = await getLocale()
+  const post = await getPost(slug, locale)
   if (!post) notFound()
-  const related = await relatedPosts(post)
+  const related = await relatedPosts(post, 3, locale)
   const url = `${siteUrl()}/blog/${post.slug}`
 
   return (
@@ -70,7 +75,7 @@ export default async function BlogArticlePage({ params }: Props) {
         mainEntityOfPage: { '@type': 'WebPage', '@id': url },
         articleSection: blogCategoryLabel(post.categorie),
         keywords: post.tags.join(', '),
-        inLanguage: 'fr-FR',
+        inLanguage: INTL_LOCALE[post.lang ?? 'fr'],
         wordCount: markdownToText(post.contenu).split(' ').length,
       }} />
       <JsonLd data={{
@@ -82,7 +87,7 @@ export default async function BlogArticlePage({ params }: Props) {
           { '@type': 'ListItem', position: 3, name: post.titre, item: url },
         ],
       }} />
-      <ArticleView post={post} publishedAt={post.publishedAt} related={related} />
+      <ArticleView post={post} publishedAt={post.publishedAt} related={related} contentLang={post.lang} />
     </>
   )
 }

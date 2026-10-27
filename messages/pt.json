@@ -460,6 +460,14 @@
     "testimonyLead": "Envie um formulário a uma testemunha e receba o depoimento dela no seu cofre.",
     "testimonyCreate": "Criar o meu pedido",
     "testimonyView": "Ver os meus pedidos de depoimento",
+    "tipCategory": {
+      "communication": "Comunicação",
+      "preuves": "Provas",
+      "enfant": "Criança",
+      "organisation": "Organização",
+      "juridique": "Jurídico",
+      "empathie": "Empatia"
+    },
     "tipCarousel": "Dicas do dia",
     "slide": "{n} de {total}",
     "chooseTip": "Escolher uma dica",

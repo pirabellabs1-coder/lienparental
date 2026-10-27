@@ -1,16 +1,18 @@
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { TopBar } from '@/components/mobile/TopBar'
 import { btn } from '@/components/profil/kit'
 import { FaqList } from '@/components/aide/FaqList'
 import { getHelpFaq } from '@/lib/aide/public'
+import { contentLangAttr } from '@/lib/contenus/locale'
 import { cn } from '@/lib/cn'
 
 export const revalidate = 300
 
 export default async function FaqPage() {
   const t = await getTranslations('public.help.faq')
-  const faq = (await getHelpFaq()).map(f => ({ slug: f.slug, question: f.question }))
+  const locale = await getLocale()
+  const faq = (await getHelpFaq(locale)).map(f => ({ slug: f.slug, question: f.question, lang: contentLangAttr(f.lang, locale) }))
   return (
     <>
       <TopBar title={t('title')} showBack backHref="/app/aide" showBell={false} />

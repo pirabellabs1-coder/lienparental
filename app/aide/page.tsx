@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { ChevronDown, Mail, Clock3 } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { SiteShell } from '@/components/site/SiteShell'
 import { getHelpFaq } from '@/lib/aide/public'
 import { FAQ_CATEGORIES } from '@/lib/aide/types'
+import { contentLangAttr } from '@/lib/contenus/locale'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.help.public')
@@ -13,11 +14,12 @@ export async function generateMetadata(): Promise<Metadata> {
 export const revalidate = 300
 
 // Ligne d'appel au vote des fichiers du dépôt : sans objet sur la page publique.
-const FEEDBACK_LINE = /\n*Cet article a-t-il été utile \?\s*$/
+const FEEDBACK_LINE = /\n*(Cet article a-t-il été utile\s?\?|Was this (article|page) helpful\?|Este artigo (te |lhe )?foi útil\?)\s*$/i
 
 // Centre d'aide public : accessible depuis un ordinateur (CDC M01, règle de gestion).
 export default async function AidePublique() {
-  const questions = await getHelpFaq()
+  const locale = await getLocale()
+  const questions = await getHelpFaq(locale)
   const t = await getTranslations('public.help.public')
   return (
     <SiteShell mainClassName="bg-[#F7F9FC]">
@@ -34,7 +36,7 @@ export default async function AidePublique() {
                 <h2 id={`cat-${cat.key}`} className="text-xs font-bold uppercase tracking-wider text-night-500">{t(`categories.${cat.key}`)}</h2>
                 <div className="mt-3 divide-y divide-night-100 rounded-xl2 border border-night-100 bg-white">
                   {items.map(q => (
-                      <details key={q.slug} className="group px-5 py-4">
+                      <details key={q.slug} className="group px-5 py-4" lang={contentLangAttr(q.lang, locale)}>
                         <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-semibold text-night-900 [&::-webkit-details-marker]:hidden">
                           {q.question}
                           <ChevronDown className="h-4 w-4 shrink-0 text-night-500 transition-transform group-open:rotate-180" aria-hidden />

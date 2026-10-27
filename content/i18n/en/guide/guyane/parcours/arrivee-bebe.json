@@ -1,0 +1,21 @@
+{
+  "slug": "arrivee-bebe",
+  "territoire": "guyane",
+  "titre": "A baby's arrival",
+  "resume": "From acknowledging the child before birth to choosing childcare: the administrative steps of the first months.",
+  "ordre": 3,
+  "elements": [
+    { "id": "reconnaissance", "titre": "Acknowledge the child before birth (unmarried parents)", "fiche": "reconnaissance-enfant" },
+    { "id": "prime-naissance", "titre": "Apply for the prime à la naissance (birth grant) and the allocation de base (basic allowance)", "detail": "Declare the pregnancy on time so you don't lose the grant.", "fiche": "prime-naissance-paje" },
+    { "id": "declaration", "titre": "Register the birth at the town hall (mairie)", "detail": "Within 5 days, or 8 days in 15 municipalities of French Guiana.", "fiche": "declaration-naissance" },
+    { "id": "livret-famille", "titre": "Get or update the family record book (livret de famille)", "fiche": "livret-de-famille" },
+    { "id": "acte-naissance", "titre": "Know how to get the child's birth certificate", "detail": "It is free, and it will be requested for many procedures.", "fiche": "acte-naissance" },
+    { "id": "conge-paternite", "titre": "Take paternity and childcare leave", "fiche": "conge-paternite" },
+    { "id": "carte-vitale", "titre": "Add the baby to both parents' Carte Vitale (health insurance card)", "fiche": "rattacher-enfant-carte-vitale" },
+    { "id": "mutuelle", "titre": "Add the baby to the top-up health insurance (mutuelle)", "fiche": "mutuelle-enfant" },
+    { "id": "pmi", "titre": "Arrange check-ups and vaccinations (doctor or PMI, the mother and child health service)", "fiche": "vaccinations-pmi" },
+    { "id": "caf", "titre": "Report the birth to the Caf (family benefits office) and check family allowances", "detail": "In French Guiana, they are paid from the first child.", "fiche": "allocations-familiales-guyane" },
+    { "id": "mode-garde", "titre": "Look for childcare", "detail": "Plan ahead from pregnancy.", "fiche": "mode-de-garde-petite-enfance" },
+    { "id": "epargne", "titre": "Open a savings account for the child", "fiche": "livret-epargne-mineur" }
+  ]
+}

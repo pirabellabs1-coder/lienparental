@@ -5,9 +5,13 @@
  *   - lib/modeles/seeds.ts        : modèles de documents         → BROUILLONS (à relire)
  *   - content/blog/*.md           : articles                     → BROUILLONS (à relire)
  * Rien n'est écrasé (`on conflict do nothing`) : relançable sans risque.
+ * Traductions : chaque ligne reçoit aussi `translations` = { en?, pt? } lues dans content/i18n/<locale>/…
+ * (validées, invariants forcés depuis le français ; colonne de la migration 0490_contenus_translations.sql).
+ * Une ligne déjà présente n'est pas modifiée : pour ajouter des traductions à du contenu déjà en base,
+ * utiliser le bouton « Importer depuis le dépôt » (il complète les traductions manquantes si le français est inchangé).
  *
  * Usage : npx --yes tsx scripts/seed-contenus-sql.ts > supabase/seed_contenus.sql
- * puis exécuter le fichier dans Supabase (SQL Editor) APRÈS 0300_admin_contenus.sql.
+ * puis exécuter le fichier dans Supabase (SQL Editor) APRÈS 0300_admin_contenus.sql et 0490_contenus_translations.sql.
  * Alternative sans script : bouton « Importer depuis le dépôt » dans /admin/guides, /admin/modeles, /admin/blog.
  */
 import fs from 'node:fs'
@@ -18,6 +22,7 @@ import { blogPostSchema } from '../lib/blog/types'
 import { parseFrontmatter } from '../lib/blog/frontmatter'
 import { TABLE, toRow } from '../lib/contenus/rows'
 import type { ContentData, ContentKind, ContentStatus } from '../lib/contenus/types'
+import { fileTranslations } from '../lib/contenus/i18n-files'
 
 const ROOT = process.cwd()
 const q = (v: string) => `'${v.replace(/'/g, "''")}'`
@@ -34,6 +39,7 @@ function lit(v: unknown): string {
 function insert<K extends ContentKind>(kind: K, data: ContentData[K], statut: ContentStatus, publishedAt: string | null, conflict: string) {
   const row = toRow(kind, data, statut, publishedAt)
   if (kind === 'article') row.tags = (data as ContentData['article']).tags // text[]
+  row.translations = fileTranslations(kind, data)
   const cols = Object.keys(row)
   const vals = cols.map((c) => (c === 'tags' ? `array[${(row.tags as string[]).map(q).join(', ')}]::text[]` : lit(row[c])))
   return `insert into public.${TABLE[kind]} (${cols.join(', ')}) values (${vals.join(', ')}) on conflict ${conflict} do nothing;`

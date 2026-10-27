@@ -4,19 +4,26 @@
  * Les valeurs saisies ne quittent jamais l'appareil (aucun envoi serveur).
  * À monter dans l'écran parent d'un modèle, par ex. app/app/modeles/[slug] :
  *   <ModeleGenerator template={t} />   (t : usePublishedTemplate(slug).data)
+ * Langue : libellés et aides des champs traduits si le modèle l'est (`contentLang`) ; le document
+ * produit (aperçu, PDF, Word) reste en français, d'où `lang="fr"` sur l'aperçu.
  */
 import { useId, useMemo, useRef, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Download, FileText, LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { valuesSchemaFor, type DocumentTemplate, type TemplateValues } from '@/lib/modeles/template'
 import { TemplatePaper } from './TemplatePaper'
+import { contentLangAttr, type ContentLocale } from '@/lib/contenus/locale'
 
 const input =
   'w-full min-h-[48px] rounded-xl border border-night-200 bg-white px-4 py-3 text-base text-night-900 shadow-soft placeholder:text-night-400 focus-visible:border-leaf-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500/30 aria-[invalid=true]:border-alert-400'
 
-export function ModeleGenerator({ template: t, onGenerated }: { template: DocumentTemplate; onGenerated?: (file: { blob: Blob; filename: string }) => void }) {
+export function ModeleGenerator({ template: t, onGenerated, contentLang }: {
+  template: DocumentTemplate; onGenerated?: (file: { blob: Blob; filename: string }) => void; contentLang?: ContentLocale
+}) {
   const tg = useTranslations('coach.templates.generator')
+  const locale = useLocale()
+  const cl = contentLangAttr(contentLang, locale)
   const uid = useId()
   const [values, setValues] = useState<TemplateValues>({})
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -79,7 +86,7 @@ export function ModeleGenerator({ template: t, onGenerated }: { template: Docume
           return (
             <div key={f.key}>
               <label htmlFor={id} className="mb-1.5 block text-sm font-semibold text-night-900">
-                {f.label}{f.obligatoire ? <span aria-hidden="true" className="ml-0.5 text-alert-500">*</span> : <span className="ml-1 font-normal text-night-500">{tg('optional')}</span>}
+                <span lang={cl}>{f.label}</span>{f.obligatoire ? <span aria-hidden="true" className="ml-0.5 text-alert-500">*</span> : <span className="ml-1 font-normal text-night-500">{tg('optional')}</span>}
               </label>
               {f.type === 'texte_long' ? (
                 <textarea {...common} rows={5} className={cn(input, 'min-h-[120px] resize-y')} />
@@ -97,7 +104,7 @@ export function ModeleGenerator({ template: t, onGenerated }: { template: Docume
                   className={input}
                 />
               )}
-              {f.aide && <p id={`${id}-aide`} className="mt-1 text-xs text-night-600">{f.aide}</p>}
+              {f.aide && <p id={`${id}-aide`} lang={cl} className="mt-1 text-xs text-night-600">{f.aide}</p>}
               {err && <p id={`${id}-err`} className="mt-1 text-xs font-semibold text-alert-600">{err}</p>}
             </div>
           )
@@ -114,7 +121,7 @@ export function ModeleGenerator({ template: t, onGenerated }: { template: Docume
         <p role="status" aria-live="polite" className="text-sm text-night-700">{status}</p>
         <p className="text-xs text-night-500">{tg('privacy')}</p>
       </form>
-      <section aria-label={tg('previewLabel')}>
+      <section aria-label={tg('previewLabel')} lang={contentLangAttr('fr', locale)}>
         <TemplatePaper template={t} values={values} mode="final" />
       </section>
     </div>

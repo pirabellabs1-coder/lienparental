@@ -1,0 +1,72 @@
+{
+  "slug": "mode-de-garde-petite-enfance",
+  "territoire": "guyane",
+  "categorie": "naissance",
+  "titre": "Daycare or childminder: finding childcare",
+  "resume": "Where to look for a place, which documents to prepare for the daycare (crèche) application, and how to get help from the Caf (CMG) when you employ a registered childminder (assistante maternelle).",
+  "aQuoiCaSert": "Having your young child looked after lets you work or train. Daycare (crèche) places should be requested early, often during pregnancy. If you employ a registered childminder (assistante maternelle agréée), the Caf (Caisse d'allocations familiales, the family benefits office) can pay the complément de libre choix du mode de garde (CMG, childcare allowance) and cover the social security contributions. Having a complete file from your very first request avoids losing your place on the waiting list.",
+  "quiEstConcerne": [
+    "Parents of a child under 6 (under 12 for a single parent, for the CMG).",
+    "As a couple, at least one parent must work to receive the CMG. Treated as work: daily sickness or maternity benefits, paid unemployment, paid training. Some situations exempt you: studies, AAH (adult disability allowance), RSA (minimum income) with registration as a job seeker, ASS (solidarity allowance for job seekers)."
+  ],
+  "aSavoir": [
+    "Public daycare: the application form is picked up at the town hall (mairie). Non-profit or private daycare: you register with the management. It is advisable to start during pregnancy.",
+    "In most daycares funded by the Caf, the fee follows a national scale based on your income and number of children.",
+    "Childminders must be registered (agréées) by the PMI (protection maternelle et infantile, the mother and child health service). You can find them on monenfant.fr. You become their employer and sign an employment contract.",
+    "CMG: the amount depends on your income, the number of children, the hourly cost of childcare (capped) and the number of hours. Contributions are covered 100% for a registered childminder, up to a ceiling. It is paid from the month of the application.",
+    "Shared residence: since December 1, 2025, each parent can receive the CMG, calculated according to their own situation. The amount is not split between them.",
+    "You must register on Pajemploi and declare the salary paid each month. The Pajemploi+ option automates debiting and paying the salary."
+  ],
+  "documents": [
+    { "id": "livret-famille", "libelle": "Family record book (livret de famille) or the child's birth certificate", "detail": "Copy. During pregnancy, a certificate of pregnancy is usually requested instead. Birth certificate free on service-public.gouv.fr.", "coffre": "autres" },
+    { "id": "identite-parents", "libelle": "ID of each parent", "detail": "Copy.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Proof of address less than 3 months old", "detail": "Copy. Municipal daycares often reserve places for residents of the town.", "coffre": "autres" },
+    { "id": "avis-impot", "libelle": "Latest tax notice or Caf beneficiary number", "detail": "Copy. Used to calculate the daycare's hourly rate.", "coffre": "finances" },
+    { "id": "travail", "libelle": "Proof of the parents' activity", "detail": "Employment contract, payslips, certificate of training or from France Travail (the public employment service), depending on the case.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Judgment or agreement setting residence and parental authority, if you are separated", "detail": "Copy. Shows who may pick up the child and each parent's weeks.", "coffre": "jaf" },
+    { "id": "vaccins", "libelle": "Vaccination pages of the health record book (carnet de santé)", "detail": "Copy. Compulsory vaccines are required to start daycare, yellow fever from 12 months in French Guiana.", "coffre": "sante" },
+    { "id": "attestation-droits", "libelle": "The child's Assurance Maladie (French public health insurance) certificate of entitlement", "detail": "Downloadable from your ameli account.", "coffre": "sante" },
+    { "id": "assurance", "libelle": "Certificate of civil liability insurance", "detail": "Often requested by daycares.", "coffre": "autres" },
+    { "id": "contrat-assmat", "libelle": "The childminder's employment contract and certificate of registration", "detail": "Original signed by both parties. Ask for a copy of the registration issued by the PMI.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (bank account details)", "detail": "For the daycare's direct debit or the payment of the CMG.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Look for childcare options near you", "detail": "On monenfant.fr, through a relais petite enfance (RPE, early childhood information center) or at the town hall." },
+    { "titre": "Check before you go", "detail": "Family record book or certificate of pregnancy, parents' ID, proof of address less than 3 months old, tax notice or Caf number, proof of activity, judgment if you are separated, vaccination pages. Phone the daycare to ask for its exact list." },
+    { "titre": "Apply for a daycare place", "detail": "At the town hall for a public daycare, otherwise with the management. Note the date you applied and follow up regularly." },
+    { "titre": "With a childminder, check their registration and sign the contract", "detail": "Registration issued by the PMI of the Collectivité territoriale de Guyane (CTG, the local government of French Guiana)." },
+    { "titre": "Apply for the CMG", "detail": "In your Caf online account, childcare section. Not yet a beneficiary? First create a Caf account. Then register as an employer on Pajemploi and declare the salary each month." },
+    { "titre": "Record the childcare costs", "detail": "In the Journal, to track the expense per child and the split with the other parent." }
+  ],
+  "ou": [
+    { "nom": "monenfant.fr", "detail": "Directory of daycares, childminders and early childhood information centers.", "url": "https://monenfant.fr" },
+    { "nom": "Your town hall", "detail": "Municipal daycares." },
+    { "nom": "Caf de la Guyane", "detail": "Childcare allowance (complément de libre choix du mode de garde).", "url": "https://www.caf.fr/allocataires/caf-de-la-guyane" },
+    { "nom": "Pajemploi (Urssaf)", "detail": "Monthly declaration of the childminder's salary, run by the Urssaf (social contributions agency).", "url": "https://www.pajemploi.urssaf.fr" },
+    { "nom": "CTG PMI centers", "detail": "Registration and monitoring of childminders.", "url": "https://www.ctguyane.fr/les-agences-regionales/" }
+  ],
+  "liens": [
+    { "titre": "Choosing group childcare (monenfant.fr)", "url": "https://monenfant.fr/choisir-un-mode-d-accueil-collectif" },
+    { "titre": "Childcare allowance, CMG (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152" },
+    { "titre": "CMG simulator (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72489" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Follow up on the daycare place application", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Declare the childminder's salary on Pajemploi", "evenement": "autre" },
+    { "type": "coffre", "titre": "Daycare agreement or childminder's contract", "categorie": "finances" },
+    { "type": "coffre", "titre": "Childminder's certificate of registration", "categorie": "finances" },
+    { "type": "depense", "titre": "Childcare costs", "categorie": "autre" }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: number of places, allocation criteria and waiting times for daycare, which vary widely between towns in French Guiana.",
+    "To be confirmed locally: exact list of documents for the daycare application, specific to each facility.",
+    "CMG amounts depend on your income, the number of children and the hourly cost: use the official simulator."
+  ],
+  "motsCles": ["daycare (crèche)", "childminder", "nanny", "CMG", "Pajemploi", "childcare", "RPE"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "monenfant.fr, Choosing group childcare", "url": "https://monenfant.fr/choisir-un-mode-d-accueil-collectif", "verifieLe": "2026-08-14" },
+    { "titre": "Service-public.gouv.fr, F39152 CMG for direct employment", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152", "verifieLe": "2026-06-26" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccinations for school, daycare or after-school care", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" }
+  ]
+}

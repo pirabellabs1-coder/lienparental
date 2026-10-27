@@ -1,0 +1,73 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "guyane",
+  "categorie": "sante",
+  "titre": "Mandatory vaccinations and check-ups at the PMI",
+  "resume": "The vaccines required for daycare, school and holiday clubs, yellow fever vaccination (mandatory in French Guiana from 12 months), and free check-ups for children under 6 at the PMI.",
+  "aQuoiCaSert": "Mandatory vaccinations are required to start daycare, school, after-school care or holiday camp: without proof, enrollment may be refused or only temporary. The proof is the child's health record book (carnet de santé) filled in by the doctor, and for yellow fever the international certificate of vaccination (the \"carnet jaune\", yellow booklet). The PMI (protection maternelle et infantile, the mother and child health service) provides free consultations for pregnant women and children under 6, vaccinations included.",
+  "quiEstConcerne": [
+    "All parents of minor children, especially before starting daycare, school or a holiday club.",
+    "Anyone living in or staying in French Guiana, from 12 months of age, for yellow fever."
+  ],
+  "aSavoir": [
+    "Child born before 2018: diphtheria, tetanus and polio (DTP) are mandatory for school.",
+    "Child born between January 1, 2018 and December 31, 2022: 11 mandatory vaccines (diphtheria, tetanus, polio, whooping cough, Haemophilus influenzae b, hepatitis B, pneumococcus, meningococcus C, measles, mumps, rubella).",
+    "Child born in 2023 or later: same list, with meningococcus A, B, C, W and Y instead of meningococcus C alone.",
+    "Yellow fever: recommended from 9 months and mandatory in French Guiana from 12 months. A single injection protects for life. If the child was vaccinated before age 2, a second dose is recommended between 6 and 10. The vaccine given in French Guiana is reimbursed by the Assurance Maladie (French public health insurance).",
+    "A child who is not up to date can be admitted provisionally: you then have 3 months to catch up, otherwise the child may be excluded. If the child stays more than a year, proof is requested every year.",
+    "The 20 mandatory health check-ups up to age 6 are covered 100% with no upfront payment, excluding extra fees charged by the doctor (dépassements d'honoraires).",
+    "Separated parents: the parent who takes the child to be vaccinated should inform the other parent and send them a copy of the vaccination pages, so that each parent has the proof."
+  ],
+  "documents": [
+    { "id": "carnet-sante", "libelle": "The child's health record book (carnet de santé)", "detail": "Bring the original to every appointment. It is the proof of vaccination: keep a photocopy or photo of the vaccination pages. Lost it? Ask the PMI or your doctor.", "coffre": "sante" },
+    { "id": "carnet-jaune", "libelle": "International certificate of vaccination against yellow fever (carnet jaune)", "detail": "Given after the vaccine. Checked by airlines. Ask the center that vaccinated the child for a duplicate.", "coffre": "sante" },
+    { "id": "carte-vitale", "libelle": "Parent's carte Vitale (health insurance card) or the child's certificate of entitlement", "detail": "Certificate can be downloaded free of charge from your ameli account.", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "ID of the parent or the accompanying adult", "detail": "Original. If another person accompanies the child, bring written authorization from a parent.", "coffre": "sante" },
+    { "id": "contre-indication", "libelle": "Medical certificate of contraindication, if applicable", "detail": "Issued by the doctor. To be shown instead of proof of vaccination.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Check the health record book", "detail": "Compare it with the list of mandatory vaccines for your child's year of birth, and check yellow fever from 12 months." },
+    { "titre": "Make an appointment", "detail": "With your regular doctor (médecin traitant) or pediatrician, or at a PMI center of the Collectivité territoriale de Guyane (CTG, the local government of French Guiana) for children under 6. Call first: some centers may be temporarily closed." },
+    { "titre": "Check before you go", "detail": "Health record book, carnet jaune if the child already has one, carte Vitale or certificate of entitlement, ID, written authorization if the child is not accompanied by a parent." },
+    { "titre": "Have your child vaccinated", "detail": "The health professional records the vaccine in the health record book. For yellow fever: at an approved center, or at the PMI for children under 6." },
+    { "titre": "Show the proof", "detail": "A photocopy of the vaccination pages to the daycare, school or holiday club, every year if the child stays more than a year." }
+  ],
+  "ou": [
+    { "nom": "PMI centers of the Collectivité territoriale de Guyane (CTG)", "detail": "Free consultations and vaccines for children under 6. Centers in Cayenne, Kourou, Matoury, Saint-Laurent-du-Maroni and many other towns.", "url": "https://www.ctguyane.fr/les-agences-regionales/" },
+    { "nom": "PMI de Cayenne", "detail": "36 rue du 14-Juillet, Cayenne.", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3", "telephone": "05 94 39 03 60" },
+    { "nom": "Your regular doctor or pediatrician", "detail": "Some general practitioners are approved for yellow fever vaccination." },
+    { "nom": "Approved yellow fever vaccination centers", "detail": "List and advice on the website of the ARS Guyane (regional health agency).", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires" }
+  ],
+  "liens": [
+    { "titre": "Vaccines required for daycare and school (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Health advice for newcomers (ARS Guyane)", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires" },
+    { "titre": "Mandatory health check-ups up to age 6 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Vaccination appointment", "evenement": "sante" },
+    { "type": "rappel", "titre": "Vaccine booster", "evenement": "sante" },
+    { "type": "rappel", "titre": "Second yellow fever dose between 6 and 10 (if vaccinated before age 2)", "evenement": "sante" },
+    { "type": "coffre", "titre": "Vaccination pages of the health record book", "categorie": "sante" },
+    { "type": "coffre", "titre": "International yellow fever vaccination certificate", "categorie": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "3 months to catch up after provisional admission", "detail": "If vaccinations are still not up to date after this period, the child may be excluded from the daycare, school or club." },
+    { "libelle": "Yellow fever: no later than 10 days before traveling to French Guiana", "detail": "For a child aged 12 months or more who is arriving in French Guiana." }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: opening hours and availability of PMI centers, as some may be temporarily closed. Call before you go.",
+    "To be confirmed locally: up-to-date list of centers approved for yellow fever, as the ARS Guyane page dates from 2023.",
+    "The number of doses and the age for each vaccine follow the current vaccination schedule: check with your doctor or the PMI."
+  ],
+  "motsCles": ["vaccine", "yellow fever", "PMI", "health record book", "carnet jaune", "pediatrician", "baby"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vaccination for school, daycare or after-school care", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F1879 Health at primary school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879", "verifieLe": "2026-10-15" },
+    { "titre": "Service-public.gouv.fr, F35490 Mandatory check-ups up to age 6", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490", "verifieLe": "2026-07-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
+    { "titre": "ARS Guyane, Newcomers: health advice", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires", "verifieLe": "2023-01-09" },
+    { "titre": "CTG, PMI: framework of its partnership with the CHU de Guyane (university hospital)", "url": "https://www.ctguyane.fr/pmi-la-ctg-clarifie-le-cadre-de-son-partenariat-avec-le-chu-de-guyane/", "verifieLe": "2026-09-08" },
+    { "titre": "Service-public directory, PMI de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3" }
+  ]
+}

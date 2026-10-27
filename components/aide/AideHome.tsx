@@ -8,7 +8,8 @@ import { SoftSearch } from '@/components/profil/SoftSearch'
 import { APP_VERSION } from '@/components/profil/data'
 
 /** Entrée FAQ minimale envoyée au client (jamais la réponse complète). */
-export type FaqLink = { slug: string; question: string }
+/** `lang` : attribut à poser si la question s'affiche dans une autre langue que l'interface (non traduite). */
+export type FaqLink = { slug: string; question: string; lang?: string }
 
 const ICON = 'h-6 w-6'
 const ROWS = [
@@ -41,7 +42,7 @@ export function AideHome({ faq }: { faq: FaqLink[] }) {
           <ListRow key={r.href} href={r.href} icon={r.icon} title={r.title} subtitle={r.sub} className="px-1" />
         ))}
         {questions.map(x => (
-          <ListRow key={x.slug} href={`/app/aide/faq/${x.slug}`} icon={<CircleHelp className={ICON} strokeWidth={1.7} />} title={x.question} subtitle={t('faqTag')} className="px-1" />
+          <ListRow key={x.slug} href={`/app/aide/faq/${x.slug}`} icon={<CircleHelp className={ICON} strokeWidth={1.7} />} title={x.lang ? <span lang={x.lang}>{x.question}</span> : x.question} subtitle={t('faqTag')} className="px-1" />
         ))}
         {showAbout && (
           <ListRow href="/app/aide/apropos" icon={<Info className={ICON} strokeWidth={1.7} />} title={t('about')} subtitle={t('version', { version: APP_VERSION })} chevron={false} className="px-1" />

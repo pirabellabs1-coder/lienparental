@@ -6,6 +6,9 @@ import 'server-only'
  *  - Conseils du jour : lib/mock-data.ts (mockTips)
  * Servent de contenu en démonstration et d'import initial en base (bouton « Importer depuis le dépôt »).
  * Une entrée invalide ou sans fichier est ignorée (avertissement serveur), jamais inventée.
+ *
+ * `locale` (en, pt) : superpose les traductions de content/i18n/<locale>/… (docs/I18N-CONTENU.md),
+ * élément par élément ; sans traduction valide, l'élément reste en français.
  */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -14,6 +17,8 @@ import tutoIndex from '@/content/tutoriels/index.json'
 import { mockTips } from '@/lib/mock-data'
 import { parseFrontmatter } from '@/lib/blog/frontmatter'
 import { slugify } from '@/lib/contenus/types'
+import type { ContentLocale } from '@/lib/contenus/i18n'
+import { localizeFromFiles } from '@/lib/contenus/i18n-files'
 import { conseilSchema, faqSchema, tutorielSchema, type Conseil, type FaqItem, type TipCategory, type Tutoriel } from './types'
 
 const SAFE = /^[a-z0-9-]+$/
@@ -25,7 +30,11 @@ function readBody(dir: 'faq' | 'tutoriels', slug: string): string | null {
   return parseFrontmatter(fs.readFileSync(file, 'utf8')).body
 }
 
-export function readSeedFaq(): FaqItem[] {
+export function readSeedFaq(locale: ContentLocale = 'fr'): FaqItem[] {
+  return frFaq().map((f) => localizeFromFiles('faq', f, locale).data)
+}
+
+function frFaq(): FaqItem[] {
   return faqIndex.questions.flatMap((q, i) => {
     const body = readBody('faq', q.slug)
     if (!body) return []
@@ -42,7 +51,11 @@ const ICON: Record<string, Tutoriel['icone']> = {
   rocket: 'rocket', sparkles: 'sparkles', upload: 'upload', 'user-check': 'user-check', 'folder-down': 'folder-down', star: 'star',
 }
 
-export function readSeedTutoriels(): Tutoriel[] {
+export function readSeedTutoriels(locale: ContentLocale = 'fr'): Tutoriel[] {
+  return frTutoriels().map((t) => localizeFromFiles('tutoriel', t, locale).data)
+}
+
+function frTutoriels(): Tutoriel[] {
   return tutoIndex.tutoriels.flatMap((t, i) => {
     const body = readBody('tutoriels', t.slug)
     if (!body) return []
@@ -59,7 +72,11 @@ export function readSeedTutoriels(): Tutoriel[] {
 
 const TAG: Record<string, TipCategory> = { Communication: 'communication', Preuves: 'preuves', Enfant: 'enfant', Organisation: 'organisation' }
 
-export function readSeedConseils(): Conseil[] {
+export function readSeedConseils(locale: ContentLocale = 'fr'): Conseil[] {
+  return frConseils().map((c) => localizeFromFiles('conseil', c, locale).data)
+}
+
+function frConseils(): Conseil[] {
   return mockTips.flatMap((t, i) => {
     const r = conseilSchema.safeParse({
       slug: slugify(t.title, 80) || `conseil-${i + 1}`,

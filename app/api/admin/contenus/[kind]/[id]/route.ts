@@ -2,11 +2,13 @@
  * GET    /api/admin/contenus/[kind]/[id]                                         → { data }
  * PATCH  /api/admin/contenus/[kind]/[id]  { version, data?, statut?, publishedAt? } → { data }
  *        409 `conflict` si `version` n'est plus la version courante (concurrence optimiste)
+ * PATCH  /api/admin/contenus/[kind]/[id]  { version, translation: { locale: 'en'|'pt', data: {…} | null } } → { data }
+ *        Enregistre (ou supprime si null) la traduction d'une langue ; invariants forcés depuis le français.
  * DELETE /api/admin/contenus/[kind]/[id]                                         → 204
  */
 import { NextResponse, type NextRequest } from 'next/server'
 import { adminRoute, apiError, apiOk, patchBodySchema, readJson, revalidateFor } from '@/lib/contenus/api'
-import { deleteContent, getContent, updateContent } from '@/lib/contenus/repo'
+import { deleteContent, getContent, saveTranslation, updateContent } from '@/lib/contenus/repo'
 import { isContentKind, zodIssues } from '@/lib/contenus/types'
 
 export const dynamic = 'force-dynamic'
@@ -25,6 +27,11 @@ export async function PATCH(req: NextRequest, { params }: Ctx) {
   return adminRoute(req, async (ctx) => {
     const body = patchBodySchema.safeParse(await readJson(req))
     if (!body.success) return apiError(400, 'bad_request', 'Requête invalide.', zodIssues(body.error))
+    if (body.data.translation) {
+      const rec = await saveTranslation(ctx, kind, id, body.data.translation.locale, body.data.translation.data, body.data.version)
+      revalidateFor(kind, rec.slug)
+      return apiOk({ data: rec })
+    }
     const before = await getContent(ctx, kind, id)
     const rec = await updateContent(ctx, kind, id, {
       data: body.data.data,

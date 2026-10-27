@@ -18,7 +18,7 @@ Ce qui se passe ensuite :
 - Vous conservez l'accès Premium jusqu'à la date de fin de la période déjà payée.
 - Aucun prélèvement ne sera effectué au renouvellement.
 - Vos données restent dans votre coffre-fort.
-- Si vous dépassez les limites gratuites (500 Mo, 3 témoignages), rien n'est supprimé : vous ne pourrez plus ajouter de nouveaux éléments jusqu'à repasser Premium ou faire de la place.
+- Si vous dépassez les limites gratuites (2 Go d'espace), rien n'est supprimé : vous ne pourrez plus ajouter de nouveaux éléments jusqu'à repasser Premium ou faire de la place.
 
 Un exemple concret : vous résiliez le 25 octobre 2026, votre période payée se termine le 14 novembre 2026. Vous gardez tout Premium jusqu'au 14 novembre, puis le compte bascule automatiquement en gratuit.
 

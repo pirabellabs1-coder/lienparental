@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronLeft } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { ArticleFeedback } from '@/components/profil/ArticleFeedback'
 import { MarkdownBlocks, parseMarkdown } from '@/components/profil/markdown'
 import { getHelpTutoriel, getHelpTutoriels } from '@/lib/aide/public'
+import { contentLangAttr } from '@/lib/contenus/locale'
 
 export const revalidate = 300
 
@@ -14,7 +15,8 @@ export async function generateStaticParams() {
 
 export default async function TutorielDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const tuto = await getHelpTutoriel(slug)
+  const locale = await getLocale()
+  const tuto = await getHelpTutoriel(slug, locale)
   if (!tuto) notFound()
   const { blocks } = parseMarkdown(tuto.contenu)
   const t = await getTranslations('public.help.tutorials')
@@ -25,9 +27,11 @@ export default async function TutorielDetailPage({ params }: { params: Promise<{
         <ChevronLeft className="h-4 w-4" aria-hidden />
         {t('title')}
       </Link>
-      <h1 className="mt-1 text-[19px] font-extrabold leading-snug text-night-900">{tuto.titre}</h1>
+      <h1 className="mt-1 text-[19px] font-extrabold leading-snug text-night-900" lang={contentLangAttr(tuto.lang, locale)}>{tuto.titre}</h1>
       <p className="mb-4 mt-1.5 text-[12px] text-night-700">{t('readingTime', { n: tuto.dureeMin })}</p>
-      <MarkdownBlocks blocks={blocks} />
+      <div lang={contentLangAttr(tuto.lang, locale)}>
+        <MarkdownBlocks blocks={blocks} />
+      </div>
       <ArticleFeedback slug={slug} />
     </article>
   )

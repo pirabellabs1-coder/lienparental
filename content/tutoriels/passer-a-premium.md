@@ -10,7 +10,7 @@ Premium élargit l'espace, les témoignages et l'accès au Coach IA.
 
    ![step 1](/content/tutoriels/passer-a-premium/step-1.png)
 
-2. **Comparez les formules.** Gratuit ou Premium (6,99 €/mois ou 59 €/an). Vérifiez ce qui vous est utile aujourd'hui : espace supplémentaire, témoignages illimités, Coach IA illimité, OCR, exports JAF enrichis.
+2. **Comparez les formules.** Gratuit ou Premium (11,99 €/mois ou 99 €/an). Vérifiez ce qui vous est utile aujourd'hui : espace supplémentaire, témoignages illimités, Coach IA illimité, OCR, exports JAF enrichis.
 
    ![step 2](/content/tutoriels/passer-a-premium/step-2.png)
 

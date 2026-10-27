@@ -24,7 +24,7 @@ export function ImportButton({ what }: { what: 'guide' | 'modeles' | 'blog' | 'a
         setMsg('')
         try {
           const r = await contenusApi.importSeeds(what)
-          setMsg(`${r.created} importé(s), ${r.skipped} déjà présent(s)${r.errors.length ? `, ${r.errors.length} erreur(s) : ${r.errors.slice(0, 3).join(' ; ')}` : ''}.`)
+          setMsg(`${r.created} importé(s), ${r.skipped} déjà présent(s)${r.translated ? `, ${r.translated} traduction(s) ajoutée(s)` : ''}${r.errors.length ? `, ${r.errors.length} erreur(s) : ${r.errors.slice(0, 3).join(' ; ')}` : ''}.`)
           router.refresh()
         } catch (e) {
           setMsg(e instanceof AdminApiError ? e.message : 'Import impossible.')
@@ -34,7 +34,7 @@ export function ImportButton({ what }: { what: 'guide' | 'modeles' | 'blog' | 'a
       }}>
         <DatabaseZap className="h-4 w-4" aria-hidden="true" /> {busy ? 'Import…' : 'Importer depuis le dépôt'}
       </button>
-      <p role="status" aria-live="polite" className="max-w-xs text-[12.5px] text-night-600">{msg || `Copie ${LABEL[what]} absents de la base.`}</p>
+      <p role="status" aria-live="polite" className="max-w-xs text-[12.5px] text-night-600">{msg || `Copie ${LABEL[what]} absents de la base, avec leurs traductions anglaise et portugaise.`}</p>
     </div>
   )
 }

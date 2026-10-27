@@ -1,0 +1,51 @@
+{
+  "slug": "assurance-scolaire",
+  "territoire": "guyane",
+  "categorie": "assurances",
+  "titre": "School insurance",
+  "resume": "When it can be required (canteen, after-school care), what it covers, how to check your child is not already insured, and how to arrange it between separated parents.",
+  "aQuoiCaSert": "School insurance (assurance scolaire) protects your child during school activities and on the way to and from school. It combines two types of cover: civil liability (responsabilité civile), for damage the child causes to others, and personal accident insurance (individuelle accident corporel), for injuries the child suffers, even if they hurt themselves on their own. An \"extra-scolaire\" option also covers leisure activities and holidays, 24 hours a day.",
+  "quiEstConcerne": [
+    "Parents of children in school, from nursery school to high school.",
+    "Parents whose child eats at the canteen or attends the town's after-school care, where a certificate may be required."
+  ],
+  "aSavoir": [
+    "In principle, school insurance is optional, whether activities are compulsory (swimming pool or gym sessions on the timetable) or optional (outings and trips organized by the school).",
+    "It may be required for the canteen and for after-school activities organized by the town (supervised homework, cultural or sports activities).",
+    "Civil liability is often already included in your multi-risk home insurance (assurance multirisque habitation), and some personal policies cover personal injury: check before you take out a policy.",
+    "Possible additional cover depending on the policy: theft or extortion (racket), home tutoring for a child who is ill.",
+    "If your child changes school, let your insurer know.",
+    "Indicative cost according to service-public.gouv.fr: from about €10 per year per child."
+  ],
+  "documents": [
+    { "id": "contrat-habitation", "libelle": "Each parent's multi-risk home insurance policy", "detail": "To check the civil liability cover and whether the child is listed as insured.", "coffre": "finances" },
+    { "id": "contrats-perso", "libelle": "Other personal policies (garantie des accidents de la vie, individuelle accident)", "detail": "They may already cover the child's personal injuries.", "coffre": "finances" },
+    { "id": "attestation", "libelle": "School insurance or civil liability certificate in the child's name", "detail": "Original or copy, as requested by the school, the town hall (mairie: canteen, after-school care) or the holiday club. Remember a copy for the other parent.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Check your existing policies", "detail": "Home insurance, garantie des accidents de la vie (life accident cover), personal accident: ask your insurer whether your child is covered for school and after-school activities." },
+    { "titre": "Separated parents: decide who insures the child", "detail": "There is no point paying twice for the same cover. One policy is enough if the child is properly named on it; share the certificate." },
+    { "titre": "Take out a policy if needed", "detail": "With the insurer of your choice, or through a group policy offered by a parents' association or a private school." },
+    { "titre": "Check before handing in the file", "detail": "Certificate in the child's name, for the current school year, mentioning civil liability and, if requested, personal accident cover." },
+    { "titre": "Hand in the certificate", "detail": "To the school, the town hall (canteen, after-school care) or the holiday club if it is requested." }
+  ],
+  "ou": [
+    { "nom": "Your insurer or a parents' association (association de parents d'élèves)" }
+  ],
+  "liens": [
+    { "titre": "School insurance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "School insurance certificate", "categorie": "scolarite" },
+    { "type": "depense", "titre": "School insurance", "categorie": "assurance" },
+    { "type": "rappel", "titre": "Renew the school insurance certificate before school starts", "evenement": "ecole" }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the certificates required by your school, your town (canteen, after-school care) or the private school."
+  ],
+  "motsCles": ["insurance", "civil liability", "accident", "school", "certificate", "canteen"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1871 School insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2025-09-15" }
+  ]
+}

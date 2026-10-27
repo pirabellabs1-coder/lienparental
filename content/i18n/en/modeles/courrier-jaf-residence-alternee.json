@@ -1,0 +1,131 @@
+{
+  "slug": "courrier-jaf-residence-alternee",
+  "titre": "Letter to the JAF (family court judge): request for alternating residence",
+  "categorie": "juridique",
+  "description": "Make a request for alternating residence before the juge aux affaires familiales (the French family court judge).",
+  "badge": "Populaire",
+  "champs": [
+    {
+      "key": "nom_complet",
+      "label": "Your first and last name",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Julie Martin",
+      "options": []
+    },
+    {
+      "key": "adresse",
+      "label": "Your address",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "Number and street",
+      "exemple": "12 rue des Palmistes",
+      "options": []
+    },
+    {
+      "key": "code_postal_ville",
+      "label": "Postal code and town",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "97300 Cayenne",
+      "options": []
+    },
+    {
+      "key": "telephone",
+      "label": "Phone",
+      "type": "telephone",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "email",
+      "label": "Email address",
+      "type": "email",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "autre_parent",
+      "label": "Other parent’s first and last name",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Marc Dupont",
+      "options": []
+    },
+    {
+      "key": "adresse_autre_parent",
+      "label": "Other parent’s address",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "5 avenue Léopold Héder, 97300 Cayenne",
+      "options": []
+    },
+    {
+      "key": "prenom_enfant",
+      "label": "Child’s first name",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Lina",
+      "options": []
+    },
+    {
+      "key": "date_naissance_enfant",
+      "label": "Child’s date of birth",
+      "type": "date",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "tribunal",
+      "label": "Tribunal judiciaire (court)",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Tribunal judiciaire de Cayenne",
+      "options": []
+    },
+    {
+      "key": "ville",
+      "label": "Town where you sign",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Cayenne",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Date of the letter",
+      "type": "date",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    }
+  ],
+  "corps": "Madame, Monsieur le Juge,\n\nNous soussignés, {{nom_complet}}, demeurant {{adresse}}, {{code_postal_ville}}, et {{autre_parent}}, demeurant {{adresse_autre_parent}}, parents de {{prenom_enfant}}, né(e) le {{date_naissance_enfant}}, sollicitons par la présente la mise en place d’une résidence alternée.\n\nCette demande est motivée par notre volonté commune de préserver l’équilibre affectif de notre enfant et de maintenir des liens étroits et réguliers avec chacun de ses parents.\n\nNos domiciles respectifs permettent d’assurer la continuité de la scolarité et des activités de {{prenom_enfant}}.\n\nNous proposons une alternance hebdomadaire ainsi qu’un partage par moitié des vacances scolaires, selon le calendrier joint.\n\nNous vous prions d’agréer, Madame, Monsieur le Juge, l’expression de notre haute considération.\n\n---\n\n## Proposition de calendrier\n\n- Semaines paires : résidence chez {{nom_complet}}\n- Semaines impaires : résidence chez {{autre_parent}}\n- Vacances scolaires : partage par moitié, alternance chaque année\n- Jours fériés : rattachés à la semaine en cours\n\n## Pièces jointes\n\n- Copie du livret de famille\n- Justificatif de domicile de moins de 3 mois\n- Certificat de scolarité de l’enfant",
+  "miseEnPage": {
+    "type": "lettre",
+    "expediteur": "{{nom_complet}}\n{{adresse}}\n{{code_postal_ville}}\n{{telephone}}\n{{email}}",
+    "destinataire": "À l’attention du juge aux affaires familiales\n{{tribunal}}",
+    "lieuDate": "{{ville}}, le {{date}}",
+    "objet": "Demande de résidence alternée de notre enfant {{prenom_enfant}}",
+    "signature": "{{nom_complet}}          {{autre_parent}}",
+    "piedDePage": "",
+    "logo": true,
+    "police": "helvetica",
+    "taille": "normale",
+    "marges": "normales"
+  }
+}

@@ -8,6 +8,9 @@ import 'server-only'
  * - Semé au premier accès avec les fichiers du dépôt (content/guide, content/blog,
  *   lib/modeles/seeds) : ce qui est affiché au parent est donc le même contenu.
  * - Perdu au redémarrage du serveur (assumé : recette uniquement, jamais en production).
+ * - Traductions : un contenu semé depuis le dépôt et jamais modifié (`fileBacked`) lit ses traductions
+ *   EN/PT directement dans content/i18n/<locale>/… (les traducteurs peuvent les ajouter à chaud) ;
+ *   à la première écriture, elles sont recopiées dans l'enregistrement (`translations`).
  */
 import { createHash, randomUUID } from 'node:crypto'
 import { getFiches, getParcoursList, getPartenairesDemo, listTerritoires } from '@/lib/guide/load'
@@ -15,15 +18,19 @@ import type { Territoire } from '@/lib/guide/types'
 import { SEED_TEMPLATES } from '@/lib/modeles/seeds'
 import { readSeedPosts } from '@/lib/blog/seed'
 import { readSeedConseils, readSeedFaq, readSeedTutoriels } from '@/lib/aide/seed'
+import type { TranslationLocale, Translations } from './i18n'
+import { fileTranslations, rawFileTranslation } from './i18n-files'
 import { describe, type ContentData, type ContentKind, type ContentRecord, type ContentStatus, type ContentVersion } from './types'
 
 type Store = {
   records: Record<ContentKind, Map<string, ContentRecord>>
   versions: Map<string, ContentVersion[]>
   territoires: Map<string, Territoire>
+  /** Identifiants des contenus encore identiques aux fichiers du dépôt (traductions lues dans content/i18n). */
+  fileBacked: Set<string>
 }
 
-const KEY = '__lienParentalContenusDemo_v3'
+const KEY = '__lienParentalContenusDemo_v4'
 type G = typeof globalThis & { [KEY]?: Store }
 
 const MAX_VERSIONS = 50
@@ -46,6 +53,7 @@ function seed(): Store {
     },
     versions: new Map(),
     territoires: new Map(),
+    fileBacked: new Set(),
   }
   const add = <K extends ContentKind>(kind: K, data: ContentData[K], opts: { statut?: ContentStatus; at?: string; publishedAt?: string | null; id?: string } = {}) => {
     // Jamais de date future à l'amorçage (une fiche vérifiée « aujourd'hui » ne doit pas paraître programmée).
@@ -61,7 +69,11 @@ function seed(): Store {
       publishedAt: statut === 'publie' ? (opts.publishedAt && opts.publishedAt < nowIso ? opts.publishedAt : at) : null,
     })
     store.records[kind].set(rec.id, rec as ContentRecord)
+    store.fileBacked.add(rec.id)
     logVersion(store, rec as ContentRecord, 'creation', 'Import initial')
+    // Traductions lues dans les fichiers (non figées à l'amorçage) : l'instantané initial n'en porte pas,
+    // et restaurer cette version conserve donc les traductions courantes (comme un instantané d'avant 0490).
+    delete (store.versions.get(rec.id)?.[0]?.snapshot as Partial<ContentRecord> | undefined)?.translations
   }
 
   for (const t of listTerritoires()) {
@@ -92,9 +104,34 @@ export function makeRecord<K extends ContentKind>(
   id: string,
   data: ContentData[K],
   env: Pick<ContentRecord, 'statut' | 'version' | 'createdAt' | 'updatedAt' | 'publishedAt'>,
+  translations: Translations = {},
 ): ContentRecord<K> {
   const d = describe(kind, data)
-  return { id, kind, ...env, titre: d.titre, slug: d.slug, territoire: d.territoire, data }
+  return { id, kind, ...env, titre: d.titre, slug: d.slug, territoire: d.territoire, data, translations }
+}
+
+/** Traduction brute d'un contenu de démonstration pour une langue (enregistrement, sinon fichier du dépôt). */
+export function demoTranslation(store: Store, rec: ContentRecord, locale: TranslationLocale): unknown {
+  if (rec.translations[locale] !== undefined) return rec.translations[locale]
+  return store.fileBacked.has(rec.id) ? rawFileTranslation(rec.kind, rec.data, locale) ?? undefined : undefined
+}
+
+/** Toutes les traductions d'un contenu de démonstration (fichiers du dépôt valides + saisies admin). */
+export function demoTranslations(store: Store, rec: ContentRecord): Translations {
+  if (!store.fileBacked.has(rec.id)) return rec.translations
+  return { ...fileTranslations(rec.kind, rec.data), ...rec.translations }
+}
+
+/** Vue « admin » d'un enregistrement de démonstration (traductions des fichiers incluses). */
+export function demoView<K extends ContentKind>(store: Store, rec: ContentRecord<K>): ContentRecord<K> {
+  return store.fileBacked.has(rec.id) ? { ...rec, translations: demoTranslations(store, rec as ContentRecord) } : rec
+}
+
+/** Avant une écriture : fige les traductions lues dans les fichiers, puis l'enregistrement vit sa vie. */
+export function detachFromFiles(store: Store, rec: ContentRecord): Translations {
+  const t = demoTranslations(store, rec)
+  store.fileBacked.delete(rec.id)
+  return t
 }
 
 export function logVersion(store: Store, rec: ContentRecord, action: ContentVersion['action'], actor: string | null) {

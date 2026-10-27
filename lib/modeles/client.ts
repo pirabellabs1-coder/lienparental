@@ -50,5 +50,6 @@ export function toModelCard(t: PublishedTemplateSummary): ModelCard & { href: st
     accent: ACCENT_BY_CATEGORY[t.categorie] ?? 'night',
     category: templateCategoryLabel(t.categorie),
     href: `/app/modeles/${t.slug}`,
+    lang: t.lang,
   }
 }

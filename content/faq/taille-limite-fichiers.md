@@ -9,13 +9,13 @@ Oui, Lien Parental applique une limite par fichier et un espace total selon votr
 Les limites :
 
 - Un fichier ne peut pas dépasser 50 Mo.
-- La formule gratuite donne droit à 500 Mo d'espace total.
-- La formule Premium donne droit à 20 Go.
+- La formule gratuite donne droit à 2 Go d'espace total.
+- La formule Premium donne droit à 10 Go.
 
 À quoi cela correspond :
 
-- 500 Mo, c'est environ 1 500 photos ou 2 000 pages de PDF scannés.
-- 20 Go, c'est l'équivalent de plusieurs années d'archives complètes.
+- 2 Go, c'est environ 6 000 photos ou 8 000 pages de PDF scannés.
+- 10 Go, c'est l'équivalent de plusieurs années d'archives complètes.
 
 Si un fichier dépasse 50 Mo (par exemple un gros PDF scanné en haute résolution), deux solutions pratiques :
 

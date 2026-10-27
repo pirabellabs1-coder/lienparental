@@ -1,0 +1,66 @@
+{
+  "slug": "changer-ecole-en-cours-annee",
+  "territoire": "guyane",
+  "categorie": "ecole",
+  "titre": "Mudar de escola durante o ano letivo (mudança, certificat de radiation)",
+  "resume": "Transferir seu filho de escola, collège ou lycée durante o ano: certificat de radiation, inscrição na prefeitura e depois na escola, documentos exatos e o caso dos pais separados.",
+  "aQuoiCaSert": "Uma criança pode mudar de estabelecimento durante o ano, por exemplo após uma mudança de casa ou uma separação. A transferência nunca é automática: depende das vagas disponíveis. O estabelecimento anterior entrega um certificat de radiation (certificado de desligamento da escola), indispensável para matricular a criança no novo. Na educação infantil e no ensino fundamental públicos (maternelle e élémentaire), a inscrição passa primeiro pela prefeitura (mairie).",
+  "quiEstConcerne": [
+    "Os pais que se mudam durante o ano letivo, no mesmo município ou em outro lugar da Guiana Francesa.",
+    "Os pais separados cujo filho muda de residência principal.",
+    "Os pais que desejam outra escola, outro collège (anos finais do fundamental) ou outro lycée (ensino médio) que não o do seu setor."
+  ],
+  "aSavoir": [
+    "Escola pública, outra escola do mesmo município: é preciso a autorização do prefeito, que emite um certificado de inscrição (certificat d'inscription). Em outro município: autorização do prefeito do seu município de residência e do município de destino (service-public.gouv.fr).",
+    "Pais separados: se um dos pais se opuser à transferência, o diretor deve aguardar a decisão do juiz de família (juge aux affaires familiales, JAF) acionado por esse genitor (service-public.gouv.fr). Mudar de escola é uma decisão importante para a criança: o ideal é ter o acordo escrito dos dois pais que exercem a autoridade parental.",
+    "Se uma sentença confia só a você a autoridade parental, apresente-a à escola e à prefeitura.",
+    "Collège ou lycée público do setor: obtenha o certificat de radiation (chamado exeat) do estabelecimento anterior e matricule a criança no novo. O diretor do estabelecimento deve aceitar a matrícula. Se não houver mais vagas, os serviços acadêmicos designam a escola do aluno.",
+    "Collège ou lycée fora do setor: é preciso primeiro a autorização do diretor acadêmico (Dasen, directeur académique) antes da matrícula.",
+    "A matrícula no ensino fundamental público é gratuita (service-public.gouv.fr)."
+  ],
+  "documents": [
+    { "id": "certificat-radiation", "libelle": "Certificat de radiation da escola anterior (exeat no collège e no lycée)", "detail": "Original entregue pela direção do estabelecimento anterior, depois de informada a transferência. Indispensável em todos os casos.", "coffre": "scolarite" },
+    { "id": "certificat-inscription", "libelle": "Certificado de inscrição emitido pela prefeitura (escola pública)", "detail": "Original, a pedir ao serviço escolar da prefeitura do novo município.", "coffre": "scolarite" },
+    { "id": "filiation", "libelle": "Livro de família (livret de famille) ou extrato da certidão de nascimento da criança", "detail": "Cópia, para comprovar identidade e filiação. Certidão gratuita em service-public.gouv.fr ou na prefeitura do local de nascimento.", "coffre": "scolarite" },
+    { "id": "vaccins", "libelle": "Comprovante das vacinas obrigatórias", "detail": "Cópia das páginas de vacinas da caderneta de saúde ou atestado de contraindicação. Na Guiana Francesa, a febre amarela está entre as vacinas exigidas.", "coffre": "sante" },
+    { "id": "identite-parents", "libelle": "Documento de identidade de cada genitor que faz o pedido", "detail": "Cópia válida, pedida pela prefeitura para a inscrição.", "coffre": "scolarite" },
+    { "id": "domicile", "libelle": "Comprovante de endereço recente", "detail": "Cópia de conta ou recibo de aluguel no novo endereço. Se você está hospedado(a), declaração sob compromisso de honra de quem hospeda, com o comprovante dele.", "coffre": "scolarite" },
+    { "id": "bulletins", "libelle": "Boletins do ano e decisão de orientação (collège, lycée)", "detail": "Cópias, disponíveis no portal digital do estabelecimento.", "coffre": "scolarite" },
+    { "id": "accord-autre-parent", "libelle": "Acordo escrito do outro genitor", "detail": "Datado e assinado, com cópia do documento de identidade dele. Recomendado quando a autoridade parental é compartilhada.", "coffre": "jaf" },
+    { "id": "jugement", "libelle": "Sentença ou acordo (residência da criança, autoridade parental)", "detail": "Cópia, se uma decisão fixa a residência ou confia a autoridade parental a um só genitor.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Informe-se na nova escola ou no novo estabelecimento", "detail": "Verifique se há vagas. Para uma escola pública, ligue também para o serviço escolar da prefeitura." },
+    { "titre": "Obtenha a autorização necessária", "detail": "Certificado de inscrição da prefeitura para uma escola pública, autorização do diretor acadêmico para um collège ou lycée fora do setor." },
+    { "titre": "Informe a saída ao estabelecimento anterior", "detail": "Peça o certificat de radiation ou o exeat. Avise o outro genitor." },
+    { "titre": "Confira antes de ir", "detail": "Certificat de radiation, certificado de inscrição da prefeitura, livro de família ou certidão de nascimento, carteira de vacinação em dia, comprovante de endereço, documentos de identidade, boletins, acordo escrito do outro genitor ou sentença, se necessário." },
+    { "titre": "Conclua a matrícula no novo estabelecimento", "detail": "Lembre-se também de reinscrever a criança na cantina, nas atividades extraescolares e no transporte escolar." }
+  ],
+  "ou": [
+    { "nom": "Prefeitura do seu novo município (serviço escolar)", "detail": "Para o certificado de inscrição em escola pública." },
+    { "nom": "Rectorat de l'académie de la Guyane (secretaria regional de educação)", "detail": "Para a designação de vaga em collège ou lycée quando o estabelecimento está lotado ou fora do setor.", "url": "https://www.ac-guyane.fr" }
+  ],
+  "liens": [
+    { "titre": "Mudar de escola durante o ano (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722" },
+    { "titre": "Mudar de collège ou de lycée durante o ano (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393" },
+    { "titre": "Inscrição no ensino fundamental (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Certificat de radiation da escola anterior", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Certificado de inscrição da prefeitura", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Acordo escrito do outro genitor para a mudança de escola", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Horário de matrícula na nova escola", "evenement": "ecole" },
+    { "type": "rappel", "titre": "Reinscrever a criança na cantina e no extraescolar", "evenement": "ecole" }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: na Guiana Francesa, o serviço do rectorat responsável pelas designações durante o ano e seus prazos de resposta.",
+    "A confirmar localmente: os documentos pedidos por cada prefeitura da Guiana Francesa podem variar um pouco."
+  ],
+  "motsCles": ["transferência escolar", "certificat de radiation", "exeat", "mudança", "prefeitura", "collège", "lycée"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10722 Mudança de escola durante o ano", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722", "verifieLe": "2025-07-08" },
+    { "titre": "Service-public.gouv.fr, F20393 Mudança de collège ou de lycée durante o ano", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393", "verifieLe": "2025-10-09" },
+    { "titre": "Service-public.gouv.fr, F1865 Inscrição no ensino fundamental", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" }
+  ]
+}

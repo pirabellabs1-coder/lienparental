@@ -1,0 +1,74 @@
+{
+  "slug": "allocation-soutien-familial",
+  "territoire": "guyane",
+  "categorie": "aides",
+  "titre": "Auxílio de apoio familiar (ASF, allocation de soutien familial)",
+  "resume": "200,78 € por mês e por filho, pagos pela Caf ao genitor que cria o filho sozinho quando o outro não paga pensão ou paga pouco. Os documentos exatos e o prazo de 4 meses que não se pode perder.",
+  "aQuoiCaSert": "O ASF ajuda o genitor que vive sozinho com o filho quando o outro genitor deixou de contribuir para o sustento da criança, ou paga uma pensão menor que o valor do ASF. Se uma pensão foi fixada e não é paga, a Caf (Caisse d'allocations familiales, órgão de benefícios familiares) paga o ASF como adiantamento e depois cobra ela mesma o genitor que não paga. Se nenhuma pensão foi fixada, o ASF é pago por 4 meses, o tempo de recorrer ao juiz.",
+  "quiEstConcerne": [
+    "O genitor que vive sozinho (sem cônjuge, companheiro nem parceiro de PACS (união civil)), reside na França e tem pelo menos um filho a cargo.",
+    "Se o outro genitor não contribui para o sustento da criança há pelo menos 1 mês, ou paga uma pensão inferior a 200,78 € por mês e por filho.",
+    "Se o outro genitor não tem condições de pagar (insolvência, desemprego, prisão, RSA, a renda mínima...): a Caf também pode pagar o ASF após verificar a situação dele."
+  ],
+  "aSavoir": [
+    "Valor: 200,78 € por mês e por filho (service-public.gouv.fr, página verificada em 1º de abril de 2026).",
+    "ASF diferencial (ASF différentielle): se a pensão recebida for menor que 200,78 €, a Caf paga a diferença. Não é paga se a diferença for inferior a 15 €, e é paga a cada 3 meses de uma só vez.",
+    "Pensão fixada mas não paga (sentença, acordo homologado ou acordo de divórcio depositado junto a um notário): o ASF é um adiantamento, e a Caf inicia a cobrança da pensão.",
+    "Nenhuma pensão fixada: o ASF é pago só por 4 meses. Para mantê-lo, recorra ao juiz de família (juge aux affaires familiales, JAF) nesse prazo (ou peça a revisão de uma decisão que não fixa pensão).",
+    "O ASF é devido a partir do mês seguinte à separação. É cortado assim que você passa a viver em casal: declare qualquer mudança rapidamente para evitar valores recebidos a mais que terá de devolver.",
+    "Não é preciso o acordo do outro genitor para pedir o ASF."
+  ],
+  "documents": [
+    { "id": "cerfa-12038", "libelle": "Pedido de auxílio de apoio familiar (cerfa n° 12038)", "detail": "Original assinado. Disponível para download em service-public.gouv.fr; existe também um formulário on-line. Guarde uma cópia.", "coffre": "finances" },
+    { "id": "cerfa-11423", "libelle": "Declaração de situação (Déclaration de situation, cerfa n° 11423)", "detail": "A anexar ao pedido de ASF, original assinado.", "coffre": "finances" },
+    { "id": "identite", "libelle": "Seu documento de identidade (cópia)", "detail": "Carteira de identidade, passaporte ou autorização de residência (titre de séjour) válidos.", "coffre": "finances" },
+    { "id": "livret-famille", "libelle": "Livro de família (livret de famille) ou certidão de nascimento de cada filho (cópia)", "detail": "Se não tiver, a certidão de nascimento pode ser pedida gratuitamente on-line em service-public.gouv.fr à prefeitura (mairie) do local de nascimento.", "coffre": "jaf" },
+    { "id": "jugement", "libelle": "Sentença, acordo homologado ou título que fixa a pensão (cópia), se existir", "detail": "Se você perdeu, peça uma cópia ao cartório do tribunal (greffe) que a proferiu, ou ao advogado ou notário, no caso de um acordo.", "coffre": "jaf" },
+    { "id": "preuves-impayes", "libelle": "Provas das pensões não pagas ou pagas em parte", "detail": "Extratos bancários dos últimos meses, mensagens escritas, carta de cobrança. Anote os meses e valores que faltam.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (comprovante de dados bancários) em seu nome", "detail": "Se você ainda não é beneficiário da Caf ou se mudou de conta.", "coffre": "finances" },
+    { "id": "saisine-jaf", "libelle": "Prova do pedido ao juiz de família (JAF)", "detail": "Cópia do pedido enviado ou recibo do cartório do tribunal, se nenhuma pensão estiver fixada. Envie à Caf antes do fim dos 4 meses.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Verifique se você cumpre as condições", "detail": "Você vive sozinho(a) com a criança, e o outro genitor não paga nada há pelo menos 1 mês ou paga menos de 200,78 € por filho. O simulador da Caf permite estimar seus direitos." },
+    { "titre": "Preencha os dois formulários", "detail": "Cerfa n° 12038 (pedido de ASF) e cerfa n° 11423 (declaração de situação), ou faça o pedido on-line no seu espaço Caf." },
+    { "titre": "Confira antes de enviar seu processo", "detail": "Os dois formulários estão datados e assinados; a cópia do documento de identidade está legível; o livro de família ou a certidão de cada filho está anexado; a sentença ou o acordo está anexado se existir; as provas de não pagamento indicam os meses; seu RIB está atualizado. Guarde cópia de tudo." },
+    { "titre": "Envie o processo à Caf de la Guyane ou entregue-o no atendimento", "detail": "Se você é do regime agrícola, envie à MSA (Mutualité sociale agricole, seguridade social agrícola)." },
+    { "titre": "Sem pensão fixada, recorra ao juiz de família em até 4 meses", "detail": "É a condição para continuar recebendo o ASF. Veja a ficha «Recorrer ao juiz de família (JAF)». Depois envie à Caf a prova do seu pedido." },
+    { "titre": "Acompanhe os pagamentos no Diário", "detail": "Anote cada pensão recebida ou não paga, com o comprovante: isso servirá para a Caf, a ARIPA (Agence de recouvrement et d'intermédiation des pensions alimentaires, agência de cobrança de pensões alimentícias) ou o juiz." }
+  ],
+  "ou": [
+    { "nom": "Caf de la Guyane", "detail": "Espaço on-line em caf.fr ou aplicativo Caf. Atendimento em Cayenne, Kourou e Saint-Laurent-du-Maroni.", "url": "https://www.caf.fr/allocataires/caf-de-la-guyane" },
+    { "nom": "MSA (Mutualité sociale agricole, seguridade social agrícola)", "detail": "Se você é do regime agrícola." },
+    { "nom": "ARIPA, serviço público das pensões alimentícias", "detail": "Para cobrar pensões não pagas e para a intermediação financeira (o órgão recebe e repassa a pensão).", "url": "https://pension-alimentaire.caf.fr/usagers" }
+  ],
+  "liens": [
+    { "titre": "Auxílio de apoio familiar para pais separados (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815" },
+    { "titre": "ARIPA, intermediação financeira", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" },
+    { "titre": "Caf de la Guyane", "url": "https://www.caf.fr/allocataires/caf-de-la-guyane" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Pedido de ASF enviado à Caf (cerfa 12038 e 11423)", "categorie": "finances" },
+    { "type": "coffre", "titre": "Sentença ou acordo que fixa a pensão", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Provas das pensões não pagas", "categorie": "finances" },
+    { "type": "coffre", "titre": "Prova do pedido ao juiz de família", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Recorrer ao juiz antes do fim dos 4 meses de ASF", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Declarar à Caf qualquer mudança (nova união, pensão recebida)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "4 meses para recorrer ao juiz se nenhuma pensão estiver fixada", "detail": "Caso contrário, o pagamento do ASF para no fim do 4º mês." },
+    { "libelle": "1 mês sem contribuição do outro genitor", "detail": "É o prazo mínimo a partir do qual o ASF pode ser pedido." }
+  ],
+  "aConfirmer": [
+    "A página oficial mostra 201,78 € em um ponto e 200,78 € em outro: verifique o valor em vigor em caf.fr ou com a Caf de la Guyane.",
+    "A lista exata de documentos não é publicada pelo service-public.gouv.fr (depende da sua situação): a Caf pode pedir outros.",
+    "Criança não reconhecida por um dos pais ou órfã: casos não tratados na página «pais separados»; informe-se com a Caf.",
+    "A confirmar localmente: horários e condições de agendamento do atendimento da Caf de la Guyane em Cayenne, Kourou e Saint-Laurent-du-Maroni."
+  ],
+  "motsCles": ["ASF", "mãe solo", "Caf", "pensão não paga", "auxílio", "pai solo"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F815 Auxílio de apoio familiar (pais separados)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F36407 Intermediação financeira das pensões alimentícias", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-04-01" },
+    { "titre": "ARIPA, intermediação financeira", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" }
+  ]
+}

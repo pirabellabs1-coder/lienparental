@@ -1,0 +1,71 @@
+{
+  "slug": "autorisation-sortie-territoire",
+  "territoire": "guyane",
+  "categorie": "logement",
+  "titre": "Autorização de saída do território (AST)",
+  "resume": "Quando o seu filho viaja para o exterior sem nenhum dos pais (inclusive para o Brasil ou o Suriname): o formulário gratuito, os documentos a anexar e o que fazer se você teme uma viagem sem o seu consentimento.",
+  "aQuoiCaSert": "A autorisation de sortie du territoire (AST, autorização de saída do território) permite que um menor que mora na França viaje ao exterior sem estar acompanhado de um dos pais ou de quem exerce a autoridade parental: viagem escolar, estadia com um parente, colônia de férias. É preenchida sem ir à prefeitura (mairie) nem à préfecture. A partir da Guiana Francesa, atravessar para o Brasil (Oiapoque) ou o Suriname (Albina) é sair do território francês: a AST é necessária se a criança for sem os pais.",
+  "quiEstConcerne": [
+    "Menores que moram na França e viajam ao exterior sem nenhum dos pais nem titular da autoridade parental (sozinhos, em grupo, com um parente ou outro adulto).",
+    "Pais separados que precisam assinar ou conferir uma AST, ou que temem que a criança seja levada ao exterior sem o seu consentimento."
+  ],
+  "aSavoir": [
+    "Não é preciso AST se a criança viajar com um dos pais, mesmo que os pais estejam separados ou divorciados.",
+    "Só um dos pais titular da autoridade parental assina o formulário. O consentimento do outro genitor não é exigido para a AST.",
+    "O prazo de validade é escolhido por quem assina, até no máximo um ano.",
+    "O formulário é gratuito e é preenchido on-line em service-public.gouv.fr (ou impresso e preenchido à mão). Não é preciso ir a nenhum órgão.",
+    "A criança também precisa do próprio documento de identidade válido (carteira de identidade ou passaporte, conforme o país) e de visto, se o país exigir. O livro de família (livret de famille) não pode ser exigido, mas uma cópia é recomendada.",
+    "Caso especial dos territórios ultramarinos: um trajeto entre a França continental e um departamento ultramarino com escala no exterior exige AST se a criança viajar sem os pais.",
+    "Se a criança for objeto de uma oposição (OST) ou de uma proibição de saída do território (IST) não revogada, ela não pode viajar, mesmo com AST.",
+    "Medo de sequestro pelo outro genitor: em urgência, a opposition de sortie du territoire (OST) é pedida pessoalmente na préfecture ou sous-préfecture (delegacia ou gendarmerie se estiverem fechadas e a partida for iminente). Dura no máximo 15 dias. Para uma medida duradoura, só o juiz de família (juge aux affaires familiales, JAF) pode decretar uma IST.",
+    "IST em vigor: a criança só pode sair do território com o consentimento dos dois pais. Se ambos concordarem, uma declaração na delegacia ou na gendarmerie, pelo menos 5 dias antes da partida, suspende a IST temporariamente."
+  ],
+  "documents": [
+    { "id": "formulaire-ast", "libelle": "Formulário de AST preenchido e assinado (Cerfa n° 15646)", "detail": "Original assinado por um dos pais titular da autoridade parental. Preencha on-line em service-public.gouv.fr e imprima. A criança o leva consigo durante toda a viagem.", "coffre": "autres" },
+    { "id": "identite-signataire", "libelle": "Fotocópia legível do documento de identidade de quem assina", "detail": "Genitor francês: carteira de identidade ou passaporte válido ou vencido há menos de 5 anos. Genitor de fora da União Europeia: passaporte válido e título de residência francês válido. Nome, foto, assinatura e datas legíveis.", "coffre": "autres" },
+    { "id": "identite-enfant", "libelle": "Documento de identidade da criança (original e válido)", "detail": "Carteira de identidade ou passaporte conforme o destino, com visto se o país exigir. Se estiver vencido, veja a ficha «Fazer a carteira de identidade ou o passaporte do meu filho».", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Cópia do livro de família (livret de famille)", "detail": "Não pode ser exigida, mas é recomendada se a criança e quem assina tiverem sobrenomes diferentes.", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Decisão judicial sobre a autoridade parental (cópia)", "detail": "Útil se você exerce sozinho a autoridade parental ou em caso de IST. Indispensável para pedir uma OST, com qualquer prova do risco (passagem aérea, mensagens).", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Verifique se a AST é necessária", "detail": "A criança vai ao exterior (inclusive Brasil e Suriname) sem nenhum dos pais? Se sim, precisa de AST. Se viajar com um de vocês, não precisa." },
+    { "titre": "Preencha o formulário on-line", "detail": "Em service-public.gouv.fr, formulário de autorização de saída do território. Indique o prazo de validade (no máximo um ano), depois imprima e assine." },
+    { "titre": "Confira antes da partida", "detail": "Formulário original assinado, fotocópia legível do documento de quem assina, documento de identidade válido da criança (e visto, se necessário), cópia do livro de família. Informe-se com a companhia ou o organizador sobre as exigências deles." },
+    { "titre": "Entregue tudo à criança ou ao acompanhante", "detail": "Os documentos viajam com a criança. Guarde uma cópia digitalizada no Cofre." },
+    { "titre": "Se você teme uma partida sem o seu consentimento", "detail": "Urgência: vá pessoalmente à préfecture ou sous-préfecture com o comprovante de autoridade parental, seus documentos de identidade e de endereço, o documento da criança e as provas do risco. Para uma proteção duradoura, informe-se sobre como acionar o juiz de família." }
+  ],
+  "ou": [
+    { "nom": "Formulário de AST on-line (service-public.gouv.fr)", "detail": "Gratuito, sem deslocamento.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46121" },
+    { "nom": "Préfecture de la Guyane ou sous-préfecture (representação do Estado)", "detail": "Só para uma oposição de saída do território (OST) urgente. Delegacia ou gendarmerie se estiverem fechadas e a partida for iminente." },
+    { "nom": "Allô Service Public", "detail": "Informações gratuitas sobre os seus direitos, sem acesso aos processos individuais.", "telephone": "3939" }
+  ],
+  "liens": [
+    { "titre": "Autorização de saída do território (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359" },
+    { "titre": "Conflito entre os pais sobre a saída do território: OST e IST (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774" },
+    { "titre": "Um dos pais pode viajar ao exterior com a criança? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38460" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Autorização de saída do território assinada", "categorie": "autres" },
+    { "type": "coffre", "titre": "Cópia do documento de identidade de quem assinou", "categorie": "autres" },
+    { "type": "coffre", "titre": "Sentença sobre a autoridade parental ou IST", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Fim da validade da AST da criança", "evenement": "autre" },
+    { "type": "rappel", "titre": "IST: declaração conjunta pelo menos 5 dias antes da partida", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "No máximo um ano", "detail": "Prazo de validade da AST, definido por quem assina." },
+    { "libelle": "No máximo 15 dias", "detail": "Duração de uma oposição de saída do território (OST) decidida pelo préfet." },
+    { "libelle": "Pelo menos 5 dias antes da partida", "detail": "Para suspender temporariamente uma IST, por declaração conjunta dos dois pais na delegacia ou gendarmerie." }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: como é feito o controle de menores nas travessias para o Brasil (Saint-Georges, Oiapoque) e o Suriname (Saint-Laurent-du-Maroni, Albina), e qual documento o país de destino exige.",
+    "A confirmar localmente: horários de atendimento da préfecture de Cayenne e da sous-préfecture de Saint-Laurent-du-Maroni para uma OST urgente."
+  ],
+  "motsCles": ["AST", "saída do território", "viagem", "menor", "Brasil", "Suriname", "OST", "IST", "cerfa 15646"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1359 Autorização de saída do território (AST)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359", "verifieLe": "2026-03-20" },
+    { "titre": "Service-public.gouv.fr, F1774 Conflito entre os pais sobre a saída do território de um filho menor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774", "verifieLe": "2025-04-29" },
+    { "titre": "Service-public.gouv.fr, F38460 Um dos pais pode viajar ao exterior com a criança?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38460", "verifieLe": "2026-06-05" },
+    { "titre": "Formulaires.service-public.gouv.fr, Cerfa n° 15646 Autorização de saída do território", "url": "https://www.formulaires.service-public.gouv.fr/gf/getAnnexe.do?cerfaAnnexe=15646*01&cerfaFormulaire=15646*01" }
+  ]
+}

@@ -13,6 +13,7 @@ import { ficheSchema, parcoursSchema, partenaireSchema, territoireSchema } from 
 import { documentTemplateSchema } from '@/lib/modeles/template'
 import { blogPostSchema } from '@/lib/blog/types'
 import { conseilSchema, faqSchema, tutorielSchema } from '@/lib/aide/types'
+import type { ContentLocale, Translations } from './locale'
 
 export const CONTENT_KINDS = ['fiche', 'parcours', 'partenaire', 'modele', 'article', 'faq', 'tutoriel', 'conseil'] as const
 export type ContentKind = (typeof CONTENT_KINDS)[number]
@@ -99,7 +100,15 @@ export type ContentRecord<K extends ContentKind = ContentKind> = {
   createdAt: string
   updatedAt: string
   publishedAt: string | null
+  /** Données dans la langue demandée (français = original ; voir `lang` pour les lectures publiques). */
   data: ContentData[K]
+  /**
+   * Traductions stockées (colonne `translations`, migration 0490) : { en?, pt? }, objets complets
+   * superposés au français à la lecture (lib/contenus/i18n.ts). Toujours présent ({} si aucune).
+   */
+  translations: Translations
+  /** Lectures publiques localisées uniquement : langue réellement affichée par `data`. */
+  lang?: ContentLocale
 }
 
 /** Ligne d'historique (instantané complet de l'élément après l'écriture). */
@@ -112,6 +121,8 @@ export type ContentVersion = {
   actor: string | null
   createdAt: string
   snapshot: unknown
+  /** Traductions de l'instantané (absent pour les instantanés antérieurs à la migration 0490). */
+  translations?: Translations
 }
 
 /** Titre et slug d'affichage, quel que soit le type de contenu. */

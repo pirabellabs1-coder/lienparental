@@ -45,8 +45,8 @@ export const blogPostSchema = z.object({
 })
 export type BlogPost = z.output<typeof blogPostSchema>
 
-/** Article publié tel qu'affiché par les pages publiques. */
-export type PublishedPost = BlogPost & { id: string; publishedAt: string; updatedAt: string }
+/** Article publié tel qu'affiché par les pages publiques (`lang` : langue réellement affichée). */
+export type PublishedPost = BlogPost & { id: string; publishedAt: string; updatedAt: string; lang?: 'fr' | 'en' | 'pt' }
 
 export function emptyPost(): BlogPost {
   return {

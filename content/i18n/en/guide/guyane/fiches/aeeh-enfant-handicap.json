@@ -1,0 +1,73 @@
+{
+  "slug": "aeeh-enfant-handicap",
+  "territoire": "guyane",
+  "categorie": "aides",
+  "titre": "Disabled child education allowance (AEEH) and the MDPH",
+  "resume": "Putting together a complete MDPH file for the AEEH: form, medical certificate less than a year old, exact documents, response times and appeals.",
+  "aQuoiCaSert": "The AEEH (allocation d'éducation de l'enfant handicapé, disabled child education allowance) helps parents cover the education and care costs of a child with a disability. It consists of a basic amount and, depending on needs, a supplement and an increase for single parents. You apply to the MDPH (maison départementale des personnes handicapées, the local disability services center). The decision is made by the CDAPH (commission des droits et de l'autonomie, the rights and autonomy committee), then the Caf (Caisse d'allocations familiales, the family benefits office) pays the allowance.",
+  "quiEstConcerne": [
+    "Parents of a child under 20 with a disability rate of at least 80%.",
+    "Parents of a child with a rate from 50% to under 80%, if the child attends a specialized facility or service or if care is recommended by the CDAPH.",
+    "Separated parents, whatever the child's residence arrangement (however, the AEEH is not shared under shared residence)."
+  ],
+  "aSavoir": [
+    "Basic amount: €153.01 per month. Supplements exist depending on the category of needs (1 to 6), and there is an increase for single parents (service-public.gouv.fr, checked as of June 1, 2026).",
+    "The medical certificate (cerfa n° 15695) must be no more than one year old when you submit the file.",
+    "The CDAPH must reply within 4 months. With no reply after 4 months, the application is considered rejected.",
+    "If refused, a mandatory prior administrative appeal (recours administratif préalable obligatoire) can be made within 2 months, then an appeal to the tribunal judiciaire (judicial court) within 2 months of the reply.",
+    "The AEEH is granted for 3 to 5 years if the rate is at least 80%, for 2 to 5 years between 50 and 80%, or with no time limit until age 20 if the child's condition cannot improve.",
+    "Under shared residence, the AEEH is not shared: it is paid in full to the parent designated as the beneficiary (service-public.gouv.fr).",
+    "A law of June 12, 2026 provides for changes, including a trial of faster processing. They only apply once the implementing decrees are published."
+  ],
+  "documents": [
+    { "id": "formulaire-mdph", "libelle": "MDPH application form (cerfa n° 15692)", "detail": "Original, dated and signed by the legal representative. Available on service-public.gouv.fr or from the MDPH.", "coffre": "sante" },
+    { "id": "certificat-medical", "libelle": "Medical certificate (cerfa n° 15695) less than a year old", "detail": "Original completed by the doctor who follows the child. Attach any useful reports (assessments, tests).", "coffre": "sante" },
+    { "id": "identite-enfant", "libelle": "Child's ID or family record book (livret de famille)", "detail": "Photocopy, front and back. For a foreign child, residence permit or travel document.", "coffre": "sante" },
+    { "id": "identite-representants", "libelle": "ID of each legal representative", "detail": "Photocopy, front and back, valid, or residence permit.", "coffre": "sante" },
+    { "id": "domicile", "libelle": "Proof of address", "detail": "Photocopy. If you are housed by someone, add a sworn statement (attestation sur l'honneur) from the person housing you.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Protection judgment or decision on parental authority, if applicable", "detail": "Copy, if a judgment sets who exercises parental authority or if a protection measure exists.", "coffre": "jaf" },
+    { "id": "bilans", "libelle": "Additional assessments (hearing, vision, psychologist, school)", "detail": "Copies. The form indicates the optional sections (hearing assessment, eye assessment).", "coffre": "sante" },
+    { "id": "accuse-reception", "libelle": "MDPH acknowledgment of receipt of the file", "detail": "Keep it: it starts the 4-month period.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Make an appointment with the doctor for the medical certificate", "detail": "The certificate must be less than a year old when you submit. Ask the doctor to detail the child's everyday needs." },
+    { "titre": "Fill in the application form", "detail": "Describe the child's life, needs, schooling and your expenses. The life plan (projet de vie) helps the committee understand the situation." },
+    { "titre": "Check before sending your file", "detail": "Signed form, original medical certificate less than a year old, IDs of the child and legal representatives, proof of address, assessments. An incomplete file delays the review." },
+    { "titre": "Send the file to the MDPH", "detail": "Preferably by registered letter with acknowledgment of receipt, or online if the MDPH offers this service. Keep a full copy." },
+    { "titre": "Follow up on the decision", "detail": "The CDAPH has 4 months to reply. Note the date so you can follow up and, if refused, appeal within 2 months." }
+  ],
+  "ou": [
+    { "nom": "MDPH de Guyane", "detail": "Contact details to check in the official Mon Parcours Handicap directory.", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" },
+    { "nom": "Caf de la Guyane", "detail": "Pays the AEEH after the CDAPH decision.", "url": "https://caf.fr/allocataires/caf-de-la-guyane" }
+  ],
+  "liens": [
+    { "titre": "Disabled child education allowance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809" },
+    { "titre": "MDPH application form (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993" },
+    { "titre": "Find your MDPH (monparcourshandicap.gouv.fr)", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Child's MDPH medical certificate", "categorie": "sante" },
+    { "type": "coffre", "titre": "Complete MDPH file (copy)", "categorie": "sante" },
+    { "type": "coffre", "titre": "CDAPH decision notice", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Follow up with the MDPH if no reply 4 months after submitting", "evenement": "autre" },
+    { "type": "rappel", "titre": "Prepare the AEEH renewal before entitlement ends", "evenement": "sante" },
+    { "type": "calendrier", "titre": "Doctor's appointment for the MDPH medical certificate", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Medical certificate less than a year old when the file is submitted" },
+    { "libelle": "CDAPH reply within 4 months", "detail": "With no reply, the application is considered rejected." },
+    { "libelle": "Appeal within 2 months after a refusal decision" }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the address, opening hours and whether the file can be submitted online to the MDPH de Guyane.",
+    "To be confirmed locally: actual processing times in French Guiana may exceed the legal time limit."
+  ],
+  "motsCles": ["AEEH", "MDPH", "disability", "CDAPH", "medical certificate", "allowance"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F14809 Disabled child education allowance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-06-01" },
+    { "titre": "Service-public.gouv.fr, R19993 MDPH application form", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-07-13" },
+    { "titre": "Service-public.gouv.fr, F21248 Shared residence and family benefits", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
+    { "titre": "Mon Parcours Handicap, directory", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
+  ]
+}

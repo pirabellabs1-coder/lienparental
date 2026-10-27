@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { ChevronRight } from 'lucide-react'
 import { GuideHeader } from '@/components/guide/GuideHeader'
 import { GuideSearch } from '@/components/guide/GuideSearch'
@@ -9,6 +9,7 @@ import { CategoryIcon } from '@/components/guide/icons'
 import { loadGuide, toResume } from '@/lib/guide/load'
 import { GUIDE_CATEGORIES } from '@/lib/guide/types'
 import { categoryHref } from '@/lib/guide/links'
+import { contentLangAttr } from '@/lib/contenus/locale'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('coach.guide')
@@ -21,7 +22,8 @@ type Props = { searchParams: Promise<Record<string, string | string[] | undefine
 export default async function GuidePage({ searchParams }: Props) {
   const t = await getTranslations('coach.guide')
   const sp = await searchParams
-  const g = await loadGuide(sp.territoire)
+  const locale = await getLocale()
+  const g = await loadGuide(sp.territoire, locale)
   const { territoire, fiches, parcours } = g
   const counts = Object.fromEntries(GUIDE_CATEGORIES.map((c) => [c.key, fiches.filter((f) => f.categorie === c.key).length]))
 
@@ -35,7 +37,7 @@ export default async function GuidePage({ searchParams }: Props) {
       </p>
 
       <div className="mt-5 max-w-[640px]">
-        <GuideSearch fiches={fiches.map(toResume)} territoire={territoire.code} />
+        <GuideSearch fiches={fiches.map((f) => ({ ...toResume(f), lang: contentLangAttr(f.lang, locale) }))} territoire={territoire.code} />
       </div>
 
       {parcours.length > 0 && (
@@ -44,7 +46,7 @@ export default async function GuidePage({ searchParams }: Props) {
           <p className="mt-0.5 text-[13px] text-night-600">{t('home.parcoursHint')}</p>
           <ul className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {parcours.map((p) => (
-              <li key={p.slug}><ParcoursCard parcours={p} territoire={territoire.code} /></li>
+              <li key={p.slug} lang={contentLangAttr(p.lang, locale)}><ParcoursCard parcours={p} territoire={territoire.code} /></li>
             ))}
           </ul>
         </section>

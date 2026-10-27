@@ -460,6 +460,14 @@
     "testimonyLead": "Send a form to a witness and receive their statement in your vault.",
     "testimonyCreate": "Create my request",
     "testimonyView": "View my testimonial requests",
+    "tipCategory": {
+      "communication": "Communication",
+      "preuves": "Evidence",
+      "enfant": "Child",
+      "organisation": "Organization",
+      "juridique": "Legal",
+      "empathie": "Empathy"
+    },
     "tipCarousel": "Tips of the day",
     "slide": "{n} of {total}",
     "chooseTip": "Choose a tip",

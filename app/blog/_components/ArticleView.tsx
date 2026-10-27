@@ -3,6 +3,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { ArrowLeft, CalendarDays, Clock3 } from 'lucide-react'
 import { BLOG_CATEGORIES, blogCategoryLabel, type BlogPost, type PublishedPost } from '@/lib/blog/types'
 import { intlLocale } from '@/lib/i18n/config'
+import { contentLangAttr, type ContentLocale } from '@/lib/contenus/locale'
 import { readingMinutes, tableOfContents } from '@/lib/blog/markdown'
 import { Markdown } from './Markdown'
 import { PostCard } from './PostCard'
@@ -10,12 +11,17 @@ import { PostCard } from './PostCard'
 export const formatArticleDate = (iso: string, locale: string) =>
   new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/Cayenne' }).format(new Date(iso))
 
-/** Article complet (page publique et aperçu du back-office). */
+/**
+ * Article complet (page publique et aperçu du back-office).
+ * `contentLang` : langue réellement affichée ; si elle diffère de l'interface (article non traduit),
+ * les textes de l'article portent l'attribut `lang` (lecteurs d'écran, césure).
+ */
 export function ArticleView({
-  post, publishedAt, related = [], backHref = '/blog',
-}: { post: BlogPost; publishedAt: string | null; related?: PublishedPost[]; backHref?: string }) {
+  post, publishedAt, related = [], backHref = '/blog', contentLang,
+}: { post: BlogPost; publishedAt: string | null; related?: PublishedPost[]; backHref?: string; contentLang?: ContentLocale }) {
   const t = useTranslations('public.blog')
   const locale = useLocale()
+  const cl = contentLangAttr(contentLang, locale)
   const category = BLOG_CATEGORIES.some((c) => c.key === post.categorie) ? t(`categories.${post.categorie}`) : blogCategoryLabel(post.categorie)
   const toc = tableOfContents(post.contenu)
   const minutes = readingMinutes(post.contenu)
@@ -28,10 +34,10 @@ export function ArticleView({
 
       <header className="mx-auto mt-4 max-w-3xl">
         <p className="inline-flex rounded-full bg-leaf-50 px-3 py-1 text-[12.5px] font-bold text-leaf-800">{category}</p>
-        <h1 className="mt-4 text-[30px] font-extrabold leading-[1.15] tracking-[-0.02em] text-night-900 sm:text-[40px]">{post.titre}</h1>
-        <p className="mt-4 text-[17px] leading-relaxed text-night-700">{post.extrait}</p>
+        <h1 className="mt-4 text-[30px] font-extrabold leading-[1.15] tracking-[-0.02em] text-night-900 sm:text-[40px]" lang={cl}>{post.titre}</h1>
+        <p className="mt-4 text-[17px] leading-relaxed text-night-700" lang={cl}>{post.extrait}</p>
         <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[13.5px] text-night-600">
-          <span className="font-semibold text-night-900">{post.auteur}</span>
+          <span className="font-semibold text-night-900" lang={cl}>{post.auteur}</span>
           {publishedAt && (
             <span className="inline-flex items-center gap-1.5">
               <CalendarDays className="h-4 w-4 text-leaf-600" aria-hidden="true" />
@@ -48,15 +54,15 @@ export function ArticleView({
       {post.couverture && (
         <div className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl border border-[#E5E7EB] bg-night-50">
           {/* eslint-disable-next-line @next/next/no-img-element -- image de couverture (chemin interne ou bucket public) */}
-          <img src={post.couverture} alt={post.couvertureAlt} className="aspect-[16/8] w-full object-cover object-[center_30%]" fetchPriority="high" />
+          <img src={post.couverture} alt={post.couvertureAlt} lang={cl} className="aspect-[16/8] w-full object-cover object-[center_30%]" fetchPriority="high" />
         </div>
       )}
 
       <div className="mx-auto mt-10 grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_220px]">
         <div className="min-w-0 max-w-3xl">
-          <Markdown source={post.contenu} />
+          <div lang={cl}><Markdown source={post.contenu} /></div>
           {post.tags.length > 0 && (
-            <ul aria-label={t('tags')} className="mt-10 flex flex-wrap gap-2 border-t border-[#E5E7EB] pt-6">
+            <ul aria-label={t('tags')} lang={cl} className="mt-10 flex flex-wrap gap-2 border-t border-[#E5E7EB] pt-6">
               {post.tags.map((tag) => (
                 <li key={tag} className="rounded-full border border-[#E5E7EB] px-3 py-1 text-[12.5px] font-semibold text-night-700">#{tag}</li>
               ))}
@@ -74,7 +80,7 @@ export function ArticleView({
           <nav aria-labelledby="sommaire" className="hidden lg:block">
             <div className="sticky top-6 rounded-2xl border border-[#E5E7EB] p-4">
               <p id="sommaire" className="text-[12px] font-bold uppercase tracking-wider text-night-500">{t('toc')}</p>
-              <ol className="mt-3 space-y-2 text-[13.5px]">
+              <ol className="mt-3 space-y-2 text-[13.5px]" lang={cl}>
                 {toc.map((h) => (
                   <li key={h.id}><a href={`#${h.id}`} className="text-night-700 hover:text-leaf-700 hover:underline">{h.text}</a></li>
                 ))}

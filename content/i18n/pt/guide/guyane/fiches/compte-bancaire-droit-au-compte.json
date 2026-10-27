@@ -1,0 +1,64 @@
+{
+  "slug": "compte-bancaire-droit-au-compte",
+  "territoire": "guyane",
+  "categorie": "argent",
+  "titre": "Ter a sua própria conta bancária após a separação",
+  "resume": "Abrir uma conta em seu nome para receber pensão e benefícios e, se um banco recusar, usar o direito à conta (droit au compte) junto ao Banque de France: documentos exatos e prazos.",
+  "aQuoiCaSert": "Após uma separação, uma conta pessoal permite receber a pensão alimentícia e os benefícios da Caf (Caisse d'allocations familiales, órgão de benefícios familiares), e pagar as despesas da criança mantendo registros claros. Se um banco se recusar a abrir uma conta, o Banque de France (banco central francês) designa um banco que é obrigado a abri-la, com serviços bancários básicos gratuitos. O procedimento vale mesmo em caso de proibição de emitir cheques (interdit bancaire), de registro no cadastro de inadimplência de crédito ou de superendividamento.",
+  "quiEstConcerne": [
+    "O genitor que não tem conta em seu nome, ou só uma conta conjunta com o ex-cônjuge.",
+    "Qualquer pessoa domiciliada na França que não tem nenhuma conta de depósito no país e teve a abertura de conta recusada.",
+    "Quem tem apenas uma conta conjunta também pode pedir o direito à conta para uma conta individual."
+  ],
+  "aSavoir": [
+    "O banco tem 15 dias para responder ao seu pedido de abertura. Sem resposta, é uma recusa: ele deve então entregar uma carta de recusa fundamentada.",
+    "O Banque de France designa um banco em 1 dia útil. A designação vale por 6 meses: entre em contato com o banco designado nesse prazo.",
+    "O banco designado envia a lista de documentos em 3 dias úteis e deve abrir a conta no máximo 3 dias úteis após receber todos eles, em geral num atendimento agendado.",
+    "Serviços bancários básicos gratuitos: manutenção e encerramento da conta, cartão de pagamento, débitos e transferências SEPA, depósitos e saques no caixa, 2 cheques administrativos por mês. Tarifas por incidente limitadas a 4 € por operação e 20 € por mês.",
+    "O banco designado só pode encerrar essa conta em casos específicos (por exemplo, informações inexatas, abertura de uma segunda conta de depósito), em geral com aviso prévio de 2 meses."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Documento de identidade válido", "detail": "Carteira de identidade, passaporte ou título de residência. Cópia para o dossiê do Banque de France, original no atendimento no banco.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Comprovante de endereço com menos de 3 meses", "detail": "Conta de luz, de água, recibo de aluguel. Mora na casa de alguém: declaração de hospedagem, documento de identidade e comprovante de endereço de quem hospeda (a confirmar com o banco).", "coffre": "finances" },
+    { "id": "lettre-refus", "libelle": "Carta de recusa do banco", "detail": "Ou, sem resposta, o aviso de recebimento do seu pedido com mais de 15 dias.", "coffre": "courriers" },
+    { "id": "attestation-honneur", "libelle": "Declaração sob compromisso de honra de que não tem conta de depósito", "detail": "Modelo oferecido pelo Banque de France no momento do pedido.", "coffre": "finances" },
+    { "id": "attestation-residence", "libelle": "Atestado de residência, se você for cidadão de outro país da União Europeia", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (dados bancários) da nova conta", "detail": "Para enviar à Caf, à ARIPA (Agence de recouvrement et d'intermédiation des pensions alimentaires, agência de cobrança de pensões alimentícias), ao seu empregador e ao outro genitor se a pensão for paga diretamente a você.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Peça a abertura de uma conta a um banco", "detail": "Por escrito, se possível, e guarde uma prova da data do pedido." },
+    { "titre": "Em caso de recusa, peça a carta de recusa", "detail": "Ou espere 15 dias sem resposta. Você também pode pedir ao banco que recusou que envie ele mesmo o seu dossiê ao Banque de France." },
+    { "titre": "Envie o seu dossiê ao Banque de France", "detail": "On-line em banque-france.fr (com FranceConnect), no guichê de uma agência (é possível agendar) ou pelo correio." },
+    { "titre": "Confira antes de sair de casa", "detail": "Para o banco designado: horário agendado dentro dos 6 meses, documento de identidade válido original, comprovante de endereço com menos de 3 meses, carta de designação do Banque de France, lista de documentos enviada pelo banco." },
+    { "titre": "Abra a conta no banco designado", "detail": "Ele tem 3 dias úteis após receber todos os documentos." },
+    { "titre": "Envie o seu novo RIB", "detail": "À Caf (conta on-line), à ARIPA se ela paga a pensão, ao empregador e, se necessário, ao outro genitor." }
+  ],
+  "ou": [
+    { "nom": "Banque de France", "detail": "Pedido de direito à conta on-line, no guichê de uma agência ou pelo correio.", "url": "https://www.banque-france.fr" },
+    { "nom": "O banco da sua escolha", "detail": "Primeiro pedido de abertura." }
+  ],
+  "liens": [
+    { "titre": "Direito à conta (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417" },
+    { "titre": "Banque de France", "url": "https://www.banque-france.fr" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Carta de recusa de abertura de conta", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Carta de designação do Banque de France", "categorie": "courriers" },
+    { "type": "coffre", "titre": "RIB da minha conta pessoal", "categorie": "finances" },
+    { "type": "rappel", "titre": "Contatar o banco designado (no máximo 6 meses)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Enviar meu novo RIB à Caf e à ARIPA", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "15 dias: prazo de resposta do banco; depois disso, o silêncio vale como recusa" },
+    { "libelle": "6 meses: validade da designação pelo Banque de France" }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: endereço, horários e agendamento da agência do Banque de France na Guiana Francesa, em banque-france.fr.",
+    "As regras para sair de uma conta conjunta dependem do seu banco: a página oficial sobre o direito à conta não as detalha."
+  ],
+  "motsCles": ["conta bancária", "RIB", "direito à conta", "Banque de France", "conta conjunta", "separação"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2417 Direito à conta", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417", "verifieLe": "2026-10-19" }
+  ]
+}

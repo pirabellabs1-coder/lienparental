@@ -67,7 +67,7 @@ export function GuideSearch({ fiches, territoire }: { fiches: FicheResume[]; ter
                         <CategoryIcon cat={f.categorie} className="h-[18px] w-[18px]" />
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block text-[14px] font-bold text-night-900">{f.titre}</span>
+                        <span className="block text-[14px] font-bold text-night-900" lang={f.lang}>{f.titre}</span>
                         <span className="block truncate text-[12.5px] text-night-600">{t(`categories.${f.categorie}`)}</span>
                       </span>
                       <ChevronRight className="h-4 w-4 shrink-0 text-night-400" strokeWidth={1.75} aria-hidden="true" />

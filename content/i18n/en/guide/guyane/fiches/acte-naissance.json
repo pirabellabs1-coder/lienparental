@@ -1,0 +1,64 @@
+{
+  "slug": "acte-naissance",
+  "territoire": "guyane",
+  "categorie": "naissance",
+  "titre": "Getting a birth certificate",
+  "resume": "Full copy or extract, with or without parentage: who can request it, how to get it free of charge online, by post or at the town hall, and when you no longer need it.",
+  "aQuoiCaSert": "The birth certificate (acte de naissance) proves your child's identity and parentage (filiation). You are often asked for it for a first ID card or passport, a marriage file, a certificate of French nationality, court proceedings or some registrations. Good news: the request is always free, and in many cases the administration retrieves it itself, without you having to provide it.",
+  "quiEstConcerne": [
+    "Parents who need their minor child's birth certificate (they are the child's legal representatives).",
+    "Anyone who needs their own birth certificate, or that of a parent or grandparent, a child or grandchild, their spouse or PACS partner (civil partnership)."
+  ],
+  "aSavoir": [
+    "There are three formats. Full copy (copie intégrale): the whole certificate, with the parents and the notes in the margin. Extract with parentage (extrait avec filiation): a summary including the parents. Extract without parentage (extrait sans filiation): identity, date and place of birth only.",
+    "Full copy and extract with parentage: reserved for the person concerned (if an adult) or their legal representative, their spouse or PACS partner, their ancestors and descendants, and certain professionals such as a lawyer. Anyone can request the extract without parentage.",
+    "The request is free. Service-public.gouv.fr warns against websites that charge for this procedure: never pay for a birth certificate.",
+    "In person, at the town hall (mairie) of the place of birth, the certificate is handed over immediately on presentation of ID. By post or online, allow a few days depending on the town hall and La Poste.",
+    "French child or parent born abroad: the certificate is issued by the Service central d'état civil (Scec, the central civil registry office) in Nantes, online or by post only (no public reception). Stated time: about 30 days.",
+    "ID card or passport for a minor: if the town of birth has digitized its civil records, you do not need to provide the certificate. Otherwise, a certificate less than 3 months old is required. If the child already has a passport, the certificate may not be requested: check your situation on the official page.",
+    "Separated parents: each parent, as an ancestor, can request a full copy of their child's certificate on their own, without the other parent's agreement."
+  ],
+  "documents": [
+    { "id": "infos-naissance", "libelle": "The exact details of the birth", "detail": "Child's surname, first names, date and place of birth, usual surnames and first names of both parents. Copy them from the family record book (livret de famille) to avoid a refusal.", "coffre": "autres" },
+    { "id": "identite-demandeur", "libelle": "ID of the requesting parent (original)", "detail": "Required at the town hall desk. By post or online, the registrar may ask for it if in doubt.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Family record book (original or copy)", "detail": "Useful to prove your link with the child if asked. If you no longer have it, see the guide entry \"Getting or updating a family record book (livret de famille): duplicate, second book\".", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Full copy of the birth certificate received", "detail": "Note the date of issue: many procedures require a certificate less than 3 months old.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Check whether you really need it", "detail": "For an ID card or passport, look at the list of towns with digitized civil records on the website of the ANTS (Agence nationale des titres sécurisés, the national agency for secure documents): if the town of birth is listed, the certificate is retrieved automatically. Also ask the organization which format it wants (usually the full copy) and whether it must be less than 3 months old." },
+    { "titre": "Born in France: apply online", "detail": "On service-public.gouv.fr, free service \"Demande d'acte de naissance\", signing in with FranceConnect (impots.gouv, ameli, La Poste login details, etc.). Choose the town of birth, your link with the child, the type of certificate and the number of copies. The certificate arrives by post." },
+    { "titre": "Or write to the town hall of the place of birth", "detail": "On plain paper: type of certificate wanted, surname, first names, date of birth, parents' names, your link with the child and your address. Enclosing a stamped envelope addressed to yourself often speeds up the reply." },
+    { "titre": "Check before going to the town hall", "detail": "The right town hall (the one in the place of birth, not where you live), valid original ID, family record book, exact names of both parents, type of certificate wanted. Call to find out the opening hours of the civil registry office (état civil)." },
+    { "titre": "Born abroad: go through the Scec in Nantes", "detail": "Apply online on service-public.gouv.fr (service for French people born abroad) or by post to the Service central d'état civil, 11 rue de la Maison Blanche, 44941 Nantes Cedex 09." },
+    { "titre": "Store the certificate you receive", "detail": "Scan it into the Vault and note its date: after 3 months, you will often need to request a new one." }
+  ],
+  "ou": [
+    { "nom": "Service-public.gouv.fr, online birth certificate request", "detail": "Free, FranceConnect login, for a birth in France.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406" },
+    { "nom": "Town hall of the place of birth", "detail": "Issued immediately at the civil registry desk, on presentation of ID." },
+    { "nom": "Service central d'état civil (Scec), Nantes", "detail": "For French people born abroad. No public reception: online or by post.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1405" }
+  ],
+  "liens": [
+    { "titre": "Birth certificate: full copy or extract (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427" },
+    { "titre": "Online birth certificate request, birth in France", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406" },
+    { "titre": "ID card for a minor: documents to provide (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Full copy of the child's birth certificate", "categorie": "autres" },
+    { "type": "rappel", "titre": "Birth certificate: valid for 3 months for procedures", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Town hall visit: picking up a birth certificate", "evenement": "rdv" }
+  ],
+  "datesLimites": [
+    { "libelle": "Less than 3 months old", "detail": "Age often required for the certificate provided, for example for a first ID card if the civil records are not digitized." }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: not all towns in French Guiana are necessarily on the list of towns with digitized civil records; check the town of birth on the ANTS website or with the town hall.",
+    "To be confirmed locally: opening hours and whether an appointment is needed at the civil registry office of the town hall of birth."
+  ],
+  "motsCles": ["birth certificate", "full copy", "extract", "parentage", "civil registry", "town hall", "Scec", "Nantes"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1427 Birth certificate: requesting a full copy or an extract", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
+    { "titre": "Service-public.gouv.fr, R1406 Online birth certificate request (birth in France)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406", "verifieLe": "2026-08-14" },
+    { "titre": "Service-public.gouv.fr, F1342 ID card for a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-04-27" }
+  ]
+}

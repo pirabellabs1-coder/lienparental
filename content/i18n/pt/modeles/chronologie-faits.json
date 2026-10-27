@@ -1,0 +1,113 @@
+{
+  "slug": "chronologie-faits",
+  "titre": "Cronologia dos fatos",
+  "categorie": "juridique",
+  "description": "Reconstitua os fatos com datas e fontes para o seu advogado ou para o juiz.",
+  "badge": null,
+  "champs": [
+    {
+      "key": "nom_complet",
+      "label": "Seu nome e sobrenome",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Julie Martin",
+      "options": []
+    },
+    {
+      "key": "adresse",
+      "label": "Seu endereço",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "Número e rua",
+      "exemple": "12 rue des Palmistes",
+      "options": []
+    },
+    {
+      "key": "code_postal_ville",
+      "label": "CEP e cidade",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "97300 Cayenne",
+      "options": []
+    },
+    {
+      "key": "telephone",
+      "label": "Telefone",
+      "type": "telephone",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "email",
+      "label": "E-mail",
+      "type": "email",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "avocat",
+      "label": "Nome do seu advogado",
+      "type": "texte",
+      "obligatoire": false,
+      "aide": "",
+      "exemple": "Maître Durand",
+      "options": []
+    },
+    {
+      "key": "prenom_enfant",
+      "label": "Nome da criança",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Lina",
+      "options": []
+    },
+    {
+      "key": "faits",
+      "label": "Fatos com data",
+      "type": "texte_long",
+      "obligatoire": true,
+      "aide": "Uma linha por fato: data, descrição factual, fonte (documento, testemunha, mensagem).",
+      "exemple": "",
+      "options": []
+    },
+    {
+      "key": "ville",
+      "label": "Cidade onde você assina",
+      "type": "texte",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "Cayenne",
+      "options": []
+    },
+    {
+      "key": "date",
+      "label": "Data da carta",
+      "type": "date",
+      "obligatoire": true,
+      "aide": "",
+      "exemple": "",
+      "options": []
+    }
+  ],
+  "corps": "# Chronologie des faits concernant {{prenom_enfant}}\n\nPièce à l’attention de {{avocat}}.\n\n{{faits}}\n\nDocument établi le {{date}} par {{nom_complet}}.",
+  "miseEnPage": {
+    "type": "document",
+    "expediteur": "{{nom_complet}}\n{{adresse}}\n{{code_postal_ville}}\n{{telephone}}\n{{email}}",
+    "destinataire": "",
+    "lieuDate": "{{ville}}, le {{date}}",
+    "objet": "",
+    "signature": "{{nom_complet}}",
+    "piedDePage": "Chronologie des faits",
+    "logo": true,
+    "police": "helvetica",
+    "taille": "normale",
+    "marges": "normales"
+  }
+}

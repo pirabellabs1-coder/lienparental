@@ -2,15 +2,16 @@
 
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { ChevronRight, FileText, ListFilter, Search } from 'lucide-react'
 import { StatusBadge } from '@/components/coffre/StatusBadge'
 import { TONES } from '@/components/coffre/tones'
 import { MODELES, MODELE_CATEGORIES, type ModeleCategory, type VaultTone } from '@/lib/mock-vault'
 import { usePublishedTemplates } from '@/lib/modeles/client'
 import { cn } from '@/lib/cn'
+import { contentLangAttr, type ContentLocale } from '@/lib/contenus/locale'
 
-type ListItem = { slug: string; title: string; kind: string; category: string; badge?: 'Populaire' | 'Nouveau' | null; tone: VaultTone; description: string }
+type ListItem = { slug: string; title: string; kind: string; category: string; badge?: 'Populaire' | 'Nouveau' | null; tone: VaultTone; description: string; lang?: ContentLocale }
 
 const TONE_BY_CATEGORY: Record<string, VaultTone> = { juridique: 'violet', scolaire: 'green', communication: 'orange', autre: 'blue' }
 
@@ -18,6 +19,7 @@ const TONE_BY_CATEGORY: Record<string, VaultTone> = { juridique: 'violet', scola
 // (repli sur les modèles de démonstration si aucun n'est publié ou si l'API est indisponible).
 export default function ModelesPage() {
   const tr = useTranslations('coach.templates')
+  const locale = useLocale()
   const [q, setQ] = useState('')
   const [cat, setCat] = useState<ModeleCategory | 'tous'>('tous')
   const [popularFirst, setPopularFirst] = useState(false)
@@ -34,6 +36,7 @@ export default function ModelesPage() {
         badge: tpl.badge,
         tone: TONE_BY_CATEGORY[tpl.categorie] ?? 'gray',
         description: tpl.description,
+        lang: tpl.lang,
       }))
     }
     return loading ? [] : MODELES
@@ -131,7 +134,7 @@ export default function ModelesPage() {
                   <FileText className="h-6 w-6" strokeWidth={1.9} />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[14px] font-bold leading-snug text-night-900">{m.title}</span>
+                  <span className="block text-[14px] font-bold leading-snug text-night-900" lang={contentLangAttr(m.lang, locale)}>{m.title}</span>
                   <span className="mt-1 flex items-center justify-between gap-2">
                     <span className="text-[12px] text-night-500">{m.kind}</span>
                     {m.badge && <StatusBadge kind={m.badge === 'Populaire' ? 'populaire' : 'nouveau'} />}

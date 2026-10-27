@@ -20,6 +20,7 @@ import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { requireAuthedUser } from '@/lib/auth/guard'
 import { RepoError, type AdminCtx } from './repo'
 import { CONTENT_STATUSES, type ContentKind } from './types'
+import { TRANSLATION_LOCALES } from './i18n'
 
 const isoDateTime = z.string().datetime({ offset: true })
 
@@ -35,6 +36,17 @@ export const patchBodySchema = z.object({
   data: z.unknown().optional(),
   statut: z.enum(CONTENT_STATUSES).optional(),
   publishedAt: isoDateTime.nullable().optional(),
+  /**
+   * Traduction d'une langue (exclusif des autres champs) : `data` = objet complet dans la langue,
+   * `null` = supprimer la traduction. Langue limitée à en | pt (le français est l'original).
+   */
+  translation: z.object({
+    locale: z.enum(TRANSLATION_LOCALES),
+    data: z.record(z.unknown()).nullable(),
+  }).strict().optional(),
+}).refine((b) => !b.translation || (b.data === undefined && b.statut === undefined && b.publishedAt === undefined), {
+  message: 'Une traduction s’enregistre seule (sans contenu français ni statut).',
+  path: ['translation'],
 })
 
 export const versionBodySchema = z.object({ version: z.number().int().positive() })

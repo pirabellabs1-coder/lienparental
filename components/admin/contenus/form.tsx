@@ -7,10 +7,27 @@
 import { createContext, useContext, useId, type ReactNode } from 'react'
 import { ArrowDown, ArrowUp, Plus, Trash2 } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import { isInvariantPath } from '@/lib/contenus/i18n'
 import type { Issue } from './client-api'
 
 const IssuesCtx = createContext<Issue[]>([])
 export const IssuesProvider = IssuesCtx.Provider
+
+/**
+ * Mode traduction (EditorShell, langue ≠ français) : les champs invariants (slugs, URL, catégories,
+ * dates… : lib/contenus/i18n-invariants.ts) sont verrouillés et la structure des listes est figée
+ * (mêmes éléments que le français). Le serveur force de toute façon ces valeurs depuis le français.
+ */
+const TranslatingCtx = createContext(false)
+export const TranslatingProvider = TranslatingCtx.Provider
+export function useTranslating(): boolean {
+  return useContext(TranslatingCtx)
+}
+
+function useLocked(path?: string): boolean {
+  const translating = useContext(TranslatingCtx)
+  return translating && (isInvariantPath(path) || path === 'publishedAt')
+}
 
 export function useIssue(path?: string): string | undefined {
   const issues = useContext(IssuesCtx)
@@ -36,14 +53,16 @@ export const btnDanger =
 export const iconBtn =
   'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-night-600 hover:bg-night-50 hover:text-night-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 disabled:opacity-30 disabled:hover:bg-transparent'
 
-type FieldRender = (p: { id: string; describedBy?: string; invalid: boolean }) => ReactNode
+type FieldRender = (p: { id: string; describedBy?: string; invalid: boolean; disabled?: boolean }) => ReactNode
 
 export function Field({ label, path, hint, required, children, className, counter }: {
   label: ReactNode; path?: string; hint?: ReactNode; required?: boolean; children: FieldRender; className?: string; counter?: ReactNode
 }) {
   const id = useId()
   const error = useIssue(path)
-  const describedBy = [hint ? `${id}-hint` : null, error ? `${id}-err` : null].filter(Boolean).join(' ') || undefined
+  const locked = useLocked(path)
+  const shownHint = locked ? 'Commun à toutes les langues : se modifie dans la version française.' : hint
+  const describedBy = [shownHint ? `${id}-hint` : null, error ? `${id}-err` : null].filter(Boolean).join(' ') || undefined
   return (
     <div className={cn('min-w-0', className)} data-field-path={path}>
       <div className="mb-1.5 flex items-baseline justify-between gap-3">
@@ -53,8 +72,8 @@ export function Field({ label, path, hint, required, children, className, counte
         </label>
         {counter}
       </div>
-      {children({ id, describedBy, invalid: Boolean(error) })}
-      {hint && !error && <p id={`${id}-hint`} className="mt-1 text-[12.5px] text-night-600">{hint}</p>}
+      {children({ id, describedBy, invalid: Boolean(error), disabled: locked || undefined })}
+      {shownHint && !error && <p id={`${id}-hint`} className="mt-1 text-[12.5px] text-night-600">{shownHint}</p>}
       {error && <p id={`${id}-err`} className="mt-1 text-[12.5px] font-semibold text-alert-600">{error}</p>}
     </div>
   )
@@ -73,9 +92,9 @@ export function TextField({ label, path, value, onChange, max, required, hint, t
 }) {
   return (
     <Field label={label} path={path} hint={hint} required={required} className={className} counter={<Counter value={value} max={max} />}>
-      {({ id, describedBy, invalid }) => (
+      {({ id, describedBy, invalid, disabled }) => (
         <input
-          id={id} type={type} value={value} placeholder={placeholder} inputMode={inputMode}
+          id={id} type={type} value={value} placeholder={placeholder} inputMode={inputMode} disabled={disabled}
           onChange={(e) => onChange(e.target.value)}
           aria-invalid={invalid || undefined} aria-describedby={describedBy} aria-required={required || undefined}
           className={cn(inputCls, mono && 'font-mono text-[14px]')}
@@ -91,9 +110,9 @@ export function TextAreaField({ label, path, value, onChange, max, required, hin
 }) {
   return (
     <Field label={label} path={path} hint={hint} required={required} className={className} counter={<Counter value={value} max={max} />}>
-      {({ id, describedBy, invalid }) => (
+      {({ id, describedBy, invalid, disabled }) => (
         <textarea
-          id={id} rows={rows} value={value} placeholder={placeholder}
+          id={id} rows={rows} value={value} placeholder={placeholder} disabled={disabled}
           onChange={(e) => onChange(e.target.value)}
           aria-invalid={invalid || undefined} aria-describedby={describedBy} aria-required={required || undefined}
           className={cn(inputCls, 'resize-y leading-relaxed', mono && 'font-mono text-[13.5px]')}
@@ -109,9 +128,9 @@ export function SelectField<V extends string>({ label, path, value, onChange, op
 }) {
   return (
     <Field label={label} path={path} hint={hint} required={required} className={className}>
-      {({ id, describedBy, invalid }) => (
+      {({ id, describedBy, invalid, disabled }) => (
         <select
-          id={id} value={value} onChange={(e) => onChange(e.target.value as V)}
+          id={id} value={value} onChange={(e) => onChange(e.target.value as V)} disabled={disabled}
           aria-invalid={invalid || undefined} aria-describedby={describedBy} aria-required={required || undefined}
           className={cn(inputCls, 'appearance-auto pr-8')}
         >
@@ -125,9 +144,11 @@ export function SelectField<V extends string>({ label, path, value, onChange, op
 
 export function CheckboxField({ label, checked, onChange, hint }: { label: ReactNode; checked: boolean; onChange: (v: boolean) => void; hint?: ReactNode }) {
   const id = useId()
+  // Les cases à cocher sont des options techniques : jamais traduites.
+  const locked = useContext(TranslatingCtx)
   return (
     <div className="flex items-start gap-3">
-      <input id={id} type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} aria-describedby={hint ? `${id}-h` : undefined}
+      <input id={id} type="checkbox" checked={checked} disabled={locked} onChange={(e) => onChange(e.target.checked)} aria-describedby={hint ? `${id}-h` : undefined}
         className="mt-0.5 h-5 w-5 shrink-0 rounded border-night-300 text-leaf-500 accent-leaf-500 focus-visible:ring-2 focus-visible:ring-leaf-500" />
       <div>
         <label htmlFor={id} className="text-[14px] font-semibold text-night-900">{label}</label>
@@ -158,6 +179,8 @@ export function Repeater<T>({ label, path, items, onChange, make, render, itemTi
   itemTitle: (item: T, index: number) => string; max?: number; addLabel?: string; min?: number
 }) {
   const error = useIssue(path)
+  // Traduction : mêmes éléments, dans le même ordre que le français (ni ajout, ni retrait, ni déplacement).
+  const fixed = useContext(TranslatingCtx)
   const move = (i: number, d: -1 | 1) => {
     const j = i + d
     if (j < 0 || j >= items.length) return
@@ -177,15 +200,19 @@ export function Repeater<T>({ label, path, items, onChange, make, render, itemTi
                 <span className="mr-1.5 inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-night-100 px-1.5 text-[11.5px] text-night-800">{i + 1}</span>
                 {itemTitle(it, i) || 'Nouvel élément'}
               </p>
-              <button type="button" className={iconBtn} onClick={() => move(i, -1)} disabled={i === 0} aria-label={`Monter l’élément ${i + 1}`}><ArrowUp className="h-4 w-4" /></button>
-              <button type="button" className={iconBtn} onClick={() => move(i, 1)} disabled={i === items.length - 1} aria-label={`Descendre l’élément ${i + 1}`}><ArrowDown className="h-4 w-4" /></button>
-              <button type="button" className={cn(iconBtn, 'hover:text-alert-600')} onClick={() => onChange(items.filter((_, k) => k !== i))} disabled={items.length <= min} aria-label={`Retirer l’élément ${i + 1}`}><Trash2 className="h-4 w-4" /></button>
+              {!fixed && (
+                <>
+                  <button type="button" className={iconBtn} onClick={() => move(i, -1)} disabled={i === 0} aria-label={`Monter l’élément ${i + 1}`}><ArrowUp className="h-4 w-4" /></button>
+                  <button type="button" className={iconBtn} onClick={() => move(i, 1)} disabled={i === items.length - 1} aria-label={`Descendre l’élément ${i + 1}`}><ArrowDown className="h-4 w-4" /></button>
+                  <button type="button" className={cn(iconBtn, 'hover:text-alert-600')} onClick={() => onChange(items.filter((_, k) => k !== i))} disabled={items.length <= min} aria-label={`Retirer l’élément ${i + 1}`}><Trash2 className="h-4 w-4" /></button>
+                </>
+              )}
             </div>
             <div className="space-y-3">{render(it, (patch) => onChange(items.map((x, k) => (k === i ? { ...x, ...patch } : x))), i)}</div>
           </li>
         ))}
       </ol>
-      {items.length < max && (
+      {items.length < max && !fixed && (
         <button type="button" onClick={() => onChange([...items, make()])} className={cn(btnSecondary, 'mt-3 border-dashed')}>
           <Plus className="h-4 w-4" aria-hidden="true" /> {addLabel}
         </button>

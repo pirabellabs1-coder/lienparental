@@ -1,0 +1,73 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "guyane",
+  "categorie": "sante",
+  "titre": "Vacinas obrigatórias e acompanhamento na PMI",
+  "resume": "As vacinas exigidas para a creche, a escola e as colônias de férias, a febre amarela obrigatória na Guiana Francesa a partir de 12 meses e o acompanhamento gratuito dos menores de 6 anos na PMI.",
+  "aQuoiCaSert": "As vacinas obrigatórias são exigidas para entrar na creche, na escola, no cuidado extraescolar ou na colônia de férias: sem comprovante, a matrícula pode ser recusada ou apenas provisória. O comprovante é a caderneta de saúde (carnet de santé) preenchida pelo médico e, para a febre amarela, o certificado internacional de vacinação (o « carnet jaune », caderneta amarela). A PMI (protection maternelle et infantile, serviço de saúde materno-infantil) oferece consultas gratuitas para gestantes e crianças de menos de 6 anos, vacinas incluídas.",
+  "quiEstConcerne": [
+    "Todos os pais de filhos menores, sobretudo antes da entrada na creche, na escola ou em centro de lazer.",
+    "Toda pessoa que mora na Guiana Francesa ou está de passagem, a partir de 12 meses, para a febre amarela."
+  ],
+  "aSavoir": [
+    "Criança nascida antes de 2018: difteria, tétano e poliomielite (DTP) obrigatórias para a escola.",
+    "Criança nascida entre 1º de janeiro de 2018 e 31 de dezembro de 2022: 11 vacinas obrigatórias (difteria, tétano, poliomielite, coqueluche, Haemophilus influenzae b, hepatite B, pneumococo, meningococo C, sarampo, caxumba, rubéola).",
+    "Criança nascida a partir de 2023: mesma lista, com os meningococos A, B, C, W e Y no lugar do meningococo C apenas.",
+    "Febre amarela: recomendada a partir de 9 meses e obrigatória na Guiana Francesa a partir de 12 meses. Uma só dose protege por toda a vida. Se a criança foi vacinada antes dos 2 anos, recomenda-se uma segunda dose entre 6 e 10 anos. A vacina feita na Guiana Francesa é reembolsada pela Assurance Maladie (seguro de saúde público francês).",
+    "Uma criança com vacinas atrasadas pode ser admitida provisoriamente: você tem então 3 meses para regularizar, senão ela pode ser excluída. Se a criança ficar mais de um ano, o comprovante é pedido todo ano.",
+    "Os 20 exames de saúde obrigatórios até os 6 anos são cobertos 100%, sem adiantar dinheiro, exceto honorários acima da tabela (dépassements d'honoraires).",
+    "Pais separados: o genitor que leva a criança para vacinar deve, de preferência, avisar o outro e enviar uma cópia das páginas de vacinas, para que cada um tenha o comprovante."
+  ],
+  "documents": [
+    { "id": "carnet-sante", "libelle": "Caderneta de saúde da criança (carnet de santé)", "detail": "Original, a levar a cada consulta. É o comprovante das vacinas: guarde uma fotocópia ou foto das páginas de vacinas. Perdeu? Informe-se na PMI ou com seu médico.", "coffre": "sante" },
+    { "id": "carnet-jaune", "libelle": "Certificado internacional de vacinação contra a febre amarela (carnet jaune)", "detail": "Entregue após a vacina. Verificado pelas companhias aéreas. Segunda via a pedir ao centro que vacinou.", "coffre": "sante" },
+    { "id": "carte-vitale", "libelle": "Carte Vitale (cartão do seguro de saúde) do genitor ou atestado de direitos da criança", "detail": "Atestado disponível gratuitamente na sua conta ameli.", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "Documento de identidade do genitor ou do adulto acompanhante", "detail": "Original. Se outra pessoa acompanhar a criança, leve uma autorização escrita de um dos pais.", "coffre": "sante" },
+    { "id": "contre-indication", "libelle": "Atestado médico de contraindicação, se for o caso", "detail": "Emitido pelo médico. Apresentado no lugar do comprovante de vacina.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Verifique a caderneta de saúde", "detail": "Compare com a lista de vacinas obrigatórias conforme o ano de nascimento do seu filho e verifique a febre amarela a partir de 12 meses." },
+    { "titre": "Marque uma consulta", "detail": "Com seu médico de referência (médecin traitant) ou pediatra, ou num centro de PMI da Collectivité territoriale de Guyane (CTG, governo local da Guiana Francesa) para menores de 6 anos. Ligue antes: alguns centros podem estar fechados temporariamente." },
+    { "titre": "Confira antes de ir", "detail": "Caderneta de saúde, carnet jaune se já existir, carte Vitale ou atestado de direitos, documento de identidade, autorização escrita se quem acompanha não for um dos pais." },
+    { "titre": "Vacine seu filho", "detail": "O profissional registra a vacina na caderneta de saúde. Para a febre amarela, num centro autorizado ou na PMI para menores de 6 anos." },
+    { "titre": "Apresente o comprovante", "detail": "Fotocópia das páginas de vacinas para a creche, a escola ou o centro de lazer, todo ano se a criança ficar mais de um ano." }
+  ],
+  "ou": [
+    { "nom": "Centros de PMI da Collectivité territoriale de Guyane (CTG)", "detail": "Consultas gratuitas e vacinas para menores de 6 anos. Centros em Cayenne, Kourou, Matoury, Saint-Laurent-du-Maroni e em muitos outros municípios.", "url": "https://www.ctguyane.fr/les-agences-regionales/" },
+    { "nom": "PMI de Cayenne", "detail": "36 rue du 14-Juillet, Cayenne.", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3", "telephone": "05 94 39 03 60" },
+    { "nom": "Seu médico de referência ou pediatra", "detail": "Alguns clínicos gerais são autorizados a aplicar a vacina contra a febre amarela." },
+    { "nom": "Centros autorizados para a vacina contra a febre amarela", "detail": "Lista e orientações no site da ARS Guyane (agência regional de saúde).", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires" }
+  ],
+  "liens": [
+    { "titre": "Vacinas exigidas para a creche e a escola (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Orientações de saúde para recém-chegados (ARS Guyane)", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires" },
+    { "titre": "Exames de saúde obrigatórios até os 6 anos (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Consulta de vacinação", "evenement": "sante" },
+    { "type": "rappel", "titre": "Reforço de vacina", "evenement": "sante" },
+    { "type": "rappel", "titre": "Segunda dose de febre amarela entre 6 e 10 anos (se vacinado antes dos 2 anos)", "evenement": "sante" },
+    { "type": "coffre", "titre": "Páginas de vacinas da caderneta de saúde", "categorie": "sante" },
+    { "type": "coffre", "titre": "Certificado internacional de vacinação contra febre amarela", "categorie": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "3 meses para regularizar após uma admissão provisória", "detail": "Sem vacinas em dia ao fim desse prazo, a criança pode ser excluída da creche, escola ou centro." },
+    { "libelle": "Febre amarela: no máximo 10 dias antes da viagem para a Guiana Francesa", "detail": "Para uma criança de 12 meses ou mais que chega à Guiana Francesa." }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: horários e funcionamento dos centros de PMI, alguns podendo estar temporariamente fechados. Ligue antes de ir.",
+    "A confirmar localmente: lista atualizada dos centros autorizados para a febre amarela, pois a página da ARS Guyane é de 2023.",
+    "O número de doses e a idade de cada vacina seguem o calendário vacinal em vigor: verifique com seu médico ou a PMI."
+  ],
+  "motsCles": ["vacina", "febre amarela", "PMI", "caderneta de saúde", "carnet jaune", "pediatra", "bebê"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F1879 Saúde na escola primária", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879", "verifieLe": "2026-10-15" },
+    { "titre": "Service-public.gouv.fr, F35490 Exames obrigatórios até os 6 anos", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490", "verifieLe": "2026-07-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
+    { "titre": "ARS Guyane, Recém-chegados: orientações de saúde", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires", "verifieLe": "2023-01-09" },
+    { "titre": "CTG, PMI: quadro da parceria com o CHU de Guyane (hospital universitário)", "url": "https://www.ctguyane.fr/pmi-la-ctg-clarifie-le-cadre-de-son-partenariat-avec-le-chu-de-guyane/", "verifieLe": "2026-09-08" },
+    { "titre": "Diretório do service-public, PMI de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3" }
+  ]
+}

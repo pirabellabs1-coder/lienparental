@@ -1,0 +1,90 @@
+{
+  "slug": "saisir-juge-affaires-familiales",
+  "territoire": "guyane",
+  "categorie": "separation",
+  "titre": "Applying to the family court judge (JAF)",
+  "resume": "Form cerfa n° 11530, the exact list of documents (birth certificates less than 3 months old), the competent court in French Guiana, the €50 tax stamp and when you don't have to pay it.",
+  "aQuoiCaSert": "The family court judge (juge aux affaires familiales, JAF) settles disagreements between parents about how parental authority is exercised, where the child lives, visiting and staying rights, or child support. The judge can also change an existing decision when circumstances change, or give court approval (homologation) to an agreement reached by the parents so that it has the force of a court judgment.",
+  "quiEstConcerne": [
+    "Parents, married or not, who cannot reach an agreement about their children.",
+    "A parent who wants an existing decision changed (moving house, change in income, new arrangements).",
+    "Parents who agree with each other and want their parenting agreement (convention parentale) approved by the court.",
+    "A parent who receives the ASF (allocation de soutien familial, family support allowance) with no child support set and must apply to the judge within 4 months."
+  ],
+  "aSavoir": [
+    "Form: cerfa n° 11530 \"Demande au juge aux affaires familiales\" (application to the family court judge), to fill in online or on paper. A fully online application is also possible.",
+    "Competent court: the tribunal judiciaire (judicial court) where the parent the child usually lives with resides. If the parents still live together, the court where the family lives. In French Guiana: the tribunal judiciaire de Cayenne, located in Matoury.",
+    "A lawyer is not mandatory. Legal aid (aide juridictionnelle) can cover lawyer's fees depending on your income (see the guide entry \"Applying for legal aid (aide juridictionnelle)\").",
+    "€50 tax stamp (timbre fiscal), electronic only, bought online by bank card before you apply. It is not due if you receive legal aid, for approval of a parenting agreement, or for a protection order. Valid for 12 months, refundable within 18 months if unused.",
+    "Parents in agreement: joint application for approval (cerfa n° 16139), signed by both, at the court where either parent lives.",
+    "Sole parental authority: the judge can give it to one parent only, for example if the other loses interest in the child or obstructs the exercise of parental authority.",
+    "Violence: a protection order (ordonnance de protection) is requested from the family court judge (separate form), with no prior police complaint required. The hearing takes place within 6 days of being scheduled. Emergency: 17 or 112; helpline: 3919.",
+    "This guide does not replace legal advice: for your situation, contact a lawyer or a point-justice (free legal information center)."
+  ],
+  "documents": [
+    { "id": "cerfa-11530", "libelle": "Form cerfa n° 11530, completed, dated and signed", "detail": "Original for the court, a copy for you. Can be filled in online on service-public.gouv.fr.", "coffre": "jaf" },
+    { "id": "acte-naissance-parent", "libelle": "Full copy (copie intégrale) of your birth certificate, less than 3 months old", "detail": "Not an extract. Request it free of charge online on service-public.gouv.fr from the town hall (mairie) of your place of birth (see the guide entry \"Getting a birth certificate\").", "coffre": "jaf" },
+    { "id": "actes-naissance-enfants", "libelle": "Full copy of the birth certificate of each child concerned, less than 3 months old", "detail": "Same online process, from the town hall of the child's place of birth. Allow time for delivery by post.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Family record book (livret de famille, copy of all completed pages) or full copy of the marriage certificate less than 3 months old", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Copy of your ID", "detail": "Valid ID card, passport or residence permit, front and back.", "coffre": "jaf" },
+    { "id": "jugements", "libelle": "Copy of previous judgments (divorce, separation, parental authority, child support)", "detail": "If you no longer have it, ask the court registry (greffe) of the court that issued it for a copy.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Recent proof of address", "detail": "Depending on your situation: a bill, a rent receipt or a letter confirming you are housed by someone (attestation d'hébergement).", "coffre": "jaf" },
+    { "id": "ressources", "libelle": "Proof of income and expenses", "detail": "Especially if your application concerns child support: latest tax notice, latest income tax return, last 3 payslips, benefit statement from the Caf (Caisse d'allocations familiales, the family benefits office), rent, loans, child-related costs.", "coffre": "jaf" },
+    { "id": "timbre", "libelle": "€50 electronic tax stamp (PDF or 16-digit SMS)", "detail": "Unless you have legal aid or are applying for approval of a parenting agreement.", "coffre": "jaf" },
+    { "id": "aj", "libelle": "Legal aid decision or receipt of your application, if you applied for it", "coffre": "jaf" },
+    { "id": "pieces-situation", "libelle": "Documents supporting your application", "detail": "For example: school attendance certificate, written exchanges about arrangements, witness statements. Avoid documents unrelated to your application.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "First try to reach an amicable solution", "detail": "Family mediation or a written agreement to have approved. The form asks whether an amicable approach has been tried. No mediation in cases of violence." },
+    { "titre": "Order the birth certificates now", "detail": "They must be less than 3 months old when you file and arrive by post: they are often the document that delays the file." },
+    { "titre": "Fill in cerfa n° 11530 or the online application", "detail": "Explain clearly what you are asking for (residence, visiting rights, amount of child support) and why." },
+    { "titre": "Buy the €50 stamp if you are not exempt", "detail": "Online, by bank card, before sending your application." },
+    { "titre": "Check before sending your file", "detail": "Signed cerfa; full copies of birth certificates less than 3 months old (yours and each child's); family record book or marriage certificate; ID; previous judgments; proof of income if you mention child support; stamp or legal aid decision. Make a full copy." },
+    { "titre": "Send or drop off the file at the court registry of the tribunal judiciaire de Cayenne", "detail": "Or file the application online. Store the copy in the Court file section of your Vault." },
+    { "titre": "Prepare for the hearing", "detail": "Add the date to the calendar as soon as you receive the summons, with a reminder. Bring the originals of your documents." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Cayenne (Cayenne Judicial Court)", "detail": "Located in Matoury (97351). Open Monday to Friday, 8 a.m. to 12 p.m. and 2 p.m. to 5 p.m. Reception email: accueil-cayenne@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/9fd0ecd0-af48-4635-a700-067ebceebcef" },
+    { "nom": "Point-justice or lawyer", "detail": "Free legal information, help putting your file together, legal aid application." },
+    { "nom": "Violences Femmes Info (violence against women helpline)", "detail": "Listening and guidance, free and anonymous, 24 hours a day. In immediate danger, call 17 or 112.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "telephone": "3919" }
+  ],
+  "liens": [
+    { "titre": "Application to the family court judge, cerfa 11530 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764" },
+    { "titre": "Online application to the JAF (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72663" },
+    { "titre": "Approval of a parenting agreement, cerfa 16139 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771" },
+    { "titre": "€50 tax stamp (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227" },
+    { "titre": "Parental authority after separation (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133" },
+    { "titre": "Domestic violence and protection order (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Tax stamp for applying to the family court judge", "categorie": "frais-administratifs", "montant": 50, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764" },
+    { "type": "coffre", "titre": "Application to the family court judge (full copy)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Birth certificates less than 3 months old", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Proof of income and expenses", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Summons and decision of the family court judge", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Hearing before the family court judge", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Check the date of the birth certificates (under 3 months)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Birth certificates less than 3 months old at the time of filing" },
+    { "libelle": "Tax stamp valid for 12 months after purchase", "detail": "Refund possible online within 18 months if unused." },
+    { "libelle": "ASF with no child support set: apply to the judge within 4 months" }
+  ],
+  "aConfirmer": [
+    "The deadline for correcting an application filed without a tax stamp is not specified in the current official guidance: ask the court registry.",
+    "The official guidance on the €50 stamp does not mention any specific rule for overseas France: to be confirmed with the court registry before filing.",
+    "To be confirmed locally: the full postal address and phone number of the tribunal judiciaire de Cayenne (the official directory only gives Matoury, 97351).",
+    "To be confirmed locally: whether family cases are handled by the local court (tribunal de proximité) in Saint-Laurent-du-Maroni, and point-justice sessions in western French Guiana.",
+    "To be confirmed locally: average waiting times for a hearing at the tribunal judiciaire de Cayenne."
+  ],
+  "motsCles": ["JAF", "judge", "family court", "custody", "residence", "visiting rights", "cerfa 11530", "court approval"],
+  "derniereVerification": "2026-10-26",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, R15764 Application to the family court judge (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-02-26" },
+    { "titre": "Service-public.gouv.fr, F33227 Tax stamp", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-04-10" },
+    { "titre": "Service-public.gouv.fr, R58771 Approval of a parenting agreement (cerfa 16139)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2025-11-26" },
+    { "titre": "Service-public.gouv.fr, F3133 Parental authority after separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
+    { "titre": "Service-public.gouv.fr, F12544 Domestic violence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public directory, Tribunal judiciaire de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/9fd0ecd0-af48-4635-a700-067ebceebcef", "verifieLe": "2026-09-16" }
+  ]
+}
