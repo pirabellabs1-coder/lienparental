@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
 import { Crown } from 'lucide-react'
 import { PLAN_NAME, type PlanId } from '@/components/profil/pricing'
@@ -14,6 +15,7 @@ import { NAV_MAIN as MAIN, NAV_SECONDARY as SECONDARY, NAV_TOOLS as TOOLS, activ
 
 // Navigation tablette et ordinateur (≥ md). Sur téléphone : barre d'onglets du bas + menu complet.
 export function DesktopSidebar({ plan = 'gratuit' }: { plan?: PlanId }) {
+  const t = useTranslations('appnav')
   const pathname = usePathname()
   const router = useRouter()
   // Abonnement modifié dans un autre onglet : la carte (et les droits affichés) se mettent à jour.
@@ -23,7 +25,7 @@ export function DesktopSidebar({ plan = 'gratuit' }: { plan?: PlanId }) {
   const match = activeNavHref(pathname)
   const active = (href: string) => match === href
 
-  const item = ({ href, label, icon: Icon }: NavItem) => (
+  const item = ({ href, labelKey, icon: Icon }: NavItem) => (
     <li key={href}>
       <Link
         href={href}
@@ -34,7 +36,7 @@ export function DesktopSidebar({ plan = 'gratuit' }: { plan?: PlanId }) {
         )}
       >
         <Icon className="h-5 w-5" strokeWidth={active(href) ? 2.2 : 1.7} aria-hidden />
-        {label}
+        {t(labelKey)}
       </Link>
     </li>
   )
@@ -43,9 +45,9 @@ export function DesktopSidebar({ plan = 'gratuit' }: { plan?: PlanId }) {
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col overflow-y-auto overscroll-contain border-r border-night-100 bg-white px-4 py-6 [scrollbar-width:thin] md:flex">
       <Link href="/app" aria-label="Lien Parental, accueil" className="px-3"><Logo size="md" /></Link>
       <SearchTrigger variant="sidebar" className="mt-6" />
-      <nav aria-label="Navigation principale" className="mt-4 flex flex-1 flex-col">
+      <nav aria-label={t('mainNav')} className="mt-4 flex flex-1 flex-col">
         <ul className="space-y-1">{MAIN.map(item)}</ul>
-        <p className="mb-1 mt-5 px-3 text-[11px] font-bold uppercase tracking-[0.12em] text-night-500">Coparentalité</p>
+        <p className="mb-1 mt-5 px-3 text-[11px] font-bold uppercase tracking-[0.12em] text-night-500">{t('groupCoparenting')}</p>
         <ul className="space-y-1">{TOOLS.map(item)}</ul>
         <ul className="mt-6 space-y-1 border-t border-night-100 pt-4">
           {SECONDARY.map(item)}
@@ -63,8 +65,8 @@ export function DesktopSidebar({ plan = 'gratuit' }: { plan?: PlanId }) {
       >
         <Crown className={cn('h-6 w-6 shrink-0', paid ? 'text-night-900' : 'text-gold-600')} strokeWidth={1.7} aria-hidden />
         <span className="text-[13px] leading-snug">
-          <span className="block font-bold text-night-900">{paid ? 'Mon abonnement' : 'Passer à Premium'}</span>
-          <span className="text-night-700">{paid ? `Formule ${PLAN_NAME[plan]}` : '10 Go et Coach IA étendu'}</span>
+          <span className="block font-bold text-night-900">{paid ? t('mySubscription') : t('upgradeToPremium')}</span>
+          <span className="text-night-700">{paid ? t('planPrefix', { plan: PLAN_NAME[plan] }) : t('premiumTeaser')}</span>
         </span>
       </Link>
     </aside>

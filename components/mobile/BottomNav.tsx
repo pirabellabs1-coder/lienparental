@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Home, NotebookText, CalendarDays, FolderLock, LayoutGrid } from 'lucide-react'
 import { Sheet } from '@/components/messages/Sheet'
@@ -10,10 +11,10 @@ import { cn } from '@/lib/cn'
 import { NAV_MAIN, NAV_SECONDARY, NAV_TOOLS, activeNavHref, type NavItem } from './navItems'
 
 const TABS = [
-  { href: '/app',            label: 'Accueil',     icon: Home },
-  { href: '/app/journal',    label: 'Journal',     icon: NotebookText },
-  { href: '/app/calendrier', label: 'Calendrier',  icon: CalendarDays },
-  { href: '/app/coffre',     label: 'Coffre-fort', icon: FolderLock },
+  { href: '/app',            labelKey: 'accueil',    icon: Home },
+  { href: '/app/journal',    labelKey: 'journal',    icon: NotebookText },
+  { href: '/app/calendrier', labelKey: 'calendrier', icon: CalendarDays },
+  { href: '/app/coffre',     labelKey: 'coffre',     icon: FolderLock },
 ] as const
 
 // Ces sections vivent sous un autre préfixe mais appartiennent à un onglet. Le reste relève du « Menu ».
@@ -22,14 +23,15 @@ const ALIASES: Record<string, string> = {
   '/app/frais': '/app/journal',
 }
 
-const MENU_GROUPS: { title: string; items: NavItem[] }[] = [
-  { title: 'Au quotidien', items: NAV_MAIN.filter(i => i.href !== '/app') },
-  { title: 'Coparentalité', items: NAV_TOOLS },
-  { title: 'Mon compte', items: NAV_SECONDARY },
+const MENU_GROUPS: { titleKey: 'groupDaily' | 'groupCoparenting' | 'groupAccount'; items: readonly NavItem[] }[] = [
+  { titleKey: 'groupDaily', items: NAV_MAIN.filter(i => i.href !== '/app') },
+  { titleKey: 'groupCoparenting', items: NAV_TOOLS },
+  { titleKey: 'groupAccount', items: NAV_SECONDARY },
 ]
 
 // Barre d'onglets du téléphone : 4 rubriques + « Menu », qui ouvre toutes les rubriques de l'application.
 export function BottomNav() {
+  const t = useTranslations('appnav')
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const alias = Object.keys(ALIASES).find(p => pathname.startsWith(p))
@@ -49,19 +51,19 @@ export function BottomNav() {
 
   return (
     <>
-      <nav aria-label="Navigation principale" className="fixed inset-x-0 bottom-0 z-40">
+      <nav aria-label={t('mainNav')} className="fixed inset-x-0 bottom-0 z-40">
         <div
           className="mx-auto max-w-[430px] border-t border-night-100 bg-white"
           style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         >
           <ul className="flex items-stretch justify-around">
-            {TABS.map(({ href, label, icon: Icon }) => {
+            {TABS.map(({ href, labelKey, icon: Icon }) => {
               const active = onTab(href)
               return (
                 <li key={href} className="flex-1">
                   <Link href={href} aria-current={active ? 'page' : undefined} className={tabClass(active)}>
                     <Icon className="h-[22px] w-[22px]" strokeWidth={active ? 2.4 : 1.8} fill={active ? 'currentColor' : 'none'} fillOpacity={active ? 0.15 : 0} aria-hidden />
-                    <span className={cn('text-[11px]', active ? 'font-bold' : 'font-medium')}>{label}</span>
+                    <span className={cn('text-[11px]', active ? 'font-bold' : 'font-medium')}>{t(labelKey)}</span>
                   </Link>
                 </li>
               )
@@ -69,20 +71,20 @@ export function BottomNav() {
             <li className="flex-1">
               <button type="button" onClick={() => setMenuOpen(true)} aria-haspopup="dialog" aria-expanded={menuOpen} className={tabClass(inMenu)}>
                 <LayoutGrid className="h-[22px] w-[22px]" strokeWidth={inMenu ? 2.4 : 1.8} fill={inMenu ? 'currentColor' : 'none'} fillOpacity={inMenu ? 0.15 : 0} aria-hidden />
-                <span className={cn('text-[11px]', inMenu ? 'font-bold' : 'font-medium')}>Menu</span>
+                <span className={cn('text-[11px]', inMenu ? 'font-bold' : 'font-medium')}>{t('menu')}</span>
               </button>
             </li>
           </ul>
         </div>
       </nav>
 
-      <Sheet open={menuOpen} onClose={() => setMenuOpen(false)} title="Menu" description="Toutes les rubriques de Lien Parental.">
-        <nav aria-label="Toutes les rubriques" className="mt-2 space-y-5">
+      <Sheet open={menuOpen} onClose={() => setMenuOpen(false)} title={t('menu')} description={t('allSectionsDesc')}>
+        <nav aria-label={t('allSections')} className="mt-2 space-y-5">
           {MENU_GROUPS.map(group => (
-            <div key={group.title}>
-              <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-night-500">{group.title}</p>
+            <div key={group.titleKey}>
+              <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-night-500">{t(group.titleKey)}</p>
               <ul className="grid grid-cols-2 gap-2">
-                {group.items.map(({ href, label, icon: Icon }) => {
+                {group.items.map(({ href, labelKey, icon: Icon }) => {
                   const active = activeItem === href
                   return (
                     <li key={href}>
@@ -96,7 +98,7 @@ export function BottomNav() {
                         )}
                       >
                         <Icon className="h-5 w-5 shrink-0" strokeWidth={1.8} aria-hidden />
-                        <span className="leading-tight">{label}</span>
+                        <span className="leading-tight">{t(labelKey)}</span>
                       </Link>
                     </li>
                   )

@@ -331,5 +331,29 @@
       "demoSignin": "Se connecter",
       "demoWrong": "E-mail ou mot de passe incorrect."
     }
+  },
+  "appnav": {
+    "mainNav": "Navigation principale",
+    "allSections": "Toutes les rubriques",
+    "allSectionsDesc": "Toutes les rubriques de Lien Parental.",
+    "menu": "Menu",
+    "groupDaily": "Au quotidien",
+    "groupCoparenting": "Coparentalité",
+    "groupAccount": "Mon compte",
+    "accueil": "Accueil",
+    "enfants": "Mes enfants",
+    "journal": "Journal",
+    "calendrier": "Calendrier",
+    "coach": "Coach IA",
+    "coffre": "Coffre-fort",
+    "temoignages": "Témoignages",
+    "guide": "Guide parental",
+    "messages": "Messages",
+    "garde": "Planning de garde",
+    "dossier": "Mon dossier JAF",
+    "coparents": "Parents liés",
+    "notifications": "Notifications",
+    "profil": "Profil",
+    "aide": "Centre d’aide"
   }
 }

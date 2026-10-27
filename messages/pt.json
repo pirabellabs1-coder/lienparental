@@ -331,5 +331,33 @@
       "demoSignin": "Entrar",
       "demoWrong": "E-mail ou senha incorretos."
     }
+  },
+  "appnav": {
+    "mainNav": "Navegação principal",
+    "allSections": "Todas as seções",
+    "allSectionsDesc": "Todas as seções do Lien Parental.",
+    "menu": "Menu",
+    "groupDaily": "No dia a dia",
+    "groupCoparenting": "Coparentalidade",
+    "groupAccount": "Minha conta",
+    "accueil": "Início",
+    "enfants": "Meus filhos",
+    "journal": "Diário",
+    "calendrier": "Calendário",
+    "coach": "Coach com IA",
+    "coffre": "Cofre",
+    "temoignages": "Depoimentos",
+    "guide": "Guia parental",
+    "messages": "Mensagens",
+    "garde": "Agenda de guarda",
+    "dossier": "Meu processo judicial",
+    "coparents": "Pais vinculados",
+    "notifications": "Notificações",
+    "profil": "Perfil",
+    "aide": "Central de ajuda",
+    "mySubscription": "Minha assinatura",
+    "upgradeToPremium": "Assinar o Premium",
+    "planPrefix": "Plano {plan}",
+    "premiumTeaser": "10 GB e Coach com IA ampliado"
   }
 }

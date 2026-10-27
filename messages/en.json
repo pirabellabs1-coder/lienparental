@@ -331,5 +331,33 @@
       "demoSignin": "Log in",
       "demoWrong": "Incorrect email or password."
     }
+  },
+  "appnav": {
+    "mainNav": "Main navigation",
+    "allSections": "All sections",
+    "allSectionsDesc": "All Lien Parental sections.",
+    "menu": "Menu",
+    "groupDaily": "Everyday",
+    "groupCoparenting": "Co-parenting",
+    "groupAccount": "My account",
+    "accueil": "Home",
+    "enfants": "My children",
+    "journal": "Journal",
+    "calendrier": "Calendar",
+    "coach": "AI Coach",
+    "coffre": "Vault",
+    "temoignages": "Testimonials",
+    "guide": "Parenting guide",
+    "messages": "Messages",
+    "garde": "Custody schedule",
+    "dossier": "My court file",
+    "coparents": "Linked parents",
+    "notifications": "Notifications",
+    "profil": "Profile",
+    "aide": "Help center",
+    "mySubscription": "My subscription",
+    "upgradeToPremium": "Upgrade to Premium",
+    "planPrefix": "{plan} plan",
+    "premiumTeaser": "10 GB and extended AI Coach"
   }
 }
