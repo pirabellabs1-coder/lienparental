@@ -27,7 +27,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   }
 
   return (
-    <div role="group" aria-label={t('label')} className={cn('flex items-center gap-1', className)}>
+    <div role="group" aria-label={t('label')} className={cn('flex items-center gap-2', className)}>
       {locales.map((loc) => {
         const meta = LOCALE_META[loc]
         const isActive = loc === active

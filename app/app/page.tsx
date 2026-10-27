@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { Bell, Wallet, Compass, HeartPulse, MessageSquareQuote, MessageCircle, Repeat, FileStack, UsersRound } from 'lucide-react'
 import { LogoutButton } from '@/components/auth/LogoutButton'
 import { SearchTrigger } from '@/components/search/SearchTrigger'
@@ -30,6 +31,7 @@ const DEMO_PROFILE = { prenom: mockUser.prenom, nom: mockUser.nom, email: mockUs
 // Compte réel : profil, enfants, événements, documents et notifications du compte (RLS) ;
 // démonstration : jeux fictifs de lib/mock-data. Le conseil du jour reste éditorial.
 export default function DashboardPage() {
+  const t = useTranslations('dash')
   const { profile } = useAccountProfile(DEMO_PROFILE)
   const children = useChildrenList()
   const [selectedChildId, setSelectedChildId] = useState('')
@@ -53,17 +55,17 @@ export default function DashboardPage() {
       <header className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <h1 className="text-[25px] font-extrabold leading-tight tracking-[-0.01em] text-night-900">
-            {profile.prenom ? `Bonjour ${profile.prenom}` : 'Bonjour'} <span aria-hidden="true">👋</span>
+            {profile.prenom ? t('greeting', { name: profile.prenom }) : t('greetingNoName')} <span aria-hidden="true">👋</span>
           </h1>
           <p className="mt-2 max-w-[230px] text-[14px] leading-relaxed text-night-800">
-            Lien Parental vous accompagne au quotidien.
+            {t('subtitle')}
           </p>
         </div>
         <div className="-mr-1.5 flex shrink-0 items-center">
         <SearchTrigger variant="icon" className="md:hidden" />
         <Link
           href="/app/notifications"
-          aria-label={unread > 0 ? `Notifications, ${unread} non lues` : 'Notifications'}
+          aria-label={unread > 0 ? t('notificationsUnread', { count: unread }) : t('notifications')}
           className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full text-night-900 hover:bg-night-50"
         >
           <Bell className="h-6 w-6" strokeWidth={1.8} aria-hidden="true" />
@@ -75,9 +77,9 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <section aria-label="Enfant actif" className="!mt-5">
+      <section aria-label={t('activeChild')} className="!mt-5">
         {children.loading && !children.data ? (
-          <SectionPlaceholder label="Chargement de vos enfants" />
+          <SectionPlaceholder label={t('loadingChildren')} />
         ) : children.error ? (
           <SectionError message={children.error.message} onRetry={() => void children.refresh()} />
         ) : (
@@ -85,41 +87,41 @@ export default function DashboardPage() {
         )}
       </section>
 
-      <nav aria-label="Organisation" className="!mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <nav aria-label={t('orgNav')} className="!mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Link href="/app/guide" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600"><Compass className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="text-[13.5px] font-bold leading-tight text-night-900">Guide parental</span>
+          <span className="text-[13.5px] font-bold leading-tight text-night-900">{t('guide')}</span>
         </Link>
         <Link href="/app/journal?filtre=finances" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-50 text-gold-600"><Wallet className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="text-[13.5px] font-bold leading-tight text-night-900">Dépenses et paiements</span>
+          <span className="text-[13.5px] font-bold leading-tight text-night-900">{t('expenses')}</span>
         </Link>
         <Link href={activeChildId ? `/app/enfants/${activeChildId}/sante` : '/app/enfants'} className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-50 text-sky-600"><HeartPulse className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="text-[13.5px] font-bold leading-tight text-night-900">Santé des enfants</span>
+          <span className="text-[13.5px] font-bold leading-tight text-night-900">{t('health')}</span>
         </Link>
         <Link href="/app/coffre/temoignages" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-night-50 text-night-700"><MessageSquareQuote className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="text-[13.5px] font-bold leading-tight text-night-900">Témoignages</span>
+          <span className="text-[13.5px] font-bold leading-tight text-night-900">{t('testimonials')}</span>
         </Link>
       </nav>
 
-      <nav aria-label="Coparentalité" className="!mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <nav aria-label={t('coparentNav')} className="!mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <Link href="/app/messages" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600"><MessageCircle className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">Messages</span><span className="block text-[12px] text-night-600">Échanger avec l’autre parent</span></span>
+          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('messages')}</span><span className="block text-[12px] text-night-600">{t('messagesSub')}</span></span>
         </Link>
         <Link href="/app/garde" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-50 text-sky-600"><Repeat className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">Planning de garde</span><span className="block text-[12px] text-night-600">Alternance et vacances</span></span>
+          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('custody')}</span><span className="block text-[12px] text-night-600">{t('custodySub')}</span></span>
         </Link>
         <Link href="/app/dossier" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-night-50 text-night-700"><FileStack className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">Mon dossier JAF</span><span className="block text-[12px] text-night-600">Export PDF et partage avocat</span></span>
+          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('courtFile')}</span><span className="block text-[12px] text-night-600">{t('courtFileSub')}</span></span>
         </Link>
               <Link href="/app/coparents" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600"><UsersRound className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">Parents liés</span><span className="block text-[12px] text-night-600">Inviter l’autre parent, partager</span></span>
+          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('linkedParents')}</span><span className="block text-[12px] text-night-600">{t('linkedParentsSub')}</span></span>
         </Link>
 </nav>
 
@@ -128,29 +130,29 @@ export default function DashboardPage() {
       </div>
 
       <section aria-labelledby="models-title">
-        <SectionTitle id="models-title">Documents prêts à l’emploi</SectionTitle>
-        {models.length ? <ModelCardsGrid models={models} /> : <SectionPlaceholder label="Chargement des modèles" />}
+        <SectionTitle id="models-title">{t('models')}</SectionTitle>
+        {models.length ? <ModelCardsGrid models={models} /> : <SectionPlaceholder label={t('loadingModels')} />}
       </section>
 
       <div className="space-y-6 border-t border-night-100 pt-5 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
         <section aria-labelledby="recent-title">
-          <SectionTitle id="recent-title">Mes documents récents</SectionTitle>
+          <SectionTitle id="recent-title">{t('recentDocs')}</SectionTitle>
           {/* Coffre verrouillé (ou état inconnu) : aucune donnée du coffre, carte explicite. */}
           {vault !== 'open' ? (
-            <VaultLockedNotice state={vault} what="vos documents récents" />
+            <VaultLockedNotice state={vault} what={t('recentDocsWhat')} />
           ) : recent.loading ? (
-            <SectionPlaceholder label="Chargement de vos documents" />
+            <SectionPlaceholder label={t('loadingDocs')} />
           ) : recent.error ? (
             <SectionError message={recent.error.message} onRetry={recent.retry} />
           ) : (
-            <RecentDocuments docs={recent.data} emptyLabel={LIVE ? 'Aucun document dans votre coffre-fort pour le moment.' : undefined} />
+            <RecentDocuments docs={recent.data} emptyLabel={LIVE ? t('noDocs') : undefined} />
           )}
         </section>
 
         <section aria-labelledby="events-title">
-          <SectionTitle id="events-title">Prochains événements</SectionTitle>
+          <SectionTitle id="events-title">{t('events')}</SectionTitle>
           {events.loading ? (
-            <SectionPlaceholder label="Chargement de vos événements" />
+            <SectionPlaceholder label={t('loadingEvents')} />
           ) : events.error ? (
             <SectionError message={events.error.message} onRetry={events.retry} />
           ) : (
@@ -165,8 +167,8 @@ export default function DashboardPage() {
         {/* Contenu éditorial non essentiel : section omise si indisponible ou vide. */}
         {(tips.status === 'loading' || tips.data.length > 0) && (
           <section aria-labelledby="tip-title">
-            <SectionTitle id="tip-title">Conseil du jour</SectionTitle>
-            {tips.status === 'loading' ? <SectionPlaceholder label="Chargement du conseil du jour" /> : <DailyTip tips={tips.data} />}
+            <SectionTitle id="tip-title">{t('dailyTip')}</SectionTitle>
+            {tips.status === 'loading' ? <SectionPlaceholder label={t('loadingTip')} /> : <DailyTip tips={tips.data} />}
           </section>
         )}
       </div>
@@ -184,11 +186,12 @@ function SectionPlaceholder({ label }: { label: string }) {
 }
 
 function SectionError({ message, onRetry }: { message: string; onRetry: () => void }) {
+  const t = useTranslations('dash')
   return (
     <div role="alert" className="flex items-center justify-between gap-3 rounded-xl2 border border-alert-100 bg-alert-50/60 p-4 text-[13px] text-night-900">
       <span className="min-w-0">{message}</span>
       <button type="button" onClick={onRetry} className="min-h-[44px] shrink-0 rounded-lg px-3 font-bold text-leaf-700 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400">
-        Réessayer
+        {t('retry')}
       </button>
     </div>
   )
