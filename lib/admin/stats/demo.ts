@@ -2,7 +2,7 @@
 // Déterministe (même date = mêmes chiffres) et cohérent : une seule
 // simulation quotidienne depuis le lancement alimente indicateurs,
 // graphiques et listes. Aucune personne réelle : prénoms fictifs.
-import { addDaysToKey, dayKeyToDate, todayKey, wallTimeToIso } from '@/lib/tz'
+import { addDaysToKey, dayKeyToDate, timeInTz, todayKey, wallTimeToIso } from '@/lib/tz'
 import {
   buildAlerts,
   buildKpis,
@@ -15,7 +15,22 @@ import {
   type Pricing,
   type RawOverview,
 } from './compute'
-import type { DashboardData, GuideTop, ModuleKey, Period, RecentPayment, RecentSignup, RevenueMonth } from './types'
+import { weekStart } from './compute'
+import { attachSparklines, mrrSeries } from './trends'
+import type {
+  Cohorts,
+  DashboardData,
+  DeviceCounts,
+  GuideTop,
+  ModuleKey,
+  Period,
+  RecentPayment,
+  RecentSignup,
+  RevenueMonth,
+  SubsDay,
+  TodayStats,
+  Trends,
+} from './types'
 
 const LAUNCH = '2025-01-06'
 const DAY_MS = 86_400_000
@@ -41,6 +56,8 @@ type Day = {
   activeM: number
   activeY: number
   churn: number
+  /** Nouveaux abonnements payants du jour. */
+  newSubs: number
   subsEur: number
   donEur: number
   ai: number
@@ -110,6 +127,7 @@ function simulate(today: string): Day[] {
       activeM,
       activeY,
       churn: cM + cY,
+      newSubs: nM + nY,
       subsEur,
       donEur,
       ai,
@@ -152,6 +170,54 @@ function activeAt(days: Day[], day: string, window: 7 | 30): number {
   return Math.round(row.total * ratio)
 }
 
+/** Actifs du jour : une part des actifs sur 7 jours, modulée par le jour de la semaine (≤ WAU). */
+function dauAt(days: Day[], day: string): number {
+  const i = indexOf(days, day)
+  const wau = activeAt(days, day, 7)
+  return Math.min(wau, Math.round(wau * (0.27 + 0.08 * rnd(i, 50)) * WEEKDAY[dayKeyToDate(day).getUTCDay()]))
+}
+
+/** Démonstration : ~20 % des abonnés payants en Coparentalité+ (même règle que les indicateurs). */
+const copaShare = (n: number | undefined) => Math.round((n ?? 0) * 0.2)
+
+function subsOf(d: Day): SubsDay {
+  return {
+    day: d.day,
+    premiumMonthly: d.activeM - copaShare(d.activeM),
+    premiumYearly: d.activeY - copaShare(d.activeY),
+    coparentaliteMonthly: copaShare(d.activeM),
+    coparentaliteYearly: copaShare(d.activeY),
+  }
+}
+
+function devicesOf(days: Day[], rows: Day[], salt: number): DeviceCounts {
+  const sessions = Math.round(rows.reduce((s, d) => s + dauAt(days, d.day), 0) * 1.25)
+  const j = (k: number) => 0.94 + 0.12 * rnd(rows.length + salt, k)
+  const mobile = Math.round(sessions * 0.64 * j(60))
+  const tablette = Math.round(sessions * 0.05 * j(61))
+  const inconnu = Math.round(sessions * 0.015)
+  return { mobile, ordinateur: Math.max(0, sessions - mobile - tablette - inconnu), tablette, inconnu }
+}
+
+/** Rétention synthétique : forte la première semaine, puis décroissance vers un socle d'habitués. */
+function demoCohorts(days: Day[], endDay: string, weeks = 12): Cohorts {
+  const currentWeek = weekStart(endDay)
+  const elapsed = Math.round((dayKeyToDate(endDay).getTime() - dayKeyToDate(currentWeek).getTime()) / DAY_MS) + 1
+  const cohorts = Array.from({ length: weeks }, (_, idx) => {
+    const week = addDaysToKey(currentWeek, -7 * (weeks - 1 - idx))
+    const size = sum(range(days, week, addDaysToKey(week, 6) < endDay ? addDaysToKey(week, 6) : endDay), 'signups')
+    const span = weeks - idx // semaines écoulées, semaine en cours comprise
+    const active = Array.from({ length: span }, (_, k) => {
+      const base = k === 0 ? 0.74 : 0.21 + 0.4 * 0.7 ** k
+      const noisy = base * (0.92 + 0.16 * rnd(indexOf(days, week) + k, 70))
+      const partial = k === span - 1 && elapsed < 7 ? 0.35 + (0.65 * elapsed) / 7 : 1
+      return Math.min(size, Math.round(size * noisy * partial))
+    })
+    return { week, size, active }
+  })
+  return { currentWeek, lastDay: endDay, cohorts }
+}
+
 const storageMb = (row: Day | null) => (row ? Math.round(row.docsCumul * 2.4 + row.total * 12) : 0)
 
 const FIRST_NAMES = ['Camille', 'Nassim', 'Sofia', 'Thomas', 'Léa', 'Hugo', 'Yasmine', 'Paul', 'Inès', 'Antoine', 'Claire', 'Mehdi', 'Maëva', 'Kévin', 'Océane', 'Jordan', 'Naïma', 'Loïc', 'Sarah', 'Dylan']
@@ -187,7 +253,6 @@ export function demoDashboard(period: Period, pricing: Pricing, aiBudgetEur: num
   const revenue = (rows: Day[]) => round2(sum(rows, 'subsEur') + sum(rows, 'donEur'))
   const ticketsAt = (day: string) => 5 + Math.round(5 * rnd(indexOf(days, day), 20))
 
-  const copaShare = (n: number | undefined) => Math.round((n ?? 0) * 0.2)
   const raw: RawOverview = {
     usersTotal: end?.total ?? 0,
     usersTotalPrev: startRef?.total ?? 0,
@@ -296,6 +361,37 @@ export function demoDashboard(period: Period, pricing: Pricing, aiBudgetEur: num
   })
 
   const todayRow = at(days, today)
+
+  // Séries temporelles (mêmes jours simulés que les indicateurs).
+  const subsDaily = cur.map(subsOf)
+  const trends: Trends = {
+    activeDaily: cur.map((d) => ({ day: d.day, dau: dauAt(days, d.day), wau: activeAt(days, d.day, 7) })),
+    activePrevDaily: prev.map((d) => ({ day: d.day, value: dauAt(days, d.day) })),
+    accountsDaily: cur.map((d) => ({ day: d.day, value: d.total })),
+    subsDaily,
+    mrrDaily: mrrSeries(subsDaily, pricing),
+    subsFlowDaily: cur.map((d) => ({ day: d.day, started: d.newSubs, canceled: d.churn })),
+    activityDaily: cur.map((d) => ({ day: d.day, messages: d.messages, ai: d.ai, documents: d.documents })),
+    devices: { current: devicesOf(days, cur, 0), previous: devicesOf(days, prev, 1), pwaMeasured: false },
+  }
+
+  // Aujourd'hui : part de la journée écoulée (heure de Cayenne), hier à la même heure.
+  const [hh, mm] = (timeInTz(now) || '12:00').split(':').map(Number)
+  const elapsed = Math.max(0.02, (hh * 60 + mm) / 1440)
+  const yRow = at(days, addDaysToKey(today, -1))
+  const part = (v: number | undefined) => Math.round((v ?? 0) * elapsed)
+  const todayStats: TodayStats = {
+    day: today,
+    signups: part(todayRow?.signups),
+    signupsPrev: part(yRow?.signups),
+    active: Math.round(dauAt(days, today) * Math.sqrt(elapsed)),
+    activePrev: yRow ? Math.round(dauAt(days, yRow.day) * Math.sqrt(elapsed)) : 0,
+    messages: part(todayRow?.messages),
+    messagesPrev: part(yRow?.messages),
+    ticketsOpen: ticketsAt(today),
+    ticketsNew: Math.round(2 * elapsed + rnd(indexOf(days, today), 21)),
+  }
+
   const monthAi = sum(days.filter((d) => d.day.startsWith(today.slice(0, 7))), 'ai')
   const alerts = buildAlerts(
     {
@@ -317,7 +413,9 @@ export function demoDashboard(period: Period, pricing: Pricing, aiBudgetEur: num
     source: 'demo',
     generatedAt: now.toISOString(),
     period,
-    kpis: buildKpis(raw, pricing, period),
+    kpis: attachSparklines(buildKpis(raw, pricing, period), {
+      trends, signupsDaily: cur.map((d) => ({ day: d.day, value: d.signups })), revenueMonthly, grain: period.grain, fromDay: period.fromDay, toDay: period.toDay,
+    }),
     signupsDaily: cur.map((d) => ({ day: d.day, value: d.signups })),
     revenueMonthly,
     plans: {
@@ -346,6 +444,9 @@ export function demoDashboard(period: Period, pricing: Pricing, aiBudgetEur: num
     recentSignups,
     recentPayments,
     alerts,
+    trends,
+    cohorts: demoCohorts(days, period.toDay < today ? period.toDay : today),
+    today: todayStats,
     notes: [],
   }
 }

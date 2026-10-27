@@ -19,11 +19,13 @@ type Props = {
   description: string
   table?: TableSpec
   actions?: ReactNode
+  /** Limite de mesure ou définition, affichée sous le graphique. */
+  note?: ReactNode
   children: ReactNode
   className?: string
 }
 
-export function ChartCard({ id, title, description, table, actions, children, className }: Props) {
+export function ChartCard({ id, title, description, table, actions, note, children, className }: Props) {
   const titleId = `${id}-titre`
   const descId = `${id}-desc`
   return (
@@ -36,7 +38,10 @@ export function ChartCard({ id, title, description, table, actions, children, cl
           </div>
           {actions}
         </div>
-        <div className="flex-1 px-5 py-5">{children}</div>
+        <div className="min-w-0 flex-1 px-5 py-5">
+          {children}
+          {note && <p className="mt-3 text-xs leading-snug text-night-600">{note}</p>}
+        </div>
         {table && <DataTableDetails table={table} />}
       </Card>
     </section>

@@ -1,5 +1,7 @@
-// Contenu du tableau de bord (Server Component) : indicateurs, graphiques,
-// listes récentes, alertes. Reçoit des données déjà agrégées et minimisées.
+// Contenu du tableau de bord (Server Component) : alertes, bandeau du jour,
+// indicateurs, graphiques regroupés par thème, listes récentes.
+// Reçoit des données déjà agrégées et minimisées.
+import type { ReactNode } from 'react'
 import { Info } from 'lucide-react'
 import { fmtDayKey } from '@/lib/tz'
 import { fmtEur, fmtEurExact, fmtInt, fmtDateTime } from '@/lib/admin/stats/format'
@@ -11,13 +13,57 @@ import { ColumnChart, Donut, Funnel, HBarList, Legend } from './charts'
 import { KpiGrid } from './KpiGrid'
 import { RecentPayments, RecentSignups } from './RecentLists'
 import { SignupsChart } from './SignupsChart'
+import { TodayStrip } from './TodayStrip'
+import {
+  AccountsCard,
+  ActiveUsersCard,
+  ActivityCard,
+  ChurnCard,
+  CohortCard,
+  DevicesCard,
+  MrrCard,
+  SubsFlowCard,
+  SubscribersCard,
+} from './TrendCards'
 
 const pct = (part: number, total: number) => (total > 0 ? `${((part / total) * 100).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} %` : '0 %')
 const eurAxis = (n: number) => (n >= 1000 ? `${(n / 1000).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} k€` : `${fmtInt(n)} €`)
 
+const SECTIONS = [
+  { id: 'audience', title: 'Audience' },
+  { id: 'abonnements', title: 'Abonnements et revenus' },
+  { id: 'usage', title: 'Usage' },
+  { id: 'retention', title: 'Rétention' },
+  { id: 'recent', title: 'Territoires et activité récente' },
+] as const
+
+function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
+  return (
+    <section id={id} aria-labelledby={`${id}-titre`} className="scroll-mt-6 space-y-4">
+      <h2 id={`${id}-titre`} className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-night-600">
+        {title}
+        <span className="h-px flex-1 bg-night-100" aria-hidden="true" />
+      </h2>
+      {children}
+    </section>
+  )
+}
+
+/** Remplace un graphique dont la source n'est pas disponible (jamais de chiffre inventé). */
+function Unavailable({ title, className }: { title: string; className?: string }) {
+  return (
+    <div className={`rounded-xl2 border border-dashed border-night-200 bg-white px-5 py-6 ${className ?? ''}`}>
+      <h3 className="font-display text-lg font-semibold text-night-900">{title}</h3>
+      <p className="mt-1 text-sm text-night-600">Données indisponibles pour ce graphique : la raison est indiquée dans les notes en bas de page.</p>
+    </div>
+  )
+}
+
 export function Dashboard({ data }: { data: DashboardData }) {
-  const { period } = data
+  const { period, trends } = data
   const inPeriod = period.label
+  const kpiPrev = (id: string) => data.kpis.find((k) => k.id === id)?.previous ?? 0
+  const subsStart = kpiPrev('premium-mensuel') + kpiPrev('premium-annuel') + kpiPrev('coparentalite-mensuel') + kpiPrev('coparentalite-annuel')
 
   // Revenus
   const rev = data.revenueMonthly
@@ -76,20 +122,38 @@ export function Dashboard({ data }: { data: DashboardData }) {
     <div className="space-y-8">
       <AlertsPanel alerts={data.alerts} />
 
+      <TodayStrip today={data.today} />
+
       <KpiGrid kpis={data.kpis} />
 
-      <section aria-labelledby="graphiques-titre" className="space-y-4">
-        <h2 id="graphiques-titre" className="text-xs font-bold uppercase tracking-wider text-night-600">Graphiques</h2>
+      <nav aria-label="Sections des graphiques" className="flex flex-wrap gap-2">
+        {SECTIONS.map((s) => (
+          <a key={s.id} href={`#${s.id}`} className="inline-flex min-h-11 items-center rounded-full border border-night-200 bg-white px-4 text-sm font-semibold text-night-800 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
+            {s.title}
+          </a>
+        ))}
+      </nav>
 
+      <Section id="audience" title="Audience">
         <div className="grid gap-4 xl:grid-cols-3">
+          {trends ? <ActiveUsersCard className="xl:col-span-2" trends={trends} period={period} /> : <Unavailable className="xl:col-span-2" title="Utilisateurs actifs" />}
+          {trends ? <DevicesCard trends={trends} period={period} /> : <Unavailable title="Appareils" />}
+        </div>
+        <div className="grid gap-4 xl:grid-cols-2">
           <SignupsChart
-            className="xl:col-span-2"
             points={data.signupsDaily}
             fromDay={period.fromDay}
             toDay={period.toDay}
             defaultGrain={period.grain}
             periodLabel={inPeriod}
           />
+          {trends ? <AccountsCard trends={trends} period={period} startTotal={kpiPrev('inscrits')} /> : <Unavailable title="Inscriptions cumulées" />}
+        </div>
+      </Section>
+
+      <Section id="abonnements" title="Abonnements et revenus">
+        <div className="grid gap-4 xl:grid-cols-3">
+          {trends ? <SubscribersCard className="xl:col-span-2" trends={trends} period={period} startTotal={subsStart} /> : <Unavailable className="xl:col-span-2" title="Abonnés payants" />}
           <ChartCard
             id="formules"
             title="Répartition des formules"
@@ -118,11 +182,10 @@ export function Dashboard({ data }: { data: DashboardData }) {
             </div>
           </ChartCard>
         </div>
-
-        <div className="grid gap-4 xl:grid-cols-3">
+        <div className="grid gap-4 xl:grid-cols-2">
+          {trends ? <MrrCard trends={trends} period={period} startMrr={kpiPrev('mrr')} /> : <Unavailable title="Revenu mensuel récurrent (MRR)" />}
           <ChartCard
             id="revenus"
-            className="xl:col-span-2"
             title="Revenus par mois"
             description={revDesc}
             table={{
@@ -154,6 +217,16 @@ export function Dashboard({ data }: { data: DashboardData }) {
             />
           </ChartCard>
 
+        </div>
+        <div className="grid gap-4 xl:grid-cols-2">
+          {trends ? <SubsFlowCard trends={trends} period={period} /> : <Unavailable title="Nouveaux abonnements et résiliations" />}
+          {trends ? <ChurnCard trends={trends} period={period} startTotal={subsStart} /> : <Unavailable title="Taux de résiliation" />}
+        </div>
+      </Section>
+
+      <Section id="usage" title="Usage">
+        <div className="grid gap-4 xl:grid-cols-3">
+          {trends ? <ActivityCard className="xl:col-span-2" trends={trends} period={period} modules={data.modules} /> : <Unavailable className="xl:col-span-2" title="Activité dans le temps" />}
           <ChartCard
             id="entonnoir"
             title="Entonnoir d’inscription"
@@ -170,7 +243,6 @@ export function Dashboard({ data }: { data: DashboardData }) {
             <Funnel steps={data.funnel} summary={`Entonnoir. ${funnelDesc}`} />
           </ChartCard>
         </div>
-
         <div className="grid gap-4 xl:grid-cols-2">
           <ChartCard
             id="modules"
@@ -213,7 +285,13 @@ export function Dashboard({ data }: { data: DashboardData }) {
             )}
           </ChartCard>
         </div>
+      </Section>
 
+      <Section id="retention" title="Rétention">
+        {data.cohorts ? <CohortCard cohorts={data.cohorts} /> : <Unavailable title="Rétention par cohorte" />}
+      </Section>
+
+      <Section id="recent" title="Territoires et activité récente">
         <div className="grid gap-4 xl:grid-cols-3">
           <ChartCard
             id="territoires"
@@ -235,7 +313,7 @@ export function Dashboard({ data }: { data: DashboardData }) {
           <RecentSignups rows={data.recentSignups} />
           <RecentPayments rows={data.recentPayments} />
         </div>
-      </section>
+      </Section>
 
       <footer className="space-y-2 border-t border-night-100 pt-4 text-xs text-night-600">
         {data.notes.length > 0 && (

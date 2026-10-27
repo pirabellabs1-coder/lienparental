@@ -242,20 +242,24 @@ export type Bucket = { key: string; label: string; longLabel: string; value: num
 export function bucketize(points: DailyPoint[], grain: Grain): Bucket[] {
   const map = new Map<string, number>()
   for (const p of points) {
-    const k = grain === 'jour' ? p.day : grain === 'semaine' ? weekStart(p.day) : p.day.slice(0, 7)
+    const k = bucketKey(p.day, grain)
     map.set(k, (map.get(k) ?? 0) + p.value)
   }
   return [...map.entries()]
     .sort(([a], [b]) => (a < b ? -1 : 1))
-    .map(([key, value]) => {
-      if (grain === 'mois') {
-        return { key, value, label: fmtDayKey(`${key}-01`, { month: 'short' }), longLabel: fmtDayKey(`${key}-01`, { month: 'long', year: 'numeric' }) }
-      }
-      if (grain === 'semaine') {
-        return { key, value, label: fmtDayKey(key, { day: 'numeric', month: 'short' }), longLabel: `Semaine du ${fmtDayKey(key, { day: 'numeric', month: 'long', year: 'numeric' })}` }
-      }
-      return { key, value, label: fmtDayKey(key, { day: 'numeric', month: 'short' }), longLabel: fmtDayKey(key, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) }
-    })
+    .map(([key, value]) => ({ key, value, ...bucketLabels(key, grain) }))
+}
+
+/** Clé de regroupement d'un jour : le jour, le lundi de sa semaine ou son mois. */
+export function bucketKey(day: string, grain: Grain): string {
+  return grain === 'jour' ? day : grain === 'semaine' ? weekStart(day) : day.slice(0, 7)
+}
+
+/** Libellés court (axe) et long (infobulle, tableau) d'une clé de regroupement. */
+export function bucketLabels(key: string, grain: Grain): { label: string; longLabel: string } {
+  if (grain === 'mois') return { label: fmtDayKey(`${key}-01`, { month: 'short' }), longLabel: fmtDayKey(`${key}-01`, { month: 'long', year: 'numeric' }) }
+  if (grain === 'semaine') return { label: fmtDayKey(key, { day: 'numeric', month: 'short' }), longLabel: `Semaine du ${fmtDayKey(key, { day: 'numeric', month: 'long', year: 'numeric' })}` }
+  return { label: fmtDayKey(key, { day: 'numeric', month: 'short' }), longLabel: fmtDayKey(key, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) }
 }
 
 /** Mois "yyyy-mm" de `fromMonth` à `toMonth` inclus, complétés à 0. */

@@ -11,12 +11,13 @@ import { cn } from '@/lib/cn'
 
 // --- Échelle --------------------------------------------------------------
 
-/** Maximum « rond » et graduations (0 inclus) pour un axe vertical. */
-export function niceScale(max: number, ticks = 4): { max: number; ticks: number[] } {
+/** Maximum « rond » et graduations (0 inclus) pour un axe vertical. `integer` : pas entiers (comptages). */
+export function niceScale(max: number, ticks = 4, integer = false): { max: number; ticks: number[] } {
   if (!(max > 0)) return { max: 1, ticks: [0, 1] }
   const raw = max / ticks
   const pow = 10 ** Math.floor(Math.log10(raw))
-  const step = [1, 2, 2.5, 5, 10].map((m) => m * pow).find((s) => s >= raw) ?? 10 * pow
+  const steps = [1, 2, 2.5, 5, 10].map((m) => m * pow).filter((s) => !integer || (s >= 1 && Number.isInteger(s)))
+  const step = steps.find((s) => s >= raw) ?? (integer ? Math.max(1, Math.ceil(raw)) : 10 * pow)
   const top = Math.ceil(max / step) * step
   const out: number[] = []
   for (let v = 0; v <= top + step / 2; v += step) out.push(Math.round(v * 100) / 100)
@@ -103,7 +104,7 @@ export function ColumnChart({ data, series, summary, format, formatAxis = format
         </div>
         <div className="relative min-w-0 flex-1" style={{ height }}>
           {scale.ticks.map((t) => (
-            <div key={t} className={cn('absolute inset-x-0 border-t', t === 0 ? 'border-night-300' : 'border-dashed border-night-100')} style={{ bottom: `${(t / scale.max) * 100}%` }} aria-hidden="true" />
+            <div key={t} className={cn('absolute inset-x-0 border-t', t === 0 ? 'border-night-300' : 'border-night-100')} style={{ bottom: `${(t / scale.max) * 100}%` }} aria-hidden="true" />
           ))}
           <svg viewBox={`0 0 ${W} 100`} preserveAspectRatio="none" className="absolute inset-0 h-full w-full" role="img" aria-label={summary}>
             {data.map((d, i) => {
@@ -284,6 +285,33 @@ export function Funnel({
         )
       })}
     </ol>
+    </div>
+  )
+}
+
+// --- Mini-courbe (indicateurs) ----------------------------------------------------
+
+/**
+ * Tendance des derniers regroupements : trait de mise en retrait, dernier point
+ * accentué. Décorative (aria-hidden) : la valeur et sa variation sont dans la
+ * carte, la série complète dans les graphiques et leurs tableaux.
+ */
+export function Sparkline({ values, className }: { values: number[]; className?: string }) {
+  if (values.length < 2) return null
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+  const span = max - min || 1
+  const x = (i: number) => (i / (values.length - 1)) * 100
+  // Courbe plate : tracée au milieu ; sinon marge de 10 % en haut et en bas.
+  const y = (v: number) => (max === min ? 50 : 90 - ((v - min) / span) * 80)
+  const d = values.map((v, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(2)},${y(v).toFixed(2)}`).join('')
+  const last = values[values.length - 1]
+  return (
+    <div className={cn('relative h-8 w-full', className)} aria-hidden="true">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full overflow-visible">
+        <path d={d} fill="none" className="stroke-night-300" strokeWidth={1.5} strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+      </svg>
+      <span className="absolute h-2 w-2 -translate-x-1/2 translate-y-1/2 rounded-full bg-night-800 ring-2 ring-white" style={{ left: '100%', bottom: `${100 - y(last)}%` }} />
     </div>
   )
 }

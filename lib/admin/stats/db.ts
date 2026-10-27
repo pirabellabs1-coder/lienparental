@@ -23,7 +23,8 @@ import {
 import { AI_MONTHLY_BUDGET_EUR, BASE_PRICING } from './config'
 import { loadStripeRevenue } from './stripe'
 import { resolveGuideTitles } from './guide-titles'
-import type { DashboardData, GuideTop, Period, RecentPayment, RecentSignup } from './types'
+import { attachSparklines, mrrSeries } from './trends'
+import type { Cohorts, DashboardData, GuideTop, Period, RecentPayment, RecentSignup, TodayStats, Trends } from './types'
 
 // --- Schémas de réponse (on ne fait pas confiance à la forme du JSON) --------
 
@@ -75,7 +76,40 @@ const coparentaliteSchema = z.object({ monthly: n, yearly: n, monthly_prev: n, y
 type CoparentaliteCounts = z.infer<typeof coparentaliteSchema>
 const NO_COPARENTALITE: CoparentaliteCounts = { monthly: 0, yearly: 0, monthly_prev: 0, yearly_prev: 0 }
 
+// 0450 : séries temporelles, cohortes, bandeau « Aujourd'hui ».
+const devSchema = z.object({ mobile: n, ordinateur: n, tablette: n, inconnu: n })
+const trendsSchema = z.object({
+  active_daily: z.array(z.object({ d: z.string(), dau: n, wau: n })),
+  active_prev_daily: z.array(z.object({ d: z.string(), dau: n })),
+  accounts_daily: z.array(z.object({ d: z.string(), n })),
+  subs_daily: z.array(z.object({ d: z.string(), pm: n, py: n, cm: n, cy: n })),
+  subs_flow_daily: z.array(z.object({ d: z.string(), new: n, canceled: n })),
+  activity_daily: z.array(z.object({ d: z.string(), messages: n, ai: n, documents: n })),
+  devices: z.object({ current: devSchema, previous: devSchema, pwa_measured: z.boolean().catch(false) }),
+})
+const cohortsSchema = z.object({
+  current_week: z.string(),
+  last_day: z.string().optional(),
+  cohorts: z.array(z.object({ w: z.string(), size: n, active: z.array(n).max(60) })).max(60),
+})
+const todaySchema = z.object({
+  day: z.string(), signups: n, signups_prev: n, active: n, active_prev: n,
+  messages: n, messages_prev: n, tickets_open: n, tickets_new: n,
+})
+
 const eur = (cents: number) => round2(cents / 100)
+
+/** Échec d'une RPC facultative : absente (migration non appliquée) ou en erreur (dont délai dépassé). */
+type OptionalFailure = { failed: 'missing' | 'error' }
+const isFailure = (v: unknown): v is OptionalFailure => typeof v === 'object' && v !== null && 'failed' in v
+
+/** RPC facultative (migration récente) : un refus d'accès reste une erreur, le reste devient un échec signalé. */
+function optional(p: Promise<unknown>): Promise<unknown> {
+  return p.catch((e: unknown): unknown => {
+    if (e instanceof StatsUnavailableError && e.message === 'forbidden') throw e
+    return { failed: e instanceof StatsUnavailableError && e.message === 'missing_function' ? 'missing' : 'error' } satisfies OptionalFailure
+  })
+}
 
 /** Libellé d'un subscriptions.plan. */
 export function planLabelOf(plan: string): string {
@@ -112,7 +146,7 @@ export async function liveDashboard(supabase: TypedSupabaseClient, period: Perio
   const revFromIso = wallTimeToIso(`${revFromMonth}-01`, '00:00', tz)
   const stripeFrom = revFromIso < period.prevFrom ? revFromIso : period.prevFrom
 
-  const [overviewRaw, seriesRaw, feedRaw, stripe, copaRaw] = await Promise.all([
+  const [overviewRaw, seriesRaw, feedRaw, stripe, copaRaw, trendsRaw, cohortsRaw, todayRaw] = await Promise.all([
     rpc(supabase, 'admin_stats_overview', args),
     rpc(supabase, 'admin_stats_series', args),
     rpc(supabase, 'admin_stats_feed', { p_limit: 8, p_free_quota: ANALYSIS_QUOTA.gratuit }),
@@ -120,6 +154,10 @@ export async function liveDashboard(supabase: TypedSupabaseClient, period: Perio
     // 0380 : abonnés Coparentalité+. Migration absente → zéro et une note (pas d'échec du tableau).
     rpc(supabase, 'admin_stats_coparentalite', { p_from: period.from, p_to: period.to }).catch((e: unknown) =>
       e instanceof StatsUnavailableError && e.message === 'forbidden' ? Promise.reject(e) : null),
+    // 0450 : absentes → graphiques correspondants remplacés par un message, pas d'échec du tableau.
+    optional(rpc(supabase, 'admin_stats_trends', args)),
+    optional(rpc(supabase, 'admin_stats_cohorts', { p_to: period.to, p_tz: tz, p_weeks: 12 })),
+    optional(rpc(supabase, 'admin_stats_today', { p_tz: tz })),
   ])
 
   const o = overviewSchema.parse(overviewRaw)
@@ -244,14 +282,51 @@ export async function liveDashboard(supabase: TypedSupabaseClient, period: Perio
     AI_MONTHLY_BUDGET_EUR,
   )
 
+  // Séries 0450 (forme vérifiée ; toute réponse inattendue = série absente).
+  const tr = trendsSchema.safeParse(trendsRaw)
+  const trends: Trends | null = !isFailure(trendsRaw) && tr.success
+    ? (() => {
+        const subsDaily = tr.data.subs_daily.map((r) => ({ day: r.d, premiumMonthly: r.pm, premiumYearly: r.py, coparentaliteMonthly: r.cm, coparentaliteYearly: r.cy }))
+        return {
+          activeDaily: tr.data.active_daily.map((r) => ({ day: r.d, dau: r.dau, wau: r.wau })),
+          activePrevDaily: tr.data.active_prev_daily.map((r) => ({ day: r.d, value: r.dau })),
+          accountsDaily: tr.data.accounts_daily.map((r) => ({ day: r.d, value: r.n })),
+          subsDaily,
+          mrrDaily: mrrSeries(subsDaily, pricing),
+          subsFlowDaily: tr.data.subs_flow_daily.map((r) => ({ day: r.d, started: r.new, canceled: r.canceled })),
+          activityDaily: tr.data.activity_daily.map((r) => ({ day: r.d, messages: r.messages, ai: r.ai, documents: r.documents })),
+          devices: { current: tr.data.devices.current, previous: tr.data.devices.previous, pwaMeasured: tr.data.devices.pwa_measured },
+        }
+      })()
+    : null
+  const co = cohortsSchema.safeParse(cohortsRaw)
+  const cohorts: Cohorts | null = !isFailure(cohortsRaw) && co.success
+    ? { currentWeek: co.data.current_week, lastDay: co.data.last_day, cohorts: co.data.cohorts.map((c) => ({ week: c.w, size: c.size, active: c.active })) }
+    : null
+  const td = todaySchema.safeParse(todayRaw)
+  const today: TodayStats | null = !isFailure(todayRaw) && td.success
+    ? {
+        day: td.data.day, signups: td.data.signups, signupsPrev: td.data.signups_prev, active: td.data.active, activePrev: td.data.active_prev,
+        messages: td.data.messages, messagesPrev: td.data.messages_prev, ticketsOpen: td.data.tickets_open, ticketsNew: td.data.tickets_new,
+      }
+    : null
+  const optionalRaw = [trendsRaw, cohortsRaw, todayRaw]
+  if (optionalRaw.some((r) => isFailure(r) && r.failed === 'missing')) {
+    notes.push('Courbes d’évolution, rétention par cohorte ou chiffres du jour indisponibles : appliquer la migration 0450_admin_stats_trends.sql.')
+  } else if (!trends || !cohorts || !today) {
+    notes.push('Courbes d’évolution, rétention par cohorte ou chiffres du jour non calculés (erreur ou délai dépassé côté base) : réessayez ou choisissez une période plus courte.')
+  }
+
+  const signupsDaily = s.signups_daily.filter((p) => p.d >= period.fromDay && p.d <= period.toDay).map((p) => ({ day: p.d, value: p.n }))
+  const revenueMonthly = fillMonths(monthly, revFromMonth, monthKey)
   const paid = paidTotal(raw)
   return {
     source: stripe ? 'base+stripe' : 'base',
     generatedAt: now.toISOString(),
     period,
-    kpis: buildKpis(raw, pricing, period),
-    signupsDaily: s.signups_daily.filter((p) => p.d >= period.fromDay && p.d <= period.toDay).map((p) => ({ day: p.d, value: p.n })),
-    revenueMonthly: fillMonths(monthly, revFromMonth, monthKey),
+    kpis: attachSparklines(buildKpis(raw, pricing, period), { trends, signupsDaily, revenueMonthly, grain: period.grain, fromDay: period.fromDay, toDay: period.toDay }),
+    signupsDaily,
+    revenueMonthly,
     plans: {
       free: Math.max(0, raw.usersTotal - paid),
       monthly: raw.premiumMonthly,
@@ -271,6 +346,9 @@ export async function liveDashboard(supabase: TypedSupabaseClient, period: Perio
     recentSignups,
     recentPayments,
     alerts,
+    trends,
+    cohorts,
+    today,
     notes,
   }
 }

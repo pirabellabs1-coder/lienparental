@@ -27,6 +27,7 @@ import { Card } from '@/components/ui'
 import { cn } from '@/lib/cn'
 import { computeDelta, fmtValue } from '@/lib/admin/stats/format'
 import type { Kpi, KpiGroup, KpiTone } from '@/lib/admin/stats/types'
+import { Sparkline } from './charts'
 
 const ICONS: Record<string, LucideIcon> = {
   inscrits: Users,
@@ -79,7 +80,8 @@ function KpiCard({ k }: { k: Kpi }) {
               <Icon className="h-[18px] w-[18px]" />
             </span>
           </div>
-          <p className="font-display text-xl font-bold tabular-nums text-night-900 min-[400px]:text-2xl sm:text-[1.7rem]">{fmtValue(k.value, k.unit)}</p>
+          <p className="font-display text-xl font-bold text-night-900 min-[400px]:text-2xl sm:text-[1.7rem]">{fmtValue(k.value, k.unit)}</p>
+          {k.spark && <Sparkline values={k.spark} />}
           <div className="mt-auto">
             {d.direction === 'none' ? (
               <p className="text-xs text-night-600">Pas de comparaison disponible</p>
