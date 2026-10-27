@@ -6,7 +6,8 @@ import { TopBar } from '@/components/admin/TopBar'
 import { cookies } from 'next/headers'
 import { DEMO_COOKIE, DEMO_MODE } from '@/lib/demo-auth'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { ADMIN_MFA_ENROLL_PATH, getCurrentUser } from '@/lib/auth/session'
+import { getCurrentUser } from '@/lib/auth/session'
+import { ADMIN_LOGIN_PATH } from '@/lib/admin/gate'
 
 export const metadata = {
   title: 'Lien Parental · Admin',
@@ -16,9 +17,8 @@ export const metadata = {
 /**
  * Garde d'accès du back-office.
  *
- * - Lit la session via getCurrentUser() (auth.getUser revalidé + niveau MFA aal2 si 2FA).
- * - Pas de session   → page de connexion (?suite=/admin)
- * - Admin sans session aal2 (aucun facteur TOTP) → enrôlement 2FA (M7, audit v3)
+ * - Lit la session via getCurrentUser() (auth.getUser revalidé).
+ * - Pas de session   → formulaire de connexion DÉDIÉ à l'admin (/console)
  * - Pas admin        → redirect('/')   (jamais 401/403 : moins de leak)
  * - Erreur RPC       → redirect('/')   (fail-closed : isAdmin === true exigé)
  * - Ni Supabase ni démo configurés → redirect('/')
@@ -31,17 +31,16 @@ async function guardAdmin() {
   // Mode démonstration (désactivé en production par défaut) : session du compte admin de démo.
   if (DEMO_MODE) {
     if ((await cookies()).get(DEMO_COOKIE)?.value === 'admin') return
-    redirect('/onboarding/connexion?suite=/admin')
+    redirect(ADMIN_LOGIN_PATH)
   }
 
   if (!SUPABASE_ENABLED) redirect('/')
 
   const user = await getCurrentUser()
-  if (!user) redirect('/onboarding/connexion?suite=/admin')
-  if (user.isAdmin !== true) {
-    if (user.adminMfaRequired === true) redirect(ADMIN_MFA_ENROLL_PATH)
-    redirect('/')
-  }
+  // Pas de session → formulaire de connexion DÉDIÉ à l'admin (isolé des parents).
+  if (!user) redirect(ADMIN_LOGIN_PATH)
+  // Pas admin → accueil (jamais 401/403 : moins de fuite d'information).
+  if (user.isAdmin !== true) redirect('/')
 }
 
 export default async function AdminLayout({ children }: { children: ReactNode }) {

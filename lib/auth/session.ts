@@ -21,14 +21,9 @@ export type CurrentUser = {
   prenom: string
   nom: string
   plan: 'gratuit' | 'premium'
-  /** Administrateur ET session aal2 (TOTP validé) : seul cas où le back-office s'ouvre. */
+  /** Administrateur (rôle vérifié en base). La 2FA n'est pas exigée pour l'admin. */
   isAdmin: boolean
-  /** Compte administrateur dont la session n'est pas aal2 (aucun facteur TOTP) : enrôlement 2FA exigé. */
-  adminMfaRequired?: boolean
 }
-
-/** Page d'enrôlement de la double authentification (admins sans facteur). */
-export const ADMIN_MFA_ENROLL_PATH = '/app/profil/securite/2fa?raison=admin'
 
 async function loadSupabaseUser(): Promise<CurrentUser | null> {
   const supabase = await createClient()
@@ -59,10 +54,10 @@ async function loadSupabaseUser(): Promise<CurrentUser | null> {
     // Même règle d'accès que la facturation (lib/billing/sync-core#planOf) : actif, essai,
     // ou paiement en échec encore dans le délai de grâce.
     plan: subscription.data && planOf(subscription.data as Parameters<typeof planOf>[0]) !== 'gratuit' ? 'premium' : 'gratuit',
-    // M7 (audit v3) : les droits d'administration exigent une session aal2, même
-    // si le compte n'a encore aucun facteur (la base applique is_admin_aal2()).
-    isAdmin: adminRole && aal.currentLevel === 'aal2',
-    adminMfaRequired: adminRole && aal.currentLevel !== 'aal2',
+    // La 2FA n'est pas imposée pour l'admin : l'accès repose sur le lien secret
+    // (porte masquée) + le rôle vérifié en base. Si l'admin a activé une 2FA, la
+    // vérification aal (plus haut) s'applique déjà comme pour tout utilisateur.
+    isAdmin: adminRole,
   }
 }
 

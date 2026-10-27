@@ -18,7 +18,6 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import { DEMO_COOKIE, DEMO_MODE } from '@/lib/demo-auth'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { requireAuthedUser } from '@/lib/auth/guard'
-import { isAal2 } from '@/lib/auth/session'
 import { RepoError, type AdminCtx } from './repo'
 import { CONTENT_STATUSES, type ContentKind } from './types'
 
@@ -67,9 +66,6 @@ export async function requireAdmin(): Promise<AdminGate> {
   }
   const { data: isAdmin, error } = await auth.supabase.rpc('is_admin')
   if (error || isAdmin !== true) return { ok: false, response: apiError(403, 'forbidden', 'Accès réservé aux administrateurs.') }
-  if (!(await isAal2(auth.supabase))) {
-    return { ok: false, response: apiError(403, 'mfa_enrollment_required', 'Activez la double authentification pour accéder à l’administration.') }
-  }
   return {
     ok: true,
     ctx: { mode: 'live', db: auth.supabase as unknown as SupabaseClient, userId: auth.user.id, actor: auth.user.email ?? auth.user.id },

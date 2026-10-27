@@ -1,7 +1,11 @@
 // Accès masqué à l'administration : sans un cookie de « porte » posé par un lien secret,
-// /admin répond « page introuvable » (404) pour tout le monde. Ce n'est PAS l'authentification :
-// le rôle admin et la double authentification (aal2) restent exigés par-dessus (voir middleware.ts).
-// C'est une couche d'obscurité en plus, pour qu'un scanner ne découvre jamais l'existence de /admin.
+// /admin ET /console répondent « page introuvable » (404) pour tout le monde. Ce n'est PAS
+// l'authentification : le rôle admin (RPC is_admin) reste exigé par-dessus (voir middleware.ts).
+// C'est une couche d'obscurité en plus, pour qu'un scanner ne découvre jamais l'existence de l'admin.
+//
+// Parcours : le lien secret /console/<secret> pose le cookie puis renvoie vers /console, le
+// formulaire de connexion DÉDIÉ à l'administration (isolé de la connexion des parents). Après
+// connexion, l'admin arrive sur /admin.
 //
 // Compatible Edge (middleware) : Web Crypto uniquement, aucune dépendance Node.
 //
@@ -9,6 +13,8 @@
 // Sans ADMIN_GATE_SECRET, la porte est inactive et /admin se comporte normalement (démo, local).
 
 export const ADMIN_ENTRY_PREFIX = '/console/'
+/** Page de connexion dédiée à l'administration (derrière la porte, isolée des parents). */
+export const ADMIN_LOGIN_PATH = '/console'
 const GATE_COOKIE = 'lp_adm'
 const enc = new TextEncoder()
 
