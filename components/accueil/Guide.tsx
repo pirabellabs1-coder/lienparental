@@ -1,10 +1,11 @@
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { ArrowRight, Check } from 'lucide-react'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
+import { appShot } from '@/lib/i18n/shots'
 import { TERRITORIES, TerritoryShape } from '@/components/site/territories'
 import { BTN_PRIMARY, CONTAINER, H2, LEAD, SECTION } from './ui'
 
@@ -19,6 +20,7 @@ function countGuyaneSheets(): number {
 
 export async function Guide() {
   const t = await getTranslations('guide')
+  const locale = await getLocale()
   const sheets = countGuyaneSheets()
   const POINTS = [
     sheets > 0 ? t('pointSheets', { count: sheets }) : t('pointSheetsNoCount'),
@@ -61,7 +63,7 @@ export async function Guide() {
         </div>
 
         <PhoneFrame
-          src="/images/app/mobile-guide.png"
+          src={appShot('mobile-guide', locale)}
           alt={t('phoneAlt')}
           sizes="260px"
           className="mx-auto w-[220px] lg:w-[260px]"

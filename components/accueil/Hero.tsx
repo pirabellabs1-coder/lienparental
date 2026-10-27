@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { appShot } from '@/lib/i18n/shots'
 import { ArrowRight, Download, HeartHandshake, MessagesSquare, Monitor, Play, Smartphone, Sun, Users } from 'lucide-react'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
@@ -17,6 +18,7 @@ const d = (ms: number) => ({ '--d': `${ms}ms` }) as React.CSSProperties
 
 export async function Hero() {
   const t = await getTranslations('home.hero')
+  const locale = await getLocale()
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden bg-gradient-to-b from-[#F3F8F3] via-[#F8FBF8] to-white">
       <div className={cn(CONTAINER, 'grid grid-cols-1 items-center gap-12 pb-12 pt-10 sm:pt-14 lg:grid-cols-[1.08fr_1fr] lg:gap-14 lg:pb-16 lg:pt-16 [&>*]:min-w-0')}>
@@ -104,7 +106,7 @@ export async function Hero() {
               </p>
             </div>
             <PhoneFrame
-              src="/images/app/mobile-accueil.png"
+              src={appShot('mobile-accueil', locale)}
               alt={t('phoneAlt')}
               sizes="(min-width:1024px) 200px, 38vw"
               priority

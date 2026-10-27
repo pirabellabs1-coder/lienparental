@@ -1,23 +1,25 @@
 'use client'
 import { useRef, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Bot, CalendarDays, FolderLock, HeartPulse, MessageSquareQuote, MessagesSquare, Scale, Wallet } from 'lucide-react'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
+import { appShot, type AppShotName } from '@/lib/i18n/shots'
 import { CONTAINER, H2, IconBubble, LEAD, SECTION } from './ui'
 
 // Les 8 modules (+ messagerie) regroupés en 4 besoins de parent : un onglet = une idée, illustrée par une vraie capture.
 // Le Guide parental a sa propre section. Onglets ARIA (WAI-ARIA APG) : flèches, Début / Fin, tabulation vers le panneau.
 // Les textes viennent des catalogues i18n (namespace featureTabs), par clé d'onglet.
 const TABS = [
-  { key: 'organiser', shot: '/images/app/mobile-calendrier.png', mod1Icon: CalendarDays, mod2Icon: Wallet },
-  { key: 'proteger', shot: '/images/app/mobile-coffre.png', mod1Icon: HeartPulse, mod2Icon: FolderLock },
-  { key: 'preparer', shot: '/images/app/mobile-temoignages.png', mod1Icon: MessageSquareQuote, mod2Icon: Scale },
-  { key: 'apaiser', shot: '/images/app/mobile-coach.png', mod1Icon: Bot, mod2Icon: MessagesSquare },
-] as const
+  { key: 'organiser', shot: 'mobile-calendrier', mod1Icon: CalendarDays, mod2Icon: Wallet },
+  { key: 'proteger', shot: 'mobile-coffre', mod1Icon: HeartPulse, mod2Icon: FolderLock },
+  { key: 'preparer', shot: 'mobile-temoignages', mod1Icon: MessageSquareQuote, mod2Icon: Scale },
+  { key: 'apaiser', shot: 'mobile-coach', mod1Icon: Bot, mod2Icon: MessagesSquare },
+] as const satisfies ReadonlyArray<{ key: string; shot: AppShotName; mod1Icon: unknown; mod2Icon: unknown }>
 
 export function FeatureTabs() {
   const t = useTranslations('featureTabs')
+  const locale = useLocale()
   const [active, setActive] = useState(0)
   const tabs = useRef<(HTMLButtonElement | null)[]>([])
 
@@ -95,7 +97,7 @@ export function FeatureTabs() {
                 ))}
               </ul>
             </div>
-            <PhoneFrame src={tab.shot} alt={t(`${tab.key}ShotAlt`)} sizes="230px" className="home-rise mx-auto w-[190px] sm:w-[210px] lg:w-[230px]" />
+            <PhoneFrame src={appShot(tab.shot, locale)} alt={t(`${tab.key}ShotAlt`)} sizes="230px" className="home-rise mx-auto w-[190px] sm:w-[210px] lg:w-[230px]" />
           </div>
         </div>
       </div>

@@ -1,7 +1,8 @@
 import { ArrowRight, CheckCheck, Clock, FileDown, FolderLock, Images, Sparkles } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
+import { appShot } from '@/lib/i18n/shots'
 import { BTN_PRIMARY, CONTAINER, H2, IconBubble, LEAD, SECTION } from './ui'
 import Link from 'next/link'
 
@@ -17,6 +18,7 @@ const POINTS = [
 
 export async function Messaging() {
   const t = await getTranslations('homeMessaging')
+  const locale = await getLocale()
   return (
     <section id="messagerie" aria-labelledby="messaging-title" className={cn(SECTION, 'overflow-hidden')}>
       <div className={cn(CONTAINER, 'grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_0.85fr] lg:gap-16 [&>*]:min-w-0')}>
@@ -55,7 +57,7 @@ export async function Messaging() {
         <div className="relative mx-auto w-full max-w-[340px]">
           <div aria-hidden className="absolute -inset-x-10 inset-y-10 -z-10 rounded-[48px] bg-gradient-to-br from-[#EAF4EA] via-[#F3F8F3] to-[#EEF2F8]" />
           <PhoneFrame
-            src="/images/app/mobile-messages.png"
+            src={appShot('mobile-messages', locale)}
             alt={t('phoneAlt')}
             sizes="(min-width:1024px) 340px, 80vw"
           />
