@@ -24,12 +24,23 @@ const CSP = [
   'upgrade-insecure-requests',
 ].join('; ')
 
+// Chemins privés : jamais indexés, même si un lien externe y mène (complète robots.txt, qui n'empêche que l'exploration).
+const NOINDEX = { key: 'X-Robots-Tag', value: 'noindex, nofollow' }
+// « /x/:path* » couvre aussi « /x ».
+const PRIVATE_PATHS = ['/app/:path*', '/admin/:path*', '/console/:path*', '/api/:path*', '/abonner']
+
 const nextConfig = {
   // Racine du projet explicite : un package-lock.json parasite dans le dossier utilisateur trompait Next.
   outputFileTracingRoot: dirname(fileURLToPath(import.meta.url)),
   reactStrictMode: true,
   devIndicators: false,
-  images: { formats: ['image/avif', 'image/webp'] },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    // Images du blog stockées dans le bucket public Supabase (app/blog/_components/image.ts).
+    remotePatterns: [{ protocol: 'https', hostname: '*.supabase.co', pathname: '/storage/v1/object/public/**' }],
+  },
+  // Robots qui n'exécutent pas le JavaScript : métadonnées rendues dans le <head> (pas de streaming dans le <body>).
+  htmlLimitedBots: /bot|crawler|spider|slurp|facebookexternalhit|facebookcatalog|embedly|quora link preview|outbrain|pinterest|vkshare|w3c_validator|whatsapp|telegram|skype|discord|linkedin|mastodon|bluesky|google-extended|gptbot|chatgpt-user|oai-searchbot|claude|perplexity|applebot|meta-externalagent|bingpreview|yandex|baidu|duckduck|petal|ia_archiver/i,
   async headers() {
     return [
       {
@@ -50,6 +61,7 @@ const nextConfig = {
         source: '/app/messages/:path*',
         headers: [{ key: 'Permissions-Policy', value: 'camera=(), microphone=(self), geolocation=(), payment=(self)' }],
       },
+      ...PRIVATE_PATHS.map((source) => ({ source, headers: [NOINDEX] })),
     ]
   },
 }

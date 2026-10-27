@@ -5,13 +5,18 @@ import { SiteShell } from '@/components/site/SiteShell'
 import { getHelpFaq } from '@/lib/aide/public'
 import { FAQ_CATEGORIES } from '@/lib/aide/types'
 import { contentLangAttr } from '@/lib/contenus/locale'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { faqPage, graph } from '@/lib/seo/jsonld'
+import { pageMetadata } from '@/lib/seo/metadata'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.help.public')
-  return { title: t('metaTitle'), description: t('metaDescription') }
+  const ts = await getTranslations('seo.pages.aide')
+  return pageMetadata({ title: t('metaTitle'), description: ts('description'), path: '/aide', locale: await getLocale() })
 }
 
-export const revalidate = 300
+// Langue lue dans un cookie à chaque requête : rendu dynamique (pas d'ISR, cf. docs/SEO-AUDIT.md C1).
+export const dynamic = 'force-dynamic'
 
 // Ligne d'appel au vote des fichiers du dépôt : sans objet sur la page publique.
 const FEEDBACK_LINE = /\n*(Cet article a-t-il été utile\s?\?|Was this (article|page) helpful\?|Este artigo (te |lhe )?foi útil\?)\s*$/i
@@ -21,8 +26,12 @@ export default async function AidePublique() {
   const locale = await getLocale()
   const questions = await getHelpFaq(locale)
   const t = await getTranslations('public.help.public')
+  const answer = (r: string) => r.replace(FEEDBACK_LINE, '').trim()
   return (
     <SiteShell mainClassName="bg-[#F7F9FC]">
+      {questions.length > 0 && (
+        <JsonLd data={graph(faqPage({ path: '/aide', locale, items: questions.map(q => ({ question: q.question, answer: answer(q.reponse) })) }))} />
+      )}
       <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
         <h1 className="text-[32px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 sm:text-[38px]">{t('title')}</h1>
         <p className="mt-2 text-night-700">{t('lead')}</p>
@@ -41,7 +50,7 @@ export default async function AidePublique() {
                           {q.question}
                           <ChevronDown className="h-4 w-4 shrink-0 text-night-500 transition-transform group-open:rotate-180" aria-hidden />
                         </summary>
-                        <div className="mt-3 whitespace-pre-line text-sm leading-relaxed text-night-700">{q.reponse.replace(FEEDBACK_LINE, '').trim()}</div>
+                        <div className="mt-3 whitespace-pre-line text-sm leading-relaxed text-night-700">{answer(q.reponse)}</div>
                       </details>
                   ))}
                 </div>

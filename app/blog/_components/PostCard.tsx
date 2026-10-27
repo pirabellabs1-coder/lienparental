@@ -1,9 +1,11 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 import { BLOG_CATEGORIES, blogCategoryLabel, type PublishedPost } from '@/lib/blog/types'
 import { intlLocale } from '@/lib/i18n/config'
 import { contentLangAttr } from '@/lib/contenus/locale'
 import { readingMinutes } from '@/lib/blog/markdown'
+import { isOptimizable } from './image'
 
 const formatDate = (iso: string, locale: string) =>
   new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'America/Cayenne' }).format(new Date(iso))
@@ -18,8 +20,14 @@ export function PostCard({ post, featured = false }: { post: PublishedPost; feat
     <article className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white transition-shadow duration-200 hover:shadow-card focus-within:ring-2 focus-within:ring-leaf-500 motion-reduce:transition-none ${featured ? 'lg:flex-row' : ''}`}>
       <div className={`relative overflow-hidden bg-gradient-to-br from-night-900 to-night-700 ${featured ? 'aspect-[16/9] lg:aspect-auto lg:w-1/2' : 'aspect-[16/9]'}`}>
         {post.couverture ? (
-          // eslint-disable-next-line @next/next/no-img-element -- couverture (chemin interne ou bucket public)
-          <img src={post.couverture} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100" />
+          <Image
+            src={post.couverture}
+            alt=""
+            fill
+            sizes={featured ? '(min-width: 1024px) 576px, calc(100vw - 40px)' : '(min-width: 1024px) 368px, (min-width: 640px) 50vw, calc(100vw - 40px)'}
+            unoptimized={!isOptimizable(post.couverture)}
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+          />
         ) : (
           <span aria-hidden="true" className="absolute inset-0 flex items-end p-5 font-script text-[44px] leading-none text-leaf-300/80">Parental</span>
         )}

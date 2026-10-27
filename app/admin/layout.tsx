@@ -8,10 +8,12 @@ import { DEMO_COOKIE, DEMO_MODE } from '@/lib/demo-auth'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { getCurrentUser } from '@/lib/auth/session'
 import { ADMIN_LOGIN_PATH } from '@/lib/admin/gate'
+import { NOINDEX_NOFOLLOW } from '@/lib/seo/metadata'
 
 export const metadata = {
   title: 'Lien Parental · Admin',
   description: 'Back-office Lien Parental — gestion des contenus et des comptes.',
+  robots: NOINDEX_NOFOLLOW,
 }
 
 /**

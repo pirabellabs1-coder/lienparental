@@ -3,13 +3,17 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { intlLocale } from '@/lib/i18n/config';
+import { pageMetadata } from '@/lib/seo/metadata';
+import { LEGAL_UPDATED, isoDate } from '@/lib/seo/pages';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.legal.privacy');
-  return { title: t('metaTitle'), description: t('metaDescription') };
+  const ts = await getTranslations('seo.pages.privacy');
+  return pageMetadata({ title: t('metaTitle'), description: ts('description'), path: '/legal/confidentialite', locale: await getLocale() });
 }
 
-const LAST_UPDATED = new Date(Date.UTC(2026, 9, 26));
+// Date partagée avec le sitemap (lib/seo/pages.ts).
+const LAST_UPDATED = isoDate(LEGAL_UPDATED.confidentialite);
 
 /**
  * Sous-traitants et destinataires techniques (art. 28 et 44 et suivants du RGPD).

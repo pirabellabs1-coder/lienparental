@@ -18,7 +18,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const locale = await getLocale()
   const p = (await guideAsync.parcours(sp.territoire, slug, locale)) ?? (await guideAsync.parcours(DEFAULT_TERRITOIRE, slug, locale))
   const t = await getTranslations('coach.guide.parcours')
-  return { title: p?.titre ?? t('metaTitle') }
+  return { title: p?.titre ?? t('metaTitle'), robots: { index: false, follow: false } }
 }
 
 export default async function GuideParcoursPage({ params, searchParams }: Props) {

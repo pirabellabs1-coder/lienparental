@@ -13,7 +13,7 @@ import { contentLangAttr } from '@/lib/contenus/locale'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('coach.guide')
-  return { title: t('title') }
+  return { title: t('title'), robots: { index: false, follow: false } }
 }
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> }

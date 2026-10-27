@@ -8,7 +8,7 @@ import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher'
 import { cn } from '@/lib/cn'
 
 // En-tête unique des pages publiques (accueil, blog, aide, pages légales, don, installation).
-// Hors de l'accueil, les ancres pointent vers les sections de l'accueil (/#tarifs…) ;
+// « Guide parental » mène au Guide public (/guide). Hors de l'accueil, les ancres pointent vers les sections de l'accueil (/#tarifs…) ;
 // « FAQ » mène alors au centre d'aide complet (/aide).
 
 type NavKey = 'home' | 'features' | 'guide' | 'pricing' | 'testimonials' | 'faq' | 'blog'
@@ -19,7 +19,7 @@ function navLinks(pathname: string): NavLink[] {
   return [
     { href: '/', key: 'home', current: home },
     { href: '/#fonctionnalites', key: 'features', current: false },
-    { href: '/#guide', key: 'guide', current: false },
+    { href: '/guide', key: 'guide', current: pathname === '/guide' || pathname.startsWith('/guide/') },
     { href: '/#tarifs', key: 'pricing', current: false },
     { href: '/#temoignages', key: 'testimonials', current: false },
     { href: home ? '/#faq' : '/aide', key: 'faq', current: pathname.startsWith('/aide') },
@@ -36,6 +36,7 @@ export function SiteHeader() {
   const links = navLinks(pathname)
   const t = useTranslations('nav')
   const th = useTranslations('header')
+  const ta = useTranslations('a11y')
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const sentinel = useRef<HTMLSpanElement>(null)
@@ -85,11 +86,11 @@ export function SiteHeader() {
       <span ref={sentinel} aria-hidden className="pointer-events-none absolute left-0 top-0 h-px w-px" />
       <header className={cn('site-header sticky top-0 z-40 border-b bg-white transition-shadow duration-200', scrolled ? 'border-[#E5E7EB] shadow-[0_8px_24px_-20px_rgba(11,45,91,0.35)]' : 'border-transparent')}>
         <div className="relative z-10 mx-auto flex h-[72px] w-full max-w-[1280px] items-center justify-between gap-4 bg-white px-5 sm:px-8">
-          <Link href="/" aria-label="Lien Parental, accueil" className="shrink-0 rounded-lg">
+          <Link href="/" aria-label={ta('homeLink')} className="shrink-0 rounded-lg">
             <Logo size="sm" layout="inline" />
           </Link>
 
-          <nav aria-label="Navigation principale" className="hidden xl:block">
+          <nav aria-label={ta('mainNav')} className="hidden xl:block">
             <ul className="flex items-center">
               {links.map(l => (
                 <li key={l.key}>
@@ -128,7 +129,7 @@ export function SiteHeader() {
         </div>
 
         <div ref={menu} id="site-menu" hidden={!open} className="fixed inset-0 overflow-y-auto overscroll-contain bg-white px-6 pb-10 pt-24 xl:hidden">
-          <nav aria-label="Menu mobile" className="mx-auto flex max-w-md flex-col">
+          <nav aria-label={ta('mobileNav')} className="mx-auto flex max-w-md flex-col">
             <ul className="flex flex-col">
               {links.map((l, i) => (
                 <li key={l.key} className="site-rise border-b border-[#E5E7EB]" style={{ '--d': `${40 + i * 35}ms` } as React.CSSProperties}>

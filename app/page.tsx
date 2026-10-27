@@ -21,11 +21,14 @@ import { Testimonials } from '@/components/accueil/TestimonialsSection'
 import { PricingFaq } from '@/components/accueil/PricingFaq'
 import { FinalBanner } from '@/components/accueil/FinalBanner'
 import { DEMO_COOKIE } from '@/lib/demo-auth'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { graph, webApplication } from '@/lib/seo/jsonld'
+import { pageMetadata } from '@/lib/seo/metadata'
 
 // Page d'accueil : maquette du client (octobre 2026), fond clair et sections dans l'ordre de la maquette.
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('meta')
-  return { title: t('homeTitle'), description: t('homeDescription') }
+  return pageMetadata({ title: t('homeTitle'), description: t('homeDescription'), path: '/', locale: await getLocale(), absoluteTitle: true })
 }
 
 // Vidéo de présentation, une par langue (voix off seule, pas de sous-titres) :
@@ -56,11 +59,18 @@ async function hasSessionCookie(): Promise<boolean> {
 
 export default async function HomePage() {
   const signedIn = await hasSessionCookie()
-  const video = presentationVideo(await getLocale())
+  const locale = await getLocale()
+  const video = presentationVideo(locale)
+  const tm = await getTranslations('meta')
+  const ts = await getTranslations('seo')
   // Ordre de la maquette du client ; en-tête et pied de page partagés avec les autres pages publiques (SiteShell).
   return (
     <SiteShell className="home">
       <HomeStyles />
+      <JsonLd data={graph(webApplication({
+        description: tm('homeDescription'),
+        offerLabels: { free: ts('offers.free'), monthly: ts('offers.monthly'), yearly: ts('offers.yearly') },
+      }))} />
       <Hero />
       <div className="-mt-4 lg:-mt-6"><ModuleBar /></div>
       <Partners />

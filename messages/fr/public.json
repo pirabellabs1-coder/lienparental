@@ -835,6 +835,112 @@
       "endTitle": "Votre témoignage est sécurisé",
       "endText1": "Vous pouvez maintenant",
       "endText2": "fermer cette page."
+    },
+    "guide": {
+      "breadcrumbLabel": "Fil d'Ariane",
+      "breadcrumbHome": "Accueil",
+      "title": "Guide parental",
+      "audience": "Parents",
+      "ficheCount": "{count, plural, =0 {Aucune fiche} one {# fiche} other {# fiches}}",
+      "disclaimer": "Ce guide donne une information générale, vérifiée sur des sources officielles et datée sur chaque fiche. Il ne constitue pas un conseil juridique : les montants et délais peuvent évoluer, vérifiez auprès de l'organisme concerné avant toute démarche.",
+      "categories": {
+        "ecole": "École & scolarité",
+        "sante": "Santé",
+        "aides": "Aides & droits",
+        "argent": "Banque & argent",
+        "assurances": "Assurances",
+        "naissance": "Naissance & petite enfance",
+        "separation": "Séparation & parentalité",
+        "loisirs": "Loisirs & activités",
+        "logement": "Logement & vie quotidienne"
+      },
+      "landing": {
+        "metaTitle": "Guide parental : démarches et aides",
+        "metaDescription": "Démarches, aides et organismes pour les parents, expliqués pas à pas : documents à réunir, délais, où s'adresser. Fiches vérifiées sur des sources officielles.",
+        "title": "Les démarches des parents, expliquées simplement",
+        "lead": "École, santé, aides, naissance, séparation, logement : chaque fiche vous dit quoi faire, avec quels documents, dans quels délais et où vous adresser. Les informations sont vérifiées sur des sources officielles et datées.",
+        "openDefault": "Ouvrir le guide {territory}",
+        "territoriesTitle": "Choisissez votre territoire",
+        "available": "Disponible",
+        "soon": "Bientôt",
+        "pointsTitle": "Dans chaque fiche",
+        "point1Title": "Les étapes, dans l'ordre",
+        "point1Text": "Les documents à réunir, les délais à respecter et les étapes à suivre, sans jargon.",
+        "point2Title": "Des sources officielles",
+        "point2Text": "Chaque fiche cite ses sources et affiche sa date de vérification.",
+        "point3Title": "Adapté à votre territoire",
+        "point3Text": "Les organismes, adresses utiles et règles propres à votre territoire.",
+        "categoriesTitle": "Les thèmes du guide {territory}"
+      },
+      "territory": {
+        "metaTitle": "Guide parental {territory}",
+        "metaDescription": "{count} fiches pratiques pour les parents en {territory} : école, santé, aides de la Caf, naissance, séparation, logement. Étapes, documents et organismes, avec sources officielles.",
+        "title": "Guide parental : {territory}",
+        "lead": "{count, plural, one {# fiche pratique} other {# fiches pratiques}} pour les parents en {territory}, classées par thème, et des parcours pour enchaîner les démarches dans le bon ordre.",
+        "parcoursTitle": "Parcours pas à pas",
+        "parcoursHint": "Les démarches à enchaîner, dans l'ordre, pour les grands moments de la vie de famille.",
+        "stepsCount": "{count, plural, one {# étape} other {# étapes}}",
+        "categoriesTitle": "Thèmes",
+        "fichesTitle": "Toutes les fiches"
+      },
+      "category": {
+        "metaTitle": "{category} · Guide {territory}",
+        "metaDescription": "Guide parental {territory}, « {category} » : {count, plural, one {# fiche pratique} other {# fiches pratiques}} avec les étapes, les documents à réunir et les organismes à contacter, vérifiées sur des sources officielles.",
+        "title": "{category}",
+        "lead": "{count, plural, =0 {Aucune fiche pour le moment} one {# fiche pratique} other {# fiches pratiques}} pour les parents en {territory}.",
+        "empty": "Aucune fiche pour le moment dans cette catégorie.",
+        "others": "Autres thèmes"
+      },
+      "parcours": {
+        "eyebrow": "Parcours",
+        "stepsTitle": "{count, plural, one {# étape} other {# étapes}}",
+        "seeFiche": "Lire la fiche « {title} »"
+      },
+      "fiche": {
+        "verified": "Vérifié le <date></date>",
+        "untranslated": "Cette fiche n'est pas encore traduite : elle s'affiche en français.",
+        "inBrief": "En bref",
+        "briefDeadlines": "Délais",
+        "briefWhere": "Où",
+        "briefDocuments": "Pièces à fournir",
+        "documentsCount": "{count, plural, one {# document, voir la liste} other {# documents, voir la liste}}",
+        "whatFor": "À quoi ça sert ?",
+        "who": "Qui est concerné ?",
+        "deadlines": "Dates limites",
+        "steps": "Étapes",
+        "documents": "Documents à réunir",
+        "where": "Où s'adresser",
+        "officialSite": "Site officiel",
+        "officialSiteSr": " de {name} (nouvel onglet)",
+        "newTab": " (nouvel onglet)",
+        "links": "Liens utiles",
+        "goodToKnow": "À savoir",
+        "sources": "Sources officielles",
+        "checkedBySource": ", consultée le {date}",
+        "asideLabel": "Suivre la démarche et fiches liées",
+        "inParcours": "Dans les parcours",
+        "related": "Fiches liées",
+        "allInCategory": "Toutes les fiches « {category} »"
+      },
+      "cta": {
+        "login": "Se connecter",
+        "free": "Gratuit, sans carte bancaire.",
+        "fiche": {
+          "title": "Suivez cette démarche dans Lien Parental",
+          "text": "Rappels, documents rangés dans le coffre-fort, dates dans le calendrier et suivi de votre avancement.",
+          "signup": "Créer un compte gratuit pour suivre cette démarche"
+        },
+        "parcours": {
+          "title": "Suivez ce parcours étape par étape",
+          "text": "Cochez chaque étape, gardez vos documents et recevez des rappels au bon moment.",
+          "signup": "Créer un compte gratuit pour suivre ce parcours"
+        },
+        "generic": {
+          "title": "Passez de la lecture à l'action",
+          "text": "Avec un compte Lien Parental, ajoutez un rappel, un document ou une date à partir de chaque fiche, et suivez vos démarches.",
+          "signup": "Créer un compte gratuit"
+        }
+      }
     }
   }
 }

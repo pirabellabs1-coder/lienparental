@@ -1,7 +1,9 @@
+import Image from 'next/image'
 import { Fragment, type ReactNode } from 'react'
 import { useTranslations } from 'next-intl'
 import { parseMarkdown, type Block, type Inline } from '@/lib/blog/markdown'
 import { cn } from '@/lib/cn'
+import { isOptimizable } from './image'
 
 /**
  * Rendu Markdown sûr : l'arbre produit par lib/blog/markdown est converti en éléments
@@ -46,8 +48,16 @@ function renderBlock(b: Block, i: number, nt: string): ReactNode {
     case 'img':
       return (
         <figure key={i} className="mt-6">
-          {/* eslint-disable-next-line @next/next/no-img-element -- images d'article : chemin interne ou bucket public, dimensions inconnues */}
-          <img src={b.src} alt={b.alt} loading="lazy" decoding="async" className="w-full rounded-2xl border border-[#E5E7EB] object-cover" />
+          {/* Dimensions réelles inconnues : 16:9 réservé (pas de saut de mise en page), hauteur ajustée au chargement. */}
+          <Image
+            src={b.src}
+            alt={b.alt}
+            width={1200}
+            height={675}
+            sizes="(min-width: 768px) 768px, calc(100vw - 40px)"
+            unoptimized={!isOptimizable(b.src)}
+            className="h-auto w-full rounded-2xl border border-[#E5E7EB] object-cover"
+          />
           {b.alt && <figcaption className="mt-2 text-center text-[13px] text-night-600">{b.alt}</figcaption>}
         </figure>
       )

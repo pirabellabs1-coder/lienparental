@@ -57,7 +57,7 @@ export async function Guide() {
             ))}
           </ul>
 
-          <Link href="/app/guide" className={cn(BTN_PRIMARY, 'mt-10')}>
+          <Link href="/guide" className={cn(BTN_PRIMARY, 'mt-10')}>
             {t('cta')}<ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>

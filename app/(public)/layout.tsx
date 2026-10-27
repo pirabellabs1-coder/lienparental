@@ -1,9 +1,15 @@
+import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Lock, Globe2, BadgeCheck } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { Logo } from '@/components/brand/Logo'
+import { NOINDEX_FOLLOW } from '@/lib/seo/metadata'
+
+// Étapes d'onboarding, mot de passe oublié / nouveau : hors index. Connexion et inscription
+// redéfinissent leurs metadata (indexables) dans leur propre layout.
+export const metadata: Metadata = { robots: NOINDEX_FOLLOW }
 
 /**
  * Parcours publics (connexion, inscription, onboarding, mot de passe oublié).

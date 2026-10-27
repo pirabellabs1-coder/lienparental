@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { cat } = await params
   const t = await getTranslations('coach.guide')
   const category = getCategory(cat)
-  return { title: category ? t(`categories.${category.key}`) : t('title') }
+  return { title: category ? t(`categories.${category.key}`) : t('title'), robots: { index: false, follow: false } }
 }
 
 export default async function GuideCategoryPage({ params, searchParams }: Props) {

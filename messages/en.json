@@ -500,10 +500,10 @@
   },
   "meta": {
     "rootTitle": "Lien Parental: inform, support and protect the parent-child bond",
-    "rootDescription": "Lien Parental supports separated parents: encrypted vault, journal, calendar, timestamped testimonies and an AI parenting coach. Secure hosting in Europe.",
+    "rootDescription": "Lien Parental supports separated parents: shared calendar, encrypted vault, journal, testimonies and an AI parenting coach. Your data is hosted in Europe.",
     "ogDescription": "Communicate calmly, get organized easily and find everything about your child in one place.",
     "homeTitle": "Lien Parental: everything for your child, finally in one place",
-    "homeDescription": "The app for separated parents: shared calendar, expenses and payments, children’s health, secure vault, testimonies, court file, AI parenting coach and Parenting guide (French Guiana). Free to start, installable as a PWA.",
+    "homeDescription": "The app for separated parents: shared calendar, expenses, children’s health, vault, court file, AI Coach and Parenting guide. Free to start, works on any phone.",
     "appTitle": "App"
   },
   "publicAside": {
@@ -513,5 +513,93 @@
     "encrypted": "Encrypted data",
     "europe": "Hosted in Europe",
     "noCommitment": "No commitment"
+  },
+  "seo": {
+    "ogImageAlt": "Lien Parental, the app for separated parents",
+    "ogTagline": "The app for separated parents",
+    "ogSub": "Organize, communicate, keep records and understand your procedures, in the child’s best interest.",
+    "orgDescription": "Lien Parental is an app for separated parents: organize the child’s daily life, communicate, keep documents and understand administrative procedures.",
+    "offers": {
+      "free": "Free",
+      "monthly": "monthly",
+      "yearly": "yearly"
+    },
+    "blogName": "The Lien Parental blog",
+    "blogPageTitle": "{title}, page {page}",
+    "pages": {
+      "aide": {
+        "description": "Lien Parental help center: answers to frequently asked questions about your account, subscription, the vault, data security and installing the app on a phone."
+      },
+      "blog": {
+        "description": "Practical advice for separated parents: co-parenting, procedures, organizing daily life and the child’s well-being, written by the Lien Parental team for you."
+      },
+      "mentions": {
+        "description": "Lien Parental legal notice: publisher of the service (Pirabel Labs), director of publication, hosting provider, intellectual property and contact address."
+      },
+      "cgu": {
+        "description": "Lien Parental terms of use: purpose of the service, access and account, user obligations, suspension of access and the limits of liability of the publisher."
+      },
+      "privacy": {
+        "description": "Lien Parental privacy policy: data collected, hosting in the EU, subprocessors, encryption, retention periods and your rights under the GDPR, explained simply."
+      },
+      "don": {
+        "description": "Support Lien Parental: your donations help us build new free tools that support families and protect the bond between parents and their children every day."
+      },
+      "installer": {
+        "description": "Install Lien Parental on the home screen of your iPhone or Android phone in a few seconds, without going through an app store. Free to start, works offline."
+      },
+      "connexion": {
+        "title": "Log in",
+        "description": "Log in to your Lien Parental space to find your shared calendar, journal, secure vault and all the documents concerning your child, in one single place."
+      },
+      "inscription": {
+        "title": "Create an account",
+        "description": "Create your free Lien Parental account: shared calendar, journal, secure vault and Parenting guide for separated parents, set up in just a few minutes."
+      }
+    }
+  },
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "homeLink": "Lien Parental, home",
+    "mainNav": "Main navigation",
+    "mobileNav": "Mobile menu"
+  },
+  "notFound": {
+    "metaTitle": "Page not found",
+    "kicker": "Error 404",
+    "title": "This page cannot be found",
+    "text": "The link may be incomplete, or the page may have moved. Here are a few ways to find your way back.",
+    "home": "Back to home",
+    "help": "Help center",
+    "guide": "Parenting guide",
+    "blog": "Blog"
+  },
+  "about": {
+    "metaTitle": "About",
+    "metaDescription": "Who publishes Lien Parental, who the app is built for, how the Parenting guide fact sheets are checked and how to contact us: everything about the project.",
+    "kicker": "About",
+    "title": "Lien Parental, protecting the parent-child bond",
+    "lead": "Lien Parental is an app for separated parents: organize the child’s daily life, communicate calmly, keep important documents and understand administrative procedures.",
+    "whoTitle": "Who we are",
+    "whoBody": "Lien Parental is a service published by <b>Pirabel Labs</b>. Full legal information (publisher, hosting provider, director of publication) is available in the <link>legal notice</link>.",
+    "whereTitle": "Where",
+    "whereBody": "The Parenting guide is designed first for “{territory}”, with {count, plural, one {# fact sheet} other {# fact sheets}} and step-by-step paths. The app itself works everywhere, on the web and as an app installed on your phone.",
+    "forTitle": "Who it is for",
+    "for1": "Separated parents, or parents going through a separation, who organize their child’s life between two homes.",
+    "for2": "Families looking for reliable information about their procedures: health, school, benefits, family justice.",
+    "for3": "Parents who need to keep a clear, dated record of exchanges and documents.",
+    "methodTitle": "How we check the guide’s fact sheets",
+    "method1": "Each fact sheet cites its official sources (Service-Public.fr, Caf, local administrations and organizations), with a link to each one.",
+    "method2": "Each fact sheet shows the date it was last checked. The most recent review is dated {date}.",
+    "method3": "Before publication, each fact sheet is checked automatically: complete structure, sources present, valid links between fact sheets and paths.",
+    "method4": "Local information we could not confirm is never presented as established fact.",
+    "legalTitle": "No legal advice",
+    "legalBody": "Lien Parental informs and helps you get organized, but it does not replace a lawyer or personalized legal advice. For a specific situation, contact a lawyer, a family mediator or a free legal advice point (point-justice).",
+    "dataTitle": "Your data",
+    "dataBody": "Data is hosted in the European Union and encrypted in transit and at rest. Details are available in the <link>privacy policy</link>.",
+    "contactTitle": "Contact us",
+    "contactGeneral": "General questions",
+    "contactSupport": "Support",
+    "contactHelp": "You can also visit the <link>help center</link>."
   }
 }

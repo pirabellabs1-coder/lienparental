@@ -6,11 +6,10 @@ import { cn } from '@/lib/cn'
 import { TERRITORIES, TerritoryShape } from './territories'
 
 // Pied de page unique des pages publiques.
-// « À propos » pointe vers /don, seule page publique qui présente l'association à ce jour.
 const LINKS: { key: string; href: string }[] = [
-  { key: 'about', href: '/don' },
+  { key: 'about', href: '/a-propos' },
   { key: 'features', href: '/#fonctionnalites' },
-  { key: 'guide', href: '/#guide' },
+  { key: 'guide', href: '/guide' },
   { key: 'pricing', href: '/#tarifs' },
   { key: 'faq', href: '/aide' },
   { key: 'contact', href: `mailto:${SUPPORT_EMAIL}` },
@@ -23,11 +22,12 @@ const LINKS: { key: string; href: string }[] = [
 
 export async function SiteFooter() {
   const t = await getTranslations('footer')
+  const ta = await getTranslations('a11y')
   return (
     <footer className="site-footer border-t border-[#E5E7EB] bg-white text-night-900">
       <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1fr_2fr] lg:gap-16 [&>*]:min-w-0">
         <div>
-          <Link href="/" aria-label="Lien Parental, accueil" className="inline-flex rounded-lg">
+          <Link href="/" aria-label={ta('homeLink')} className="inline-flex rounded-lg">
             <Logo size="md" tagline />
           </Link>
           <p className="mt-4 max-w-[36ch] text-[14px] leading-relaxed text-night-700">

@@ -5,6 +5,8 @@ import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import './globals.css'
 import { DisplayPrefs } from '@/components/a11y/DisplayPrefs'
 import { isLocale, LOCALE_META } from '@/lib/i18n/config'
+import { SITE, SITE_NAME } from '@/lib/seo/site'
+import { defaultOgImage, ogLocale } from '@/lib/seo/metadata'
 
 // Typographies du guide d'identité : Montserrat (titres et textes), Allura (signature « Parental »).
 // Auto-hébergées par next/font : pas d'appel à Google au chargement, pas de saut de mise en page.
@@ -14,22 +16,30 @@ const allura = Allura({ subsets: ['latin'], weight: '400', variable: '--font-all
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('meta')
   const locale = await getLocale()
+  const og = t('ogDescription')
   return {
-    title: { default: t('rootTitle'), template: '%s · Lien Parental' },
+    // Origine absolue : tous les canonical, og:url et og:image relatifs en dérivent.
+    metadataBase: new URL(SITE),
+    title: { default: t('rootTitle'), template: `%s · ${SITE_NAME}` },
     description: t('rootDescription'),
     manifest: '/manifest.json',
-    applicationName: 'Lien Parental',
-    appleWebApp: { capable: true, title: 'Lien Parental', statusBarStyle: 'black-translucent' },
+    applicationName: SITE_NAME,
+    appleWebApp: { capable: true, title: SITE_NAME, statusBarStyle: 'black-translucent' },
     icons: {
       icon: [{ url: '/icons/favicon.svg', type: 'image/svg+xml' }, { url: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' }, { url: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' }],
       apple: [{ url: '/icons/apple-touch-icon.png', sizes: '180x180' }],
     },
+    // Valeurs par défaut ; chaque page publique fournit les siennes (lib/seo/metadata.ts).
     openGraph: {
-      title: 'Lien Parental',
-      description: t('ogDescription'),
+      title: SITE_NAME,
+      description: og,
       type: 'website',
-      locale: locale === 'en' ? 'en_US' : locale === 'pt' ? 'pt_BR' : 'fr_FR',
+      siteName: SITE_NAME,
+      url: SITE,
+      locale: ogLocale(locale),
+      images: [defaultOgImage((await getTranslations('seo'))('ogImageAlt'))],
     },
+    twitter: { card: 'summary_large_image', title: SITE_NAME, description: og },
   }
 }
 

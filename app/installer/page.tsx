@@ -1,14 +1,16 @@
 import type { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { SiteShell } from '@/components/site/SiteShell'
 import { MobileInstall } from '@/components/marketing/MobileInstall'
 import { InstallQr } from '@/components/install/InstallQr'
 import { getCurrentUser } from '@/lib/auth/session'
 import { appUrl } from '@/lib/auth/redirect'
+import { pageMetadata } from '@/lib/seo/metadata'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.install')
-  return { title: t('metaTitle'), description: t('metaDescription') }
+  const ts = await getTranslations('seo.pages.installer')
+  return pageMetadata({ title: t('metaTitle'), description: ts('description'), path: '/installer', locale: await getLocale() })
 }
 
 export default async function InstallerPage() {

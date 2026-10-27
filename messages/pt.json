@@ -500,10 +500,10 @@
   },
   "meta": {
     "rootTitle": "Lien Parental: informar, apoiar e preservar o vínculo entre pais e filhos",
-    "rootDescription": "O Lien Parental apoia pais separados: cofre criptografado, diário, calendário, depoimentos com data e hora e coach parental com IA. Hospedagem segura na Europa.",
+    "rootDescription": "O Lien Parental apoia pais separados: agenda compartilhada, cofre criptografado, diário, depoimentos e coach parental com IA. Dados hospedados na Europa.",
     "ogDescription": "Comunique-se com tranquilidade, organize-se com facilidade e encontre tudo sobre o seu filho.",
     "homeTitle": "Lien Parental: tudo para o seu filho, enfim num só lugar",
-    "homeDescription": "O aplicativo dos pais separados: agenda compartilhada, despesas e pagamentos, saúde dos filhos, cofre seguro, depoimentos, processo judicial, coach parental com IA e Guia parental (Guiana Francesa). Gratuito para começar, instalável como PWA.",
+    "homeDescription": "O app dos pais separados: agenda compartilhada, despesas, saúde dos filhos, cofre, processo judicial, Coach com IA e Guia parental. Gratuito para começar.",
     "appTitle": "Aplicativo"
   },
   "publicAside": {
@@ -513,5 +513,93 @@
     "encrypted": "Dados criptografados",
     "europe": "Hospedado na Europa",
     "noCommitment": "Sem fidelidade"
+  },
+  "seo": {
+    "ogImageAlt": "Lien Parental, o aplicativo dos pais separados",
+    "ogTagline": "O aplicativo dos pais separados",
+    "ogSub": "Organizar, comunicar, guardar registros e entender seus trâmites, no interesse da criança.",
+    "orgDescription": "O Lien Parental é um aplicativo para pais separados: organizar o dia a dia da criança, comunicar-se, guardar documentos e entender os trâmites.",
+    "offers": {
+      "free": "Gratuito",
+      "monthly": "mensal",
+      "yearly": "anual"
+    },
+    "blogName": "O blog do Lien Parental",
+    "blogPageTitle": "{title}, página {page}",
+    "pages": {
+      "aide": {
+        "description": "Central de ajuda do Lien Parental: respostas às perguntas frequentes sobre a conta, a assinatura, o cofre, a segurança dos dados e a instalação do aplicativo."
+      },
+      "blog": {
+        "description": "Dicas práticas para pais separados: coparentalidade, trâmites, organização do dia a dia e bem-estar da criança, escritas pela equipe do Lien Parental."
+      },
+      "mentions": {
+        "description": "Informações legais do Lien Parental: editor do serviço (Pirabel Labs), diretor de publicação, hospedagem, propriedade intelectual e endereço de contato."
+      },
+      "cgu": {
+        "description": "Termos de uso do Lien Parental: objeto do serviço, acesso e conta, obrigações dos usuários, suspensão do acesso e limites de responsabilidade do editor."
+      },
+      "privacy": {
+        "description": "Política de privacidade do Lien Parental: dados coletados, hospedagem na UE, suboperadores, criptografia, prazos de conservação e seus direitos pelo RGPD."
+      },
+      "don": {
+        "description": "Apoie o Lien Parental: suas doações nos ajudam a criar novas ferramentas gratuitas para acompanhar as famílias e preservar o vínculo entre pais e filhos."
+      },
+      "installer": {
+        "description": "Instale o Lien Parental na tela inicial do seu iPhone ou celular Android em poucos segundos, sem passar por uma loja de aplicativos. Gratuito para começar."
+      },
+      "connexion": {
+        "title": "Entrar",
+        "description": "Entre no seu espaço Lien Parental para encontrar a agenda compartilhada, o diário, o cofre seguro e todos os documentos relacionados ao seu filho."
+      },
+      "inscription": {
+        "title": "Criar uma conta",
+        "description": "Crie gratuitamente sua conta Lien Parental: agenda compartilhada, diário, cofre seguro e Guia parental para pais separados, pronta em poucos minutos."
+      }
+    }
+  },
+  "a11y": {
+    "skipToContent": "Ir para o conteúdo",
+    "homeLink": "Lien Parental, início",
+    "mainNav": "Navegação principal",
+    "mobileNav": "Menu móvel"
+  },
+  "notFound": {
+    "metaTitle": "Página não encontrada",
+    "kicker": "Erro 404",
+    "title": "Esta página não foi encontrada",
+    "text": "O link pode estar incompleto, ou a página pode ter sido movida. Aqui estão algumas pistas para encontrar o caminho.",
+    "home": "Voltar ao início",
+    "help": "Central de ajuda",
+    "guide": "Guia parental",
+    "blog": "Blog"
+  },
+  "about": {
+    "metaTitle": "Sobre",
+    "metaDescription": "Quem publica o Lien Parental, para quem o aplicativo foi criado, como as fichas do Guia parental são verificadas e como falar conosco: tudo sobre o projeto.",
+    "kicker": "Sobre",
+    "title": "Lien Parental, para preservar o vínculo entre pais e filhos",
+    "lead": "O Lien Parental é um aplicativo para pais separados: organizar o dia a dia da criança, comunicar-se com tranquilidade, guardar documentos importantes e entender os trâmites.",
+    "whoTitle": "Quem somos",
+    "whoBody": "O Lien Parental é um serviço publicado pela <b>Pirabel Labs</b>. Os dados legais completos (editor, hospedagem, diretor de publicação) estão nas <link>informações legais</link>.",
+    "whereTitle": "Onde",
+    "whereBody": "O Guia parental foi pensado primeiro para o território “{territory}”, com {count, plural, one {# ficha prática} other {# fichas práticas}} e percursos passo a passo. O aplicativo funciona em qualquer lugar, na web e instalado no celular.",
+    "forTitle": "Para quem",
+    "for1": "Pais separados ou em processo de separação, que organizam a vida do filho entre dois lares.",
+    "for2": "Famílias que procuram informações confiáveis sobre seus trâmites: saúde, escola, auxílios, justiça de família.",
+    "for3": "Pais que precisam manter um registro claro e datado das trocas de mensagens e dos documentos.",
+    "methodTitle": "Como verificamos as fichas do Guia",
+    "method1": "Cada ficha cita suas fontes oficiais (Service-Public.fr, Caf, administrações e órgãos do território), com um link para cada uma.",
+    "method2": "Cada ficha mostra a data da última verificação. A revisão mais recente é de {date}.",
+    "method3": "Antes da publicação, cada ficha é verificada automaticamente: estrutura completa, fontes presentes, links válidos entre fichas e percursos.",
+    "method4": "Uma informação local que não pudemos confirmar nunca é apresentada como certa.",
+    "legalTitle": "Sem aconselhamento jurídico",
+    "legalBody": "O Lien Parental informa e ajuda a se organizar, mas não substitui um advogado nem um aconselhamento jurídico personalizado. Para uma situação específica, procure um advogado, um mediador familiar ou um ponto de acesso à justiça (point-justice).",
+    "dataTitle": "Seus dados",
+    "dataBody": "Os dados são hospedados na União Europeia e criptografados em trânsito e em repouso. Os detalhes estão na <link>política de privacidade</link>.",
+    "contactTitle": "Fale conosco",
+    "contactGeneral": "Perguntas gerais",
+    "contactSupport": "Suporte",
+    "contactHelp": "Consulte também a <link>central de ajuda</link>."
   }
 }

@@ -1,12 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Heart, ArrowLeft } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { SiteShell } from '@/components/site/SiteShell'
+import { pageMetadata } from '@/lib/seo/metadata'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.donate')
-  return { title: t('metaTitle') }
+  const ts = await getTranslations('seo.pages.don')
+  return pageMetadata({ title: t('metaTitle'), description: ts('description'), path: '/don', locale: await getLocale() })
 }
 
 // La plateforme de don (Stripe, HelloAsso…) reste à choisir par le client (CDC §13 Q7).

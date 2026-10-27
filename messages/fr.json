@@ -500,10 +500,10 @@
   },
   "meta": {
     "rootTitle": "Lien Parental : informer, accompagner, préserver le lien parent-enfant",
-    "rootDescription": "Lien Parental accompagne les parents séparés : coffre-fort chiffré, journal, calendrier, témoignages horodatés et coach parental IA. Hébergement sécurisé en Europe.",
+    "rootDescription": "Lien Parental accompagne les parents séparés : agenda partagé, coffre-fort chiffré, journal, témoignages et Coach parental IA. Données hébergées en Europe.",
     "ogDescription": "Communiquer sereinement, s’organiser facilement, retrouver tout ce qui concerne votre enfant.",
     "homeTitle": "Lien Parental : tout pour votre enfant, enfin au même endroit",
-    "homeDescription": "L’application des parents séparés : agenda partagé, dépenses et paiements, santé des enfants, coffre-fort sécurisé, témoignages, dossier JAF, Coach parental IA et Guide parental (Guyane). Gratuit pour commencer, installable en PWA.",
+    "homeDescription": "L’application des parents séparés : agenda partagé, dépenses, santé des enfants, coffre-fort, dossier JAF, Coach IA et Guide parental. Gratuit pour commencer.",
     "appTitle": "Application"
   },
   "publicAside": {
@@ -513,5 +513,93 @@
     "encrypted": "Données chiffrées",
     "europe": "Hébergé en Europe",
     "noCommitment": "Sans engagement"
+  },
+  "seo": {
+    "ogImageAlt": "Lien Parental, l’application des parents séparés",
+    "ogTagline": "L’application des parents séparés",
+    "ogSub": "Organiser, communiquer, conserver et comprendre ses démarches, dans l’intérêt de l’enfant.",
+    "orgDescription": "Lien Parental est une application pour les parents séparés : organiser le quotidien de l’enfant, communiquer, conserver les documents et comprendre ses démarches.",
+    "offers": {
+      "free": "Gratuit",
+      "monthly": "mensuel",
+      "yearly": "annuel"
+    },
+    "blogName": "Le blog Lien Parental",
+    "blogPageTitle": "{title}, page {page}",
+    "pages": {
+      "aide": {
+        "description": "Centre d’aide Lien Parental : réponses aux questions fréquentes sur le compte, l’abonnement, le coffre-fort, la sécurité des données et l’installation de l’app."
+      },
+      "blog": {
+        "description": "Conseils pratiques pour les parents séparés : coparentalité, démarches, organisation du quotidien et bien-être de l’enfant, par l’équipe de Lien Parental."
+      },
+      "mentions": {
+        "description": "Mentions légales de Lien Parental : éditeur du service (Pirabel Labs), directeur de la publication, hébergeur, propriété intellectuelle et adresse de contact."
+      },
+      "cgu": {
+        "description": "Conditions générales d’utilisation de Lien Parental : objet du service, accès et compte, obligations des utilisateurs, suspension et limites de responsabilité."
+      },
+      "privacy": {
+        "description": "Politique de confidentialité de Lien Parental : données collectées, hébergement dans l’UE, sous-traitants, chiffrement, durées de conservation et droits RGPD."
+      },
+      "don": {
+        "description": "Soutenez Lien Parental : vos dons nous aident à créer de nouveaux outils gratuits pour accompagner les familles et préserver le lien entre parent et enfant."
+      },
+      "installer": {
+        "description": "Installez Lien Parental sur l’écran d’accueil de votre iPhone ou de votre téléphone Android en quelques secondes, sans passer par un magasin d’applications."
+      },
+      "connexion": {
+        "title": "Se connecter",
+        "description": "Connectez-vous à votre espace Lien Parental pour retrouver l’agenda partagé, le journal, le coffre-fort et tous les documents qui concernent votre enfant."
+      },
+      "inscription": {
+        "title": "Créer un compte",
+        "description": "Créez gratuitement votre compte Lien Parental : agenda partagé, journal, coffre-fort sécurisé et Guide parental pour les parents séparés, en quelques minutes."
+      }
+    }
+  },
+  "a11y": {
+    "skipToContent": "Aller au contenu",
+    "homeLink": "Lien Parental, accueil",
+    "mainNav": "Navigation principale",
+    "mobileNav": "Menu mobile"
+  },
+  "notFound": {
+    "metaTitle": "Page introuvable",
+    "kicker": "Erreur 404",
+    "title": "Cette page est introuvable",
+    "text": "Le lien est peut-être incomplet, ou la page a été déplacée. Voici quelques pistes pour retrouver votre chemin.",
+    "home": "Retour à l’accueil",
+    "help": "Centre d’aide",
+    "guide": "Guide parental",
+    "blog": "Blog"
+  },
+  "about": {
+    "metaTitle": "À propos",
+    "metaDescription": "Qui édite Lien Parental, pour qui l’application est conçue, comment les fiches du Guide parental sont vérifiées et comment nous contacter : tout sur le projet.",
+    "kicker": "À propos",
+    "title": "Lien Parental, pour préserver le lien parent-enfant",
+    "lead": "Lien Parental est une application pour les parents séparés : organiser le quotidien de l’enfant, communiquer sereinement, conserver les documents importants et comprendre ses démarches.",
+    "whoTitle": "Qui sommes-nous",
+    "whoBody": "Lien Parental est un service édité par <b>Pirabel Labs</b>. Les informations légales complètes (éditeur, hébergeur, directeur de la publication) figurent dans les <link>mentions légales</link>.",
+    "whereTitle": "Où",
+    "whereBody": "Le Guide parental est d’abord conçu pour le territoire « {territory} », avec {count, plural, one {# fiche pratique} other {# fiches pratiques}} et des parcours pas à pas. L’application est accessible partout, sur le web et en application installable sur téléphone.",
+    "forTitle": "Pour qui",
+    "for1": "Les parents séparés ou en cours de séparation, qui organisent la vie de leur enfant entre deux foyers.",
+    "for2": "Les familles qui cherchent une information fiable sur leurs démarches : santé, école, aides, justice familiale.",
+    "for3": "Les parents qui ont besoin de garder une trace claire et datée des échanges et des documents.",
+    "methodTitle": "Comment nous vérifions les fiches du Guide",
+    "method1": "Chaque fiche cite ses sources officielles (Service-Public.fr, Caf, administrations et organismes du territoire), avec un lien vers chacune.",
+    "method2": "Chaque fiche affiche sa date de dernière vérification. La plus récente revue date du {date}.",
+    "method3": "Avant publication, chaque fiche est contrôlée automatiquement : structure complète, sources présentes, liens entre fiches et parcours valides.",
+    "method4": "Une information locale que nous n’avons pas pu confirmer n’est jamais présentée comme acquise.",
+    "legalTitle": "Pas de conseil juridique",
+    "legalBody": "Lien Parental informe et aide à s’organiser, mais ne remplace pas un avocat ni un conseil juridique personnalisé. Pour une situation particulière, rapprochez-vous d’un avocat, d’un médiateur familial ou d’un point-justice.",
+    "dataTitle": "Vos données",
+    "dataBody": "Les données sont hébergées dans l’Union européenne et chiffrées en transit et au repos. Le détail figure dans la <link>politique de confidentialité</link>.",
+    "contactTitle": "Nous contacter",
+    "contactGeneral": "Questions générales",
+    "contactSupport": "Assistance",
+    "contactHelp": "Consultez aussi le <link>centre d’aide</link>."
   }
 }

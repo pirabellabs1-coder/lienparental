@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 import { ArrowLeft, CalendarDays, Clock3 } from 'lucide-react'
@@ -7,6 +8,7 @@ import { contentLangAttr, type ContentLocale } from '@/lib/contenus/locale'
 import { readingMinutes, tableOfContents } from '@/lib/blog/markdown'
 import { Markdown } from './Markdown'
 import { PostCard } from './PostCard'
+import { isOptimizable } from './image'
 
 export const formatArticleDate = (iso: string, locale: string) =>
   new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/Cayenne' }).format(new Date(iso))
@@ -52,9 +54,17 @@ export function ArticleView({
       </header>
 
       {post.couverture && (
-        <div className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl border border-[#E5E7EB] bg-night-50">
-          {/* eslint-disable-next-line @next/next/no-img-element -- image de couverture (chemin interne ou bucket public) */}
-          <img src={post.couverture} alt={post.couvertureAlt} lang={cl} className="aspect-[16/8] w-full object-cover object-[center_30%]" fetchPriority="high" />
+        <div className="relative mx-auto mt-8 aspect-[16/8] max-w-4xl overflow-hidden rounded-3xl border border-[#E5E7EB] bg-night-50">
+          <Image
+            src={post.couverture}
+            alt={post.couvertureAlt}
+            lang={cl}
+            fill
+            priority
+            sizes="(min-width: 960px) 896px, calc(100vw - 40px)"
+            unoptimized={!isOptimizable(post.couverture)}
+            className="object-cover object-[center_30%]"
+          />
         </div>
       )}
 

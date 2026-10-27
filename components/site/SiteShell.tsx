@@ -1,8 +1,12 @@
+import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { graph, organization, website } from '@/lib/seo/jsonld'
 import { SiteFooter } from './SiteFooter'
 import { SiteHeader } from './SiteHeader'
 
-// Gabarit des pages publiques : lien d'évitement, en-tête et pied de page partagés, <main id="contenu">.
+// Gabarit des pages publiques : lien d'évitement, en-tête et pied de page partagés, <main id="contenu">,
+// et graphe schema.org Organization + WebSite (référencé par @id depuis les autres données structurées).
 // Animations sobres (transform / opacity uniquement), coupées en prefers-reduced-motion.
 const CSS = `
 @keyframes site-rise{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:none}}
@@ -25,14 +29,18 @@ type Props = {
 
 export function SiteShell({ children, className, mainClassName, ownMain = false }: Props) {
   const Main = ownMain ? 'div' : 'main'
+  const t = useTranslations('a11y')
+  const ts = useTranslations('seo')
+  const locale = useLocale()
   return (
     <div className={cn('site flex min-h-[100dvh] flex-col overflow-x-clip bg-white font-sans text-night-900 antialiased', className)}>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
+      <JsonLd data={graph(organization({ description: ts('orgDescription') }), website({ description: ts('orgDescription'), locale }))} />
       <a
         href="#contenu"
         className="fixed left-4 top-4 z-50 -translate-y-24 rounded-full bg-white px-5 py-3 text-[15px] font-semibold text-night-900 shadow-lg ring-1 ring-[#E5E7EB] transition-transform focus-visible:translate-y-0"
       >
-        Aller au contenu
+        {t('skipToContent')}
       </a>
       <SiteHeader />
       <Main id="contenu" tabIndex={-1} className={cn('flex-1 outline-none', mainClassName)}>

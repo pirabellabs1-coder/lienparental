@@ -28,7 +28,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const locale = await getLocale()
   const f = (await guideAsync.fiche(sp.territoire, slug, locale)) ?? (await guideAsync.ficheParDefaut(slug, locale))
   const t = await getTranslations('coach.guide')
-  return { title: f?.titre ?? t('title'), description: f?.resume }
+  return { title: f?.titre ?? t('title'), description: f?.resume, robots: { index: false, follow: false } }
 }
 
 /** `lang` : langue du CONTENU (fiche non traduite) ; le titre de section suit l'interface. */

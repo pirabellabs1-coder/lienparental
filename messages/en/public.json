@@ -835,6 +835,112 @@
       "endTitle": "Your testimony is secure",
       "endText1": "You can now",
       "endText2": "close this page."
+    },
+    "guide": {
+      "breadcrumbLabel": "Breadcrumb",
+      "breadcrumbHome": "Home",
+      "title": "Parenting guide",
+      "audience": "Parents",
+      "ficheCount": "{count, plural, =0 {No guides} one {# guide} other {# guides}}",
+      "disclaimer": "This guide provides general information, checked against official sources and dated on each page. It does not constitute legal advice: amounts and deadlines may change, so check with the organization concerned before taking any step.",
+      "categories": {
+        "ecole": "School & education",
+        "sante": "Health",
+        "aides": "Benefits & rights",
+        "argent": "Banking & money",
+        "assurances": "Insurance",
+        "naissance": "Birth & early childhood",
+        "separation": "Separation & parenting",
+        "loisirs": "Leisure & activities",
+        "logement": "Housing & daily life"
+      },
+      "landing": {
+        "metaTitle": "Parenting guide: paperwork and benefits",
+        "metaDescription": "Paperwork, benefits and offices for parents, explained step by step: documents to gather, deadlines, where to go. Guides checked against official sources.",
+        "title": "Parents’ paperwork, explained simply",
+        "lead": "School, health, benefits, birth, separation, housing: each guide tells you what to do, with which documents, by when and where to go. The information is checked against official sources and dated.",
+        "openDefault": "Open the {territory} guide",
+        "territoriesTitle": "Choose your territory",
+        "available": "Available",
+        "soon": "Coming soon",
+        "pointsTitle": "In every guide",
+        "point1Title": "Steps, in order",
+        "point1Text": "The documents to gather, the deadlines to meet and the steps to follow, without jargon.",
+        "point2Title": "Official sources",
+        "point2Text": "Every guide cites its sources and shows when it was last checked.",
+        "point3Title": "Tailored to your territory",
+        "point3Text": "The offices, useful addresses and rules specific to your territory.",
+        "categoriesTitle": "Topics in the {territory} guide"
+      },
+      "territory": {
+        "metaTitle": "Parenting guide: {territory}",
+        "metaDescription": "{count} practical guides for parents in {territory}: school, health, Caf benefits, birth, separation, housing. Steps, documents and offices, with official sources.",
+        "title": "Parenting guide: {territory}",
+        "lead": "{count, plural, one {# practical guide} other {# practical guides}} for parents in {territory}, sorted by topic, plus journeys to take the steps in the right order.",
+        "parcoursTitle": "Step-by-step journeys",
+        "parcoursHint": "The procedures to follow, in order, for the big moments of family life.",
+        "stepsCount": "{count, plural, one {# step} other {# steps}}",
+        "categoriesTitle": "Topics",
+        "fichesTitle": "All guides"
+      },
+      "category": {
+        "metaTitle": "{category} · {territory} guide",
+        "metaDescription": "{territory} parenting guide, “{category}”: {count, plural, one {# practical guide} other {# practical guides}} with the steps, the documents to gather and the offices to contact, checked against official sources.",
+        "title": "{category}",
+        "lead": "{count, plural, =0 {No guides yet} one {# practical guide} other {# practical guides}} for parents in {territory}.",
+        "empty": "No guides in this category yet.",
+        "others": "Other topics"
+      },
+      "parcours": {
+        "eyebrow": "Journey",
+        "stepsTitle": "{count, plural, one {# step} other {# steps}}",
+        "seeFiche": "Read “{title}”"
+      },
+      "fiche": {
+        "verified": "Checked on <date></date>",
+        "untranslated": "This guide has not been translated yet: it is shown in French.",
+        "inBrief": "At a glance",
+        "briefDeadlines": "Deadlines",
+        "briefWhere": "Where",
+        "briefDocuments": "Documents required",
+        "documentsCount": "{count, plural, one {# document, see the list} other {# documents, see the list}}",
+        "whatFor": "What is it for?",
+        "who": "Who is concerned?",
+        "deadlines": "Deadlines",
+        "steps": "Steps",
+        "documents": "Documents to gather",
+        "where": "Where to go",
+        "officialSite": "Official website",
+        "officialSiteSr": " of {name} (new tab)",
+        "newTab": " (new tab)",
+        "links": "Useful links",
+        "goodToKnow": "Good to know",
+        "sources": "Official sources",
+        "checkedBySource": ", consulted on {date}",
+        "asideLabel": "Follow this procedure and related guides",
+        "inParcours": "In these journeys",
+        "related": "Related guides",
+        "allInCategory": "All “{category}” guides"
+      },
+      "cta": {
+        "login": "Log in",
+        "free": "Free, no credit card required.",
+        "fiche": {
+          "title": "Track this procedure in Lien Parental",
+          "text": "Reminders, documents stored in the Vault, dates in the calendar and your progress, all in one place.",
+          "signup": "Create a free account to track this procedure"
+        },
+        "parcours": {
+          "title": "Follow this journey step by step",
+          "text": "Check off each step, keep your documents and get reminders at the right time.",
+          "signup": "Create a free account to follow this journey"
+        },
+        "generic": {
+          "title": "From reading to doing",
+          "text": "With a Lien Parental account, add a reminder, a document or a date from any guide, and track your procedures.",
+          "signup": "Create a free account"
+        }
+      }
     }
   }
 }
