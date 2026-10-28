@@ -21,12 +21,14 @@ export type AccountModerationProps = {
   details?: string | null
   /** Fin de suspension (ISO). */
   until?: string | null
+  /** Fuseau du destinataire (preferences.ui.fuseau). Absent : DEFAULT_TZ. */
+  tz?: string
 }
 
-export function moderationDate(iso: string, locale: Locale): string {
+export function moderationDate(iso: string, locale: Locale, tz: string = DEFAULT_TZ): string {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return iso
-  return new Intl.DateTimeFormat(dateLocale(locale), { dateStyle: 'long', timeStyle: 'short', timeZone: DEFAULT_TZ }).format(d)
+  return new Intl.DateTimeFormat(dateLocale(locale), { dateStyle: 'long', timeStyle: 'short', timeZone: tz }).format(d)
 }
 
 /** Lien vers les conditions d'utilisation publiques, dans la langue du destinataire. */
@@ -53,7 +55,7 @@ export function accountModerationEmail(props: AccountModerationProps, locale: Lo
     lines.push(`<p style="${P}white-space:pre-line;">${escapeHtml(tr('moderation.detailsLine', { details }))}</p>`)
   }
   if (kind === 'suspension' && props.until) {
-    lines.push(`<p style="${P}">${escapeHtml(tr('moderation.untilLine', { date: moderationDate(props.until, locale) }))}</p>`)
+    lines.push(`<p style="${P}">${escapeHtml(tr('moderation.untilLine', { date: moderationDate(props.until, locale, props.tz) }))}</p>`)
   }
   if (kind === 'deactivation') lines.push(`<p style="${P}">${tr('moderation.deactivationLine')}</p>`)
   if (kind === 'suspension' || kind === 'deactivation') lines.push(`<p style="${P}">${tr('moderation.keptData')}</p>`)

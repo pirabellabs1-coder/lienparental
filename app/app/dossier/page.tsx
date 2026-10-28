@@ -94,7 +94,7 @@ export default function DossierPage() {
   const periodError = period && period.from > period.to ? t('periodError') : null
 
   // Section « Dépenses et pension » : lecture dédiée des dépenses du Journal sur la période
-  // (non tronquée, bornes en DEFAULT_TZ), rechargée quand la période change.
+  // (non tronquée, bornes dans le fuseau de l'utilisateur), rechargée quand la période change.
   const expensesState = useAsyncData(
     () => (period && !periodError ? listJournalExpenses({ fromDay: period.from, toDay: period.to }) : Promise.resolve([])),
     `dossier-expenses:${period?.from ?? ''}:${period?.to ?? ''}`,

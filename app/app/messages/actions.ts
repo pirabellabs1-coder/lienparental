@@ -20,7 +20,8 @@ import { deniedMessage, requireAuthedUser } from '@/lib/auth/guard'
 import { createServiceClient } from '@/lib/supabase/server'
 import { rateLimit, userKey } from '@/lib/data/server/rate-limit'
 import { requireVaultUnlocked } from '@/lib/vault-lock'
-import { DEFAULT_TZ, dayKeyInTz } from '@/lib/tz'
+import { dayKeyInTz } from '@/lib/tz'
+import { tzFromPreferencesRow } from '@/lib/timezones'
 import { VaultImportQuotaError, addToVaultFromSource, isMessageAttachmentPath } from '@/lib/vault/from-source'
 
 export type VaultLinkStatus = 'pending' | 'done' | 'failed'
@@ -52,11 +53,17 @@ type MsgRow = {
 type UserRow = { id: string; prenom: string | null; nom: string | null }
 type LinkRow = { message_id: string | null; document_id: string | null; status: VaultLinkStatus; category_name: string }
 
-function stamp(iso: string): string {
+function stamp(iso: string, tz: string): string {
   const d = new Date(iso)
-  const date = d.toLocaleDateString('fr-FR', { timeZone: DEFAULT_TZ, day: '2-digit', month: '2-digit', year: 'numeric' })
-  const time = d.toLocaleTimeString('fr-FR', { timeZone: DEFAULT_TZ, hour: '2-digit', minute: '2-digit' })
+  const date = d.toLocaleDateString('fr-FR', { timeZone: tz, day: '2-digit', month: '2-digit', year: 'numeric' })
+  const time = d.toLocaleTimeString('fr-FR', { timeZone: tz, hour: '2-digit', minute: '2-digit' })
   return `${date} à ${time}`
+}
+
+/** Fuseau du propriétaire du coffre (preferences.ui.fuseau ; repli DEFAULT_TZ). */
+async function ownerTz(admin: SupabaseClient, userId: string): Promise<string> {
+  const { data } = await admin.from('preferences').select('ui').eq('user_id', userId).maybeSingle()
+  return tzFromPreferencesRow(data as { ui?: unknown } | null)
 }
 
 function fullName(u: UserRow | undefined): string {
@@ -74,7 +81,9 @@ async function importAttachment(
   const { userId, m, conversationId, title, names, categoryName } = args
   const sender = names.get(m.sender_id)
   const mine = m.sender_id === userId
-  const when = stamp(m.created_at)
+  // Date et heure dans le fuseau du propriétaire du coffre (destinataire de l'import).
+  const tz = await ownerTz(admin, userId)
+  const when = stamp(m.created_at, tz)
   const name = m.kind === 'audio'
     ? `Note vocale de ${fullName(sender)} du ${when.replace(' à ', ' ')}`
     : (m.attachment_meta?.name?.trim() || 'Pièce jointe')
@@ -87,7 +96,7 @@ async function importAttachment(
     from: { bucket: 'message-attachments', path: m.attachment_path ?? '' },
     name,
     categoryName,
-    docDate: dayKeyInTz(m.created_at),
+    docDate: dayKeyInTz(m.created_at, tz),
     description,
     meta: {
       provenance: 'Messagerie',

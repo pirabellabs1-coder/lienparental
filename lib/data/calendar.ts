@@ -53,7 +53,7 @@ function reminderMinutes(key: ReminderKey | undefined, startIso: string): number
   if (!key || key === 'none') return null
   if (key === '15m') return 15
   if (key === '1h') return 60
-  // « La veille à 20h » dans DEFAULT_TZ (pas dans le fuseau du navigateur).
+  // « La veille à 20h » dans le fuseau de l'utilisateur (pas dans le fuseau du navigateur).
   const eve = new Date(eveReminderAt(startIso))
   return Math.max(0, Math.round((new Date(startIso).getTime() - eve.getTime()) / 60_000))
 }
@@ -115,7 +115,7 @@ function toRow(input: EventInput) {
   const p = inputSchema().safeParse(input)
   if (!p.success) throw new DataError(p.error.issues[0]?.message ?? dataMsg('errors.invalid'), 'invalid')
   const v = p.data
-  // Saisie = heure murale DEFAULT_TZ.
+  // Saisie = heure murale dans le fuseau de l'utilisateur.
   const start = wallTimeToIso(v.date, v.time || '09:00')
   const end = new Date(new Date(start).getTime() + (v.durationMin ?? 60) * 60_000).toISOString()
   return {

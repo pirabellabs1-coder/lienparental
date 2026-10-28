@@ -4,11 +4,11 @@
 
 import { intlLocale } from '@/lib/i18n/config'
 import {
-  DEFAULT_TZ, addDaysToKey, dateToDayKey, dayKeyInTz, dayKeyToDate, timeInTz, todayKey, wallTimeToIso,
+  DEFAULT_TZ, addDaysToKey, currentTz, dateToDayKey, dayKeyInTz, dayKeyToDate, timeInTz, todayKey, wallTimeToIso,
   type InstantInput,
 } from './tz'
 
-export { DEFAULT_TZ } // lancement en Guyane (UTC-3) — source : lib/tz
+export { DEFAULT_TZ } // repli (Guyane, UTC-3) — fuseau courant : lib/tz → currentTz()
 
 export type EventTypeKey =
   | 'visite' | 'appel' | 'message' | 'sante' | 'rdv' | 'ecole'
@@ -58,7 +58,7 @@ export type CalendarEvent = {
   id: string
   title: string
   type: EventTypeKey
-  /** ISO date-time début (instant UTC ; lu et affiché dans DEFAULT_TZ) */
+  /** ISO date-time début (instant UTC ; lu et affiché dans le fuseau de l'utilisateur, lib/tz → currentTz) */
   start: string
   /** ISO date-time fin */
   end: string
@@ -86,18 +86,18 @@ export const REMINDER_OPTIONS: { value: ReminderKey; label: string }[] = [
 // --- Date helpers ----------------------------------------------------------
 // Un « jour » du calendrier est une Date à MIDI UTC (cf. lib/tz → dayKeyToDate) :
 // composantes lues en UTC, formatage avec `timeZone: 'UTC'`. Les instants (start/end,
-// createdAt) se rattachent à un jour via `dayOf` (DEFAULT_TZ), jamais via l'heure du navigateur.
+// createdAt) se rattachent à un jour via `dayOf` (fuseau de l'utilisateur, currentTz), jamais via l'heure implicite du navigateur.
 
 const DAY_MS = 86_400_000
 
-/** Jour (midi UTC) d'un instant ou d'une clé "yyyy-mm-dd", dans DEFAULT_TZ. */
+/** Jour (midi UTC) d'un instant ou d'une clé "yyyy-mm-dd", dans le fuseau de l'utilisateur. */
 export function dayOf(input: InstantInput): Date {
   return dayKeyToDate(dayKeyInTz(input))
 }
 
-/** Aujourd'hui (midi UTC) dans DEFAULT_TZ. */
+/** Aujourd'hui (midi UTC) dans le fuseau de l'utilisateur. */
 export function todayDay(now: Date = new Date()): Date {
-  return dayKeyToDate(todayKey(DEFAULT_TZ, now))
+  return dayKeyToDate(todayKey(currentTz(), now))
 }
 
 /** Jour (midi UTC) "yyyy-mm-dd". */
@@ -182,7 +182,7 @@ export function fmtDateMedium(d: Date, locale?: string): string {
   return d.toLocaleDateString(dateLoc(locale), { day: 'numeric', month: 'long', year: 'numeric', ...DAY_FMT })
 }
 
-/** Heure murale "HH:mm" d'un instant, dans DEFAULT_TZ. */
+/** Heure murale "HH:mm" d'un instant, dans le fuseau de l'utilisateur. */
 export function fmtTime(iso: string): string {
   return timeInTz(iso)
 }
@@ -213,7 +213,7 @@ export function fmtWallTime(hhmm: string, locale: string): string {
   })
 }
 
-/** Heure d'un instant (DEFAULT_TZ) au format de la langue (cf. fmtWallTime). */
+/** Heure d'un instant (fuseau de l'utilisateur) au format de la langue (cf. fmtWallTime). */
 export function fmtHourLocale(iso: string, locale: string): string {
   return fmtWallTime(fmtTime(iso), locale)
 }
@@ -225,15 +225,15 @@ export function fmtHourTickLocale(h: number, locale: string): string {
   return fmtWallTime(`${h}:00`, locale)
 }
 
-/** Minutes écoulées depuis minuit (DEFAULT_TZ) pour un instant — positionnement sur une grille horaire. */
+/** Minutes écoulées depuis minuit (fuseau de l'utilisateur) pour un instant — positionnement sur une grille horaire. */
 export function minutesOfDay(iso: string): number {
   const [h, m] = fmtTime(iso).split(':').map(Number)
   return (h || 0) * 60 + (m || 0)
 }
 
-/** Instant du rappel « la veille à 20h » (DEFAULT_TZ) d'un événement. */
-export function eveReminderAt(startIso: string): string {
-  return wallTimeToIso(addDaysToKey(dayKeyInTz(startIso), -1), '20:00')
+/** Instant du rappel « la veille à 20h » (fuseau `tz`, celui de l'auteur par défaut) d'un événement. */
+export function eveReminderAt(startIso: string, tz: string = currentTz()): string {
+  return wallTimeToIso(addDaysToKey(dayKeyInTz(startIso, tz), -1), '20:00', tz)
 }
 
 /** Formate un compte à rebours "Dans 2 jours", "Dans 1 h", "Dans 15 min", "Passé" */
@@ -270,7 +270,7 @@ export function googleCalendarUrl(e: CalendarEvent): string {
     action: 'TEMPLATE',
     text: e.title,
     dates: `${toUtcStamp(e.start)}/${toUtcStamp(e.end)}`,
-    ctz: DEFAULT_TZ,
+    ctz: currentTz(),
   })
   if (e.description) p.set('details', e.description)
   if (e.location) p.set('location', e.location)
@@ -332,9 +332,10 @@ export function childrenLabel(ids: string[] | undefined): string {
 // --- Mock events (centrés sur aujourd'hui) ---------------------------------
 // Supabase plug-in point : remplacer par `supabase.from('events').select(...)`
 
-// Heures « murales » dans DEFAULT_TZ : identiques quel que soit le fuseau du serveur ou du navigateur.
+// Démo : heures « murales » de la famille de démonstration (Guyane, DEFAULT_TZ), figées au chargement
+// du module : ce sont des instants, affichés ensuite dans le fuseau de chaque utilisateur.
 function at(dayOffset: number, h: number, m = 0): string {
-  return wallTimeToIso(addDaysToKey(todayKey(), dayOffset), `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`)
+  return wallTimeToIso(addDaysToKey(todayKey(DEFAULT_TZ), dayOffset), `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`, DEFAULT_TZ)
 }
 
 export const EVENTS: CalendarEvent[] = [

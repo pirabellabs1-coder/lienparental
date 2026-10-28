@@ -139,6 +139,7 @@
         "demo": "Available with a real account (demo mode).",
         "notConfigured": "Device notifications are not available yet.",
         "iosInstall": "On iPhone and iPad, first add Lien Parental to your Home Screen.",
+        "iosUpdate": "Update your iPhone or iPad (iOS 16.4 or later) to receive notifications.",
         "unsupported": "This browser doesn’t support notifications.",
         "blocked": "Notifications are blocked for this site in your browser settings.",
         "on": "On for this device.",
@@ -154,7 +155,30 @@
       "others": "Other devices",
       "since": "Since {date}",
       "removeAria": "Remove {label}",
-      "remove": "Remove"
+      "remove": "Remove",
+      "blockedHelp": {
+        "title": "How to turn them back on",
+        "ios": "Open Settings > Notifications > Lien Parental, then turn on “Allow Notifications”. Then come back to this screen.",
+        "android": "In Chrome, tap ⋮ > Settings > Site settings > Notifications, choose lienparental.fr, then “Allow”. Installed app: long-press its icon > App info > Notifications. Then reload this page.",
+        "desktop": "Click the icon to the left of the site address (padlock or settings), set “Notifications” to “Allow”, then reload the page."
+      },
+      "test": {
+        "hint": "Check in a few seconds that notifications reach your devices.",
+        "button": "Send a test notification",
+        "sending": "Sending…",
+        "notifTitle": "Test notification",
+        "notifBody": "Everything works: your Lien Parental reminders and messages will appear like this.",
+        "notReceived": "Nothing received? Make sure Do Not Disturb (or Focus) is off and that browser notifications are allowed in your device settings.",
+        "result": {
+          "sent": "{count, plural, one {Sent to # device.} other {Sent to # devices.}} It should appear within a few seconds.",
+          "sentOthers": "{count, plural, one {Sent to # device,} other {Sent to # devices,}} but not this one: turn on notifications above to receive it here too.",
+          "noDevices": "No device is turned on. First turn on notifications on this device.",
+          "expired": "Your devices’ subscription had expired and was removed. Turn notifications back on for this device, then try again.",
+          "failed": "Unable to send right now. Please try again in a moment.",
+          "notConfigured": "Device notifications are not available yet.",
+          "rateLimited": "Too many attempts. Please try again in a few minutes."
+        }
+      }
     },
     "profile": {
       "home": {

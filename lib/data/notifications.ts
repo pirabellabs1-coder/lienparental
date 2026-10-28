@@ -38,7 +38,11 @@ const CHANNELS = ['inapp', 'push']
 /** N'accepte qu'un chemin interne de l'espace parent (pas de redirection ouverte). */
 function safeHref(v: unknown): string | null {
   if (typeof v !== 'string') return null
-  return /^\/app(\/[\w\-./?=&%]*)?$/.test(v) && !v.includes('//') ? v : null
+  if (!/^\/app(\/[\w\-./?=&%]*)?$/.test(v) || v.includes('//')) return null
+  let decoded: string
+  try { decoded = decodeURIComponent(v) } catch { return null }
+  // « /app/../admin » ou « /app/%2e%2e/admin » sortiraient de l'espace /app.
+  return /(^|\/)\.\.?(\/|$|\?)/.test(decoded) || decoded.includes('//') ? null : v
 }
 
 function fromRow(r: NotificationRow): AppNotification {

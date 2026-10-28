@@ -10,7 +10,7 @@ import { intlLocale } from '@/lib/i18n/config'
 
 // Formatage localisé du calendrier (fr / en / pt). Les jours sont des Dates à midi UTC
 // (lib/calendrier) : on formate toujours avec `timeZone: 'UTC'`. Les heures murales viennent
-// de DEFAULT_TZ (lib/calendrier → fmtTime). Heures : « 14h30 » (fr), « 2:30 PM » (en), « 14:30 » (pt).
+// du fuseau de l'utilisateur (lib/calendrier → fmtTime). Heures : « 14h30 » (fr), « 2:30 PM » (en), « 14:30 » (pt).
 
 const UTC = { timeZone: 'UTC' } as const
 /** Lundi 1er janvier 2024, midi UTC : base des noms de jours (lundi en premier). */

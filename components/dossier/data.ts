@@ -124,7 +124,7 @@ export const PERIOD_PRESETS: { value: PeriodPreset; label: string }[] = [
   { value: 'custom', label: 'Personnalisée' },
 ]
 
-/** Période glissante se terminant aujourd'hui (jours DEFAULT_TZ). */
+/** Période glissante se terminant aujourd'hui (jours du fuseau de l'utilisateur). */
 export function presetPeriod(preset: Exclude<PeriodPreset, 'custom'>, now = new Date()): Period {
   const months = preset === '3m' ? 3 : preset === '6m' ? 6 : 12
   const to = todayKey(undefined, now)

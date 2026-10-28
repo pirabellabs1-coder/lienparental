@@ -10,6 +10,9 @@ import 'server-only'
 import webpush from 'web-push'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import type { PushMessage } from './core'
+import { pushFailureAction, pushShouldRetry, type PushReport } from './push-report'
+
+export type { PushReport } from './push-report'
 
 export function pushConfigured(env: Record<string, string | undefined> = process.env): boolean {
   return Boolean(env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && env.VAPID_PRIVATE_KEY && env.VAPID_SUBJECT)
@@ -31,13 +34,18 @@ function configure(): boolean {
 
 type SubRow = { id: string; endpoint: string; p256dh: string; auth_secret: string; failure_count: number }
 
-const MAX_FAILURES = 10
+/** Message push ; `lang` (facultatif) : langue de la notification affichée par le SW. */
+export type PushPayload = PushMessage & { lang?: 'fr' | 'en' | 'pt' }
 
-/** Envoie à tous les appareils de l'utilisateur. Renvoie le nombre d'appareils atteints. */
-export async function sendPushToUser(admin: SupabaseClient, userId: string, msg: PushMessage): Promise<number> {
+/**
+ * Envoie à tous les appareils de l'utilisateur et renvoie le bilan détaillé.
+ * Abonnement expiré (404 / 410) ou trop d'échecs consécutifs : supprimé (compté dans `expired`).
+ * `configured: false` : clés VAPID absentes, rien n'est tenté.
+ */
+export async function sendPushToUserDetailed(admin: SupabaseClient, userId: string, msg: PushPayload): Promise<PushReport & { configured: boolean }> {
   if (!configure()) {
     console.info('[push] désactivé (clés VAPID absentes) : non envoyé')
-    return 0
+    return { configured: false, total: 0, sent: 0, expired: 0, failed: 0 }
   }
   const { data, error } = await admin
     .from('push_subscriptions')
@@ -46,12 +54,14 @@ export async function sendPushToUser(admin: SupabaseClient, userId: string, msg:
     .limit(20)
   if (error) throw new Error(`push_read_${error.code ?? 'error'}`)
   const subs = (data ?? []) as SubRow[]
-  if (subs.length === 0) return 0
+  const report = { configured: true, total: subs.length, sent: 0, expired: 0, failed: 0 }
+  if (subs.length === 0) return report
 
   // Charge minimale : pas de contenu sensible (voir lib/notify/content.ts).
-  const body = JSON.stringify({ title: msg.title.slice(0, 120), body: msg.body.slice(0, 240), url: msg.url, tag: msg.tag.slice(0, 64) })
-  let sent = 0
-  let transient = 0
+  const body = JSON.stringify({
+    title: msg.title.slice(0, 120), body: msg.body.slice(0, 240), url: msg.url, tag: msg.tag.slice(0, 64),
+    ...(msg.lang ? { lang: msg.lang } : {}),
+  })
   await Promise.all(subs.map(async (s) => {
     try {
       await webpush.sendNotification(
@@ -59,19 +69,25 @@ export async function sendPushToUser(admin: SupabaseClient, userId: string, msg:
         body,
         { TTL: 60 * 60 * 24, urgency: 'normal', timeout: 8_000 },
       )
-      sent++
+      report.sent++
       await admin.from('push_subscriptions').update({ last_success_at: new Date().toISOString(), failure_count: 0 }).eq('id', s.id)
     } catch (e) {
-      const status = (e as { statusCode?: number }).statusCode
-      if (status === 404 || status === 410 || s.failure_count + 1 >= MAX_FAILURES) {
+      if (pushFailureAction((e as { statusCode?: number }).statusCode, s.failure_count) === 'delete') {
+        report.expired++
         await admin.from('push_subscriptions').delete().eq('id', s.id)
       } else {
-        transient++
+        report.failed++
         await admin.from('push_subscriptions').update({ failure_count: s.failure_count + 1 }).eq('id', s.id)
       }
     }
   }))
+  return report
+}
+
+/** Envoie à tous les appareils de l'utilisateur. Renvoie le nombre d'appareils atteints. */
+export async function sendPushToUser(admin: SupabaseClient, userId: string, msg: PushPayload): Promise<number> {
+  const r = await sendPushToUserDetailed(admin, userId, msg)
   // Tous les appareils en échec temporaire : réessai plus tard.
-  if (sent === 0 && transient > 0) throw new Error('push_transient')
-  return sent
+  if (pushShouldRetry(r)) throw new Error('push_transient')
+  return r.sent
 }

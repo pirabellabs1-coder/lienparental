@@ -21,9 +21,11 @@ export type Recipient = {
   prefs: NotifPrefs
   /** Langue du destinataire (preferences.langue) : textes in-app, push et e-mail. Absente : français. */
   locale?: Locale
+  /** Fuseau du destinataire (preferences.ui.fuseau, lib/timezones#resolveTz). Absent : DEFAULT_TZ. */
+  tz?: string
 }
 
-export type PushMessage = { title: string; body: string; url: string; tag: string }
+export type PushMessage = { title: string; body: string; url: string; tag: string; lang?: Locale }
 
 export type DispatchDeps = {
   loadRecipient(userId: string): Promise<Recipient | null>
@@ -76,7 +78,7 @@ export async function dispatch(deps: DispatchDeps, input: DispatchInput): Promis
     const facts = await deps.loadFacts(input.userId, input.event, payload)
     if (!facts) return { status: 'skipped', delivered, failed, reason: 'gone' }
 
-    const r = renderNotification(facts, recipient.prenom, input.now, recipient.locale ?? 'fr')
+    const r = renderNotification(facts, recipient.prenom, input.now, recipient.locale ?? 'fr', recipient.tz)
     const channels = decideChannels(input.event, recipient.prefs, { topic: r.topic, emailEligible: r.emailEligible })
 
     for (const ch of channels) {
@@ -85,7 +87,7 @@ export async function dispatch(deps: DispatchDeps, input: DispatchInput): Promis
         if (ch === 'inapp') {
           await deps.insertInApp({ userId: input.userId, type: input.event, title: r.title, body: r.body, href: r.href, dedupeKey: input.dedupeKey })
         } else if (ch === 'push') {
-          await deps.sendPush(input.userId, { title: r.push.title, body: r.push.body, url: r.href, tag: r.push.tag })
+          await deps.sendPush(input.userId, { title: r.push.title, body: r.push.body, url: r.href, tag: r.push.tag, lang: recipient.locale ?? 'fr' })
         } else if (ch === 'email') {
           if (!r.email) continue
           const targets = new Set<string>()

@@ -139,6 +139,7 @@
         "demo": "Disponible avec un compte réel (mode démonstration).",
         "notConfigured": "Les notifications sur appareil ne sont pas encore disponibles.",
         "iosInstall": "Sur iPhone et iPad, ajoutez d’abord Lien Parental à l’écran d’accueil.",
+        "iosUpdate": "Mettez à jour votre iPhone ou iPad (iOS 16.4 ou plus récent) pour recevoir les notifications.",
         "unsupported": "Ce navigateur ne permet pas les notifications.",
         "blocked": "Les notifications sont bloquées pour ce site dans les réglages du navigateur.",
         "on": "Activées sur cet appareil.",
@@ -154,7 +155,30 @@
       "others": "Autres appareils",
       "since": "Depuis le {date}",
       "removeAria": "Retirer {label}",
-      "remove": "Retirer"
+      "remove": "Retirer",
+      "blockedHelp": {
+        "title": "Comment les réactiver",
+        "ios": "Ouvrez Réglages > Notifications > Lien Parental, puis activez « Autoriser les notifications ». Revenez ensuite sur cet écran.",
+        "android": "Dans Chrome, touchez ⋮ > Paramètres > Paramètres des sites > Notifications, choisissez lienparental.fr puis « Autoriser ». Application installée : appui long sur son icône > Infos sur l’appli > Notifications. Rechargez ensuite cette page.",
+        "desktop": "Cliquez sur l’icône à gauche de l’adresse du site (cadenas ou réglages), passez « Notifications » sur « Autoriser », puis rechargez la page."
+      },
+      "test": {
+        "hint": "Vérifiez en quelques secondes que les notifications arrivent bien sur vos appareils.",
+        "button": "Envoyer une notification de test",
+        "sending": "Envoi…",
+        "notifTitle": "Notification de test",
+        "notifBody": "Tout fonctionne : vos rappels et messages Lien Parental s’afficheront ainsi.",
+        "notReceived": "Rien reçu ? Vérifiez que le mode Ne pas déranger (ou Concentration) est coupé et que les notifications du navigateur sont autorisées dans les réglages de l’appareil.",
+        "result": {
+          "sent": "{count, plural, one {Envoyée à # appareil.} other {Envoyée à # appareils.}} Elle doit s’afficher dans quelques secondes.",
+          "sentOthers": "{count, plural, one {Envoyée à # appareil,} other {Envoyée à # appareils,}} mais pas à celui-ci : activez les notifications ci-dessus pour la recevoir ici aussi.",
+          "noDevices": "Aucun appareil n’est activé. Activez d’abord les notifications sur cet appareil.",
+          "expired": "L’abonnement de vos appareils avait expiré et a été retiré. Réactivez les notifications sur cet appareil, puis réessayez.",
+          "failed": "Envoi impossible pour le moment. Réessayez dans un instant.",
+          "notConfigured": "Les notifications sur appareil ne sont pas encore disponibles.",
+          "rateLimited": "Trop d’essais rapprochés. Réessayez dans quelques minutes."
+        }
+      }
     },
     "profile": {
       "home": {

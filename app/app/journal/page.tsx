@@ -55,7 +55,7 @@ export default function JournalPage({ searchParams }: { searchParams: Promise<Se
   const filtered = useMemo(() => (data ?? []).filter((e) => !type || e.type === type), [data, type])
   const recents = filtered.slice(0, 20)
 
-  // Mois courant dans DEFAULT_TZ (même clé que les dépenses et le Coach IA).
+  // Mois courant dans le fuseau de l'utilisateur (même clé que les dépenses et le Coach IA).
   const currentMonth = now ? monthKeyInTz(now) : null
   const today = now ? dayKeyInTz(now) : null
   const financeFilters = useMemo(() => parseFinanceFilters(sp), [sp])

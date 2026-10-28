@@ -1,7 +1,8 @@
 /**
  * Abonnements Web Push de l'utilisateur connecté (public.push_subscriptions, 0440).
  *
- * GET    → { configured, devices: [{ id, label, createdAt, endpointHash }] }
+ * GET    → { configured, publicKey, devices: [{ id, label, createdAt, endpointHash }] }
+ *          publicKey : clé VAPID PUBLIQUE (réabonnement par le service worker, pushsubscriptionchange).
  *          endpointHash = sha256(endpoint) en hexadécimal, 16 premiers caractères :
  *          le navigateur reconnaît « cet appareil » sans que l'adresse ne circule.
  * POST   { endpoint, keys: { p256dh, auth } } → enregistre CE navigateur. Si l'adresse
@@ -53,7 +54,7 @@ export async function GET() {
   if (error) return jsonError(500, 'read_failed', t('readFailed'))
   const devices = ((data ?? []) as { id: string; endpoint: string; device_label: string | null; created_at: string }[])
     .map(d => ({ id: d.id, label: d.device_label ?? t('deviceFallback'), createdAt: d.created_at, endpointHash: endpointHash(d.endpoint) }))
-  return jsonOk({ configured: pushConfigured(), devices })
+  return jsonOk({ configured: pushConfigured(), publicKey: process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY ?? '', devices })
 }
 
 export async function POST(req: Request) {
@@ -76,6 +77,16 @@ export async function POST(req: Request) {
   if ((count ?? 0) >= MAX_DEVICES) {
     const { data: same } = await a.db.from('push_subscriptions').select('id').eq('endpoint', parsed.data.endpoint).maybeSingle()
     if (!same) return jsonError(409, 'too_many_devices', t('tooManyDevices', { max: MAX_DEVICES }))
+  }
+
+  // Adresse déjà rattachée à un AUTRE compte : on ne la réattribue que si c'est le même navigateur
+  // (mêmes clés de chiffrement, cas d'un appareil partagé où l'on change de compte). Sinon refus :
+  // connaître l'adresse d'un appareil ne doit pas suffire à détourner ses notifications.
+  const { data: existing } = await admin.from('push_subscriptions')
+    .select('user_id, p256dh, auth_secret').eq('endpoint', parsed.data.endpoint).maybeSingle()
+  if (existing && existing.user_id !== a.ctx.user.id
+    && (existing.p256dh !== parsed.data.keys.p256dh || existing.auth_secret !== parsed.data.keys.auth)) {
+    return jsonError(409, 'subscription_conflict', t('invalidSubscription'))
   }
 
   const label = parseUserAgent(req.headers.get('user-agent')).label

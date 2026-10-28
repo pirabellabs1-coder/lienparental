@@ -74,7 +74,7 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
   // Enfant passé dans l'URL : retenu seulement s'il fait partie des enfants du compte.
   const urlChild = prefill.enfant ? childOptions.find((c) => c.id === prefill.enfant) : undefined
 
-  // Valeurs par défaut calculées côté client, dans DEFAULT_TZ (pas le fuseau du navigateur) :
+  // Valeurs par défaut calculées côté client, dans le fuseau de l'utilisateur (pas le fuseau implicite du navigateur) :
   // l'heure pleine suivante ; après 23 h, le lendemain à 09:00.
   useEffect(() => {
     const now = new Date()

@@ -12,7 +12,7 @@ import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { addDaysDay, todayDay } from '@/lib/calendrier'
 import { useEvents } from '@/lib/data/calendar'
 
-// M06 — Vue hebdomadaire (jours = DEFAULT_TZ, Dates à midi UTC) : bandeau de la semaine + grille horaire 08h → 20h du jour choisi.
+// M06 — Vue hebdomadaire (jours = fuseau de l'utilisateur, Dates à midi UTC) : bandeau de la semaine + grille horaire 08h → 20h du jour choisi.
 // Libellé de la semaine : useCalFormat().weekRange.
 
 export default function CalendrierSemainePage() {

@@ -420,6 +420,45 @@
       "cancel": "Annuler",
       "clear": "Effacer",
       "placeholder": "--:--"
+    },
+    "timezones": {
+      "auto": "Automatique (fuseau de l’appareil)",
+      "autoNow": "Automatique (fuseau de l’appareil : {zone})",
+      "hint": "Les heures des événements, du journal et des rappels sont affichées et saisies dans ce fuseau. L’autre parent voit les mêmes rendez-vous dans le sien.",
+      "other": "Autre fuseau",
+      "zones": {
+        "cayenne": "Cayenne (Guyane)",
+        "paris": "Paris (France hexagonale)",
+        "guadeloupe": "Guadeloupe",
+        "martinique": "Martinique",
+        "reunion": "La Réunion",
+        "mayotte": "Mayotte",
+        "noumea": "Nouméa (Nouvelle-Calédonie)",
+        "papeete": "Papeete (Polynésie française)",
+        "miquelon": "Saint-Pierre-et-Miquelon",
+        "brussels": "Bruxelles",
+        "zurich": "Genève / Zurich",
+        "luxembourg": "Luxembourg",
+        "london": "Londres",
+        "lisbon": "Lisbonne",
+        "montreal": "Montréal / Toronto",
+        "saoPaulo": "São Paulo / Brasília",
+        "belem": "Belém / Macapá",
+        "paramaribo": "Paramaribo (Suriname)",
+        "georgetown": "Georgetown (Guyana)",
+        "portAuPrince": "Port-au-Prince (Haïti)",
+        "dakar": "Dakar",
+        "abidjan": "Abidjan"
+      },
+      "banner": {
+        "title": "Fuseau horaire différent",
+        "text": "Votre appareil est à l’heure de {device}, mais l’application affiche les heures de {current}.",
+        "use": "Passer à {device}",
+        "keep": "Garder {current}",
+        "close": "Fermer"
+      },
+      "current": "Heures affichées dans le fuseau : {zone}.",
+      "change": "Modifier"
     }
   }
 }

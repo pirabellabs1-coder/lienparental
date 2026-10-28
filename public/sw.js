@@ -164,46 +164,161 @@ async function staleWhileRevalidate(req) {
 
 /* ------------------------------------------------------------------- push */
 // Notifications Web Push (lib/notify/push.ts). La charge ne contient jamais de
-// contenu sensible : un titre court, une phrase et un lien interne /app/…
+// contenu sensible : un titre court, une phrase, un lien interne /app/… et,
+// facultativement, la langue du destinataire (fr | en | pt).
+// Fonctions pures ci-dessous testées par tests/push-sw.test.ts (exécution du
+// fichier dans un bac à sable node:vm avec un faux `self`).
 const PUSH_ICON = '/icons/icon-192.png';
+// Badge : silhouette monochrome blanche sur fond transparent (Android n'utilise que l'alpha).
+const PUSH_BADGE = '/brand/badge-96.png';
+const PUSH_FALLBACK_URL = '/app/notifications';
+const PUSH_LANGS = ['fr', 'en', 'pt'];
+const PUSH_DEFAULT_TITLE = 'Lien Parental';
 
 function safeAppPath(value) {
-  if (typeof value !== 'string') return '/app/notifications';
-  // Chemin interne uniquement : jamais d'URL absolue ni de //hôte.
-  return /^\/app(\/[\w\-./?=&%]*)?$/.test(value) && !value.includes('//') ? value : '/app/notifications';
+  if (typeof value !== 'string') return PUSH_FALLBACK_URL;
+  // Chemin interne /app… uniquement : jamais d'URL absolue, de //hôte, de \ ni de remontée « .. ».
+  if (!/^\/app(\/[\w\-./?=&%]*)?$/.test(value)) return PUSH_FALLBACK_URL;
+  if (value.includes('//') || value.includes('..')) return PUSH_FALLBACK_URL;
+  // Contrôle APRÈS résolution : « /app/%2e%2e/admin » devient « /admin » une fois analysé.
+  try {
+    const base = 'https://app.invalid';
+    const u = new URL(value, base);
+    if (u.origin !== base || !/^\/app(\/|$)/.test(u.pathname)) return PUSH_FALLBACK_URL;
+  } catch {
+    return PUSH_FALLBACK_URL;
+  }
+  return value;
+}
+
+/** Charge reçue → { title, options } pour showNotification. Ne lève jamais. */
+function buildNotification(data) {
+  const d = data && typeof data === 'object' ? data : {};
+  const title = typeof d.title === 'string' && d.title.trim() ? d.title.slice(0, 120) : PUSH_DEFAULT_TITLE;
+  const tag = typeof d.tag === 'string' && d.tag ? d.tag.slice(0, 64) : undefined;
+  const options = {
+    body: typeof d.body === 'string' ? d.body.slice(0, 240) : '',
+    icon: PUSH_ICON,
+    badge: PUSH_BADGE,
+    // Même tag : la nouvelle notification remplace l'ancienne et sonne de nouveau (renotify).
+    tag,
+    renotify: Boolean(tag),
+    timestamp: Date.now(),
+    data: { url: safeAppPath(d.url) },
+  };
+  if (typeof d.lang === 'string' && PUSH_LANGS.includes(d.lang)) options.lang = d.lang;
+  return { title, options };
+}
+
+function parsePushData(event) {
+  if (!event || !event.data) return {};
+  try {
+    return event.data.json();
+  } catch {
+    // Charge non JSON : on l'affiche comme corps (jamais d'exception, sinon le navigateur
+    // affiche « Ce site a été mis à jour en arrière-plan »).
+    try {
+      const text = event.data.text();
+      return { body: typeof text === 'string' ? text : '' };
+    } catch {
+      return {};
+    }
+  }
 }
 
 self.addEventListener('push', (event) => {
-  let data = {};
-  try {
-    data = event.data ? event.data.json() : {};
-  } catch {
-    data = {};
-  }
-  const title = typeof data.title === 'string' && data.title ? data.title.slice(0, 120) : 'Lien Parental';
-  const options = {
-    body: typeof data.body === 'string' ? data.body.slice(0, 240) : '',
-    icon: PUSH_ICON,
-    badge: PUSH_ICON,
-    lang: 'fr',
-    tag: typeof data.tag === 'string' && data.tag ? data.tag.slice(0, 64) : undefined,
-    renotify: Boolean(data.tag),
-    data: { url: safeAppPath(data.url) },
-  };
+  const { title, options } = buildNotification(parsePushData(event));
+  // userVisibleOnly : une notification DOIT être affichée pour chaque push reçu.
   event.waitUntil(self.registration.showNotification(title, options));
 });
 
+/**
+ * Choisit l'onglet à réutiliser : d'abord un onglet déjà sur l'URL cible, sinon un
+ * onglet de l'application (/app…), sinon n'importe quel onglet du site. null : ouvrir.
+ */
+function pickClient(list, targetHref, origin) {
+  const same = list.filter((c) => {
+    try { return new URL(c.url).origin === origin; } catch { return false; }
+  });
+  return (
+    same.find((c) => c.url === targetHref) ||
+    same.find((c) => new URL(c.url).pathname.startsWith('/app')) ||
+    same[0] ||
+    null
+  );
+}
+
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  const target = new URL(safeAppPath(event.notification.data && event.notification.data.url), self.location.origin).href;
+  const data = event.notification.data || {};
+  const target = new URL(safeAppPath(data.url), self.location.origin).href;
   event.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
-      for (const client of list) {
-        if (new URL(client.url).origin === self.location.origin && 'focus' in client) {
-          return client.focus().then((c) => (c && 'navigate' in c ? c.navigate(target) : undefined)).catch(() => self.clients.openWindow(target));
-        }
-      }
-      return self.clients.openWindow(target);
+      const client = pickClient(list, target, self.location.origin);
+      if (!client) return self.clients.openWindow(target);
+      const focus = 'focus' in client ? client.focus() : Promise.resolve(client);
+      return focus
+        .then((c) => {
+          const win = c || client;
+          if (win.url === target) return win;
+          // navigate() rejette si l'onglet n'est pas contrôlé par ce SW : nouvel onglet (catch).
+          return win.navigate(target);
+        })
+        .catch(() => self.clients.openWindow(target));
     })
   );
+});
+
+/* --------------------------------------------- pushsubscriptionchange */
+// Le service push a renouvelé (ou révoqué) l'abonnement : on se réabonne avec la même clé
+// VAPID et on enregistre la nouvelle adresse pour le compte connecté (cookie de session ;
+// sans session valide, l'enregistrement échoue silencieusement et l'utilisateur réactivera
+// les notifications depuis Préférences). L'ancienne adresse sera purgée au premier envoi
+// (404/410 côté serveur).
+function base64UrlToBytes(b64) {
+  const padding = '='.repeat((4 - (b64.length % 4)) % 4);
+  const raw = atob((b64 + padding).replace(/-/g, '+').replace(/_/g, '/'));
+  const out = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
+  return out;
+}
+
+async function vapidKey(oldSubscription) {
+  const fromOld = oldSubscription && oldSubscription.options && oldSubscription.options.applicationServerKey;
+  if (fromOld) return fromOld;
+  const res = await fetch('/api/push/subscribe', { credentials: 'same-origin', cache: 'no-store' });
+  if (!res.ok) return null;
+  const body = await res.json().catch(() => null);
+  return body && typeof body.publicKey === 'string' && body.publicKey ? base64UrlToBytes(body.publicKey) : null;
+}
+
+async function resubscribe(event) {
+  // Ancienne adresse retirée d'abord : sinon un compte au plafond d'appareils (10) verrait la
+  // nouvelle refusée (409) et cet appareil perdrait ses notifications sans le savoir.
+  const old = event.oldSubscription && event.oldSubscription.endpoint;
+  if (old) {
+    await fetch('/api/push/subscribe', {
+      method: 'DELETE',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ endpoint: old }),
+    }).catch(() => null);
+  }
+  const sub = event.newSubscription || (await (async () => {
+    const key = await vapidKey(event.oldSubscription);
+    if (!key) return null;
+    return self.registration.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: key });
+  })());
+  if (!sub) return false;
+  const res = await fetch('/api/push/subscribe', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(sub.toJSON()),
+  });
+  return res.ok;
+}
+
+self.addEventListener('pushsubscriptionchange', (event) => {
+  event.waitUntil(resubscribe(event).catch(() => false));
 });

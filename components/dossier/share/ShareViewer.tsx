@@ -13,7 +13,7 @@ import { fmtSize } from '@/components/journal/journalData'
 import { intlLocale } from '@/lib/i18n/config'
 import type { ShareContent } from '@/lib/partages'
 import { relationLabel } from '@/lib/temoin/attestation'
-import { DEFAULT_TZ } from '@/lib/tz'
+import { DEFAULT_TZ, isValidTz } from '@/lib/tz'
 
 type View =
   | { k: 'loading' }
@@ -27,14 +27,14 @@ const card = 'rounded-2xl border border-night-100 bg-white shadow-[0_1px_2px_rgb
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 focus-visible:ring-offset-2'
 
 /** Formats localisés (date « 12 mai 2024 à 14:30 », jour seul, taille de fichier). */
-function useViewerFormat() {
+function useViewerFormat(tz: string = DEFAULT_TZ) {
   const t = useTranslations('family.courtFile.viewer')
   const locale = useLocale()
   const loc = intlLocale(locale)
   return {
     dateTime: (iso: string) => t('dateTime', {
-      date: new Date(iso).toLocaleDateString(loc, { day: 'numeric', month: 'long', year: 'numeric', timeZone: DEFAULT_TZ }),
-      time: new Date(iso).toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit', timeZone: DEFAULT_TZ }),
+      date: new Date(iso).toLocaleDateString(loc, { day: 'numeric', month: 'long', year: 'numeric', timeZone: tz }),
+      time: new Date(iso).toLocaleTimeString(loc, { hour: '2-digit', minute: '2-digit', timeZone: tz }),
     }),
     frDate: (ymd: string) => formatDay(ymd, locale),
     size: (bytes: number) => (locale === 'fr' ? frSize(bytes) : fmtSize(bytes, locale)),
@@ -202,7 +202,8 @@ function CodePrompt({ error, busy, onSubmit }: { error: string | null; busy: boo
 function SharedDossier({ content, token, accessKey }: { content: ShareContent; token: string; accessKey: string }) {
   const t = useTranslations('family.courtFile.viewer')
   const locale = useLocale()
-  const { dateTime, frDate, size } = useViewerFormat()
+  // Heures dans le fuseau du parent qui partage (celui de sa chronologie), pas celui du lecteur.
+  const { dateTime, frDate, size } = useViewerFormat(content.tz && isValidTz(content.tz) ? content.tz : DEFAULT_TZ)
   // Types du journal traduits (le libellé reçu sert de repli) ; qualité des témoins traduite si reconnue.
   const typeLabel = (e: { type: string; typeKey?: string }) => (e.typeKey && t.has(`journalTypes.${e.typeKey}`) ? t(`journalTypes.${e.typeKey}`) : e.type)
   const sections = [

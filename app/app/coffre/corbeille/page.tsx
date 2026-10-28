@@ -12,6 +12,7 @@ import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { LIVE } from '@/lib/data/core'
 import { TRASH_RETENTION_DAYS, purgeDocument, restoreDocument, type VaultDocumentRecord } from '@/lib/data/vault'
 import { intlLocale } from '@/lib/i18n/config'
+import { currentTz } from '@/lib/tz'
 
 type TrashedDoc = {
   id: string
@@ -48,7 +49,7 @@ export default function CorbeillePage() {
   const t = useTranslations('vault.trash')
   const tc = useTranslations('vault.common')
   const locale = useLocale()
-  const fmtDeleted = (iso: string) => new Date(iso).toLocaleDateString(intlLocale(locale), { day: '2-digit', month: 'short', year: 'numeric' })
+  const fmtDeleted = (iso: string) => new Date(iso).toLocaleDateString(intlLocale(locale), { day: '2-digit', month: 'short', year: 'numeric', timeZone: currentTz() })
   const trash = useTrashedDocs()
   // Démo : documents mis à la corbeille pendant la session (store partagé) + exemples fixes.
   const sessionTrash = useDemoTrash()

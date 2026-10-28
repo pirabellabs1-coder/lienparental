@@ -10,7 +10,7 @@
  *   préfixe `${uid}/journal/`.
  * - Démo : données de components/journal/journalData + entrées créées pendant la session
  *   (sessionStorage, métadonnées seulement : les fichiers ne sont jamais conservés).
- * - Dates : `occurred_at` (instant UTC) ↔ jour + heure murale dans DEFAULT_TZ (lib/tz),
+ * - Dates : `occurred_at` (instant UTC) ↔ jour + heure murale dans fuseau de l'utilisateur (lib/tz → currentTz),
  *   jamais le fuseau du navigateur. Une dépense saisie sans heure est placée à 12:00.
  */
 import { z } from 'zod'
@@ -194,10 +194,10 @@ const inputSchema = () => z
 export type JournalInput = z.input<ReturnType<typeof inputSchema>>
 type ValidInput = z.output<ReturnType<typeof inputSchema>>
 
-/** Heure par défaut d'une dépense saisie sans heure : midi (DEFAULT_TZ), loin de tout changement de jour. */
+/** Heure par défaut d'une dépense saisie sans heure : midi (fuseau de l'utilisateur), loin de tout changement de jour. */
 export const DEPENSE_DEFAULT_TIME = '12:00'
 
-/** Jour + heure murale (DEFAULT_TZ) → instant `occurred_at`. */
+/** Jour + heure murale (fuseau de l'utilisateur) → instant `occurred_at`. */
 function occurredAt(v: Pick<ValidInput, 'type' | 'date' | 'heure'>): string {
   return wallTimeToIso(v.date, v.heure || (v.type === 'depense' ? DEPENSE_DEFAULT_TIME : '00:00'))
 }
@@ -360,7 +360,7 @@ export async function listJournal(): Promise<JournalRecord[]> {
   return ((data ?? []) as unknown as JournalRow[]).map(fromRow)
 }
 
-/** Plage de jours inclusive "yyyy-mm-dd" (DEFAULT_TZ). Bornes absentes = ouverte. */
+/** Plage de jours inclusive "yyyy-mm-dd" (fuseau de l'utilisateur). Bornes absentes = ouverte. */
 export type DayRange = { fromDay?: string; toDay?: string }
 
 const EXPENSE_PAGE = 500
@@ -368,7 +368,7 @@ const EXPENSE_MAX_PAGES = 20 // 10 000 dépenses : garde-fou
 
 /**
  * Lecture DÉDIÉE des dépenses (type `depense`), indépendante de la limite de `listJournal`
- * (500 entrées tous types) : pagination jusqu'à épuisement. Bornes en DEFAULT_TZ.
+ * (500 entrées tous types) : pagination jusqu'à épuisement. Bornes dans le fuseau de l'utilisateur.
  * Démo : mêmes données que le Journal, filtrées sur la date.
  */
 export async function listJournalExpenses(range: DayRange = {}): Promise<JournalRecord[]> {
@@ -394,7 +394,7 @@ export async function listJournalExpenses(range: DayRange = {}): Promise<Journal
   return out
 }
 
-/** Dépenses d'un mois "yyyy-mm" (bornes du mois dans DEFAULT_TZ). */
+/** Dépenses d'un mois "yyyy-mm" (bornes du mois dans le fuseau de l'utilisateur). */
 export function listMonthExpenses(month: string): Promise<JournalRecord[]> {
   return listJournalExpenses({ fromDay: `${month}-01`, toDay: addDaysToKey(`${shiftMonthKey(month, 1)}-01`, -1) })
 }

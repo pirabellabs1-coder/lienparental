@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { CalendarDays, FileHeart, School, Scale, Video } from 'lucide-react'
 import { daysUntil, type AppEvent } from '@/lib/mock-data'
 import { intlLocale } from '@/lib/i18n/config'
+import { currentTz } from '@/lib/tz'
 
 const TYPE_META: Record<AppEvent['type'], { icon: typeof CalendarDays; tone: string }> = {
   garde: { icon: CalendarDays, tone: 'text-leaf-600' },
@@ -20,7 +21,7 @@ export function UpcomingEvents({ events }: { events: AppEvent[] }) {
   const locale = useLocale()
   // « Mardi 27 octobre 2026 » / « Tuesday, October 27, 2026 » selon la langue.
   const weekdayDate = (iso: string) => {
-    const s = new Date(iso).toLocaleDateString(intlLocale(locale), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+    const s = new Date(iso).toLocaleDateString(intlLocale(locale), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: currentTz() })
     return s.charAt(0).toUpperCase() + s.slice(1)
   }
   const countdown = (iso: string) => {

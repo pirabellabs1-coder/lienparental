@@ -21,7 +21,7 @@ export default function CalendrierPage() {
   const tWeek = useTranslations('calendar.week')
   const f = useCalFormat()
   const now = useClientNow()
-  // Jours du calendrier = jours de DEFAULT_TZ (midi UTC), pas ceux du navigateur.
+  // Jours du calendrier = jours du fuseau de l'utilisateur (midi UTC), pas ceux du navigateur.
   const today = now ? todayDay(now) : null
   const { data, loading, error, refresh } = useEvents()
   const childNames = useChildNames()

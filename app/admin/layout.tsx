@@ -11,6 +11,8 @@ import { ADMIN_LOGIN_PATH } from '@/lib/admin/gate'
 import { NOINDEX_NOFOLLOW } from '@/lib/seo/metadata'
 import { ScopedIntlProvider } from '@/components/i18n/ScopedIntlProvider'
 import { CLIENT_NS_ADMIN } from '@/lib/i18n/client-namespaces'
+import { FixedTimeZone } from '@/components/tz/FixedTimeZone'
+import { DEFAULT_TZ } from '@/lib/tz'
 
 export const metadata = {
   title: 'Lien Parental · Admin',
@@ -57,13 +59,19 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   return (
     // Seuls les textes des composants client partagés utilisés par l'admin (audit C3).
     <ScopedIntlProvider namespaces={CLIENT_NS_ADMIN}>
+    {/* Outil interne : toutes les heures de l'admin restent en heure de Guyane (UTC−3). */}
+    <FixedTimeZone tz={DEFAULT_TZ}>
     <div className="min-h-screen bg-night-50/40 text-night-900">
       <Sidebar user={identity} />
       <TopBar user={identity} />
       <main className="lg:pl-64">
-        <div className="mx-auto w-full max-w-7xl px-4 lg:px-8 py-6 lg:py-10">{children}</div>
+        <div className="mx-auto w-full max-w-7xl px-4 lg:px-8 py-6 lg:py-10">
+          <p className="mb-4 text-xs text-night-500">Heures affichées en heure de Guyane (Cayenne, UTC−3), quel que soit le fuseau des utilisateurs.</p>
+          {children}
+        </div>
       </main>
     </div>
+    </FixedTimeZone>
     </ScopedIntlProvider>
   )
 }

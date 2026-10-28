@@ -1,4 +1,5 @@
 import 'server-only'
+import { getRequestTz } from '@/lib/tz-server'
 /**
  * Formule et consommation RÉELLES d'un compte (écrans Profil et Stockage), côté serveur.
  *
@@ -82,7 +83,7 @@ async function loadSubscription(user: CurrentUser): Promise<ProfileUsage['subscr
   try {
     const v = await getBillingOverview(user.id)
     // Libellé et phrase dans la langue de l'utilisateur (miroir de describeStatus) ; le ton reste celui de describeStatus.
-    const s = localizeStatus(v, billingFormat(await getTranslations('billing'), await getLocale()))
+    const s = localizeStatus(v, billingFormat(await getTranslations('billing'), await getLocale(), await getRequestTz()))
     return { periodEnd: v.periodEnd, cancelAtPeriodEnd: v.cancelAtPeriodEnd, status: { label: s.label, headline: s.headline, tone: describeStatus(v).tone } }
   } catch {
     return null

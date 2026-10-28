@@ -110,7 +110,7 @@ export function randomToken(len = 32): string {
 }
 
 // --- Dates ---------------------------------------------------------------------
-// Plus de dates « locales » (fuseau du navigateur) : tout passe par lib/tz (DEFAULT_TZ).
+// Plus de dates « locales » (fuseau du navigateur) : tout passe par lib/tz (fuseau de l'utilisateur).
 
 // --- Hook générique ---------------------------------------------------------
 

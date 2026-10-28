@@ -18,6 +18,7 @@ import type { Facts } from './content'
 import { maskEmail } from './device'
 import { sendPushToUser } from './push'
 import { toLocale } from '@/lib/email/i18n'
+import { tzFromPreferencesRow } from '@/lib/timezones'
 import { isModerationKind, isModerationReason } from '@/lib/admin/ops/moderation'
 
 const str = (v: unknown): string => (typeof v === 'string' ? v : '')
@@ -65,6 +66,8 @@ export function realDeps(db: SupabaseClient): DispatchDeps {
         prefs: prefsFromRow(p as Parameters<typeof prefsFromRow>[0]),
         // Langue du destinataire (fr | en | pt ; toute autre valeur → fr).
         locale: toLocale((p as { langue?: string | null } | null)?.langue),
+        // Fuseau du destinataire : heures des rappels, partages et alertes (repli DEFAULT_TZ).
+        tz: tzFromPreferencesRow(p as { ui?: unknown } | null),
       }
     },
 

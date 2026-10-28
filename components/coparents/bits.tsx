@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
-import { DEFAULT_TZ } from '@/lib/tz'
+import { currentTz } from '@/lib/tz'
 import type { FamilyRole } from '@/lib/coparents/types'
 
 // Petites briques visuelles de la liaison des parents.
@@ -37,7 +37,7 @@ export function PersonAvatar({ prenom, nom, seed, size = 'md' }: { prenom: strin
 
 // Les helpers de date acceptent la locale next-intl (défaut 'fr' : rendu historique).
 export function frDay(iso: string, withYear = false, locale = 'fr'): string {
-  return new Date(iso).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', ...(withYear ? { year: 'numeric' } : {}), timeZone: DEFAULT_TZ })
+  return new Date(iso).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', ...(withYear ? { year: 'numeric' } : {}), timeZone: currentTz() })
 }
 
 /** Date de naissance yyyy-mm-dd → « 12 mai 2019 » (sans décalage de fuseau). */

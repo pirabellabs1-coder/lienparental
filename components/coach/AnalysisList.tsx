@@ -1,5 +1,6 @@
 'use client'
 
+import { useTimeZone } from '@/components/tz/TimeZoneProvider'
 import { useMemo, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import Link from 'next/link'
@@ -37,13 +38,15 @@ export function AnalysisList({ initialItems, mode }: Props) {
   const visible = useMemo(() => (filter === 'all' ? items : items.filter((i) => i.kind === filter)), [items, filter])
   const isArchive = mode === 'archives'
   const intl = intlLocale(locale)
+  // Fuseau du contexte (identique côté serveur et client) : pas d'écart d'hydratation hors Guyane.
+  const tz = useTimeZone()
   const dateOf = (it: CoachListItem) =>
     it.createdAt
       ? localizedDateLabel(it.createdAt, intl, {
           today: (time) => tc('time.today', { time }),
           yesterday: (time) => tc('time.yesterday', { time }),
           dateAt: (date, time) => tc('time.dateAt', { date, time }),
-        })
+        }, undefined, tz)
       : it.dateLabel
   // Exemples de démonstration : titre générique traduit (les titres réels restent ceux de l'utilisateur).
   const titleOf = (it: CoachListItem) => (it.remote ? it.title : tc(`kinds.${it.kind}`))

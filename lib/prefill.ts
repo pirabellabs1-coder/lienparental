@@ -108,7 +108,7 @@ export type JournalPrefill = {
 
 /**
  * `/app/journal/nouveau?type=depense&titre=…&montant=12,50&categorie=sante&enfant=<id>&date=YYYY-MM-DD&source=guide:<slug>`
- * `today` ("yyyy-mm-dd", DEFAULT_TZ) borne la date : pas de futur, pas plus de 10 ans en arrière.
+ * `today` ("yyyy-mm-dd", fuseau de l'utilisateur) borne la date : pas de futur, pas plus de 10 ans en arrière.
  */
 export function parseJournalPrefill(p: RawParams, today?: string): JournalPrefill {
   const out: JournalPrefill = {}

@@ -110,7 +110,7 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
   }
 
   const day = parseDay(entry.date)
-  // Horodatage de création (preuve) : date ET heure dans DEFAULT_TZ (pas la date UTC).
+  // Horodatage de création (preuve) : date ET heure dans le fuseau de l'utilisateur (pas la date UTC).
   const createdAt = createdParts(entry)
   const created = parseDay(createdAt.day)
   const createdTime = createdAt.time

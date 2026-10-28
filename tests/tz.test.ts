@@ -1,4 +1,7 @@
-/** lib/tz : règle unique « un instant se lit dans DEFAULT_TZ » (America/Cayenne, UTC−3). */
+/**
+ * lib/tz : un instant se lit dans le fuseau courant — côté serveur (ces tests) DEFAULT_TZ,
+ * America/Cayenne (UTC−3). Fuseau par utilisateur (Paris, Réunion…) : tests/timezones.test.ts.
+ */
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { DEFAULT_TZ, addDaysToKey, dayKeyInTz, fmtDayKey, monthKeyInTz, timeInTz, todayKey, wallTimeToIso } from '../lib/tz'
@@ -7,7 +10,7 @@ import { dayKey, dayLabel, fullStamp, shortStamp, timeLabel } from '../component
 // 23 h 30 le 31 octobre à Cayenne = 02 h 30 UTC le 1er novembre.
 const LATE = '2026-11-01T02:30:00.000Z'
 
-test('fuseau de référence', () => {
+test('fuseau de repli (serveur, admin, préférence absente)', () => {
   assert.equal(DEFAULT_TZ, 'America/Cayenne')
 })
 

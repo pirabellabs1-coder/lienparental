@@ -47,7 +47,7 @@ export type DossierModel = {
   messages: Message[]
 }
 
-/** Jour d'un instant dans DEFAULT_TZ (même règle que le Journal et le calendrier). */
+/** Jour d'un instant dans le fuseau de l'utilisateur (même règle que le Journal et le calendrier). */
 const day = (iso: string) => dayKeyInTz(iso)
 
 /** Données filtrées (enfant + période + sélection), sans tenir compte des sections cochées. */

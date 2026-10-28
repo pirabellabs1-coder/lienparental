@@ -5,6 +5,7 @@
  */
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { libT } from '@/lib/i18n/runtime'
+import type { PushTestOutcome } from './push-test'
 
 let kickTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -42,6 +43,7 @@ export type PushSupport =
   | 'supported'
   | 'unsupported'      // navigateur sans Push API
   | 'ios-needs-install' // iPhone / iPad : il faut ajouter l'app à l'écran d'accueil
+  | 'ios-update'       // iPhone / iPad installé, mais iOS < 16.4 (pas de Web Push)
   | 'not-configured'   // clés VAPID absentes côté serveur
   | 'demo'
 
@@ -55,11 +57,22 @@ export function isStandalone(): boolean {
   return window.matchMedia?.('(display-mode: standalone)').matches || (navigator as Navigator & { standalone?: boolean }).standalone === true
 }
 
+export function isAndroid(): boolean {
+  return typeof navigator !== 'undefined' && /android/i.test(navigator.userAgent)
+}
+
+/** Plateforme pour l'aide « réactiver les notifications bloquées ». */
+export function helpPlatform(): 'ios' | 'android' | 'desktop' {
+  return isIos() ? 'ios' : isAndroid() ? 'android' : 'desktop'
+}
+
 export function pushSupport(): PushSupport {
   if (!SUPABASE_ENABLED) return 'demo'
   if (typeof window === 'undefined') return 'unsupported'
   const hasApi = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
+  // iOS / iPadOS : Web Push uniquement dans l'application ajoutée à l'écran d'accueil (16.4+).
   if (isIos() && !isStandalone()) return 'ios-needs-install'
+  if (isIos() && !hasApi) return 'ios-update'
   if (!hasApi) return 'unsupported'
   if (!VAPID_PUBLIC_KEY) return 'not-configured'
   return 'supported'
@@ -78,7 +91,7 @@ async function registration(): Promise<ServiceWorkerRegistration> {
   const existing = await navigator.serviceWorker.getRegistration('/')
   if (existing) return existing
   // En production RegisterSW l'a déjà fait ; ailleurs, on l'enregistre à la demande (clic).
-  await navigator.serviceWorker.register('/sw.js', { scope: '/' })
+  await navigator.serviceWorker.register('/sw.js', { scope: '/', updateViaCache: 'none' })
   return navigator.serviceWorker.ready
 }
 
@@ -149,4 +162,26 @@ export async function removePushDevice(id: string): Promise<boolean> {
     body: JSON.stringify({ id }),
   }).catch(() => null)
   return Boolean(res?.ok)
+}
+
+export type PushTestResult = PushTestOutcome
+
+/**
+ * « Envoyer une notification de test » (POST /api/push/test) : push sur tous les appareils
+ * du compte + ligne in-app. Erreur HTTP (limite, session…) : PushError avec le message serveur.
+ */
+export async function sendTestPush(): Promise<PushTestResult> {
+  const res = await fetch('/api/push/test', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'same-origin',
+    body: '{}',
+  }).catch(() => null)
+  // Message vide : l'écran affiche son propre texte d'échec (account.push.test.result.failed).
+  if (!res) throw new PushError('')
+  const body = (await res.json().catch(() => null)) as (PushTestResult & { error?: { message?: string } }) | null
+  if (!res.ok || !body || typeof body.status !== 'string') {
+    throw new PushError(body?.error?.message ?? '')
+  }
+  return body
 }

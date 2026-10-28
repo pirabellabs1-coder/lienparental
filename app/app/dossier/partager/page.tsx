@@ -15,12 +15,12 @@ import { inPeriod, loadDossierSource, presetPeriod, readSelection, type DossierS
 import { cn } from '@/lib/cn'
 import { formatDay } from '@/components/famille/useFamilyFormat'
 import { intlLocale } from '@/lib/i18n/config'
-import { DEFAULT_TZ, dayKeyInTz } from '@/lib/tz'
+import { currentTz, dayKeyInTz } from '@/lib/tz'
 import {
   createShare, EXPIRY_OPTIONS, listShares, revokeShare, type CreateShareResult, type ShareExpiry, type ShareSummary,
 } from '@/lib/partages'
 
-// Jour d'un instant dans DEFAULT_TZ (même règle que « Mon dossier »).
+// Jour d'un instant dans le fuseau de l'utilisateur (même règle que « Mon dossier »).
 const localDayOf = (iso: string) => dayKeyInTz(iso)
 
 // Partage temporaire en lecture seule avec l'avocat : contenu choisi, expiration, code facultatif,
@@ -306,7 +306,7 @@ function CreatedSheet({ result, onClose, announce }: { result: CreateShareResult
   const [copied, setCopied] = useState<'link' | 'code' | null>(null)
   const url = result ? `${window.location.origin}${result.share.path}` : ''
   const expires = result
-    ? new Date(result.share.expiresAt).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: DEFAULT_TZ })
+    ? new Date(result.share.expiresAt).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: currentTz() })
     : ''
 
   const copy = async (what: 'link' | 'code', text: string) => {

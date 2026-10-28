@@ -31,7 +31,8 @@ import { decryptMedical, isEncryptedPayload, medicalCryptoReady } from '@/lib/da
 import { ageFromBirthDate, mockChildren, mockJournalEntries } from '@/lib/mock-data'
 import { TESTIMONY_REQUESTS, VAULT_CATEGORIES, VAULT_DOCS, receivedCount } from '@/lib/mock-vault'
 import { EVENTS } from '@/lib/calendrier'
-import { DEFAULT_TZ, dayKeyInTz, monthKeyInTz, shiftMonthKey, wallTimeToIso } from '@/lib/tz'
+import { DEFAULT_TZ, dayKeyInTz, isValidTz, monthKeyInTz, shiftMonthKey, wallClockDate, wallTimeToIso } from '@/lib/tz'
+import { getRequestTz } from '@/lib/tz-server'
 import {
   CO_PARENT_PRENOM,
   RYTHME_LABELS,
@@ -89,6 +90,8 @@ type KbExpense = {
 
 export type KnowledgeSnapshot = {
   today: Date
+  /** Fuseau du parent connecté (préférence) : jours, heures et « aujourd'hui » du contexte. Absent : DEFAULT_TZ. */
+  tz?: string
   parentPrenom: string
   coParent: string
   children: KbChild[]
@@ -104,8 +107,9 @@ export type KnowledgeSnapshot = {
   vaultLocked: boolean
 }
 
-// Un seul fuseau pour tout l'instantané (démo comprise) : celui de l'application.
-const TZ = DEFAULT_TZ
+// Un seul fuseau pour tout l'instantané : celui du parent connecté (snapshot.tz, repli DEFAULT_TZ).
+// `renderTz` vaut ce fuseau pendant renderSnapshot, SYNCHRONE : aucun autre rendu ne s'intercale.
+let renderTz = DEFAULT_TZ
 const DAY_MS = 86_400_000
 const JOURNAL_PAST_DAYS = 60
 const EVENTS_PAST_DAYS = 31 // utile pour « ce mois-ci » / visites prévues mais non notées
@@ -127,22 +131,33 @@ function clean(s: string | null | undefined, max = 280): string {
   return t.length > max ? `${t.slice(0, max - 1)}…` : t
 }
 
-const fmtDayParis = new Intl.DateTimeFormat('fr-FR', { timeZone: TZ, weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })
-const fmtTimeParis = new Intl.DateTimeFormat('fr-FR', { timeZone: TZ, hour: '2-digit', minute: '2-digit' })
-const fmtDay = fmtDayParis
-const fmtTime = fmtTimeParis
-const fmtToday = new Intl.DateTimeFormat('fr-FR', { timeZone: TZ, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+type Fmts = { day: Intl.DateTimeFormat; time: Intl.DateTimeFormat; today: Intl.DateTimeFormat }
+const fmtCache = new Map<string, Fmts>()
+function fmts(tz: string = renderTz): Fmts {
+  let f = fmtCache.get(tz)
+  if (!f) {
+    f = {
+      day: new Intl.DateTimeFormat('fr-FR', { timeZone: tz, weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }),
+      time: new Intl.DateTimeFormat('fr-FR', { timeZone: tz, hour: '2-digit', minute: '2-digit' }),
+      today: new Intl.DateTimeFormat('fr-FR', { timeZone: tz, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
+    }
+    fmtCache.set(tz, f)
+  }
+  return f
+}
 
 function day(iso: string): string {
   // Date seule (yyyy-mm-dd) : midi UTC pour éviter tout glissement de jour.
   const d = /^\d{4}-\d{2}-\d{2}$/.test(iso) ? new Date(`${iso}T12:00:00Z`) : new Date(iso)
-  return Number.isNaN(d.getTime()) ? iso : fmtDay.format(d)
+  if (Number.isNaN(d.getTime())) return iso
+  // Jour seul : midi UTC formaté en UTC (aucun fuseau ne doit le décaler).
+  return /^\d{4}-\d{2}-\d{2}$/.test(iso) ? fmts('UTC').day.format(d) : fmts().day.format(d)
 }
 function dayTime(iso: string): string {
   const d = new Date(iso)
-  return Number.isNaN(d.getTime()) ? iso : `${fmtDay.format(d)} ${fmtTime.format(d)}`
+  return Number.isNaN(d.getTime()) ? iso : `${fmts().day.format(d)} ${fmts().time.format(d)}`
 }
-/** Dates « locales » produites par lib/garde (heure du serveur, par construction). */
+/** Dates « locales » flottantes de lib/garde (heure murale du parent : voir wallClockDate). */
 function localDayTime(d: Date): string {
   const dd = d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })
   const h = d.getHours()
@@ -158,8 +173,18 @@ function childNames(s: KnowledgeSnapshot, ids: string[]): string {
 }
 
 export function renderSnapshot(s: KnowledgeSnapshot): string {
+  const previous = renderTz
+  renderTz = s.tz && isValidTz(s.tz) ? s.tz : DEFAULT_TZ
+  try {
+    return renderSnapshotIn(s)
+  } finally {
+    renderTz = previous
+  }
+}
+
+function renderSnapshotIn(s: KnowledgeSnapshot): string {
   const out: string[] = []
-  out.push(`Aujourd'hui : ${fmtToday.format(s.today)} (fuseau America/Cayenne).`)
+  out.push(`Aujourd'hui : ${fmts().today.format(s.today)} (fuseau horaire du parent : ${renderTz} ; toutes les heures ci-dessous sont dans ce fuseau).`)
   out.push(`Parent connecté : ${clean(s.parentPrenom, 40) || 'non renseigné'}. Autre parent : ${clean(s.coParent, 40)}.`)
   out.push(
     s.includeMedical
@@ -199,7 +224,7 @@ export function renderSnapshot(s: KnowledgeSnapshot): string {
     s.events &&
       s.events.map((e) => {
         const who = childNames(s, e.childIds)
-        const when = e.allDay ? `${day(e.start)} (journée)` : `${dayTime(e.start)}${e.end ? `–${fmtTime.format(new Date(e.end))}` : ''}`
+        const when = e.allDay ? `${day(e.start)} (journée)` : `${dayTime(e.start)}${e.end ? `–${fmts().time.format(new Date(e.end))}` : ''}`
         const past = new Date(e.start).getTime() < s.today.getTime() ? ' [passé]' : ''
         const healthMasked = e.type === 'sante' && !s.includeMedical
         const desc = e.description && !healthMasked ? ` — ${clean(e.description, 200)}` : ''
@@ -309,8 +334,8 @@ function looksLikeGardeConfig(v: unknown): v is GardeConfig {
 }
 
 function describeFinances(list: KbExpense[], today: Date, includeMedical: boolean, names: (ids: string[]) => string): string[] {
-  // Même clé de mois que le « Total du mois » du Journal : jour DEFAULT_TZ (lib/tz).
-  const current = monthKeyInTz(today)
+  // Même clé de mois que le « Total du mois » du Journal : jour dans le fuseau du parent.
+  const current = monthKeyInTz(today, renderTz)
   const previous = shiftMonthKey(current, -1)
   const inMonth = (key: string) => list.filter((e) => e.date.slice(0, 7) === key)
   // Mêmes règles que la vue Finances (totalsByFlux) : montant effectivement réglé ; une somme
@@ -448,7 +473,7 @@ function medicalLines(raw: unknown): string[] {
   return lines
 }
 
-async function supabaseSnapshot(user: CurrentUser, opts: ContextOptions, today: Date, vaultOpen: boolean): Promise<KnowledgeSnapshot> {
+async function supabaseSnapshot(user: CurrentUser, opts: ContextOptions, today: Date, vaultOpen: boolean, tz: string): Promise<KnowledgeSnapshot> {
   const supabase = await createClient()
   // Tables récentes (garde, journal_expenses) absentes des types écrits à la main : client non typé.
   const raw = supabase as unknown as SupabaseClient
@@ -537,7 +562,8 @@ async function supabaseSnapshot(user: CurrentUser, opts: ContextOptions, today: 
     const { data, error } = await raw.from('garde_configs').select('config').maybeSingle()
     if (error) throw error
     const cfg = (data as { config?: unknown } | null)?.config
-    return looksLikeGardeConfig(cfg) ? describeGarde(cfg, today, coParent) : []
+    // Planning en heures murales flottantes : « maintenant » à l'heure du parent, pas du serveur.
+    return looksLikeGardeConfig(cfg) ? describeGarde(cfg, wallClockDate(tz, today), coParent) : []
   })
 
   const financesP = safe(async () => {
@@ -567,7 +593,7 @@ async function supabaseSnapshot(user: CurrentUser, opts: ContextOptions, today: 
       const x = Array.isArray(r.journal_expenses) ? r.journal_expenses[0] : r.journal_expenses
       if (!x) return []
       return [{
-        date: dayKeyInTz(r.occurred_at),
+        date: dayKeyInTz(r.occurred_at, tz),
         titre: r.titre,
         childIds: r.children_ids ?? [],
         depense: {
@@ -611,7 +637,9 @@ export async function buildKnowledgeSnapshot(user: CurrentUser, opts: ContextOpt
   // Portée minimale : ni documents ni témoignages, inutile de vérifier le verrou.
   // Sinon fail closed : toute erreur de vérification = coffre considéré verrouillé.
   const vaultOpen = opts.scope === 'minimal' ? false : await requireVaultUnlocked().then((v) => v.ok, () => false)
-  return SUPABASE_ENABLED ? supabaseSnapshot(user, opts, today, vaultOpen) : demoSnapshot(user, opts, today, vaultOpen)
+  const tz = await getRequestTz().catch(() => DEFAULT_TZ)
+  const snap = SUPABASE_ENABLED ? await supabaseSnapshot(user, opts, today, vaultOpen, tz) : demoSnapshot(user, opts, today, vaultOpen)
+  return { ...snap, tz }
 }
 
 /** Texte prêt à insérer dans le prompt, selon la portée demandée. */

@@ -62,20 +62,23 @@ export const SHARED_EVENT_EMAIL_DAYS = 14
 
 const name = (s: string | null | undefined, fallback: string) => (s ?? '').trim() || fallback
 
-/** « le 12 nov. à 10h », « le 12 nov. à 10h30 », « le 12 nov. » (journée entière), fuseau de l'application. */
-export function whenLabel(iso: string, allDay = false, locale: Locale = 'fr'): string {
+/**
+ * « le 12 nov. à 10h », « le 12 nov. à 10h30 », « le 12 nov. » (journée entière), dans le fuseau
+ * du DESTINATAIRE (`tz`, preferences.ui.fuseau ; absent : DEFAULT_TZ) et dans sa langue.
+ */
+export function whenLabel(iso: string, allDay = false, locale: Locale = 'fr', tz: string = DEFAULT_TZ): string {
   const d = new Date(iso)
   if (Number.isNaN(d.getTime())) return ''
   const tr = emailT(locale)
   if (locale === 'en') {
-    const day = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'short', timeZone: DEFAULT_TZ }).format(d)
+    const day = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'short', timeZone: tz }).format(d)
     if (allDay) return tr('notify.whenAllDay', { day })
-    const time = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: DEFAULT_TZ }).format(d)
+    const time = new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: tz }).format(d)
     return tr('notify.whenTimed', { day, time })
   }
-  const day = new Intl.DateTimeFormat(locale === 'pt' ? 'pt-BR' : 'fr-FR', { day: 'numeric', month: 'short', timeZone: DEFAULT_TZ }).format(d)
+  const day = new Intl.DateTimeFormat(locale === 'pt' ? 'pt-BR' : 'fr-FR', { day: 'numeric', month: 'short', timeZone: tz }).format(d)
   if (allDay) return tr('notify.whenAllDay', { day })
-  const parts = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: DEFAULT_TZ }).formatToParts(d)
+  const parts = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: tz }).formatToParts(d)
   const h = String(Number(parts.find(p => p.type === 'hour')?.value ?? '0'))
   const m = parts.find(p => p.type === 'minute')?.value ?? '00'
   return tr('notify.whenTimed', { day, time: `${h}h${m === '00' ? '' : m}` })
@@ -110,10 +113,10 @@ export function publicEventTitle(f: { titre: string; kind?: string; childName?: 
   return f.titre.trim() || (fallback ?? tr('notify.anEvent'))
 }
 
-function calendarSentence(f: Extract<Facts, { event: 'calendar_shared' }>, outside: boolean, tr: EmailT, locale: Locale): string {
+function calendarSentence(f: Extract<Facts, { event: 'calendar_shared' }>, outside: boolean, tr: EmailT, locale: Locale, tz: string): string {
   const who = name(f.actorName, tr('common.aParent'))
   const titre = outside ? publicEventTitle(f, undefined, locale) : (f.titre.trim() || tr('notify.anEvent'))
-  const when = whenLabel(f.startAt, f.allDay, locale)
+  const when = whenLabel(f.startAt, f.allDay, locale, tz)
   if (f.action === 'deleted') return tr('notify.calendarDeleted', { who, title: titre, when })
   if (f.action === 'updated') return tr('notify.calendarUpdated', { who, title: titre, when })
   return tr('notify.calendarCreated', { who, title: titre, when })
@@ -142,8 +145,11 @@ export function deviceText(value: string, locale: Locale = 'fr'): string {
   return m ? tr('device.on', { browser: m[1]!, os: m[2]! }) : value
 }
 
-/** Contenu d'une notification pour un destinataire (prénom pour la salutation de l'e-mail, langue du destinataire). */
-export function renderNotification(f: Facts, recipientPrenom: string, now: Date = new Date(), locale: Locale = 'fr'): Rendered {
+/**
+ * Contenu d'une notification pour un destinataire : prénom (salutation de l'e-mail), langue et
+ * fuseau horaire du destinataire (dates et heures ; absent : DEFAULT_TZ).
+ */
+export function renderNotification(f: Facts, recipientPrenom: string, now: Date = new Date(), locale: Locale = 'fr', tz: string = DEFAULT_TZ): Rendered {
   const prenom = recipientPrenom
   const tr = emailT(locale)
   const aParent = tr('common.aParent')
@@ -155,7 +161,7 @@ export function renderNotification(f: Facts, recipientPrenom: string, now: Date 
       return {
         title: tr('notify.loginTitle'), body, href: '/app/profil/securite/sessions',
         push: { title: tr('notify.loginTitle'), body: tr('notify.loginPush', { system: systeme }), tag: 'security' },
-        email: newLoginEmail({ prenom, appareil, systeme, dateIso: f.dateIso }, locale),
+        email: newLoginEmail({ prenom, appareil, systeme, dateIso: f.dateIso, tz }, locale),
       }
     }
     case 'security_change': {
@@ -166,7 +172,7 @@ export function renderNotification(f: Facts, recipientPrenom: string, now: Date 
       return {
         title: t.title, body: tr('notify.ifNotYouSecure'), href: '/app/profil/securite',
         push: { title: t.title, body: tr('notify.ifNotYouOpen'), tag: 'security' },
-        email: securityChangeEmail({ prenom, title: t.title, message, dateIso: f.dateIso }, locale),
+        email: securityChangeEmail({ prenom, title: t.title, message, dateIso: f.dateIso, tz }, locale),
       }
     }
     case 'message_received': {
@@ -219,7 +225,7 @@ export function renderNotification(f: Facts, recipientPrenom: string, now: Date 
       const fallback = tr('calendarReminder.defaultTitle')
       const titre = f.titre.trim() || fallback
       const outside = publicEventTitle(f, fallback, locale)
-      const when = whenLabel(f.startAt, f.allDay, locale)
+      const when = whenLabel(f.startAt, f.allDay, locale, tz)
       return {
         title: tr('notify.reminderTitle', { title: titre }), body: tr('notify.reminderBody', { when }), href: `/app/calendrier/${f.eventId}`,
         push: { title: tr('notify.reminderTitle', { title: outside }), body: tr('notify.reminderBody', { when }), tag: `event:${f.eventId}` },
@@ -228,8 +234,8 @@ export function renderNotification(f: Facts, recipientPrenom: string, now: Date 
       }
     }
     case 'calendar_shared': {
-      const inApp = calendarSentence(f, false, tr, locale)
-      const sentence = calendarSentence(f, true, tr, locale)
+      const inApp = calendarSentence(f, false, tr, locale, tz)
+      const sentence = calendarSentence(f, true, tr, locale, tz)
       const start = Date.parse(f.startAt)
       const soon = Number.isFinite(start)
         && start >= now.getTime() - 86_400_000
@@ -266,13 +272,13 @@ export function renderNotification(f: Facts, recipientPrenom: string, now: Date 
       const reason = f.reasonCode ? tr(`moderation.reasons.${f.reasonCode}`) : ''
       const k = f.kind
       const title = k === 'suspension' && f.until
-        ? tr('notify.moderation.suspensionTitle', { date: moderationDate(f.until, locale) })
+        ? tr('notify.moderation.suspensionTitle', { date: moderationDate(f.until, locale, tz) })
         : tr(`notify.moderation.${k}Title`)
       const body = tr(`notify.moderation.${k}Body`, { reason })
       return {
         title, body, href: '/app/aide',
         push: { title, body, tag: 'moderation' },
-        email: accountModerationEmail({ prenom, kind: k, reasonCode: f.reasonCode, details: f.details, until: f.until }, locale),
+        email: accountModerationEmail({ prenom, kind: k, reasonCode: f.reasonCode, details: f.details, until: f.until, tz }, locale),
       }
     }
   }

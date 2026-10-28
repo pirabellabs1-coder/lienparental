@@ -57,20 +57,25 @@ export function baseLayout(opts: BaseLayoutOptions): string {
 <![endif]-->
 <style>
   /* Styles minimaux : tout le reste est inline */
+  :root { color-scheme: light dark; supported-color-schemes: light dark; }
   a { color: ${t.colors.link}; }
   @media (max-width: 600px) {
     .lp-card { padding: 24px !important; }
     .lp-title { font-size: 22px !important; line-height: 28px !important; }
   }
 </style>
+<style>
+  /* Mode sombre, dans un bloc séparé : un client qui rejette ces sélecteurs ne perd que ce bloc. */
+${darkModeCss()}
+</style>
 </head>
-<body style="margin:0;padding:0;background:${t.colors.pageBg};">
+<body class="lp-body" style="margin:0;padding:0;background:${t.colors.pageBg};">
   <!-- Preheader (masqué) -->
   <div style="display:none;overflow:hidden;line-height:1px;opacity:0;max-height:0;max-width:0;mso-hide:all;">
     ${preheader}
   </div>
 
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${t.colors.pageBg};">
+  <table role="presentation" class="lp-body" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${t.colors.pageBg};">
     <tr>
       <td align="center" style="padding:24px 12px;">
         <table role="presentation" width="${t.maxWidth}" cellpadding="0" cellspacing="0" border="0" style="max-width:${t.maxWidth}px;width:100%;">
@@ -80,7 +85,7 @@ export function baseLayout(opts: BaseLayoutOptions): string {
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td align="left" style="font-family:${t.font};color:${t.colors.night};font-size:16px;font-weight:600;">
-                    <img src="${t.logoUrl}" width="${t.logoWidth}" height="${t.logoHeight}" alt="Lien Parental" style="display:block;border:0;outline:none;" />
+                    <img src="${t.logoUrl}" width="${t.logoWidth}" height="${t.logoHeight}" alt="Lien Parental" style="display:block;border:0;outline:none;width:${t.logoWidth}px;height:auto;max-width:100%;" />
                   </td>
                 </tr>
               </table>
@@ -90,23 +95,23 @@ export function baseLayout(opts: BaseLayoutOptions): string {
           <tr>
             <td class="lp-card" style="background:${t.colors.cardBg};border:1px solid ${t.colors.border};border-radius:12px;padding:32px;font-family:${t.font};color:${t.colors.text};">
               <h1 class="lp-title" style="margin:0 0 16px 0;font-family:${t.font};font-size:24px;line-height:30px;color:${t.colors.night};font-weight:700;">${title}</h1>
-              <div style="font-family:${t.font};font-size:16px;line-height:24px;color:${t.colors.text};">
+              <div class="lp-text" style="font-family:${t.font};font-size:16px;line-height:24px;color:${t.colors.text};">
                 ${body}
               </div>
               ${ctaHtml ? `<div style="margin-top:28px;">${ctaHtml}</div>` : ''}
-              ${extraFooter ? `<div style="margin-top:24px;font-family:${t.font};font-size:14px;line-height:20px;color:${t.colors.textMuted};">${extraFooter}</div>` : ''}
+              ${extraFooter ? `<div class="lp-muted" style="margin-top:24px;font-family:${t.font};font-size:14px;line-height:20px;color:${t.colors.textMuted};">${extraFooter}</div>` : ''}
             </td>
           </tr>
           <!-- Footer -->
           <tr>
-            <td style="padding:24px 8px;font-family:${t.font};font-size:12px;line-height:18px;color:${t.colors.footerText};text-align:center;">
+            <td class="lp-footer" style="padding:24px 8px;font-family:${t.font};font-size:12px;line-height:18px;color:${t.colors.footerText};text-align:center;">
               <p style="margin:0 0 8px 0;">
                 ${tr('layout.reason', { brand: t.brandName })}
               </p>
               <p style="margin:0 0 8px 0;">
-                <a href="${t.unsubscribeUrlPlaceholder}" style="color:${t.colors.footerText};text-decoration:underline;">${tr('layout.manage')}</a>
+                <a href="${t.unsubscribeUrlPlaceholder}" class="lp-footer" style="color:${t.colors.footerText};text-decoration:underline;">${tr('layout.manage')}</a>
                 &nbsp;·&nbsp;
-                <a href="${t.legalUrl}" style="color:${t.colors.footerText};text-decoration:underline;">${tr('layout.legal')}</a>
+                <a href="${t.legalUrl}" class="lp-footer" style="color:${t.colors.footerText};text-decoration:underline;">${tr('layout.legal')}</a>
               </p>
               <p style="margin:0;">
                 ${t.addressPlaceholder}
@@ -119,6 +124,54 @@ export function baseLayout(opts: BaseLayoutOptions): string {
   </table>
 </body>
 </html>`
+}
+
+/**
+ * Mode sombre.
+ *  - Apple Mail / iOS Mail / Outlook macOS & iOS : `@media (prefers-color-scheme: dark)`.
+ *  - Outlook.com et Outlook web / mobile : attributs [data-ogsc] (couleur) / [data-ogsb] (fond)
+ *    qu'ils posent eux-mêmes en mode sombre.
+ *  - Gmail : ignore ces règles et inverse partiellement les couleurs ; les images ne sont pas
+ *    inversées, d'où le logo sur pastille blanche opaque (theme.ts).
+ * Les couleurs des gabarits sont inline : on les cible par sous-chaîne d'attribut `style`
+ * (valeurs exactes de theme.ts), avec !important pour l'emporter sur l'inline.
+ * Le bouton (vert, texte blanc) reste identique : contraste suffisant sur fond sombre.
+ */
+export function darkModeCss(): string {
+  const c = t.colors
+  const d = t.dark
+  const color = (from: string, to: string) => `[style*="color:${from}"] { color: ${to} !important; }`
+  // Couleurs de texte (classes du gabarit) et fonds, séparés pour Outlook ([data-ogsc] / [data-ogsb]).
+  const textRules = (scope: string) => [
+    `${scope}.lp-title { color: ${d.night} !important; }`,
+    `${scope}.lp-text { color: ${d.text} !important; }`,
+    `${scope}.lp-muted { color: ${d.textMuted} !important; }`,
+    `${scope}.lp-footer { color: ${d.footerText} !important; }`,
+    `${scope}td.lp-card { border-color: ${d.border} !important; }`,
+  ]
+  const bgRules = (scope: string, withBody: boolean) => [
+    `${withBody ? `${scope}body.lp-body, ` : ''}${scope}table.lp-body { background: ${d.pageBg} !important; }`,
+    `${scope}td.lp-card { background: ${d.cardBg} !important; }`,
+  ]
+  const media = [
+    ...bgRules('', true),
+    ...textRules(''),
+    'a { color: ' + d.link + '; }',
+    `[style*="background:${c.pageBg}"] { background: ${d.boxBg} !important; }`,
+    `[style*="${c.border}"] { border-color: ${d.border} !important; }`,
+    color(c.text, d.text),
+    color(c.textMuted, d.textMuted),
+    color(c.night, d.night),
+    color(c.link, d.link),
+    color(c.alert, d.alert),
+  ]
+  // Outlook.com / Outlook mobile : l'attribut est posé sur un conteneur, jamais au-dessus de <body>.
+  const outlook = [...textRules('[data-ogsc] '), ...bgRules('[data-ogsb] ', false)]
+  const indent = (lines: string[], pad: string) => lines.map(r => pad + r).join('\n')
+  return `  @media (prefers-color-scheme: dark) {
+${indent(media, '    ')}
+  }
+${indent(outlook, '  ')}`
 }
 
 /**

@@ -41,7 +41,7 @@ const DRAFT_KEY = 'nouveau'
 
 type Search = Record<string, string | string[] | undefined>
 
-// Jour et heure par défaut dans DEFAULT_TZ (pas le fuseau du navigateur).
+// Jour et heure par défaut dans le fuseau de l'utilisateur (pas le fuseau implicite du navigateur).
 const todayInput = (): string => todayKey()
 const nowTime = (): string => timeInTz(new Date())
 

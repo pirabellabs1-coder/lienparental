@@ -78,7 +78,7 @@ export default function EvenementDetailPage({ params }: { params: Promise<{ id: 
 
   if (!now) return <>{bar}<LoadingState compact title={t('detail.loading')} description="" /></>
 
-  const start = dayOf(event.start) // jour DEFAULT_TZ
+  const start = dayOf(event.start) // jour du fuseau de l'utilisateur
   const kids = childOptions.filter((c) => (event.childrenIds ?? []).includes(c.id)).map((c) => t('common.childOption', { name: c.prenom, count: c.age })).join(', ')
   const healthChild = event.type === 'sante' && event.childrenIds?.length === 1 ? childOptions.find((c) => c.id === event.childrenIds![0]) : undefined
 

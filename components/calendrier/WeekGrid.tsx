@@ -63,7 +63,7 @@ export function DayTimeline({ day, events, childNames }: { day: Date; events: Ca
   const list = eventsOnDay(events, day)
   const span = (HOUR_END - HOUR_START) * 60
   const pct = (iso: string) => {
-    // Heure murale DEFAULT_TZ (pas celle du navigateur).
+    // Heure murale dans le fuseau de l'utilisateur (pas celle du navigateur).
     const m = minutesOfDay(iso) - HOUR_START * 60
     return (Math.max(0, Math.min(span, m)) / span) * 100
   }

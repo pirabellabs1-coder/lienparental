@@ -6,35 +6,28 @@ import { TopBar } from '@/components/mobile/TopBar'
 import { typeStyle } from '@/components/calendrier/eventTypeStyles'
 import { useCalFormat } from '@/components/calendrier/useCalFormat'
 import { GoogleLogo } from '@/components/auth/GoogleButton'
-import { RadioGroup, Switch, Select, Button, Badge, ConfirmDialog } from '@/components/ui'
+import { RadioGroup, Switch, Button, Badge, ConfirmDialog } from '@/components/ui'
 import {
-  EVENT_TYPES, REMINDER_OPTIONS, DEFAULT_TYPE_REMINDER_ENABLED, DEFAULT_TZ,
+  EVENT_TYPES, REMINDER_OPTIONS, DEFAULT_TYPE_REMINDER_ENABLED,
   type EventTypeKey, type ReminderKey,
 } from '@/lib/calendrier'
+import { currentTz } from '@/lib/tz'
+import { useTimeZone } from '@/components/tz/TimeZoneProvider'
+import { useTzLabel } from '@/components/tz/useTzLabel'
+import Link from 'next/link'
 import { resetGoogleSyncHint } from '@/lib/integrations/google/client'
 import type { CalendarTarget, GoogleCalendarState, MaskMode, SyncResponse, UiEventType } from '@/lib/integrations/google/types'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
-
-// Libellés : clés calendar.settings.tz.* (traduites au rendu).
-const TZ_OPTIONS = [
-  { value: 'America/Cayenne',    key: 'cayenne' },
-  { value: 'America/Martinique', key: 'martinique' },
-  { value: 'America/Guadeloupe', key: 'guadeloupe' },
-  { value: 'Europe/Paris',       key: 'paris' },
-  { value: 'Europe/Brussels',    key: 'brussels' },
-  { value: 'Europe/Zurich',      key: 'zurich' },
-  { value: 'Europe/London',      key: 'london' },
-  { value: 'America/Montreal',   key: 'montreal' },
-  { value: 'Africa/Dakar',       key: 'dakar' },
-]
 
 export default function ParametresCalendrierPage() {
   const t = useTranslations('calendar.settings')
   const f = useCalFormat()
   const [defaultReminder, setDefaultReminder] = useState<ReminderKey>('1h')
   const [enabled, setEnabled] = useState<Record<EventTypeKey, boolean>>(DEFAULT_TYPE_REMINDER_ENABLED)
-  const [tz, setTz] = useState<string>(DEFAULT_TZ)
+  const tt = useTranslations('shared.timezones')
+  const tz = useTimeZone()
+  const tzLabel = useTzLabel()
   const [saved, setSaved] = useState(false)
 
   const onSave = () => {
@@ -75,14 +68,14 @@ export default function ParametresCalendrierPage() {
         </div>
       </section>
 
-      <section className="mt-6">
-        <Select
-          label={t('tzLabel')}
-          value={tz}
-          onChange={(e) => setTz(e.target.value)}
-          options={TZ_OPTIONS.map((o) => ({ value: o.value, label: t(`tz.${o.key}`) }))}
-          hint={t('tzHint')}
-        />
+      {/* Fuseau : préférence unique du compte (Préférences > Général), appliquée partout. */}
+      <section className="mt-6" aria-labelledby="cal-tz-title">
+        <h2 id="cal-tz-title" className="font-display text-sm font-semibold text-night-900">{t('tzLabel')}</h2>
+        <p className="mt-1 text-sm text-night-700">
+          {tt('current', { zone: tzLabel(tz) })}{' '}
+          <Link href="/app/profil/preferences/general" className="font-semibold text-leaf-700 underline underline-offset-2 hover:text-leaf-800">{tt('change')}</Link>
+        </p>
+        <p className="mt-0.5 text-xs text-night-500">{t('tzHint')}</p>
       </section>
 
       <div className="mt-6">
@@ -145,7 +138,7 @@ async function api<T>(method: string, path = '', body?: unknown): Promise<{ ok: 
 function formatDateTime(iso: string | null, locale: string) {
   if (!iso) return null
   try {
-    return new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: DEFAULT_TZ }).format(new Date(iso))
+    return new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: currentTz() }).format(new Date(iso))
   } catch {
     return null
   }

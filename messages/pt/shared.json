@@ -420,6 +420,45 @@
       "cancel": "Cancelar",
       "clear": "Limpar",
       "placeholder": "--:--"
+    },
+    "timezones": {
+      "auto": "Automático (fuso horário do aparelho)",
+      "autoNow": "Automático (fuso horário do aparelho: {zone})",
+      "hint": "Os horários dos eventos, do diário e dos lembretes são exibidos e informados neste fuso. O outro responsável vê os mesmos compromissos no fuso dele.",
+      "other": "Outro fuso horário",
+      "zones": {
+        "cayenne": "Caiena (Guiana Francesa)",
+        "paris": "Paris (França metropolitana)",
+        "guadeloupe": "Guadalupe",
+        "martinique": "Martinica",
+        "reunion": "Reunião",
+        "mayotte": "Mayotte",
+        "noumea": "Nouméa (Nova Caledônia)",
+        "papeete": "Papeete (Polinésia Francesa)",
+        "miquelon": "Saint-Pierre e Miquelon",
+        "brussels": "Bruxelas",
+        "zurich": "Genebra / Zurique",
+        "luxembourg": "Luxemburgo",
+        "london": "Londres",
+        "lisbon": "Lisboa",
+        "montreal": "Montreal / Toronto",
+        "saoPaulo": "São Paulo / Brasília",
+        "belem": "Belém / Macapá",
+        "paramaribo": "Paramaribo (Suriname)",
+        "georgetown": "Georgetown (Guiana)",
+        "portAuPrince": "Porto Príncipe (Haiti)",
+        "dakar": "Dacar",
+        "abidjan": "Abidjan"
+      },
+      "banner": {
+        "title": "Fuso horário diferente",
+        "text": "Seu aparelho está no horário de {device}, mas o aplicativo mostra os horários de {current}.",
+        "use": "Mudar para {device}",
+        "keep": "Manter {current}",
+        "close": "Fechar"
+      },
+      "current": "Horários exibidos no fuso: {zone}.",
+      "change": "Alterar"
     }
   }
 }

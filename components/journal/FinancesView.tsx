@@ -64,9 +64,9 @@ export function FinancesView({
   childrenLoading?: boolean
   /** Mois affiché "yyyy-mm" (période `mois`) */
   month: string
-  /** Mois courant "yyyy-mm" dans DEFAULT_TZ (borne de « mois suivant ») */
+  /** Mois courant "yyyy-mm" dans le fuseau de l'utilisateur (borne de « mois suivant ») */
   currentMonth: string
-  /** Jour courant "yyyy-mm-dd" dans DEFAULT_TZ */
+  /** Jour courant "yyyy-mm-dd" dans le fuseau de l'utilisateur */
   today: string
   filters: FinanceFilters
   basePath: string

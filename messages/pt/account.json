@@ -139,6 +139,7 @@
         "demo": "Disponível com uma conta real (modo demonstração).",
         "notConfigured": "As notificações no dispositivo ainda não estão disponíveis.",
         "iosInstall": "No iPhone e iPad, adicione primeiro o Lien Parental à tela de início.",
+        "iosUpdate": "Atualize o seu iPhone ou iPad (iOS 16.4 ou mais recente) para receber notificações.",
         "unsupported": "Este navegador não permite notificações.",
         "blocked": "As notificações estão bloqueadas para este site nas configurações do navegador.",
         "on": "Ativadas neste dispositivo.",
@@ -154,7 +155,30 @@
       "others": "Outros dispositivos",
       "since": "Desde {date}",
       "removeAria": "Remover {label}",
-      "remove": "Remover"
+      "remove": "Remover",
+      "blockedHelp": {
+        "title": "Como reativá-las",
+        "ios": "Abra Ajustes > Notificações > Lien Parental e ative “Permitir Notificações”. Depois, volte a esta tela.",
+        "android": "No Chrome, toque em ⋮ > Configurações > Configurações do site > Notificações, escolha lienparental.fr e depois “Permitir”. App instalado: toque e segure o ícone > Informações do app > Notificações. Depois, recarregue esta página.",
+        "desktop": "Clique no ícone à esquerda do endereço do site (cadeado ou configurações), coloque “Notificações” em “Permitir” e recarregue a página."
+      },
+      "test": {
+        "hint": "Verifique em poucos segundos se as notificações chegam aos seus dispositivos.",
+        "button": "Enviar uma notificação de teste",
+        "sending": "Enviando…",
+        "notifTitle": "Notificação de teste",
+        "notifBody": "Tudo funciona: os seus lembretes e mensagens do Lien Parental aparecerão assim.",
+        "notReceived": "Não recebeu nada? Verifique se o modo Não perturbe (ou Foco) está desligado e se as notificações do navegador estão permitidas nos ajustes do dispositivo.",
+        "result": {
+          "sent": "{count, plural, one {Enviada para # dispositivo.} other {Enviada para # dispositivos.}} Deve aparecer em poucos segundos.",
+          "sentOthers": "{count, plural, one {Enviada para # dispositivo,} other {Enviada para # dispositivos,}} mas não para este: ative as notificações acima para recebê-la aqui também.",
+          "noDevices": "Nenhum dispositivo está ativado. Ative primeiro as notificações neste dispositivo.",
+          "expired": "A assinatura dos seus dispositivos tinha expirado e foi removida. Reative as notificações neste dispositivo e tente novamente.",
+          "failed": "Não foi possível enviar agora. Tente novamente em instantes.",
+          "notConfigured": "As notificações no dispositivo ainda não estão disponíveis.",
+          "rateLimited": "Tentativas demais. Tente novamente em alguns minutos."
+        }
+      }
     },
     "profile": {
       "home": {

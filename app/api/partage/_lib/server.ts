@@ -18,6 +18,8 @@ import { getTranslations } from 'next-intl/server'
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { createServiceClient } from '@/lib/supabase/server'
+import { dayKeyInTz, timeInTz } from '@/lib/tz'
+import { tzFromPreferencesRow } from '@/lib/timezones'
 import {
   buildDemoShareContent, type ShareContent, type ShareScope, type ShareSummary, type SharedEvent,
 } from '@/lib/partages'
@@ -282,8 +284,9 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 
 const JOURNAL_TYPES = new Set(['visite', 'appel', 'message', 'sante', 'depense', 'autre'])
 
-const hhmm = (d: Date) => d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Cayenne' })
-const ymdParis = (d: Date) => d.toLocaleDateString('sv-SE', { timeZone: 'America/Cayenne' })
+// Jour et heure dans le fuseau du PROPRIÉTAIRE du dossier (même chronologie que dans son application).
+const hhmm = (d: Date, tz: string) => timeInTz(d, tz)
+const ymdOwner = (d: Date, tz: string) => dayKeyInTz(d, tz)
 
 /**
  * Contenu en lecture seule. Toutes les requêtes sont bornées au propriétaire
@@ -297,13 +300,15 @@ export async function buildShareContent(share: ResolvedShare): Promise<ShareCont
   const db = service()
   const { scope } = share
   const uid = share.userId
+  const { data: ownerPrefs } = await db.from('preferences').select('ui').eq('user_id', uid).maybeSingle()
+  const tz = tzFromPreferencesRow(ownerPrefs as { ui?: unknown } | null)
   const childId = scope.childId && UUID_RE.test(scope.childId) ? scope.childId : null
   const docIds = scope.documentIds.filter((x) => UUID_RE.test(x))
   const tmgIds = scope.testimonyIds.filter((x) => UUID_RE.test(x))
-  // Bornes élargies d'un jour (fuseau), puis filtrage exact sur la date de Paris.
+  // Bornes élargies d'un jour (fuseau), puis filtrage exact sur le jour du propriétaire.
   const from = scope.journal ? new Date(Date.parse(`${scope.journal.from}T00:00:00Z`) - 86_400_000).toISOString() : null
   const to = scope.journal ? new Date(Date.parse(`${scope.journal.to}T23:59:59Z`) + 86_400_000).toISOString() : null
-  const inPeriod = (iso: string) => !scope.journal || (ymdParis(new Date(iso)) >= scope.journal.from && ymdParis(new Date(iso)) <= scope.journal.to)
+  const inPeriod = (iso: string) => !scope.journal || (ymdOwner(new Date(iso), tz) >= scope.journal.from && ymdOwner(new Date(iso), tz) <= scope.journal.to)
 
   const [childRes, journalRes, docsRes, tmgRes, convRes] = await Promise.all([
     childId ? db.from('children').select('prenom, nom').eq('id', childId).eq('user_id', uid).maybeSingle() : Promise.resolve({ data: null }),
@@ -333,7 +338,7 @@ export async function buildShareContent(share: ResolvedShare): Promise<ShareCont
     .map((r) => {
       const d = new Date(r.occurred_at)
       return {
-        id: r.id, date: ymdParis(d), heure: hhmm(d), type: t(`journalTypes.${JOURNAL_TYPES.has(r.type) && r.type !== 'depense' ? r.type : 'autre'}`), typeKey: JOURNAL_TYPES.has(r.type) ? r.type : 'autre', titre: r.titre,
+        id: r.id, date: ymdOwner(d, tz), heure: hhmm(d, tz), type: t(`journalTypes.${JOURNAL_TYPES.has(r.type) && r.type !== 'depense' ? r.type : 'autre'}`), typeKey: JOURNAL_TYPES.has(r.type) ? r.type : 'autre', titre: r.titre,
         description: r.description ?? undefined, lieu: r.lieu ?? undefined,
       }
     })
@@ -381,6 +386,7 @@ export async function buildShareContent(share: ResolvedShare): Promise<ShareCont
     documents,
     testimonies,
     messages,
+    tz,
   }
 }
 

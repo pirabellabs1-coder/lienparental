@@ -420,6 +420,45 @@
       "cancel": "Cancel",
       "clear": "Clear",
       "placeholder": "--:--"
+    },
+    "timezones": {
+      "auto": "Automatic (device time zone)",
+      "autoNow": "Automatic (device time zone: {zone})",
+      "hint": "Event, journal and reminder times are shown and entered in this time zone. The other parent sees the same appointments in their own.",
+      "other": "Other time zone",
+      "zones": {
+        "cayenne": "Cayenne (French Guiana)",
+        "paris": "Paris (mainland France)",
+        "guadeloupe": "Guadeloupe",
+        "martinique": "Martinique",
+        "reunion": "Réunion",
+        "mayotte": "Mayotte",
+        "noumea": "Nouméa (New Caledonia)",
+        "papeete": "Papeete (French Polynesia)",
+        "miquelon": "Saint Pierre and Miquelon",
+        "brussels": "Brussels",
+        "zurich": "Geneva / Zurich",
+        "luxembourg": "Luxembourg",
+        "london": "London",
+        "lisbon": "Lisbon",
+        "montreal": "Montreal / Toronto",
+        "saoPaulo": "São Paulo / Brasília",
+        "belem": "Belém / Macapá",
+        "paramaribo": "Paramaribo (Suriname)",
+        "georgetown": "Georgetown (Guyana)",
+        "portAuPrince": "Port-au-Prince (Haiti)",
+        "dakar": "Dakar",
+        "abidjan": "Abidjan"
+      },
+      "banner": {
+        "title": "Different time zone",
+        "text": "Your device is set to {device}, but the app shows times for {current}.",
+        "use": "Switch to {device}",
+        "keep": "Keep {current}",
+        "close": "Close"
+      },
+      "current": "Times are shown in this time zone: {zone}.",
+      "change": "Change"
     }
   }
 }

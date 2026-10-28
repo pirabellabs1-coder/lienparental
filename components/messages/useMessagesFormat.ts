@@ -9,7 +9,7 @@ import { timeLabel } from './format'
 
 /**
  * Libellés de la messagerie dans la langue courante (équivalents traduits de
- * ./format et des aides d'affichage de lib/messages, mêmes règles et même fuseau DEFAULT_TZ).
+ * ./format et des aides d'affichage de lib/messages, mêmes règles et même fuseau (celui de l'utilisateur)).
  */
 export function useMessagesFormat() {
   const t = useTranslations('messaging.format')

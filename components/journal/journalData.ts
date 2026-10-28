@@ -71,7 +71,7 @@ export function parseDay(iso: string): Date {
 }
 
 /**
- * Date et heure de création (preuve) dans DEFAULT_TZ. `createdAt` est un instant ISO
+ * Date et heure de création (preuve) dans le fuseau de l'utilisateur. `createdAt` est un instant ISO
  * (mode connecté) ou, pour certaines données de démo, un jour seul + `createdTime`.
  */
 export function createdParts(e: Pick<JournalItem, 'createdAt' | 'createdTime'>): { day: string; time?: string } {

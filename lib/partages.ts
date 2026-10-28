@@ -80,6 +80,8 @@ export type ShareContent = {
   documents: SharedDocument[]
   testimonies: SharedTestimony[]
   messages: SharedMessage[]
+  /** Fuseau du propriétaire du dossier (dates et heures affichées au destinataire). Absent : DEFAULT_TZ. */
+  tz?: string
 }
 
 export function shareStatus(s: Pick<ShareSummary, 'expiresAt' | 'revokedAt'>, now = Date.now()): ShareStatus {

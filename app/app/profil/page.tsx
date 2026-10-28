@@ -1,3 +1,4 @@
+import { getRequestTz } from '@/lib/tz-server'
 import { resolvePlan, subscription, usage } from '@/components/profil/data'
 import { GO } from '@/components/profil/storage'
 import { loadProfileUsage } from '@/components/profil/usage-server'
@@ -29,12 +30,13 @@ const statusOf = (v: BillingView, f: BillingFmt) => {
 export default async function ProfilPage({ searchParams }: PageProps) {
   const t = await getTranslations('account.profile.home')
   const locale = await getLocale()
-  const bf = billingFormat(await getTranslations('billing'), locale)
-  // Même rendu que formatDateFr (date longue, fuseau Guyane), dans la langue de l’utilisateur.
+  const tz = await getRequestTz()
+  const bf = billingFormat(await getTranslations('billing'), locale, tz)
+  // Même rendu que formatDateFr (date longue), dans la langue et le fuseau de l’utilisateur.
   const formatDate = (iso: string | null | undefined) => {
     const d = iso ? new Date(iso) : null
     if (!d || Number.isNaN(d.getTime())) return t('unknownDate')
-    return new Intl.DateTimeFormat(intlLocale(locale), { dateStyle: 'long', timeZone: 'America/Cayenne' }).format(d)
+    return new Intl.DateTimeFormat(intlLocale(locale), { dateStyle: 'long', timeZone: tz }).format(d)
   }
   if (!SUPABASE_ENABLED) {
     const forced = (await searchParams).plan

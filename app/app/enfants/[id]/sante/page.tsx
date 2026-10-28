@@ -79,7 +79,7 @@ export default function EnfantSantePage({ params }: { params: Promise<{ id: stri
 function HealthSpace({ child, back }: { child: Child; back: ReactNode }) {
   const t = useTranslations('family.children.health')
   const now = useClientNow()
-  // Jour courant dans DEFAULT_TZ (rappels de vaccin, traitements en cours).
+  // Jour courant dans le fuseau de l'utilisateur (rappels de vaccin, traitements en cours).
   const today = now ? dayKeyInTz(now) : ''
   const [announce, setAnnounce] = useState('')
   // Une seule lecture par source, partagée entre les rubriques.
@@ -258,7 +258,7 @@ function Appointments({ child, now, addHref, events }: { child: Child; now: Date
 }
 
 function DateChip({ iso }: { iso: string }) {
-  // Jour du rendez-vous dans DEFAULT_TZ, rendu comme date « jour seul » (UTC).
+  // Jour du rendez-vous dans le fuseau de l'utilisateur, rendu comme date « jour seul » (UTC).
   const { intl } = useFamilyFormat()
   const d = dayKeyToDate(dayKeyInTz(iso))
   return (

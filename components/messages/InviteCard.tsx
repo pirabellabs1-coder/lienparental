@@ -8,6 +8,7 @@ import { btn, card } from '@/components/ui/kit'
 import { copyText } from '@/components/coffre/CopyLinkField'
 import { cancelInvite, createInvite, inviteUrl, type CoparentInvite } from '@/lib/messages'
 import { intlLocale } from '@/lib/i18n/config'
+import { currentTz } from '@/lib/tz'
 
 type Props = {
   invite: CoparentInvite | null
@@ -83,7 +84,7 @@ export function InviteCard({ invite, senderPrenom, onChange, announce }: Props) 
 
   const url = inviteUrl(invite.token)
   const message = t('shareMessage', { url })
-  const expires = new Date(invite.expiresAt).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long' })
+  const expires = new Date(invite.expiresAt).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', timeZone: currentTz() })
   const canShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function'
 
   const onCopy = async () => {

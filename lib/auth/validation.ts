@@ -11,6 +11,7 @@
 import { z } from 'zod'
 import { authT, type AuthTranslate } from './errors'
 import { EMAIL_OTP_RE } from './email-otp'
+import { isTzPreference } from '@/lib/timezones'
 
 const CODE_PREFIX = 'auth.validation.'
 
@@ -102,7 +103,8 @@ export const accountInfoSchema = z.object({
 export const preferencesSchema = z.object({
   // fr/en/pt = langues de l'application ; 'es' toléré pour les anciennes préférences enregistrées.
   langue: z.enum(['fr', 'en', 'pt', 'es']),
-  fuseau: trimmed(64),
+  // '' = non choisi (ignoré à l'enregistrement) ; sinon "auto" ou fuseau IANA accepté (lib/timezones).
+  fuseau: z.union([z.literal(''), z.string().max(64).refine(isTzPreference, code('invalid'))]),
   formatDate: z.enum(['dd/mm/yyyy', 'mm/dd/yyyy', 'yyyy-mm-dd']),
   formatHeure: z.enum(['24', '12']),
   notifPush: z.boolean(),

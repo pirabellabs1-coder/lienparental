@@ -23,7 +23,8 @@ export type Prefs = {
 
 export const DEFAULT_PREFS: Prefs = {
   langue: 'fr',
-  fuseau: 'America/Cayenne',
+  // '' = jamais choisi : le fuseau appliqué vient de components/tz/TimeZoneProvider.
+  fuseau: '',
   formatDate: 'dd/mm/yyyy',
   formatHeure: '24',
   notifPush: true,

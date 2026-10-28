@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { PeriodNav } from '@/components/calendrier/CalendarHeader'
-import { useClientNow } from '@/components/calendrier/useClientNow'
+import { useGardeNow } from '@/components/garde/useGardeNow'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { CustodyLegend, CustodyMonth } from '@/components/garde/CustodyMonth'
 import { downloadText, takeGardeFlash } from '@/components/garde/store'
@@ -27,7 +27,7 @@ const btnSecondary =
 // Planning de garde (vue mois). Configuration : garde_configs (Supabase) ou sessionStorage (démo).
 // Prénoms : enfants du compte et parent lié (useGardeNames), formulation neutre si inconnus.
 export default function GardePage() {
-  const today = useClientNow()
+  const today = useGardeNow()
   const names = useGardeNames()
   const t = useTranslations('calendar')
   const f = useGardeFormat(names)

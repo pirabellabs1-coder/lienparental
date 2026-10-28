@@ -1,19 +1,19 @@
 // Formatage des dates de la messagerie. Règle unique de l'application (lib/tz) : un instant
-// se lit, se regroupe par jour et s'affiche dans DEFAULT_TZ, jamais dans le fuseau du
+// se lit, se regroupe par jour et s'affiche dans le fuseau de l'utilisateur, jamais dans le fuseau implicite du
 // navigateur ni du serveur (même rendu partout, y compris dans les exports PDF).
 import { addDaysToKey, dayKeyInTz, fmtDayKey, timeInTz } from '@/lib/tz'
 
-/** « 09:30 » dans DEFAULT_TZ. */
+/** « 09:30 » dans le fuseau de l'utilisateur. */
 export function timeLabel(iso: string): string {
   return timeInTz(iso)
 }
 
-/** Clé de regroupement par jour "yyyy-mm-dd" dans DEFAULT_TZ. */
+/** Clé de regroupement par jour "yyyy-mm-dd" dans le fuseau de l'utilisateur. */
 export function dayKey(iso: string): string {
   return dayKeyInTz(iso)
 }
 
-/** « Aujourd'hui », « Hier », « Lundi 20 octobre » (année ajoutée si différente), jours DEFAULT_TZ. */
+/** « Aujourd'hui », « Hier », « Lundi 20 octobre » (année ajoutée si différente), jours du fuseau de l'utilisateur. */
 export function dayLabel(iso: string, now: Date = new Date()): string {
   const day = dayKeyInTz(iso)
   const today = dayKeyInTz(now)
@@ -26,7 +26,7 @@ export function dayLabel(iso: string, now: Date = new Date()): string {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-/** Heure si aujourd'hui, « Hier », sinon « 26 oct. » (listes), jours DEFAULT_TZ. */
+/** Heure si aujourd'hui, « Hier », sinon « 26 oct. » (listes), jours du fuseau de l'utilisateur. */
 export function shortStamp(iso: string, now: Date = new Date()): string {
   const day = dayKeyInTz(iso)
   const today = dayKeyInTz(now)
@@ -35,7 +35,7 @@ export function shortStamp(iso: string, now: Date = new Date()): string {
   return fmtDayKey(day, { day: 'numeric', month: 'short' })
 }
 
-/** « 26 octobre 2026 à 09:30 » (export, notes de preuve), DEFAULT_TZ. */
+/** « 26 octobre 2026 à 09:30 » (export, notes de preuve), fuseau de l'utilisateur. */
 export function fullStamp(iso: string): string {
   return `${fmtDayKey(dayKeyInTz(iso), { day: 'numeric', month: 'long', year: 'numeric' })} à ${timeLabel(iso)}`
 }

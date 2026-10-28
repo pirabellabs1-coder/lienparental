@@ -14,26 +14,15 @@ import 'server-only'
  * création rejouée renvoie 409 et devient une mise à jour, jamais un doublon.
  */
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { appUrl } from '@/lib/auth/redirect'
 import { DEFAULT_TZ } from '@/lib/tz'
 import { enc, gcal, type GResult, type GoogleCalendar, type GoogleEvent, type GoogleEventBody } from './calendar-api'
 import { googleOAuthConfig } from './config'
 import { openToken, sealToken } from './crypto'
 import { refreshAccessToken, revokeToken } from './oauth'
 import * as store from './store'
-import { GENERIC_TITLES, type DbEventType } from './types'
+import { toGoogleEvent, type EventRow } from './event-body'
+import { tzFromPreferencesRow } from '@/lib/timezones'
 
-type EventRow = {
-  id: string
-  type: DbEventType
-  titre: string
-  description: string | null
-  lieu: string | null
-  start_at: string
-  end_at: string | null
-  reminder_minutes: number | null
-  deleted_at: string | null
-}
 
 export type SyncOutcome = 'synced' | 'removed' | 'skipped' | 'queued' | 'not_connected' | 'reauth_required' | 'failed'
 
@@ -56,7 +45,8 @@ function raise(r: Extract<GResult<unknown>, { ok: false }>): never {
 /** Session d'appel : jeton d'accès en cache chiffré, rafraîchi à l'expiration ou sur 401 (une fois). */
 class GoogleSession {
   private token: string | null = null
-  constructor(readonly conn: store.ConnectionRow) {}
+  /** @param tz Fuseau de l'utilisateur (preferences.ui.fuseau) : start/end.timeZone et agenda dédié. */
+  constructor(readonly conn: store.ConnectionRow, readonly tz: string = DEFAULT_TZ) {}
 
   private async freshToken(force: boolean): Promise<string> {
     const c = this.conn
@@ -99,7 +89,7 @@ class GoogleSession {
     const r = await this.call<GoogleCalendar>('POST', '/calendars', {
       summary: 'Lien Parental',
       description: 'Événements envoyés depuis l’application Lien Parental.',
-      timeZone: DEFAULT_TZ,
+      timeZone: this.tz,
     })
     if (!r.ok) raise(r)
     this.conn.calendar_id = r.data.id
@@ -111,26 +101,6 @@ class GoogleSession {
   async forgetCalendar(): Promise<void> {
     this.conn.calendar_id = null
     await store.updateConnection(this.conn.user_id, { calendar_id: null })
-  }
-}
-
-function toGoogleEvent(ev: EventRow, conn: store.ConnectionRow): GoogleEventBody {
-  const masked = conn.mask_mode === 'all' || (conn.mask_mode === 'sensitive' && ev.type === 'sante')
-  const end = ev.end_at ?? new Date(Date.parse(ev.start_at) + 3_600_000).toISOString()
-  const reminder = ev.reminder_minutes != null ? Math.min(Math.max(0, ev.reminder_minutes), 40_320) : null
-  const footer = 'Ajouté depuis Lien Parental.'
-  return {
-    summary: masked ? GENERIC_TITLES[ev.type] : ev.titre.slice(0, 250),
-    // Masqué : ni description ni lieu ne quittent l'application.
-    description: masked ? 'Détails disponibles dans Lien Parental.' : [ev.description?.trim(), footer].filter(Boolean).join('\n\n'),
-    ...(masked || !ev.lieu ? {} : { location: ev.lieu.slice(0, 200) }),
-    start: { dateTime: ev.start_at, timeZone: DEFAULT_TZ },
-    end: { dateTime: end, timeZone: DEFAULT_TZ },
-    reminders: reminder != null ? { useDefault: false, overrides: [{ method: 'popup', minutes: reminder }] } : { useDefault: false, overrides: [] },
-    extendedProperties: { private: { lienParentalId: ev.id } },
-    source: { title: 'Lien Parental', url: `${appUrl()}/app/calendrier/${ev.id}` },
-    visibility: masked ? 'private' : 'default',
-    status: 'confirmed',
   }
 }
 
@@ -158,7 +128,7 @@ async function reconcile(s: GoogleSession, userDb: SupabaseClient, eventId: stri
     return 'removed'
   }
 
-  const body = toGoogleEvent(ev, s.conn)
+  const body = toGoogleEvent(ev, s.conn, s.tz)
 
   if (link) {
     const r = await s.call<GoogleEvent>('PUT', `/calendars/${enc(link.external_calendar_id)}/events/${enc(link.external_event_id)}`, body)
@@ -190,16 +160,18 @@ async function reconcile(s: GoogleSession, userDb: SupabaseClient, eventId: stri
   throw new PermanentError('calendar_unavailable')
 }
 
-async function activeSession(userId: string): Promise<GoogleSession | SyncOutcome> {
+async function activeSession(userId: string, userDb: SupabaseClient): Promise<GoogleSession | SyncOutcome> {
   const conn = await store.getConnection(userId)
   if (!conn || conn.status === 'disconnected') return 'not_connected'
   if (conn.status === 'reauth_required') return 'reauth_required'
-  return new GoogleSession(conn)
+  // Fuseau de l'utilisateur (repli DEFAULT_TZ si la préférence est illisible).
+  const { data: prefs } = await userDb.from('preferences').select('ui').eq('user_id', userId).maybeSingle()
+  return new GoogleSession(conn, tzFromPreferencesRow(prefs as { ui?: unknown } | null))
 }
 
 /** Synchronise un événement maintenant ; panne passagère → mis en file. */
 export async function syncEvent(userId: string, userDb: SupabaseClient, eventId: string, op: 'upsert' | 'delete'): Promise<SyncOutcome> {
-  const s = await activeSession(userId)
+  const s = await activeSession(userId, userDb)
   if (typeof s === 'string') return s
   try {
     const out = await reconcile(s, userDb, eventId)
@@ -225,7 +197,7 @@ export async function syncEvent(userId: string, userDb: SupabaseClient, eventId:
 
 /** Traite les tâches dues de l'utilisateur (borné : quelques secondes par appel). */
 export async function processQueue(userId: string, userDb: SupabaseClient, limit = 10): Promise<{ processed: number; remaining: number; reauthRequired: boolean }> {
-  const s = await activeSession(userId)
+  const s = await activeSession(userId, userDb)
   if (typeof s === 'string') {
     const { pending } = await store.queueCounts(userId)
     return { processed: 0, remaining: pending, reauthRequired: s === 'reauth_required' }

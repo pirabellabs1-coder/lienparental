@@ -3,7 +3,9 @@
  * Notifications sur CET appareil (Web Push) : état, activation, désactivation,
  * liste des autres appareils. La permission du navigateur n'est demandée QUE sur
  * un clic (jamais au chargement de la page). iPhone / iPad : l'application doit
- * d'abord être ajoutée à l'écran d'accueil.
+ * d'abord être ajoutée à l'écran d'accueil (iOS 16.4+).
+ * « Envoyer une notification de test » (POST /api/push/test) : vérification en quelques
+ * secondes, sur tous les appareils du compte. Notifications bloquées : aide par plateforme.
  */
 import { useCallback, useEffect, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
@@ -13,9 +15,10 @@ import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
 import { DEFAULT_TZ } from '@/lib/tz'
 import {
-  currentSubscription, disablePushOnThisDevice, enablePushOnThisDevice, listPushDevices, pushSupport, removePushDevice, sha16,
+  currentSubscription, disablePushOnThisDevice, enablePushOnThisDevice, helpPlatform, listPushDevices, pushSupport, removePushDevice, sendTestPush, sha16,
   PushError, type PushDevice, type PushSupport,
 } from '@/lib/notify/client'
+import { pushTestMessage } from '@/lib/notify/push-test'
 
 type State = 'loading' | 'on' | 'off' | 'blocked'
 
@@ -29,10 +32,14 @@ export function PushDeviceCard({ accountPushEnabled }: { accountPushEnabled: boo
   const [error, setError] = useState<string | null>(null)
   const [devices, setDevices] = useState<PushDevice[]>([])
   const [mine, setMine] = useState<string | null>(null)
+  const [testing, setTesting] = useState(false)
+  const [testResult, setTestResult] = useState<{ ok: boolean; text: string } | null>(null)
+  const [platform, setPlatform] = useState<'ios' | 'android' | 'desktop'>('desktop')
 
   const refresh = useCallback(async () => {
     const s = pushSupport()
     setSupport(s)
+    setPlatform(helpPlatform())
     if (s !== 'supported') { setState('off'); return }
     if (Notification.permission === 'denied') setState('blocked')
     const sub = await currentSubscription().catch(() => null)
@@ -85,13 +92,31 @@ export function PushDeviceCard({ accountPushEnabled }: { accountPushEnabled: boo
     }
   }
 
+  const sendTest = async () => {
+    if (testing) return
+    setTesting(true); setTestResult(null)
+    try {
+      const r = await sendTestPush()
+      const m = pushTestMessage(r, state === 'on')
+      setTestResult({ ok: r.status === 'sent', text: t(`test.${m.key}`, m.values) })
+      // Abonnements expirés supprimés côté serveur : la liste et l'état changent.
+      if (r.expired > 0) await refresh()
+    } catch (e) {
+      setTestResult({ ok: false, text: e instanceof PushError && e.message ? e.message : t('test.result.failed') })
+    } finally {
+      setTesting(false)
+    }
+  }
+
   const others = devices.filter(d => d.endpointHash !== mine)
+  const canTest = support === 'supported' && state !== 'loading' && (state === 'on' || devices.length > 0)
 
   let status: string
   if (support === null || state === 'loading') status = t('status.checking')
   else if (support === 'demo') status = t('status.demo')
   else if (support === 'not-configured') status = t('status.notConfigured')
   else if (support === 'ios-needs-install') status = t('status.iosInstall')
+  else if (support === 'ios-update') status = t('status.iosUpdate')
   else if (support === 'unsupported') status = t('status.unsupported')
   else if (state === 'blocked') status = t('status.blocked')
   else if (state === 'on') status = accountPushEnabled ? t('status.on') : t('status.onAccountOff')
@@ -127,7 +152,33 @@ export function PushDeviceCard({ accountPushEnabled }: { accountPushEnabled: boo
         )
       )}
 
+      {support === 'supported' && state === 'blocked' && (
+        <div className="mt-3 rounded-xl bg-night-50 px-3 py-2.5 text-[13px] leading-5 text-night-800">
+          <p className="font-semibold text-night-900">{t('blockedHelp.title')}</p>
+          <p className="mt-0.5">{t(`blockedHelp.${platform}`)}</p>
+        </div>
+      )}
+
       {error && <p role="alert" className="mt-3 text-[13px] font-medium text-alert-600">{error}</p>}
+
+      {canTest && (
+        <div className="mt-4 border-t border-night-100 pt-3">
+          <p className="text-[13px] leading-5 text-night-700">{t('test.hint')}</p>
+          <button
+            type="button"
+            onClick={sendTest}
+            aria-disabled={testing}
+            aria-busy={testing}
+            className={cn(btn.secondary, 'mt-2', testing && 'cursor-not-allowed opacity-50')}
+          >
+            {testing ? t('test.sending') : t('test.button')}
+          </button>
+          <p role="status" aria-live="polite" className={cn('mt-2 text-[13px] font-medium', testResult?.ok ? 'text-leaf-700' : 'text-alert-600')}>
+            {testResult?.text ?? ''}
+          </p>
+          {testResult?.ok && <p className="mt-1 text-[12px] leading-5 text-night-600">{t('test.notReceived')}</p>}
+        </div>
+      )}
 
       {others.length > 0 && (
         <div className="mt-4 border-t border-night-100 pt-3">

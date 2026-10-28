@@ -8,6 +8,8 @@ import { ScopedIntlProvider } from '@/components/i18n/ScopedIntlProvider'
 import { CLIENT_NS_APP } from '@/lib/i18n/client-namespaces'
 import { getCurrentUser } from '@/lib/auth/session'
 import { getEffectivePlan } from '@/lib/billing/entitlements'
+import { getRequestTzInfo } from '@/lib/tz-server'
+import { TimeZoneProvider } from '@/components/tz/TimeZoneProvider'
 import type { PlanId } from '@/components/profil/pricing'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,10 +29,12 @@ async function sidebarPlan(): Promise<PlanId> {
 }
 
 export default async function AppShellLayout({ children }: { children: React.ReactNode }) {
-  const plan = await sidebarPlan()
+  const [plan, tz] = await Promise.all([sidebarPlan(), getRequestTzInfo()])
   return (
     // Catalogue des modules de l'espace connecté (sans e-mails, erreurs serveur, site public…) : audit C3.
     <ScopedIntlProvider namespaces={CLIENT_NS_APP}>
+    {/* Fuseau de l'utilisateur (préférence) : posé avant le rendu des pages (lib/tz → currentTz). */}
+    <TimeZoneProvider initialTz={tz.tz} preference={tz.preference}>
     <div className="min-h-dvh bg-white lg:bg-[#f7f8fc]">
       <DesktopSidebar plan={plan} />
       <div className="md:pl-64 lg:pr-8">
@@ -45,6 +49,7 @@ export default async function AppShellLayout({ children }: { children: React.Rea
       <SearchProvider />
       <LocaleSync />
     </div>
+    </TimeZoneProvider>
     </ScopedIntlProvider>
   )
 }

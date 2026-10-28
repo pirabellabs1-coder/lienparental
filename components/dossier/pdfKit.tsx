@@ -119,12 +119,12 @@ export function pdfSafe(text: string): string {
 
 const NUMERIC_DAY = { day: '2-digit', month: '2-digit', year: 'numeric' } as const
 
-/** Instant → « 25/10/2026 14:30 » dans DEFAULT_TZ. */
+/** Instant → « 25/10/2026 14:30 » dans le fuseau de l'utilisateur. */
 export function frDateTime(iso: string): string {
   return `${fmtDayKey(dayKeyInTz(iso), NUMERIC_DAY)} ${timeInTz(iso)}`
 }
 
-/** Jour seul ("yyyy-mm-dd") ou instant (jour DEFAULT_TZ) → « 25/10/2026 ». */
+/** Jour seul ("yyyy-mm-dd") ou instant (jour du fuseau de l'utilisateur) → « 25/10/2026 ». */
 export function frDay(iso: string): string {
   return fmtDayKey(dayKeyInTz(iso), NUMERIC_DAY)
 }

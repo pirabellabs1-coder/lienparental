@@ -1,3 +1,4 @@
+import { getRequestTz } from '@/lib/tz-server'
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { TopBar } from '@/components/mobile/TopBar'
@@ -36,7 +37,7 @@ export default async function AbonnementPage({ searchParams }: PageProps) {
   const formule = firstParam(sp.formule)
   const reason = paywallReason(sp.raison)
   const t = await getTranslations('billing')
-  const f = billingFormat(t, await getLocale())
+  const f = billingFormat(t, await getLocale(), await getRequestTz())
   // Raison du paywall traduite (la clé est validée par paywallReason).
   const reasonKey = Array.isArray(sp.raison) ? sp.raison[0] : sp.raison
   const reasonText = reason && reasonKey ? { title: t(`paywall.${reasonKey}.title`), text: t(`paywall.${reasonKey}.text`) } : null

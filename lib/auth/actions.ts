@@ -186,6 +186,8 @@ function toRow(p: Partial<PreferencesInput>, currentUi: Record<string, unknown>)
   const ui: Record<string, unknown> = { ...currentUi }
   let uiChanged = false
   for (const k of UI_KEYS) {
+    // Fuseau vide = jamais choisi : on ne remplace pas la valeur enregistrée.
+    if (k === 'fuseau' && !p.fuseau) continue
     if (p[k] !== undefined) { ui[k] = p[k]; uiChanged = true }
   }
   if (uiChanged) row.ui = ui

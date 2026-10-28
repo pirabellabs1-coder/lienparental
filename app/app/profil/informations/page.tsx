@@ -19,6 +19,10 @@ import { authErrorMessage } from '@/lib/auth/errors'
 import { appUrl } from '@/lib/auth/redirect'
 import { ACCOUNT_COUNTRIES, emailSchema, type AccountCountry } from '@/lib/auth/validation'
 import { applyLocale } from '@/lib/i18n/actions'
+import { applyTimeZone } from '@/lib/tz-actions'
+import { deviceTz } from '@/lib/tz'
+import { useTimeZone, useTimeZonePreference } from '@/components/tz/TimeZoneProvider'
+import { useTzOptions } from '@/components/tz/useTzOptions'
 
 type Form = {
   prenom: string
@@ -72,6 +76,8 @@ export default function InformationsWizardPage() {
   const [saveError, setSaveError] = useState<string>()
   // Supabase : profil réel (public.users) ; démonstration : profil fictif.
   const { profile: account, loading: accountLoading } = useAccountProfile(profile)
+  const activeTz = useTimeZone()
+  const tzPreference = useTimeZonePreference()
   const [form, setForm] = useState<Form>({
     prenom: profile.prenom,
     nom: profile.nom,
@@ -85,12 +91,14 @@ export default function InformationsWizardPage() {
     ville: 'Paris',
     pays: 'FR',
     langue: locale,
-    fuseau: 'America/Cayenne',
+    // Fuseau réellement appliqué (préférence du compte, ou fuseau de l'appareil adopté).
+    fuseau: tzPreference ?? activeTz,
     formatDate: 'dd/mm/yyyy',
     notifEmail: true,
     notifPush: true,
   })
   const set = <K extends keyof Form>(k: K, v: Form[K]) => setForm(f => ({ ...f, [k]: v }))
+  const tzOptions = useTzOptions(form.fuseau)
 
   // Pré-remplissage depuis la base (Supabase uniquement ; la démo garde ses valeurs).
   useEffect(() => {
@@ -118,7 +126,7 @@ export default function InformationsWizardPage() {
       const p = res.data
       setForm(f => ({
         ...f,
-        fuseau: p.fuseau ?? f.fuseau,
+        fuseau: p.fuseau || f.fuseau,
         formatDate: p.formatDate ?? f.formatDate,
         notifEmail: p.notifEmail ?? f.notifEmail,
         notifPush: p.notifPush ?? f.notifPush,
@@ -212,6 +220,7 @@ export default function InformationsWizardPage() {
     }
     // La langue choisie ici s'applique aussi à l'affichage (cookie lp_locale + préférence du compte).
     await applyLocale(form.langue)
+    if (form.fuseau) await applyTimeZone(form.fuseau, deviceTz())
     router.refresh()
     try {
       sessionStorage.setItem(SUMMARY_KEY, JSON.stringify({
@@ -302,10 +311,7 @@ export default function InformationsWizardPage() {
           {step === 4 && (
             <div className="space-y-3">
               <BoxSelect label={t('language')} value={form.langue} onChange={e => set('langue', e.target.value)} options={LANGUES} leading={<Globe className="h-6 w-6 text-orange-500" />} />
-              <BoxSelect label={t('timezone')} value={form.fuseau} onChange={e => set('fuseau', e.target.value)} leading={<Clock className="h-6 w-6 text-orange-500" />} options={[
-                { value: 'Europe/Paris', label: '(UTC+01:00) Paris' }, { value: 'Europe/Brussels', label: t('tz.brussels') },
-                { value: 'America/Cayenne', label: '(UTC-03:00) Cayenne' }, { value: 'Indian/Reunion', label: t('tz.reunion') }, { value: 'America/Montreal', label: t('tz.montreal') },
-              ]} />
+              <BoxSelect label={t('timezone')} value={form.fuseau} onChange={e => set('fuseau', e.target.value)} leading={<Clock className="h-6 w-6 text-orange-500" />} options={tzOptions} />
               <BoxSelect label={t('dateFormat')} value={form.formatDate} onChange={e => set('formatDate', e.target.value)} leading={<CalendarDays className="h-6 w-6 text-orange-500" />} options={[
                 { value: 'dd/mm/yyyy', label: t('dmy') }, { value: 'mm/dd/yyyy', label: t('mdy') }, { value: 'yyyy-mm-dd', label: t('ymd') },
               ]} />

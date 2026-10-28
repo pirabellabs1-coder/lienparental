@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { Input, RadioGroup, Select, StepIndicator, Switch } from '@/components/ui'
 import { TopBar } from '@/components/mobile/TopBar'
 import { LoadingState } from '@/components/mobile/StateScreens'
-import { useClientNow } from '@/components/calendrier/useClientNow'
+import { useGardeNow } from '@/components/garde/useGardeNow'
 import { CustomPatternPicker } from '@/components/garde/CustomPatternPicker'
 import { setGardeFlash } from '@/components/garde/store'
 import { useGardeNames } from '@/components/garde/useGardeNames'
@@ -68,7 +68,7 @@ export default function ConfigurerGardePage() {
   const weekdays = weekdayNames(locale)
   /** 0 = dimanche … 6 = samedi (lib/garde) → nom du jour dans la langue active. */
   const weekdayLong = (d: number) => weekdays[(d + 6) % 7].long
-  const today = useClientNow()
+  const today = useGardeNow()
   const names = useGardeNames()
   const [config, setConfig] = useState<GardeConfig | null>(null)
   const [step, setStep] = useState(1)

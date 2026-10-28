@@ -14,6 +14,7 @@ import {
   type PlanId,
 } from '@/components/profil/pricing'
 import { intlLocale } from '@/lib/i18n/config'
+import { currentTz } from '@/lib/tz'
 import { planDirection, sameOffer } from '@/lib/billing/plans'
 import type { BillingView } from '@/lib/billing/types'
 import {
@@ -30,10 +31,13 @@ import {
 /** Traducteur next-intl de l'espace de noms racine `billing`. */
 export type BillingT = (key: string, values?: Record<string, string | number>) => string
 
-/** Outils de formatage liés à une locale (prix EUR, dates, noms de formules). */
-export function billingFormat(t: BillingT, locale: string) {
+/**
+ * Outils de formatage liés à une locale (prix EUR, dates, noms de formules).
+ * `tz` : fuseau de l'utilisateur (navigateur : currentTz ; serveur : passer `await getRequestTz()`).
+ */
+export function billingFormat(t: BillingT, locale: string, tz: string = currentTz()) {
   const loc = intlLocale(locale)
-  const dateFmt = new Intl.DateTimeFormat(loc, { dateStyle: 'long', timeZone: 'America/Cayenne' })
+  const dateFmt = new Intl.DateTimeFormat(loc, { dateStyle: 'long', timeZone: tz })
   const price = (v: number) => formatPriceIn(v, loc)
   const plan = (p: PlanId) => t(`common.plan.${p}`)
   const offer = (p: PaidPlan, c: Cycle) => t(`common.offer.${c}`, { plan: plan(p) })

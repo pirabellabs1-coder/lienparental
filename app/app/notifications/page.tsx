@@ -9,6 +9,7 @@ import { EmptyState, ErrorState, LoadingState } from '@/components/mobile/StateS
 import { cn } from '@/lib/cn'
 import { LIVE } from '@/lib/data/core'
 import { intlLocale } from '@/lib/i18n/config'
+import { currentTz } from '@/lib/tz'
 import {
   markAllNotificationsRead, markNotificationRead, useNotifications, type AppNotification,
 } from '@/lib/data/notifications'
@@ -59,7 +60,7 @@ function timeAgo(iso: string, t: T, locale: string, now = Date.now()): string {
   if (Math.abs(h) < 24) return capitalize(rtf.format(h, 'hour'))
   const d = Math.round(h / 24)
   if (Math.abs(d) < 7) return capitalize(rtf.format(d, 'day'))
-  return new Date(iso).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric' })
+  return new Date(iso).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: currentTz() })
 }
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)

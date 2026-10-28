@@ -4,6 +4,7 @@ import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
 import { escapeHtml, safeUrl } from '../escape'
 import { dateLocale, emailT, greeting, type Locale } from '../i18n'
+import { DEFAULT_TZ } from '@/lib/tz'
 
 export type NewLoginProps = {
   prenom: string
@@ -15,19 +16,21 @@ export type NewLoginProps = {
   systeme: string
   /** Date au format ISO 8601. */
   dateIso: string
+  /** Fuseau du destinataire (preferences.ui.fuseau). Absent : DEFAULT_TZ. */
+  tz?: string
 }
 
 /** Objet en français (historique) ; l'objet traduit est renvoyé par newLoginEmail(props, locale). */
 export const newLoginSubject = 'Nouvelle connexion à votre compte Lien Parental'
 
-function formatDate(iso: string, locale: Locale): string {
+function formatDate(iso: string, locale: Locale, tz: string = DEFAULT_TZ): string {
   try {
     const d = new Date(iso)
     if (Number.isNaN(d.getTime())) return iso
     return new Intl.DateTimeFormat(dateLocale(locale), {
       dateStyle: 'full',
       timeStyle: 'short',
-      timeZone: 'America/Cayenne',
+      timeZone: tz,
     }).format(d)
   } catch {
     return iso
@@ -37,7 +40,7 @@ function formatDate(iso: string, locale: Locale): string {
 export function newLoginEmail(props: NewLoginProps, locale: Locale = 'fr'): { subject: string; html: string } {
   const tr = emailT(locale)
   const prenom = escapeHtml(props.prenom?.trim() || '')
-  const date = escapeHtml(formatDate(props.dateIso, locale))
+  const date = escapeHtml(formatDate(props.dateIso, locale, props.tz))
   const appareil = escapeHtml(props.appareil)
   const lieu = props.lieu?.trim() ? escapeHtml(props.lieu.trim()) : ''
   const systeme = escapeHtml(props.systeme)

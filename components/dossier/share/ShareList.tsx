@@ -9,12 +9,12 @@ import { copyText } from '@/components/coffre/CopyLinkField'
 import { Sheet } from '@/components/messages/Sheet'
 import { shareStatus, type ShareSummary } from '@/lib/partages'
 import { intlLocale } from '@/lib/i18n/config'
-import { DEFAULT_TZ } from '@/lib/tz'
+import { currentTz } from '@/lib/tz'
 
 const dayOf = (iso: string, locale: string) =>
-  new Date(iso).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', timeZone: DEFAULT_TZ })
+  new Date(iso).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', timeZone: currentTz() })
 const timeOf = (iso: string, locale: string) =>
-  new Date(iso).toLocaleTimeString(intlLocale(locale), { hour: '2-digit', minute: '2-digit', timeZone: DEFAULT_TZ })
+  new Date(iso).toLocaleTimeString(intlLocale(locale), { hour: '2-digit', minute: '2-digit', timeZone: currentTz() })
 
 // Libellés : family.courtFile.shareList.status.<statut> (traduits au rendu).
 const STATUS_BADGE = {
