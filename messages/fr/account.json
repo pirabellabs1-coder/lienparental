@@ -215,7 +215,10 @@
           "subscriptionSub": "Formule, paiement, factures, changement ou résiliation",
           "subscriptionFreeSub": "Offre Gratuite : voir les formules et s’abonner",
           "help": "Centre d'aide",
-          "helpSub": "FAQ, guides et contact support"
+          "helpSub": "FAQ, guides et contact support",
+          "credits": "Crédits IA",
+          "creditsSub": "{count, plural, =0 {Aucun crédit : acheter des analyses supplémentaires} one {# analyse supplémentaire disponible} other {# analyses supplémentaires disponibles}}",
+          "creditsExpiry": "{label} · expiration la plus proche le {date}"
         },
         "storageUsed": "Espace utilisé",
         "storageAria": "Espace de stockage utilisé",

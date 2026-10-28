@@ -12,7 +12,9 @@
  *   - error    { code, message }
  * Erreurs avant flux : JSON { error: { code, message } } (401, 413, 415, 422, 429).
  *
- * Quota : une analyse réussie = 1 unité (réservée avant l'appel, rendue en cas d'échec ou de refus).
+ * Quota : une analyse réussie = 1 unité (réservée avant l'appel, rendue en cas d'échec ou de refus) :
+ * quota mensuel de la formule, puis 1 crédit acheté (0510). Ni l'un ni l'autre → 429 quota_exceeded,
+ * avec `upgrade` (formule Gratuite) ; l'écran propose alors l'achat de crédits (/app/coach/credits).
  */
 import type Anthropic from '@anthropic-ai/sdk'
 import { getLocale, getTranslations } from 'next-intl/server'
@@ -37,7 +39,8 @@ import { buildContextText } from '@/lib/ai/context'
 import { PROMPT_VERSION, analysisSystemPrompt, neutralizeTags } from '@/lib/ai/prompts'
 import { AnalysisOutputSchema, normalizeAnalysis } from '@/lib/ai/schemas'
 import { completeAnalysis, insertPending, type CoachKind } from '@/lib/ai/analyses'
-import { getQuotaStatus, releaseAnalysis, reserveAnalysis } from '@/lib/ai/quota'
+import { getQuotaStatus, releaseAnalysis, reserveAnalysis, reserveDemoAnalysis, type QuotaStatus } from '@/lib/ai/quota'
+import { COACH_ANALYSES } from '@/components/profil/pricing'
 import { mockAnalysis } from '@/lib/ai/mock'
 import { sleep, sseResponse } from '@/lib/ai/sse'
 
@@ -153,8 +156,26 @@ export async function POST(req: Request) {
   const prepared = await prepare(form, (key, values) => ta(key as Parameters<typeof ta>[0], values))
   if (prepared instanceof Response) return prepared
 
+  const quotaExceeded = (s: QuotaStatus) =>
+    Response.json(
+      {
+        error: {
+          code: 'quota_exceeded',
+          message: s.plan !== 'gratuit'
+            ? ta('quotaExceededPaid', { quota: s.quota })
+            : ta('quotaExceededFree', { quota: s.quota, premium: COACH_ANALYSES.premium }),
+        },
+        quota: { used: s.used, quota: s.quota, remaining: 0, nextReleaseAt: s.nextReleaseAt },
+        upgrade: s.plan === 'gratuit',
+      },
+      { status: 429, headers: { 'Cache-Control': 'no-store' } },
+    )
+
   // --- Mode démonstration : pas de clé API -> réponse simulée -------------------
   if (!AI_ENABLED) {
+    // Comptes de démonstration : quota du profil de démo, puis crédits simulés (cookie lp_demo_ai).
+    const demoQuota = await reserveDemoAnalysis()
+    if (demoQuota && !demoQuota.ok) return quotaExceeded(demoQuota.status)
     const result = mockAnalysis(prepared.kind, prepared.kind === 'message' ? prepared.text : undefined, locale)
     let id = `demo_${Date.now().toString(36)}`
     if (!SUPABASE_ENABLED) {
@@ -175,19 +196,7 @@ export async function POST(req: Request) {
 
   // --- Quota ------------------------------------------------------------------------
   const reservation = await reserveAnalysis(user, { kind: prepared.kind as CoachKind, title: prepared.title })
-  if (!reservation.ok) {
-    const s = reservation.status
-    return Response.json(
-      {
-        error: {
-          code: 'quota_exceeded',
-          message: s.plan !== 'gratuit' ? ta('quotaExceededPaid', { quota: s.quota }) : ta('quotaExceededFree', { quota: s.quota }),
-        },
-        quota: { used: s.used, quota: s.quota, remaining: 0, nextReleaseAt: s.nextReleaseAt },
-      },
-      { status: 429, headers: { 'Cache-Control': 'no-store' } },
-    )
-  }
+  if (!reservation.ok) return quotaExceeded(reservation.status)
   const analysisId = reservation.analysis.id
 
   let contextText: string

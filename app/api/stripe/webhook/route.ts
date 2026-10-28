@@ -10,7 +10,8 @@ import { claimEvent, handleStripeEvent, markProcessed, releaseClaim } from '@/li
  * POST /api/stripe/webhook — synchronisation des abonnements depuis Stripe.
  *
  * Événements traités : HANDLED_STRIPE_EVENTS (lib/billing/events.ts) = checkout.session.completed,
- * customer.subscription.created|updated|deleted, invoice.paid, invoice.payment_failed
+ * customer.subscription.created|updated|deleted, invoice.paid, invoice.payment_failed,
+ * charge.refunded, charge.dispute.created (crédits IA)
  * (les autres sont acquittés et ignorés). scripts/stripe-setup.ts abonne l'endpoint à cette liste.
  * - Signature vérifiée sur le corps brut (STRIPE_WEBHOOK_SECRET).
  * - Idempotent : table stripe_events (Stripe livre au moins une fois, parfois en double).

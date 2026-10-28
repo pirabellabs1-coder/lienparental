@@ -5,6 +5,7 @@ import { intlLocale } from '@/lib/i18n/config';
 import { localePath } from '@/lib/i18n/routing';
 import { pageMetadata } from '@/lib/seo/metadata';
 import { LEGAL_UPDATED, isoDate } from '@/lib/seo/pages';
+import { AI_CREDIT_VALIDITY_MONTHS, packSummaries } from '@/lib/billing/credit-packs';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.legal.cgu');
@@ -15,13 +16,18 @@ export async function generateMetadata(): Promise<Metadata> {
 // Date partagée avec le sitemap (lib/seo/pages.ts).
 const LAST_UPDATED = isoDate(LEGAL_UPDATED.cgu);
 
-const SECTIONS = ['s1', 's2', 's3', 's4', 's5', 's6'] as const;
+// `credits` : crédits d'analyses du Coach IA (prix et validité issus de lib/billing/credit-packs.ts).
+const SECTIONS = ['s1', 's2', 's3', 's4', 's5', 'credits', 's6'] as const;
 
 export default async function CGUPage() {
   const t = await getTranslations('public.legal.cgu');
   const tl = await getTranslations('public.legal');
   const locale = await getLocale();
   const lastUpdated = new Intl.DateTimeFormat(intlLocale(locale), { dateStyle: 'long', timeZone: 'UTC' }).format(LAST_UPDATED);
+  const packs = new Intl.ListFormat(intlLocale(locale), { style: 'long', type: 'disjunction' }).format(
+    packSummaries(intlLocale(locale), (count, price) => t('credits.packItem', { count, price })),
+  );
+  const values = { packs, months: AI_CREDIT_VALIDITY_MONTHS };
   return (
     <div className="px-5 py-12 text-night-900 sm:px-8 sm:py-16">
       <article className="mx-auto max-w-[760px] rounded-3xl bg-white p-6 ring-1 ring-[#E5E7EB] sm:p-10">
@@ -51,7 +57,7 @@ export default async function CGUPage() {
                 {t(`${s}.title`)}
               </h2>
               <p className="mt-3">
-                {t(`${s}.body`)}
+                {t(`${s}.body`, values)}
               </p>
             </section>
           ))}

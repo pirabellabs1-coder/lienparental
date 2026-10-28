@@ -123,7 +123,9 @@
         "unknown_price": "Formule actuelle inconnue. Contactez l’assistance.",
         "payment_failed": "Le paiement de la différence a été refusé. Vérifiez votre moyen de paiement puis réessayez.",
         "change_not_applied": "Le changement n’a pas été appliqué. Rechargez la page puis réessayez."
-      }
+      },
+      "creditsInvalidPack": "Pack de crédits inconnu.",
+      "creditsWaiverRequired": "Cochez la case de renonciation au droit de rétractation pour continuer."
     },
     "google": {
       "sessionExpired": "Session expirée. Reconnectez-vous.",

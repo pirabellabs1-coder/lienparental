@@ -38,13 +38,13 @@
     "features": {
       "gratuit": {
         "vault": "Cofre de {gb} GB",
-        "coach": "3 análises do Coach com IA por mês",
+        "coach": "{count} análises do Coach com IA por mês",
         "journalCalendar": "Diário e calendário",
         "exportPdf": "Exportação em PDF"
       },
       "premium": {
         "vault": "Cofre de {gb} GB",
-        "coach": "10 análises do Coach com IA por mês",
+        "coach": "{count} análises do Coach com IA por mês",
         "templatesAll": "Todos os modelos de cartas e documentos",
         "journalAdvanced": "Diário cronológico avançado",
         "exportAll": "Exportação em PDF, Word e Canva",
@@ -56,7 +56,8 @@
         "expenses": "Acompanhamento reforçado das despesas compartilhadas",
         "exportAdvanced": "Exportação avançada (dossiê para advogado, mediador)",
         "supportPriority": "Atendimento prioritário",
-        "webPwa": "Acesso web e aplicativo instalável (PWA)"
+        "webPwa": "Acesso web e aplicativo instalável (PWA)",
+        "coach": "{count} análises do Coach com IA por mês"
       }
     },
     "comparison": {
@@ -77,9 +78,9 @@
       },
       "cells": {
         "coach": {
-          "gratuit": "3 análises / mês",
-          "premium": "10 análises / mês",
-          "coparentalite": "10 análises / mês"
+          "gratuit": "{count} análises / mês",
+          "premium": "{count} análises / mês",
+          "coparentalite": "{count} análises / mês"
         },
         "vault": {
           "gratuit": "{gb} GB",
@@ -280,7 +281,7 @@
     "paywall": {
       "coach": {
         "title": "Você usou suas análises gratuitas",
-        "text": "O plano Grátis inclui 3 análises do Coach com IA por mês. O Premium oferece 10."
+        "text": "O plano Grátis inclui {free} análises do Coach com IA por mês. O Premium oferece {premium}, e créditos de análise estão disponíveis para compra."
       },
       "stockage": {
         "title": "Seu cofre está quase cheio",

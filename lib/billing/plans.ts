@@ -8,7 +8,7 @@
 //  - plan EFFECTIF          : niveau propre, relevé à 'premium' si un parent lié
 //                             (même enfant, rôle titulaire ou parent) est en Coparentalité+.
 //                             Voir public.effective_plan() (0380) et docs/FAMILLE.md §12.
-import { PLAN_RANK, PRICING, type Cycle, type Offer, type PaidPlan, type PlanId } from '@/components/profil/pricing'
+import { COACH_ANALYSES, PLAN_RANK, PRICING, type Cycle, type Offer, type PaidPlan, type PlanId } from '@/components/profil/pricing'
 import type { PlanTier, SubscriptionPlan } from '@/lib/supabase/types'
 
 export type { Offer, PaidPlan, PlanId }
@@ -114,8 +114,8 @@ export function hasFeature(plan: PlanId, feature: Feature): boolean {
 
 // --- Quotas -----------------------------------------------------------------
 
-/** Analyses Coach IA par fenêtre glissante de 30 jours (CDC §6.2). */
-export const ANALYSIS_QUOTA_BY_PLAN: Record<PlanId, number> = { gratuit: 3, premium: 10, coparentalite: 10 }
+/** Analyses Coach IA par fenêtre glissante de 30 jours (CDC §6.2) : source unique COACH_ANALYSES (pricing.ts). */
+export const ANALYSIS_QUOTA_BY_PLAN: Readonly<Record<PlanId, number>> = COACH_ANALYSES
 
 /** Stockage (Go) d'un niveau, repris de PRICING.storage. */
 export function storageGbFor(plan: PlanId): number {

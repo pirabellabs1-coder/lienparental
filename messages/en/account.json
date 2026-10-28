@@ -215,7 +215,10 @@
           "subscriptionSub": "Plan, payment, invoices, change or cancel",
           "subscriptionFreeSub": "Free plan: see plans and subscribe",
           "help": "Help center",
-          "helpSub": "FAQ, guides and support contact"
+          "helpSub": "FAQ, guides and support contact",
+          "credits": "AI credits",
+          "creditsSub": "{count, plural, =0 {No credits: buy extra analyses} one {# extra analysis available} other {# extra analyses available}}",
+          "creditsExpiry": "{label} · earliest expiry on {date}"
         },
         "storageUsed": "Space used",
         "storageAria": "Storage space used",

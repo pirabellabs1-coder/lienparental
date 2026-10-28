@@ -177,7 +177,8 @@
         "impact": "Impact sur la communication"
       },
       "checked": " : vérifié",
-      "pending": " : en attente"
+      "pending": " : en attente",
+      "buyCredits": "Acheter des crédits"
     },
     "document": {
       "topTitle": "Coach parental IA",
@@ -265,7 +266,7 @@
       "inDays": "Dans {count} jours",
       "cycle30": "Cycle de 30 jours",
       "goodToKnow": "À savoir",
-      "goodToKnowText": "Chaque cycle vous permet d’effectuer jusqu’à {total} analyses avec Coach IA. Votre compteur se réinitialise automatiquement tous les 30 jours.",
+      "goodToKnowText": "Chaque cycle vous permet d’effectuer jusqu’à {total} analyses avec Coach IA. Votre compteur se réinitialise automatiquement tous les 30 jours. Au-delà, vos crédits d’analyses prennent le relais.",
       "seeHistory": "Voir mon historique",
       "detail": {
         "topTitle": "Détail utilisation",
@@ -300,12 +301,12 @@
         "aboutTitle": "À propos de Coach IA",
         "aboutText": "Coach IA vous accompagne avec des analyses personnalisées pour vous aider dans votre parentalité.",
         "quotaTitle": "Comment fonctionne votre quota ?",
-        "quotaText": "Vous disposez de {total} analyses par cycle de 30 jours. Une fois ce quota atteint, vous devrez attendre la réinitialisation pour réaliser de nouvelles analyses.",
+        "quotaText": "Vous disposez de {total} analyses par cycle de 30 jours. Une fois ce quota atteint, vos crédits d’analyses prennent le relais ; sans crédit, vous attendez qu’une analyse se libère.",
         "nextCycle": "Prochain cycle",
         "noneYet": "Aucune analyse décomptée pour le moment",
         "moreTitle": "Besoin de plus d’analyses ?",
-        "moreText": "Contactez notre équipe pour découvrir nos offres supplémentaires.",
-        "contact": "Nous contacter"
+        "moreText": "Achetez des crédits d’analyses, valables 12 mois et utilisés seulement une fois votre quota du mois épuisé.",
+        "buyCredits": "Acheter des crédits"
       },
       "trends": {
         "topTitle": "Tendances d’utilisation",
@@ -321,6 +322,14 @@
         "currentCycle": "Cycle actuel",
         "cycleN": "Cycle -{n}",
         "avgValue": "{value} analyses"
+      },
+      "credits": {
+        "title": "Crédits d’analyses",
+        "balance": "{count, plural, =0 {Aucun crédit} one {# crédit disponible} other {# crédits disponibles}}",
+        "expires": "Les plus anciens expirent le {date}",
+        "exhausted": "Quota du cycle atteint : achetez des crédits pour continuer sans attendre.",
+        "exhaustedCovered": "Quota du cycle atteint : vos prochaines analyses utilisent vos crédits.",
+        "buy": "Acheter des crédits"
       }
     },
     "guide": {
@@ -528,6 +537,45 @@
         "more2": "modèles",
         "seeAll": "Voir tous les modèles"
       }
+    },
+    "credits": {
+      "metaTitle": "Crédits IA",
+      "topTitle": "Crédits IA",
+      "title": "Crédits d’analyses du Coach IA",
+      "intro": "Votre formule inclut {quota} analyses par cycle de 30 jours. Les crédits ne servent qu’une fois ce quota épuisé.",
+      "balanceTitle": "Votre solde",
+      "balance": "{count, plural, =0 {Aucun crédit} one {# crédit} other {# crédits}}",
+      "nextExpiry": "Expiration la plus proche : {date}",
+      "noCredits": "Aucun crédit en cours de validité.",
+      "quotaLine": "Ce cycle : {used} / {quota} analyses de votre formule utilisées.",
+      "packsTitle": "Choisir un pack",
+      "packName": "{count} analyses",
+      "perAnalysis": "soit {price} par analyse",
+      "bestValue": "Meilleur prix",
+      "validity": "Valables {months} mois après l’achat. Prix TTC, paiement unique.",
+      "waiver": "Je demande l’accès immédiat aux crédits et je reconnais perdre mon droit de rétractation dès leur première utilisation.",
+      "waiverRequired": "(obligatoire)",
+      "pay": "Continuer vers le paiement",
+      "payDemo": "Simuler l’achat (démonstration)",
+      "secure": "Paiement sécurisé par Stripe : aucune donnée bancaire ne transite par Lien Parental. Crédits non remboursables une fois utilisés.",
+      "terms": "Conditions générales d’utilisation",
+      "demoNotice": "Démonstration : l’achat est simulé, aucun paiement n’est effectué. Les crédits sont ajoutés au compte de démonstration.",
+      "howTitle": "Comment ça marche ?",
+      "how1": "Les analyses incluses dans votre formule sont utilisées en premier.",
+      "how2": "Ensuite, chaque analyse utilise 1 crédit, en commençant par les plus anciens.",
+      "how3": "Une analyse qui échoue n’utilise aucun crédit.",
+      "success": "Paiement reçu : {count, plural, one {# crédit ajouté} other {# crédits ajoutés}} à votre compte.",
+      "successPending": "Paiement reçu : vos crédits apparaîtront dans quelques instants. Rechargez la page si besoin.",
+      "demoSuccess": "Démonstration : {count, plural, one {# crédit simulé ajouté} other {# crédits simulés ajoutés}}. Aucun paiement n’a été effectué.",
+      "canceled": "Paiement annulé : aucun montant n’a été débité.",
+      "errors": {
+        "waiver_required": "Cochez la case de renonciation au droit de rétractation pour continuer.",
+        "invalid_pack": "Choisissez un pack de crédits.",
+        "rate_limited": "Trop de tentatives. Patientez quelques minutes.",
+        "generic": "Paiement momentanément indisponible. Réessayez dans un instant."
+      },
+      "back": "Revenir au Coach",
+      "usage": "Voir mon utilisation"
     }
   }
 }

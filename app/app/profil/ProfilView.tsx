@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { Brain, CalendarDays, ChevronRight, CircleHelp, Cloud, LockKeyhole, SlidersHorizontal, UserRound } from 'lucide-react'
+import { Brain, CalendarDays, ChevronRight, CircleHelp, Cloud, Coins, LockKeyhole, SlidersHorizontal, UserRound } from 'lucide-react'
 import { ConfirmDialog } from '@/components/ui'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
@@ -33,6 +33,8 @@ export type ProfilViewProps = {
   /** null : consommation indisponible (erreur de lecture). */
   storage: { usedBytes: number; maxBytes: number } | null
   coach: { used: number; quota: number } | null
+  /** Crédits d'analyses du Coach IA (solde, expiration la plus proche déjà formatée côté serveur) ; null : indisponible. */
+  credits?: { balance: number; expiryLabel: string | null } | null
   /** Libellé de date de l'abonnement, ou null si inconnu (accès famille, facturation non branchée). */
   subscriptionDate: { label: string; date: string } | null
   /** Statut (libellé et phrase) issu de describeStatus, comme sur « Mon abonnement ». */
@@ -42,7 +44,7 @@ export type ProfilViewProps = {
 /** Date d'inscription du profil de démonstration (« mai 2024 » dans components/profil/data). */
 const DEMO_MEMBER_SINCE = '2024-05-15T12:00:00Z'
 
-export function ProfilView({ live, plan, storage, coach, subscriptionDate, status }: ProfilViewProps) {
+export function ProfilView({ live, plan, storage, coach, credits, subscriptionDate, status }: ProfilViewProps) {
   const t = useTranslations('account.profile.home')
   const tb = useTranslations('billing.common.plan')
   const locale = useLocale()
@@ -158,6 +160,18 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate, statu
               </>
             ) : (
               <ListRow href="/app/abonnement" icon={<CrownIcon variant="outline" className="h-6 w-7 text-night-900" />} title={t('rows.subscription')} subtitle={t('rows.subscriptionFreeSub')} />
+            )}
+            {credits && (
+              <ListRow
+                href="/app/coach/credits"
+                icon={<Coins className="h-6 w-6" strokeWidth={1.7} />}
+                title={t('rows.credits')}
+                subtitle={
+                  credits.balance > 0 && credits.expiryLabel
+                    ? t('rows.creditsExpiry', { label: t('rows.creditsSub', { count: credits.balance }), date: credits.expiryLabel })
+                    : t('rows.creditsSub', { count: credits.balance })
+                }
+              />
             )}
           </ListGroup>
         </section>

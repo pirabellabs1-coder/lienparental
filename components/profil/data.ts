@@ -3,7 +3,7 @@
 // abonnement (lib/billing). Ces valeurs ne servent qu'en démonstration ou comme repli neutre.
 import { mockUser } from '@/lib/mock-data'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { PRICING, type Cycle, type PlanId } from './pricing'
+import { COACH_ANALYSES, PRICING, type Cycle, type PlanId } from './pricing'
 
 export const APP_VERSION = '1.0.0'
 export const SUPPORT_EMAIL = 'support@lienparental.fr'
@@ -38,9 +38,9 @@ export const subscription = {
 
 /** Démonstration uniquement (comptes réels : loadProfileUsage, components/profil/usage-server). */
 export const usage = {
-  gratuit: { storageUsed: 1.2, storageMax: PRICING.storage.free, coachUsed: 1, coachMax: 3 },
-  premium: { storageUsed: 5, storageMax: PRICING.storage.premium, coachUsed: 7, coachMax: 10 },
-  coparentalite: { storageUsed: 5, storageMax: PRICING.storage.coparentalite, coachUsed: 7, coachMax: 10 },
+  gratuit: { storageUsed: 1.2, storageMax: PRICING.storage.free, coachUsed: 1, coachMax: COACH_ANALYSES.gratuit },
+  premium: { storageUsed: 5, storageMax: PRICING.storage.premium, coachUsed: 7, coachMax: COACH_ANALYSES.premium },
+  coparentalite: { storageUsed: 5, storageMax: PRICING.storage.coparentalite, coachUsed: 7, coachMax: COACH_ANALYSES.coparentalite },
 }
 
 export const invoices = [

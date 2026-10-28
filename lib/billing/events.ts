@@ -8,6 +8,9 @@ export const HANDLED_STRIPE_EVENTS = [
   'customer.subscription.deleted',
   'invoice.paid',
   'invoice.payment_failed',
+  // Crédits IA : remboursement total ou litige → lot révoqué (revokeCreditsForPayment).
+  'charge.refunded',
+  'charge.dispute.created',
 ] as const
 
 export type HandledStripeEvent = (typeof HANDLED_STRIPE_EVENTS)[number]

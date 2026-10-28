@@ -449,8 +449,13 @@
           "title": "5. Responsabilité",
           "body": "Lien Parental fournit un outil de soutien à la coparentalité ; il ne se substitue en aucun cas à un conseil juridique, médical ou psychologique. L'éditeur met en œuvre les meilleurs efforts pour assurer la disponibilité du service, sans toutefois garantir une continuité absolue. Sa responsabilité ne saurait être engagée pour un préjudice indirect ou pour une interruption liée à un cas de force majeure."
         },
+        "credits": {
+          "title": "6. Crédits d’analyses du Coach IA",
+          "body": "Au-delà du quota mensuel d’analyses inclus dans sa formule, l’utilisateur peut acheter des crédits d’analyses du Coach IA, quelle que soit sa formule (Gratuite comprise) : {packs}. Les prix s’entendent toutes taxes comprises et sont payés en une fois par l’intermédiaire de Stripe. Un crédit correspond à une analyse. Les crédits sont valables {months} mois à compter de l’achat, puis expirent sans contrepartie. Ils ne sont consommés qu’une fois le quota mensuel de la formule épuisé, en commençant par les plus anciens ; une analyse qui échoue ne consomme aucun crédit. S’agissant d’un contenu numérique fourni immédiatement, l’utilisateur demande expressément, avant le paiement, l’accès immédiat aux crédits et reconnaît perdre son droit de rétractation dès leur première utilisation (article L221-28 du Code de la consommation) ; tant qu’aucun crédit du pack n’a été utilisé, il peut se rétracter dans les quatorze jours suivant l’achat en contactant l’assistance. Les crédits utilisés ne sont pas remboursables ; ils ne sont ni cessibles ni convertibles en argent.",
+          "packItem": "{count} analyses pour {price}"
+        },
         "s6": {
-          "title": "6. Droit applicable",
+          "title": "7. Droit applicable",
           "body": "Les présentes CGU sont soumises au droit français. Tout litige relatif à leur interprétation ou leur exécution relève de la compétence exclusive des tribunaux français, sous réserve des dispositions impératives applicables aux consommateurs."
         }
       },

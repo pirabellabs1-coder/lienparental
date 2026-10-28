@@ -449,8 +449,13 @@
           "title": "5. Liability",
           "body": "Lien Parental provides a tool to support co-parenting; it is in no way a substitute for legal, medical or psychological advice. The publisher makes its best efforts to ensure the availability of the service, without however guaranteeing absolute continuity. It cannot be held liable for indirect damage or for an interruption due to force majeure."
         },
+        "credits": {
+          "title": "6. AI Coach analysis credits",
+          "body": "Beyond the monthly allowance of analyses included in their plan, users may buy AI Coach analysis credits, whatever their plan (Free included): {packs}. Prices include all taxes and are paid once through Stripe. One credit equals one analysis. Credits are valid for {months} months from purchase and then expire without compensation. They are only used once the plan's monthly allowance is used up, starting with the oldest; an analysis that fails does not use any credit. As digital content supplied immediately, users expressly request, before payment, immediate access to the credits and acknowledge that they lose their right of withdrawal as soon as they first use them (article L221-28 of the French Consumer Code); as long as no credit from the pack has been used, they may withdraw within fourteen days of purchase by contacting support. Used credits are non-refundable; they cannot be transferred or exchanged for money.",
+          "packItem": "{count} analyses for {price}"
+        },
         "s6": {
-          "title": "6. Governing law",
+          "title": "7. Governing law",
           "body": "These Terms are governed by French law. Any dispute relating to their interpretation or performance falls under the exclusive jurisdiction of the French courts, subject to the mandatory provisions applicable to consumers."
         }
       },

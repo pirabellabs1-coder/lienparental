@@ -123,7 +123,9 @@
         "unknown_price": "Plano atual desconhecido. Entre em contato com o suporte.",
         "payment_failed": "O pagamento da diferença foi recusado. Verifique sua forma de pagamento e tente novamente.",
         "change_not_applied": "A mudança não foi aplicada. Recarregue a página e tente novamente."
-      }
+      },
+      "creditsInvalidPack": "Pacote de créditos desconhecido.",
+      "creditsWaiverRequired": "Marque a caixa do direito de arrependimento para continuar."
     },
     "google": {
       "sessionExpired": "Sessão expirada. Entre novamente.",

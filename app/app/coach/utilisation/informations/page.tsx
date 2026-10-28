@@ -40,8 +40,8 @@ export default async function CoachInformationsPage() {
           </InfoRow>
         </div>
 
-        <Link href="/app/aide/contact" className={`${btn.secondary} mt-6`}>
-          {t('contact')}
+        <Link href="/app/coach/credits" className={`${btn.secondary} mt-6`}>
+          {t('buyCredits')}
         </Link>
 
       </div>

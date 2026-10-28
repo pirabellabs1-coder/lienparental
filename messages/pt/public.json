@@ -449,8 +449,13 @@
           "title": "5. Responsabilidade",
           "body": "O Lien Parental oferece uma ferramenta de apoio à coparentalidade; ela não substitui, em nenhum caso, uma orientação jurídica, médica ou psicológica. O editor faz o possível para garantir a disponibilidade do serviço, sem, no entanto, garantir uma continuidade absoluta. Sua responsabilidade não poderá ser invocada por um dano indireto ou por uma interrupção decorrente de força maior."
         },
+        "credits": {
+          "title": "6. Créditos de análise do Coach com IA",
+          "body": "Além da cota mensal de análises incluída no seu plano, o usuário pode comprar créditos de análise do Coach com IA, seja qual for o plano (Grátis incluído): {packs}. Os preços incluem todos os impostos e são pagos uma única vez por meio da Stripe. Um crédito corresponde a uma análise. Os créditos são válidos por {months} meses a partir da compra e depois expiram sem contrapartida. Eles só são usados depois que a cota mensal do plano acabar, começando pelos mais antigos; uma análise que falha não usa nenhum crédito. Tratando-se de conteúdo digital fornecido imediatamente, o usuário solicita expressamente, antes do pagamento, o acesso imediato aos créditos e reconhece que perde o seu direito de arrependimento a partir da primeira utilização (artigo L221-28 do Código do Consumidor francês); enquanto nenhum crédito do pacote tiver sido usado, ele pode desistir em até catorze dias após a compra entrando em contato com o suporte. Os créditos usados não são reembolsáveis; não podem ser transferidos nem convertidos em dinheiro.",
+          "packItem": "{count} análises por {price}"
+        },
         "s6": {
-          "title": "6. Lei aplicável",
+          "title": "7. Lei aplicável",
           "body": "Estes Termos estão sujeitos à lei francesa. Qualquer litígio relativo à sua interpretação ou execução é de competência exclusiva dos tribunais franceses, ressalvadas as disposições imperativas aplicáveis aos consumidores."
         }
       },

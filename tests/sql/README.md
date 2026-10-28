@@ -33,6 +33,7 @@ dans le même bloc ; même contrainte dans l'éditeur SQL de Supabase). Sortie e
 | `0380-coparentalite` | plan effectif partagé Coparentalité+, garde-fou `users.plan`, statistiques admin |
 | `0400-admin` | opérations admin `aal2` (comptes, déconnexion forcée, journal append-only et rétention, support, témoignages en métadonnées seules, centre d'aide versionné et publié seulement) |
 | `0410-dossiers` | dossiers et sous-dossiers du coffre (cycles, profondeur, noms), partage d'un dossier avec un parent lié (lecture seule, documents ajoutés plus tard, Storage), tiers / proche / anonyme sans accès, écritures refusées au destinataire, arrêt du partage et fin du lien, réglage de rangement automatique des pièces jointes (0420) |
+| `0510-credits` | crédits IA : achat idempotent par session Stripe, quota puis crédit (lot non expiré le plus ancien), remboursement, concurrence, isolement entre comptes, colonnes Stripe illisibles, aucune écriture client, lot consommé non supprimable, cascade à la suppression du compte |
 | `0440-notifications` | file de notifications : message → tâche immédiate + e-mail différé (ignoré si lu, 1 par 30 min), partage de dossier, invitation acceptée, événements partagés (parents liés seulement, jamais les proches pour la santé, regroupement 2 min), rappels selon les préférences du destinataire, alertes de sécurité, bienvenue, appareils connus, RLS de `push_subscriptions`, file réservée au service_role, `search_path` vide |
 
 Écrire un scénario : `export default async function run(db)` ; jouer un utilisateur avec

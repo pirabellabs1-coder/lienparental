@@ -2,6 +2,7 @@
 // simple, bouton unique par formule, explication des changements (prorata).
 // Module PUR (testé dans tests/billing.test.ts), importable côté client.
 import {
+  COACH_ANALYSES,
   PLAN_NAME,
   formatPrice,
   periodFor,
@@ -384,7 +385,7 @@ export const BILLING_INFO: Record<string, string> = {
 export const PAYWALL_REASONS: Record<string, { title: string; text: string; formule: PaidPlan }> = {
   coach: {
     title: 'Vous avez utilisé vos analyses gratuites',
-    text: 'L’offre Gratuite inclut 3 analyses du Coach IA par mois. Premium en offre 10.',
+    text: `L’offre Gratuite inclut ${COACH_ANALYSES.gratuit} analyses du Coach IA par mois. Premium en offre ${COACH_ANALYSES.premium}, et des crédits d’analyses sont disponibles à l’achat.`,
     formule: 'premium',
   },
   stockage: {

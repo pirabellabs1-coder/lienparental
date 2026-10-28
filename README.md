@@ -82,7 +82,7 @@ Voir `pilotage.html` (ou l'artifact publié : salle de pilotage) pour l'organisa
 ## Points en attente de validation client (chap. 13 CDC)
 
 - Prix Premium : 11,99/99 ou 19,99/199,99 ?
-- Coach IA Premium : 10/cycle ou illimité ?
+- Coach IA : tranché le 28/10/2026 (Gratuit 5, Premium 50, Coparentalité+ 100 / 30 jours, crédits achetables au-delà).
 - Messagerie entre parents en V1 ?
 - Validation manuelle des témoignages ou classement auto ?
 - Couleurs d'accent personnalisables dès V1 ?

@@ -162,8 +162,8 @@ export async function completeAnalysis(user: CurrentUser, id: string, kind: Coac
 /**
  * Annule une réservation (échec, refus) : l'analyse n'est pas décomptée.
  * Supabase : seule une analyse ENCORE en attente appartenant à l'utilisateur est annulée ;
- * la ligne ai_usage liée est alors retirée (remboursement). Une analyse terminée n'est
- * jamais remboursée.
+ * la ligne ai_usage liée est alors retirée (remboursement du quota, ou du crédit consommé,
+ * release_ai_usage 0510). Une analyse terminée n'est jamais remboursée.
  */
 export async function cancelPending(user: CurrentUser, id: string): Promise<void> {
   if (SUPABASE_ENABLED) {
@@ -179,7 +179,14 @@ export async function cancelPending(user: CurrentUser, id: string): Promise<void
     // Réservation sans ligne d'analyse (échec d'insertion) ou analyse annulée : remboursement.
     const { count } = await db.from('ai_analyses').select('id', { count: 'exact', head: true }).eq('id', id).eq('user_id', user.id)
     if ((data ?? []).length > 0 || count === 0) {
-      await db.from('ai_usage').delete().eq('analysis_id', id).eq('user_id', user.id)
+      // release_ai_usage (0510) : ligne ai_usage retirée ET crédit éventuel rendu, atomiquement.
+      const { error } = await db.rpc('release_ai_usage', { p_user_id: user.id, p_analysis_id: id })
+      // Avant 0510 (fonction absente) : remboursement du quota seul, comme auparavant.
+      if (error && ['PGRST202', '42883'].includes(error.code ?? '')) {
+        await db.from('ai_usage').delete().eq('analysis_id', id).eq('user_id', user.id)
+      } else if (error) {
+        throw new Error('release_ai_usage failed')
+      }
     }
     return
   }

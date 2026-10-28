@@ -123,7 +123,9 @@
         "unknown_price": "Current plan unknown. Please contact support.",
         "payment_failed": "The payment for the difference was declined. Check your payment method and try again.",
         "change_not_applied": "The change wasn’t applied. Reload the page and try again."
-      }
+      },
+      "creditsInvalidPack": "Unknown credit pack.",
+      "creditsWaiverRequired": "Tick the right-of-withdrawal box to continue."
     },
     "google": {
       "sessionExpired": "Session expired. Please sign in again.",

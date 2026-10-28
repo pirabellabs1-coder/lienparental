@@ -177,7 +177,8 @@
         "impact": "Impact on communication"
       },
       "checked": ": checked",
-      "pending": ": pending"
+      "pending": ": pending",
+      "buyCredits": "Buy credits"
     },
     "document": {
       "topTitle": "AI parenting coach",
@@ -265,7 +266,7 @@
       "inDays": "{count, plural, one {In # day} other {In # days}}",
       "cycle30": "30-day cycle",
       "goodToKnow": "Good to know",
-      "goodToKnowText": "Each cycle lets you run up to {total} analyses with the AI Coach. Your counter resets automatically every 30 days.",
+      "goodToKnowText": "Each cycle lets you run up to {total} analyses with the AI Coach. Your counter resets automatically every 30 days. Beyond that, your analysis credits take over.",
       "seeHistory": "View my history",
       "detail": {
         "topTitle": "Usage details",
@@ -300,12 +301,12 @@
         "aboutTitle": "About the AI Coach",
         "aboutText": "The AI Coach supports you with personalized analyses to help you in your parenting.",
         "quotaTitle": "How does your quota work?",
-        "quotaText": "You have {total} analyses per 30-day cycle. Once you reach this quota, you will need to wait for the reset to run new analyses.",
+        "quotaText": "You have {total} analyses per 30-day cycle. Once this allowance is reached, your analysis credits take over; without credits, you wait until an analysis frees up.",
         "nextCycle": "Next cycle",
         "noneYet": "No analyses counted yet",
         "moreTitle": "Need more analyses?",
-        "moreText": "Contact our team to discover our additional offers.",
-        "contact": "Contact us"
+        "moreText": "Buy analysis credits, valid for 12 months and only used once your monthly allowance is used up.",
+        "buyCredits": "Buy credits"
       },
       "trends": {
         "topTitle": "Usage trends",
@@ -321,6 +322,14 @@
         "currentCycle": "Current cycle",
         "cycleN": "Cycle -{n}",
         "avgValue": "{value} analyses"
+      },
+      "credits": {
+        "title": "Analysis credits",
+        "balance": "{count, plural, =0 {No credits} one {# credit available} other {# credits available}}",
+        "expires": "The oldest expire on {date}",
+        "exhausted": "Cycle allowance reached: buy credits to keep going without waiting.",
+        "exhaustedCovered": "Cycle allowance reached: your next analyses use your credits.",
+        "buy": "Buy credits"
       }
     },
     "guide": {
@@ -528,6 +537,45 @@
         "more2": "templates",
         "seeAll": "See all templates"
       }
+    },
+    "credits": {
+      "metaTitle": "AI credits",
+      "topTitle": "AI credits",
+      "title": "AI Coach analysis credits",
+      "intro": "Your plan includes {quota} analyses per 30-day cycle. Credits are only used once this allowance is used up.",
+      "balanceTitle": "Your balance",
+      "balance": "{count, plural, =0 {No credits} one {# credit} other {# credits}}",
+      "nextExpiry": "Earliest expiry: {date}",
+      "noCredits": "No valid credits.",
+      "quotaLine": "This cycle: {used} / {quota} analyses from your plan used.",
+      "packsTitle": "Choose a pack",
+      "packName": "{count} analyses",
+      "perAnalysis": "that is {price} per analysis",
+      "bestValue": "Best value",
+      "validity": "Valid for {months} months after purchase. Price including VAT, one-time payment.",
+      "waiver": "I request immediate access to the credits and I acknowledge that I lose my right of withdrawal as soon as I first use them.",
+      "waiverRequired": "(required)",
+      "pay": "Continue to payment",
+      "payDemo": "Simulate the purchase (demo)",
+      "secure": "Secure payment by Stripe: no card data passes through Lien Parental. Credits are non-refundable once used.",
+      "terms": "Terms of use",
+      "demoNotice": "Demo: the purchase is simulated and no payment is made. Credits are added to the demo account.",
+      "howTitle": "How does it work?",
+      "how1": "The analyses included in your plan are used first.",
+      "how2": "After that, each analysis uses 1 credit, starting with the oldest.",
+      "how3": "An analysis that fails does not use any credit.",
+      "success": "Payment received: {count, plural, one {# credit added} other {# credits added}} to your account.",
+      "successPending": "Payment received: your credits will appear in a few moments. Reload the page if needed.",
+      "demoSuccess": "Demo: {count, plural, one {# simulated credit added} other {# simulated credits added}}. No payment was made.",
+      "canceled": "Payment canceled: you have not been charged.",
+      "errors": {
+        "waiver_required": "Tick the right-of-withdrawal box to continue.",
+        "invalid_pack": "Choose a credit pack.",
+        "rate_limited": "Too many attempts. Please wait a few minutes.",
+        "generic": "Payment temporarily unavailable. Please try again shortly."
+      },
+      "back": "Back to the Coach",
+      "usage": "See my usage"
     }
   }
 }

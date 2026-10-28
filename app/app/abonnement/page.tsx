@@ -2,7 +2,7 @@ import { getRequestTz } from '@/lib/tz-server'
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { TopBar } from '@/components/mobile/TopBar'
-import { isPaidPlan, parseCycle, type Cycle } from '@/components/profil/pricing'
+import { COACH_ANALYSES, isPaidPlan, parseCycle, type Cycle } from '@/components/profil/pricing'
 import { loadBillingPage } from '@/lib/billing/page-state'
 import type { BillingView } from '@/lib/billing/types'
 import { BILLING_INFO, hasManagedSubscription, paywallReason } from '@/lib/billing/ui-state'
@@ -40,7 +40,9 @@ export default async function AbonnementPage({ searchParams }: PageProps) {
   const f = billingFormat(t, await getLocale(), await getRequestTz())
   // Raison du paywall traduite (la clé est validée par paywallReason).
   const reasonKey = Array.isArray(sp.raison) ? sp.raison[0] : sp.raison
-  const reasonText = reason && reasonKey ? { title: t(`paywall.${reasonKey}.title`), text: t(`paywall.${reasonKey}.text`) } : null
+  const reasonText = reason && reasonKey
+    ? { title: t(`paywall.${reasonKey}.title`), text: t(`paywall.${reasonKey}.text`, { free: COACH_ANALYSES.gratuit, premium: COACH_ANALYSES.premium }) }
+    : null
   const focusPlan = isPaidPlan(formule) ? formule : reason?.formule ?? null
   const managed = hasManagedSubscription(view)
   // Cycle présélectionné : celui de l'URL, sinon celui de l'abonnement en cours.

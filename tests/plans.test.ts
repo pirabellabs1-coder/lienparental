@@ -173,7 +173,7 @@ test('droits selon le plan effectif', () => {
 })
 
 test('quotas, stockage et priorité support par niveau', () => {
-  assert.deepEqual(ANALYSIS_QUOTA_BY_PLAN, { gratuit: 3, premium: 10, coparentalite: 10 })
+  assert.deepEqual(ANALYSIS_QUOTA_BY_PLAN, { gratuit: 5, premium: 50, coparentalite: 100 })
   assert.equal(storageGbFor('gratuit'), 2)
   assert.equal(storageGbFor('coparentalite'), PRICING.storage.coparentalite)
   assert.equal(supportPriorityFor('gratuit'), 'low')

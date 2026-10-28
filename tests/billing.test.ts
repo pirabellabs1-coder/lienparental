@@ -304,9 +304,9 @@ test('Checkout : session ouverte, expirée ou paiement pas encore abouti', async
 
 // --- Webhook, limites, démonstration --------------------------------------------------
 
-test('webhook : exactement les six événements traités', () => {
+test('webhook : exactement les huit événements traités', () => {
   assert.deepEqual([...HANDLED_STRIPE_EVENTS].sort(), [
-    'checkout.session.completed', 'customer.subscription.created', 'customer.subscription.deleted',
+    'charge.dispute.created', 'charge.refunded', 'checkout.session.completed', 'customer.subscription.created', 'customer.subscription.deleted',
     'customer.subscription.updated', 'invoice.paid', 'invoice.payment_failed',
   ])
   assert.equal(isHandledStripeEvent('invoice.upcoming'), false)

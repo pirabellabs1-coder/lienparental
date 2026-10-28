@@ -38,13 +38,13 @@
     "features": {
       "gratuit": {
         "vault": "{gb} GB vault",
-        "coach": "3 AI Coach analyses per month",
+        "coach": "{count} AI Coach analyses per month",
         "journalCalendar": "Journal and calendar",
         "exportPdf": "PDF export"
       },
       "premium": {
         "vault": "{gb} GB vault",
-        "coach": "10 AI Coach analyses per month",
+        "coach": "{count} AI Coach analyses per month",
         "templatesAll": "All letter and file templates",
         "journalAdvanced": "Advanced chronological journal",
         "exportAll": "PDF, Word and Canva export",
@@ -56,7 +56,8 @@
         "expenses": "Enhanced tracking of shared expenses",
         "exportAdvanced": "Advanced export (file for a lawyer or mediator)",
         "supportPriority": "Priority support",
-        "webPwa": "Web access and installable app (PWA)"
+        "webPwa": "Web access and installable app (PWA)",
+        "coach": "{count} AI Coach analyses per month"
       }
     },
     "comparison": {
@@ -77,9 +78,9 @@
       },
       "cells": {
         "coach": {
-          "gratuit": "3 analyses / month",
-          "premium": "10 analyses / month",
-          "coparentalite": "10 analyses / month"
+          "gratuit": "{count} analyses / month",
+          "premium": "{count} analyses / month",
+          "coparentalite": "{count} analyses / month"
         },
         "vault": {
           "gratuit": "{gb} GB",
@@ -280,7 +281,7 @@
     "paywall": {
       "coach": {
         "title": "You have used your free analyses",
-        "text": "The Free plan includes 3 AI Coach analyses per month. Premium offers 10."
+        "text": "The Free plan includes {free} AI Coach analyses per month. Premium offers {premium}, and analysis credits are available to buy."
       },
       "stockage": {
         "title": "Your vault is almost full",

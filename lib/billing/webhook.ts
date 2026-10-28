@@ -16,6 +16,8 @@ import { invoiceSubscriptionId } from './events'
 import { claimEventWith, type Claim, type EventStore } from './claim-core'
 import { idOf } from './stripe'
 import { isUuid, syncSubscription, type UpsertResult } from './subscription'
+import { grantCreditsForSession, revokeCreditsForPayment } from '@/lib/ai/credits'
+import { isCreditSession } from '@/lib/ai/credits-core'
 
 // --- Idempotence ----------------------------------------------------------
 
@@ -101,12 +103,34 @@ export async function handleStripeEvent(event: Stripe.Event): Promise<Deferred[]
   switch (event.type) {
     case 'checkout.session.completed': {
       const session = event.data.object
+      // Achat de crédits IA (paiement unique) : session relue chez Stripe, crédit idempotent par
+      // session (grant_ai_credits, 0510). Aucun effet sur l'abonnement.
+      if (isCreditSession(session)) {
+        const fresh = await getStripe().checkout.sessions.retrieve(session.id)
+        await grantCreditsForSession(fresh, 'webhook')
+        break
+      }
       if (session.mode !== 'subscription') break
       const subId = idOf(session.subscription)
       const hint = isUuid(session.client_reference_id) ? session.client_reference_id : session.metadata?.user_id
       if (!subId) break
       const res = await syncSubscription(subId, hint)
       if (!res.ok) logUnresolved(event, res)
+      break
+    }
+
+    // Crédits IA remboursés en totalité ou contestés : solde du lot remis à 0 (les analyses déjà
+    // faites restent). Remboursement partiel : journalisé, à traiter à la main (docs/STRIPE.md).
+    case 'charge.refunded':
+    case 'charge.dispute.created': {
+      const obj = event.data.object as { payment_intent?: string | { id: string } | null; refunded?: boolean }
+      const pi = idOf(obj.payment_intent)
+      if (!pi) break
+      if (event.type === 'charge.refunded' && !obj.refunded) {
+        console.warn('[ai-credits] remboursement partiel, lot conservé', { pi: pi.slice(-8) })
+        break
+      }
+      await revokeCreditsForPayment(pi, event.type === 'charge.refunded' ? 'refund' : 'dispute')
       break
     }
 

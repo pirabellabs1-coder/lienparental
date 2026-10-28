@@ -50,7 +50,7 @@ prévenus (BroadcastChannel) : les fonctionnalités payantes se débloquent imm�
 
 Événements écoutés (liste unique dans `lib/billing/events.ts`) : `checkout.session.completed`,
 `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`,
-`invoice.paid`, `invoice.payment_failed`.
+`invoice.paid`, `invoice.payment_failed`, `charge.refunded`, `charge.dispute.created` (crédits IA).
 
 ## 2. Mode test
 
@@ -142,3 +142,19 @@ Sans clés Supabase (comptes de démo), « S'abonner » simule l'abonnement (coo
 | `NEXT_PUBLIC_APP_URL` | oui | URL publique exacte (URL de retour Checkout, contrôle d'origine) |
 | `BILLING_GRACE_DAYS` | non | jours d'avantages conservés après un échec de paiement (14) |
 | `CRON_SECRET` | oui | secret de la tâche quotidienne `/api/stripe/cron` (déjà utilisé par les autres tâches planifiées) |
+
+## Crédits d'analyses du Coach IA (paiement unique, 28/10/2026)
+
+- **Packs** : `lib/billing/credit-packs.ts` (source unique : 10 = 2,99 €, 30 = 6,99 €, 100 = 19,99 € TTC, validité 12 mois).
+  Aucun produit ni prix à créer dans Stripe : la route `POST /api/stripe/credits` construit `price_data` côté serveur
+  (Checkout `mode: 'payment'`, carte uniquement, `metadata.kind = 'ai_credits'` + pack, prix et quantité figés).
+- **Crédit** : webhook `checkout.session.completed` (déjà abonné) → session relue chez Stripe → `grant_ai_credits`
+  (migration `0510`), idempotent par identifiant de session ; le retour `/app/coach/credits?achat=succes` crédite aussi
+  (même fonction) sans attendre le webhook. Aucun effet sur l'abonnement.
+- **Base** : appliquer `supabase/migrations/0510_ai_credits.sql` **avant** de déployer le code.
+- **Remboursement total ou litige** : `charge.refunded` (remboursement complet) et `charge.dispute.created` remettent
+  automatiquement `remaining = 0` sur le lot (`ai_credits.stripe_payment_intent`). **Ajouter ces deux événements à
+  l'endpoint webhook** (relancer `scripts/stripe-setup.ts` ou les cocher dans le Dashboard). Remboursement partiel :
+  journalisé, ajuster `remaining` à la main ; ne jamais supprimer un lot déjà consommé (refusé par la clé étrangère). Journal `[ai-credits] PAIEMENT NON CRÉDITÉ` = paiement encaissé sans crédit (créditer ou rembourser).
+- **Rétractation** : case obligatoire avant paiement (horodatage `withdrawal_waiver_at`) ; tant qu'aucun crédit du pack
+  n'est utilisé, rétractation possible 14 jours via l'assistance (CGU § 6).

@@ -24,6 +24,8 @@ import { billingFormat, localizeStatus } from '@/app/app/abonnement/_components/
 /** Statut d'abonnement affiché sur le profil : même libellé que « Mon abonnement ». */
 export type ProfileStatus = { label: string; headline: string; tone: StatusTone }
 import { getQuotaStatus } from '@/lib/ai/quota'
+import { getCreditBalance } from '@/lib/ai/credits'
+import type { CreditBalance } from '@/lib/ai/credits-core'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { PRICING, type PlanId } from './pricing'
 import { GO } from './storage'
@@ -35,6 +37,8 @@ export type ProfileUsage = {
   plan: PlanId
   storage: StorageUsage | null
   coach: { used: number; quota: number } | null
+  /** Crédits d'analyses du Coach IA achetés (solde, expiration la plus proche). */
+  credits: CreditBalance | null
   /** Abonnement Stripe (facturation réelle uniquement). */
   subscription: { periodEnd: string | null; cancelAtPeriodEnd: boolean; status: ProfileStatus } | null
 }
@@ -95,10 +99,11 @@ export async function loadProfileUsage(opts: { coach?: boolean; subscription?: b
   const user = await getCurrentUser()
   if (!user) return null
   const { plan } = await getEffectivePlan(user.id, user.plan)
-  const [storage, coach, subscription] = await Promise.all([
+  const [storage, coach, subscription, credits] = await Promise.all([
     loadStorage(user, plan),
     opts.coach === false ? Promise.resolve(null) : loadCoach(user),
     opts.subscription === false ? Promise.resolve(null) : loadSubscription(user),
+    opts.coach === false ? Promise.resolve(null) : getCreditBalance(user),
   ])
-  return { plan, storage, coach, subscription }
+  return { plan, storage, coach, subscription, credits }
 }

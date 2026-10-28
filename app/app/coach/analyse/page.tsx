@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { Check, RefreshCw, Sparkles } from 'lucide-react'
+import { Check, Coins, RefreshCw, Sparkles } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ProgressRing } from '@/components/coach/ProgressRing'
 import { btn, ScreenTitle } from '@/components/coach/ui'
@@ -19,7 +19,8 @@ const STAGES = ['sending', 'received', 'thinking', 'reading', 'writing', 'done']
 // Critères affichés pendant l'analyse (libellés : coach.analysis.checks.<clé>).
 const CHECKS = ['tone', 'hurtful', 'clarity', 'respect', 'impact'] as const
 
-type Failure = { message: string; quota?: boolean }
+/** `quota` : quota du cycle et crédits épuisés (429 quota_exceeded) ; `upgrade` : formule Gratuite. */
+type Failure = { message: string; quota?: boolean; upgrade?: boolean }
 
 // M09 — étape 3 « Analyse en cours » (maquette 12.12.07 (2)).
 // La progression suit le flux réel de /api/coach/analyze : étapes du serveur, puis
@@ -74,15 +75,17 @@ export default function CoachAnalysePage() {
       const res = await fetch('/api/coach/analyze', { method: 'POST', body: form })
       if (!res.ok || !(res.headers.get('content-type') ?? '').includes('text/event-stream')) {
         let quota = false
+        let upgrade = false
         let message: string
         if (res.status === 429) {
-          const body = (await res.json().catch(() => null)) as { error?: { code?: string; message?: string } } | null
+          const body = (await res.json().catch(() => null)) as { error?: { code?: string; message?: string }; upgrade?: boolean } | null
           quota = body?.error?.code === 'quota_exceeded'
+          upgrade = quota && body?.upgrade === true
           message = body?.error?.message ?? t('tooMany')
         } else {
           message = await errorMessage(res, tc('errors.generic'), { sessionExpired: tc('errors.sessionExpired'), tooLarge: tc('errors.tooLarge') })
         }
-        if (mounted.current) setFailure({ message, quota })
+        if (mounted.current) setFailure({ message, quota, upgrade })
         return
       }
       let finished = false
@@ -162,10 +165,18 @@ export default function CoachAnalysePage() {
               {failure.message}
             </p>
             {failure.quota ? (
-              <Link href="/app/abonnement?formule=premium&raison=coach" className={btn.primary}>
-                <Sparkles className="h-5 w-5" aria-hidden="true" />
-                {t('upgrade')}
-              </Link>
+              <>
+                <Link href="/app/coach/credits" className={btn.primary}>
+                  <Coins className="h-5 w-5" aria-hidden="true" />
+                  {t('buyCredits')}
+                </Link>
+                {failure.upgrade && (
+                  <Link href="/app/abonnement?formule=premium&raison=coach" className={btn.secondary}>
+                    <Sparkles className="h-5 w-5" aria-hidden="true" />
+                    {t('upgrade')}
+                  </Link>
+                )}
+              </>
             ) : (
               <button type="button" onClick={() => setAttempt((a) => a + 1)} className={btn.primary}>
                 <RefreshCw className="h-5 w-5" aria-hidden="true" />

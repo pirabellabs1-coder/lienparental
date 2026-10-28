@@ -4,7 +4,8 @@ import 'server-only'
  * fiches et parcours du Guide (lib/guide/load, URL publiques guidePaths), FAQ (lib/aide/public),
  * articles du blog, prix réels (components/profil/pricing). Le champ `aConfirmer` n'est JAMAIS lu.
  */
-import { PLAN_NAME, PRICING, formatPrice } from '@/components/profil/pricing'
+import { COACH_ANALYSES, PLAN_NAME, PRICING, formatPrice } from '@/components/profil/pricing'
+import { AI_CREDIT_VALIDITY_MONTHS, packSummaries } from '@/lib/billing/credit-packs'
 import { SUPPORT_EMAIL } from '@/components/profil/data'
 import { getHelpFaq } from '@/lib/aide/public'
 import { FAQ_CATEGORIES } from '@/lib/aide/types'
@@ -32,6 +33,7 @@ function header(g: GuideSnapshot | null): string {
     `- Public : parents séparés ou en cours de séparation, et familles qui cherchent une information fiable sur leurs démarches (${territoire} d'abord).`,
     `- Langues de l'interface : français, anglais, portugais (Brésil).`,
     `- Tarifs : ${PLAN_NAME.gratuit} (0 €) ; ${PLAN_NAME.premium} ${formatPrice(p.premium.monthly)} par mois ou ${formatPrice(p.premium.yearly)} par an ; ${PLAN_NAME.coparentalite} ${formatPrice(p.coparentalite.monthly)} par mois ou ${formatPrice(p.coparentalite.yearly)} par an.`,
+    `- Coach IA : ${COACH_ANALYSES.gratuit} analyses par mois (${PLAN_NAME.gratuit}), ${COACH_ANALYSES.premium} (${PLAN_NAME.premium}), ${COACH_ANALYSES.coparentalite} (${PLAN_NAME.coparentalite}) ; au-delà, crédits d'analyses à l'achat pour toutes les formules (${packSummaries('fr-FR', (n, eur) => `${n} pour ${eur}`).join(', ')}), valables ${AI_CREDIT_VALIDITY_MONTHS} mois.`,
     '- Données hébergées dans l’Union européenne, chiffrées en transit et au repos.',
     `- ${SITE_NAME} informe et aide à s'organiser : ce n'est pas un conseil juridique et l'application ne remplace pas un avocat.`,
     `- Chaque fiche du Guide cite ses sources officielles et affiche sa date de dernière vérification.`,

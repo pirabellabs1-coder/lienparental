@@ -43,6 +43,14 @@ const PREMIUM = derivePlanPricing(11.99, 99)
  */
 const COPARENTALITE = derivePlanPricing(19.99, 189)
 
+/**
+ * Analyses du Coach IA par fenêtre glissante de 30 jours, selon le plan EFFECTIF : SOURCE UNIQUE
+ * (quota appliqué par lib/ai/quota.ts via ANALYSIS_QUOTA_BY_PLAN, libellés des écrans et catalogues
+ * `{count}`). Un parent lié à un abonné Coparentalité+ reçoit le niveau Premium (getEffectivePlan).
+ * Au-delà : crédits d'analyses achetés (lib/billing/credit-packs.ts).
+ */
+export const COACH_ANALYSES: Readonly<Record<PlanId, number>> = { gratuit: 5, premium: 50, coparentalite: 100 }
+
 export const PRICING = {
   currency: 'EUR',
   // Champs historiques (Premium) conservés à plat : PRICING.monthly, PRICING.freeMonthsLabel…
@@ -110,7 +118,7 @@ export function isPaidPlan(value: unknown): value is PaidPlan {
 }
 
 export const PREMIUM_FEATURES = [
-  'Coach IA étendu : 10 analyses par mois',
+  `Coach IA étendu : ${COACH_ANALYSES.premium} analyses par mois`,
   'Tous les modèles de courriers et dossiers',
   'Coffre-fort sécurisé et stockage étendu',
   'Journal chronologique avancé',
@@ -135,13 +143,13 @@ export const COPARENTALITE_EXTRAS = [
 export const PLAN_FEATURES: Record<PlanId, readonly string[]> = {
   gratuit: [
     `Coffre-fort de ${PRICING.storage.free} Go`,
-    '3 analyses du Coach IA par mois',
+    `${COACH_ANALYSES.gratuit} analyses du Coach IA par mois`,
     'Journal et calendrier',
     'Export PDF',
   ],
   premium: [
     `Coffre-fort de ${PRICING.storage.premium} Go`,
-    '10 analyses du Coach IA par mois',
+    `${COACH_ANALYSES.premium} analyses du Coach IA par mois`,
     'Tous les modèles de courriers et dossiers',
     'Journal chronologique avancé',
     'Export PDF, Word et Canva',
@@ -149,7 +157,7 @@ export const PLAN_FEATURES: Record<PlanId, readonly string[]> = {
   ],
   // « Accès web et PWA » : demandé dans la liste Coparentalité+, mais disponible pour toutes
   // les formules (ne pas le présenter comme exclusif ; voir PLAN_COMPARISON).
-  coparentalite: ['Tout Premium', ...COPARENTALITE_EXTRAS, 'Accès web et application installable (PWA)'],
+  coparentalite: ['Tout Premium', `${COACH_ANALYSES.coparentalite} analyses du Coach IA par mois`, ...COPARENTALITE_EXTRAS, 'Accès web et application installable (PWA)'],
 }
 
 /**
@@ -169,7 +177,7 @@ export type ComparisonValue = boolean | string
 
 /** Comparatif des trois formules (Mon abonnement /app/abonnement, page d'accueil). */
 export const PLAN_COMPARISON: ReadonlyArray<{ /** Clé stable de traduction (i18n, additif). */ key?: string; label: string; values: Record<PlanId, ComparisonValue> }> = [
-  { key: 'coach', label: 'Coach IA', values: { gratuit: '3 analyses / mois', premium: '10 analyses / mois', coparentalite: '10 analyses / mois' } },
+  { key: 'coach', label: 'Coach IA', values: { gratuit: `${COACH_ANALYSES.gratuit} analyses / mois`, premium: `${COACH_ANALYSES.premium} analyses / mois`, coparentalite: `${COACH_ANALYSES.coparentalite} analyses / mois` } },
   { key: 'vault', label: 'Coffre-fort sécurisé', values: { gratuit: `${PRICING.storage.free} Go`, premium: `${PRICING.storage.premium} Go`, coparentalite: `${PRICING.storage.coparentalite} Go` } },
   { key: 'journalCalendar', label: 'Journal et calendrier', values: { gratuit: true, premium: true, coparentalite: true } },
   { key: 'templates', label: 'Modèles de courriers et dossiers', values: { gratuit: 'Essentiels', premium: 'Tous', coparentalite: 'Tous' } },
@@ -201,7 +209,7 @@ export const SUBSCRIBE_STEPS = ['Choix de l’offre', 'Paiement', 'Confirmation'
 export const PLAN_FEATURE_KEYS: Record<PlanId, readonly string[]> = {
   gratuit: ['vault', 'coach', 'journalCalendar', 'exportPdf'],
   premium: ['vault', 'coach', 'templatesAll', 'journalAdvanced', 'exportAll', 'sync'],
-  coparentalite: ['allPremium', 'multiParents', 'expenses', 'exportAdvanced', 'supportPriority', 'webPwa'],
+  coparentalite: ['allPremium', 'coach', 'multiParents', 'expenses', 'exportAdvanced', 'supportPriority', 'webPwa'],
 }
 
 /** Valeurs numériques des libellés promotionnels (mêmes calculs que derivePlanPricing). */

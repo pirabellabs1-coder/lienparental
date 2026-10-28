@@ -34,8 +34,8 @@
       "badContentType": "Formato de solicitação inválido.",
       "truncated": "O conteúdo é longo demais para ser analisado de uma só vez. Tente com um trecho mais curto.",
       "invalidOutput": "Não foi possível concluir a análise. Tente novamente em instantes.",
-      "quotaExceededPaid": "Você usou as suas {quota} análises deste ciclo de 30 dias.",
-      "quotaExceededFree": "Você usou as suas {quota} análises gratuitas deste ciclo de 30 dias. Assine o Premium para ter 10.",
+      "quotaExceededPaid": "Você usou as suas {quota} análises deste ciclo de 30 dias. Compre créditos de análise para continuar agora mesmo.",
+      "quotaExceededFree": "Você usou as suas {quota} análises gratuitas deste ciclo de 30 dias. Compre créditos de análise para continuar, ou assine o Premium ({premium} análises por mês).",
       "disclaimer": "O Coach com IA não dá aconselhamento jurídico.",
       "titles": {
         "message": "Mensagem escrita",

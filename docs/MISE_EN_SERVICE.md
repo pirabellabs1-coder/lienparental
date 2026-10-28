@@ -519,7 +519,7 @@ Tarifs Opus 5.5 : 4 $ / million de tokens en entrée, 20 $ en sortie, lecture de
 | Question au Coach, 1re de la conversation | ~0,02 à 0,03 $ |
 | Question suivante (contexte en cache) | ~0,01 à 0,02 $ |
 
-Ordre de grandeur : un parent premium très actif (10 analyses + 300 questions par mois) ≈ 4 à 7 $ / mois ; un parent gratuit typique < 0,50 $ / mois. La sortie (réflexion comprise) pèse le plus : baisser l'effort réduit le coût plus sûrement que d'ajouter des consignes de brièveté. Le coût réel par appel est visible dans les journaux `[coach-ai]` (`cost_usd`).
+Ordre de grandeur : un parent premium très actif (10 analyses + 300 questions par mois) ≈ 4 à 7 $ / mois (estimation faite avec l’ancien quota de 10 : depuis le 28/10/2026, Premium = 50 analyses et Coparentalité+ = 100, à recalculer avec `cost_usd`) ; un parent gratuit typique < 0,50 $ / mois. La sortie (réflexion comprise) pèse le plus : baisser l'effort réduit le coût plus sûrement que d'ajouter des consignes de brièveté. Le coût réel par appel est visible dans les journaux `[coach-ai]` (`cost_usd`).
 
 ### 3.7 Évaluation (avant chaque changement de prompt ou de modèle)
 

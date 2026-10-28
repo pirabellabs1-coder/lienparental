@@ -34,8 +34,8 @@
       "badContentType": "Invalid request format.",
       "truncated": "The content is too long to be analyzed in one go. Try a shorter excerpt.",
       "invalidOutput": "The analysis could not be completed. Please try again in a moment.",
-      "quotaExceededPaid": "You have used your {quota} analyses for this 30-day cycle.",
-      "quotaExceededFree": "You have used your {quota} free analyses for this 30-day cycle. Upgrade to Premium to get 10.",
+      "quotaExceededPaid": "You have used your {quota} analyses for this 30-day cycle. Buy analysis credits to keep going right away.",
+      "quotaExceededFree": "You have used your {quota} free analyses for this 30-day cycle. Buy analysis credits to keep going, or upgrade to Premium ({premium} analyses per month).",
       "disclaimer": "The AI Coach does not give legal advice.",
       "titles": {
         "message": "Written message",

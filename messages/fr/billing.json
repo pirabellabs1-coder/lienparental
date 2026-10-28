@@ -38,13 +38,13 @@
     "features": {
       "gratuit": {
         "vault": "Coffre-fort de {gb} Go",
-        "coach": "3 analyses du Coach IA par mois",
+        "coach": "{count} analyses du Coach IA par mois",
         "journalCalendar": "Journal et calendrier",
         "exportPdf": "Export PDF"
       },
       "premium": {
         "vault": "Coffre-fort de {gb} Go",
-        "coach": "10 analyses du Coach IA par mois",
+        "coach": "{count} analyses du Coach IA par mois",
         "templatesAll": "Tous les modèles de courriers et dossiers",
         "journalAdvanced": "Journal chronologique avancé",
         "exportAll": "Export PDF, Word et Canva",
@@ -56,7 +56,8 @@
         "expenses": "Suivi renforcé des dépenses partagées",
         "exportAdvanced": "Export avancé (dossier pour avocat, médiateur)",
         "supportPriority": "Assistance prioritaire",
-        "webPwa": "Accès web et application installable (PWA)"
+        "webPwa": "Accès web et application installable (PWA)",
+        "coach": "{count} analyses du Coach IA par mois"
       }
     },
     "comparison": {
@@ -77,9 +78,9 @@
       },
       "cells": {
         "coach": {
-          "gratuit": "3 analyses / mois",
-          "premium": "10 analyses / mois",
-          "coparentalite": "10 analyses / mois"
+          "gratuit": "{count} analyses / mois",
+          "premium": "{count} analyses / mois",
+          "coparentalite": "{count} analyses / mois"
         },
         "vault": {
           "gratuit": "{gb} Go",
@@ -280,7 +281,7 @@
     "paywall": {
       "coach": {
         "title": "Vous avez utilisé vos analyses gratuites",
-        "text": "L’offre Gratuite inclut 3 analyses du Coach IA par mois. Premium en offre 10."
+        "text": "L’offre Gratuite inclut {free} analyses du Coach IA par mois. Premium en offre {premium}, et des crédits d’analyses sont disponibles à l’achat."
       },
       "stockage": {
         "title": "Votre coffre-fort est presque plein",
