@@ -10,7 +10,7 @@ Lien Parental se prend en main en cinq minutes. Suivez ces étapes pour partir s
 
    ![step 1](/content/tutoriels/bien-demarrer/step-1.png)
 
-2. **Vérifiez votre adresse e-mail.** Saisissez le code à 6 chiffres reçu par e-mail. Pensez à regarder dans vos spams si vous ne le voyez pas.
+2. **Vérifiez votre adresse e-mail.** Saisissez le code de vérification reçu par e-mail. Pensez à regarder dans vos spams si vous ne le voyez pas.
 
    ![step 2](/content/tutoriels/bien-demarrer/step-2.png)
 

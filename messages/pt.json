@@ -340,6 +340,9 @@
       "errLastName": "Informe o seu sobrenome.",
       "errEmail": "Informe um endereço de e-mail válido.",
       "errPassword": "A senha ainda não atende a todas as regras.",
+      "confirmPassword": "Confirme a senha",
+      "confirmPasswordPlaceholder": "Digite-a novamente",
+      "errPasswordMatch": "As duas senhas não coincidem.",
       "errCheck": "Verifique as informações digitadas.",
       "errUnavailable": "Serviço temporariamente indisponível. Tente novamente em um instante.",
       "errNetwork": "Não foi possível conectar. Verifique a sua rede e tente novamente."

@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/cn'
 import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
-import { OTPInput } from '@/components/onboarding/OTPInput'
+import { EmailCodeInput } from '@/components/onboarding/EmailCodeInput'
 import { btn } from '@/components/onboarding/styles'
 import { useOnboardingDraft } from '@/components/onboarding/draft'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
@@ -14,13 +14,18 @@ import { createClient } from '@/lib/supabase/client'
 import { kickNotifications, reportSignIn } from '@/lib/notify/client'
 import { takePendingPassword } from '@/lib/auth/pending-password'
 import { authErrorMessage, isRateLimited } from '@/lib/auth/errors'
+import { EMAIL_OTP_MIN, isDemoEmailOtp, parseEmailOtpLength } from '@/lib/auth/email-otp'
+import { emailOtpSchema } from '@/lib/auth/validation'
 
-// Étape 7 — Vérification de l'e-mail par code à 6 chiffres.
+// Étape 7 — Vérification de l'e-mail par le code reçu (6 à 10 chiffres : réglage Supabase « Email OTP Length »,
+// lib/auth/email-otp.ts). Champ unique : un code de 7 chiffres ne tenait pas dans 6 cases.
 // Supabase : verifyOtp({ type: 'signup' }) ; durée de validité du code = « Email OTP Expiration »
 // du projet (1 h, valeur par défaut, annoncée dans l'e-mail) ; GoTrue limite aussi les vérifications par IP.
 // Les 5 essais ci-dessous sont une limite d'interface complémentaire.
 const RESEND_DELAY = 45
 const MAX_ATTEMPTS = 5
+/** Longueur connue du code (réglage du projet) : validation automatique au collage / autofill ; sinon au clic. */
+const EXPECTED_LENGTH = parseEmailOtpLength(process.env.NEXT_PUBLIC_EMAIL_OTP_LENGTH)
 
 function mmss(s: number) {
   return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
@@ -89,7 +94,7 @@ export default function VerificationPage() {
   }
 
   const verify = async (value: string) => {
-    if (blocked || verifying || value.length !== 6) return
+    if (blocked || verifying || !emailOtpSchema.safeParse(value).success) return
     setInfo(null)
 
     if (SUPABASE_ENABLED) {
@@ -134,8 +139,8 @@ export default function VerificationPage() {
       return
     }
 
-    // Démonstration : "123456" = succès.
-    if (value === '123456') {
+    // Démonstration : 123456 (ou 1234567, 12345678… jusqu'à 10 chiffres) = succès.
+    if (isDemoEmailOtp(value)) {
       setVerifying(true)
       router.push('/onboarding/profil')
       return
@@ -147,6 +152,7 @@ export default function VerificationPage() {
     <OnboardingScreen
       step={7}
       title={t('title')}
+      onSubmit={(e) => { e.preventDefault(); void verify(code) }}
       subtitle={
         <>
           {t('sentTo')}
@@ -157,10 +163,10 @@ export default function VerificationPage() {
       footer={
         <>
           <button
-            type="button"
+            type="submit"
             className={cn(btn.primary, 'w-full')}
-            disabled={code.length !== 6 || blocked || verifying || missingEmail}
-            onClick={() => void verify(code)}
+            disabled={code.length < EMAIL_OTP_MIN || blocked || verifying || missingEmail}
+            aria-busy={verifying}
           >
             {verifying ? t('verifying') : t('verify')}
           </button>
@@ -172,19 +178,21 @@ export default function VerificationPage() {
         </>
       }
     >
-      <OTPInput
+      <EmailCodeInput
+        label={t('codeLabel')}
         value={code}
         onChange={(v) => {
           setCode(v)
           if (error && !blocked) setError(null)
         }}
         onComplete={(v) => void verify(v)}
+        expectedLength={EXPECTED_LENGTH}
         disabled={blocked || missingEmail}
         error={!!error}
         autoFocus
         describedBy="otp-help"
       />
-      <p id="otp-help" className="sr-only">
+      <p id="otp-help" className="mt-1.5 text-[13px] text-night-600">
         {t('help')}
       </p>
 

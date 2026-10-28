@@ -37,7 +37,11 @@ export function usePublishedTemplate(slug: string): State<PublishedTemplate | nu
   return state
 }
 
-const ICON_BY_CATEGORY: Record<string, ModelCard['icon']> = { juridique: 'scale', scolaire: 'school', communication: 'clock', autre: 'home' }
+const ICON_BY_CATEGORY: Record<string, ModelCard['icon']> = { juridique: 'scale', scolaire: 'school', communication: 'mail', autre: 'file' }
+// Le sujet précis du modèle (repéré dans son slug) l'emporte sur la catégorie : logement, santé, chronologie.
+const ICON_BY_TOPIC: [RegExp, ModelCard['icon']][] = [[/heberg|logement/, 'home'], [/medic|sante|soin/, 'health'], [/chrono/, 'clock']]
+const iconFor = (slug: string, categorie: string): ModelCard['icon'] =>
+  ICON_BY_TOPIC.find(([re]) => re.test(slug))?.[1] ?? ICON_BY_CATEGORY[categorie] ?? 'file'
 const ACCENT_BY_CATEGORY: Record<string, ModelCard['accent']> = { juridique: 'iris', scolaire: 'leaf', communication: 'gold', autre: 'orange' }
 
 /** Tuile du tableau de bord (components/dashboard/ModelCardsGrid) à partir d'un modèle publié. */
@@ -46,7 +50,7 @@ export function toModelCard(t: PublishedTemplateSummary): ModelCard & { href: st
     id: t.slug,
     title: t.titre,
     description: t.description,
-    icon: ICON_BY_CATEGORY[t.categorie] ?? 'home',
+    icon: iconFor(t.slug, t.categorie),
     accent: ACCENT_BY_CATEGORY[t.categorie] ?? 'night',
     category: templateCategoryLabel(t.categorie),
     href: `/app/modeles/${t.slug}`,

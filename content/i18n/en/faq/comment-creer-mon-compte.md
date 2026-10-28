@@ -11,7 +11,7 @@ The steps:
 1. Open Lien Parental from your mobile browser or from the icon installed on your home screen.
 2. Tap "Create my account".
 3. Enter your first name, last name, email address and a password (at least 8 characters, one uppercase letter and one number or symbol).
-4. Enter the 6-digit code received by email to verify your address.
+4. Enter the verification code received by email to verify your address.
 5. Complete your profile and, if you wish, add your first child.
 
 A practical tip: use an email address that only you can access, preferably not a shared one. Your password is never stored in plain text.

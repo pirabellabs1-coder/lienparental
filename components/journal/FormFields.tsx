@@ -6,6 +6,7 @@ import {
 import { useTranslations } from 'next-intl'
 import { Calendar, Check, ChevronDown, ChevronRight, Clock } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import { TimePicker } from '@/components/forms/TimePicker'
 
 // Primitives de formulaire « Ajouter un événement » (maquettes Journal + Calendrier).
 // Partagées par components/journal et components/calendrier.
@@ -214,15 +215,8 @@ export function DateTimeFields({
           <Calendar aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-night-700" />
         </div>
         {withTime && <div className="relative">
-          <label htmlFor={`${id}-t`} className="sr-only">{t('time')}</label>
-          <input
-            id={`${id}-t`}
-            type="time"
-            value={time}
-            onChange={(e) => onTime(e.target.value)}
-            className={cn(fieldBase, 'relative h-12 border-night-100 pr-11', pickerIndicator)}
-          />
-          <Clock aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-night-700" />
+          {/* Sélecteur maison : le sélecteur natif d'Android déborde de l'écran en grande taille d'affichage. */}
+          <TimePicker id={`${id}-t`} label={t('time')} value={time} onChange={onTime} />
         </div>}
       </div>
       <FieldError id={`${id}-derr`}>{dateError}</FieldError>

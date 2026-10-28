@@ -411,6 +411,15 @@
       "guadeloupe": "Guadeloupe",
       "reunion": "Réunion",
       "mayotte": "Mayotte"
+    },
+    "timePicker": {
+      "title": "Choose a time",
+      "hours": "Hour",
+      "minutes": "Minutes",
+      "confirm": "OK",
+      "cancel": "Cancel",
+      "clear": "Clear",
+      "placeholder": "--:--"
     }
   }
 }

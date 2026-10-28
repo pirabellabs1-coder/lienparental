@@ -40,6 +40,7 @@ export default function InscriptionPage() {
   const [nom, setNom] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirm, setConfirm] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [serverError, setServerError] = useState<string | null>(null)
@@ -56,6 +57,7 @@ export default function InscriptionPage() {
     nom: !nom.trim() ? t('errLastName') : undefined,
     email: !EMAIL_RE.test(email.trim()) ? t('errEmail') : undefined,
     password: !PASSWORD_RULES.every((r) => r.test(password)) ? t('errPassword') : undefined,
+    confirm: confirm !== password ? t('errPasswordMatch') : undefined,
   }
   const valid = !Object.values(errors).some(Boolean)
 
@@ -70,7 +72,7 @@ export default function InscriptionPage() {
       email: emailSchema.safeParse(email),
       password: passwordSchema.safeParse(password),
     }
-    if (!parsed.prenom.success || !parsed.nom.success || !parsed.email.success || !parsed.password.success) {
+    if (!parsed.prenom.success || !parsed.nom.success || !parsed.email.success || !parsed.password.success || confirm !== password) {
       setServerError(t('errCheck'))
       return
     }
@@ -84,7 +86,9 @@ export default function InscriptionPage() {
     }
     writeDraft({ prenom: parsed.prenom.data, nom: parsed.nom.data, email: parsed.email.data })
     setPendingPassword(parsed.email.data, parsed.password.data)
-    setPassword('')
+    // Ne PAS vider les champs ici : `submitted` est vrai, un champ vide afficherait l'erreur rouge
+    // « mot de passe invalide » pendant la navigation. L'état disparaît avec l'écran (démontage) ;
+    // le mot de passe n'est conservé que par setPendingPassword, en mémoire, jusqu'à la vérification du code.
     router.push('/onboarding/verification')
   }
 
@@ -175,6 +179,14 @@ export default function InscriptionPage() {
           autoComplete="new-password"
           placeholder={t('passwordPlaceholder')}
           errorText={submitted ? errors.password : undefined}
+        />
+        <PasswordField
+          label={t('confirmPassword')}
+          value={confirm}
+          onValueChange={setConfirm}
+          autoComplete="new-password"
+          placeholder={t('confirmPasswordPlaceholder')}
+          errorText={submitted ? errors.confirm : undefined}
         />
       </div>
     </OnboardingScreen>

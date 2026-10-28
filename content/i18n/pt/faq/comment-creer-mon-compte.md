@@ -11,7 +11,7 @@ As etapas:
 1. Abra o Lien Parental no navegador do celular ou pelo ícone instalado na sua tela inicial.
 2. Toque em "Criar minha conta".
 3. Informe seu nome, sobrenome, e-mail e uma senha (pelo menos 8 caracteres, uma letra maiúscula e um número ou símbolo).
-4. Digite o código de 6 dígitos recebido por e-mail para verificar o seu endereço.
+4. Digite o código de verificação recebido por e-mail para verificar o seu endereço.
 5. Complete seu perfil e, se quiser, adicione seu primeiro filho.
 
 Uma dica prática: use um e-mail ao qual só você tem acesso, de preferência não compartilhado. Sua senha nunca é armazenada em texto simples.

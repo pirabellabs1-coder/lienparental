@@ -44,7 +44,7 @@ function Connexion() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(() => linkErrors[params.get('erreur') ?? ''] ?? null)
   const [loading, setLoading] = useState(false)
-  // Étape 2FA (Supabase) : code TOTP à 6 chiffres.
+  // Étape 2FA (Supabase) : code TOTP à 6 chiffres (otpSchema ; le code e-mail d'inscription, lui, fait 6 à 10 chiffres).
   const [phase, setPhase] = useState<'credentials' | 'mfa'>('credentials')
   const [factorId, setFactorId] = useState<string | null>(null)
   const [code, setCode] = useState('')
@@ -103,17 +103,29 @@ function Connexion() {
     if (err) {
       setLoading(false)
       if (err.code === 'email_not_confirmed') {
-        // Compte créé mais jamais vérifié : on renvoie un code et on reprend l'étape 7.
+        // Compte créé mais jamais vérifié : nouveau code par NOTRE e-mail (même appel que « Renvoyer le code »
+        // de l'étape 7 : POST /api/auth/signup, réponse neutre, limites de débit du serveur), puis étape 7.
+        // Jamais supabase.auth.resend : il enverrait le modèle par défaut de Supabase.
         writeDraft({ email: parsed.data })
-        await supabase.auth.resend({ type: 'signup', email: parsed.data }).catch(() => undefined)
+        const res = await fetch('/api/auth/signup', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin',
+          body: JSON.stringify({ email: parsed.data, resend: true }),
+        }).catch(() => null)
+        // Refus du serveur (ex. 429, trop de demandes) : on l'explique ici plutôt que d'ouvrir l'étape 7 sans code.
+        if (res && !res.ok) {
+          const data = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
+          setError(data?.error?.message ?? authErrorMessage(err, 'signin'))
+          return
+        }
         router.push('/onboarding/verification')
         return
       }
       setError(authErrorMessage(err, 'signin'))
       return
     }
-    setPassword('')
-    if (await needsMfa()) { setLoading(false); return }
+    // Étape 2FA : le champ n'est plus affiché, on efface le mot de passe tout de suite. Sinon on le
+    // laisse jusqu'au démontage : le vider avant la navigation faisait clignoter le champ vide.
+    if (await needsMfa()) { setPassword(''); setLoading(false); return }
     await finish()
   }
 

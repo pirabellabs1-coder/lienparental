@@ -10,7 +10,7 @@ You can get to grips with Lien Parental in five minutes. Follow these steps to s
 
    ![step 1](/content/tutoriels/bien-demarrer/step-1.png)
 
-2. **Verify your email address.** Enter the 6-digit code received by email. Remember to check your spam folder if you don't see it.
+2. **Verify your email address.** Enter the verification code received by email. Remember to check your spam folder if you don't see it.
 
    ![step 2](/content/tutoriels/bien-demarrer/step-2.png)
 

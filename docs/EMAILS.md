@@ -30,7 +30,7 @@ La route renvoie 404 en production.
 
 | Clé | Fichier | Déclencheur | Variables |
 | --- | --- | --- | --- |
-| `verification` (M02) | `templates/verification.ts` | Inscription et « Renvoyer le code » (`POST /api/auth/signup`) | `prenom`, `code` (6 chiffres), `expireMinutes` (défaut 15), `url?` (lien de confirmation en un clic) |
+| `verification` (M02) | `templates/verification.ts` | Inscription et « Renvoyer le code » (`POST /api/auth/signup`) | `prenom`, `code` (6 à 10 chiffres selon « Email OTP Length »), `expireMinutes` (défaut 15), `url?` (lien de confirmation en un clic) |
 | `account-exists` | `templates/accountExists.ts` | Inscription demandée avec une adresse déjà confirmée (réponse neutre à l'écran) | `prenom` |
 | `reset-password` | `templates/resetPassword.ts` | Mot de passe oublié (`POST /api/auth/password-reset`) | `prenom`, `url` |
 | `new-login` (M11) | `templates/newLogin.ts` | Connexion depuis un appareil inédit (`lib/notify/login.ts`) | `prenom`, `appareil`, `lieu?` (omis : aucune géolocalisation tierce), `systeme`, `dateIso` |

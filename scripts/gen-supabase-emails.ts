@@ -3,7 +3,7 @@
 // Usage : npx --yes tsx scripts/gen-supabase-emails.ts
 // Puis coller chaque fichier dans Supabase > Authentication > Emails > Templates (sujets : supabase/templates/README.md).
 //
-// Variables Go de Supabase : {{ .Token }} (code à 6 chiffres), {{ .TokenHash }}, {{ .SiteURL }}, {{ .Email }}, {{ .NewEmail }}.
+// Variables Go de Supabase : {{ .Token }} (code, longueur = « Email OTP Length » : 6 recommandé, l'app accepte 6 à 10), {{ .TokenHash }}, {{ .SiteURL }}, {{ .Email }}, {{ .NewEmail }}.
 // Les liens passent par /auth/confirm (vérification côté serveur, fonctionne d'un appareil à l'autre).
 
 import { mkdirSync, writeFileSync } from 'node:fs'

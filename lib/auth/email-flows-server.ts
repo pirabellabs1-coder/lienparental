@@ -58,5 +58,6 @@ export function serverFlowDeps(): FlowDeps | null {
     appOrigin: appOrigin(),
 
     log: (msg, meta) => console.warn(`[auth-email] ${msg}`, meta ?? {}),
+    logError: (msg, meta) => console.error(`[auth-email] ${msg}`, meta ?? {}),
   }
 }

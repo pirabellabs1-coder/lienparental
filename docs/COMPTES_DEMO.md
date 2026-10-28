@@ -10,6 +10,7 @@ Pour tester le parcours complet sans backend. Chaque connexion ouvre une session
 
 Sur l'écran de connexion, l'encart **Comptes de démonstration** permet aussi de se connecter en un clic.
 Créer un compte via l'inscription ouvre également une session de démonstration à la dernière étape.
+Code de vérification de l'inscription en démonstration : **123456** (ou 1234567, 12345678… jusqu'à 1234567890, pour essayer les codes de 6 à 10 chiffres).
 « Se déconnecter » (Profil) ferme la session.
 
 ## Fonctionnement

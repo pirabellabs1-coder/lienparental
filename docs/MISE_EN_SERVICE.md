@@ -80,7 +80,7 @@ select id, public from storage.buckets;   -- 3 buckets, public = false
 - **Enable Email provider** : activé. **Confirm email** : activé.
 - **Secure email change** : activé (confirmation sur l'ancienne ET la nouvelle adresse).
 - **Secure password change** : activé.
-- **Email OTP Length** : `6` (l'écran de vérification a 6 cases). **Email OTP Expiration** : `3600` s (1 heure, valeur par défaut), réglage PARTAGÉ par le code d'inscription et le lien de réinitialisation (nos e-mails et l'app annoncent « 1 heure »). `900` s serait plus strict ; si le propriétaire choisit cette valeur, il faut changer les textes (template `verification`, écran de vérification, `resetPassword`, `scripts/gen-supabase-emails.ts`).
+- **Email OTP Length** : `6` recommandé. L'application accepte **6 à 10** chiffres (champ unique de l'écran de vérification, `EMAIL_OTP_MIN` / `EMAIL_OTP_MAX` de `lib/auth/email-otp.ts`) : un réglage à 7 ou 8 ne bloque donc plus l'inscription, mais 6 reste le plus simple à saisir. Facultatif : `NEXT_PUBLIC_EMAIL_OTP_LENGTH` = la même valeur, pour valider automatiquement un code collé ou proposé par le téléphone (sans elle, validation au clic sur « Vérifier »). Hors de 6 à 10, le serveur journalise `ERREUR generateLink signup : code e-mail hors format` (sans le code). **Email OTP Expiration** : `3600` s (1 heure, valeur par défaut), réglage PARTAGÉ par le code d'inscription et le lien de réinitialisation (nos e-mails et l'app annoncent « 1 heure »). `900` s serait plus strict ; si le propriétaire choisit cette valeur, il faut changer les textes (template `verification`, écran de vérification, `resetPassword`, `scripts/gen-supabase-emails.ts`).
 - **Password requirements** (Authentication > Policies / Passwords) : longueur minimale `8`, exiger
   « lowercase, uppercase letters and digits » — c'est la vérification **côté serveur** des règles affichées, identiques à
   `passwordSchema` (`lib/auth/validation.ts`) et `PASSWORD_RULES` : à modifier ensemble.
@@ -88,7 +88,7 @@ select id, public from storage.buckets;   -- 3 buckets, public = false
 
 ### 1.5 Authentication > Email Templates
 
-L'inscription se vérifie par **code à 6 chiffres** et la réinitialisation par **lien** vers `/auth/confirm`.
+L'inscription se vérifie par **code reçu par e-mail** (6 chiffres recommandés, 6 à 10 acceptés) et la réinitialisation par **lien** vers `/auth/confirm`.
 
 **Confirm signup** — sujet : `Votre code Lien Parental`
 

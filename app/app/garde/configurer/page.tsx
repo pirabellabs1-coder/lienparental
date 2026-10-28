@@ -12,6 +12,7 @@ import { setGardeFlash } from '@/components/garde/store'
 import { useGardeNames } from '@/components/garde/useGardeNames'
 import { weekdayNames } from '@/components/calendrier/useCalFormat'
 import { intlLocale } from '@/lib/i18n/config'
+import { TimePicker } from '@/components/forms/TimePicker'
 import { fetchGardeConfig, storeGardeConfig } from '@/lib/data/garde'
 import {
   SCHOOL_HOLIDAYS, ZONE_CALENDAR_UNTIL, ZONE_OPTIONS,
@@ -248,14 +249,20 @@ export default function ConfigurerGardePage() {
                   {c.rythme === 'personnalise' && t('custodySetup.infoCustom')}
                 </div>
               )}
-              <Input
-                type="time"
-                label={t('custodySetup.handoverTime')}
-                required
-                value={c.handoverTime}
-                onChange={(e) => update({ handoverTime: e.target.value })}
-                error={errors.handoverTime}
-              />
+              <div>
+                <span id="handover-time-label" className="mb-1.5 block text-sm font-semibold text-night-800">
+                  {t('custodySetup.handoverTime')} <span aria-hidden="true" className="text-alert-600">*</span>
+                </span>
+                <TimePicker
+                  label={t('custodySetup.handoverTime')}
+                  required
+                  value={c.handoverTime}
+                  onChange={(v) => update({ handoverTime: v })}
+                  invalid={Boolean(errors.handoverTime)}
+                  describedBy={errors.handoverTime ? 'handover-time-error' : undefined}
+                />
+                {errors.handoverTime && <p id="handover-time-error" role="alert" className="mt-1.5 text-sm font-medium text-alert-600">{errors.handoverTime}</p>}
+              </div>
               <Select
                 label={t('custodySetup.handoverPlace')}
                 value={c.lieu}

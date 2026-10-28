@@ -39,7 +39,7 @@ Les colonnes sensibles non médicales (nom, prénom de l'enfant...) restent en c
 - Politique mot de passe appliquée côté UI et serveur : 8 caractères minimum, 1 majuscule, 1 chiffre ou symbole (M02-04).
 - E-mail vérifié obligatoire pour accéder au coffre-fort et créer une demande de témoignage.
 - **2FA** : TOTP optionnel (M11). Attribut `users.mfa_enabled`.
-- **Code de vérification e-mail** : 6 chiffres, expiration 15 min, 5 essais max avant blocage temporaire.
+- **Code de vérification e-mail** : 6 chiffres recommandés (« Email OTP Length » ; l'app accepte 6 à 10), expiration 1 h, 5 essais max avant blocage temporaire.
 
 ## 4. Autorisation : RLS (Row Level Security)
 

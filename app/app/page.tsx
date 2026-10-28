@@ -89,19 +89,19 @@ export default function DashboardPage() {
 
       {/* Taille de texte « Grande » sur téléphone (zoom 1,1, cf. globals.css) : une colonne, libellés jamais coupés. */}
       <nav aria-label={t('orgNav')} className="!mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4 max-sm:[html[data-text-size=grande]_&]:grid-cols-1">
-        <Link href="/app/guide" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
+        <Link href="/app/guide" className="flex flex-col items-start gap-2 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card sm:flex-row sm:items-center sm:gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600"><Compass className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
           <span className="min-w-0 break-words text-[13.5px] font-bold leading-tight text-night-900">{t('guide')}</span>
         </Link>
-        <Link href="/app/journal?filtre=finances" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
+        <Link href="/app/journal?filtre=finances" className="flex flex-col items-start gap-2 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card sm:flex-row sm:items-center sm:gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-50 text-gold-600"><Wallet className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
           <span className="min-w-0 break-words text-[13.5px] font-bold leading-tight text-night-900">{t('expenses')}</span>
         </Link>
-        <Link href={activeChildId ? `/app/enfants/${activeChildId}/sante` : '/app/enfants'} className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
+        <Link href={activeChildId ? `/app/enfants/${activeChildId}/sante` : '/app/enfants'} className="flex flex-col items-start gap-2 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card sm:flex-row sm:items-center sm:gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-50 text-sky-600"><HeartPulse className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
           <span className="min-w-0 break-words text-[13.5px] font-bold leading-tight text-night-900">{t('health')}</span>
         </Link>
-        <Link href="/app/coffre/temoignages" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
+        <Link href="/app/coffre/temoignages" className="flex flex-col items-start gap-2 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card sm:flex-row sm:items-center sm:gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-night-50 text-night-700"><MessageSquareQuote className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
           <span className="min-w-0 break-words text-[13.5px] font-bold leading-tight text-night-900">{t('testimonials')}</span>
         </Link>

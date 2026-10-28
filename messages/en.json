@@ -340,6 +340,9 @@
       "errLastName": "Please enter your last name.",
       "errEmail": "Please enter a valid email address.",
       "errPassword": "The password doesn’t meet all the rules yet.",
+      "confirmPassword": "Confirm the password",
+      "confirmPasswordPlaceholder": "Enter it again",
+      "errPasswordMatch": "The two passwords do not match.",
       "errCheck": "Please check the information entered.",
       "errUnavailable": "Service temporarily unavailable. Please try again in a moment.",
       "errNetwork": "Couldn’t connect. Check your network and try again."

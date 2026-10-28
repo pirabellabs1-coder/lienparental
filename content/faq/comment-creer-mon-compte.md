@@ -11,7 +11,7 @@ Les étapes :
 1. Ouvrez Lien Parental depuis votre navigateur mobile ou l'icône installée sur votre écran d'accueil.
 2. Appuyez sur « Créer mon compte ».
 3. Saisissez votre prénom, votre nom, votre adresse e-mail et un mot de passe (au moins 8 caractères, une majuscule et un chiffre ou un symbole).
-4. Saisissez le code à 6 chiffres reçu par e-mail pour vérifier votre adresse.
+4. Saisissez le code de vérification reçu par e-mail pour vérifier votre adresse.
 5. Complétez votre profil et ajoutez, si vous le souhaitez, votre premier enfant.
 
 Un conseil pratique : utilisez une adresse e-mail à laquelle vous seul avez accès, de préférence pas une adresse partagée. Votre mot de passe n'est jamais stocké en clair.

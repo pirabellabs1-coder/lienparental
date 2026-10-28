@@ -411,6 +411,15 @@
       "guadeloupe": "Guadalupe",
       "reunion": "Reunião",
       "mayotte": "Mayotte"
+    },
+    "timePicker": {
+      "title": "Escolher o horário",
+      "hours": "Hora",
+      "minutes": "Minutos",
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "clear": "Limpar",
+      "placeholder": "--:--"
     }
   }
 }

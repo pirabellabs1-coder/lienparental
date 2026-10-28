@@ -1,4 +1,4 @@
-// lib/email/templates/verification.ts — M02 : code à 6 chiffres pour vérifier l'adresse email.
+// lib/email/templates/verification.ts — M02 : code (6 à 10 chiffres, « Email OTP Length ») pour vérifier l'adresse email.
 
 import { baseLayout } from '../layout'
 import { emailTheme as t } from '../theme'
@@ -7,7 +7,7 @@ import { emailT, greeting, type Locale } from '../i18n'
 
 export type VerificationProps = {
   prenom: string
-  /** Code à 6 chiffres. */
+  /** Code reçu de generateLink : 6 à 10 chiffres selon « Email OTP Length » (lib/auth/email-otp.ts). */
   code: string
   /** Durée de validité en minutes (défaut : 15). */
   expireMinutes?: number

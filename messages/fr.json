@@ -340,6 +340,9 @@
       "errLastName": "Indiquez votre nom.",
       "errEmail": "Indiquez une adresse e-mail valide.",
       "errPassword": "Le mot de passe ne respecte pas encore toutes les règles.",
+      "confirmPassword": "Confirmez le mot de passe",
+      "confirmPasswordPlaceholder": "Saisissez-le à nouveau",
+      "errPasswordMatch": "Les deux mots de passe ne correspondent pas.",
       "errCheck": "Vérifiez les informations saisies.",
       "errUnavailable": "Service momentanément indisponible. Réessayez dans un instant.",
       "errNetwork": "Connexion impossible. Vérifiez votre réseau puis réessayez."

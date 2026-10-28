@@ -10,7 +10,7 @@ Você aprende a usar o Lien Parental em cinco minutos. Siga estas etapas para co
 
    ![etapa 1](/content/tutoriels/bien-demarrer/step-1.png)
 
-2. **Verifique seu e-mail.** Digite o código de 6 dígitos recebido por e-mail. Lembre-se de olhar a caixa de spam se não o encontrar.
+2. **Verifique seu e-mail.** Digite o código de verificação recebido por e-mail. Lembre-se de olhar a caixa de spam se não o encontrar.
 
    ![etapa 2](/content/tutoriels/bien-demarrer/step-2.png)
 

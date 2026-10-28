@@ -6,7 +6,7 @@
  * (routes /api/auth/signup et /api/auth/password-reset ; doublures dans tests/auth-email-flows.test.ts).
  *
  * Principe : le serveur appelle supabase.auth.admin.generateLink (service_role), qui crée le
- * compte ou le jeton SANS envoyer d'e-mail et renvoie le code à 6 chiffres (email_otp) et le
+ * compte ou le jeton SANS envoyer d'e-mail et renvoie le code (email_otp, 6 à 10 chiffres selon « Email OTP Length ») et le
  * jeton haché (hashed_token). Nous envoyons ensuite notre e-mail : code + lien vers la page
  * intermédiaire /auth/confirmer (bouton : un scanner de liens ne consomme pas le jeton).
  *
@@ -29,6 +29,7 @@
  */
 import { z } from 'zod'
 import { emailSchema } from './validation'
+import { isEmailOtp } from './email-otp'
 import { ipKey, tokenKey, type RateLimitResult } from '@/lib/data/server/rate-limit-core'
 import { verificationEmail } from '@/lib/email/templates/verification'
 import { resetPasswordEmail } from '@/lib/email/templates/resetPassword'
@@ -59,6 +60,8 @@ export type FlowDeps = {
   /** Langue enregistrée d'un compte existant (null : inconnue). Absent : langue du visiteur. */
   userLocale?(userId: string): Promise<Locale | null>
   log?(msg: string, meta?: Record<string, unknown>): void
+  /** Anomalie à corriger (réglage du projet…) ; à défaut : `log`. */
+  logError?(msg: string, meta?: Record<string, unknown>): void
 }
 
 export type FlowResult =
@@ -151,6 +154,12 @@ export async function prepareSignup(deps: FlowDeps, body: unknown, ip: string, v
         type: 'signup', email, password: deps.randomPassword(), redirectTo: `${deps.appOrigin}${SIGNUP_PASSWORD_STEP}`,
       })
       if (!link.ok) { deps.log?.('generateLink signup en échec', { code: link.code }); return }
+      if (!isEmailOtp(link.otp)) {
+        // Le code ne pourra pas être saisi (l'écran accepte 6 à 10 chiffres) ; le lien de l'e-mail reste valable.
+        // Jamais le code lui-même dans les journaux : seulement sa longueur et sa forme.
+        const meta = { length: typeof link.otp === 'string' ? link.otp.length : null, digitsOnly: /^\d*$/.test(String(link.otp ?? '')) }
+        ;(deps.logError ?? deps.log)?.('ERREUR generateLink signup : code e-mail hors format (6 à 10 chiffres attendus), vérifier « Email OTP Length » dans Supabase', meta)
+      }
       const mail = verificationEmail({
         prenom: '', // adresse non encore vérifiée : jamais de texte saisi par le demandeur
         code: link.otp,

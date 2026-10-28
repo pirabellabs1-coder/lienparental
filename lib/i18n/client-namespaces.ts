@@ -60,6 +60,7 @@ export const CLIENT_NS_APP = [
   'shared.calendar',
   'shared.dashboard',
   'shared.states',
+  'shared.timePicker',
   'shared.topBar',
 ] as const
 

@@ -525,7 +525,8 @@
       },
       "grid": {
         "more1": "More",
-        "more2": "templates"
+        "more2": "templates",
+        "seeAll": "See all templates"
       }
     }
   }

@@ -10,6 +10,7 @@
  */
 import { z } from 'zod'
 import { authT, type AuthTranslate } from './errors'
+import { EMAIL_OTP_RE } from './email-otp'
 
 const CODE_PREFIX = 'auth.validation.'
 
@@ -41,7 +42,11 @@ export const passwordSchema = z
   .refine(v => /[a-z]/.test(v) && /[A-Z]/.test(v), code('passwordCase'))
   .refine(v => /[0-9]/.test(v), code('passwordDigit'))
 
+/** Code TOTP de la 2FA (application d'authentification) : toujours 6 chiffres. */
 export const otpSchema = z.string().regex(/^\d{6}$/, code('otpFormat'))
+
+/** Code d'inscription reçu par e-mail : 6 à 10 chiffres (réglage Supabase « Email OTP Length », lib/auth/email-otp.ts). */
+export const emailOtpSchema = z.string().regex(EMAIL_OTP_RE, code('emailOtpFormat'))
 
 export const nameSchema = trimmed(80).min(1, code('required'))
 

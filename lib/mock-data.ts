@@ -73,7 +73,7 @@ export type ModelCard = {
   id: string
   title: string
   description: string
-  icon: 'scale' | 'school' | 'clock' | 'home'
+  icon: 'scale' | 'school' | 'clock' | 'home' | 'mail' | 'health' | 'file'
   accent: 'night' | 'leaf' | 'iris' | 'gold' | 'orange'
   /** Petite catégorie affichée sous le titre (tuiles du dashboard). */
   category?: string

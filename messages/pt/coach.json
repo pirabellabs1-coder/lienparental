@@ -525,7 +525,8 @@
       },
       "grid": {
         "more1": "Mais",
-        "more2": "modelos"
+        "more2": "modelos",
+        "seeAll": "Ver todos os modelos"
       }
     }
   }
