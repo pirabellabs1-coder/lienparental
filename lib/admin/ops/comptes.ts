@@ -4,21 +4,32 @@ import 'server-only'
  * actions journalisées et export CSV minimisé.
  *
  * Réel : fonctions admin_list_accounts / admin_get_account / admin_revoke_user_sessions
- * (0400, is_admin_aal2 vérifié en base) avec la session de l'admin ; GoTrue admin
- * (service_role) uniquement pour suspendre, réactiver, renvoyer l'e-mail et supprimer.
- * Démonstration : magasin mémoire (lib/admin/ops/demo.ts).
+ * (0400) et admin_moderate_account / admin_accounts_moderation / admin_account_moderation
+ * (0500), is_admin_aal2 vérifié en base, avec la session de l'admin ; GoTrue admin
+ * (service_role) uniquement pour le ban (suspendre, désactiver, réactiver), renvoyer
+ * l'e-mail et supprimer. Démonstration : magasin mémoire (lib/admin/ops/demo.ts).
+ *
+ * Modération : règles des transitions et validation dans ./moderation (module pur, testé).
  */
 import { z } from 'zod'
 import { RepoError, type AdminCtx } from '@/lib/contenus/repo'
 import { csvCell } from '@/lib/admin/stats/csv'
 import { softDeleteAccount } from '@/lib/account/deletion'
 import { DEFAULT_TZ, addDaysToKey, dayKeyInTz, wallTimeToIso } from '@/lib/tz'
-import { demoAudit, opsDemo } from './demo'
-import { logAdminAction, logAdminFailure, rpc, serviceClient, type LiveCtx } from './rpc'
+import { randomUUID } from 'node:crypto'
+import type { SupabaseClient } from '@supabase/supabase-js'
+import { notify } from '@/lib/notify/server'
+import { DEMO_ACTOR, demoAudit, opsDemo } from './demo'
+import { logAdminAction, logAdminFailure, opsError, rpc, serviceClient, type LiveCtx } from './rpc'
 import {
   ACCOUNT_PLANS, ACCOUNT_STATUSES, PLAN_LABEL, STATUS_LABEL, decodeCursor, deviceLabel, encodeCursor,
-  type AccountAction, type AccountDetail, type AccountFilters, type AccountRow,
+  type AccountDetail, type AccountFilters, type AccountListItem, type AccountModeration, type AccountRow,
 } from './types'
+import {
+  KIND_OF_ACTION, MODERATION_KINDS, MODERATION_REASONS, actionAvailability, banDurationFor, legacyStatus, moderationState,
+  restoreBanDuration, suspensionUntil,
+  type ActionBody, type ModAction, type ModerationAction, type ModerationEntry, type ModerationTarget,
+} from './moderation'
 
 const PAGE = 50
 const EXPORT_MAX = 10_000
@@ -68,10 +79,16 @@ async function livePage(ctx: LiveCtx, f: AccountFilters, cursor: { createdAt: st
 
 const norm = (s: string) => s.toLocaleLowerCase('fr').normalize('NFD').replace(/[̀-ͯ]/g, '')
 
+/** Démo : statut recalculé à chaque lecture (une suspension expire seule, comme le ban GoTrue). */
+function demoAccounts() {
+  const now = Date.now()
+  return opsDemo().accounts.map((a) => ({ ...a, status: legacyStatus(moderationState(a, now).state) }))
+}
+
 function demoPage(f: AccountFilters, cursor: { createdAt: string; id: string } | null, limit: number): AccountRow[] {
   const { from, to } = bounds(f)
   const needle = f.q ? norm(f.q) : ''
-  return opsDemo().accounts
+  return demoAccounts()
     .filter((a) => (f.statut ? a.status === f.statut : a.status !== 'supprime'))
     .filter((a) => !f.plan || a.plan === f.plan)
     .filter((a) => !needle || norm(`${a.email} ${a.prenom ?? ''} ${a.nom ?? ''}`).includes(needle) || a.id === f.q)
@@ -82,7 +99,44 @@ function demoPage(f: AccountFilters, cursor: { createdAt: string; id: string } |
     .map(({ deletedAt: _d, bannedUntil: _b, ...row }) => row)
 }
 
-export type AccountPage = { rows: AccountRow[]; nextCursor: string | null }
+export type AccountPage = { rows: AccountListItem[]; nextCursor: string | null }
+
+const modListSchema = z.array(z.object({ user_id: z.string(), banned_until: isoN, warnings: z.coerce.number().catch(0) }))
+
+/** Repli sans journal 0500 : état d'après le statut de la liste (sans date de fin ni avertissements). */
+function fallbackModeration(r: AccountRow): AccountModeration {
+  return { state: r.status, until: null, warnings: null }
+}
+
+/** Fin de ban et avertissements d'une page de comptes (0500) ; absent : repli, la liste reste utilisable. */
+async function moderationFor(ctx: AdminCtx, rows: AccountRow[]): Promise<Map<string, AccountModeration>> {
+  const out = new Map<string, AccountModeration>()
+  const now = Date.now()
+  if (ctx.mode === 'demo') {
+    const s = opsDemo()
+    for (const r of rows) {
+      const a = s.accounts.find((x) => x.id === r.id)
+      if (!a) continue
+      out.set(r.id, { ...moderationState(a, now), warnings: s.moderation.filter((m) => m.userId === r.id && m.kind === 'warning').length })
+    }
+    return out
+  }
+  const ids = rows.map((r) => r.id).filter((id) => UUID_RE.test(id))
+  if (ids.length === 0) return out
+  try {
+    const data = await rpc(ctx, 'admin_accounts_moderation', { p_ids: ids }, modListSchema)
+    const byId = new Map(rows.map((r) => [r.id, r]))
+    for (const m of data) {
+      const r = byId.get(m.user_id)
+      if (!r) continue
+      const st = moderationState({ deletedAt: r.status === 'supprime' ? r.createdAt : null, bannedUntil: m.banned_until, emailVerified: r.emailVerified }, now)
+      out.set(m.user_id, { ...st, warnings: m.warnings })
+    }
+  } catch {
+    /* journal 0500 absent ou indisponible : repli (déjà signalé dans le journal serveur) */
+  }
+  return out
+}
 
 export async function listAccounts(ctx: AdminCtx, f: AccountFilters): Promise<AccountPage> {
   const cursor = decodeCursor(f.apres)
@@ -90,7 +144,11 @@ export async function listAccounts(ctx: AdminCtx, f: AccountFilters): Promise<Ac
   const more = rows.length > PAGE
   const page = rows.slice(0, PAGE)
   const last = page.at(-1)
-  return { rows: page, nextCursor: more && last ? encodeCursor(last.createdAt, last.id) : null }
+  const mods = await moderationFor(ctx, page)
+  return {
+    rows: page.map((r) => ({ ...r, moderation: mods.get(r.id) ?? fallbackModeration(r) })),
+    nextCursor: more && last ? encodeCursor(last.createdAt, last.id) : null,
+  }
 }
 
 // --- Fiche ------------------------------------------------------------------------------
@@ -115,9 +173,34 @@ const detailSchema = z.object({
 }).nullable()
 
 function statusOf(p: { deleted_at: string | null; banned_until: string | null; email_verified: boolean }): AccountRow['status'] {
-  if (p.deleted_at) return 'supprime'
-  if (p.banned_until && Date.parse(p.banned_until) > Date.now()) return 'suspendu'
-  return p.email_verified ? 'actif' : 'non_verifie'
+  return legacyStatus(moderationState({ deletedAt: p.deleted_at, bannedUntil: p.banned_until, emailVerified: p.email_verified }).state)
+}
+
+const modDetailSchema = z.object({
+  warnings: z.coerce.number().catch(0),
+  history: z.array(z.object({
+    id: z.coerce.string(),
+    kind: z.enum(MODERATION_KINDS),
+    reason_code: z.enum(MODERATION_REASONS).nullable().catch(null),
+    reason: z.string().nullable().catch(null),
+    until: isoN,
+    created_at: iso,
+    admin_email: z.string().nullable().catch(null),
+  })).catch([]),
+})
+
+async function liveModeration(ctx: LiveCtx, id: string): Promise<{ warnings: number | null; history: ModerationEntry[] | null }> {
+  try {
+    const m = await rpc(ctx, 'admin_account_moderation', { p_user_id: id }, modDetailSchema)
+    return {
+      warnings: m.warnings,
+      history: m.history.map((h) => ({
+        id: h.id, kind: h.kind, reasonCode: h.reason_code, reason: h.reason, until: h.until, createdAt: h.created_at, adminEmail: h.admin_email,
+      })),
+    }
+  } catch {
+    return { warnings: null, history: null } // journal 0500 absent : la fiche reste consultable
+  }
 }
 
 export async function getAccount(ctx: AdminCtx, id: string): Promise<AccountDetail> {
@@ -126,7 +209,12 @@ export async function getAccount(ctx: AdminCtx, id: string): Promise<AccountDeta
   const d = await rpc(ctx, 'admin_get_account', { p_id: id }, detailSchema)
   if (!d) throw new RepoError('not_found', 'Compte introuvable.')
   const p = d.profile
+  const mod = await liveModeration(ctx, id)
   return {
+    moderation: {
+      ...moderationState({ deletedAt: p.deleted_at, bannedUntil: p.banned_until, emailVerified: p.email_verified }),
+      warnings: mod.warnings, history: mod.history,
+    },
     profile: {
       id: p.id, email: p.email, prenom: p.prenom, nom: p.nom, plan: p.plan, status: statusOf(p), createdAt: p.created_at,
       lastSignInAt: p.last_sign_in_at, emailVerified: p.email_verified, mfaEnabled: p.mfa_enabled, storageMb: p.storage_mb,
@@ -151,8 +239,10 @@ function demoDetail(id: string): AccountDetail {
   if (!a) throw new RepoError('not_found', 'Compte introuvable.')
   const paid = a.plan === 'premium' || a.plan === 'coparentalite'
   const now = Date.now()
+  const history = s.moderation.filter((m) => m.userId === id).map(({ userId: _u, ...m }) => m)
   return {
-    profile: { ...a },
+    profile: { ...a, status: legacyStatus(moderationState(a, now).state) },
+    moderation: { ...moderationState(a, now), warnings: history.filter((m) => m.kind === 'warning').length, history },
     effective: { plan: a.plan === 'admin' ? 'free' : a.plan, ownPlan: a.plan, via: paid ? 'abonnement' : null },
     sessions: a.lastSignInAt ? [
       { createdAt: a.lastSignInAt, lastSeenAt: a.lastSignInAt, device: 'Safari · iOS', aal: a.mfaEnabled ? 'aal2' : 'aal1' },
@@ -176,65 +266,156 @@ function demoDetail(id: string): AccountDetail {
 
 export type ActionResult = { ok: true; message: string }
 
-const BAN = '876000h' // ~100 ans : GoTrue n'a pas de « suspension sans fin », c'est la convention Supabase.
+/** Le compte affiché est-il celui de l'administrateur connecté ? (démo : adresse du compte admin de démo) */
+export function isSelfAccount(ctx: AdminCtx, profile: { id: string; email: string }): boolean {
+  return ctx.mode === 'live' ? profile.id === ctx.userId : profile.email.toLowerCase() === DEMO_ACTOR
+}
 
-function assertTarget(ctx: AdminCtx, d: AccountDetail, action: string) {
-  if (ctx.mode === 'live' && d.profile.id === ctx.userId) throw new RepoError('forbidden', 'Action impossible sur votre propre compte.')
-  if (d.profile.status === 'supprime') throw new RepoError('conflict', 'Ce compte est déjà supprimé.')
-  if (d.profile.plan === 'admin' && action !== 'force_logout') {
-    throw new RepoError('forbidden', 'Un compte administrateur ne se gère pas depuis cet écran (retirez d’abord le rôle en base).')
+export function targetOf(ctx: AdminCtx, d: AccountDetail): ModerationTarget {
+  return {
+    state: d.moderation.state, until: d.moderation.until, isAdmin: d.profile.plan === 'admin',
+    isSelf: isSelfAccount(ctx, d.profile), emailVerified: d.profile.emailVerified,
   }
 }
 
-export async function runAccountAction(ctx: AdminCtx, id: string, action: AccountAction): Promise<ActionResult> {
+/** Refus explicite (même texte que l'interface) si l'action n'est pas permise sur ce compte. */
+function assertAllowed(ctx: AdminCtx, d: AccountDetail, action: ModAction) {
+  const av = actionAvailability(targetOf(ctx, d))[action]
+  if (!av.allowed) throw new RepoError(av.code, av.reason)
+}
+
+const MESSAGES: Record<ActionBody['action'], string> = {
+  warn: 'Avertissement enregistré.',
+  suspend: 'Compte suspendu : connexion bloquée et sessions fermées jusqu’à la date de fin.',
+  deactivate: 'Compte désactivé : connexion bloquée et sessions fermées jusqu’à réactivation.',
+  reactivate: 'Compte réactivé : la connexion est de nouveau possible.',
+  resend_verification: 'E-mail de vérification renvoyé.',
+  force_logout: 'Déconnexion forcée effectuée',
+}
+
+export async function runAccountAction(ctx: AdminCtx, id: string, body: ActionBody): Promise<ActionResult> {
   const d = await getAccount(ctx, id)
-  assertTarget(ctx, d, action)
-  const p = d.profile
+  assertAllowed(ctx, d, body.action)
 
-  if (action === 'suspend' && p.status === 'suspendu') throw new RepoError('conflict', 'Ce compte est déjà suspendu.')
-  if (action === 'reactivate' && p.status !== 'suspendu') throw new RepoError('conflict', 'Ce compte n’est pas suspendu.')
-  if (action === 'resend_verification' && p.emailVerified) throw new RepoError('conflict', 'L’adresse e-mail de ce compte est déjà vérifiée.')
-
-  if (ctx.mode === 'demo') {
-    const a = opsDemo().accounts.find((x) => x.id === id)!
-    if (action === 'suspend') { a.bannedUntil = new Date(Date.now() + 100 * 365 * 86_400_000).toISOString(); a.status = 'suspendu' }
-    if (action === 'reactivate') { a.bannedUntil = null; a.status = a.emailVerified ? 'actif' : 'non_verifie' }
-    demoAudit(`admin.account.${action}`, { subjectId: id, entity: 'users', entityId: id })
-    return { ok: true, message: MESSAGES[action] }
+  if (body.action === 'warn' || body.action === 'suspend' || body.action === 'deactivate' || body.action === 'reactivate') {
+    return moderate(ctx, d, body)
   }
 
-  if (action === 'force_logout') {
+  if (ctx.mode === 'demo') {
+    demoAudit(`admin.account.${body.action}`, { subjectId: id, entity: 'users', entityId: id })
+    return { ok: true, message: MESSAGES[body.action] }
+  }
+
+  if (body.action === 'force_logout') {
     const n = await rpc(ctx, 'admin_revoke_user_sessions', { p_user_id: id }, z.coerce.number())
     return { ok: true, message: `${MESSAGES.force_logout} (${n} session${n > 1 ? 's' : ''}).` }
   }
 
-  const admin = serviceClient()
-  await logAdminAction(ctx, `admin.account.${action}`, { entity: 'users', entityId: id, subject: id })
-  if (action === 'suspend' || action === 'reactivate') {
-    const { error } = await admin.auth.admin.updateUserById(id, { ban_duration: action === 'suspend' ? BAN : 'none' })
-    if (error) {
-      await logAdminFailure(ctx, action, id, String(error.code ?? error.status ?? 'auth'))
-      throw new RepoError('unavailable', 'Le service d’authentification a refusé la modification. Réessayez dans un instant.')
-    }
-    // Suspendre ferme aussi les sessions ouvertes (le jeton d'accès en cours expire sous 1 h).
-    if (action === 'suspend') await rpc(ctx, 'admin_revoke_user_sessions', { p_user_id: id }, z.coerce.number()).catch(() => 0)
-    return { ok: true, message: MESSAGES[action] }
-  }
   // resend_verification : nouveau code d'inscription (limites d'envoi GoTrue appliquées).
-  const { error } = await admin.auth.resend({ type: 'signup', email: p.email })
+  const admin = serviceClient()
+  await logAdminAction(ctx, 'admin.account.resend_verification', { entity: 'users', entityId: id, subject: id })
+  const { error } = await admin.auth.resend({ type: 'signup', email: d.profile.email })
   if (error) {
-    await logAdminFailure(ctx, action, id, String(error.code ?? error.status ?? 'auth'))
+    await logAdminFailure(ctx, body.action, id, String(error.code ?? error.status ?? 'auth'))
     throw new RepoError(error.status === 429 ? 'conflict' : 'unavailable',
       error.status === 429 ? 'Un e-mail vient déjà d’être envoyé : patientez quelques minutes.' : 'L’e-mail n’a pas pu être envoyé. Réessayez dans un instant.')
   }
-  return { ok: true, message: MESSAGES[action] }
+  return { ok: true, message: MESSAGES.resend_verification }
 }
 
-const MESSAGES: Record<AccountAction, string> = {
-  suspend: 'Compte suspendu : connexion bloquée et sessions fermées.',
-  reactivate: 'Compte réactivé : la connexion est de nouveau possible.',
-  resend_verification: 'E-mail de vérification renvoyé.',
-  force_logout: 'Déconnexion forcée effectuée',
+type ModerationBody = Extract<ActionBody, { action: ModerationAction }>
+
+/**
+ * Avertir / suspendre / désactiver / réactiver.
+ * Ordre (réel) : 1. ban GoTrue (sauf avertissement) ; 2. décision + audit en UNE transaction
+ * (admin_moderate_account, 0500) ; en cas d'échec, le ban antérieur est rétabli : aucune action
+ * ne subsiste sans trace ; 3. fermeture des sessions (suspension, désactivation) ; 4. e-mail et
+ * notification in-app dans la langue de l'utilisateur (jamais bloquant).
+ */
+async function moderate(ctx: AdminCtx, d: AccountDetail, body: ModerationBody): Promise<ActionResult> {
+  const id = d.profile.id
+  const kind = KIND_OF_ACTION[body.action]
+  const now = Date.now()
+  const until = body.action === 'suspend' ? suspensionUntil(body.duration, now) : null
+  const reasonCode = body.action === 'reactivate' ? null : body.reason
+  const details = body.details?.trim() || null
+
+  if (ctx.mode === 'demo') {
+    const s = opsDemo()
+    const a = s.accounts.find((x) => x.id === id)!
+    if (body.action === 'suspend') a.bannedUntil = until
+    if (body.action === 'deactivate') a.bannedUntil = new Date(now + 100 * 365 * 86_400_000).toISOString()
+    if (body.action === 'reactivate') a.bannedUntil = null
+    a.status = legacyStatus(moderationState(a, now).state)
+    const entryId = randomUUID()
+    s.moderation.unshift({ id: entryId, userId: id, kind, reasonCode, reason: details, until, createdAt: new Date(now).toISOString(), adminEmail: DEMO_ACTOR })
+    demoAudit(`admin.account.${body.action}`, {
+      subjectId: id, entity: 'users', entityId: id,
+      metadata: { moderation_id: entryId, ...(reasonCode ? { reason_code: reasonCode } : {}), ...(until ? { until } : {}) },
+    })
+    return { ok: true, message: `${MESSAGES[body.action]} Démonstration : aucun e-mail ni notification envoyés.` }
+  }
+
+  const ban = banDurationFor(body)
+  const admin = ban ? serviceClient() : null
+  if (admin && ban) {
+    const { error } = await admin.auth.admin.updateUserById(id, { ban_duration: ban })
+    if (error) {
+      await logAdminFailure(ctx, body.action, id, String(error.code ?? error.status ?? 'auth'))
+      throw new RepoError('unavailable', 'Le service d’authentification a refusé la modification. Réessayez dans un instant.')
+    }
+  }
+
+  let entryId: string
+  try {
+    entryId = await recordModeration(ctx, { userId: id, kind, reasonCode, details, until })
+  } catch (e) {
+    if (admin) {
+      // Annulation : rétablit l'état de connexion antérieur (le journal fait foi, fail-closed).
+      const { error: rollbackError } = await admin.auth.admin
+        .updateUserById(id, { ban_duration: restoreBanDuration(d.profile.bannedUntil) })
+        .catch((err: unknown) => ({ error: err }))
+      // Annulation impossible : le compte reste dans l'état du ban sans entrée de journal → on le trace.
+      if (rollbackError) await logAdminFailure(ctx, body.action, id, 'ban_rollback_failed')
+    }
+    await logAdminFailure(ctx, body.action, id, 'moderation_log')
+    throw e
+  }
+
+  // Suspendre / désactiver ferme aussi les sessions ouvertes (le jeton d'accès en cours expire sous 1 h).
+  let sessionsClosed = true
+  if (body.action === 'suspend' || body.action === 'deactivate') {
+    sessionsClosed = await rpc(ctx, 'admin_revoke_user_sessions', { p_user_id: id }, z.coerce.number()).then(() => true, () => false)
+  }
+
+  const sent = await notify(id, 'account_moderation', { kind, reason_code: reasonCode, details, until }, { dedupeKey: `moderation:${entryId}` })
+  const informed = sent.delivered.includes('email')
+    ? 'L’utilisateur a été prévenu par e-mail et dans l’application.'
+    : sent.delivered.includes('inapp')
+      ? 'Notification in-app envoyée ; l’e-mail n’a pas pu partir.'
+      : 'Attention : l’utilisateur n’a pas pu être prévenu (e-mail et notification indisponibles).'
+  const sessionsNote = sessionsClosed ? '' : ' Attention : les sessions ouvertes n’ont pas pu être fermées (utilisez « Déconnecter »).'
+  return { ok: true, message: `${MESSAGES[body.action]} ${informed}${sessionsNote}` }
+}
+
+/** Écrit la décision et sa ligne d'audit (0500). Erreurs traduites, migration absente signalée. */
+async function recordModeration(ctx: LiveCtx, m: {
+  userId: string; kind: ModerationEntry['kind']; reasonCode: string | null; details: string | null; until: string | null
+}): Promise<string> {
+  const db = ctx.db as SupabaseClient
+  const { data, error } = await db.rpc('admin_moderate_account', {
+    p_user_id: m.userId, p_kind: m.kind, p_reason_code: m.reasonCode, p_reason: m.details, p_until: m.until,
+  })
+  if (error) {
+    if (error.code === 'PGRST202' || error.code === '42883' || error.code === '42P01') {
+      console.error('[admin-ops] admin_moderate_account absente : migration 0500 non appliquée')
+      throw new RepoError('unavailable', 'Journal de modération absent : appliquez la migration 0500_moderation.sql. Action annulée.')
+    }
+    throw opsError(error, 'admin_moderate_account')
+  }
+  const parsed = z.string().min(1).safeParse(data)
+  if (!parsed.success) throw new RepoError('unavailable', 'Réponse inattendue de la base : vérifiez la migration 0500.')
+  return parsed.data
 }
 
 /**
@@ -244,7 +425,7 @@ const MESSAGES: Record<AccountAction, string> = {
  */
 export async function deleteAccountAsAdmin(ctx: AdminCtx, id: string, confirmEmail: string): Promise<ActionResult> {
   const d = await getAccount(ctx, id)
-  assertTarget(ctx, d, 'delete')
+  assertAllowed(ctx, d, 'delete')
   if (confirmEmail.trim().toLowerCase() !== d.profile.email.trim().toLowerCase()) {
     throw new RepoError('invalid', 'L’adresse saisie ne correspond pas à celle du compte.', [{ path: 'email', message: 'Adresse différente.' }])
   }

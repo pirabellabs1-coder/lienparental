@@ -22,6 +22,8 @@ import { folderSharedEmail } from '@/lib/email/templates/folderShared'
 import { calendarReminderEmail } from '@/lib/email/templates/calendarReminder'
 import { calendarSharedEmail } from '@/lib/email/templates/calendarShared'
 import { appOrigin } from '@/lib/email/templates/notificationParts'
+import { accountModerationEmail, moderationDate } from '@/lib/email/templates/accountModeration'
+import type { ModerationKind, ModerationReason } from '@/lib/admin/ops/moderation'
 import { emailT, type EmailT, type Locale } from '@/lib/email/i18n'
 
 export type CalendarAction = 'created' | 'updated' | 'deleted'
@@ -38,6 +40,7 @@ export type Facts =
   | { event: 'calendar_shared'; eventId: string; action: CalendarAction; actorName: string; titre: string; startAt: string; allDay: boolean; kind?: string; childName?: string | null }
   | { event: 'coparent_activity'; entity: 'expense' | 'garde'; entityId: string; action: 'created' | 'updated'; actorName: string }
   | { event: 'welcome' }
+  | { event: 'account_moderation'; kind: ModerationKind; reasonCode: ModerationReason | null; details: string | null; until: string | null }
 
 export type Rendered = {
   /** Ligne in-app (écran Notifications). */
@@ -258,6 +261,20 @@ export function renderNotification(f: Facts, recipientPrenom: string, now: Date 
         push: { title: tr('notify.welcomeTitle'), body: tr('notify.welcomeBody'), tag: 'welcome' },
         email: welcomeEmail({ prenom }, locale),
       }
+    case 'account_moderation': {
+      // Les précisions de l'équipe restent dans l'e-mail : la ligne in-app ne reprend que le motif.
+      const reason = f.reasonCode ? tr(`moderation.reasons.${f.reasonCode}`) : ''
+      const k = f.kind
+      const title = k === 'suspension' && f.until
+        ? tr('notify.moderation.suspensionTitle', { date: moderationDate(f.until, locale) })
+        : tr(`notify.moderation.${k}Title`)
+      const body = tr(`notify.moderation.${k}Body`, { reason })
+      return {
+        title, body, href: '/app/aide',
+        push: { title, body, tag: 'moderation' },
+        email: accountModerationEmail({ prenom, kind: k, reasonCode: f.reasonCode, details: f.details, until: f.until }, locale),
+      }
+    }
   }
 }
 

@@ -1,22 +1,36 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ChevronRight, Download, Users } from 'lucide-react'
+import { Download, Users } from 'lucide-react'
 import { pageAdminCtx } from '@/lib/contenus/api'
 import { RepoError } from '@/lib/contenus/repo'
-import { listAccounts, type AccountPage } from '@/lib/admin/ops/comptes'
+import { isSelfAccount, listAccounts, type AccountPage } from '@/lib/admin/ops/comptes'
 import {
   ACCOUNT_PLANS, ACCOUNT_STATUSES, PLAN_LABEL, STATUS_LABEL, accountFiltersSchema, flatParams,
   type AccountFilters,
 } from '@/lib/admin/ops/types'
+import type { AccountListItem } from '@/lib/admin/ops/types'
+import type { AdminCtx } from '@/lib/contenus/repo'
 import {
-  DemoNotice, Empty, ErrorBox, FilterBar, FilterField, Note, OpsHeader, Pill, btnSecondaryCls, fieldCls, fmtDate, fmtDateTime, fmtMb, hrefWith, linkCls,
+  DemoNotice, Empty, ErrorBox, FilterBar, FilterField, Note, OpsHeader, Pill, btnSecondaryCls, fieldCls, fmtDate, fmtDateTime, fmtMb, hrefWith,
 } from '@/components/admin/ops/ui'
-import { PLAN_TONE, STATUS_TONE } from '@/components/admin/ops/tones'
+import { PLAN_TONE } from '@/components/admin/ops/tones'
+import { ModerationPill, WarningCount } from '@/components/admin/ops/moderation/ModerationPill'
+import { AccountRowMenu } from '@/components/admin/ops/AccountRowMenu'
+import type { ActionTarget } from '@/components/admin/ops/moderation/AccountActionDialog'
 
 export const metadata: Metadata = { title: 'Comptes' }
 export const dynamic = 'force-dynamic'
 
 type SP = Promise<Record<string, string | string[] | undefined>>
+
+const displayName = (r: AccountListItem) => [r.prenom, r.nom].filter(Boolean).join(' ') || 'Sans nom'
+
+function targetOf(ctx: AdminCtx, r: AccountListItem): ActionTarget {
+  return {
+    id: r.id, email: r.email, name: displayName(r), state: r.moderation.state, until: r.moderation.until,
+    isAdmin: r.plan === 'admin', isSelf: isSelfAccount(ctx, r), emailVerified: r.emailVerified, hasSubscription: null,
+  }
+}
 
 export default async function ComptesPage({ searchParams }: { searchParams: SP }) {
   const ctx = await pageAdminCtx()
@@ -36,7 +50,7 @@ export default async function ComptesPage({ searchParams }: { searchParams: SP }
       <OpsHeader
         icon={<Users className="h-5 w-5" aria-hidden="true" />}
         title="Comptes"
-        description="Rechercher, consulter et gérer les comptes. Seules les informations nécessaires à l’assistance sont affichées."
+        description="Rechercher, consulter et modérer les comptes (avertir, suspendre, désactiver, réactiver) depuis le menu « ⋯ » de chaque ligne ou depuis la fiche. Seules les informations nécessaires à l’assistance sont affichées."
         actions={
           <a href={hrefWith('/api/admin/comptes/export', filters)} className={btnSecondaryCls} download>
             <Download className="h-4 w-4" aria-hidden="true" /> Exporter en CSV<span className="sr-only"> (filtres appliqués, sans nom ni contenu)</span>
@@ -81,7 +95,7 @@ export default async function ComptesPage({ searchParams }: { searchParams: SP }
           ) : (
             <>
               {/* Grand écran : tableau */}
-              <div className="hidden overflow-hidden rounded-2xl border border-[#E5E7EB] bg-white shadow-soft md:block">
+              <div className="relative hidden overflow-x-auto rounded-2xl border border-[#E5E7EB] bg-white shadow-soft md:block">
                 <table className="min-w-full text-[14px]">
                   <caption className="sr-only">Comptes (50 par page, du plus récent au plus ancien)</caption>
                   <thead className="border-b border-night-100 bg-night-50/70 text-left text-[11px] uppercase tracking-wider text-night-500">
@@ -89,16 +103,17 @@ export default async function ComptesPage({ searchParams }: { searchParams: SP }
                       <th scope="col" className="px-5 py-3 font-bold">Compte</th>
                       <th scope="col" className="px-4 py-3 font-bold">Formule</th>
                       <th scope="col" className="px-4 py-3 font-bold">Statut</th>
+                      <th scope="col" className="px-4 py-3 text-center font-bold"><abbr title="Avertissements" className="no-underline">Avert.</abbr></th>
                       <th scope="col" className="px-4 py-3 font-bold">Inscription</th>
-                      <th scope="col" className="px-4 py-3 font-bold">Dernière connexion</th>
-                      <th scope="col" className="px-4 py-3 text-right font-bold">Stockage</th>
-                      <th scope="col" className="px-4 py-3 text-right font-bold">Enfants</th>
-                      <th scope="col" className="px-4 py-3"><span className="sr-only">Ouvrir</span></th>
+                      <th scope="col" className="hidden px-4 py-3 font-bold 2xl:table-cell">Dernière connexion</th>
+                      <th scope="col" className="hidden px-4 py-3 text-right font-bold lg:table-cell">Stockage</th>
+                      <th scope="col" className="hidden px-4 py-3 text-right font-bold lg:table-cell">Enfants</th>
+                      <th scope="col" className="px-3 py-3 text-right"><span className="sr-only">Actions</span></th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-night-100">
                     {page.rows.map((r) => {
-                      const name = [r.prenom, r.nom].filter(Boolean).join(' ') || 'Sans nom'
+                      const name = displayName(r)
                       const initial = (r.prenom?.[0] ?? r.nom?.[0] ?? r.email[0] ?? '?').toLocaleUpperCase('fr')
                       return (
                       <tr key={r.id} className="align-middle transition-colors hover:bg-night-50/60">
@@ -106,22 +121,19 @@ export default async function ComptesPage({ searchParams }: { searchParams: SP }
                           <div className="flex items-center gap-3">
                             <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-night-100 text-[12.5px] font-bold text-night-600">{initial}</span>
                             <span className="min-w-0">
-                              <span className="block truncate font-semibold text-night-900">{name}</span>
+                              <Link href={`/admin/comptes/${r.id}`} className="block truncate rounded font-semibold text-night-900 hover:text-leaf-700 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">{name}</Link>
                               <span className="block truncate font-mono text-[12px] text-night-500">{r.email}</span>
                             </span>
                           </div>
                         </td>
                         <td className="px-4 py-3"><Pill tone={PLAN_TONE[r.plan]}>{PLAN_LABEL[r.plan]}</Pill></td>
-                        <td className="px-4 py-3"><Pill tone={STATUS_TONE[r.status]}>{STATUS_LABEL[r.status]}</Pill></td>
+                        <td className="px-4 py-3"><ModerationPill state={r.moderation.state} until={r.moderation.until} stacked /></td>
+                        <td className="px-4 py-3 text-center"><WarningCount count={r.moderation.warnings} compact /></td>
                         <td className="whitespace-nowrap px-4 py-3 text-night-700">{fmtDate(r.createdAt)}</td>
-                        <td className="whitespace-nowrap px-4 py-3 text-night-700">{fmtDateTime(r.lastSignInAt) || 'Jamais'}</td>
-                        <td className="whitespace-nowrap px-4 py-3 text-right tabular-nums text-night-700">{fmtMb(r.storageMb)}</td>
-                        <td className="px-4 py-3 text-right tabular-nums text-night-700">{r.childrenCount}</td>
-                        <td className="px-4 py-3 text-right">
-                          <Link href={`/admin/comptes/${r.id}`} className={`${linkCls} inline-flex min-h-[44px] items-center gap-1 px-1 text-[13.5px]`}>
-                            Ouvrir<span className="sr-only"> le compte {r.email}</span> <ChevronRight className="h-4 w-4" aria-hidden="true" />
-                          </Link>
-                        </td>
+                        <td className="hidden whitespace-nowrap px-4 py-3 text-night-700 2xl:table-cell">{fmtDateTime(r.lastSignInAt) || 'Jamais'}</td>
+                        <td className="hidden whitespace-nowrap px-4 py-3 text-right tabular-nums text-night-700 lg:table-cell">{fmtMb(r.storageMb)}</td>
+                        <td className="hidden px-4 py-3 text-right tabular-nums text-night-700 lg:table-cell">{r.childrenCount}</td>
+                        <td className="px-3 py-2 text-right"><AccountRowMenu target={targetOf(ctx, r)} /></td>
                       </tr>
                     )})}
                   </tbody>
@@ -131,16 +143,18 @@ export default async function ComptesPage({ searchParams }: { searchParams: SP }
               {/* Mobile : cartes */}
               <ul className="space-y-3 md:hidden" aria-label="Comptes">
                 {page.rows.map((r) => (
-                  <li key={r.id}>
-                    <Link href={`/admin/comptes/${r.id}`} className="block rounded-2xl border border-[#E5E7EB] bg-white p-4 shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
-                      <p className="font-semibold text-night-900">{[r.prenom, r.nom].filter(Boolean).join(' ') || 'Sans nom'}</p>
+                  <li key={r.id} className="flex items-start gap-1 rounded-2xl border border-[#E5E7EB] bg-white p-4 shadow-soft">
+                    <Link href={`/admin/comptes/${r.id}`} className="block min-w-0 flex-1 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
+                      <p className="font-semibold text-night-900">{displayName(r)}</p>
                       <p className="truncate font-mono text-[12px] text-night-600">{r.email}</p>
                       <p className="mt-2 flex flex-wrap gap-1.5">
                         <Pill tone={PLAN_TONE[r.plan]}>{PLAN_LABEL[r.plan]}</Pill>
-                        <Pill tone={STATUS_TONE[r.status]}>{STATUS_LABEL[r.status]}</Pill>
+                        <ModerationPill state={r.moderation.state} until={r.moderation.until} />
+                        {r.moderation.warnings ? <WarningCount count={r.moderation.warnings} /> : null}
                       </p>
                       <p className="mt-2 text-[12.5px] text-night-600">Inscrit le {fmtDate(r.createdAt)} · {fmtMb(r.storageMb)} · {r.childrenCount} enfant{r.childrenCount > 1 ? 's' : ''}</p>
                     </Link>
+                    <AccountRowMenu target={targetOf(ctx, r)} />
                   </li>
                 ))}
               </ul>

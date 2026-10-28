@@ -18,6 +18,7 @@ import type { Facts } from './content'
 import { maskEmail } from './device'
 import { sendPushToUser } from './push'
 import { toLocale } from '@/lib/email/i18n'
+import { isModerationKind, isModerationReason } from '@/lib/admin/ops/moderation'
 
 const str = (v: unknown): string => (typeof v === 'string' ? v : '')
 const UUID = /^[0-9a-f-]{36}$/i
@@ -148,6 +149,18 @@ export function realDeps(db: SupabaseClient): DispatchDeps {
         }
         case 'welcome':
           return { event }
+        case 'account_moderation': {
+          // Charge utile construite par le serveur admin (lib/admin/ops/comptes.ts), revalidée ici.
+          if (!isModerationKind(payload.kind)) return null
+          const reasonCode = isModerationReason(payload.reason_code) ? payload.reason_code : null
+          if (payload.kind !== 'reactivation' && !reasonCode) return null
+          const until = str(payload.until)
+          return {
+            event, kind: payload.kind, reasonCode,
+            details: str(payload.details).trim().slice(0, 500) || null,
+            until: payload.kind === 'suspension' && !Number.isNaN(Date.parse(until)) ? until : null,
+          }
+        }
       }
     },
 

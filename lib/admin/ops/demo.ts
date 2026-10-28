@@ -7,8 +7,10 @@ import 'server-only'
  */
 import { randomUUID } from 'node:crypto'
 import type { AccountPlan, AccountRow, AuditRow, TestimonyRequestRow, TicketDetail, TicketMessage } from './types'
+import type { ModerationEntry } from './moderation'
 
 type DemoAccount = AccountRow & { deletedAt: string | null; bannedUntil: string | null }
+type DemoModeration = ModerationEntry & { userId: string }
 type DemoTicket = TicketDetail & { lastReplyAt: string | null; lastReplyBy: 'user' | 'admin' | null }
 
 type Store = {
@@ -16,13 +18,17 @@ type Store = {
   tickets: DemoTicket[]
   audit: AuditRow[]
   testimonies: TestimonyRequestRow[]
+  /** Journal de modération fictif (0500), du plus récent au plus ancien. */
+  moderation: DemoModeration[]
   nextAudit: number
 }
 
-const KEY = '__lienParentalAdminOpsDemo_v2'
+const KEY = '__lienParentalAdminOpsDemo_v3'
 type G = typeof globalThis & { [KEY]?: Store }
 
 export const DEMO_ACTOR = 'admin@demo.lienparental.fr'
+/** Autre administrateur fictif (montre les actions désactivées, avec leur explication). */
+export const DEMO_OTHER_ADMIN = 'claire.m@pirabellabs.com'
 
 const day = (d: string, h = '10:00') => new Date(`${d}T${h}:00.000Z`).toISOString()
 const ago = (ms: number) => new Date(Date.now() - ms).toISOString()
@@ -58,6 +64,20 @@ function seed(): Store {
     deletedAt: null,
     bannedUntil: null,
   }))
+  // Comptes administrateurs : le sien (démo) et un collègue. Aucune modération possible sur eux.
+  const adminAccount = (id: string, prenom: string, nom: string, email: string, inscrit: string): DemoAccount => ({
+    id, prenom, nom, email, plan: 'admin', status: 'actif', createdAt: day(inscrit), lastSignInAt: ago(2 * H),
+    emailVerified: true, mfaEnabled: true, storageMb: 0, childrenCount: 0, deletedAt: null, bannedUntil: null,
+  })
+  accounts.push(adminAccount('u_adm1', 'Admin', 'Démo', DEMO_ACTOR, '2025-05-02'), adminAccount('u_adm2', 'Claire', 'Martin', DEMO_OTHER_ADMIN, '2025-05-03'))
+  // États de modération de départ : une suspension en cours (u_007), une désactivation (u_008).
+  const set = (id: string, bannedUntil: string) => {
+    const a = accounts.find((x) => x.id === id)!
+    a.bannedUntil = bannedUntil
+    a.status = 'suspendu'
+  }
+  set('u_007', new Date(Date.now() - 5 * H + 3 * D).toISOString()) // suspension de 3 jours commencée il y a 5 h
+  set('u_008', new Date(Date.now() + 100 * 365 * D).toISOString())
 
   const msg = (from: 'user' | 'admin', body: string, at: string): TicketMessage => ({ id: randomUUID(), from, body, at })
   const requester = (id: string) => {
@@ -127,7 +147,22 @@ function seed(): Store {
     req('7a1c0d2e-0000-4000-8000-000000024086', 'u_005', 'submitted', 20, true),
   ]
 
-  return { accounts, tickets, audit, testimonies, nextAudit: n }
+  const mod = (id: string, userId: string, kind: DemoModeration['kind'], reasonCode: DemoModeration['reasonCode'], createdMsAgo: number,
+    reason: string | null = null, untilMs: number | null = null): DemoModeration => ({
+    id, userId, kind, reasonCode, reason, createdAt: ago(createdMsAgo),
+    until: untilMs === null ? null : new Date(Date.now() - createdMsAgo + untilMs).toISOString(), adminEmail: DEMO_ACTOR,
+  })
+  const moderation: DemoModeration[] = [
+    mod('m_009', 'u_007', 'suspension', 'harcelement', 5 * H, 'Messages répétés et insistants envoyés à l’autre parent malgré un premier avertissement.', 3 * D),
+    mod('m_008', 'u_007', 'warning', 'comportement', 4 * D, 'Propos insultants dans la messagerie.'),
+    mod('m_007', 'u_008', 'deactivation', 'usurpation', 6 * D, 'Profil créé au nom d’une autre personne (signalement vérifié).'),
+    mod('m_006', 'u_008', 'warning', 'spam', 12 * D),
+    mod('m_005', 'u_012', 'reactivation', null, 25 * H),
+    mod('m_004', 'u_012', 'suspension', 'contenu', 26 * H, null, D),
+    mod('m_003', 'u_002', 'warning', 'comportement', 9 * D, 'Rappel des règles de courtoisie après un signalement.'),
+  ]
+
+  return { accounts, tickets, audit, testimonies, moderation, nextAudit: n }
 }
 
 export function opsDemo(): Store {

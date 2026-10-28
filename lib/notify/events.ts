@@ -22,6 +22,7 @@ export const NOTIFY_EVENTS = [
   'calendar_shared',
   'coparent_activity',
   'welcome',
+  'account_moderation',
 ] as const
 export type NotifyEvent = (typeof NOTIFY_EVENTS)[number]
 
@@ -89,6 +90,8 @@ export const RULES: Record<NotifyEvent, Rule> = {
   calendar_shared:          { inapp: true, push: 'pref', email: 'pref', topic: 'onCalendrier' },
   coparent_activity:        { inapp: true, push: 'pref', email: 'never', topic: 'onGarde' },
   welcome:                  { inapp: false, push: 'never', email: 'always' },
+  // Décision de modération (0500) : toujours in-app + e-mail, comme une alerte de sécurité.
+  account_moderation:       { security: true, inapp: true, push: 'never', email: 'always' },
 }
 
 export function isNotifyEvent(v: unknown): v is NotifyEvent {

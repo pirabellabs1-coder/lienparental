@@ -315,7 +315,59 @@
       "expenseBody": "Despesas compartilhadas",
       "activityPush": "Abra para ver os detalhes.",
       "welcomeTitle": "Bem-vindo(a) ao Lien Parental",
-      "welcomeBody": "Sua conta está pronta."
+      "welcomeBody": "Sua conta está pronta.",
+      "moderation": {
+        "warningTitle": "Advertência da equipe Lien Parental",
+        "warningBody": "Motivo: {reason}. Respeite os termos de uso.",
+        "suspensionTitle": "Sua conta foi suspensa até {date}",
+        "suspensionBody": "Motivo: {reason}.",
+        "deactivationTitle": "Sua conta foi desativada",
+        "deactivationBody": "Motivo: {reason}. Fale com o suporte em caso de dúvida.",
+        "reactivationTitle": "Sua conta foi reativada",
+        "reactivationBody": "Você pode usar o Lien Parental normalmente outra vez."
+      }
+    },
+    "moderation": {
+      "subject": {
+        "warning": "Advertência sobre sua conta Lien Parental",
+        "suspension": "Sua conta Lien Parental está suspensa temporariamente",
+        "deactivation": "Sua conta Lien Parental foi desativada",
+        "reactivation": "Sua conta Lien Parental foi reativada"
+      },
+      "title": {
+        "warning": "Uma advertência sobre sua conta",
+        "suspension": "Sua conta está suspensa temporariamente",
+        "deactivation": "Sua conta foi desativada",
+        "reactivation": "Sua conta está ativa novamente"
+      },
+      "intro": {
+        "warning": "Nossa equipe constatou um uso da sua conta que não respeita as regras do Lien Parental. Esta mensagem é uma advertência: sua conta continua acessível.",
+        "suspension": "Nossa equipe suspendeu temporariamente sua conta, pois o uso dela não respeita as regras do Lien Parental.",
+        "deactivation": "Nossa equipe desativou sua conta, pois o uso dela não respeita as regras do Lien Parental.",
+        "reactivation": "Boa notícia: a restrição da sua conta foi retirada. Você pode entrar novamente e usar o Lien Parental normalmente."
+      },
+      "reasonLine": "Motivo: {reason}",
+      "detailsLine": "Detalhes da nossa equipe: {details}",
+      "untilLine": "Sua conta voltará a ficar acessível automaticamente em {date} (horário da Guiana Francesa).",
+      "deactivationLine": "Ela continuará desativada até uma nova análise da nossa equipe.",
+      "keptData": "Seus dados são mantidos: nada é excluído, você apenas não pode entrar durante esse período.",
+      "warningNext": "Em caso de nova infração, sua conta poderá ser suspensa ou desativada.",
+      "rules": "O Lien Parental é um espaço de confiança para as famílias: cada pessoa se compromete a respeitar os outros usuários e os termos de uso do serviço.",
+      "rulesReactivation": "Obrigado por continuar respeitando os termos de uso, para que o Lien Parental continue sendo um espaço de confiança para todas as famílias.",
+      "contact": "Acha que se trata de um erro ou tem alguma dúvida? Escreva para {email}: um membro da equipe vai responder.",
+      "ctaRules": "Ler os termos de uso",
+      "ctaLogin": "Entrar",
+      "footer": "Este e-mail trata do uso da sua conta: ele é enviado independentemente das suas preferências de notificação.",
+      "reasons": {
+        "comportement": "Comportamento desrespeitoso com outros usuários",
+        "harcelement": "Assédio, ameaças ou intimidação",
+        "contenu": "Publicação de conteúdo impróprio ou ilegal",
+        "usurpation": "Falsidade ideológica ou perfil falso",
+        "spam": "Spam ou solicitações abusivas",
+        "fraude": "Fraude ou uso fraudulento do pagamento",
+        "securite": "Ameaça à segurança do serviço",
+        "autre": "Descumprimento dos termos de uso"
+      }
     },
     "device": {
       "Appareil": "Aparelho",

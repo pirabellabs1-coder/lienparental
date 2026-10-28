@@ -7,6 +7,9 @@
  * témoignages, de la messagerie ni de données de santé.
  */
 import { z } from 'zod'
+import type { ModerationEntry, ModerationStatus } from './moderation'
+
+export { ACCOUNT_ACTIONS, type AccountAction } from './moderation'
 
 // --- Comptes ---------------------------------------------------------------------
 
@@ -19,7 +22,7 @@ export const PLAN_LABEL: Record<AccountPlan, string> = {
 export const ACCOUNT_STATUSES = ['actif', 'non_verifie', 'suspendu', 'supprime'] as const
 export type AccountStatus = (typeof ACCOUNT_STATUSES)[number]
 export const STATUS_LABEL: Record<AccountStatus, string> = {
-  actif: 'Actif', non_verifie: 'E-mail non vérifié', suspendu: 'Suspendu', supprime: 'Supprimé (purge sous 30 jours)',
+  actif: 'Actif', non_verifie: 'E-mail non vérifié', suspendu: 'Suspendu ou désactivé', supprime: 'Supprimé (purge sous 30 jours)',
 }
 
 export type AccountRow = {
@@ -36,6 +39,11 @@ export type AccountRow = {
   storageMb: number
   childrenCount: number
 }
+
+/** Modération d'un compte : état dérivé du ban GoTrue et nombre d'avertissements (null : journal 0500 indisponible). */
+export type AccountModeration = ModerationStatus & { warnings: number | null }
+
+export type AccountListItem = AccountRow & { moderation: AccountModeration }
 
 export type AccountSession = { createdAt: string; lastSeenAt: string; device: string; aal: string | null }
 export type AccountSubscription = {
@@ -59,6 +67,8 @@ export type AccountDetail = {
   payments: AccountPayment[]
   audit: AccountAuditLine[]
   openTickets: number
+  /** history null : journal de modération indisponible (migration 0500 non appliquée). */
+  moderation: AccountModeration & { history: ModerationEntry[] | null }
 }
 
 const dayKey = z.string().regex(/^\d{4}-\d{2}-\d{2}$/)
@@ -73,9 +83,6 @@ export const accountFiltersSchema = z.object({
   apres: opt(z.string().max(200)),
 })
 export type AccountFilters = z.infer<typeof accountFiltersSchema>
-
-export const ACCOUNT_ACTIONS = ['suspend', 'reactivate', 'resend_verification', 'force_logout'] as const
-export type AccountAction = (typeof ACCOUNT_ACTIONS)[number]
 
 // --- Support -----------------------------------------------------------------------
 
@@ -170,7 +177,9 @@ export type AuditFilters = z.infer<typeof auditFiltersSchema>
 
 /** Libellés lisibles des actions connues (les autres s'affichent telles quelles). */
 export const ACTION_LABEL: Record<string, string> = {
-  'admin.account.suspend': 'Compte suspendu',
+  'admin.account.warn': 'Avertissement envoyé',
+  'admin.account.suspend': 'Compte suspendu (temporaire)',
+  'admin.account.deactivate': 'Compte désactivé',
   'admin.account.reactivate': 'Compte réactivé',
   'admin.account.resend_verification': 'E-mail de vérification renvoyé',
   'admin.account.force_logout': 'Déconnexion forcée',

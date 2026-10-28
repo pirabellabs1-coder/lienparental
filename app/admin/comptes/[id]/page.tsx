@@ -1,15 +1,17 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, CreditCard, HardDrive, History, KeyRound, LifeBuoy, MonitorSmartphone, UserRound } from 'lucide-react'
+import { ArrowLeft, CreditCard, Gavel, HardDrive, History, KeyRound, LifeBuoy, MonitorSmartphone, UserRound } from 'lucide-react'
 import { pageAdminCtx } from '@/lib/contenus/api'
 import { RepoError } from '@/lib/contenus/repo'
-import { getAccount } from '@/lib/admin/ops/comptes'
-import { PLAN_LABEL, STATUS_LABEL, actionLabel, type AccountDetail } from '@/lib/admin/ops/types'
+import { getAccount, isSelfAccount } from '@/lib/admin/ops/comptes'
+import { PLAN_LABEL, actionLabel, type AccountDetail } from '@/lib/admin/ops/types'
+import { MODERATION_KIND_LABEL, MODERATION_REASON_LABEL, durationLabelOf, type ModerationEntry, type ModerationKind } from '@/lib/admin/ops/moderation'
 import { planLabelOf } from '@/lib/admin/stats/db'
 import { AccountActions } from '@/components/admin/ops/AccountActions'
-import { DemoNotice, ErrorBox, KV, Note, Panel, Pill, fmtDate, fmtDateTime, fmtMb, hrefWith, linkCls } from '@/components/admin/ops/ui'
-import { PLAN_TONE, STATUS_TONE } from '@/components/admin/ops/tones'
+import { ModerationPill, WarningCount } from '@/components/admin/ops/moderation/ModerationPill'
+import { DemoNotice, ErrorBox, KV, Note, Panel, Pill, fmtDate, fmtDateTime, fmtMb, hrefWith, linkCls, type Tone } from '@/components/admin/ops/ui'
+import { PLAN_TONE } from '@/components/admin/ops/tones'
 
 export const metadata: Metadata = { title: 'Fiche compte' }
 export const dynamic = 'force-dynamic'
@@ -19,6 +21,7 @@ const SUB_STATUS: Record<string, string> = {
   active: 'Actif', trialing: 'Essai', past_due: 'Impayé', canceled: 'Résilié', incomplete: 'Incomplet', incomplete_expired: 'Expiré', unpaid: 'Impayé', paused: 'En pause',
 }
 const PAY_STATUS: Record<string, string> = { succeeded: 'Réussi', failed: 'Échoué', refunded: 'Remboursé', pending: 'En cours', canceled: 'Annulé' }
+const KIND_TONE: Record<ModerationKind, Tone> = { warning: 'warn', suspension: 'danger', deactivation: 'dark', reactivation: 'ok' }
 const eur = (cents: number, cur: string) => new Intl.NumberFormat('fr-FR', { style: 'currency', currency: cur || 'EUR' }).format(cents / 100)
 
 export default async function CompteDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -37,7 +40,9 @@ export default async function CompteDetailPage({ params }: { params: Promise<{ i
     )
   }
   const p = d.profile
+  const m = d.moderation
   const name = [p.prenom, p.nom].filter(Boolean).join(' ') || 'Sans nom'
+  const hasSubscription = !!d.subscription && ['active', 'trialing', 'past_due'].includes(d.subscription.status)
 
   return (
     <div className="space-y-5">
@@ -50,7 +55,8 @@ export default async function CompteDetailPage({ params }: { params: Promise<{ i
         </div>
         <p className="flex flex-wrap gap-1.5">
           <Pill tone={PLAN_TONE[p.plan]}>{PLAN_LABEL[p.plan]}</Pill>
-          <Pill tone={STATUS_TONE[p.status]}>{STATUS_LABEL[p.status]}</Pill>
+          <ModerationPill state={m.state} until={m.until} />
+          <WarningCount count={m.warnings} />
         </p>
       </header>
       <DemoNotice mode={ctx.mode} />
@@ -58,9 +64,17 @@ export default async function CompteDetailPage({ params }: { params: Promise<{ i
         Fiche minimale : profil, formule, abonnement, stockage, nombre d’enfants et connexions. Le Journal, le coffre-fort, les témoignages, la messagerie et la santé ne sont jamais accessibles à l’administration.
       </Note>
 
-      <Panel title="Actions" icon={<KeyRound className="h-4 w-4 text-night-500" aria-hidden="true" />}>
-        <AccountActions id={p.id} email={p.email} status={p.status} isAdminAccount={p.plan === 'admin'} emailVerified={p.emailVerified} hasSubscription={!!d.subscription && ['active', 'trialing', 'past_due'].includes(d.subscription.status)} />
-      </Panel>
+      <div className="grid gap-5 lg:grid-cols-5">
+        <Panel title="Actions" icon={<KeyRound className="h-4 w-4 text-night-500" aria-hidden="true" />} className="lg:col-span-2">
+          <AccountActions target={{
+            id: p.id, email: p.email, name, state: m.state, until: m.until, isAdmin: p.plan === 'admin',
+            isSelf: isSelfAccount(ctx, p), emailVerified: p.emailVerified, hasSubscription,
+          }} />
+        </Panel>
+        <Panel title="Historique de modération" icon={<Gavel className="h-4 w-4 text-night-500" aria-hidden="true" />} className="lg:col-span-3">
+          <ModerationHistory history={m.history} />
+        </Panel>
+      </div>
 
       <div className="grid gap-5 lg:grid-cols-3">
         <Panel title="Profil" icon={<UserRound className="h-4 w-4 text-night-500" aria-hidden="true" />}>
@@ -71,7 +85,8 @@ export default async function CompteDetailPage({ params }: { params: Promise<{ i
             { k: 'E-mail vérifié', v: p.emailVerified ? 'Oui' : 'Non' },
             { k: 'Double authentification', v: p.mfaEnabled ? 'Activée' : 'Non activée' },
             { k: 'Dernière connexion', v: fmtDateTime(p.lastSignInAt) || 'Jamais' },
-            ...(p.bannedUntil && p.status === 'suspendu' ? [{ k: 'Suspendu', v: 'Oui (connexion bloquée)' }] : []),
+            ...(m.state === 'suspendu' ? [{ k: 'Connexion', v: `Bloquée jusqu’au ${fmtDateTime(m.until)}` }] : []),
+            ...(m.state === 'desactive' ? [{ k: 'Connexion', v: 'Bloquée (désactivé)' }] : []),
             ...(p.deletedAt ? [{ k: 'Suppression demandée', v: fmtDateTime(p.deletedAt) }] : []),
           ]} />
         </Panel>
@@ -161,6 +176,34 @@ export default async function CompteDetailPage({ params }: { params: Promise<{ i
         <LifeBuoy className="h-4 w-4" aria-hidden="true" /> Une question de l’utilisateur ? Répondez depuis le support plutôt que par un autre canal : l’échange reste tracé.
       </p>
     </div>
+  )
+}
+
+function ModerationHistory({ history }: { history: ModerationEntry[] | null }) {
+  if (history === null) {
+    return <p className="text-[14px] text-night-600">Journal de modération indisponible : appliquez la migration <span className="font-mono text-[12.5px]">0500_moderation.sql</span>. Les actions de modération sont refusées tant qu’il est absent.</p>
+  }
+  if (history.length === 0) return <p className="text-[14px] text-night-600">Aucune décision de modération pour ce compte.</p>
+  return (
+    <ol className="divide-y divide-night-100 text-[14px]" aria-label="Décisions de modération, de la plus récente à la plus ancienne">
+      {history.map((h) => {
+        const duration = h.kind === 'suspension' ? durationLabelOf(h.createdAt, h.until) : null
+        return (
+          <li key={h.id} className="py-2.5 first:pt-0 last:pb-0">
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+              <Pill tone={KIND_TONE[h.kind]}>{MODERATION_KIND_LABEL[h.kind]}</Pill>
+              <span className="text-[13px] text-night-600"><time dateTime={h.createdAt}>{fmtDateTime(h.createdAt)}</time> · {h.adminEmail ?? 'administrateur supprimé'}</span>
+            </div>
+            <dl className="mt-1.5 grid gap-x-3 gap-y-0.5 text-[13.5px] sm:grid-cols-[110px_1fr]">
+              {h.reasonCode && (<><dt className="text-night-500">Motif</dt><dd className="font-semibold text-night-900">{MODERATION_REASON_LABEL[h.reasonCode]}</dd></>)}
+              {h.kind === 'suspension' && (<><dt className="text-night-500">Durée</dt><dd className="text-night-900">{duration ?? 'Inconnue'}{h.until ? ` · jusqu’au ${fmtDateTime(h.until)}` : ''}</dd></>)}
+              {h.kind === 'deactivation' && (<><dt className="text-night-500">Durée</dt><dd className="text-night-900">Jusqu’à réactivation manuelle</dd></>)}
+              {h.reason && (<><dt className="text-night-500">{h.kind === 'reactivation' ? 'Note interne' : 'Précisions'}</dt><dd className="whitespace-pre-line break-words text-night-800">{h.reason}</dd></>)}
+            </dl>
+          </li>
+        )
+      })}
+    </ol>
   )
 }
 

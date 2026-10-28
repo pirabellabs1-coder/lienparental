@@ -19,6 +19,7 @@ import { folderSharedEmail } from '@/lib/email/templates/folderShared'
 import { calendarReminderEmail } from '@/lib/email/templates/calendarReminder'
 import { calendarSharedEmail } from '@/lib/email/templates/calendarShared'
 import { accountExistsEmail } from '@/lib/email/templates/accountExists'
+import { accountModerationEmail } from '@/lib/email/templates/accountModeration'
 import { familyInvitationEmail, guardianRemovedEmail, ownerNewAdultEmail } from '@/lib/coparents/server/email'
 import { deviceText, securityText, whenLabel } from '@/lib/notify/content'
 import { emailT, toLocale, type Locale } from '@/lib/email/i18n'
@@ -110,6 +111,12 @@ const samples: Record<string, (l: Locale) => Rendered> = {
   'calendar-reminder': (l) =>
     calendarReminderEmail({ prenom: 'Camille', titre: 'Kermesse de l’école', whenLabel: whenLabel(EVENT_AT, false, l), eventId: '00000000-0000-0000-0000-000000000003' }, l),
   'account-exists': (l) => accountExistsEmail({ prenom: 'Camille' }, l),
+  'moderation-warning': (l) =>
+    accountModerationEmail({ prenom: 'Camille', kind: 'warning', reasonCode: 'comportement', details: 'Propos insultants dans la messagerie.' }, l),
+  'moderation-suspension': (l) =>
+    accountModerationEmail({ prenom: 'Camille', kind: 'suspension', reasonCode: 'harcelement', until: inDays(7) }, l),
+  'moderation-deactivation': (l) => accountModerationEmail({ prenom: 'Camille', kind: 'deactivation', reasonCode: 'usurpation' }, l),
+  'moderation-reactivation': (l) => accountModerationEmail({ prenom: 'Camille', kind: 'reactivation' }, l),
   'calendar-shared': (l) =>
     calendarSharedEmail({
       prenom: 'Camille',

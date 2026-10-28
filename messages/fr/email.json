@@ -285,7 +285,59 @@
       "expenseBody": "Dépenses partagées",
       "activityPush": "Ouvrez pour voir le détail.",
       "welcomeTitle": "Bienvenue sur Lien Parental",
-      "welcomeBody": "Votre compte est prêt."
+      "welcomeBody": "Votre compte est prêt.",
+      "moderation": {
+        "warningTitle": "Avertissement de l’équipe Lien Parental",
+        "warningBody": "Motif : {reason}. Merci de respecter les conditions d’utilisation.",
+        "suspensionTitle": "Votre compte a été suspendu jusqu’au {date}",
+        "suspensionBody": "Motif : {reason}.",
+        "deactivationTitle": "Votre compte a été désactivé",
+        "deactivationBody": "Motif : {reason}. Contactez l’assistance pour toute question.",
+        "reactivationTitle": "Votre compte est réactivé",
+        "reactivationBody": "Vous pouvez de nouveau utiliser Lien Parental normalement."
+      }
+    },
+    "moderation": {
+      "subject": {
+        "warning": "Avertissement concernant votre compte Lien Parental",
+        "suspension": "Votre compte Lien Parental est suspendu temporairement",
+        "deactivation": "Votre compte Lien Parental est désactivé",
+        "reactivation": "Votre compte Lien Parental est réactivé"
+      },
+      "title": {
+        "warning": "Un avertissement concernant votre compte",
+        "suspension": "Votre compte est suspendu temporairement",
+        "deactivation": "Votre compte est désactivé",
+        "reactivation": "Votre compte est de nouveau actif"
+      },
+      "intro": {
+        "warning": "Notre équipe a constaté un usage de votre compte qui ne respecte pas les règles de Lien Parental. Ce message est un avertissement : votre compte reste accessible.",
+        "suspension": "Notre équipe a suspendu temporairement votre compte, car son usage ne respecte pas les règles de Lien Parental.",
+        "deactivation": "Notre équipe a désactivé votre compte, car son usage ne respecte pas les règles de Lien Parental.",
+        "reactivation": "Bonne nouvelle : la restriction de votre compte a été levée. Vous pouvez de nouveau vous connecter et utiliser Lien Parental normalement."
+      },
+      "reasonLine": "Motif : {reason}",
+      "detailsLine": "Précisions de notre équipe : {details}",
+      "untilLine": "Votre compte sera de nouveau accessible automatiquement le {date} (heure de Guyane).",
+      "deactivationLine": "Il reste désactivé jusqu’à un nouvel examen par notre équipe.",
+      "keptData": "Vos données sont conservées : rien n’est supprimé, vous ne pouvez simplement pas vous connecter pendant cette période.",
+      "warningNext": "En cas de nouveau manquement, votre compte pourra être suspendu ou désactivé.",
+      "rules": "Lien Parental est un espace de confiance pour les familles : chacun s’engage à respecter les autres utilisateurs et les conditions d’utilisation du service.",
+      "rulesReactivation": "Merci de continuer à respecter les conditions d’utilisation, pour que Lien Parental reste un espace de confiance pour toutes les familles.",
+      "contact": "Vous pensez qu’il s’agit d’une erreur, ou vous avez une question ? Écrivez-nous à {email} : un membre de l’équipe vous répondra.",
+      "ctaRules": "Lire les conditions d’utilisation",
+      "ctaLogin": "Me connecter",
+      "footer": "Cet e-mail concerne l’usage de votre compte : il vous est envoyé quelles que soient vos préférences de notification.",
+      "reasons": {
+        "comportement": "Comportement irrespectueux envers d’autres utilisateurs",
+        "harcelement": "Harcèlement, menaces ou intimidation",
+        "contenu": "Publication de contenu inapproprié ou illicite",
+        "usurpation": "Usurpation d’identité ou faux profil",
+        "spam": "Spam ou sollicitations abusives",
+        "fraude": "Fraude ou usage frauduleux du paiement",
+        "securite": "Atteinte à la sécurité du service",
+        "autre": "Non-respect des conditions d’utilisation"
+      }
     },
     "device": {
       "Appareil": "Appareil",
