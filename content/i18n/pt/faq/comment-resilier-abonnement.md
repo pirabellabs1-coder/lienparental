@@ -8,8 +8,8 @@ O cancelamento é feito em dois toques, sem justificativa.
 
 As etapas:
 
-1. Abra o Lien Parental e vá em "Configurações".
-2. Toque em "Assinatura".
+1. Abra o Lien Parental e vá em "Perfil".
+2. Toque em "Minha assinatura".
 3. Escolha "Cancelar a assinatura".
 4. Confirme.
 

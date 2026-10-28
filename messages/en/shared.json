@@ -403,6 +403,14 @@
         "unsupportedBrowser": "This browser does not support fingerprint sign-in.",
         "windows": "Windows PC (Windows Hello)"
       }
+    },
+    "territories": {
+      "guyane": "French Guiana",
+      "france": "Metropolitan France",
+      "martinique": "Martinique",
+      "guadeloupe": "Guadeloupe",
+      "reunion": "Réunion",
+      "mayotte": "Mayotte"
     }
   }
 }

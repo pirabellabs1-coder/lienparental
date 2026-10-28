@@ -34,7 +34,7 @@ export default function DossierPage({ params }: { params: Promise<{ id: string }
   const { docs: myDocs } = useVaultDocs()
   const { docs, loading: docsLoading, error: docsError, refresh: refreshDocs } = useFolderDocs(id)
   const { announce, node } = useAnnounce()
-  const { openActions, sheet } = useDocActions(announce)
+  const { openActions, sheet } = useDocActions(announce, { onRemoved: refreshDocs })
   const [menuOpen, setMenuOpen] = useState(false)
   const actions = useFolderActions({
     shares,

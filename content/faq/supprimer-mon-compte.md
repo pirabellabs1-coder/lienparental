@@ -8,8 +8,8 @@ La suppression est définitive et sans retour en arrière. Prenez le temps d'exp
 
 Les étapes :
 
-1. Ouvrez "Réglages".
-2. Appuyez sur "Mon compte".
+1. Ouvrez "Profil".
+2. Appuyez sur "Sécurité".
 3. Choisissez "Supprimer mon compte".
 4. Saisissez votre mot de passe pour confirmer.
 5. Validez la mention "Je comprends que la suppression est définitive".

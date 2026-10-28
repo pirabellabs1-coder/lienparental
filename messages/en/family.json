@@ -235,6 +235,11 @@
         "kindJournal": "Journal",
         "historyHint": "Add a Health note in the <link>Journal</link> to complete the history.",
         "add": "Add"
+      },
+      "healthPrivacy": {
+        "onlyYou": "Health data encrypted in transit and at rest, visible only to you.",
+        "shared": "Health data encrypted in transit and at rest, visible to you and to {names} ({count, plural, one {parent linked to this profile} other {parents linked to this profile}}). Relatives don’t have access.",
+        "generic": "Health data encrypted in transit and at rest, visible to you and to the parents linked to this profile, never to relatives."
       }
     },
     "journal": {
@@ -1159,7 +1164,15 @@
         "messagesTitle": "Messages between the parents",
         "messagesNote": "Messages are timestamped when sent and can be neither edited nor deleted.",
         "attachment": "Attachment: {name}",
-        "items": "items"
+        "items": "items",
+        "journalTypes": {
+          "visite": "Visit",
+          "appel": "Call",
+          "message": "Message",
+          "sante": "Health",
+          "depense": "Expense / Payment",
+          "autre": "Other"
+        }
       }
     },
     "common": {

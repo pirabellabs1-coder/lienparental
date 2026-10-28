@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { localePathFor } from '@/lib/i18n/routing'
 import { ArrowRight, Plus } from 'lucide-react'
 import { H2 } from './ui'
 
@@ -33,9 +34,10 @@ function Item({ q, a, linkHref, linkLabel }: FaqItem) {
 /** FAQ sous les tarifs : titre centré, questions sur deux colonnes en grand écran. */
 export async function Faq() {
   const t = await getTranslations('faq')
+  const lp = localePathFor(await getLocale())
   const FAQ: FaqItem[] = [
     { q: t('q1'), a: t('a1') },
-    { q: t('q2'), a: t('a2'), linkHref: '/installer', linkLabel: t('a2Link') },
+    { q: t('q2'), a: t('a2'), linkHref: lp('/installer'), linkLabel: t('a2Link') },
     { q: t('q3'), a: t('a3') },
     { q: t('q4'), a: t('a4') },
     { q: t('q5'), a: t('a5') },
@@ -55,7 +57,7 @@ export async function Faq() {
         ))}
       </div>
       <div className="mt-8 text-center">
-        <Link href="/aide" className="inline-flex min-h-[44px] items-center gap-2 rounded-lg text-[16px] font-semibold text-leaf-600 hover:text-leaf-700">
+        <Link href={lp('/aide')} className="inline-flex min-h-[44px] items-center gap-2 rounded-lg text-[16px] font-semibold text-leaf-600 hover:text-leaf-700">
           {t('seeAll')}<ArrowRight className="h-4 w-4" aria-hidden />
         </Link>
       </div>

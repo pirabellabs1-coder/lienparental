@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useLocalePath } from '@/components/i18n/useLocalePath'
 import { useEffect, useState, type FormEvent } from 'react'
 import { Mail, User } from 'lucide-react'
 import { cn } from '@/lib/cn'
@@ -34,6 +35,7 @@ async function postAuth(url: string, body: unknown, fallbacks: { unavailable: st
 export default function InscriptionPage() {
   const router = useRouter()
   const t = useTranslations('onb.signup')
+  const lp = useLocalePath()
   const [prenom, setPrenom] = useState('')
   const [nom, setNom] = useState('')
   const [email, setEmail] = useState('')
@@ -108,11 +110,11 @@ export default function InscriptionPage() {
         <>
           <p className="text-center text-xs leading-relaxed text-night-500">
             {t('termsBefore')}
-            <Link href="/legal/cgu" className="font-semibold text-night-700 underline underline-offset-2">
+            <Link href={lp('/legal/cgu')} className="font-semibold text-night-700 underline underline-offset-2">
               {t('termsLink')}
             </Link>
             {t('termsMiddle')}
-            <Link href="/legal/confidentialite" className="font-semibold text-night-700 underline underline-offset-2">
+            <Link href={lp('/legal/confidentialite')} className="font-semibold text-night-700 underline underline-offset-2">
               {t('privacyLink')}
             </Link>
             {t('termsAfter')}

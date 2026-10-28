@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Download, Eye, Folder, FolderInput, Share2, Trash2 } from 'lucide-react'
-import { ActionSheet } from '@/components/ui'
+import { ActionSheet, ConfirmDialog } from '@/components/ui'
+import { useDeletedDocs } from './store'
 import type { VaultDocument } from '@/lib/mock-vault'
 import { LIVE } from '@/lib/data/core'
 import { createShare, downloadDocument, previewDocument, type VaultDocumentRecord } from '@/lib/data/vault'
@@ -83,12 +84,33 @@ export async function startPreview(doc: VaultDocument | VaultDocumentRecord, ann
   }
 }
 
-/** Menu « ⋯ » d'un document (Voir, Télécharger, Partager, Ranger dans un dossier, Déplacer, Supprimer). */
-export function useDocActions(announce: (m: string) => void) {
+/**
+ * Menu « ⋯ » d'un document (Voir, Télécharger, Partager, Ranger dans un dossier, Déplacer, Supprimer).
+ * « Supprimer » = mise à la corbeille (30 jours, restaurable), confirmée sur place : même
+ * comportement que depuis la fiche du document. `onRemoved` : rechargement de la liste (Supabase).
+ */
+export function useDocActions(announce: (m: string) => void, opts: { onRemoved?: () => void | Promise<void> } = {}) {
   const router = useRouter()
   const t = useTranslations('vault.docActions')
   const tc = useTranslations('vault.common')
+  const td = useTranslations('vault.docDelete')
   const [doc, setDoc] = useState<VaultDocument | null>(null)
+  const [toTrash, setToTrash] = useState<VaultDocument | null>(null)
+  const { remove } = useDeletedDocs()
+
+  const confirmTrash = async () => {
+    const target = toTrash
+    if (!target) return
+    try {
+      await remove(target.id)
+      setToTrash(null)
+      announce(t('movedToTrash', { name: target.name }))
+      await opts.onRemoved?.()
+    } catch (e) {
+      setToTrash(null)
+      announce(e instanceof Error ? e.message : td('failed'))
+    }
+  }
 
   const sheet = (
     <ActionSheet
@@ -103,11 +125,22 @@ export function useDocActions(announce: (m: string) => void) {
           { key: 'share', label: tc('share'), icon: <Share2 className="h-5 w-5" />, onClick: () => { void shareDocument(doc, t).then((m) => m && announce(m)) } },
           { key: 'folder', label: t('toFolder'), icon: <Folder className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}?dossier=1`) },
           { key: 'move', label: t('changeCategory'), icon: <FolderInput className="h-5 w-5" />, onClick: () => router.push(`/app/coffre/documents/${doc.id}?deplacer=1`) },
-          { key: 'del', label: tc('delete'), icon: <Trash2 className="h-5 w-5" />, variant: 'danger' as const, onClick: () => router.push(`/app/coffre/documents/${doc.id}/supprimer`) },
+          { key: 'del', label: tc('delete'), icon: <Trash2 className="h-5 w-5" />, variant: 'danger' as const, onClick: () => setToTrash(doc) },
         ]),
       ] : []}
     />
   )
+  const dialog = (
+    <ConfirmDialog
+      open={toTrash !== null}
+      onClose={() => setToTrash(null)}
+      onConfirm={confirmTrash}
+      title={td('trashTitle')}
+      description={toTrash ? `${toTrash.name} — ${td('trashText')}` : ''}
+      confirmLabel={td('toTrash')}
+      tone="danger"
+    />
+  )
 
-  return { openActions: setDoc, sheet }
+  return { openActions: setDoc, sheet: <>{sheet}{dialog}</> }
 }

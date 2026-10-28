@@ -10,13 +10,14 @@ import { FileIcon } from '@/components/coffre/FileIcon'
 import { btn } from '@/components/coffre/buttons'
 import { useDeletedDocs, useVaultDoc } from '@/components/coffre/store'
 import { LoadingState } from '@/components/mobile/StateScreens'
-import { LIVE } from '@/lib/data/core'
 import { useVaultI18n } from '@/components/coffre/i18n'
 
 /**
- * Maquette « Supprimer le document ». Cet écran EST l'étape de confirmation
- * de l'action irréversible : focus initial sur « Annuler », action destructive
- * explicitement libellée.
+ * Maquette « Supprimer le document ». Cet écran EST l'étape de confirmation :
+ * focus initial sur « Annuler », action explicitement libellée. La suppression
+ * met le document à la corbeille (30 jours, restaurable) — en production
+ * (rpc soft_delete_document) comme en démonstration ; seule la corbeille
+ * propose la suppression définitive.
  */
 export default function DeleteDocumentPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -69,13 +70,13 @@ export default function DeleteDocumentPage({ params }: { params: Promise<{ id: s
     )
   }
 
-  // Supabase : mise à la corbeille (restaurable 30 jours). Démo : masqué pour la session.
+  // Mise à la corbeille (restaurable 30 jours), en production comme en démo.
   const onDelete = async () => {
     setBusy(true)
     setFailure(null)
     try {
       await remove(doc.id)
-      router.replace('/app/coffre/documents/tous')
+      router.replace('/app/coffre/documents/tous?corbeille=1')
     } catch (e) {
       setFailure(e instanceof Error ? e.message : t('failed'))
       setBusy(false)
@@ -97,24 +98,15 @@ export default function DeleteDocumentPage({ params }: { params: Promise<{ id: s
         <div role="note" className="mt-4 flex gap-3 rounded-2xl border border-orange-100 bg-orange-50/70 p-4">
           <TriangleAlert className="mt-0.5 h-5 w-5 shrink-0 text-orange-500" aria-hidden="true" />
           <div className="text-[13.5px] leading-relaxed text-night-800">
-            {LIVE ? (
-              <>
-                <p className="font-bold text-night-900">{t('trashTitle')}</p>
-                <p className="mt-1">{t('trashText')}</p>
-              </>
-            ) : (
-              <>
-                <p className="font-bold text-night-900">{t('irreversible')}</p>
-                <p className="mt-1">{t('permanentText')}</p>
-              </>
-            )}
+            <p className="font-bold text-night-900">{t('trashTitle')}</p>
+            <p className="mt-1">{t('trashText')}</p>
           </div>
         </div>
 
         <div className="mt-8 space-y-3">
           {failure && <p role="alert" className="text-center text-[13px] font-semibold text-alert-600">{failure}</p>}
           <button type="button" onClick={() => void onDelete()} disabled={busy} className={btn({ variant: 'danger' })}>
-            {busy ? t('deleting') : LIVE ? t('toTrash') : t('permanent')}
+            {busy ? t('deleting') : t('toTrash')}
           </button>
           <Link ref={cancelRef} href={`/app/coffre/documents/${doc.id}`} className={btn({ variant: 'secondary' })}>
             {tc('cancel')}

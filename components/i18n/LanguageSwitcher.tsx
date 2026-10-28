@@ -1,21 +1,26 @@
 'use client'
 import { useTransition } from 'react'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { locales, LOCALE_META, type Locale } from '@/lib/i18n/config'
 import { applyLocale } from '@/lib/i18n/actions'
+import { isPublicLocalizable, localePath, stripLocale } from '@/lib/i18n/routing'
 import { Flag } from './Flags'
 import { cn } from '@/lib/cn'
 
 /**
  * Sélecteur de langue FR / EN / PT (drapeaux circulaires + code).
- * Mémorise le choix dans le cookie lp_locale puis rafraîchit la page serveur
- * pour re-rendre tout le contenu dans la nouvelle langue.
+ * Mémorise le choix (cookie lp_locale + préférence du compte), puis :
+ * - page publique localisable (/, /aide, /blog, /guide…) : chargement de l'URL de la langue choisie
+ *   (`/en/aide`, `/aide`…). Chargement complet : le gabarit racine (<html lang>, messages client)
+ *   est rendu à nouveau dans la bonne langue ;
+ * - ailleurs (espace connecté…) : rafraîchissement de la page serveur, comme avant.
  */
 export function LanguageSwitcher({ className }: { className?: string }) {
   const active = useLocale() as Locale
   const t = useTranslations('lang')
   const router = useRouter()
+  const pathname = usePathname() ?? '/'
   const [pending, start] = useTransition()
 
   const pick = (loc: Locale) => {
@@ -23,6 +28,11 @@ export function LanguageSwitcher({ className }: { className?: string }) {
     start(async () => {
       // Cookie d'affichage + préférence du compte (si connecté) : un seul réglage effectif.
       await applyLocale(loc)
+      const { path } = stripLocale(pathname)
+      if (isPublicLocalizable(path)) {
+        window.location.assign(`${localePath(loc, path)}${window.location.search}${window.location.hash}`)
+        return
+      }
       router.refresh()
     })
   }

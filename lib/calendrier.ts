@@ -201,6 +201,30 @@ export function fmtHourRange(start: string, end: string): string {
   return `${fmtHour(start)} - ${fmtHour(end)}`
 }
 
+/**
+ * Heure murale "HH:mm" au format de la langue de l'interface :
+ * fr « 14h30 » / « 8h » (notation des maquettes), en « 2:30 PM », pt « 14:30 » (format brésilien, via Intl).
+ */
+export function fmtWallTime(hhmm: string, locale: string): string {
+  const [h, m] = hhmm.split(':').map(Number)
+  if (locale === 'fr') return m ? `${h || 0}h${String(m).padStart(2, '0')}` : `${h || 0}h`
+  return new Date(Date.UTC(2000, 0, 1, h || 0, m || 0)).toLocaleTimeString(intlLocale(locale), {
+    hour: locale === 'en' ? 'numeric' : '2-digit', minute: '2-digit', timeZone: 'UTC',
+  })
+}
+
+/** Heure d'un instant (DEFAULT_TZ) au format de la langue (cf. fmtWallTime). */
+export function fmtHourLocale(iso: string, locale: string): string {
+  return fmtWallTime(fmtTime(iso), locale)
+}
+
+/** Graduation d'une grille horaire : fr « 08h », en « 8 AM », pt « 08:00 ». */
+export function fmtHourTickLocale(h: number, locale: string): string {
+  if (locale === 'fr') return `${String(h).padStart(2, '0')}h`
+  if (locale === 'en') return new Date(Date.UTC(2000, 0, 1, h)).toLocaleTimeString(intlLocale(locale), { hour: 'numeric', timeZone: 'UTC' })
+  return fmtWallTime(`${h}:00`, locale)
+}
+
 /** Minutes écoulées depuis minuit (DEFAULT_TZ) pour un instant — positionnement sur une grille horaire. */
 export function minutesOfDay(iso: string): number {
   const [h, m] = fmtTime(iso).split(':').map(Number)

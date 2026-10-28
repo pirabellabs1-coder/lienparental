@@ -1,8 +1,8 @@
 'use client'
 
-import { use, useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react'
-import { Check, ChevronDown, FileText, Paperclip, Sparkles, X } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { use, useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react'
+import { Check, ChevronDown, Download, FileText, Languages, Paperclip, PenLine, Sparkles, X } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { Logo } from '@/components/brand/Logo'
 import { ConfettiBurst, EnvelopeShieldIcon, LockLeavesIllustration } from '@/components/illustrations'
@@ -12,30 +12,37 @@ import { mockTestimonyRequest, type TestimonyPerson, type TestimonyRequestPublic
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { Q, SkipLink, WitnessBody, WitnessDots, WitnessFrame, WitnessHeader } from './_parts'
+import { SignaturePad, type SignaturePadHandle } from '@/components/temoin/SignaturePad'
+import {
+  DURATION, LINK_ADULT, LINK_CHILD, PARTY_TIES, WITNESS_LOCALES, compileAttestation, compileFacts, formatDay,
+  frDuration, frLinkAdult, frLinkChild, fullName, personRole,
+  type PartyTie, type WitnessAnswers, type WitnessIdentity, type WitnessLocale,
+} from '@/lib/temoin/attestation'
+import { identityErrors, witnessDeclarationSchema } from '@/lib/temoin/schema'
+import { fileUploadKey, signatureUploadKey, uniqueKeys, uploadOnce } from '@/lib/temoin/upload-cache'
 
 // M08 — Espace témoin public (/temoin/[token]) : aucun compte requis.
 // Parcours (maquette « Côté témoin ») : intro → cible → questionnaire parents (lien, faits,
-// contexte, autre fait ?) → questionnaire enfants → compléments → relecture (reformulation IA
-// facultative, CDC) → merci → fin.
+// contexte, autre fait ?) → questionnaire enfants → compléments → identité → lien avec les
+// parties → pièce d'identité → relecture, mention légale et signature (art. 202 CPC ;
+// reformulation IA facultative, CDC) → merci → fin.
+// L'attestation enregistrée reste EN FRANÇAIS (tribunal français) ; une traduction de lecture
+// dans la langue du témoin est affichée au-dessus (lib/temoin/attestation.ts, même gabarit).
 
 const MAX_TEXT = 2000
 const MAX_FILES = 5
 const MAX_FILE_BYTES = 10 * 1024 * 1024
 
-// Valeurs enregistrées (texte du témoignage, réponses) : en français, pour le dossier du parent.
-// Seul le libellé affiché est traduit (public.witness.options.<liste>.<clé>).
-const LIEN_ADULTE = [
-  ['family', 'Membre de la famille'], ['friend', 'Ami(e)'], ['neighbour', 'Voisin(e)'], ['colleague', 'Collègue'],
-  ['school', 'Enseignant(e) / personnel scolaire'], ['health', 'Professionnel(le) de santé'], ['other', 'Autre'],
-] as const
-const DUREE = [
-  ['lt6m', 'Moins de 6 mois'], ['6m1y', '6 mois à 1 an'], ['1y3y', '1 à 3 ans'], ['3y5y', '3 à 5 ans'], ['gt5y', 'Plus de 5 ans'],
-] as const
-const LIEN_ENFANT = [
-  ['family', 'Membre de la famille'], ['familyFriend', 'Ami(e) de la famille'], ['neighbour', 'Voisin(e)'],
-  ['school', 'Enseignant(e) / personnel scolaire'], ['activity', 'Encadrant(e) d’activité'], ['health', 'Professionnel(le) de santé'], ['other', 'Autre'],
-] as const
+// Réponses saisies sous forme de CLÉS ; libellé affiché traduit (public.witness.options.<liste>.<clé>),
+// valeurs enregistrées (texte du témoignage, réponses) en français, pour le dossier du parent.
 const LIEUX = ['home', 'school', 'public', 'handover', 'activity'] as const
+const IDENTITY_FIELDS = ['nom', 'prenoms', 'dateNaissance', 'lieuNaissance', 'adresse', 'cp', 'ville', 'pays', 'profession'] as const
+const emptyIdentity = (): WitnessIdentity => ({ nom: '', prenoms: '', dateNaissance: '', lieuNaissance: '', adresse: '', cp: '', ville: '', pays: '', profession: '' })
+/** Jour local du témoin, AAAA-MM-JJ (date de l'attestation). */
+const todayIso = () => {
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+}
 
 type Fact = { faits: string; quand: string; ou: string; contexte: string }
 type ParentAns = { lien: string; duree: string; facts: Fact[] }
@@ -50,6 +57,9 @@ type Screen =
   | { k: 'p-autre'; p: number; f: number }
   | { k: 'enfant'; c: number }
   | { k: 'complements' }
+  | { k: 'identite' }
+  | { k: 'lien-parties' }
+  | { k: 'piece' }
   | { k: 'relecture' }
   | { k: 'merci' }
   | { k: 'fin' }
@@ -76,10 +86,6 @@ function reformulate(text: string) {
     .join('\n')
 }
 
-function formatDate(iso: string) {
-  return iso ? new Date(iso).toLocaleDateString('fr-FR') : ''
-}
-
 type LoadState = { k: 'loading' } | { k: 'ready'; request: TestimonyRequestPublic } | { k: 'error'; message: string }
 
 async function apiError(res: Response, fallback: string): Promise<string> {
@@ -90,8 +96,9 @@ async function apiError(res: Response, fallback: string): Promise<string> {
 export default function TemoinPage({ params }: { params: Promise<{ token: string }> }) {
   const { token } = use(params)
   const t = useTranslations('public.witness')
-  const opts = (list: string, items: ReadonlyArray<readonly [string, string]>) =>
-    items.map(([key, value]) => ({ value, label: t(`options.${list}.${key}`) }))
+  const rawLocale = useLocale()
+  const locale: WitnessLocale = (WITNESS_LOCALES as readonly string[]).includes(rawLocale) ? (rawLocale as WitnessLocale) : 'fr'
+  const opts = (list: string, keys: readonly string[]) => keys.map((key) => ({ value: key, label: t(`options.${list}.${key}`) }))
   const localRef = useMemo(() => referenceFrom(token), [token])
   const [serverRef, setServerRef] = useState<string | null>(null)
   const ref = serverRef ?? localRef
@@ -133,12 +140,30 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
   const [iaText, setIaText] = useState<string | null>(null)
   const [useIa, setUseIa] = useState(false)
   const [certified, setCertified] = useState(false)
+  // Éléments de l'attestation (art. 202 CPC).
+  const [identity, setIdentity] = useState<WitnessIdentity>(emptyIdentity)
+  const [identityErrs, setIdentityErrs] = useState<Record<string, string>>({})
+  const [tie, setTie] = useState<{ kind: PartyTie | ''; detail: string }>({ kind: '', detail: '' })
+  const [tieError, setTieError] = useState<string | null>(null)
+  const [idDoc, setIdDoc] = useState<File | null>(null)
+  const [idDocError, setIdDocError] = useState<string | null>(null)
+  const [mention, setMention] = useState(false)
+  const [signPlace, setSignPlace] = useState('')
+  const [signed, setSigned] = useState(false)
+  const onSigned = useCallback((v: boolean) => setSigned(v), [])
+  const sigRef = useRef<SignaturePadHandle>(null)
+  const idDocInput = useRef<HTMLInputElement>(null)
+  const [pdfBusy, setPdfBusy] = useState(false)
+  const [pdfError, setPdfError] = useState<string | null>(null)
+  const signDay = useMemo(() => todayIso(), [])
   const [sending, setSending] = useState(false)
   const [sendError, setSendError] = useState<string | null>(null)
   const [closeHint, setCloseHint] = useState(false)
 
   const fileInput = useRef<HTMLInputElement>(null)
   const firstRender = useRef(true)
+  /** Fichiers déjà déposés (clé stable → chemin serveur), réutilisés d'une tentative d'envoi à l'autre. */
+  const uploaded = useRef(new Map<string, string>())
 
   // Move focus to the new screen title (screen-reader + keyboard context).
   useEffect(() => {
@@ -184,32 +209,45 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
   const toggle = (list: string[], set: (v: string[]) => void, id: string) =>
     set(list.includes(id) ? list.filter((x) => x !== id) : [...list, id])
 
-  // --- compiled testimony (texte_original) -----------------------------------
-  const original = useMemo(() => {
-    const blocks: string[] = []
-    parents.forEach((p) => {
-      const a = pAns(p)
-      const head = [`Concernant ${p.nom}`, a.lien && `lien : ${a.lien}`, a.duree && `connu(e) depuis : ${a.duree}`]
-        .filter(Boolean)
-        .join(' — ')
-      const facts = a.facts
-        .filter((f) => f.faits.trim() || f.contexte.trim())
-        .map((f, i) => {
-          const meta = [f.quand && `le ${formatDate(f.quand)}`, f.ou && `lieu : ${f.ou}`].filter(Boolean).join(', ')
-          return [`Fait ${i + 1}${meta ? ` (${meta})` : ''} :`, f.faits.trim(), f.contexte.trim() && `Contexte : ${f.contexte.trim()}`]
-            .filter(Boolean)
-            .join('\n')
-        })
-      if (facts.length) blocks.push([head, ...facts].join('\n'))
-    })
-    children.forEach((c) => {
-      const a = cAns(c)
-      if (a.constate.trim()) blocks.push([`Concernant ${c.nom}${a.lien ? ` — lien : ${a.lien}` : ''}`, a.constate.trim()].join('\n'))
-    })
-    if (complement.trim()) blocks.push(`Informations complémentaires :\n${complement.trim()}`)
-    return blocks.join('\n\n')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parentAns, childAns, complement, parentIds, childIds])
+  // --- compiled testimony ------------------------------------------------------
+  // texte_original : faits en FRANÇAIS (même gabarit qu'auparavant) ; `local` : même texte dans la
+  // langue du témoin, pour la traduction de lecture.
+  const answers = useMemo<WitnessAnswers>(() => ({
+    parents: parents.map((p) => ({ nom: p.nom, ...pAns(p) })),
+    children: children.map((c) => ({ nom: c.nom, ...cAns(c) })),
+    complement,
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [parentAns, childAns, complement, parentIds, childIds, request])
+  const original = useMemo(() => compileFacts(answers, 'fr'), [answers])
+  const localFacts = useMemo(() => compileFacts(answers, locale), [answers, locale])
+  const sentFacts = iaText !== null && useIa ? iaText.trim() : original.trim()
+  const declaration = { identity, tie: { kind: (tie.kind || 'none') as PartyTie, detail: tie.detail }, place: signPlace, date: signDay }
+  const attestationFr = compileAttestation(declaration, sentFacts, 'fr')
+  const attestationLocal = locale === 'fr' ? null : compileAttestation(declaration, localFacts, locale)
+
+  const pickIdDoc = (e: ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0]
+    e.target.value = ''
+    setIdDocError(null)
+    if (!f) return
+    if (!/^(image\/|application\/pdf$)/.test(f.type)) return setIdDocError(t('errFormat'))
+    if (f.size > MAX_FILE_BYTES) return setIdDocError(t('errSize', { name: f.name }))
+    setIdDoc(f)
+  }
+
+  const downloadPdf = async () => {
+    setPdfBusy(true)
+    setPdfError(null)
+    try {
+      const { renderAttestationPdf, downloadBlob } = await import('@/components/temoin/attestationPdf')
+      const blob = await renderAttestationPdf({ text: attestationFr, signature: sigRef.current?.toDataUrl('image/jpeg') ?? null })
+      downloadBlob(blob, `Attestation-temoin-${signDay}.pdf`)
+    } catch {
+      setPdfError(t('review.downloadError'))
+    } finally {
+      setPdfBusy(false)
+    }
+  }
 
   const onFiles = (e: ChangeEvent<HTMLInputElement>) => {
     const picked = Array.from(e.target.files ?? [])
@@ -236,34 +274,55 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
 
   const send = async () => {
     if (!original.trim() || !certified) return
+    // Contrôle complet avant envoi (le serveur refait le même contrôle).
+    const decl = witnessDeclarationSchema.safeParse({ ...declaration, mention, locale })
+    if (!decl.success || !idDoc || !signed) {
+      setSendError(t('review.errIncomplete'))
+      return
+    }
     setSending(true)
     setSendError(null)
     try {
       if (!SUPABASE_ENABLED) {
         await new Promise((r) => setTimeout(r, 700)) // démo
       } else {
-        // 1) Pièces jointes : validées et stockées côté serveur (taille, type réel, jeton).
-        const attachments: { path: string; name: string }[] = []
-        for (const f of files) {
+        // 1) Fichiers : validés et stockés côté serveur (taille, type réel, jeton), bucket privé.
+        const upload = async (f: File) => {
           const fd = new FormData()
           fd.append('file', f)
           const up = await fetch(`/api/temoin/${encodeURIComponent(token)}/upload`, { method: 'POST', body: fd })
           if (!up.ok) throw new Error(await apiError(up, t('errUpload', { name: f.name })))
-          const body = (await up.json()) as { path: string }
-          attachments.push({ path: body.path, name: f.name.slice(0, 120) })
+          return ((await up.json()) as { path: string }).path
+        }
+        // Nouvelle tentative : seuls les fichiers pas encore déposés repartent (dépôt limité par IP).
+        const cache = uploaded.current
+        const identityDocument = { path: await uploadOnce(cache, fileUploadKey('identity', idDoc), () => upload(idDoc)) }
+        const sigData = sigRef.current?.toDataUrl('image/png')
+        if (!sigData) throw new Error(t('sign.errSign'))
+        const signature = {
+          path: await uploadOnce(cache, await signatureUploadKey(sigData), async () => {
+            const sigBlob = await sigRef.current?.toBlob()
+            if (!sigBlob) throw new Error(t('sign.errSign'))
+            return upload(new File([sigBlob], 'signature.png', { type: 'image/png' }))
+          }),
+        }
+        const attachments: { path: string; name: string }[] = []
+        const keys = uniqueKeys(files.map((f) => fileUploadKey('attachment', f)))
+        for (const [i, f] of files.entries()) {
+          attachments.push({ path: await uploadOnce(cache, keys[i]!, () => upload(f)), name: f.name.slice(0, 120) })
         }
         // 2) Témoignage : RPC record_testimony_submission via le serveur (limitation de débit par IP).
         const firstParent = parents.map((p) => pAns(p)).find((a) => a.lien || a.duree)
         const firstChild = children.map((c) => cAns(c)).find((a) => a.lien)
-        const sent = iaText !== null && useIa ? iaText.trim() : original.trim()
+        const sent = sentFacts
         const reponses: Record<string, string> = {}
         parents.forEach((p) => {
           const a = pAns(p)
-          reponses[`parent:${p.nom}`.slice(0, 80)] = JSON.stringify({ lien: a.lien, duree: a.duree, facts: a.facts.filter((f) => f.faits.trim() || f.contexte.trim()) }).slice(0, 4000)
+          reponses[`parent:${p.nom}`.slice(0, 80)] = JSON.stringify({ lien: frLinkAdult(a.lien), duree: frDuration(a.duree), facts: a.facts.filter((f) => f.faits.trim() || f.contexte.trim()) }).slice(0, 4000)
         })
         children.forEach((c) => {
           const a = cAns(c)
-          reponses[`enfant:${c.nom}`.slice(0, 80)] = JSON.stringify(a).slice(0, 4000)
+          reponses[`enfant:${c.nom}`.slice(0, 80)] = JSON.stringify({ ...a, lien: frLinkChild(a.lien) }).slice(0, 4000)
         })
         if (complement.trim()) reponses.complement = complement.trim().slice(0, 4000)
         const res = await fetch(`/api/temoin/${encodeURIComponent(token)}`, {
@@ -273,10 +332,16 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
             texte_original: original.trim(),
             texte_ia: iaText?.trim() || undefined,
             texte_envoye: sent || original.trim(),
-            temoin: { lien: firstParent?.lien || firstChild?.lien || undefined, duree: firstParent?.duree || undefined },
+            temoin: {
+              lien: (firstParent?.lien ? frLinkAdult(firstParent.lien) : firstChild?.lien ? frLinkChild(firstChild.lien) : '') || undefined,
+              duree: firstParent?.duree ? frDuration(firstParent.duree) : undefined,
+            },
             reponses,
             attachments,
             certified: true,
+            declaration: decl.data,
+            identityDocument,
+            signature,
           }),
         })
         if (!res.ok) throw new Error(await apiError(res, t('errSend')))
@@ -391,7 +456,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                       onChange={() => toggle(list, set, p.id)}
                       className="h-5 w-5 shrink-0 cursor-pointer rounded accent-leaf-500"
                     />
-                    {p.nom} ({p.role})
+                    {p.nom} ({personRole(p.id, locale) ?? p.role})
                   </label>
                 ))}
               </fieldset>
@@ -421,8 +486,8 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
             }
           >
             <div className="space-y-7">
-              <SelectField label={<Q>{t('qLinkAdult')}</Q>} placeholder={t('select')} options={opts('linkAdult', LIEN_ADULTE)} value={a.lien} onChange={(e) => patchParent(p, { lien: e.target.value })} />
-              <SelectField label={<Q>{t('qDuration')}</Q>} placeholder={t('select')} options={opts('duration', DUREE)} value={a.duree} onChange={(e) => patchParent(p, { duree: e.target.value })} />
+              <SelectField label={<Q>{t('qLinkAdult')}</Q>} placeholder={t('select')} options={opts('linkAdult', LINK_ADULT)} value={a.lien} onChange={(e) => patchParent(p, { lien: e.target.value })} />
+              <SelectField label={<Q>{t('qDuration')}</Q>} placeholder={t('select')} options={opts('duration', DURATION)} value={a.duree} onChange={(e) => patchParent(p, { duree: e.target.value })} />
             </div>
           </WitnessBody>
         </>
@@ -572,7 +637,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
             }
           >
             <div className="space-y-7">
-              <SelectField label={<Q>{t('qLinkChild')}</Q>} placeholder={t('select')} options={opts('linkChild', LIEN_ENFANT)} value={a.lien} onChange={(e) => patchChild(c, { lien: e.target.value })} />
+              <SelectField label={<Q>{t('qLinkChild')}</Q>} placeholder={t('select')} options={opts('linkChild', LINK_CHILD)} value={a.lien} onChange={(e) => patchChild(c, { lien: e.target.value })} />
               <TextAreaField
                 label={<Q>{t('qChild')}</Q>}
                 placeholder={t('childPh')}
@@ -591,15 +656,15 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
     case 'complements':
       content = (
         <>
-          <WitnessHeader title={t('complementsTitle')} counter={[1, 2]} onBack={back} />
+          <WitnessHeader title={t('complementsTitle')} counter={[1, 5]} onBack={back} />
           <WitnessBody
             footer={
               <>
-                <button type="button" className={cn(btn.primary, 'w-full')} onClick={() => go({ k: 'relecture' })}>
+                <button type="button" className={cn(btn.primary, 'w-full')} onClick={() => go({ k: 'identite' })}>
                   {t('next')}
                 </button>
-                <SkipLink onClick={() => go({ k: 'relecture' })} />
-                <WitnessDots current={1} total={2} />
+                <SkipLink onClick={() => go({ k: 'identite' })} />
+                <WitnessDots current={1} total={5} />
               </>
             }
           >
@@ -656,11 +721,162 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
       )
       break
 
+    case 'identite': {
+      const next = () => {
+        const errs = identityErrors(identity)
+        setIdentityErrs(errs)
+        const first = IDENTITY_FIELDS.find((f) => errs[f])
+        if (first) {
+          document.getElementById(`id-${first}`)?.focus()
+          return
+        }
+        go({ k: 'lien-parties' })
+      }
+      const field = (k: (typeof IDENTITY_FIELDS)[number], extra: Record<string, unknown> = {}) => (
+        <TextField
+          id={`id-${k}`}
+          label={t(`identity.${k}`)}
+          required={k !== 'pays'}
+          optional={k === 'pays'}
+          value={identity[k] ?? ''}
+          error={identityErrs[k] ? t(`identity.errors.${identityErrs[k]}`) : undefined}
+          onChange={(e) => setIdentity((cur) => ({ ...cur, [k]: e.target.value }))}
+          {...extra}
+        />
+      )
+      content = (
+        <>
+          <WitnessHeader title={t('identity.title')} counter={[2, 5]} onBack={back} />
+          <WitnessBody
+            footer={
+              <>
+                <button type="button" className={cn(btn.primary, 'w-full')} onClick={next}>
+                  {t('next')}
+                </button>
+                <WitnessDots current={2} total={5} />
+              </>
+            }
+          >
+            <p className="text-sm leading-relaxed text-night-600">{t('identity.hint')}</p>
+            <div className="mt-5 space-y-4">
+              {field('nom', { autoComplete: 'family-name' })}
+              {field('prenoms', { autoComplete: 'given-name' })}
+              {field('dateNaissance', { type: 'date', autoComplete: 'bday', max: todayIso() })}
+              {field('lieuNaissance')}
+              {field('adresse', { autoComplete: 'street-address' })}
+              <div className="grid grid-cols-2 gap-3">
+                {field('cp', { autoComplete: 'postal-code' })}
+                {field('ville', { autoComplete: 'address-level2' })}
+              </div>
+              {field('pays', { autoComplete: 'country-name' })}
+              {field('profession', { autoComplete: 'organization-title' })}
+            </div>
+          </WitnessBody>
+        </>
+      )
+      break
+    }
+
+    case 'lien-parties': {
+      const next = () => {
+        if (!tie.kind) return setTieError(t('identity.errors.required'))
+        if (tie.kind !== 'none' && !tie.detail.trim()) return setTieError(t('tie.errDetail'))
+        setTieError(null)
+        go({ k: 'piece' })
+      }
+      content = (
+        <>
+          <WitnessHeader title={t('tie.title')} counter={[3, 5]} onBack={back} />
+          <WitnessBody
+            footer={
+              <>
+                <button type="button" className={cn(btn.primary, 'w-full')} onClick={next}>
+                  {t('next')}
+                </button>
+                <WitnessDots current={3} total={5} />
+              </>
+            }
+          >
+            <div className="space-y-6">
+              <SelectField
+                id="tie-kind"
+                label={<Q>{t('tie.q')}</Q>}
+                hint={t('tie.hint')}
+                placeholder={t('select')}
+                options={PARTY_TIES.map((value) => ({ value, label: t(`tie.options.${value}`) }))}
+                value={tie.kind}
+                error={!tie.kind && tieError ? tieError : undefined}
+                onChange={(e) => { setTie((cur) => ({ ...cur, kind: e.target.value as PartyTie })); setTieError(null) }}
+              />
+              {tie.kind && tie.kind !== 'none' && (
+                <TextField
+                  id="tie-detail"
+                  label={t('tie.detail')}
+                  placeholder={t('tie.detailPh')}
+                  maxLength={300}
+                  required
+                  value={tie.detail}
+                  error={tieError ?? undefined}
+                  onChange={(e) => setTie((cur) => ({ ...cur, detail: e.target.value }))}
+                />
+              )}
+            </div>
+          </WitnessBody>
+        </>
+      )
+      break
+    }
+
+    case 'piece': {
+      const next = () => {
+        if (!idDoc) return setIdDocError(t('idDoc.errRequired'))
+        go({ k: 'relecture' })
+      }
+      content = (
+        <>
+          <WitnessHeader title={t('idDoc.title')} counter={[4, 5]} onBack={back} />
+          <WitnessBody
+            footer={
+              <>
+                <button type="button" className={cn(btn.primary, 'w-full')} onClick={next}>
+                  {t('next')}
+                </button>
+                <WitnessDots current={4} total={5} />
+              </>
+            }
+          >
+            <p className="text-sm leading-relaxed text-night-600">{t('idDoc.hint')}</p>
+            <input ref={idDocInput} id="id-doc" type="file" accept="image/*,application/pdf" className="sr-only" tabIndex={-1} aria-hidden="true" onChange={pickIdDoc} />
+            <button
+              type="button"
+              className={cn(btn.secondary, 'mt-5 w-full')}
+              onClick={() => idDocInput.current?.click()}
+              aria-describedby={idDocError ? 'id-doc-error' : 'id-doc-privacy'}
+            >
+              <Paperclip className="h-[18px] w-[18px] text-leaf-600" aria-hidden="true" />
+              {idDoc ? t('idDoc.replace') : t('idDoc.choose')}
+            </button>
+            {idDoc && (
+              <p className="mt-3 flex items-center gap-2 rounded-xl border border-night-100 px-3 py-2 text-sm text-night-800">
+                <FileText className="h-4 w-4 shrink-0 text-leaf-600" aria-hidden="true" />
+                <span className="min-w-0 flex-1 truncate">{idDoc.name}</span>
+              </p>
+            )}
+            {idDocError && (
+              <p id="id-doc-error" role="alert" className="mt-2 text-xs font-semibold text-alert-600">{idDocError}</p>
+            )}
+            <p id="id-doc-privacy" className="mt-4 text-xs leading-relaxed text-night-500">{t('idDoc.privacy')}</p>
+          </WitnessBody>
+        </>
+      )
+      break
+    }
+
     case 'relecture': {
       const empty = !original.trim()
       content = (
         <>
-          <WitnessHeader title={t('reviewTitle')} counter={[2, 2]} onBack={back} />
+          <WitnessHeader title={t('reviewTitle')} counter={[5, 5]} onBack={back} />
           <WitnessBody
             footer={
               <>
@@ -669,10 +885,10 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                     {sendError}
                   </p>
                 )}
-                <button type="button" className={cn(btn.primary, 'w-full')} disabled={empty || !certified || sending} aria-busy={sending} onClick={send}>
+                <button type="button" className={cn(btn.primary, 'w-full')} disabled={empty || !certified || !mention || !signed || !signPlace.trim() || sending} aria-busy={sending} onClick={send}>
                   {sending ? t('sending') : t('send')}
                 </button>
-                <WitnessDots current={2} total={2} />
+                <WitnessDots current={5} total={5} />
               </>
             }
           >
@@ -725,7 +941,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                   </fieldset>
                 )}
 
-                {iaText !== null && useIa ? (
+                {iaText !== null && useIa && (
                   <TextAreaField
                     containerClassName="mt-4"
                     label={t('versionIaEditable')}
@@ -733,19 +949,66 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                     value={iaText}
                     onChange={(e) => setIaText(e.target.value)}
                   />
-                ) : (
-                  <div className="mt-4">
-                    <p className="mb-1.5 text-[13px] font-bold text-night-900">{t('yourTestimony')}</p>
-                    <p className="max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl border border-night-100 p-4 text-sm leading-relaxed text-night-800">
-                      {original}
-                    </p>
-                  </div>
                 )}
+
+                {attestationLocal && (
+                  <section aria-labelledby="fr-note-title" className="mt-5 rounded-2xl border border-leaf-200 bg-leaf-50/60 p-4">
+                    <h2 id="fr-note-title" className="flex items-center gap-2 text-sm font-bold text-leaf-700">
+                      <Languages className="h-4 w-4" aria-hidden="true" />
+                      {t('review.frenchTitle')}
+                    </h2>
+                    <p className="mt-1 text-[13px] leading-relaxed text-night-700">{t('review.frenchText')}</p>
+                    <p className="mt-3 text-[12px] font-bold uppercase tracking-wide text-night-600">{t('review.translationTitle')}</p>
+                    <p className="mt-1 max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl border border-night-100 bg-white p-3 text-[13px] leading-relaxed text-night-800">
+                      {attestationLocal}
+                    </p>
+                  </section>
+                )}
+
+                <div className="mt-5">
+                  <p className="mb-1.5 text-[13px] font-bold text-night-900">{locale === 'fr' ? t('yourTestimony') : t('review.legalTitle')}</p>
+                  <p lang="fr" className="max-h-72 overflow-y-auto whitespace-pre-wrap rounded-xl border border-night-100 p-4 text-sm leading-relaxed text-night-800">
+                    {attestationFr}
+                  </p>
+                </div>
 
                 <label className="mt-5 flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-night-600">
                   <input type="checkbox" checked={certified} onChange={(e) => setCertified(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-leaf-500" />
                   {t('certify')}
                 </label>
+                <label className="mt-3 flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-night-600">
+                  <input type="checkbox" checked={mention} onChange={(e) => setMention(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-leaf-500" />
+                  {t('sign.mention')}
+                </label>
+
+                <section aria-labelledby="sign-title" className="mt-6">
+                  <h2 id="sign-title" className="flex items-center gap-2 text-[13px] font-bold text-night-900">
+                    <PenLine className="h-4 w-4 text-leaf-600" aria-hidden="true" />
+                    {t('sign.title')}
+                  </h2>
+                  <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-3">
+                    <TextField id="sign-place" label={t('sign.place')} required maxLength={100} value={signPlace} onChange={(e) => setSignPlace(e.target.value)} autoComplete="address-level2" />
+                    <p className="pb-3 text-sm text-night-700">{t('sign.date')} {formatDay(signDay, locale, 'long')}</p>
+                  </div>
+                  <p id="sign-hint" className="mb-2 mt-3 text-xs text-night-500">{t('sign.hint')}</p>
+                  <SignaturePad ref={sigRef} name={fullName(identity)} onChange={onSigned} describedBy="sign-hint" />
+                </section>
+
+                <section aria-labelledby="print-title" className="mt-6 rounded-2xl border border-night-100 bg-night-50/60 p-4">
+                  <h2 id="print-title" className="text-sm font-bold text-night-900">{t('review.printTitle')}</h2>
+                  <p className="mt-1 text-[13px] leading-relaxed text-night-700">{t('review.printText')}</p>
+                  <button
+                    type="button"
+                    onClick={() => void downloadPdf()}
+                    disabled={pdfBusy}
+                    aria-busy={pdfBusy}
+                    className="mt-3 inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-night-200 bg-white px-4 text-sm font-semibold text-night-900 hover:bg-night-50"
+                  >
+                    <Download className="h-4 w-4" aria-hidden="true" />
+                    {pdfBusy ? t('review.downloading') : t('review.download')}
+                  </button>
+                  {pdfError && <p role="alert" className="mt-2 text-xs font-semibold text-alert-600">{pdfError}</p>}
+                </section>
               </>
             )}
           </WitnessBody>

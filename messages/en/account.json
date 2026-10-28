@@ -229,6 +229,8 @@
         },
         "countries": {
           "FR": "France",
+          "GF": "French Guiana (France)",
+          "BR": "Brazil",
           "BE": "Belgium",
           "CH": "Switzerland",
           "CA": "Canada",

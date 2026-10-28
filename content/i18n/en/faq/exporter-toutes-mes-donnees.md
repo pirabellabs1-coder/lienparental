@@ -4,32 +4,27 @@ category: "Account"
 updatedAt: "October 25, 2026"
 ---
 
-Lien Parental lets you retrieve all of your data in a single file, at any time. This is your right to data portability (GDPR, known in France as the RGPD, Article 20).
+Lien Parental lets you retrieve your data at any time, in a single file. This is your right of access and to data portability (GDPR, known in France as the RGPD, Articles 15 and 20).
 
 The steps:
 
-1. Open "Settings".
-2. Tap "Export my data".
-3. Choose the format: PDF (readable, for paper archives) or ZIP (original files + a structured JSON file).
-4. Confirm.
-
-Lien Parental prepares the export in the background. For a large vault, this can take a few minutes. You receive a notification when it is ready, and a secure link by email valid for 72 hours.
+1. Open "Profile", then "Security".
+2. Tap "Delete my account": the screen starts with the "Before you go" section (nothing is deleted at this stage).
+3. Tap "Export my data".
+4. The file downloads to your device.
 
 What the export contains:
 
-- All your documents in their original format, organized by folder.
-- Your journal in text and PDF format.
-- Your testimonials as signed PDFs.
-- Your calendar in iCal format (.ics).
-- The history of your conversations with the AI Coach.
+- A structured JSON file with your account information: profile, children, journal, calendar, expenses and payments, testimonials, details of your documents (names, folders, dates) and your message history.
+- Your children's health information is included in encrypted form.
+- The files themselves (PDFs, photos) are not in this file: download the ones you need from the Vault.
 
-A concrete example: before a hearing, you generate a numbered "Court file" PDF. Before deleting your account, you generate a complete ZIP that you keep on an external drive.
+Good to know:
 
-Two practical tips:
+- You can export once every 7 days.
+- Before a hearing, use "My court file" instead: it generates a readable, numbered PDF.
+- Keep the export in a safe place (USB stick, hard drive): it contains personal information.
 
-- Encrypt the ZIP if you store it in a personal cloud.
-- Keep a physical copy (USB stick, hard drive) of critical documents.
-
-For any legal question about archiving evidence, consult your lawyer.
+For any legal question about keeping evidence, consult your lawyer.
 
 Was this article helpful?

@@ -72,6 +72,14 @@ export const childSchema = z.object({
 const optionalText = (max: number) =>
   z.string().trim().max(max, code('maxChars', { max })).transform(v => (v === '' ? null : v)).nullable().optional()
 
+/**
+ * Pays du profil (ISO 3166-1 alpha-2). La colonne public.users.pays est un texte libre
+ * limité à 2 caractères (contrainte users_profile_lengths, 0200) : tout code ISO y tient.
+ * GF = Guyane (code ISO distinct, territoire français) ; BR = Brésil (frontière, familles binationales).
+ */
+export const ACCOUNT_COUNTRIES = ['FR', 'GF', 'BR', 'BE', 'CH', 'CA', 'LU'] as const
+export type AccountCountry = (typeof ACCOUNT_COUNTRIES)[number]
+
 export const accountInfoSchema = z.object({
   prenom: nameSchema,
   nom: nameSchema,
@@ -82,7 +90,7 @@ export const accountInfoSchema = z.object({
   adresse: optionalText(200),
   cp: optionalText(12),
   ville: optionalText(100),
-  pays: z.enum(['FR', 'BE', 'CH', 'CA', 'LU']).nullable().optional(),
+  pays: z.enum(ACCOUNT_COUNTRIES).nullable().optional(),
   photoPath: avatarPathSchema.nullable().optional(),
 })
 

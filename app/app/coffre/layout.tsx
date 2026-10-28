@@ -14,7 +14,14 @@ export default async function CoffreLayout({ children }: { children: ReactNode }
   const { status, blocked } = await loadVaultGateState()
   return (
     <VaultGate initialStatus={status} blocked={blocked}>
-      {status?.unlocked && !blocked ? children : null}
+      {status?.unlocked && !blocked ? (
+        <>
+          {children}
+          {/* Réserve sous le contenu pour le bouton flottant « Verrouiller » (VaultGate) :
+              il ne masque plus les actions « ⋯ » du dernier document d'une liste. */}
+          <div aria-hidden="true" className="h-16 lg:h-14" />
+        </>
+      ) : null}
     </VaultGate>
   )
 }

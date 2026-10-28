@@ -10,6 +10,7 @@ import { useCallback, useEffect, useSyncExternalStore } from 'react'
 import { DataError, LIVE, db, requireUserId, toDataError } from '@/lib/data/core'
 import { libT } from '@/lib/i18n/runtime'
 import { PROGRESS_STATUSES, type ProgressRefType, type ProgressStatus } from './types'
+import { parcoursElementStatus, parcoursElementWrites, persistOrResync } from './progress-rules'
 
 const STORAGE_KEY = 'lp_guide_progress_v2'
 type ProgressMap = Record<string, ProgressStatus>
@@ -86,6 +87,23 @@ function load(territoire: string): Promise<void> {
   return p
 }
 
+/**
+ * Recharge la progression d'un territoire depuis la base et REMPLACE ses clés locales
+ * (les valeurs optimistes non confirmées disparaissent, celles déjà enregistrées restent).
+ * En démonstration (localStorage), l'état local est la source : rien à recharger.
+ */
+async function resync(territoire: string): Promise<void> {
+  if (!LIVE) return
+  const { data, error } = await db().from('guide_progress').select('ref_type, ref_slug, element, statut').eq('territoire', territoire)
+  if (error) throw error
+  const prefix = `${territoire}:`
+  const next: ProgressMap = {}
+  for (const [k, v] of Object.entries(state)) if (!k.startsWith(prefix)) next[k] = v
+  for (const r of (data ?? []) as Row[]) if (isStatus(r.statut)) next[keyOf(territoire, r.ref_type, r.ref_slug, r.element)] = r.statut
+  state = next
+  emit()
+}
+
 async function persist(territoire: string, refType: ProgressRefType, slug: string, element: string, statut: ProgressStatus) {
   if (!LIVE) { writeLocal(state); return }
   try {
@@ -145,9 +163,52 @@ export function useGuideProgress(territoire: string) {
     }
   }, [territoire])
 
+  /** Statut effectif d'une étape de parcours (partagé avec sa fiche liée, cf. progress-rules). */
+  const getParcoursElement = useCallback(
+    (parcoursSlug: string, element: { id: string; fiche?: string }): ProgressStatus =>
+      parcoursElementStatus((r, s, e) => map[keyOf(territoire, r, s, e)], parcoursSlug, element),
+    [map, territoire],
+  )
+
+  /**
+   * Change une étape de parcours ET sa fiche liée (même démarche). Écritures successives, fiche
+   * d'abord (source de vérité) ; en cas d'échec, l'état est rechargé depuis la base (une écriture
+   * déjà acceptée reste affichée) plutôt que remis localement à sa valeur d'avant.
+   */
+  const setParcoursElement = useCallback(async (parcoursSlug: string, element: { id: string; fiche?: string }, statut: ProgressStatus) => {
+    if (!status.get(territoire)?.ready) throw new DataError(libT('shared.guide')('notReady'), 'not_ready')
+    const writes = parcoursElementWrites(parcoursSlug, element)
+    const before = { ...state }
+    const next = { ...state }
+    for (const w of writes) next[keyOf(territoire, w.refType, w.slug, w.element)] = statut
+    state = next
+    emit()
+    await persistOrResync(
+      writes,
+      (w) => persist(territoire, w.refType, w.slug, w.element, statut),
+      async () => {
+        try {
+          await resync(territoire)
+        } catch (e) {
+          // Base injoignable : état réel inconnu. Retour arrière local en repli, et progression
+          // marquée « non chargée » avec l'erreur (bouton Réessayer, qui relit la base).
+          const rollback = { ...state }
+          for (const w of writes) {
+            const k = keyOf(territoire, w.refType, w.slug, w.element)
+            if (k in before) rollback[k] = before[k]
+            else delete rollback[k]
+          }
+          state = rollback
+          loads.delete(territoire)
+          setStatus(territoire, { ready: false, error: toDataError(e, 'guide_progress.select', libT('shared.guide')('loadFailed')).message })
+        }
+      },
+    )
+  }, [territoire])
+
   const retry = useCallback(() => { void load(territoire) }, [territoire])
 
-  return { get, set, ready: st.ready, error: st.error, retry }
+  return { get, set, getParcoursElement, setParcoursElement, ready: st.ready, error: st.error, retry }
 }
 
 /** Compte des éléments terminés / en cours parmi une liste. */

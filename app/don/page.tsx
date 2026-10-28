@@ -4,6 +4,7 @@ import { Heart, ArrowLeft } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { SiteShell } from '@/components/site/SiteShell'
 import { pageMetadata } from '@/lib/seo/metadata'
+import { localePath } from '@/lib/i18n/routing'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.donate')
@@ -33,7 +34,7 @@ export default async function DonPage() {
         ) : (
           <p className="mt-6 rounded-lg bg-leaf-50 px-4 py-3 text-sm font-medium text-leaf-700">{t('soon')}</p>
         )}
-        <Link href="/" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-night-900 hover:text-leaf-500">
+        <Link href={localePath(await getLocale(), '/')} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-night-900 hover:text-leaf-500">
           <ArrowLeft className="h-4 w-4" aria-hidden /> {t('backHome')}
         </Link>
       </div>

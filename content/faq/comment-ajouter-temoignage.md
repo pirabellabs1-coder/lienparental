@@ -14,7 +14,7 @@ Les étapes :
 4. Choisissez un modèle (grand-parent, enseignant, voisin, ami, professionnel) ou laissez vide pour un témoignage libre.
 5. Envoyez : votre proche reçoit un lien sécurisé par e-mail.
 
-De son côté, votre proche clique sur le lien, répond à quelques questions guidées (contexte, faits observés, dates si possible), puis valide. Lien Parental génère automatiquement une attestation au format conforme (identité du témoin, mention manuscrite requise, pièce d'identité jointe).
+De son côté, votre proche clique sur le lien, répond à quelques questions guidées (contexte, faits observés, dates si possible), puis valide. Lien Parental recueille les éléments de l'attestation (identité du témoin, lien avec les parties, mention légale, copie de sa pièce d'identité, signature à l'écran) et lui propose une version pré-remplie à imprimer et signer à la main si le tribunal l'exige.
 
 Un exemple concret : vous demandez à l'enseignante de votre enfant d'attester qu'elle vous voit systématiquement aux réunions parents-professeurs. Vous recevez son témoignage daté et signé en moins de 48 heures.
 

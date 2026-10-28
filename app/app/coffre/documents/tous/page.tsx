@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Suspense, useMemo, useState } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ListFilter, Search } from 'lucide-react'
@@ -26,7 +26,14 @@ function AllDocuments() {
   const { categories } = useCategories()
   const catName = (id: string) => categories.find((c) => c.id === id)?.name
   const { announce, node } = useAnnounce()
-  const { openActions, sheet } = useDocActions(announce)
+  const { openActions, sheet } = useDocActions(announce, { onRemoved: refresh })
+  const ta = useTranslations('vault.docActions')
+  // Retour de « Supprimer le document » : confirmation de la mise à la corbeille.
+  const trashed = params.get('corbeille') === '1'
+  useEffect(() => {
+    if (trashed) announce(ta('movedToTrashShort'))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trashed])
 
   const [q, setQ] = useState(params.get('q') ?? '')
   const [sort, setSort] = useState<Sort>('recent')

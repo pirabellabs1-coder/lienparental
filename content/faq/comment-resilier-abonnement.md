@@ -8,8 +8,8 @@ La résiliation se fait en deux appuis, sans justification.
 
 Les étapes :
 
-1. Ouvrez Lien Parental et allez dans "Réglages".
-2. Appuyez sur "Abonnement".
+1. Ouvrez Lien Parental et allez dans "Profil".
+2. Appuyez sur "Mon abonnement".
 3. Choisissez "Résilier l'abonnement".
 4. Confirmez.
 

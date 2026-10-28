@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { Check, UserPlus, UserRound } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import type { Child } from '@/lib/mock-data'
+import { useChildLabels } from '@/components/enfants/childLabels'
 
 type Props = {
   items: Child[]
@@ -16,6 +17,8 @@ type Props = {
 // M03 — Enfant actif : avatar, nom, âge • classe | « Changer d'enfant ».
 export function ActiveChildCard({ items, activeId, onChange }: Props) {
   const t = useTranslations('dash')
+  // Mêmes libellés que « Mes enfants » : âge calculé depuis la date de naissance, classe traduite.
+  const labels = useChildLabels()
   const [open, setOpen] = useState(false)
   const listId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
@@ -52,11 +55,11 @@ export function ActiveChildCard({ items, activeId, onChange }: Props) {
 
   const canSwitch = items.length > 1
   const switchClass =
-    'flex min-h-[44px] shrink-0 items-center gap-2.5 rounded-lg pl-1 pr-1 text-left text-[13px] font-semibold leading-tight text-leaf-600 hover:text-leaf-700'
+    'flex min-h-[44px] max-w-[9rem] shrink items-center gap-2.5 rounded-lg pl-1 pr-1 text-left text-[13px] font-semibold leading-tight text-leaf-600 hover:text-leaf-700 [overflow-wrap:anywhere]'
 
   return (
     <div ref={rootRef} className="relative rounded-xl2 border border-night-100 bg-white shadow-soft">
-      <div className="flex items-center gap-3.5 px-3.5 py-3">
+      <div className="flex flex-wrap items-center gap-x-3.5 gap-y-1 px-3.5 py-3">
         <span className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-full bg-leaf-50">
           {active.photoUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -66,17 +69,24 @@ export function ActiveChildCard({ items, activeId, onChange }: Props) {
           )}
         </span>
 
-        <div className="min-w-0 flex-1">
+        <div className="min-w-[7.5rem] flex-1">
           <p className="sr-only">{t('activeChildSr')}</p>
-          <p className="truncate text-[16px] font-bold text-night-900">{active.prenom}</p>
-          <p className="mt-0.5 truncate text-[12.5px] text-night-700">
-            {t('ageLabel', { age: active.age })} <span aria-hidden="true" className="mx-1">•</span>
-            <span className="sr-only">, </span>
-            {active.classe}
+          {/* Retour à la ligne plutôt que troncature : prénom, âge et classe restent lisibles en taille de texte « Grande ». */}
+          <p className="break-words text-[16px] font-bold leading-snug text-night-900">{active.prenom}</p>
+          <p className="mt-0.5 break-words text-[12.5px] leading-snug text-night-700">
+            {labels.ageLabel(active)}
+            {active.classe && (
+              <>
+                <span aria-hidden="true" className="mx-1">•</span>
+                <span className="sr-only">, </span>
+                {labels.classLabel(active.classe)}
+              </>
+            )}
           </p>
         </div>
 
-        <span aria-hidden="true" className="h-11 w-px shrink-0 bg-night-100" />
+        {/* Séparateur seulement quand tout tient sur une ligne (sinon le bouton passe dessous). */}
+        <span aria-hidden="true" className="hidden h-11 w-px shrink-0 bg-night-100 sm:block [html[data-text-size=grande]_&]:hidden" />
 
         {canSwitch ? (
           <button
@@ -87,12 +97,12 @@ export function ActiveChildCard({ items, activeId, onChange }: Props) {
             className={switchClass}
           >
             <UserPlus className="h-6 w-6 shrink-0" strokeWidth={1.8} aria-hidden="true" />
-            <span>{t('switchChild')}</span>
+            <span className="min-w-0">{t('switchChild')}</span>
           </button>
         ) : (
           <Link href="/app/enfants" className={switchClass}>
             <UserPlus className="h-6 w-6 shrink-0" strokeWidth={1.8} aria-hidden="true" />
-            <span>{t('switchChild')}</span>
+            <span className="min-w-0">{t('switchChild')}</span>
           </Link>
         )}
       </div>
@@ -120,9 +130,9 @@ export function ActiveChildCard({ items, activeId, onChange }: Props) {
                     <UserRound className="h-4 w-4 fill-leaf-500 text-leaf-500" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[14px] font-semibold text-night-900">{c.prenom}</span>
-                    <span className="block truncate text-[12px] text-night-600">
-                      {t('ageLabel', { age: c.age })} • {c.classe}
+                    <span className="block break-words text-[14px] font-semibold text-night-900">{c.prenom}</span>
+                    <span className="block break-words text-[12px] text-night-600">
+                      {labels.ageLabel(c)}{c.classe ? ` • ${labels.classLabel(c.classe)}` : ''}
                     </span>
                   </span>
                   {selected && <Check className="h-4 w-4 text-leaf-500" aria-hidden="true" />}

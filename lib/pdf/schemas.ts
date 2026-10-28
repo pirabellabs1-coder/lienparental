@@ -163,6 +163,10 @@ export const temoignageCerfaSchema = z.object({
   faitsConstates: z.string().min(1),
   lieu: z.string().min(1),
   date: z.string().min(1),
+  /** Signature tracée à l'écran par le témoin (PNG en data URL), facultative. */
+  signature: z.string().max(400_000).regex(/^data:image\/png;base64,[A-Za-z0-9+/=]+$/).optional(),
+  /** Copie de la pièce d'identité du témoin reçue (jointe séparément au dossier). */
+  pieceIdentiteJointe: z.boolean().optional(),
 });
 export type TemoignageCerfaProps = z.infer<typeof temoignageCerfaSchema>;
 

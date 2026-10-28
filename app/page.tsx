@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { SiteShell } from '@/components/site/SiteShell'
+import { CLIENT_NS_SITE_HOME } from '@/lib/i18n/client-namespaces'
 import { HomeStyles } from '@/components/accueil/HomeStyles'
 import { Hero } from '@/components/accueil/Hero'
 import { ModuleBar } from '@/components/accueil/ModuleBar'
@@ -65,7 +66,7 @@ export default async function HomePage() {
   const ts = await getTranslations('seo')
   // Ordre de la maquette du client ; en-tête et pied de page partagés avec les autres pages publiques (SiteShell).
   return (
-    <SiteShell className="home">
+    <SiteShell className="home" extraNamespaces={CLIENT_NS_SITE_HOME}>
       <HomeStyles />
       <JsonLd data={graph(webApplication({
         description: tm('homeDescription'),

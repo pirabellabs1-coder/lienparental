@@ -54,8 +54,8 @@ export function UpcomingEvents({ events }: { events: AppEvent[] }) {
             >
               <Icon className={`h-6 w-6 shrink-0 ${tone}`} strokeWidth={1.8} aria-hidden="true" />
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[13.5px] font-bold text-night-900">{e.title}</p>
-                <p className="mt-0.5 truncate text-[12px] text-night-700">
+                <p className="line-clamp-2 break-words text-[13.5px] font-bold text-night-900">{e.title}</p>
+                <p className="mt-0.5 break-words text-[12px] text-night-700">
                   {weekdayDate(e.date)}
                   {e.timeLabel && (
                     <>

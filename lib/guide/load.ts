@@ -10,6 +10,14 @@ import {
 import { toContentLocale, type ContentLocale, type Localized } from '@/lib/contenus/i18n'
 import { localizeFromFiles, localizeTerritoire } from '@/lib/contenus/i18n-files'
 import type { ContentKind, ContentData } from '@/lib/contenus/types'
+import { territoryDisplayName } from './territory-name'
+
+/** Territoire dans la langue demandée, nom compris (repli sur le catalogue : « French Guiana »). */
+function localizeTerritoireNamed(t: Territoire, locale: ContentLocale): Territoire {
+  if (locale === 'fr') return t
+  const l = localizeTerritoire(t, locale)
+  return { ...l, nom: territoryDisplayName(t.code, t.nom, l.nom, locale) }
+}
 
 /**
  * Chargement du Guide depuis `content/guide/<territoire>/` (lecture serveur, validation zod).
@@ -95,7 +103,7 @@ function localizeList<K extends ContentKind>(kind: K, items: ContentData[K][], l
 /** Territoires présents dans `content/guide/` (un dossier = un territoire), noms traduits si `locale`. */
 export function listTerritoires(locale: ContentLocale = 'fr'): Territoire[] {
   const all = listTerritoiresFr()
-  return locale === 'fr' ? all : all.map((t) => localizeTerritoire(t, locale))
+  return locale === 'fr' ? all : all.map((t) => localizeTerritoireNamed(t, locale))
 }
 
 const listTerritoiresFr = cache((): Territoire[] => {
@@ -195,13 +203,31 @@ function pruneParcours<P extends Parcours>(parcours: P[], fiches: Fiche[]): P[] 
     .sort((a, b) => a.ordre - b.ordre)
 }
 
+/**
+ * Offres de démonstration restées en français alors qu'une traduction existe dans
+ * content/i18n/<l>/guide/<territoire>/partenaires.demo.json : la démo leur attribue un identifiant
+ * stable (UUID) différent de l'`id` du fichier, si bien que la recherche de traduction par `id`
+ * échouait. On rapproche donc par contenu français (nom + catégorie) et on garde l'identifiant démo.
+ */
+function withFilePartnerTranslations(code: string, list: Localized<Partenaire>[], locale: ContentLocale): Localized<Partenaire>[] {
+  if (locale === 'fr' || !list.some((p) => p.lang === 'fr')) return list
+  const fr = loadTerritory(code)?.partenairesDemo ?? []
+  const translated = getPartenairesDemo(code, locale)
+  return list.map((p) => {
+    if (p.lang !== 'fr') return p
+    const i = fr.findIndex((f) => f.nom === p.nom && f.categorie === p.categorie)
+    const tr = i >= 0 ? translated[i] : undefined
+    return tr && tr.lang !== 'fr' ? { ...tr, id: p.id, demo: true, lang: tr.lang } : p
+  })
+}
+
 // Clé de mémoïsation React : (territoire, langue) ; une page EN ne reçoit jamais le Guide FR d'une autre.
 const loadGuideCached = cache(async (wanted: string | undefined, locale: ContentLocale): Promise<GuideSnapshot> => {
   const { listPublished, listPublicTerritoires, CONTENT_LIVE } = await import('@/lib/contenus/public')
   try {
     const all = (await listPublicTerritoires())
       .map((t) => territoireSchema.safeParse(t))
-      .flatMap((r) => (r.success ? [localizeTerritoire(r.data, locale)] : []))
+      .flatMap((r) => (r.success ? [localizeTerritoireNamed(r.data, locale)] : []))
       .sort((a, b) => a.ordre - b.ordre || a.nom.localeCompare(b.nom, 'fr'))
     const dispo = all.filter((t) => t.disponible)
     const territoire = dispo.find((t) => t.code === wanted) ?? dispo.find((t) => t.code === DEFAULT_TERRITOIRE) ?? dispo[0]
@@ -229,7 +255,7 @@ const loadGuideCached = cache(async (wanted: string | undefined, locale: Content
       territoires: all,
       fiches: ficheList,
       parcours: pruneParcours(parcours.map((r) => withLang(r.data, r.lang)), ficheList),
-      partenairesDemo: partenaires.map((r) => ({ ...withLang(r.data, r.lang), demo: true })),
+      partenairesDemo: withFilePartnerTranslations(territoire.code, partenaires.map((r) => ({ ...withLang(r.data, r.lang), demo: true })), locale),
       source: CONTENT_LIVE ? 'base' : 'demo',
     }
   } catch (e) {

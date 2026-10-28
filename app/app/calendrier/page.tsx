@@ -9,6 +9,8 @@ import { useClientNow } from '@/components/calendrier/useClientNow'
 import { useChildNames } from '@/components/calendrier/useChildNames'
 import { useCalFormat } from '@/components/calendrier/useCalFormat'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
+import { Fab } from '@/components/journal/Fab'
+import { dateToDayKey } from '@/lib/tz'
 import { addMonthsDay, eventsOnDay, startOfMonthDay, todayDay } from '@/lib/calendrier'
 import { useEvents } from '@/lib/data/calendar'
 
@@ -16,6 +18,7 @@ import { useEvents } from '@/lib/data/calendar'
 // Supabase : calendar_events (RLS user_id = auth.uid()) via lib/data/calendar ; démo : EVENTS.
 export default function CalendrierPage() {
   const t = useTranslations('calendar.common')
+  const tWeek = useTranslations('calendar.week')
   const f = useCalFormat()
   const now = useClientNow()
   // Jours du calendrier = jours de DEFAULT_TZ (midi UTC), pas ceux du navigateur.
@@ -69,6 +72,9 @@ export default function CalendrierPage() {
           </section>
         </div>
       )}
+
+      {/* Ajout depuis la vue Mois (vue par défaut) : date pré-remplie avec le jour sélectionné. */}
+      <Fab href={selected ? `/app/calendrier/nouveau?date=${dateToDayKey(selected)}` : '/app/calendrier/nouveau'} label={tWeek('addEvent')} />
     </>
   )
 }

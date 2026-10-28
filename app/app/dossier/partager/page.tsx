@@ -61,8 +61,11 @@ export default function PartagerPage() {
         setPreset(sel.preset)
         setPeriod(sel.period)
         setDocumentIds(sel.documentIds.filter((id) => src.documents.some((d) => d.id === id)))
+        // Sections choisies sur « Mon dossier » : l'export des messages coché y était perdu (défaut : non).
+        if (sel.journal !== undefined) setJournal(sel.journal)
+        if (sel.messages !== undefined) setMessages(sel.messages && !!src.conversation)
       }
-      setTestimonyIds(src.testimonies.map((tm) => tm.id))
+      setTestimonyIds(sel?.testimonies === false ? [] : src.testimonies.map((tm) => tm.id))
     } catch {
       setLoadError(true)
     }

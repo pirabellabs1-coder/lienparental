@@ -51,7 +51,16 @@ const PAGES: [string, string, string][] = [
   ['Conditions générales d’utilisation', '/legal/cgu', ''],
 ]
 
-const pagesSection = () => ['## Pages principales', '', ...PAGES.map(([t, p, d]) => `- [${t}](${abs(p)})${d ? ` : ${d}` : ''}`), ''].join('\n')
+/** Versions traduites du site public (URL par langue, lib/i18n/routing.ts). */
+const LANGUAGES: [string, string, string][] = [
+  ['English', '/en', 'version anglaise du site public (accueil, Guide, aide, blog)'],
+  ['Português', '/pt', 'version portugaise (Brésil) du site public'],
+]
+
+const pagesSection = () => [
+  '## Pages principales', '', ...PAGES.map(([t, p, d]) => `- [${t}](${abs(p)})${d ? ` : ${d}` : ''}`), '',
+  '## Autres langues', '', ...LANGUAGES.map(([t, p, d]) => `- [${t}](${abs(p)}) : ${d}`), '',
+].join('\n')
 
 async function safeGuide(): Promise<GuideSnapshot | null> {
   try {

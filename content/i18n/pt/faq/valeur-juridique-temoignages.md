@@ -1,29 +1,28 @@
 ---
 title: "Os depoimentos têm valor jurídico?"
 category: "Depoimentos"
-updatedAt: "25 de outubro de 2026"
+updatedAt: "28 de outubro de 2026"
 ---
 
-Sim, desde que respeitem a forma prevista pela lei francesa (artigo 202 do Code de procédure civile, o Código de Processo Civil francês).
+Um depoimento escrito pode ser apresentado ao juiz de família se respeitar a forma prevista pela lei francesa (artigo 202 do Code de procédure civile, o Código de Processo Civil francês).
 
-O Lien Parental gera declarações que incluem os elementos exigidos:
+O percurso da testemunha no Lien Parental reúne os elementos exigidos por esse artigo:
 
 - Identidade completa da testemunha (sobrenome, nomes, data e local de nascimento, endereço, profissão).
-- Eventual vínculo de parentesco ou de interesse com você.
-- Menção indicando que a declaração se destina a ser apresentada em juízo.
-- Menção de ciência das sanções penais em caso de declaração falsa.
-- Documento de identidade da testemunha anexado.
-- Menção manuscrita e assinatura.
+- Eventual vínculo de parentesco, de parentesco por afinidade, de subordinação, de colaboração ou de interesse com as partes.
+- Declaração, marcada pela testemunha, de que o atestado é feito para ser apresentado à Justiça e de que um falso atestado a expõe a sanções penais.
+- Cópia de um documento de identidade oficial da testemunha, armazenada de forma privada.
+- Local e data, e assinatura desenhada na tela.
 
-O Lien Parental guia a pessoa próxima passo a passo para que nada falte.
+O atestado é redigido em francês, para o tribunal. Se a pessoa usa o aplicativo em inglês ou em português, uma tradução para leitura é exibida para que ela saiba o que está certificando.
 
-Um exemplo concreto: uma declaração incompleta (sem documento de identidade, sem menção manuscrita) pode ser descartada pelo juiz. Com o modelo guiado do Lien Parental, esses esquecimentos são evitados.
+Importante: a lei prevê que o atestado seja escrito, datado e assinado de próprio punho pelo autor. A assinatura desenhada na tela não substitui uma assinatura de próprio punho se o tribunal a exigir. A pessoa pode então baixar o atestado pré-preenchido, imprimi-lo, datá-lo e assiná-lo à mão (com a menção "Lu et approuvé", lido e aprovado) e entregá-lo a você com a cópia do documento de identidade. O formulário oficial Cerfa nº 11527*03 também pode ser usado.
 
 Duas ressalvas importantes:
 
 - Ter um depoimento na forma correta não garante que ele será considerado convincente. O juiz avalia livremente o peso de cada elemento do dossiê.
 - Um depoimento falso ou de favor expõe o autor a uma pena prevista no artigo 441-7 do Code pénal (o Código Penal francês).
 
-Para saber quais depoimentos apresentar e em que ordem, consulte o seu advogado.
+Para saber quais depoimentos apresentar e em que forma, consulte o seu advogado.
 
 Este artigo foi útil?

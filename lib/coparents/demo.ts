@@ -3,6 +3,7 @@
 // invitation (Rose, proche) est en attente. Aperçus : ?apercu=demande, ?apercu=fusion,
 // ?apercu=gardien (fiche d'Emma dont je suis parent NON titulaire, avec un proche que j'ai invité).
 import { mockChildren } from '@/lib/mock-data'
+import { libT } from '@/lib/i18n/runtime'
 import { DEMO_ME, DEMO_OTHER } from '@/components/messages/seed'
 import type {
   FamilyChild, FamilyOverview, GuardianRole, InvitationPreview, IssuedInvitation, LinkedParent,
@@ -145,10 +146,10 @@ export async function demoCreateInvitation(email: string, role: GuardianRole, ch
   await pause()
   const s = read()
   if (s.sent.some((i) => i.email === email && i.status === 'pending')) {
-    throw new Error('Une invitation est déjà en attente pour cette adresse : renvoyez-la ou annulez-la.')
+    throw new Error(libT('auth.family')('pendingExists'))
   }
   if (email === 'julie.premium@demo.lienparental.fr' || email === 'julie.gratuit@demo.lienparental.fr') {
-    throw new Error('Vous ne pouvez pas vous inviter vous-même.')
+    throw new Error(libT('auth.family')('selfInvite'))
   }
   const token = hex(32)
   const inv: SentInvitation = {
@@ -171,8 +172,8 @@ export async function demoResend(id: string): Promise<IssuedInvitation> {
   await pause()
   const s = read()
   const inv = s.sent.find((i) => i.id === id)
-  if (!inv) throw new Error('Invitation introuvable ou déjà traitée.')
-  if (Date.now() - Date.parse(inv.lastSentAt) < 60_000) throw new Error('Patientez une minute avant de renvoyer l’invitation.')
+  if (!inv) throw new Error(libT('auth.family')('notFound'))
+  if (Date.now() - Date.parse(inv.lastSentAt) < 60_000) throw new Error(libT('auth.family')('resendWait'))
   inv.sentCount += 1
   inv.lastSentAt = iso(0)
   inv.expiresAt = iso(7)
@@ -208,7 +209,7 @@ export async function demoAccept(id: string) {
   await pause()
   const s = read()
   const inv = s.received.find((r) => r.id === id)
-  if (!inv) throw new Error('Invitation invalide ou expirée.')
+  if (!inv) throw new Error(libT('shared.family')('inviteInvalid'))
   s.received = s.received.filter((r) => r.id !== id)
   for (const k of inv.children) {
     if (s.children.some((c) => c.id === k.id)) continue

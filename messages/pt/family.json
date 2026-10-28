@@ -235,6 +235,11 @@
         "kindJournal": "Diário",
         "historyHint": "Adicione uma nota de Saúde no <link>Diário</link> para completar o histórico.",
         "add": "Adicionar"
+      },
+      "healthPrivacy": {
+        "onlyYou": "Dados de saúde criptografados em trânsito e em repouso, visíveis apenas para você.",
+        "shared": "Dados de saúde criptografados em trânsito e em repouso, visíveis para você e para {names} ({count, plural, one {pai ou mãe vinculado(a) a esta ficha} other {pais vinculados a esta ficha}}). Os familiares próximos não têm acesso.",
+        "generic": "Dados de saúde criptografados em trânsito e em repouso, visíveis para você e para os pais vinculados a esta ficha, nunca para os familiares próximos."
       }
     },
     "journal": {
@@ -1159,7 +1164,15 @@
         "messagesTitle": "Mensagens entre os pais",
         "messagesNote": "Mensagens com data e hora de envio, que não podem ser editadas nem excluídas.",
         "attachment": "Anexo: {name}",
-        "items": "itens"
+        "items": "itens",
+        "journalTypes": {
+          "visite": "Visita",
+          "appel": "Ligação",
+          "message": "Mensagem",
+          "sante": "Saúde",
+          "depense": "Despesa / Pagamento",
+          "autre": "Outro"
+        }
       }
     },
     "common": {

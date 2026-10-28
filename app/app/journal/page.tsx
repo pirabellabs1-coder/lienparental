@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { use, useMemo } from 'react'
+import { use, useEffect, useMemo, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { CalendarDays, ChevronRight, NotebookPen, Plus } from 'lucide-react'
+import { CalendarDays, CheckCircle2, ChevronRight, NotebookPen, Plus } from 'lucide-react'
 import { EmptyState, ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { JOURNAL_TYPES } from '@/components/journal/journalTypes'
 import { JournalFilters } from '@/components/journal/JournalFilters'
@@ -31,6 +32,21 @@ export default function JournalPage({ searchParams }: { searchParams: Promise<Se
   const filter = parseJournalFilter(sp.filtre)
   const moisParam = Array.isArray(sp.mois) ? sp.mois[0] : sp.mois
   const type = FILTER_TYPE[filter]
+  const tSaved = useTranslations('family.journal.entryForm')
+  const router = useRouter()
+  const pathname = usePathname()
+  // Confirmation après un ajout (`?ok=depense|evenement`, posé par /app/journal/nouveau) :
+  // affichée une fois, puis le paramètre est retiré de l'URL (pas de message à chaque rechargement).
+  const okParam = Array.isArray(sp.ok) ? sp.ok[0] : sp.ok
+  const [savedKind, setSavedKind] = useState<'depense' | 'evenement' | null>(null)
+  useEffect(() => {
+    if (okParam !== 'depense' && okParam !== 'evenement') return
+    setSavedKind(okParam)
+    const rest = new URLSearchParams()
+    for (const [k, v] of Object.entries(sp)) if (k !== 'ok' && typeof v === 'string') rest.set(k, v)
+    const qs = rest.toString()
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
+  }, [okParam, sp, pathname, router])
 
   const { data, loading, error, refresh } = useJournalList()
   const { options: childOptions, loading: childrenLoading } = useChildOptions()
@@ -57,6 +73,13 @@ export default function JournalPage({ searchParams }: { searchParams: Promise<Se
           <Plus aria-hidden="true" className="h-5 w-5" />
         </Link>
       </header>
+
+      {savedKind && (
+        <p role="status" className="mt-3 flex items-center gap-2 rounded-xl bg-leaf-50 px-3.5 py-2.5 text-[13.5px] font-semibold text-leaf-800 ring-1 ring-leaf-200">
+          <CheckCircle2 aria-hidden="true" className="h-[18px] w-[18px] shrink-0 text-leaf-600" />
+          {savedKind === 'depense' ? tSaved('doneExpenseHeading') : tSaved('doneEventHeading')}
+        </p>
+      )}
 
       <Link
         href={filter === 'tous' ? '/app/journal/chronologie' : `/app/journal/chronologie?filtre=${filter}`}

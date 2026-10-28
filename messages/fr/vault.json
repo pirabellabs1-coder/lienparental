@@ -187,7 +187,9 @@
       "previewFailed": "Aperçu impossible",
       "view": "Voir le détail",
       "toFolder": "Ranger dans un dossier",
-      "changeCategory": "Changer de catégorie"
+      "changeCategory": "Changer de catégorie",
+      "movedToTrash": "« {name} » a été placé dans la corbeille. Vous pouvez le restaurer pendant 30 jours.",
+      "movedToTrashShort": "Document placé dans la corbeille. Vous pouvez le restaurer pendant 30 jours."
     },
     "lock": {
       "pinPad": {

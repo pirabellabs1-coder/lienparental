@@ -8,8 +8,8 @@ Cancelling takes two taps, with no justification needed.
 
 The steps:
 
-1. Open Lien Parental and go to "Settings".
-2. Tap "Subscription".
+1. Open Lien Parental and go to "Profile".
+2. Tap "My subscription".
 3. Choose "Cancel subscription".
 4. Confirm.
 

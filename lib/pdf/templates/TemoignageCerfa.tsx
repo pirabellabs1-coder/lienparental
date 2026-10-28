@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document, Page, Text, View } from '@react-pdf/renderer';
+import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
 import { colors, spacing, styles } from '../theme';
 import { Footer, Header, Row, Section } from '../primitives';
 import { formatDateFR, formatDateShortFR } from '../format';
@@ -17,6 +17,8 @@ export function TemoignageCerfa(props: TemoignageCerfaProps) {
     faitsConstates,
     lieu,
     date,
+    signature,
+    pieceIdentiteJointe,
   } = props;
 
   return (
@@ -90,8 +92,9 @@ export function TemoignageCerfa(props: TemoignageCerfaProps) {
             Fait à {lieu}, le {formatDateFR(date)}.
           </Text>
           <Text style={{ marginTop: spacing.sm, fontStyle: 'italic', color: colors.muted }}>
-            La présente attestation doit être accompagnée d'une copie d'une
-            pièce d'identité officielle du témoin.
+            {pieceIdentiteJointe
+              ? "Pièce jointe : copie d'une pièce d'identité officielle du témoin comportant sa signature."
+              : "La présente attestation doit être accompagnée d'une copie d'une pièce d'identité officielle du témoin comportant sa signature."}
           </Text>
         </View>
 
@@ -99,8 +102,14 @@ export function TemoignageCerfa(props: TemoignageCerfaProps) {
           <Text style={{ fontWeight: 700 }}>
             {temoin.prenom} {temoin.nom}
           </Text>
+          {signature ? (
+            <View style={{ marginTop: spacing.sm }}>
+              <Image src={signature} style={{ width: 200, height: 66, objectFit: 'contain' }} />
+              <Text style={styles.small}>(Signature tracée à l'écran par le témoin)</Text>
+            </View>
+          ) : null}
           <Text style={styles.small}>
-            (Signature manuscrite précédée de la mention « Lu et approuvé »)
+            (Signature manuscrite précédée de la mention « Lu et approuvé », si le tribunal l'exige)
           </Text>
         </View>
 

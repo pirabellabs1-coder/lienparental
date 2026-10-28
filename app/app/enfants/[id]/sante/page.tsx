@@ -12,6 +12,7 @@ import { btn } from '@/components/onboarding/styles'
 import { BackButton, EnfantsHeader } from '@/components/enfants/EnfantsHeader'
 import { useChild } from '@/components/enfants/useChild'
 import { HealthBadge, TreatmentForm, VaccinationForm } from '@/components/enfants/HealthForms'
+import { HealthPrivacyNote } from '@/components/enfants/HealthPrivacyNote'
 import { useClientNow } from '@/components/calendrier/useClientNow'
 import { useCategories, useVaultDocs } from '@/components/coffre/store'
 import { useVaultLockState } from '@/components/vault-lock/useVaultLockState'
@@ -95,7 +96,7 @@ function HealthSpace({ child, back }: { child: Child; back: ReactNode }) {
 
       <p className="mt-2 flex items-start gap-2 text-[12.5px] leading-relaxed text-night-600">
         <Lock aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" strokeWidth={1.8} />
-        {t('privacy')}
+        <HealthPrivacyNote childId={child.id} />
       </p>
 
       <div className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:max-w-2xl">

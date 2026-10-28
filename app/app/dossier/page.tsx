@@ -157,7 +157,8 @@ export default function DossierPage() {
 
   const goShare = () => {
     if (!period) return
-    saveSelection({ childId, preset, period, documentIds })
+    // Les sections cochées (journal, témoignages, messages) sont reprises par le partage avocat.
+    saveSelection({ childId, preset, period, documentIds, journal: sections.journal, testimonies: sections.temoignages, messages: sections.messages })
     router.push('/app/dossier/partager')
   }
 

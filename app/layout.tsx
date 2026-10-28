@@ -5,6 +5,8 @@ import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import './globals.css'
 import { DisplayPrefs } from '@/components/a11y/DisplayPrefs'
 import { isLocale, LOCALE_META } from '@/lib/i18n/config'
+import { CLIENT_NS_ROOT } from '@/lib/i18n/client-namespaces'
+import { pick } from '@/lib/i18n/pick'
 import { SITE, SITE_NAME } from '@/lib/seo/site'
 import { defaultOgImage, ogLocale } from '@/lib/seo/metadata'
 
@@ -53,8 +55,10 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Locale résolue par next-intl (cookie lp_locale, repli français) : pilote <html lang>,
   // le format des dates/nombres et les messages fournis aux composants client.
+  // Seuls les namespaces globaux sont sérialisés ici ; chaque zone (site, parcours, app, admin…)
+  // fournit les siens via ScopedIntlProvider (lib/i18n/client-namespaces.ts, audit C3).
   const locale = await getLocale()
-  const messages = await getMessages()
+  const messages = pick(await getMessages(), CLIENT_NS_ROOT)
   const htmlLang = isLocale(locale) ? LOCALE_META[locale].htmlLang : 'fr'
 
   return (

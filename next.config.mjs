@@ -56,9 +56,12 @@ const nextConfig = {
           { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
         ],
       },
+      // Micro autorisé pour l'origine du site uniquement, sur TOUTE l'app connectée (« /app/:path* » couvre
+      // aussi « /app ») : la navigation côté client ne recharge pas la page, donc l'en-tête reçu à l'entrée
+      // vaut pour toute la session ; une liste de sous-routes rendait la dictée / les notes vocales
+      // dépendantes de la page d'arrivée. Le site public garde microphone=().
       {
-        // Notes vocales : micro autorisé pour l'origine du site uniquement, et seulement dans la messagerie.
-        source: '/app/messages/:path*',
+        source: '/app/:path*',
         headers: [{ key: 'Permissions-Policy', value: 'camera=(), microphone=(self), geolocation=(), payment=(self)' }],
       },
       ...PRIVATE_PATHS.map((source) => ({ source, headers: [NOINDEX] })),

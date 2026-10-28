@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { localePathFor } from '@/lib/i18n/routing'
 import { ArrowRight, Smartphone } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { CONTAINER } from './ui'
@@ -9,6 +10,7 @@ const STEPS = [1, 2, 3] as const
 // Bandeau horizontal de la maquette : message PWA à gauche, 3 étapes numérotées à droite.
 export async function Pwa() {
   const t = await getTranslations('pwa')
+  const lp = localePathFor(await getLocale())
   return (
     <section aria-labelledby="pwa-title" className="py-6 lg:py-8">
       <div className={CONTAINER}>
@@ -22,7 +24,7 @@ export async function Pwa() {
               <p className="mt-2 text-[15px] leading-relaxed text-night-700">
                 {t('lead')}
               </p>
-              <Link href="/installer" className="mt-2 inline-flex min-h-[44px] items-center gap-2 rounded-lg text-[15px] font-semibold text-leaf-600 hover:text-leaf-700">
+              <Link href={lp('/installer')} className="mt-2 inline-flex min-h-[44px] items-center gap-2 rounded-lg text-[15px] font-semibold text-leaf-600 hover:text-leaf-700">
                 {t('guideLink')}<ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </div>

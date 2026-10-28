@@ -45,6 +45,8 @@ export function AnalysisList({ initialItems, mode }: Props) {
           dateAt: (date, time) => tc('time.dateAt', { date, time }),
         })
       : it.dateLabel
+  // Exemples de démonstration : titre générique traduit (les titres réels restent ceux de l'utilisateur).
+  const titleOf = (it: CoachListItem) => (it.remote ? it.title : tc(`kinds.${it.kind}`))
 
   const call = async (method: 'PATCH' | 'DELETE', body: unknown): Promise<boolean> => {
     setBusy(true)
@@ -135,7 +137,7 @@ export function AnalysisList({ initialItems, mode }: Props) {
             <li key={it.id} className="flex items-center gap-3.5 rounded-xl2 border border-night-100 bg-white py-3.5 pl-4 pr-1.5 shadow-soft">
               <FileText className="h-8 w-8 shrink-0 text-night-800" strokeWidth={1.6} aria-hidden="true" />
               <Link href={hrefFor(it)} className="min-w-0 flex-1 rounded-md">
-                <p className="truncate text-[15px] font-bold text-night-900">{it.title}</p>
+                <p className="truncate text-[15px] font-bold text-night-900">{titleOf(it)}</p>
                 <p className="mt-0.5 text-[13px] text-night-600">{dateOf(it)}</p>
                 {it.responseReady && <p className="mt-0.5 text-[12px] font-bold text-leaf-600">{t('responseReady')}</p>}
                 <span className="sr-only">, {tc(`kinds.${it.kind}`)}</span>
@@ -143,7 +145,7 @@ export function AnalysisList({ initialItems, mode }: Props) {
               <button
                 type="button"
                 onClick={() => setMenuFor(it)}
-                aria-label={t('actionsFor', { title: it.title, date: dateOf(it) })}
+                aria-label={t('actionsFor', { title: titleOf(it), date: dateOf(it) })}
                 aria-haspopup="dialog"
                 className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-night-900 hover:bg-night-50"
               >
@@ -165,7 +167,7 @@ export function AnalysisList({ initialItems, mode }: Props) {
         </Link>
       </div>
 
-      <ActionSheet open={menuFor !== null} onClose={() => setMenuFor(null)} title={menuFor?.title} description={menuFor ? dateOf(menuFor) : undefined} actions={actions} />
+      <ActionSheet open={menuFor !== null} onClose={() => setMenuFor(null)} title={menuFor ? titleOf(menuFor) : undefined} description={menuFor ? dateOf(menuFor) : undefined} actions={actions} />
 
       <ConfirmDialog
         open={confirmAll}

@@ -7,6 +7,7 @@ import { contentLangAttr } from '@/lib/contenus/locale'
 import { categoryHref } from '@/lib/guide/links'
 import { GUIDE_CATEGORIES, getCategory } from '@/lib/guide/types'
 import { guidePaths } from '@/lib/seo/site'
+import { localePathFor } from '@/lib/i18n/routing'
 import { collectionJsonLd, type Crumb } from '@/lib/seo/guide-jsonld'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { CategoryIcon } from '@/components/guide/icons'
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t('category.metaTitle', { category: label, territory: r.g.territoire.nom }),
     description: t('category.metaDescription', { category: label, territory: r.g.territoire.nom, count }),
     path: guidePaths.categorie(r.g.territoire.code, r.category.key),
-    lang: r.locale,
+    locale: r.locale,
   })
 }
 
@@ -44,16 +45,17 @@ export default async function GuideCategoryPublicPage({ params }: Props) {
   const r = await resolve(params)
   if (!r) notFound()
   const { g, locale, category } = r
+  const lp = localePathFor(locale)
   const { territoire } = g
   const t = await getTranslations('public.guide')
   const label = t(`categories.${category.key}`)
   const fiches = g.fiches.filter((f) => f.categorie === category.key)
-  const path = guidePaths.categorie(territoire.code, category.key)
+  const path = lp(guidePaths.categorie(territoire.code, category.key))
 
   const crumbs: Crumb[] = [
-    { name: t('breadcrumbHome'), path: '/' },
-    { name: t('title'), path: guidePaths.index },
-    { name: territoire.nom, path: guidePaths.territoire(territoire.code) },
+    { name: t('breadcrumbHome'), path: lp('/') },
+    { name: t('title'), path: lp(guidePaths.index) },
+    { name: territoire.nom, path: lp(guidePaths.territoire(territoire.code)) },
     { name: label, path },
   ]
 
@@ -64,7 +66,7 @@ export default async function GuideCategoryPublicPage({ params }: Props) {
         title: t('category.metaTitle', { category: label, territory: territoire.nom }),
         description: t('category.metaDescription', { category: label, territory: territoire.nom, count: fiches.length }),
         lang: locale,
-        entries: fiches.map((f) => ({ name: f.titre, path: guidePaths.fiche(territoire.code, f.slug) })),
+        entries: fiches.map((f) => ({ name: f.titre, path: lp(guidePaths.fiche(territoire.code, f.slug)) })),
         crumbs,
       })} />
 
@@ -87,7 +89,7 @@ export default async function GuideCategoryPublicPage({ params }: Props) {
           <ul className="mt-8 grid gap-3 md:grid-cols-2">
             {fiches.map((f) => (
               <li key={f.slug}>
-                <FicheCard href={guidePaths.fiche(territoire.code, f.slug)} title={f.titre} summary={f.resume} lang={contentLangAttr(f.lang, locale)} />
+                <FicheCard href={lp(guidePaths.fiche(territoire.code, f.slug))} title={f.titre} summary={f.resume} lang={contentLangAttr(f.lang, locale)} />
               </li>
             ))}
           </ul>
@@ -99,7 +101,7 @@ export default async function GuideCategoryPublicPage({ params }: Props) {
             {GUIDE_CATEGORIES.filter((c) => c.key !== category.key).map((c) => (
               <li key={c.key}>
                 <Link
-                  href={guidePaths.categorie(territoire.code, c.key)}
+                  href={lp(guidePaths.categorie(territoire.code, c.key))}
                   className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full bg-white px-3.5 text-[14px] font-semibold text-night-800 ring-1 ring-[#E5E7EB] hover:bg-night-50"
                 >
                   <CategoryIcon cat={c.key} className="h-4 w-4 text-leaf-700" />

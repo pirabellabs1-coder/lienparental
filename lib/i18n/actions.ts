@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { requireAuthedUser } from '@/lib/auth/guard'
-import { isLocale, LOCALE_COOKIE } from './config'
+import { isLocale, LOCALE_AUTO_COOKIE, LOCALE_COOKIE } from './config'
 
 /**
  * Langue affichée = cookie lp_locale (lu par i18n/request.ts).
@@ -24,6 +24,9 @@ export async function setLocale(locale: string): Promise<void> {
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',
   })
+  // Choix explicite : le cookie n'est plus « posé automatiquement » (cf. decideLocaleRoute) ;
+  // une langue en|pt choisie redirige désormais les pages publiques françaises vers leur version préfixée.
+  if (store.has(LOCALE_AUTO_COOKIE)) store.delete({ name: LOCALE_AUTO_COOKIE, path: '/' })
 }
 
 /**

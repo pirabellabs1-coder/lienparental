@@ -40,7 +40,12 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
   // En modification, l'URL de pré-remplissage est ignorée : l'événement existant fait foi.
   const prefill = useMemo(() => (editId ? {} : parseCalendarPrefill(params)), [editId, params])
   const router = useRouter()
-  const { options: childOptions, loading: childrenLoading } = useChildOptions()
+  const { options: rawChildOptions, loading: childrenLoading } = useChildOptions()
+  // Libellé « Prénom (n ans) » traduit au rendu (lib/data/children est partagé).
+  const childOptions = useMemo(
+    () => rawChildOptions.map((c) => ({ ...c, label: t('common.childOption', { name: c.prenom, count: c.age }) })),
+    [rawChildOptions, t],
+  )
   const { data: existing } = useEvent(editId ?? null)
   const prefilled = useRef(false)
   const childPrefilled = useRef(false)

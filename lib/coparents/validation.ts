@@ -14,6 +14,24 @@ export const createInvitationSchema = z.object({
   childIds: z.array(uuidSchema).min(1, 'chooseChild').max(20),
 }).strict()
 
+/**
+ * Mode démonstration uniquement (aucun serveur) : les fiches fictives ont des identifiants
+ * lisibles (« c_1 », « c_demo_emma »), pas des UUID. Mêmes règles sinon. Le serveur
+ * (/api/coparents/invitations) et le mode Supabase gardent createInvitationSchema (UUID).
+ */
+export const demoChildIdSchema = z.string().regex(/^[A-Za-z0-9_-]{1,64}$/)
+export const demoCreateInvitationSchema = createInvitationSchema.extend({
+  childIds: z.array(demoChildIdSchema).min(1, 'chooseChild').max(20),
+}).strict()
+
+/** Codes d'erreur de validation connus (traduits côté client : auth.family.<code>). */
+export const INVITATION_ERROR_CODES = ['invalidEmail', 'chooseChild'] as const
+export function invitationErrorCode(message: string | undefined): 'invalidEmail' | 'chooseChild' | 'invalid' {
+  return (INVITATION_ERROR_CODES as readonly string[]).includes(message ?? '')
+    ? (message as 'invalidEmail' | 'chooseChild')
+    : 'invalid'
+}
+
 export const acceptSchema = z.union([
   z.object({ token: familyTokenSchema }).strict(),
   z.object({ id: uuidSchema }).strict(),

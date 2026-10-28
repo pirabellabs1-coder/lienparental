@@ -7,6 +7,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { SUPPORT_EMAIL } from '@/components/profil/data'
 import { loadGuide } from '@/lib/guide/load'
 import { intlLocale } from '@/lib/i18n/config'
+import { localePathFor } from '@/lib/i18n/routing'
 import { aboutPage, graph } from '@/lib/seo/jsonld'
 import { pageMetadata } from '@/lib/seo/metadata'
 import { CONTACT_EMAIL } from '@/lib/seo/site'
@@ -38,6 +39,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 export default async function AboutPage() {
   const t = await getTranslations('about')
   const locale = await getLocale()
+  const lp = localePathFor(locale)
   // Chiffres du Guide calculés depuis le contenu publié (version française de référence).
   const guide = await loadGuide(undefined, 'fr').catch(() => null)
   const ficheCount = guide?.fiches.length ?? 0
@@ -47,7 +49,7 @@ export default async function AboutPage() {
 
   return (
     <SiteShell mainClassName="bg-[#F7F9FC]">
-      <JsonLd data={graph(aboutPage({ path: PATH, name: t('title'), description: t('metaDescription'), locale }))} />
+      <JsonLd data={graph(aboutPage({ path: lp(PATH), name: t('title'), description: t('metaDescription'), locale }))} />
       <div className="px-5 py-12 sm:px-8 sm:py-16">
         <article className="mx-auto max-w-[760px] rounded-3xl bg-white p-6 ring-1 ring-[#E5E7EB] sm:p-10">
           <p className="text-[13px] font-bold uppercase tracking-[0.12em] text-leaf-700">{t('kicker')}</p>
@@ -55,7 +57,7 @@ export default async function AboutPage() {
           <p className="mt-4 text-[17px] leading-relaxed text-night-700">{t('lead')}</p>
 
           <Section id="qui" title={t('whoTitle')}>
-            <p>{t.rich('whoBody', { b: strong, link: linkTo('/legal/mentions') })}</p>
+            <p>{t.rich('whoBody', { b: strong, link: linkTo(lp('/legal/mentions')) })}</p>
           </Section>
 
           {territoryName && ficheCount > 0 && (
@@ -86,7 +88,7 @@ export default async function AboutPage() {
           </Section>
 
           <Section id="donnees" title={t('dataTitle')}>
-            <p>{t.rich('dataBody', { link: linkTo('/legal/confidentialite') })}</p>
+            <p>{t.rich('dataBody', { link: linkTo(lp('/legal/confidentialite')) })}</p>
           </Section>
 
           <Section id="contact" title={t('contactTitle')}>
@@ -96,7 +98,7 @@ export default async function AboutPage() {
               <dt className="font-semibold text-night-900">{t('contactSupport')}</dt>
               <dd><a href={`mailto:${SUPPORT_EMAIL}`} className={LINK}>{SUPPORT_EMAIL}</a></dd>
             </dl>
-            <p>{t.rich('contactHelp', { link: linkTo('/aide') })}</p>
+            <p>{t.rich('contactHelp', { link: linkTo(lp('/aide')) })}</p>
           </Section>
         </article>
       </div>

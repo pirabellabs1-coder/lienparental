@@ -235,6 +235,11 @@
         "kindJournal": "Journal",
         "historyHint": "Ajoutez une note Santé dans le <link>Journal</link> pour compléter l’historique.",
         "add": "Ajouter"
+      },
+      "healthPrivacy": {
+        "onlyYou": "Données de santé chiffrées en transit et au repos, visibles par vous seul.",
+        "shared": "Données de santé chiffrées en transit et au repos, visibles par vous et par {names} ({count, plural, one {parent lié à cette fiche} other {parents liés à cette fiche}}). Les proches n’y ont pas accès.",
+        "generic": "Données de santé chiffrées en transit et au repos, visibles par vous et par les parents liés à cette fiche, jamais par les proches."
       }
     },
     "journal": {
@@ -1159,7 +1164,15 @@
         "messagesTitle": "Messages entre les parents",
         "messagesNote": "Messages horodatés à l'envoi, ni modifiables ni supprimables.",
         "attachment": "Pièce jointe : {name}",
-        "items": "éléments"
+        "items": "éléments",
+        "journalTypes": {
+          "visite": "Visite",
+          "appel": "Appel",
+          "message": "Message",
+          "sante": "Santé",
+          "depense": "Dépense / Paiement",
+          "autre": "Autre"
+        }
       }
     },
     "common": {

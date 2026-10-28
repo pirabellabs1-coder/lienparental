@@ -403,6 +403,14 @@
         "unsupportedBrowser": "Ce navigateur ne prend pas en charge l’empreinte.",
         "windows": "PC Windows (Windows Hello)"
       }
+    },
+    "territories": {
+      "guyane": "Guyane",
+      "france": "France métropolitaine",
+      "martinique": "Martinique",
+      "guadeloupe": "Guadeloupe",
+      "reunion": "La Réunion",
+      "mayotte": "Mayotte"
     }
   }
 }

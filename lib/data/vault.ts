@@ -34,6 +34,7 @@ import {
 } from './core'
 import { dayKeyInTz, timeInTz } from '@/lib/tz'
 import { familyAuthorNames, sharedByLabel } from './family'
+import { demoId, hasId, readDemoList, writeDemoList } from './demo-session'
 
 // --- Constantes -------------------------------------------------------------
 
@@ -210,7 +211,41 @@ export async function demoExtraDocs(): Promise<VaultDocumentRecord[]> {
       folderId: v.folderId ?? null,
     }
   })
-  return [...FAMILY_DEMO_DOCS, ...imports]
+  return [...readDemoList(DEMO_DOCS_KEY, isDemoDoc), ...FAMILY_DEMO_DOCS, ...imports]
+}
+
+// Démo : documents ajoutés pendant la session (métadonnées seulement, jamais le fichier),
+// même mécanisme que le journal. Lus par demoExtraDocs(), donc dans la liste, la recherche et les dossiers.
+const DEMO_DOCS_KEY = 'lp_demo_vault_docs_v1'
+const isDemoDoc = (v: unknown): v is VaultDocumentRecord =>
+  hasId(v) && typeof (v as VaultDocumentRecord).name === 'string' && typeof (v as VaultDocumentRecord).addedAt === 'string'
+
+/** Démo uniquement : « ajoute » un document (fiche visible pour la session, fichier non conservé). */
+export function addDemoDocument(
+  file: { name: string; size: number; type?: string },
+  meta: { name: string; description?: string; docDate: string; source?: string; confidentialite: 'prive' | 'partage'; categoryId: string | null; childIds?: string[]; folderId?: string | null },
+): VaultDocumentRecord {
+  const now = new Date()
+  const mime = file.type || EXT_MIME[extOf(file.name)] || ''
+  const doc: VaultDocumentRecord = {
+    id: demoId('v'),
+    name: meta.name.trim().slice(0, 120),
+    type: typeOf(mime),
+    ext: extFromMime(mime || undefined, file.name),
+    size: file.size,
+    docDate: meta.docDate,
+    addedAt: dayKeyInTz(now),
+    addedTime: timeInTz(now),
+    categoryId: meta.categoryId ?? '',
+    tone: toneOf(mime),
+    source: (meta.source ?? '').slice(0, 120),
+    description: meta.description?.slice(0, 280) || undefined,
+    confidentialite: meta.confidentialite,
+    childIds: meta.childIds ?? [],
+    folderId: meta.folderId ?? null,
+  }
+  writeDemoList(DEMO_DOCS_KEY, [doc, ...readDemoList(DEMO_DOCS_KEY, isDemoDoc)], 50)
+  return doc
 }
 
 // --- Catégories -------------------------------------------------------------
@@ -235,10 +270,14 @@ export async function listCategories(): Promise<VaultCategory[]> {
     if (error) throw toDataError(error, 'vault.listCategories')
   }
   // Compteurs : documents actifs par catégorie (une requête légère, colonnes minimales).
-  const { data: docs, error: dErr } = await db().from('documents').select('category_id').is('deleted_at', null).limit(5000)
+  // Même périmètre que listDocuments() (mes documents + documents famille partagés) : le compteur
+  // d'une catégorie correspond toujours à ce que la liste affiche.
+  const userId = await requireUserId()
+  const { data: docs, error: dErr } = await db().from('documents').select('category_id, user_id, family_shared').is('deleted_at', null).limit(5000)
   if (dErr) throw toDataError(dErr, 'vault.countDocs')
   const counts = new Map<string, number>()
-  for (const d of (docs ?? []) as { category_id: string | null }[]) {
+  for (const d of (docs ?? []) as { category_id: string | null; user_id: string; family_shared: boolean | null }[]) {
+    if (d.user_id !== userId && !d.family_shared) continue
     if (d.category_id) counts.set(d.category_id, (counts.get(d.category_id) ?? 0) + 1)
   }
   return ((data ?? []) as CategoryRow[]).map((r) => categoryFromRow(r, counts.get(r.id) ?? 0))

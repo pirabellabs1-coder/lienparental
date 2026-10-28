@@ -2,6 +2,7 @@ import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
+import { localePathFor } from '@/lib/i18n/routing'
 import { ArrowRight, Check } from 'lucide-react'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
@@ -20,6 +21,8 @@ function countGuyaneSheets(): number {
 
 export async function Guide() {
   const t = await getTranslations('guide')
+  // Noms des territoires traduits (catalogue shared.territories, mêmes codes que TERRITORIES).
+  const tTerr = await getTranslations('shared.territories')
   const locale = await getLocale()
   const sheets = countGuyaneSheets()
   const POINTS = [
@@ -50,14 +53,14 @@ export async function Guide() {
               <li key={terr.code} className={cn('flex items-center gap-3 rounded-2xl p-3 ring-1', terr.available ? 'bg-leaf-50 ring-leaf-300' : 'bg-white ring-[#E5E7EB]')}>
                 <TerritoryShape path={terr.path} available={terr.available} className="h-10 w-10 shrink-0" />
                 <span className="flex min-w-0 flex-col leading-tight">
-                  <span className="text-[14.5px] font-semibold text-night-900">{terr.name}</span>
+                  <span className="text-[14.5px] font-semibold text-night-900">{tTerr(terr.code)}</span>
                   <span className={cn('mt-0.5 text-[13.5px]', terr.available ? 'font-semibold text-leaf-700' : 'text-night-600')}>{terr.available ? t('available') : t('soon')}</span>
                 </span>
               </li>
             ))}
           </ul>
 
-          <Link href="/guide" className={cn(BTN_PRIMARY, 'mt-10')}>
+          <Link href={localePathFor(locale)('/guide')} className={cn(BTN_PRIMARY, 'mt-10')}>
             {t('cta')}<ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>

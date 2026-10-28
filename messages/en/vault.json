@@ -187,7 +187,9 @@
       "previewFailed": "Preview unavailable",
       "view": "View details",
       "toFolder": "Put in a folder",
-      "changeCategory": "Change category"
+      "changeCategory": "Change category",
+      "movedToTrash": "“{name}” was moved to the trash. You can restore it for 30 days.",
+      "movedToTrashShort": "Document moved to the trash. You can restore it for 30 days."
     },
     "lock": {
       "pinPad": {

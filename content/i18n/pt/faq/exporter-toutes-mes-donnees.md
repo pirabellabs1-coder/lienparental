@@ -4,32 +4,27 @@ category: "Conta"
 updatedAt: "25 de outubro de 2026"
 ---
 
-O Lien Parental permite que você recupere todos os seus dados em um único arquivo, a qualquer momento. É o seu direito à portabilidade (RGPD, o regulamento europeu de proteção de dados, artigo 20).
+O Lien Parental permite que você recupere seus dados a qualquer momento, em um único arquivo. É o seu direito de acesso e à portabilidade (RGPD, o regulamento europeu de proteção de dados, artigos 15 e 20).
 
 As etapas:
 
-1. Abra "Configurações".
-2. Toque em "Exportar meus dados".
-3. Escolha o formato: PDF (legível, para arquivo em papel) ou ZIP (arquivos originais + um arquivo JSON estruturado).
-4. Confirme.
+1. Abra "Perfil" e depois "Segurança".
+2. Toque em "Excluir minha conta": a tela começa pela seção "Antes de sair" (nada é excluído nesta etapa).
+3. Toque em "Exportar meus dados".
+4. O arquivo é baixado no seu aparelho.
 
-O Lien Parental prepara a exportação em segundo plano. Para um cofre grande, isso pode levar alguns minutos. Você recebe uma notificação quando estiver pronta, e um link seguro por e-mail válido por 72 horas.
+O que a exportação contém:
 
-Conteúdo da exportação:
+- Um arquivo JSON estruturado com as informações da sua conta: perfil, filhos, diário, calendário, despesas e pagamentos, depoimentos, dados dos seus documentos (nomes, pastas, datas) e o histórico das suas conversas.
+- As informações de saúde dos filhos aparecem de forma criptografada.
+- Os próprios arquivos (PDF, fotos) não estão nesse arquivo: baixe os que você precisar no Cofre.
 
-- Todos os seus documentos no formato original, organizados por pasta.
-- Seu diário em formato texto e PDF.
-- Seus depoimentos em PDF assinado.
-- Seu calendário no formato iCal (.ics).
-- O histórico das suas conversas com o Coach com IA.
+É bom saber:
 
-Um exemplo concreto: antes de uma audiência, você gera um PDF "Processo judicial" numerado. Antes de excluir sua conta, você gera um ZIP completo que guarda em um disco externo.
+- É possível exportar uma vez a cada 7 dias.
+- Antes de uma audiência, prefira "Meu processo judicial", que gera um PDF legível e numerado.
+- Guarde a exportação em um lugar seguro (pen drive, disco rígido): ela contém informações pessoais.
 
-Duas dicas práticas:
-
-- Criptografe o ZIP se for armazená-lo em uma nuvem pessoal.
-- Guarde uma cópia física (pen drive, disco rígido) dos documentos essenciais.
-
-Para qualquer questão jurídica sobre o arquivamento de provas, consulte o seu advogado.
+Para qualquer dúvida jurídica sobre a guarda de provas, consulte seu advogado.
 
 Este artigo foi útil?

@@ -8,6 +8,7 @@ import { ALLOWED_ATTACHMENT_MIME, MAX_BODY_CHARS, durationLabel } from '@/lib/me
 import { AudioPlayer } from './AudioPlayer'
 import { useMessagesFormat } from './useMessagesFormat'
 import { useVoiceRecorder, voiceSupported, type VoiceClip } from './useVoiceRecorder'
+import { useVaultI18n } from '@/components/coffre/i18n'
 
 type Props = {
   value: string
@@ -42,6 +43,8 @@ export function Composer({
   vaultCategories, vaultCategory, onVaultCategoryChange, recipients, announce,
 }: Props) {
   const t = useTranslations('messaging.composer')
+  // Catégories système du coffre (« Courriers »…) traduites à l'affichage ; la valeur envoyée reste le nom stocké.
+  const vaultI18n = useVaultI18n()
   const fileRef = useRef<HTMLInputElement>(null)
   const voiceRef = useRef<HTMLDivElement>(null)
   const micRef = useRef<HTMLButtonElement>(null)
@@ -263,7 +266,7 @@ export function Composer({
             aria-describedby={`${uid}-cat-hint`}
             className="min-h-[44px] rounded-lg border border-night-200 bg-white px-2.5 text-[13px] font-semibold text-night-900 focus:border-leaf-500 focus:outline-none focus:ring-2 focus:ring-leaf-200"
           >
-            {vaultCategories.map((c) => <option key={c} value={c}>{c}</option>)}
+            {vaultCategories.map((c) => <option key={c} value={c}>{vaultI18n.category(c)}</option>)}
           </select>
           <p id={`${uid}-cat-hint`} className="w-full text-[11px] text-night-600">
             {t('vaultHint', { recipients })}

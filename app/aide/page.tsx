@@ -8,6 +8,7 @@ import { contentLangAttr } from '@/lib/contenus/locale'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { faqPage, graph } from '@/lib/seo/jsonld'
 import { pageMetadata } from '@/lib/seo/metadata'
+import { localePath } from '@/lib/i18n/routing'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.help.public')
@@ -27,10 +28,13 @@ export default async function AidePublique() {
   const questions = await getHelpFaq(locale)
   const t = await getTranslations('public.help.public')
   const answer = (r: string) => r.replace(FEEDBACK_LINE, '').trim()
+  // Données structurées : seulement les questions réellement affichées dans la langue de la page
+  // (une question non traduite, montrée en français en repli, n'entre pas dans un FAQPage anglais).
+  const structured = questions.filter(q => q.lang === locale)
   return (
     <SiteShell mainClassName="bg-[#F7F9FC]">
-      {questions.length > 0 && (
-        <JsonLd data={graph(faqPage({ path: '/aide', locale, items: questions.map(q => ({ question: q.question, answer: answer(q.reponse) })) }))} />
+      {structured.length > 0 && (
+        <JsonLd data={graph(faqPage({ path: localePath(locale, '/aide'), locale, items: structured.map(q => ({ question: q.question, answer: answer(q.reponse) })) }))} />
       )}
       <div className="mx-auto max-w-4xl px-5 py-12 sm:px-8">
         <h1 className="text-[32px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 sm:text-[38px]">{t('title')}</h1>

@@ -1,10 +1,13 @@
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
+import { localToneAnalysis, LOCAL_TONE_THRESHOLD, type ToneLocalLabels } from './toneLocal'
+
+export type { ToneLocalLabels } from './toneLocal'
 
 // Vérification du ton avant envoi (Coach IA). Ne bloque JAMAIS l'envoi :
 // en cas d'échec réseau, de quota ou de délai dépassé, on renvoie null et
 // le message part tel quel.
 
-export const TONE_THRESHOLD = 40
+export const TONE_THRESHOLD = LOCAL_TONE_THRESHOLD
 // Au-delà, le message part sans vérification (ne jamais bloquer l'envoi).
 const TIMEOUT_MS = 12000
 
@@ -23,10 +26,10 @@ export type ToneAnalysis = {
  * Réponse de démonstration (`demo: true`, résultat fixe) : on lui préfère
  * l'analyse locale, qui dépend réellement du texte saisi.
  */
-export async function analyzeTone(text: string, otherPrenom: string): Promise<ToneAnalysis | null> {
+export async function analyzeTone(text: string, otherPrenom: string, labels: ToneLocalLabels): Promise<ToneAnalysis | null> {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS)
-  const fallback = () => (SUPABASE_ENABLED ? null : localAnalysis(text, otherPrenom))
+  const fallback = () => (SUPABASE_ENABLED ? null : localAnalysis(text, otherPrenom, labels))
   try {
     const form = new FormData()
     form.set('text', text.slice(0, 2000))
@@ -40,7 +43,7 @@ export async function analyzeTone(text: string, otherPrenom: string): Promise<To
 
     const done = await readDoneEvent(res.body)
     if (!done) return fallback()
-    if (done.demo === true) return localAnalysis(text, otherPrenom)
+    if (done.demo === true) return localAnalysis(text, otherPrenom, labels)
     return parseAnalysis(done.result) ?? fallback()
   } catch {
     return fallback()
@@ -91,65 +94,8 @@ function parseAnalysis(v: unknown): ToneAnalysis | null {
 }
 
 // --- Analyse locale de démonstration ---------------------------------------
+// Logique pure et multilingue dans ./toneLocal (testée) ; libellés dans la langue de l'interface.
 
-const MARKERS: Array<[RegExp, number]> = [
-  [/\bjamais\b/i, 15],
-  [/\btoujours\b/i, 10],
-  [/!{2,}|\?!/, 15],
-  [/\b(nul|nulle|incapable|menteur|menteuse|irresponsable|égoïste|egoiste|minable|pathétique|ridicule|idiot|idiote|débile|honte)\b/i, 30],
-  [/n['’]importe quoi/i, 20],
-  [/\bc['’]est (de )?ta faute\b/i, 25],
-  [/\btu (ne )?(fais|comprends|écoutes|t['’]occupes) (jamais|rien)\b/i, 20],
-  [/\b(tu vas voir|tu (le )?regretteras|je vais te)\b/i, 35],
-]
-
-function localAnalysis(text: string, otherPrenom: string): ToneAnalysis {
-  let score = 0
-  for (const [re, w] of MARKERS) if (re.test(text)) score += w
-  const letters = text.replace(/[^A-Za-zÀ-ÿ]/g, '')
-  if (letters.length >= 8 && letters.replace(/[^A-ZÀ-Þ]/g, '').length / letters.length > 0.6) score += 25
-  score = Math.min(100, score)
-
-  return {
-    agressivite: score,
-    reformulation: softened(text, otherPrenom),
-    resume: score >= TONE_THRESHOLD
-      ? 'Certaines expressions peuvent être perçues comme des reproches. Une formulation factuelle facilite la réponse.'
-      : undefined,
-    source: 'local',
-  }
-}
-
-/**
- * Reformulation de démonstration : les phrases accusatrices sont retirées
- * (plutôt que déformées), les phrases factuelles conservées, puis le message
- * est encadré par une formulation en « je » tournée vers une solution.
- */
-function softened(text: string, otherPrenom: string): string {
-  let t = text.trim()
-  const letters = t.replace(/[^A-Za-zÀ-ÿ]/g, '')
-  if (letters.length >= 8 && letters.replace(/[^A-ZÀ-Þ]/g, '').length / letters.length > 0.6) t = t.toLowerCase()
-
-  const sentences = t
-    .replace(/\?!+/g, ' ?')
-    .split(/(?<=[.!?])\s+/)
-    .map((x) => x.replace(/!+/g, '.').replace(/\s+([,.;:?])/g, '$1').replace(/\s{2,}/g, ' ').trim())
-    .filter(Boolean)
-
-  const accusatory = (x: string) => MARKERS.some(([re]) => re.test(x))
-  const kept = sentences
-    .filter((x) => !accusatory(x))
-    .filter((x) => !/^(bonjour|bonsoir|salut)\b[^.?]*[.,]?$/i.test(x))
-    .map((x) => {
-      const y = x.charAt(0).toUpperCase() + x.slice(1)
-      return /[.?]$/.test(y) ? y : `${y}.`
-    })
-
-  const parts = [
-    `Bonjour ${otherPrenom}, je voudrais qu'on reprenne ce point calmement.`,
-    ...kept,
-    "J'aimerais qu'on trouve ensemble une solution qui convienne aux enfants.",
-    'Peux-tu me dire ce qui te conviendrait ? Merci.',
-  ]
-  return parts.join(' ')
+function localAnalysis(text: string, otherPrenom: string, labels: ToneLocalLabels): ToneAnalysis {
+  return { ...localToneAnalysis(text, otherPrenom, labels), source: 'local' }
 }

@@ -1,4 +1,5 @@
 import { getLocale, getTranslations } from 'next-intl/server'
+import { signupPath } from '@/lib/i18n/routing'
 import { Check, ChevronDown, Minus } from 'lucide-react'
 import { PLAN_COMPARISON, PLAN_FEATURE_KEYS, PLAN_FEATURES, PRICING, formatPriceIn, planPromo, storageGb, type ComparisonValue, type PaidPlan, type PlanId } from '@/components/profil/pricing'
 import { intlLocale } from '@/lib/i18n/config'
@@ -30,7 +31,7 @@ type BillingT = (key: string, values?: Record<string, string | number>) => strin
  * Boutons des formules payantes : /abonner présélectionne la formule dans « Mon abonnement »
  * (connecté) ou la mémorise pendant la création de compte (non connecté), voir app/abonner/route.ts.
  */
-function plans(signedIn: boolean, t: BillingT, loc: string): Plan[] {
+function plans(signedIn: boolean, t: BillingT, loc: string, signup: string): Plan[] {
   const paid = (formule: 'premium' | 'coparentalite') => `/abonner?formule=${formule}&cycle=mensuel`
   // Équivalent traduit de PRICING[plan].freeMonthsLabel.
   const promo = (p: PaidPlan) => {
@@ -39,7 +40,7 @@ function plans(signedIn: boolean, t: BillingT, loc: string): Plan[] {
   }
   const note = (p: PaidPlan) => t('pricing.note.paid', { price: formatPriceIn(PRICING[p].yearly, loc), promo: promo(p) })
   return [
-    { key: 'gratuit', price: 0, note: t('pricing.note.gratuit'), cta: { label: t('pricing.cta.createAccount'), href: '/onboarding' } },
+    { key: 'gratuit', price: 0, note: t('pricing.note.gratuit'), cta: { label: t('pricing.cta.createAccount'), href: signup } },
     {
       key: 'premium',
       price: PRICING.premium.monthly,
@@ -69,8 +70,9 @@ function Cell({ value, text, labels }: { value: ComparisonValue; text?: string; 
 /** Bloc tarifs : colonne gauche (≈ 2/3) de la section Tarifs + FAQ (PricingFaq). */
 export async function Pricing({ signedIn = false }: { signedIn?: boolean }) {
   const t = await getTranslations('billing')
-  const loc = intlLocale(await getLocale())
-  const PLANS = plans(signedIn, t, loc)
+  const locale = await getLocale()
+  const loc = intlLocale(locale)
+  const PLANS = plans(signedIn, t, loc, signupPath(locale))
   const cellLabels = { included: t('common.included'), notIncluded: t('common.notIncluded') }
   return (
     <div id="tarifs" className="scroll-mt-24">

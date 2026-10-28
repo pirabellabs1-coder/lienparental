@@ -8,7 +8,7 @@ Oui, Lien Parental applique une limite par fichier et un espace total selon votr
 
 Les limites :
 
-- Un fichier ne peut pas dépasser 50 Mo.
+- Un fichier du coffre-fort ne peut pas dépasser 20 Mo.
 - La formule gratuite donne droit à 2 Go d'espace total.
 - La formule Premium donne droit à 10 Go.
 
@@ -17,7 +17,7 @@ Les limites :
 - 2 Go, c'est environ 6 000 photos ou 8 000 pages de PDF scannés.
 - 10 Go, c'est l'équivalent de plusieurs années d'archives complètes.
 
-Si un fichier dépasse 50 Mo (par exemple un gros PDF scanné en haute résolution), deux solutions pratiques :
+Si un fichier dépasse 20 Mo (par exemple un gros PDF scanné en haute résolution), deux solutions pratiques :
 
 - Compressez-le avec un outil comme un convertisseur PDF.
 - Scindez-le en plusieurs parties (page 1-10, 11-20, etc.) directement depuis votre application de lecture PDF.

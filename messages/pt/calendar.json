@@ -15,7 +15,8 @@
       "backToCalendar": "Voltar ao calendário",
       "saving": "Salvando…",
       "saveFailed": "Não foi possível salvar.",
-      "loading": "Carregando…"
+      "loading": "Carregando…",
+      "childOption": "{name} ({count, plural, one {# ano} other {# anos}})"
     },
     "types": {
       "visite": "Visita",
@@ -95,14 +96,17 @@
     "agenda": {
       "title": "Adicionar à agenda",
       "preparing": "Preparando",
-      "added": "Evento adicionado!",
-      "addedDesc": "O evento foi adicionado com sucesso à sua agenda.",
       "openIn": "Abrir em",
       "google": "Google Agenda",
       "apple": "Calendário da Apple",
       "outlook": "Outlook",
       "newTab": "(nova aba)",
-      "close": "Fechar"
+      "close": "Fechar",
+      "chooseTitle": "Escolha sua agenda",
+      "chooseDesc": "O evento abre na agenda escolhida: depois é só salvá-lo lá.",
+      "sentGoogle": "O Google Agenda foi aberto em uma nova aba: salve o evento lá para adicioná-lo.",
+      "sentOutlook": "O Outlook foi aberto em uma nova aba: salve o evento lá para adicioná-lo.",
+      "sentApple": "Arquivo .ics baixado: abra-o para adicionar o evento ao seu calendário."
     },
     "new": {
       "titleAdd": "Adicionar um evento",

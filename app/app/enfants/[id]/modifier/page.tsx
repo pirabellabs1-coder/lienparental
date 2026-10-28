@@ -11,6 +11,7 @@ import { SelectField, TextField } from '@/components/onboarding/fields'
 import { btn } from '@/components/onboarding/styles'
 import { EnfantsHeader } from '@/components/enfants/EnfantsHeader'
 import { useChild } from '@/components/enfants/useChild'
+import { HealthPrivacyNote } from '@/components/enfants/HealthPrivacyNote'
 import { LoadingState } from '@/components/mobile/StateScreens'
 import { removeChild } from '@/lib/data/children'
 import { useChildLabels } from '@/components/enfants/childLabels'
@@ -257,7 +258,7 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
             </SectionTitle>
             <p className="mt-2 flex items-center gap-1.5 text-xs text-night-500">
               <Lock className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-              {t('medicalPrivacy')}
+              <HealthPrivacyNote childId={id} />
             </p>
 
             <div className="mt-4 space-y-4">

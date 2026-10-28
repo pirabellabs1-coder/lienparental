@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Globe, Mail, MapPin, Phone, UserRound } from 'lucide-react'
 import { SuccessBurst, btn } from '@/components/profil/kit'
 import { ProfileAvatar } from '@/components/profil/ProfileAvatar'
@@ -17,19 +17,22 @@ const FALLBACK: Summary = {
   email: profile.email,
   telephone: '',
   adresse: '',
-  langue: 'Français',
+  langue: '',
 }
+// Noms natifs des langues (jamais traduits).
+const NATIVE: Record<string, string> = { fr: 'Français', en: 'English', pt: 'Português' }
 
 // Résumé issu de l'assistant (sessionStorage) ; la photo est relue depuis public.users avec Supabase.
 export default function ValidationPage() {
   const t = useTranslations('account.profile.validation')
-  const [summary, setSummary] = useState<Summary>(FALLBACK)
+  const locale = useLocale()
+  const [summary, setSummary] = useState<Summary>(() => ({ ...FALLBACK, langue: NATIVE[locale] ?? NATIVE.fr }))
   const { profile: account } = useAccountProfile(profile)
 
   useEffect(() => {
     try {
       const raw = sessionStorage.getItem(SUMMARY_KEY)
-      if (raw) setSummary({ ...FALLBACK, ...(JSON.parse(raw) as Partial<Summary>) })
+      if (raw) setSummary(prev => ({ ...prev, ...(JSON.parse(raw) as Partial<Summary>) }))
     } catch { /* données absentes ou invalides : on garde le profil par défaut */ }
   }, [])
 

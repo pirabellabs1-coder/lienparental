@@ -87,41 +87,42 @@ export default function DashboardPage() {
         )}
       </section>
 
-      <nav aria-label={t('orgNav')} className="!mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
+      {/* Taille de texte « Grande » sur téléphone (zoom 1,1, cf. globals.css) : une colonne, libellés jamais coupés. */}
+      <nav aria-label={t('orgNav')} className="!mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4 max-sm:[html[data-text-size=grande]_&]:grid-cols-1">
         <Link href="/app/guide" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600"><Compass className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="text-[13.5px] font-bold leading-tight text-night-900">{t('guide')}</span>
+          <span className="min-w-0 break-words text-[13.5px] font-bold leading-tight text-night-900">{t('guide')}</span>
         </Link>
         <Link href="/app/journal?filtre=finances" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gold-50 text-gold-600"><Wallet className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="text-[13.5px] font-bold leading-tight text-night-900">{t('expenses')}</span>
+          <span className="min-w-0 break-words text-[13.5px] font-bold leading-tight text-night-900">{t('expenses')}</span>
         </Link>
         <Link href={activeChildId ? `/app/enfants/${activeChildId}/sante` : '/app/enfants'} className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-50 text-sky-600"><HeartPulse className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="text-[13.5px] font-bold leading-tight text-night-900">{t('health')}</span>
+          <span className="min-w-0 break-words text-[13.5px] font-bold leading-tight text-night-900">{t('health')}</span>
         </Link>
         <Link href="/app/coffre/temoignages" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-night-50 text-night-700"><MessageSquareQuote className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="text-[13.5px] font-bold leading-tight text-night-900">{t('testimonials')}</span>
+          <span className="min-w-0 break-words text-[13.5px] font-bold leading-tight text-night-900">{t('testimonials')}</span>
         </Link>
       </nav>
 
       <nav aria-label={t('coparentNav')} className="!mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <Link href="/app/messages" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600"><MessageCircle className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('messages')}</span><span className="block text-[12px] text-night-600">{t('messagesSub')}</span></span>
+          <span className="min-w-0 break-words"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('messages')}</span><span className="block text-[12px] text-night-600">{t('messagesSub')}</span></span>
         </Link>
         <Link href="/app/garde" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-50 text-sky-600"><Repeat className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('custody')}</span><span className="block text-[12px] text-night-600">{t('custodySub')}</span></span>
+          <span className="min-w-0 break-words"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('custody')}</span><span className="block text-[12px] text-night-600">{t('custodySub')}</span></span>
         </Link>
         <Link href="/app/dossier" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-night-50 text-night-700"><FileStack className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('courtFile')}</span><span className="block text-[12px] text-night-600">{t('courtFileSub')}</span></span>
+          <span className="min-w-0 break-words"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('courtFile')}</span><span className="block text-[12px] text-night-600">{t('courtFileSub')}</span></span>
         </Link>
               <Link href="/app/coparents" className="flex items-center gap-3 rounded-2xl border border-night-100 bg-white p-3.5 shadow-soft transition-shadow hover:shadow-card">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600"><UsersRound className="h-5 w-5" strokeWidth={1.8} aria-hidden /></span>
-          <span className="min-w-0"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('linkedParents')}</span><span className="block text-[12px] text-night-600">{t('linkedParentsSub')}</span></span>
+          <span className="min-w-0 break-words"><span className="block text-[13.5px] font-bold leading-tight text-night-900">{t('linkedParents')}</span><span className="block text-[12px] text-night-600">{t('linkedParentsSub')}</span></span>
         </Link>
 </nav>
 

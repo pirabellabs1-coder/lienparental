@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { localePath } from '@/lib/i18n/routing'
 import { ArrowRight, ChevronRight, LogIn } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { CategoryIcon } from '@/components/guide/icons'
@@ -23,6 +24,7 @@ export const BTN_OUTLINE = cn(BTN, 'bg-white text-night-900 ring-1 ring-inset ri
 /** Fil d'Ariane visible (le dernier élément est la page courante). */
 export async function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
   const t = await getTranslations('public.guide')
+  const locale = await getLocale()
   return (
     <nav aria-label={t('breadcrumbLabel')}>
       <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[13.5px] text-night-600">
@@ -34,7 +36,7 @@ export async function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
               {last ? (
                 <span aria-current="page" className="line-clamp-1 font-semibold text-night-800">{c.name}</span>
               ) : (
-                <Link href={c.path} className="inline-flex min-h-[32px] items-center underline-offset-2 hover:text-night-900 hover:underline">{c.name}</Link>
+                <Link href={localePath(locale, c.path)} className="inline-flex min-h-[32px] items-center underline-offset-2 hover:text-night-900 hover:underline">{c.name}</Link>
               )}
             </li>
           )
@@ -80,16 +82,17 @@ export function FicheCard({ href, title, summary, lang, meta }: { href: string; 
  */
 export async function SignupCta({ next, variant = 'fiche', className }: { next: string; variant?: 'fiche' | 'parcours' | 'generic'; className?: string }) {
   const t = await getTranslations('public.guide.cta')
+  const locale = await getLocale()
   const login = `/onboarding/connexion?${new URLSearchParams({ suite: next }).toString()}`
   return (
     <section aria-labelledby="cta-guide" className={cn('rounded-2xl bg-night-900 p-5 text-white sm:p-6 on-dark', className)}>
       <h2 id="cta-guide" className="text-[18px] font-extrabold leading-snug">{t(`${variant}.title`)}</h2>
       <p className="mt-1.5 text-[14px] leading-relaxed text-white/80">{t(`${variant}.text`)}</p>
       <div className="mt-4 flex flex-col gap-2.5">
-        <Link href="/onboarding/inscription" className={cn(BTN, 'bg-leaf-400 text-night-900 hover:bg-leaf-300')}>
+        <Link href={localePath(locale, '/onboarding/inscription')} className={cn(BTN, 'bg-leaf-400 text-night-900 hover:bg-leaf-300')}>
           {t(`${variant}.signup`)}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
         </Link>
-        <Link href={login} className={cn(BTN, 'min-h-[44px] text-white ring-1 ring-inset ring-white/30 hover:bg-white/10')}>
+        <Link href={localePath(locale, login)} className={cn(BTN, 'min-h-[44px] text-white ring-1 ring-inset ring-white/30 hover:bg-white/10')}>
           <LogIn className="h-4 w-4 shrink-0" aria-hidden="true" />{t('login')}
         </Link>
       </div>

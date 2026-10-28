@@ -1,6 +1,8 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { ScopedIntlProvider } from '@/components/i18n/ScopedIntlProvider'
+import { CLIENT_NS_SITE } from '@/lib/i18n/client-namespaces'
 import { graph, organization, website } from '@/lib/seo/jsonld'
 import { SiteFooter } from './SiteFooter'
 import { SiteHeader } from './SiteHeader'
@@ -25,14 +27,18 @@ type Props = {
   mainClassName?: string
   /** La page fournit déjà son propre <main> (ex. /installer) : on l'enveloppe sans en créer un second. */
   ownMain?: boolean
+  /** Namespaces client propres à la page, en plus de CLIENT_NS_SITE (ex. CLIENT_NS_SITE_HOME). */
+  extraNamespaces?: readonly string[]
 }
 
-export function SiteShell({ children, className, mainClassName, ownMain = false }: Props) {
+export function SiteShell({ children, className, mainClassName, ownMain = false, extraNamespaces = [] }: Props) {
   const Main = ownMain ? 'div' : 'main'
   const t = useTranslations('a11y')
   const ts = useTranslations('seo')
   const locale = useLocale()
   return (
+    // Textes des composants client du site public uniquement (audit C3 : pas tout le catalogue dans le HTML).
+    <ScopedIntlProvider namespaces={[...CLIENT_NS_SITE, ...extraNamespaces]}>
     <div className={cn('site flex min-h-[100dvh] flex-col overflow-x-clip bg-white font-sans text-night-900 antialiased', className)}>
       <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <JsonLd data={graph(organization({ description: ts('orgDescription') }), website({ description: ts('orgDescription'), locale }))} />
@@ -48,5 +54,6 @@ export function SiteShell({ children, className, mainClassName, ownMain = false 
       </Main>
       <SiteFooter />
     </div>
+    </ScopedIntlProvider>
   )
 }

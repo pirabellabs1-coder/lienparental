@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { intlLocale } from '@/lib/i18n/config';
+import { localePath } from '@/lib/i18n/routing';
 import { pageMetadata } from '@/lib/seo/metadata';
 import { LEGAL_UPDATED, isoDate } from '@/lib/seo/pages';
 
@@ -41,7 +42,7 @@ export default async function ConfidentialitePage() {
     <div className="px-5 py-12 text-night-900 sm:px-8 sm:py-16">
       <article className="mx-auto max-w-[760px] rounded-3xl bg-white p-6 ring-1 ring-[#E5E7EB] sm:p-10">
         <Link
-          href="/"
+          href={localePath(locale, '/')}
           className="inline-flex items-center gap-2 min-h-[44px] text-[14px] font-semibold text-night-700 hover:text-leaf-600 underline underline-offset-4"
         >
           <span aria-hidden="true">←</span> {tl('backHome')}

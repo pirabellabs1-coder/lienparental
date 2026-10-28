@@ -9,10 +9,11 @@ import { contentLangAttr } from '@/lib/contenus/locale'
 import { ficheHref } from '@/lib/guide/links'
 import { getCategory } from '@/lib/guide/types'
 import { guidePaths } from '@/lib/seo/site'
+import { localePath, localePathFor } from '@/lib/i18n/routing'
 import { ficheJsonLd, type Crumb } from '@/lib/seo/guide-jsonld'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { CategoryIcon } from '@/components/guide/icons'
-import { formatDate, guideMetadata, isSlug, loadPublicTerritory } from '@/components/guide-public/data'
+import { formatDate, guideItemLocales, guideMetadata, isSlug, loadPublicTerritory } from '@/components/guide-public/data'
 import { Breadcrumbs, CARD, CONTAINER, EXT_LINK, H1, SignupCta } from '@/components/guide-public/ui'
 
 export const dynamic = 'force-dynamic'
@@ -35,7 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: r.fiche.titre,
     description: r.fiche.resume,
     path: guidePaths.fiche(r.g.territoire.code, r.fiche.slug),
+    locale: r.locale,
     lang: r.fiche.lang ?? 'fr',
+    available: await guideItemLocales(r.g.territoire.code, 'fiche', r.fiche.slug),
     type: 'article',
     modifiedTime: r.fiche.derniereVerification,
     section: t(`categories.${r.fiche.categorie}`),
@@ -59,6 +62,7 @@ export default async function GuideFichePublicPage({ params }: Props) {
   const r = await resolve(params)
   if (!r) notFound()
   const { g, locale, fiche } = r
+  const lp = localePathFor(locale)
   const { territoire } = g
   const t = await getTranslations('public.guide')
   const cl = contentLangAttr(fiche.lang, locale)
@@ -77,17 +81,17 @@ export default async function GuideFichePublicPage({ params }: Props) {
   const related = relatedSlugs.slice(0, 4).map((s) => g.fiches.find((f) => f.slug === s)).filter((f) => f !== undefined)
 
   const crumbs: Crumb[] = [
-    { name: t('breadcrumbHome'), path: '/' },
-    { name: t('title'), path: guidePaths.index },
-    { name: territoire.nom, path: guidePaths.territoire(territoire.code) },
-    { name: categoryLabel, path: guidePaths.categorie(territoire.code, category.key) },
-    { name: fiche.titre, path },
+    { name: t('breadcrumbHome'), path: lp('/') },
+    { name: t('title'), path: lp(guidePaths.index) },
+    { name: territoire.nom, path: lp(guidePaths.territoire(territoire.code)) },
+    { name: categoryLabel, path: lp(guidePaths.categorie(territoire.code, category.key)) },
+    { name: fiche.titre, path: lp(path) },
   ]
 
   return (
     <>
       <JsonLd data={ficheJsonLd({
-        path,
+        path: localePath(shownLang, path),
         title: fiche.titre,
         description: fiche.resume,
         lang: shownLang,
@@ -106,7 +110,7 @@ export default async function GuideFichePublicPage({ params }: Props) {
         <article className="mt-6 lg:grid lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-x-10">
           <div className="min-w-0">
             <Link
-              href={guidePaths.categorie(territoire.code, category.key)}
+              href={lp(guidePaths.categorie(territoire.code, category.key))}
               className="inline-flex min-h-[32px] items-center gap-1.5 rounded-full bg-leaf-50 px-3 py-1 text-[12.5px] font-semibold text-leaf-800 hover:bg-leaf-100"
             >
               <CategoryIcon cat={category.key} className="h-3.5 w-3.5" />{categoryLabel}
@@ -297,7 +301,7 @@ export default async function GuideFichePublicPage({ params }: Props) {
                   <ul className="mt-2 space-y-1">
                     {parcours.map((p) => (
                       <li key={p.slug} lang={contentLangAttr(p.lang, locale)}>
-                        <Link href={guidePaths.parcours(territoire.code, p.slug)} className="inline-flex min-h-[40px] items-center text-[14px] font-semibold text-leaf-700 hover:underline">
+                        <Link href={lp(guidePaths.parcours(territoire.code, p.slug))} className="inline-flex min-h-[40px] items-center text-[14px] font-semibold text-leaf-700 hover:underline">
                           {p.titre}
                         </Link>
                       </li>
@@ -312,13 +316,13 @@ export default async function GuideFichePublicPage({ params }: Props) {
                   <ul className="mt-2 space-y-1">
                     {related.map((f) => (
                       <li key={f.slug} lang={contentLangAttr(f.lang, locale)}>
-                        <Link href={guidePaths.fiche(territoire.code, f.slug)} className="inline-flex min-h-[40px] items-center py-1 text-[14px] font-semibold leading-snug text-leaf-700 hover:underline">
+                        <Link href={lp(guidePaths.fiche(territoire.code, f.slug))} className="inline-flex min-h-[40px] items-center py-1 text-[14px] font-semibold leading-snug text-leaf-700 hover:underline">
                           {f.titre}
                         </Link>
                       </li>
                     ))}
                   </ul>
-                  <Link href={guidePaths.categorie(territoire.code, category.key)} className="mt-2 inline-flex min-h-[40px] items-center text-[13.5px] font-semibold text-night-700 underline underline-offset-2 hover:text-night-900">
+                  <Link href={lp(guidePaths.categorie(territoire.code, category.key))} className="mt-2 inline-flex min-h-[40px] items-center text-[13.5px] font-semibold text-night-700 underline underline-offset-2 hover:text-night-900">
                     {t('fiche.allInCategory', { category: categoryLabel })}
                   </Link>
                 </nav>

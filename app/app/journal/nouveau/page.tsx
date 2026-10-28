@@ -96,6 +96,11 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
 
   const [submitted, setSubmitted] = useState(false)
   const [saving, setSaving] = useState(false)
+  // Enregistrement réussi : la navigation vers la liste peut prendre plusieurs secondes (données
+  // serveur + code de la page), le bouton ne doit plus afficher « Enregistrement… » pendant ce temps.
+  const [saved, setSaved] = useState(false)
+  // Prépare la page de destination pendant la saisie : le retour à la liste est alors immédiat.
+  useEffect(() => { router.prefetch('/app/journal') }, [router])
   const [focusTick, setFocusTick] = useState(0)
   const [done, setDone] = useState<{ type: JournalType; date: string; id: string | null } | null>(null)
 
@@ -300,8 +305,15 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
         setSaving(false)
         return
       }
+      setSaving(false)
+      setSaved(true)
+      // Retour à la liste avec confirmation (`ok`, lu puis retiré de l'URL par la page Journal).
       router.push(
-        isEdit ? `/app/journal/${editId}` : isDepense ? `/app/journal?filtre=finances&mois=${monthKeyOf(date)}` : '/app/journal',
+        isEdit
+          ? `/app/journal/${editId}`
+          : isDepense
+            ? `/app/journal?filtre=finances&mois=${monthKeyOf(date)}&ok=depense`
+            : '/app/journal?ok=evenement',
       )
     } catch (err) {
       setSaveError(err instanceof Error ? err.message : t('saveFailed'))
@@ -548,10 +560,13 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
         {saveError && (
           <p role="alert" className="text-center text-[13px] font-semibold text-alert-600">{saveError}</p>
         )}
+        <p role="status" className={saved ? 'text-center text-[13px] font-semibold text-leaf-700' : 'sr-only'}>
+          {saved ? (isDepense ? t('doneExpenseHeading') : t('doneEventHeading')) : ''}
+        </p>
 
         <div className="pt-1">
-          <SubmitBar disabled={saving || editBlocked}>
-            {saving ? t('saving') : isDepense ? (outgoing ? t('saveExpense') : t('savePayment')) : t('save')}
+          <SubmitBar disabled={saving || saved || editBlocked}>
+            {saving ? t('saving') : saved ? (isDepense ? t('doneExpenseTitle') : t('doneEventTitle')) : isDepense ? (outgoing ? t('saveExpense') : t('savePayment')) : t('save')}
           </SubmitBar>
         </div>
       </form>

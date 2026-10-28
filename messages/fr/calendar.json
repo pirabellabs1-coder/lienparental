@@ -15,7 +15,8 @@
       "backToCalendar": "Retour au calendrier",
       "saving": "Enregistrement…",
       "saveFailed": "Enregistrement impossible.",
-      "loading": "Chargement…"
+      "loading": "Chargement…",
+      "childOption": "{name} ({count, plural, one {# an} other {# ans}})"
     },
     "types": {
       "visite": "Visite",
@@ -95,14 +96,17 @@
     "agenda": {
       "title": "Ajouter à l'agenda",
       "preparing": "Préparation",
-      "added": "Événement ajouté !",
-      "addedDesc": "L'événement a été ajouté avec succès à votre agenda.",
       "openIn": "Ouvrir dans",
       "google": "Google Agenda",
       "apple": "Apple Calendrier",
       "outlook": "Outlook",
       "newTab": "(nouvel onglet)",
-      "close": "Fermer"
+      "close": "Fermer",
+      "chooseTitle": "Choisissez votre agenda",
+      "chooseDesc": "L’événement s’ouvre dans l’agenda choisi : il vous restera à l’y enregistrer.",
+      "sentGoogle": "Google Agenda s’est ouvert dans un nouvel onglet : enregistrez-y l’événement pour l’ajouter.",
+      "sentOutlook": "Outlook s’est ouvert dans un nouvel onglet : enregistrez-y l’événement pour l’ajouter.",
+      "sentApple": "Fichier .ics téléchargé : ouvrez-le pour ajouter l’événement à votre calendrier."
     },
     "new": {
       "titleAdd": "Ajouter un événement",

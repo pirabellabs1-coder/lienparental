@@ -24,7 +24,7 @@ export default function DocumentsHub() {
   const sharedWithMe = sharedRoots(sharedAll, folders)
   const myFolders = folders.filter((f) => f.mine).length
   const { announce, node } = useAnnounce()
-  const { openActions, sheet } = useDocActions(announce)
+  const { openActions, sheet } = useDocActions(announce, { onRemoved: refresh })
   const total = categories.reduce((s, c) => s + c.count, 0)
   const recent = [...docs].sort((a, b) => b.addedAt.localeCompare(a.addedAt)).slice(0, 4)
 

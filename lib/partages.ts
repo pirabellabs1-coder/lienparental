@@ -59,7 +59,12 @@ export type CreateShareInput = {
 
 export type CreateShareResult = { share: ShareSummary; code: string | null }
 
-export type SharedEvent = { id: string; date: string; heure?: string; type: string; titre: string; description?: string; lieu?: string }
+export type SharedEvent = {
+  id: string; date: string; heure?: string
+  /** Libellé du type (repli) ; `typeKey` permet de le traduire à l'affichage (family.courtFile.viewer.journalTypes). */
+  type: string; typeKey?: string
+  titre: string; description?: string; lieu?: string
+}
 export type SharedDocument = { id: string; name: string; ext: string; sizeBytes: number; date: string }
 export type SharedTestimony = { id: string; author: string; relation: string; date: string; summary: string; facts: string[] }
 export type SharedMessage = { id: string; sender: string; fromOwner: boolean; body: string; createdAt: string; attachmentName?: string }
@@ -145,7 +150,7 @@ export function buildDemoShareContent(
         .filter((e) => (!child || e.childIds.includes(child.id)) && inPeriod(e.date, scope.journal))
         .sort((a, b) => a.date.localeCompare(b.date) || (a.heure ?? '').localeCompare(b.heure ?? ''))
         .map((e) => ({
-          id: e.id, date: e.date, heure: e.heure, type: journalTypeLabels[e.type], titre: e.title,
+          id: e.id, date: e.date, heure: e.heure, type: journalTypeLabels[e.type], typeKey: e.type, titre: e.title,
           description: e.description, lieu: e.lieu,
         }))
     : []

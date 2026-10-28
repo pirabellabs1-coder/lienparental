@@ -280,7 +280,7 @@ export async function logAccess(share: ResolvedShare, ua: string | null, success
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
-const JOURNAL_TYPES = new Set(['visite', 'appel', 'message', 'sante', 'autre'])
+const JOURNAL_TYPES = new Set(['visite', 'appel', 'message', 'sante', 'depense', 'autre'])
 
 const hhmm = (d: Date) => d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Cayenne' })
 const ymdParis = (d: Date) => d.toLocaleDateString('sv-SE', { timeZone: 'America/Cayenne' })
@@ -333,7 +333,7 @@ export async function buildShareContent(share: ResolvedShare): Promise<ShareCont
     .map((r) => {
       const d = new Date(r.occurred_at)
       return {
-        id: r.id, date: ymdParis(d), heure: hhmm(d), type: t(`journalTypes.${JOURNAL_TYPES.has(r.type) ? r.type : 'autre'}`), titre: r.titre,
+        id: r.id, date: ymdParis(d), heure: hhmm(d), type: t(`journalTypes.${JOURNAL_TYPES.has(r.type) && r.type !== 'depense' ? r.type : 'autre'}`), typeKey: JOURNAL_TYPES.has(r.type) ? r.type : 'autre', titre: r.titre,
         description: r.description ?? undefined, lieu: r.lieu ?? undefined,
       }
     })

@@ -1,6 +1,6 @@
 // Mock data for the mobile app (M03). Replace with Supabase queries later.
 // All strings are French and reflect the cahier des charges tone.
-import { addDaysToKey, todayKey } from './tz'
+import { addDaysToKey, todayKey, wallTimeToIso } from './tz'
 
 export type User = {
   id: string
@@ -100,7 +100,8 @@ export const mockUser: User = {
 
 export const mockChildren: Child[] = [
   {
-    id: 'c_1', prenom: 'Lina', age: 5, classe: 'Moyenne section',
+    // `age` dérivé de la date de naissance (jamais figé : il vieillissait avec la démo).
+    id: 'c_1', prenom: 'Lina', age: ageFromBirthDate('2019-05-12'), classe: 'Moyenne section',
     dateNaissance: '2019-05-12', langue: 'Français', statut: 'actif',
     taille: 110, poids: 18, couleurYeux: 'Marron', couleurCheveux: 'Châtain',
     allergies: ['Pollen', 'Arachides'], groupeSanguin: 'A+',
@@ -108,7 +109,7 @@ export const mockChildren: Child[] = [
     createdAt: '2024-09-01T10:00:00.000Z',
   },
   {
-    id: 'c_2', prenom: 'Noah', age: 7, classe: 'CE1',
+    id: 'c_2', prenom: 'Noah', age: ageFromBirthDate('2018-03-02'), classe: 'CE1',
     dateNaissance: '2018-03-02', langue: 'Français', statut: 'actif',
     taille: 122, poids: 23, couleurYeux: 'Bleu', couleurCheveux: 'Blond',
     allergies: [], groupeSanguin: 'O+',
@@ -335,22 +336,29 @@ export type CoachHistoryItem = {
   kind: CoachDocKind
   title: string
   dateLabel: string
+  /** Instant ISO (relatif à aujourd'hui, fuseau Guyane) : le libellé est localisé au rendu (localizedDateLabel). */
+  createdAt?: string
   responseReady: boolean
 }
 
+/** « il y a n jours à hh:mm » (heure murale Guyane) en ISO. */
+function coachAt(daysAgo: number, time: string): string {
+  return wallTimeToIso(addDaysToKey(todayKey(), -daysAgo), time)
+}
+
 export const mockCoachHistory: CoachHistoryItem[] = [
-  { id: 'ch_1', kind: 'capture', title: "Capture d'écran WhatsApp", dateLabel: "aujourd'hui à 10:32", responseReady: true },
-  { id: 'ch_2', kind: 'pdf', title: 'Document - PDF', dateLabel: 'hier à 16:45', responseReady: true },
-  { id: 'ch_3', kind: 'message', title: 'Message écrit', dateLabel: '29 juillet à 14:21', responseReady: true },
-  { id: 'ch_4', kind: 'capture', title: "Capture d'écran", dateLabel: '28 juillet à 09:15', responseReady: true },
-  { id: 'ch_5', kind: 'word', title: 'Document - Word', dateLabel: '27 juillet à 11:08', responseReady: true },
+  { id: 'ch_1', kind: 'capture', title: "Capture d'écran WhatsApp", dateLabel: "aujourd'hui à 10:32", createdAt: coachAt(0, '10:32'), responseReady: true },
+  { id: 'ch_2', kind: 'pdf', title: 'Document - PDF', dateLabel: 'hier à 16:45', createdAt: coachAt(1, '16:45'), responseReady: true },
+  { id: 'ch_3', kind: 'message', title: 'Message écrit', dateLabel: '29 juillet à 14:21', createdAt: coachAt(91, '14:21'), responseReady: true },
+  { id: 'ch_4', kind: 'capture', title: "Capture d'écran", dateLabel: '28 juillet à 09:15', createdAt: coachAt(92, '09:15'), responseReady: true },
+  { id: 'ch_5', kind: 'word', title: 'Document - Word', dateLabel: '27 juillet à 11:08', createdAt: coachAt(93, '11:08'), responseReady: true },
 ]
 
 export const mockCoachArchives: CoachHistoryItem[] = [
-  { id: 'ca_1', kind: 'message', title: 'Message écrit', dateLabel: '20 juillet à 18:30', responseReady: false },
-  { id: 'ca_2', kind: 'pdf', title: 'Document - PDF', dateLabel: '15 juillet à 10:12', responseReady: false },
-  { id: 'ca_3', kind: 'capture', title: "Capture d'écran WhatsApp", dateLabel: '10 juillet à 16:05', responseReady: false },
-  { id: 'ca_4', kind: 'word', title: 'Document - Word', dateLabel: '5 juillet à 09:20', responseReady: false },
+  { id: 'ca_1', kind: 'message', title: 'Message écrit', dateLabel: '20 juillet à 18:30', createdAt: coachAt(100, '18:30'), responseReady: false },
+  { id: 'ca_2', kind: 'pdf', title: 'Document - PDF', dateLabel: '15 juillet à 10:12', createdAt: coachAt(105, '10:12'), responseReady: false },
+  { id: 'ca_3', kind: 'capture', title: "Capture d'écran WhatsApp", dateLabel: '10 juillet à 16:05', createdAt: coachAt(110, '16:05'), responseReady: false },
+  { id: 'ca_4', kind: 'word', title: 'Document - Word', dateLabel: '5 juillet à 09:20', createdAt: coachAt(115, '09:20'), responseReady: false },
 ]
 
 /** Messages « reconnus » dans la capture d'écran de démonstration. */
@@ -474,12 +482,22 @@ export const ALLERGY_SUGGESTIONS: string[] = [
   'Arachides', 'Pollen', 'Lactose', 'Gluten', 'Œuf', 'Fruits à coque', 'Acariens', 'Poils d’animaux', 'Pénicilline',
 ]
 
-/** Age in full years from an ISO birth date (yyyy-mm-dd). */
-export function ageFromBirthDate(iso: string, now: Date = new Date()): number {
-  const b = new Date(iso)
-  let age = now.getFullYear() - b.getFullYear()
-  const m = now.getMonth() - b.getMonth()
-  if (m < 0 || (m === 0 && now.getDate() < b.getDate())) age--
+/**
+ * Âge en années révolues à partir d'une date de naissance "yyyy-mm-dd".
+ * Une date de naissance est un JOUR (pas un instant) : on compare ses composantes au jour
+ * courant dans le fuseau de l'application (DEFAULT_TZ), jamais via `new Date(iso)` lu dans le
+ * fuseau du navigateur ou du serveur (décalage d'un jour la veille d'un anniversaire).
+ * Source unique de l'âge affiché (accueil, Mes enfants, journal, calendrier, Coach).
+ */
+export function ageFromBirthDate(iso: string, now: Date = new Date(), tz?: string): number {
+  const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso ?? '')
+  if (!m) return 0
+  const [ty, tm, td] = todayKey(tz, now).split('-').map(Number)
+  const by = Number(m[1])
+  const bm = Number(m[2])
+  const bd = Number(m[3])
+  let age = ty - by
+  if (tm < bm || (tm === bm && td < bd)) age--
   return Math.max(age, 0)
 }
 

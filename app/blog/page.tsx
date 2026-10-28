@@ -9,6 +9,7 @@ import { PostCard } from './_components/PostCard'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { blog, graph } from '@/lib/seo/jsonld'
 import { pageMetadata } from '@/lib/seo/metadata'
+import { localePathFor } from '@/lib/i18n/routing'
 
 // Langue lue dans un cookie à chaque requête : rendu dynamique (pas d'ISR, cf. docs/SEO-AUDIT.md C1).
 export const dynamic = 'force-dynamic'
@@ -59,11 +60,12 @@ export default async function BlogPage({ searchParams }: Props) {
   const slice = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
   const [first, ...rest] = slice
   const present = new Set(all.map((p) => p.categorie))
-  const href = (p: number) => listHref(cat, p)
+  const lp = localePathFor(locale)
+  const href = (p: number) => lp(listHref(cat, p))
 
   return (
     <div className="mx-auto max-w-6xl px-5 pb-16 pt-8 sm:pt-12">
-      <JsonLd data={graph(blog({ name: ts('blogName'), description: ts('pages.blog.description'), locale }))} />
+      <JsonLd data={graph(blog({ name: ts('blogName'), description: ts('pages.blog.description'), locale, path: lp('/blog') }))} />
       <header className="max-w-3xl">
         <p className="font-script text-[34px] leading-none text-leaf-500">{t('kicker')}</p>
         <h1 className="mt-1 text-[32px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 sm:text-[42px]">{t('title')}</h1>
@@ -77,7 +79,7 @@ export default async function BlogPage({ searchParams }: Props) {
             return (
               <li key={c.key ?? 'all'} className="shrink-0">
                 <Link
-                  href={c.key ? `/blog?categorie=${c.key}` : '/blog'}
+                  href={lp(c.key ? `/blog?categorie=${c.key}` : '/blog')}
                   aria-current={active ? 'page' : undefined}
                   className={cn(
                     'inline-flex min-h-[44px] items-center rounded-full border px-4 text-[13.5px] font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500',

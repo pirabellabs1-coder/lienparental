@@ -467,7 +467,7 @@
         },
         "s3": {
           "title": "Host",
-          "body": "The application is hosted within the European Union by [host’s company name], a [legal form] company whose registered office is located at [address], reachable at [phone number]. The application servers are located in France (region [zone])."
+          "body": "The application is hosted by <b>Vercel Inc.</b>, 440 N Barranca Ave #4133, Covina, CA 91723, United States (vercel.com): the application’s functions run in the European Union (Paris). The database, authentication and files are hosted by <b>Supabase, Inc.</b>, 970 Toa Payoh North #07-04, Singapore 318992 (supabase.com), on servers located in the European Union (Ireland)."
         },
         "s4": {
           "title": "Intellectual property",
@@ -834,7 +834,83 @@
       "closeHint": "You can safely close this tab.",
       "endTitle": "Your testimony is secure",
       "endText1": "You can now",
-      "endText2": "close this page."
+      "endText2": "close this page.",
+      "steps": {
+        "complements": "Additional information",
+        "identity": "Your identity",
+        "tie": "Relationship with the parties",
+        "idDoc": "ID document",
+        "review": "Review and signature"
+      },
+      "identity": {
+        "title": "Your identity",
+        "hint": "French law (Article 202 of the Code of Civil Procedure) requires the witness’s full identity. This information is sent only to the parent who invited you, to be attached to the statement.",
+        "nom": "Last name",
+        "prenoms": "First names",
+        "dateNaissance": "Date of birth",
+        "lieuNaissance": "Place of birth (city, country)",
+        "adresse": "Address",
+        "cp": "Postal code",
+        "ville": "City",
+        "pays": "Country",
+        "profession": "Occupation",
+        "errors": {
+          "required": "Required field.",
+          "tooLong": "Text is too long.",
+          "birthDateInvalid": "Enter a valid date of birth.",
+          "dateInvalid": "Invalid date.",
+          "invalid": "Invalid value."
+        }
+      },
+      "tie": {
+        "title": "Relationship with the parties",
+        "q": "Do you have a relationship with one of the parents or children concerned?",
+        "hint": "The law requires you to state any family relationship, relationship by marriage, subordination (employer, employee), working relationship or shared interest with the parties.",
+        "options": {
+          "none": "No relationship",
+          "kin": "Family relationship",
+          "alliance": "Relationship by marriage",
+          "subordination": "Employment or subordination relationship",
+          "collaboration": "Working relationship",
+          "interest": "Shared interest"
+        },
+        "detail": "Specify (with whom and which)",
+        "detailPh": "E.g. I am Lina’s aunt",
+        "errDetail": "Specify this relationship."
+      },
+      "idDoc": {
+        "title": "Copy of your ID document",
+        "hint": "A copy of an official ID document bearing your signature (ID card, passport, residence permit) must accompany the statement. Image or PDF, 10 MB maximum.",
+        "choose": "Add the copy",
+        "replace": "Replace",
+        "privacy": "This file is stored privately and sent only to the parent who invited you, to be produced with the statement.",
+        "errRequired": "Add a copy of your ID document."
+      },
+      "sign": {
+        "padLabel": "Signature area",
+        "typeInstead": "I can’t draw: sign by typing my name",
+        "clear": "Clear",
+        "title": "Signature",
+        "hint": "Sign in the box with your finger, a stylus or the mouse.",
+        "place": "Made in (city)",
+        "date": "On",
+        "mention": "I know that this statement is made to be produced in court and that a false statement on my part exposes me to criminal penalties (Article 441-7 of the French Criminal Code).",
+        "errSign": "Sign in the box (or tick the typed signature).",
+        "errPlace": "Enter the city where you are signing.",
+        "errMention": "Tick the legal statement to continue."
+      },
+      "review": {
+        "frenchTitle": "Your statement is written in French",
+        "frenchText": "It is intended for a French court, so the official text below stays in French. Here is a translation so you know exactly what you are certifying.",
+        "translationTitle": "Reading translation (unofficial)",
+        "legalTitle": "Statement (official text in French)",
+        "printTitle": "Handwritten signature",
+        "printText": "Some courts require a statement written and signed by hand. Download the pre-filled statement, print it, add “Lu et approuvé” (read and approved), the date and your handwritten signature, then give it to the parent with the copy of your ID document.",
+        "download": "Download the pre-filled statement (PDF)",
+        "downloading": "Preparing the PDF…",
+        "downloadError": "The PDF could not be created. Please try again.",
+        "errIncomplete": "Complete your identity, ID document, legal statement and signature before sending."
+      }
     },
     "guide": {
       "breadcrumbLabel": "Breadcrumb",

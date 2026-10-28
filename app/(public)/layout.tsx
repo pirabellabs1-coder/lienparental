@@ -6,6 +6,8 @@ import { Lock, Globe2, BadgeCheck } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 import { Logo } from '@/components/brand/Logo'
 import { NOINDEX_FOLLOW } from '@/lib/seo/metadata'
+import { ScopedIntlProvider } from '@/components/i18n/ScopedIntlProvider'
+import { CLIENT_NS_PUBLIC_FLOWS } from '@/lib/i18n/client-namespaces'
 
 // Étapes d'onboarding, mot de passe oublié / nouveau : hors index. Connexion et inscription
 // redéfinissent leurs metadata (indexables) dans leur propre layout.
@@ -21,6 +23,8 @@ export const metadata: Metadata = { robots: NOINDEX_FOLLOW }
 export default async function PublicLayout({ children }: { children: ReactNode }) {
   const t = await getTranslations('publicAside')
   return (
+    // Textes des composants client des parcours publics uniquement (audit C3).
+    <ScopedIntlProvider namespaces={CLIENT_NS_PUBLIC_FLOWS}>
     <div className="min-h-dvh bg-white pwa-safe md:bg-[#f6f7fb] lg:grid lg:grid-cols-[1.05fr_1fr] lg:bg-white">
       <aside className="relative hidden overflow-hidden lg:block" aria-hidden="false">
         <Image
@@ -53,5 +57,6 @@ export default async function PublicLayout({ children }: { children: ReactNode }
         </div>
       </div>
     </div>
+    </ScopedIntlProvider>
   )
 }

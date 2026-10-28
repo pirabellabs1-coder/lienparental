@@ -8,8 +8,8 @@ Deletion is permanent and cannot be undone. Take the time to export what you wan
 
 The steps:
 
-1. Open "Settings".
-2. Tap "My account".
+1. Open "Profile".
+2. Tap "Security".
 3. Choose "Delete my account".
 4. Enter your password to confirm.
 5. Confirm the statement "I understand that deletion is permanent".

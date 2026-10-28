@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/Card'
 import { Button, ConfirmDialog, EmptyState } from '@/components/ui'
 import { Trash2, FileText, Info, RotateCcw } from 'lucide-react'
 import { LoadingState } from '@/components/mobile/StateScreens'
-import { useTrashedDocs } from '@/components/coffre/store'
+import { useDeletedDocs, useDemoTrash, useTrashedDocs } from '@/components/coffre/store'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { LIVE } from '@/lib/data/core'
 import { TRASH_RETENTION_DAYS, purgeDocument, restoreDocument, type VaultDocumentRecord } from '@/lib/data/vault'
@@ -50,7 +50,13 @@ export default function CorbeillePage() {
   const locale = useLocale()
   const fmtDeleted = (iso: string) => new Date(iso).toLocaleDateString(intlLocale(locale), { day: '2-digit', month: 'short', year: 'numeric' })
   const trash = useTrashedDocs()
-  const [docs, setDocs] = useState<TrashedDoc[]>(LIVE ? [] : INITIAL)
+  // Démo : documents mis à la corbeille pendant la session (store partagé) + exemples fixes.
+  const sessionTrash = useDemoTrash()
+  const demoBin = useDeletedDocs()
+  const [fixtures, setFixtures] = useState<TrashedDoc[]>(LIVE ? [] : INITIAL)
+  const [liveDocs, setDocs] = useState<TrashedDoc[]>([])
+  const sessionIds = new Set(sessionTrash.map((d) => d.id))
+  const docs = LIVE ? liveDocs : [...sessionTrash.map((d) => toTrashed(d)), ...fixtures]
   const [toDelete, setToDelete] = useState<TrashedDoc | null>(null)
   const { announce, node } = useAnnounce()
 
@@ -67,8 +73,13 @@ export default function CorbeillePage() {
         announce(e instanceof Error ? e.message : t('restoreFailed'))
         return
       }
+      setDocs((xs) => xs.filter((d) => d.id !== id))
+      return
     }
-    setDocs((xs) => xs.filter((d) => d.id !== id))
+    // Démo : le document revient dans la liste du coffre.
+    if (sessionIds.has(id)) demoBin.restore(id)
+    else setFixtures((xs) => xs.filter((d) => d.id !== id))
+    announce(t('restored'))
   }
   const purge = async () => {
     if (!toDelete) return
@@ -81,8 +92,14 @@ export default function CorbeillePage() {
         setToDelete(null)
         return
       }
+      setDocs((xs) => xs.filter((d) => d.id !== toDelete.id))
+    } else if (sessionIds.has(toDelete.id)) {
+      demoBin.purge(toDelete.id)
+      announce(t('purged'))
+    } else {
+      setFixtures((xs) => xs.filter((d) => d.id !== toDelete.id))
+      announce(t('purged'))
     }
-    setDocs((xs) => xs.filter((d) => d.id !== toDelete.id))
     setToDelete(null)
   }
 

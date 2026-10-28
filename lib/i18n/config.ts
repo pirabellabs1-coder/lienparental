@@ -1,7 +1,6 @@
-// Configuration i18n (Phase 1) — locale portée par un cookie, sans préfixe d'URL.
-// Ce choix évite de restructurer les 100+ routes sous app/[locale] et de toucher à la
-// middleware personnalisée (porte admin, auth, CSRF). Le routing par URL (/en, /pt)
-// pourra s'ajouter plus tard sans remettre en cause les catalogues de messages.
+// Configuration i18n — locale portée par un cookie dans l'espace connecté ; les pages publiques
+// ont en plus une URL par langue (/en/…, /pt/…) réécrite par la middleware, sans déplacer les
+// routes sous app/[locale] (voir lib/i18n/routing.ts).
 
 export const locales = ['fr', 'en', 'pt'] as const
 export type Locale = (typeof locales)[number]
@@ -10,6 +9,13 @@ export const defaultLocale: Locale = 'fr'
 
 /** Cookie qui mémorise la langue choisie (lisible côté serveur dans getRequestConfig). */
 export const LOCALE_COOKIE = 'lp_locale'
+
+/**
+ * Marqueur posé par la middleware à côté de lp_locale quand celui-ci a été mémorisé
+ * AUTOMATIQUEMENT (premier passage sur /en|pt/…) : la langue suit alors l'inscription et l'app,
+ * mais ne redirige pas les URL françaises. Supprimé par tout choix explicite (setLocale).
+ */
+export const LOCALE_AUTO_COOKIE = 'lp_locale_auto'
 
 export function isLocale(value: string | undefined | null): value is Locale {
   return !!value && (locales as readonly string[]).includes(value)

@@ -403,6 +403,14 @@
         "unsupportedBrowser": "Este navegador não suporta impressão digital.",
         "windows": "PC Windows (Windows Hello)"
       }
+    },
+    "territories": {
+      "guyane": "Guiana Francesa",
+      "france": "França metropolitana",
+      "martinique": "Martinica",
+      "guadeloupe": "Guadalupe",
+      "reunion": "Reunião",
+      "mayotte": "Mayotte"
     }
   }
 }

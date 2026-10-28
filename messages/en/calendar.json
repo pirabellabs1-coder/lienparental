@@ -15,7 +15,8 @@
       "backToCalendar": "Back to calendar",
       "saving": "Saving…",
       "saveFailed": "Could not save.",
-      "loading": "Loading…"
+      "loading": "Loading…",
+      "childOption": "{name} ({count, plural, one {# year old} other {# years old}})"
     },
     "types": {
       "visite": "Visit",
@@ -95,14 +96,17 @@
     "agenda": {
       "title": "Add to calendar",
       "preparing": "Preparing",
-      "added": "Event added!",
-      "addedDesc": "The event was successfully added to your calendar.",
       "openIn": "Open in",
       "google": "Google Calendar",
       "apple": "Apple Calendar",
       "outlook": "Outlook",
       "newTab": "(new tab)",
-      "close": "Close"
+      "close": "Close",
+      "chooseTitle": "Choose your calendar",
+      "chooseDesc": "The event opens in the calendar you choose: you then just need to save it there.",
+      "sentGoogle": "Google Calendar opened in a new tab: save the event there to add it.",
+      "sentOutlook": "Outlook opened in a new tab: save the event there to add it.",
+      "sentApple": ".ics file downloaded: open it to add the event to your calendar."
     },
     "new": {
       "titleAdd": "Add an event",

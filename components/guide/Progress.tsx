@@ -27,8 +27,8 @@ function ProgressBar({ value, label }: { value: number; label: string }) {
 /** Carte de parcours avec progression (accueil du guide). */
 export function ParcoursCard({ parcours, territoire }: { parcours: Parcours; territoire: string }) {
   const t = useTranslations('coach.guide.progress')
-  const { get } = useGuideProgress(territoire)
-  const p = countProgress(parcours.elements.map((e) => get('parcours', parcours.slug, e.id)))
+  const { getParcoursElement } = useGuideProgress(territoire)
+  const p = countProgress(parcours.elements.map((e) => getParcoursElement(parcours.slug, e)))
   return (
     <Link
       href={parcoursHref(parcours.slug, territoire)}
@@ -116,9 +116,10 @@ function useSaveError() {
 /** Liste des éléments d'un parcours, chacun avec son statut et sa fiche liée. */
 export function ParcoursChecklist({ parcours, territoire, ficheTitles }: { parcours: Parcours; territoire: string; ficheTitles: Record<string, string> }) {
   const t = useTranslations('coach.guide.progress')
-  const { get, set, ready, error: loadError, retry } = useGuideProgress(territoire)
+  // Étape liée à une fiche = même démarche : statut partagé avec la fiche (lib/guide/progress-rules).
+  const { getParcoursElement, setParcoursElement, ready, error: loadError, retry } = useGuideProgress(territoire)
   const { error, run } = useSaveError()
-  const statuses = parcours.elements.map((e) => get('parcours', parcours.slug, e.id))
+  const statuses = parcours.elements.map((e) => getParcoursElement(parcours.slug, e))
   const p = countProgress(statuses)
 
   return (
@@ -152,7 +153,7 @@ export function ParcoursChecklist({ parcours, territoire, ficheTitles }: { parco
                   )}
                 </div>
               </div>
-              <StatusControl value={s} label={e.titre} disabled={!ready} onChange={(v) => run(() => set('parcours', parcours.slug, e.id, v))} />
+              <StatusControl value={s} label={e.titre} disabled={!ready} onChange={(v) => run(() => setParcoursElement(parcours.slug, e, v))} />
             </li>
           )
         })}

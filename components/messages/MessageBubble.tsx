@@ -9,6 +9,7 @@ import { attachmentUrl, durationLabel, vaultDocumentHref, type Message, type Mes
 import { AudioPlayer } from './AudioPlayer'
 import { timeLabel } from './format'
 import { useMessagesFormat } from './useMessagesFormat'
+import { useVaultI18n } from '@/components/coffre/i18n'
 
 type Props = {
   message: Message
@@ -92,6 +93,7 @@ export function MessageBubble({ message, mine, senderName, showSender = false, v
 /** Pièce jointe rangée (ou en cours de rangement) dans VOTRE coffre-fort. */
 function VaultBadge({ link }: { link: VaultLink }) {
   const t = useTranslations('messaging.bubble')
+  const vaultI18n = useVaultI18n()
   if (link.status === 'done' && link.documentId) {
     return (
       <Link
@@ -99,7 +101,7 @@ function VaultBadge({ link }: { link: VaultLink }) {
         className="mt-0.5 inline-flex min-h-[32px] items-center gap-1 rounded-full px-2 text-[11px] font-semibold text-leaf-700 hover:bg-leaf-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
       >
         <FolderLock className="h-3.5 w-3.5" aria-hidden="true" />
-        {t('inVault', { category: link.categoryName })}
+        {t('inVault', { category: vaultI18n.category(link.categoryName) })}
         <span className="sr-only">{t('openDocument')}</span>
       </Link>
     )

@@ -1,5 +1,6 @@
 import { ArrowRight, CheckCheck, Clock, FileDown, FolderLock, Images, Sparkles } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
+import { signupPath } from '@/lib/i18n/routing'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
 import { appShot } from '@/lib/i18n/shots'
@@ -47,7 +48,7 @@ export async function Messaging() {
           </ul>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link href="/onboarding" className={cn(BTN_PRIMARY, 'h-12 px-6')}>
+            <Link href={signupPath(locale)} className={cn(BTN_PRIMARY, 'h-12 px-6')}>
               {t('cta')}<ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
             <p className="text-[13.5px] text-night-600">{t('note')}</p>

@@ -467,7 +467,7 @@
         },
         "s3": {
           "title": "Hospedagem",
-          "body": "O aplicativo é hospedado na União Europeia por [razão social do provedor de hospedagem], empresa [forma jurídica] com sede em [endereço], contatável pelo telefone [número de telefone]. Os servidores do aplicativo estão localizados na França (região [zona])."
+          "body": "O aplicativo é hospedado pela <b>Vercel Inc.</b>, 440 N Barranca Ave #4133, Covina, CA 91723, Estados Unidos (vercel.com): as funções do aplicativo são executadas na União Europeia (Paris). O banco de dados, a autenticação e os arquivos são hospedados pela <b>Supabase, Inc.</b>, 970 Toa Payoh North #07-04, Singapura 318992 (supabase.com), em servidores localizados na União Europeia (Irlanda)."
         },
         "s4": {
           "title": "Propriedade intelectual",
@@ -834,7 +834,83 @@
       "closeHint": "Você pode fechar esta aba com segurança.",
       "endTitle": "Seu depoimento está seguro",
       "endText1": "Agora você pode",
-      "endText2": "fechar esta página."
+      "endText2": "fechar esta página.",
+      "steps": {
+        "complements": "Informações complementares",
+        "identity": "Sua identidade",
+        "tie": "Vínculo com as partes",
+        "idDoc": "Documento de identidade",
+        "review": "Revisão e assinatura"
+      },
+      "identity": {
+        "title": "Sua identidade",
+        "hint": "A lei francesa (artigo 202 do Código de Processo Civil) exige a identidade completa da testemunha. Essas informações são enviadas apenas ao pai ou à mãe que convidou você, para serem anexadas ao atestado.",
+        "nom": "Sobrenome",
+        "prenoms": "Nomes",
+        "dateNaissance": "Data de nascimento",
+        "lieuNaissance": "Local de nascimento (cidade, país)",
+        "adresse": "Endereço",
+        "cp": "CEP / código postal",
+        "ville": "Cidade",
+        "pays": "País",
+        "profession": "Profissão",
+        "errors": {
+          "required": "Campo obrigatório.",
+          "tooLong": "Texto muito longo.",
+          "birthDateInvalid": "Informe uma data de nascimento válida.",
+          "dateInvalid": "Data inválida.",
+          "invalid": "Valor inválido."
+        }
+      },
+      "tie": {
+        "title": "Vínculo com as partes",
+        "q": "Você tem algum vínculo com um dos pais ou com as crianças envolvidas?",
+        "hint": "A lei exige que você informe qualquer parentesco, parentesco por afinidade (casamento), relação de subordinação (empregador, empregado), de colaboração ou interesse em comum com as partes.",
+        "options": {
+          "none": "Nenhum vínculo",
+          "kin": "Parentesco",
+          "alliance": "Parentesco por afinidade (casamento)",
+          "subordination": "Relação de subordinação (trabalho)",
+          "collaboration": "Relação de colaboração",
+          "interest": "Interesse em comum"
+        },
+        "detail": "Especifique (com quem e qual)",
+        "detailPh": "Ex.: sou tia da Lina",
+        "errDetail": "Especifique esse vínculo."
+      },
+      "idDoc": {
+        "title": "Cópia do seu documento de identidade",
+        "hint": "Uma cópia de um documento oficial de identidade com a sua assinatura (carteira de identidade, passaporte, título de residência) deve acompanhar o atestado. Imagem ou PDF, até 10 MB.",
+        "choose": "Adicionar a cópia",
+        "replace": "Substituir",
+        "privacy": "Este arquivo é armazenado de forma privada e enviado apenas ao pai ou à mãe que convidou você, para ser apresentado com o atestado.",
+        "errRequired": "Adicione a cópia do seu documento de identidade."
+      },
+      "sign": {
+        "padLabel": "Área de assinatura",
+        "typeInstead": "Não consigo desenhar: assinar digitando meu nome",
+        "clear": "Apagar",
+        "title": "Assinatura",
+        "hint": "Assine no quadro com o dedo, uma caneta ou o mouse.",
+        "place": "Feito em (cidade)",
+        "date": "Em",
+        "mention": "Sei que este atestado é feito para ser apresentado à Justiça e que um falso atestado de minha parte me expõe a sanções penais (artigo 441-7 do Código Penal francês).",
+        "errSign": "Assine no quadro (ou marque a assinatura digitada).",
+        "errPlace": "Informe a cidade onde você assina.",
+        "errMention": "Marque a declaração legal para continuar."
+      },
+      "review": {
+        "frenchTitle": "Seu atestado é redigido em francês",
+        "frenchText": "Ele se destina a um tribunal francês: o texto oficial abaixo permanece em francês. Veja a tradução para saber exatamente o que você está certificando.",
+        "translationTitle": "Tradução para leitura (não oficial)",
+        "legalTitle": "Atestado (texto oficial em francês)",
+        "printTitle": "Assinatura de próprio punho",
+        "printText": "Alguns tribunais exigem um atestado escrito e assinado à mão. Baixe o atestado pré-preenchido, imprima-o, acrescente “Lu et approuvé” (lido e aprovado), a data e sua assinatura de próprio punho e entregue-o ao pai ou à mãe com a cópia do seu documento de identidade.",
+        "download": "Baixar o atestado pré-preenchido (PDF)",
+        "downloading": "Preparando o PDF…",
+        "downloadError": "Não foi possível criar o PDF. Tente novamente.",
+        "errIncomplete": "Preencha sua identidade, o documento de identidade, a declaração legal e a assinatura antes de enviar."
+      }
     },
     "guide": {
       "breadcrumbLabel": "Trilha de navegação",

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { Fragment, type ReactNode } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+import { localePath } from '@/lib/i18n/routing'
 import { parseMarkdown, type Block, type Inline } from '@/lib/blog/markdown'
 import { cn } from '@/lib/cn'
 import { isOptimizable } from './image'
@@ -9,6 +10,12 @@ import { isOptimizable } from './image'
  * Rendu Markdown sûr : l'arbre produit par lib/blog/markdown est converti en éléments
  * React (aucun HTML injecté). Utilisé par les pages publiques et l'aperçu du back-office.
  */
+/** Lien interne d'un article : suit la langue de la page (/en/guide/… sur /en/blog/…). */
+function LocalizedAnchor({ href, ...rest }: React.ComponentProps<'a'> & { href: string }) {
+  const locale = useLocale()
+  return <a href={localePath(locale, href)} {...rest} />
+}
+
 function renderInline(nodes: Inline[], key = 'i', nt = ''): ReactNode[] {
   return nodes.map((n, i) => {
     const k = `${key}-${i}`
@@ -24,9 +31,9 @@ function renderInline(nodes: Inline[], key = 'i', nt = ''): ReactNode[] {
             {renderInline(n.c, k, nt)}<span className="sr-only"> {nt}</span>
           </a>
         ) : (
-          <a key={k} href={n.href} className="font-semibold text-leaf-700 underline decoration-leaf-300 underline-offset-2 hover:decoration-leaf-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 rounded-sm">
+          <LocalizedAnchor key={k} href={n.href} className="font-semibold text-leaf-700 underline decoration-leaf-300 underline-offset-2 hover:decoration-leaf-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 rounded-sm">
             {renderInline(n.c, k, nt)}
-          </a>
+          </LocalizedAnchor>
         )
     }
   })

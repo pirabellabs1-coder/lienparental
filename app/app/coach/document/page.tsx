@@ -22,6 +22,8 @@ import {
 import { mockCoachCapture } from '@/lib/mock-data'
 import { LIVE } from '@/lib/data/core'
 import { intlLocale } from '@/lib/i18n/config'
+import { todayKey, wallTimeToIso } from '@/lib/tz'
+import { localizedDateLabel } from '@/components/coach/history-items'
 
 // Brouillon de démonstration quand on arrive ici sans rien avoir importé (démo uniquement :
 // un compte réel voit un état vide, jamais la capture fictive).
@@ -85,20 +87,19 @@ export default function CoachDocumentPage() {
     )
   }
 
-  // Libellé « aujourd’hui à 10:32 » / « 12 mars à 10:32 » dans la langue de l'utilisateur.
-  const addedLabel = (iso: string) => {
-    const d = new Date(iso)
-    const intl = intlLocale(locale)
-    const time = d.toLocaleTimeString(intl, { hour: '2-digit', minute: '2-digit' })
-    return d.toDateString() === new Date().toDateString()
-      ? tc('time.today', { time })
-      : tc('time.dateAt', { date: d.toLocaleDateString(intl, { day: 'numeric', month: 'long' }), time })
-  }
+  // Libellé « aujourd’hui à 10:32 » / « 12 mars à 10:32 » dans la langue de l'utilisateur (fuseau Guyane).
+  const addedLabel = (iso: string) =>
+    localizedDateLabel(iso, intlLocale(locale), {
+      today: (time) => tc('time.today', { time }),
+      yesterday: (time) => tc('time.yesterday', { time }),
+      dateAt: (date, time) => tc('time.dateAt', { date, time }),
+    })
 
   const isDemo = draft === DEMO
   const isMessage = draft.kind === 'message'
-  const title = isMessage ? tc('kinds.message') : draft.kind === 'capture' && isDemo ? mockCoachCapture.title : draft.name
-  const added = draft.createdAt ? addedLabel(draft.createdAt) : mockCoachCapture.addedLabel
+  const title = isMessage ? tc('kinds.message') : draft.kind === 'capture' && isDemo ? tc('kinds.capture') : draft.name
+  // Démo sans date : la capture fictive est datée d'aujourd'hui 10:32 (heure de Guyane), libellé localisé.
+  const added = addedLabel(draft.createdAt || wallTimeToIso(todayKey(), '10:32'))
   // Pour une capture, on affiche les messages « reconnus » (OCR simulé).
   const lines: { text: string; time?: string }[] = isMessage
     ? (draft.text ?? '').split(/\n+/).filter(Boolean).map((line) => ({ text: line }))

@@ -40,7 +40,7 @@ export function RecentDocuments({ docs, emptyLabel }: { docs: RecentlyViewedDoc[
                 <Icon className="h-5 w-5" strokeWidth={1.8} />
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[13.5px] font-bold text-night-900">{d.title}</p>
+                <p className="line-clamp-2 break-words text-[13.5px] font-bold text-night-900">{d.title}</p>
                 <p className="mt-0.5 text-[12px] text-night-700">{d.viewedLabel}</p>
               </div>
               <button

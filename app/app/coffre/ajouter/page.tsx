@@ -18,7 +18,7 @@ import { VAULT_SOURCES, type VaultTone } from '@/lib/mock-vault'
 import { useVaultI18n } from '@/components/coffre/i18n'
 import { cn } from '@/lib/cn'
 import { LIVE } from '@/lib/data/core'
-import { uploadDocument, validateVaultFile } from '@/lib/data/vault'
+import { addDemoDocument, uploadDocument, validateVaultFile } from '@/lib/data/vault'
 import { useChildOptions } from '@/lib/data/children'
 import { matchCategory, parseVaultPrefill, type RawParams } from '@/lib/prefill'
 
@@ -170,9 +170,19 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
 
   const category = categories.find((c) => c.id === cat)
 
-  // Supabase : upload Storage (`${uid}/${uuid}-${nom}`) puis ligne `documents`. Démo : succès simulé.
+  // Supabase : upload Storage (`${uid}/${uuid}-${nom}`) puis ligne `documents`.
+  // Démo : fiche conservée pour la session (métadonnées, sans le fichier), visible dans la liste.
   const save = async () => {
-    if (!LIVE) { setDone(true); return }
+    if (!LIVE) {
+      if (file) {
+        addDemoDocument({ name: file.name, size: file.size, type: rawFile?.type }, {
+          name: name.trim(), description: desc.trim() || undefined, docDate, source: source || undefined,
+          confidentialite: conf, categoryId: category?.id ?? null, childIds, folderId,
+        })
+      }
+      setDone(true)
+      return
+    }
     if (!rawFile) { setStep(3); return }
     setSaving(true)
     setSaveError('')

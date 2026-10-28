@@ -467,7 +467,7 @@
         },
         "s3": {
           "title": "Hébergeur",
-          "body": "L'application est hébergée au sein de l'Union européenne par [raison sociale de l'hébergeur], société [forme juridique] dont le siège social est situé [adresse], joignable au [numéro de téléphone]. Les serveurs applicatifs sont localisés en France (région [zone])."
+          "body": "L’application est hébergée par <b>Vercel Inc.</b>, 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis (vercel.com) : les fonctions de l’application sont exécutées dans l’Union européenne (Paris). La base de données, l’authentification et les fichiers sont hébergés par <b>Supabase, Inc.</b>, 970 Toa Payoh North #07-04, Singapour 318992 (supabase.com), sur des serveurs situés dans l’Union européenne (Irlande)."
         },
         "s4": {
           "title": "Propriété intellectuelle",
@@ -834,7 +834,83 @@
       "closeHint": "Vous pouvez fermer cet onglet en toute sécurité.",
       "endTitle": "Votre témoignage est sécurisé",
       "endText1": "Vous pouvez maintenant",
-      "endText2": "fermer cette page."
+      "endText2": "fermer cette page.",
+      "steps": {
+        "complements": "Compléments",
+        "identity": "Votre identité",
+        "tie": "Lien avec les parties",
+        "idDoc": "Pièce d’identité",
+        "review": "Relecture et signature"
+      },
+      "identity": {
+        "title": "Votre identité",
+        "hint": "La loi (article 202 du Code de procédure civile) exige l’identité complète du témoin. Ces informations ne sont transmises qu’au parent qui vous a invité(e), pour être jointes à l’attestation.",
+        "nom": "Nom de famille",
+        "prenoms": "Prénoms",
+        "dateNaissance": "Date de naissance",
+        "lieuNaissance": "Lieu de naissance (ville, pays)",
+        "adresse": "Adresse",
+        "cp": "Code postal",
+        "ville": "Ville",
+        "pays": "Pays",
+        "profession": "Profession",
+        "errors": {
+          "required": "Champ obligatoire.",
+          "tooLong": "Texte trop long.",
+          "birthDateInvalid": "Indiquez une date de naissance valide.",
+          "dateInvalid": "Date invalide.",
+          "invalid": "Valeur invalide."
+        }
+      },
+      "tie": {
+        "title": "Lien avec les parties",
+        "q": "Avez-vous un lien avec l’un des parents ou des enfants concernés ?",
+        "hint": "La loi demande de préciser tout lien de parenté, d’alliance (par mariage), de subordination (employeur, salarié), de collaboration ou d’intérêt commun avec les parties.",
+        "options": {
+          "none": "Aucun lien",
+          "kin": "Lien de parenté",
+          "alliance": "Lien d’alliance (par mariage)",
+          "subordination": "Lien de subordination (travail)",
+          "collaboration": "Lien de collaboration",
+          "interest": "Intérêt commun"
+        },
+        "detail": "Précisez (avec qui et lequel)",
+        "detailPh": "Ex. : je suis la tante de Lina",
+        "errDetail": "Précisez ce lien."
+      },
+      "idDoc": {
+        "title": "Copie de votre pièce d’identité",
+        "hint": "Une copie d’un document officiel d’identité comportant votre signature (carte d’identité, passeport, titre de séjour) doit accompagner l’attestation. Image ou PDF, 10 Mo maximum.",
+        "choose": "Ajouter la copie",
+        "replace": "Remplacer",
+        "privacy": "Ce fichier est stocké de façon privée et transmis uniquement au parent qui vous a invité(e), pour être produit avec l’attestation.",
+        "errRequired": "Ajoutez la copie de votre pièce d’identité."
+      },
+      "sign": {
+        "padLabel": "Zone de signature",
+        "typeInstead": "Je ne peux pas dessiner : signer en tapant mon nom",
+        "clear": "Effacer",
+        "title": "Signature",
+        "hint": "Signez dans le cadre avec le doigt, un stylet ou la souris.",
+        "place": "Fait à (ville)",
+        "date": "Le",
+        "mention": "Je sais que la présente attestation est établie en vue de sa production en justice et qu’une fausse attestation de ma part m’expose à des sanctions pénales (article 441-7 du Code pénal).",
+        "errSign": "Signez dans le cadre (ou cochez la signature au clavier).",
+        "errPlace": "Indiquez la ville où vous signez.",
+        "errMention": "Cochez la mention légale pour continuer."
+      },
+      "review": {
+        "frenchTitle": "Votre attestation est rédigée en français",
+        "frenchText": "Elle est destinée à un tribunal français : le texte officiel ci-dessous reste en français. Voici sa traduction pour que vous sachiez exactement ce que vous certifiez.",
+        "translationTitle": "Traduction de lecture (non officielle)",
+        "legalTitle": "Attestation (texte officiel en français)",
+        "printTitle": "Signature manuscrite",
+        "printText": "Certains tribunaux exigent une attestation écrite et signée à la main. Téléchargez l’attestation pré-remplie, imprimez-la, ajoutez « Lu et approuvé », la date et votre signature manuscrite, puis remettez-la au parent avec la copie de votre pièce d’identité.",
+        "download": "Télécharger l’attestation pré-remplie (PDF)",
+        "downloading": "Préparation du PDF…",
+        "downloadError": "Le PDF n’a pas pu être créé. Réessayez.",
+        "errIncomplete": "Complétez votre identité, la pièce d’identité, la mention légale et la signature avant d’envoyer."
+      }
     },
     "guide": {
       "breadcrumbLabel": "Fil d'Ariane",

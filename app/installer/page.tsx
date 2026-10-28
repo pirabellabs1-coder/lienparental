@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { SiteShell } from '@/components/site/SiteShell'
+import { CLIENT_NS_SITE_INSTALL } from '@/lib/i18n/client-namespaces'
 import { MobileInstall } from '@/components/marketing/MobileInstall'
 import { InstallQr } from '@/components/install/InstallQr'
 import { getCurrentUser } from '@/lib/auth/session'
@@ -18,7 +19,7 @@ export default async function InstallerPage() {
   const user = await getCurrentUser().catch(() => null)
   // En-tête et pied de page partagés ; MobileInstall garde son en-tête simplifié de maquette (retour, centre d'aide).
   return (
-    <SiteShell ownMain>
+    <SiteShell ownMain extraNamespaces={CLIENT_NS_SITE_INSTALL}>
       <MobileInstall
         continueHref={user ? '/app' : '/onboarding'}
         qr={<InstallQr url={`${appUrl()}/installer`} size={152} />}

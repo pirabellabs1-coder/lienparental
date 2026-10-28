@@ -17,6 +17,7 @@ import { z } from 'zod'
 import { EVENTS, FAMILY_DEMO_EVENTS, eveReminderAt, getEventById, type CalendarEvent, type EventTypeKey, type ReminderKey } from '@/lib/calendrier'
 import { wallTimeToIso } from '@/lib/tz'
 import { DataError, LIVE, dataMsg, db, requireUserId, toDataError, useAsyncData, uuid } from './core'
+import { demoId, hasId, readDemoList, writeDemoList } from './demo-session'
 import { pushCalendarSync } from '@/lib/integrations/google/client'
 import { kickNotifications } from '@/lib/notify/client'
 import { familyAuthorNames, sharedByLabel } from './family'
@@ -152,7 +153,7 @@ async function withHealthChild(input: EventInput): Promise<EventInput> {
 
 /** Événements de −12 mois à +24 mois (fenêtre bornée, index (user_id, start_at)). */
 export async function listEvents(): Promise<CalendarEvent[]> {
-  if (!LIVE) return DEMO_LIST
+  if (!LIVE) return [...demoCreated(), ...DEMO_LIST]
   const now = new Date()
   const from = new Date(now.getFullYear() - 1, now.getMonth(), 1).toISOString()
   const to = new Date(now.getFullYear() + 2, now.getMonth(), 1).toISOString()
@@ -172,8 +173,21 @@ export async function listEvents(): Promise<CalendarEvent[]> {
 const DEMO_LIST: CalendarEvent[] = [...EVENTS, ...FAMILY_DEMO_EVENTS]
 const demoEvent = (id: string) => getEventById(id) ?? FAMILY_DEMO_EVENTS.find((e) => e.id === id)
 
+// Démo : événements créés pendant la session (sessionStorage, même mécanisme que le journal).
+const DEMO_EVENTS_KEY = 'lp_demo_events_v1'
+const isDemoEvent = (v: unknown): v is CalendarEvent =>
+  hasId(v) && typeof (v as CalendarEvent).title === 'string' && typeof (v as CalendarEvent).start === 'string'
+const demoCreated = () => readDemoList(DEMO_EVENTS_KEY, isDemoEvent)
+
+function demoFromInput(id: string, input: EventInput, createdAt: string): CalendarEvent {
+  const row = toRow(input)
+  return fromRow({
+    ...row, id, created_at: createdAt, user_id: 'demo', family_shared: row.family_shared ?? true,
+  } as EventRow)
+}
+
 export async function getEvent(id: string): Promise<CalendarEvent | null> {
-  if (!LIVE) return demoEvent(id) ?? null
+  if (!LIVE) return demoCreated().find((e) => e.id === id) ?? demoEvent(id) ?? null
   if (!z.string().uuid().safeParse(id).success) return null
   const [who, { data, error }] = await Promise.all([
     viewer(),
@@ -183,10 +197,14 @@ export async function getEvent(id: string): Promise<CalendarEvent | null> {
   return data ? fromRow(data as EventRow, who) : null
 }
 
-/** Démo : aucune persistance (comportement historique). */
+/** Démo : conservé pour la session (sessionStorage). */
 export async function createEvent(input: EventInput): Promise<string | null> {
   let row = toRow(input)
-  if (!LIVE) return null
+  if (!LIVE) {
+    const ev = demoFromInput(demoId('ev'), input, new Date().toISOString())
+    writeDemoList(DEMO_EVENTS_KEY, [ev, ...demoCreated()], 100)
+    return ev.id
+  }
   row = toRow(await withHealthChild(input))
   const userId = await requireUserId()
   const id = uuid()
@@ -201,6 +219,9 @@ export async function updateEvent(id: string, input: EventInput): Promise<void> 
   let row = toRow(input)
   if (!LIVE) {
     if (demoEvent(id)?.sharedBy) throw new DataError(NOT_AUTHOR(), 'not_author')
+    const list = demoCreated()
+    const prev = list.find((e) => e.id === id)
+    if (prev) writeDemoList(DEMO_EVENTS_KEY, list.map((e) => (e.id === id ? demoFromInput(id, input, prev.createdAt ?? new Date().toISOString()) : e)), 100)
     return
   }
   row = toRow(await withHealthChild(input))
@@ -215,6 +236,7 @@ export async function updateEvent(id: string, input: EventInput): Promise<void> 
 export async function removeEvent(id: string): Promise<void> {
   if (!LIVE) {
     if (demoEvent(id)?.sharedBy) throw new DataError(NOT_AUTHOR(), 'not_author')
+    writeDemoList(DEMO_EVENTS_KEY, demoCreated().filter((e) => e.id !== id), 100)
     return
   }
   const userId = await requireUserId()
@@ -236,6 +258,7 @@ export function useEvent(id: string | null) {
   return useAsyncData<CalendarEvent | null>(
     () => (id ? getEvent(id) : Promise.resolve(null)),
     `event:${id ?? ''}`,
-    LIVE ? undefined : id ? (demoEvent(id) ?? null) : null,
+    // Démo : un événement créé pendant la session n'est lu qu'après montage → « chargement » d'abord.
+    LIVE ? undefined : id ? (demoEvent(id) ?? undefined) : null,
   )
 }

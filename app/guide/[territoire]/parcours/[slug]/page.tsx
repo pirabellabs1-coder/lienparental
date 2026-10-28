@@ -7,9 +7,10 @@ import { cn } from '@/lib/cn'
 import { contentLangAttr } from '@/lib/contenus/locale'
 import { parcoursHref } from '@/lib/guide/links'
 import { guidePaths } from '@/lib/seo/site'
+import { localePath, localePathFor } from '@/lib/i18n/routing'
 import { parcoursJsonLd, type Crumb } from '@/lib/seo/guide-jsonld'
 import { JsonLd } from '@/components/seo/JsonLd'
-import { guideMetadata, isSlug, loadPublicTerritory } from '@/components/guide-public/data'
+import { guideItemLocales, guideMetadata, isSlug, loadPublicTerritory } from '@/components/guide-public/data'
 import { Breadcrumbs, CARD, CONTAINER, H1, SignupCta } from '@/components/guide-public/ui'
 
 export const dynamic = 'force-dynamic'
@@ -31,7 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: r.parcours.titre,
     description: r.parcours.resume,
     path: guidePaths.parcours(r.g.territoire.code, r.parcours.slug),
+    locale: r.locale,
     lang: r.parcours.lang ?? 'fr',
+    available: await guideItemLocales(r.g.territoire.code, 'parcours', r.parcours.slug),
   })
 }
 
@@ -40,6 +43,7 @@ export default async function GuideParcoursPublicPage({ params }: Props) {
   const r = await resolve(params)
   if (!r) notFound()
   const { g, locale, parcours } = r
+  const lp = localePathFor(locale)
   const { territoire } = g
   const t = await getTranslations('public.guide')
   const cl = contentLangAttr(parcours.lang, locale)
@@ -47,20 +51,20 @@ export default async function GuideParcoursPublicPage({ params }: Props) {
   const path = guidePaths.parcours(territoire.code, parcours.slug)
 
   const crumbs: Crumb[] = [
-    { name: t('breadcrumbHome'), path: '/' },
-    { name: t('title'), path: guidePaths.index },
-    { name: territoire.nom, path: guidePaths.territoire(territoire.code) },
-    { name: parcours.titre, path },
+    { name: t('breadcrumbHome'), path: lp('/') },
+    { name: t('title'), path: lp(guidePaths.index) },
+    { name: territoire.nom, path: lp(guidePaths.territoire(territoire.code)) },
+    { name: parcours.titre, path: lp(path) },
   ]
 
   return (
     <>
       <JsonLd data={parcoursJsonLd({
-        path,
+        path: localePath(parcours.lang ?? 'fr', path),
         title: parcours.titre,
         description: parcours.resume,
         lang: parcours.lang ?? 'fr',
-        entries: parcours.elements.map((e) => ({ name: e.titre, path: e.fiche && fiches.has(e.fiche) ? guidePaths.fiche(territoire.code, e.fiche) : undefined })),
+        entries: parcours.elements.map((e) => ({ name: e.titre, path: e.fiche && fiches.has(e.fiche) ? lp(guidePaths.fiche(territoire.code, e.fiche)) : undefined })),
         crumbs,
       })} />
 
@@ -85,7 +89,7 @@ export default async function GuideParcoursPublicPage({ params }: Props) {
                       {e.detail && <p className="mt-1 text-[14px] leading-relaxed text-night-700">{e.detail}</p>}
                       {fiche && (
                         <Link
-                          href={guidePaths.fiche(territoire.code, fiche.slug)}
+                          href={lp(guidePaths.fiche(territoire.code, fiche.slug))}
                           className="mt-2 inline-flex min-h-[40px] items-center gap-1.5 text-[14px] font-semibold text-leaf-700 underline decoration-leaf-300 underline-offset-2 hover:decoration-leaf-600"
                         >
                           <span lang={contentLangAttr(fiche.lang, locale)}>{t('parcours.seeFiche', { title: fiche.titre })}</span>

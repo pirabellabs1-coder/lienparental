@@ -2,10 +2,12 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Logo } from '@/components/brand/Logo'
 import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher'
 import { cn } from '@/lib/cn'
+import { signupPath, stripLocale } from '@/lib/i18n/routing'
+import { useLocalePath } from '@/components/i18n/useLocalePath'
 
 // En-tête unique des pages publiques (accueil, blog, aide, pages légales, don, installation).
 // « Guide parental » mène au Guide public (/guide). Hors de l'accueil, les ancres pointent vers les sections de l'accueil (/#tarifs…) ;
@@ -14,16 +16,17 @@ import { cn } from '@/lib/cn'
 type NavKey = 'home' | 'features' | 'guide' | 'pricing' | 'testimonials' | 'faq' | 'blog'
 type NavLink = { href: string; key: NavKey; current: boolean }
 
-function navLinks(pathname: string): NavLink[] {
+/** `pathname` : chemin SANS préfixe de langue ; `lp` : lien dans la langue courante (/en/…, /pt/…). */
+function navLinks(pathname: string, lp: (href: string) => string): NavLink[] {
   const home = pathname === '/'
   return [
-    { href: '/', key: 'home', current: home },
-    { href: '/#fonctionnalites', key: 'features', current: false },
-    { href: '/guide', key: 'guide', current: pathname === '/guide' || pathname.startsWith('/guide/') },
-    { href: '/#tarifs', key: 'pricing', current: false },
-    { href: '/#temoignages', key: 'testimonials', current: false },
-    { href: home ? '/#faq' : '/aide', key: 'faq', current: pathname.startsWith('/aide') },
-    { href: '/blog', key: 'blog', current: pathname.startsWith('/blog') },
+    { href: lp('/'), key: 'home', current: home },
+    { href: lp('/#fonctionnalites'), key: 'features', current: false },
+    { href: lp('/guide'), key: 'guide', current: pathname === '/guide' || pathname.startsWith('/guide/') },
+    { href: lp('/#tarifs'), key: 'pricing', current: false },
+    { href: lp('/#temoignages'), key: 'testimonials', current: false },
+    { href: lp(home ? '/#faq' : '/aide'), key: 'faq', current: pathname.startsWith('/aide') },
+    { href: lp('/blog'), key: 'blog', current: pathname.startsWith('/blog') },
   ]
 }
 
@@ -32,8 +35,14 @@ const BTN_PRIMARY = cn(BTN, 'bg-leaf-500 text-white hover:bg-leaf-600')
 const BTN_OUTLINE = cn(BTN, 'bg-white text-night-900 ring-1 ring-inset ring-night-900/20 hover:bg-night-50')
 
 export function SiteHeader() {
-  const pathname = usePathname() ?? '/'
-  const links = navLinks(pathname)
+  const rawPathname = usePathname() ?? '/'
+  const pathname = stripLocale(rawPathname).path
+  const locale = useLocale()
+  const lp = useLocalePath()
+  const links = navLinks(pathname, lp)
+  // Inscription : l'accueil de l'onboarding (/onboarding) n'existe qu'en français d'URL ; en EN/PT on
+  // mène directement au formulaire d'inscription localisé (/en/onboarding/inscription).
+  const signupHref = signupPath(locale)
   const t = useTranslations('nav')
   const th = useTranslations('header')
   const ta = useTranslations('a11y')
@@ -86,7 +95,7 @@ export function SiteHeader() {
       <span ref={sentinel} aria-hidden className="pointer-events-none absolute left-0 top-0 h-px w-px" />
       <header className={cn('site-header sticky top-0 z-40 border-b bg-white transition-shadow duration-200', scrolled ? 'border-[#E5E7EB] shadow-[0_8px_24px_-20px_rgba(11,45,91,0.35)]' : 'border-transparent')}>
         <div className="relative z-10 mx-auto flex h-[72px] w-full max-w-[1280px] items-center justify-between gap-4 bg-white px-5 sm:px-8">
-          <Link href="/" aria-label={ta('homeLink')} className="shrink-0 rounded-lg">
+          <Link href={lp('/')} aria-label={ta('homeLink')} className="shrink-0 rounded-lg">
             <Logo size="sm" layout="inline" />
           </Link>
 
@@ -111,8 +120,8 @@ export function SiteHeader() {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <LanguageSwitcher />
-            <Link href="/onboarding/connexion" className={cn(BTN_OUTLINE, 'hidden sm:inline-flex')}>{th('login')}</Link>
-            <Link href="/onboarding" className={cn(BTN_PRIMARY, 'hidden sm:inline-flex')}>{th('signup')}</Link>
+            <Link href={lp('/onboarding/connexion')} className={cn(BTN_OUTLINE, 'hidden sm:inline-flex')}>{th('login')}</Link>
+            <Link href={signupHref} className={cn(BTN_PRIMARY, 'hidden sm:inline-flex')}>{th('signup')}</Link>
             <button
               ref={toggle}
               type="button"
@@ -145,8 +154,8 @@ export function SiteHeader() {
               ))}
             </ul>
             <div className="mt-8 flex flex-col gap-3">
-              <Link href="/onboarding" onClick={() => setOpen(false)} className={cn(BTN_PRIMARY, 'h-14 text-[16px]')}>{th('signup')}</Link>
-              <Link href="/onboarding/connexion" onClick={() => setOpen(false)} className={cn(BTN_OUTLINE, 'h-14 text-[16px]')}>{th('login')}</Link>
+              <Link href={signupHref} onClick={() => setOpen(false)} className={cn(BTN_PRIMARY, 'h-14 text-[16px]')}>{th('signup')}</Link>
+              <Link href={lp('/onboarding/connexion')} onClick={() => setOpen(false)} className={cn(BTN_OUTLINE, 'h-14 text-[16px]')}>{th('login')}</Link>
             </div>
             <div className="mt-8 flex justify-center">
               <LanguageSwitcher />

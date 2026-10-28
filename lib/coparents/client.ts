@@ -8,7 +8,7 @@
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import * as demo from './demo'
 import { libT } from '@/lib/i18n/runtime'
-import { createInvitationSchema, familyTokenSchema } from './validation'
+import { createInvitationSchema, demoCreateInvitationSchema, familyTokenSchema, invitationErrorCode } from './validation'
 import type {
   AcceptResult, FamilyOverview, GuardianRole, InvitationPreview, IssuedInvitation, LinkedParent,
   MergeResult, SharingKind, SharingSummary,
@@ -53,7 +53,8 @@ const wrap = async <T>(fn: () => Promise<T>): Promise<T> => {
     return await fn()
   } catch (e) {
     if (e instanceof FamilyError) throw e
-    throw new FamilyError(e instanceof Error ? e.message : 'Une erreur est survenue.')
+    // Démonstration : messages déjà traduits (lib/coparents/demo.ts, libT) ; sinon repli traduit.
+    throw new FamilyError(!FAMILY_LIVE && e instanceof Error && e.message ? e.message : libT('shared.family')('generic'))
   }
 }
 
@@ -68,10 +69,11 @@ export function loadFamilyOverview(): Promise<FamilyOverview> {
 }
 
 export function createFamilyInvitation(input: { email: string; role: GuardianRole; childIds: string[] }): Promise<IssuedInvitation> {
-  const parsed = createInvitationSchema.safeParse(input)
+  // Supabase : UUID exigés (comme le serveur) ; démonstration : identifiants fictifs acceptés.
+  const parsed = (FAMILY_LIVE ? createInvitationSchema : demoCreateInvitationSchema).safeParse(input)
   if (!parsed.success) {
-    const msg = parsed.error.issues[0]?.message
-    return Promise.reject(new FamilyError(msg && !msg.startsWith('Invalid') && msg !== 'Required' ? msg : 'Certaines informations sont invalides.', 'invalid'))
+    const code = invitationErrorCode(parsed.error.issues[0]?.message)
+    return Promise.reject(new FamilyError(libT('auth.family')(code), code))
   }
   const v = parsed.data
   return wrap(() => FAMILY_LIVE

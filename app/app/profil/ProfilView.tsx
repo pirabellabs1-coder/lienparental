@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { Brain, CalendarDays, ChevronRight, CircleHelp, Cloud, LockKeyhole, SlidersHorizontal, UserRound } from 'lucide-react'
 import { ConfirmDialog } from '@/components/ui'
 import { cn } from '@/lib/cn'
+import { intlLocale } from '@/lib/i18n/config'
 import {
   BrandHeader,
   CrownIcon,
@@ -38,6 +39,9 @@ export type ProfilViewProps = {
   status?: { label: string; headline: string; tone: StatusTone } | null
 }
 
+/** Date d'inscription du profil de démonstration (« mai 2024 » dans components/profil/data). */
+const DEMO_MEMBER_SINCE = '2024-05-15T12:00:00Z'
+
 export function ProfilView({ live, plan, storage, coach, subscriptionDate, status }: ProfilViewProps) {
   const t = useTranslations('account.profile.home')
   const tb = useTranslations('billing.common.plan')
@@ -51,6 +55,11 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate, statu
   // Supabase : public.users (RLS) ; démonstration : profil fictif.
   const { profile: account } = useAccountProfile(profile)
   const fullName = `${account.prenom} ${account.nom}`.trim()
+  // Compte réel : date déjà formatée dans la langue de l'interface (useAccountProfile).
+  // Démonstration : le profil fictif porte un libellé français, reformaté ici dans la langue courante.
+  const memberSince = account.memberSince === profile.memberSince
+    ? new Intl.DateTimeFormat(intlLocale(locale), { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(DEMO_MEMBER_SINCE))
+    : account.memberSince
 
   return (
     <>
@@ -69,7 +78,7 @@ export function ProfilView({ live, plan, storage, coach, subscriptionDate, statu
             <span className="block truncate text-[17px] font-bold text-night-900">{fullName}</span>
             <span className="mt-1.5 flex items-center gap-2 text-[12.5px] text-night-800">
               <span aria-hidden className="h-2 w-2 rounded-full bg-leaf-500" />
-              {t('memberSince', { date: account.memberSince })}
+              {t('memberSince', { date: memberSince })}
             </span>
             <span className="mt-1.5 block truncate text-[12.5px] text-night-800">{account.email}</span>
           </span>

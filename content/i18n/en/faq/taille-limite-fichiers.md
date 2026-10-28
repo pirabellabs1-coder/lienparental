@@ -8,7 +8,7 @@ Yes, Lien Parental applies a limit per file and a total space depending on your 
 
 The limits:
 
-- A file cannot exceed 50 MB.
+- A file in the Vault cannot exceed 20 MB.
 - The free plan gives you 2 GB of total space.
 - The Premium plan gives you 10 GB.
 
@@ -17,7 +17,7 @@ What this represents:
 - 2 GB is about 6,000 photos or 8,000 pages of scanned PDFs.
 - 10 GB is the equivalent of several years of complete archives.
 
-If a file exceeds 50 MB (for example a large PDF scanned in high resolution), there are two practical solutions:
+If a file exceeds 20 MB (for example a large PDF scanned in high resolution), there are two practical solutions:
 
 - Compress it with a tool such as a PDF converter.
 - Split it into several parts (pages 1-10, 11-20, etc.) directly from your PDF reader app.

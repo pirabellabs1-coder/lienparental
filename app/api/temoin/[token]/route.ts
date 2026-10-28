@@ -8,6 +8,8 @@ import {
   resolveRequest, serviceClientOrNull,
 } from '@/lib/data/server/witness'
 import { addToVaultFromSource } from '@/lib/vault/from-source'
+import { witnessDeclarationSchema, witnessFilePathSchema } from '@/lib/temoin/schema'
+import { compileAttestation, fullName } from '@/lib/temoin/attestation'
 
 // Espace témoin public (aucun compte).
 //   GET  /api/temoin/[token]  → personnes concernées (noms saisis par le parent) ;
@@ -35,6 +37,12 @@ const payloadSchema = z.object({
   attachments: z.array(z.object({ path: z.string().max(200), name: z.string().trim().max(120).optional() }).strict())
     .max(WITNESS_MAX_FILES).default([]),
   certified: z.literal(true),
+  // Éléments de l'article 202 du Code de procédure civile (identité, lien avec les parties,
+  // mention pénale, lieu et date) + copie de la pièce d'identité et signature tracée, déposées
+  // au préalable par /upload. Tous obligatoires.
+  declaration: witnessDeclarationSchema,
+  identityDocument: z.object({ path: witnessFilePathSchema }).strict(),
+  signature: z.object({ path: witnessFilePathSchema }).strict(),
 }).strict()
 
 type T = Awaited<ReturnType<typeof getTranslations>>
@@ -107,30 +115,54 @@ export async function POST(req: Request, ctx: Ctx) {
   const svc = serviceClientOrNull()
   if (!svc) return jsonError(503, 'unavailable', t('serviceUnavailable'))
 
-  // Pièces jointes : uniquement des objets déposés par /upload POUR CETTE DEMANDE.
+  // Fichiers : uniquement des objets déposés par /upload POUR CETTE DEMANDE.
   // Taille et type sont relus côté Storage, jamais repris du client.
-  const attachments: { path: string; mime: string; size: number; name?: string }[] = []
-  if (v.attachments.length > 0) {
-    const pattern = new RegExp(`^${r.id}/[0-9a-f-]{36}\\.(pdf|jpg|png|webp)$`)
-    const { data: objects, error } = await svc.storage.from(WITNESS_BUCKET).list(r.id, { limit: 100 })
-    if (error) return jsonError(503, 'unavailable', t('attachmentsCheckFailed'))
-    for (const a of v.attachments) {
-      if (!pattern.test(a.path)) return jsonError(422, 'invalid_attachment', t('attachmentInvalid'))
-      const obj = (objects ?? []).find((o) => `${r.id}/${o.name}` === a.path)
-      if (!obj) return jsonError(422, 'invalid_attachment', t('attachmentNotFound'))
-      const meta = (obj.metadata ?? {}) as { size?: number; mimetype?: string }
-      attachments.push({ path: a.path, mime: meta.mimetype ?? 'application/octet-stream', size: Number(meta.size ?? 0), name: a.name })
-    }
+  type StoredFile = { path: string; mime: string; size: number; name?: string; kind: 'piece' | 'piece_identite' | 'signature' }
+  const pattern = new RegExp(`^${r.id}/[0-9a-f-]{36}\\.(pdf|jpg|png|webp)$`)
+  const { data: objects, error: listError } = await svc.storage.from(WITNESS_BUCKET).list(r.id, { limit: 100 })
+  if (listError) return jsonError(503, 'unavailable', t('attachmentsCheckFailed'))
+  const stored = (path: string, kind: StoredFile['kind'], name?: string): StoredFile | null => {
+    if (!pattern.test(path)) return null
+    const obj = (objects ?? []).find((o) => `${r.id}/${o.name}` === path)
+    if (!obj) return null
+    const meta = (obj.metadata ?? {}) as { size?: number; mimetype?: string }
+    return { path, mime: meta.mimetype ?? 'application/octet-stream', size: Number(meta.size ?? 0), name, kind }
   }
+  const attachments: StoredFile[] = []
+  for (const a of v.attachments) {
+    const f = stored(a.path, 'piece', a.name)
+    if (!f) return jsonError(422, 'invalid_attachment', pattern.test(a.path) ? t('attachmentNotFound') : t('attachmentInvalid'))
+    attachments.push(f)
+  }
+  const idDoc = stored(v.identityDocument.path, 'piece_identite', 'Pièce d’identité du témoin')
+  const sig = stored(v.signature.path, 'signature', 'Signature du témoin')
+  if (!idDoc || !sig || sig.mime !== 'image/png') return jsonError(422, 'invalid_attachment', t('attachmentInvalid'))
+  const paths = new Set([...attachments.map((a) => a.path), idDoc.path, sig.path])
+  if (paths.size !== attachments.length + 2) return jsonError(422, 'invalid_attachment', t('attachmentInvalid'))
 
+  const d = v.declaration
   // Payload construit champ par champ (aucune clé client recopiée telle quelle).
   const payload = {
-    temoin: { nom: '', prenom: '', ...v.temoin },
+    temoin: {
+      ...v.temoin,
+      nom: d.identity.nom,
+      prenom: d.identity.prenoms,
+      identite: d.identity,
+      lien_parties: d.tie,
+      mention_penale: true,
+      fait_a: d.place,
+      fait_le: d.date,
+      langue_lecture: d.locale,
+      // Attestation complète en français, recomposée ICI (gabarit serveur) à partir des champs validés.
+      attestation_fr: compileAttestation(d, v.texte_envoye, 'fr'),
+      piece_identite: idDoc.path,
+      signature: sig.path,
+    },
     reponses: v.reponses,
     texte_original: v.texte_original,
     texte_ia: v.texte_ia ?? '',
     texte_envoye: v.texte_envoye,
-    attachments,
+    attachments: [...attachments, idDoc, sig],
   }
   const rpcArgs = {
     p_token: g.token,
@@ -161,17 +193,18 @@ export async function POST(req: Request, ctx: Ctx) {
   // Pièces jointes → coffre-fort du parent demandeur (lib/vault/from-source.ts) : copie relue
   // côté serveur, idempotente par (parent, 'temoignage', `${testimonyId}:${n}`). Jamais bloquant
   // pour le témoin : un échec est journalisé (code seul) et le témoignage reste enregistré.
-  if (attachments.length > 0) {
+  const toVault = [...attachments, idDoc, sig]
+  {
     const { data: owner } = await svc.from('testimony_requests').select('user_id').eq('id', r.id).maybeSingle()
     const userId = (owner as { user_id?: string } | null)?.user_id
     if (userId) {
-      const results = await Promise.allSettled(attachments.map((a, n) =>
+      const results = await Promise.allSettled(toVault.map((a, n) =>
         addToVaultFromSource(svc, {
           userId,
           source: 'temoignage',
           sourceRef: `${testimonyId}:${n}`,
           from: { bucket: WITNESS_BUCKET, path: a.path },
-          name: a.name || `Pièce ${n + 1} du témoignage`,
+          name: a.kind === 'piece' ? a.name || `Pièce ${n + 1} du témoignage` : `${a.name} — ${fullName(d.identity)}`.slice(0, 120),
           categoryName: 'Dossier JAF',
           description: reference ? `Pièce jointe au témoignage ${reference}` : 'Pièce jointe à un témoignage',
           meta: { testimonyId, reference },

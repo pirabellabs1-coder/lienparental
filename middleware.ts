@@ -1,8 +1,14 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { DEMO_COOKIE, DEMO_MODE, isDemoAccountId } from '@/lib/demo-auth'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { redirectWithSession, updateSession } from '@/lib/supabase/middleware'
+import { passThrough, redirectWithSession, updateSession, type Forward } from '@/lib/supabase/middleware'
 import { ADMIN_ENTRY_PREFIX, ADMIN_GATE_COOKIE, ADMIN_LOGIN_PATH, adminGateConfigured, adminGateProof, hasAdminGate, isValidAdminEntry } from '@/lib/admin/gate'
+import { LOCALE_AUTO_COOKIE, LOCALE_COOKIE, type Locale } from '@/lib/i18n/config'
+import { decideLocaleRoute, forwardHeaders } from '@/lib/i18n/routing'
+
+/** « Page introuvable » (404) : réécriture vers une route inexistante, en-têtes internes assainis. */
+const notFoundRewrite = (req: NextRequest, locale: Locale | null = null) =>
+  NextResponse.rewrite(new URL('/__introuvable', req.url), { request: { headers: forwardHeaders(req.headers, locale) } })
 
 const isAdminPath = (p: string) => p === '/admin' || p.startsWith('/admin/')
 
@@ -37,10 +43,15 @@ function isCrossSite(req: NextRequest): boolean {
 async function adminGate(req: NextRequest): Promise<NextResponse | null> {
   if (!adminGateConfigured()) return null
   const p = req.nextUrl.pathname
-  const notFound = () => NextResponse.rewrite(new URL('/__introuvable', req.url))
+  const notFound = () => notFoundRewrite(req)
   // Lien secret d'entrée : /console/<secret> (a un jeton après /console/).
   if (p.startsWith(ADMIN_ENTRY_PREFIX)) {
-    const token = decodeURIComponent(p.slice(ADMIN_ENTRY_PREFIX.length))
+    let token: string
+    try {
+      token = decodeURIComponent(p.slice(ADMIN_ENTRY_PREFIX.length))
+    } catch {
+      return notFound() // encodage invalide (ex. /console/%E0) : 404 comme tout jeton refusé, jamais 500
+    }
     if (await isValidAdminEntry(token)) {
       const res = NextResponse.redirect(new URL(ADMIN_LOGIN_PATH, req.url))
       res.cookies.set(ADMIN_GATE_COOKIE, await adminGateProof(), { httpOnly: true, secure: true, sameSite: 'lax', path: '/', maxAge: 60 * 60 * 24 * 30 })
@@ -88,9 +99,9 @@ function planIntentUrl(req: NextRequest): URL | null {
 }
 
 // --- Authentification réelle (Supabase) --------------------------------
-async function supabaseMiddleware(req: NextRequest) {
-  // Rafraîchit la session sur toutes les routes couvertes par le matcher.
-  const { response, user, supabase } = await updateSession(req)
+async function supabaseMiddleware(req: NextRequest, forward: Forward) {
+  // Rafraîchit la session sur toutes les routes couvertes par le matcher (réécriture de langue conservée).
+  const { response, user, supabase } = await updateSession(req, forward)
   const { pathname } = req.nextUrl
 
   if (!isProtected(pathname)) return response
@@ -132,15 +143,15 @@ async function supabaseMiddleware(req: NextRequest) {
 
 // --- Mode démonstration (inchangé) -----------------------------------
 // Le cookie de démo n'est pas une preuve d'identité : recette uniquement.
-function demoMiddleware(req: NextRequest) {
+function demoMiddleware(req: NextRequest, forward: Forward) {
   const { pathname } = req.nextUrl
-  if (!isProtected(pathname)) return NextResponse.next()
+  if (!isProtected(pathname)) return passThrough(req, forward)
 
   const session = req.cookies.get(DEMO_COOKIE)?.value
   const valid = isDemoAccountId(session)
 
   if (pathname.startsWith('/admin')) {
-    return session === 'admin' ? NextResponse.next() : NextResponse.redirect(loginUrl(req))
+    return session === 'admin' ? passThrough(req, forward) : NextResponse.redirect(loginUrl(req))
   }
 
   if (!valid) return NextResponse.redirect(loginUrl(req))
@@ -152,7 +163,7 @@ function demoMiddleware(req: NextRequest) {
     redirect.cookies.delete(PLAN_INTENT_COOKIE)
     return redirect
   }
-  return NextResponse.next()
+  return passThrough(req, forward)
 }
 
 // --- Ni Supabase ni démo ------------------------------------------------
@@ -191,12 +202,38 @@ export async function middleware(req: NextRequest) {
     )
   }
 
-  if (SUPABASE_ENABLED) return supabaseMiddleware(req)
-  if (DEMO_MODE) return demoMiddleware(req)
+  // Langue des pages publiques (lib/i18n/routing.ts) : APRÈS la porte admin et l'anti-CSRF, AVANT la session.
+  // `/en|pt/<page publique>` → réécriture ; préfixe hors liste blanche → 404 ; `/fr/…` → 308 ;
+  // page publique sans préfixe + cookie en|pt explicitement choisi → 307. Jamais d'Accept-Language.
+  const route = decideLocaleRoute({
+    pathname,
+    method: req.method,
+    cookieLocale: req.cookies.get(LOCALE_COOKIE)?.value,
+    cookieLocaleAuto: req.cookies.has(LOCALE_AUTO_COOKIE),
+  })
+  if (route.kind === 'redirect') {
+    const url = req.nextUrl.clone()
+    url.pathname = route.location
+    const res = NextResponse.redirect(url, route.status)
+    // 307 dépendant du cookie : jamais mis en cache partagé.
+    if (route.status === 307) res.headers.set('Cache-Control', 'private, no-store')
+    return res
+  }
+  if (route.kind === 'notFound') return notFoundRewrite(req, route.locale)
+  const forward: Forward = { locale: route.locale }
+  if (route.kind === 'rewrite') {
+    const target = req.nextUrl.clone()
+    target.pathname = route.path
+    forward.rewrite = target
+    forward.setLocaleCookie = route.setCookie
+  }
+
+  if (SUPABASE_ENABLED) return supabaseMiddleware(req, forward)
+  if (DEMO_MODE) return demoMiddleware(req, forward)
   if (process.env.NODE_ENV === 'production' && isUnavailableWithoutBackend(req.nextUrl.pathname)) {
     return notConfigured(req)
   }
-  return NextResponse.next()
+  return passThrough(req, forward)
 }
 
 export const config = {

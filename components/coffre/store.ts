@@ -25,6 +25,7 @@ import {
   listReceivedTestimonies, listTestimonyRequests, reviewTestimony, type ReceivedTestimonyRecord,
 } from '@/lib/data/testimonies'
 import { listFolderDocuments } from '@/lib/data/vault'
+import { withDemoCounts } from '@/lib/vault/counts'
 import {
   DEFAULT_VAULT_SETTINGS, FOLDER_DEMO_DOCS, demoDocsWithFolders, getVaultSettings, listFolders, listMyFolderShares,
   listSharedWithMe, saveVaultSettings,
@@ -37,7 +38,14 @@ const KEYS = {
   requests: 'lp.coffre.requests',
   handledTestimonies: 'lp.coffre.testimonies.handled',
   deletedDocs: 'lp.coffre.docs.deleted',
+  /** Démo : date de mise à la corbeille par document (affichée dans la corbeille). */
+  deletedAt: 'lp.coffre.docs.deletedAt',
+  /** Démo : documents supprimés définitivement depuis la corbeille. */
+  purgedDocs: 'lp.coffre.docs.purged',
 } as const
+
+/** Démo : une écriture prévient les autres écrans montés (liste, compteurs, corbeille). */
+const SYNC_EVENT = 'lp-coffre-store'
 
 function read<T>(key: string, fallback: T): T {
   if (typeof window === 'undefined') return fallback
@@ -54,6 +62,8 @@ function write<T>(key: string, value: T) {
   } catch {
     /* quota / navigation privée : on ignore, l'état reste en mémoire */
   }
+  // Hors du rendu en cours (write est appelé depuis un updater de setState).
+  setTimeout(() => window.dispatchEvent(new CustomEvent(SYNC_EVENT, { detail: key })), 0)
 }
 
 function useStored<T>(key: string, fallback: T) {
@@ -63,6 +73,9 @@ function useStored<T>(key: string, fallback: T) {
     if (LIVE) return
     setValue(read(key, fallback))
     setReady(true)
+    const onSync = (e: Event) => { if ((e as CustomEvent<string>).detail === key) setValue(read(key, fallback)) }
+    window.addEventListener(SYNC_EVENT, onSync)
+    return () => window.removeEventListener(SYNC_EVENT, onSync)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key])
   const update = useCallback((next: T | ((prev: T) => T)) => {
@@ -83,10 +96,12 @@ export function useCategories() {
   const [extra, setExtra, storedReady] = useStored<VaultCategory[]>(KEYS.categories, [])
   const [deleted, setDeleted] = useStored<string[]>(KEYS.hiddenCategories, [])
   const live = useAsyncData<VaultCategory[]>(LIVE ? listCategories : noLoad([]), `vault:categories:${LIVE}`)
+  // Démo : compteurs calculés sur la MÊME liste que « Tous les documents » (et non des nombres figés).
+  const { docs: demoDocs } = useDemoActiveDocs()
 
   const categories = LIVE
     ? (live.data ?? [])
-    : [...VAULT_CATEGORIES, ...extra].filter((c) => !deleted.includes(c.id))
+    : withDemoCounts([...VAULT_CATEGORIES, ...extra].filter((c) => !deleted.includes(c.id)), demoDocs)
 
   const add = async (c: VaultCategory): Promise<VaultCategory> => {
     if (!LIVE) {
@@ -130,16 +145,26 @@ function useDemoExtraDocs() {
   return { extra, ready }
 }
 
-/** Documents actifs (démo : VAULT_DOCS + documents complémentaires, moins ceux supprimés dans la session). */
-export function useVaultDocs() {
+/**
+ * Démo : documents actifs = VAULT_DOCS + documents complémentaires (ajoutés, partagés, messagerie),
+ * moins ceux mis à la corbeille dans la session. Source unique de la liste ET des compteurs.
+ */
+function useDemoActiveDocs() {
   const { deleted, ready: storedReady } = useDeletedDocs()
   const { extra, ready: extraReady } = useDemoExtraDocs()
-  const live = useAsyncData<VaultDocumentRecord[]>(LIVE ? () => listDocuments() : noLoad([]), `vault:docs:${LIVE}`)
   // Démo : dossiers lus en sessionStorage, donc seulement après montage (pas d'écart d'hydratation).
   // FOLDER_DEMO_DOCS : seuls les miens (ceux partagés par Thomas restent dans « Partagés avec moi »).
   const demoDocs = [...extra, ...FOLDER_DEMO_DOCS.filter((d) => !d.sharedBy), ...VAULT_DOCS].filter((d) => !deleted.includes(d.id))
-  const docs: VaultDocumentRecord[] = LIVE ? (live.data ?? []) : extraReady ? demoDocsWithFolders(demoDocs) : demoDocs
-  return { docs, ready: LIVE ? !live.loading : storedReady, loading: LIVE && live.loading, error: live.error, refresh: live.refresh }
+  const docs = extraReady ? demoDocsWithFolders(demoDocs) : demoDocs
+  return { docs, ready: storedReady }
+}
+
+/** Documents actifs (démo : useDemoActiveDocs ; Supabase : documents non supprimés, RLS). */
+export function useVaultDocs() {
+  const demo = useDemoActiveDocs()
+  const live = useAsyncData<VaultDocumentRecord[]>(LIVE ? () => listDocuments() : noLoad([]), `vault:docs:${LIVE}`)
+  const docs: VaultDocumentRecord[] = LIVE ? (live.data ?? []) : demo.docs
+  return { docs, ready: LIVE ? !live.loading : demo.ready, loading: LIVE && live.loading, error: live.error, refresh: live.refresh }
 }
 
 /** Un document (démo : VAULT_DOCS + documents complémentaires). */
@@ -267,9 +292,15 @@ export function useHandledTestimonies() {
 
 /* ---- Documents supprimés ---------------------------------------------- */
 
+/**
+ * Mise à la corbeille (30 jours, restaurable) — le comportement réel côté Supabase
+ * (rpc soft_delete_document, migration 0101). La démo reproduit la même chose pour la session :
+ * le document quitte la liste, apparaît dans la corbeille et revient s'il est restauré.
+ */
 export function useDeletedDocs() {
   const [deleted, setDeleted, ready] = useStored<string[]>(KEYS.deletedDocs, [])
-  /** Démo : masque le document pour la session. Supabase : mise à la corbeille (30 jours). */
+  const [deletedAt, setDeletedAt] = useStored<Record<string, string>>(KEYS.deletedAt, {})
+  const [purged, setPurged] = useStored<string[]>(KEYS.purgedDocs, [])
   const remove = async (id: string): Promise<void> => {
     if (LIVE) {
       try {
@@ -280,8 +311,37 @@ export function useDeletedDocs() {
       return
     }
     setDeleted((xs) => (xs.includes(id) ? xs : [...xs, id]))
+    setDeletedAt((m) => ({ ...m, [id]: new Date().toISOString() }))
   }
-  return { deleted: LIVE ? [] : deleted, remove, ready: LIVE ? true : ready }
+  /** Démo : restauration depuis la corbeille (Supabase : restoreDocument, lib/data/vault). */
+  const restore = (id: string) => {
+    setDeleted((xs) => xs.filter((x) => x !== id))
+    setDeletedAt((m) => Object.fromEntries(Object.entries(m).filter(([k]) => k !== id)))
+  }
+  /** Démo : suppression définitive depuis la corbeille (le document reste hors de la liste). */
+  const purge = (id: string) => setPurged((xs) => (xs.includes(id) ? xs : [...xs, id]))
+  return {
+    deleted: LIVE ? [] : deleted,
+    deletedAt: LIVE ? {} : deletedAt,
+    purged: LIVE ? [] : purged,
+    remove, restore, purge,
+    ready: LIVE ? true : ready,
+  }
+}
+
+/** Démo : documents mis à la corbeille pendant la session (les plus récents d'abord). */
+export function useDemoTrash(): VaultDocumentRecord[] {
+  const { deleted, deletedAt, purged } = useDeletedDocs()
+  const { extra } = useDemoExtraDocs()
+  if (LIVE) return []
+  const all = [...extra, ...FOLDER_DEMO_DOCS, ...VAULT_DOCS]
+  return deleted
+    .filter((id) => !purged.includes(id))
+    .flatMap((id) => {
+      const d = all.find((x) => x.id === id)
+      return d ? [{ ...d, deletedAt: deletedAt[id] ?? new Date().toISOString() }] : []
+    })
+    .sort((a, b) => (b.deletedAt ?? '').localeCompare(a.deletedAt ?? ''))
 }
 
 /** Jeton de lien non devinable (base62, 6 caractères — format des maquettes, démo uniquement). */

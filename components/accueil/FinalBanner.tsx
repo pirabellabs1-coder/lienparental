@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { signupPath } from '@/lib/i18n/routing'
 import { ArrowRight, BadgeCheck, MonitorSmartphone, Unlock } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { cn } from '@/lib/cn'
@@ -14,6 +15,7 @@ const GUARANTEES = [
 
 export async function FinalBanner() {
   const t = await getTranslations('finalBanner')
+  const signup = signupPath(await getLocale())
   return (
     <section aria-labelledby="final-title" className="pb-20 pt-4 lg:pb-28">
       <div className={CONTAINER}>
@@ -26,7 +28,7 @@ export async function FinalBanner() {
           <div className="px-6 pt-10 sm:px-10 lg:py-14 lg:pl-6 lg:pr-4">
             <h2 id="final-title" className="text-[28px] font-extrabold leading-[1.15] tracking-[-0.025em] [text-wrap:balance] lg:text-[34px]">{t('title')}</h2>
             <p className="mt-3 max-w-[44ch] text-[15.5px] leading-relaxed text-night-100">{t('lead')}</p>
-            <Link href="/onboarding" className={cn(BTN_PRIMARY, 'mt-6 h-[52px] bg-leaf-500 px-7 text-[16px]')}>
+            <Link href={signup} className={cn(BTN_PRIMARY, 'mt-6 h-[52px] bg-leaf-500 px-7 text-[16px]')}>
               {t('cta')}<ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
             <ul className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-6">

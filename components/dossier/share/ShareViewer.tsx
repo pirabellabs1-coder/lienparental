@@ -12,6 +12,7 @@ import { formatDay } from '@/components/famille/useFamilyFormat'
 import { fmtSize } from '@/components/journal/journalData'
 import { intlLocale } from '@/lib/i18n/config'
 import type { ShareContent } from '@/lib/partages'
+import { relationLabel } from '@/lib/temoin/attestation'
 import { DEFAULT_TZ } from '@/lib/tz'
 
 type View =
@@ -200,7 +201,10 @@ function CodePrompt({ error, busy, onSubmit }: { error: string | null; busy: boo
 
 function SharedDossier({ content, token, accessKey }: { content: ShareContent; token: string; accessKey: string }) {
   const t = useTranslations('family.courtFile.viewer')
+  const locale = useLocale()
   const { dateTime, frDate, size } = useViewerFormat()
+  // Types du journal traduits (le libellé reçu sert de repli) ; qualité des témoins traduite si reconnue.
+  const typeLabel = (e: { type: string; typeKey?: string }) => (e.typeKey && t.has(`journalTypes.${e.typeKey}`) ? t(`journalTypes.${e.typeKey}`) : e.type)
   const sections = [
     { id: 'chronologie', label: t('navTimeline'), count: content.timeline.length, show: content.periode !== null },
     { id: 'documents', label: t('navDocuments'), count: content.documents.length, show: content.documents.length > 0 },
@@ -282,7 +286,7 @@ function SharedDossier({ content, token, accessKey }: { content: ShareContent; t
                   <li key={e.id} className="relative">
                     <span aria-hidden="true" className="absolute -left-[23px] top-1.5 h-3 w-3 rounded-full border-2 border-white bg-leaf-500" />
                     <p className="text-[12px] font-semibold text-night-600">
-                      <time dateTime={e.date}>{frDate(e.date)}</time>{e.heure ? ` · ${e.heure}` : ''} · {e.type}
+                      <time dateTime={e.date}>{frDate(e.date)}</time>{e.heure ? ` · ${e.heure}` : ''} · {typeLabel(e)}
                     </p>
                     <h3 className="text-[15px] font-bold text-night-900">{e.titre}</h3>
                     {e.lieu && <p className="text-[13px] text-night-600">{t('place', { value: e.lieu })}</p>}
@@ -326,7 +330,7 @@ function SharedDossier({ content, token, accessKey }: { content: ShareContent; t
             <ul className="mt-4 space-y-4">
               {content.testimonies.map((tm) => (
                 <li key={tm.id} className="rounded-xl border-l-4 border-gold-300 bg-night-50/50 p-4">
-                  <p className="text-[14px] font-bold text-night-900">{tm.author}{tm.relation ? <span className="font-normal text-night-600"> · {tm.relation}</span> : null}</p>
+                  <p className="text-[14px] font-bold text-night-900">{tm.author}{tm.relation ? <span className="font-normal text-night-600"> · {relationLabel(tm.relation, locale)}</span> : null}</p>
                   <p className="text-[12px] text-night-600">{t('receivedOn', { date: frDate(tm.date) })}</p>
                   <p className="mt-2 whitespace-pre-wrap break-words text-[14px] text-night-800">{tm.summary}</p>
                   {tm.facts.length > 0 && (

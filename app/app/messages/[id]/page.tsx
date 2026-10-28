@@ -268,7 +268,13 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
     const body = text.trim()
     if (toneCheck && body.length >= 4) {
       setBusy('checking')
-      const analysis = await analyzeTone(body, others.length === 1 ? others[0].prenom : '')
+      // Alerte et reformulation locale dans la langue de l'interface (détection multilingue : toneLocal).
+      const analysis = await analyzeTone(body, others.length === 1 ? others[0].prenom : '', {
+        openingNamed: (name) => tm('tone.local.openingNamed', { name }),
+        opening: tm('tone.local.opening'),
+        closing: tm('tone.local.closing'),
+        resume: tm('tone.local.resume'),
+      })
       setBusy('idle')
       if (analysis && analysis.agressivite >= TONE_THRESHOLD) {
         setPending({ text: body, file, analysis })

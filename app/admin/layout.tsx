@@ -9,6 +9,8 @@ import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { getCurrentUser } from '@/lib/auth/session'
 import { ADMIN_LOGIN_PATH } from '@/lib/admin/gate'
 import { NOINDEX_NOFOLLOW } from '@/lib/seo/metadata'
+import { ScopedIntlProvider } from '@/components/i18n/ScopedIntlProvider'
+import { CLIENT_NS_ADMIN } from '@/lib/i18n/client-namespaces'
 
 export const metadata = {
   title: 'Lien Parental · Admin',
@@ -53,6 +55,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
   const identity = user ? { name: `${user.prenom} ${user.nom}`.trim(), email: user.email } : undefined
 
   return (
+    // Seuls les textes des composants client partagés utilisés par l'admin (audit C3).
+    <ScopedIntlProvider namespaces={CLIENT_NS_ADMIN}>
     <div className="min-h-screen bg-night-50/40 text-night-900">
       <Sidebar user={identity} />
       <TopBar user={identity} />
@@ -60,5 +64,6 @@ export default async function AdminLayout({ children }: { children: ReactNode })
         <div className="mx-auto w-full max-w-7xl px-4 lg:px-8 py-6 lg:py-10">{children}</div>
       </main>
     </div>
+    </ScopedIntlProvider>
   )
 }

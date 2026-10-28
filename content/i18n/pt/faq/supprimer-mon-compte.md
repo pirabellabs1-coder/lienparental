@@ -8,8 +8,8 @@ A exclusão é definitiva e não pode ser desfeita. Reserve um tempo para export
 
 As etapas:
 
-1. Abra "Configurações".
-2. Toque em "Minha conta".
+1. Abra "Perfil".
+2. Toque em "Segurança".
 3. Escolha "Excluir minha conta".
 4. Digite sua senha para confirmar.
 5. Confirme a frase "Entendo que a exclusão é definitiva".

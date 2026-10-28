@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getLocale, getTranslations } from 'next-intl/server'
-import { getPost, relatedPosts } from '@/lib/blog/queries'
+import { getPost, postLocales, relatedPosts } from '@/lib/blog/queries'
 import { markdownToText } from '@/lib/blog/markdown'
+import { localePathFor } from '@/lib/i18n/routing'
 import { ArticleView } from '../_components/ArticleView'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { blogPosting, breadcrumbList, graph } from '@/lib/seo/jsonld'
@@ -29,8 +30,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     path: `/blog/${post.slug}`,
-    // Langue réellement affichée (traduction ou repli français).
-    locale: post.lang ?? 'fr',
+    locale,
+    // Langue réellement affichée (traduction ou repli français) et langues réellement traduites :
+    // une version /en|pt non traduite a son canonical sur l'URL française, sans hreflang.
+    contentLocale: post.lang ?? 'fr',
+    available: await postLocales(post.slug),
     keywords: post.tags,
     images: post.couverture ? [{ url: absolute(post.couverture), alt: post.couvertureAlt }] : undefined,
     article: {
@@ -52,12 +56,15 @@ export default async function BlogArticlePage({ params }: Props) {
   const tn = await getTranslations('nav')
   const tb = await getTranslations('public.blog')
   const path = `/blog/${post.slug}`
+  // Liens et fil d'Ariane : langue de la page ; URL de l'article : langue réellement affichée.
+  const lp = localePathFor(locale)
+  const shown = localePathFor(post.lang ?? 'fr')
 
   return (
     <>
       <JsonLd data={graph(
         blogPosting({
-          path,
+          path: shown(path),
           headline: post.titre,
           description: post.seoDescription || post.extrait,
           image: post.couverture ? absolute(post.couverture) : undefined,
@@ -67,13 +74,14 @@ export default async function BlogArticlePage({ params }: Props) {
           keywords: post.tags,
           lang: post.lang,
           wordCount: markdownToText(post.contenu).split(/\s+/).filter(Boolean).length,
+          blogPath: shown('/blog'),
         }),
         breadcrumbList({
-          path,
+          path: shown(path),
           crumbs: [
-            { name: tn('home'), path: '/' },
-            { name: tn('blog'), path: '/blog' },
-            { name: post.titre, path },
+            { name: tn('home'), path: lp('/') },
+            { name: tn('blog'), path: lp('/blog') },
+            { name: post.titre, path: shown(path) },
           ],
         }),
       )} />

@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { ArrowLeft, CalendarDays, Clock3 } from 'lucide-react'
 import { BLOG_CATEGORIES, blogCategoryLabel, type BlogPost, type PublishedPost } from '@/lib/blog/types'
 import { intlLocale } from '@/lib/i18n/config'
+import { localePath } from '@/lib/i18n/routing'
 import { contentLangAttr, type ContentLocale } from '@/lib/contenus/locale'
 import { readingMinutes, tableOfContents } from '@/lib/blog/markdown'
 import { Markdown } from './Markdown'
@@ -30,7 +31,7 @@ export function ArticleView({
 
   return (
     <article className="mx-auto max-w-6xl px-5 pb-16 pt-6 sm:pt-10">
-      <Link href={backHref} className="inline-flex min-h-[44px] items-center gap-2 rounded-lg text-[14px] font-semibold text-night-700 hover:text-leaf-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
+      <Link href={localePath(locale, backHref)} className="inline-flex min-h-[44px] items-center gap-2 rounded-lg text-[14px] font-semibold text-night-700 hover:text-leaf-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500">
         <ArrowLeft className="h-4 w-4" aria-hidden="true" /> {t('allArticles')}
       </Link>
 
@@ -81,7 +82,7 @@ export function ArticleView({
           <aside className="mt-10 rounded-2xl bg-night-900 p-6 text-white sm:p-8" aria-labelledby="cta-titre">
             <h2 id="cta-titre" className="text-[20px] font-extrabold">{t('ctaTitle')}</h2>
             <p className="mt-2 text-[14.5px] leading-relaxed text-night-100">{t('ctaText')}</p>
-            <Link href="/onboarding/inscription" className="mt-5 inline-flex min-h-[48px] items-center rounded-xl bg-leaf-500 px-5 font-semibold text-white hover:bg-leaf-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-night-900">
+            <Link href={localePath(locale, '/onboarding/inscription')} className="mt-5 inline-flex min-h-[48px] items-center rounded-xl bg-leaf-500 px-5 font-semibold text-white hover:bg-leaf-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-night-900">
               {t('ctaButton')}
             </Link>
           </aside>

@@ -8,6 +8,7 @@ import { contentLangAttr } from '@/lib/contenus/locale'
 import { GUIDE_CATEGORIES } from '@/lib/guide/types'
 import { homeHref } from '@/lib/guide/links'
 import { guidePaths } from '@/lib/seo/site'
+import { localePathFor } from '@/lib/i18n/routing'
 import { collectionJsonLd, type Crumb } from '@/lib/seo/guide-jsonld'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { guideMetadata, loadPublicTerritory } from '@/components/guide-public/data'
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t('metaTitle', { territory: g.territoire.nom }),
     description: t('metaDescription', { territory: g.territoire.nom, count: g.fiches.length }),
     path: guidePaths.territoire(g.territoire.code),
-    lang: locale,
+    locale,
   })
 }
 
@@ -37,25 +38,26 @@ export default async function GuideTerritoryPage({ params }: Props) {
   const data = await loadPublicTerritory(code)
   if (!data) notFound()
   const { g, locale } = data
+  const lp = localePathFor(locale)
   const { territoire, fiches, parcours } = g
   const t = await getTranslations('public.guide')
   const counts = Object.fromEntries(GUIDE_CATEGORIES.map((c) => [c.key, fiches.filter((f) => f.categorie === c.key).length]))
   const title = t('territory.title', { territory: territoire.nom })
 
   const crumbs: Crumb[] = [
-    { name: t('breadcrumbHome'), path: '/' },
-    { name: t('title'), path: guidePaths.index },
-    { name: territoire.nom, path: guidePaths.territoire(territoire.code) },
+    { name: t('breadcrumbHome'), path: lp('/') },
+    { name: t('title'), path: lp(guidePaths.index) },
+    { name: territoire.nom, path: lp(guidePaths.territoire(territoire.code)) },
   ]
 
   return (
     <>
       <JsonLd data={collectionJsonLd({
-        path: guidePaths.territoire(territoire.code),
+        path: lp(guidePaths.territoire(territoire.code)),
         title,
         description: t('territory.metaDescription', { territory: territoire.nom, count: fiches.length }),
         lang: locale,
-        entries: fiches.map((f) => ({ name: f.titre, path: guidePaths.fiche(territoire.code, f.slug) })),
+        entries: fiches.map((f) => ({ name: f.titre, path: lp(guidePaths.fiche(territoire.code, f.slug)) })),
         crumbs,
       })} />
 
@@ -74,7 +76,7 @@ export default async function GuideTerritoryPage({ params }: Props) {
             <ul className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
               {parcours.map((p) => (
                 <li key={p.slug}>
-                  <Link href={guidePaths.parcours(territoire.code, p.slug)} className={cn(LINK_CARD, 'flex h-full items-start gap-3 p-4')}>
+                  <Link href={lp(guidePaths.parcours(territoire.code, p.slug))} className={cn(LINK_CARD, 'flex h-full items-start gap-3 p-4')}>
                     <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-700"><ListChecks className="h-5 w-5" strokeWidth={1.75} /></span>
                     <span className="min-w-0 flex-1">
                       <span className="block text-[15.5px] font-bold leading-snug text-night-900" lang={contentLangAttr(p.lang, locale)}>{p.titre}</span>
@@ -95,7 +97,7 @@ export default async function GuideTerritoryPage({ params }: Props) {
             {GUIDE_CATEGORIES.map((c) => (
               <li key={c.key}>
                 <CategoryTile
-                  href={guidePaths.categorie(territoire.code, c.key)}
+                  href={lp(guidePaths.categorie(territoire.code, c.key))}
                   cat={c.key}
                   label={t(`categories.${c.key}`)}
                   count={t('ficheCount', { count: counts[c.key] ?? 0 })}
@@ -110,12 +112,12 @@ export default async function GuideTerritoryPage({ params }: Props) {
           {GUIDE_CATEGORIES.filter((c) => counts[c.key]).map((c) => (
             <div key={c.key} className="mt-6">
               <h3 className="text-[15px] font-bold text-night-800">
-                <Link href={guidePaths.categorie(territoire.code, c.key)} className="hover:underline">{t(`categories.${c.key}`)}</Link>
+                <Link href={lp(guidePaths.categorie(territoire.code, c.key))} className="hover:underline">{t(`categories.${c.key}`)}</Link>
               </h3>
               <ul className="mt-3 grid gap-3 md:grid-cols-2">
                 {fiches.filter((f) => f.categorie === c.key).map((f) => (
                   <li key={f.slug}>
-                    <FicheCard href={guidePaths.fiche(territoire.code, f.slug)} title={f.titre} summary={f.resume} lang={contentLangAttr(f.lang, locale)} />
+                    <FicheCard href={lp(guidePaths.fiche(territoire.code, f.slug))} title={f.titre} summary={f.resume} lang={contentLangAttr(f.lang, locale)} />
                   </li>
                 ))}
               </ul>

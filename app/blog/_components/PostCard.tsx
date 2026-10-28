@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
 import { BLOG_CATEGORIES, blogCategoryLabel, type PublishedPost } from '@/lib/blog/types'
 import { intlLocale } from '@/lib/i18n/config'
+import { localePath } from '@/lib/i18n/routing'
 import { contentLangAttr } from '@/lib/contenus/locale'
 import { readingMinutes } from '@/lib/blog/markdown'
 import { isOptimizable } from './image'
@@ -35,7 +36,7 @@ export function PostCard({ post, featured = false }: { post: PublishedPost; feat
       <div className={`flex flex-1 flex-col p-5 ${featured ? 'lg:p-8' : ''}`}>
         <p className="text-[12px] font-bold uppercase tracking-wider text-leaf-700">{category}</p>
         <h3 lang={cl} className={`mt-2 font-extrabold leading-snug text-night-900 ${featured ? 'text-[22px] lg:text-[28px]' : 'text-[17px]'}`}>
-          <Link href={`/blog/${post.slug}`} className="after:absolute after:inset-0 focus-visible:outline-none">{post.titre}</Link>
+          <Link href={localePath(locale, `/blog/${post.slug}`)} className="after:absolute after:inset-0 focus-visible:outline-none">{post.titre}</Link>
         </h3>
         <p lang={cl} className="mt-2 line-clamp-3 text-[14px] leading-relaxed text-night-700">{post.extrait}</p>
         <p className="mt-auto pt-4 text-[12.5px] text-night-600">

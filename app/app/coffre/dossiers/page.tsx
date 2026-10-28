@@ -24,7 +24,7 @@ export default function DossiersPage() {
   const { folders, shares, sharedWithMe, initialLoading, error, refresh } = useFolders()
   const { docs, loading: docsLoading, error: docsError, refresh: refreshDocs } = useVaultDocs()
   const { announce, node } = useAnnounce()
-  const { openActions, sheet } = useDocActions(announce)
+  const { openActions, sheet } = useDocActions(announce, { onRemoved: refreshDocs })
   const actions = useFolderActions({ shares, refresh, announce })
 
   const mine = folders.filter((f) => f.mine && f.parentId === null).sort((a, b) => a.name.localeCompare(b.name, 'fr'))

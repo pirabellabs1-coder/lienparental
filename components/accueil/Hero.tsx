@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
+import { localePathFor, signupPath } from '@/lib/i18n/routing'
 import { appShot } from '@/lib/i18n/shots'
 import { ArrowRight, Download, HeartHandshake, MessagesSquare, Monitor, Play, Smartphone, Sun, Users } from 'lucide-react'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
@@ -43,7 +44,7 @@ export async function Hero() {
           </ul>
 
           <div className="home-rise mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={d(240)}>
-            <Link href="/onboarding" className={cn(BTN_PRIMARY, 'h-14 px-7 text-[16px] shadow-[0_14px_30px_-14px_rgba(46,125,50,0.8)]')}>
+            <Link href={signupPath(locale)} className={cn(BTN_PRIMARY, 'h-14 px-7 text-[16px] shadow-[0_14px_30px_-14px_rgba(46,125,50,0.8)]')}>
               {t('ctaCreate')}<ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
             <VideoTrigger className={cn(BTN_OUTLINE, 'h-14 px-6 text-[16px]')}>
@@ -57,7 +58,7 @@ export async function Hero() {
             <p className="text-[13px] font-semibold uppercase tracking-[0.14em] text-night-600">{t('downloadTitle')}</p>
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <Link
-                href="/installer"
+                href={localePathFor(locale)('/installer')}
                 className="group inline-flex min-h-[60px] items-center gap-3 rounded-2xl bg-night-900 py-2.5 pl-3 pr-5 text-white shadow-[0_14px_30px_-16px_rgba(11,45,91,0.9)] transition-[transform,background-color] duration-200 hover:bg-night-800 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 focus-visible:ring-offset-2"
               >
                 <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/10 ring-1 ring-white/15">
@@ -69,7 +70,7 @@ export async function Hero() {
                 </span>
               </Link>
               <Link
-                href="/installer"
+                href={localePathFor(locale)('/installer')}
                 className="inline-flex min-h-[60px] items-center gap-3 rounded-2xl bg-white py-2.5 pl-3 pr-5 text-night-900 ring-1 ring-[#E5E7EB] transition-colors duration-200 hover:ring-leaf-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400"
               >
                 <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-leaf-50 text-leaf-600">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
+import { localePathFor } from '@/lib/i18n/routing'
 import { SiteShell } from '@/components/site/SiteShell'
 import { NOINDEX_FOLLOW } from '@/lib/seo/metadata'
 import { guidePaths } from '@/lib/seo/site'
@@ -15,10 +16,12 @@ const BTN = 'inline-flex min-h-[48px] items-center justify-center rounded-full p
 /** 404 de marque, traduite (URL inconnue, article ou fiche introuvable, espace admin masqué). */
 export default async function NotFound() {
   const t = await getTranslations('notFound')
+  // Liens dans la langue de la page (404 sous /en/… : liens /en/…).
+  const lp = localePathFor(await getLocale())
   const links = [
-    { href: '/aide', label: t('help') },
-    { href: guidePaths.index, label: t('guide') },
-    { href: '/blog', label: t('blog') },
+    { href: lp('/aide'), label: t('help') },
+    { href: lp(guidePaths.index), label: t('guide') },
+    { href: lp('/blog'), label: t('blog') },
   ]
   return (
     <SiteShell mainClassName="grid place-items-center bg-[#F7F9FC] px-5 py-16 sm:py-24">
@@ -26,7 +29,7 @@ export default async function NotFound() {
         <p className="font-script text-[40px] leading-none text-leaf-500">{t('kicker')}</p>
         <h1 className="mt-3 text-[30px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 sm:text-[38px]">{t('title')}</h1>
         <p className="mt-4 text-[16px] leading-relaxed text-night-700">{t('text')}</p>
-        <Link href="/" className={`${BTN} mt-8 bg-leaf-500 text-white hover:bg-leaf-600`}>{t('home')}</Link>
+        <Link href={lp('/')} className={`${BTN} mt-8 bg-leaf-500 text-white hover:bg-leaf-600`}>{t('home')}</Link>
         <ul className="mt-6 flex flex-wrap justify-center gap-3">
           {links.map((l) => (
             <li key={l.href}>

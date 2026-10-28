@@ -264,7 +264,13 @@
       "indicative": "Suggestion indicative, vous restez libre de votre message.",
       "useReformulation": "Utiliser la reformulation",
       "sendAsIs": "Envoyer tel quel",
-      "edit": "Modifier"
+      "edit": "Modifier",
+      "local": {
+        "openingNamed": "Bonjour {name}, je voudrais qu’on reprenne ce point calmement.",
+        "opening": "Bonjour, je voudrais qu’on reprenne ce point calmement.",
+        "closing": "J’aimerais qu’on trouve ensemble une solution qui convienne aux enfants. Peux-tu me dire ce qui te conviendrait ? Merci.",
+        "resume": "Certaines expressions peuvent être perçues comme des reproches. Une formulation factuelle facilite la réponse."
+      }
     },
     "pdf": {
       "noMessages": "Aucun message sur la période.",

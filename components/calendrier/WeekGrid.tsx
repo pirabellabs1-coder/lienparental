@@ -104,22 +104,35 @@ export function DayTimeline({ day, events, childNames }: { day: Date; events: Ca
             const Icon = typeIcon(e.type)
             const top = pct(e.start)
             const height = Math.max(pct(e.end) - top, 0)
+            // Événement court (< 2 h, hauteur ≈ min-h) : horaire + titre seulement, sur deux lignes
+            // lisibles ; le détail (enfants, lieu, partage) n'est plus coupé à mi-hauteur.
+            const compact = minutesOfDay(e.end) - minutesOfDay(e.start) < 120
             return (
               <li key={e.id}>
                 <Link
                   href={`/app/calendrier/${e.id}`}
                   className={cn('absolute left-2 right-1 flex min-h-[46px] gap-2 overflow-hidden rounded-lg px-2.5 py-1.5 transition-transform motion-safe:hover:-translate-y-px', s.bg)}
                   style={{ top: `${top}%`, height: `${height}%` }}
+                  title={`${f.hourRange(e.start, e.end)} · ${e.title}`}
                 >
                   <Icon aria-hidden="true" className={cn('mt-0.5 h-4 w-4 shrink-0', s.icon)} strokeWidth={1.9} />
                   <span className="min-w-0">
-                    <span className={cn('block text-[10px] font-semibold tabular-nums', s.text)}>{f.hourRange(e.start, e.end)}</span>
-                    <span className={cn('block truncate text-[11.5px] font-bold', s.text)}>
+                    <span className={cn('block truncate text-[10px] font-semibold leading-[15px] tabular-nums', s.text)}>{f.hourRange(e.start, e.end)}</span>
+                    <span className={cn('block truncate text-[11.5px] font-bold leading-[16px]', s.text)}>
                       {e.title}
                       <span className="sr-only"> ({f.typeLabel(e.type)})</span>
                     </span>
-                    <EventMeta kids={childNames?.(e.childrenIds)} location={e.location} className="text-[10.5px] text-night-700" />
-                    {e.sharedBy && <SharedByBadge prenom={e.sharedBy.prenom} className="mt-0.5" />}
+                    {compact ? (
+                      // Détail toujours disponible pour les lecteurs d'écran (et sur la fiche de l'événement).
+                      <span className="sr-only">
+                        <EventMeta kids={childNames?.(e.childrenIds)} location={e.location} />
+                      </span>
+                    ) : (
+                      <>
+                        <EventMeta kids={childNames?.(e.childrenIds)} location={e.location} className="text-[10.5px] text-night-700" />
+                        {e.sharedBy && <SharedByBadge prenom={e.sharedBy.prenom} className="mt-0.5" />}
+                      </>
+                    )}
                   </span>
                 </Link>
               </li>

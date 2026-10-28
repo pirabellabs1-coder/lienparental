@@ -3,14 +3,14 @@
 import { useMemo } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import {
-  capitalize, fmtHour as fmtHourFr, fmtHourRange as fmtHourRangeFr, fmtTime, getWeekDays,
+  capitalize, fmtHourLocale, fmtHourTickLocale, fmtWallTime, getWeekDays,
   type EventTypeKey, type ReminderKey,
 } from '@/lib/calendrier'
 import { intlLocale } from '@/lib/i18n/config'
 
 // Formatage localisé du calendrier (fr / en / pt). Les jours sont des Dates à midi UTC
 // (lib/calendrier) : on formate toujours avec `timeZone: 'UTC'`. Les heures murales viennent
-// de DEFAULT_TZ (lib/calendrier → fmtTime). Français et portugais : notation « 14h30 ».
+// de DEFAULT_TZ (lib/calendrier → fmtTime). Heures : « 14h30 » (fr), « 2:30 PM » (en), « 14:30 » (pt).
 
 const UTC = { timeZone: 'UTC' } as const
 /** Lundi 1er janvier 2024, midi UTC : base des noms de jours (lundi en premier). */
@@ -29,13 +29,9 @@ export function weekdayNames(locale: string): WeekdayName[] {
   })
 }
 
-/** Heure murale "HH:mm" au format de la langue (en : « 2:30 PM » ; fr / pt : « 14h30 »). */
+/** Heure murale "HH:mm" au format de la langue (fr « 14h30 », en « 2:30 PM », pt « 14:30 »). */
 export function localWallTime(hhmm: string, locale: string): string {
-  const [h, m] = hhmm.split(':').map(Number)
-  if (locale !== 'en') return m ? `${h || 0}h${String(m).padStart(2, '0')}` : `${h || 0}h`
-  return new Date(Date.UTC(2000, 0, 1, h || 0, m || 0)).toLocaleTimeString(intlLocale(locale), {
-    hour: 'numeric', minute: '2-digit', ...UTC,
-  })
+  return fmtWallTime(hhmm, locale)
 }
 
 export function useCalFormat() {
@@ -46,7 +42,7 @@ export function useCalFormat() {
     const loc = intlLocale(locale)
     const en = locale === 'en'
     const day = (d: Date, o: Intl.DateTimeFormatOptions) => d.toLocaleDateString(loc, { ...o, ...UTC })
-    const hour = (iso: string) => (en ? localWallTime(fmtTime(iso), locale) : fmtHourFr(iso))
+    const hour = (iso: string) => fmtHourLocale(iso, locale)
 
     return {
       locale,
@@ -57,15 +53,12 @@ export function useCalFormat() {
       dateFull: (d: Date) => capitalize(day(d, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })),
       /** « 12 mai 2024 » */
       dateMedium: (d: Date) => day(d, { day: 'numeric', month: 'long', year: 'numeric' }),
-      /** « 14h30 » (fr / pt), « 2:30 PM » (en) */
+      /** « 14h30 » (fr), « 2:30 PM » (en), « 14:30 » (pt) */
       hour,
-      /** « 14h30 - 17h30 » */
-      hourRange: (start: string, end: string) => (en ? `${hour(start)} – ${hour(end)}` : fmtHourRangeFr(start, end)),
-      /** Graduation de la grille horaire : « 08h » (fr / pt), « 8 AM » (en). */
-      hourTick: (h: number) =>
-        en
-          ? new Date(Date.UTC(2000, 0, 1, h)).toLocaleTimeString(loc, { hour: 'numeric', ...UTC })
-          : `${String(h).padStart(2, '0')}h`,
+      /** « 14h30 - 17h30 » (fr), « 2:30 PM – 5:30 PM » (en), « 14:30 – 17:30 » (pt) */
+      hourRange: (start: string, end: string) => (locale === 'fr' ? `${hour(start)} - ${hour(end)}` : `${hour(start)} – ${hour(end)}`),
+      /** Graduation de la grille horaire : « 08h » (fr), « 8 AM » (en), « 08:00 » (pt). */
+      hourTick: (h: number) => fmtHourTickLocale(h, locale),
       /** « 6 – 12 mai 2024 » / « 29 avr. – 5 mai 2024 » */
       weekRange: (ref: Date) => {
         const days = getWeekDays(ref)

@@ -11,6 +11,7 @@ import { useMemo } from 'react'
 import { z } from 'zod'
 import { childProfileStatus, mockChildren, ageFromBirthDate, type Child } from '@/lib/mock-data'
 import { DataError, LIVE, dataMsg, db, requireUserId, toDataError, useAsyncData } from './core'
+import { demoId, hasId, readDemoList, writeDemoList } from './demo-session'
 
 // --- Lignes Supabase (sous-ensemble utilisé) --------------------------------
 
@@ -108,10 +109,23 @@ function saveOverride(id: string, patch: Partial<Child>) {
   }
 }
 
+/** L'âge affiché découle toujours de la date de naissance (même calcul que « Mes enfants »). */
+function withAge(c: Child): Child {
+  return c.dateNaissance ? { ...c, age: ageFromBirthDate(c.dateNaissance) } : c
+}
+
+// --- Démo : enfants ajoutés pendant la session (même mécanisme que le journal) ---
+
+const DEMO_CHILDREN_KEY = 'lp_demo_children_v1'
+const isDemoChild = (v: unknown): v is Child =>
+  hasId(v) && typeof (v as Child).prenom === 'string' && typeof (v as Child).dateNaissance === 'string'
+const demoChildren = () => readDemoList(DEMO_CHILDREN_KEY, isDemoChild)
+const allDemoChildren = (): Child[] => [...mockChildren, ...demoChildren()]
+
 // --- API --------------------------------------------------------------------
 
 export async function listChildren(): Promise<Child[]> {
-  if (!LIVE) return mockChildren.map((c) => ({ ...c, ...readOverride(c.id) }))
+  if (!LIVE) return allDemoChildren().map((c) => withAge({ ...c, ...readOverride(c.id) }))
   const { data, error } = await db()
     .from('children')
     .select(COLUMNS)
@@ -125,8 +139,8 @@ export async function listChildren(): Promise<Child[]> {
 /** Profil complet (y compris médical déchiffré côté serveur). */
 export async function getChild(id: string): Promise<Child | null> {
   if (!LIVE) {
-    const base = mockChildren.find((c) => c.id === id)
-    return base ? { ...base, ...readOverride(id) } : null
+    const base = allDemoChildren().find((c) => c.id === id)
+    return base ? withAge({ ...base, ...readOverride(id) }) : null
   }
   if (!z.string().uuid().safeParse(id).success) return null
   const { data, error } = await db().from('children').select(COLUMNS).eq('id', id).is('deleted_at', null).maybeSingle()
@@ -150,8 +164,16 @@ async function fetchMedical(id: string): Promise<ChildMedical | undefined> {
 export async function createChild(input: { prenom: string; dateNaissance: string; classe?: string }): Promise<Child | null> {
   const parsed = createSchema().safeParse(input)
   if (!parsed.success) throw invalid(parsed.error)
-  // Démo : comportement historique (aucune persistance de création).
-  if (!LIVE) return null
+  // Démo : conservé pour la session (sessionStorage), comme les entrées du journal.
+  if (!LIVE) {
+    const v = parsed.data
+    const child: Child = withAge({
+      id: demoId('c'), prenom: v.prenom, age: 0, classe: v.classe ?? '', dateNaissance: v.dateNaissance,
+      statut: 'actif', allergies: [], createdAt: new Date().toISOString(),
+    })
+    writeDemoList(DEMO_CHILDREN_KEY, [...demoChildren(), child], 20)
+    return child
+  }
   const userId = await requireUserId()
   const v = parsed.data
   const { data, error } = await db()
@@ -232,7 +254,9 @@ export function useChildrenList() {
 }
 
 export function useChildData(id: string) {
-  return useAsyncData(() => getChild(id), `child:${id}`, LIVE ? undefined : (mockChildren.find((c) => c.id === id) ?? null))
+  // Démo : un enfant ajouté pendant la session n'est connu qu'après montage → état « chargement », pas « introuvable ».
+  const seed = LIVE ? undefined : mockChildren.find((c) => c.id === id)
+  return useAsyncData(() => getChild(id), `child:${id}`, seed ? withAge(seed) : undefined)
 }
 
 /** Options des sélecteurs « Enfants concernés » : « Lina (5 ans) ». */

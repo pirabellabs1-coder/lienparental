@@ -7,7 +7,7 @@ import 'server-only'
  */
 import { cache } from 'react'
 import { listPublished, PublicReadError } from '@/lib/contenus/public'
-import { toContentLocale, type ContentLocale } from '@/lib/contenus/locale'
+import { CONTENT_LOCALES, toContentLocale, type ContentLocale } from '@/lib/contenus/locale'
 import type { PublishedPost } from './types'
 
 /** Articles publiés dans une langue (sans `locale` : français, ex. sitemap). */
@@ -31,6 +31,15 @@ const listPostsCached = cache(async (locale: ContentLocale): Promise<PublishedPo
 export async function getPost(slug: string, locale?: string): Promise<PublishedPost | null> {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 80) return null
   return (await listPosts(locale)).find((p) => p.slug === slug) ?? null
+}
+
+/**
+ * Langues dans lesquelles un article existe VRAIMENT (traduction présente ; le français toujours).
+ * Sert aux hreflang et au sitemap : une version EN/PT affichée en repli français n'y figure pas.
+ */
+export async function postLocales(slug: string): Promise<ContentLocale[]> {
+  const found = await Promise.all(CONTENT_LOCALES.map(async (l) => ((await listPosts(l)).find((p) => p.slug === slug)?.lang === l ? l : null)))
+  return found.filter((l): l is ContentLocale => l !== null)
 }
 
 /** Articles proches (même catégorie d'abord, puis étiquettes communes), dans la même langue. */

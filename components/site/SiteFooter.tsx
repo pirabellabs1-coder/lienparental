@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { Logo } from '@/components/brand/Logo'
 import { SUPPORT_EMAIL } from '@/components/profil/data'
 import { cn } from '@/lib/cn'
+import { localePathFor } from '@/lib/i18n/routing'
 import { TERRITORIES, TerritoryShape } from './territories'
 
 // Pied de page unique des pages publiques.
@@ -22,12 +23,16 @@ const LINKS: { key: string; href: string }[] = [
 
 export async function SiteFooter() {
   const t = await getTranslations('footer')
+  // Noms des territoires traduits (catalogue shared.territories, mêmes codes que TERRITORIES).
+  const tTerr = await getTranslations('shared.territories')
   const ta = await getTranslations('a11y')
+  // Liens dans la langue de la page (/en/aide…) ; mailto: et liens externes inchangés.
+  const lp = localePathFor(await getLocale())
   return (
     <footer className="site-footer border-t border-[#E5E7EB] bg-white text-night-900">
       <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1fr_2fr] lg:gap-16 [&>*]:min-w-0">
         <div>
-          <Link href="/" aria-label={ta('homeLink')} className="inline-flex rounded-lg">
+          <Link href={lp('/')} aria-label={ta('homeLink')} className="inline-flex rounded-lg">
             <Logo size="md" tagline />
           </Link>
           <p className="mt-4 max-w-[36ch] text-[14px] leading-relaxed text-night-700">
@@ -39,7 +44,7 @@ export async function SiteFooter() {
             <ul className="grid grid-cols-2 gap-x-6 sm:grid-cols-3">
               {LINKS.map(({ key, href }) => (
                 <li key={key}>
-                  <Link href={href} className="inline-flex min-h-[44px] items-center text-[14.5px] text-night-800 hover:text-leaf-600">{t(key)}</Link>
+                  <Link href={lp(href)} className="inline-flex min-h-[44px] items-center text-[14.5px] text-night-800 hover:text-leaf-600">{t(key)}</Link>
                 </li>
               ))}
             </ul>
@@ -51,7 +56,7 @@ export async function SiteFooter() {
               {TERRITORIES.map(terr => (
                 <li key={terr.code} className={cn('inline-flex items-center gap-2 rounded-full py-1.5 pl-2 pr-3 text-[13px] ring-1', terr.available ? 'bg-leaf-50 ring-leaf-200' : 'bg-white ring-[#E5E7EB]')}>
                   <TerritoryShape path={terr.path} available={terr.available} className="h-6 w-6 shrink-0" />
-                  <span className="font-semibold text-night-900">{terr.name}</span>
+                  <span className="font-semibold text-night-900">{tTerr(terr.code)}</span>
                   <span className={terr.available ? 'font-semibold text-leaf-700' : 'text-night-600'}>{terr.available ? t('available') : t('soon')}</span>
                 </li>
               ))}

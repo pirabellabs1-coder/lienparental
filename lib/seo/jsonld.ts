@@ -139,6 +139,8 @@ export type BlogPostingInput = {
   /** Langue réellement affichée (traduction ou repli français). */
   lang?: string
   wordCount?: number
+  /** URL de la liste du blog dans la même langue (`/en/blog`…), défaut `/blog`. */
+  blogPath?: string
 }
 
 /** Article du blog : auteur et éditeur = l'organisation (« L'équipe Lien Parental », pas une personne). */
@@ -156,7 +158,7 @@ export function blogPosting(i: BlogPostingInput): Node {
     author: { '@id': ORG_ID },
     publisher: { '@id': ORG_ID },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    isPartOf: { '@id': `${SITE}/blog#blog` },
+    isPartOf: { '@id': `${abs(i.blogPath ?? '/blog')}#blog` },
     ...(i.section ? { articleSection: i.section } : {}),
     ...(i.keywords?.length ? { keywords: i.keywords.join(', ') } : {}),
     inLanguage: inLanguage(i.lang),
@@ -164,11 +166,13 @@ export function blogPosting(i: BlogPostingInput): Node {
   }
 }
 
-export function blog(i: { name: string; description: string; locale: string }): Node {
+/** `path` : URL de la liste dans la langue affichée (`/blog`, `/en/blog`…), défaut `/blog`. */
+export function blog(i: { name: string; description: string; locale: string; path?: string }): Node {
+  const url = abs(i.path ?? '/blog')
   return {
     '@type': 'Blog',
-    '@id': `${SITE}/blog#blog`,
-    url: `${SITE}/blog`,
+    '@id': `${url}#blog`,
+    url,
     name: i.name,
     description: i.description,
     inLanguage: inLanguage(i.locale),

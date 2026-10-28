@@ -264,7 +264,13 @@
       "indicative": "This is only a suggestion: your message is your choice.",
       "useReformulation": "Use the rewording",
       "sendAsIs": "Send as is",
-      "edit": "Edit"
+      "edit": "Edit",
+      "local": {
+        "openingNamed": "Hello {name}, I’d like us to go over this calmly.",
+        "opening": "Hello, I’d like us to go over this calmly.",
+        "closing": "I’d like us to find a solution together that works for the children. Could you tell me what would work for you? Thank you.",
+        "resume": "Some expressions can come across as criticism. Factual wording makes it easier to reply."
+      }
     },
     "pdf": {
       "noMessages": "No messages in this period.",

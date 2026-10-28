@@ -6,6 +6,7 @@ import { cn } from '@/lib/cn'
 import { loadGuide } from '@/lib/guide/load'
 import { GUIDE_CATEGORIES } from '@/lib/guide/types'
 import { guidePaths } from '@/lib/seo/site'
+import { localePathFor } from '@/lib/i18n/routing'
 import { collectionJsonLd, type Crumb } from '@/lib/seo/guide-jsonld'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { TERRITORIES, TerritoryShape } from '@/components/site/territories'
@@ -17,12 +18,13 @@ export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.guide.landing')
-  return guideMetadata({ title: t('metaTitle'), description: t('metaDescription'), path: guidePaths.index, lang: await getLocale() })
+  return guideMetadata({ title: t('metaTitle'), description: t('metaDescription'), path: guidePaths.index, locale: await getLocale() })
 }
 
 // Présentation du Guide parental public et choix du territoire (Guyane par défaut).
 export default async function GuidePublicIndex() {
   const locale = await getLocale()
+  const lp = localePathFor(locale)
   const t = await getTranslations('public.guide')
   const g = await loadGuide(undefined, locale)
   const def = g.territoire
@@ -30,19 +32,19 @@ export default async function GuidePublicIndex() {
   const counts = Object.fromEntries(GUIDE_CATEGORIES.map((c) => [c.key, g.fiches.filter((f) => f.categorie === c.key).length]))
 
   const crumbs: Crumb[] = [
-    { name: t('breadcrumbHome'), path: '/' },
-    { name: t('title'), path: guidePaths.index },
+    { name: t('breadcrumbHome'), path: lp('/') },
+    { name: t('title'), path: lp(guidePaths.index) },
   ]
   const available = g.territoires.filter((x) => x.disponible)
 
   return (
     <>
       <JsonLd data={collectionJsonLd({
-        path: guidePaths.index,
+        path: lp(guidePaths.index),
         title: t('landing.title'),
         description: t('landing.metaDescription'),
         lang: locale,
-        entries: available.map((x) => ({ name: t('territory.title', { territory: x.nom }), path: guidePaths.territoire(x.code) })),
+        entries: available.map((x) => ({ name: t('territory.title', { territory: x.nom }), path: lp(guidePaths.territoire(x.code)) })),
         crumbs,
       })} />
 
@@ -53,7 +55,7 @@ export default async function GuidePublicIndex() {
           <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-leaf-700">{t('title')}</p>
           <h1 className={cn(H1, 'mt-2')}>{t('landing.title')}</h1>
           <p className="mt-4 text-[17px] leading-relaxed text-night-700">{t('landing.lead')}</p>
-          <Link href={guidePaths.territoire(def.code)} className={cn(BTN_PRIMARY, 'mt-6')}>
+          <Link href={lp(guidePaths.territoire(def.code))} className={cn(BTN_PRIMARY, 'mt-6')}>
             {t('landing.openDefault', { territory: def.nom })}<ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </header>
@@ -79,7 +81,7 @@ export default async function GuidePublicIndex() {
               return (
                 <li key={x.code}>
                   {x.disponible ? (
-                    <Link href={guidePaths.territoire(x.code)} className={cn(CARD, 'flex min-h-[72px] items-center gap-3 p-4 ring-leaf-300 transition-shadow hover:shadow-[0_12px_32px_-20px_rgba(11,45,91,0.35)]')}>
+                    <Link href={lp(guidePaths.territoire(x.code))} className={cn(CARD, 'flex min-h-[72px] items-center gap-3 p-4 ring-leaf-300 transition-shadow hover:shadow-[0_12px_32px_-20px_rgba(11,45,91,0.35)]')}>
                       {body}
                       <ArrowRight className="h-5 w-5 shrink-0 text-leaf-600" aria-hidden="true" />
                     </Link>
@@ -109,7 +111,7 @@ export default async function GuidePublicIndex() {
             {GUIDE_CATEGORIES.map((c) => (
               <li key={c.key}>
                 <CategoryTile
-                  href={guidePaths.categorie(def.code, c.key)}
+                  href={lp(guidePaths.categorie(def.code, c.key))}
                   cat={c.key}
                   label={t(`categories.${c.key}`)}
                   count={t('ficheCount', { count: counts[c.key] ?? 0 })}

@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Bell, CalendarDays, Camera, Clock, Globe } from 'lucide-react'
 import { Switch } from '@/components/ui'
 import { BrandHeader, Stepper, TitleBar, btn } from '@/components/profil/kit'
@@ -17,7 +17,7 @@ import { loadPreferences, saveAccountInfo } from '@/lib/auth/actions'
 import { uploadAvatar, useAccountProfile } from '@/lib/auth/browser'
 import { authErrorMessage } from '@/lib/auth/errors'
 import { appUrl } from '@/lib/auth/redirect'
-import { emailSchema } from '@/lib/auth/validation'
+import { ACCOUNT_COUNTRIES, emailSchema, type AccountCountry } from '@/lib/auth/validation'
 import { applyLocale } from '@/lib/i18n/actions'
 
 type Form = {
@@ -45,11 +45,22 @@ const STEPS = [1, 2, 3, 4] as const
 // Langues prises en charge, chacune dans son nom natif (jamais traduit).
 const LANGUES = [{ value: 'fr', label: 'Français' }, { value: 'en', label: 'English' }, { value: 'pt', label: 'Português' }]
 // Pays : libellés traduits au rendu (account.profile.info.countries.{code}).
-const PAYS = ['FR', 'BE', 'CH', 'CA', 'LU'] as const
+const PAYS = ACCOUNT_COUNTRIES
+// Indicatif téléphonique proposé selon le pays choisi.
+const DIAL: Record<AccountCountry, string> = { FR: '+33', GF: '+594', BR: '+55', BE: '+32', CH: '+41', CA: '+1', LU: '+352' }
+const dialFor = (pays: string) => DIAL[pays as AccountCountry] ?? '+33'
+/** Pays enregistré, sinon déduit du code postal (973xx = Guyane), sinon France. */
+const initialCountry = (pays?: string | null, cp?: string | null) =>
+  pays && (PAYS as readonly string[]).includes(pays) ? pays : cp?.trim().startsWith('973') ? 'GF' : 'FR'
+/** Numéro affiché dans le récapitulatif : indicatif du pays sauf s'il est déjà international. */
+const withDial = (tel: string, pays: string) => (tel.trim().startsWith('+') ? tel.trim() : `${dialFor(pays)} ${tel.trim()}`)
 
 export default function InformationsWizardPage() {
   const t = useTranslations('account.profile.info')
   const router = useRouter()
+  // Langue affichée = langue réellement utilisée (cookie lp_locale) : « Enregistrer » ne doit
+  // jamais changer la langue de l'application si l'utilisateur n'a pas touché ce champ.
+  const locale = useLocale()
   const [step, setStep] = useState(1)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const firstRender = useRef(true)
@@ -73,7 +84,7 @@ export default function InformationsWizardPage() {
     cp: '75015',
     ville: 'Paris',
     pays: 'FR',
-    langue: 'fr',
+    langue: locale,
     fuseau: 'America/Cayenne',
     formatDate: 'dd/mm/yyyy',
     notifEmail: true,
@@ -96,7 +107,7 @@ export default function InformationsWizardPage() {
       adresse: account.adresse ?? '',
       cp: account.codePostal ?? '',
       ville: account.ville ?? '',
-      pays: account.pays ?? 'FR',
+      pays: initialCountry(account.pays, account.codePostal),
     }))
   }, [accountLoading, account])
 
@@ -107,7 +118,6 @@ export default function InformationsWizardPage() {
       const p = res.data
       setForm(f => ({
         ...f,
-        langue: p.langue ?? f.langue,
         fuseau: p.fuseau ?? f.fuseau,
         formatDate: p.formatDate ?? f.formatDate,
         notifEmail: p.notifEmail ?? f.notifEmail,
@@ -207,7 +217,7 @@ export default function InformationsWizardPage() {
       sessionStorage.setItem(SUMMARY_KEY, JSON.stringify({
         nom: `${form.prenom} ${form.nom}`.trim(),
         email: emailPending ? t('emailPending', { current: account.email, next: form.email.trim() }) : form.email,
-        telephone: form.telephone ? `+33 ${form.telephone}` : '',
+        telephone: form.telephone ? withDial(form.telephone, form.pays) : '',
         adresse: [form.adresse, [form.cp, form.ville].filter(Boolean).join(' ')].filter(Boolean).join(', '),
         langue: LANGUES.find(l => l.value === form.langue)?.label ?? 'Français',
       }))
@@ -278,7 +288,7 @@ export default function InformationsWizardPage() {
                 value={form.telephone}
                 onChange={e => set('telephone', e.target.value)}
                 autoComplete="tel-national"
-                leading={<span className="flex items-center gap-2 pt-4"><FrFlag /><span className="text-[15px] text-night-900">+33</span></span>}
+                leading={<span className="flex items-center gap-2 pt-4">{(form.pays === 'FR' || form.pays === 'GF') && <FrFlag />}<span className="text-[15px] text-night-900">{dialFor(form.pays)}</span></span>}
               />
               <BoxInput label={t('address')} value={form.adresse} onChange={e => set('adresse', e.target.value)} autoComplete="street-address" />
               <div className="grid grid-cols-2 gap-3">

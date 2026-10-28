@@ -3,6 +3,7 @@
 import { useRef, type ClipboardEvent, type KeyboardEvent } from 'react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
+import { applyBackspace, applyInput, fillFrom, focusTarget, onlyDigits, toDigits, type OtpStep } from './otp-logic'
 
 type Props = {
   length?: number
@@ -37,47 +38,34 @@ export function OTPInput({
   const t = useTranslations('public.onboarding.otp')
   const ariaLabel = ariaLabelProp ?? t('label')
   const refs = useRef<Array<HTMLInputElement | null>>([])
-  const digits = Array.from({ length }, (_, i) => value[i] ?? '')
+  const digits = toDigits(value, length)
+  // Latest value, updated synchronously on every change: the focus handlers of
+  // the next box run before React re-renders, so they must not read `digits`
+  // from a stale render (that bug sent the focus back and gave "246" for 123456).
+  const valueRef = useRef(value)
+  valueRef.current = value
 
-  const commit = (next: string[]) => {
+  const current = () => toDigits(valueRef.current, length)
+
+  const apply = ({ digits: next, focus }: OtpStep, complete = true) => {
     const joined = next.join('')
+    valueRef.current = joined
     onChange(joined)
-    if (joined.length === length && !next.includes('')) onComplete?.(joined)
-  }
-
-  const setDigit = (idx: number, raw: string) => {
-    const clean = raw.replace(/\D/g, '')
-    if (clean.length > 1) {
-      // Autofill / fast typing delivered several digits into one box.
-      fill(clean, idx)
-      return
-    }
-    const next = [...digits]
-    next[idx] = clean
-    commit(next)
-    if (clean && idx < length - 1) refs.current[idx + 1]?.focus()
-  }
-
-  const fill = (raw: string, start = 0) => {
-    const chars = raw.slice(0, length - start).split('')
-    const next = [...digits]
-    chars.forEach((c, i) => (next[start + i] = c))
-    commit(next)
-    refs.current[Math.min(start + chars.length, length - 1)]?.focus()
+    if (complete && joined.length === length && !next.includes('')) onComplete?.(joined)
+    const el = refs.current[focus]
+    if (el && document.activeElement !== el) el.focus()
+    else el?.select()
   }
 
   const onKeyDown = (idx: number) => (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace') {
       e.preventDefault()
-      const next = [...digits]
-      if (next[idx]) {
-        next[idx] = ''
-        onChange(next.join(''))
-      } else if (idx > 0) {
-        next[idx - 1] = ''
-        onChange(next.join(''))
-        refs.current[idx - 1]?.focus()
-      }
+      apply(applyBackspace(current(), idx), false)
+    } else if (e.key === 'Delete') {
+      e.preventDefault()
+      const next = current()
+      next[idx] = ''
+      apply({ digits: next, focus: idx }, false)
     } else if (e.key === 'ArrowLeft' && idx > 0) {
       e.preventDefault()
       refs.current[idx - 1]?.focus()
@@ -87,11 +75,12 @@ export function OTPInput({
     }
   }
 
-  const onPaste = (e: ClipboardEvent<HTMLInputElement>) => {
-    const pasted = e.clipboardData.getData('text').replace(/\D/g, '')
+  const onPaste = (idx: number) => (e: ClipboardEvent<HTMLInputElement>) => {
+    const pasted = onlyDigits(e.clipboardData.getData('text'))
     if (!pasted) return
     e.preventDefault()
-    fill(pasted, 0)
+    // A full code always lands from the first box; a partial one from the current box.
+    apply(fillFrom(current(), pasted.length >= length ? 0 : focusTarget(current(), idx), pasted))
   }
 
   return (
@@ -110,14 +99,14 @@ export function OTPInput({
           value={d}
           disabled={disabled}
           autoFocus={autoFocus && i === 0}
-          onChange={(e) => setDigit(i, e.target.value)}
+          onChange={(e) => apply(applyInput(current(), i, e.target.value))}
           onKeyDown={onKeyDown(i)}
-          onPaste={onPaste}
+          onPaste={onPaste(i)}
           onFocus={(e) => {
-            // Keep digits contiguous: jump back to the first empty box.
-            const firstEmpty = digits.findIndex((x) => !x)
-            if (firstEmpty !== -1 && i > firstEmpty) {
-              refs.current[firstEmpty]?.focus()
+            // Keep digits contiguous: a click on a later box jumps back to the first empty one.
+            const target = focusTarget(current(), i)
+            if (target !== i) {
+              refs.current[target]?.focus()
               return
             }
             e.currentTarget.select()

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useLocalePath } from '@/components/i18n/useLocalePath'
 import { Suspense, useEffect, useState, type FormEvent } from 'react'
 import { KeyRound } from 'lucide-react'
 import { cn } from '@/lib/cn'
@@ -37,6 +38,7 @@ function Connexion() {
   const router = useRouter()
   const params = useSearchParams()
   const t = useTranslations('onb.login')
+  const lp = useLocalePath()
   const linkErrors: Record<string, string> = { lien: t('linkErrLien'), google: t('linkErrGoogle'), compte: t('linkErrCompte') }
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -214,7 +216,7 @@ function Connexion() {
           <p className="pt-2 text-center text-[13px] text-night-600">
             {t('noAccount')}
             <br />
-            <Link href="/onboarding/inscription" className={cn(linkLeaf, 'inline-flex min-h-[40px] items-center')}>
+            <Link href={lp('/onboarding/inscription')} className={cn(linkLeaf, 'inline-flex min-h-[40px] items-center')}>
               {t('createAccount')}
             </Link>
           </p>

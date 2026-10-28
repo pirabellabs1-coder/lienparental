@@ -145,6 +145,10 @@ export type DossierSelection = {
   preset: PeriodPreset
   period: Period
   documentIds: string[]
+  /** Sections cochées sur « Mon dossier », reprises par le partage avocat (absentes : valeurs par défaut). */
+  journal?: boolean
+  testimonies?: boolean
+  messages?: boolean
 }
 
 const SELECTION_KEY = 'lp.dossier.selection.v1'
@@ -164,6 +168,9 @@ export function readSelection(): DossierSelection | null {
       preset: (['3m', '6m', '12m', 'custom'] as const).includes(v.preset as PeriodPreset) ? (v.preset as PeriodPreset) : 'custom',
       period: { from: v.period.from, to: v.period.to },
       documentIds: Array.isArray(v.documentIds) ? v.documentIds.filter((x): x is string => typeof x === 'string') : [],
+      ...(typeof v.journal === 'boolean' ? { journal: v.journal } : {}),
+      ...(typeof v.testimonies === 'boolean' ? { testimonies: v.testimonies } : {}),
+      ...(typeof v.messages === 'boolean' ? { messages: v.messages } : {}),
     }
   } catch {
     return null

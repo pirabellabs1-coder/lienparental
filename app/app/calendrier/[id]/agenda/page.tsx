@@ -1,6 +1,6 @@
 'use client'
 
-import { use, type ReactNode } from 'react'
+import { use, useState, type ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ChevronRight } from 'lucide-react'
@@ -10,7 +10,9 @@ import { useClientNow } from '@/components/calendrier/useClientNow'
 import { buildIcs, googleCalendarUrl, outlookCalendarUrl } from '@/lib/calendrier'
 import { useEvent } from '@/lib/data/calendar'
 
-// M06 — « Ajouter à l'agenda » : confirmation + ouverture dans un agenda externe.
+// M06 — « Ajouter à l'agenda » : choix d'un agenda externe, puis indication de ce qui s'est passé.
+// Rien n'est ajouté tant que l'utilisateur n'a pas choisi un agenda (et ne l'y a pas enregistré) :
+// pas de « Événement ajouté ! » prématuré.
 export default function AjouterAgendaPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
   const t = useTranslations('calendar')
@@ -18,6 +20,7 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
   const { data: event, loading } = useEvent(id)
   const now = useClientNow()
   const back = `/app/calendrier/${id}`
+  const [sent, setSent] = useState<'google' | 'apple' | 'outlook' | null>(null)
 
   if (!event && loading) {
     return (
@@ -59,6 +62,7 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
     a.download = `${event!.title.replace(/[^\p{L}\p{N}]+/gu, '-').toLowerCase()}.ics`
     a.click()
     URL.revokeObjectURL(url)
+    setSent('apple')
   }
 
   const row = 'flex min-h-[56px] w-full items-center gap-3.5 rounded-xl border border-night-100 bg-white px-4 text-left transition-colors hover:bg-night-50/50'
@@ -68,11 +72,14 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
       <TopBar title={t('agenda.title')} showBack backHref={back} showBell={false} />
 
       <div className="px-4 pb-6 pt-4">
-        <div className="flex flex-col items-center text-center" role="status">
+        <div className="flex flex-col items-center text-center">
           <CalendarAddedIllustration />
-          <h2 className="mt-5 text-[17px] font-extrabold text-night-900">{t('agenda.added')}</h2>
-          <p className="mt-2 max-w-[16rem] text-[12.5px] leading-relaxed text-night-600">
-            {t('agenda.addedDesc')}
+          <h2 className="mt-5 text-[17px] font-extrabold text-night-900">{t('agenda.chooseTitle')}</h2>
+          <p className="mt-2 max-w-[18rem] text-[12.5px] leading-relaxed text-night-600">
+            {t('agenda.chooseDesc')}
+          </p>
+          <p role="status" className={sent ? 'mt-3 max-w-[20rem] rounded-xl bg-leaf-50 px-3 py-2 text-[12.5px] font-semibold leading-relaxed text-leaf-800' : 'sr-only'}>
+            {sent === 'google' ? t('agenda.sentGoogle') : sent === 'outlook' ? t('agenda.sentOutlook') : sent === 'apple' ? t('agenda.sentApple') : ''}
           </p>
         </div>
 
@@ -80,7 +87,7 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
           <h3 id="open-in" className="mb-2.5 text-[13px] font-bold text-night-900">{t('agenda.openIn')}</h3>
           <ul className="space-y-2.5">
             <li>
-              <a href={googleCalendarUrl(event)} target="_blank" rel="noopener noreferrer" className={row}>
+              <a href={googleCalendarUrl(event)} target="_blank" rel="noopener noreferrer" className={row} onClick={() => setSent('google')}>
                 <GoogleCalIcon />
                 <RowLabel>{t('agenda.google')}</RowLabel>
                 <span className="sr-only">{t('agenda.newTab')}</span>
@@ -93,7 +100,7 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
               </button>
             </li>
             <li>
-              <a href={outlookCalendarUrl(event)} target="_blank" rel="noopener noreferrer" className={row}>
+              <a href={outlookCalendarUrl(event)} target="_blank" rel="noopener noreferrer" className={row} onClick={() => setSent('outlook')}>
                 <OutlookIcon />
                 <RowLabel>{t('agenda.outlook')}</RowLabel>
                 <span className="sr-only">{t('agenda.newTab')}</span>

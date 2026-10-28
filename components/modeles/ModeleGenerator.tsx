@@ -13,6 +13,7 @@ import { Download, FileText, LoaderCircle } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { valuesSchemaFor, type DocumentTemplate, type TemplateValues } from '@/lib/modeles/template'
 import { TemplatePaper } from './TemplatePaper'
+import { completeTemplateValues } from './formValues'
 import { contentLangAttr, type ContentLocale } from '@/lib/contenus/locale'
 
 const input =
@@ -33,7 +34,8 @@ export function ModeleGenerator({ template: t, onGenerated, contentLang }: {
   const schema = useMemo(() => valuesSchemaFor(t.champs), [t.champs])
 
   const generate = async (format: 'pdf' | 'word') => {
-    const r = schema.safeParse(values)
+    // Champs jamais touchés → '' : messages traduits du schéma, jamais le « Required » anglais de zod.
+    const r = schema.safeParse(completeTemplateValues(t.champs, values))
     if (!r.success) {
       const errs: Record<string, string> = {}
       for (const i of r.error.issues) errs[String(i.path[0])] ??= i.message

@@ -264,7 +264,13 @@
       "indicative": "Sugestão indicativa: você decide sua mensagem.",
       "useReformulation": "Usar a nova redação",
       "sendAsIs": "Enviar assim mesmo",
-      "edit": "Editar"
+      "edit": "Editar",
+      "local": {
+        "openingNamed": "Olá, {name}, gostaria que retomássemos este assunto com calma.",
+        "opening": "Olá, gostaria que retomássemos este assunto com calma.",
+        "closing": "Gostaria que encontrássemos juntos uma solução que seja boa para as crianças. Você pode me dizer o que funcionaria para você? Obrigado.",
+        "resume": "Algumas expressões podem soar como críticas. Uma formulação objetiva facilita a resposta."
+      }
     },
     "pdf": {
       "noMessages": "Nenhuma mensagem no período.",

@@ -17,6 +17,8 @@ import 'server-only'
 import { getCurrentUser, type CurrentUser } from '@/lib/auth/session'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { mockCoachCycles, mockCoachLog, mockCoachUsage } from '@/lib/mock-data'
+import { getDemoBilling } from '@/lib/billing/demo'
+import { demoCoachUsage } from './quota-demo'
 import type { PlanId } from '@/components/profil/pricing'
 import { getEffectivePlan } from '@/lib/billing/entitlements'
 import { ANALYSIS_QUOTA_BY_PLAN } from '@/lib/billing/plans'
@@ -266,13 +268,25 @@ export type CoachUsageView = {
 }
 
 export async function loadCoachUsage(locale?: Locale): Promise<CoachUsageView> {
-  const user = SUPABASE_ENABLED ? await getCurrentUser() : null
+  // Même source que le profil : comptes réels → getQuotaStatus (ai_usage) ; démonstration → les
+  // valeurs du Profil de démo. Le compteur « 7/10 » figé contredisait le « 1/3 » du profil gratuit.
+  if (!SUPABASE_ENABLED) {
+    // Démonstration : même source que le Profil de démo (formule simulée + components/profil/data).
+    const loc = locale ?? (await requestLocale())
+    const demo = await getDemoBilling()
+    const v = demoCoachUsage(demo?.plan ?? 'gratuit', loc, await usageLabels(loc))
+    return { ...v, live: false }
+  }
+  const user = await getCurrentUser()
   if (!user) {
-    return { used: mockCoachUsage.used, total: mockCoachUsage.total, resetInDays: mockCoachUsage.resetInDays, resetDateLabel: mockCoachUsage.resetDateLabel, cycles: mockCoachCycles, log: mockCoachLog, live: false }
+    // Sans session (ne devrait pas arriver sous /app) : exemple de démonstration, date localisée.
+    const fmt = usageFormatters(locale ?? (await requestLocale()))
+    const reset = mockCoachUsage.resetInDays != null ? new Date(Date.now() + mockCoachUsage.resetInDays * DAY_MS) : null
+    return { used: mockCoachUsage.used, total: mockCoachUsage.total, resetInDays: mockCoachUsage.resetInDays, resetDateLabel: reset ? fmt.long(reset) : null, cycles: mockCoachCycles, log: mockCoachLog, live: false }
   }
   try {
     const o = await getUsageOverview(user, locale)
-    return { used: o.used, total: o.quota, resetInDays: o.resetInDays, resetDateLabel: o.resetDateLabel, cycles: o.cycles, log: o.log, live: true }
+    return { used: Math.min(o.used, o.quota), total: o.quota, resetInDays: o.resetInDays, resetDateLabel: o.resetDateLabel, cycles: o.cycles, log: o.log, live: true }
   } catch {
     const { quota } = await planQuota(user)
     return { used: 0, total: quota, resetInDays: null, resetDateLabel: null, cycles: [], log: [], live: true }
