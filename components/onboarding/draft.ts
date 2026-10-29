@@ -15,6 +15,8 @@ export type OnboardingDraft = {
   prenom?: string
   nom?: string
   email?: string
+  /** Territoire du Guide parental (code, ex. « reunion »). */
+  territoire?: string
   child?: OnboardingChildDraft | null
 }
 

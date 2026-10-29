@@ -15,6 +15,7 @@
  * de l'utilisateur, et non par IP du serveur (qui serait partagée par tous).
  */
 import { revalidatePath } from 'next/cache'
+import { cookies } from 'next/headers'
 import { getTranslations } from 'next-intl/server'
 import type { PreferenceRow } from '@/lib/supabase/types'
 import { authErrorMessage, rateLimitMessage, type AuthTranslate } from './errors'
@@ -31,6 +32,7 @@ import {
 } from './validation'
 import { verifyPassword } from './verify-password'
 import { flushForActor } from '@/lib/notify/jobs'
+import { GUIDE_TERRITORY_COOKIE } from '@/lib/guide/territories'
 
 export type ActionResult<T = undefined> =
   | ({ ok: true } & (T extends undefined ? object : { data: T }))
@@ -61,13 +63,25 @@ function ownsPath(uid: string, path: string | null | undefined) {
   return !path || path.startsWith(`${uid}/`)
 }
 
-// --- Onboarding étape 8 : prénom / nom / photo --------------------------
-export async function saveOnboardingProfile(input: { prenom: string; nom: string; photoPath?: string | null }): Promise<ActionResult> {
+/**
+ * Cookie du territoire du Guide aligné sur le choix enregistré : le cookie (dernier territoire
+ * consulté) prime sur le profil dans wantedTerritoire, il ne doit donc pas garder un ancien choix.
+ */
+async function rememberTerritoryCookie(code: string) {
+  const secure = process.env.NODE_ENV === 'production'
+  ;(await cookies()).set(GUIDE_TERRITORY_COOKIE, code, { path: '/', maxAge: 60 * 60 * 24 * 365, sameSite: 'lax', secure })
+}
+
+// --- Onboarding étape 8 : prénom / nom / photo / territoire --------------
+export async function saveOnboardingProfile(input: { prenom: string; nom: string; photoPath?: string | null; territoire?: string }): Promise<ActionResult> {
   const { ctx, denied } = await authed()
   if (denied) return denied
-  const parsed = profileNamesSchema.extend({ photoPath: avatarPathSchema.nullable().optional() }).safeParse(input)
+  const parsed = profileNamesSchema.extend({
+    photoPath: avatarPathSchema.nullable().optional(),
+    territoire: preferencesSchema.shape.territoire,
+  }).safeParse(input)
   if (!parsed.success) return { ok: false, error: await issue(parsed.error) }
-  const { prenom, nom, photoPath } = parsed.data
+  const { prenom, nom, photoPath, territoire } = parsed.data
   if (!ownsPath(ctx.user.id, photoPath)) return { ok: false, error: (await tr('actions'))('photoInvalid') }
 
   const patch: { prenom: string; nom: string; photo_url?: string | null } = { prenom, nom }
@@ -75,6 +89,11 @@ export async function saveOnboardingProfile(input: { prenom: string; nom: string
 
   const { error } = await ctx.supabase.from('users').update(patch).eq('id', ctx.user.id)
   if (error) return { ok: false, error: await generic() }
+  if (territoire) {
+    const saved = await mergePreferences(ctx, { territoire })
+    if (!saved.ok) return saved
+    await rememberTerritoryCookie(territoire)
+  }
   return { ok: true }
 }
 
@@ -174,7 +193,7 @@ type Ctx = Extract<Awaited<ReturnType<typeof requireAuthedUser>>, { ok: true }>
 
 const THEME_TO_DB = { clair: 'light', sombre: 'dark', auto: 'system' } as const
 const THEME_FROM_DB = { light: 'clair', dark: 'sombre', system: 'auto' } as const
-const UI_KEYS = ['fuseau', 'formatDate', 'formatHeure', 'rappelHeure', 'onMessages', 'onGarde', 'onCalendrier', 'onDocuments', 'couleur', 'taille'] as const
+const UI_KEYS = ['fuseau', 'territoire', 'formatDate', 'formatHeure', 'rappelHeure', 'onMessages', 'onGarde', 'onCalendrier', 'onDocuments', 'couleur', 'taille'] as const
 
 function toRow(p: Partial<PreferencesInput>, currentUi: Record<string, unknown>) {
   const row: Partial<Pick<PreferenceRow, 'theme' | 'langue' | 'notif_push' | 'notif_email' | 'notif_rappels' | 'ui'>> = {}
@@ -186,8 +205,8 @@ function toRow(p: Partial<PreferencesInput>, currentUi: Record<string, unknown>)
   const ui: Record<string, unknown> = { ...currentUi }
   let uiChanged = false
   for (const k of UI_KEYS) {
-    // Fuseau vide = jamais choisi : on ne remplace pas la valeur enregistrée.
-    if (k === 'fuseau' && !p.fuseau) continue
+    // Fuseau ou territoire vide = jamais choisi : on ne remplace pas la valeur enregistrée.
+    if ((k === 'fuseau' || k === 'territoire') && !p[k]) continue
     if (p[k] !== undefined) { ui[k] = p[k]; uiChanged = true }
   }
   if (uiChanged) row.ui = ui
@@ -238,7 +257,9 @@ export async function savePreferences(input: unknown): Promise<ActionResult> {
   if (denied) return denied
   const parsed = preferencesSchema.safeParse(input)
   if (!parsed.success) return { ok: false, error: (await tr('actions'))('preferencesInvalid') }
-  return mergePreferences(ctx, parsed.data)
+  const res = await mergePreferences(ctx, parsed.data)
+  if (res.ok && parsed.data.territoire) await rememberTerritoryCookie(parsed.data.territoire)
+  return res
 }
 
 // --- Sécurité > Mot de passe -------------------------------------------------

@@ -512,7 +512,10 @@
         "h24": "24 heures",
         "h12": "12 heures",
         "saving": "Enregistrement…",
-        "save": "Enregistrer"
+        "save": "Enregistrer",
+        "territory": "Territoire du Guide parental",
+        "territoryHint": "Le Guide vous propose les démarches, aides et organismes de ce territoire.",
+        "territoryNone": "Choisir un territoire"
       },
       "home": {
         "title": "Préférences",

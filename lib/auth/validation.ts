@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { authT, type AuthTranslate } from './errors'
 import { EMAIL_OTP_RE } from './email-otp'
 import { isTzPreference } from '@/lib/timezones'
+import { TERRITORY_CODE_RE } from '@/lib/guide/territories'
 
 const CODE_PREFIX = 'auth.validation.'
 
@@ -105,6 +106,8 @@ export const preferencesSchema = z.object({
   langue: z.enum(['fr', 'en', 'pt', 'es']),
   // '' = non choisi (ignoré à l'enregistrement) ; sinon "auto" ou fuseau IANA accepté (lib/timezones).
   fuseau: z.union([z.literal(''), z.string().max(64).refine(isTzPreference, code('invalid'))]),
+  // Territoire du Guide parental (choisi à l'inscription) ; '' = non choisi (ignoré à l'enregistrement).
+  territoire: z.union([z.literal(''), z.string().max(40).regex(TERRITORY_CODE_RE, code('invalid'))]).optional(),
   formatDate: z.enum(['dd/mm/yyyy', 'mm/dd/yyyy', 'yyyy-mm-dd']),
   formatHeure: z.enum(['24', '12']),
   notifPush: z.boolean(),

@@ -70,7 +70,10 @@
         "firstName": "First name",
         "firstNamePh": "E.g. Martin",
         "lastName": "Last name",
-        "lastNamePh": "E.g. Smith"
+        "lastNamePh": "E.g. Smith",
+        "territoryLegend": "Your territory",
+        "territoryHelp": "The Parenting guide will show you the procedures, benefits and offices for this territory. You can change it anytime in your profile.",
+        "errTerritory": "Choose your territory."
       },
       "coparent": {
         "skip": "Skip this step",
@@ -139,7 +142,8 @@
         "child": "Child",
         "noChild": "No child added yet.",
         "editChild": "Edit child {name}",
-        "addChild": "Add a child"
+        "addChild": "Add a child",
+        "territory": "Territory: {name}"
       },
       "verify": {
         "errUnavailable": "Unable to send right now. Please try again in a moment.",

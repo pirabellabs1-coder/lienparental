@@ -130,3 +130,13 @@ test('messages du Guide : préposition juste pour chaque territoire (FR « à La
   assert.match(fmt('en', 'lead', 'Réunion', 'reunion'), /parents in Réunion,/)
   for (const l of ['fr', 'en', 'pt']) assert.ok(read(l).public.guide.territory.change)
 })
+
+test('préférences : territoire du Guide facultatif, code validé', async () => {
+  const { preferencesSchema } = await import('../lib/auth/validation')
+  const t = preferencesSchema.shape.territoire
+  assert.equal(t.safeParse('reunion').success, true)
+  assert.equal(t.safeParse('').success, true) // jamais choisi
+  assert.equal(t.safeParse(undefined).success, true) // écran Préférences d'avant le champ
+  assert.equal(t.safeParse('La Réunion').success, false)
+  assert.equal(t.safeParse('../guyane').success, false)
+})

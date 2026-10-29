@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 export type Prefs = {
   langue: string
   fuseau: string
+  /** Territoire du Guide parental ('' = jamais choisi). */
+  territoire: string
   formatDate: string
   formatHeure: string
   notifPush: boolean
@@ -25,6 +27,7 @@ export const DEFAULT_PREFS: Prefs = {
   langue: 'fr',
   // '' = jamais choisi : le fuseau appliqué vient de components/tz/TimeZoneProvider.
   fuseau: '',
+  territoire: '',
   formatDate: 'dd/mm/yyyy',
   formatHeure: '24',
   notifPush: true,

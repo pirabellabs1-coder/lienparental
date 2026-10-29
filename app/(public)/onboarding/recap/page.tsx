@@ -12,12 +12,14 @@ import { getDraftPhoto, useOnboardingDraft } from '@/components/onboarding/draft
 import { ChecklistIllustration, ChildAvatarIllustration } from '@/components/illustrations'
 import { childClassKey } from '@/components/onboarding/fields'
 import { intlLocale } from '@/lib/i18n/config'
+import { isTerritoryCode } from '@/lib/guide/territories'
 
 // Étape 10 (récap) : vérifiez vos informations.
 export default function RecapPage() {
   const router = useRouter()
   const t = useTranslations('public.onboarding.recap')
   const tc = useTranslations('public.onboarding.classes')
+  const tTerr = useTranslations('shared.territories')
   const locale = useLocale()
   const formatDate = (iso: string) =>
     new Date(iso).toLocaleDateString(intlLocale(locale), { day: '2-digit', month: '2-digit', year: 'numeric' })
@@ -65,6 +67,9 @@ export default function RecapPage() {
             <h2 className="text-[13px] font-bold text-night-900">{t('you')}</h2>
             <p className="truncate text-sm font-semibold text-night-800">{fullName || t('noName')}</p>
             <p className="truncate text-[13px] text-night-500">{draft.email || t('noEmail')}</p>
+            {draft.territoire && isTerritoryCode(draft.territoire) && (
+              <p className="truncate text-[13px] text-night-500">{t('territory', { name: tTerr(draft.territoire) })}</p>
+            )}
           </div>
           <Link
             href="/onboarding/profil"
