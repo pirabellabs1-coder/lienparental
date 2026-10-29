@@ -65,7 +65,16 @@ async function loadStorage(user: CurrentUser, plan: PlanId): Promise<StorageUsag
       else if (mime === 'application/pdf' || mime.includes('word')) breakdown.documents += size
       else breakdown.autres += size
     }
-    return { usedBytes: breakdown.documents + breakdown.photos + breakdown.autres, maxBytes: storageMaxBytes(plan), breakdown }
+    let usedBytes = breakdown.documents + breakdown.photos + breakdown.autres
+    // Total compté par la base pour le quota (0560) : inclut les vignettes de l'album.
+    if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      const { data: total } = await db.rpc('storage_used_bytes', { p_user_id: user.id })
+      if (total != null && Number(total) > usedBytes) {
+        breakdown.photos += Number(total) - usedBytes
+        usedBytes = Number(total)
+      }
+    }
+    return { usedBytes, maxBytes: storageMaxBytes(plan), breakdown }
   } catch (err) {
     console.warn('[profil] stockage indisponible', err instanceof Error ? err.message : 'unknown')
     return null

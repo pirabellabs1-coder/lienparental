@@ -896,6 +896,14 @@
       "noteLabel": "Nota",
       "notePlaceholder": "Uma pequena nota sobre este momento (opcional)",
       "noteCount": "{n} / {max}"
+    },
+    "quota": {
+      "warnTitle": "Seu espaço está quase cheio",
+      "warnText": "{used} usados de {max} ({pct}%). Pense em esvaziar a lixeira ou mudar para um plano superior.",
+      "fullTitle": "Seu espaço de armazenamento está cheio",
+      "fullText": "{used} usados de {max}. Libere espaço (a lixeira conta até ser esvaziada) ou mude para um plano superior para adicionar arquivos.",
+      "upgrade": "Ver os planos",
+      "trash": "Abrir a lixeira"
     }
   }
 }

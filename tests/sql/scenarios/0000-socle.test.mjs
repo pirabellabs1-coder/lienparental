@@ -9,9 +9,9 @@ export default async function run(db) {
   console.log('\n== Socle (storage.sql avant les migrations, RLS partout)')
 
   const buckets = (await db.query(`select id, public, file_size_limit from storage.buckets order by id`)).rows
-  // Seule exception voulue : blog-images (0300), images des articles publics, écriture réservée aux admins.
-  const PUBLIC_BUCKETS = ['blog-images']
-  check('tous les buckets sont privés (sauf blog-images)', buckets.length > 0 && buckets.every((b) => b.public === false || PUBLIC_BUCKETS.includes(b.id)),
+  // Exceptions voulues : blog-images (0300) et partner-logos (0550), images publiques, écriture réservée au serveur / aux admins.
+  const PUBLIC_BUCKETS = ['blog-images', 'partner-logos']
+  check('tous les buckets sont privés (sauf blog-images, partner-logos)', buckets.length > 0 && buckets.every((b) => b.public === false || PUBLIC_BUCKETS.includes(b.id)),
     JSON.stringify(buckets.filter((b) => b.public !== false && !PUBLIC_BUCKETS.includes(b.id))))
   const docs = buckets.find((b) => b.id === 'documents')
   check('bucket documents : 20 Mo (0210 appliquée après storage.sql)', Number(docs?.file_size_limit) === 20 * 1024 * 1024,

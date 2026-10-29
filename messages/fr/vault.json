@@ -896,6 +896,14 @@
       "noteLabel": "Note",
       "notePlaceholder": "Une petite note sur ce moment (facultatif)",
       "noteCount": "{n} / {max}"
+    },
+    "quota": {
+      "warnTitle": "Votre espace est presque plein",
+      "warnText": "{used} utilisés sur {max} ({pct} %). Pensez à vider la corbeille ou à passer à une offre supérieure.",
+      "fullTitle": "Votre espace de stockage est plein",
+      "fullText": "{used} utilisés sur {max}. Libérez de la place (la corbeille compte jusqu’à sa purge) ou passez à une offre supérieure pour ajouter des fichiers.",
+      "upgrade": "Voir les offres",
+      "trash": "Ouvrir la corbeille"
     }
   }
 }

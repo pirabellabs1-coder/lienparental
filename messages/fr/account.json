@@ -56,7 +56,10 @@
     "storage": {
       "usage": {
         "title": "Espace utilisé",
-        "progress": "{pct} % de l’espace utilisé"
+        "progress": "{pct} % de l’espace utilisé",
+        "warn": "Plus que {left} disponibles : pensez à libérer de la place ou à passer à une offre supérieure.",
+        "full": "Espace plein : les nouveaux ajouts sont bloqués.",
+        "upgrade": "Augmenter mon espace"
       },
       "vault": {
         "title": "Vos fichiers se gèrent dans le coffre-fort",

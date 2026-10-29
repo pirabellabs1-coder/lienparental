@@ -97,7 +97,8 @@
         "notFound": "Item não encontrado.",
         "relatedNotFound": "Item vinculado não encontrado.",
         "sessionExpired": "Sua sessão expirou. Entre novamente.",
-        "childrenLimit": "Você atingiu o máximo de 5 fichas de crianças."
+        "childrenLimit": "Você atingiu o máximo de 5 fichas de crianças.",
+        "storageQuota": "Seu espaço de armazenamento está cheio: libere espaço (lixeira incluída) ou mude para um plano superior."
       },
       "family": {
         "linkedParent": "um pai/mãe vinculado(a)"

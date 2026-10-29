@@ -48,6 +48,8 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
   const [status, setStatus] = useState('')
   // Solde insuffisant (402) : message + packs proposés ; la question reste dans le champ.
   const [blocked, setBlocked] = useState<string | null>(null)
+  // Formule Gratuite (champ `upgrade` du 402) : l'offre Premium est proposée en plus des packs.
+  const [upgrade, setUpgrade] = useState(false)
   const { data: credits, refresh: refreshCredits } = useCredits()
   const chatCost = credits?.costs.chat_question ?? 1
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -116,8 +118,9 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
         })
         if (res.status === 402) {
           // Aucun crédit débité : la question revient dans le champ, les bulles sont retirées.
-          const body = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
+          const body = (await res.json().catch(() => null)) as { error?: { message?: string }; upgrade?: boolean } | null
           const msg = body?.error?.message ?? t('insufficient')
+          setUpgrade(body?.upgrade === true)
           setMessages((list) => list.slice(0, -2))
           setQ(text)
           setBlocked(msg)
@@ -275,15 +278,23 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
           {t('hint')} {t('costHint', { count: chatCost })}
           {credits ? ` ${t('balanceHint', { total: credits.total })}` : ''}
         </p>
-        {blocked && (
+        {(blocked || (credits && credits.total < chatCost)) ? (
           <div role="alert" className="mt-3 rounded-xl2 border border-alert-200 bg-alert-50 p-3 text-[12.5px] leading-relaxed text-night-900">
-            <p>{blocked}</p>
-            <Link href="/app/coach/credits#packs" className="mt-2 inline-flex items-center gap-1.5 font-semibold underline underline-offset-2">
-              <Coins className="h-4 w-4" aria-hidden="true" />
-              {t('buyCredits')}
-            </Link>
+            <p>{blocked ?? t('noCredits')}</p>
+            <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+              <Link href="/app/coach/credits#packs" className="inline-flex items-center gap-1.5 font-semibold underline underline-offset-2">
+                <Coins className="h-4 w-4" aria-hidden="true" />
+                {t('buyCredits')}
+              </Link>
+              <Link href="/app/abonnement" className="font-semibold underline underline-offset-2">{upgrade ? t('upgradePlan') : t('seePlans')}</Link>
+            </p>
           </div>
-        )}
+        ) : credits && credits.total <= chatCost * 3 ? (
+          <p role="status" className="mt-3 rounded-xl2 bg-gold-50 px-3 py-2.5 text-[12.5px] font-semibold leading-relaxed text-gold-900">
+            {t('lowCredits', { total: credits.total })}{' '}
+            <Link href="/app/coach/credits#packs" className="underline underline-offset-2">{t('buyCredits')}</Link>
+          </p>
+        ) : null}
 
         <label
           htmlFor={medId}
