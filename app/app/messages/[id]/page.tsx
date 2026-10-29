@@ -63,7 +63,8 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
 
   const [text, setText] = useState('')
   const [file, setFile] = useState<File | null>(null)
-  const [toneCheck, setToneCheck] = useState(true)
+  // Désactivée par défaut : chaque message vérifié consomme des crédits IA ; le parent l'active à la demande.
+  const [toneCheck, setToneCheck] = useState(false)
   const [busy, setBusy] = useState<'idle' | 'checking' | 'sending'>('idle')
   const [error, setError] = useState<string | null>(null)
   const [pending, setPending] = useState<Pending | null>(null)
