@@ -1,57 +1,49 @@
-LIEN PARENTAL - PRESENTATION VIDEO (98 s) - ENGLISH VOICE-OVER SCRIPT
+LIEN PARENTAL - PRESENTATION VIDEO (58 s) - ENGLISH VOICE-OVER SCRIPT
 =====================================================================
 
-Video: public/video/presentation.en.mp4 (1920x1080, 30 fps, 98.0 s, voice-over only, no subtitles)
-Voice: "Sarah - Warm & Conversational" (ElevenLabs voice id h1Q2hoJVsQ8dXy9QYQN5, American English),
-model eleven_multilingual_v2. Mix normalised (loudnorm, target -14 LUFS, true peak -1.5 dBTP) like the French track.
-On-screen texts: anim.html?lang=en (scratchpad video project), app screenshots from public/images/app/en/.
+Video: public/video/presentation.en.mp4 (1920x1080, 30 fps, 58 s), voice-over only, no subtitles.
+Voice: "Christina – Energetic Commercial" (ElevenLabs voice id BuaKXS4Sv1Mccaw3flfU, American English), model eleven_multilingual_v2, upbeat (speed 1.1).
+Original music (116 BPM), ducked under the voice; mix normalised to -16 LUFS.
 
-Voice direction
-- Native English female voice, warm and calm, smiling, never shouted.
-- Each line starts at the given time and must end before its slot ends (the screen text changes afterwards).
-- "lienparental.fr" is read "lien parental dot f r".
-- Glossary: Journal, Vault, AI Coach, Testimonials, Parenting guide, Google Calendar.
-
-Actual timing of the recorded takes: [start - end of speech] / slot limit
 -----------------------------------------------------------------
-[00:00.50 - 00:03.84] / 00:05.0   1. Intro, "Separated. Still parents."
-When parents separate, everything about the child gets scattered.
+[00:00.4 - 00:02.1]
+Separated… but still parents.
 
-[00:05.50 - 00:07.28] / 00:09.0   1. Intro, items fly around
-Papers, messages, appointments...
+[00:02.8 - 00:05.6]
+Papers, messages, appointments: everything gets scattered.
 
-[00:09.30 - 00:11.62] / 00:12.5   1. Intro, everything tidies into the phone
-What if it all came together in one place?
+[00:06.3 - 00:07.7]
+What if it all fit in one place?
 
-[00:13.15 - 00:18.60] / 00:19.9   2. Logo and app modules
-Welcome to Lien Parental: organization, messages, documents and paperwork, in one place.
+[00:08.4 - 00:12.3]
+Meet Lien Parental: your child's whole life, in one single app!
 
-[00:20.50 - 00:26.16] / 00:28.5   3. Journal and expenses
-The Journal keeps a dated record of everyday life. Expenses and payments are there too, with their receipts.
+[00:13.0 - 00:17.0]
+The Journal keeps everyday life, dated. Expenses? Shared, with receipts.
 
-[00:29.50 - 00:34.26] / 00:36.5   4. Calendar and Google Calendar
-The calendar tracks each child's appointments, school and health. It syncs with Google Calendar.
+[00:17.7 - 00:22.6]
+School, health, appointments: it's all in the calendar, synced with Google Calendar.
 
-[00:37.30 - 00:43.48] / 00:44.5   5. Vault (code or fingerprint)
-Rulings, certificates, invoices: the Vault keeps them safe, protected by a code or your fingerprint.
+[00:23.4 - 00:26.5]
+Important documents? Safe in the Vault, behind a code or your fingerprint.
 
-[00:45.0 - 00:53.0]  5b. Child's album (dated photos, note, private -> shared)
-The child's album sorts their photos by date. Private, or shared with the other parent.
+[00:27.4 - 00:31.0]
+The album sorts their photos by date. Private… or shared with the other parent.
 
-[00:53.50 - 00:58.33] / 01:01.5   6. AI Coach (tense message, calm reply)
-A tense message? The AI Coach helps you reply calmly. It does not give legal advice.
+[00:31.8 - 00:35.2]
+A tense message? The AI Coach helps you reply calmly. No legal advice.
 
-[01:02.50 - 01:06.70] / 01:08.5   7. Time-stamped testimonies
-Your loved ones can send you a time-stamped testimony, without creating an account.
+[00:36.3 - 00:38.8]
+Loved ones send a time-stamped testimony, no account needed.
 
-[01:09.50 - 01:14.44] / 01:16.5   8. Parenting guide (checklist)
-The Parenting guide walks you through your procedures step by step, with the list of documents to bring.
+[00:39.8 - 00:41.7]
+The Parenting guide walks you through every step.
 
-[01:17.50 - 01:21.00] / 01:23.5   9. Linked parents
-Invite the other parent to join you, and share what concerns your child.
+[00:43.8 - 00:46.5]
+Invite the other parent, and move forward together for your child.
 
-[01:24.50 - 01:28.85] / 01:30.5   10. Installation without an app store (web, iPhone, Android)
-On a computer, iPhone or Android, it installs without going through an app store.
+[00:47.3 - 00:50.7]
+Computer, iPhone or Android: it installs in a snap, no app store.
 
-[01:30.90 - 01:36.33] / 01:37.8   11. Closing
-Lien Parental: inform, support, protect. Start for free at lien parental dot f r.
+[00:51.4 - 00:56.8]
+Lien Parental: inform, support, protect. Start for free at lien parental dot f r!
