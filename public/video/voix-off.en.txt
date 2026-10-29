@@ -1,7 +1,7 @@
-LIEN PARENTAL - PRESENTATION VIDEO (90 s) - ENGLISH VOICE-OVER SCRIPT
+LIEN PARENTAL - PRESENTATION VIDEO (98 s) - ENGLISH VOICE-OVER SCRIPT
 =====================================================================
 
-Video: public/video/presentation.en.mp4 (1920x1080, 30 fps, 90.0 s, voice-over only, no subtitles)
+Video: public/video/presentation.en.mp4 (1920x1080, 30 fps, 98.0 s, voice-over only, no subtitles)
 Voice: "Sarah - Warm & Conversational" (ElevenLabs voice id h1Q2hoJVsQ8dXy9QYQN5, American English),
 model eleven_multilingual_v2. Mix normalised (loudnorm, target -14 LUFS, true peak -1.5 dBTP) like the French track.
 On-screen texts: anim.html?lang=en (scratchpad video project), app screenshots from public/images/app/en/.
@@ -35,20 +35,24 @@ The calendar tracks each child's appointments, school and health. It syncs with 
 [00:37.30 - 00:43.48] / 00:44.5   5. Vault (code or fingerprint)
 Rulings, certificates, invoices: the Vault keeps them safe, protected by a code or your fingerprint.
 
-[00:45.50 - 00:50.33] / 00:53.5   6. AI Coach (tense message, calm reply)
+[00:45.0 - 00:53.0]  5b. Child's album (dated photos, note, private -> shared)
+(music only for now; planned line, to be recorded with the same voice:)
+The child's album sorts their photos by date. Private, or shared with the other parent.
+
+[00:53.50 - 00:58.33] / 01:01.5   6. AI Coach (tense message, calm reply)
 A tense message? The AI Coach helps you reply calmly. It does not give legal advice.
 
-[00:54.50 - 00:58.70] / 01:00.5   7. Time-stamped testimonies
+[01:02.50 - 01:06.70] / 01:08.5   7. Time-stamped testimonies
 Your loved ones can send you a time-stamped testimony, without creating an account.
 
-[01:01.50 - 01:06.44] / 01:08.5   8. Parenting guide (checklist)
+[01:09.50 - 01:14.44] / 01:16.5   8. Parenting guide (checklist)
 The Parenting guide walks you through your procedures step by step, with the list of documents to bring.
 
-[01:09.50 - 01:13.00] / 01:15.5   9. Linked parents
+[01:17.50 - 01:21.00] / 01:23.5   9. Linked parents
 Invite the other parent to join you, and share what concerns your child.
 
-[01:16.50 - 01:20.85] / 01:22.5   10. Installation without an app store (web, iPhone, Android)
+[01:24.50 - 01:28.85] / 01:30.5   10. Installation without an app store (web, iPhone, Android)
 On a computer, iPhone or Android, it installs without going through an app store.
 
-[01:22.90 - 01:28.33] / 01:29.8   11. Closing
+[01:30.90 - 01:36.33] / 01:37.8   11. Closing
 Lien Parental: inform, support, protect. Start for free at lien parental dot f r.

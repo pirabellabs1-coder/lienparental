@@ -1,7 +1,7 @@
-LIEN PARENTAL - VIDÉO DE PRÉSENTATION (90 s) - SCRIPT DE VOIX OFF
+LIEN PARENTAL - VIDÉO DE PRÉSENTATION (98 s) - SCRIPT DE VOIX OFF
 =================================================================
 
-Vidéo : public/video/presentation.mp4 (1920x1080, 30 i/s, 90,0 s, voix off intégrée : voix « Sophie - Publicité et Réseaux sociaux », ElevenLabs multilingual v2)
+Vidéo : public/video/presentation.mp4 (1920x1080, 30 i/s, 98,0 s, voix off intégrée : voix « Sophie - Publicité et Réseaux sociaux », ElevenLabs multilingual v2)
 Sous-titres : public/video/presentation.fr.vtt (calés sur ce script)
 
 Direction de voix
@@ -34,23 +34,27 @@ Il se synchronise avec Google Agenda.
 [00:37.5 - 00:44.5]  5. Coffre-fort (code ou empreinte)
 Jugements, certificats, factures : le coffre-fort les garde à l'abri, protégés par un code ou par votre empreinte.
 
-[00:45.5 - 00:53.5]  6. Coach IA (message tendu, réponse apaisée)
+[00:45.0 - 00:53.0]  5b. Album de l'enfant (photos datées, note, privée -> partagée)
+(musique seule pour l'instant ; phrase prévue, à enregistrer avec la même voix :)
+L'album de l'enfant range ses photos par date. Privées, ou partagées avec l'autre parent.
+
+[00:53.5 - 01:01.5]  6. Coach IA (message tendu, réponse apaisée)
 Un message tendu ? Le Coach IA vous aide à répondre avec calme.
 Il ne donne pas de conseil juridique.
 
-[00:54.5 - 01:00.5]  7. Témoignages horodatés
+[01:02.5 - 01:08.5]  7. Témoignages horodatés
 Vos proches peuvent vous envoyer un témoignage horodaté, sans créer de compte.
 
-[01:01.5 - 01:08.5]  8. Guide parental (checklist qui se coche)
+[01:09.5 - 01:16.5]  8. Guide parental (checklist qui se coche)
 Le Guide parental explique vos démarches pas à pas, avec la liste des documents à apporter.
 
-[01:09.5 - 01:15.5]  9. Parents liés
+[01:17.5 - 01:23.5]  9. Parents liés
 Invitez l'autre parent à vous rejoindre, et partagez ce qui concerne l'enfant.
 
-[01:16.5 - 01:22.5]  10. Installation sans store (web, iPhone, Android)
+[01:24.5 - 01:30.5]  10. Installation sans store (web, iPhone, Android)
 Sur ordinateur, iPhone ou Android, elle s'installe sans passer par un store.
 
-[01:23.5 - 01:29.5]  11. Conclusion
+[01:31.5 - 01:37.5]  11. Conclusion
 Lien Parental : informer, accompagner, préserver.
 Commencez gratuitement sur lienparental.fr.
 
