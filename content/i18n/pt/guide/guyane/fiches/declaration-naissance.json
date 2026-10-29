@@ -58,11 +58,11 @@
     "A confirmar localmente: horário do serviço de registro civil e plantões aos sábados, conforme a prefeitura."
   ],
   "motsCles": ["nascimento", "bebê", "registro civil", "prefeitura", "certidão de nascimento", "maternidade", "livro de família"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F961 Registro de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961", "verifieLe": "2026-06-18" },
-    { "titre": "Service-public.gouv.fr, F11991 Livro de família no nascimento do primeiro filho", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-08-12" },
-    { "titre": "Service-public.gouv.fr, F1427 Pedido de certidão de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, F887 Reconhecimento de um filho", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-01-27" }
+    { "titre": "Service-public.gouv.fr, F961 Registro de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11991 Livro de família no nascimento do primeiro filho", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1427 Pedido de certidão de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F887 Reconhecimento de um filho", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-10-29" }
   ]
 }

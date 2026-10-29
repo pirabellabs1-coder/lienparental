@@ -34,7 +34,7 @@
     { "titre": "Entregue o dossiê na prefeitura e retire o certificado de matrícula", "detail": "O certificado indica a escola para a qual o seu filho foi designado. Peça a dérogation nesse momento se quiser outra escola." },
     { "titre": "Faça a admissão do seu filho na escola", "detail": "Apresente o certificado de matrícula e o comprovante de vacinação à direção da escola. Informe os contatos dos dois pais e a lista das pessoas autorizadas a buscar a criança." },
     { "titre": "Informe o outro genitor", "detail": "Se vocês estiverem separados, avise o outro genitor da matrícula, de preferência por escrito (mensagem ou e-mail)." },
-    { "titre": "Não é preciso nova matrícula todo ano", "detail": "A matrícula vale para toda a educação infantil. A passagem para o CP (1º ano) é automática se a cidade tiver escola de ensino fundamental." }
+    { "titre": "Não é preciso nova matrícula todo ano", "detail": "A matrícula vale para toda a educação infantil. Se a escola também tiver ensino fundamental (groupe scolaire), a criança passa direto para o CP (1º ano) depois do último ano da educação infantil; caso contrário, informe-se na prefeitura (mairie)." }
   ],
   "ou": [
     { "nom": "Prefeitura (mairie) do seu município, serviço escolar", "detail": "Matrícula, certificado de matrícula e dérogations de setor." },
@@ -63,14 +63,14 @@
     "A confirmar localmente: documentos exigidos em caso de troca de escola (certificat de radiation, último boletim escolar), a pedir à prefeitura e à nova escola."
   ],
   "motsCles": ["educação infantil", "ensino fundamental", "CP", "prefeitura (mairie)", "matrícula", "dérogation", "desligamento"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1864 Matrícula na educação infantil", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2025-11-06" },
-    { "titre": "Service-public.gouv.fr, F1865 Matricular o filho no ensino fundamental", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2025-01-10" },
+    { "titre": "Service-public.gouv.fr, F1864 Matrícula na educação infantil", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1865 Matricular o filho no ensino fundamental", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1898 Escolarização obrigatória", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1898", "verifieLe": "2025-11-06" },
-    { "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1427 Pedido de certidão de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
-    { "titre": "CASNAV de Guyane, dossiê de matrícula de aluno que não fala francês", "url": "https://casnav.ins.ac-guyane.fr/Dossier-d-inscription-211.html", "verifieLe": "2025-09-23" }
+    { "titre": "CASNAV de Guyane, dossiê de matrícula de aluno que não fala francês", "url": "https://casnav.ins.ac-guyane.fr/Dossier-d-inscription-211.html", "verifieLe": "2026-10-29" }
   ]
 }

@@ -1,0 +1,69 @@
+{
+  "slug": "rattacher-enfant-carte-vitale",
+  "territoire": "france",
+  "categorie": "sante",
+  "titre": "Rattacher mon enfant, obtenir son attestation de droits et sa carte Vitale",
+  "resume": "Inscrire l'enfant sur la carte Vitale des deux parents, télécharger son attestation de droits sur ameli, et demander sa propre carte Vitale à partir de 12 ou 16 ans.",
+  "aQuoiCaSert": "Avant 16 ans, un enfant est ayant droit de l'un de ses parents ou des deux. S'il figure sur les deux cartes Vitale, le parent qui l'emmène chez le médecin ou à la pharmacie est remboursé directement : c'est précieux quand les parents sont séparés. L'attestation de droits prouve que l'enfant est couvert ; la crèche, l'école, le centre de loisirs ou l'hôpital la demandent souvent. Enfin, l'enfant peut avoir sa propre carte Vitale : de 12 à 15 ans sur demande d'un parent, et à partir de 16 ans.",
+  "quiEstConcerne": [
+    "Les parents d'un nouveau-né, ou d'un enfant rattaché à un seul des deux parents.",
+    "Les parents séparés qui veulent chacun être remboursés des soins de l'enfant.",
+    "Les parents à qui l'on demande une attestation de droits (crèche, école, colonie, hôpital).",
+    "Les jeunes de 12 à 18 ans qui ont besoin de leur propre carte Vitale."
+  ],
+  "aSavoir": [
+    "L'enfant est rattaché automatiquement à la carte du parent qui a déclaré sa naissance. Le rattachement aux deux parents est ensuite possible, sauf si l'un des parents est travailleur frontalier.",
+    "En cas de double rattachement, le remboursement va au parent qui a présenté sa carte Vitale. Si l'un des parents n'est plus assuré, les remboursements vont à l'autre.",
+    "Le rattachement à l'autre parent se demande depuis le compte ameli du parent sur la carte duquel l'enfant figure déjà, ou par courrier avec le cerfa n° 14445.",
+    "Carte Vitale de l'enfant : de 12 à 15 ans, sur demande d'un parent ; dès 16 ans, avec l'accord d'un parent qui exerce l'autorité parentale. Elle est gratuite. À 16 ans, l'Assurance Maladie envoie un courrier et la carte arrive en général sous 3 semaines.",
+    "Joignez un RIB au nom du jeune si vous voulez qu'il soit remboursé directement. Un parent peut bloquer l'application carte Vitale de son enfant mineur.",
+    "De 16 à 18 ans, le jeune peut rester ayant droit de ses parents ou devenir ayant droit autonome. Le rattachement prend fin s'il exerce une activité professionnelle, y compris en apprentissage."
+  ],
+  "documents": [
+    { "id": "livret-famille", "libelle": "Copie du livret de famille à jour ou extrait d'acte de naissance de l'enfant", "detail": "Une seule de ces pièces suffit pour le rattachement. Acte de naissance gratuit en ligne sur service-public.gouv.fr ou à la mairie du lieu de naissance.", "coffre": "sante" },
+    { "id": "cerfa-14445", "libelle": "Formulaire cerfa n° 14445, si vous faites le rattachement par courrier", "detail": "Rempli et signé, envoyé à votre caisse d'assurance maladie (CPAM).", "coffre": "sante" },
+    { "id": "tutelle", "libelle": "Jugement de tutelle ou justificatif de recueil, si vous n'êtes pas le parent", "detail": "Copie. Pour un tuteur ou une personne qui a recueilli l'enfant.", "coffre": "jaf" },
+    { "id": "photo-enfant", "libelle": "Photo d'identité récente de l'enfant, pour sa carte Vitale", "detail": "En ligne, une photo numérisée suffit.", "coffre": "sante" },
+    { "id": "identite-enfant", "libelle": "Pièce d'identité de l'enfant, pour sa carte Vitale", "detail": "Copie ou version numérisée de sa carte d'identité ou de son passeport.", "coffre": "sante" },
+    { "id": "rib-jeune", "libelle": "RIB au nom du jeune", "detail": "Facultatif, pour qu'il soit remboursé sur son propre compte.", "coffre": "finances" },
+    { "id": "attestation-droits", "libelle": "Attestation de droits mentionnant l'enfant", "detail": "Téléchargeable gratuitement sur ameli. À renouveler en cas de changement de situation.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez sur quelle carte Vitale l'enfant figure", "detail": "Dans votre compte ameli, ou en pharmacie." },
+    { "titre": "Inscrivez l'enfant sur la carte de l'autre parent", "detail": "Depuis le compte ameli du parent qui a déjà l'enfant : rubrique « Mes démarches », « Inscrire votre enfant sur la carte Vitale de l'autre parent ». Ou par courrier à la CPAM, cerfa n° 14445 avec la copie du livret de famille ou de l'acte de naissance." },
+    { "titre": "Téléchargez l'attestation de droits", "detail": "Dans votre compte ameli (site ou application), en sélectionnant l'enfant. Si l'enfant n'apparaît pas, il n'est pas encore rattaché à votre dossier." },
+    { "titre": "Demandez la carte Vitale de l'enfant si besoin", "detail": "Depuis le compte ameli du parent auquel l'enfant est rattaché, avec sa photo et sa pièce d'identité numérisées, ou par formulaire envoyé à la caisse." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Si vous allez à l'accueil de la CPAM : votre carte Vitale, votre pièce d'identité, le livret de famille ou l'acte de naissance de l'enfant, sa photo et sa pièce d'identité pour une carte Vitale, le jugement de tutelle le cas échéant." },
+    { "titre": "Mettez à jour votre carte Vitale", "detail": "En pharmacie, une fois que vous avez reçu la notification confirmant le rattachement." }
+  ],
+  "ou": [
+    { "nom": "Compte ameli (site et application)", "detail": "Rattachement, attestation de droits, commande de carte Vitale.", "url": "https://www.ameli.fr" },
+    { "nom": "CPAM de votre département", "detail": "Caisse primaire d'assurance maladie. Accueils et contacts sur ameli.fr, rubrique adresses et contacts.", "url": "https://www.ameli.fr" },
+    { "nom": "Pharmacie", "detail": "Mise à jour de la carte Vitale." },
+    { "nom": "France Services", "detail": "Aide gratuite pour créer votre compte ameli et faire les démarches en ligne. Adresses dans l'annuaire de l'administration.", "url": "https://lannuaire.service-public.gouv.fr" }
+  ],
+  "liens": [
+    { "titre": "Rattachement d'un mineur comme ayant droit (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620" },
+    { "titre": "Carte Vitale des mineurs (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693" },
+    { "titre": "Obtenir une attestation de droits (ameli.fr)", "url": "https://www.ameli.fr/assure/adresses-et-contacts/l-obtention-d-un-document/obtenir-une-attestation/obtenir-une-attestation-de-droits" },
+    { "titre": "Demander sa carte Vitale (ameli.fr)", "url": "https://www.ameli.fr/assure/remboursements/etre-bien-rembourse/carte-vitale/carte-vitale-application/demander-sa-carte-vitale-conditions-et-demarches" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation de droits Assurance Maladie de l'enfant", "categorie": "sante" },
+    { "type": "coffre", "titre": "Copie de la carte Vitale de l'enfant", "categorie": "sante" },
+    { "type": "rappel", "titre": "Mettre à jour la carte Vitale après le rattachement", "evenement": "sante" },
+    { "type": "rappel", "titre": "Demander la carte Vitale de l'enfant à ses 16 ans", "evenement": "sante" }
+  ],
+  "aConfirmer": [
+    "Les pages d'ameli.fr n'ont pas pu être consultées lors de la vérification : les libellés exacts des menus du compte ameli et les modalités d'obtention de l'attestation sans compte (téléphone, borne) sont à vérifier sur ameli.fr.",
+    "L'actualité service-public sur l'inscription de l'enfant sur les deux cartes Vitale date de janvier 2025 : le parcours en ligne a pu évoluer.",
+    "À confirmer localement : adresses et horaires des accueils de votre CPAM, sur ameli.fr, avant de vous déplacer."
+  ],
+  "motsCles": ["carte Vitale", "ameli", "ayant droit", "attestation de droits", "remboursement", "sécurité sociale", "CPAM"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F16620 Rattachement d'un mineur en tant qu'ayant droit", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A17693 Carte Vitale des mineurs (10 septembre 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A18009 Inscrire son enfant sur les deux cartes Vitale", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18009", "verifieLe": "2026-10-29" }
+  ]
+}

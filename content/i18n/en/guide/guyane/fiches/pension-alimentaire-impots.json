@@ -59,11 +59,11 @@
     "The filing deadline that applies in French Guiana is published every year by the DGFiP (French tax administration): check it on impots.gouv.fr."
   ],
   "motsCles": ["taxes", "child support", "deduction", "family quotient", "tax shares", "tax return", "box T"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F2 Deducting child support", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2", "verifieLe": "2026-04-15" },
-    { "titre": "Service-public.gouv.fr, F3170 Child support received", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170", "verifieLe": "2026-04-15" },
-    { "titre": "Service-public.gouv.fr, F2633 Shared residence, family quotient and box T", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-04-15" },
+    { "titre": "Service-public.gouv.fr, F2 Deducting child support", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3170 Child support received", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2633 Shared residence, family quotient and box T", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F12 (contact details of the tax information service)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12", "verifieLe": "2026-04-15" }
   ]
 }

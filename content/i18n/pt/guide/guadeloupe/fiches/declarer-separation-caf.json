@@ -1,0 +1,187 @@
+{
+  "slug": "declarer-separation-caf",
+  "territoire": "guadeloupe",
+  "categorie": "aides",
+  "titre": "Declarar a separação à Caf",
+  "resume": "Informar a separação on-line para que os seus direitos sejam recalculados só com a sua renda, e escolher quem recebe os benefícios em residência alternada (Cerfa n° 14000).",
+  "aQuoiCaSert": "Após uma separação, os seus benefícios da Caf (Caisse d'allocations familiales, órgão de benefícios familiares), como auxílios familiares, auxílio-moradia, prime d'activité (complemento de renda para quem trabalha) ou ASF (auxílio de apoio familiar), são recalculados sem a renda do ex-cônjuge. Declarar logo a mudança abre novos direitos e evita ter de devolver valores recebidos a mais. Em residência alternada, os dois pais também devem informar à Caf quem recebe os benefícios.",
+  "quiEstConcerne": [
+    "Todo beneficiário da Caf que se separa, seja casado, em PACS (união civil) ou vivendo junto sem casamento nem PACS.",
+    "O ex-cônjuge que não era o beneficiário e precisa abrir o próprio cadastro para receber benefícios.",
+    "Os pais em residência alternada, que precisam escolher o beneficiário."
+  ],
+  "aSavoir": [
+    "Residência alternada, com acordo: os pais indicam um único beneficiário para todos os benefícios, ou dividem os auxílios familiares pela metade e indicam um beneficiário único para os outros benefícios.",
+    "Residência alternada, sem acordo: cada um dos pais recebe automaticamente uma parte dos auxílios familiares.",
+    "A escolha só pode ser alterada após um ano (salvo mudança de residência da criança) e depois é renovada automaticamente.",
+    "Só os auxílios familiares são divididos. Paje (prestation d'accueil du jeune enfant, benefício da primeira infância), complément familial (complemento familiar), auxílio-moradia, AEEH (auxílio de educação da criança com deficiência), ASF e ARS (auxílio de volta às aulas) vão para o genitor indicado. Exceção: desde 1º de dezembro de 2025, sem acordo, cada um dos pais pode receber o complément de libre choix du mode de garde (CMG, auxílio para cuidados infantis) conforme a própria situação.",
+    "Residência com um só dos pais, sem pensão paga pelo outro: você pode ter direito ao auxílio de apoio familiar (veja a ficha «Auxílio de apoio familiar (ASF, allocation de soutien familial)»)."
+  ],
+  "documents": [
+    {
+      "id": "identifiants-caf",
+      "libelle": "Número de beneficiário e senha da Caf",
+      "detail": "Se você não era o beneficiário, crie a sua própria conta em caf.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "date-separation",
+      "libelle": "Data exata da separação e novo endereço",
+      "detail": "A data da saída efetiva da moradia comum.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (dados bancários) só em seu nome",
+      "detail": "Se os benefícios eram pagos numa conta conjunta.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Sua renda recente",
+      "detail": "Contracheques ou valores de benefícios, para o auxílio-moradia ou a prime d'activité.",
+      "coffre": "finances"
+    },
+    {
+      "id": "bail",
+      "libelle": "Contrato de aluguel ou declaração de aluguel da nova moradia",
+      "detail": "Para pedir o auxílio-moradia.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Formulário “Enfant(s) en résidence alternée, déclaration et choix des parents” (Cerfa n° 14000)",
+      "detail": "Filho(s) em residência alternada: declaração e escolha dos pais. Original assinado pelos dois, se houver acordo. Disponível em service-public.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo que fixa a residência da criança (cópia), se houver",
+      "detail": "Peça uma cópia ao cartório do tribunal (greffe), ao advogado ou ao notário se não a tiver mais.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Entre na sua conta em caf.fr ou no aplicativo da Caf",
+      "detail": "Seção de declaração de mudança de situação familiar. O ex-cônjuge que não é beneficiário cria o próprio cadastro."
+    },
+    {
+      "titre": "Informe a data da separação, o seu novo endereço e a residência dos filhos"
+    },
+    {
+      "titre": "Em residência alternada, preencha o Cerfa n° 14000",
+      "detail": "Assinado pelos dois pais se houver acordo sobre a escolha do beneficiário ou a divisão. Sem acordo, a divisão dos auxílios familiares é automática."
+    },
+    {
+      "titre": "Confira antes de enviar a declaração",
+      "detail": "A data da separação está certa; o endereço de cada um está atualizado; o RIB está só em seu nome; o Cerfa n° 14000 está assinado pelos dois se necessário; a cópia da sentença ou do acordo está anexada, se houver. Guarde o comprovante de envio."
+    },
+    {
+      "titre": "Faça uma simulação dos seus novos direitos",
+      "detail": "ASF, auxílio-moradia, prime d'activité: faça os pedidos que se aplicam a você."
+    },
+    {
+      "titre": "Avise também os outros órgãos",
+      "detail": "Assurance Maladie (seguro de saúde público francês; vínculo dos filhos), escola, imposto de renda (case T se você cria os filhos sozinho)."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Guadeloupe",
+      "detail": "On-line ou num posto de atendimento (lista na página da Caf).",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    },
+    {
+      "nom": "MSA",
+      "detail": "Mutualité sociale agricole: se você é do regime agrícola."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Auxílios familiares em residência alternada (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Formulário Cerfa n° 14000 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R36342"
+    },
+    {
+      "titre": "Caf de la Guadeloupe",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Declarar a separação à Caf",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Rever a escolha do beneficiário (residência alternada) em 1 ano",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Comprovante da declaração de mudança de situação na Caf",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Cerfa n° 14000 assinado (residência alternada)",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Sentença ou acordo sobre a residência da criança",
+      "categorie": "jaf"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Logo após a separação",
+      "detail": "Declare sem esperar, para evitar ter de devolver valores recebidos a mais."
+    },
+    {
+      "libelle": "No mínimo 1 ano para a escolha do beneficiário em residência alternada",
+      "detail": "Não pode ser alterada antes, salvo mudança de residência da criança."
+    }
+  ],
+  "aConfirmer": [
+    "Em Guadalupe, os auxílios familiares são pagos desde o primeiro filho (Cnaf, LR-2026-051): valor e divisão em residência alternada com um só filho a confirmar com a Caf de la Guadeloupe.",
+    "A Caf pode pedir um comprovante de separação se vocês ainda morarem sob o mesmo teto: o tipo de comprovante aceito deve ser confirmado com a Caf.",
+    "A confirmar localmente: horários e agendamento dos atendimentos da Caf de la Guadeloupe."
+  ],
+  "motsCles": [
+    "separação",
+    "Caf",
+    "mudança de situação",
+    "residência alternada",
+    "auxílios familiares",
+    "cerfa 14000"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F21248 Auxílios familiares e residência alternada",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13213 Auxílios familiares (regras diferentes nos territórios ultramarinos)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213",
+      "verifieLe": "2026-06-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2633 Quociente familiar (case T, pai ou mãe solo)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633",
+      "verifieLe": "2026-04-15"
+    },
+    {
+      "titre": "Cnaf, carta de rede LR-2026-051 de 26 de fevereiro de 2026 (disposições para os DOM)",
+      "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

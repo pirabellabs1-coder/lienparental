@@ -1,0 +1,158 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "france",
+  "categorie": "sante",
+  "titre": "Mandatory vaccinations and check-ups at the PMI",
+  "resume": "Vaccines required for daycare, school and the holiday club according to the year of birth, including meningococcus A, B, C, W and Y, and check-ups for children under 6 at the PMI (mother and child health service).",
+  "aQuoiCaSert": "Unless there is a medical contraindication, mandatory vaccinations are required to enter daycare, school, childcare or a holiday camp: without proof, enrollment may only be provisional, then refused. The proof is the health record book (carnet de santé) filled in by the doctor. Mother and child health centers (protection maternelle et infantile, PMI), run by the conseil départemental (département council), offer free consultations for pregnant women and children under 6.",
+  "quiEstConcerne": [
+    "All parents of minor children, especially before starting daycare, school, childcare or a holiday camp.",
+    "Parents of children under 6, for consultations and vaccinations at the PMI."
+  ],
+  "aSavoir": [
+    "Child born before 2018: only the primary vaccination against diphtheria, tetanus and polio (DTP) is required for school.",
+    "Child born between 2018 and 2022: 11 mandatory vaccines (diphtheria, tetanus, polio, whooping cough, Haemophilus influenzae b, hepatitis B, pneumococcus, meningococcus C, measles, mumps, rubella).",
+    "Child born from 2023: same list, but the meningococcal vaccination covers serogroups A, B, C, W and Y (and no longer C only).",
+    "A child who is not up to date can be admitted provisionally: you have 3 months to catch up on the vaccines, otherwise the facility can exclude the child. If the child is admitted for more than a year, proof is requested every year.",
+    "20 mandatory health check-ups from birth to age 16, including 16 before age 6. They are reimbursed at 100% with no upfront payment, except extra fees (dépassements d'honoraires). Until age 6, they can be done by the regular doctor, another doctor or the PMI.",
+    "Separated parents: the parent who takes the child to be vaccinated should inform the other and send them a copy of the vaccination pages, so that each has the proof."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "The child's health record book (carnet de santé)",
+      "detail": "Original to bring to every appointment. It is the proof of vaccination: keep a photocopy or a photo of the vaccination pages.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Parent's carte Vitale (health insurance card) or the child's certificate of entitlement",
+      "detail": "Certificate can be downloaded free of charge from your ameli account.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "ID of the parent or the accompanying adult",
+      "detail": "Original. If another person accompanies the child, bring written authorization from a parent.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Medical certificate of contraindication, if applicable",
+      "detail": "Issued by the doctor. To be shown instead of proof of vaccination.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check the health record book",
+      "detail": "Compare it with the list of mandatory vaccines for your child's year of birth."
+    },
+    {
+      "titre": "Make an appointment",
+      "detail": "With your regular doctor or pediatrician, or at a PMI center in your département for children under 6. Call ahead to find out the consultation days."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Health record book, carte Vitale or certificate of entitlement, ID, written authorization if the accompanying adult is not a parent."
+    },
+    {
+      "titre": "Have your child vaccinated",
+      "detail": "The health professional records the vaccine in the health record book."
+    },
+    {
+      "titre": "Show the proof",
+      "detail": "A photocopy of the vaccination pages to the daycare, school or holiday club, every year if the child stays more than a year."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "PMI centers of the conseil départemental",
+      "detail": "Free consultations, prevention and follow-up for pregnant women and children under 6. Find the nearest center in the government directory or on your département's website.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    },
+    {
+      "nom": "Your regular doctor or pediatrician",
+      "detail": "Mandatory vaccinations and health check-ups."
+    },
+    {
+      "nom": "ameli account",
+      "detail": "The child's certificate of entitlement and information about vaccination.",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vaccines required for daycare and school (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Mandatory medical check-ups for children (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967"
+    },
+    {
+      "titre": "Mandatory vaccines (ameli.fr)",
+      "url": "https://www.ameli.fr/assure/sante/themes/vaccination/vaccins-obligatoires"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Vaccination appointment",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Vaccine booster",
+      "evenement": "sante"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Child's mandatory health check-up",
+      "evenement": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Vaccination pages of the health record book",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 months to catch up after provisional admission",
+      "detail": "If vaccinations are still not up to date after this period, the child may be excluded from the daycare, school or club."
+    }
+  ],
+  "aConfirmer": [
+    "The number of doses and the age for each vaccine follow the current vaccination schedule: check with your doctor or the PMI.",
+    "The ameli.fr and vaccination-info-service.fr pages could not be consulted during the check; the list above follows the service-public.gouv.fr page. Meningococcal catch-up for a child already vaccinated against meningococcus C only should be discussed with the doctor.",
+    "To be confirmed locally: addresses, consultation days and appointment booking at PMI centers, which vary by département."
+  ],
+  "motsCles": [
+    "vaccine",
+    "mandatory vaccines",
+    "meningococcus",
+    "PMI",
+    "health record book",
+    "pediatrician",
+    "baby"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vaccinations for school, daycare or after-school care",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F967 Mandatory medical check-ups for children",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public directory, example page of a PMI center (role of the centers)",
+      "url": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/yonne/5f0cff59-99c9-49ca-9ec7-9c1ba117b650",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

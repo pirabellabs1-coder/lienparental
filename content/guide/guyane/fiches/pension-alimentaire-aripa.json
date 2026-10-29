@@ -73,11 +73,11 @@
     "À confirmer localement : modalités de dépôt de plainte pour abandon de famille (commissariat, gendarmerie ou courrier au procureur du tribunal judiciaire de Cayenne)."
   ],
   "motsCles": ["pension", "ARIPA", "intermédiation", "impayé", "Caf", "recouvrement", "titre exécutoire"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1249 Pension alimentaire impayée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-01-30" },
-    { "titre": "Service-public.gouv.fr, F36407 Intermédiation financière des pensions alimentaires", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-04-01" },
-    { "titre": "Service-public.gouv.fr, F815 Allocation de soutien familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F1249 Pension alimentaire impayée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F36407 Intermédiation financière des pensions alimentaires", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F815 Allocation de soutien familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-10-29" },
     { "titre": "ARIPA, intermédiation financière", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" },
     { "titre": "ARIPA, demande de titre exécutoire", "url": "https://pension-alimentaire.caf.fr/usagers/demande-titre-executoire" }
   ]

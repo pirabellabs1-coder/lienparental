@@ -60,10 +60,10 @@
     "A confirmar localmente: horários e agendamento do atendimento presencial da Caf de la Guyane."
   ],
   "motsCles": ["separação", "Caf", "mudança de situação", "residência alternada", "auxílios familiares", "cerfa 14000"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F21248 Auxílios familiares e residência alternada", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F13213 Auxílios familiares (regras diferentes nos territórios ultramarinos)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213", "verifieLe": "2026-06-01" },
-    { "titre": "Service-public.gouv.fr, F2633 Quociente familiar (case T, pai ou mãe solo)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-04-15" }
+    { "titre": "Service-public.gouv.fr, F21248 Auxílios familiares e residência alternada", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13213 Auxílios familiares (regras diferentes nos territórios ultramarinos)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2633 Quociente familiar (case T, pai ou mãe solo)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-10-29" }
   ]
 }

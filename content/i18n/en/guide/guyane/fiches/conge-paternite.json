@@ -16,7 +16,7 @@
     "The remaining 21 days (28 for multiple births) can be taken all at once or in 2 periods of at least 5 days, within 6 months of the birth.",
     "Tell your employer at least 1 month before the expected date of delivery, then at least 1 month before the start of each period, stating the dates and length. Doing so in writing is advised: registered letter with acknowledgment of receipt, or hand delivery against a signed receipt.",
     "Daily allowances: among other conditions, you must have been registered for at least 6 months and have worked 150 hours in the previous 3 months, or paid contributions on at least €12,058.20 of salary over 6 months. They range from €11.12 to €104.02 per day (service-public.gouv.fr, checked as of June 1, 2026).",
-    "Additional birth leave: since July 1, 2026, each parent can take 1 to 2 months of paid leave after maternity or paternity leave. For an employee, the allowance is 70% of net salary the first month and 60% the second, up to the social security ceiling. Tell your employer at least 1 month in advance (code.travail.gouv.fr)."
+    "Additional birth leave: since July 1, 2026, each parent can take 1 or 2 months (possibly as 2 one-month periods) after maternity or paternity leave. For an employee, the allowance is 70% of net salary the first month and 60% the second, up to the monthly social security ceiling (€4,005 in 2026). Tell your employer at least 1 month in advance, or 15 days if this leave immediately follows paternity leave (service-public.gouv.fr)."
   ],
   "documents": [
     { "id": "acte-naissance", "libelle": "Full copy of the child's birth certificate or updated family record book (livret de famille)", "detail": "To send to the Assurance Maladie. Certificate free on service-public.gouv.fr or from the town hall (mairie) of the place of birth.", "coffre": "finances" },
@@ -31,7 +31,7 @@
     { "titre": "Check before sending your file", "detail": "Birth certificate or updated family record book, proof of relationship with the mother if you are not the father, salary statement sent by the employer, bank details and address up to date on ameli." },
     { "titre": "Send the supporting documents to the Assurance Maladie", "detail": "In your ameli account or by post to the CGSS de la Guyane." },
     { "titre": "Take the mandatory 4-day period", "detail": "Right after the 3-day birth leave paid by the employer." },
-    { "titre": "Plan the rest of the leave within 6 months", "detail": "And, if you wish, the additional birth leave within 9 months of the birth." }
+    { "titre": "Plan the rest of the leave within 6 months", "detail": "And, if you wish, the additional birth leave: within 9 months of the birth for a child born on or after July 1, 2026, or between July 1, 2026 and March 31, 2027 for a child born between January 1 and June 30, 2026." }
   ],
   "ou": [
     { "nom": "Your employer", "detail": "For advance notice and the salary statement." },
@@ -39,7 +39,8 @@
   ],
   "liens": [
     { "titre": "Paternity and childcare leave (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156" },
-    { "titre": "Additional birth leave (code.travail.gouv.fr)", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026" }
+    { "titre": "Additional birth leave (code.travail.gouv.fr)", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026" },
+    { "titre": "Additional birth leave (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685" }
   ],
   "actions": [
     { "type": "rappel", "titre": "Tell the employer about paternity leave (1 month before due date)", "evenement": "autre" },
@@ -50,15 +51,16 @@
   "datesLimites": [
     { "libelle": "Inform the employer at least 1 month before the expected birth", "detail": "Then at least 1 month before each period." },
     { "libelle": "Leave to be taken within 6 months of the birth", "detail": "Can be postponed in certain cases provided for by law, for example if the mother dies." },
-    { "libelle": "Additional birth leave within 9 months of the birth", "detail": "For a child born on or after June 1, 2026." }
+    { "libelle": "Additional birth leave: deadline depends on the date of birth", "detail": "Child born on or after July 1, 2026: within 9 months of the birth. Child born between January 1 and June 30, 2026: between July 1, 2026 and March 31, 2027." }
   ],
   "aConfirmer": [
     "To be confirmed with the CGSS de la Guyane: how to send the supporting documents in practice and how long daily allowance payments take."
   ],
   "motsCles": ["paternity leave", "birth", "daily allowances", "employer", "additional birth leave", "CGSS"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F3156 Paternity and childcare leave", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156", "verifieLe": "2026-06-01" },
-    { "titre": "Code du travail numérique, Additional birth leave: what changes on July 1, 2026", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026", "verifieLe": "2026-04-01" }
+    { "titre": "Service-public.gouv.fr, F3156 Paternity and childcare leave", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156", "verifieLe": "2026-10-29" },
+    { "titre": "Code du travail numérique, Additional birth leave: what changes on July 1, 2026", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F39685 Additional birth leave for private-sector employees", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685", "verifieLe": "2026-10-29" }
   ]
 }

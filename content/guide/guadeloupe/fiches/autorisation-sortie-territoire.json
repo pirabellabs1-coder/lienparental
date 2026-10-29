@@ -1,0 +1,192 @@
+{
+  "slug": "autorisation-sortie-territoire",
+  "territoire": "guadeloupe",
+  "categorie": "logement",
+  "titre": "Autorisation de sortie du territoire (AST)",
+  "resume": "Quand votre enfant voyage à l'étranger sans aucun de ses parents (y compris vers une île voisine comme la Dominique) : le formulaire gratuit, les pièces à joindre, et que faire si vous craignez un départ sans votre accord.",
+  "aQuoiCaSert": "L'autorisation de sortie du territoire (AST) permet à un mineur qui vit en France de voyager à l'étranger sans être accompagné d'un parent ou d'une personne exerçant l'autorité parentale : voyage scolaire, séjour chez un proche, colonie. Elle se remplit sans aucun déplacement en mairie ou en préfecture. Depuis la Guadeloupe, un voyage vers une île étrangère voisine (par exemple la Dominique ou Sainte-Lucie) est une sortie du territoire français : l'AST est donc nécessaire si l'enfant y va sans ses parents.",
+  "quiEstConcerne": [
+    "Les mineurs qui vivent en France et voyagent à l'étranger sans aucun parent ni titulaire de l'autorité parentale (seuls, avec un groupe, un proche ou un autre adulte).",
+    "Les parents séparés qui doivent signer ou vérifier une AST, ou qui craignent un départ de l'enfant à l'étranger sans leur accord."
+  ],
+  "aSavoir": [
+    "Pas d'AST si l'enfant voyage avec l'un de ses parents, même si les parents sont séparés ou divorcés.",
+    "Un seul parent titulaire de l'autorité parentale signe le formulaire. L'accord de l'autre parent n'est pas demandé pour l'AST.",
+    "La durée de validité est choisie par le parent signataire, dans la limite d'un an.",
+    "Le formulaire est gratuit et se remplit en ligne sur service-public.gouv.fr (ou s'imprime et se complète à la main). Aucun déplacement n'est nécessaire.",
+    "L'enfant doit aussi avoir sa propre pièce d'identité valide (carte d'identité ou passeport selon le pays), et un visa si le pays l'exige. Le livret de famille ne peut pas être exigé, mais une copie est conseillée.",
+    "Cas particulier outre-mer : un trajet entre la métropole et un département d'outre-mer avec une escale à l'étranger nécessite une AST si l'enfant voyage sans ses parents.",
+    "Si l'enfant fait l'objet d'une opposition (OST) ou d'une interdiction de sortie du territoire (IST) non levée, il ne peut pas partir, même avec une AST.",
+    "Crainte d'un enlèvement par l'autre parent : en urgence, une opposition de sortie du territoire (OST) se demande en personne en préfecture ou sous-préfecture (commissariat ou gendarmerie si elles sont fermées et le départ imminent). Elle dure 15 jours au maximum. Pour une mesure durable, seul le juge aux affaires familiales peut prononcer une IST.",
+    "IST en cours : l'enfant ne peut quitter le territoire qu'avec l'accord des deux parents. Si les deux sont d'accord, une déclaration en commissariat ou en gendarmerie, au moins 5 jours avant le départ, permet de suspendre temporairement l'IST."
+  ],
+  "documents": [
+    {
+      "id": "formulaire-ast",
+      "libelle": "Formulaire d'AST rempli et signé (cerfa n° 15646)",
+      "detail": "Original signé par un seul parent titulaire de l'autorité parentale. À remplir en ligne sur service-public.gouv.fr puis imprimer. L'enfant le garde sur lui pendant tout le voyage.",
+      "coffre": "autres"
+    },
+    {
+      "id": "identite-signataire",
+      "libelle": "Photocopie lisible de la pièce d'identité du parent signataire",
+      "detail": "Parent français : carte d'identité ou passeport valide ou périmé depuis moins de 5 ans. Parent hors Union européenne : passeport valide et titre de séjour français valide. Nom, photo, signature et dates doivent être lisibles.",
+      "coffre": "autres"
+    },
+    {
+      "id": "identite-enfant",
+      "libelle": "Pièce d'identité de l'enfant (original en cours de validité)",
+      "detail": "Carte d'identité ou passeport selon la destination, avec un visa si le pays l'exige. Si elle est périmée, voyez la fiche « carte d'identité et passeport ».",
+      "coffre": "autres"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Copie du livret de famille",
+      "detail": "Ne peut pas être exigée, mais conseillée en cas de nom différent entre l'enfant et le parent signataire.",
+      "coffre": "autres"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Décision du juge sur l'autorité parentale (copie)",
+      "detail": "Utile si vous exercez seul l'autorité parentale ou en cas d'IST. Indispensable pour une demande d'OST, avec tout élément prouvant le risque (billet d'avion, messages).",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Vérifiez si une AST est nécessaire",
+      "detail": "L'enfant part-il à l'étranger (îles étrangères voisines comprises) sans aucun de ses parents ? Si oui, il faut une AST. S'il voyage avec l'un de vous, elle n'est pas nécessaire."
+    },
+    {
+      "titre": "Remplissez le formulaire en ligne",
+      "detail": "Sur service-public.gouv.fr, formulaire d'autorisation de sortie du territoire. Indiquez la durée de validité (un an au maximum), puis imprimez et signez."
+    },
+    {
+      "titre": "Vérifiez avant le départ",
+      "detail": "Formulaire original signé, photocopie lisible de la pièce d'identité du parent signataire, pièce d'identité valide de l'enfant (et visa si besoin), copie du livret de famille. Renseignez-vous auprès de la compagnie ou de l'organisateur sur ses propres exigences."
+    },
+    {
+      "titre": "Remettez le tout à l'enfant ou à l'accompagnateur",
+      "detail": "Les documents voyagent avec l'enfant. Gardez une copie scannée dans le coffre-fort."
+    },
+    {
+      "titre": "En cas de crainte d'un départ sans votre accord",
+      "detail": "Urgence : rendez-vous en personne à la préfecture ou à la sous-préfecture avec le justificatif d'autorité parentale, vos pièces d'identité et de domicile, la pièce d'identité de l'enfant et les preuves du risque. Pour une protection durable, renseignez-vous sur la saisine du juge aux affaires familiales."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Formulaire d'AST en ligne (service-public.gouv.fr)",
+      "detail": "Gratuit, sans déplacement.",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46121"
+    },
+    {
+      "nom": "Préfecture de la Guadeloupe (Basse-Terre) ou sous-préfecture de Pointe-à-Pitre",
+      "detail": "Uniquement pour une opposition de sortie du territoire (OST) en urgence. Adresses et horaires sur le site des services de l'État. Commissariat ou gendarmerie si elles sont fermées et le départ imminent.",
+      "url": "https://www.guadeloupe.gouv.fr"
+    },
+    {
+      "nom": "Allô Service Public",
+      "detail": "Renseignements gratuits sur vos droits, sans accès aux dossiers individuels.",
+      "telephone": "3939"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Autorisation de sortie du territoire (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359"
+    },
+    {
+      "titre": "Conflit parental sur la sortie du territoire : OST et IST (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774"
+    },
+    {
+      "titre": "Un parent peut-il partir à l'étranger avec l'enfant ? (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38460"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Autorisation de sortie du territoire signée",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Copie de la pièce d'identité du parent signataire",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Jugement sur l'autorité parentale ou IST",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Fin de validité de l'AST de l'enfant",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "IST : déclaration commune au moins 5 jours avant le départ",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Un an au maximum",
+      "detail": "Durée de validité de l'AST, fixée par le parent signataire."
+    },
+    {
+      "libelle": "15 jours au maximum",
+      "detail": "Durée d'une opposition de sortie du territoire (OST) décidée par le préfet."
+    },
+    {
+      "libelle": "Au moins 5 jours avant le départ",
+      "detail": "Pour suspendre temporairement une IST, par déclaration commune des deux parents en commissariat ou gendarmerie."
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer : Saint-Martin (partie française) et Saint-Barthélemy font partie du territoire français, mais la partie néerlandaise de Saint-Martin (Sint Maarten) est un autre pays. Renseignez-vous sur les documents demandés pour un mineur qui la rejoint sans ses parents.",
+    "À confirmer localement : pièces exigées par les compagnies maritimes et aériennes vers les îles voisines, et pièce d'identité demandée par le pays de destination.",
+    "À confirmer localement : horaires d'accueil de la préfecture à Basse-Terre et de la sous-préfecture de Pointe-à-Pitre pour une OST en urgence."
+  ],
+  "motsCles": [
+    "AST",
+    "sortie du territoire",
+    "voyage",
+    "mineur",
+    "Dominique",
+    "îles voisines",
+    "OST",
+    "IST",
+    "cerfa 15646"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1359 Autorisation de sortie du territoire (AST)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359",
+      "verifieLe": "2026-03-20"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1774 Conflit parental sur la sortie du territoire d'un enfant mineur",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774",
+      "verifieLe": "2025-04-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F38460 Un parent peut-il partir à l'étranger avec l'enfant ?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38460",
+      "verifieLe": "2026-06-05"
+    },
+    {
+      "titre": "Formulaires.service-public.gouv.fr, cerfa n° 15646 Autorisation de sortie du territoire",
+      "url": "https://www.formulaires.service-public.gouv.fr/gf/getAnnexe.do?cerfaAnnexe=15646*01&cerfaFormulaire=15646*01"
+    },
+    {
+      "titre": "Services de l'État en Guadeloupe (préfecture et sous-préfectures)",
+      "url": "https://www.guadeloupe.gouv.fr",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

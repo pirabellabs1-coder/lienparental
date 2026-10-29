@@ -1,0 +1,66 @@
+{
+  "slug": "mode-de-garde-petite-enfance",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Crèche ou assistante maternelle : trouver un mode de garde",
+  "resume": "Les places d'accueil sont rares à Mayotte : où chercher, quelles pièces préparer, et comment obtenir le complément de libre choix du mode de garde (CMG) versé par la CSSM.",
+  "aQuoiCaSert": "Faire garder son jeune enfant permet de travailler ou de se former. À Mayotte, les places en crèche sont peu nombreuses : il faut s'y prendre très tôt. Si vous employez une assistante maternelle agréée ou une garde à domicile, ou si l'enfant va dans une crèche ou une micro-crèche concernée, la CSSM peut verser le complément de libre choix du mode de garde (CMG) et prendre en charge tout ou partie des cotisations sociales.",
+  "quiEstConcerne": [
+    "Les parents d'un enfant de 6 ans ou moins (moins de 12 ans pour une famille monoparentale), pour le CMG.",
+    "Les parents séparés en garde alternée : chacun peut percevoir le CMG depuis décembre 2025."
+  ],
+  "aSavoir": [
+    "Le CMG existe à Mayotte. Depuis le 1er septembre 2025, son montant ne dépend plus de forfaits par tranche : il est calculé selon vos ressources mensuelles, la composition de la famille, le coût horaire et le nombre d'heures de garde.",
+    "Il couvre l'assistante maternelle, la garde à domicile, la crèche ou la micro-crèche, selon les cas (CSSM).",
+    "Employeur direct d'une assistante maternelle ou d'une garde à domicile : déclarez chaque mois la rémunération sur pajemploi.urssaf.fr.",
+    "Les assistantes maternelles doivent être agréées par la PMI du Département de Mayotte. Vous devenez leur employeur et signez un contrat de travail.",
+    "Crèche publique : le dossier se retire en général à la mairie. Crèche associative ou privée : l'inscription se fait auprès de la direction."
+  ],
+  "documents": [
+    { "id": "livret-famille", "libelle": "Livret de famille ou acte de naissance de l'enfant", "detail": "Copie. Pendant la grossesse, une attestation de grossesse est en général demandée à la place.", "coffre": "autres" },
+    { "id": "identite-parents", "libelle": "Pièce d'identité de chaque parent", "detail": "Copie.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Justificatif de domicile de moins de 3 mois", "detail": "Copie.", "coffre": "autres" },
+    { "id": "ressources", "libelle": "Dernier avis d'imposition ou attestation de la CSSM", "detail": "Copie. Sert à calculer le tarif de la crèche.", "coffre": "finances" },
+    { "id": "travail", "libelle": "Justificatifs d'activité des parents", "detail": "Contrat de travail, bulletins de salaire, attestation de formation ou de France Travail.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant la résidence et l'autorité parentale, si vous êtes séparés", "detail": "Copie. Indique qui peut récupérer l'enfant.", "coffre": "jaf" },
+    { "id": "vaccins", "libelle": "Pages vaccins du carnet de santé", "detail": "Copie. Les vaccins obligatoires sont exigés à l'entrée en collectivité.", "coffre": "sante" },
+    { "id": "contrat-assmat", "libelle": "Contrat de travail de l'assistante maternelle et attestation d'agrément", "detail": "Original signé. Demandez une copie de l'agrément délivré par la PMI.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Recherchez les modes d'accueil près de chez vous", "detail": "Sur monenfant.fr, auprès de votre mairie ou de la PMI." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Livret de famille ou attestation de grossesse, pièces d'identité des parents, justificatif de domicile, avis d'impôt, justificatifs d'activité, jugement si vous êtes séparés, pages vaccins. Demandez par téléphone la liste exacte de la structure." },
+    { "titre": "Déposez une demande de place", "detail": "Notez la date de dépôt et relancez régulièrement." },
+    { "titre": "Avec une assistante maternelle, vérifiez son agrément et signez le contrat", "detail": "Agrément délivré par la PMI du Département de Mayotte." },
+    { "titre": "Demandez le CMG", "detail": "Dans « Mon Compte » sur caf.fr, espace utilisé par la CSSM. Inscrivez-vous ensuite comme employeur sur Pajemploi si vous employez directement." },
+    { "titre": "Enregistrez les frais de garde", "detail": "Dans le Journal, pour suivre la dépense par enfant et le partage avec l'autre parent." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Complément de libre choix du mode de garde.", "url": "https://www.cssm.fr/page/prestations-familiales", "telephone": "02 69 61 91 91" },
+    { "nom": "Département de Mayotte (PMI)", "detail": "Agrément et suivi des assistantes maternelles. Standard du Département, 112 boulevard Halidi Sélémani, Mamoudzou.", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "telephone": "02 69 66 10 00" },
+    { "nom": "monenfant.fr", "detail": "Annuaire national des crèches et assistantes maternelles.", "url": "https://monenfant.fr" },
+    { "nom": "Pajemploi (Urssaf)", "detail": "Déclaration mensuelle du salaire.", "url": "https://www.pajemploi.urssaf.fr" }
+  ],
+  "liens": [
+    { "titre": "Prestations familiales à Mayotte, dont le CMG (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Complément de libre choix du mode de garde (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Relancer la demande de place en crèche", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Déclarer le salaire de l'assistante maternelle sur Pajemploi", "evenement": "autre" },
+    { "type": "coffre", "titre": "Contrat d'accueil ou contrat de l'assistante maternelle", "categorie": "finances" },
+    { "type": "coffre", "titre": "Attestation d'agrément de l'assistante maternelle", "categorie": "finances" },
+    { "type": "depense", "titre": "Frais de garde", "categorie": "garde" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : la couverture de Mayotte sur monenfant.fr (site non consultable lors de la vérification) et l'existence de relais petite enfance.",
+    "À confirmer auprès du Département : service et adresse de la PMI chargée de l'agrément des assistantes maternelles.",
+    "À confirmer auprès de la CSSM : conditions d'activité des parents exigées pour le CMG et montant pour votre situation."
+  ],
+  "motsCles": ["crèche", "assistante maternelle", "nounou", "CMG", "Pajemploi", "garde", "CSSM"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Prestations familiales (CMG)", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "Département de Mayotte, Nous contacter", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39152 CMG emploi direct", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152", "verifieLe": "2026-10-29" }
+  ]
+}

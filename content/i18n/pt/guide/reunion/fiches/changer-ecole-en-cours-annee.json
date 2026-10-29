@@ -1,0 +1,186 @@
+{
+  "slug": "changer-ecole-en-cours-annee",
+  "territoire": "reunion",
+  "categorie": "ecole",
+  "titre": "Mudar de escola durante o ano letivo (mudança, certificat de radiation)",
+  "resume": "Transferir seu filho de escola, collège ou lycée durante o ano na Reunião: certificat de radiation, autorização da prefeitura, documentos a apresentar e o caso dos pais separados.",
+  "aQuoiCaSert": "Após uma mudança de casa ou uma separação, seu filho pode mudar de estabelecimento durante o ano. Essa transferência nunca é automática: é preciso haver vaga na nova escola. O estabelecimento anterior entrega a você um certificat de radiation (certificado de desligamento da escola), sem o qual a nova matrícula não é possível. Para uma escola pública de educação infantil ou de ensino fundamental (maternelle ou élémentaire), a prefeitura (mairie) deve primeiro dar sua autorização e emitir um certificado de inscrição (certificat d'inscription).",
+  "quiEstConcerne": [
+    "Os pais que se mudam durante o ano letivo, no mesmo município ou em outro município da ilha.",
+    "Os pais separados cujo filho muda de residência principal.",
+    "Os pais que desejam outra escola, outro collège (anos finais do fundamental) ou outro lycée (ensino médio) que não o do seu setor."
+  ],
+  "aSavoir": [
+    "Escola pública no mesmo município: é preciso a autorização do prefeito, e a prefeitura emite um certificado de inscrição. Em outro município: é preciso a autorização do prefeito do município de residência e do município de destino, que emite o certificado.",
+    "Pais separados: se um dos pais se opuser à mudança de escola, o diretor deve aguardar a decisão do juiz de família (juge aux affaires familiales, JAF) acionado por esse genitor. Um acordo escrito dos dois pais que exercem a autoridade parental evita esse bloqueio.",
+    "Se uma sentença confia só a você o exercício da autoridade parental, apresente-a à prefeitura e à escola: nesse caso, você decide sozinho(a).",
+    "Collège ou lycée público do setor: peça o certificat de radiation (exeat) ao estabelecimento anterior e depois matricule a criança no novo. A matrícula depende das vagas e deve ser aceita pelo diretor do estabelecimento. Se não houver mais vagas, os serviços departamentais da Éducation nationale (Ministério da Educação) designam a escola do aluno.",
+    "Collège ou lycée público fora do setor: é preciso primeiro a autorização do diretor acadêmico (Dasen, directeur académique) antes da matrícula.",
+    "Estabelecimento particular: as condições dependem de cada estabelecimento; entre em contato diretamente com a secretaria."
+  ],
+  "documents": [
+    {
+      "id": "certificat-radiation",
+      "libelle": "Certificat de radiation da escola anterior (exeat no collège e no lycée)",
+      "detail": "Original entregue pela direção do estabelecimento anterior quando você informa a saída. Indispensável em todos os casos.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "certificat-inscription",
+      "libelle": "Certificado de inscrição emitido pela prefeitura (escola pública)",
+      "detail": "Original, emitido pela prefeitura do município de destino.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "filiation",
+      "libelle": "Livro de família (livret de famille) ou extrato da certidão de nascimento da criança",
+      "detail": "Cópia, para comprovar identidade e filiação. A certidão de nascimento é pedida gratuitamente on-line ou na prefeitura do local de nascimento.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "vaccins",
+      "libelle": "Comprovante das vacinas obrigatórias",
+      "detail": "Cópia das páginas de vacinas da caderneta de saúde ou atestado de contraindicação. A lista depende do ano de nascimento da criança.",
+      "coffre": "sante"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço recente",
+      "detail": "Cópia de uma conta ou recibo no novo endereço. Pedido sobretudo no collège e no lycée.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "bulletins",
+      "libelle": "Boletins do ano e decisão de orientação (collège, lycée)",
+      "detail": "Cópias, muitas vezes disponíveis no portal digital do estabelecimento.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "fiche-renseignements",
+      "libelle": "Ficha de informações sobre os pais",
+      "detail": "Preenchida com os contatos dos dois pais. Pedida pelo collège ou pelo lycée.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "accord-autre-parent",
+      "libelle": "Acordo escrito do outro genitor",
+      "detail": "Datado e assinado, com cópia do documento de identidade dele. Recomendado quando a autoridade parental é compartilhada.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo (residência da criança, autoridade parental)",
+      "detail": "Cópia, se uma decisão fixa a residência ou confia a autoridade parental a um só genitor.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique se ainda há vaga",
+      "detail": "Ligue para a nova escola ou o novo estabelecimento. Para uma escola pública, entre em contato também com o serviço escolar da prefeitura."
+    },
+    {
+      "titre": "Obtenha as autorizações necessárias",
+      "detail": "Certificado de inscrição da prefeitura para uma escola pública. Autorização do diretor acadêmico para um collège ou lycée fora do setor."
+    },
+    {
+      "titre": "Informe a saída ao estabelecimento anterior",
+      "detail": "Peça o certificat de radiation ou o exeat e avise o outro genitor por escrito."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Certificat de radiation, certificado de inscrição da prefeitura, livro de família ou certidão de nascimento, carteira de vacinação, comprovante de endereço, boletins, acordo escrito do outro genitor ou sentença, se necessário."
+    },
+    {
+      "titre": "Conclua a matrícula",
+      "detail": "Com a direção da nova escola ou na secretaria do estabelecimento. Lembre-se de reinscrever a criança na cantina, nas atividades extraescolares e no transporte escolar."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Prefeitura do seu novo município (serviço escolar)",
+      "detail": "Certificado de inscrição para uma escola pública de educação infantil ou de ensino fundamental."
+    },
+    {
+      "nom": "Académie de La Réunion (rede regional de educação)",
+      "detail": "Serviços departamentais da Éducation nationale: designação de vaga em collège ou lycée quando o estabelecimento está lotado, ou pedido fora do setor.",
+      "url": "https://www.ac-reunion.fr"
+    },
+    {
+      "nom": "Secretaria do collège ou do lycée",
+      "detail": "Exeat, processo de matrícula e documentos pedidos."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Mudar de escola durante o ano (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722"
+    },
+    {
+      "titre": "Mudar de collège ou de lycée durante o ano (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393"
+    },
+    {
+      "titre": "Académie de La Réunion",
+      "url": "https://www.ac-reunion.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Certificat de radiation da escola anterior",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Certificado de inscrição da prefeitura",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Acordo escrito do outro genitor para a mudança de escola",
+      "categorie": "jaf"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Horário de matrícula na nova escola",
+      "evenement": "ecole"
+    },
+    {
+      "type": "rappel",
+      "titre": "Reinscrever a criança na cantina e no extraescolar",
+      "evenement": "ecole"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: o setor da académie de La Réunion responsável pelas designações de vaga durante o ano e seus prazos de resposta.",
+    "A confirmar localmente: os documentos exatos pedidos por cada prefeitura da Reunião para o certificado de inscrição."
+  ],
+  "motsCles": [
+    "transferência escolar",
+    "certificat de radiation",
+    "exeat",
+    "mudança",
+    "prefeitura",
+    "collège",
+    "lycée"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F10722 Mudança de escola durante o ano",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F20393 Mudança de collège ou de lycée durante o ano",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

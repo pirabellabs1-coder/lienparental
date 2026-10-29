@@ -1,0 +1,66 @@
+{
+  "slug": "pension-alimentaire-impayee",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Pensão alimentícia não paga em Mayotte: os recursos",
+  "resume": "A ARIPA e o auxílio de apoio familiar ainda não funcionam em Mayotte. Os recursos possíveis hoje: cobrança, oficial de justiça (commissaire de justice), Tesouro Público via promotor, queixa por abandono de família.",
+  "aQuoiCaSert": "Na França metropolitana, a Caf (Caisse d'allocations familiales, órgão de benefícios familiares), por meio da sua agência ARIPA (agência de cobrança de pensões alimentícias), pode cobrar a pensão e pagar um adiantamento. Em Mayotte, esse serviço ainda não existe: a intermediação financeira e o auxílio de apoio familiar (allocation de soutien familial) estão previstos para 2035, e a cobrança das pensões não pagas pela CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte) a partir de 2031. Enquanto isso, o genitor que não recebe a pensão fixada por decisão judicial ou acordo pode iniciar ele mesmo os procedimentos previstos em lei.",
+  "quiEstConcerne": [
+    "O genitor que não recebe, ou não recebe por inteiro, a pensão fixada para a criança.",
+    "É preciso uma decisão judicial, um acordo parental homologado ou um acordo de divórcio consensual. Sem isso, é preciso primeiro recorrer ao juiz de família (juge aux affaires familiales, JAF)."
+  ],
+  "aSavoir": [
+    "Pagamento direto: um oficial de justiça (commissaire de justice) pede ao empregador ou ao banco do genitor devedor que pague a pensão a você. Permite recuperar os últimos 6 meses de atrasados e as parcelas futuras.",
+    "Penhoras: o oficial de justiça também pode fazer uma penhora de salário, de conta bancária ou uma penhora e venda de bens (saisie-vente).",
+    "Cobrança pelo Tesouro Público (Trésor public): só é possível após o fracasso de um desses procedimentos, que você deve comprovar. O pedido é feito ao promotor (procureur de la République) do Tribunal judiciaire do seu domicílio, em Mayotte o de Mamoudzou.",
+    "Queixa por abandono de família (abandon de famille): possível se a pensão não for paga integralmente por mais de 2 meses. O crime é punido com 2 anos de prisão e multa de 15.000 €.",
+    "As pensões podem ser cobradas retroativamente por no máximo 5 anos.",
+    "A assistência jurídica gratuita (aide juridictionnelle) pode cobrir os custos do processo conforme a sua renda (veja a ficha específica)."
+  ],
+  "documents": [
+    { "id": "titre", "libelle": "Decisão ou acordo que fixa a pensão (cópia)", "detail": "Sentença, acordo homologado ou acordo de divórcio. Se perdeu, peça uma cópia ao cartório do tribunal (greffe), ao advogado ou ao notário.", "coffre": "jaf" },
+    { "id": "preuves-impayes", "libelle": "Tabela dos valores não pagos e comprovantes", "detail": "Mês a mês: valor devido, valor recebido, data. Extratos bancários, mensagens escritas. O Diário do Lien Parental pode ajudar a prepará-la.", "coffre": "finances" },
+    { "id": "coordonnees-autre-parent", "libelle": "Dados conhecidos do outro genitor", "detail": "Último endereço, empregador e banco, se você souber: úteis para o oficial de justiça.", "coffre": "jaf" },
+    { "id": "relance", "libelle": "Cópia da carta de cobrança ao outro genitor", "detail": "Opcional, de preferência com aviso de recebimento.", "coffre": "courriers" },
+    { "id": "identite", "libelle": "Seu documento de identidade (cópia)", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Reúna a prova dos valores não pagos", "detail": "Liste mês a mês o que é devido e o que foi recebido. Se possível, envie uma cobrança por escrito ao outro genitor." },
+    { "titre": "Verifique se a pensão está fixada por decisão ou acordo", "detail": "Se não estiver, recorra ao juiz de família (veja a ficha específica)." },
+    { "titre": "Procure um oficial de justiça", "detail": "Para um pagamento direto ou uma penhora. Pergunte o custo e se a assistência jurídica gratuita pode cobri-lo." },
+    { "titre": "Confira antes de ir", "detail": "Cópia completa da decisão ou do acordo, tabela dos valores não pagos e comprovantes, dados do outro genitor, documento de identidade. Guarde uma cópia de tudo." },
+    { "titre": "Se não der certo, escreva ao promotor ou registre queixa", "detail": "Cobrança pelo Tesouro Público via promotor do Tribunal judiciaire de Mamoudzou, ou queixa por abandono de família após mais de 2 meses sem pagamento (delegacia, gendarmerie ou carta ao promotor)." },
+    { "titre": "Acompanhe cada pagamento no Diário", "detail": "Com o comprovante. O Lien Parental não certifica que um pagamento foi feito, mas ajuda você a manter o histórico." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Mamoudzou (tribunal de Mamoudzou)", "detail": "Juiz de família e promotor. Atendimento por telefone ou e-mail.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" },
+    { "nom": "Points-justice de Mayotte (CDAD, conselho departamental de acesso ao direito)", "detail": "Informação jurídica gratuita em vários municípios.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271" },
+    { "nom": "Um oficial de justiça (commissaire de justice)", "detail": "Para o pagamento direto e as penhoras." }
+  ],
+  "liens": [
+    { "titre": "Pensão alimentícia não paga (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249" },
+    { "titre": "Ordonnance n° 2026-647, calendário da convergência (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Decisão ou acordo que fixa a pensão", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Tabela e comprovantes das pensões não pagas", "categorie": "finances" },
+    { "type": "depense", "titre": "Pensão alimentícia", "categorie": "pension" },
+    { "type": "rappel", "titre": "Verificar o pagamento mensal da pensão", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Queixa por abandono de família possível após mais de 2 meses sem pagamento" },
+    { "libelle": "Atrasados cobráveis por no máximo 5 anos", "detail": "O pagamento direto só cobre os últimos 6 meses." }
+  ],
+  "aConfirmer": [
+    "A página oficial sobre pensões não pagas não menciona Mayotte: os procedimentos descritos são de direito nacional, mas confirme sua aplicação local num point-justice (posto gratuito de informação jurídica) ou com um advogado.",
+    "A confirmar localmente: contatos dos oficiais de justiça que atuam em Mayotte e prazos.",
+    "As datas de 2031 e 2035 vêm do relatório sobre a ordonnance n° 2026-647 e podem ser detalhadas por textos de aplicação."
+  ],
+  "motsCles": ["pensão alimentícia", "não pagamento", "commissaire de justice", "pagamento direto", "abandono de família", "ARIPA", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1249 Pensão alimentícia não paga", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, relatório ao Presidente sobre a ordonnance n° 2026-647 de 22 de julho de 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" },
+    { "titre": "Anuário service-public, Tribunal judiciaire de Mamoudzou", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "verifieLe": "2026-10-29" }
+  ]
+}

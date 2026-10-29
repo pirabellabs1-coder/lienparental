@@ -1,0 +1,235 @@
+{
+  "slug": "aide-juridictionnelle",
+  "territoire": "reunion",
+  "categorie": "aides",
+  "titre": "Applying for legal aid (aide juridictionnelle)",
+  "resume": "Have the State pay all or part of your lawyer and court fees, for example before the family court judge: 2026 limits, form, documents and the Saint-Denis and Saint-Pierre offices.",
+  "aQuoiCaSert": "Legal aid (aide juridictionnelle, AJ) pays, fully or partly, lawyer's fees and court costs when your income is modest. It is used in particular for proceedings before the family court judge (juge aux affaires familiales, JAF): the child's residence, child support, parental authority. You remain free to choose your lawyer.",
+  "quiEstConcerne": [
+    "Parents whose reference tax income (revenu fiscal de référence) and assets are below the limits, who are bringing or defending proceedings.",
+    "Minor children heard by the judge in proceedings that concern them: aid is granted to them without any means test.",
+    "Victims of domestic violence, who can obtain provisional aid."
+  ],
+  "aSavoir": [
+    "2026 limits for full aid (reference tax income): €12,957 for 1 person, €15,289 for 2, €17,621 for 3, €19,095 for 4, €20,568 for 5, €22,041 for 6, €23,514 for 7.",
+    "Just above the limit, partial aid is possible. For a single person: from €12,958 to €15,316 for 55% coverage, from €15,317 to €19,433 for 25%.",
+    "Assets also count (excluding your main home). For 1 person: a maximum of €12,957 in movable assets and €38,866 in real estate. Exceeding either of these limits rules out any aid.",
+    "If you are in conflict with the other parent and belong to the same tax household, your resources are assessed separately.",
+    "First check your policies (home, bank card, legal protection): if legal protection insurance covers the costs, AJ may be refused. A certificate from the insurer stating it does not cover the costs is required.",
+    "Costs incurred before the decision of the legal aid office (bureau d'aide juridictionnelle) are not covered: apply as early as possible.",
+    "The pleading fee (droit de plaidoirie, €13) and any sums you are ordered to pay are not covered by AJ.",
+    "No response time is set: the decision is sent \"as soon as possible\". Appeal against the decision: 15 days after its notification, to the office that made it.",
+    "Once aid is granted, you have 1 year from the decision to start legal action; after that, the decision lapses.",
+    "In an emergency, provisional aid can be granted, with your resources checked afterwards."
+  ],
+  "documents": [
+    {
+      "id": "formulaire",
+      "libelle": "Legal aid application form (cerfa n° 16146)",
+      "detail": "Filled in online on service-public.gouv.fr, printed, dated and signed, then submitted or sent to the competent office.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "identite",
+      "libelle": "Front-and-back copy of your ID document",
+      "detail": "Valid ID card or passport. Foreign nationals: residence permit or equivalent document.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Recent proof of address (copy)",
+      "detail": "Bill, rent receipt. If you are housed by someone: also a certificate of accommodation (attestation d'hébergement).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Copy of the family record book (livret de famille)",
+      "detail": "Lost book: a free second book from the town hall (mairie).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Latest tax notice (avis d'imposition) (copy)",
+      "detail": "Download it from your account on impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "changement-situation",
+      "libelle": "Proof of a change in family situation or income",
+      "detail": "For example a recent separation or job loss: certificate, judgment, France Travail notification.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "patrimoine",
+      "libelle": "Proof of savings and real estate other than your main home",
+      "detail": "Savings account statements, property tax (taxe foncière), if you have any.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-assurance",
+      "libelle": "Certificate from your insurer stating it does not cover the costs (legal protection)",
+      "detail": "Ask your home, car or bank card insurer.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "pieces-affaire",
+      "libelle": "Case documents",
+      "detail": "Depending on the case: summons to the hearing, previous judgment, acceptance letter from the lawyer you have chosen.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "decision-baj",
+      "libelle": "Decision of the legal aid office",
+      "detail": "Keep it and send it to your lawyer.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check your legal protection insurance",
+      "detail": "Call your insurer: if it covers the costs, you do not need AJ; otherwise ask for a certificate stating it does not cover them."
+    },
+    {
+      "titre": "Estimate your entitlement",
+      "detail": "Compare your reference tax income with the limits, or use the simulator on service-public.gouv.fr."
+    },
+    {
+      "titre": "Choose a lawyer if you wish",
+      "detail": "Ask the lawyer to accept your case under AJ and attach their acceptance letter. Otherwise, the head of the bar (bâtonnier) can appoint one."
+    },
+    {
+      "titre": "Fill in the application",
+      "detail": "Cerfa n° 16146 form, or an online application on aidejuridictionnelle.justice.fr with FranceConnect (for adults only, for the civil and criminal courts)."
+    },
+    {
+      "titre": "Check before submitting or sending",
+      "detail": "Signed form, ID, proof of address, family record book, latest tax notice, insurer's certificate, summons or judgment. Keep a full copy."
+    },
+    {
+      "titre": "Submit the file to the right office",
+      "detail": "Before going to court: the office of the tribunal judiciaire (judicial court) where you live (Saint-Denis or Saint-Pierre). After: the office of the court handling the case."
+    },
+    {
+      "titre": "Follow up the decision",
+      "detail": "Send it to your lawyer. If refused, you have 15 days to challenge it."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Legal aid office of the Tribunal judiciaire de Saint-Denis (Saint-Denis court)",
+      "detail": "5 avenue André Malraux, 97400 Saint-Denis. Mail: CS 81027, 97495 Sainte-Clotilde Cedex.",
+      "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-saint-denis",
+      "telephone": "+33 2 62 40 23 45"
+    },
+    {
+      "nom": "Legal aid office of the Tribunal judiciaire de Saint-Pierre (Saint-Pierre court)",
+      "detail": "At the court, 28 rue Augustin Archambaud, 97410 Saint-Pierre.",
+      "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-saint-pierre-reunion"
+    },
+    {
+      "nom": "Points-justice in Réunion (free legal information centers)",
+      "detail": "Free legal information and help putting the file together.",
+      "url": "https://lannuaire.service-public.gouv.fr/navigation/la-reunion/point_justice"
+    },
+    {
+      "nom": "Online legal aid application",
+      "detail": "Free service with FranceConnect.",
+      "url": "https://www.aidejuridictionnelle.justice.fr/authentification"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Legal aid: conditions and procedure (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074"
+    },
+    {
+      "titre": "Legal aid application form (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444"
+    },
+    {
+      "titre": "Online legal aid application (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Legal aid application (copy of the file)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Decision of the legal aid office",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Insurer's certificate of non-coverage",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Legal aid: appeal within 15 days",
+      "evenement": "autre"
+    },
+    {
+      "type": "depense",
+      "titre": "Pleading fee (not covered by AJ)",
+      "categorie": "frais-administratifs",
+      "montant": 13,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Before the hearing",
+      "detail": "Costs incurred before the office's decision are not covered: apply as early as possible."
+    },
+    {
+      "libelle": "15 days",
+      "detail": "Time limit to appeal against a decision of the legal aid office, from its notification."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the competent tribunal judiciaire depending on your town (Saint-Denis or Saint-Pierre). The split of towns could not be checked, as the justice.fr and court of appeal websites were under maintenance.",
+    "To be confirmed locally: opening hours and phone number of the Saint-Pierre legal aid office (not confirmed in the official directory)."
+  ],
+  "motsCles": [
+    "legal aid",
+    "AJ",
+    "lawyer",
+    "JAF",
+    "court fees",
+    "cerfa 16146",
+    "Saint-Denis",
+    "Saint-Pierre"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F18074 Legal aid (aide juridictionnelle)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R1444 Legal aid application form (cerfa n° 16146*04)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R66463 Online legal aid application",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Justice.gouv.fr, directory: Legal aid office of the Tribunal judiciaire de Saint-Denis",
+      "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-saint-denis",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Government directory (service-public.gouv.fr): Tribunal judiciaire de Saint-Pierre",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

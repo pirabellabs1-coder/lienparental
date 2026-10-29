@@ -1,0 +1,56 @@
+{
+  "slug": "pass-culture",
+  "territoire": "mayotte",
+  "categorie": "loisirs",
+  "titre": "Pass Culture pour les 15 à 18 ans",
+  "resume": "Offres gratuites à 15 et 16 ans, 50 € à 17 ans, 150 € à 18 ans, avec un avantage à Mayotte : pas de plafond de 50 € sur les achats en ligne. Les pièces à préparer pour l'inscription.",
+  "aQuoiCaSert": "Le pass Culture facilite l'accès des jeunes à la culture : livres, places de cinéma, concerts, spectacles, cours, instruments de musique. Il comporte une part individuelle, utilisée par le jeune dans l'application, et une part collective, utilisée par les enseignants pour des sorties de classe. Mayotte fait partie des territoires où il est ouvert.",
+  "quiEstConcerne": [
+    "Les jeunes de 15 à 18 ans résidant en métropole ou en outre-mer, dont Mayotte.",
+    "Les jeunes de nationalité étrangère qui résident en France depuis au moins 1 an."
+  ],
+  "aSavoir": [
+    "Jeunes inscrits depuis le 1er mars 2025 : offres gratuites à 15 et 16 ans, 50 € à 17 ans, 150 € à 18 ans.",
+    "L'argent est utilisable jusqu'à la veille des 21 ans.",
+    "Les achats d'offres en ligne (musique, vidéo, jeux, presse numérique...) sont désormais plafonnés à 50 €, sauf pour les jeunes qui résident à Mayotte.",
+    "Inscription : pièce d'identité et justificatif de domicile au nom du jeune. S'il est hébergé, il faut aussi le justificatif de domicile de l'hébergeant, une attestation d'hébergement et la pièce d'identité de l'hébergeant."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité valide du jeune", "detail": "Copie envoyée dans l'application. Pas de pièce d'identité : voir la fiche « Faire la carte d'identité ou le passeport de mon enfant ».", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Justificatif de domicile au nom du jeune", "detail": "À défaut, documents de l'hébergeant ci-dessous.", "coffre": "autres" },
+    { "id": "hebergement", "libelle": "Attestation d'hébergement signée par le parent ou l'hébergeant", "detail": "Avec la copie de sa pièce d'identité et de son justificatif de domicile.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Téléchargez l'application pass Culture", "detail": "Ou rendez-vous sur pass.culture.fr, dès les 15 ans." },
+    { "titre": "Vérifiez avant de commencer l'inscription", "detail": "Pièce d'identité valide du jeune, justificatif de domicile à son nom ou attestation d'hébergement avec les pièces du parent, adresse mail et téléphone du jeune." },
+    { "titre": "Créez le compte du jeune et envoyez les justificatifs" },
+    { "titre": "Attendez la validation", "detail": "Le compte est crédité une fois l'inscription acceptée." },
+    { "titre": "Réservez les offres", "detail": "Accompagnez votre ado dans ses premiers choix si besoin." }
+  ],
+  "ou": [
+    { "nom": "pass Culture", "detail": "Application et site officiel, avec un service d'aide en ligne.", "url": "https://pass.culture.fr" }
+  ],
+  "liens": [
+    { "titre": "Pass Culture (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959" },
+    { "titre": "Pass Culture : changements en 2026 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Les 17 ans : activer le crédit pass Culture", "evenement": "activite" },
+    { "type": "rappel", "titre": "Utiliser le crédit pass Culture avant les 21 ans", "evenement": "activite" },
+    { "type": "depense", "titre": "Sortie ou activité culturelle", "categorie": "loisirs" }
+  ],
+  "datesLimites": [
+    { "libelle": "Crédits utilisables jusqu'à la veille des 21 ans" }
+  ],
+  "aConfirmer": [
+    "À confirmer dans l'application : le report sur les 18 ans du crédit de 17 ans non dépensé (les pages officielles consultées ne le précisent pas).",
+    "À confirmer localement : les offres disponibles à Mayotte dépendent des lieux partenaires, à consulter dans l'application.",
+    "Le modèle d'attestation d'hébergement et le dépôt des pièces sont précisés dans l'application : vérifiez au moment de l'inscription."
+  ],
+  "motsCles": ["pass Culture", "culture", "ado", "livres", "cinéma", "17 ans", "18 ans"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A18775 Pass Culture : changements en 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775", "verifieLe": "2026-10-29" }
+  ]
+}

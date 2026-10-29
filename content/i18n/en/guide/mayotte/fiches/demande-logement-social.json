@@ -1,0 +1,65 @@
+{
+  "slug": "demande-logement-social",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Applying for social housing",
+  "resume": "Submitting a social housing application in Mayotte, getting your unique number, gathering the right documents (including those related to a separation) and renewing the application every year.",
+  "aQuoiCaSert": "Social housing is housing with a regulated rent, allocated subject to income limits. The application, online or at a registration office, gives you a unique number (numéro unique), which starts the clock on how long your application has been waiting. After a separation, you can have only your own income taken into account, provided you supply the right supporting documents.",
+  "quiEstConcerne": [
+    "Households whose income does not exceed the limits set for the overseas departments, including Mayotte.",
+    "Parents who are separating and need to find new housing with their children.",
+    "Foreign nationals holding a valid residence permit or receipt (récépissé)."
+  ],
+  "aSavoir": [
+    "Income limits in the DOM (overseas departments), including Mayotte, for an application made in 2026 (2024 income, general case): €27,382 for 1 person, €36,567 for 2, €43,973 for 3 people or a single person with 1 dependent, €53,088 for 4 or a single person with 2 dependents, €62,450 for 5, €70,383 for 6, plus €7,851 per additional person.",
+    "Separation: to have only your income taken into account, attach proof such as the document referring the case to the family court judge (juge aux affaires familiales, JAF), the divorce judgment or the birth certificate noting the dissolution of the PACS (civil partnership).",
+    "In the overseas departments, you need one application per department: an application in Mayotte only covers Mayotte.",
+    "The application must be renewed every year; without renewal, it is cancelled."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Applicant's ID document", "detail": "Front-and-back copy. For a non-EU national: valid residence permit or receipt.", "coffre": "courriers" },
+    { "id": "identite-cotitulaire", "libelle": "ID document or residence permit of each adult to be housed", "coffre": "courriers" },
+    { "id": "avis-imposition", "libelle": "2025 tax notice on 2024 income for each person to be housed", "detail": "Copy.", "coffre": "finances" },
+    { "id": "justificatif-separation", "libelle": "Proof of separation", "detail": "Document referring the case to the family court judge, divorce judgment or birth certificate noting the dissolution of the PACS.", "coffre": "jaf" },
+    { "id": "jugement-residence", "libelle": "Judgment or agreement setting the children's residence", "detail": "Copy.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Family record book (livret de famille) or the children's birth certificates", "detail": "Copy.", "coffre": "courriers" },
+    { "id": "situation-logement", "libelle": "Proof of your current housing situation", "detail": "Lease, certificate of accommodation, or landlord's notice to quit.", "coffre": "courriers" },
+    { "id": "attestation-enregistrement", "libelle": "Registration certificate with the unique number", "detail": "Keep it safe.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Create your application", "detail": "Online on service-public.gouv.fr or demande-logement-social.gouv.fr, or with the cerfa n° 14069 form submitted at a registration office." },
+    { "titre": "Check before sending your application", "detail": "ID document or residence permit for each adult, everyone's tax notice, proof of separation and judgment on the children's residence if you are separated, family record book. Everyone to be housed must be declared." },
+    { "titre": "Get your registration certificate", "detail": "It shows your unique number and the application date." },
+    { "titre": "Update the application as soon as your situation changes", "detail": "Separation, birth, new address, drop in income." },
+    { "titre": "Renew every year", "detail": "Without renewal, the application is cancelled." }
+  ],
+  "ou": [
+    { "nom": "National social housing application portal", "detail": "Submit, track and renew online.", "url": "https://www.demande-logement-social.gouv.fr" },
+    { "nom": "Registration offices (town halls, social landlords)", "detail": "To submit a paper application or get help." },
+    { "nom": "ADIL de Mayotte", "detail": "ADIL (Agence départementale d'information sur le logement, the local housing information agency): free housing advice.", "url": "https://www.anil.org/adil-976/", "telephone": "06 39 21 53 91" }
+  ],
+  "liens": [
+    { "titre": "Social housing: income limits (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007" },
+    { "titre": "Social housing application (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869" },
+    { "titre": "Renewing the application (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Social housing application registration certificate", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Proof of separation for the housing application", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Renew the social housing application every year", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Annual renewal of the application", "detail": "Otherwise the application is cancelled." }
+  ],
+  "aConfirmer": [
+    "To be confirmed: the exact renewal period and whether a reminder is sent, not specified on the page consulted.",
+    "To be confirmed locally: the list of registration offices and social landlords in Mayotte, and the waiting times."
+  ],
+  "motsCles": ["social housing", "HLM", "unique number", "renewal", "separation", "income limits"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10007 Social housing income limits (DOM, including Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F869 Social housing application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F35010 Renewing a social housing application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010", "verifieLe": "2026-10-29" }
+  ]
+}

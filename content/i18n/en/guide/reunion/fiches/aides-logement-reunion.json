@@ -1,0 +1,183 @@
+{
+  "slug": "aides-logement-reunion",
+  "territoire": "reunion",
+  "categorie": "logement",
+  "titre": "Housing benefits in Réunion",
+  "resume": "Family or social housing allowance: who is entitled, the documents to prepare (including the rent certificate signed by the landlord) and applying to the Caf de La Réunion (Caisse d'allocations familiales, the family benefits office) after a separation.",
+  "aQuoiCaSert": "Housing benefits reduce the rent you pay each month. With children or family benefits, the one that applies to you is usually the ALF (allocation de logement familiale, family housing allowance); otherwise the ALS (allocation de logement sociale, social housing allowance). After a separation, each parent who takes a home can make their own application, calculated on their own income and new family situation only.",
+  "quiEstConcerne": [
+    "Tenants or subtenants of decent housing occupied as their main residence.",
+    "ALF: in particular people who receive family benefits or the AEEH (disabled child education allowance), or single pregnant women from the 5th month of pregnancy, under certain conditions.",
+    "ALS: people who meet neither the conditions for the APL (aide personnalisée au logement, personalized housing aid) nor those for the ALF.",
+    "Foreign nationals must hold a valid residence permit."
+  ],
+  "aSavoir": [
+    "APL, ALF and ALS cannot be combined. The amount depends on your income over the last 12 months, your rent, your family situation and where the home is: only the Caf simulator gives an estimate.",
+    "The household's assets (real estate and financial) are taken into account when they exceed €30,000.",
+    "Entitlement starts on the 1st day of the month after your file is processed, which can take about 2 months. The benefit is paid on the 5th of each month: apply as soon as you move in.",
+    "If refused, you have 2 months from the notice to challenge the decision with the Caf, then refer the matter to the amicable appeals committee (commission de recours amiable).",
+    "Separation: report it to the Caf. Each parent declares their own home and their own family situation; the amount is recalculated accordingly."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Copy of your ID or residence permit, front and back",
+      "detail": "Valid.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "Bank details (RIB) in your name",
+      "detail": "Open a personal account if you only had a joint account: see the guide entry \"Having your own bank account after a separation\".",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Rent certificate (cerfa n° 10842), dated and signed by the landlord",
+      "detail": "Have it completed by your landlord or social housing provider. Without their signature, the file is incomplete.",
+      "coffre": "finances"
+    },
+    {
+      "id": "bail",
+      "libelle": "Lease or rental agreement",
+      "detail": "Copy. It states the rent, service charges and move-in date.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Amounts of your income over the last 12 months",
+      "detail": "Payslips, allowances, child support received or paid: you will be asked for them in the online form.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement setting the children's residence, if you have one",
+      "detail": "Copy. Useful if the Caf asks you to prove where the children live after the separation.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "notification",
+      "libelle": "Caf notice of entitlement",
+      "detail": "Keep it: it shows the amount and the start date of the entitlement.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Run a simulation on caf.fr",
+      "detail": "With the rent for the new home and your current income."
+    },
+    {
+      "titre": "First report your change of situation",
+      "detail": "Separation, move, children's residence: in your Caf account."
+    },
+    {
+      "titre": "Have the rent certificate filled in",
+      "detail": "By the landlord or housing provider, dated and signed."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "The application is made online. If you go to a Caf reception desk: Caf number (numéro allocataire), ID, bank details in your name, signed rent certificate, lease, amounts of your income over the last 12 months."
+    },
+    {
+      "titre": "Apply online in your Caf account",
+      "detail": "As soon as you move in, attaching the documents."
+    },
+    {
+      "titre": "Then report any change",
+      "detail": "Move, new bank account, a child arriving or leaving, change in the children's residence."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de La Réunion",
+      "detail": "Online application in the Mon Compte area; reception desks across the island if you need help.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    },
+    {
+      "nom": "ADIL de La Réunion (local housing information agency)",
+      "detail": "Free advice on your rights as a tenant. 24 rue Henri Vavasseur, 97400 Saint-Denis.",
+      "url": "https://www.anil.org/adil-974/",
+      "telephone": "02 62 41 14 24"
+    },
+    {
+      "nom": "France Services (local public service help centers)",
+      "detail": "Free help to apply online."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Housing benefits: APL, ALF, ALS (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864"
+    },
+    {
+      "titre": "Family housing allowance (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    },
+    {
+      "titre": "Caf de La Réunion",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Signed rent certificate",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Housing benefit notice",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Apply for housing benefit for the new home",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Appeal possible: 2 months after a housing benefit refusal",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "2 months after the notice to challenge a Caf decision"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the Caf de La Réunion: in the overseas departments, the APL reportedly does not apply to ordinary housing, the benefit paid then being the ALF or ALS. The national pages consulted do not specify this.",
+    "To be confirmed locally: the scales specific to overseas France. Use the Caf simulator rather than an indicative amount.",
+    "To be confirmed with the Caf de La Réunion: how a child under shared residence is counted in each of the two households for housing benefit.",
+    "To be confirmed locally: addresses and opening hours of the Caf de La Réunion reception desks (caf.fr site unreadable during the check) and ADIL drop-in sessions near you."
+  ],
+  "motsCles": [
+    "housing",
+    "APL",
+    "ALF",
+    "ALS",
+    "rent",
+    "Caf",
+    "rent certificate",
+    "ADIL"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F31864 Housing benefits",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13132 Family housing allowance",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "ANIL, ADIL de La Réunion",
+      "url": "https://www.anil.org/adil-974/",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

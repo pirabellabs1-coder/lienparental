@@ -14,7 +14,7 @@
     "2026 limits for full aid (reference tax income): €12,957 for 1 person, €15,289 for 2, €17,621 for 3, €19,095 for 4, €20,568 for 5, €22,041 for 6, €23,514 for 7.",
     "If your income is slightly above the limit, partial aid of 55% or 25% is possible. For a single person: up to €15,316 of reference tax income for 55%, up to €19,433 for 25%.",
     "Assets also count (excluding your main home). For 1 person: a maximum of €12,957 in movable assets (savings) and €38,866 in real estate. Exceeding an asset limit rules out any aid.",
-    "If you are in conflict with the other parent and belong to the same tax household, your resources are assessed individually.",
+    "If you are in conflict with the other parent and belong to the same tax household (for example in a divorce), the assets ceiling is assessed individually.",
     "First check your insurance policies (home, bank card, legal protection): if legal protection insurance already covers the costs, your AJ application may be rejected. You must provide a certificate stating the insurer does not cover the costs.",
     "Costs incurred before the decision of the legal aid office (bureau d'aide juridictionnelle) are not covered. Apply as early as possible, before the hearing.",
     "The pleading fee (droit de plaidoirie, €13) and any sums you are ordered to pay (damages, fines) are not covered by the AJ.",
@@ -67,14 +67,14 @@
   ],
   "aConfirmer": [
     "To be confirmed locally: opening hours of the Cayenne legal aid office and whether you can submit at the other court sites in French Guiana (Saint-Laurent-du-Maroni).",
-    "The official online application service has been reported as limited to certain situations: check whether it is open for proceedings in French Guiana, otherwise use the paper form."
-  ],
+    "The official online application service has been reported as limited to certain situations: check whether it is open for proceedings in French Guiana, otherwise use the paper form.",
+    "To be confirmed with the legal aid office: whether your income (and not only your assets) is assessed individually when you are in conflict with the other parent in the same tax household; the official page only states this for assets."  ],
   "motsCles": ["legal aid", "AJ", "lawyer", "JAF", "court fees", "cerfa 16146", "Cayenne court"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F18074 Legal aid (aide juridictionnelle)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-06-12" },
-    { "titre": "Service-public.gouv.fr, R1444 Legal aid application form (Cerfa n° 16146*04)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-09-02" },
-    { "titre": "Service-public.gouv.fr, R66463 Online legal aid application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463", "verifieLe": "2025-10-15" },
-    { "titre": "Justice.gouv.fr, directory: Legal aid office of the Tribunal judiciaire de Cayenne", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-cayenne" }
+    { "titre": "Service-public.gouv.fr, F18074 Legal aid (aide juridictionnelle)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1444 Legal aid application form (Cerfa n° 16146*04)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R66463 Online legal aid application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463", "verifieLe": "2026-10-29" },
+    { "titre": "Justice.gouv.fr, directory: Legal aid office of the Tribunal judiciaire de Cayenne", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-cayenne", "verifieLe": "2026-10-29" }
   ]
 }

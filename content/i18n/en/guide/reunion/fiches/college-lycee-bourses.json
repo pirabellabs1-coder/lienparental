@@ -1,0 +1,206 @@
+{
+  "slug": "college-lycee-bourses",
+  "territoire": "reunion",
+  "categorie": "ecole",
+  "titre": "Applying for a middle school or high school grant",
+  "resume": "Automatic assessment at enrollment or an application between September 1 and October 15, 2026: income limits, amounts, the tax notice to provide and the rules when parents are separated or have shared residence.",
+  "aQuoiCaSert": "The bourse de collège (middle school grant) and the bourse de lycée (high school grant) help low-income families pay school costs. They are paid in three installments during the year. For 2026-2027, what counts is the reference tax income (revenu fiscal de référence) on the 2026 tax notice (2025 income). The simplest way is to agree to automatic assessment of grant eligibility when you enroll your child. This entry also recaps the key points of enrolling in middle school (collège).",
+  "quiEstConcerne": [
+    "Families of a middle or high school student attending a public school, a state-contracted private school (privé sous contrat) or the Cned (national distance-learning center).",
+    "Parents of a student starting 6e (first year of collège) or high school.",
+    "Separated parents: only one of the two can apply."
+  ],
+  "aSavoir": [
+    "Middle school grant 2026-2027: €40, €112 or €175 per term depending on income. Income limits (2025 income): €18,488 for 1 dependent child, €22,754 for 2, €27,020 for 3, €31,286 for 4, €35,553 for 5.",
+    "High school grant 2026-2027: 6 levels (échelons), from €168 to €357 per term. For 1 dependent child, the limit for level 1 is €22,037. The official simulator tells you your level.",
+    "Shared residence (middle school grant): only one parent submits the application. If both submit one, both are declared inadmissible. A statement in which the other parent waives their right to apply is not accepted.",
+    "Agreeing to automatic assessment at enrollment counts as an application for the rest of the child's time in middle and high school. Without this agreement, you must apply again every year, even if the child had a grant the year before.",
+    "Paid in 3 installments, usually at the end of December, end of March and end of June.",
+    "Appeals: in middle school, 2 months after the notice. In high school, 15 full days (jours francs) after a refusal, to the rectorat (regional education authority), then 2 months if refused a second time."
+  ],
+  "documents": [
+    {
+      "id": "avis-impot",
+      "libelle": "2026 tax notice on 2025 income",
+      "detail": "Copy of every page. Both notices if you are an unmarried couple living together. Downloadable from your account on impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "Bank details (RIB) in the name of the applying parent",
+      "detail": "Often requested in private schools or without automatic assessment.",
+      "coffre": "finances"
+    },
+    {
+      "id": "formulaire-bourse",
+      "libelle": "Paper grant application form, if you do not use EduConnect",
+      "detail": "Available from the school office.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement setting the child's residence, if you are separated",
+      "detail": "Copy. May be requested to prove that the child is your dependent.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "caf",
+      "libelle": "Payment statement from the Caf (Caisse d'allocations familiales, the family benefits office) listing dependent children",
+      "detail": "Downloadable from your Caf account, if the school asks for it.",
+      "coffre": "finances"
+    },
+    {
+      "id": "dossier-inscription",
+      "libelle": "Middle school enrollment file",
+      "detail": "Collected from the school office or filled in online with EduConnect if the school offers it.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "identite",
+      "libelle": "IDs of the parents and the child, family record book (livret de famille)",
+      "detail": "Copies, for enrollment.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address and ID photos",
+      "detail": "For enrollment, according to the school's list.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "notification",
+      "libelle": "Notice granting or refusing the grant",
+      "detail": "Keep it: the appeal deadline runs from this notice.",
+      "coffre": "scolarite"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Estimate your entitlement with the simulator",
+      "detail": "With your 2026 tax notice and the number of dependent children. The simulator can be reached from the service-public.gouv.fr pages."
+    },
+    {
+      "titre": "At enrollment, agree to automatic assessment",
+      "detail": "Online with EduConnect or on the paper file. There is then nothing else to do."
+    },
+    {
+      "titre": "Otherwise, apply between September 1 and October 15, 2026",
+      "detail": "Online with EduConnect, or on a paper form at the school office."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Full 2026 tax notice (both for unmarried couples), RIB, signed form, residence judgment if you are separated. With shared residence, agree in advance on which parent applies."
+    },
+    {
+      "titre": "Submit the file before the deadline",
+      "detail": "Ask for a receipt or note the date you submitted it."
+    },
+    {
+      "titre": "Keep the notice",
+      "detail": "If refused, respect the appeal deadline given above."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Middle or high school office (secrétariat)",
+      "detail": "Enrollment, paper grant file, social fund."
+    },
+    {
+      "nom": "EduConnect (Scolarité services)",
+      "detail": "Online enrollment and grant application.",
+      "url": "https://educonnect.education.gouv.fr"
+    },
+    {
+      "nom": "Académie de La Réunion (regional education authority)",
+      "detail": "High school grant decisions and appeals.",
+      "url": "https://www.ac-reunion.fr"
+    },
+    {
+      "nom": "CASNAV de La Réunion",
+      "detail": "Reception and assessment of newly arrived non-French-speaking students.",
+      "url": "https://www.ac-reunion.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Middle school grant (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984"
+    },
+    {
+      "titre": "High school grant (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616"
+    },
+    {
+      "titre": "Enrolling in middle school (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Grant application: deadline October 15",
+      "evenement": "ecole"
+    },
+    {
+      "type": "rappel",
+      "titre": "Agree to automatic grant assessment at enrollment",
+      "evenement": "ecole"
+    },
+    {
+      "type": "coffre",
+      "titre": "Tax notice used for the grant",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Grant notice",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "depense",
+      "titre": "School supplies",
+      "categorie": "ecole"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Without automatic assessment: September 1 to October 15, 2026",
+      "detail": "For the Cned, the high school grant page states a paper application until October 31, 2026."
+    },
+    {
+      "libelle": "Appeal: 2 months (middle school) or 15 full days (high school) after the notice"
+    }
+  ],
+  "aConfirmer": [
+    "The official middle school grant page gives two different dates for the Cned (October 15 and 31, 2026): check with the Cned.",
+    "To be confirmed locally: the calendar specific to the Académie de La Réunion (6e file, payments), with the school.",
+    "The shared-residence rule is only detailed for the middle school grant: for high school, ask the school."
+  ],
+  "motsCles": [
+    "grant",
+    "middle school",
+    "high school",
+    "6e",
+    "EduConnect",
+    "tax notice",
+    "shared residence"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F984 Middle school grant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F616 High school grant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2322 Enrolling in middle school",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

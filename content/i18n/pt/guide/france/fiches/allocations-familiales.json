@@ -1,0 +1,160 @@
+{
+  "slug": "allocations-familiales",
+  "territoire": "france",
+  "categorie": "aides",
+  "titre": "Auxílios familiares (a partir do 2º filho)",
+  "resume": "Na França metropolitana, os auxílios familiares são pagos a partir de 2 filhos a cargo. Valores de 2026, acréscimo por idade, pedido à Caf e divisão em residência alternada.",
+  "aQuoiCaSert": "Os auxílios familiares ajudam as famílias a arcar com as despesas do dia a dia dos filhos. Na França metropolitana, são pagos a partir de 2 filhos a cargo com menos de 20 anos, sem condição de renda para abrir o direito, mas o valor varia conforme a renda do domicílio. Soma-se um acréscimo quando um filho atinge certa idade. Ao contrário dos departamentos ultramarinos, nenhum auxílio familiar é pago para um filho único.",
+  "quiEstConcerne": [
+    "As famílias que residem na França metropolitana com pelo menos 2 filhos a cargo com menos de 20 anos.",
+    "Os pais separados cujos filhos vivem em residência alternada.",
+    "Os pais que ainda não são beneficiários da Caf (Caisse d'allocations familiales, órgão de benefícios familiares) ou da MSA (Mutualité sociale agricole, seguridade social agrícola)."
+  ],
+  "aSavoir": [
+    "Valor de base para 2 filhos: 152,25 € por mês se a renda de 2024 do domicílio não ultrapassar 79.980 €, 76,13 € até 106.604 €, 38,07 € acima disso (service-public.gouv.fr, verificado em 1º de junho de 2026).",
+    "Para 3 filhos, o valor de base vai de 86,83 € a 347,32 € por mês conforme a renda. Os tetos aumentam com o número de filhos.",
+    "Acréscimo por idade (majoration pour âge): pago a partir dos 14 anos para um filho nascido antes de 1º de março de 2012, e a partir dos 18 anos para um filho nascido a partir de 1º de março de 2012. Com apenas 2 filhos, o mais velho não tem direito a ele.",
+    "Família com pelo menos 3 filhos: um valor fixo mensal pode ser pago durante um ano para um filho que completa 20 anos e ainda mora com a família, conforme a renda do filho.",
+    "Residência alternada: os pais podem escolher dividir os auxílios familiares, cada um recebendo a metade, com o formulário cerfa n° 14000. Essa escolha só pode ser alterada após um ano, salvo mudança de residência da criança. Em caso de desacordo, cada genitor recebe automaticamente uma parte.",
+    "Só os auxílios familiares podem ser divididos. Os demais benefícios (Paje, complément familial, auxílios-moradia, ARS, ASF, AEEH) são pagos integralmente ao genitor designado; desde 1º de dezembro de 2025, porém, cada genitor pode receber o CMG (complemento para a guarda da criança) conforme a própria situação."
+  ],
+  "documents": [
+    {
+      "id": "identite-parents",
+      "libelle": "Documento de identidade ou autorização de residência (titre de séjour) de cada genitor",
+      "detail": "Cópia válida, pedida no primeiro pedido à Caf.",
+      "coffre": "finances"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Livro de família (livret de famille) ou certidão de nascimento de cada filho",
+      "detail": "Cópia. Certidão gratuita em service-public.gouv.fr ou na prefeitura (mairie) do local de nascimento.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (comprovante de dados bancários) do genitor beneficiário",
+      "detail": "Em seu nome.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Aviso de imposto do ano anterior",
+      "detail": "Cópia, disponível no seu espaço em impots.gouv.fr. A renda é usada no cálculo.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de residência",
+      "detail": "Cópia recente (conta, recibo de aluguel ou declaração de hospedagem).",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Sentença ou acordo que fixa a residência alternada",
+      "detail": "Cópia, a anexar ao formulário de divisão se a residência alternada foi fixada pelo juiz ou por acordo.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Formulário cerfa n° 14000 de declaração em caso de residência alternada",
+      "detail": "Assinado pelos dois pais se houver acordo sobre a divisão. Guarde uma cópia.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Torne-se beneficiário, se ainda não for",
+      "detail": "Faça um pedido de benefícios em caf.fr (ou msa.fr no regime agrícola). Se já for beneficiário, basta declarar o nascimento ou a chegada do 2º filho."
+    },
+    {
+      "titre": "Confira antes de enviar o processo",
+      "detail": "Filhos bem declarados, renda atualizada, RIB, endereço correto, situação familiar (em casal, separado, pai ou mãe solo). Em caso de separação, declare a data real."
+    },
+    {
+      "titre": "Residência alternada: escolha a divisão ou um só beneficiário",
+      "detail": "Preencham juntos o formulário cerfa n° 14000 e enviem-no à Caf ou à MSA com a decisão do juiz ou o acordo, se houver."
+    },
+    {
+      "titre": "Confira seus direitos",
+      "detail": "Consulte o detalhe dos pagamentos no seu espaço « Mon Compte » e use o simulador da Caf para verificar o valor."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf do seu departamento",
+      "detail": "Trâmites on-line no espaço « Mon Compte ». Para encontrar a sua Caf e os atendimentos, informe o seu código postal em caf.fr.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, seguridade social agrícola)",
+      "detail": "Se você é do regime agrícola.",
+      "url": "https://www.msa.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Auxílios familiares (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213"
+    },
+    {
+      "titre": "Residência alternada e benefícios familiares (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Complément familial, a partir de 3 filhos (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214"
+    },
+    {
+      "titre": "Caf.fr, simuladores e espaço « Mon Compte »",
+      "url": "https://www.caf.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Formulário de divisão dos auxílios familiares (cerfa n° 14000)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notificação de direitos da Caf",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Informar à Caf qualquer mudança de situação familiar",
+      "evenement": "autre"
+    }
+  ],
+  "aConfirmer": [
+    "O valor exato da parte de cada genitor em caso de divisão depende da composição de cada domicílio: verifique com o simulador da Caf ou com a sua Caf.",
+    "Os valores indicados são os publicados pelo service-public.gouv.fr (ficha verificada em 1º de junho de 2026): em caso de reajuste, confie no simulador da Caf."
+  ],
+  "motsCles": [
+    "auxílios familiares",
+    "dois filhos",
+    "Caf",
+    "acréscimo por idade",
+    "residência alternada",
+    "divisão"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F13213 Auxílios familiares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13214 Complément familial (complemento familiar)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

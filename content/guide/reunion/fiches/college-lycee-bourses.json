@@ -1,0 +1,74 @@
+{
+  "slug": "college-lycee-bourses",
+  "territoire": "reunion",
+  "categorie": "ecole",
+  "titre": "Demander la bourse de collège ou de lycée",
+  "resume": "L'étude automatique à l'inscription ou une demande entre le 1er septembre et le 15 octobre 2026 : plafonds, montants, avis d'impôt à fournir et règles quand les parents sont séparés ou en résidence alternée.",
+  "aQuoiCaSert": "La bourse de collège et la bourse de lycée aident les familles aux revenus modestes à financer la scolarité. Elles sont versées en trois fois dans l'année. Pour 2026-2027, c'est le revenu fiscal de référence de l'avis d'impôt 2026 (revenus 2025) qui compte. Le plus simple est d'accepter l'étude automatique du droit à la bourse au moment de l'inscription. Cette fiche rappelle aussi les points clés de l'inscription au collège.",
+  "quiEstConcerne": [
+    "Les familles d'un collégien ou d'un lycéen scolarisé dans un établissement public ou privé sous contrat, ou au Cned.",
+    "Les parents d'un élève qui entre en 6e ou au lycée.",
+    "Les parents séparés : un seul des deux peut faire la demande."
+  ],
+  "aSavoir": [
+    "Bourse de collège 2026-2027 : 40 €, 112 € ou 175 € par trimestre selon les revenus. Plafonds (revenus 2025) : 18 488 € pour 1 enfant à charge, 22 754 € pour 2, 27 020 € pour 3, 31 286 € pour 4, 35 553 € pour 5.",
+    "Bourse de lycée 2026-2027 : 6 échelons, de 168 € à 357 € par trimestre. Pour 1 enfant à charge, le plafond de l'échelon 1 est de 22 037 €. Le simulateur officiel indique votre échelon.",
+    "Résidence alternée (bourse de collège) : un seul parent dépose la demande. Si les deux en déposent une, les deux sont déclarées irrecevables. Une attestation par laquelle l'autre parent renonce à demander n'est pas admise.",
+    "L'accord pour l'étude automatique, donné à l'inscription, vaut demande pour la suite de la scolarité au collège et au lycée. Sans cet accord, il faut refaire une demande chaque année, même si l'enfant était boursier l'année précédente.",
+    "Versement en 3 fois, en général fin décembre, fin mars et fin juin.",
+    "Recours : au collège, 2 mois après la notification. Au lycée, 15 jours francs après un refus auprès du rectorat, puis 2 mois en cas de second refus."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Avis d'impôt 2026 sur les revenus de 2025", "detail": "Copie de toutes les pages. Les deux avis si vous vivez en union libre. Téléchargeable dans votre espace impots.gouv.fr.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB au nom du parent qui demande", "detail": "Souvent demandé dans le privé ou sans étude automatique.", "coffre": "finances" },
+    { "id": "formulaire-bourse", "libelle": "Formulaire de demande de bourse papier, si vous ne passez pas par EduConnect", "detail": "À retirer au secrétariat de l'établissement.", "coffre": "scolarite" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant la résidence de l'enfant, si vous êtes séparés", "detail": "Copie. Peut être demandé pour justifier que l'enfant est à votre charge.", "coffre": "jaf" },
+    { "id": "caf", "libelle": "Attestation de paiement de la Caf mentionnant les enfants à charge", "detail": "Téléchargeable dans votre espace Caf, si l'établissement la demande.", "coffre": "finances" },
+    { "id": "dossier-inscription", "libelle": "Dossier d'inscription du collège", "detail": "Retiré au secrétariat ou rempli en ligne avec EduConnect si l'établissement le propose.", "coffre": "scolarite" },
+    { "id": "identite", "libelle": "Pièces d'identité des parents et de l'enfant, livret de famille", "detail": "Copies, pour l'inscription.", "coffre": "scolarite" },
+    { "id": "domicile", "libelle": "Justificatif de domicile et photos d'identité", "detail": "Pour l'inscription, selon la liste de l'établissement.", "coffre": "scolarite" },
+    { "id": "notification", "libelle": "Notification d'attribution ou de refus de la bourse", "detail": "À conserver : elle fait partir le délai de recours.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Estimez vos droits avec le simulateur", "detail": "Avec votre avis d'impôt 2026 et le nombre d'enfants à charge. Le simulateur est accessible depuis les fiches de service-public.gouv.fr." },
+    { "titre": "À l'inscription, acceptez l'étude automatique", "detail": "En ligne avec EduConnect ou sur le dossier papier. Vous n'avez ensuite rien d'autre à faire." },
+    { "titre": "Sinon, déposez une demande entre le 1er septembre et le 15 octobre 2026", "detail": "En ligne avec EduConnect, ou sur formulaire papier au secrétariat de l'établissement." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Avis d'impôt 2026 complet (les deux en union libre), RIB, formulaire signé, jugement de résidence si vous êtes séparés. En résidence alternée, mettez-vous d'accord à l'avance sur le parent qui dépose." },
+    { "titre": "Déposez le dossier avant la date limite", "detail": "Demandez un récépissé ou notez la date de dépôt." },
+    { "titre": "Conservez la notification", "detail": "En cas de refus, respectez le délai de recours indiqué ci-dessus." }
+  ],
+  "ou": [
+    { "nom": "Secrétariat du collège ou du lycée", "detail": "Inscription, dossier de bourse papier, fonds social." },
+    { "nom": "EduConnect (Scolarité services)", "detail": "Inscription et demande de bourse en ligne.", "url": "https://educonnect.education.gouv.fr" },
+    { "nom": "Académie de La Réunion", "detail": "Décision d'attribution de la bourse de lycée et recours.", "url": "https://www.ac-reunion.fr" },
+    { "nom": "CASNAV de La Réunion", "detail": "Accueil et évaluation des élèves allophones nouvellement arrivés.", "url": "https://www.ac-reunion.fr" }
+  ],
+  "liens": [
+    { "titre": "Bourse de collège (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984" },
+    { "titre": "Bourse de lycée (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616" },
+    { "titre": "Inscription au collège (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Demande de bourse : date limite le 15 octobre", "evenement": "ecole" },
+    { "type": "rappel", "titre": "Accepter l'étude automatique de la bourse à l'inscription", "evenement": "ecole" },
+    { "type": "coffre", "titre": "Avis d'impôt utilisé pour la bourse", "categorie": "finances" },
+    { "type": "coffre", "titre": "Notification de bourse", "categorie": "scolarite" },
+    { "type": "depense", "titre": "Fournitures scolaires", "categorie": "ecole" }
+  ],
+  "datesLimites": [
+    { "libelle": "Sans étude automatique : du 1er septembre au 15 octobre 2026", "detail": "Pour le Cned, la fiche bourse de lycée indique une demande papier jusqu'au 31 octobre 2026." },
+    { "libelle": "Recours : 2 mois (collège) ou 15 jours francs (lycée) après la notification" }
+  ],
+  "aConfirmer": [
+    "La fiche officielle de la bourse de collège indique deux dates différentes pour le Cned (15 et 31 octobre 2026) : vérifiez auprès du Cned.",
+    "À confirmer localement : calendrier propre à l'académie de La Réunion (dossier de 6e, versements), auprès de l'établissement.",
+    "La règle de la résidence alternée n'est détaillée que pour la bourse de collège : pour le lycée, renseignez-vous auprès de l'établissement."
+  ],
+  "motsCles": ["bourse", "collège", "lycée", "6e", "EduConnect", "avis d'impôt", "résidence alternée"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F984 Bourse de collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F616 Bourse de lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2322 Inscription au collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322", "verifieLe": "2026-10-29" }
+  ]
+}

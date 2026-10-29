@@ -1,0 +1,65 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Vaccinations obligatoires et suivi en PMI",
+  "resume": "Les vaccins exigés pour la crèche, l'école et le centre de loisirs, les recommandations propres à Mayotte et le suivi des moins de 6 ans en PMI, gérée par le Département.",
+  "aQuoiCaSert": "Les vaccinations obligatoires sont exigées pour entrer en crèche, à l'école, en garderie ou en colonie : sans justificatif, l'inscription peut être refusée ou seulement provisoire. Le justificatif, c'est le carnet de santé rempli par le médecin. La protection maternelle et infantile (PMI), qui relève à Mayotte du Département, assure des consultations pour les femmes enceintes et les jeunes enfants, vaccinations comprises.",
+  "quiEstConcerne": [
+    "Tous les parents d'enfants mineurs, en particulier avant une entrée en crèche, à l'école ou en centre de loisirs.",
+    "Les parents de nouveau-nés, pour les vaccins recommandés dès la naissance à Mayotte."
+  ],
+  "aSavoir": [
+    "Enfant né avant 2018 : diphtérie, tétanos et poliomyélite (DTP) obligatoires pour l'école.",
+    "Enfant né entre le 1er janvier 2018 et le 31 décembre 2022 : 11 vaccins obligatoires (diphtérie, tétanos, poliomyélite, coqueluche, Haemophilus influenzae b, hépatite B, pneumocoque, méningocoque C, rougeole, oreillons, rubéole).",
+    "Enfant né à partir de 2023 : même liste, avec les méningocoques A, B, C, W et Y à la place du seul méningocoque C.",
+    "Ces obligations s'appliquent à Mayotte ; l'ARS Mayotte relaie aussi un renforcement des recommandations contre la coqueluche.",
+    "Un enfant pas à jour peut être admis provisoirement : vous avez alors 3 mois pour régulariser, sinon il peut être exclu.",
+    "L'enfant bénéficie de 20 examens médicaux obligatoires de la naissance à 16 ans (16 avant ses 6 ans), remboursés à 100 % sans avance de frais, hors dépassements d'honoraires.",
+    "Parents séparés : le parent qui emmène l'enfant se faire vacciner a intérêt à informer l'autre et à lui transmettre une copie des pages vaccins."
+  ],
+  "documents": [
+    { "id": "carnet-sante", "libelle": "Carnet de santé de l'enfant", "detail": "Original à apporter à chaque rendez-vous. Gardez une photo des pages vaccins.", "coffre": "sante" },
+    { "id": "carte-vitale", "libelle": "Carte Vitale du parent ou attestation de droits de l'enfant", "detail": "Attestation dans votre compte ameli ou auprès de la CSSM.", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité du parent ou de l'adulte qui accompagne", "detail": "Si un tiers accompagne l'enfant, prévoyez une autorisation écrite d'un parent.", "coffre": "sante" },
+    { "id": "contre-indication", "libelle": "Certificat médical de contre-indication, le cas échéant", "detail": "À présenter à la place du justificatif de vaccin.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez le carnet de santé", "detail": "Comparez avec la liste des vaccins obligatoires selon l'année de naissance de votre enfant." },
+    { "titre": "Prenez rendez-vous", "detail": "Chez votre médecin, ou dans un centre de PMI du Département de Mayotte pour les jeunes enfants." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Carnet de santé, carte Vitale ou attestation de droits, pièce d'identité, autorisation écrite si ce n'est pas un parent qui accompagne." },
+    { "titre": "Faites vacciner votre enfant", "detail": "Le professionnel inscrit le vaccin dans le carnet de santé." },
+    { "titre": "Présentez le justificatif", "detail": "Photocopie des pages vaccins à la crèche, à l'école ou au centre de loisirs." }
+  ],
+  "ou": [
+    { "nom": "Département de Mayotte (PMI)", "detail": "Standard du Département, 112 boulevard Halidi Sélémani, Mamoudzou : orientation vers le centre de PMI le plus proche.", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "telephone": "02 69 66 10 00" },
+    { "nom": "ARS Mayotte", "detail": "Informations sur la vaccination. Centre Kinga, Kawéni, Mamoudzou.", "url": "https://www.mayotte.ars.sante.fr/vaccination-24", "telephone": "02 69 61 12 25" },
+    { "nom": "Votre médecin traitant ou pédiatre" }
+  ],
+  "liens": [
+    { "titre": "Vaccins exigés pour la crèche et l'école (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Vaccination (ARS Mayotte)", "url": "https://www.mayotte.ars.sante.fr/vaccination-24" },
+    { "titre": "Examens médicaux obligatoires de l'enfant (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Rendez-vous vaccination", "evenement": "sante" },
+    { "type": "rappel", "titre": "Rappel de vaccin", "evenement": "sante" },
+    { "type": "coffre", "titre": "Pages vaccins du carnet de santé", "categorie": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "3 mois pour régulariser après une admission provisoire", "detail": "Sans vaccins à jour à l'issue de ce délai, l'enfant peut être exclu de la collectivité." }
+  ],
+  "aConfirmer": [
+    "À confirmer avec votre médecin ou la PMI : le calendrier vaccinal adapté à Mayotte recommande des vaccins supplémentaires (notamment le BCG et l'hépatite B dès la naissance).",
+    "À confirmer localement : liste, adresses et horaires des centres de PMI de Mayotte, non publiés sur le site du Département lors de la vérification.",
+    "À confirmer localement : gratuité des consultations et des vaccins en PMI pour les enfants, selon le centre."
+  ],
+  "motsCles": ["vaccin", "PMI", "carnet de santé", "BCG", "coqueluche", "pédiatre", "bébé"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
+    { "titre": "ARS Mayotte, Vaccination", "url": "https://www.mayotte.ars.sante.fr/vaccination-24", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F967 Examens médicaux obligatoires de l'enfant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967", "verifieLe": "2026-10-29" },
+    { "titre": "Département de Mayotte, Nous contacter", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "verifieLe": "2026-10-29" }
+  ]
+}

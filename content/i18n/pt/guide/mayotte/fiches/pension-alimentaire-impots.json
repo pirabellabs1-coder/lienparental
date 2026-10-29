@@ -1,0 +1,71 @@
+{
+  "slug": "pension-alimentaire-impots",
+  "territoire": "mayotte",
+  "categorie": "argent",
+  "titre": "Pensão alimentícia e declaração de imposto de renda",
+  "resume": "Quem paga pode deduzir a pensão, quem recebe a declara. Na residência alternada, não há dedução, mas as cotas são divididas. Em Mayotte, aplica-se ainda uma redução de 40% do imposto.",
+  "aQuoiCaSert": "A pensão paga para um filho tem efeitos no imposto de renda dos dois pais: dedução para um, renda tributável para o outro. Ela nunca aparece na declaração pré-preenchida: cada um deve informá-la por conta própria. Declará-la corretamente, com os comprovantes certos, evita erros e autuações fiscais (redressements).",
+  "quiEstConcerne": [
+    "O genitor que paga pensão para um filho menor que mora com o outro genitor.",
+    "O genitor que recebe a pensão.",
+    "Os pais em residência alternada (résidence alternée).",
+    "O genitor que cria os filhos sozinho (quadro T)."
+  ],
+  "aSavoir": [
+    "Quem paga, filho menor: a pensão é dedutível se a criança mora habitualmente com o outro genitor e não é contada no seu quociente familiar (quotient familial, sistema de cotas fiscais por família). As despesas ligadas ao seu direito de visita não são dedutíveis.",
+    "Quem recebe: a pensão é tributável até o limite do que o outro genitor pode deduzir. Ela é declarada em «Pensions alimentaires perçues». Um abatimento de 10% é aplicado automaticamente.",
+    "Residência alternada: nenhuma pensão é dedutível. Cada filho conta como 1/4 de cota para cada genitor nos dois primeiros, depois 1/2 cota a partir do terceiro.",
+    "Quadro T (case T): o genitor solteiro, divorciado ou separado que mora sozinho com os filhos dependentes marca o quadro T e ganha meia cota a mais.",
+    "Filho maior de idade não vinculado: pensão dedutível até 6.855 € por filho, e o filho declara ele mesmo o valor recebido.",
+    "Mayotte: o imposto das famílias domiciliadas em Mayotte é reduzido em 40%, até o limite de 4.050 € (artigo 197 do code général des impôts, o código tributário francês).",
+    "Em 2026, o prazo para a declaração on-line em Mayotte era 4 de junho (departamentos 55 a 976)."
+  ],
+  "documents": [
+    { "id": "jugement", "libelle": "Sentença ou acordo que fixa a pensão (cópia)", "detail": "Peça uma cópia ao cartório do tribunal (greffe), ao advogado ou ao tabelião se não a tiver mais.", "coffre": "jaf" },
+    { "id": "preuves-versement", "libelle": "Comprovantes de cada pagamento do ano", "detail": "Extratos bancários, comprovantes de transferência. Dinheiro em espécie sem recibo é difícil de comprovar.", "coffre": "finances" },
+    { "id": "depenses-directes", "libelle": "Notas das despesas pagas diretamente para a criança", "detail": "Escola, despesas médicas, se você as deduzir além da pensão.", "coffre": "finances" },
+    { "id": "recapitulatif", "libelle": "Resumo anual dos valores pagos ou recebidos", "detail": "Você pode exportá-lo do Diário do Lien Parental.", "coffre": "finances" },
+    { "id": "avis-impot", "libelle": "Último aviso de imposto (avis d'impôt)", "detail": "Pode ser baixado em impots.gouv.fr.", "coffre": "finances" },
+    { "id": "decision-residence", "libelle": "Decisão ou acordo que fixa a residência (alternada ou não)", "detail": "Para justificar a divisão das cotas ou o quadro T se a Receita pedir.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Some os valores pagos ou recebidos no ano civil", "detail": "O Diário (filtro Finanças, categoria Pensão) mostra o histórico dos pagamentos registrados." },
+    { "titre": "Confira antes de preencher a declaração", "detail": "O total bate com os extratos; a criança não é sua dependente se você deduz a pensão; na residência alternada você não deduz nada." },
+    { "titre": "Declare a pensão", "detail": "Como despesa dedutível se você a paga, em «Pensions alimentaires perçues» se você a recebe." },
+    { "titre": "Marque o quadro T se você cria os filhos sozinho", "detail": "Somente se mora sozinho com eles e é solteiro, divorciado ou separado." },
+    { "titre": "Guarde os comprovantes", "detail": "A Receita pode pedi-los." }
+  ],
+  "ou": [
+    { "nom": "impots.gouv.fr, sua área pessoal", "detail": "Declaração on-line e mensagens seguras.", "url": "https://www.impots.gouv.fr" },
+    { "nom": "Service des impôts des particuliers de Mamoudzou (posto da Receita para pessoas físicas)", "detail": "20 boulevard Halidi-Sélémani, Mamoudzou (diretório service-public).", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ffe2d9b2-eb24-4240-89eb-975245128401", "telephone": "02 69 61 81 10" }
+  ],
+  "liens": [
+    { "titre": "Deduzir uma pensão alimentícia (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2" },
+    { "titre": "Declarar uma pensão alimentícia recebida (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170" },
+    { "titre": "Quociente familiar, residência alternada e quadro T (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633" },
+    { "titre": "Como fazer a declaração de renda em 2026 (impots.gouv.fr)", "url": "https://www.impots.gouv.fr/les-modalites-de-la-declaration-de-revenus-en-2026" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Pensão alimentícia do mês", "categorie": "pension" },
+    { "type": "coffre", "titre": "Comprovantes de pagamento da pensão do ano", "categorie": "finances" },
+    { "type": "coffre", "titre": "Resumo anual da pensão", "categorie": "finances" },
+    { "type": "rappel", "titre": "Declaração de renda: declarar a pensão (primavera)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Declaração da renda de 2026 na primavera de 2027", "detail": "Os prazos, diferentes conforme o departamento, são publicados todos os anos em impots.gouv.fr." }
+  ],
+  "aConfirmer": [
+    "As páginas nacionais sobre pensão alimentícia não mencionam Mayotte: a aplicação das mesmas regras deve ser confirmada no posto da Receita de Mamoudzou.",
+    "A confirmar localmente: horários atuais do Service des impôts des particuliers de Mamoudzou (a ficha do diretório não é recente).",
+    "Os números dos quadros mudam conforme o ano: confira-os no manual do ano em impots.gouv.fr."
+  ],
+  "motsCles": ["imposto de renda", "pensão alimentícia", "dedução", "quociente familiar", "quadro T", "redução de 40%", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2 Dedução de uma pensão alimentícia", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3170 Pensão alimentícia recebida", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2633 Residência alternada, quociente familiar e quadro T", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-10-29" },
+    { "titre": "BOFiP, redução do imposto nos departamentos ultramarinos (BOI-IR-LIQ-20-30-10)", "url": "https://bofip.impots.gouv.fr/bofip/4618-PGP.html/identifiant=BOI-IR-LIQ-20-30-10-20190226", "verifieLe": "2026-10-29" },
+    { "titre": "Impots.gouv.fr, como fazer a declaração de renda em 2026", "url": "https://www.impots.gouv.fr/les-modalites-de-la-declaration-de-revenus-en-2026", "verifieLe": "2026-10-29" }
+  ]
+}

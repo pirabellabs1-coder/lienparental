@@ -1,0 +1,60 @@
+{
+  "slug": "pass-sport",
+  "territoire": "mayotte",
+  "categorie": "loisirs",
+  "titre": "Pass'Sport: a discount on sports club membership",
+  "resume": "€50 off membership of a sports club for 2026-2027, to be used before December 31, 2026. The decree provides for an adaptation for Mayotte: who is eligible and how to get your code.",
+  "aQuoiCaSert": "The Pass'Sport (a government sports grant for young people) reduces the cost of enrolling your child in a partner sports club. The club deducts €50 directly from the license or membership fee. The decree of August 28, 2026 setting the 2026-2027 rules includes an article adapting them to Mayotte, where family benefits are paid by the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund).",
+  "quiEstConcerne": [
+    "Young people aged 6 to 17 whose family quotient is €699 or less.",
+    "Young people aged 6 to 19 receiving the AEEH (disabled child education allowance), and aged 16 to 30 receiving the AAH (adult disability allowance).",
+    "Students on grants aged 28 or under."
+  ],
+  "aSavoir": [
+    "Amount for 2026-2027: €50 per young person.",
+    "Valid for enrollments made between September 1 and December 31, 2026.",
+    "Codes are emailed to eligible families. No email: check eligibility on the official website, then request the code online.",
+    "Separated parents: eligibility depends on the family quotient of the benefits recipient. The code is sent to that parent: share it if the other parent is enrolling the child."
+  ],
+  "documents": [
+    { "id": "code-pass", "libelle": "Child's Pass'Sport code", "detail": "In the email received or obtained online. One code per child.", "coffre": "autres" },
+    { "id": "certificat", "libelle": "Medical certificate or health questionnaire, if the club asks for it", "coffre": "sante" },
+    { "id": "dossier-club", "libelle": "Club registration form and the documents it asks for", "coffre": "autres" },
+    { "id": "licence", "libelle": "License or membership receipt showing the discount", "detail": "Keep it.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Check your child's eligibility", "detail": "On the official Pass'Sport website." },
+    { "titre": "Get your code", "detail": "In the email you received, or by requesting it online." },
+    { "titre": "Choose a partner club", "detail": "List on the official website, or ask the club directly." },
+    { "titre": "Check before you go", "detail": "Code written down or printed, registration form filled in, medical certificate or health questionnaire if requested, enrollment before December 31, 2026." },
+    { "titre": "Show the code to the club when enrolling", "detail": "The club deducts €50." },
+    { "titre": "Record the remaining cost in the Journal" }
+  ],
+  "ou": [
+    { "nom": "Official Pass'Sport website", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" },
+    { "nom": "France Services or your town's CCAS (municipal social welfare center)", "detail": "Free help with the online application.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Pass'Sport, young people and parents (sports.gouv.fr)", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" },
+    { "titre": "Décret n° 2026-830 of August 28, 2026 on the Pass'Sport (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054761806" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Use the Pass'Sport before December 31, 2026", "evenement": "activite" },
+    { "type": "depense", "titre": "Sports club membership", "categorie": "activites" },
+    { "type": "coffre", "titre": "Sports license", "categorie": "autres" }
+  ],
+  "datesLimites": [
+    { "libelle": "December 31, 2026: last date to enroll with the 2026-2027 Pass'Sport" }
+  ],
+  "aConfirmer": [
+    "To be confirmed: how the family quotient of families covered by the CSSM is taken into account (the decree refers to the quotient set by the Cnaf, the national family benefits fund, or the MSA, the farmers' social security fund) and whether codes are sent to them automatically.",
+    "To be confirmed locally: the list of partner clubs in Mayotte."
+  ],
+  "motsCles": ["sport", "club", "Pass'Sport", "sports license", "activity", "discount"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Légifrance, décret n° 2026-830 of August 28, 2026 (Pass'Sport, article adapting it to Mayotte)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054761806", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, news item A15850 Pass'Sport 2026-2027", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-10-29" },
+    { "titre": "Pass'Sport, young people and parents", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents", "verifieLe": "2026-10-29" }
+  ]
+}

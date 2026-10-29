@@ -55,9 +55,9 @@
     "The amount and terms of the Caf equipment grant announced for 2027 should be checked with the Caf de la Guyane."
   ],
   "motsCles": ["sport", "club", "Pass'Sport", "sports license", "activity", "discount"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, news item A15850 Pass'Sport 2026-2027", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-09-02" },
-    { "titre": "Pass'Sport, young people and parents", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" }
+    { "titre": "Service-public.gouv.fr, news item A15850 Pass'Sport 2026-2027", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-10-29" },
+    { "titre": "Pass'Sport, young people and parents", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents", "verifieLe": "2026-10-29" }
   ]
 }

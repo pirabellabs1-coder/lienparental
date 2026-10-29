@@ -63,11 +63,11 @@
     "A confirmar localmente: os prazos reais de análise na Guiana Francesa podem ultrapassar o prazo legal."
   ],
   "motsCles": ["AEEH", "MDPH", "deficiência", "CDAPH", "atestado médico", "auxílio"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F14809 Auxílio de educação da criança com deficiência", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-06-01" },
-    { "titre": "Service-public.gouv.fr, R19993 Formulário de pedido à MDPH", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-07-13" },
-    { "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
+    { "titre": "Service-public.gouv.fr, F14809 Auxílio de educação da criança com deficiência", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R19993 Formulário de pedido à MDPH", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
     { "titre": "Mon Parcours Handicap, diretório", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
   ]
 }

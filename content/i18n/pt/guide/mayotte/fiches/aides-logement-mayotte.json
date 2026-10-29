@@ -1,0 +1,60 @@
+{
+  "slug": "aides-logement-mayotte",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Auxílios-moradia em Mayotte (ALF e ALS)",
+  "resume": "Auxílio-moradia familiar ou social pago pela CSSM: condições próprias de Mayotte (moradia digna, ocupada 8 meses por ano), documentos a preparar e pedido após uma separação.",
+  "aQuoiCaSert": "Os auxílios-moradia reduzem o seu aluguel. Em Mayotte, a CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte) paga a ALF (allocation de logement familiale, auxílio-moradia familiar), prioritária para as famílias com filhos, ou a ALS (allocation de logement sociale, auxílio-moradia social). Só um direito é aberto por domicílio. Após uma separação, cada genitor que passa a ter uma moradia pode fazer o seu próprio pedido, calculado com base na nova situação.",
+  "quiEstConcerne": [
+    "Os inquilinos de uma moradia digna ocupada como residência principal pelo menos 8 meses por ano.",
+    "As famílias com filhos dependentes, para a ALF; as demais pessoas, para a ALS.",
+    "Não têm direito: moradia alugada de um membro da família, ou hospedagem gratuita."
+  ],
+  "aSavoir": [
+    "Condições de dignidade adotadas pela CSSM: pelo menos 9 m² para uma pessoa, 16 m² para duas, mais 9 m² por pessoa adicional.",
+    "O direito começa no mês seguinte ao pedido e o valor é recalculado a cada 3 meses: faça o pedido assim que se mudar.",
+    "O pedido é feito no « Mon Compte » em caf.fr, espaço on-line usado pela CSSM.",
+    "Separação: declare-a. Cada genitor declara a sua própria moradia e a sua situação familiar; o valor é recalculado conforme isso.",
+    "Um contrato de aluguel escrito e um atestado de aluguel assinado pelo proprietário facilitam o dossiê. A ADIL de Mayotte (Agence départementale d'information sur le logement, agência local de informação sobre moradia) pode orientar você gratuitamente se não tiver contrato escrito."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Cópia frente e verso do seu documento de identidade ou título de residência", "detail": "Válido.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (comprovante de dados bancários) em seu nome", "detail": "Abra uma conta pessoal se você só tinha conta conjunta: veja a ficha sobre o direito a uma conta bancária.", "coffre": "finances" },
+    { "id": "attestation-loyer", "libelle": "Atestado de aluguel (attestation de loyer) datado e assinado pelo proprietário", "detail": "Peça ao proprietário ou ao locador social que o preencha.", "coffre": "finances" },
+    { "id": "bail", "libelle": "Contrato de aluguel ou de locação", "detail": "Cópia. Ele indica o aluguel, a área e a data de entrada.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Comprovantes da sua renda", "detail": "Contracheques, benefícios, pensão alimentícia recebida ou paga.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Sentença ou acordo que fixa a residência dos filhos, se tiver", "detail": "Cópia, útil para comprovar a residência dos filhos após a separação.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Declare primeiro a mudança de situação", "detail": "Separação, mudança de endereço, residência dos filhos: no « Mon Compte »." },
+    { "titre": "Peça o preenchimento do atestado de aluguel", "detail": "Pelo proprietário ou locador, datado e assinado." },
+    { "titre": "Confira antes de ir", "detail": "Horário agendado, número da seguridade social, cópia do documento de identidade, RIB em seu nome, atestado de aluguel assinado, contrato, comprovantes de renda." },
+    { "titre": "Faça o pedido assim que se mudar", "detail": "On-line, ou com a ajuda do atendimento da CSSM ou de um France Services (ponto de atendimento ao público)." },
+    { "titre": "Depois, declare qualquer mudança", "detail": "Mudança de endereço, nova conta bancária, chegada ou saída de um filho, mudança na residência dos filhos." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Pedido no « Mon Compte » em caf.fr; atendimento com hora marcada em Mamoudzou.", "url": "https://www.cssm.fr/page/aides-au-logement", "telephone": "02 69 61 91 91" },
+    { "nom": "ADIL de Mayotte", "detail": "Orientação jurídica gratuita sobre moradia. Résidence Nyrora, bairro Hamaha, Mamoudzou.", "url": "https://www.anil.org/adil-976/", "telephone": "06 39 21 53 91" },
+    { "nom": "France Services", "detail": "Ajuda gratuita com o pedido on-line.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Auxílios-moradia (CSSM)", "url": "https://www.cssm.fr/page/aides-au-logement" },
+    { "titre": "ADIL de Mayotte (anil.org)", "url": "https://www.anil.org/adil-976/" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Atestado de aluguel assinado", "categorie": "finances" },
+    { "type": "coffre", "titre": "Notificação de auxílio-moradia", "categorie": "finances" },
+    { "type": "rappel", "titre": "Pedir o auxílio-moradia para a nova moradia", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "A confirmar com a CSSM: em Mayotte, a APL só se aplicaria a certas residências coletivas (logements-foyers); para uma moradia comum, é a ALF ou a ALS.",
+    "A confirmar com a CSSM: tabelas e valores, não publicados na página consultada. Use o simulador ou pergunte no atendimento.",
+    "A confirmar com a CSSM: o prazo e a comissão para contestar uma decisão, assim como a divisão do auxílio em residência alternada."
+  ],
+  "motsCles": ["moradia", "ALF", "ALS", "aluguel", "CSSM", "atestado de aluguel", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Auxílios-moradia", "url": "https://www.cssm.fr/page/aides-au-logement", "verifieLe": "2026-10-29" },
+    { "titre": "ANIL, ADIL de Mayotte", "url": "https://www.anil.org/adil-976/", "verifieLe": "2026-10-29" }
+  ]
+}

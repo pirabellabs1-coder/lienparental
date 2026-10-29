@@ -1,0 +1,184 @@
+{
+  "slug": "declarer-separation-caf",
+  "territoire": "france",
+  "categorie": "aides",
+  "titre": "Reporting your separation to the Caf",
+  "resume": "Report the separation online so that your entitlements are recalculated on your own resources alone, and choose who receives the benefits with shared residence (cerfa n° 14000).",
+  "aQuoiCaSert": "After a separation, your benefits (family allowances, housing benefit, prime d'activité (in-work benefit), ASF (allocation de soutien familial, family support allowance)...) are recalculated without your ex-partner's income. Reporting the change quickly opens new entitlements and avoids having to repay overpayments. With shared residence, both parents must also tell the Caf (Caisse d'allocations familiales, the family benefits office), or the MSA (Mutualité sociale agricole, the farmers' social security fund), who receives the benefits.",
+  "quiEstConcerne": [
+    "Any Caf or MSA beneficiary who separates, whether married, in a PACS (civil partnership) or living together.",
+    "The ex-partner who was not the beneficiary and must open their own file to receive benefits.",
+    "Parents with shared residence, who must choose the beneficiary."
+  ],
+  "aSavoir": [
+    "Shared residence is taken into account if it results from a decision of the family court judge (juge aux affaires familiales, JAF) that is actually applied, a joint declaration by the parents, or one parent's declaration not disputed by the other.",
+    "Shared residence, if you agree: the parents name a single beneficiary for all benefits, or split the family allowances in half and name a single beneficiary for the other benefits.",
+    "Shared residence, if you disagree: each parent automatically receives a share of the family allowances; the other benefits go in full to the designated parent.",
+    "In mainland France, family allowances are not paid with only one dependent child: so there is nothing to split.",
+    "The choice can only be changed after one year (unless the child's residence changes), then it is renewed automatically.",
+    "Only family allowances are split. Exception: since December 1, 2025, each parent can receive the complément de libre choix du mode de garde (CMG, childcare allowance) according to their own situation.",
+    "Residence with one parent only, with no child support paid by the other: you may be entitled to the family support allowance (see the guide entry \"Family support allowance (ASF, allocation de soutien familial)\")."
+  ],
+  "documents": [
+    {
+      "id": "identifiants-caf",
+      "libelle": "Caf beneficiary number and password",
+      "detail": "If you were not the beneficiary, create your own account on caf.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "date-separation",
+      "libelle": "Exact date of separation and new address",
+      "detail": "The date you actually left the shared home.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank account details) in your name only",
+      "detail": "If benefits were paid into a joint account.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Your recent income",
+      "detail": "Payslips or benefit amounts, for housing benefit or the prime d'activité.",
+      "coffre": "finances"
+    },
+    {
+      "id": "bail",
+      "libelle": "Lease or rent certificate for the new home",
+      "detail": "For a housing benefit application.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Form \"Enfant(s) en résidence alternée, déclaration et choix des parents\" (Cerfa n° 14000)",
+      "detail": "Child(ren) in shared residence: parents' declaration and choice. Original signed by both parents if you agree. Available on service-public.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement setting the child's residence (copy), if there is one",
+      "detail": "Ask the court registry (greffe), your lawyer or the notary for a copy if you no longer have it.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Log in to your account on caf.fr or in the Caf app",
+      "detail": "Section for reporting a change in family situation. The ex-partner who was not the beneficiary creates their own file. Under the agricultural scheme, use your MSA account."
+    },
+    {
+      "titre": "Enter the separation date, your new address and the children's residence"
+    },
+    {
+      "titre": "In shared residence, fill in Cerfa n° 14000",
+      "detail": "Signed by both parents if you agree on the choice of beneficiary or the split. Without agreement, the family allowances are split automatically."
+    },
+    {
+      "titre": "Check before sending your declaration",
+      "detail": "The separation date is correct; each parent's address is up to date; the RIB is in your name only; Cerfa n° 14000 is signed by both parents if needed; the copy of the judgment or agreement is attached if there is one. Keep the acknowledgment of receipt."
+    },
+    {
+      "titre": "Run a simulation of your new entitlements",
+      "detail": "ASF, housing benefit, prime d'activité: apply for those that concern you."
+    },
+    {
+      "titre": "Also inform the other organizations",
+      "detail": "Assurance Maladie (French public health insurance; attaching the children), school, tax office (box T if you live alone with your dependent children)."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf of your département",
+      "detail": "Online procedures in your Mon Compte area. For in-person service, find your Caf with your postcode on caf.fr.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, the farmers' social security fund)",
+      "detail": "If you are covered by the agricultural scheme.",
+      "url": "https://www.msa.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Family allowances with shared residence (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Form Cerfa n° 14000 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R36342"
+    },
+    {
+      "titre": "Caf.fr, Mon Compte area and simulators",
+      "url": "https://www.caf.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Report the separation to the Caf",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Review the choice of beneficiary (shared residence) in 1 year",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Acknowledgment of the Caf change-of-situation declaration",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Signed Cerfa n° 14000 (shared residence)",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Judgment or agreement on the child's residence",
+      "categorie": "jaf"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "As soon as you separate",
+      "detail": "Report it without delay to avoid an overpayment you would have to repay."
+    },
+    {
+      "libelle": "1 year minimum for the choice of beneficiary in shared residence",
+      "detail": "It cannot be changed earlier, unless the child's residence changes."
+    }
+  ],
+  "aConfirmer": [
+    "The Caf may ask for proof of separation if you still live under the same roof: the type of proof accepted is to be confirmed with your Caf.",
+    "To be confirmed locally: opening hours and appointment booking at your département's Caf office."
+  ],
+  "motsCles": [
+    "separation",
+    "Caf",
+    "change of situation",
+    "shared residence",
+    "family allowances",
+    "cerfa 14000"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F21248 Family allowances and shared residence",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R36342 Cerfa n° 14000 Child(ren) in shared residence",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R36342",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2633 Family quotient (box T, single parent)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

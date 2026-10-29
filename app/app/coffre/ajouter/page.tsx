@@ -21,6 +21,8 @@ import { LIVE } from '@/lib/data/core'
 import { addDemoDocument, uploadDocument, validateVaultFile } from '@/lib/data/vault'
 import { useChildOptions } from '@/lib/data/children'
 import { matchCategory, parseVaultPrefill, type RawParams } from '@/lib/prefill'
+import { photoDateFromFile } from '@/lib/vault/photo-date'
+import { todayKey } from '@/lib/tz'
 
 type Step = 1 | 2 | 3 | 4
 /** Étapes (libellés : vault.upload.steps.*). */
@@ -34,6 +36,7 @@ type Picked = { name: string; size: number; ext: string }
 function extOf(name: string) {
   return (name.split('.').pop() ?? '').toLowerCase()
 }
+const isPhotoExt = (ext: string) => ext === 'jpg' || ext === 'jpeg' || ext === 'png'
 function toneForExt(ext: string): VaultTone {
   if (ext === 'pdf') return 'red'
   if (ext === 'doc' || ext === 'docx') return 'blue'
@@ -105,6 +108,10 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
   const [saveError, setSaveError] = useState('')
   const [fileError, setFileError] = useState('')
   const [dragging, setDragging] = useState(false)
+  // Date de prise de vue (EXIF) : 'detected' = reprise de la photo (prevDate = date saisie avant,
+  // pour « Garder le … ») ; 'missing' = photo sans date lisible ; null = rien à signaler.
+  const [photoDate, setPhotoDate] = useState<{ state: 'detected' | 'missing'; prevDate: string } | null>(null)
+  const pickToken = useRef(0)
 
   // Focus sur le titre d'étape à chaque changement (annonce lecteur d'écran), pas au premier rendu.
   // Supabase : les catégories ont des identifiants UUID → présélection de la première disponible.
@@ -138,7 +145,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
 
   const errors = {
     name: !name.trim() ? t('errors.name') : '',
-    date: !docDate ? t('errors.date') : '',
+    date: !docDate ? t(file && isPhotoExt(file.ext) ? 'errors.photoDate' : 'errors.date') : '',
     file: !file ? t('errors.file') : '',
   }
 
@@ -155,14 +162,39 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
     setFile({ name: f.name, size: f.size, ext })
     setRawFile(f)
     if (!name.trim()) setName(f.name.replace(/\.[^.]+$/, ''))
+    setPhotoDate(null)
+    if (isPhotoExt(ext)) void applyPhotoDate(f)
   }
+
+  // Photo : la date de prise de vue remplace la date saisie (qu'on peut rétablir). Un fichier
+  // choisi entre-temps annule la lecture en cours (jeton).
+  const applyPhotoDate = async (f: File) => {
+    const token = ++pickToken.current
+    const day = await photoDateFromFile(f, todayKey())
+    if (token !== pickToken.current) return
+    if (!day) { setPhotoDate(docDate ? null : { state: 'missing', prevDate: '' }); return }
+    setPhotoDate({ state: 'detected', prevDate: docDate === day ? '' : docDate })
+    setDocDate(day)
+  }
+  const removeFile = () => {
+    pickToken.current++
+    // Date reprise de la photo retirée avec elle : retour à la date saisie avant.
+    if (photoDate?.state === 'detected') setDocDate(photoDate.prevDate)
+    setPhotoDate(null)
+    setFile(null)
+    setRawFile(null)
+  }
+  // Saisie manuelle : prioritaire sur une lecture EXIF encore en cours.
+  const typeDate = (v: string) => { pickToken.current++; setDocDate(v); setPhotoDate(null) }
+  const isPhoto = file ? isPhotoExt(file.ext) : false
   const onInput = (e: ChangeEvent<HTMLInputElement>) => { accept(e.target.files?.[0]); e.target.value = '' }
   const onDrop = (e: DragEvent<HTMLDivElement>) => { e.preventDefault(); setDragging(false); accept(e.dataTransfer.files?.[0]) }
 
   const next = () => {
     setTried(true)
-    if (step === 1 && (errors.name || errors.date)) return
-    if (step === 3 && errors.file) return
+    // Date contrôlée à l'étape Fichier : pour une photo, elle vient de la prise de vue.
+    if (step === 1 && errors.name) return
+    if (step === 3 && (errors.file || errors.date)) return
     setTried(false)
     if (step < 4) setStep((s) => (s + 1) as Step)
   }
@@ -244,7 +276,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
           )}
           <button
             type="button"
-            onClick={() => { setDone(false); setStep(1); setName(''); setDesc(''); setDocDate(''); setSource(''); setFile(null); setRawFile(null); setChildIds([]) }}
+            onClick={() => { setDone(false); setStep(1); setName(''); setDesc(''); setDocDate(''); setSource(''); setFile(null); setRawFile(null); setPhotoDate(null); setChildIds([]) }}
             className={btn({ variant: 'ghost' })}
           >
             {t('success.addAnother')}
@@ -311,17 +343,17 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
                 className={cn(fieldCls, 'border-night-200')}
               />
             </Field>
-            <Field id={`${uid}-date`} label={t('dateLabel')} required error={tried ? errors.date : ''}>
+            <Field id={`${uid}-date`} label={t('dateLabel')} required>
               <input
                 id={`${uid}-date`}
                 type="date"
                 value={docDate}
-                onChange={(e) => setDocDate(e.target.value)}
+                onChange={(e) => typeDate(e.target.value)}
                 aria-required="true"
-                aria-invalid={tried && !!errors.date}
-                aria-describedby={tried && errors.date ? `${uid}-date-error` : undefined}
-                className={cn(fieldCls, tried && errors.date ? 'border-alert-400' : 'border-night-200')}
+                aria-describedby={`${uid}-date-help`}
+                className={cn(fieldCls, 'border-night-200')}
               />
+              <p id={`${uid}-date-help`} className="mt-1.5 text-[12px] text-night-500">{t('dateHelp')}</p>
             </Field>
             <Field id={`${uid}-source`} label={t('sourceLabel')}>
               <div className="relative">
@@ -424,16 +456,54 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
             <input ref={cameraRef} type="file" accept="image/*" capture="environment" onChange={onInput} className="sr-only" tabIndex={-1} aria-hidden="true" />
 
             {file ? (
-              <div className="flex items-center gap-3.5 rounded-2xl border border-leaf-200 bg-leaf-50/60 p-4">
-                <FileIcon tone={toneForExt(file.ext)} label={labelForExt(file.ext)} size="lg" />
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-[14.5px] font-bold text-night-900">{file.name}</p>
-                  <p className="text-[12.5px] text-night-500">{fmt.size(file.size)}</p>
+              <>
+                <div className="flex items-center gap-3.5 rounded-2xl border border-leaf-200 bg-leaf-50/60 p-4">
+                  <FileIcon tone={toneForExt(file.ext)} label={labelForExt(file.ext)} size="lg" />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-[14.5px] font-bold text-night-900">{file.name}</p>
+                    <p className="text-[12.5px] text-night-500">{fmt.size(file.size)}</p>
+                  </div>
+                  <button type="button" onClick={removeFile} aria-label={t('removeFile', { name: file.name })} className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-600 hover:bg-white">
+                    <X className="h-5 w-5" aria-hidden="true" />
+                  </button>
                 </div>
-                <button type="button" onClick={() => { setFile(null); setRawFile(null) }} aria-label={t('removeFile', { name: file.name })} className="inline-flex h-11 w-11 items-center justify-center rounded-full text-night-600 hover:bg-white">
-                  <X className="h-5 w-5" aria-hidden="true" />
-                </button>
-              </div>
+                {/* Date (photo : jour de prise de vue, repris automatiquement), saisie ou calendrier. */}
+                <div className="mt-4">
+                  <Field id={`${uid}-date3`} label={isPhoto ? t('photoDateLabel') : t('dateLabel')} required error={tried ? errors.date : ''}>
+                    <input
+                      id={`${uid}-date3`}
+                      type="date"
+                      value={docDate}
+                      max={isPhoto ? todayKey() : undefined}
+                      onChange={(e) => typeDate(e.target.value)}
+                      aria-required="true"
+                      aria-invalid={tried && !!errors.date}
+                      aria-describedby={cn(photoDate && `${uid}-date3-note`, tried && errors.date && `${uid}-date3-error`) || undefined}
+                      className={cn(fieldCls, tried && errors.date ? 'border-alert-400' : 'border-night-200')}
+                    />
+                  </Field>
+                  {photoDate && (
+                    <p id={`${uid}-date3-note`} role="status" className="mt-2 flex items-start gap-2 rounded-xl bg-leaf-50 px-3.5 py-2.5 text-[12.5px] leading-relaxed text-leaf-800">
+                      <Info aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.8} />
+                      <span>
+                        {photoDate.state === 'detected' ? t('photoDateDetected', { date: fmt.date(docDate) }) : t('photoDateMissing')}
+                        {photoDate.state === 'detected' && photoDate.prevDate && (
+                          <>
+                            {' '}
+                            <button
+                              type="button"
+                              onClick={() => typeDate(photoDate.prevDate)}
+                              className="rounded font-bold text-leaf-700 underline decoration-2 underline-offset-2"
+                            >
+                              {t('photoDateKeep', { date: fmt.date(photoDate.prevDate) })}
+                            </button>
+                          </>
+                        )}
+                      </span>
+                    </p>
+                  )}
+                </div>
+              </>
             ) : (
               <div
                 onDragOver={(e) => { e.preventDefault(); setDragging(true) }}
@@ -491,7 +561,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
               {[
                 [t('summary.category'), category ? fmt.category(category.name) : '—'],
                 [t('summary.children'), childLabel || '—'],
-                [t('summary.date'), docDate ? fmt.date(docDate) : '—'],
+                [isPhoto ? t('summary.photoDate') : t('summary.date'), docDate ? fmt.date(docDate) : '—'],
                 [t('summary.source'), source ? fmt.source(source) : '—'],
                 [t('summary.conf'), conf === 'prive' ? t('private') : t('shareable')],
                 [t('summary.description'), desc || '—'],

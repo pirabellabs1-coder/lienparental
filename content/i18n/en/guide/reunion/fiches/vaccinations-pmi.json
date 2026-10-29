@@ -1,0 +1,175 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "reunion",
+  "categorie": "sante",
+  "titre": "Mandatory vaccinations and check-ups at the PMI",
+  "resume": "The vaccines required for daycare, school and leisure centers depending on year of birth, the new features of the 2026 schedule relayed by the ARS La Réunion, and check-ups for young children at the PMI.",
+  "aQuoiCaSert": "Mandatory vaccinations are required to enter daycare, school, after-school care or holiday camps: without proof, admission may be refused or only provisional. The proof is the health record book (carnet de santé) filled in by the health professional. The mother and child health protection centers (protection maternelle et infantile, PMI) of the Département de La Réunion (the departmental council) provide medical follow-up for young children, vaccinations included. The ARS La Réunion (Agence régionale de santé, the regional health agency) relays the vaccination schedule every year and runs campaigns for young people with the académie (the regional education authority).",
+  "quiEstConcerne": [
+    "All parents of minor children, especially before starting daycare, school or a leisure center.",
+    "Parents of children under 6, for check-ups at the PMI.",
+    "Parents of middle school students, for the vaccination campaigns organized at middle school (HPV, meningococcus)."
+  ],
+  "aSavoir": [
+    "Child born before 2018: diphtheria, tetanus and polio (DTP) are mandatory.",
+    "Child born from 2018 to 2022: 11 mandatory vaccines (diphtheria, tetanus, polio, whooping cough, Haemophilus influenzae b, hepatitis B, pneumococcus, meningococcus C, measles, mumps, rubella).",
+    "Child born in 2023 or later: same list, with meningococcus A, B, C, W and Y instead of meningococcus C alone. Catch-up meningococcal vaccination is offered to children aged 2 to 4 (2026 schedule).",
+    "No additional vaccine is mandatory in Réunion: yellow fever is only mandatory in French Guiana.",
+    "A child who is not up to date can be admitted provisionally: you then have 3 months to catch up, otherwise the child may be excluded. If the child stays more than a year in the facility, proof is requested every year.",
+    "HPV: priority vaccination from 11 to 14, with a free campaign in 5e (7th grade), and catch-up now possible up to age 26.",
+    "The child's 20 mandatory health check-ups (up to age 16) are covered 100% with no upfront payment, excluding extra fees. Up to age 6, they can be done by the regular doctor (médecin traitant), another doctor or a PMI center; after that, by a general practitioner or a pediatrician.",
+    "Separated parents: the parent who has the child vaccinated should inform the other parent and send them a copy of the vaccination pages, so that each parent has the proof."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "The child's health record book (carnet de santé)",
+      "detail": "Bring the original to every appointment. It is the proof of vaccination: keep a copy or photo of the vaccination pages.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Parent's carte Vitale (health insurance card) or the child's certificate of entitlement",
+      "detail": "Certificate can be downloaded free of charge from your ameli account.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "ID of the parent or the accompanying adult",
+      "detail": "If another person accompanies the child, bring written authorization from a parent.",
+      "coffre": "sante"
+    },
+    {
+      "id": "autorisation-college",
+      "libelle": "Parental consent form for vaccination at middle school",
+      "detail": "Given out by the school during HPV and meningococcal campaigns: return it before the stated date.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Medical certificate of contraindication, if applicable",
+      "detail": "Issued by the doctor. To be shown instead of proof of vaccination.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check the health record book",
+      "detail": "Compare it with the list of mandatory vaccines for your child's year of birth and with the 2026 vaccination schedule."
+    },
+    {
+      "titre": "Make an appointment",
+      "detail": "With your regular doctor or pediatrician, or at a PMI center of the Département for children under 6. Call before you go."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Health record book, carte Vitale or certificate of entitlement, ID, written authorization if the child is not accompanied by a parent."
+    },
+    {
+      "titre": "Have your child vaccinated",
+      "detail": "The health professional records the vaccine in the health record book."
+    },
+    {
+      "titre": "Show the proof",
+      "detail": "A copy of the vaccination pages to the daycare, school or leisure center, and every year if the child stays more than a year."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "PMI of the Département de La Réunion",
+      "detail": "Medical follow-up for young children, vaccinations and parenting support. Département switchboard: Monday to Friday, 8 a.m. to 4:30 p.m.",
+      "url": "https://www.departement974.fr/protection-maternelle-infantile-pmi",
+      "telephone": "0262 90 30 30"
+    },
+    {
+      "nom": "Your regular doctor or pediatrician",
+      "detail": "Vaccinations and mandatory health check-ups."
+    },
+    {
+      "nom": "ARS La Réunion",
+      "detail": "Vaccination schedule and vaccination campaigns on the island.",
+      "url": "https://www.lareunion.ars.sante.fr/calendrier-des-vaccinations-2026"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vaccines required for daycare and school (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "2026 vaccination schedule (ARS La Réunion)",
+      "url": "https://www.lareunion.ars.sante.fr/calendrier-des-vaccinations-2026"
+    },
+    {
+      "titre": "Mandatory medical check-ups for children (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Vaccination appointment",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Vaccine booster",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Return the middle school vaccination consent form (HPV, meningococcus)",
+      "evenement": "ecole"
+    },
+    {
+      "type": "coffre",
+      "titre": "Vaccination pages of the health record book",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 months to catch up after provisional admission",
+      "detail": "If vaccinations are still not up to date after this period, the child may be excluded from the facility."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the list, addresses and opening hours of the Département's PMI centers, as the official website does not publish an up-to-date list. Call the Département switchboard before you go.",
+    "To be confirmed: whether PMI consultations are free is not stated on the Département page consulted.",
+    "To be confirmed with the middle school: the dates of the next HPV and meningococcal vaccination campaigns.",
+    "The number of doses and the age for each vaccine follow the current vaccination schedule: check with your doctor or the PMI."
+  ],
+  "motsCles": [
+    "vaccine",
+    "PMI",
+    "health record book",
+    "measles",
+    "meningococcus",
+    "HPV",
+    "pediatrician",
+    "baby"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vaccination for school, daycare or after-school care",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F967 Mandatory medical check-ups for children",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "ARS La Réunion, 2026 vaccination schedule",
+      "url": "https://www.lareunion.ars.sante.fr/calendrier-des-vaccinations-2026",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Département de La Réunion, Mother and child health protection (PMI)",
+      "url": "https://www.departement974.fr/protection-maternelle-infantile-pmi",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

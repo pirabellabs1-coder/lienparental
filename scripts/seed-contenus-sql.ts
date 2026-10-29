@@ -4,7 +4,10 @@
  *   - content/guide/<territoire>/ : territoire, fiches et parcours → PUBLIÉS (contenu déjà relu et sourcé)
  *   - lib/modeles/seeds.ts        : modèles de documents         → BROUILLONS (à relire)
  *   - content/blog/*.md           : articles                     → BROUILLONS (à relire)
- * Rien n'est écrasé (`on conflict do nothing`) : relançable sans risque.
+ * Contenus : rien n'est écrasé (`on conflict do nothing`) : relançable sans risque.
+ * Territoires : créés, ou mis à jour (nom, disponibilité, ordre) depuis territoire.json : un territoire
+ * semé « Bientôt » passe « Disponible » dès que son territoire.json porte `"disponible": true`.
+ * Un dossier sans territoire.json (contenu en cours de rédaction) est ignoré.
  * Traductions : chaque ligne reçoit aussi `translations` = { en?, pt? } lues dans content/i18n/<locale>/…
  * (validées, invariants forcés depuis le français ; colonne de la migration 0490_contenus_translations.sql).
  * Une ligne déjà présente n'est pas modifiée : pour ajouter des traductions à du contenu déjà en base,
@@ -16,7 +19,9 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
-import { ficheSchema, parcoursSchema, territoireSchema } from '../lib/guide/types'
+import { ficheSchema, parcoursSchema } from '../lib/guide/types'
+import { readFileTerritoires } from '../lib/guide/territories-fs'
+import { territoireUpsertSql } from '../lib/guide/territories'
 import { SEED_TEMPLATES } from '../lib/modeles/seeds'
 import { blogPostSchema } from '../lib/blog/types'
 import { parseFrontmatter } from '../lib/blog/frontmatter'
@@ -53,11 +58,10 @@ const out: string[] = [
 const now = new Date().toISOString()
 
 const guideDir = path.join(ROOT, 'content', 'guide')
-for (const code of fs.readdirSync(guideDir).filter((d) => fs.statSync(path.join(guideDir, d)).isDirectory()).sort()) {
-  const dir = path.join(guideDir, code)
-  const t = territoireSchema.parse(JSON.parse(fs.readFileSync(path.join(dir, 'territoire.json'), 'utf8')))
+for (const t of readFileTerritoires(guideDir)) {
+  const dir = path.join(guideDir, t.code)
   out.push(`\n-- Territoire ${t.code}`)
-  out.push(`insert into public.guide_territoires (code, nom, disponible, ordre) values (${q(t.code)}, ${q(t.nom)}, ${t.disponible}, ${t.ordre}) on conflict (code) do nothing;`)
+  out.push(territoireUpsertSql(t))
   const read = (sub: string) => {
     const d = path.join(dir, sub)
     return fs.existsSync(d) ? fs.readdirSync(d).filter((f) => f.endsWith('.json')).sort().map((f) => JSON.parse(fs.readFileSync(path.join(d, f), 'utf8'))) : []

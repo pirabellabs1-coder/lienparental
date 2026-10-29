@@ -1,0 +1,72 @@
+{
+  "slug": "aeeh-enfant-handicap",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Auxílio de educação da criança com deficiência (AEEH) e MDPH de Mayotte",
+  "resume": "Montar um processo completo na MDPH para a AEEH, paga depois pela CSSM: valores 2026-2027 em Mayotte, atestado médico com menos de um ano, prazos e recursos.",
+  "aQuoiCaSert": "A AEEH (allocation d'éducation de l'enfant handicapé, auxílio de educação da criança com deficiência) ajuda os pais a arcar com as despesas de educação e de cuidados de uma criança com deficiência. Ela tem um valor básico e, conforme as necessidades, um complemento e um acréscimo para pai ou mãe solo. O pedido é feito à MDPH (maison départementale des personnes handicapées, centro departamental para pessoas com deficiência). A CDAPH (commission des droits et de l'autonomie, comissão de direitos e autonomia) decide e, depois, a CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte) paga o auxílio e informa o valor a você.",
+  "quiEstConcerne": [
+    "Os pais de uma criança com menos de 20 anos cuja taxa de incapacidade é de pelo menos 80%.",
+    "Os pais de uma criança com taxa de 50% a menos de 80%, se ela frequenta um estabelecimento ou serviço especializado ou se a CDAPH recomendar cuidados.",
+    "Os pais separados, qualquer que seja o regime de residência da criança (a AEEH é paga a um só genitor)."
+  ],
+  "aSavoir": [
+    "Valores em Mayotte de 1º de abril de 2026 a 31 de março de 2027 (CSSM): valor básico de 153,01 € por mês, sem condição de renda.",
+    "Complementos conforme o nível de necessidades: 114,76 € (1), 310,80 € (2), 439,91 € (3), 681,71 € (4), 871,26 € (5), 1.298,44 € (6) por mês.",
+    "Acréscimo para pai ou mãe solo, a partir do nível 2: 62,16 € (2), 86,07 € (3), 272,55 € (4), 349,06 € (5), 511,63 € (6) por mês.",
+    "O atestado médico (cerfa n° 15695) deve ter no máximo um ano na data da entrega.",
+    "A CDAPH deve responder em até 4 meses. Sem resposta após 4 meses, o pedido é considerado recusado.",
+    "Em caso de recusa, é possível um recurso administrativo prévio obrigatório (recours administratif préalable obligatoire) em até 2 meses e, depois, um recurso ao tribunal judiciaire (tribunal judiciário) em até 2 meses após a resposta.",
+    "O formulário de pedido está disponível na MDPH, no CCAS (centro municipal de ação social) do seu município ou on-line."
+  ],
+  "documents": [
+    { "id": "formulaire-mdph", "libelle": "Formulário de pedido à MDPH (cerfa n° 15692)", "detail": "Original datado e assinado pelo representante legal.", "coffre": "sante" },
+    { "id": "certificat-medical", "libelle": "Atestado médico (cerfa n° 15695) com menos de um ano", "detail": "Original preenchido pelo médico que acompanha a criança. Anexe os laudos úteis.", "coffre": "sante" },
+    { "id": "identite-enfant", "libelle": "Documento de identidade da criança ou livro de família (livret de famille)", "detail": "Fotocópia frente e verso. Para criança estrangeira, autorização de residência ou documento de circulação.", "coffre": "sante" },
+    { "id": "identite-representants", "libelle": "Documento de identidade de cada representante legal", "detail": "Fotocópia frente e verso de documento válido, ou autorização de residência.", "coffre": "sante" },
+    { "id": "domicile", "libelle": "Comprovante de residência", "detail": "Fotocópia. Se você mora na casa de alguém, junte uma declaração da pessoa que o hospeda.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Decisão sobre a autoridade parental ou sentença de proteção, se for o caso", "detail": "Cópia.", "coffre": "jaf" },
+    { "id": "accuse-reception", "libelle": "Aviso de recebimento do processo pela MDPH", "detail": "Guarde-o: é ele que inicia a contagem do prazo de 4 meses.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Marque consulta com o médico para o atestado médico", "detail": "O atestado deve ter menos de um ano na entrega. Peça que ele detalhe as necessidades da criança no dia a dia." },
+    { "titre": "Preencha o formulário de pedido", "detail": "Descreva a vida da criança, suas necessidades, a escola e as suas despesas." },
+    { "titre": "Confira antes de enviar o processo", "detail": "Formulário assinado, atestado médico original com menos de um ano, documentos de identidade da criança e dos representantes legais, comprovante de residência, avaliações. Um processo incompleto atrasa a análise." },
+    { "titre": "Entregue o processo na MDPH ou no CCAS", "detail": "Ou envie-o, de preferência por carta registrada com aviso de recebimento. Guarde uma cópia completa." },
+    { "titre": "Acompanhe a decisão", "detail": "A CDAPH tem 4 meses para responder. Anote a data para poder cobrar e, em caso de recusa, recorrer em até 2 meses." }
+  ],
+  "ou": [
+    { "nom": "MDPH de Mayotte", "detail": "BP 1060, 97600 Mamoudzou; e-mail accueil@mdph976.fr (contatos indicados pela CSSM). Endereço de atendimento e horários no diretório Mon Parcours Handicap.", "url": "https://www.monparcourshandicap.gouv.fr/annuaire", "telephone": "02 69 62 96 20" },
+    { "nom": "CCAS do seu município", "detail": "Formulário disponível e entrega do processo possível, segundo a CSSM." },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Paga a AEEH após a decisão da CDAPH.", "url": "https://www.cssm.fr/page/prestations-familiales", "telephone": "02 69 61 91 91" }
+  ],
+  "liens": [
+    { "titre": "Benefícios familiares em Mayotte, incluindo a AEEH (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Auxílio de educação da criança com deficiência (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809" },
+    { "titre": "Formulário de pedido à MDPH (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993" },
+    { "titre": "Encontrar a sua MDPH (monparcourshandicap.gouv.fr)", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Atestado médico da MDPH da criança", "categorie": "sante" },
+    { "type": "coffre", "titre": "Processo completo da MDPH (cópia)", "categorie": "sante" },
+    { "type": "coffre", "titre": "Notificação de decisão da CDAPH", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Cobrar a MDPH se não houver resposta 4 meses após a entrega", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Consulta médica para o atestado médico da MDPH", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Atestado médico com menos de um ano na entrega do processo" },
+    { "libelle": "Resposta da CDAPH em até 4 meses", "detail": "Sem resposta, o pedido é considerado recusado." },
+    { "libelle": "Recurso em até 2 meses após uma decisão de recusa" }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: endereço de atendimento presencial e horários da MDPH de Mayotte (um endereço na rue Mariazé, em Mamoudzou, é citado, mas não foi possível consultar o site da MDPH).",
+    "A confirmar localmente: prazos reais de análise em Mayotte, que podem ultrapassar o prazo legal."
+  ],
+  "motsCles": ["AEEH", "MDPH", "deficiência", "CDAPH", "CSSM", "atestado médico"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Benefícios familiares (AEEH, tabela 2026-2027)", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F14809 Auxílio de educação da criança com deficiência", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R19993 Formulário de pedido à MDPH", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-10-29" }
+  ]
+}

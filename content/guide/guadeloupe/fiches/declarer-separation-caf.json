@@ -1,0 +1,187 @@
+{
+  "slug": "declarer-separation-caf",
+  "territoire": "guadeloupe",
+  "categorie": "aides",
+  "titre": "Déclarer sa séparation à la Caf",
+  "resume": "Signaler la séparation en ligne pour que vos droits soient recalculés sur vos seules ressources, et choisir qui perçoit les allocations en résidence alternée (cerfa n° 14000).",
+  "aQuoiCaSert": "Après une séparation, vos prestations (allocations familiales, aides au logement, prime d'activité, ASF...) sont recalculées sans les revenus de votre ex-conjoint. Déclarer vite le changement permet d'ouvrir de nouveaux droits et évite de devoir rembourser des sommes trop perçues. En résidence alternée, les deux parents doivent aussi dire à la Caf qui perçoit les prestations.",
+  "quiEstConcerne": [
+    "Tout allocataire de la Caf qui se sépare, qu'il ait été marié, pacsé ou en concubinage.",
+    "L'ex-conjoint qui n'était pas allocataire et qui doit ouvrir son propre dossier pour percevoir des aides.",
+    "Les parents en résidence alternée, qui doivent choisir l'allocataire."
+  ],
+  "aSavoir": [
+    "Résidence alternée, en cas d'accord : les parents désignent un seul allocataire pour toutes les prestations, ou partagent les allocations familiales par moitié et désignent un allocataire unique pour les autres prestations.",
+    "Résidence alternée, en cas de désaccord : chaque parent perçoit automatiquement une part des allocations familiales.",
+    "Le choix ne peut être modifié qu'au bout d'un an (sauf changement de résidence de l'enfant), puis il est reconduit tacitement.",
+    "Seules les allocations familiales se partagent. Paje, complément familial, aides au logement, AEEH, ASF et ARS vont au parent désigné. Exception : depuis le 1er décembre 2025, en cas de désaccord, chaque parent peut percevoir le complément de libre choix du mode de garde (CMG) selon sa propre situation.",
+    "Résidence chez un seul parent sans pension versée par l'autre : vous pouvez avoir droit à l'allocation de soutien familial (voir la fiche ASF)."
+  ],
+  "documents": [
+    {
+      "id": "identifiants-caf",
+      "libelle": "Numéro d'allocataire et mot de passe Caf",
+      "detail": "Si vous n'étiez pas l'allocataire, créez votre propre compte sur caf.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "date-separation",
+      "libelle": "Date exacte de la séparation et nouvelle adresse",
+      "detail": "La date du départ effectif du logement commun.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB à votre seul nom",
+      "detail": "Si les prestations étaient versées sur un compte joint.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Vos ressources récentes",
+      "detail": "Bulletins de salaire ou montants d'allocations, pour l'aide au logement ou la prime d'activité.",
+      "coffre": "finances"
+    },
+    {
+      "id": "bail",
+      "libelle": "Bail ou attestation de loyer du nouveau logement",
+      "detail": "Pour une demande d'aide au logement.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Formulaire « Enfant(s) en résidence alternée, déclaration et choix des parents » (cerfa n° 14000)",
+      "detail": "Original signé par les deux parents si vous êtes d'accord. Disponible sur service-public.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Jugement ou convention fixant la résidence de l'enfant (copie), s'il existe",
+      "detail": "Copie à demander au greffe du tribunal, à l'avocat ou au notaire si vous ne l'avez plus.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Connectez-vous à votre espace sur caf.fr ou dans l'application Caf",
+      "detail": "Rubrique de déclaration d'un changement de situation familiale. L'ex-conjoint non allocataire crée son propre dossier."
+    },
+    {
+      "titre": "Indiquez la date de séparation, votre nouvelle adresse et la résidence des enfants"
+    },
+    {
+      "titre": "En résidence alternée, remplissez le cerfa n° 14000",
+      "detail": "Signé par les deux parents si vous êtes d'accord sur le choix de l'allocataire ou le partage. Sans accord, le partage des allocations familiales est automatique."
+    },
+    {
+      "titre": "Vérifiez avant d'envoyer votre déclaration",
+      "detail": "La date de séparation est exacte ; l'adresse de chacun est à jour ; le RIB est à votre seul nom ; le cerfa n° 14000 est signé par les deux parents si nécessaire ; la copie du jugement ou de la convention est jointe s'il existe. Gardez l'accusé de dépôt."
+    },
+    {
+      "titre": "Faites une simulation de vos nouveaux droits",
+      "detail": "ASF, aides au logement, prime d'activité : faites les demandes qui vous concernent."
+    },
+    {
+      "titre": "Prévenez aussi les autres organismes",
+      "detail": "Assurance maladie (rattachement des enfants), école, impôts (case T si vous élevez seul vos enfants)."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Guadeloupe",
+      "detail": "En ligne ou dans un point d'accueil (liste sur la page de la Caf).",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    },
+    {
+      "nom": "MSA",
+      "detail": "Si vous relevez du régime agricole."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Allocations familiales en résidence alternée (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Formulaire cerfa n° 14000 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R36342"
+    },
+    {
+      "titre": "Caf de la Guadeloupe",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Déclarer la séparation à la Caf",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Revoir le choix de l'allocataire (résidence alternée) dans 1 an",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Accusé de déclaration de changement de situation Caf",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Cerfa n° 14000 signé (résidence alternée)",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Jugement ou convention de résidence de l'enfant",
+      "categorie": "jaf"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Dès la séparation",
+      "detail": "Déclarez sans attendre pour éviter un trop-perçu à rembourser."
+    },
+    {
+      "libelle": "1 an minimum pour le choix de l'allocataire en résidence alternée",
+      "detail": "Il ne peut être modifié avant, sauf changement de résidence de l'enfant."
+    }
+  ],
+  "aConfirmer": [
+    "En Guadeloupe, les allocations familiales sont versées dès le premier enfant (Cnaf, LR-2026-051) : montant et partage en résidence alternée avec un seul enfant à confirmer auprès de la Caf de la Guadeloupe.",
+    "La Caf peut demander un justificatif de séparation si vous vivez encore sous le même toit : la nature du justificatif accepté est à confirmer auprès de la Caf.",
+    "À confirmer localement : horaires et prise de rendez-vous des accueils de la Caf de la Guadeloupe."
+  ],
+  "motsCles": [
+    "séparation",
+    "Caf",
+    "changement de situation",
+    "résidence alternée",
+    "allocations familiales",
+    "cerfa 14000"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F21248 Allocations familiales et résidence alternée",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13213 Allocations familiales (règles différentes en outre-mer)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213",
+      "verifieLe": "2026-06-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2633 Quotient familial (case T parent isolé)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633",
+      "verifieLe": "2026-04-15"
+    },
+    {
+      "titre": "Cnaf, lettre réseau LR-2026-051 du 26 février 2026 (dispositions DOM)",
+      "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

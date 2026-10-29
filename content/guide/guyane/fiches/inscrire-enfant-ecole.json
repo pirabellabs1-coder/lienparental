@@ -34,7 +34,7 @@
     { "titre": "Déposez le dossier en mairie et récupérez le certificat d'inscription", "detail": "Le certificat indique l'école où votre enfant est affecté. Demandez une dérogation à ce moment si vous souhaitez une autre école." },
     { "titre": "Faites admettre votre enfant à l'école", "detail": "Présentez le certificat d'inscription et le justificatif de vaccinations à la direction de l'école. Donnez les coordonnées des deux parents et la liste des personnes autorisées à récupérer l'enfant." },
     { "titre": "Informez l'autre parent", "detail": "Si vous êtes séparés, prévenez l'autre parent de l'inscription, par écrit de préférence (message ou courriel)." },
-    { "titre": "Pas de nouvelle inscription chaque année", "detail": "L'inscription vaut pour toute la maternelle. Le passage en CP se fait automatiquement si la commune a une école élémentaire." }
+    { "titre": "Pas de nouvelle inscription chaque année", "detail": "L'inscription vaut pour toute la maternelle. Si l'école comprend aussi une école élémentaire (groupe scolaire), l'enfant passe directement en CP après la grande section ; sinon, renseignez-vous en mairie." }
   ],
   "ou": [
     { "nom": "Mairie de votre commune, service scolaire", "detail": "Inscription, certificat d'inscription et dérogations de secteur." },
@@ -63,14 +63,14 @@
     "À confirmer localement : pièces exigées en cas de changement d'école (certificat de radiation, dernier livret scolaire), à demander à la mairie et à la nouvelle école."
   ],
   "motsCles": ["maternelle", "primaire", "CP", "mairie", "inscription", "dérogation", "radiation"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1864 Inscription à l'école maternelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2025-11-06" },
-    { "titre": "Service-public.gouv.fr, F1865 Inscrire son enfant à l'école élémentaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2025-01-10" },
+    { "titre": "Service-public.gouv.fr, F1864 Inscription à l'école maternelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1865 Inscrire son enfant à l'école élémentaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1898 Instruction obligatoire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1898", "verifieLe": "2025-11-06" },
-    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1427 Demande d'acte de naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
-    { "titre": "CASNAV de Guyane, dossier d'inscription élève allophone", "url": "https://casnav.ins.ac-guyane.fr/Dossier-d-inscription-211.html", "verifieLe": "2025-09-23" }
+    { "titre": "CASNAV de Guyane, dossier d'inscription élève allophone", "url": "https://casnav.ins.ac-guyane.fr/Dossier-d-inscription-211.html", "verifieLe": "2026-10-29" }
   ]
 }

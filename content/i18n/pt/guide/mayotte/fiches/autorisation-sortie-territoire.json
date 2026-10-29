@@ -1,0 +1,63 @@
+{
+  "slug": "autorisation-sortie-territoire",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Autorização de saída do território (AST)",
+  "resume": "Quando o seu filho viaja ao exterior sem nenhum dos pais (Comores, Madagascar ou outro lugar), ou à França metropolitana com escala no exterior: o formulário gratuito, os documentos e o que fazer se você teme uma viagem sem o seu consentimento.",
+  "aQuoiCaSert": "A autorisation de sortie du territoire (AST, autorização de saída do território) permite que um menor que mora na França viaje ao exterior sem estar acompanhado de um dos pais ou de quem exerce a autoridade parental: viagem escolar, estadia com um parente, colônia de férias. É preenchida sem ir à prefeitura (mairie) nem à préfecture. A partir de Mayotte, uma estadia em Comores ou Madagascar, ou um voo para La Réunion ou a França metropolitana com escala no exterior, estão incluídos se a criança viajar sem os pais.",
+  "quiEstConcerne": [
+    "Menores que moram na França e viajam ao exterior sem nenhum dos pais nem titular da autoridade parental.",
+    "Pais separados que precisam assinar ou conferir uma AST, ou que temem que a criança seja levada ao exterior sem o seu consentimento."
+  ],
+  "aSavoir": [
+    "Não é preciso AST se a criança viajar com um dos pais, mesmo que os pais estejam separados.",
+    "Só um dos pais titular da autoridade parental assina o formulário. O consentimento do outro genitor não é pedido.",
+    "O prazo de validade é escolhido por quem assina, até no máximo um ano.",
+    "O formulário é gratuito e é preenchido on-line em service-public.gouv.fr (ou impresso e preenchido à mão).",
+    "A criança também precisa do próprio documento de identidade válido (carteira de identidade ou passaporte, conforme o país) e de visto, se o país exigir.",
+    "Territórios ultramarinos: um trajeto entre um departamento ultramarino e a França metropolitana com escala no exterior exige AST se a criança viajar sem os pais.",
+    "Medo de sequestro: em urgência, a opposition de sortie du territoire (OST) é pedida pessoalmente na préfecture (delegacia ou gendarmerie se estiver fechada e a partida for iminente). Dura no máximo 15 dias. Para uma medida duradoura, só o juiz de família (juge aux affaires familiales, JAF) pode decretar uma proibição (IST).",
+    "IST em vigor: a criança só pode sair do território com o consentimento dos dois pais. A IST também deve ser suspensa temporariamente para um voo a um território ultramarino ou à França metropolitana com escala no exterior."
+  ],
+  "documents": [
+    { "id": "formulaire-ast", "libelle": "Formulário de AST preenchido e assinado (Cerfa n° 15646)", "detail": "Original assinado por um dos pais titular da autoridade parental. A criança o leva consigo durante toda a viagem.", "coffre": "autres" },
+    { "id": "identite-signataire", "libelle": "Fotocópia legível do documento de identidade de quem assina", "detail": "Genitor francês: carteira de identidade ou passaporte válido ou vencido há menos de 5 anos. Genitor de fora da União Europeia: passaporte válido e título de residência francês válido.", "coffre": "autres" },
+    { "id": "identite-enfant", "libelle": "Documento de identidade da criança (original e válido)", "detail": "Carteira de identidade ou passaporte conforme o destino, com visto se o país exigir.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Cópia do livro de família (livret de famille)", "detail": "Recomendada se a criança e quem assina tiverem sobrenomes diferentes.", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Decisão judicial sobre a autoridade parental (cópia)", "detail": "Útil se você exerce sozinho a autoridade parental ou em caso de IST. Indispensável para pedir uma OST, com as provas do risco.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Verifique se a AST é necessária", "detail": "A criança vai ao exterior, ou passa pelo exterior, sem nenhum dos pais? Se sim, precisa de AST." },
+    { "titre": "Preencha o formulário on-line", "detail": "Em service-public.gouv.fr. Indique o prazo de validade (no máximo um ano), depois imprima e assine." },
+    { "titre": "Confira antes da partida", "detail": "Formulário original assinado, fotocópia do documento de quem assina, documento de identidade válido da criança (e visto, se necessário), cópia do livro de família. Informe-se com a companhia aérea sobre as exigências dela." },
+    { "titre": "Entregue tudo à criança ou ao acompanhante", "detail": "Guarde uma cópia digitalizada no Cofre." },
+    { "titre": "Se você teme uma partida sem o seu consentimento", "detail": "Vá pessoalmente à Préfecture de Mayotte com o comprovante de autoridade parental, seus documentos de identidade, o documento da criança e as provas do risco. Para uma proteção duradoura, acione o juiz de família." }
+  ],
+  "ou": [
+    { "nom": "Formulário de AST on-line (service-public.gouv.fr)", "detail": "Gratuito, sem deslocamento.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46121" },
+    { "nom": "Préfecture de Mayotte (representação do Estado)", "detail": "Avenue de la Préfecture, 97600 Mamoudzou. Só para uma oposição de saída do território (OST) urgente.", "telephone": "02 69 63 50 00" }
+  ],
+  "liens": [
+    { "titre": "Autorização de saída do território (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359" },
+    { "titre": "Conflito entre os pais sobre a saída do território: OST e IST (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Autorização de saída do território assinada", "categorie": "autres" },
+    { "type": "coffre", "titre": "Sentença sobre a autoridade parental ou IST", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Fim da validade da AST da criança", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "No máximo um ano", "detail": "Prazo de validade da AST." },
+    { "libelle": "No máximo 15 dias", "detail": "Duração de uma oposição de saída do território decidida pelo préfet." }
+  ],
+  "aConfirmer": [
+    "A confirmar: documento de identidade e documentos exigidos pelo país de destino (Comores, Madagascar) para um menor, com a companhia aérea ou o consulado.",
+    "A confirmar localmente: horários de atendimento da Préfecture de Mayotte para uma OST urgente (endereço e telefone obtidos no diretório do service-public)."
+  ],
+  "motsCles": ["AST", "saída do território", "viagem", "menor", "Comores", "Madagascar", "OST", "IST"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1359 Autorização de saída do território", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1774 Conflito entre os pais sobre a saída do território", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774", "verifieLe": "2026-10-29" }
+  ]
+}

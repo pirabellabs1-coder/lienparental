@@ -1,0 +1,65 @@
+{
+  "slug": "compte-bancaire-droit-au-compte",
+  "territoire": "mayotte",
+  "categorie": "argent",
+  "titre": "Ter sua própria conta bancária após uma separação",
+  "resume": "Abrir uma conta em seu nome para receber a pensão e os benefícios e, se um banco recusar, usar o direito à conta junto ao IEDOM em Mamoudzou ou ao Banque de France: documentos exatos e prazos.",
+  "aQuoiCaSert": "Após uma separação, uma conta pessoal permite receber a pensão alimentícia e os benefícios da CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte) e pagar as despesas do filho mantendo registros claros. Se um banco se recusar a abrir uma conta para você, um banco pode ser designado e será obrigado a abri-la, com serviços bancários básicos gratuitos. Em Mayotte, o pedido pode ser apresentado ao Institut d'émission des départements d'outre-mer (IEDOM, banco central dos territórios ultramarinos) ou on-line ao Banque de France (banco central francês).",
+  "quiEstConcerne": [
+    "O genitor que não tem conta em seu nome, ou só uma conta conjunta com o ex-cônjuge.",
+    "Qualquer pessoa domiciliada na França que não tem nenhuma conta de depósito e teve a abertura de conta recusada.",
+    "Quem tem apenas uma conta conjunta também pode pedir o direito à conta para uma conta individual."
+  ],
+  "aSavoir": [
+    "O banco tem 15 dias para responder ao seu pedido de abertura. Sem resposta, é uma recusa: o banco deve então lhe entregar uma carta de recusa.",
+    "O banco é designado em 1 dia útil. Essa designação vale por 6 meses: entre em contato com o banco designado nesse prazo.",
+    "O banco designado deve abrir a conta no máximo 3 dias úteis após receber todos os documentos.",
+    "Serviços bancários básicos gratuitos: manutenção e encerramento da conta, cartão de pagamento, débitos automáticos e transferências, depósitos e saques no guichê, 2 cheques administrativos por mês. Tarifas por incidente limitadas a 4 € por operação e 20 € por mês.",
+    "Em Mayotte, o IEDOM recebe os pedidos em Mamoudzou; o pedido on-line é feito pelo site do Banque de France."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Documento de identidade válido", "detail": "Carteira de identidade, passaporte ou título de residência. Cópia para o processo, original no atendimento no banco.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Comprovante de endereço com menos de 3 meses", "detail": "Conta, recibo de aluguel. Se mora na casa de alguém: declaração de hospedagem e documentos de quem hospeda (a confirmar com o banco).", "coffre": "finances" },
+    { "id": "lettre-refus", "libelle": "Carta de recusa do banco", "detail": "Ou, sem resposta, a prova do seu pedido feito há mais de 15 dias.", "coffre": "courriers" },
+    { "id": "attestation-honneur", "libelle": "Declaração sob compromisso de não ter conta de depósito", "detail": "Modelo oferecido no momento do pedido.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (dados bancários) da nova conta", "detail": "A enviar à CSSM, ao seu empregador e ao outro genitor se a pensão for paga diretamente a você.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Peça a abertura de uma conta a um banco", "detail": "Por escrito, se possível, e guarde uma prova da data." },
+    { "titre": "Em caso de recusa, peça a carta de recusa", "detail": "Ou espere 15 dias sem resposta." },
+    { "titre": "Apresente seu pedido de direito à conta", "detail": "Na agência do IEDOM em Mamoudzou ou on-line no site do Banque de France." },
+    { "titre": "Confira antes de ir", "detail": "Documento de identidade válido original, comprovante de endereço com menos de 3 meses, carta de recusa, carta de designação para o banco designado." },
+    { "titre": "Abra a conta no banco designado", "detail": "Nos 6 meses seguintes à designação." },
+    { "titre": "Envie seu novo RIB", "detail": "À CSSM (\"Mon Compte\" no caf.fr e seguro-saúde), ao empregador e, se necessário, ao outro genitor." }
+  ],
+  "ou": [
+    { "nom": "IEDOM, agência de Mayotte", "detail": "Avenue de la Préfecture, BP 500, 97600 Mamoudzou. Atendimento ao público sem agendamento às terças e quintas, das 8h às 12h; com agendamento às segundas e quartas (8h às 15h30) e às sextas (8h às 12h). E-mail: particuliers-mayotte@iedom.fr. Documento de identidade exigido.", "url": "https://www.iedom.fr/rubrique19", "telephone": "02 62 90 71 00" },
+    { "nom": "Banque de France, pedido on-line", "detail": "Direito à conta com FranceConnect.", "url": "https://www.banque-france.fr/fr/a-votre-service/particuliers/droit-au-compte-bancaire" },
+    { "nom": "O banco de sua escolha", "detail": "Primeiro pedido de abertura." }
+  ],
+  "liens": [
+    { "titre": "Direito à conta (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417" },
+    { "titre": "Guia do direito à conta em Mayotte (IEDOM)", "url": "https://www.iedom.fr/IMG/pdf/mayotte-notice-droit_au_compte.pdf" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Carta de recusa de abertura de conta", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Carta de designação do banco", "categorie": "courriers" },
+    { "type": "coffre", "titre": "RIB da minha conta pessoal", "categorie": "finances" },
+    { "type": "rappel", "titre": "Contatar o banco designado (no máximo 6 meses)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Enviar meu novo RIB à CSSM", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "15 dias: prazo de resposta do banco; depois disso, o silêncio vale recusa" },
+    { "libelle": "6 meses: validade da designação" }
+  ],
+  "aConfirmer": [
+    "As regras para sair de uma conta conjunta dependem do seu banco."
+  ],
+  "motsCles": ["conta bancária", "RIB", "direito à conta", "IEDOM", "Banque de France", "conta conjunta", "separação"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2417 Direito à conta", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417", "verifieLe": "2026-10-29" },
+    { "titre": "IEDOM, guia do direito à conta em Mayotte", "url": "https://www.iedom.fr/IMG/pdf/mayotte-notice-droit_au_compte.pdf", "verifieLe": "2026-10-29" },
+    { "titre": "IEDOM, agência de Mayotte", "url": "https://www.iedom.fr/rubrique19", "verifieLe": "2026-10-29" }
+  ]
+}

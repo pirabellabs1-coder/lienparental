@@ -12,7 +12,7 @@
   ],
   "aSavoir": [
     "Tenant: only insurance against tenant's risks (fire, explosion, water damage) is compulsory. Give the certificate to the landlord when you get the keys, then every year if they ask for it.",
-    "Without insurance, after a registered letter and a one-month period, the landlord can take out insurance for you and charge you the premium increased by up to 10%, or ask for the lease to be terminated.",
+    "Without insurance, the landlord has two options. Either they send you a registered letter: one month later, they can take out insurance for you and charge you the premium increased by up to 10%, but they can no longer ask for the lease to be terminated on this ground. Or they have a formal notice (commandement) served on you by a commissaire de justice (bailiff): if you are still uninsured one month later, they can ask the judge to declare the lease terminated.",
     "Moving: notify your insurer before you leave or at the latest within 15 calendar days after leaving the home, by registered letter or registered electronic mail.",
     "Cancellation because of a move: possible if the change of home alters the insured risks. Send the letter no later than 3 months after leaving, explaining the link with the move. The contract ends 1 month after the insurer receives it.",
     "No cancellation fee can be charged because of a move, and premiums paid for the period after cancellation must be refunded to you.",
@@ -55,13 +55,13 @@
     { "libelle": "3 months after leaving to cancel on the grounds of the move" }
   ],
   "aConfirmer": [
-    "To be confirmed locally: whether there is an ADIL in French Guiana and its office hours, on anil.org.",
+    "To be confirmed locally: the address and office hours of the ADIL de la Guyane, on anil.org.",
     "If the contract is in both ex-partners' names, how to change it must be discussed directly with the insurer: the official pages do not cover this case."
   ],
   "motsCles": ["home insurance", "moving", "tenant", "cancellation", "civil liability", "separation"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F31300 Tenant's home insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2025-04-16" },
-    { "titre": "Service-public.gouv.fr, F10827 Home insurance and moving", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2025-05-02" }
+    { "titre": "Service-public.gouv.fr, F31300 Tenant's home insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10827 Home insurance and moving", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2026-10-29" }
   ]
 }

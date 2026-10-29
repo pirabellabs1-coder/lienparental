@@ -59,12 +59,12 @@
     "À confirmer localement : possibilité pour votre mairie de transmettre une demande de mise à jour à une autre commune (toutes ne le font pas)."
   ],
   "motsCles": ["livret de famille", "second livret", "duplicata", "perte", "divorce", "séparation", "mise à jour", "mairie"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F11991 Livret de famille à la naissance du premier enfant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-08-12" },
-    { "titre": "Service-public.gouv.fr, F11996 Second livret en cas de divorce ou de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996", "verifieLe": "2026-04-21" },
-    { "titre": "Service-public.gouv.fr, F11994 Second livret en cas de perte, vol ou détérioration", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994", "verifieLe": "2026-10-08" },
-    { "titre": "Service-public.gouv.fr, F18910 Mise à jour du livret de famille", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910", "verifieLe": "2025-02-26" },
-    { "titre": "Service-public.gouv.fr, F39789 Peut-on avoir plusieurs livrets de famille ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39789", "verifieLe": "2026-08-04" }
+    { "titre": "Service-public.gouv.fr, F11991 Livret de famille à la naissance du premier enfant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11996 Second livret en cas de divorce ou de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11994 Second livret en cas de perte, vol ou détérioration", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F18910 Mise à jour du livret de famille", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39789 Peut-on avoir plusieurs livrets de famille ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39789", "verifieLe": "2026-10-29" }
   ]
 }

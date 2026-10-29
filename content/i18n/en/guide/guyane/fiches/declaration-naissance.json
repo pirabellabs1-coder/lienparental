@@ -58,11 +58,11 @@
     "To be confirmed locally: opening hours of the civil registry office and Saturday sessions, depending on the town hall."
   ],
   "motsCles": ["birth", "baby", "civil status", "town hall", "birth certificate", "maternity", "family record book"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F961 Registering a birth", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961", "verifieLe": "2026-06-18" },
-    { "titre": "Service-public.gouv.fr, F11991 Family record book at the birth of the first child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-08-12" },
-    { "titre": "Service-public.gouv.fr, F1427 Requesting a birth certificate", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, F887 Recognizing a child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-01-27" }
+    { "titre": "Service-public.gouv.fr, F961 Registering a birth", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11991 Family record book at the birth of the first child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1427 Requesting a birth certificate", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F887 Recognizing a child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-10-29" }
   ]
 }

@@ -1,0 +1,72 @@
+{
+  "slug": "inscrire-enfant-ecole",
+  "territoire": "mayotte",
+  "categorie": "ecole",
+  "titre": "Inscrire mon enfant à l'école maternelle ou élémentaire",
+  "resume": "Deux étapes : la mairie délivre un certificat d'inscription, puis l'école admet l'enfant. La liste des pièces que la mairie peut demander, ce qu'elle ne peut pas exiger, et ce qui change quand les parents sont séparés.",
+  "aQuoiCaSert": "L'instruction est obligatoire de 3 à 16 ans. Pour une première inscription dans une école publique, vous passez d'abord par le service scolaire de la mairie, qui vous remet un certificat d'inscription indiquant l'école d'affectation. Ensuite, la direction de l'école admet votre enfant sur présentation de ce certificat et du justificatif de vaccinations. À Mayotte, les inscriptions commencent souvent tôt dans l'année : renseignez-vous dès l'hiver auprès de votre mairie.",
+  "quiEstConcerne": [
+    "Les parents d'un enfant qui aura 3 ans dans l'année civile de la rentrée.",
+    "Les parents qui déménagent ou changent d'école pour leur enfant.",
+    "Les familles nouvellement arrivées à Mayotte, y compris avec un enfant qui ne parle pas encore français."
+  ],
+  "aSavoir": [
+    "L'enfant doit être inscrit en maternelle à la rentrée de l'année civile de ses 3 ans. L'école publique est gratuite.",
+    "La liste des pièces que la mairie peut demander est fixée par la réglementation : identité de l'enfant et des responsables légaux, domicile, vaccinations. Une attestation sur l'honneur peut être acceptée pour l'identité comme pour le domicile.",
+    "On inscrit en principe à l'école du secteur fixé par la commune. Une autre école demande une dérogation, qui n'est pas automatique.",
+    "Parents séparés : l'inscription dans un établissement public est un acte usuel. Un parent peut la faire seul, il est présumé avoir l'accord de l'autre, mais doit l'informer. Si l'autre parent signale son désaccord à l'école, elle doit en tenir compte.",
+    "Autorité parentale exclusive : apportez une copie du jugement pour que l'école et la mairie en tiennent compte.",
+    "Changement d'école : la nouvelle école demande en général le certificat de radiation délivré par l'ancienne."
+  ],
+  "documents": [
+    { "id": "identite-enfant", "libelle": "Livret de famille, carte d'identité, passeport ou copie d'extrait d'acte de naissance de l'enfant", "detail": "Original à présenter. Pas d'acte de naissance ? Demandez-le à la mairie du lieu de naissance.", "coffre": "scolarite" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité du parent qui fait l'inscription", "detail": "Original. Carte d'identité, passeport ou titre de séjour.", "coffre": "scolarite" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Facture, quittance de loyer ou avis d'imposition. Hébergé ? Attestation d'hébergement. Une attestation sur l'honneur peut être acceptée.", "coffre": "scolarite" },
+    { "id": "vaccins", "libelle": "Carnet de santé (pages vaccins) ou certificat de contre-indication", "detail": "Original à montrer, photocopie souvent demandée.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant l'autorité parentale et la résidence, si vous êtes séparés", "detail": "Copie.", "coffre": "jaf" },
+    { "id": "radiation", "libelle": "Certificat de radiation de l'ancienne école", "detail": "Seulement en cas de changement d'école.", "coffre": "scolarite" },
+    { "id": "certificat-inscription", "libelle": "Certificat d'inscription délivré par la mairie", "detail": "Original à remettre à la direction de l'école. Gardez une copie.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Contactez le service scolaire de votre mairie", "detail": "Demandez les dates d'inscription, s'il faut un rendez-vous ou un envoi par courriel, et la liste des pièces." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pièce d'identité de l'enfant (ou livret de famille), votre pièce d'identité, justificatif de domicile (ou attestation d'hébergement ou sur l'honneur), carnet de santé à jour, jugement si vous êtes séparés, certificat de radiation en cas de changement d'école. Prévoyez les photocopies." },
+    { "titre": "Déposez le dossier et récupérez le certificat d'inscription", "detail": "Il indique l'école d'affectation. Demandez une dérogation à ce moment si vous souhaitez une autre école." },
+    { "titre": "Faites admettre votre enfant à l'école", "detail": "Présentez le certificat d'inscription et le justificatif de vaccinations. Donnez les coordonnées des deux parents et la liste des personnes autorisées à récupérer l'enfant." },
+    { "titre": "Informez l'autre parent", "detail": "Si vous êtes séparés, prévenez-le par écrit de préférence." },
+    { "titre": "En cas de refus ou de silence de la mairie", "detail": "Demandez une réponse écrite et contactez la direction académique (rectorat de Mayotte)." }
+  ],
+  "ou": [
+    { "nom": "Mairie de votre commune, service scolaire", "detail": "Inscription, certificat d'inscription et dérogations de secteur." },
+    { "nom": "Direction de l'école", "detail": "Admission de l'enfant et certificat de radiation." },
+    { "nom": "Rectorat de Mayotte", "detail": "Rue Sarahangué, 97600 Mamoudzou.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "telephone": "02 69 61 10 24" }
+  ],
+  "liens": [
+    { "titre": "Inscription à l'école maternelle (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864" },
+    { "titre": "Inscrire son enfant à l'école élémentaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" },
+    { "titre": "Autorité parentale en cas de séparation (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133" },
+    { "titre": "Académie de Mayotte", "url": "https://www.ac-mayotte.fr" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Certificat d'inscription scolaire", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Pages vaccins du carnet de santé", "categorie": "sante" },
+    { "type": "coffre", "titre": "Jugement ou convention (autorité parentale, résidence)", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Inscription à l'école en mairie", "evenement": "ecole" },
+    { "type": "calendrier", "titre": "Rendez-vous d'admission à l'école", "evenement": "ecole" }
+  ],
+  "datesLimites": [
+    { "libelle": "Inscription en mairie avant la rentrée", "detail": "Les périodes sont fixées par chaque commune et peuvent commencer dès décembre : vérifiez le calendrier de votre mairie." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : dates d'inscription, prise de rendez-vous et pièces demandées, propres à chaque mairie de Mayotte.",
+    "À confirmer : procédure et coordonnées du CASNAV de Mayotte pour l'inscription des élèves allophones nouvellement arrivés (le site du rectorat n'a pas pu être consulté).",
+    "À confirmer localement : acceptation d'une attestation sur l'honneur à la place d'un justificatif de domicile, selon la mairie."
+  ],
+  "motsCles": ["maternelle", "primaire", "CP", "mairie", "inscription", "dérogation", "rectorat"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1864 Inscription à l'école maternelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1865 Inscrire son enfant à l'école élémentaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public, Rectorat de Mayotte", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "verifieLe": "2026-10-29" }
+  ]
+}

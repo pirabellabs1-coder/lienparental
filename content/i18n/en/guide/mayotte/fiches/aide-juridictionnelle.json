@@ -1,0 +1,74 @@
+{
+  "slug": "aide-juridictionnelle",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Applying for legal aid (aide juridictionnelle)",
+  "resume": "Have the State pay all or part of your lawyer's and court fees, for example before the family court judge: 2026 income limits, form, exact documents and where to submit your application at the Mamoudzou judicial court.",
+  "aQuoiCaSert": "Legal aid (aide juridictionnelle, AJ) covers, fully or partly, lawyer's fees and court costs if your income is modest. It is useful for proceedings before the family court judge (juge aux affaires familiales, JAF): the child's residence, child support, parental authority. It can also cover the fees of a court bailiff (commissaire de justice) to enforce a decision. You remain free to choose your lawyer.",
+  "quiEstConcerne": [
+    "Parents whose reference tax income (revenu fiscal de référence) and assets are below the limits, who are bringing or defending proceedings.",
+    "Minor children heard by the judge in proceedings that concern them: aid is granted to them without any means test.",
+    "Victims of domestic violence, who can obtain provisional aid."
+  ],
+  "aSavoir": [
+    "2026 limits for full aid (reference tax income): €12,957 for 1 person, €15,289 for 2, €17,621 for 3, €19,095 for 4, €20,568 for 5, €22,041 for 6, €23,514 for 7.",
+    "Above that, partial aid of 55% or 25% is possible. For a single person: up to €15,316 of reference tax income for 55%, up to €19,433 for 25%.",
+    "Assets also count (excluding your main home). For 1 person: a maximum of €12,957 in movable assets and €38,866 in real estate.",
+    "If you are in conflict with the other parent and belong to the same tax household, your resources are assessed individually.",
+    "First check your insurance policies (home, bank card, legal protection): if legal protection insurance already covers the costs, your application may be rejected. You must provide a certificate stating the insurer does not cover the costs.",
+    "Costs incurred before the decision of the legal aid office (bureau d'aide juridictionnelle) are not covered: apply as early as possible.",
+    "Appeal against a refusal: 15 days after notification. Once AJ is granted, legal action must be started within the year."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "Legal aid application form (cerfa n° 16146)", "detail": "Filled in online on service-public.gouv.fr, printed, dated and signed.", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Front-and-back copy of your ID document", "detail": "Valid ID card or passport. Foreign nationals: residence permit or equivalent document.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Proof of address less than 3 months old (copy)", "detail": "Bill, rent receipt. If you are housed by someone: also a certificate of accommodation (attestation d'hébergement).", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Copy of the family record book (livret de famille)", "detail": "Or equivalent document. Lost book: a free second book from the town hall (mairie).", "coffre": "jaf" },
+    { "id": "avis-imposition", "libelle": "Latest tax notice (avis d'imposition) (copy)", "detail": "Download it from impots.gouv.fr. Otherwise, proof of income for the last 6 months.", "coffre": "finances" },
+    { "id": "attestation-assurance", "libelle": "Certificate from your insurer stating it does not cover the costs", "detail": "Ask your home, car or bank card insurer.", "coffre": "jaf" },
+    { "id": "pieces-affaire", "libelle": "Case documents", "detail": "Summons to the hearing, previous judgment, acceptance letter from the lawyer you have chosen.", "coffre": "jaf" },
+    { "id": "decision-baj", "libelle": "Decision of the legal aid office", "detail": "Keep it and send it to your lawyer.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Check your legal protection insurance", "detail": "If it covers the costs, you do not need AJ; otherwise ask for a certificate stating it does not cover them." },
+    { "titre": "Estimate your entitlement", "detail": "Compare your reference tax income with the limits, or use the official simulator on service-public.gouv.fr." },
+    { "titre": "Choose a lawyer if you wish", "detail": "Attach their acceptance letter. If no one accepts, the head of the bar (bâtonnier) can appoint one." },
+    { "titre": "Fill in the application", "detail": "Cerfa n° 16146 form, or an online application on aidejuridictionnelle.justice.fr with FranceConnect if your situation allows." },
+    { "titre": "Check before submitting or sending", "detail": "Signed form, ID document, proof of address less than 3 months old, family record book, tax notice, insurer's certificate, summons or judgment. Make a full copy of the file." },
+    { "titre": "Submit the file to the legal aid office of the Mamoudzou judicial court (tribunal judiciaire)", "detail": "Or send it by mail. A point-justice (free legal information center) can help you fill it in." },
+    { "titre": "Follow up the decision", "detail": "Send it to your lawyer. If refused, you have 15 days to challenge it." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Mamoudzou (legal aid office)", "detail": "Reception email: accueil.tj-mamoudzou@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" },
+    { "nom": "Points-justice in Mayotte (CDAD, Conseil départemental de l'accès au droit, the local access-to-law council)", "detail": "Free help putting the file together, in several towns (Mamoudzou, Koungou, Labattoir, Pamandzi, Bandrélé, Bouéni, Combani...).", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271" },
+    { "nom": "Online legal aid application", "detail": "Free service with FranceConnect.", "url": "https://www.aidejuridictionnelle.justice.fr/authentification" }
+  ],
+  "liens": [
+    { "titre": "Legal aid: conditions and procedure (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074" },
+    { "titre": "Legal aid application form (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Legal aid application (copy of the file)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Decision of the legal aid office", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Legal aid: appeal within 15 days", "evenement": "autre" },
+    { "type": "rappel", "titre": "Start legal action within a year of aid being granted", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Before the hearing", "detail": "Costs incurred before the office's decision are not covered." },
+    { "libelle": "15 days", "detail": "Time limit to appeal against a decision of the legal aid office." },
+    { "libelle": "1 year", "detail": "Time limit to take legal action after aid is granted." }
+  ],
+  "aConfirmer": [
+    "The official page does not mention Mayotte: whether the 2026 national limits apply should be confirmed with the Mamoudzou legal aid office.",
+    "To be confirmed locally: postal address, opening hours and submission arrangements of the legal aid office (the justice.fr website was unavailable when this was checked).",
+    "To be confirmed locally: days and times of the points-justice sessions, not given in the directory."
+  ],
+  "motsCles": ["legal aid", "AJ", "lawyer", "JAF", "court fees", "cerfa 16146", "Mamoudzou"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F18074 Legal aid (aide juridictionnelle)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1444 Legal aid application form", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public directory, Tribunal judiciaire de Mamoudzou", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public directory, CDAD de Mayotte", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271", "verifieLe": "2026-10-29" }
+  ]
+}

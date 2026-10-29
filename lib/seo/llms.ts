@@ -10,8 +10,8 @@ import { SUPPORT_EMAIL } from '@/components/profil/data'
 import { getHelpFaq } from '@/lib/aide/public'
 import { FAQ_CATEGORIES } from '@/lib/aide/types'
 import { listPosts } from '@/lib/blog/queries'
-import { loadGuide, type GuideSnapshot } from '@/lib/guide/load'
-import { GUIDE_CATEGORIES, type Fiche } from '@/lib/guide/types'
+import { listAvailableTerritoires, loadGuide, type GuideSnapshot } from '@/lib/guide/load'
+import { DEFAULT_TERRITOIRE, GUIDE_CATEGORIES, type Fiche } from '@/lib/guide/types'
 import { CONTACT_EMAIL, PUBLISHER_NAME, SITE_NAME, abs, guidePaths } from './site'
 
 const FEEDBACK_LINE = /\n*(Cet article a-t-il été utile\s?\?)\s*$/i
@@ -20,17 +20,20 @@ const catLabel = (key: string) => GUIDE_CATEGORIES.find((c) => c.key === key)?.l
 const faqCatLabel = (key: string) => FAQ_CATEGORIES.find((c) => c.key === key)?.label ?? key
 
 /** Résumé fidèle de l'entité (identique dans les deux fichiers). */
-function header(g: GuideSnapshot | null): string {
+function header(guides: GuideSnapshot[]): string {
   const p = PRICING
-  const territoire = g?.territoire.nom ?? 'Guyane'
+  const noms = guides.length ? guides.map((g) => `« ${g.territoire.nom} »`) : ['« Guyane »']
+  const territoires = `${noms.length > 1 ? 'les territoires' : 'le territoire'} ${noms.join(', ')}`
+  // Positionnement : la Guyane d'abord (territoire par défaut), quels que soient les territoires ouverts.
+  const premier = guides.find((g) => g.territoire.code === DEFAULT_TERRITOIRE)?.territoire.nom ?? guides[0]?.territoire.nom ?? 'Guyane'
   return [
     `# ${SITE_NAME}`,
     '',
-    `> ${SITE_NAME} est une application web (installable sur téléphone) pour les parents séparés : agenda partagé, journal, dépenses, coffre-fort de documents, témoignages, dossier JAF, Coach parental IA et un Guide parental de démarches pour le territoire « ${territoire} ». Elle ne remplace pas un avocat.`,
+    `> ${SITE_NAME} est une application web (installable sur téléphone) pour les parents séparés : agenda partagé, journal, dépenses, coffre-fort de documents, témoignages, dossier JAF, Coach parental IA et un Guide parental de démarches pour ${territoires}. Elle ne remplace pas un avocat.`,
     '',
     'Faits essentiels :',
     `- Éditeur : ${PUBLISHER_NAME}. Contact : ${CONTACT_EMAIL}. Assistance : ${SUPPORT_EMAIL}.`,
-    `- Public : parents séparés ou en cours de séparation, et familles qui cherchent une information fiable sur leurs démarches (${territoire} d'abord).`,
+    `- Public : parents séparés ou en cours de séparation, et familles qui cherchent une information fiable sur leurs démarches (${premier} d'abord).`,
     `- Langues de l'interface : français, anglais, portugais (Brésil).`,
     `- Tarifs : ${PLAN_NAME.gratuit} (0 €) ; ${PLAN_NAME.premium} ${formatPrice(p.premium.monthly)} par mois ou ${formatPrice(p.premium.yearly)} par an ; ${PLAN_NAME.coparentalite} ${formatPrice(p.coparentalite.monthly)} par mois ou ${formatPrice(p.coparentalite.yearly)} par an.`,
     `- Économie de l'abonnement annuel : environ ${planPromo('premium').discountPct} % par rapport à douze mensualités.`,
@@ -66,21 +69,23 @@ const pagesSection = () => [
   '## Autres langues', '', ...LANGUAGES.map(([t, p, d]) => `- [${t}](${abs(p)}) : ${d}`), '',
 ].join('\n')
 
-async function safeGuide(): Promise<GuideSnapshot | null> {
+/** Guides (fr) de tous les territoires disponibles ayant au moins une fiche ; jamais d'erreur. */
+async function safeGuides(): Promise<GuideSnapshot[]> {
   try {
-    const g = await loadGuide(undefined, 'fr')
-    return g.fiches.length ? g : null
+    const territoires = await listAvailableTerritoires('fr')
+    const guides = await Promise.all(territoires.map((t) => loadGuide(t.code, 'fr').catch(() => null)))
+    return guides.filter((g, i): g is GuideSnapshot => Boolean(g && g.territoire.code === territoires[i].code && g.fiches.length))
   } catch {
-    return null
+    return []
   }
 }
 
 const ficheUrl = (g: GuideSnapshot, f: Fiche) => abs(guidePaths.fiche(g.territoire.code, f.slug))
 
 export async function llmsTxt(): Promise<string> {
-  const [g, faq, posts] = await Promise.all([safeGuide(), getHelpFaq('fr'), listPosts()])
-  const out = [header(g), pagesSection()]
-  if (g) {
+  const [guides, faq, posts] = await Promise.all([safeGuides(), getHelpFaq('fr'), listPosts()])
+  const out = [header(guides), pagesSection()]
+  for (const g of guides) {
     out.push(`## Guide parental : ${g.territoire.nom}`, '', `Index : ${abs(guidePaths.territoire(g.territoire.code))}`, '')
     for (const cat of GUIDE_CATEGORIES) {
       const fiches = g.fiches.filter((f) => f.categorie === cat.key)
@@ -121,16 +126,16 @@ function ficheFull(g: GuideSnapshot, f: Fiche): string {
 }
 
 export async function llmsFullTxt(): Promise<string> {
-  const [g, faq] = await Promise.all([safeGuide(), getHelpFaq('fr')])
-  const out = [header(g), pagesSection()]
-  if (g) {
+  const [guides, faq] = await Promise.all([safeGuides(), getHelpFaq('fr')])
+  const out = [header(guides), pagesSection()]
+  for (const g of guides) {
     out.push(`## Guide parental : ${g.territoire.nom}`, '')
     for (const cat of GUIDE_CATEGORIES) {
       const fiches = g.fiches.filter((f) => f.categorie === cat.key)
       if (fiches.length) out.push(...fiches.map((f) => ficheFull(g, f)))
     }
     if (g.parcours.length) {
-      out.push('## Parcours pas à pas', '')
+      out.push(`## Parcours pas à pas : ${g.territoire.nom}`, '')
       const bySlug = new Map(g.fiches.map((f) => [f.slug, f]))
       for (const p of g.parcours) {
         out.push(`### ${p.titre}`, '', `URL : ${abs(guidePaths.parcours(g.territoire.code, p.slug))}`, '', oneLine(p.resume), '')

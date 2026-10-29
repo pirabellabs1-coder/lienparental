@@ -1,0 +1,73 @@
+{
+  "slug": "inscrire-enfant-ecole",
+  "territoire": "reunion",
+  "categorie": "ecole",
+  "titre": "Matricular meu filho na educação infantil ou no ensino fundamental",
+  "resume": "Duas etapas: a prefeitura (mairie) emite um certificado de matrícula e depois a escola admite a criança. Os documentos a levar e o que muda quando os pais estão separados.",
+  "aQuoiCaSert": "A instrução é obrigatória a partir dos 3 anos. Para uma matrícula numa escola pública de educação infantil (école maternelle) ou de ensino fundamental (école élémentaire), você passa primeiro pelo serviço escolar da prefeitura (mairie), que entrega um certificado de matrícula com a escola designada. Depois, a direção da escola admite o seu filho mediante esse certificado e o comprovante de vacinação. Preparar os documentos com antecedência evita voltar uma segunda vez.",
+  "quiEstConcerne": [
+    "Pais de uma criança que fará 3 anos no ano civil do início do ano letivo.",
+    "Pais que se mudam ou trocam o filho de escola.",
+    "As famílias recém-chegadas à Reunião, inclusive com uma criança que ainda não fala francês."
+  ],
+  "aSavoir": [
+    "A criança deve ser matriculada na educação infantil no início do ano letivo do ano civil em que faz 3 anos. A matrícula na escola pública é gratuita.",
+    "A matrícula na prefeitura deve ser feita no máximo em junho, antes do início das aulas. As matrículas costumam abrir em março, às vezes antes, conforme a cidade.",
+    "Documentos de identidade aceitos pela prefeitura: livro de família (livret de famille), carteira de identidade, passaporte ou extrato da certidão de nascimento. Uma declaração sob compromisso de honra (attestation sur l'honneur) pode ser aceita tanto para a identidade quanto para o endereço.",
+    "Em princípio, a matrícula é na escola do setor definido pela cidade. Outra escola exige uma dérogation (autorização especial), que não é automática.",
+    "Pais separados: matricular ou desmatricular na escola é um ato usual. Um dos pais pode fazê-lo sozinho, presume-se que tem o acordo do outro, mas deve informá-lo. Se o outro genitor avisar a escola que discorda, ela deve levar isso em conta; o juiz de família (juge aux affaires familiales, JAF) pode decidir.",
+    "Autoridade parental exclusiva: se uma sentença a atribui a um só dos pais, ele decide sozinho. Leve uma cópia da sentença.",
+    "Vacinas: a lista das vacinas obrigatórias depende do ano de nascimento da criança. Não existe obrigação de vacinação própria da Reunião.",
+    "Se a escola tem educação infantil e ensino fundamental, a passagem para o CP (1º ano) é automática."
+  ],
+  "documents": [
+    { "id": "identite-enfant", "libelle": "Livro de família, carteira de identidade, passaporte ou extrato da certidão de nascimento da criança", "detail": "Não tem certidão de nascimento? Peça-a gratuitamente on-line ou na prefeitura do local de nascimento.", "coffre": "scolarite" },
+    { "id": "identite-parent", "libelle": "Documento de identidade de quem faz a matrícula", "detail": "Carteira de identidade, passaporte ou título de residência.", "coffre": "scolarite" },
+    { "id": "domicile", "libelle": "Comprovante de endereço recente", "detail": "Conta, recibo de aluguel ou aviso de imposto. Se você mora na casa de alguém, informe-se sobre a declaração de hospedagem aceita pela prefeitura.", "coffre": "scolarite" },
+    { "id": "vaccins", "libelle": "Caderneta de saúde (carnet de santé, páginas de vacinas) ou atestado de contraindicação", "detail": "A escola costuma pedir uma fotocópia das páginas de vacinas.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Sentença ou acordo que fixa a autoridade parental e a residência, se vocês estiverem separados", "detail": "Cópia. Indispensável em caso de autoridade parental exclusiva.", "coffre": "jaf" },
+    { "id": "radiation", "libelle": "Certificat de radiation da escola anterior", "detail": "Só em caso de troca de escola. Peça à direção da escola anterior.", "coffre": "scolarite" },
+    { "id": "certificat-inscription", "libelle": "Certificado de matrícula emitido pela prefeitura", "detail": "Original a entregar à direção da escola. Guarde uma cópia.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Entre em contato com o serviço escolar da sua prefeitura", "detail": "Pergunte as datas de matrícula, se é preciso agendar, se existe serviço on-line e a lista exata de documentos." },
+    { "titre": "Confira antes de sair de casa", "detail": "Documento de identidade da criança ou livro de família, seu documento de identidade, comprovante de endereço recente, caderneta de saúde em dia, sentença se vocês forem separados, certificat de radiation em caso de troca de escola." },
+    { "titre": "Retire o certificado de matrícula na prefeitura", "detail": "Ele indica a escola designada. Peça a dérogation nesse momento se quiser outra escola." },
+    { "titre": "Faça a admissão do seu filho na escola", "detail": "Apresente o certificado de matrícula e o comprovante de vacinação. Informe os contatos dos dois pais e a lista das pessoas autorizadas a buscar a criança." },
+    { "titre": "Informe o outro genitor", "detail": "Se vocês estiverem separados, avise-o por escrito (mensagem ou e-mail)." }
+  ],
+  "ou": [
+    { "nom": "Prefeitura (mairie) do seu município, serviço escolar", "detail": "Matrícula, certificado de matrícula e dérogations de setor." },
+    { "nom": "Direção da escola", "detail": "Admissão da criança e certificat de radiation." },
+    { "nom": "CASNAV de La Réunion", "detail": "Acolhimento dos alunos alófonos recém-chegados: avaliação em francês e orientação, pedida pela escola ou pelo estabelecimento.", "url": "https://www.ac-reunion.fr" }
+  ],
+  "liens": [
+    { "titre": "Matrícula na educação infantil (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864" },
+    { "titre": "Matricular o filho no ensino fundamental (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" },
+    { "titre": "Autoridade parental em caso de separação (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133" },
+    { "titre": "Vacinas exigidas para a escola (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Certificado de matrícula escolar", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Páginas de vacinas da caderneta de saúde", "categorie": "sante" },
+    { "type": "coffre", "titre": "Sentença ou acordo (autoridade parental, residência)", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Matrícula escolar na prefeitura, no máximo em junho", "evenement": "ecole" },
+    { "type": "calendrier", "titre": "Horário de admissão na escola", "evenement": "ecole" }
+  ],
+  "datesLimites": [
+    { "libelle": "Matrícula na prefeitura no máximo em junho, antes do início das aulas", "detail": "As matrículas costumam abrir em março. Confira as datas na sua prefeitura e o calendário escolar da académie de La Réunion (rede de ensino local)." }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: datas de matrícula, agendamento, serviço on-line e lista de documentos, próprios de cada prefeitura da Reunião.",
+    "A confirmar localmente: aceitação de declaração sob compromisso de honra ou de declaração de hospedagem no lugar do comprovante de endereço, conforme a prefeitura.",
+    "A confirmar: os contatos do CASNAV de La Réunion, pois as páginas da académie indicam endereços e números diferentes."
+  ],
+  "motsCles": ["educação infantil", "ensino fundamental", "CP", "prefeitura (mairie)", "matrícula", "dérogation", "desligamento"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1864 Matrícula na educação infantil", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1865 Matricular o filho no ensino fundamental", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" }
+  ]
+}

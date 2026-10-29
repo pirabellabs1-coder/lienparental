@@ -1,0 +1,71 @@
+{
+  "slug": "changer-adresse-enfant-separation",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Changer l'adresse de l'enfant après une séparation (CSSM, école, impôts)",
+  "resume": "Qui prévenir et dans quel ordre quand l'enfant change d'adresse : CSSM (prestations et assurance maladie), école, impôts, avec les pièces à préparer et les obligations envers l'autre parent.",
+  "aQuoiCaSert": "Après une séparation, l'adresse de l'enfant change souvent, ou il vit désormais dans deux foyers. Mettre à jour cette adresse évite les courriers perdus, les prestations mal calculées ou versées au mauvais parent, et les oublis de l'école. À Mayotte, la CSSM gère à la fois les prestations familiales et l'assurance maladie, mais elle ne figure pas dans la liste des organismes prévenus par le service national de changement d'adresse : il faut la prévenir directement.",
+  "quiEstConcerne": [
+    "Le parent chez qui l'enfant vit désormais, ou qui déménage avec lui.",
+    "Les parents en résidence alternée qui doivent déclarer les deux adresses."
+  ],
+  "aSavoir": [
+    "Le service gratuit « Déclaration de changement d'adresse » de service-public.gouv.fr prévient en une démarche plusieurs organismes (impôts, France Travail notamment). La CSSM n'y figure pas.",
+    "CSSM, prestations familiales : déclarez la séparation et le déménagement dans « Mon Compte » sur caf.fr. Pour l'aide au logement, faites une nouvelle demande dès l'entrée dans le logement.",
+    "CSSM, assurance maladie : mettez à jour votre adresse dans votre compte ameli ou auprès de l'accueil de la CSSM, et vérifiez à quel parent l'enfant est rattaché.",
+    "Impôts : signalez l'adresse depuis votre espace sur impots.gouv.fr, puis indiquez le déménagement dans votre déclaration de revenus.",
+    "École : vous devez signaler tout changement de situation familiale ou d'adresse, ainsi que toute décision du juge aux affaires familiales concernant l'enfant.",
+    "Déménagement d'un parent : s'il modifie l'exercice de l'autorité parentale (droits de visite par exemple), il doit informer l'autre parent à l'avance. Si l'enfant vit chez lui en vertu d'un jugement ou d'une convention, il doit communiquer sa nouvelle adresse au plus tard 1 mois après le déménagement, sous peine de 6 mois d'emprisonnement et 7 500 € d'amende.",
+    "En cas de désaccord sur le déménagement ou la résidence de l'enfant : médiation familiale ou saisine du juge aux affaires familiales de Mamoudzou."
+  ],
+  "documents": [
+    { "id": "domicile", "libelle": "Justificatif du nouveau domicile (de moins de 3 mois de préférence)", "detail": "Bail, quittance, facture d'eau ou d'électricité. Hébergé : attestation d'hébergement et pièces de l'hébergeant.", "coffre": "courriers" },
+    { "id": "identite", "libelle": "Pièce d'identité du parent déclarant (copie recto verso)", "coffre": "autres" },
+    { "id": "numeros", "libelle": "Numéro de sécurité sociale et numéro fiscal", "detail": "Sur votre carte Vitale et votre avis d'imposition.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Jugement ou convention sur la résidence de l'enfant (copie)", "detail": "Pour l'école et la CSSM si une décision existe.", "coffre": "jaf" },
+    { "id": "courrier-autre-parent", "libelle": "Copie du courrier informant l'autre parent de la nouvelle adresse", "detail": "Gardez une preuve datée.", "coffre": "jaf" },
+    { "id": "fiche-ecole", "libelle": "Fiche de renseignements de l'école mise à jour", "detail": "Avec les coordonnées des deux parents et les personnes autorisées à récupérer l'enfant.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Informez l'autre parent", "detail": "Avant le déménagement si l'organisation de l'enfant change, et au plus tard 1 mois après si l'enfant vit chez vous selon un jugement ou une convention. Gardez une trace écrite." },
+    { "titre": "Faites la déclaration groupée en ligne", "detail": "Service « Déclaration de changement d'adresse » sur service-public.gouv.fr, pour les organismes proposés." },
+    { "titre": "Déclarez la séparation et l'adresse à la CSSM", "detail": "Dans « Mon Compte » sur caf.fr pour les prestations, et dans votre compte ameli ou à l'accueil pour l'assurance maladie." },
+    { "titre": "Vérifiez avant d'aller à l'école", "detail": "Justificatif du nouveau domicile, jugement ou convention s'il existe, coordonnées des deux parents, liste des personnes autorisées à venir chercher l'enfant." },
+    { "titre": "Prévenez l'école ou l'établissement", "detail": "Pensez aussi au périscolaire et au transport scolaire." },
+    { "titre": "Terminez par les autres organismes", "detail": "Banque, assurance habitation et scolaire, mutuelle, médecin, activités de l'enfant, listes électorales en mairie." }
+  ],
+  "ou": [
+    { "nom": "Service-public.gouv.fr, Déclaration de changement d'adresse", "detail": "Déclaration unique et gratuite auprès de plusieurs organismes.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R11193" },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Prestations familiales et assurance maladie. Accueil sur rendez-vous.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "Impots.gouv.fr", "detail": "Espace particulier.", "url": "https://www.impots.gouv.fr" },
+    { "nom": "École, collège ou lycée de l'enfant", "detail": "Directeur d'école ou secrétariat de l'établissement." }
+  ],
+  "liens": [
+    { "titre": "Déclaration de changement d'adresse (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R11193" },
+    { "titre": "Un parent séparé peut-il déménager librement ? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389" },
+    { "titre": "École et parents séparés : information des parents (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Justificatif du nouveau domicile", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Preuve d'information de l'autre parent (nouvelle adresse)", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Communiquer la nouvelle adresse à l'autre parent (1 mois maximum)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Prévenir la CSSM du changement d'adresse", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Rendez-vous à l'école : mise à jour de l'adresse", "evenement": "ecole" }
+  ],
+  "datesLimites": [
+    { "libelle": "Au plus tard 1 mois après le déménagement", "detail": "Pour communiquer la nouvelle adresse à l'autre parent, quand l'enfant vit chez vous en vertu d'un jugement ou d'une convention." },
+    { "libelle": "Dès l'entrée dans le logement", "detail": "Nouvelle demande d'aide au logement à la CSSM." }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la CSSM : si un changement d'adresse déclaré dans « Mon Compte » est aussi pris en compte pour l'assurance maladie, ou s'il faut deux démarches.",
+    "À confirmer auprès de la CSSM : déclaration de la résidence alternée et partage des allocations familiales."
+  ],
+  "motsCles": ["changement d'adresse", "déménagement", "séparation", "résidence alternée", "CSSM", "école", "impôts"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, R11193 Déclaration de changement d'adresse", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R11193", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11389 Un parent séparé peut-il déménager librement ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1391 Information des parents à l'école", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Famille", "url": "https://www.cssm.fr/page/famille", "verifieLe": "2026-10-29" }
+  ]
+}

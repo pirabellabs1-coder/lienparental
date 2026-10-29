@@ -59,8 +59,8 @@
     "À confirmer localement : adresses et horaires des accueils de la CGSS de la Guyane."
   ],
   "motsCles": ["C2S", "CMU", "mutuelle", "complémentaire", "santé", "remboursement", "gratuit"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (section Guyane, Guadeloupe, Martinique, La Réunion)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-07-01" }
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (section Guyane, Guadeloupe, Martinique, La Réunion)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" }
   ]
 }

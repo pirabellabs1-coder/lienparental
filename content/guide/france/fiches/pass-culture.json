@@ -1,0 +1,61 @@
+{
+  "slug": "pass-culture",
+  "territoire": "france",
+  "categorie": "loisirs",
+  "titre": "Pass Culture pour les 15 à 18 ans",
+  "resume": "Offres gratuites à 15 et 16 ans, 50 € à 17 ans, 150 € à 18 ans : les pièces à préparer pour l'inscription dans l'application et les délais d'utilisation.",
+  "aQuoiCaSert": "Le pass Culture facilite l'accès des jeunes à la culture : livres, places de cinéma, concerts, spectacles, cours, instruments de musique. Il comporte une part individuelle, utilisée par le jeune dans l'application, et une part collective, utilisée par les enseignants pour des sorties de classe. Les réservations se font dans l'application, auprès des lieux partenaires.",
+  "quiEstConcerne": [
+    "Les jeunes de 15 à 18 ans résidant en métropole ou dans un département d'outre-mer, scolarisés ou non.",
+    "Les jeunes de nationalité étrangère qui résident en France depuis au moins 1 an."
+  ],
+  "aSavoir": [
+    "Jeunes inscrits depuis le 1er mars 2025 : offres gratuites à 15 et 16 ans, 50 € à 17 ans, 150 € à 18 ans. Les crédits de 17 et 18 ans se cumulent.",
+    "L'argent est utilisable jusqu'à la veille des 21 ans.",
+    "Depuis un arrêté publié au Journal officiel du 30 décembre 2025, les offres en ligne (musique, vidéo, jeux vidéo, livres audio, presse numérique) sont plafonnées à 50 € au total, sauf pour les jeunes en situation de handicap reconnu.",
+    "Un bonus de 50 € après 18 ans est prévu pour les jeunes en situation de handicap (AEEH, AAH) ou dont le foyer a un quotient familial inférieur à un seuil fixé chaque année.",
+    "Inscription : pièce d'identité et justificatif de domicile au nom du jeune. S'il est hébergé, il faut aussi le justificatif de domicile de l'hébergeant, une attestation d'hébergement et la pièce d'identité de l'hébergeant. Les élèves peuvent aussi créer leur compte via ÉduConnect, avec un code fourni par l'établissement."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité valide du jeune", "detail": "Copie (photo ou scan) envoyée dans l'application. Pas de pièce d'identité : voir la fiche « Faire la carte d'identité ou le passeport de mon enfant ».", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Justificatif de domicile au nom du jeune", "detail": "Copie. À défaut, documents de l'hébergeant ci-dessous.", "coffre": "autres" },
+    { "id": "hebergement", "libelle": "Attestation d'hébergement signée par le parent ou l'hébergeant", "detail": "Avec la copie de la pièce d'identité et du justificatif de domicile de l'hébergeant. Cas le plus fréquent pour un mineur qui vit chez ses parents.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Téléchargez l'application pass Culture", "detail": "Ou rendez-vous sur pass.culture.fr. À faire dès les 15 ans pour les offres gratuites." },
+    { "titre": "Vérifiez avant de commencer l'inscription", "detail": "Pièce d'identité valide du jeune, justificatif de domicile à son nom, ou à défaut attestation d'hébergement signée avec la pièce d'identité et le justificatif de domicile du parent qui l'héberge, adresse mail et téléphone du jeune." },
+    { "titre": "Créez le compte du jeune et envoyez les justificatifs" },
+    { "titre": "Attendez la validation", "detail": "Le compte est crédité une fois l'inscription acceptée." },
+    { "titre": "Réservez les offres", "detail": "Accompagnez votre ado dans ses premiers choix si besoin." }
+  ],
+  "ou": [
+    { "nom": "pass Culture", "detail": "Application et site officiel, avec un service d'aide en ligne.", "url": "https://pass.culture.fr" }
+  ],
+  "liens": [
+    { "titre": "Pass Culture (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959" },
+    { "titre": "Pass Culture : changements en 2026 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775" },
+    { "titre": "Réforme du pass Culture (pass.culture.fr)", "url": "https://pass.culture.fr/reforme-du-pass-culture" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Les 17 ans : activer le crédit pass Culture", "evenement": "activite" },
+    { "type": "rappel", "titre": "Utiliser le crédit pass Culture avant les 21 ans", "evenement": "activite" },
+    { "type": "coffre", "titre": "Attestation d'hébergement pour le pass Culture", "categorie": "autres" },
+    { "type": "depense", "titre": "Sortie ou activité culturelle", "categorie": "loisirs" },
+    { "type": "calendrier", "titre": "Sortie culturelle", "evenement": "activite" }
+  ],
+  "datesLimites": [
+    { "libelle": "Crédits utilisables jusqu'à la veille des 21 ans" }
+  ],
+  "aConfirmer": [
+    "La date de mise en place, le seuil de quotient familial et les modalités du bonus de 50 € après 18 ans ne sont pas encore précisés sur pass.culture.fr : vérifiez sur le site.",
+    "Les offres disponibles dépendent des lieux partenaires près de chez vous, à consulter dans l'application.",
+    "Le modèle d'attestation d'hébergement et la façon de déposer les pièces sont précisés dans l'application : vérifiez au moment de l'inscription."
+  ],
+  "motsCles": ["pass Culture", "culture", "ado", "livres", "cinéma", "musique", "17 ans", "18 ans"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A18775 Pass Culture : changements en 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775", "verifieLe": "2026-10-29" },
+    { "titre": "pass Culture, Réforme du pass Culture", "url": "https://pass.culture.fr/reforme-du-pass-culture", "verifieLe": "2026-10-29" }
+  ]
+}

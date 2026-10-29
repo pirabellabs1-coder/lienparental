@@ -61,11 +61,11 @@
     "À confirmer localement : horaires d'accueil de la préfecture de Cayenne et de la sous-préfecture de Saint-Laurent-du-Maroni pour une OST en urgence."
   ],
   "motsCles": ["AST", "sortie du territoire", "voyage", "mineur", "Brésil", "Suriname", "OST", "IST", "cerfa 15646"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1359 Autorisation de sortie du territoire (AST)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359", "verifieLe": "2026-03-20" },
-    { "titre": "Service-public.gouv.fr, F1774 Conflit parental sur la sortie du territoire d'un enfant mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774", "verifieLe": "2025-04-29" },
-    { "titre": "Service-public.gouv.fr, F38460 Un parent peut-il partir à l'étranger avec l'enfant ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38460", "verifieLe": "2026-06-05" },
-    { "titre": "Formulaires.service-public.gouv.fr, cerfa n° 15646 Autorisation de sortie du territoire", "url": "https://www.formulaires.service-public.gouv.fr/gf/getAnnexe.do?cerfaAnnexe=15646*01&cerfaFormulaire=15646*01" }
+    { "titre": "Service-public.gouv.fr, F1359 Autorisation de sortie du territoire (AST)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1774 Conflit parental sur la sortie du territoire d'un enfant mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F38460 Un parent peut-il partir à l'étranger avec l'enfant ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38460", "verifieLe": "2026-10-29" },
+    { "titre": "Formulaires.service-public.gouv.fr, cerfa n° 15646 Autorisation de sortie du territoire", "url": "https://www.formulaires.service-public.gouv.fr/gf/getAnnexe.do?cerfaAnnexe=15646*01&cerfaFormulaire=15646*01", "verifieLe": "2026-10-29" }
   ]
 }

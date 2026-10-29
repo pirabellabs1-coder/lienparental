@@ -1,0 +1,65 @@
+{
+  "slug": "declarer-separation-caf",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Reporting your separation to the CSSM",
+  "resume": "Report the separation in \"Mon Compte\" on caf.fr so the CSSM recalculates your benefits on your income alone, and arrange how the allowances are paid when the children live with both parents.",
+  "aQuoiCaSert": "In Mayotte, family benefits are managed by the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund), in the \"Mon Compte\" (My Account) area of the caf.fr website. After a separation, your entitlements (family allowances, complément familial (family supplement), housing benefit, CMG...) are recalculated without your ex-partner's income. Reporting the change quickly opens new entitlements and avoids having to repay overpayments.",
+  "quiEstConcerne": [
+    "Any CSSM beneficiary who separates, whether they were married, in a PACS (civil partnership) or living together.",
+    "The ex-partner who was not the beneficiary and must open their own file to receive benefits.",
+    "Parents with shared residence, who must agree on the beneficiary."
+  ],
+  "aSavoir": [
+    "You log in to \"Mon Compte\" with the first 13 digits of your social security number. This is where you update your situation with the CSSM.",
+    "The complément de libre choix du mode de garde (CMG, childcare allowance) can be received by both parents in shared custody since December 2025 (CSSM).",
+    "The allocation de soutien familial (ASF, family support allowance) and child support intermediation by the ARIPA (Agence de recouvrement et d'intermédiation des pensions alimentaires, the child support collection agency) do not yet exist in Mayotte (planned for 2035). For unpaid child support, see the guide entry \"Unpaid child support in Mayotte: your options\".",
+    "Victim of domestic violence: the CSSM pays emergency aid on proof less than 12 months old (complaint, report to the public prosecutor or protection order)."
+  ],
+  "documents": [
+    { "id": "identifiants", "libelle": "Social security number and \"Mon Compte\" password", "detail": "If you were not the beneficiary, create your own account.", "coffre": "finances" },
+    { "id": "date-separation", "libelle": "Exact date of separation and new address", "detail": "The date you actually left the shared home.", "coffre": "courriers" },
+    { "id": "rib", "libelle": "RIB (bank account details) in your name only", "detail": "If benefits were paid into a joint account.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Your recent income", "detail": "Payslips or benefit amounts.", "coffre": "finances" },
+    { "id": "bail", "libelle": "Lease or rent certificate for the new home", "detail": "For a housing benefit application.", "coffre": "courriers" },
+    { "id": "jugement", "libelle": "Judgment or agreement setting the child's residence (copy), if there is one", "detail": "Ask the court registry (greffe), your lawyer or the notary for a copy if you no longer have it.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Log in to \"Mon Compte\" on caf.fr", "detail": "Section for reporting a change of situation. The ex-partner who is not a beneficiary creates their own file." },
+    { "titre": "Enter the separation date, your new address and the children's residence" },
+    { "titre": "Shared residence: report it and agree on the beneficiary", "detail": "Ask the CSSM what to do to split the family allowances." },
+    { "titre": "Check before sending your declaration", "detail": "Exact separation date, each parent's address up to date, RIB in your name only, copy of the judgment or agreement attached if there is one. Keep the acknowledgment of receipt." },
+    { "titre": "Apply for what concerns you", "detail": "Housing benefit for the new home, CMG if you have someone look after your child." },
+    { "titre": "Also inform the other organizations", "detail": "Health insurance (attaching the children), school, tax office (box T if you are raising your children alone)." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Online in \"Mon Compte\" on caf.fr, or reception by appointment at the Centre Kinga, Kawéni, Mamoudzou.", "url": "https://www.cssm.fr/page/famille", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Free help with online procedures.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Family (CSSM)", "url": "https://www.cssm.fr/page/famille" },
+    { "titre": "Family benefits in Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Aid for victims of domestic violence (CSSM)", "url": "https://www.cssm.fr/page/aide-aux-victimes-de-violences-conjugales" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Report the separation to the CSSM", "evenement": "autre" },
+    { "type": "coffre", "titre": "Acknowledgment of the change-of-situation declaration", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Judgment or agreement on the child's residence", "categorie": "jaf" }
+  ],
+  "datesLimites": [
+    { "libelle": "As soon as you separate", "detail": "Report it without delay to avoid an overpayment you would have to repay." }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the CSSM: the exact procedure in shared residence (form cerfa n° 14000 or other), whether the family allowances can be split, and the minimum duration of the choice of beneficiary.",
+    "To be confirmed with the CSSM: the proof of separation accepted if you still live under the same roof.",
+    "To be confirmed: opening hours of the reception desk and drop-in sessions, check on cssm.fr before you go."
+  ],
+  "motsCles": ["separation", "CSSM", "change of situation", "shared residence", "Mon Compte", "allowances"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Family", "url": "https://www.cssm.fr/page/famille", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Family benefits", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Aid for victims of domestic violence", "url": "https://www.cssm.fr/page/aide-aux-victimes-de-violences-conjugales", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, report to the President on ordonnance n° 2026-647 of July 22, 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" }
+  ]
+}

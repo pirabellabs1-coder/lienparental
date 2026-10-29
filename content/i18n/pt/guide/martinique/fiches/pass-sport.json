@@ -1,0 +1,148 @@
+{
+  "slug": "pass-sport",
+  "territoire": "martinique",
+  "categorie": "loisirs",
+  "titre": "Pass'Sport: um desconto na inscrição em clube esportivo",
+  "resume": "50 € de desconto na inscrição num clube esportivo para 2026-2027, a usar até 31 de dezembro de 2026: quem tem direito, como obter o código e o que levar ao clube.",
+  "aQuoiCaSert": "O Pass'Sport (auxílio do governo para o esporte dos jovens) reduz o custo da inscrição do seu filho num clube esportivo ou numa academia parceira. O clube desconta diretamente 50 € da licença ou da mensalidade de adesão. Se o valor for inferior a 50 €, o clube se compromete a repassar a diferença ao jovem (equipamento, roupas esportivas).",
+  "quiEstConcerne": [
+    "Os jovens de 6 a 17 anos completos cujo quociente familiar da Caf (Caisse d'allocations familiales, órgão de benefícios familiares) ou da MSA (Mutualité sociale agricole, seguridade social agrícola) seja igual ou inferior a 699 €.",
+    "Os jovens de 6 a 19 anos completos beneficiários da AEEH (auxílio de educação da criança com deficiência), e de 16 a 30 anos completos beneficiários da AAH (auxílio a adultos com deficiência).",
+    "Os estudantes bolsistas com menos de 28 anos (bolsa por critérios sociais, auxílio anual do Crous, serviço de apoio estudantil, bolsa regional de formações sanitárias e sociais)."
+  ],
+  "aSavoir": [
+    "Valor 2026-2027: 50 € por jovem (70 € em 2025-2026).",
+    "Válido para inscrições feitas entre 1º de setembro e 31 de dezembro de 2026.",
+    "Os códigos foram enviados por e-mail de 9 a 13 de setembro de 2026, para o endereço registrado na Caf, na MSA ou no Crous, com um e-mail por filho menor elegível. Lembre-se de verificar a caixa de spam.",
+    "Sem e-mail: teste a elegibilidade no site oficial e depois peça o código on-line (FranceConnect recomendado). Ele chega por e-mail em no máximo 72 horas.",
+    "Pais separados: a elegibilidade depende do quociente familiar do beneficiário principal da Caf. O código é, portanto, enviado ao e-mail desse genitor: compartilhe-o se for o outro genitor quem inscreve a criança.",
+    "Um auxílio complementar da Caf para equipamento foi anunciado para o 1º trimestre de 2027 para os beneficiários de 6 a 17 anos que ativaram o Pass'Sport na volta às aulas de 2026. O valor não foi informado."
+  ],
+  "documents": [
+    {
+      "id": "code-pass",
+      "libelle": "Código Pass'Sport da criança",
+      "detail": "No e-mail recebido ou obtido on-line. Um código por criança.",
+      "coffre": "autres"
+    },
+    {
+      "id": "certificat",
+      "libelle": "Atestado médico ou questionário de saúde, se o clube pedir",
+      "detail": "As regras dependem do esporte e da federação: pergunte ao clube.",
+      "coffre": "sante"
+    },
+    {
+      "id": "dossier-club",
+      "libelle": "Ficha de inscrição do clube e documentos que ele pede",
+      "detail": "A lista depende do clube: peça-a antes de ir.",
+      "coffre": "autres"
+    },
+    {
+      "id": "licence",
+      "libelle": "Licença ou recibo de adesão com o desconto",
+      "detail": "Guarde como prova do pagamento e do desconto aplicado.",
+      "coffre": "autres"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique se seu filho tem direito",
+      "detail": "No site oficial do Pass'Sport."
+    },
+    {
+      "titre": "Obtenha seu código",
+      "detail": "No e-mail recebido, ou fazendo o pedido on-line."
+    },
+    {
+      "titre": "Escolha um clube parceiro",
+      "detail": "Lista no site oficial. Um clube que não está na lista pode ser parceiro: pergunte diretamente a ele."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Código Pass'Sport anotado ou impresso, ficha de inscrição do clube preenchida, atestado ou questionário de saúde se pedido, forma de pagamento para o restante, inscrição até 31 de dezembro de 2026."
+    },
+    {
+      "titre": "Apresente o código ao clube na inscrição",
+      "detail": "O clube desconta 50 € da adesão."
+    },
+    {
+      "titre": "Registre o valor restante no Diário"
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Site oficial do Pass'Sport",
+      "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents"
+    },
+    {
+      "nom": "France Services ou CCAS (centro municipal de ação social) do seu município",
+      "detail": "Ajuda gratuita para fazer o pedido on-line."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Pass'Sport, jovens e pais (sports.gouv.fr)",
+      "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents"
+    },
+    {
+      "titre": "Pass'Sport 2026-2027, notícia (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Usar o Pass'Sport até 31 de dezembro de 2026",
+      "evenement": "activite"
+    },
+    {
+      "type": "depense",
+      "titre": "Inscrição no clube esportivo",
+      "categorie": "activites"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Treino esportivo",
+      "evenement": "activite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Licença esportiva",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Atestado médico esportivo",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "31 de dezembro de 2026: última data de inscrição com o Pass'Sport 2026-2027"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: a lista dos clubes parceiros na Martinica, no site oficial ou diretamente com o clube.",
+    "O valor e as condições do auxílio para equipamento da Caf anunciado para 2027 devem ser verificados com a Caf de la Martinique."
+  ],
+  "motsCles": [
+    "esporte",
+    "clube",
+    "Pass'Sport",
+    "licença esportiva",
+    "atividade",
+    "desconto"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, notícia A15850 Pass'Sport 2026-2027",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Pass'Sport, jovens e pais",
+      "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents"
+    }
+  ]
+}

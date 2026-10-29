@@ -1,0 +1,165 @@
+{
+  "slug": "complementaire-sante-solidaire",
+  "territoire": "guadeloupe",
+  "categorie": "sante",
+  "titre": "Complémentaire santé solidaire (C2S): free or low-cost top-up health cover",
+  "resume": "Free or low-cost top-up health cover for the whole household, children included, based on your income over the last 12 months, with higher limits in Guadeloupe.",
+  "aQuoiCaSert": "The Complémentaire santé solidaire (C2S) covers the share of health expenses not reimbursed by the Assurance Maladie (French public health insurance), up to the Sécurité sociale (social security) rates. It is free or comes with a small monthly contribution depending on your resources, and covers everyone in the household, so your children too. It is often the solution when you have no mutuelle (top-up health insurance) and a low income.",
+  "quiEstConcerne": [
+    "Low-income households who have lived in France on a stable and lawful basis for more than 3 months.",
+    "People receiving the RSA (revenu de solidarité active, the minimum income benefit): free C2S is granted automatically, unless they object.",
+    "Single parents and families who have no top-up health cover for their children."
+  ],
+  "aSavoir": [
+    "With the C2S: no extra fees above the standard rates (dépassements d'honoraires), third-party payment (no upfront payment), daily hospital charge (forfait hospitalier) covered.",
+    "Annual limits in Guadeloupe for free C2S: €11,599 for 1 person, €17,398 for 2, €20,878 for 3, €24,358 for 4, plus €4,640 per additional person.",
+    "C2S with a contribution in Guadeloupe: resources up to €15,659 for 1 person, €23,488 for 2, €28,185 for 3, €32,883 for 4, plus €6,263 per additional person.",
+    "The resources counted are those of the 12 months before the application. A flat-rate housing amount (forfait logement) is added if you receive housing benefit, are housed free of charge or own your home.",
+    "Decision within 2 months. Without a reply within this time, the application is accepted. If refused, an amicable appeal is possible within 2 months.",
+    "The C2S is granted for 1 year. Renewal must be requested between 4 and 2 months before the end date, unless it is automatic (RSA, Aspa and Asi minimum benefits, and the AAH (adult disability allowance) with no change of situation).",
+    "Separated parents: the C2S is granted to the household that applies. A child in shared residence is in principle part of only one parent's household: ask your health insurance fund."
+  ],
+  "documents": [
+    {
+      "id": "formulaire",
+      "libelle": "Cerfa n° 12504 form, completed and signed, if you are not applying online",
+      "detail": "It includes the list of household members and their resources over the last 12 months.",
+      "coffre": "sante"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Tax notice (avis d'impôt) or tax return statement (Asdir)",
+      "detail": "Copy. Download it from impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "taxe-fonciere",
+      "libelle": "Property tax notice (taxe foncière), if you own your home",
+      "detail": "Copy.",
+      "coffre": "finances"
+    },
+    {
+      "id": "taxe-habitation",
+      "libelle": "Housing tax notice (taxe d'habitation), if applicable",
+      "detail": "Copy.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Proof of resources for the last 12 months, if requested",
+      "detail": "Payslips, allowances, child support received. The fund may ask for additional information.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-caf",
+      "libelle": "Statement of resources from the Caf or the MSA, if an RSA application is under way",
+      "detail": "Download it from your Caf (Caisse d'allocations familiales, the family benefits office) account.",
+      "coffre": "finances"
+    },
+    {
+      "id": "etranger",
+      "libelle": "Tax and social security documents from each country, if you lived abroad in the last 12 months",
+      "coffre": "finances"
+    },
+    {
+      "id": "decision-c2s",
+      "libelle": "C2S award decision",
+      "detail": "It shows the end date of your entitlement: note it for the renewal.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Estimate your entitlement",
+      "detail": "Add up the household's resources over 12 months and compare them with the Guadeloupe limits. Have your tax notice and income statements ready."
+    },
+    {
+      "titre": "Apply online",
+      "detail": "From your ameli account: this is the fastest way. You can also send the Cerfa n° 12504 form to your health insurance fund."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "If you submit the file at the front desk: signed form, tax notice, property or housing tax notice, Caf certificate if an RSA application is under way, proof of resources, ID document and carte Vitale (health insurance card). Make photocopies."
+    },
+    {
+      "titre": "Wait for the decision",
+      "detail": "It is made within 2 months. If refused, refer the matter to the amicable appeals board (commission de recours amiable) within 2 months."
+    },
+    {
+      "titre": "Remember to renew",
+      "detail": "Between 4 and 2 months before the end date shown on your certificate."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caisse générale de sécurité sociale (CGSS) de la Guadeloupe, the local social security fund",
+      "detail": "Apply online on ameli or at the front desk. Phone 36 46.",
+      "url": "https://www.ameli.fr",
+      "telephone": "36 46"
+    },
+    {
+      "nom": "France Services",
+      "detail": "Help with online procedures near you."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Complémentaire santé solidaire (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027"
+    },
+    {
+      "titre": "ameli.fr, Assurance Maladie",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "C2S award decision",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Tax notice used for the C2S",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Renew the C2S (4 to 2 months before the end date)",
+      "evenement": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Renewal between 4 and 2 months before the end date",
+      "detail": "Automatic for people receiving the RSA, Aspa, Asi or AAH with no change of situation."
+    },
+    {
+      "libelle": "Appeal against a refusal within 2 months",
+      "detail": "To the fund's amicable appeals board."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the monthly contribution for paid C2S in Guadeloupe by age, as the official page only gives the scale for Mayotte.",
+    "To be confirmed locally: which parent's household a child in shared residence is attached to for the C2S, with the CGSS de la Guadeloupe.",
+    "To be confirmed locally: addresses and opening hours of the CGSS de la Guadeloupe offices.",
+    "Saint-Barthélemy and Saint-Martin are separate territories (collectivités): check with the Assurance Maladie the limits and the competent fund if you live there."
+  ],
+  "motsCles": [
+    "C2S",
+    "CMU",
+    "mutuelle",
+    "top-up cover",
+    "health",
+    "reimbursement",
+    "free"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (French Guiana, Guadeloupe, Martinique, La Réunion section)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027",
+      "verifieLe": "2026-07-01"
+    }
+  ]
+}

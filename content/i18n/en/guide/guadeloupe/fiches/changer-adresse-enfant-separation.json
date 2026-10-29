@@ -1,0 +1,255 @@
+{
+  "slug": "changer-adresse-enfant-separation",
+  "territoire": "guadeloupe",
+  "categorie": "separation",
+  "titre": "Changing your child's address after a separation (Caf, school, social security)",
+  "resume": "Who to notify, and in what order, when your child's address changes: Caf, school, Assurance Maladie, tax office, all at once if possible, with the documents to prepare and your obligations toward the other parent.",
+  "aQuoiCaSert": "After a separation, a child's address often changes, or the child now lives in two homes. Updating this address prevents lost mail, family benefits that are miscalculated or paid to the wrong parent, and missed information from the school. This guide lists the steps, office by office, and reminds you what the law requires to keep the other parent informed.",
+  "quiEstConcerne": [
+    "The parent the child now lives with, or who is moving with the child.",
+    "Parents with shared residence, who must declare both addresses and choose how to split family benefits."
+  ],
+  "aSavoir": [
+    "The free online service \"Je change de coordonnées\" (\"I am changing my contact details\") on service-public.gouv.fr, the official French government website, sends your new address in a single step to more than 30 national bodies (tax office, Assurance Maladie, France Travail, pension funds, some energy suppliers) and to more than 4,500 connected town halls (mairies). It does not update the electoral rolls, your bank or your insurance.",
+    "Caf (Caisse d'allocations familiales, the family benefits office): report the separation in your online account under \"Déclaration de situation\", and the move with the \"Déclaration de changement d'adresse\" service. For housing benefits, make a new application as soon as you move in. If you forgot in good faith, the \"droit à l'erreur\" (right to make a mistake) applies if you correct it quickly.",
+    "Shared residence and the Caf: fill in form cerfa n° 14000. Parents can name a single beneficiary or split the family allowances; if they disagree, each parent automatically receives a share. Only family allowances and the complément de libre choix du mode de garde (CMG, childcare allowance) can be split; other benefits go to one parent only. The choice can be changed after one year.",
+    "Assurance Maladie (French public health insurance): change your address in your ameli online account, under \"Mes démarches\", by phone at 3646, or by mail with a front-and-back copy of your ID.",
+    "Tax office: report your address in your personal account on impots.gouv.fr, then state the move and its date in your income tax return.",
+    "School: you must inform the school of any change in family situation or address, and of any decision by the family court judge (juge aux affaires familiales, JAF) concerning the child. The school gives the same information to each parent, in person or at the addresses provided at the start of the year.",
+    "If you alone hold parental authority, give a copy of the judgment to the school principal or head of the school.",
+    "A parent moving: a separated parent has the right to move. If this changes how parental authority is exercised (for example visiting rights), they must inform the other parent in advance, as early as possible. If the child lives with them under a judgment or an agreement, they must give their new address no later than 1 month after moving, or face 6 months' imprisonment and a €7,500 fine.",
+    "If you disagree about the move or where the child lives: family mediation, or an application to the family court judge (JAF) where the child lives (a lawyer is not required)."
+  ],
+  "documents": [
+    {
+      "id": "domicile",
+      "libelle": "Proof of your new address (preferably less than 3 months old)",
+      "detail": "Lease or rent receipt, water or electricity bill. If someone is housing you: a certificate of accommodation, plus that person's ID and proof of address.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "ancien-domicile",
+      "libelle": "Proof of your previous address",
+      "detail": "Requested by the Assurance Maladie if you apply by mail.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "identite",
+      "libelle": "ID of the parent making the declaration (front-and-back copy)",
+      "detail": "For letters to the CPAM or CGSS (local health insurance funds) and to create a Caf account.",
+      "coffre": "autres"
+    },
+    {
+      "id": "numeros",
+      "libelle": "Caf beneficiary number, social security number and tax number",
+      "detail": "Found on your Caf letters, your carte Vitale (health insurance card) and your tax notice. Needed for any online or written request.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement on the child's residence (copy)",
+      "detail": "For the school, the Caf and social security if a decision sets the residence or gives parental authority to one parent only.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Form \"Enfant(s) en résidence alternée : déclaration et choix des parents\" (cerfa n° 14000)",
+      "detail": "Shared residence only. Signed by both parents if you agree. Available on service-public.gouv.fr and caf.fr.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "courrier-autre-parent",
+      "libelle": "Copy of the letter informing the other parent of the new address",
+      "detail": "Keep dated proof (registered letter, email or message) that you gave this information.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "fiche-ecole",
+      "libelle": "Updated school information form",
+      "detail": "With both parents' contact details and the people allowed to pick up the child.",
+      "coffre": "scolarite"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Inform the other parent",
+      "detail": "Before the move if the child's arrangements change, and in any case no later than 1 month after if the child lives with you under a judgment or agreement. Keep a written record."
+    },
+    {
+      "titre": "Make the combined online declaration",
+      "detail": "On service-public.gouv.fr, online service \"Je change de coordonnées\": tick the bodies to notify (tax office, Assurance Maladie, town hall if connected, energy)."
+    },
+    {
+      "titre": "Report the separation and the address to the Caf",
+      "detail": "In \"Mon Compte\": \"Déclaration de situation\" for the separation, \"Déclaration de changement d'adresse\" for the move, and a new housing benefit application. For shared residence, send cerfa n° 14000."
+    },
+    {
+      "titre": "Update the Assurance Maladie",
+      "detail": "ameli account, under \"Mes démarches\", or 3646. Take the opportunity to check which parent the child is registered under."
+    },
+    {
+      "titre": "Check before going to the school",
+      "detail": "Proof of new address, judgment or agreement if there is one, full contact details of both parents, list of people allowed to pick up the child. Ask for letters to be sent to both addresses."
+    },
+    {
+      "titre": "Notify the school",
+      "detail": "Give the updated information form to the principal or the school office. Remember the canteen, after-school care and school transport too."
+    },
+    {
+      "titre": "Finish with the bodies not covered",
+      "detail": "Bank, home and school insurance, mutuelle (top-up health insurance), doctor, the child's activities, registration on the electoral rolls at the town hall."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Service-public.gouv.fr, Je change de coordonnées",
+      "detail": "Single, free declaration to more than 30 bodies.",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901"
+    },
+    {
+      "nom": "Caf de la Guadeloupe",
+      "detail": "\"Mon Compte\" on caf.fr or the \"Caf - Mon Compte\" app.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "Assurance Maladie (CGSS de la Guadeloupe, the local social security fund)",
+      "detail": "ameli account or 3646.",
+      "url": "https://www.ameli.fr",
+      "telephone": "3646"
+    },
+    {
+      "nom": "Impots.gouv.fr",
+      "detail": "Personal account, or your local public finance center (centre des finances publiques).",
+      "url": "https://www.impots.gouv.fr"
+    },
+    {
+      "nom": "Your child's school (école, collège or lycée)",
+      "detail": "School principal or the school office."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Je change de coordonnées, change your details online (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901"
+    },
+    {
+      "titre": "Reporting a change of situation to the Caf (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827"
+    },
+    {
+      "titre": "Family allowances with shared residence (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Can a separated parent move freely? (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389"
+    },
+    {
+      "titre": "School and separated parents: keeping parents informed (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Proof of new address",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Proof the other parent was informed (new address)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Caf shared residence form (cerfa 14000)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Give the new address to the other parent (1 month maximum)",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Shared residence: Caf choice can be changed after 1 year",
+      "evenement": "autre"
+    },
+    {
+      "type": "calendrier",
+      "titre": "School appointment: address update",
+      "evenement": "ecole"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "No later than 1 month after the move",
+      "detail": "To give the new address to the other parent, when the child lives with you under a judgment or an agreement."
+    },
+    {
+      "libelle": "As soon as you move in",
+      "detail": "New housing benefit application to the Caf."
+    },
+    {
+      "libelle": "1 year",
+      "detail": "Minimum period for the choice of beneficiary or split under shared residence, unless the children's residence changes."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the Caf de la Guadeloupe applies rules specific to the overseas departments for family allowances (for example from the first child); check with them what shared residence means when there is only one child.",
+    "To be confirmed locally: whether your town hall is connected to the \"Je change de coordonnées\" online service."
+  ],
+  "motsCles": [
+    "change of address",
+    "moving",
+    "separation",
+    "shared residence",
+    "Caf",
+    "ameli",
+    "school",
+    "taxes",
+    "cerfa 14000"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, news item A18901 Je change de coordonnées (May 6, 2026)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F827 Reporting a change of situation to the Caf",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Family allowances with shared residence",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F737 Social security: change in personal situation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F383 Income tax: change of address",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383",
+      "verifieLe": "2026-04-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F11389 Can a separated parent move freely?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389",
+      "verifieLe": "2025-05-28"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2025-06-20"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1391 Nursery and primary school: informing parents",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391",
+      "verifieLe": "2025-07-30"
+    }
+  ]
+}

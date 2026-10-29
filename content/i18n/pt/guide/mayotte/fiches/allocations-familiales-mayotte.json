@@ -1,0 +1,61 @@
+{
+  "slug": "allocations-familiales-mayotte",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Auxílios familiares em Mayotte (desde o 1º filho)",
+  "resume": "Em Mayotte, a CSSM paga auxílios familiares desde um único filho, com tabela própria do território. Valores de 2026-2027, complemento familiar e procedimentos on-line.",
+  "aQuoiCaSert": "Os auxílios familiares (allocations familiales) ajudam a cobrir as despesas do dia a dia dos filhos. Em Mayotte, não há Caf (Caisse d'allocations familiales, órgão de benefícios familiares): quem os paga é a CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte). Eles são devidos desde o primeiro filho, mas os valores continuam diferentes dos da França metropolitana. Uma ordonnance (decreto-lei) de 22 de julho de 2026 prevê um alinhamento progressivo, concluído em 2030 para os auxílios familiares e o acréscimo por idade. O complément familial (complemento familiar), próprio dos departamentos ultramarinos, pode se somar quando um filho tem entre 3 e 5 anos.",
+  "quiEstConcerne": [
+    "As famílias que moram em Mayotte com pelo menos um filho dependente com menos de 20 anos.",
+    "Os pais separados, inclusive em residência alternada.",
+    "Os pais de um filho de 3 a 5 anos sem outro filho com menos de 3 anos, para o complemento familiar."
+  ],
+  "aSavoir": [
+    "Valores mensais de 1º de abril de 2026 a 31 de março de 2027 (CSSM): 28,12 € para 1 filho (57,28 € se você já recebia os auxílios antes de janeiro de 2012), 153,01 € para 2 filhos, 229,52 € para 3 filhos, mais 22,14 € por filho adicional.",
+    "Complemento familiar: 159,28 € por mês, ou 113,75 € se a sua renda ultrapassar um pouco o teto (renda do ano N-2). É pago do mês seguinte aos 3 anos do filho mais novo até o mês anterior aos 5 anos dele, se não houver filho com menos de 3 anos no domicílio.",
+    "O pedido e o acompanhamento são feitos no espaço « Mon Compte » em caf.fr, com login pelos 13 primeiros dígitos do seu número da seguridade social (CSSM).",
+    "A ordonnance n° 2026-647 de 22 de julho de 2026 prevê o alinhamento completo dos auxílios familiares e do acréscimo por idade com a França metropolitana em 2030.",
+    "Pais separados: declare a separação e a residência dos filhos sem demora; os outros benefícios (complemento familiar, ARS, auxílios-moradia, AEEH) são pagos a um único genitor."
+  ],
+  "documents": [
+    { "id": "identite-parents", "libelle": "Documento de identidade ou título de residência de cada genitor", "detail": "Cópia válida, pedida no primeiro pedido.", "coffre": "finances" },
+    { "id": "numero-secu", "libelle": "Número da seguridade social (carte Vitale ou atestado da CSSM)", "detail": "Os 13 primeiros dígitos servem para entrar no « Mon Compte ».", "coffre": "finances" },
+    { "id": "livret-famille", "libelle": "Livro de família (livret de famille) ou certidão de nascimento de cada filho", "detail": "Cópia. Certidão gratuita, a pedir na prefeitura (mairie) do local de nascimento.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (comprovante de dados bancários) do genitor beneficiário", "detail": "Em seu nome.", "coffre": "finances" },
+    { "id": "avis-imposition", "libelle": "Aviso de imposto ou comprovantes de renda", "detail": "A renda serve sobretudo para calcular o complemento familiar.", "coffre": "finances" },
+    { "id": "jugement-residence", "libelle": "Sentença ou acordo que fixa a residência do filho", "detail": "Cópia, útil se vocês estão separados, em especial em residência alternada.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Crie ou abra o seu espaço « Mon Compte » em caf.fr", "detail": "Os benefícios da CSSM são geridos nesse espaço. Entre com os 13 primeiros dígitos do seu número da seguridade social." },
+    { "titre": "Confira antes de enviar o seu dossiê", "detail": "Filhos bem declarados, renda atualizada, RIB, endereço exato, situação familiar (casal, separado, pai ou mãe solo). Em caso de separação, declare a data real." },
+    { "titre": "Residência alternada: combinem quem será o beneficiário", "detail": "Pergunte à CSSM como declarar a divisão dos auxílios familiares ou a escolha de um único beneficiário." },
+    { "titre": "Acompanhe os seus pagamentos", "detail": "Consulte o detalhe dos pagamentos no « Mon Compte » e informe qualquer mudança de situação sem demora." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Centre Kinga, Route nationale 1, Kawéni, 97600 Mamoudzou. Atendimento com hora marcada (agendamento on-line em cssm.fr).", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Ajuda gratuita com os procedimentos on-line, em vários municípios de Mayotte.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Benefícios familiares em Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Família (CSSM)", "url": "https://www.cssm.fr/page/famille" },
+    { "titre": "Ordonnance n° 2026-647 de 22 de julho de 2026, relatório ao Presidente (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Notificação de direitos da CSSM", "categorie": "finances" },
+    { "type": "coffre", "titre": "Sentença ou acordo de residência do filho", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Informar à CSSM qualquer mudança de situação familiar", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "A confirmar com a CSSM: a possibilidade e o procedimento de divisão dos auxílios familiares em residência alternada (formulário nacional cerfa n° 14000 ou procedimento próprio), em especial com um único filho.",
+    "A confirmar com a CSSM: os valores de 2026-2027 dos acréscimos por idade e os tetos de renda do complemento familiar, não exibidos na página consultada.",
+    "A confirmar com a CSSM: a regra aplicável aos servidores públicos efetivos que têm só um filho.",
+    "A confirmar com a CSSM: a existência de uma agência em Petite-Terre (Dzaoudzi-Labattoir) e de plantões nos municípios, não mencionados na página Contacts consultada."
+  ],
+  "motsCles": ["auxílios familiares", "CSSM", "um filho", "complemento familiar", "Mayotte", "residência alternada"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Benefícios familiares (tabela de 1º de abril de 2026 a 31 de março de 2027)", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Contacts", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, relatório ao Presidente sobre a ordonnance n° 2026-647 de 22 de julho de 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" }
+  ]
+}

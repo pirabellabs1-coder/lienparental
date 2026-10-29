@@ -1,0 +1,175 @@
+{
+  "slug": "allocation-rentree-scolaire",
+  "territoire": "reunion",
+  "categorie": "aides",
+  "titre": "Back-to-school allowance (ARS, allocation de rentrée scolaire)",
+  "resume": "Financial help from the Caf paid in Réunion from August 4, 2026 for each child aged 6 to 18 in school, subject to income limits. Automatic before age 16; you must declare it for 16-18-year-olds.",
+  "aQuoiCaSert": "The back-to-school allowance helps pay for back-to-school costs (school supplies, clothes, equipment) for each child aged 6 to 18 in school, if the household's income does not exceed a ceiling. In Réunion, as the school year starts earlier than in mainland France, it is paid from the beginning of August. If you already receive benefits from the Caf (Caisse d'allocations familiales, the family benefits office) and your declarations are up to date, it is paid with no action needed for children under 16. For a young person aged 16 to 18, you must declare online that they are still in school or an apprentice, otherwise nothing is paid.",
+  "quiEstConcerne": [
+    "Families with a child aged 6 to 18 in school or enrolled with the Cned (the national distance learning center). For the 2026 school year: child born between September 16, 2008 and December 31, 2020 inclusive.",
+    "A child under 6 already enrolled in CP (first year of primary school) is also eligible for the ARS.",
+    "A child who is home-schooled is not eligible for the ARS. Nor is an apprentice whose wages exceed a ceiling."
+  ],
+  "aSavoir": [
+    "Amounts for the 2026 school year, after CRDS (a social contribution deducted at source): €426.87 for ages 6 to 10, €450.41 for ages 11 to 14, €466.02 for ages 15 to 18 (age on December 31, 2025). These are the general-case amounts, which apply in Réunion.",
+    "Income ceilings for the 2026 school year (2024 income): €28,956 for 1 child, €35,638 for 2, €42,320 for 3, plus €6,682 for each additional child.",
+    "If your income is slightly above the ceiling, a reduced (differential) allowance may be paid.",
+    "In Réunion, payment starts from August 4, 2026, instead of August 18 in the general case.",
+    "For a young person aged 16 to 18: you must have filed your 2025 income tax return and declared your 2024 income to the Caf, then declare from mid-July that they will be in school or an apprenticeship for the 2026 school year. A late declaration is paid a few days after the Caf receives it.",
+    "Separated parents: the ARS is paid to a single beneficiary. Even with shared residence, it is not split: it goes to the designated parent."
+  ],
+  "documents": [
+    {
+      "id": "avis-impot",
+      "libelle": "2025 income tax return filed with the tax office",
+      "detail": "Essential so the Caf knows your income. Tax notice downloadable on impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "certificat-scolarite",
+      "libelle": "School attendance certificate (certificat de scolarité)",
+      "detail": "For a child under 6 starting CP if you do not receive Caf benefits, or if the Caf asks for it. Issued by the school.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "contrat-apprentissage",
+      "libelle": "Apprenticeship contract and pay slips, for an apprentice aged 16 to 18",
+      "detail": "Copy. The Caf checks that the wages do not exceed the ceiling.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "declaration-situation",
+      "libelle": "Statement of situation and 2024 income statement",
+      "detail": "Only if you do not yet receive Caf benefits. Forms on caf.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank details slip)",
+      "detail": "If you do not yet receive Caf benefits.",
+      "coffre": "finances"
+    },
+    {
+      "id": "notification-caf",
+      "libelle": "ARS notification or payment certificate",
+      "detail": "Downloadable from your Caf account.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check that your declarations are up to date",
+      "detail": "Income tax return filed, family situation and number of children up to date in your Caf account."
+    },
+    {
+      "titre": "Child under 16 and you receive Caf benefits",
+      "detail": "Nothing to do: the ARS is paid automatically if you are eligible."
+    },
+    {
+      "titre": "Young person aged 16 to 18: declare their schooling",
+      "detail": "On caf.fr or the Caf app, from mid-July. Do it before August 4 to be paid with the first payment in Réunion."
+    },
+    {
+      "titre": "You do not receive Caf benefits",
+      "detail": "Submit a statement of situation and income to the Caf, with a RIB, and the school attendance certificate for a child under 6 in CP."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "If you go to a Caf reception desk: beneficiary number, ID, tax notice, school attendance certificate or apprenticeship contract as applicable. Most steps can be done online."
+    },
+    {
+      "titre": "Record back-to-school expenses",
+      "detail": "Log school supplies and clothes in the Journal to track each child's costs."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de La Réunion",
+      "detail": "\"Mon Compte\" online account on caf.fr or the Caf app.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, the farmers' social security fund)",
+      "detail": "If you are covered by the agricultural scheme."
+    },
+    {
+      "nom": "France Services (local public service help centers)",
+      "detail": "Free help with online procedures near you."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Back-to-school allowance (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878"
+    },
+    {
+      "titre": "Shared residence and family benefits (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Caf de La Réunion",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Declare schooling of 16-18-year-olds for the ARS (mid-July)",
+      "evenement": "ecole"
+    },
+    {
+      "type": "rappel",
+      "titre": "Check the ARS payment (August 4, 2026 in Réunion)",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "ARS payment certificate",
+      "categorie": "finances"
+    },
+    {
+      "type": "depense",
+      "titre": "Back-to-school supplies",
+      "categorie": "ecole"
+    },
+    {
+      "type": "depense",
+      "titre": "Back-to-school clothes",
+      "categorie": "vetements"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Declaration for 16-18-year-olds from mid-July",
+      "detail": "A declaration made after the payment date is paid a few days after the Caf receives it."
+    },
+    {
+      "libelle": "Payment in Réunion from August 4, 2026"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the Caf de La Réunion: which parent receives the ARS under shared residence, when you have not designated a single beneficiary.",
+    "To be confirmed: the wage ceiling for an apprentice above which the ARS is not paid, not stated on the page consulted."
+  ],
+  "motsCles": [
+    "ARS",
+    "back to school",
+    "school supplies",
+    "Caf",
+    "allowance",
+    "16-18 years"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1878 Back-to-school allowance (La Réunion section)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Shared residence and family benefits",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

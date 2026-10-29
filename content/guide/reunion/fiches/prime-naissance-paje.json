@@ -1,0 +1,64 @@
+{
+  "slug": "prime-naissance-paje",
+  "territoire": "reunion",
+  "categorie": "naissance",
+  "titre": "Prime à la naissance et allocation de base (Paje)",
+  "resume": "Les deux aides de la Caf liées à l'arrivée d'un bébé : conditions de ressources, montants 2026, dates de versement, règle de non-cumul propre aux DOM et ce qu'il faut déclarer à temps.",
+  "aQuoiCaSert": "La prestation d'accueil du jeune enfant (Paje) comprend notamment la prime à la naissance, versée une fois pendant la grossesse, et l'allocation de base, versée chaque mois jusqu'aux 3 ans de l'enfant. Elles aident à faire face aux dépenses liées à l'arrivée et à l'entretien d'un jeune enfant. Les deux sont soumises à des conditions de ressources. À La Réunion, l'allocation de base ne se cumule pas avec les allocations familiales versées pour un enfant à charge.",
+  "quiEstConcerne": [
+    "Les futurs parents et les parents d'un enfant de moins de 3 ans dont les revenus ne dépassent pas les plafonds.",
+    "Les familles qui résident en France, La Réunion comprise, plus de 9 mois dans l'année civile."
+  ],
+  "aSavoir": [
+    "Prime à la naissance : 1 093,11 € net par enfant à naître (montant en vigueur depuis le 1er avril 2026).",
+    "Pour la prime, le premier examen prénatal doit avoir eu lieu et la grossesse doit être déclarée avant la fin du 3e mois. Elle est versée avant le dernier jour du mois civil qui suit le 6e mois de grossesse.",
+    "Plafonds 2026 (revenus nets catégoriels 2024) pour la prime, avec 1 enfant : 49 054 € pour un couple avec deux revenus ou un parent isolé, 37 118 € pour un couple avec un seul revenu ; plus 8 908 € par enfant supplémentaire. L'enfant à naître compte comme un enfant à charge.",
+    "Allocation de base : 198,16 € par mois à taux plein ou 99,08 € à taux partiel selon les revenus. Elle est versée à partir du mois qui suit la naissance, jusqu'au mois précédant les 3 ans de l'enfant.",
+    "En Guadeloupe, Guyane, Martinique et à La Réunion, l'allocation de base ne se cumule pas avec les allocations familiales (et leurs majorations) versées pour un enfant à charge, ni avec le complément familial.",
+    "Parents séparés : la Paje n'est pas partagée entre les parents, même en résidence alternée. Elle est versée en totalité au parent désigné comme allocataire."
+  ],
+  "documents": [
+    { "id": "declaration-grossesse", "libelle": "Déclaration de grossesse", "detail": "Faite par le médecin ou la sage-femme lors du premier examen prénatal, avant la fin du 3e mois. Gardez le volet ou l'accusé.", "coffre": "sante" },
+    { "id": "identite-parents", "libelle": "Pièce d'identité ou titre de séjour de chaque parent", "detail": "Copie en cours de validité, demandée si vous n'êtes pas encore allocataire.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB du parent allocataire", "detail": "À votre nom, pour le versement.", "coffre": "finances" },
+    { "id": "avis-imposition", "libelle": "Avis d'imposition 2025 sur les revenus 2024", "detail": "Copie. Téléchargeable dans votre espace impots.gouv.fr. Les revenus servent à vérifier les plafonds.", "coffre": "finances" },
+    { "id": "acte-naissance", "libelle": "Acte de naissance de l'enfant ou livret de famille mis à jour", "detail": "Copie, pour déclarer la naissance à la Caf. Acte gratuit sur service-public.gouv.fr ou à la mairie du lieu de naissance.", "coffre": "finances" },
+    { "id": "notification-caf", "libelle": "Notifications de droits de la Caf", "detail": "Disponibles dans votre espace Mon Compte sur caf.fr.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Faites le premier examen prénatal avant la fin du 3e mois", "detail": "Le professionnel de santé fait la déclaration de grossesse : c'est elle qui ouvre le droit à la prime." },
+    { "titre": "Créez ou mettez à jour votre espace sur caf.fr", "detail": "Si vous n'êtes pas encore allocataire, faites une demande de prestations en ligne. Signalez la grossesse si la Caf ne l'a pas reçue." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Déclaration de grossesse transmise, coordonnées et RIB à jour, ressources déclarées, situation familiale exacte (couple, parent isolé). Une situation mal déclarée peut retarder ou fausser le calcul." },
+    { "titre": "Déclarez la naissance à la Caf", "detail": "Dans votre espace en ligne, rubrique changement de situation, dès que l'acte de naissance est établi." },
+    { "titre": "Suivez vos paiements", "detail": "La prime est versée avant la fin du mois qui suit le 6e mois de grossesse. L'allocation de base est versée chaque mois à partir du mois qui suit la naissance. La Caf applique la règle de non-cumul avec les allocations familiales." }
+  ],
+  "ou": [
+    { "nom": "Caf de La Réunion", "detail": "Démarches en ligne dans l'espace Mon Compte ou l'application Caf.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" },
+    { "nom": "MSA", "detail": "Si vous relevez du régime agricole." }
+  ],
+  "liens": [
+    { "titre": "Prime à la naissance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550" },
+    { "titre": "Allocation de base de la Paje (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552" },
+    { "titre": "Résidence alternée et prestations familiales (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Premier examen prénatal et déclaration de grossesse avant la fin du 3e mois", "evenement": "sante" },
+    { "type": "rappel", "titre": "Déclarer la naissance à la Caf", "evenement": "autre" },
+    { "type": "coffre", "titre": "Déclaration de grossesse", "categorie": "sante" },
+    { "type": "coffre", "titre": "Notification de droits Paje de la Caf", "categorie": "finances" }
+  ],
+  "datesLimites": [
+    { "libelle": "Déclaration de grossesse avant la fin du 3e mois", "detail": "Condition pour recevoir la prime à la naissance." },
+    { "libelle": "Allocation de base jusqu'au mois précédant les 3 ans de l'enfant" }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la Caf de La Réunion : les fiches nationales ne donnent pas de montant ou de plafond propre aux DOM pour la Paje, et c'est la Caf qui détermine, selon la règle de non-cumul, si vous percevez l'allocation de base ou les allocations familiales pour un enfant."
+  ],
+  "motsCles": ["Paje", "prime de naissance", "allocation de base", "grossesse", "Caf", "bébé"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2550 Prime à la naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2552 Allocation de base de la Paje", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" }
+  ]
+}

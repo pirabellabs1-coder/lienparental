@@ -23,6 +23,8 @@ export const PUBLIC_PAGES: PublicPage[] = [
   { path: '/aide', lastModified: '2026-10-27', priority: 0.6, changeFrequency: 'monthly' },
   { path: '/a-propos', lastModified: '2026-10-27', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/installer', lastModified: '2026-10-26', priority: 0.5, changeFrequency: 'yearly' },
+  { path: '/partenaires', lastModified: '2026-10-29', priority: 0.5, changeFrequency: 'monthly' },
+  { path: '/partenaires/candidature', lastModified: '2026-10-29', priority: 0.4, changeFrequency: 'yearly' },
   { path: '/onboarding/inscription', lastModified: '2026-10-26', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/onboarding/connexion', lastModified: '2026-10-26', priority: 0.3, changeFrequency: 'yearly' },
   { path: '/don', lastModified: '2026-10-26', priority: 0.3, changeFrequency: 'yearly' },

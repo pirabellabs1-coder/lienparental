@@ -1,0 +1,66 @@
+{
+  "slug": "mode-de-garde-petite-enfance",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Creche ou assistente maternal: encontrar quem cuide da criança",
+  "resume": "As vagas são raras em Mayotte: onde procurar, quais documentos preparar e como obter o complément de libre choix du mode de garde (CMG, auxílio para cuidados infantis) pago pela CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte).",
+  "aQuoiCaSert": "Deixar o seu filho pequeno aos cuidados de alguém permite trabalhar ou estudar. Em Mayotte, as vagas em creche (crèche) são poucas: é preciso se organizar muito cedo. Se você emprega uma assistente maternal credenciada (assistante maternelle agréée) ou uma cuidadora em domicílio, ou se a criança frequenta uma creche ou microcreche (micro-crèche) elegível, a CSSM pode pagar o complément de libre choix du mode de garde (CMG) e assumir toda ou parte das contribuições sociais.",
+  "quiEstConcerne": [
+    "Pais de uma criança de até 6 anos (menos de 12 anos para família monoparental), no caso do CMG.",
+    "Pais separados em residência alternada: cada um pode receber o CMG desde dezembro de 2025."
+  ],
+  "aSavoir": [
+    "O CMG existe em Mayotte. Desde 1º de setembro de 2025, o valor não depende mais de valores fixos por faixa: é calculado conforme a sua renda mensal, a composição da família, o custo por hora e o número de horas de cuidado.",
+    "Cobre a assistente maternal, o cuidado em domicílio, a creche ou a microcreche, conforme o caso (CSSM).",
+    "Empregador direto de uma assistente maternal ou de uma cuidadora em domicílio: declare todo mês a remuneração em pajemploi.urssaf.fr.",
+    "As assistentes maternais devem ser credenciadas (agréées) pela PMI (protection maternelle et infantile, serviço de saúde materno-infantil) do Département de Mayotte (governo local). Você se torna empregador e assina um contrato de trabalho.",
+    "Creche pública: o formulário costuma ser retirado na prefeitura (mairie). Creche associativa ou particular: a inscrição é feita com a direção."
+  ],
+  "documents": [
+    { "id": "livret-famille", "libelle": "Livro de família (livret de famille) ou certidão de nascimento da criança", "detail": "Cópia. Durante a gravidez, em geral pede-se um atestado de gravidez no lugar.", "coffre": "autres" },
+    { "id": "identite-parents", "libelle": "Documento de identidade de cada um dos pais", "detail": "Cópia.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Comprovante de endereço com menos de 3 meses", "detail": "Cópia.", "coffre": "autres" },
+    { "id": "ressources", "libelle": "Último aviso de imposto ou atestado da CSSM", "detail": "Cópia. Serve para calcular o valor da creche.", "coffre": "finances" },
+    { "id": "travail", "libelle": "Comprovantes de atividade dos pais", "detail": "Contrato de trabalho, contracheques, atestado de formação ou do France Travail (serviço público de emprego).", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Sentença ou acordo que fixa a residência e a autoridade parental, se vocês estiverem separados", "detail": "Cópia. Indica quem pode buscar a criança.", "coffre": "jaf" },
+    { "id": "vaccins", "libelle": "Páginas de vacinas da caderneta de saúde (carnet de santé)", "detail": "Cópia. As vacinas obrigatórias são exigidas para entrar em ambiente coletivo.", "coffre": "sante" },
+    { "id": "contrat-assmat", "libelle": "Contrato de trabalho da assistente maternal e atestado de credenciamento", "detail": "Original assinado. Peça uma cópia do credenciamento emitido pela PMI.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Procure as opções de cuidado perto de você", "detail": "Em monenfant.fr, na sua prefeitura ou na PMI." },
+    { "titre": "Confira antes de sair de casa", "detail": "Livro de família ou atestado de gravidez, documentos dos pais, comprovante de endereço, aviso de imposto, comprovantes de atividade, sentença se vocês estiverem separados, páginas de vacinas. Ligue para a estrutura e peça a lista exata." },
+    { "titre": "Faça o pedido de vaga", "detail": "Anote a data do pedido e cobre regularmente." },
+    { "titre": "Com uma assistente maternal, verifique o credenciamento e assine o contrato", "detail": "Credenciamento emitido pela PMI do Département de Mayotte." },
+    { "titre": "Peça o CMG", "detail": "Em “Mon Compte” no caf.fr, espaço usado pela CSSM. Depois, inscreva-se como empregador no Pajemploi se você contratar diretamente." },
+    { "titre": "Registre os gastos com cuidados", "detail": "No Diário, para acompanhar a despesa por filho e a divisão com o outro genitor." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Complément de libre choix du mode de garde (auxílio para cuidados infantis).", "url": "https://www.cssm.fr/page/prestations-familiales", "telephone": "02 69 61 91 91" },
+    { "nom": "Département de Mayotte (PMI)", "detail": "Credenciamento e acompanhamento das assistentes maternais. Central telefônica do Département, 112 boulevard Halidi Sélémani, Mamoudzou.", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "telephone": "02 69 66 10 00" },
+    { "nom": "monenfant.fr", "detail": "Diretório nacional de creches e assistentes maternais.", "url": "https://monenfant.fr" },
+    { "nom": "Pajemploi (Urssaf)", "detail": "Declaração mensal do salário.", "url": "https://www.pajemploi.urssaf.fr" }
+  ],
+  "liens": [
+    { "titre": "Benefícios familiares em Mayotte, incluindo o CMG (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Auxílio para cuidados infantis: complément de libre choix du mode de garde (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Cobrar o pedido de vaga na creche", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Declarar o salário da assistente maternal no Pajemploi", "evenement": "autre" },
+    { "type": "coffre", "titre": "Contrato de acolhimento ou contrato da assistente maternal", "categorie": "finances" },
+    { "type": "coffre", "titre": "Atestado de credenciamento da assistente maternal", "categorie": "finances" },
+    { "type": "depense", "titre": "Gastos com cuidados infantis", "categorie": "garde" }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: a cobertura de Mayotte em monenfant.fr (site indisponível na verificação) e a existência de relais petite enfance (centros de informação sobre a primeira infância).",
+    "A confirmar com o Département: serviço e endereço da PMI responsável pelo credenciamento das assistentes maternais.",
+    "A confirmar com a CSSM: condições de atividade dos pais exigidas para o CMG e valor para a sua situação."
+  ],
+  "motsCles": ["creche", "assistente maternal", "babá", "CMG", "Pajemploi", "cuidado infantil", "CSSM"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Benefícios familiares (CMG)", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "Département de Mayotte, Contato", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39152 CMG emprego direto", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152", "verifieLe": "2026-10-29" }
+  ]
+}

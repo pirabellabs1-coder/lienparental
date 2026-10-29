@@ -1,0 +1,65 @@
+{
+  "slug": "college-lycee-bourses",
+  "territoire": "mayotte",
+  "categorie": "ecole",
+  "titre": "Demander la bourse de collège ou de lycée",
+  "resume": "L'étude automatique à l'inscription ou une demande avant le 15 octobre : les plafonds, les montants, l'avis d'impôt à fournir et les règles quand les parents sont séparés ou en résidence alternée.",
+  "aQuoiCaSert": "La bourse de collège et la bourse de lycée aident les familles aux revenus modestes à payer les frais de scolarité. Elles sont versées chaque trimestre. Pour l'année 2026-2027, c'est le revenu fiscal de référence de l'avis d'impôt 2026 sur les revenus de 2025 qui compte. La demande se fait le plus souvent en donnant l'accord pour l'étude automatique au moment de l'inscription.",
+  "quiEstConcerne": [
+    "Les familles d'un collégien ou d'un lycéen scolarisé dans un établissement public, privé sous contrat ou au Cned dans une classe complète.",
+    "Les parents d'un élève de CM2 qui entre en 6e, ou de 3e qui entre au lycée.",
+    "Les parents séparés : un seul parent peut faire la demande."
+  ],
+  "aSavoir": [
+    "Bourse de collège 2026-2027 : 40 €, 112 € ou 175 € par trimestre selon les revenus. Plafonds de revenus 2025 : 18 488 € pour 1 enfant à charge, 22 754 € pour 2, 27 020 € pour 3, 31 286 € pour 4, 35 553 € pour 5.",
+    "Bourse de lycée 2026-2027 : 6 échelons, de 168 € à 357 € par trimestre. Le simulateur officiel donne votre échelon.",
+    "Couple marié ou pacsé : un avis d'impôt commun. Couple en union libre : l'avis d'impôt de chacun. Parent isolé vivant seul : uniquement votre avis d'impôt.",
+    "Résidence alternée (bourse de collège) : les parents choisissent lequel des deux fait la demande. Si les deux déposent un dossier, les deux demandes sont rejetées.",
+    "L'accord pour l'étude automatique, donné à l'inscription dans le public, vaut demande pour toute la scolarité au collège et au lycée. Sans cet accord, il faut redemander chaque année.",
+    "Versement en 3 fois. Pour un demi-pensionnaire ou un interne, les frais de cantine ou d'internat sont déduits d'abord."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Avis d'impôt 2026 sur les revenus de 2025", "detail": "Copie de chaque page. Les deux avis en union libre. Pas d'avis ? Faites votre déclaration ou adressez-vous au fonds social de l'établissement.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB au nom du parent qui demande", "detail": "Exigé dans le privé ou sans étude automatique.", "coffre": "finances" },
+    { "id": "formulaire-bourse", "libelle": "Formulaire de demande de bourse papier, si vous ne passez pas par EduConnect", "detail": "À retirer au secrétariat.", "coffre": "scolarite" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant la résidence de l'enfant, si vous êtes séparés", "detail": "Copie.", "coffre": "jaf" },
+    { "id": "attestation-cssm", "libelle": "Attestation de la CSSM mentionnant les enfants à charge", "detail": "Peut être demandée pour justifier le nombre d'enfants.", "coffre": "finances" },
+    { "id": "notification", "libelle": "Notification d'attribution ou de refus de la bourse", "detail": "À conserver en cas de recours.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Estimez vos droits avec le simulateur", "detail": "Accessible depuis les fiches service-public.gouv.fr, avec votre avis d'impôt 2026." },
+    { "titre": "À l'inscription, donnez l'accord pour l'étude automatique", "detail": "En ligne avec EduConnect ou sur le dossier papier, dans le public." },
+    { "titre": "Sinon, déposez une demande entre le 1er septembre et le 15 octobre", "detail": "En ligne sur Scolarité services avec EduConnect, ou sur formulaire papier au secrétariat." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Avis d'impôt 2026 complet, RIB, formulaire signé, jugement de résidence si vous êtes séparés. En résidence alternée, mettez-vous d'accord sur celui qui dépose." },
+    { "titre": "Conservez la notification", "detail": "En cas de refus au collège, recours possible dans les 2 mois. Au lycée, 15 jours francs après la notification." }
+  ],
+  "ou": [
+    { "nom": "Secrétariat du collège ou du lycée", "detail": "Dossier de bourse papier et fonds social." },
+    { "nom": "Scolarité services (EduConnect)", "detail": "Demande de bourse en ligne.", "url": "https://educonnect.education.gouv.fr" },
+    { "nom": "Rectorat de Mayotte", "detail": "Décision d'attribution et recours.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "telephone": "02 69 61 10 24" }
+  ],
+  "liens": [
+    { "titre": "Bourse de collège (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984" },
+    { "titre": "Bourse de lycée (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Demande de bourse : date limite le 15 octobre", "evenement": "ecole" },
+    { "type": "rappel", "titre": "Donner l'accord pour l'étude automatique de la bourse à l'inscription", "evenement": "ecole" },
+    { "type": "coffre", "titre": "Avis d'impôt utilisé pour la bourse", "categorie": "finances" },
+    { "type": "coffre", "titre": "Notification de bourse", "categorie": "scolarite" }
+  ],
+  "datesLimites": [
+    { "libelle": "Bourse sans étude automatique : du 1er septembre au 15 octobre 2026" }
+  ],
+  "aConfirmer": [
+    "Les fiches nationales ne mentionnent pas Mayotte : application des mêmes montants, plafonds et dates à confirmer auprès de l'établissement ou du rectorat de Mayotte.",
+    "À confirmer localement : règle de la résidence alternée pour la bourse de lycée, la fiche officielle ne la détaillant que pour le collège."
+  ],
+  "motsCles": ["bourse", "collège", "lycée", "6e", "EduConnect", "avis d'impôt", "résidence alternée"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F984 Bourse de collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F616 Bourse de lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public, Rectorat de Mayotte", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "verifieLe": "2026-10-29" }
+  ]
+}

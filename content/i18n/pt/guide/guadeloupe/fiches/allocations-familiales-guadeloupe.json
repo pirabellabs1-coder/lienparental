@@ -1,0 +1,167 @@
+{
+  "slug": "allocations-familiales-guadeloupe",
+  "territoire": "guadeloupe",
+  "categorie": "aides",
+  "titre": "Auxílios familiares em Guadalupe (desde o 1º filho)",
+  "resume": "Em Guadalupe, os auxílios familiares são pagos a partir de um só filho a cargo. Quem tem direito, como pedir e como são divididos em residência alternada.",
+  "aQuoiCaSert": "Os auxílios familiares (allocations familiales) ajudam as famílias a arcar com as despesas do dia a dia dos filhos. Na França continental, só são pagos a partir de 2 filhos. Em Guadalupe, como nos outros departamentos ultramarinos e em Saint-Martin e Saint-Barthélemy, aplicam-se regras específicas: um auxílio é pago desde o primeiro filho a cargo, com acréscimos ligados à idade da criança.",
+  "quiEstConcerne": [
+    "As famílias que moram em Guadalupe com pelo menos um filho a cargo de menos de 20 anos.",
+    "Os pais separados cujo filho vive em residência alternada.",
+    "Os pais que ainda não são beneficiários da Caf (Caisse d'allocations familiales, órgão de benefícios familiares)."
+  ],
+  "aSavoir": [
+    "Com um só filho a cargo, um auxílio familiar é pago em Guadalupe, com acréscimos ligados à idade da criança: a partir dos 11 anos, depois reajustados a partir dos 16 anos (Cnaf, caixa nacional de auxílios familiares, carta de rede LR-2026-051 de 26 de fevereiro de 2026). A mesma regra vale em Saint-Martin e Saint-Barthélemy.",
+    "A partir de 2 filhos, as regras são as mesmas da França metropolitana. Desde 1º de março de 2026, o acréscimo por idade é pago aos 18 anos em vez de 14 para os filhos nascidos a partir de 1º de março de 2012, nas famílias com pelo menos 2 filhos (Cnaf, LR-2026-051).",
+    "Para 2 filhos, o valor básico vai de 38,07 € a 152,25 € por mês, conforme a renda da família (service-public.gouv.fr, verificado em 1º de junho de 2026).",
+    "O complément familial (complemento familiar) tem condições e valor diferentes nos departamentos ultramarinos, entre eles Guadalupe (service-public.gouv.fr).",
+    "Residência alternada: os pais podem escolher dividir os auxílios familiares, cada um recebendo a metade, com o formulário cerfa n° 14000. Essa escolha só pode ser alterada após um ano, salvo mudança de residência da criança. Em caso de desacordo, cada genitor recebe automaticamente uma parte.",
+    "Só os auxílios familiares se dividem. Paje (prestation d'accueil du jeune enfant, benefício da primeira infância), complément familial, auxílios-moradia, auxílio de volta às aulas, auxílio de apoio familiar ou AEEH (auxílio de educação da criança com deficiência) são pagos integralmente ao genitor designado."
+  ],
+  "documents": [
+    {
+      "id": "identite-parents",
+      "libelle": "Documento de identidade ou autorização de residência (titre de séjour) de cada genitor",
+      "detail": "Cópia válida, pedida no primeiro pedido à Caf.",
+      "coffre": "finances"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Livro de família (livret de famille) ou certidão de nascimento de cada filho",
+      "detail": "Cópia. Certidão gratuita em service-public.gouv.fr ou na prefeitura (mairie) do local de nascimento.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (comprovante de dados bancários) do genitor beneficiário",
+      "detail": "Em seu nome.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Aviso de imposto do ano anterior",
+      "detail": "Cópia, disponível no seu espaço em impots.gouv.fr. A renda é usada no cálculo.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço",
+      "detail": "Cópia recente (conta, recibo de aluguel ou declaração de hospedagem).",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Sentença ou acordo que fixa a residência alternada",
+      "detail": "Cópia, a anexar ao formulário de divisão se a residência alternada foi fixada pelo juiz ou por acordo.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Formulário cerfa n° 14000 de declaração em caso de residência alternada",
+      "detail": "Assinado pelos dois pais se houver acordo sobre a divisão. Guarde uma cópia.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Torne-se beneficiário, se ainda não for",
+      "detail": "Faça um pedido de benefícios em caf.fr. Se já for beneficiário, basta declarar o nascimento ou a chegada da criança."
+    },
+    {
+      "titre": "Confira antes de enviar seu processo",
+      "detail": "Filhos bem declarados, renda atualizada, RIB, endereço correto, situação familiar (em casal, separado, pai ou mãe solo). Em caso de separação, declare a data real."
+    },
+    {
+      "titre": "Residência alternada: escolha a divisão ou um só beneficiário",
+      "detail": "Preencham juntos o formulário cerfa n° 14000 e enviem à Caf com a decisão do juiz ou o acordo, se houver."
+    },
+    {
+      "titre": "Confira seus direitos",
+      "detail": "Consulte o detalhe dos pagamentos no seu espaço « Mon Compte » e use o simulador da Caf para verificar o valor."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Guadeloupe",
+      "detail": "Procedimentos on-line na área « Mon Compte ». Postos de atendimento listados na página da Caf.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Auxílios familiares (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213"
+    },
+    {
+      "titre": "Residência alternada e benefícios familiares (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Complément familial, complemento familiar (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214"
+    },
+    {
+      "titre": "Caf de la Guadeloupe",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Formulário de divisão dos auxílios familiares (cerfa n° 14000)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notificação de direitos da Caf",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Informar à Caf qualquer mudança de situação familiar",
+      "evenement": "autre"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente com a Caf de la Guadeloupe: o valor mensal 2026 para um só filho e o dos acréscimos aos 11 e 16 anos não constam das páginas nacionais consultadas. Use o simulador da Caf.",
+    "A confirmar localmente com a Caf de la Guadeloupe: as regras de divisão em residência alternada quando a família tem um só filho a cargo.",
+    "A confirmar localmente: as condições do complément familial em Guadalupe (idade e número de filhos, tetos, valor).",
+    "A confirmar com a Caf: a situação dos servidores públicos lotados em Guadalupe que têm um só filho, para os quais podem valer regras específicas.",
+    "A confirmar localmente: endereços, horários e condições de agendamento dos postos de atendimento da Caf de la Guadeloupe (página do caf.fr indisponível na verificação de 29 de outubro de 2026)."
+  ],
+  "motsCles": [
+    "auxílios familiares",
+    "um filho",
+    "DOM",
+    "Caf",
+    "residência alternada",
+    "divisão"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Cnaf, carta de rede LR-2026-051 de 26 de fevereiro de 2026 (acréscimo dos auxílios familiares, disposições DOM)",
+      "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13213 Auxílios familiares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213",
+      "verifieLe": "2026-06-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13214 Complément familial (complemento familiar)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214",
+      "verifieLe": "2026-04-01"
+    },
+    {
+      "titre": "Caf.fr, página da Caf de la Guadeloupe",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ]
+}

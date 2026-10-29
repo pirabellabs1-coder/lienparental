@@ -14,7 +14,7 @@
     "Full copy and extract with parentage: reserved for the person concerned (if an adult) or their legal representative, their spouse or PACS partner, their ancestors and descendants, and certain professionals such as a lawyer. Anyone can request the extract without parentage.",
     "The request is free. Service-public.gouv.fr warns against websites that charge for this procedure: never pay for a birth certificate.",
     "In person, at the town hall (mairie) of the place of birth, the certificate is handed over immediately on presentation of ID. By post or online, allow a few days depending on the town hall and La Poste.",
-    "French child or parent born abroad: the certificate is issued by the Service central d'état civil (Scec, the central civil registry office) in Nantes, online or by post only (no public reception). Stated time: about 30 days.",
+    "French child or parent born abroad: the certificate is issued by the Service central d'état civil (Scec, the central civil registry office) in Nantes, online or by post only (no public reception). Stated time: about 30 days by post, about 20 days online.",
     "ID card or passport for a minor: if the town of birth has digitized its civil records, you do not need to provide the certificate. Otherwise, a certificate less than 3 months old is required. If the child already has a passport, the certificate may not be requested: check your situation on the official page.",
     "Separated parents: each parent, as an ancestor, can request a full copy of their child's certificate on their own, without the other parent's agreement."
   ],
@@ -55,10 +55,10 @@
     "To be confirmed locally: opening hours and whether an appointment is needed at the civil registry office of the town hall of birth."
   ],
   "motsCles": ["birth certificate", "full copy", "extract", "parentage", "civil registry", "town hall", "Scec", "Nantes"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1427 Birth certificate: requesting a full copy or an extract", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, R1406 Online birth certificate request (birth in France)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, F1342 ID card for a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-04-27" }
+    { "titre": "Service-public.gouv.fr, F1427 Birth certificate: requesting a full copy or an extract", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1406 Online birth certificate request (birth in France)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1342 ID card for a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-10-29" }
   ]
 }

@@ -1,0 +1,74 @@
+{
+  "slug": "aide-juridictionnelle",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Pedir assistência jurídica gratuita (aide juridictionnelle)",
+  "resume": "Fazer o Estado pagar todo ou parte dos honorários de advogado e das custas, por exemplo perante o juiz de família: limites de 2026, formulário, documentos exatos e entrega no tribunal judiciário de Mamoudzou.",
+  "aQuoiCaSert": "A assistência jurídica gratuita (aide juridictionnelle, AJ) cobre, total ou parcialmente, os honorários de advogado e as custas judiciais se a sua renda for modesta. Ela é útil num processo perante o juiz de família (juge aux affaires familiales, JAF): residência da criança, pensão alimentícia, autoridade parental. Também pode cobrir as despesas de um oficial de justiça (commissaire de justice) para fazer cumprir uma decisão. Você continua livre para escolher seu advogado.",
+  "quiEstConcerne": [
+    "Os pais cuja renda fiscal de referência (revenu fiscal de référence) e cujo patrimônio ficam abaixo dos limites, que movem ou respondem a um processo.",
+    "Os filhos menores ouvidos pelo juiz num processo que os envolve: a assistência é concedida sem análise de renda.",
+    "As vítimas de violência conjugal, que podem obter uma assistência provisória."
+  ],
+  "aSavoir": [
+    "Limites de 2026 para a assistência total (renda fiscal de referência): 12.957 € para 1 pessoa, 15.289 € para 2, 17.621 € para 3, 19.095 € para 4, 20.568 € para 5, 22.041 € para 6, 23.514 € para 7.",
+    "Acima disso, é possível uma assistência parcial de 55% ou 25%. Para uma pessoa sozinha: até 15.316 € de renda fiscal de referência para 55%, até 19.433 € para 25%.",
+    "O patrimônio também conta (exceto a residência principal). Para 1 pessoa: no máximo 12.957 € de bens móveis e 38.866 € de imóveis.",
+    "Em caso de conflito com o outro genitor que faz parte do mesmo domicílio fiscal, a renda de cada um é analisada individualmente.",
+    "Verifique primeiro seus seguros (residencial, cartão bancário, proteção jurídica): se uma proteção jurídica já cobre as despesas, o pedido pode ser recusado. É preciso apresentar uma declaração de não cobertura.",
+    "As despesas feitas antes da decisão do escritório de assistência jurídica gratuita (bureau d'aide juridictionnelle) não são cobertas: faça o pedido o quanto antes.",
+    "Recurso contra uma recusa: 15 dias após a notificação. Depois de concedida a AJ, a ação judicial deve ser iniciada dentro de um ano."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "Formulário de pedido de assistência jurídica gratuita (cerfa n° 16146)", "detail": "Preenchido on-line no service-public.gouv.fr, impresso, datado e assinado.", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Cópia frente e verso do seu documento de identidade", "detail": "Carteira de identidade ou passaporte válido. Estrangeiro: título de residência ou documento equivalente.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Comprovante de endereço com menos de 3 meses (cópia)", "detail": "Conta, recibo de aluguel. Se você mora na casa de alguém: também uma declaração de hospedagem (attestation d'hébergement).", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Cópia do livro de família (livret de famille)", "detail": "Ou documento equivalente. Livro perdido: segundo livro gratuito na prefeitura (mairie).", "coffre": "jaf" },
+    { "id": "avis-imposition", "libelle": "Último aviso de imposto (avis d'imposition) (cópia)", "detail": "Baixe em impots.gouv.fr. Na falta dele, comprovantes de renda dos últimos 6 meses.", "coffre": "finances" },
+    { "id": "attestation-assurance", "libelle": "Declaração de não cobertura da sua seguradora", "detail": "Peça à seguradora da casa, do carro ou do cartão bancário.", "coffre": "jaf" },
+    { "id": "pieces-affaire", "libelle": "Documentos do processo", "detail": "Intimação para a audiência, sentença anterior, carta de aceite do advogado escolhido.", "coffre": "jaf" },
+    { "id": "decision-baj", "libelle": "Decisão do escritório de assistência jurídica gratuita", "detail": "Guarde e envie ao seu advogado.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Verifique seu seguro de proteção jurídica", "detail": "Se ele cobrir, a AJ não é necessária; caso contrário, peça uma declaração de não cobertura." },
+    { "titre": "Estime seu direito", "detail": "Compare sua renda fiscal de referência com os limites, ou use o simulador oficial no service-public.gouv.fr." },
+    { "titre": "Escolha um advogado, se quiser", "detail": "Anexe a carta de aceite dele. Se ninguém aceitar, o presidente da Ordem dos Advogados (bâtonnier) pode designar um." },
+    { "titre": "Preencha o pedido", "detail": "Formulário cerfa n° 16146, ou pedido on-line em aidejuridictionnelle.justice.fr com FranceConnect, se a sua situação permitir." },
+    { "titre": "Confira antes de entregar ou enviar", "detail": "Formulário assinado, documento de identidade, comprovante de endereço com menos de 3 meses, livro de família, aviso de imposto, declaração da seguradora, intimação ou sentença. Faça uma cópia completa do dossiê." },
+    { "titre": "Entregue o dossiê no escritório de assistência jurídica gratuita do tribunal judiciário (tribunal judiciaire) de Mamoudzou", "detail": "Ou envie pelo correio. Um point-justice (posto gratuito de informação jurídica) pode ajudar você a preenchê-lo." },
+    { "titre": "Acompanhe a decisão", "detail": "Envie-a ao seu advogado. Em caso de recusa, você tem 15 dias para contestar." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Mamoudzou (escritório de assistência jurídica gratuita)", "detail": "E-mail de atendimento: accueil.tj-mamoudzou@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" },
+    { "nom": "Points-justice de Mayotte (CDAD, Conseil départemental de l'accès au droit, conselho local de acesso ao direito)", "detail": "Ajuda gratuita para montar o dossiê, em vários municípios (Mamoudzou, Koungou, Labattoir, Pamandzi, Bandrélé, Bouéni, Combani...).", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271" },
+    { "nom": "Pedido on-line de assistência jurídica gratuita", "detail": "Serviço gratuito com FranceConnect.", "url": "https://www.aidejuridictionnelle.justice.fr/authentification" }
+  ],
+  "liens": [
+    { "titre": "Assistência jurídica gratuita: condições e procedimentos (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074" },
+    { "titre": "Formulário de pedido de assistência jurídica gratuita (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Pedido de assistência jurídica gratuita (cópia do dossiê)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Decisão do escritório de assistência jurídica gratuita", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Assistência jurídica gratuita: recurso em até 15 dias", "evenement": "autre" },
+    { "type": "rappel", "titre": "Iniciar a ação dentro de um ano após a concessão da assistência", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Antes da audiência", "detail": "As despesas feitas antes da decisão do escritório não são cobertas." },
+    { "libelle": "15 dias", "detail": "Prazo de recurso contra uma decisão do escritório de assistência jurídica gratuita." },
+    { "libelle": "1 ano", "detail": "Prazo para entrar na justiça após a concessão da assistência." }
+  ],
+  "aConfirmer": [
+    "A página oficial não menciona Mayotte: a aplicação dos limites nacionais de 2026 deve ser confirmada com o escritório de assistência jurídica gratuita de Mamoudzou.",
+    "A confirmar localmente: endereço postal, horários e forma de entrega do escritório de assistência jurídica gratuita (o site justice.fr estava indisponível na verificação).",
+    "A confirmar localmente: dias e horários dos plantões dos points-justice, não indicados no diretório."
+  ],
+  "motsCles": ["assistência jurídica gratuita", "AJ", "advogado", "JAF", "custas judiciais", "cerfa 16146", "Mamoudzou"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F18074 Assistência jurídica gratuita (aide juridictionnelle)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1444 Formulário de pedido de assistência jurídica gratuita", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-10-29" },
+    { "titre": "Diretório service-public, Tribunal judiciaire de Mamoudzou", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "verifieLe": "2026-10-29" },
+    { "titre": "Diretório service-public, CDAD de Mayotte", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271", "verifieLe": "2026-10-29" }
+  ]
+}

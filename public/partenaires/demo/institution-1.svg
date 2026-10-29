@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-label="Agence Territoriale des Familles (logo d’exemple)">
+  <g transform="translate(6 8)"><path d="M8 40h40M12 40V24M20 40V24M28 40V24M36 40V24M44 40V24M6 24h44L28 10z" fill="none" stroke="#4caf50" stroke-width="3" stroke-linejoin="round"/></g>
+  <text x="70" y="32" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="0.5" fill="#0b2d5b">AGENCE TERRITORIALE</text>
+  <text x="70" y="54" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#2e7d32">des Familles</text>
+</svg>

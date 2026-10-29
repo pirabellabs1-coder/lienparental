@@ -1,0 +1,70 @@
+{
+  "slug": "demande-logement-social",
+  "territoire": "reunion",
+  "categorie": "logement",
+  "titre": "Pedir moradia social",
+  "resume": "Fazer um pedido de moradia social na Reunião, obter seu número único, reunir os documentos certos (inclusive os ligados a uma separação) e renovar o pedido a tempo.",
+  "aQuoiCaSert": "Uma moradia social tem aluguel controlado e é atribuída conforme a renda. O pedido, on-line ou num posto de atendimento, dá a você um número único (numéro unique), que marca o início da antiguidade do seu pedido. Após uma separação, é possível fazer contar apenas a sua própria renda, desde que você apresente os comprovantes certos.",
+  "quiEstConcerne": [
+    "As famílias cuja renda não ultrapassa os tetos fixados para os territórios ultramarinos.",
+    "Os pais que se separam e precisam de uma nova moradia com os filhos.",
+    "Os estrangeiros com título de residência ou protocolo (récépissé) válido."
+  ],
+  "aSavoir": [
+    "Tetos de renda nos territórios ultramarinos, entre eles a Reunião, para um pedido feito em 2026 (renda de 2024, caso geral): 27.382 € para 1 pessoa, 36.567 € para 2, 43.973 € para 3, 53.088 € para 4. Eles se aplicam ao total da renda de todas as pessoas a alojar.",
+    "Pai ou mãe solo: com 1 dependente, o teto considerado é o de 3 pessoas (43.973 €); com 2 dependentes, o de 4 pessoas (53.088 €).",
+    "Separação: para que só a sua renda seja considerada, anexe um comprovante, por exemplo o ato que aciona o juiz de família (juge aux affaires familiales, JAF), a sentença de divórcio ou a certidão de nascimento com a dissolução do PACS (união civil).",
+    "Todas as pessoas a alojar devem ser declaradas, inclusive os filhos em residência alternada.",
+    "Renovação: um pedido não atendido deve ser renovado todo ano. Segundo o service-public.gouv.fr, é preciso renová-lo nos 11 meses seguintes ao registro; sem renovação, ele é cancelado e você perde sua antiguidade.",
+    "Atualize o pedido assim que sua situação mudar (separação, nascimento, novo endereço, queda de renda)."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Documento de identidade do requerente", "detail": "Cópia frente e verso da carteira de identidade ou do passaporte. Para quem não é da União Europeia: cópia do título de residência ou do protocolo válido.", "coffre": "courriers" },
+    { "id": "identite-cotitulaire", "libelle": "Documento de identidade ou título de residência de cada adulto a alojar", "detail": "Cópia válida.", "coffre": "courriers" },
+    { "id": "avis-imposition", "libelle": "Aviso de imposto 2025 sobre a renda de 2024 de cada pessoa a alojar", "detail": "Cópia. Pode ser baixado no seu espaço impots.gouv.fr.", "coffre": "finances" },
+    { "id": "justificatif-separation", "libelle": "Comprovante de separação", "detail": "Cópia do ato que aciona o juiz de família, da sentença de divórcio ou da certidão de nascimento com a dissolução do PACS.", "coffre": "jaf" },
+    { "id": "jugement-residence", "libelle": "Sentença ou acordo que fixa a residência dos filhos", "detail": "Cópia, para comprovar os filhos que morarão com você ou uma residência alternada.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Livro de família (livret de famille) ou certidões de nascimento dos filhos", "detail": "Cópia, para comprovar os dependentes.", "coffre": "courriers" },
+    { "id": "ressources", "libelle": "Comprovantes de renda recentes", "detail": "Últimos contracheques, declarações da Caf (Caisse d'allocations familiales, órgão de benefícios familiares) ou do France Travail.", "coffre": "finances" },
+    { "id": "situation-logement", "libelle": "Comprovante da sua situação de moradia atual", "detail": "Contrato de aluguel, recibo, declaração de hospedagem, ou aviso de saída do proprietário, se for o caso.", "coffre": "courriers" },
+    { "id": "attestation-enregistrement", "libelle": "Comprovante de registro com o número único", "detail": "Pode ser baixado no seu espaço pessoal. Guarde-o com cuidado.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Crie seu pedido no site nacional", "detail": "Em demande-logement-social.gouv.fr, ou com o formulário Cerfa n° 14069 entregue num posto de atendimento (prefeitura, órgão de habitação social)." },
+    { "titre": "Confira antes de enviar o pedido", "detail": "Documento de identidade ou título de residência válido de cada adulto, aviso de imposto 2025 de cada um, comprovante de separação e sentença sobre a residência dos filhos se você é separado, livro de família." },
+    { "titre": "Pegue o comprovante de registro", "detail": "Ele traz seu número único e a data do pedido, que conta para a antiguidade." },
+    { "titre": "Atualize o pedido quando sua situação mudar", "detail": "Declare a mudança e anexe o comprovante." },
+    { "titre": "Renove a tempo", "detail": "Antes do fim do prazo indicado no seu espaço ou na carta de lembrete. Sem renovação, o pedido é cancelado." }
+  ],
+  "ou": [
+    { "nom": "Portal nacional de pedidos de moradia social", "detail": "Envio, acompanhamento, atualização e renovação on-line.", "url": "https://www.demande-logement-social.gouv.fr" },
+    { "nom": "Postos de atendimento da Reunião (prefeituras, órgãos de habitação social)", "detail": "Para entregar um pedido em papel ou obter ajuda. Informe-se na sua prefeitura (mairie)." },
+    { "nom": "ADIL de La Réunion", "detail": "Orientação gratuita e neutra sobre moradia. Sede: 24 rue Henri Vavasseur, Saint-Denis.", "url": "https://www.anil.org/adil-974/", "telephone": "02 62 41 14 24" }
+  ],
+  "liens": [
+    { "titre": "Pedido de moradia social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007" },
+    { "titre": "Renovação do pedido de moradia social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010" },
+    { "titre": "Pedido de moradia social on-line", "url": "https://www.demande-logement-social.gouv.fr" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Comprovante de registro do pedido de moradia social", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Comprovante de separação para o pedido de moradia", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Renovar o pedido de moradia social (antes de 11 meses)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Renovação anual do pedido", "detail": "Nos 11 meses seguintes ao registro, segundo o service-public.gouv.fr; caso contrário, o pedido é cancelado." }
+  ],
+  "aConfirmer": [
+    "As duas páginas oficiais consultadas descrevem o calendário de renovação de forma diferente: siga a data indicada no seu espaço demande-logement-social.gouv.fr ou na carta de lembrete.",
+    "O número de ajuda por telefone 0 806 000 113 é indicado para a Île-de-France e o restante da França: o acesso a partir da Reunião ainda precisa ser confirmado.",
+    "A confirmar localmente: a lista dos postos de atendimento da Reunião e os prazos de espera, e os documentos adicionais pedidos pelos órgãos de habitação social no momento da atribuição."
+  ],
+  "motsCles": ["moradia social", "HLM", "número único", "renovação", "separação", "tetos de renda", "ADIL"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10007 Pedido de moradia social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F35010 Renovação de um pedido de moradia social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F869 Condições para obter uma moradia social (tetos nos territórios ultramarinos)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869", "verifieLe": "2026-10-29" },
+    { "titre": "ANIL, ADIL de La Réunion", "url": "https://www.anil.org/adil-974/", "verifieLe": "2026-10-29" }
+  ]
+}

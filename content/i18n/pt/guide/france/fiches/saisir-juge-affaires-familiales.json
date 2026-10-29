@@ -1,0 +1,259 @@
+{
+  "slug": "saisir-juge-affaires-familiales",
+  "territoire": "france",
+  "categorie": "separation",
+  "titre": "Recorrer ao juiz de família (JAF)",
+  "resume": "O formulário cerfa n° 11530 ou o pedido on-line, a lista de documentos (certidões de nascimento com menos de 3 meses), o tribunal competente, o selo fiscal de 50 € e os casos em que ele não é devido.",
+  "aQuoiCaSert": "O juiz de família (juge aux affaires familiales, JAF) decide os desacordos entre os pais sobre o exercício da autoridade parental, a residência da criança, o direito de visita e de hospedagem ou a pensão alimentícia. Ele também pode modificar uma decisão existente quando a situação muda, ou homologar um acordo feito entre os pais para lhe dar a força de uma sentença.",
+  "quiEstConcerne": [
+    "Os pais de um filho menor, casados ou não, separados ou divorciados, que não conseguem chegar a um acordo.",
+    "O genitor que quer modificar uma decisão existente (mudança de endereço, mudança de renda, nova organização).",
+    "Os pais que estão de acordo e querem homologar o seu acordo parental (convention parentale).",
+    "O genitor que recebe a ASF (allocation de soutien familial, auxílio de apoio familiar) sem pensão fixada e deve recorrer ao juiz."
+  ],
+  "aSavoir": [
+    "Formulário: cerfa n° 11530 « Demande au juge aux affaires familiales », para imprimir e enviar. Também é possível um pedido totalmente on-line, com o FranceConnect (credenciais de impots.gouv, ameli, La Poste etc.).",
+    "Tribunal competente: o tribunal judiciaire (tribunal judiciário) do lugar onde a criança mora habitualmente, com o genitor com quem reside. Se os pais ainda moram juntos, o do lugar de residência da família.",
+    "Selo fiscal (timbre fiscal) de 50 €, somente eletrônico, comprado on-line com cartão bancário antes do pedido. Não é devido com a assistência jurídica gratuita (aide juridictionnelle), para a homologação de um acordo parental nem para uma medida protetiva. Válido por 12 meses, reembolsável on-line em até 18 meses se não for usado.",
+    "Pais de acordo: pedido conjunto de homologação (cerfa n° 16139), assinado pelos dois, no tribunal do lugar de residência de um ou de outro genitor. O juiz em geral homologa sem audiência.",
+    "Depois do envio, você é avisado da data da audiência e o outro genitor é convocado por carta registrada. A assistência jurídica gratuita pode cobrir os honorários do advogado conforme sua renda (veja a ficha « Pedir assistência jurídica gratuita (aide juridictionnelle) »).",
+    "O juiz pode confiar o exercício da autoridade parental a um só genitor. Também pode aplicar uma multa de até 10.000 € ao genitor que impede deliberadamente a autoridade parental do outro.",
+    "Violência: uma medida protetiva (ordonnance de protection) é pedida ao juiz de família, sem necessidade de queixa prévia; a audiência ocorre em até 6 dias após ser marcada. Urgência: 17 ou 112 (SMS para o 114). Escuta: 3919.",
+    "Este guia não substitui uma orientação jurídica: para a sua situação, procure um advogado ou um point-justice (posto gratuito de informação jurídica)."
+  ],
+  "documents": [
+    {
+      "id": "cerfa-11530",
+      "libelle": "Formulário cerfa n° 11530 preenchido, datado e assinado",
+      "detail": "Original para o tribunal, cópia para você.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "acte-naissance-parent",
+      "libelle": "Cópia integral (copie intégrale) da sua certidão de nascimento com menos de 3 meses",
+      "detail": "Não um extrato. Pedido gratuito on-line em service-public.gouv.fr à prefeitura (mairie) do lugar de nascimento (veja a ficha «Obter uma certidão de nascimento»).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "actes-naissance-enfants",
+      "libelle": "Cópia integral da certidão de nascimento de cada filho envolvido, com menos de 3 meses",
+      "detail": "Mesmo procedimento, na prefeitura do local de nascimento da criança. Conte com o prazo de envio pelo correio.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Livro de família (livret de famille) ou certidão de casamento com menos de 3 meses",
+      "coffre": "jaf"
+    },
+    {
+      "id": "identite",
+      "libelle": "Cópia do seu documento de identidade",
+      "detail": "Carteira de identidade, passaporte ou autorização de residência válidos, frente e verso.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "jugements",
+      "libelle": "Cópia das sentenças anteriores (divórcio, separação de corpos, autoridade parental, pensão)",
+      "detail": "Se não tiver mais, peça uma cópia ao cartório do tribunal (greffe) que a proferiu.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço recente",
+      "detail": "Conforme o caso: conta, recibo de aluguel ou declaração de hospedagem (attestation d'hébergement).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Comprovantes de renda e de despesas",
+      "detail": "Sobretudo se o pedido tratar da pensão: aviso de imposto, declaração de renda, 3 últimos contracheques, comprovantes de benefícios sociais, aluguel, empréstimos, despesas da criança.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "timbre",
+      "libelle": "Selo fiscal eletrônico de 50 € (PDF ou SMS com 16 dígitos)",
+      "detail": "Exceto com assistência jurídica gratuita ou homologação de acordo parental.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "aj",
+      "libelle": "Decisão de assistência jurídica gratuita ou recibo do pedido, se você a solicitou",
+      "coffre": "jaf"
+    },
+    {
+      "id": "pieces-situation",
+      "libelle": "Documentos úteis para o seu pedido",
+      "detail": "Por exemplo: atestado de matrícula escolar, mensagens escritas sobre a organização, declarações de testemunhas. Evite documentos sem relação com o pedido.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Tente primeiro uma solução amigável",
+      "detail": "Mediação familiar ou acordo escrito a homologar. Sem mediação em caso de violência."
+    },
+    {
+      "titre": "Peça as certidões de nascimento desde já",
+      "detail": "Devem ter menos de 3 meses na data do protocolo e chegam pelo correio: muitas vezes é o documento que atrasa o processo."
+    },
+    {
+      "titre": "Preencha o cerfa n° 11530 ou o pedido on-line",
+      "detail": "Explique claramente o que você pede (residência, direito de visita, valor da pensão) e por quê."
+    },
+    {
+      "titre": "Compre o selo de 50 € se não estiver isento",
+      "detail": "On-line, com cartão bancário, antes de enviar o pedido."
+    },
+    {
+      "titre": "Confira antes de enviar o processo",
+      "detail": "Cerfa assinado; cópias integrais das certidões de nascimento com menos de 3 meses (você e cada filho); livro de família ou certidão de casamento; documento de identidade; sentenças anteriores; comprovantes de renda se tratar de pensão; selo ou decisão de assistência jurídica gratuita. Faça uma cópia completa."
+    },
+    {
+      "titre": "Envie ou entregue o processo no cartório do tribunal judiciaire competente",
+      "detail": "Ou faça o pedido on-line. Guarde a cópia na seção Processo judicial do Cofre."
+    },
+    {
+      "titre": "Prepare a audiência",
+      "detail": "Inclua a data na agenda assim que receber o aviso, com um lembrete. Leve os originais dos seus documentos."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Tribunal judiciaire do lugar de residência da criança",
+      "detail": "Encontre o endereço e os horários no diretório da administração (busca « tribunal judiciaire » + seu município) ou no justice.fr.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    },
+    {
+      "nom": "Point-justice ou advogado",
+      "detail": "Informação jurídica gratuita no point-justice, ajuda para montar o processo, pedido de assistência jurídica gratuita."
+    },
+    {
+      "nom": "Violences Femmes Info (atendimento à mulher em situação de violência)",
+      "detail": "Escuta e orientação, gratuita e anônima, 24 horas por dia (não atende urgências). Em caso de perigo imediato, ligue para o 17 ou o 112.",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544",
+      "telephone": "3919"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Pedido ao juiz de família, cerfa 11530 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764"
+    },
+    {
+      "titre": "Pedido on-line ao JAF (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72663"
+    },
+    {
+      "titre": "Homologação de um acordo parental, Cerfa 16139 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771"
+    },
+    {
+      "titre": "Selo fiscal de 50 € (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227"
+    },
+    {
+      "titre": "Autoridade parental em caso de separação (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133"
+    },
+    {
+      "titre": "Violência doméstica e medida protetiva (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Selo fiscal para recorrer ao juiz de família",
+      "categorie": "frais-administratifs",
+      "montant": 50,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764"
+    },
+    {
+      "type": "coffre",
+      "titre": "Pedido ao juiz de família (cópia completa)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Certidões de nascimento com menos de 3 meses",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Comprovantes de renda e de despesas",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Convocação e decisão do juiz de família",
+      "categorie": "jaf"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Audiência com o juiz de família",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Verificar a data das certidões de nascimento (menos de 3 meses)",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Certidões de nascimento com menos de 3 meses no momento do protocolo"
+    },
+    {
+      "libelle": "Selo fiscal válido por 12 meses após a compra",
+      "detail": "Reembolso possível on-line em até 18 meses se não for usado."
+    }
+  ],
+  "aConfirmer": [
+    "O prazo para regularizar um pedido enviado sem selo fiscal não é indicado nas fichas oficiais: informe-se no cartório.",
+    "O prazo para recorrer ao juiz quando você recebe a ASF sem pensão fixada não foi verificado novamente: pergunte à sua Caf (Caisse d'allocations familiales, órgão de benefícios familiares).",
+    "A confirmar localmente: endereço, horários e prazos médios de audiência do tribunal judiciaire competente, no diretório oficial ou no cartório. O site justice.fr estava em manutenção durante a verificação."
+  ],
+  "motsCles": [
+    "JAF",
+    "juiz",
+    "tribunal",
+    "cuidados infantis",
+    "residência",
+    "direito de visita",
+    "cerfa 11530",
+    "homologação"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, R15764 Pedido ao juiz de família (cerfa 11530)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R72663 Pedido on-line ao juiz de família",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72663",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F33227 Selo fiscal",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R58771 Homologação de acordo parental (cerfa 16139)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F12544 Violência doméstica",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

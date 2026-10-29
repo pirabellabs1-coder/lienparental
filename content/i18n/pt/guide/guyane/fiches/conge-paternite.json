@@ -16,7 +16,7 @@
     "Os 21 dias restantes (28 para nascimentos múltiplos) podem ser tirados de uma vez ou em 2 períodos de pelo menos 5 dias, nos 6 meses seguintes ao nascimento.",
     "Avise o empregador pelo menos 1 mês antes da data prevista do parto e depois pelo menos 1 mês antes do início de cada período, informando datas e duração. Recomenda-se por escrito: carta registrada com aviso de recebimento ou entrega em mãos contra recibo.",
     "Diárias: é preciso, entre outras condições, estar inscrito há pelo menos 6 meses e ter trabalhado 150 horas nos 3 meses anteriores, ou ter contribuído sobre pelo menos 12.058,20 € de salário em 6 meses. Valor de 11,12 € a 104,02 € por dia (service-public.gouv.fr, verificado em 1º de junho de 2026).",
-    "Licença adicional de nascimento: desde 1º de julho de 2026, cada genitor pode tirar 1 a 2 meses de licença remunerada após a licença-maternidade ou paternidade. Para assalariados: 70% do salário líquido no 1º mês e 60% no 2º, até o teto da seguridade social. Avise o empregador pelo menos 1 mês antes (code.travail.gouv.fr)."
+    "Licença adicional de nascimento: desde 1º de julho de 2026, cada genitor pode tirar 1 ou 2 meses (em 2 períodos de um mês, se quiser) após a licença-maternidade ou paternidade. Para assalariados: 70% do salário líquido no 1º mês e 60% no 2º, até o teto mensal da seguridade social (4.005 € em 2026). Avise o empregador pelo menos 1 mês antes, ou 15 dias se essa licença vier logo após a licença-paternidade (service-public.gouv.fr)."
   ],
   "documents": [
     { "id": "acte-naissance", "libelle": "Cópia integral da certidão de nascimento da criança ou livro de família (livret de famille) atualizado", "detail": "A enviar à Assurance Maladie. Certidão gratuita em service-public.gouv.fr ou na prefeitura (mairie) do lugar de nascimento.", "coffre": "finances" },
@@ -31,7 +31,7 @@
     { "titre": "Confira antes de enviar o processo", "detail": "Certidão de nascimento ou livro de família atualizado, comprovante do vínculo com a mãe se você não for o pai, atestado de salário enviado pelo empregador, RIB e endereço atualizados no ameli." },
     { "titre": "Envie os comprovantes à Assurance Maladie", "detail": "Na sua conta ameli ou pelo correio à CGSS de la Guyane." },
     { "titre": "Tire o período obrigatório de 4 dias", "detail": "Logo após a licença de nascimento de 3 dias paga pelo empregador." },
-    { "titre": "Planeje o resto da licença em até 6 meses", "detail": "E, se quiser, a licença adicional de nascimento em até 9 meses após o nascimento." }
+    { "titre": "Planeje o resto da licença em até 6 meses", "detail": "E, se quiser, a licença adicional de nascimento: em até 9 meses após o nascimento para criança nascida a partir de 1º de julho de 2026, ou entre 1º de julho de 2026 e 31 de março de 2027 para criança nascida entre 1º de janeiro e 30 de junho de 2026." }
   ],
   "ou": [
     { "nom": "O seu empregador", "detail": "Para o aviso prévio e o atestado de salário." },
@@ -39,7 +39,8 @@
   ],
   "liens": [
     { "titre": "Licença-paternidade e de acolhimento da criança (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156" },
-    { "titre": "Licença adicional de nascimento (code.travail.gouv.fr)", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026" }
+    { "titre": "Licença adicional de nascimento (code.travail.gouv.fr)", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026" },
+    { "titre": "Licença adicional de nascimento (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685" }
   ],
   "actions": [
     { "type": "rappel", "titre": "Avisar o empregador da licença-paternidade (1 mês antes do parto previsto)", "evenement": "autre" },
@@ -50,15 +51,16 @@
   "datesLimites": [
     { "libelle": "Avisar o empregador pelo menos 1 mês antes do nascimento previsto", "detail": "Depois, pelo menos 1 mês antes de cada período." },
     { "libelle": "Licença a tirar em até 6 meses após o nascimento", "detail": "Adiamento possível em certos casos previstos em lei, por exemplo em caso de falecimento da mãe." },
-    { "libelle": "Licença adicional de nascimento em até 9 meses após o nascimento", "detail": "Para criança nascida a partir de 1º de junho de 2026." }
+    { "libelle": "Licença adicional de nascimento: prazo conforme a data de nascimento", "detail": "Criança nascida a partir de 1º de julho de 2026: em até 9 meses após o nascimento. Criança nascida entre 1º de janeiro e 30 de junho de 2026: entre 1º de julho de 2026 e 31 de março de 2027." }
   ],
   "aConfirmer": [
     "A confirmar com a CGSS de la Guyane: as formas práticas de envio dos comprovantes e o prazo de pagamento das diárias."
   ],
   "motsCles": ["licença-paternidade", "nascimento", "diárias", "empregador", "licença adicional de nascimento", "CGSS"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F3156 Licença-paternidade e de acolhimento da criança", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156", "verifieLe": "2026-06-01" },
-    { "titre": "Code du travail numérique, Licença adicional de nascimento: o que muda em 1º de julho de 2026", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026", "verifieLe": "2026-04-01" }
+    { "titre": "Service-public.gouv.fr, F3156 Licença-paternidade e de acolhimento da criança", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156", "verifieLe": "2026-10-29" },
+    { "titre": "Code du travail numérique, Licença adicional de nascimento: o que muda em 1º de julho de 2026", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F39685 Licença adicional de nascimento de assalariado do setor privado", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685", "verifieLe": "2026-10-29" }
   ]
 }

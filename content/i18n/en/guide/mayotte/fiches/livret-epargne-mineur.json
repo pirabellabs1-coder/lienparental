@@ -1,0 +1,62 @@
+{
+  "slug": "livret-epargne-mineur",
+  "territoire": "mayotte",
+  "categorie": "argent",
+  "titre": "Opening a Livret A or Livret jeune savings account for my child",
+  "resume": "Which savings account to choose, what documents to bring to the bank, the ceilings, who can withdraw depending on age, and what changes if you are separated.",
+  "aQuoiCaSert": "A savings account in the child's name lets you put money aside for them, with no fees and tax-free interest. The Livret A (a regulated, tax-free savings account) can be opened from birth, the Livret jeune (a youth savings account) from age 12. The money belongs to the child: parents manage it on the child's behalf and may only use it for expenses directly related to the child.",
+  "quiEstConcerne": [
+    "Parents (or a guardian) who want to save for their child, from birth for the Livret A.",
+    "Young people aged 12 to 25, for the Livret jeune.",
+    "Grandparents or relatives who want to pay money into the account."
+  ],
+  "aSavoir": [
+    "Livret A: only one per person, ceiling of €22,950 (excluding interest). Interest rate of 1.7% from August 1, 2026 to January 31, 2027.",
+    "Livret jeune: only one per person, from 12 to 25, deposit ceiling of €1,600, rate set by the bank but never lower than the Livret A rate. For a minor, the legal representative's signature is required.",
+    "Withdrawals before 16: the child cannot withdraw without the legal representative's consent.",
+    "Withdrawals from 16 to 18: the young person withdraws alone, unless a legal representative objects by registered letter sent to the bank.",
+    "Parents who share parental authority (even if separated): a transaction that changes a minor's account, such as an outgoing transfer, requires both parents' consent (Cour de cassation, France's highest court, June 12, 2025)."
+  ],
+  "documents": [
+    { "id": "identite-enfant", "libelle": "The child's ID or, failing that, the family record book (livret de famille)", "detail": "Original.", "coffre": "finances" },
+    { "id": "livret-famille", "libelle": "Family record book (livret de famille)", "detail": "It proves parentage. Failing that, the child's birth certificate showing parentage.", "coffre": "finances" },
+    { "id": "identite-parent", "libelle": "Valid ID of the parent signing", "detail": "If the bank requires both parents' signatures, also bring the other parent's ID.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Recent proof of address", "coffre": "finances" },
+    { "id": "jugement-autorite", "libelle": "Judgment setting parental authority, if you hold it alone", "detail": "Copy.", "coffre": "jaf" },
+    { "id": "accord-autre-parent", "libelle": "Written consent of the other parent, if the bank asks for it", "detail": "Dated and signed letter, with a copy of their ID.", "coffre": "finances" },
+    { "id": "contrat", "libelle": "Account opening contract and annual statements", "detail": "Keep them.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Choose the account", "detail": "Livret A from birth, Livret jeune from age 12. Check that no Livret A has already been opened in the child's name." },
+    { "titre": "Talk it over with the other parent", "detail": "Agree on the account, the bank and who will make deposits." },
+    { "titre": "Make an appointment at your chosen bank", "detail": "Ask for the exact list of documents." },
+    { "titre": "Check before you go", "detail": "Child's ID or family record book, your ID, proof of address, judgment if you hold parental authority alone, the other parent's consent if the bank requires it, money for the first deposit." },
+    { "titre": "Sign the account opening at the bank" },
+    { "titre": "File the contract and follow the statements", "detail": "Note the milestones: age 12, age 16 (withdrawals alone), age 18." }
+  ],
+  "ou": [
+    { "nom": "The bank of your choice or La Banque Postale", "detail": "Compare the Livret jeune terms, as its rate varies from bank to bank." }
+  ],
+  "liens": [
+    { "titre": "Livret A (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" },
+    { "titre": "Livret jeune (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904" },
+    { "titre": "A minor's account: consent of both parents (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Bank appointment: child's savings account", "evenement": "rdv" },
+    { "type": "coffre", "titre": "Child's savings account contract", "categorie": "finances" },
+    { "type": "coffre", "titre": "Annual statement of the child's savings account", "categorie": "finances" },
+    { "type": "rappel", "titre": "Child turns 16: can withdraw from the account alone", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "The national pages do not mention Mayotte: check with your bank whether the Livret A and the Livret jeune are available at its branches in Mayotte.",
+    "The exact documents and whether both parents must sign are set by each bank: ask for the list before your appointment."
+  ],
+  "motsCles": ["Livret A", "Livret jeune", "savings", "bank", "minor", "child account"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2365 Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2904 Livret jeune", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, news item A18386 (Cour de cassation, June 12, 2025)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" }
+  ]
+}

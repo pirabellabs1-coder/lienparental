@@ -1,0 +1,177 @@
+{
+  "slug": "compte-bancaire-droit-au-compte",
+  "territoire": "reunion",
+  "categorie": "argent",
+  "titre": "Ter a sua própria conta bancária após a separação",
+  "resume": "Abrir uma conta no seu nome para receber pensão e auxílios e, se um banco recusar, usar o direito à conta, administrado na Reunião pelo IEDOM: documentos e prazos.",
+  "aQuoiCaSert": "Após uma separação, uma conta pessoal permite receber a pensão alimentícia e os benefícios da Caf (Caisse d'allocations familiales, órgão de benefícios familiares), e pagar as despesas da criança mantendo registros claros. Se um banco se recusar a abrir uma conta para você, o procedimento gratuito do direito à conta (droit au compte) permite que um banco seja designado: ele é obrigado a abrir uma conta com serviços bancários básicos gratuitos. Na Reunião, esse procedimento é feito pelo IEDOM (Institut d'émission des départements d'outre-mer, instituto emissor dos departamentos ultramarinos), que faz aqui o papel do Banque de France.",
+  "quiEstConcerne": [
+    "O genitor que não tem conta em seu nome, ou só uma conta conjunta com o ex-cônjuge.",
+    "Qualquer pessoa que reside na França, não tem conta bancária e teve a abertura de conta recusada.",
+    "Quem tem apenas uma conta conjunta também pode pedir o direito à conta para ter uma conta individual."
+  ],
+  "aSavoir": [
+    "O banco tem 15 dias para responder ao seu pedido de abertura. Sem resposta nesse prazo, é uma recusa.",
+    "O banco é designado no dia útil seguinte ao recebimento do seu processo completo. A designação vale por 6 meses: entre em contato com o banco designado dentro desse prazo.",
+    "O banco designado envia a lista de documentos em 3 dias úteis e deve abrir a conta no máximo 3 dias úteis após receber todos eles.",
+    "Serviços bancários básicos gratuitos, incluindo cartão de pagamento, transferências e débitos automáticos. Tarifas por incidente limitadas a 4 € por operação e 20 € por mês.",
+    "O banco designado só pode encerrar essa conta em casos específicos, em geral com aviso prévio de 2 meses.",
+    "Na Reunião, como nos outros departamentos ultramarinos, é o IEDOM, e não o Banque de France, que recebe o pedido e designa o banco: processo on-line em iedom.fr, por carta ou na agência. O procedimento é gratuito. Na Reunião, o IEDOM atende o público com hora marcada em Saint-Denis e mantém um plantão com hora marcada em Saint-Pierre."
+  ],
+  "documents": [
+    {
+      "id": "formulaire",
+      "libelle": "Formulário de pedido de exercício do direito à conta",
+      "detail": "Disponível no IEDOM ou no site dele.",
+      "coffre": "finances"
+    },
+    {
+      "id": "identite",
+      "libelle": "Documento de identidade válido",
+      "detail": "Carteira de identidade, passaporte ou título de residência. Original no atendimento no banco.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço com menos de 3 meses",
+      "detail": "Conta de luz ou de água, recibo de aluguel. Se você mora na casa de alguém, o banco pode pedir uma declaração de hospedagem.",
+      "coffre": "finances"
+    },
+    {
+      "id": "lettre-refus",
+      "libelle": "Carta de recusa do banco",
+      "detail": "Ou a prova do seu pedido de abertura feito há mais de 15 dias sem resposta.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (dados bancários) da nova conta",
+      "detail": "Para enviar à Caf, à ARIPA (Agence de recouvrement et d'intermédiation des pensions alimentaires, agência de cobrança de pensões alimentícias), ao seu empregador e ao outro genitor se a pensão for paga diretamente a você.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Peça a abertura de uma conta a um banco",
+      "detail": "Por escrito, se possível, e guarde uma prova da data do pedido."
+    },
+    {
+      "titre": "Em caso de recusa, peça a carta de recusa",
+      "detail": "Ou espere 15 dias sem resposta. Guarde a prova do seu pedido."
+    },
+    {
+      "titre": "Marque um horário no IEDOM",
+      "detail": "Agência da Reunião em Saint-Denis, ou plantão de Saint-Pierre. O formulário está disponível no IEDOM."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Formulário preenchido, documento de identidade válido, comprovante de endereço com menos de 3 meses, carta de recusa ou prova de pedido com mais de 15 dias. Depois, para o banco designado: a carta de designação e os documentos que ele listou."
+    },
+    {
+      "titre": "Abra a conta no banco designado",
+      "detail": "Dentro de 6 meses. Ele tem 3 dias úteis após receber todos os documentos."
+    },
+    {
+      "titre": "Envie o seu novo RIB",
+      "detail": "À Caf (espaço on-line), à ARIPA se ela paga a pensão, ao empregador e, se necessário, ao outro genitor."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "IEDOM, agence de La Réunion",
+      "detail": "Atendimento ao público com hora marcada, de terça a quinta, das 8h às 12h, 4 rue du Maréchal Leclerc, 97400 Saint-Denis (e-mail: particuliers-reunion@iedom.fr). Plantão às segundas, com hora marcada, na Maison de justice et du droit de Saint-Pierre, 26 rue Marius et Ary Leblond (02 62 91 84 92).",
+      "url": "https://www.iedom.fr/rubrique20",
+      "telephone": "02 62 90 71 00"
+    },
+    {
+      "nom": "O banco da sua escolha",
+      "detail": "Primeiro pedido de abertura."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Direito à conta (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417"
+    },
+    {
+      "titre": "IEDOM, agence de La Réunion",
+      "url": "https://www.iedom.fr/rubrique20"
+    },
+    {
+      "titre": "Guia do direito à conta (IEDOM)",
+      "url": "https://www.iedom.fr/IMG/pdf/guide-droit_au_compte_vdef.pdf"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Carta de recusa de abertura de conta",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Carta de designação do banco",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "RIB da minha conta pessoal",
+      "categorie": "finances"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Horário no IEDOM: direito à conta",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Contatar o banco designado (no máximo 6 meses)",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Enviar meu novo RIB à Caf e à ARIPA",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "15 dias: prazo de resposta do banco; depois disso, o silêncio vale como recusa"
+    },
+    {
+      "libelle": "6 meses: validade da designação do banco"
+    }
+  ],
+  "aConfirmer": [
+    "Os prazos indicados acima vêm da ficha nacional (Banque de France): os aplicados pelo IEDOM devem ser confirmados com a agência.",
+    "Os horários do IEDOM podem mudar: confira em iedom.fr antes de ir.",
+    "As regras para sair de uma conta conjunta dependem do seu banco: a página oficial sobre o direito à conta não as detalha."
+  ],
+  "motsCles": [
+    "conta bancária",
+    "RIB",
+    "direito à conta",
+    "IEDOM",
+    "Banque de France",
+    "conta conjunta",
+    "separação"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2417 Direito à conta",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "IEDOM, agence de La Réunion (serviços aos particulares)",
+      "url": "https://www.iedom.fr/rubrique20",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "IEDOM, guia do direito à conta",
+      "url": "https://www.iedom.fr/IMG/pdf/guide-droit_au_compte_vdef.pdf",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

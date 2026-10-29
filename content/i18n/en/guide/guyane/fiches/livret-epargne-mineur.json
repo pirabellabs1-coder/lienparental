@@ -58,12 +58,12 @@
     "Official sources do not set a minimum age for a minor to open a Livret A alone: your bank may have its own rules."
   ],
   "motsCles": ["Livret A", "Livret jeune", "savings", "bank", "minor", "child account"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F2365 Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365", "verifieLe": "2026-08-01" },
-    { "titre": "Service-public.gouv.fr, F2904 Livret jeune", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904", "verifieLe": "2026-08-01" },
-    { "titre": "Service-public.gouv.fr, F21035 Bank account for a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2025-11-17" },
-    { "titre": "Service-public.gouv.fr, news item A18386 (Cour de cassation, June 12, 2025, n° 24-13.604)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" },
-    { "titre": "Service-public.gouv.fr, F1427 Birth certificate", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" }
+    { "titre": "Service-public.gouv.fr, F2365 Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2904 Livret jeune", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21035 Bank account for a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, news item A18386 (Cour de cassation, June 12, 2025, n° 24-13.604)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1427 Birth certificate", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" }
   ]
 }

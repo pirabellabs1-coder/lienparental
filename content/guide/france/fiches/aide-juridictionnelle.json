@@ -1,0 +1,240 @@
+{
+  "slug": "aide-juridictionnelle",
+  "territoire": "france",
+  "categorie": "aides",
+  "titre": "Demander l'aide juridictionnelle",
+  "resume": "Faire payer tout ou partie des frais d'avocat et de procédure par l'État, par exemple devant le juge aux affaires familiales : plafonds 2026, formulaire, pièces exactes et où déposer le dossier.",
+  "aQuoiCaSert": "L'aide juridictionnelle (AJ) prend en charge, totalement ou partiellement, les honoraires d'avocat et les frais de justice si vos ressources sont modestes. Elle est utile pour une procédure devant le juge aux affaires familiales : résidence de l'enfant, pension alimentaire, autorité parentale. Vous gardez le libre choix de votre avocat.",
+  "quiEstConcerne": [
+    "Les parents dont le revenu fiscal de référence et le patrimoine restent sous les plafonds, qui engagent ou subissent une procédure.",
+    "Les enfants mineurs entendus par le juge dans une procédure qui les concerne : l'aide leur est attribuée sans examen des ressources.",
+    "Les victimes de violences conjugales, qui peuvent obtenir une aide provisoire."
+  ],
+  "aSavoir": [
+    "Plafonds 2026 pour l'aide totale (revenu fiscal de référence) : 12 957 € pour 1 personne, 15 289 € pour 2, 17 621 € pour 3, 19 095 € pour 4, 20 568 € pour 5, 22 041 € pour 6, 23 514 € pour 7.",
+    "Si vous dépassez un peu le plafond de revenu, une aide partielle de 55 % ou 25 % est possible. Pour une personne seule : jusqu'à 15 316 € de revenu fiscal de référence pour 55 %, jusqu'à 19 433 € pour 25 %.",
+    "Le patrimoine compte aussi (hors résidence principale). Pour 1 personne : 12 957 € de patrimoine mobilier (épargne) et 38 866 € de patrimoine immobilier au maximum. Dépasser un plafond de patrimoine exclut toute aide.",
+    "Si la demande porte sur un conflit avec un membre de votre foyer fiscal (par exemple l'autre parent pendant un divorce), l'examen du plafond de patrimoine est individualisé.",
+    "Vérifiez d'abord vos contrats d'assurance (habitation, carte bancaire, protection juridique) : si une protection juridique couvre déjà les frais, la demande d'AJ peut être rejetée. Il faut fournir une attestation de non prise en charge.",
+    "Les frais engagés avant la décision du bureau d'aide juridictionnelle ne sont pas couverts. Faites la demande le plus tôt possible, avant l'audience.",
+    "Le droit de plaidoirie (13 €) et les éventuelles condamnations (dommages et intérêts, amendes) ne sont pas couverts par l'AJ.",
+    "Recours contre un refus : 15 jours après la notification. Une fois l'AJ accordée, l'action en justice doit être engagée dans l'année.",
+    "En urgence, une aide provisoire peut être accordée, les ressources étant vérifiées ensuite."
+  ],
+  "documents": [
+    {
+      "id": "formulaire",
+      "libelle": "Formulaire de demande d'aide juridictionnelle (cerfa n° 16146)",
+      "detail": "Rempli en ligne sur service-public.gouv.fr, imprimé, daté et signé. Obligatoire si la demande concerne une autre personne, par exemple votre enfant mineur.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "identite",
+      "libelle": "Copie recto verso de votre pièce d'identité",
+      "detail": "Carte d'identité ou passeport en cours de validité. Ressortissant étranger : titre de séjour ou document équivalent.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Justificatif de domicile de moins de 3 mois (copie)",
+      "detail": "Facture, quittance de loyer. Si vous êtes hébergé : attestation d'hébergement en plus.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Copie du livret de famille",
+      "detail": "Ou document équivalent pour un étranger. Livret perdu : second livret gratuit en mairie.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Dernier avis d'imposition (copie)",
+      "detail": "À télécharger dans votre espace sur impots.gouv.fr. À défaut, justificatifs de revenus des 6 derniers mois.",
+      "coffre": "finances"
+    },
+    {
+      "id": "changement-situation",
+      "libelle": "Justificatif d'un changement de situation familiale ou de ressources",
+      "detail": "Par exemple séparation récente, perte d'emploi : attestation, jugement, notification France Travail.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "patrimoine",
+      "libelle": "Justificatifs d'épargne et de biens immobiliers hors résidence principale",
+      "detail": "Relevés de livrets, taxe foncière, si vous en avez.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-assurance",
+      "libelle": "Attestation de non prise en charge par votre assureur (protection juridique)",
+      "detail": "À demander à votre assureur habitation, auto ou carte bancaire.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "pieces-affaire",
+      "libelle": "Pièces de l'affaire",
+      "detail": "Selon le cas : convocation à l'audience, jugement précédent, lettre d'acceptation de l'avocat que vous avez choisi.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "decision-baj",
+      "libelle": "Décision du bureau d'aide juridictionnelle",
+      "detail": "À conserver et à transmettre à votre avocat.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Vérifiez votre assurance protection juridique",
+      "detail": "Appelez votre assureur : s'il prend en charge, l'AJ n'est pas nécessaire ; sinon demandez une attestation de non prise en charge."
+    },
+    {
+      "titre": "Estimez votre droit",
+      "detail": "Comparez votre revenu fiscal de référence (sur votre avis d'imposition) aux plafonds, ou utilisez le simulateur officiel sur service-public.gouv.fr."
+    },
+    {
+      "titre": "Choisissez un avocat si vous le souhaitez",
+      "detail": "Vous pouvez demander à un avocat d'accepter votre dossier au titre de l'AJ et joindre sa lettre d'acceptation. Si personne n'accepte, le bâtonnier peut en désigner un."
+    },
+    {
+      "titre": "Remplissez la demande",
+      "detail": "Formulaire cerfa n° 16146 en ligne sur service-public.gouv.fr, ou demande en ligne sur aidejuridictionnelle.justice.fr avec FranceConnect si votre situation le permet."
+    },
+    {
+      "titre": "Vérifiez avant de déposer ou d'envoyer",
+      "detail": "Formulaire signé, copie de pièce d'identité, justificatif de domicile de moins de 3 mois, livret de famille, dernier avis d'imposition, attestation de l'assureur, convocation ou jugement. Faites une copie complète du dossier pour vous."
+    },
+    {
+      "titre": "Déposez ou envoyez le dossier au bureau d'aide juridictionnelle",
+      "detail": "Avant d'avoir saisi le juge : bureau du tribunal judiciaire de votre domicile. Après : bureau du tribunal où l'affaire est traitée."
+    },
+    {
+      "titre": "Suivez la décision",
+      "detail": "Transmettez la décision à votre avocat. En cas de refus, vous avez 15 jours pour contester."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Bureau d'aide juridictionnelle (BAJ) du tribunal judiciaire",
+      "detail": "Celui de votre domicile avant la saisine du juge, ou celui du tribunal qui traite l'affaire. Coordonnées dans l'annuaire du ministère de la Justice (commune ou code postal).",
+      "url": "https://www.justice.gouv.fr/annuaire"
+    },
+    {
+      "nom": "Demande d'aide juridictionnelle en ligne",
+      "detail": "Service gratuit avec FranceConnect, pour les litiges devant les juridictions judiciaires (hors Cour de cassation).",
+      "url": "https://www.aidejuridictionnelle.justice.fr/authentification"
+    },
+    {
+      "nom": "Point-justice",
+      "detail": "Lieu d'accueil et d'information juridique, à trouver dans l'annuaire du ministère de la Justice.",
+      "url": "https://www.justice.gouv.fr/annuaire"
+    },
+    {
+      "nom": "Allô Service Public",
+      "detail": "Renseignements juridiques gratuits (coût selon votre opérateur), sans accès aux dossiers individuels.",
+      "telephone": "3939"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Aide juridictionnelle : conditions et démarches (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074"
+    },
+    {
+      "titre": "Formulaire de demande d'aide juridictionnelle (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444"
+    },
+    {
+      "titre": "Demande d'aide juridictionnelle en ligne (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Demande d'aide juridictionnelle (copie du dossier)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Décision du bureau d'aide juridictionnelle",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Attestation de non prise en charge de l'assureur",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Aide juridictionnelle : recours dans les 15 jours",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Engager l'action dans l'année suivant l'aide accordée",
+      "evenement": "autre"
+    },
+    {
+      "type": "depense",
+      "titre": "Droit de plaidoirie (non couvert par l'AJ)",
+      "categorie": "frais-administratifs",
+      "montant": 13,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Avant l'audience",
+      "detail": "Les frais engagés avant la décision du bureau ne sont pas couverts : déposez la demande le plus tôt possible."
+    },
+    {
+      "libelle": "15 jours",
+      "detail": "Délai de recours contre une décision du bureau d'aide juridictionnelle, à partir de sa notification."
+    },
+    {
+      "libelle": "1 an",
+      "detail": "Délai pour agir en justice après l'octroi de l'aide."
+    }
+  ],
+  "aConfirmer": [
+    "Horaires d'accueil et modalités de dépôt du bureau d'aide juridictionnelle : propres à chaque tribunal, vérifiez-les dans l'annuaire du ministère de la Justice."
+  ],
+  "motsCles": [
+    "aide juridictionnelle",
+    "AJ",
+    "avocat",
+    "JAF",
+    "frais de justice",
+    "cerfa 16146",
+    "bureau d'aide juridictionnelle"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F18074 Aide juridictionnelle",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R1444 Formulaire de demande d'aide juridictionnelle (cerfa n° 16146*04)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R66463 Demande d'aide juridictionnelle en ligne",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F33683 Allô Service Public 3939",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33683",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Ministère de la Justice, annuaire des lieux de justice",
+      "url": "https://www.justice.gouv.fr/annuaire",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

@@ -55,11 +55,11 @@
     "To be confirmed with your mutuelle: the age limit for covering children and the documents required for a child of separated parents vary between contracts."
   ],
   "motsCles": ["mutuelle", "top-up health insurance", "dependent", "Noémie", "separated parents", "reimbursement"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F20740 Exemptions from joining the company mutuelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740", "verifieLe": "2024-05-16" },
-    { "titre": "Service-public.gouv.fr, F20739 Company top-up health insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739", "verifieLe": "2024-05-15" },
-    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (free or low-cost top-up insurance)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-07-01" },
-    { "titre": "ameli policyholders' forum, expert answer: dual attachment and top-up health insurance (October 29, 2025)", "url": "https://forum-assures.ameli.fr/questions/3657009-parents-separes-double-rattachement-secu-enfant-seule-complementaire-sante-papa" }
+    { "titre": "Service-public.gouv.fr, F20740 Exemptions from joining the company mutuelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F20739 Company top-up health insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (free or low-cost top-up insurance)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" },
+    { "titre": "ameli policyholders' forum, expert answer: dual attachment and top-up health insurance (October 29, 2025)", "url": "https://forum-assures.ameli.fr/questions/3657009-parents-separes-double-rattachement-secu-enfant-seule-complementaire-sante-papa", "verifieLe": "2026-10-29" }
   ]
 }

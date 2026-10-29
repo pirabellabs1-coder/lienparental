@@ -1,0 +1,58 @@
+{
+  "slug": "allocation-rentree-scolaire",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Auxílio de volta às aulas (ARS, allocation de rentrée scolaire) em Mayotte",
+  "resume": "Pago pela CSSM a partir de 4 de agosto de 2026 para cada filho de 6 a 20 anos matriculado na escola, conforme a renda. Em Mayotte, o valor depende do nível escolar e os limites de renda são próprios do território.",
+  "aQuoiCaSert": "O auxílio de volta às aulas ajuda a pagar o material escolar, as roupas e os equipamentos do início do ano letivo. Em Mayotte, ele é pago pela CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte), mais cedo do que na França metropolitana, e até os 20 anos. O valor depende do nível do filho (ensino fundamental I, fundamental II, ensino médio) e não da idade. Se você já o recebeu, em princípio não é preciso fazer nada: a matrícula é verificada junto ao rectorat (autoridade educacional regional). Se nunca o recebeu, é preciso primeiro declarar a sua situação e a sua renda.",
+  "quiEstConcerne": [
+    "As famílias com um filho de 6 a 20 anos matriculado na escola. Para o ano letivo de 2026: filho nascido entre 16 de setembro de 2006 e 31 de dezembro de 2020.",
+    "Um filho de 5 anos já matriculado no ensino fundamental também pode ter direito, segundo a CSSM."
+  ],
+  "aSavoir": [
+    "Valores do ano letivo de 2026 em Mayotte: 429,01 € para um filho no ensino fundamental I, 452,67 € no fundamental II (collège), 468,36 € no ensino médio (lycée) (service-public.gouv.fr, seção Mayotte).",
+    "Limites de renda de 2026 (renda de 2024): 35.634 € para 1 filho, 38.874 € para 2, 42.114 € para 3, mais 3.240 € por filho adicional. Um ARS reduzido (diferencial) pode ser pago se o limite for pouco ultrapassado.",
+    "Pagamento a partir de 4 de agosto de 2026 em Mayotte (18 de agosto na França metropolitana).",
+    "Primeiro pedido: preencha uma declaração de situação e uma declaração de renda de 2024. Em todos os casos, a sua renda de 2025 deve ter sido declarada à Receita.",
+    "Filho com menos de 6 anos que já entrou no 1º ano (CP): envie o atestado de matrícula dele.",
+    "Pais separados: o ARS é pago a um único beneficiário, mesmo em residência alternada."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Declaração de renda feita à Receita", "detail": "Ela permite conhecer a sua renda. Aviso de imposto para baixar em impots.gouv.fr.", "coffre": "finances" },
+    { "id": "certificat-scolarite", "libelle": "Atestado de matrícula (certificat de scolarité)", "detail": "Em princípio obtido pela CSSM junto ao rectorat. Guarde uma cópia caso seja pedido.", "coffre": "scolarite" },
+    { "id": "notification-ars", "libelle": "Notificação ou comprovante de pagamento do ARS", "detail": "No seu espaço « Mon Compte ».", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Verifique se as suas informações estão em dia", "detail": "Declaração de renda feita, situação familiar e número de filhos atualizados no « Mon Compte » em caf.fr." },
+    { "titre": "Verifique se o filho está matriculado numa escola", "detail": "A CSSM se baseia nas informações enviadas pelo rectorat." },
+    { "titre": "Confira o pagamento no início de agosto", "detail": "Se nada for pago e você achar que tem direito, entre em contato com a CSSM com o atestado de matrícula." },
+    { "titre": "Anote as despesas de volta às aulas", "detail": "Registre material e roupas no Diário para acompanhar os gastos de cada filho." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Espaço « Mon Compte » em caf.fr ou atendimento com hora marcada em Mamoudzou.", "url": "https://www.cssm.fr/page/prestations-familiales", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Ajuda gratuita com os procedimentos on-line.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Auxílio de volta às aulas (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878" },
+    { "titre": "Benefícios familiares em Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Verificar o pagamento do ARS (4 de agosto de 2026)", "evenement": "autre" },
+    { "type": "coffre", "titre": "Comprovante de pagamento do ARS", "categorie": "finances" },
+    { "type": "depense", "titre": "Material de volta às aulas", "categorie": "ecole" },
+    { "type": "depense", "titre": "Roupas de volta às aulas", "categorie": "vetements" }
+  ],
+  "datesLimites": [
+    { "libelle": "Pagamento a partir de 4 de agosto de 2026 em Mayotte" }
+  ],
+  "aConfirmer": [
+    "Jovem de 16 a 20 anos: a seção Mayotte do service-public.gouv.fr não menciona declaração de escolaridade (ela é descrita para a França metropolitana). Verifique com a CSSM se nenhum procedimento é esperado, sobretudo após os 18 anos.",
+    "A confirmar com a CSSM: qual genitor recebe o ARS em residência alternada e como designá-lo."
+  ],
+  "motsCles": ["ARS", "volta às aulas", "material escolar", "CSSM", "auxílio", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1878 Auxílio de volta às aulas (seção Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Benefícios familiares", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" }
+  ]
+}

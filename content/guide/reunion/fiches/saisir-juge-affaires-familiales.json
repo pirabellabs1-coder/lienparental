@@ -1,0 +1,90 @@
+{
+  "slug": "saisir-juge-affaires-familiales",
+  "territoire": "reunion",
+  "categorie": "separation",
+  "titre": "Saisir le juge aux affaires familiales (JAF)",
+  "resume": "Le formulaire cerfa n° 11530, la liste des pièces (actes de naissance de moins de 3 mois), le tribunal compétent à La Réunion (Saint-Denis ou Saint-Pierre), le timbre de 50 € et les cas où il n'est pas dû.",
+  "aQuoiCaSert": "Le juge aux affaires familiales tranche les désaccords entre parents sur l'exercice de l'autorité parentale, la résidence de l'enfant, le droit de visite et d'hébergement ou la pension alimentaire. Il peut aussi modifier une décision existante quand la situation change, ou homologuer un accord trouvé entre les parents pour lui donner la force d'un jugement. À La Réunion, deux tribunaux judiciaires traitent ces affaires : Saint-Denis et Saint-Pierre.",
+  "quiEstConcerne": [
+    "Les parents, mariés ou non, qui ne parviennent pas à un accord sur les enfants.",
+    "Le parent qui veut faire modifier une décision existante (déménagement, changement de revenus, nouvelle organisation).",
+    "Les parents d'accord entre eux qui veulent faire homologuer leur convention parentale.",
+    "Le parent qui perçoit l'ASF sans pension fixée et doit saisir le juge dans les 4 mois."
+  ],
+  "aSavoir": [
+    "Formulaire : cerfa n° 11530 « Demande au juge aux affaires familiales », à remplir en ligne ou sur papier. Une requête entièrement en ligne est aussi possible.",
+    "Tribunal compétent : celui du lieu où vit le parent chez qui l'enfant réside habituellement ; si les parents vivent encore ensemble, celui du lieu de résidence de la famille. À La Réunion : tribunal judiciaire de Saint-Denis ou de Saint-Pierre, selon votre commune.",
+    "L'avocat n'est pas obligatoire devant le juge aux affaires familiales (il l'est en appel). L'aide juridictionnelle peut prendre en charge les frais selon vos ressources : voir la fiche « Demander l'aide juridictionnelle ».",
+    "Timbre fiscal de 50 €, uniquement électronique, acheté en ligne par carte bancaire avant la saisine. Il n'est pas dû avec l'aide juridictionnelle, pour l'homologation d'une convention parentale, ni pour une ordonnance de protection. Valable 12 mois, remboursable dans les 18 mois s'il n'est pas utilisé.",
+    "Médiation préalable : l'expérimentation qui l'imposait au tribunal de Saint-Denis avant certaines demandes a pris fin le 31 décembre 2024. Elle reste conseillée, mais n'est plus obligatoire pour saisir le juge.",
+    "Parents d'accord : requête conjointe d'homologation de la convention parentale (cerfa n° 16139), signée par les deux.",
+    "Violences : une ordonnance de protection se demande au juge aux affaires familiales, sans plainte préalable obligatoire. L'audience a lieu dans les 6 jours suivant sa fixation. Danger immédiat : 17 ou 112. Écoute : 3919, gratuit depuis La Réunion, 24 h sur 24.",
+    "Ce guide ne remplace pas un conseil juridique : pour votre situation, adressez-vous à un avocat ou à un point-justice."
+  ],
+  "documents": [
+    { "id": "cerfa-11530", "libelle": "Formulaire cerfa n° 11530 complété, daté et signé", "detail": "Original pour le tribunal, copie pour vous. Remplissable en ligne sur service-public.gouv.fr.", "coffre": "jaf" },
+    { "id": "acte-naissance-parent", "libelle": "Copie intégrale de votre acte de naissance de moins de 3 mois", "detail": "Pas un extrait. Demande gratuite en ligne sur service-public.gouv.fr (voir la fiche « Obtenir un acte de naissance »).", "coffre": "jaf" },
+    { "id": "actes-naissance-enfants", "libelle": "Copie intégrale de l'acte de naissance de chaque enfant concerné, de moins de 3 mois", "detail": "Même démarche, auprès de la mairie du lieu de naissance de l'enfant. Comptez le délai d'envoi, surtout si l'enfant est né en métropole.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Livret de famille ou copie intégrale de l'acte de mariage de moins de 3 mois", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Copie de votre pièce d'identité", "detail": "Carte d'identité ou passeport, recto verso.", "coffre": "jaf" },
+    { "id": "jugements", "libelle": "Copie des jugements antérieurs (divorce, séparation, autorité parentale, pension)", "detail": "Si vous ne l'avez plus, demandez une copie au greffe du tribunal qui l'a rendu.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Selon votre demande : facture, quittance de loyer ou attestation d'hébergement.", "coffre": "jaf" },
+    { "id": "ressources", "libelle": "Justificatifs de ressources et de charges", "detail": "Surtout si la demande porte sur la pension : dernier avis d'imposition et déclaration de revenus, 3 derniers bulletins de salaire, attestation des prestations Caf, loyer, crédits, frais de l'enfant.", "coffre": "jaf" },
+    { "id": "timbre", "libelle": "Timbre fiscal électronique de 50 € (PDF ou SMS à 16 chiffres)", "detail": "Sauf aide juridictionnelle ou homologation de convention parentale.", "coffre": "jaf" },
+    { "id": "aj", "libelle": "Décision d'aide juridictionnelle ou récépissé de demande, si vous l'avez demandée", "coffre": "jaf" },
+    { "id": "pieces-situation", "libelle": "Pièces utiles à votre demande", "detail": "Par exemple : certificat de scolarité, échanges écrits sur l'organisation, attestations. Évitez les pièces sans rapport avec la demande.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Tentez d'abord une solution amiable", "detail": "Médiation familiale ou accord écrit à faire homologuer. Le formulaire demande si une démarche amiable a été tentée. Pas de médiation en cas de violences." },
+    { "titre": "Commandez les actes de naissance dès maintenant", "detail": "Ils doivent dater de moins de 3 mois au dépôt et arrivent par courrier : c'est souvent la pièce qui retarde le dossier." },
+    { "titre": "Remplissez le cerfa n° 11530 ou la requête en ligne", "detail": "Expliquez clairement ce que vous demandez (résidence, droit de visite, montant de pension) et pourquoi." },
+    { "titre": "Achetez le timbre de 50 € si vous n'en êtes pas dispensé", "detail": "En ligne, par carte bancaire, avant d'envoyer la demande." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Cerfa signé ; actes de naissance en copie intégrale de moins de 3 mois (vous et chaque enfant) ; livret de famille ou acte de mariage ; pièce d'identité ; jugements antérieurs ; justificatifs de ressources si vous parlez de pension ; timbre ou décision d'aide juridictionnelle. Faites une copie complète." },
+    { "titre": "Envoyez ou déposez le dossier au greffe du tribunal compétent", "detail": "Saint-Denis ou Saint-Pierre selon le lieu de résidence de l'enfant, ou requête en ligne. Rangez la copie dans le Dossier JAF du coffre-fort." },
+    { "titre": "Préparez l'audience", "detail": "La date vous est communiquée et l'autre parent est convoqué par lettre recommandée. Ajoutez-la au calendrier avec un rappel et apportez les originaux de vos pièces." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Saint-Denis", "detail": "Accueil du lundi au vendredi, 7 h 45 à 12 h 15 et 13 h 30 à 15 h 30. Courriel : accueil.tj-st-denis-de-la-reunion@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/89e93007-f1cf-40e9-92b1-c8880c9a4d8a", "telephone": "02 62 40 23 45" },
+    { "nom": "Tribunal judiciaire de Saint-Pierre", "detail": "28 rue Augustin Archambaud, 97410 Saint-Pierre. Accueil du lundi au vendredi, 8 h à 12 h et 13 h 30 à 15 h 30.", "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b", "telephone": "02 62 96 10 00" },
+    { "nom": "Points-justice de La Réunion", "detail": "Information juridique gratuite, aide à la constitution du dossier et à la demande d'aide juridictionnelle.", "url": "https://lannuaire.service-public.gouv.fr/navigation/la-reunion/point_justice" },
+    { "nom": "Violences Femmes Info", "detail": "Écoute et orientation, gratuit et anonyme, 24 h sur 24, y compris depuis La Réunion. En cas de danger immédiat, appelez le 17 ou le 112.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "telephone": "3919" }
+  ],
+  "liens": [
+    { "titre": "Demande au juge aux affaires familiales, cerfa 11530 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764" },
+    { "titre": "Homologation d'une convention parentale, cerfa 16139 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771" },
+    { "titre": "Timbre fiscal de 50 € (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227" },
+    { "titre": "Autorité parentale en cas de séparation (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133" },
+    { "titre": "Violences conjugales et ordonnance de protection (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Timbre fiscal pour saisir le juge aux affaires familiales", "categorie": "frais-administratifs", "montant": 50, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764" },
+    { "type": "coffre", "titre": "Requête au juge aux affaires familiales (copie complète)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Actes de naissance de moins de 3 mois", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Justificatifs de ressources et de charges", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Convocation et décision du juge aux affaires familiales", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Audience devant le juge aux affaires familiales", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Vérifier la date des actes de naissance (moins de 3 mois)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Actes de naissance de moins de 3 mois au moment du dépôt" },
+    { "libelle": "Timbre fiscal valable 12 mois après l'achat", "detail": "Remboursement possible en ligne dans les 18 mois s'il n'est pas utilisé." },
+    { "libelle": "ASF sans pension fixée : saisir le juge dans les 4 mois" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : la répartition des communes entre les tribunaux judiciaires de Saint-Denis et de Saint-Pierre n'a pas pu être vérifiée (sites justice.fr et de la cour d'appel en maintenance) : demandez au greffe ou à un point-justice.",
+    "À confirmer localement : l'adresse exacte d'accueil du tribunal judiciaire de Saint-Denis (l'annuaire indique l'avenue Desbassyns, le bureau d'aide juridictionnelle le 5 avenue André Malraux).",
+    "À confirmer localement : le rôle des tribunaux de proximité de Saint-Paul et de Saint-Benoît pour les affaires familiales, et les délais moyens d'audience.",
+    "Le délai pour régulariser une demande déposée sans timbre fiscal n'est pas précisé par les fiches officielles : renseignez-vous auprès du greffe."
+  ],
+  "motsCles": ["JAF", "juge", "tribunal", "garde", "résidence", "droit de visite", "cerfa 11530", "homologation", "Saint-Denis", "Saint-Pierre"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, R15764 Demande au juge aux affaires familiales (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F33227 Timbre fiscal", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F942 Autorité parentale et saisine du JAF (avocat non obligatoire)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F12544 Violences conjugales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public, Tribunal judiciaire de Saint-Denis", "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/89e93007-f1cf-40e9-92b1-c8880c9a4d8a", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public, Tribunal judiciaire de Saint-Pierre", "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, loi n° 2016-1547 du 18 novembre 2016, article 7 (fin de la médiation préalable obligatoire au 31 décembre 2024)", "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000033418805", "verifieLe": "2026-10-29" }
+  ]
+}

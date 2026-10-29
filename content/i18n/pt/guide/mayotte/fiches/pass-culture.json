@@ -1,0 +1,56 @@
+{
+  "slug": "pass-culture",
+  "territoire": "mayotte",
+  "categorie": "loisirs",
+  "titre": "Pass Culture para jovens de 15 a 18 anos",
+  "resume": "Ofertas gratuitas aos 15 e 16 anos, 50 € aos 17, 150 € aos 18, com uma vantagem em Mayotte: sem limite de 50 € nas compras on-line. Os documentos a preparar para a inscrição.",
+  "aQuoiCaSert": "O pass Culture (passe cultural francês para jovens) facilita o acesso dos jovens à cultura: livros, ingressos de cinema, shows, espetáculos, aulas, instrumentos musicais. Ele tem uma parte individual, usada pelo jovem no aplicativo, e uma parte coletiva, usada pelos professores para passeios com a turma. Mayotte é um dos territórios onde ele está disponível.",
+  "quiEstConcerne": [
+    "Jovens de 15 a 18 anos que moram na França metropolitana ou nos territórios ultramarinos, incluindo Mayotte.",
+    "Jovens de nacionalidade estrangeira que moram na França há pelo menos 1 ano."
+  ],
+  "aSavoir": [
+    "Jovens inscritos desde 1º de março de 2025: ofertas gratuitas aos 15 e 16 anos, 50 € aos 17, 150 € aos 18.",
+    "O dinheiro pode ser usado até a véspera dos 21 anos.",
+    "As compras de ofertas on-line (música, vídeo, jogos, imprensa digital...) agora têm limite de 50 €, exceto para os jovens que moram em Mayotte.",
+    "Inscrição: documento de identidade e comprovante de endereço em nome do jovem. Se ele mora com outra pessoa, também é preciso o comprovante de endereço dessa pessoa, uma declaração de hospedagem (attestation d'hébergement) e o documento de identidade dela."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Documento de identidade válido do jovem", "detail": "Cópia enviada pelo aplicativo. Sem documento de identidade: veja a ficha \"Fazer a carteira de identidade ou o passaporte do meu filho\".", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Comprovante de endereço em nome do jovem", "detail": "Na falta dele, os documentos de quem o hospeda, abaixo.", "coffre": "autres" },
+    { "id": "hebergement", "libelle": "Declaração de hospedagem (attestation d'hébergement) assinada pelo genitor ou anfitrião", "detail": "Com a cópia do documento de identidade e do comprovante de endereço dessa pessoa.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Baixe o aplicativo pass Culture", "detail": "Ou acesse pass.culture.fr, a partir dos 15 anos." },
+    { "titre": "Confira antes de começar a inscrição", "detail": "Documento de identidade válido do jovem, comprovante de endereço em nome dele ou declaração de hospedagem com os documentos do genitor, e-mail e telefone do jovem." },
+    { "titre": "Crie a conta do jovem e envie os comprovantes" },
+    { "titre": "Aguarde a validação", "detail": "A conta é creditada depois que a inscrição é aceita." },
+    { "titre": "Reserve as ofertas", "detail": "Acompanhe seu adolescente nas primeiras escolhas, se necessário." }
+  ],
+  "ou": [
+    { "nom": "pass Culture", "detail": "Aplicativo e site oficial, com um serviço de ajuda on-line.", "url": "https://pass.culture.fr" }
+  ],
+  "liens": [
+    { "titre": "Pass Culture (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959" },
+    { "titre": "Pass Culture: mudanças em 2026 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Aos 17 anos: ativar o crédito do pass Culture", "evenement": "activite" },
+    { "type": "rappel", "titre": "Usar o crédito do pass Culture antes dos 21 anos", "evenement": "activite" },
+    { "type": "depense", "titre": "Passeio ou atividade cultural", "categorie": "loisirs" }
+  ],
+  "datesLimites": [
+    { "libelle": "Créditos utilizáveis até a véspera dos 21 anos" }
+  ],
+  "aConfirmer": [
+    "A confirmar no aplicativo: se o crédito dos 17 anos não gasto é transferido para os 18 anos (as páginas oficiais consultadas não informam).",
+    "A confirmar localmente: as ofertas disponíveis em Mayotte dependem dos locais parceiros, que podem ser consultados no aplicativo.",
+    "O modelo de declaração de hospedagem e o envio dos documentos são explicados no aplicativo: confira no momento da inscrição."
+  ],
+  "motsCles": ["pass Culture", "cultura", "adolescente", "livros", "cinema", "17 anos", "18 anos"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, notícia A18775 Pass Culture: mudanças em 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775", "verifieLe": "2026-10-29" }
+  ]
+}

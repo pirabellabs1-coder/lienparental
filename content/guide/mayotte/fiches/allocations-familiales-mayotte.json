@@ -1,0 +1,61 @@
+{
+  "slug": "allocations-familiales-mayotte",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Allocations familiales à Mayotte (dès le 1er enfant)",
+  "resume": "À Mayotte, la CSSM verse des allocations familiales dès un seul enfant, avec un barème propre au territoire. Montants 2026-2027, complément familial et démarches en ligne.",
+  "aQuoiCaSert": "Les allocations familiales aident à faire face aux dépenses courantes des enfants. À Mayotte, il n'y a pas de Caf : c'est la Caisse de sécurité sociale de Mayotte (CSSM) qui les verse. Elles sont dues dès le premier enfant, mais leurs montants restent différents de ceux de la métropole. Une ordonnance du 22 juillet 2026 prévoit un alignement progressif, terminé en 2030 pour les allocations familiales et leur majoration pour âge. Le complément familial, propre aux départements d'outre-mer, peut s'y ajouter quand un enfant a entre 3 et 5 ans.",
+  "quiEstConcerne": [
+    "Les familles qui résident à Mayotte avec au moins un enfant à charge de moins de 20 ans.",
+    "Les parents séparés, y compris en résidence alternée.",
+    "Les parents d'un enfant de 3 à 5 ans sans autre enfant de moins de 3 ans, pour le complément familial."
+  ],
+  "aSavoir": [
+    "Montants mensuels du 1er avril 2026 au 31 mars 2027 (CSSM) : 28,12 € pour 1 enfant (57,28 € si vous perceviez déjà les allocations avant janvier 2012), 153,01 € pour 2 enfants, 229,52 € pour 3 enfants, plus 22,14 € par enfant supplémentaire.",
+    "Complément familial : 159,28 € par mois, ou 113,75 € si vos ressources dépassent légèrement le plafond (ressources de l'année N-2). Il est versé du mois qui suit les 3 ans du dernier enfant jusqu'au mois qui précède ses 5 ans, s'il n'y a pas d'enfant de moins de 3 ans au foyer.",
+    "La demande et le suivi se font dans l'espace « Mon Compte » sur caf.fr, en vous connectant avec les 13 premiers chiffres de votre numéro de sécurité sociale (CSSM).",
+    "L'ordonnance n° 2026-647 du 22 juillet 2026 prévoit l'alignement complet des allocations familiales et de la majoration pour âge sur la métropole en 2030.",
+    "Parents séparés : déclarez la séparation et la résidence des enfants sans attendre ; les autres prestations (complément familial, ARS, aides au logement, AEEH) sont versées à un seul parent."
+  ],
+  "documents": [
+    { "id": "identite-parents", "libelle": "Pièce d'identité ou titre de séjour de chaque parent", "detail": "Copie en cours de validité, demandée lors de la première demande.", "coffre": "finances" },
+    { "id": "numero-secu", "libelle": "Numéro de sécurité sociale (carte Vitale ou attestation de la CSSM)", "detail": "Ses 13 premiers chiffres servent à vous connecter à « Mon Compte ».", "coffre": "finances" },
+    { "id": "livret-famille", "libelle": "Livret de famille ou acte de naissance de chaque enfant", "detail": "Copie. Acte gratuit à demander à la mairie du lieu de naissance.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB du parent allocataire", "detail": "À votre nom.", "coffre": "finances" },
+    { "id": "avis-imposition", "libelle": "Avis d'imposition ou justificatifs de ressources", "detail": "Les ressources servent notamment au calcul du complément familial.", "coffre": "finances" },
+    { "id": "jugement-residence", "libelle": "Jugement ou convention fixant la résidence de l'enfant", "detail": "Copie, utile si vous êtes séparés, en particulier en résidence alternée.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Créez ou ouvrez votre espace « Mon Compte » sur caf.fr", "detail": "Les prestations de la CSSM se gèrent dans cet espace. Connectez-vous avec les 13 premiers chiffres de votre numéro de sécurité sociale." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Enfants bien déclarés, ressources à jour, RIB, adresse exacte, situation familiale (en couple, séparé, parent isolé). En cas de séparation, déclarez la date réelle." },
+    { "titre": "Résidence alternée : mettez-vous d'accord sur l'allocataire", "detail": "Demandez à la CSSM comment déclarer le partage des allocations familiales ou le choix d'un seul allocataire." },
+    { "titre": "Suivez vos paiements", "detail": "Consultez le détail des versements dans « Mon Compte » et signalez tout changement de situation sans attendre." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Centre Kinga, Route nationale 1, Kawéni, 97600 Mamoudzou. Accueil sur rendez-vous (prise de rendez-vous en ligne sur cssm.fr).", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Aide gratuite aux démarches en ligne, dans plusieurs communes de Mayotte.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Prestations familiales à Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Famille (CSSM)", "url": "https://www.cssm.fr/page/famille" },
+    { "titre": "Ordonnance n° 2026-647 du 22 juillet 2026, rapport au Président (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Notification de droits de la CSSM", "categorie": "finances" },
+    { "type": "coffre", "titre": "Jugement ou convention de résidence de l'enfant", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Signaler à la CSSM tout changement de situation familiale", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la CSSM : la possibilité et la procédure de partage des allocations familiales en résidence alternée (formulaire national cerfa n° 14000 ou démarche propre), notamment avec un seul enfant.",
+    "À confirmer auprès de la CSSM : les montants 2026-2027 des majorations pour âge et les plafonds de ressources du complément familial, non affichés sur la page consultée.",
+    "À confirmer auprès de la CSSM : la règle applicable aux fonctionnaires titulaires qui n'ont qu'un enfant.",
+    "À confirmer auprès de la CSSM : l'existence d'une agence à Petite-Terre (Dzaoudzi-Labattoir) et de permanences dans les communes, non mentionnées sur la page Contacts consultée."
+  ],
+  "motsCles": ["allocations familiales", "CSSM", "un enfant", "complément familial", "Mayotte", "résidence alternée"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Prestations familiales (barème du 1er avril 2026 au 31 mars 2027)", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Contacts", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, rapport au Président relatif à l'ordonnance n° 2026-647 du 22 juillet 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" }
+  ]
+}

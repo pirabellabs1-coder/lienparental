@@ -1,0 +1,65 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Mandatory vaccinations and check-ups at the PMI",
+  "resume": "The vaccines required for daycare, school and holiday clubs, the recommendations specific to Mayotte, and check-ups for children under 6 at the PMI, run by the Département.",
+  "aQuoiCaSert": "Mandatory vaccinations are required to start daycare, school, after-school care or holiday camp: without proof, enrollment may be refused or only temporary. The proof is the child's health record book (carnet de santé) filled in by the doctor. The PMI (protection maternelle et infantile, the mother and child health service), which in Mayotte is run by the Département (the local council), provides consultations for pregnant women and young children, vaccinations included.",
+  "quiEstConcerne": [
+    "All parents of minor children, especially before starting daycare, school or a holiday club.",
+    "Parents of newborns, for the vaccines recommended from birth in Mayotte."
+  ],
+  "aSavoir": [
+    "Child born before 2018: diphtheria, tetanus and polio (DTP) are mandatory for school.",
+    "Child born between January 1, 2018 and December 31, 2022: 11 mandatory vaccines (diphtheria, tetanus, polio, whooping cough, Haemophilus influenzae b, hepatitis B, pneumococcus, meningococcus C, measles, mumps, rubella).",
+    "Child born in 2023 or later: same list, with meningococcus A, B, C, W and Y instead of meningococcus C alone.",
+    "These requirements apply in Mayotte; the ARS Mayotte (regional health agency) is also promoting stronger recommendations against whooping cough.",
+    "A child who is not up to date can be admitted provisionally: you then have 3 months to catch up, otherwise the child may be excluded.",
+    "The child is entitled to 20 mandatory health check-ups from birth to age 16 (16 before age 6), covered 100% with no upfront payment, excluding extra fees charged by the doctor (dépassements d'honoraires).",
+    "Separated parents: the parent who takes the child to be vaccinated should inform the other parent and send them a copy of the vaccination pages."
+  ],
+  "documents": [
+    { "id": "carnet-sante", "libelle": "The child's health record book (carnet de santé)", "detail": "Bring the original to every appointment. Keep a photo of the vaccination pages.", "coffre": "sante" },
+    { "id": "carte-vitale", "libelle": "Parent's carte Vitale (health insurance card) or the child's certificate of entitlement", "detail": "Certificate in your ameli account or from the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund).", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "ID of the parent or the accompanying adult", "detail": "If another person accompanies the child, bring written authorization from a parent.", "coffre": "sante" },
+    { "id": "contre-indication", "libelle": "Medical certificate of contraindication, if applicable", "detail": "To be shown instead of proof of vaccination.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Check the health record book", "detail": "Compare it with the list of mandatory vaccines for your child's year of birth." },
+    { "titre": "Make an appointment", "detail": "With your doctor, or at a PMI center of the Département de Mayotte for young children." },
+    { "titre": "Check before you go", "detail": "Health record book, carte Vitale or certificate of entitlement, ID, written authorization if the child is not accompanied by a parent." },
+    { "titre": "Have your child vaccinated", "detail": "The health professional records the vaccine in the health record book." },
+    { "titre": "Show the proof", "detail": "A photocopy of the vaccination pages to the daycare, school or holiday club." }
+  ],
+  "ou": [
+    { "nom": "Département de Mayotte (PMI)", "detail": "Département switchboard, 112 boulevard Halidi Sélémani, Mamoudzou: directs you to the nearest PMI center.", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "telephone": "02 69 66 10 00" },
+    { "nom": "ARS Mayotte", "detail": "Information on vaccination. Centre Kinga, Kawéni, Mamoudzou.", "url": "https://www.mayotte.ars.sante.fr/vaccination-24", "telephone": "02 69 61 12 25" },
+    { "nom": "Your regular doctor or pediatrician" }
+  ],
+  "liens": [
+    { "titre": "Vaccines required for daycare and school (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Vaccination (ARS Mayotte)", "url": "https://www.mayotte.ars.sante.fr/vaccination-24" },
+    { "titre": "Mandatory health check-ups for children (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Vaccination appointment", "evenement": "sante" },
+    { "type": "rappel", "titre": "Vaccine booster", "evenement": "sante" },
+    { "type": "coffre", "titre": "Vaccination pages of the health record book", "categorie": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "3 months to catch up after provisional admission", "detail": "If vaccinations are still not up to date after this period, the child may be excluded from the daycare, school or club." }
+  ],
+  "aConfirmer": [
+    "To be confirmed with your doctor or the PMI: the vaccination schedule adapted to Mayotte recommends additional vaccines (notably BCG and hepatitis B from birth).",
+    "To be confirmed locally: list, addresses and opening hours of PMI centers in Mayotte, not published on the Département's website when checked.",
+    "To be confirmed locally: whether PMI consultations and vaccines are free for children, depending on the center."
+  ],
+  "motsCles": ["vaccine", "PMI", "health record book", "BCG", "whooping cough", "pediatrician", "baby"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vaccination for school, daycare or after-school care", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
+    { "titre": "ARS Mayotte, Vaccination", "url": "https://www.mayotte.ars.sante.fr/vaccination-24", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F967 Mandatory health check-ups for children", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967", "verifieLe": "2026-10-29" },
+    { "titre": "Département de Mayotte, Contact us", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "verifieLe": "2026-10-29" }
+  ]
+}

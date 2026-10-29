@@ -1,0 +1,63 @@
+{
+  "slug": "mutuelle-enfant",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Mutuelle et complémentaire santé de l'enfant",
+  "resume": "Ce que rembourse la CSSM, ce qui reste à votre charge, comment couvrir votre enfant par une mutuelle ou la C2S, et comment s'organiser après une séparation.",
+  "aQuoiCaSert": "À Mayotte, l'assurance maladie (la CSSM) rembourse une partie des soins. Le reste, appelé ticket modérateur, est à votre charge ou à celle de votre complémentaire santé (mutuelle). Un enfant est en général couvert comme ayant droit sur le contrat de l'un de ses parents. Depuis 2024, la complémentaire santé solidaire (C2S) existe aussi à Mayotte pour les foyers aux revenus modestes.",
+  "quiEstConcerne": [
+    "Les parents salariés couverts par une complémentaire santé d'entreprise, qui veulent y ajouter leur enfant.",
+    "Les parents qui ont une mutuelle individuelle.",
+    "Les parents séparés qui doivent décider sur quel contrat l'enfant est couvert.",
+    "Les foyers aux revenus modestes, qui peuvent avoir droit à la C2S."
+  ],
+  "aSavoir": [
+    "Consultation chez un médecin généraliste : la CSSM rembourse 70 % ; les 30 % restants sont pour vous ou votre complémentaire (Cleiss).",
+    "Au centre hospitalier de Mayotte et dans ses dispensaires, l'assuré n'avance pas de frais pour les consultations et hospitalisations, selon le Cleiss.",
+    "Certaines situations sont prises en charge à 100 %, par exemple les affections de longue durée et les femmes enceintes à partir du 6e mois.",
+    "La couverture des enfants dépend de votre contrat : lisez la notice remise par votre employeur ou votre mutuelle.",
+    "Si vos revenus sont modestes, la C2S couvre toute la famille, enfants compris : voyez la fiche dédiée du guide."
+  ],
+  "documents": [
+    { "id": "attestation-droits", "libelle": "Attestation de droits de l'enfant à l'assurance maladie", "detail": "Copie. Dans votre compte ameli ou à demander à la CSSM.", "coffre": "sante" },
+    { "id": "acte-naissance", "libelle": "Acte de naissance de l'enfant ou livret de famille", "detail": "Copie, pour prouver le lien de filiation.", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité du parent titulaire du contrat", "detail": "Copie recto verso.", "coffre": "sante" },
+    { "id": "rib", "libelle": "RIB du parent qui recevra les remboursements", "coffre": "finances" },
+    { "id": "formulaire-ajout", "libelle": "Formulaire d'ajout d'un bénéficiaire ou demande écrite à la mutuelle", "detail": "Fourni par votre mutuelle ou par l'employeur.", "coffre": "sante" },
+    { "id": "jugement-residence", "libelle": "Jugement ou convention fixant la résidence de l'enfant (parents séparés)", "detail": "Copie, si la mutuelle la demande.", "coffre": "jaf" },
+    { "id": "carte-tiers-payant", "libelle": "Carte de tiers payant de la mutuelle mentionnant l'enfant", "detail": "À présenter au médecin et à la pharmacie.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez d'abord que l'enfant est bien rattaché à la CSSM", "detail": "Sans rattachement, la mutuelle ne peut pas rembourser. Voir la fiche sur le rattachement de l'enfant." },
+    { "titre": "Lisez votre contrat ou la notice de la mutuelle d'entreprise", "detail": "Repérez si les enfants sont couverts d'office, en option ou avec un supplément." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Attestation de droits où figure l'enfant, acte de naissance ou livret de famille, RIB, pièce d'identité, formulaire signé." },
+    { "titre": "Demandez l'ajout de l'enfant", "detail": "Auprès de votre mutuelle ou de l'employeur. Gardez une copie de la demande." },
+    { "titre": "Parents séparés : accordez-vous sur le contrat qui couvre l'enfant", "detail": "Celui qui n'est pas relié à la mutuelle envoie lui-même ses relevés de remboursement." },
+    { "titre": "Contrôlez le premier remboursement", "detail": "Vérifiez que la part complémentaire a bien été versée." }
+  ],
+  "ou": [
+    { "nom": "Votre mutuelle ou le service des ressources humaines de votre employeur" },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Attestation de droits et rattachement de l'enfant.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" }
+  ],
+  "liens": [
+    { "titre": "Régime de sécurité sociale de Mayotte (Cleiss)", "url": "https://www.cleiss.fr/docs/regimes/regime_mayotte.html" },
+    { "titre": "Complémentaire santé solidaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation de droits de l'enfant", "categorie": "sante" },
+    { "type": "coffre", "titre": "Carte de tiers payant de la mutuelle", "categorie": "sante" },
+    { "type": "depense", "titre": "Cotisation de mutuelle pour l'enfant", "categorie": "sante" },
+    { "type": "rappel", "titre": "Vérifier chaque année la couverture de l'enfant par la mutuelle", "evenement": "sante" }
+  ],
+  "aConfirmer": [
+    "À confirmer : l'obligation pour les employeurs de Mayotte de proposer une complémentaire santé collective, que la fiche nationale ne mentionne pas.",
+    "À confirmer auprès de la CSSM : l'existence d'une transmission automatique des remboursements vers les mutuelles (liaison Noémie) à Mayotte.",
+    "À confirmer auprès de votre mutuelle : âge limite de couverture des enfants et justificatifs exigés pour un enfant de parents séparés."
+  ],
+  "motsCles": ["mutuelle", "complémentaire santé", "ticket modérateur", "ayant droit", "CSSM", "remboursement"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Cleiss, Le régime de sécurité sociale de Mayotte", "url": "https://www.cleiss.fr/docs/regimes/regime_mayotte.html", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" }
+  ]
+}

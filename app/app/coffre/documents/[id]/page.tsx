@@ -16,7 +16,8 @@ import { useCategories, useDeletedDocs, useFolders, useVaultDoc } from '@/compon
 import { FolderPickerSheet } from '@/components/coffre/FolderSheets'
 import { folderPath, moveDocumentToFolder } from '@/lib/data/vault-folders'
 import { LoadingState } from '@/components/mobile/StateScreens'
-import { moveDocument, renameDocument } from '@/lib/data/vault'
+import { moveDocument, renameDocument, updateDocDate } from '@/lib/data/vault'
+import { todayKey } from '@/lib/tz'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { shareDocument, startDownload, startPreview } from '@/components/coffre/useDocActions'
 import { SharedByBadge } from '@/components/famille/SharedByBadge'
@@ -67,6 +68,10 @@ function DocumentDetail({ id }: { id: string }) {
   const [moveTo, setMoveTo] = useState(categoryId)
   const [renameOpen, setRenameOpen] = useState(false)
   const [moveOpen, setMoveOpen] = useState(false)
+  const [docDate, setDocDate] = useState(base?.docDate ?? '')
+  const [draftDate, setDraftDate] = useState(docDate)
+  const [dateOpen, setDateOpen] = useState(false)
+  const isPhoto = base?.type === 'image'
   const { folders } = useFolders()
   // Dossier : celui du document (qui peut arriver après coup, ex. démo après montage),
   // sauf une fois rangé ici (valeur locale). `undefined` = pas encore modifié ici.
@@ -99,6 +104,8 @@ function DocumentDetail({ id }: { id: string }) {
     setDraftName(base.name)
     setCategoryId(base.categoryId)
     setMoveTo(base.categoryId)
+    setDocDate(base.docDate)
+    setDraftDate(base.docDate)
     setFolderOverride(undefined)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [baseId])
@@ -129,7 +136,7 @@ function DocumentDetail({ id }: { id: string }) {
 
   const category = categories.find((c) => c.id === categoryId)
   const folderTrail = folderPath(folders, folderId)
-  const doc = { ...base, name }
+  const doc = { ...base, name, docDate }
 
   return (
     <>
@@ -174,7 +181,20 @@ function DocumentDetail({ id }: { id: string }) {
                 </Link>
               ) : t('noFolder')}
             </InfoRow>
-            <InfoRow icon={<CalendarDays className="h-[18px] w-[18px]" />} label={t('docDate')}>{f.date(doc.docDate)}</InfoRow>
+            <InfoRow icon={<CalendarDays className="h-[18px] w-[18px]" />} label={t(isPhoto ? 'photoDate' : 'docDate')}>
+              <span className="flex items-center justify-between gap-3">
+                <span>{f.date(doc.docDate)}</span>
+                {!readOnly && (
+                  <button
+                    type="button"
+                    onClick={() => { setDraftDate(doc.docDate); setDateOpen(true) }}
+                    className="rounded text-[12.5px] font-bold text-leaf-700 underline decoration-2 underline-offset-2"
+                  >
+                    {t('editDate')}
+                  </button>
+                )}
+              </span>
+            </InfoRow>
             <InfoRow icon={<Clock className="h-[18px] w-[18px]" />} label={t('addedOn')}>{t('addedValue', { date: f.date(doc.addedAt), time: f.locale === 'fr' ? doc.addedTime.replace(':', 'h') : doc.addedTime })}</InfoRow>
             <InfoRow icon={<Landmark className="h-[18px] w-[18px]" />} label={t('source')}>{f.source(doc.source)}</InfoRow>
             <InfoRow icon={<HardDrive className="h-[18px] w-[18px]" />} label={t('size')}>{f.size(doc.size)}</InfoRow>
@@ -272,6 +292,43 @@ function DocumentDetail({ id }: { id: string }) {
             </label>
           ))}
         </fieldset>
+      </Modal>
+      <Modal
+        open={dateOpen && !readOnly}
+        onClose={() => setDateOpen(false)}
+        title={t(isPhoto ? 'photoDateTitle' : 'dateTitle')}
+        description={t(isPhoto ? 'photoDateDescription' : 'dateDescription')}
+        size="sm"
+        footer={
+          <>
+            <Button variant="secondary" onClick={() => setDateOpen(false)}>{tc('cancel')}</Button>
+            <Button
+              variant="primary"
+              disabled={!draftDate || draftDate === doc.docDate}
+              onClick={async () => {
+                try {
+                  await updateDocDate(doc.id, draftDate)
+                  setDocDate(draftDate)
+                  setDateOpen(false)
+                  announce(t('dateUpdated'))
+                } catch (e) {
+                  announce(e instanceof Error ? e.message : t('dateFailed'))
+                }
+              }}
+            >
+              {tc('save')}
+            </Button>
+          </>
+        }
+      >
+        <Input
+          type="date"
+          label={t(isPhoto ? 'photoDate' : 'docDate')}
+          value={draftDate}
+          onChange={(e) => setDraftDate(e.target.value)}
+          max={isPhoto ? todayKey() : undefined}
+          required
+        />
       </Modal>
       <FolderPickerSheet
         open={folderOpen && !readOnly}

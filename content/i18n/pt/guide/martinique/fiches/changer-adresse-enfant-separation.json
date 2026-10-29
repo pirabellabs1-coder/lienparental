@@ -1,0 +1,256 @@
+{
+  "slug": "changer-adresse-enfant-separation",
+  "territoire": "martinique",
+  "categorie": "separation",
+  "titre": "Mudar o endereço da criança após uma separação (Caf, escola, seguridade social)",
+  "resume": "Quem avisar e em que ordem quando o endereço da criança muda: Caf, escola, Assurance Maladie, Receita, de uma só vez se possível, com os documentos a preparar e as obrigações em relação ao outro genitor.",
+  "aQuoiCaSert": "Após uma separação, o endereço da criança muda com frequência, ou ela passa a viver em dois lares. Atualizar esse endereço evita cartas perdidas, benefícios mal calculados ou pagos ao genitor errado e esquecimentos da escola. Esta ficha reúne os procedimentos, órgão por órgão, e lembra o que a lei prevê para informar o outro genitor.",
+  "quiEstConcerne": [
+    "O genitor com quem a criança passa a morar, ou que se muda com ela.",
+    "Os pais em residência alternada, que devem declarar os dois endereços e escolher como dividir os benefícios."
+  ],
+  "aSavoir": [
+    "O serviço on-line gratuito « Je change de coordonnées » (« Mudo meus dados ») do service-public.gouv.fr, site oficial do governo francês, envia seu novo endereço de uma só vez a mais de 30 órgãos nacionais (Receita, Assurance Maladie, France Travail, caixas de aposentadoria, alguns fornecedores de energia) e a mais de 4.500 prefeituras (mairies) conectadas. Não atualiza as listas eleitorais, nem seu banco ou seguro.",
+    "Caf (Caisse d'allocations familiales, órgão de benefícios familiares): declare a separação no seu espaço on-line, em « Déclaration de situation », e a mudança no serviço « Déclaration de changement d'adresse ». Para o auxílio-moradia, faça um novo pedido assim que entrar no imóvel. Em caso de esquecimento de boa-fé, vale o « droit à l'erreur » (direito ao erro) se você regularizar rápido.",
+    "Residência alternada e Caf: preencha o formulário cerfa n° 14000. Os pais podem indicar um só beneficiário ou dividir os auxílios familiares; em caso de desacordo, cada um recebe automaticamente uma parte. Só os auxílios familiares e o complément de libre choix du mode de garde (CMG, auxílio para cuidados infantis) se dividem; os outros benefícios vão para um só genitor. A escolha pode ser mudada após um ano.",
+    "Assurance Maladie (seguro de saúde público francês): mude o endereço na conta ameli, em « Mes démarches », pelo telefone 3646, ou por carta com cópia frente e verso do seu documento de identidade.",
+    "Receita (impostos): informe o endereço no seu espaço em impots.gouv.fr e depois indique a mudança e a data dela na sua declaração de renda.",
+    "Escola: você deve informar a escola de qualquer mudança de situação familiar ou de endereço, e de qualquer decisão do juiz de família (juge aux affaires familiales, JAF) sobre a criança. A escola passa as mesmas informações a cada genitor, em mãos ou nos endereços indicados no início do ano.",
+    "Se você exerce sozinho(a) a autoridade parental, entregue uma cópia da sentença ao diretor da escola ou do estabelecimento.",
+    "Mudança de um genitor: um genitor separado tem o direito de se mudar. Se isso alterar o exercício da autoridade parental (por exemplo, o direito de visita), deve avisar o outro com antecedência, o quanto antes. Se a criança mora com ele por sentença ou acordo, deve informar o novo endereço em até 1 mês após a mudança, sob pena de 6 meses de prisão e multa de 7.500 €.",
+    "Em caso de desacordo sobre a mudança ou a residência da criança: mediação familiar ou pedido ao juiz de família (JAF) do local onde a criança mora (advogado não obrigatório)."
+  ],
+  "documents": [
+    {
+      "id": "domicile",
+      "libelle": "Comprovante do novo endereço (de preferência com menos de 3 meses)",
+      "detail": "Contrato ou recibo de aluguel, conta de água ou luz. Se você está hospedado(a): declaração de hospedagem, documento de identidade e comprovante de endereço de quem hospeda.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "ancien-domicile",
+      "libelle": "Comprovante do endereço anterior",
+      "detail": "Pedido pela Assurance Maladie se você fizer o procedimento por carta.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "identite",
+      "libelle": "Documento de identidade do genitor que declara (cópia frente e verso)",
+      "detail": "Para as cartas à CPAM ou CGSS (caixas locais de seguro de saúde) e para criar uma conta na Caf.",
+      "coffre": "autres"
+    },
+    {
+      "id": "numeros",
+      "libelle": "Números de beneficiário da Caf, de seguridade social e fiscal",
+      "detail": "Nas cartas da Caf, na sua carte Vitale (cartão do seguro de saúde) e no seu aviso de imposto. Indispensáveis para qualquer procedimento on-line ou por escrito.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo sobre a residência da criança (cópia)",
+      "detail": "Para a escola, a Caf e a seguridade social, se uma decisão fixa a residência ou confia a autoridade parental a um só genitor.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Formulário « Enfant(s) en résidence alternée : déclaration et choix des parents » (cerfa n° 14000)",
+      "detail": "Só em residência alternada. Assinado pelos dois pais se houver acordo. Disponível em service-public.gouv.fr e caf.fr.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "courrier-autre-parent",
+      "libelle": "Cópia da carta que informa o novo endereço ao outro genitor",
+      "detail": "Guarde uma prova datada (carta registrada, e-mail ou mensagem) da informação dada.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "fiche-ecole",
+      "libelle": "Ficha de informações da escola atualizada",
+      "detail": "Com os contatos dos dois pais e as pessoas autorizadas a buscar a criança.",
+      "coffre": "scolarite"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Informe o outro genitor",
+      "detail": "Antes da mudança se a rotina da criança mudar e, em todo caso, em até 1 mês depois se a criança mora com você por sentença ou acordo. Guarde um registro escrito."
+    },
+    {
+      "titre": "Faça a declaração única on-line",
+      "detail": "No service-public.gouv.fr, serviço « Je change de coordonnées »: marque os órgãos a avisar (Receita, Assurance Maladie, prefeitura se conectada, energia)."
+    },
+    {
+      "titre": "Declare a separação e o endereço à Caf",
+      "detail": "No « Mon Compte »: « Déclaration de situation » para a separação, « Déclaration de changement d'adresse » para a mudança, novo pedido de auxílio-moradia. Em residência alternada, envie o cerfa n° 14000."
+    },
+    {
+      "titre": "Atualize a Assurance Maladie",
+      "detail": "Conta ameli, em « Mes démarches », ou 3646. Aproveite para verificar a qual genitor a criança está vinculada."
+    },
+    {
+      "titre": "Confira antes de ir à escola",
+      "detail": "Comprovante do novo endereço, sentença ou acordo se houver, contatos completos dos dois pais, lista das pessoas autorizadas a buscar a criança. Peça que as cartas sejam enviadas aos dois endereços."
+    },
+    {
+      "titre": "Avise a escola",
+      "detail": "Entregue ao diretor ou à secretaria a ficha de informações atualizada. Pense também na cantina, nas atividades extraescolares e no transporte escolar."
+    },
+    {
+      "titre": "Termine pelos órgãos não incluídos",
+      "detail": "Banco, seguro residencial e escolar, mutuelle (plano de saúde complementar), médico, atividades da criança, inscrição nas listas eleitorais na prefeitura."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Service-public.gouv.fr, Je change de coordonnées",
+      "detail": "Declaração única e gratuita a mais de 30 órgãos.",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901"
+    },
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "« Mon Compte » em caf.fr ou aplicativo « Caf - Mon Compte ».",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "Assurance Maladie (CGSS de la Martinique, caixa local de seguridade social)",
+      "detail": "Conta ameli ou 3646.",
+      "url": "https://www.ameli.fr",
+      "telephone": "3646"
+    },
+    {
+      "nom": "Impots.gouv.fr",
+      "detail": "Espaço pessoal, ou centro de finanças públicas (centre des finances publiques).",
+      "url": "https://www.impots.gouv.fr"
+    },
+    {
+      "nom": "Escola da criança (école, collège ou lycée)",
+      "detail": "Diretor da escola ou secretaria do estabelecimento."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Je change de coordonnées, mudar seus dados on-line (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901"
+    },
+    {
+      "titre": "Informar uma mudança de situação à Caf (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827"
+    },
+    {
+      "titre": "Auxílios familiares em residência alternada (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Um genitor separado pode se mudar livremente? (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389"
+    },
+    {
+      "titre": "Escola e pais separados: informação aos pais (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Comprovante do novo endereço",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Prova de que o outro genitor foi informado (novo endereço)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Formulário de residência alternada da Caf (cerfa 14000)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Informar o novo endereço ao outro genitor (máximo de 1 mês)",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Residência alternada: escolha na Caf alterável após 1 ano",
+      "evenement": "autre"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Reunião na escola: atualização do endereço",
+      "evenement": "ecole"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Até 1 mês após a mudança",
+      "detail": "Para informar o novo endereço ao outro genitor, quando a criança mora com você por sentença ou acordo."
+    },
+    {
+      "libelle": "Assim que entrar no imóvel",
+      "detail": "Novo pedido de auxílio-moradia à Caf."
+    },
+    {
+      "libelle": "1 ano",
+      "detail": "Duração mínima da escolha de beneficiário ou da divisão em residência alternada, salvo mudança da residência dos filhos."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: a Caf de la Martinique aplica regras próprias dos departamentos ultramarinos para os auxílios familiares (pagos desde o primeiro filho); verifique com ela as consequências de uma residência alternada com um só filho.",
+    "A confirmar localmente: se a sua prefeitura está conectada ao serviço « Je change de coordonnées »."
+  ],
+  "motsCles": [
+    "mudança de endereço",
+    "mudança",
+    "separação",
+    "residência alternada",
+    "Caf",
+    "ameli",
+    "escola",
+    "impostos",
+    "cerfa 14000"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, notícia A18901 Je change de coordonnées (6 de maio de 2026)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F827 Informar uma mudança de situação à Caf",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Auxílios familiares em residência alternada",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F737 Seguridade social: mudança de situação pessoal",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F383 Imposto de renda: mudança de endereço",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383",
+      "verifieLe": "2026-04-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F11389 Um genitor separado pode se mudar livremente?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389",
+      "verifieLe": "2025-05-28"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2025-06-20"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1391 Educação infantil e ensino fundamental: informação aos pais",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391",
+      "verifieLe": "2025-07-30"
+    }
+  ]
+}

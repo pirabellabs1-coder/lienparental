@@ -1,0 +1,198 @@
+{
+  "slug": "aeeh-enfant-handicap",
+  "territoire": "martinique",
+  "categorie": "aides",
+  "titre": "Auxílio de educação da criança com deficiência (AEEH) e MDPH",
+  "resume": "Montar um processo completo na MDPH para a AEEH: formulário, atestado médico com menos de um ano, documentos exatos, prazos de resposta e recursos.",
+  "aQuoiCaSert": "A AEEH (allocation d'éducation de l'enfant handicapé, auxílio de educação da criança com deficiência) ajuda os pais a arcar com as despesas de educação e de cuidados de uma criança com deficiência. Ela tem um valor básico e, conforme as necessidades, um complemento e um acréscimo para pai ou mãe solo. O pedido é feito à MDPH (maison départementale des personnes handicapées, centro departamental para pessoas com deficiência). A decisão é tomada pela CDAPH (commission des droits et de l'autonomie, comissão de direitos e autonomia) e depois a Caf (Caisse d'allocations familiales, órgão de benefícios familiares) paga o auxílio.",
+  "quiEstConcerne": [
+    "Os pais de uma criança com menos de 20 anos cuja taxa de incapacidade é de pelo menos 80%.",
+    "Os pais de uma criança com taxa de 50% a menos de 80%, se ela frequenta um estabelecimento ou serviço especializado ou se a CDAPH recomendar cuidados.",
+    "Os pais separados, qualquer que seja o regime de residência da criança (mas a AEEH não é dividida em residência alternada)."
+  ],
+  "aSavoir": [
+    "Valor básico: 153,01 € por mês. Há complementos conforme a categoria de necessidades (1 a 6) e um acréscimo para pai ou mãe solo (service-public.gouv.fr, verificado em 1º de junho de 2026).",
+    "O atestado médico (cerfa n° 15695) deve ter no máximo um ano na data da entrega.",
+    "A CDAPH deve responder em até 4 meses. Sem resposta após 4 meses, o pedido é considerado recusado.",
+    "Em caso de recusa, é possível um recurso administrativo prévio obrigatório (recours administratif préalable obligatoire) em até 2 meses e, depois, um recurso ao tribunal judiciaire (tribunal judiciário) em até 2 meses após a resposta.",
+    "A AEEH é concedida por 3 a 5 anos se a taxa for de pelo menos 80%, por 2 a 5 anos entre 50 e 80%, ou sem limite de duração até os 20 anos se o estado da criança não puder melhorar.",
+    "Em residência alternada, a AEEH não é dividida: é paga integralmente ao genitor designado como beneficiário (service-public.gouv.fr).",
+    "Uma lei de 12 de junho de 2026 prevê mudanças, entre elas um teste de análise mais rápida. Elas só se aplicam depois da publicação dos decretos."
+  ],
+  "documents": [
+    {
+      "id": "formulaire-mdph",
+      "libelle": "Formulário de pedido à MDPH (cerfa n° 15692)",
+      "detail": "Original datado e assinado pelo representante legal. Disponível em service-public.gouv.fr ou na MDPH.",
+      "coffre": "sante"
+    },
+    {
+      "id": "certificat-medical",
+      "libelle": "Atestado médico (cerfa n° 15695) com menos de um ano",
+      "detail": "Original preenchido pelo médico que acompanha a criança. Anexe os laudos úteis (avaliações, exames).",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-enfant",
+      "libelle": "Documento de identidade da criança ou livro de família (livret de famille)",
+      "detail": "Fotocópia frente e verso. Para criança estrangeira, autorização de residência ou documento de circulação.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-representants",
+      "libelle": "Documento de identidade de cada representante legal",
+      "detail": "Fotocópia frente e verso de documento válido, ou autorização de residência.",
+      "coffre": "sante"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de residência",
+      "detail": "Fotocópia. Se você mora na casa de alguém, junte uma declaração sob palavra (attestation sur l'honneur) da pessoa que o hospeda.",
+      "coffre": "sante"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença de proteção ou decisão sobre a autoridade parental, se for o caso",
+      "detail": "Cópia, se uma sentença define quem exerce a autoridade parental ou se existe medida de proteção.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "bilans",
+      "libelle": "Avaliações complementares (audição, visão, psicólogo, escola)",
+      "detail": "Cópias. O formulário indica as partes opcionais (avaliação auditiva, avaliação oftalmológica).",
+      "coffre": "sante"
+    },
+    {
+      "id": "accuse-reception",
+      "libelle": "Aviso de recebimento do processo pela MDPH",
+      "detail": "Guarde-o: é ele que inicia a contagem do prazo de 4 meses.",
+      "coffre": "courriers"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Marque consulta com o médico para o atestado médico",
+      "detail": "O atestado deve ter menos de um ano na entrega. Peça que ele detalhe as necessidades da criança no dia a dia."
+    },
+    {
+      "titre": "Preencha o formulário de pedido",
+      "detail": "Descreva a vida da criança, suas necessidades, a escola e as suas despesas. O projeto de vida (projet de vie) ajuda a comissão a entender a situação."
+    },
+    {
+      "titre": "Confira antes de enviar o processo",
+      "detail": "Formulário assinado, atestado médico original com menos de um ano, documentos de identidade da criança e dos representantes legais, comprovante de residência, avaliações. Um processo incompleto atrasa a análise."
+    },
+    {
+      "titre": "Envie o processo à MDPH",
+      "detail": "De preferência por carta registrada com aviso de recebimento, ou on-line se a MDPH oferecer esse serviço. Guarde uma cópia completa."
+    },
+    {
+      "titre": "Acompanhe a decisão",
+      "detail": "A CDAPH tem 4 meses para responder. Anote a data para poder cobrar e, em caso de recusa, recorrer em até 2 meses."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "MDPH de la Martinique",
+      "detail": "Contatos a verificar no diretório oficial Mon Parcours Handicap.",
+      "url": "https://www.monparcourshandicap.gouv.fr/annuaire"
+    },
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "Paga a AEEH após a decisão da CDAPH.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Auxílio de educação da criança com deficiência (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809"
+    },
+    {
+      "titre": "Formulário de pedido à MDPH (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993"
+    },
+    {
+      "titre": "Encontrar a sua MDPH (monparcourshandicap.gouv.fr)",
+      "url": "https://www.monparcourshandicap.gouv.fr/annuaire"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Atestado médico MDPH da criança",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Processo MDPH completo (cópia)",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notificação da decisão da CDAPH",
+      "categorie": "courriers"
+    },
+    {
+      "type": "rappel",
+      "titre": "Cobrar a MDPH se não houver resposta 4 meses após a entrega",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Preparar a renovação da AEEH antes do fim do direito",
+      "evenement": "sante"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Consulta médica para o atestado médico MDPH",
+      "evenement": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Atestado médico com menos de um ano na entrega do processo"
+    },
+    {
+      "libelle": "Resposta da CDAPH em até 4 meses",
+      "detail": "Sem resposta, o pedido é considerado recusado."
+    },
+    {
+      "libelle": "Recurso em até 2 meses após uma decisão de recusa"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: o endereço, os horários e a possibilidade de enviar o pedido on-line à MDPH de la Martinique (diretório Mon Parcours Handicap).",
+    "A confirmar localmente: os prazos reais de análise na Martinica podem ultrapassar o prazo legal."
+  ],
+  "motsCles": [
+    "AEEH",
+    "MDPH",
+    "deficiência",
+    "CDAPH",
+    "atestado médico",
+    "auxílio"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F14809 Auxílio de educação da criança com deficiência",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809",
+      "verifieLe": "2026-06-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R19993 Formulário de pedido à MDPH",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993",
+      "verifieLe": "2026-07-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Mon Parcours Handicap, diretório",
+      "url": "https://www.monparcourshandicap.gouv.fr/annuaire"
+    }
+  ]
+}

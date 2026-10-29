@@ -1,0 +1,149 @@
+{
+  "slug": "prime-demenagement",
+  "territoire": "reunion",
+  "categorie": "logement",
+  "titre": "Caf moving grant (prime de déménagement)",
+  "resume": "A grant for families with at least 3 children who move around the time of a birth: date conditions, maximum amounts, documents to send and the 6-month deadline.",
+  "aQuoiCaSert": "The moving grant (prime de déménagement) from the Caf (Caisse d'allocations familiales, the family benefits office) reimburses actual moving costs, up to a maximum amount, for families with at least 3 children who move during the pregnancy of their 3rd or later child, or within two years of the youngest child's birth. It is paid in one go, on proof of costs. An advance based on a quote is possible if your situation is precarious.",
+  "quiEstConcerne": [
+    "Families with at least 3 dependent children, born or expected.",
+    "Who are entitled, for the new home, to the APL (aide personnalisée au logement, personalized housing aid) or the family housing allowance (allocation de logement familiale, ALF).",
+    "Separated parent: these conditions are assessed for your own Caf household."
+  ],
+  "aSavoir": [
+    "Dates: the move must take place between the 1st day of the month following the 3rd month of pregnancy and the last day of the month before the youngest child's 2nd birthday.",
+    "Maximum amounts since April 1, 2026: €1,147.58 for 3 children, €1,243.21 for 4 children, plus €95.63 per additional child. You are reimbursed your actual costs up to this limit.",
+    "Advance if your situation is precarious: 50% to 75% of the quote, up to the amount of the grant due. The paid invoice must then be provided within 6 months of the move to receive the balance.",
+    "The application (Cerfa n° 11363) is sent to the Caf, or to the MSA (Mutualité sociale agricole, the farmers' social security fund) for the agricultural scheme, no later than 6 months after the move.",
+    "If refused, you have 2 months from receipt of the decision to refer the matter to the amicable appeals board (commission de recours amiable)."
+  ],
+  "documents": [
+    {
+      "id": "cerfa-11363",
+      "libelle": "Moving grant application form (Cerfa n° 11363)",
+      "detail": "Download it from service-public.gouv.fr, fill it in and sign it.",
+      "coffre": "finances"
+    },
+    {
+      "id": "facture",
+      "libelle": "Paid invoice from the removal company or proof of costs",
+      "detail": "All invoices related to the move, in your name. Keep a copy of every document you send.",
+      "coffre": "finances"
+    },
+    {
+      "id": "devis",
+      "libelle": "Removal company's quote, to request an advance",
+      "detail": "Only if your situation is precarious.",
+      "coffre": "finances"
+    },
+    {
+      "id": "grossesse",
+      "libelle": "Pregnancy declaration or birth certificate of the youngest child",
+      "detail": "Only if the Caf asks for it to check the period.",
+      "coffre": "sante"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Rent certificate (attestation de loyer) for the new home",
+      "detail": "Needed to open entitlement to housing benefit, a condition of the grant.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check the date conditions and number of children",
+      "detail": "Work out the allowed period from the start of the pregnancy or the youngest child's date of birth."
+    },
+    {
+      "titre": "Apply for housing benefit for the new home",
+      "detail": "Without entitlement to the APL or the ALF, there is no grant. See the guide entry \"Housing benefits in Réunion\"."
+    },
+    {
+      "titre": "Keep all the moving invoices",
+      "detail": "Or ask for a quote if you need an advance."
+    },
+    {
+      "titre": "Check before sending",
+      "detail": "Cerfa n° 11363 form completed and signed, legible paid invoices, Caf beneficiary number, sent within 6 months of the move. Keep a copy of everything."
+    },
+    {
+      "titre": "Send the application to the Caf de La Réunion",
+      "detail": "No later than 6 months after the move."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de La Réunion",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    },
+    {
+      "nom": "MSA",
+      "detail": "If you are covered by the agricultural scheme."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Moving grant (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008"
+    },
+    {
+      "titre": "Family housing allowance (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Moving costs",
+      "categorie": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Send the moving grant application (6 months maximum)",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Moving invoice",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Moving grant application sent (copy)",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Application no later than 6 months after the move"
+    },
+    {
+      "libelle": "Paid invoice within 6 months of the move if you received an advance"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the Caf de La Réunion: which housing benefit (APL or ALF) applies to your new home, a condition of the grant.",
+    "To be confirmed: the maximum amounts quoted are those of service-public.gouv.fr; the page does not mention a different amount for the overseas territories."
+  ],
+  "motsCles": [
+    "moving",
+    "grant",
+    "large family",
+    "Caf",
+    "birth",
+    "cerfa 11363"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2008 Moving grant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13132 Family housing allowance",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

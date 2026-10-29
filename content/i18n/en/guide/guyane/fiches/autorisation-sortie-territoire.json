@@ -61,11 +61,11 @@
     "To be confirmed locally: opening hours of the Cayenne préfecture and the Saint-Laurent-du-Maroni sous-préfecture for an emergency OST."
   ],
   "motsCles": ["AST", "leaving the country", "travel", "minor", "Brazil", "Suriname", "OST", "IST", "cerfa 15646"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1359 Authorization to leave the country (AST)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359", "verifieLe": "2026-03-20" },
-    { "titre": "Service-public.gouv.fr, F1774 Parental conflict over a minor child leaving the country", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774", "verifieLe": "2025-04-29" },
-    { "titre": "Service-public.gouv.fr, F38460 Can a parent go abroad with the child?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38460", "verifieLe": "2026-06-05" },
-    { "titre": "Formulaires.service-public.gouv.fr, Cerfa n° 15646 Authorization to leave the country", "url": "https://www.formulaires.service-public.gouv.fr/gf/getAnnexe.do?cerfaAnnexe=15646*01&cerfaFormulaire=15646*01" }
+    { "titre": "Service-public.gouv.fr, F1359 Authorization to leave the country (AST)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1774 Parental conflict over a minor child leaving the country", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F38460 Can a parent go abroad with the child?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38460", "verifieLe": "2026-10-29" },
+    { "titre": "Formulaires.service-public.gouv.fr, Cerfa n° 15646 Authorization to leave the country", "url": "https://www.formulaires.service-public.gouv.fr/gf/getAnnexe.do?cerfaAnnexe=15646*01&cerfaFormulaire=15646*01", "verifieLe": "2026-10-29" }
   ]
 }

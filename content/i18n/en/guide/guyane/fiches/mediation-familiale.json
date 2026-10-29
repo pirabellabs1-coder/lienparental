@@ -63,13 +63,13 @@
     "To be confirmed locally: the compulsory prior attempt at family mediation does not appear to apply at the tribunal judiciaire (judicial court) of Cayenne. Check with the court registry (greffe) before applying to the judge."
   ],
   "motsCles": ["mediation", "mediator", "agreement", "dialogue", "conflict", "court approval"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F34355 Family mediation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355", "verifieLe": "2025-10-01" },
-    { "titre": "Service-public.gouv.fr, R58771 Joint request for approval of a parenting agreement (Cerfa 16139)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2025-11-26" },
-    { "titre": "Service-public.gouv.fr, F33227 Tax stamp (exemption for approval of a parenting agreement)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-04-10" },
-    { "titre": "Service-public.gouv.fr, F12544 Domestic violence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-04-01" },
-    { "titre": "Ministry of Justice, directory: UDAF 973", "url": "https://www.justice.gouv.fr/annuaire/fiche/union-departementale-des-associations-familiales-de-guyane-udaf-973-12-42456" },
-    { "titre": "Civil Code, article 373-2-10 (Légifrance)", "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042193469" }
+    { "titre": "Service-public.gouv.fr, F34355 Family mediation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R58771 Joint request for approval of a parenting agreement (Cerfa 16139)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F33227 Tax stamp (exemption for approval of a parenting agreement)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F12544 Domestic violence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-10-29" },
+    { "titre": "Ministry of Justice, directory: UDAF 973", "url": "https://www.justice.gouv.fr/annuaire/fiche/union-departementale-des-associations-familiales-de-guyane-udaf-973-12-42456", "verifieLe": "2026-10-29" },
+    { "titre": "Civil Code, article 373-2-10 (Légifrance)", "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042193469", "verifieLe": "2026-10-29" }
   ]
 }

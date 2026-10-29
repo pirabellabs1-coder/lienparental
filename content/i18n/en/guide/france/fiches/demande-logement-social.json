@@ -1,0 +1,189 @@
+{
+  "slug": "demande-logement-social",
+  "territoire": "france",
+  "categorie": "logement",
+  "titre": "Applying for social housing",
+  "resume": "Submit a social housing application, get your unique number, gather the right documents (including those related to a separation) and renew the application every year.",
+  "aQuoiCaSert": "Social housing is housing with a regulated rent, allocated subject to income limits. The application, online or at a registration office, gives you a national unique number (numéro unique), which starts the clock on how long your application has been waiting. After a separation, you can have only your own income taken into account, provided you supply the right supporting documents.",
+  "quiEstConcerne": [
+    "Households whose income does not exceed the limits set by area (Paris and neighboring towns, rest of Île-de-France, other regions).",
+    "Parents who are separating and need to find new housing with their children.",
+    "Foreign nationals holding a valid residence permit or receipt (récépissé)."
+  ],
+  "aSavoir": [
+    "Annual income limits outside Île-de-France, general case, for an application in 2026 (2024 reference tax income): €30,424 for 1 person, €40,630 for 2, €48,859 for 3, €58,986 for 4 people to be housed (service-public.gouv.fr).",
+    "Paris and Île-de-France, general case: €34,996 for 1 person and €52,303 for 2; for 3 people, €68,562 in Paris and neighboring towns, €62,871 in the rest of Île-de-France; for 4, €81,858 and €75,309 respectively.",
+    "Separation: so that only your income counts, attach, depending on your case, the divorce judgment, the application to the family court judge (juge aux affaires familiales, JAF) or a lawyer's certificate (amicable divorce under way), the note of the end of the PACS (civil partnership), or the police complaint receipt in case of domestic violence.",
+    "If your income has dropped by at least 10%, you can have this taken into account with supporting documents (payslips, for example). A sworn statement is not accepted.",
+    "Outside Île-de-France, you need one application per département you are targeting. In Île-de-France, a single application covers the whole region.",
+    "Renewal: every year. If not renewed before the anniversary date, the application is canceled and in principle you must start again with a new unique number.",
+    "Phone help with the procedure: 0 806 000 113, Monday to Friday from 9 a.m. to 7 p.m. This service does not give the progress of your application."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Applicant's ID document",
+      "detail": "Front-and-back copy of the ID card or passport. For a non-EU national: copy of the valid residence permit or receipt. Mandatory when applying.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "identite-cotitulaire",
+      "libelle": "ID document or residence permit of each adult to be housed",
+      "detail": "Valid copy.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "2025 tax notice on 2024 income for each person to be housed",
+      "detail": "Copy. Download it from your impots.gouv.fr account or ask your public finance center (centre des finances publiques).",
+      "coffre": "finances"
+    },
+    {
+      "id": "justificatif-separation",
+      "libelle": "Proof of separation",
+      "detail": "Copy of the divorce judgment, the application to the family court judge, the lawyer's certificate, the note of the end of the PACS or the police complaint receipt, depending on your situation.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Judgment or agreement setting the children's residence",
+      "detail": "Copy, to show the children to be housed with you or a shared residence arrangement.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Family record book (livret de famille) or the children's birth certificates",
+      "detail": "Copy, to show your dependents.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Proof of recent income",
+      "detail": "Copies of your latest payslips, Caf (Caisse d'allocations familiales, the family benefits office) or France Travail certificates. Required if your income has dropped by at least 10%.",
+      "coffre": "finances"
+    },
+    {
+      "id": "situation-logement",
+      "libelle": "Proof of your current housing situation",
+      "detail": "Copy of the lease, rent receipt, certificate of accommodation, or eviction judgment or landlord's notice to quit if applicable.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "attestation-enregistrement",
+      "libelle": "Registration certificate with the unique number",
+      "detail": "Download it from your personal account. Keep it safe.",
+      "coffre": "courriers"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Create your application on the national website",
+      "detail": "On demande-logement-social.gouv.fr, or with form cerfa n° 14069 submitted at a registration office (guichet enregistreur: town hall, social landlord, depending on the département)."
+    },
+    {
+      "titre": "Check before sending your file",
+      "detail": "Valid ID document or residence permit for each adult, everyone's 2025 tax notice, proof of separation and judgment on the children's residence if you are separated, family record book. Everyone to be housed must be declared."
+    },
+    {
+      "titre": "Get your registration certificate",
+      "detail": "It shows your national unique number and the application date, which counts for how long you have been waiting."
+    },
+    {
+      "titre": "Update the application as soon as your situation changes",
+      "detail": "Separation, birth, new address, drop in income: declare the change and add the supporting document."
+    },
+    {
+      "titre": "Renew every year",
+      "detail": "Before the anniversary date of the application, after receiving the reminder. Without renewal, the application is canceled."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "National social housing application portal",
+      "detail": "Submit, track, update and renew online.",
+      "url": "https://www.demande-logement-social.gouv.fr"
+    },
+    {
+      "nom": "Registration offices in your département (town halls, social landlords)",
+      "detail": "To submit a paper application or get help. Ask your town hall (mairie), which you can find in the service-public.fr directory.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    },
+    {
+      "nom": "ADIL of your département",
+      "detail": "Free housing advice from the ADIL (Agence départementale d'information sur le logement, the local housing information agency), including if your application has been canceled.",
+      "url": "https://www.anil.org/qui-sommes-nous/reseau-des-adil/"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Social housing conditions and income limits (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869"
+    },
+    {
+      "titre": "Social housing application (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007"
+    },
+    {
+      "titre": "Cancellation of a social housing application (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32881"
+    },
+    {
+      "titre": "Online social housing application",
+      "url": "https://www.demande-logement-social.gouv.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Social housing application registration certificate",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Proof of separation for the housing application",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Renew the social housing application before the anniversary date",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Annual renewal of the application",
+      "detail": "In the month before the anniversary date, otherwise the application is canceled."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the list of registration offices in your département and the waiting time considered \"abnormally long\", set by prefectoral order (arrêté préfectoral).",
+    "To be confirmed locally: social landlords may ask for additional documents at the time of allocation.",
+    "If you could not renew in time, you can challenge the cancellation at a registration office: check the conditions with it or with the ADIL."
+  ],
+  "motsCles": [
+    "social housing",
+    "HLM",
+    "unique number",
+    "renewal",
+    "separation",
+    "income limits"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F10007 Social housing application",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F32881 Cancellation of a social housing application",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32881",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F869 Conditions for getting social housing (income limits, form, phone help)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

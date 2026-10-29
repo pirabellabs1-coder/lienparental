@@ -1,0 +1,185 @@
+{
+  "slug": "compte-bancaire-adolescent",
+  "territoire": "france",
+  "categorie": "argent",
+  "titre": "Opening a bank account for my teenager",
+  "resume": "At what age, with which card, the parents' consent (including separated parents) and the precise list of documents to bring to the bank so you don't make the trip for nothing.",
+  "aQuoiCaSert": "An account in your teenager's name lets them receive pocket money, wages from a summer job or a benefit, and learn to manage a budget with a card suited to their age. A minor cannot open an account alone: their legal representatives (usually the parents) act on their behalf. The parents remain responsible for the funds, the transactions and any debts of the minor child.",
+  "quiEstConcerne": [
+    "Parents of a teenager aged 12 to 17 who want to open an account or a savings account with a card for them.",
+    "Separated parents who need to agree on opening the child's account or on the transactions made on it."
+  ],
+  "aSavoir": [
+    "From birth, the parents can open an account in the child's name, without the child's consent.",
+    "From age 12: with their parents' consent, the young person can request a livret jeune (youth savings account) and deposit or withdraw money from it. Withdrawals may be limited in amount and frequency, and a parent's signature is required for withdrawals. Parents cannot withdraw money from the livret jeune themselves.",
+    "From age 16: with their parents' permission, the young person can open an account at most banks, deposit and withdraw freely, and get a bank card and a checkbook.",
+    "The bank may require a systematic authorization card, which checks the balance at each payment: this is what limits the risk of an overdraft. Ask for one if you want this control.",
+    "Opening an account is free, but the bank may charge account or card fees: ask for the price list before signing.",
+    "Parents remain responsible for the funds and may only use the child's money for expenses that directly concern the child (education, upkeep). From age 16, they must account to the child for how it is used.",
+    "Separated parents who share parental authority: one parent alone can carry out routine management acts, but an act of disposal, such as changing the account or making a large withdrawal, requires both parents' agreement (Cour de cassation, France's highest court, June 12, 2025). If there is a problem, the guardianship judge (juge des tutelles) can be asked to decide.",
+    "If you hold parental authority alone by court decision, bring that decision: it explains to the bank why the other parent is not signing."
+  ],
+  "documents": [
+    {
+      "id": "identite-ado",
+      "libelle": "Teenager's ID document (valid original)",
+      "detail": "ID card or passport. If it has expired or been lost, get a new one from the town hall (mairie) first.",
+      "coffre": "finances"
+    },
+    {
+      "id": "identite-parent-1",
+      "libelle": "First parent's ID document (original)",
+      "detail": "Valid ID card, passport or residence permit, with photo.",
+      "coffre": "finances"
+    },
+    {
+      "id": "identite-parent-2",
+      "libelle": "Second parent's ID document (original or copy depending on the bank)",
+      "detail": "Often requested when both parents hold parental authority. Ask the bank whether they need to come and sign in person.",
+      "coffre": "finances"
+    },
+    {
+      "id": "filiation",
+      "libelle": "Family record book (livret de famille) or the child's birth certificate showing parentage",
+      "detail": "Proves you are the parents. Free certificate online on service-public.gouv.fr; lost book: a free second book from the town hall.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Recent proof of address",
+      "detail": "Water or electricity bill, rent receipt or tax notice. If you are housed by someone: certificate of accommodation and your host's ID document.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Court decision or agreement on parental authority (copy)",
+      "detail": "Bring it if you hold parental authority alone or if a decision sets out the child's situation.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "accord-autre-parent",
+      "libelle": "Written, signed consent from the other parent",
+      "detail": "If the other parent cannot come and the bank accepts it: dated, signed letter, with a copy of their ID document.",
+      "coffre": "finances"
+    },
+    {
+      "id": "contrat",
+      "libelle": "Account opening contract and fee terms",
+      "detail": "Given by the bank at signing. Keep it to keep track of fees and card limits.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Choose the right product for their age",
+      "detail": "Livret jeune from age 12 with a withdrawal card depending on the bank, an account with a card and checkbook from age 16 with your permission. Compare the fees and limits offered by your bank."
+    },
+    {
+      "titre": "Talk it over with the other parent",
+      "detail": "If you share parental authority, agree on the product, the card and the limits. A written agreement avoids deadlocks."
+    },
+    {
+      "titre": "Book an appointment at your bank",
+      "detail": "Ask by phone for the exact list of documents and whether both parents and the teenager must be present."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Original ID of the teenager and of each parent, family record book or birth certificate showing parentage, recent proof of address, judgment or agreement if you are separated, written consent of the other parent if absent. The teenager must be present to sign from age 16."
+    },
+    {
+      "titre": "Set up the card and limits",
+      "detail": "Ask for a systematic authorization card if you want to avoid any overdraft, and set payment and withdrawal limits."
+    },
+    {
+      "titre": "Store the contract in the Vault",
+      "detail": "Keep the contract, the bank details (RIB) and the price list."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Your bank",
+      "detail": "Branch or online bank: offers and required documents vary from one bank to another."
+    },
+    {
+      "nom": "Banque de France (French central bank), right to a bank account",
+      "detail": "If a bank refuses to open an account, it must tell you that you can refer the matter to the Banque de France.",
+      "url": "https://www.banque-france.fr/fr/a-votre-service/particuliers/droit-au-compte-bancaire"
+    },
+    {
+      "nom": "Mes questions d'argent (Banque de France)",
+      "detail": "Public financial education website, with a section on money and children.",
+      "url": "https://www.mesquestionsdargent.fr/comptes-moyens-de-paiement/ouvrir-un-compte"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Can a minor have a bank account? (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035"
+    },
+    {
+      "titre": "Individual bank account: documents to provide (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413"
+    },
+    {
+      "titre": "A minor's account: both parents' consent (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Teenager's bank account contract",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Other parent's written consent for the account",
+      "categorie": "finances"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Bank appointment: teenager's account",
+      "evenement": "rdv"
+    },
+    {
+      "type": "depense",
+      "titre": "Teenager's card or account fees",
+      "categorie": "frais-administratifs"
+    }
+  ],
+  "aConfirmer": [
+    "Each bank sets its own conditions: minimum age for the card, presence of both parents, how recent the proof of address must be. Ask for the exact list before the appointment.",
+    "To be confirmed with your bank: youth offers available, card fees and the related limits."
+  ],
+  "motsCles": [
+    "bank account",
+    "teenager",
+    "minor",
+    "bank card",
+    "pocket money",
+    "livret jeune",
+    "bank"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F21035 Can a minor have a bank account or a savings product?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2413 Individual bank account",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413",
+      "verifieLe": "2026-05-22"
+    },
+    {
+      "titre": "Service-public.gouv.fr, news item A18386 A minor's account: both parents' consent (July 8, 2025)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Mes questions d'argent (Banque de France), Opening an account",
+      "url": "https://www.mesquestionsdargent.fr/comptes-moyens-de-paiement/ouvrir-un-compte"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "slug": "declaration-naissance",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Registering my child's birth",
+  "resume": "A mandatory, free procedure at the town hall (mairie) of the place of birth, within 5 days. The exact documents to bring, the acknowledgment of paternity that can be made at the same time, and the family record book issued on this occasion.",
+  "aQuoiCaSert": "Registering the birth makes it possible to draw up the child's birth certificate: without it, the child has no civil status. The certificate is drawn up immediately by the civil registrar. For a first child together, the town hall also issues the family record book (livret de famille). It is the starting point for rights with the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund): family benefits and health insurance. Once the deadline has passed, the town hall can no longer register the birth on its own: a court decision is needed.",
+  "quiEstConcerne": [
+    "The father, the second mother, or anyone who attended the birth (doctor, midwife, head of the facility).",
+    "If the mother gives birth alone in hospital, the facility registers the birth."
+  ],
+  "aSavoir": [
+    "Deadline: 5 days after the birth, not counting the day of birth. If the last day is a Saturday, Sunday or public holiday, it is moved to the next working day.",
+    "In Mayotte, no extended deadline applies (unlike some municipalities in French Guiana): it is 5 days everywhere.",
+    "The birth is registered at the town hall of the place of birth, not necessarily the one where you live.",
+    "After the deadline, a judicial declaration is needed before the tribunal judiciaire (court of first instance) of Mamoudzou. The delay also exposes you to criminal penalties.",
+    "Unmarried parents: the father must acknowledge the child (reconnaissance) for parentage to be established. In Mayotte, an acknowledgment made at the same time as the birth registration is done at the town hall of the place of birth; made at another time, it falls under the town hall of Mamoudzou.",
+    "Family record book: for a first child together, it is issued at the registration and given free of charge by the town hall, on presentation of an ID document."
+  ],
+  "documents": [
+    { "id": "certificat-accouchement", "libelle": "Medical certificate of delivery (certificat d'accouchement)", "detail": "Original, given by the maternity unit or the midwife.", "coffre": "sante" },
+    { "id": "identite-parents", "libelle": "ID document of each parent", "detail": "Originals. ID card, passport or residence permit. Bring both parents' documents, even if only one goes.", "coffre": "autres" },
+    { "id": "reconnaissance", "libelle": "Prenatal acknowledgment certificate, if it was made before the birth", "detail": "Copy given by the town hall or the notary.", "coffre": "jaf" },
+    { "id": "choix-nom", "libelle": "Joint declaration of choice of surname, if you make one", "detail": "Signed by both parents. Form available at the town hall.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Family record book, if you already have one", "detail": "Original, to add the child.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Proof of address less than 3 months old", "detail": "Only if the parents are not married and the father has not yet acknowledged the child.", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Copies of the child's birth certificate", "detail": "Free, to request after the registration.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Get the delivery certificate from the maternity unit", "detail": "Also ask whether the maternity unit sends the registration to the town hall itself." },
+    { "titre": "Check before you go", "detail": "Delivery certificate, both parents' ID documents, prenatal acknowledgment if there is one, declaration of choice of surname if you make one, existing family record book, proof of address if the father has not yet acknowledged the child. Deadline: 5 days." },
+    { "titre": "Go to the town hall of the place of birth within the deadline", "detail": "Civil registry office (état civil). An unmarried father who has not yet acknowledged the child can do so at the same time." },
+    { "titre": "Collect the birth certificate and the family record book", "detail": "Ask for several copies of the certificate: they are needed for the CSSM and the mutuelle (top-up health insurance)." },
+    { "titre": "Report the birth to the CSSM", "detail": "In \"Mon Compte\" on caf.fr for family benefits, and in your ameli account (the French health insurance website) to add the child to your health insurance." }
+  ],
+  "ou": [
+    { "nom": "Town hall (mairie) of the place of birth, civil registry office", "detail": "Registration, birth certificate and family record book." }
+  ],
+  "liens": [
+    { "titre": "Birth registration (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961" },
+    { "titre": "Family record book at the birth of the first child (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991" },
+    { "titre": "Acknowledging a child (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Register the birth at the town hall (5 days)", "evenement": "rdv" },
+    { "type": "coffre", "titre": "Child's birth certificate", "categorie": "autres" },
+    { "type": "coffre", "titre": "Copy of the family record book", "categorie": "autres" },
+    { "type": "coffre", "titre": "Delivery certificate", "categorie": "sante" },
+    { "type": "rappel", "titre": "Report the birth to the CSSM", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "5 days after the birth", "detail": "The day of birth is not counted. Moved to the next working day if the last day falls on a weekend or public holiday." }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: whether the birth can be registered directly at the maternity unit (centre hospitalier de Mayotte or outlying maternity units), depending on the facility and the town hall.",
+    "To be confirmed locally: civil registry office hours and extra sessions, depending on the town hall."
+  ],
+  "motsCles": ["birth", "baby", "civil status", "town hall", "birth certificate", "maternity unit", "family record book"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F961 Birth registration", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11991 Family record book at the birth of the first child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, loi n° 2025-797 du 11 août 2025 (acknowledgment of children in Mayotte)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052075903", "verifieLe": "2026-10-29" }
+  ]
+}

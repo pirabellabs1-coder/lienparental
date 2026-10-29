@@ -1,0 +1,169 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "guadeloupe",
+  "categorie": "sante",
+  "titre": "Vaccinations obligatoires et suivi en PMI",
+  "resume": "Les vaccins exigés pour la crèche, l'école et le centre de loisirs, les mêmes en Guadeloupe qu'en métropole, et le suivi gratuit des moins de 6 ans dans les centres de PMI du Département.",
+  "aQuoiCaSert": "Les vaccinations obligatoires sont exigées pour entrer en crèche, à l'école, en garderie ou en colonie : sans justificatif, l'inscription peut être refusée ou seulement provisoire. Le justificatif, c'est le carnet de santé rempli par le médecin. La protection maternelle et infantile (PMI), gérée par le Département de la Guadeloupe, accompagne gratuitement les familles pendant la grossesse et les 6 premières années de l'enfant, et diffuse gratuitement le carnet de santé.",
+  "quiEstConcerne": [
+    "Tous les parents d'enfants mineurs, en particulier avant une entrée en crèche, à l'école ou en centre de loisirs.",
+    "Les futurs parents et les parents d'enfants de moins de 6 ans, pour le suivi en PMI."
+  ],
+  "aSavoir": [
+    "Enfant né avant 2018 : diphtérie, tétanos et poliomyélite (DTP) obligatoires pour l'école.",
+    "Enfant né entre le 1er janvier 2018 et le 31 décembre 2022 : 11 vaccins obligatoires (diphtérie, tétanos, poliomyélite, coqueluche, Haemophilus influenzae b, hépatite B, pneumocoque, méningocoque C, rougeole, oreillons, rubéole).",
+    "Enfant né à partir de 2023 : même liste, avec les méningocoques A, B, C, W et Y à la place du seul méningocoque C.",
+    "En Guadeloupe, la liste des vaccins obligatoires est la même qu'en métropole : la fiche officielle ne prévoit une obligation supplémentaire (fièvre jaune) que pour la Guyane.",
+    "Un enfant pas à jour peut être admis provisoirement : vous avez alors 3 mois pour régulariser, sinon il peut être exclu. Si l'enfant reste plus d'un an, le justificatif est demandé chaque année.",
+    "Les examens de santé obligatoires de l'enfant (16 entre la naissance et 6 ans, sur 20 jusqu'à 16 ans) sont remboursés à 100 % sans avance de frais, hors dépassements d'honoraires. Ils peuvent être faits par le médecin de votre choix ou en PMI.",
+    "Parents séparés : le parent qui emmène l'enfant se faire vacciner a intérêt à informer l'autre et à lui transmettre une copie des pages vaccins, pour que chacun dispose du justificatif."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "Carnet de santé de l'enfant",
+      "detail": "Original à apporter à chaque rendez-vous. C'est le justificatif des vaccinations : gardez une photocopie ou une photo des pages vaccins. Perdu ? Renseignez-vous auprès de la PMI ou de votre médecin.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Carte Vitale du parent ou attestation de droits de l'enfant",
+      "detail": "Attestation téléchargeable gratuitement sur votre compte ameli.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Pièce d'identité du parent ou de l'adulte qui accompagne",
+      "detail": "Original. Si un tiers accompagne l'enfant, prévoyez une autorisation écrite d'un parent.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Certificat médical de contre-indication, le cas échéant",
+      "detail": "Délivré par le médecin. À présenter à la place du justificatif de vaccin.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Vérifiez le carnet de santé",
+      "detail": "Comparez avec la liste des vaccins obligatoires selon l'année de naissance de votre enfant."
+    },
+    {
+      "titre": "Prenez rendez-vous",
+      "detail": "Chez votre médecin traitant ou pédiatre, ou dans un centre de PMI du Département pour les moins de 6 ans. Appelez avant pour connaître les jours de consultation."
+    },
+    {
+      "titre": "Vérifiez avant de vous déplacer",
+      "detail": "Carnet de santé, carte Vitale ou attestation de droits, pièce d'identité, autorisation écrite si ce n'est pas un parent qui accompagne."
+    },
+    {
+      "titre": "Faites vacciner votre enfant",
+      "detail": "Le professionnel inscrit le vaccin dans le carnet de santé."
+    },
+    {
+      "titre": "Présentez le justificatif",
+      "detail": "Photocopie des pages vaccins à la crèche, à l'école ou au centre de loisirs, chaque année si l'enfant y reste plus d'un an."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Centres de PMI du Département de la Guadeloupe",
+      "detail": "Accompagnement gratuit pendant la grossesse et jusqu'aux 6 ans de l'enfant. Pour trouver le centre le plus proche, consultez l'annuaire santé.fr ou contactez le Département.",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/"
+    },
+    {
+      "nom": "Annuaire santé.fr, PMI en Guadeloupe",
+      "detail": "Recherche des lieux de PMI par commune.",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/971-guadeloupe"
+    },
+    {
+      "nom": "Votre médecin traitant ou pédiatre",
+      "detail": "Vaccinations et examens de santé obligatoires."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vaccins exigés pour la crèche et l'école (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Enfance, jeunesse et famille, PMI (Département de la Guadeloupe)",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/"
+    },
+    {
+      "titre": "Examens de santé obligatoires jusqu'à 6 ans (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Rendez-vous vaccination",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Rappel de vaccin",
+      "evenement": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Pages vaccins du carnet de santé",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 mois pour régulariser après une admission provisoire",
+      "detail": "Sans vaccins à jour à l'issue de ce délai, l'enfant peut être exclu de la collectivité."
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : adresses, jours et horaires de consultation des centres de PMI du Département, qui ne figurent pas sur la page officielle consultée. Appelez avant de vous déplacer.",
+    "Le nombre de doses et l'âge de chaque vaccin suivent le calendrier vaccinal en vigueur : à vérifier avec votre médecin ou la PMI.",
+    "Voyage : un certificat de vaccination contre la fièvre jaune peut être exigé pour entrer en Guadeloupe en provenance d'un pays à risque, ou pour se rendre en Guyane. Renseignez-vous auprès de l'ARS Guadeloupe ou d'un centre de vaccinations internationales.",
+    "Saint-Martin et Saint-Barthélemy sont des collectivités distinctes : les services de PMI peuvent y être organisés différemment, renseignez-vous sur place."
+  ],
+  "motsCles": [
+    "vaccin",
+    "PMI",
+    "carnet de santé",
+    "pédiatre",
+    "bébé",
+    "Département"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-01-06"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1879 Santé à l'école primaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879",
+      "verifieLe": "2026-10-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F35490 Visites médicales de l'enfant : examens obligatoires jusqu'à 6 ans",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0",
+      "verifieLe": "2026-07-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2025-06-20"
+    },
+    {
+      "titre": "Département de la Guadeloupe, Enfance, jeunesse et famille (PMI)",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Santé.fr, annuaire PMI Guadeloupe (971)",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/971-guadeloupe",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

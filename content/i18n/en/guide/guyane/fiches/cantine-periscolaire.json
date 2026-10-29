@@ -62,11 +62,11 @@
     "To be confirmed locally: billing under shared residence (one bill per parent or not), depending on the town."
   ],
   "motsCles": ["canteen", "after-school care", "périscolaire", "school lunch", "meals", "PAI", "quotient familial"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F24570 School canteen in primary school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2025-05-20" },
-    { "titre": "Service-public.gouv.fr, F19294 Financial help for the canteen", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2025-10-20" },
-    { "titre": "Service-public.gouv.fr, F24569 Canteen in middle and high school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569", "verifieLe": "2026-02-25" },
-    { "titre": "Service-public.gouv.fr, F1871 School insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2025-09-15" }
+    { "titre": "Service-public.gouv.fr, F24570 School canteen in primary school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F19294 Financial help for the canteen", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F24569 Canteen in middle and high school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1871 School insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2026-10-29" }
   ]
 }

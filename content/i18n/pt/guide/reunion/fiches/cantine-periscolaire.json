@@ -1,0 +1,216 @@
+{
+  "slug": "cantine-periscolaire",
+  "territoire": "reunion",
+  "categorie": "ecole",
+  "titre": "Inscrever meu filho na cantina e nas atividades extraescolares",
+  "resume": "Quem organiza a cantina no primário (município), no collège (Departamento) e no lycée (Região), os documentos a preparar para obter a tarifa certa e onde pedir ajuda se o preço for um problema.",
+  "aQuoiCaSert": "A cantina e o périscolaire (cuidado antes e depois das aulas, estudo dirigido, atividades) garantem que seu filho seja acompanhado em torno do horário de aula. Na educação infantil e no ensino fundamental (maternelle e élémentaire), é o município (commune) que os organiza e fixa as tarifas, muitas vezes conforme o seu quociente familiar (índice de renda calculado pela Caf, Caisse d'allocations familiales, órgão de benefícios familiares): sem atestado, você corre o risco de pagar a tarifa mais alta. No collège e no lycée (anos finais e ensino médio), a inscrição na cantina é feita no próprio estabelecimento; as tarifas são fixadas pelo Département de La Réunion (governo departamental) para os collèges e pela Région Réunion (governo regional) para os lycées.",
+  "quiEstConcerne": [
+    "Os pais de crianças matriculadas na educação infantil ou no ensino fundamental (maternelle ou élémentaire).",
+    "Os pais de alunos de collège e lycée, para a meia-pensão (demi-pension).",
+    "Os pais de uma criança alérgica ou que segue dieta por motivo de saúde."
+  ],
+  "aSavoir": [
+    "No primário, o município não é obrigado a oferecer uma cantina. Quando ela existe, toda criança matriculada tem direito a se inscrever: reservá-la às crianças cujos pais trabalham é ilegal.",
+    "As tarifas são fixadas pelo município no primário, pelo Departamento para os collèges e pela Região para os lycées. Cada um pode ajustá-las conforme o quociente familiar.",
+    "Ajudas: no primário, informe-se na prefeitura (mairie) ou com a assistente social escolar. No collège e no lycée, o fundo social para as cantinas (fonds social pour les cantines) é concedido pelo diretor do estabelecimento, que informa as condições no início do ano.",
+    "Alergia ou dieta por motivo de saúde: um plano de acolhimento individualizado (PAI, projet d'accueil individualisé) pode ser feito com o médico. Você também pode fornecer uma marmita, cujo preparo e transporte ficam por sua conta.",
+    "Pais separados: a inscrição na cantina faz parte da vida cotidiana da criança. Em residência alternada, pergunte à prefeitura se cada genitor pode ser cobrado pelas suas semanas e com qual quociente familiar."
+  ],
+  "documents": [
+    {
+      "id": "attestation-caf",
+      "libelle": "Atestado de quociente familiar da Caf",
+      "detail": "Download gratuito no seu espaço Caf. Sem ele, a tarifa máxima pode ser aplicada.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Último aviso de imposto de renda",
+      "detail": "Cópia, muitas vezes pedida se você não é beneficiário da Caf. Disponível em impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço recente",
+      "detail": "Cópia. Conta ou recibo de aluguel em seu nome.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Documento de identidade do genitor que faz a inscrição",
+      "detail": "Original ou cópia, conforme a prefeitura.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Livro de família (livret de famille) ou certidão de nascimento da criança",
+      "detail": "Cópia. Certidão de nascimento gratuita on-line em service-public.gouv.fr.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "assurance",
+      "libelle": "Atestado de seguro de responsabilidade civil",
+      "detail": "Pode ser exigido para a cantina e as atividades extraescolares.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "carnet-vaccins",
+      "libelle": "Páginas de vacinas da caderneta de saúde",
+      "detail": "Cópia, muitas vezes pedida para o cuidado extraescolar.",
+      "coffre": "sante"
+    },
+    {
+      "id": "pai",
+      "libelle": "Plano de acolhimento individualizado (PAI) e atestado médico, se necessário",
+      "detail": "A preparar com o médico e a direção da escola antes da primeira refeição.",
+      "coffre": "sante"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo de residência, se vocês estão separados",
+      "detail": "Cópia. Útil para a cobrança em residência alternada e para a lista de pessoas autorizadas a buscar a criança.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (comprovante de dados bancários)",
+      "detail": "Se você escolher o débito automático.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Informe-se sobre o funcionamento",
+      "detail": "No primário, no serviço escolar ou extraescolar da prefeitura. No collège e no lycée, na secretaria ou na tesouraria (intendance). Peça as datas de inscrição, a lista de documentos e as tarifas."
+    },
+    {
+      "titre": "Baixe seus atestados",
+      "detail": "Quociente familiar em caf.fr, aviso de imposto em impots.gouv.fr, atestado de seguro com sua seguradora."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Atestado de quociente familiar, comprovante de endereço, documento de identidade, livro de família, atestado de seguro, páginas de vacinas, PAI se necessário, sentença em caso de separação, RIB para o débito. Anote os dias de presença da criança."
+    },
+    {
+      "titre": "Inscreva seu filho",
+      "detail": "No guichê ou no portal da família (portail famille) do município, se existir. Indique os dias de cantina e de cuidado extraescolar."
+    },
+    {
+      "titre": "Peça ajuda se necessário",
+      "detail": "No primário, na prefeitura ou com a assistente social escolar. No collège e no lycée, com a assistente social ou na secretaria para o fundo social da cantina."
+    },
+    {
+      "titre": "Registre as faturas",
+      "detail": "Anote cada pagamento no Diário para manter o histórico das despesas e facilitar a divisão com o outro genitor."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Prefeitura (mairie) do seu município",
+      "detail": "Cantina e atividades extraescolares na educação infantil e no ensino fundamental."
+    },
+    {
+      "nom": "Secretaria ou tesouraria (intendance) do collège ou do lycée",
+      "detail": "Meia-pensão e fundo social da cantina."
+    },
+    {
+      "nom": "Département de La Réunion",
+      "detail": "Refeições e tarifas dos collèges públicos.",
+      "url": "https://www.departement974.fr"
+    },
+    {
+      "nom": "Région Réunion",
+      "detail": "Refeições e tarifas dos lycées públicos.",
+      "url": "https://regionreunion.com"
+    },
+    {
+      "nom": "Caf de La Réunion",
+      "detail": "Atestado de quociente familiar no seu espaço on-line.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Cantina escolar no primário (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570"
+    },
+    {
+      "titre": "Ajuda financeira para a cantina (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294"
+    },
+    {
+      "titre": "Cantina no collège e no lycée (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Cantina escolar",
+      "categorie": "cantine"
+    },
+    {
+      "type": "depense",
+      "titre": "Cuidado antes/depois das aulas",
+      "categorie": "ecole"
+    },
+    {
+      "type": "coffre",
+      "titre": "Atestado de quociente familiar da Caf",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Ficha de inscrição na cantina e no extraescolar",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Plano de acolhimento individualizado (PAI)",
+      "categorie": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Inscrição na cantina e no extraescolar antes da volta às aulas",
+      "evenement": "ecole"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar no lycée: a refeição a 1 € (« Kantine à 1 euro ») implantada pela Région Réunion nos lycées públicos na volta às aulas de 2023, e sua manutenção em 2026-2027. A página da Região não pôde ser lida durante a verificação.",
+    "A confirmar localmente: tarifas da meia-pensão dos collèges fixadas pelo Departamento, a pedir no estabelecimento.",
+    "A confirmar localmente: tarifas, documentos pedidos, portal da família e organização do extraescolar, próprios de cada município da Reunião, assim como a cobrança em residência alternada."
+  ],
+  "motsCles": [
+    "cantina",
+    "contraturno",
+    "extraescolar",
+    "meia-pensão",
+    "refeição",
+    "PAI",
+    "quociente familiar"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F24570 Cantina escolar no primário",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F19294 Ajuda financeira para a cantina",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F24569 Cantina no collège e no lycée",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1871 Seguro escolar",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

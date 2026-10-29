@@ -1,0 +1,52 @@
+{
+  "slug": "rentree-scolaire",
+  "territoire": "guadeloupe",
+  "titre": "Volta às aulas",
+  "resume": "Matrícula, cantina, seguro, auxílios: tudo o que é preciso preparar antes da volta às aulas.",
+  "ordre": 2,
+  "elements": [
+    {
+      "id": "inscription",
+      "titre": "Matricular meu filho na escola",
+      "fiche": "inscrire-enfant-ecole"
+    },
+    {
+      "id": "changement-ecole",
+      "titre": "Mudar de escola após uma mudança de casa",
+      "detail": "Certificado de desligamento (certificat de radiation) e acordo dos dois pais.",
+      "fiche": "changer-ecole-en-cours-annee"
+    },
+    {
+      "id": "college-lycee",
+      "titre": "Pedir a bolsa do collège ou do lycée (ensino fundamental II ou médio)",
+      "fiche": "college-lycee-bourses"
+    },
+    {
+      "id": "vaccins",
+      "titre": "Verificar se as vacinas estão em dia",
+      "detail": "As mesmas vacinas obrigatórias da França continental, conforme o ano de nascimento.",
+      "fiche": "vaccinations-pmi"
+    },
+    {
+      "id": "cantine",
+      "titre": "Inscrever na cantina e nas atividades extraescolares",
+      "fiche": "cantine-periscolaire"
+    },
+    {
+      "id": "assurance",
+      "titre": "Verificar o seguro escolar",
+      "fiche": "assurance-scolaire"
+    },
+    {
+      "id": "ars",
+      "titre": "Verificar a allocation de rentrée scolaire (auxílio de volta às aulas)",
+      "detail": "É preciso fazer uma declaração para jovens de 16 a 18 anos.",
+      "fiche": "allocation-rentree-scolaire"
+    },
+    {
+      "id": "activites",
+      "titre": "Inscrever em uma atividade esportiva com o Pass'Sport",
+      "fiche": "pass-sport"
+    }
+  ]
+}

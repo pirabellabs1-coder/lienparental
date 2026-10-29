@@ -10,9 +10,9 @@
     "Les parents en résidence alternée qui doivent déclarer les deux adresses et choisir comment partager les allocations."
   ],
   "aSavoir": [
-    "Le téléservice gratuit « Je change de coordonnées » de service-public.gouv.fr transmet votre nouvelle adresse en une seule démarche à plus de 30 organismes nationaux (impôts, Assurance maladie, France Travail, caisses de retraite, certains fournisseurs d'énergie) et à plus de 4 500 mairies raccordées. Il ne met pas à jour les listes électorales, ni votre banque ou votre assurance.",
+    "Le téléservice gratuit « Je change de coordonnées » de service-public.gouv.fr transmet votre nouvelle adresse en une seule démarche à plus de 30 organismes nationaux (impôts, Assurance maladie, France Travail, caisses de retraite, certains fournisseurs d'énergie) et à plus de 4 500 mairies raccordées. Il n'a pas d'effet sur votre inscription sur les listes électorales ; prévenez vous-même votre banque et votre assurance.",
     "Caf : déclarez la séparation dans votre espace en ligne, rubrique « Déclaration de situation », et le déménagement avec le service « Déclaration de changement d'adresse ». Pour les aides au logement, faites une nouvelle demande dès l'entrée dans le nouveau logement. En cas d'oubli de bonne foi, le droit à l'erreur s'applique si vous régularisez vite.",
-    "Résidence alternée et Caf : remplissez le formulaire cerfa n° 14000. Les parents peuvent désigner un seul allocataire ou partager les allocations familiales ; en cas de désaccord, chaque parent reçoit automatiquement une part. Seules les allocations familiales (et le CMG) se partagent, les autres prestations vont à un seul parent. Le choix est modifiable après un an.",
+    "Résidence alternée et Caf : remplissez le formulaire cerfa n° 14000. Les parents peuvent désigner un seul allocataire ou partager les allocations familiales ; en cas de désaccord, chaque parent reçoit automatiquement une part. Seules les allocations familiales se partagent ; les autres prestations vont à un seul parent. Depuis le 1er décembre 2025, chaque parent peut toutefois percevoir le CMG selon sa propre situation (ce n'est pas un partage du montant). Le choix est modifiable après un an.",
     "Assurance maladie : changement d'adresse depuis le compte ameli, rubrique « Mes démarches », par téléphone au 3646, ou par courrier avec une copie recto verso de votre pièce d'identité.",
     "Impôts : signalez l'adresse depuis votre espace sur impots.gouv.fr, puis indiquez le déménagement et sa date dans votre déclaration de revenus.",
     "École : vous devez signaler à l'école tout changement de situation familiale ou d'adresse, ainsi que toute décision du juge aux affaires familiales concernant l'enfant. L'école transmet les mêmes informations à chaque parent, en main propre ou aux adresses indiquées en début d'année.",
@@ -71,15 +71,15 @@
     "À confirmer localement : raccordement de votre mairie au téléservice « Je change de coordonnées »."
   ],
   "motsCles": ["changement d'adresse", "déménagement", "séparation", "résidence alternée", "Caf", "ameli", "école", "impôts", "cerfa 14000"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
     { "titre": "Service-public.gouv.fr, actualité A18901 Je change de coordonnées (6 mai 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901" },
-    { "titre": "Service-public.gouv.fr, F827 Signaler un changement de situation à la Caf", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F21248 Allocations familiales en résidence alternée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F737 Sécurité sociale : changement de situation personnelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F383 Impôt sur le revenu : changement d'adresse", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383", "verifieLe": "2026-04-15" },
-    { "titre": "Service-public.gouv.fr, F11389 Un parent séparé peut-il déménager librement ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2025-05-28" },
-    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "Service-public.gouv.fr, F1391 Maternelle et élémentaire : information des parents", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2025-07-30" }
+    { "titre": "Service-public.gouv.fr, F827 Signaler un changement de situation à la Caf", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Allocations familiales en résidence alternée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F737 Sécurité sociale : changement de situation personnelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F383 Impôt sur le revenu : changement d'adresse", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11389 Un parent séparé peut-il déménager librement ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1391 Maternelle et élémentaire : information des parents", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2026-10-29" }
   ]
 }

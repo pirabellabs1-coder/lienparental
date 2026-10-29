@@ -59,8 +59,8 @@
     "To be confirmed locally: addresses and opening hours of the CGSS de la Guyane offices."
   ],
   "motsCles": ["C2S", "CMU", "mutuelle", "top-up cover", "health", "reimbursement", "free"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (French Guiana, Guadeloupe, Martinique, La Réunion section)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-07-01" }
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (French Guiana, Guadeloupe, Martinique, La Réunion section)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" }
   ]
 }

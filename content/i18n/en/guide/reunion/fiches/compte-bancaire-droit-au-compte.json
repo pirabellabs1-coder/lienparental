@@ -1,0 +1,177 @@
+{
+  "slug": "compte-bancaire-droit-au-compte",
+  "territoire": "reunion",
+  "categorie": "argent",
+  "titre": "Having your own bank account after a separation",
+  "resume": "Open an account in your own name to receive child support and benefits and, if a bank refuses, use the right to a bank account, handled in Réunion by the IEDOM: documents and time limits.",
+  "aQuoiCaSert": "After a separation, a personal account lets you receive child support and benefits from the Caf (Caisse d'allocations familiales, the family benefits office), and pay for the child's expenses while keeping clear records. If a bank refuses to open an account for you, the free right-to-an-account procedure (droit au compte) lets you have a bank designated, which must open an account for you with free basic banking services. In Réunion, this procedure is handled by the IEDOM (Institut d'émission des départements d'outre-mer, the overseas central bank institute), which plays the role of the Banque de France here.",
+  "quiEstConcerne": [
+    "The parent who has no account in their name, or only a joint account with their ex-partner.",
+    "Anyone residing in France who has no bank account and has been refused an account.",
+    "A holder of only a joint account can also use the right to a bank account to get an individual account."
+  ],
+  "aSavoir": [
+    "The bank has 15 days to respond to your request to open an account. No answer within this time means a refusal.",
+    "The bank is designated within 1 business day of receipt of your complete file. The designation is valid for 6 months: contact the designated bank within this period.",
+    "The designated bank sends you its list of documents within 3 business days, then must open the account no later than 3 business days after receiving all the documents.",
+    "Free basic banking services, including a payment card, transfers and direct debits. Incident fees capped at €4 per transaction and €20 per month.",
+    "The designated bank can only close this account in specific cases, usually with 2 months' notice.",
+    "In Réunion, as in the other overseas departments, it is the IEDOM, not the Banque de France, that receives the application and designates the bank: file online on iedom.fr, by mail or at the branch. The procedure is free. In Réunion, the IEDOM sees members of the public by appointment in Saint-Denis and holds a session by appointment in Saint-Pierre."
+  ],
+  "documents": [
+    {
+      "id": "formulaire",
+      "libelle": "Application form to exercise the right to a bank account",
+      "detail": "Available from the IEDOM or on its website.",
+      "coffre": "finances"
+    },
+    {
+      "id": "identite",
+      "libelle": "Valid ID",
+      "detail": "ID card, passport or residence permit. Original at the bank appointment.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address less than 3 months old",
+      "detail": "Electricity or water bill, rent receipt. If someone is housing you, the bank may ask for a certificate of accommodation.",
+      "coffre": "finances"
+    },
+    {
+      "id": "lettre-refus",
+      "libelle": "The bank's letter of refusal",
+      "detail": "Or proof of your request to open an account dated more than 15 days ago with no reply.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank account details) of the new account",
+      "detail": "To send to the Caf, the ARIPA (Agence de recouvrement et d'intermédiation des pensions alimentaires, the child support collection agency), your employer and the other parent if child support is paid to you directly.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Ask a bank to open an account",
+      "detail": "In writing if possible, and keep proof of the date of your request."
+    },
+    {
+      "titre": "If refused, ask for the letter of refusal",
+      "detail": "Or wait 15 days without a reply. Keep proof of your request."
+    },
+    {
+      "titre": "Book an appointment with the IEDOM",
+      "detail": "Réunion branch in Saint-Denis, or the Saint-Pierre session. The form is available from the IEDOM."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Completed form, valid ID, proof of address less than 3 months old, letter of refusal or proof of a request made more than 15 days ago. Then, for the designated bank: the designation letter and the documents it has listed for you."
+    },
+    {
+      "titre": "Open the account at the designated bank",
+      "detail": "Within 6 months. It has 3 business days after receiving all the documents."
+    },
+    {
+      "titre": "Send your new RIB",
+      "detail": "To the Caf (online account), to the ARIPA if it pays the child support, to your employer and, if needed, to the other parent."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "IEDOM, Réunion branch",
+      "detail": "Members of the public seen by appointment, Tuesday to Thursday from 8 a.m. to noon, 4 rue du Maréchal Leclerc, 97400 Saint-Denis (email: particuliers-reunion@iedom.fr). Monday session by appointment at the Maison de justice et du droit (legal advice center) in Saint-Pierre, 26 rue Marius et Ary Leblond (02 62 91 84 92).",
+      "url": "https://www.iedom.fr/rubrique20",
+      "telephone": "02 62 90 71 00"
+    },
+    {
+      "nom": "The bank of your choice",
+      "detail": "First request to open an account."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Right to a bank account (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417"
+    },
+    {
+      "titre": "IEDOM, Réunion branch",
+      "url": "https://www.iedom.fr/rubrique20"
+    },
+    {
+      "titre": "Guide to the right to a bank account (IEDOM)",
+      "url": "https://www.iedom.fr/IMG/pdf/guide-droit_au_compte_vdef.pdf"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Letter refusing to open an account",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Bank designation letter",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "RIB of my personal account",
+      "categorie": "finances"
+    },
+    {
+      "type": "calendrier",
+      "titre": "IEDOM appointment: right to a bank account",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Contact the designated bank (6 months maximum)",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Send my new RIB to the Caf and the ARIPA",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "15 days: the bank's deadline to respond; after that, its silence counts as a refusal"
+    },
+    {
+      "libelle": "6 months: validity of the bank designation"
+    }
+  ],
+  "aConfirmer": [
+    "The time limits given above come from the national page (Banque de France): those applied by the IEDOM are to be confirmed with its branch.",
+    "IEDOM opening hours may change: check them on iedom.fr before you go.",
+    "The rules for withdrawing from a joint account depend on your bank: the official page on the right to a bank account does not detail them."
+  ],
+  "motsCles": [
+    "bank account",
+    "RIB",
+    "right to a bank account",
+    "IEDOM",
+    "Banque de France",
+    "joint account",
+    "separation"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2417 Right to a bank account",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "IEDOM, Réunion branch (services for individuals)",
+      "url": "https://www.iedom.fr/rubrique20",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "IEDOM, guide to the right to a bank account",
+      "url": "https://www.iedom.fr/IMG/pdf/guide-droit_au_compte_vdef.pdf",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

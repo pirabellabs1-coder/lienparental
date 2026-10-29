@@ -1,0 +1,164 @@
+{
+  "slug": "complementaire-sante-solidaire",
+  "territoire": "martinique",
+  "categorie": "sante",
+  "titre": "Complémentaire santé solidaire (C2S): cobertura de saúde complementar gratuita ou barata",
+  "resume": "Um plano de saúde complementar gratuito ou de baixo custo para toda a família, filhos incluídos, conforme a renda dos últimos 12 meses, com tetos mais altos na Martinica do que na França continental.",
+  "aQuoiCaSert": "A Complémentaire santé solidaire (C2S) cobre a parte das despesas de saúde não reembolsada pela Assurance Maladie (seguro de saúde público francês), dentro das tarifas da Sécurité sociale (seguridade social). Ela é gratuita ou tem uma pequena contribuição mensal conforme a sua renda, e cobre todas as pessoas da família, ou seja, também os seus filhos. Muitas vezes é a solução quando não se tem mutuelle (plano de saúde complementar) e a renda é baixa.",
+  "quiEstConcerne": [
+    "As famílias de renda modesta que residem na França de forma estável e regular há mais de 3 meses.",
+    "Os beneficiários do RSA (revenu de solidarité active, renda mínima de inserção): a C2S gratuita é concedida automaticamente, salvo recusa.",
+    "Os pais que criam os filhos sozinhos e as famílias sem cobertura complementar para os filhos."
+  ],
+  "aSavoir": [
+    "Com a C2S: sem cobrança acima da tabela (dépassements d'honoraires), terceiro pagador (sem adiantar dinheiro), diária hospitalar (forfait hospitalier) coberta.",
+    "Tetos anuais na Martinica (como em Guadalupe, na Guiana Francesa e em La Réunion) para a C2S gratuita: 11.599 € para 1 pessoa, 17.398 € para 2, 20.878 € para 3, 24.358 € para 4, mais 4.640 € por pessoa adicional.",
+    "C2S com participação na Martinica: renda até 15.659 € para 1 pessoa, 23.488 € para 2, 28.185 € para 3, 32.883 € para 4, mais 6.263 € por pessoa adicional.",
+    "A renda considerada é a dos 12 meses anteriores ao pedido. Um valor fixo de moradia (forfait logement) é acrescentado se você recebe auxílio-moradia, mora de graça ou é proprietário.",
+    "Decisão em até 2 meses. Sem resposta nesse prazo, o pedido é aceito. Em caso de recusa, é possível um recurso amigável em até 2 meses.",
+    "A C2S é concedida por 1 ano. A renovação deve ser pedida entre 4 e 2 meses antes do vencimento, salvo se for automática (RSA, Aspa e Asi, benefícios mínimos, e AAH, auxílio a adultos com deficiência, sem mudança de situação).",
+    "Pais separados: a C2S é concedida à família que faz o pedido. Uma criança em residência alternada em princípio faz parte da família de um só genitor: informe-se na caixa."
+  ],
+  "documents": [
+    {
+      "id": "formulaire",
+      "libelle": "Formulário Cerfa n° 12504 preenchido e assinado, se você não fizer o pedido on-line",
+      "detail": "Inclui a lista das pessoas da família e a renda delas nos últimos 12 meses.",
+      "coffre": "sante"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Aviso de imposto (avis d'impôt) ou aviso de situação declarativa (Asdir)",
+      "detail": "Cópia. Pode ser baixado em impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "taxe-fonciere",
+      "libelle": "Aviso do imposto predial (taxe foncière), se você é proprietário",
+      "detail": "Cópia.",
+      "coffre": "finances"
+    },
+    {
+      "id": "taxe-habitation",
+      "libelle": "Aviso do imposto de habitação (taxe d'habitation), se for o caso",
+      "detail": "Cópia.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Comprovantes de renda dos últimos 12 meses, se forem pedidos",
+      "detail": "Contracheques, indenizações, pensões alimentícias recebidas. A caixa pode pedir informações adicionais.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-caf",
+      "libelle": "Declaração de renda da Caf ou da MSA, se houver um pedido de RSA em andamento",
+      "detail": "Pode ser baixada no seu espaço Caf (Caisse d'allocations familiales, órgão de benefícios familiares).",
+      "coffre": "finances"
+    },
+    {
+      "id": "etranger",
+      "libelle": "Comprovantes fiscais e sociais de cada país, se você morou no exterior nos últimos 12 meses",
+      "coffre": "finances"
+    },
+    {
+      "id": "decision-c2s",
+      "libelle": "Decisão de concessão da C2S",
+      "detail": "Ela indica a data de fim do direito: anote-a para a renovação.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Estime seus direitos",
+      "detail": "Some a renda da família em 12 meses e compare com os tetos da Martinica. Prepare seu aviso de imposto e seus comprovantes de renda."
+    },
+    {
+      "titre": "Faça o pedido on-line",
+      "detail": "Pela sua conta ameli: é o mais rápido. Você também pode enviar o formulário Cerfa n° 12504 à sua caixa."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Se for entregar o dossiê no atendimento: formulário assinado, aviso de imposto, aviso do imposto predial ou de habitação, declaração da Caf se houver RSA em andamento, comprovantes de renda, documento de identidade e carte Vitale (cartão do seguro de saúde). Tire fotocópias."
+    },
+    {
+      "titre": "Aguarde a decisão",
+      "detail": "Ela sai em até 2 meses. Em caso de recusa, recorra à comissão de recurso amigável (commission de recours amiable) em até 2 meses."
+    },
+    {
+      "titre": "Lembre-se da renovação",
+      "detail": "Entre 4 e 2 meses antes da data de fim indicada no seu certificado."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caisse générale de sécurité sociale (CGSS) de la Martinique, caixa local de seguridade social",
+      "detail": "Sede em Le Lamentin. Pedido on-line no ameli ou no atendimento. Telefone 36 46.",
+      "url": "https://www.ameli.fr",
+      "telephone": "36 46"
+    },
+    {
+      "nom": "France Services",
+      "detail": "Ajuda com procedimentos on-line perto de você."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Complémentaire santé solidaire (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027"
+    },
+    {
+      "titre": "ameli.fr, Assurance Maladie",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Decisão de concessão da C2S",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Aviso de imposto usado para a C2S",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Renovar a C2S (4 a 2 meses antes do vencimento)",
+      "evenement": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Renovação entre 4 e 2 meses antes do vencimento",
+      "detail": "Automática para beneficiários do RSA, da Aspa, da Asi e da AAH sem mudança de situação."
+    },
+    {
+      "libelle": "Recurso contra uma recusa em até 2 meses",
+      "detail": "Junto à comissão de recurso amigável da caixa."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: valor da participação mensal da C2S paga na Martinica conforme a idade, pois a página oficial só detalha a tabela para Mayotte.",
+    "A confirmar localmente: a qual família (de qual genitor) uma criança em residência alternada fica vinculada para a C2S, junto à CGSS de la Martinique.",
+    "A confirmar localmente: endereços e horários dos postos de atendimento da CGSS de la Martinique."
+  ],
+  "motsCles": [
+    "C2S",
+    "CMU",
+    "mutuelle",
+    "plano complementar",
+    "saúde",
+    "reembolso",
+    "gratuito"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (seção Guadalupe, Guiana Francesa, Martinica, La Réunion)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027",
+      "verifieLe": "2026-07-01"
+    }
+  ]
+}

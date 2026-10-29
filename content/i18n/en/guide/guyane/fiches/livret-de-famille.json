@@ -59,12 +59,12 @@
     "To be confirmed locally: whether your town hall can forward an update request to another town (not all of them do)."
   ],
   "motsCles": ["family record book", "livret de famille", "second book", "duplicate", "lost", "divorce", "separation", "update"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F11991 Family record book at the birth of the first child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-08-12" },
-    { "titre": "Service-public.gouv.fr, F11996 Second book in case of divorce or separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996", "verifieLe": "2026-04-21" },
-    { "titre": "Service-public.gouv.fr, F11994 Second book in case of loss, theft or damage", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994", "verifieLe": "2026-10-08" },
-    { "titre": "Service-public.gouv.fr, F18910 Updating the family record book", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910", "verifieLe": "2025-02-26" },
-    { "titre": "Service-public.gouv.fr, F39789 Can you have several family record books?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39789", "verifieLe": "2026-08-04" }
+    { "titre": "Service-public.gouv.fr, F11991 Family record book at the birth of the first child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11996 Second book in case of divorce or separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11994 Second book in case of loss, theft or damage", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F18910 Updating the family record book", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39789 Can you have several family record books?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39789", "verifieLe": "2026-10-29" }
   ]
 }

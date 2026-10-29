@@ -1,0 +1,66 @@
+{
+  "slug": "pension-alimentaire-impayee",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Pension alimentaire impayée à Mayotte : les recours",
+  "resume": "L'ARIPA et l'allocation de soutien familial ne fonctionnent pas encore à Mayotte. Les recours possibles aujourd'hui : relance, commissaire de justice, Trésor public via le procureur, plainte pour abandon de famille.",
+  "aQuoiCaSert": "En métropole, la Caf (agence ARIPA) peut collecter la pension et verser une avance. À Mayotte, ce service n'existe pas encore : l'intermédiation financière et l'allocation de soutien familial sont prévues en 2035, et le recouvrement des pensions impayées par la CSSM à partir de 2031. En attendant, le parent qui ne reçoit pas la pension fixée par une décision de justice ou une convention peut engager lui-même les procédures prévues par la loi.",
+  "quiEstConcerne": [
+    "Le parent qui ne reçoit pas, ou pas en entier, la pension fixée pour l'enfant.",
+    "Il faut une décision de justice, une convention parentale homologuée ou une convention de divorce par consentement mutuel. Sans elle, il faut d'abord saisir le juge aux affaires familiales."
+  ],
+  "aSavoir": [
+    "Paiement direct : un commissaire de justice demande à l'employeur ou à la banque du parent débiteur de vous verser la pension. Il permet de récupérer les 6 derniers mois d'arriérés et les échéances à venir.",
+    "Saisies : le commissaire de justice peut aussi faire pratiquer une saisie sur salaire, sur compte bancaire ou une saisie-vente.",
+    "Recouvrement par le Trésor public : possible seulement après l'échec d'une de ces procédures, que vous devez prouver. La demande s'adresse au procureur de la République du tribunal judiciaire de votre domicile, à Mayotte celui de Mamoudzou.",
+    "Plainte pour abandon de famille : possible si la pension n'est pas payée intégralement pendant plus de 2 mois. Le délit est puni de 2 ans d'emprisonnement et de 15 000 € d'amende.",
+    "Les pensions peuvent être réclamées sur 5 ans en arrière au maximum.",
+    "L'aide juridictionnelle peut prendre en charge les frais de procédure selon vos ressources (voir la fiche dédiée)."
+  ],
+  "documents": [
+    { "id": "titre", "libelle": "Décision ou convention fixant la pension (copie)", "detail": "Jugement, convention homologuée ou convention de divorce. Copie à demander au greffe, à l'avocat ou au notaire si vous l'avez perdue.", "coffre": "jaf" },
+    { "id": "preuves-impayes", "libelle": "Tableau des impayés et preuves", "detail": "Mois par mois : montant dû, montant reçu, date. Relevés bancaires, échanges écrits. Le Journal de Lien Parental peut vous aider à le préparer.", "coffre": "finances" },
+    { "id": "coordonnees-autre-parent", "libelle": "Coordonnées connues de l'autre parent", "detail": "Dernière adresse, employeur et banque si vous les connaissez : utiles au commissaire de justice.", "coffre": "jaf" },
+    { "id": "relance", "libelle": "Copie du courrier de relance à l'autre parent", "detail": "Facultatif, en recommandé de préférence.", "coffre": "courriers" },
+    { "id": "identite", "libelle": "Votre pièce d'identité (copie)", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Réunissez la preuve de l'impayé", "detail": "Listez mois par mois ce qui est dû et ce qui a été reçu. Envoyez si possible une relance écrite à l'autre parent." },
+    { "titre": "Vérifiez que la pension est fixée par une décision ou une convention", "detail": "Sinon, saisissez le juge aux affaires familiales (voir la fiche dédiée)." },
+    { "titre": "Contactez un commissaire de justice", "detail": "Pour un paiement direct ou une saisie. Demandez-lui le coût et si l'aide juridictionnelle peut le couvrir." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Copie complète de la décision ou convention, tableau des impayés et justificatifs, coordonnées de l'autre parent, pièce d'identité. Gardez une copie de tout." },
+    { "titre": "En cas d'échec, écrivez au procureur ou portez plainte", "detail": "Recouvrement par le Trésor public via le procureur du tribunal judiciaire de Mamoudzou, ou plainte pour abandon de famille après plus de 2 mois d'impayés (commissariat, gendarmerie ou courrier au procureur)." },
+    { "titre": "Suivez chaque versement dans le Journal", "detail": "Avec le justificatif. Lien Parental ne certifie pas qu'un paiement a été effectué, mais vous aide à garder l'historique." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Mamoudzou", "detail": "Juge aux affaires familiales et procureur de la République. Accueil par téléphone ou courriel.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" },
+    { "nom": "Points-justice de Mayotte (CDAD)", "detail": "Information juridique gratuite dans plusieurs communes.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271" },
+    { "nom": "Un commissaire de justice", "detail": "Pour le paiement direct et les saisies." }
+  ],
+  "liens": [
+    { "titre": "Pension alimentaire impayée (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249" },
+    { "titre": "Ordonnance n° 2026-647, calendrier de la convergence (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Décision ou convention fixant la pension", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Tableau et preuves des pensions impayées", "categorie": "finances" },
+    { "type": "depense", "titre": "Pension alimentaire", "categorie": "pension" },
+    { "type": "rappel", "titre": "Vérifier le versement mensuel de la pension", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Plainte pour abandon de famille possible après plus de 2 mois d'impayés" },
+    { "libelle": "Arriérés réclamables sur 5 ans au maximum", "detail": "Le paiement direct ne couvre que les 6 derniers mois." }
+  ],
+  "aConfirmer": [
+    "La page officielle sur les pensions impayées ne mentionne pas Mayotte : les procédures décrites relèvent du droit national, mais vérifiez leur mise en œuvre locale auprès d'un point-justice ou d'un avocat.",
+    "À confirmer localement : coordonnées des commissaires de justice exerçant à Mayotte et délais.",
+    "Les dates 2031 et 2035 viennent du rapport sur l'ordonnance n° 2026-647 et peuvent être précisées par des textes d'application."
+  ],
+  "motsCles": ["pension", "impayé", "commissaire de justice", "paiement direct", "abandon de famille", "ARIPA", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1249 Pension alimentaire impayée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, rapport au Président relatif à l'ordonnance n° 2026-647 du 22 juillet 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public, Tribunal judiciaire de Mamoudzou", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "verifieLe": "2026-10-29" }
+  ]
+}

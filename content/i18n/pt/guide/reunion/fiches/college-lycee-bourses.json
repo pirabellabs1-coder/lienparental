@@ -1,0 +1,206 @@
+{
+  "slug": "college-lycee-bourses",
+  "territoire": "reunion",
+  "categorie": "ecole",
+  "titre": "Pedir a bolsa do collège ou do lycée",
+  "resume": "Análise automática na matrícula ou pedido entre 1º de setembro e 15 de outubro de 2026: tetos de renda, valores, aviso de imposto a apresentar e regras para pais separados ou em residência alternada.",
+  "aQuoiCaSert": "A bolsa do collège (anos finais do ensino fundamental) e a bolsa do lycée (ensino médio) ajudam as famílias de baixa renda a pagar as despesas escolares. São pagas em três parcelas no ano. Para 2026-2027, conta a renda fiscal de referência (revenu fiscal de référence) do aviso de imposto 2026 (renda de 2025). O mais simples é aceitar a análise automática do direito à bolsa no momento da matrícula. Esta ficha também relembra os pontos principais da matrícula no collège.",
+  "quiEstConcerne": [
+    "Famílias de um aluno do collège ou do lycée matriculado em escola pública ou particular conveniada (privé sous contrat), ou no Cned (centro nacional de ensino a distância).",
+    "Pais de um aluno que entra na 6e (1º ano do collège) ou no lycée.",
+    "Pais separados: só um dos dois pode fazer o pedido."
+  ],
+  "aSavoir": [
+    "Bolsa do collège 2026-2027: 40 €, 112 € ou 175 € por trimestre conforme a renda. Tetos (renda de 2025): 18.488 € para 1 filho a cargo, 22.754 € para 2, 27.020 € para 3, 31.286 € para 4, 35.553 € para 5.",
+    "Bolsa do lycée 2026-2027: 6 níveis (échelons), de 168 € a 357 € por trimestre. Para 1 filho a cargo, o teto do nível 1 é de 22.037 €. O simulador oficial indica o seu nível.",
+    "Residência alternada (bolsa do collège): só um dos pais faz o pedido. Se os dois fizerem um pedido, ambos são declarados inadmissíveis. Uma declaração em que o outro genitor renuncia a pedir não é aceita.",
+    "A autorização para a análise automática, dada na matrícula, vale como pedido para o restante da escolaridade no collège e no lycée. Sem ela, é preciso pedir de novo todo ano, mesmo que a criança já fosse bolsista no ano anterior.",
+    "Pagamento em 3 parcelas, em geral no fim de dezembro, fim de março e fim de junho.",
+    "Recurso: no collège, 2 meses após a notificação. No lycée, 15 dias corridos completos (jours francs) após uma recusa, junto ao rectorat (secretaria regional de educação), e depois 2 meses em caso de segunda recusa."
+  ],
+  "documents": [
+    {
+      "id": "avis-impot",
+      "libelle": "Aviso de imposto 2026 sobre a renda de 2025",
+      "detail": "Cópia de todas as páginas. Os dois avisos se vocês vivem juntos sem casamento (union libre). Disponível no seu espaço em impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (dados bancários) em nome de quem faz o pedido",
+      "detail": "Muitas vezes pedido na rede particular ou sem análise automática.",
+      "coffre": "finances"
+    },
+    {
+      "id": "formulaire-bourse",
+      "libelle": "Formulário de bolsa em papel, se você não usar o EduConnect",
+      "detail": "Retire na secretaria do estabelecimento.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo que fixa a residência da criança, se vocês são separados",
+      "detail": "Cópia. Pode ser pedido para provar que a criança está a seu cargo.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "caf",
+      "libelle": "Comprovante de pagamento da Caf (Caisse d'allocations familiales, órgão de benefícios familiares) com os filhos a cargo",
+      "detail": "Disponível no seu espaço Caf, se o estabelecimento pedir.",
+      "coffre": "finances"
+    },
+    {
+      "id": "dossier-inscription",
+      "libelle": "Ficha de matrícula do collège",
+      "detail": "Retirada na secretaria ou preenchida on-line com o EduConnect, se o estabelecimento oferecer.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "identite",
+      "libelle": "Documentos de identidade dos pais e da criança, livro de família (livret de famille)",
+      "detail": "Cópias, para a matrícula.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço e fotos 3x4",
+      "detail": "Para a matrícula, conforme a lista do estabelecimento.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "notification",
+      "libelle": "Notificação de concessão ou de recusa da bolsa",
+      "detail": "Guarde-a: ela marca o início do prazo de recurso.",
+      "coffre": "scolarite"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Estime seus direitos com o simulador",
+      "detail": "Com o seu aviso de imposto 2026 e o número de filhos a cargo. O simulador está acessível nas fichas de service-public.gouv.fr."
+    },
+    {
+      "titre": "Na matrícula, aceite a análise automática",
+      "detail": "On-line com o EduConnect ou na ficha em papel. Depois, não há mais nada a fazer."
+    },
+    {
+      "titre": "Caso contrário, faça o pedido entre 1º de setembro e 15 de outubro de 2026",
+      "detail": "On-line com o EduConnect, ou em formulário de papel na secretaria do estabelecimento."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Aviso de imposto 2026 completo (os dois em union libre), RIB, formulário assinado, sentença de residência se forem separados. Em residência alternada, combinem com antecedência qual genitor faz o pedido."
+    },
+    {
+      "titre": "Entregue o pedido antes do prazo",
+      "detail": "Peça um recibo ou anote a data de entrega."
+    },
+    {
+      "titre": "Guarde a notificação",
+      "detail": "Em caso de recusa, respeite o prazo de recurso indicado acima."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Secretaria do collège ou do lycée",
+      "detail": "Matrícula, pedido de bolsa em papel, fundo social (fonds social)."
+    },
+    {
+      "nom": "EduConnect (Scolarité services)",
+      "detail": "Matrícula e pedido de bolsa on-line.",
+      "url": "https://educonnect.education.gouv.fr"
+    },
+    {
+      "nom": "Académie de La Réunion (rede regional de educação)",
+      "detail": "Decisão de concessão da bolsa do lycée e recursos.",
+      "url": "https://www.ac-reunion.fr"
+    },
+    {
+      "nom": "CASNAV de La Réunion",
+      "detail": "Acolhimento e avaliação dos alunos alófonos recém-chegados.",
+      "url": "https://www.ac-reunion.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Bolsa do collège (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984"
+    },
+    {
+      "titre": "Bolsa do lycée (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616"
+    },
+    {
+      "titre": "Matrícula no collège (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Pedido de bolsa: prazo final 15 de outubro",
+      "evenement": "ecole"
+    },
+    {
+      "type": "rappel",
+      "titre": "Aceitar a análise automática da bolsa na matrícula",
+      "evenement": "ecole"
+    },
+    {
+      "type": "coffre",
+      "titre": "Aviso de imposto usado para a bolsa",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notificação da bolsa",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "depense",
+      "titre": "Material escolar",
+      "categorie": "ecole"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Sem análise automática: de 1º de setembro a 15 de outubro de 2026",
+      "detail": "Para o Cned, a ficha da bolsa do lycée indica um pedido em papel até 31 de outubro de 2026."
+    },
+    {
+      "libelle": "Recurso: 2 meses (collège) ou 15 dias corridos completos (lycée) após a notificação"
+    }
+  ],
+  "aConfirmer": [
+    "A ficha oficial da bolsa do collège indica duas datas diferentes para o Cned (15 e 31 de outubro de 2026): confirme com o Cned.",
+    "A confirmar localmente: calendário próprio da académie de La Réunion (processo da 6e, pagamentos), junto ao estabelecimento.",
+    "A regra da residência alternada só é detalhada para a bolsa do collège: para o lycée, informe-se no estabelecimento."
+  ],
+  "motsCles": [
+    "bolsa",
+    "collège",
+    "lycée",
+    "6e",
+    "EduConnect",
+    "aviso de imposto",
+    "residência alternada"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F984 Bolsa do collège",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F616 Bolsa do lycée",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2322 Matrícula no collège",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

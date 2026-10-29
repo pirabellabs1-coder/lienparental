@@ -11,12 +11,12 @@
     "Les parents qui ne sont pas encore allocataires de la Caf."
   ],
   "aSavoir": [
-    "Dans les DOM, pour une famille avec un seul enfant à charge, une allocation familiale est versée, assortie de majorations liées à l'âge de l'enfant (Cnaf, lettre réseau LR-2026-051 du 26 février 2026).",
-    "À partir de 2 enfants, les règles sont les mêmes qu'en métropole. Depuis le 1er mars 2026, la majoration pour âge est versée à 18 ans au lieu de 14 ans pour les enfants nés à partir du 1er mars 2012, dans les familles d'au moins 2 enfants (Cnaf, LR-2026-051).",
+    "Dans les DOM, pour une famille avec un seul enfant à charge, une allocation familiale est versée, assortie de majorations liées à l'âge de l'enfant, à partir de 11 ans puis revalorisées à partir de 16 ans (Cnaf, lettre réseau LR-2026-051 du 26 février 2026).",
+    "À partir de 2 enfants, les règles sont les mêmes qu'en métropole. Depuis le 1er mars 2026, la majoration pour âge est versée à 18 ans au lieu de 14 ans pour les enfants nés à partir du 1er mars 2012, dans les familles d'au moins 2 enfants (sauf pour l'aîné d'une famille de 2 enfants) (Cnaf, LR-2026-051).",
     "Pour 2 enfants, le montant de base va de 38,07 € à 152,25 € par mois selon les ressources du foyer (service-public.gouv.fr, vérifié au 1er juin 2026).",
     "Le complément familial a des conditions et un montant différents dans les DOM, dont la Guyane (service-public.gouv.fr).",
     "Résidence alternée : les parents peuvent choisir de partager les allocations familiales, chacun recevant la moitié, avec le formulaire cerfa n° 14000. Ce choix ne peut être modifié qu'au bout d'un an, sauf changement de résidence de l'enfant. En cas de désaccord, chaque parent reçoit automatiquement une part.",
-    "Seules les allocations familiales se partagent. Paje, complément familial, aides au logement, allocation de rentrée scolaire, allocation de soutien familial ou AEEH sont versées en totalité au parent désigné."
+    "Seules les allocations familiales se partagent. Paje, complément familial, aides au logement, allocation de rentrée scolaire, allocation de soutien familial ou AEEH sont versées en totalité au parent désigné. Exception : depuis le 1er décembre 2025, chaque parent peut percevoir le CMG selon sa propre situation."
   ],
   "documents": [
     { "id": "identite-parents", "libelle": "Pièce d'identité ou titre de séjour de chaque parent", "detail": "Copie en cours de validité, demandée lors de la première demande à la Caf.", "coffre": "finances" },
@@ -48,17 +48,17 @@
     { "type": "rappel", "titre": "Signaler à la Caf tout changement de situation familiale", "evenement": "autre" }
   ],
   "aConfirmer": [
-    "À confirmer localement auprès de la Caf de la Guyane : le montant mensuel 2026 pour un seul enfant et les âges des majorations ne figurent pas sur les fiches nationales consultées. Utilisez le simulateur de la Caf.",
+    "À confirmer localement auprès de la Caf de la Guyane : le montant mensuel 2026 pour un seul enfant et celui des majorations ne figurent pas sur les fiches nationales consultées. Utilisez le simulateur de la Caf.",
     "À confirmer localement auprès de la Caf de la Guyane : les modalités de partage en résidence alternée quand la famille n'a qu'un seul enfant à charge.",
     "À confirmer localement : les conditions du complément familial en Guyane (âge et nombre d'enfants, plafonds).",
     "À confirmer auprès de la Caf : la situation des agents de la fonction publique en poste en Guyane qui n'ont qu'un enfant, pour lesquels des règles particulières peuvent s'appliquer."
   ],
   "motsCles": ["allocations familiales", "un enfant", "DOM", "Caf", "résidence alternée", "partage"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Cnaf, lettre réseau LR-2026-051 du 26 février 2026 (majoration des allocations familiales, dispositions DOM)", "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf" },
-    { "titre": "Service-public.gouv.fr, F13213 Allocations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213", "verifieLe": "2026-06-01" },
-    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F13214 Complément familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214", "verifieLe": "2026-04-01" }
+    { "titre": "Cnaf, lettre réseau LR-2026-051 du 26 février 2026 (majoration des allocations familiales, dispositions DOM)", "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13213 Allocations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13214 Complément familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214", "verifieLe": "2026-10-29" }
   ]
 }

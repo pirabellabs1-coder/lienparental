@@ -1,0 +1,61 @@
+{
+  "slug": "accueil-loisirs-vacances",
+  "territoire": "reunion",
+  "categorie": "loisirs",
+  "titre": "Centros de lazer e auxílios para as férias",
+  "resume": "Encontrar um centro de lazer para as quartas-feiras e as férias, preparar o processo (vacinas em dia, quociente familiar) e conhecer os auxílios de tempo livre da Caf de La Réunion.",
+  "aQuoiCaSert": "Os centros de lazer sem pernoite (ALSH, accueils de loisirs sans hébergement, muitas vezes chamados de centres de loisirs) recebem as crianças desde a entrada na escola até a adolescência, inclusive crianças com deficiência. Conforme o município, funcionam às quartas-feiras, antes ou depois da aula, no intervalo do almoço e nas férias escolares. Cada organizador, prefeitura (mairie) ou associação, define os preços, muitas vezes conforme a renda da família e os auxílios da Caf (Caisse d'allocations familiales, órgão de benefícios familiares). A Caf de La Réunion também oferece auxílios de tempo livre (aides au temps libre) para as estadias das crianças e as férias em família.",
+  "quiEstConcerne": [
+    "Os pais de crianças em idade escolar que procuram onde deixá-las às quartas-feiras ou nas férias.",
+    "As famílias beneficiárias de baixa renda, para os auxílios de tempo livre e de férias da Caf de La Réunion."
+  ],
+  "aSavoir": [
+    "As vagas são limitadas: informe-se várias semanas antes das férias ou da volta às aulas. A inscrição geralmente é feita na prefeitura ou diretamente no centro.",
+    "As vacinas obrigatórias são exigidas para a admissão em ambientes coletivos, inclusive centros de lazer e colônias de férias. A lista depende do ano de nascimento da criança. Não existe vacina obrigatória específica da Reunião.",
+    "Se as vacinas não estiverem em dia, a criança pode ser admitida provisoriamente: você tem então 3 meses para regularizar. A caderneta de saúde (carnet de santé) preenchida pelo médico serve de comprovante.",
+    "Os auxílios de tempo livre fazem parte da ação social própria de cada Caf: os valores e as condições mudam de um departamento para outro e às vezes de um ano para outro.",
+    "Pais separados: cada um pode inscrever a criança nas próprias semanas de férias. Informe ao centro as pessoas autorizadas a buscar a criança e, se necessário, apresente a decisão que fixa a residência dela."
+  ],
+  "documents": [
+    { "id": "dossier-inscription", "libelle": "Ficha de inscrição ou ficha de saúde do centro", "detail": "Peça à prefeitura ou ao centro. Ela define as autorizações (saídas, fotos, pessoas autorizadas).", "coffre": "autres" },
+    { "id": "carnet-sante", "libelle": "Cópia das páginas de vacinas da caderneta de saúde", "detail": "Vacinas atrasadas: marque uma consulta com o médico ou num centro de PMI (protection maternelle et infantile, serviço de saúde materno-infantil) do Département.", "coffre": "sante" },
+    { "id": "attestation-caf", "libelle": "Atestado de quociente familiar (attestation de quotient familial) da Caf", "detail": "Disponível no seu espaço Caf. Serve para calcular o seu preço.", "coffre": "finances" },
+    { "id": "notification-aide", "libelle": "Notificação de auxílio de tempo livre, se você o recebe", "coffre": "finances" },
+    { "id": "assurance", "libelle": "Atestado de seguro de responsabilidade civil ou extraescolar da criança", "detail": "Muitas vezes pedido pelos centros.", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Sentença ou acordo que fixa a residência da criança, se o centro pedir", "detail": "Cópia. Útil para definir quem pode inscrever e buscar a criança.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Encontre os centros de lazer perto de você", "detail": "Em monenfant.fr ou na sua prefeitura." },
+    { "titre": "Informe-se sobre os auxílios de tempo livre da Caf de La Réunion", "detail": "Na página específica da Caf, no seu espaço on-line ou com o centro, que pode receber o auxílio diretamente." },
+    { "titre": "Combine com o outro genitor", "detail": "Anote no calendário quem fica com a criança em cada semana de férias." },
+    { "titre": "Confira antes de ir", "detail": "Datas de abertura das inscrições, formulário do centro preenchido, cópia das vacinas em dia, atestado de quociente familiar, atestado de seguro, lista das pessoas autorizadas a buscar a criança com seus documentos de identidade." },
+    { "titre": "Inscreva o seu filho cedo", "detail": "Nas férias, as vagas acabam rápido." }
+  ],
+  "ou": [
+    { "nom": "monenfant.fr", "detail": "Diretório dos centros de lazer.", "url": "https://monenfant.fr/les-accueils-de-loisirs" },
+    { "nom": "Prefeitura (mairie) do seu município", "detail": "Centros de lazer municipais e inscrições." },
+    { "nom": "Caf de La Réunion", "detail": "Auxílios de tempo livre para as estadias das crianças e as férias em família.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion/offre-de-service/vie-personnelle/preparez-vos-vacances-avec-les-aides-au-temps-libre" }
+  ],
+  "liens": [
+    { "titre": "monenfant.fr, centros de lazer", "url": "https://monenfant.fr/les-accueils-de-loisirs" },
+    { "titre": "Vacinação e admissão em coletividade (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Caf de La Réunion, auxílios de tempo livre", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion/offre-de-service/vie-personnelle/preparez-vos-vacances-avec-les-aides-au-temps-libre" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Abertura das inscrições no centro de lazer das férias", "evenement": "activite" },
+    { "type": "calendrier", "titre": "Centro de lazer durante as férias", "evenement": "activite" },
+    { "type": "coffre", "titre": "Atestado de quociente familiar da Caf", "categorie": "finances" },
+    { "type": "coffre", "titre": "Cópia das vacinas da criança", "categorie": "sante" },
+    { "type": "depense", "titre": "Centro de lazer", "categorie": "loisirs" }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: a tabela em vigor dos auxílios de tempo livre da Caf de La Réunion (quociente familiar máximo, idades, estadias abrangidas). A página da Caf não pôde ser lida na verificação.",
+    "A confirmar localmente: a lista das estruturas de férias em família parceiras da Caf de La Réunion para o ano em curso.",
+    "A confirmar localmente: os documentos exatos da ficha de inscrição, definidos por cada prefeitura ou centro."
+  ],
+  "motsCles": ["centro de lazer", "ALSH", "férias", "colônia de férias", "tempo livre", "quarta-feira", "contraturno"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou o atendimento pós-escola", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" }
+  ]
+}

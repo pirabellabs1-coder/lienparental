@@ -1,0 +1,68 @@
+{
+  "slug": "livret-epargne-mineur",
+  "territoire": "france",
+  "categorie": "argent",
+  "titre": "Ouvrir un livret A ou un livret jeune pour mon enfant",
+  "resume": "Quel livret choisir, quelles pièces apporter à la banque (enfant et chaque parent), les plafonds, qui peut retirer selon l'âge et ce qui change si vous êtes séparés.",
+  "aQuoiCaSert": "Un livret au nom de l'enfant permet de mettre de l'argent de côté pour lui, sans frais et avec des intérêts exonérés d'impôt. Le livret A peut être ouvert dès la naissance, le livret jeune à partir de 12 ans. L'argent appartient à l'enfant : les parents le gèrent pour lui et ne peuvent l'utiliser que pour des dépenses directement liées à l'enfant (éducation, entretien). À partir de 16 ans, ils doivent lui rendre des comptes sur l'usage de son argent.",
+  "quiEstConcerne": [
+    "Les parents (ou le tuteur) qui veulent épargner pour leur enfant, dès sa naissance pour le livret A.",
+    "Les jeunes de 12 à 25 ans résidant habituellement en France pour le livret jeune.",
+    "Les grands-parents ou proches qui veulent verser de l'argent : ils peuvent alimenter le livret, mais l'ouverture passe par l'enfant ou son représentant légal."
+  ],
+  "aSavoir": [
+    "Livret A : un seul par personne, plafond de 22 950 € (hors intérêts), versement minimum de 10 € (1,50 € à La Banque Postale). Taux de 1,7 % du 1er août 2026 au 31 janvier 2027.",
+    "Livret jeune : un seul par personne, de 12 à 25 ans, plafond de versements de 1 600 €, taux fixé par la banque mais jamais inférieur à celui du livret A, ouverture avec 10 € minimum. Pour un mineur, la banque exige la signature du représentant légal.",
+    "Retraits avant 16 ans : l'enfant ne peut pas retirer sans l'accord de son représentant légal. Sur le livret A, le représentant légal ne peut retirer que dans l'agence où le livret a été ouvert.",
+    "Retraits de 16 à 18 ans : le jeune retire seul sur son livret A ou son livret jeune, sauf si un représentant légal s'y oppose par lettre recommandée envoyée à la banque.",
+    "Parents qui exercent ensemble l'autorité parentale (même séparés) : la Cour de cassation (12 juin 2025, n° 24-13.604) a jugé que modifier le compte d'un mineur est un acte de disposition qui exige l'accord des deux parents. La banque peut donc demander la signature des deux.",
+    "Si un seul parent exerce l'autorité parentale (jugement ou situation particulière), il agit seul : apportez la décision qui le prouve."
+  ],
+  "documents": [
+    { "id": "identite-enfant", "libelle": "Pièce d'identité de l'enfant ou, à défaut, livret de famille", "detail": "Original. Sert aussi de preuve de la date de naissance exigée pour le livret jeune. Pas de carte d'identité : voir la fiche « Faire la carte d'identité ou le passeport de mon enfant ».", "coffre": "finances" },
+    { "id": "livret-famille", "libelle": "Livret de famille", "detail": "Original et une copie des pages parents et enfant. Il prouve le lien de filiation. À défaut, un acte de naissance de l'enfant avec filiation (gratuit sur service-public.gouv.fr).", "coffre": "finances" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité valide du parent qui signe", "detail": "Original. Si la banque demande la signature des deux parents, apportez aussi celle de l'autre parent ou prévoyez sa venue.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Facture, avis d'imposition ou quittance au nom du parent. Beaucoup de banques demandent moins de 3 mois : vérifiez.", "coffre": "finances" },
+    { "id": "jugement-autorite", "libelle": "Jugement ou décision fixant l'autorité parentale, si vous l'exercez seul", "detail": "Copie du jugement du juge aux affaires familiales ou de la décision qui vous confie seul l'autorité parentale.", "coffre": "jaf" },
+    { "id": "accord-autre-parent", "libelle": "Accord écrit de l'autre parent, si la banque le demande", "detail": "Lettre datée et signée, avec la copie de sa pièce d'identité. Indispensable pour les retraits ou virements importants si vous exercez l'autorité parentale à deux.", "coffre": "finances" },
+    { "id": "premier-versement", "libelle": "Premier versement", "detail": "Au moins 10 € (1,50 € pour un livret A à La Banque Postale).", "coffre": "finances" },
+    { "id": "contrat", "libelle": "Contrat d'ouverture et relevés annuels", "detail": "À conserver : ils prouvent les sommes versées et retirées.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Choisissez le livret", "detail": "Livret A dès la naissance, livret jeune à partir de 12 ans. Les deux peuvent coexister. Vérifiez qu'aucun livret A n'a déjà été ouvert au nom de l'enfant (par exemple par un grand-parent) : un seul par personne." },
+    { "titre": "Parlez-en avec l'autre parent", "detail": "Mettez-vous d'accord sur le livret, la banque et qui fera les versements. Un accord écrit évite les blocages au moment des retraits." },
+    { "titre": "Prenez rendez-vous dans la banque choisie", "detail": "Demandez la liste exacte des pièces : elle peut varier d'une banque à l'autre, en particulier sur la présence ou la signature des deux parents." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pièce d'identité valide de l'enfant ou livret de famille, livret de famille original, votre pièce d'identité valide, justificatif de domicile récent, jugement si vous exercez seul l'autorité parentale, accord signé et pièce d'identité de l'autre parent si la banque l'exige, de quoi faire le premier versement." },
+    { "titre": "Signez l'ouverture à la banque", "detail": "Le parent signe pour l'enfant. Pour le livret jeune, la signature du représentant légal est exigée." },
+    { "titre": "Rangez le contrat et suivez les relevés", "detail": "Classez le contrat et chaque relevé annuel dans le coffre-fort. Notez les grandes étapes : 12 ans, 16 ans (retraits seul), 18 ans." }
+  ],
+  "ou": [
+    { "nom": "La banque de votre choix ou La Banque Postale", "detail": "Le livret A et le livret jeune sont proposés par la plupart des banques. Comparez les conditions du livret jeune, dont le taux varie selon la banque." }
+  ],
+  "liens": [
+    { "titre": "Livret A (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" },
+    { "titre": "Livret jeune (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904" },
+    { "titre": "Compte bancaire d'un mineur (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035" },
+    { "titre": "Compte d'un mineur : accord des deux parents (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" },
+    { "titre": "Obtenir un acte de naissance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Rendez-vous à la banque : livret de l'enfant", "evenement": "rdv" },
+    { "type": "coffre", "titre": "Contrat de livret d'épargne de l'enfant", "categorie": "finances" },
+    { "type": "coffre", "titre": "Relevé annuel du livret de l'enfant", "categorie": "finances" },
+    { "type": "coffre", "titre": "Accord de l'autre parent pour le livret", "categorie": "finances" },
+    { "type": "rappel", "titre": "Les 16 ans de l'enfant : il pourra retirer seul sur son livret", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "Les pièces exactes et l'exigence de la présence ou de la signature des deux parents sont fixées par chaque banque : demandez la liste avant le rendez-vous.",
+    "Service-public.gouv.fr indique qu'un mineur peut ouvrir un livret A sans son représentant légal, sans fixer d'âge minimum : votre banque peut appliquer ses propres règles."
+  ],
+  "motsCles": ["livret A", "livret jeune", "épargne", "banque", "mineur", "compte enfant"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2365 Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2904 Livret jeune", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21035 Compte bancaire d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A18386 (Cour de cassation, 12 juin 2025, n° 24-13.604)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" }
+  ]
+}

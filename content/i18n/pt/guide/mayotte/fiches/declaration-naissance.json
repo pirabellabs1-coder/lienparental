@@ -1,0 +1,65 @@
+{
+  "slug": "declaration-naissance",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Registrar o nascimento do meu filho",
+  "resume": "Um procedimento obrigatório e gratuito na prefeitura (mairie) do local de nascimento, em até 5 dias. Os documentos exatos a levar, o reconhecimento possível no mesmo momento e o livro de família entregue nessa ocasião.",
+  "aQuoiCaSert": "O registro de nascimento permite lavrar a certidão de nascimento da criança: sem ele, a criança não tem registro civil. A certidão é redigida na hora pelo oficial de registro civil. Para um primeiro filho em comum, a prefeitura também emite o livro de família (livret de famille). É o ponto de partida dos direitos junto à CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte): benefícios familiares e seguro-saúde. Passado o prazo, a prefeitura não pode mais registrar o nascimento sozinha: é preciso uma decisão judicial.",
+  "quiEstConcerne": [
+    "O pai, a segunda mãe ou qualquer pessoa que tenha assistido ao parto (médico, parteira, responsável pelo estabelecimento).",
+    "Se a mãe der à luz sozinha no hospital, o estabelecimento faz o registro."
+  ],
+  "aSavoir": [
+    "Prazo: 5 dias após o parto, sem contar o dia do parto. Se o último dia cair num sábado, domingo ou feriado, ele passa para o primeiro dia útil seguinte.",
+    "Em Mayotte, não há prazo ampliado (ao contrário de alguns municípios da Guiana Francesa): são 5 dias em todo lugar.",
+    "O registro é feito na prefeitura do local de nascimento, não necessariamente a do seu domicílio.",
+    "Depois do prazo, é necessária uma declaração judicial perante o tribunal judiciaire (tribunal judiciário) de Mamoudzou. O atraso também expõe a sanções penais.",
+    "Pais não casados: o pai precisa reconhecer a criança (reconnaissance) para que a filiação seja estabelecida. Em Mayotte, o reconhecimento feito junto com o registro de nascimento é feito na prefeitura do local de nascimento; feito em outro momento, cabe à prefeitura de Mamoudzou.",
+    "Livro de família: para um primeiro filho em comum, ele é emitido no registro e entregue gratuitamente pela prefeitura, mediante apresentação de um documento de identidade."
+  ],
+  "documents": [
+    { "id": "certificat-accouchement", "libelle": "Atestado médico de parto (certificat d'accouchement)", "detail": "Original, entregue pela maternidade ou pela parteira.", "coffre": "sante" },
+    { "id": "identite-parents", "libelle": "Documento de identidade de cada um dos pais", "detail": "Originais. Carteira de identidade, passaporte ou título de residência. Leve os dos dois pais, mesmo que só um vá.", "coffre": "autres" },
+    { "id": "reconnaissance", "libelle": "Termo de reconhecimento antecipado, se foi feito antes do nascimento", "detail": "Cópia entregue pela prefeitura ou pelo notário.", "coffre": "jaf" },
+    { "id": "choix-nom", "libelle": "Declaração conjunta de escolha do sobrenome, se vocês fizerem uma", "detail": "Assinada pelos dois pais. Formulário disponível na prefeitura.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Livro de família, se já tiverem um", "detail": "Original, para incluir a criança.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Comprovante de endereço com menos de 3 meses", "detail": "Só se os pais não forem casados e o pai ainda não tiver reconhecido a criança.", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Cópias da certidão de nascimento da criança", "detail": "Gratuitas, a pedir após o registro.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Pegue o atestado de parto na maternidade", "detail": "Pergunte também se a própria maternidade envia o registro à prefeitura." },
+    { "titre": "Confira antes de ir", "detail": "Atestado de parto, documentos de identidade dos dois pais, reconhecimento antecipado se houver, declaração de escolha do sobrenome se fizerem uma, livro de família existente, comprovante de endereço se o pai ainda não reconheceu a criança. Prazo: 5 dias." },
+    { "titre": "Vá à prefeitura do local de nascimento dentro do prazo", "detail": "Serviço de registro civil (état civil). O pai não casado que ainda não reconheceu a criança pode fazê-lo no mesmo momento." },
+    { "titre": "Retire a certidão de nascimento e o livro de família", "detail": "Peça várias cópias da certidão: servem para a CSSM e a mutuelle (plano de saúde complementar)." },
+    { "titre": "Informe o nascimento à CSSM", "detail": "Em \"Mon Compte\" no caf.fr para os benefícios familiares, e na sua conta ameli (site do seguro-saúde francês) para vincular a criança ao seguro-saúde." }
+  ],
+  "ou": [
+    { "nom": "Prefeitura (mairie) do local de nascimento, serviço de registro civil", "detail": "Registro, certidão de nascimento e livro de família." }
+  ],
+  "liens": [
+    { "titre": "Registro de nascimento (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961" },
+    { "titre": "Livro de família no nascimento do primeiro filho (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991" },
+    { "titre": "Reconhecimento de um filho (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Registrar o nascimento na prefeitura (5 dias)", "evenement": "rdv" },
+    { "type": "coffre", "titre": "Certidão de nascimento da criança", "categorie": "autres" },
+    { "type": "coffre", "titre": "Cópia do livro de família", "categorie": "autres" },
+    { "type": "coffre", "titre": "Atestado de parto", "categorie": "sante" },
+    { "type": "rappel", "titre": "Informar o nascimento à CSSM", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "5 dias após o parto", "detail": "O dia do parto não conta. Passa para o primeiro dia útil se o último dia cair num fim de semana ou feriado." }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: possibilidade de registrar diretamente na maternidade (centre hospitalier de Mayotte ou maternidades periféricas), conforme o estabelecimento e a prefeitura.",
+    "A confirmar localmente: horário do serviço de registro civil e plantões, conforme a prefeitura."
+  ],
+  "motsCles": ["nascimento", "bebê", "registro civil", "prefeitura", "certidão de nascimento", "maternidade", "livro de família"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F961 Registro de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11991 Livro de família no nascimento do primeiro filho", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, loi n° 2025-797 du 11 août 2025 (reconhecimento de filhos em Mayotte)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052075903", "verifieLe": "2026-10-29" }
+  ]
+}

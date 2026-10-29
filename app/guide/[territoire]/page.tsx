@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
-import { ChevronRight, ListChecks } from 'lucide-react'
+import { ArrowLeftRight, ChevronRight, ListChecks } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { contentLangAttr } from '@/lib/contenus/locale'
 import { GUIDE_CATEGORIES } from '@/lib/guide/types'
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations('public.guide.territory')
   return guideMetadata({
     title: t('metaTitle', { territory: g.territoire.nom }),
-    description: t('metaDescription', { territory: g.territoire.nom, count: g.fiches.length }),
+    description: t('metaDescription', { territory: g.territoire.nom, code: g.territoire.code, count: g.fiches.length }),
     path: guidePaths.territoire(g.territoire.code),
     locale,
   })
@@ -55,7 +55,7 @@ export default async function GuideTerritoryPage({ params }: Props) {
       <JsonLd data={collectionJsonLd({
         path: lp(guidePaths.territoire(territoire.code)),
         title,
-        description: t('territory.metaDescription', { territory: territoire.nom, count: fiches.length }),
+        description: t('territory.metaDescription', { territory: territoire.nom, code: territoire.code, count: fiches.length }),
         lang: locale,
         entries: fiches.map((f) => ({ name: f.titre, path: lp(guidePaths.fiche(territoire.code, f.slug)) })),
         crumbs,
@@ -66,7 +66,12 @@ export default async function GuideTerritoryPage({ params }: Props) {
 
         <header className="mt-6 max-w-[720px]">
           <h1 className={H1}>{title}</h1>
-          <p className="mt-3 text-[16.5px] leading-relaxed text-night-700">{t('territory.lead', { territory: territoire.nom, count: fiches.length })}</p>
+          <p className="mt-3 text-[16.5px] leading-relaxed text-night-700">{t('territory.lead', { territory: territoire.nom, code: territoire.code, count: fiches.length })}</p>
+          {g.territoires.filter((x) => x.disponible).length > 1 && (
+            <Link href={`${lp(guidePaths.index)}#territoires`} className="mt-3 inline-flex min-h-[44px] items-center gap-1.5 text-[14.5px] font-semibold text-leaf-700 hover:underline">
+              <ArrowLeftRight className="h-4 w-4" strokeWidth={1.75} aria-hidden="true" />{t('territory.change')}
+            </Link>
+          )}
         </header>
 
         {parcours.length > 0 && (

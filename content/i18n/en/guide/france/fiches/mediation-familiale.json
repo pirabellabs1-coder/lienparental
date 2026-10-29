@@ -1,0 +1,195 @@
+{
+  "slug": "mediation-familiale",
+  "territoire": "france",
+  "categorie": "separation",
+  "titre": "Family mediation",
+  "resume": "A neutral professional to help you reach agreements about the children together. First meeting free, fees based on your income in an approved service, agreement that can be approved by the judge.",
+  "aQuoiCaSert": "Family mediation (médiation familiale) helps parents restore dialogue and build their own agreements: the child's residence, visiting and staying rights, child support, holidays, exceptional expenses. The mediator is independent and impartial: they decide nothing for you. The written agreement can then be approved by the family court judge (juge aux affaires familiales, JAF), which is called court approval (homologation), and then becomes enforceable like a judgment. Mediation can take place before any court proceedings or during them.",
+  "quiEstConcerne": [
+    "Parents who are separated or separating, married or not.",
+    "Grandparents, to maintain relations with their grandchildren.",
+    "Mediation is not possible in cases of violence by one parent against the other or against the child: in that case, call 3919 (listening line, free, 24/7) or 17 (emergency), or send a text message to 114."
+  ],
+  "aSavoir": [
+    "The information meeting is free and without commitment. You can go alone or with the other parent.",
+    "Sessions usually last 1.5 to 2 hours. Their number is often limited to 6.",
+    "In a service approved by the Caf (Caisse d'allocations familiales, the family benefits office), the price of each session depends on your income (national scale). A private mediator sets their own fees; failing agreement, the costs are split in half.",
+    "Court-ordered mediation: it lasts at most 5 months, renewable once for 3 months. The costs are split equally unless decided otherwise, and covered by the State if you have legal aid (aide juridictionnelle).",
+    "The judge can order the parents to meet a mediator. Failing to attend can lead to a civil fine of up to €10,000.",
+    "Lawyers can attend the sessions, but the mediator leads the discussions."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "ID (original to present)",
+      "coffre": "jaf"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Latest tax notice or proof of income (copy)",
+      "detail": "To calculate your fee in an approved service. Downloadable from your impots.gouv.fr account. If you receive benefits, Caf payment certificate.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-caf",
+      "libelle": "Caf payment certificate (copy), if you are a beneficiary",
+      "detail": "Download it from your caf.fr account.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or decision ordering mediation (copy), if there is one",
+      "detail": "It names the appointed mediator, the duration, the deposit (provision) and the deadline to pay it.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "aj",
+      "libelle": "Legal aid decision (copy), if you receive it",
+      "detail": "It exempts you from paying the deposit in court-ordered mediation.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "planning",
+      "libelle": "The child's schedule and budget (school, activities, expenses)",
+      "detail": "Optional, but useful for concrete sessions: you can export it from the calendar and the Journal.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "accord-mediation",
+      "libelle": "Written agreement resulting from mediation",
+      "detail": "Original signed by both parents, to attach to the request for approval.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Find a family mediation service",
+      "detail": "Ask your Caf for approved services (fees based on income), or check the list of mediators of your cour d'appel (court of appeal), in the \"Partenaires de justice\" section of its website. A point-justice (free legal information center) can also guide you."
+    },
+    {
+      "titre": "Book the free information meeting",
+      "detail": "Alone or with the other parent. It explains how mediation works and what can be discussed."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "ID; tax notice or Caf certificate for the fee; the judge's decision if mediation is court-ordered; legal aid decision if you have it; list of topics to discuss; the child's schedule."
+    },
+    {
+      "titre": "Attend the sessions",
+      "detail": "Add each session to the calendar. Between sessions, note the points to revisit."
+    },
+    {
+      "titre": "Have the agreement approved if you wish",
+      "detail": "Joint request to the family court judge using form cerfa n° 16139, to be sent to the competent court. The approved agreement has the same force as a judgment."
+    },
+    {
+      "titre": "Without an agreement, you can apply to the judge",
+      "detail": "See the guide entry \"Applying to the family court judge (JAF)\"."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf in your département",
+      "detail": "Referral to approved family mediation services. Find your Caf with your postcode on caf.fr.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "Your cour d'appel (court of appeal)",
+      "detail": "List of family mediators, \"Partenaires de justice\" section of the court of appeal's website.",
+      "url": "https://www.cours-appel.justice.fr"
+    },
+    {
+      "nom": "Point-justice",
+      "detail": "Free legal information and guidance. Directory by town, or the single free and anonymous legal access number.",
+      "url": "https://www.justice.gouv.fr/annuaire/lieux-daccueil-dinformation/point-justice",
+      "telephone": "3039"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Family mediation (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355"
+    },
+    {
+      "titre": "Approval of a parenting agreement, Cerfa 16139 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771"
+    },
+    {
+      "titre": "Domestic violence: helplines and protection (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Family mediation information meeting",
+      "evenement": "rdv"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Family mediation session",
+      "evenement": "rdv"
+    },
+    {
+      "type": "coffre",
+      "titre": "Signed family mediation agreement",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Decision ordering mediation",
+      "categorie": "jaf"
+    },
+    {
+      "type": "depense",
+      "titre": "Family mediation session",
+      "categorie": "frais-administratifs"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Court-ordered mediation: deadline set by the judge to pay the deposit",
+      "detail": "Without payment within this deadline, the mediation cannot take place (except with legal aid)."
+    },
+    {
+      "libelle": "Court-ordered mediation: 5 months maximum",
+      "detail": "Renewable once for 3 months."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the compulsory prior attempt at family mediation (before applying to the judge to change a decision) only exists in certain designated tribunaux judiciaires (judicial courts). The up-to-date list could not be checked: ask the court registry (greffe) of your court or a point-justice.",
+    "To be confirmed locally: list of services approved by your Caf, fees and whether remote sessions are possible.",
+    "To be confirmed: the instructions for cerfa n° 16139 state whether a lawyer is needed and whether a tax stamp is due; read them before sending."
+  ],
+  "motsCles": [
+    "mediation",
+    "mediator",
+    "agreement",
+    "dialogue",
+    "conflict",
+    "court approval"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F34355 Family mediation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R58771 Joint request for approval of a parenting agreement (Cerfa 16139)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F12544 Domestic violence",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Ministry of Justice, directory of points-justice and the 3039 number",
+      "url": "https://www.justice.gouv.fr/annuaire/lieux-daccueil-dinformation/point-justice",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

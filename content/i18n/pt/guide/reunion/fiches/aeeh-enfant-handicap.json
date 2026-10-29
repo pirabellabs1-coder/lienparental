@@ -1,0 +1,72 @@
+{
+  "slug": "aeeh-enfant-handicap",
+  "territoire": "reunion",
+  "categorie": "aides",
+  "titre": "Auxílio de educação da criança com deficiência (AEEH) e MDPH",
+  "resume": "Montar um processo completo na MDPH de La Réunion para a AEEH: formulário, atestado médico com menos de um ano, documentos exatos, prazo de resposta e recursos.",
+  "aQuoiCaSert": "A AEEH (allocation d'éducation de l'enfant handicapé, auxílio de educação da criança com deficiência) ajuda os pais a arcar com as despesas de educação e de cuidados de uma criança com deficiência. Ela tem um valor básico, ao qual pode se somar um complemento, conforme as necessidades da criança e o efeito sobre a atividade profissional dos pais. O pedido é entregue à MDPH (maison départementale des personnes handicapées, centro departamental para pessoas com deficiência). A CDAPH (commission des droits et de l'autonomie, comissão de direitos e autonomia) decide e depois a Caf de La Réunion (Caisse d'allocations familiales, órgão de benefícios familiares) paga o auxílio.",
+  "quiEstConcerne": [
+    "Os pais de uma criança com menos de 20 anos cuja taxa de incapacidade é de pelo menos 80%.",
+    "Os pais de uma criança com taxa de 50% a menos de 80%, se ela é acompanhada por um serviço médico-social, tem escolarização adaptada ou recebe cuidados.",
+    "Os pais separados, qualquer que seja o regime de residência da criança."
+  ],
+  "aSavoir": [
+    "Valor básico: 153,01 € por mês. Somam-se complementos conforme a categoria da deficiência e o efeito sobre o trabalho do genitor (service-public.gouv.fr).",
+    "O atestado médico (cerfa n° 15695) deve ter no máximo um ano na data da entrega.",
+    "A CDAPH tem 4 meses para decidir. Sem resposta após 4 meses, o pedido é considerado recusado.",
+    "Em caso de recusa: recurso administrativo prévio obrigatório (recours administratif préalable obligatoire) à MDPH em até 2 meses e, depois, sem resposta ou em caso de rejeição, recurso ao tribunal judiciaire (tribunal judiciário) do seu domicílio em até 2 meses.",
+    "Duração: 3 a 5 anos se a taxa for de pelo menos 80%, 2 a 5 anos entre 50 e 80%, ou sem limite até os 20 anos se o estado da criança não puder melhorar.",
+    "Em residência alternada, a AEEH não é dividida: é paga integralmente ao genitor designado como beneficiário (regra dos benefícios familiares que não são os auxílios familiares).",
+    "Uma lei de 12 de junho de 2026 prevê um teste para encurtar os prazos, com um adiantamento automático sem resposta da CDAPH. Ela só se aplica depois da publicação dos decretos."
+  ],
+  "documents": [
+    { "id": "formulaire-mdph", "libelle": "Formulário de pedido à MDPH (cerfa n° 15692)", "detail": "Original datado e assinado pelo representante legal. Disponível em service-public.gouv.fr ou na MDPH.", "coffre": "sante" },
+    { "id": "certificat-medical", "libelle": "Atestado médico (cerfa n° 15695) com menos de um ano", "detail": "Original preenchido pelo médico que acompanha a criança. Anexe os laudos úteis (avaliações, exames).", "coffre": "sante" },
+    { "id": "identite", "libelle": "Documento de identidade frente e verso ou autorização de residência", "detail": "Fotocópia de documento válido, da criança e do representante legal.", "coffre": "sante" },
+    { "id": "domicile", "libelle": "Comprovante de residência", "detail": "Fotocópia. Se você mora na casa de alguém, junte uma declaração sob palavra (attestation sur l'honneur) da pessoa que o hospeda.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Sentença de proteção ou decisão sobre a autoridade parental, se for o caso", "detail": "Cópia, se uma decisão define quem exerce a autoridade parental ou se existe medida de proteção.", "coffre": "jaf" },
+    { "id": "bilans", "libelle": "Avaliações complementares (audição, visão, psicólogo, escola)", "detail": "Cópias. O formulário prevê partes opcionais para as avaliações auditiva e oftalmológica.", "coffre": "sante" },
+    { "id": "accuse-reception", "libelle": "Aviso de recebimento do processo pela MDPH", "detail": "Guarde-o: é ele que inicia a contagem do prazo de 4 meses.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Marque consulta com o médico para o atestado médico", "detail": "Ele deve ter menos de um ano na entrega. Peça que o médico detalhe as necessidades da criança no dia a dia." },
+    { "titre": "Preencha o formulário de pedido", "detail": "Descreva a vida da criança, suas necessidades, sua escolaridade e as suas despesas. O projeto de vida (projet de vie) ajuda a comissão a entender a situação." },
+    { "titre": "Confira antes de enviar o processo", "detail": "Formulário assinado, atestado médico original com menos de um ano, documentos de identidade, comprovante de residência, eventual sentença, avaliações. Um processo incompleto atrasa a análise." },
+    { "titre": "Envie o processo à MDPH de La Réunion", "detail": "De preferência por carta registrada com aviso de recebimento, ou on-line se a MDPH oferecer. Guarde uma cópia completa." },
+    { "titre": "Acompanhe a decisão", "detail": "Anote a data de entrega: sem resposta após 4 meses, cobre; em caso de recusa, recorra em até 2 meses." }
+  ],
+  "ou": [
+    { "nom": "MDPH de La Réunion", "detail": "Contatos a verificar no diretório oficial Mon Parcours Handicap.", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" },
+    { "nom": "Caf de La Réunion", "detail": "Paga a AEEH após a decisão da CDAPH.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" }
+  ],
+  "liens": [
+    { "titre": "Auxílio de educação da criança com deficiência (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809" },
+    { "titre": "Formulário de pedido à MDPH (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993" },
+    { "titre": "Encontrar a sua MDPH (monparcourshandicap.gouv.fr)", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Atestado médico MDPH da criança", "categorie": "sante" },
+    { "type": "coffre", "titre": "Processo MDPH completo (cópia)", "categorie": "sante" },
+    { "type": "coffre", "titre": "Notificação da decisão da CDAPH", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Cobrar a MDPH se não houver resposta 4 meses após a entrega", "evenement": "autre" },
+    { "type": "rappel", "titre": "Preparar a renovação da AEEH antes do fim do direito", "evenement": "sante" },
+    { "type": "calendrier", "titre": "Consulta médica para o atestado médico MDPH", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Atestado médico com menos de um ano na entrega do processo" },
+    { "libelle": "Resposta da CDAPH em até 4 meses", "detail": "Sem resposta, o pedido é considerado recusado." },
+    { "libelle": "Recurso em até 2 meses após uma decisão de recusa" }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: endereço, unidades, horários e envio on-line da MDPH de La Réunion, a verificar no diretório Mon Parcours Handicap (não confirmados em fonte oficial na verificação).",
+    "A confirmar localmente: prazos reais de análise na Reunião, que podem ultrapassar o prazo legal."
+  ],
+  "motsCles": ["AEEH", "MDPH", "deficiência", "CDAPH", "atestado médico", "auxílio"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F14809 Auxílio de educação da criança com deficiência", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R19993 Formulário de pedido à MDPH", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Mon Parcours Handicap, diretório", "url": "https://www.monparcourshandicap.gouv.fr/annuaire", "verifieLe": "2026-10-29" }
+  ]
+}

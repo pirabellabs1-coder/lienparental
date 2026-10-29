@@ -1,0 +1,176 @@
+{
+  "slug": "mutuelle-enfant",
+  "territoire": "martinique",
+  "categorie": "sante",
+  "titre": "Your child's mutuelle (top-up health insurance)",
+  "resume": "Adding your child to your mutuelle, choosing which parent covers them after a separation, and avoiding blocked reimbursements.",
+  "aQuoiCaSert": "The Assurance Maladie (French public health insurance; in Martinique, the CGSS, the local social security fund) reimburses part of the cost of care. Top-up health insurance (complémentaire santé), often called a mutuelle, covers all or part of the rest. A child is usually covered as a dependent (ayant droit) on one parent's contract. When the link between the Assurance Maladie and the mutuelle (called the Noémie link) is in place, the top-up reimbursement arrives automatically, without sending any paperwork.",
+  "quiEstConcerne": [
+    "Employed parents covered by their company's compulsory top-up health insurance who want to add their child to it.",
+    "Parents who have an individual mutuelle.",
+    "Separated parents who need to decide which contract covers the child.",
+    "Low-income households, who may be entitled to the complémentaire santé solidaire (C2S, free or low-cost top-up health insurance)."
+  ],
+  "aSavoir": [
+    "Children's coverage depends on your contract: some company contracts must cover the family, others give you the choice, with or without an extra premium. Read the information notice given by your employer or your mutuelle.",
+    "An employee already covered as a dependent under another compulsory group contract (for example their spouse's) or receiving the complémentaire santé solidaire can ask to be exempted from joining their company's mutuelle (service-public.gouv.fr).",
+    "A child can be attached to both parents' Assurance Maladie. On the mutuelle side, the Noémie link on both parents' files depends on each top-up insurer: the Assurance Maladie cannot impose it (answer from an ameli expert, October 2025).",
+    "Without a Noémie link on your file, you are still reimbursed by the Assurance Maladie, but you must send the reimbursement statement yourself to the mutuelle covering the child.",
+    "If your income is low, the complémentaire santé solidaire covers the whole family, children included: see the guide entry \"Complémentaire santé solidaire (C2S): free or low-cost top-up health cover\"."
+  ],
+  "documents": [
+    {
+      "id": "attestation-droits",
+      "libelle": "Assurance Maladie certificate of entitlement for the child (or for the parent on whose file they appear)",
+      "detail": "Copy. Free to download from your ameli account, \"Mes démarches\" section, or request it from the CGSS de la Martinique.",
+      "coffre": "sante"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "The child's birth certificate or family record book (livret de famille)",
+      "detail": "Copy, to prove parentage. Free certificate to request online on service-public.gouv.fr or at the town hall (mairie) of the place of birth.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "ID of the parent who holds the contract",
+      "detail": "Copy of both sides, currently valid.",
+      "coffre": "sante"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank account details) of the parent who will receive the reimbursements",
+      "detail": "Original or copy, in your name.",
+      "coffre": "finances"
+    },
+    {
+      "id": "formulaire-ajout",
+      "libelle": "Form to add a beneficiary, or written request to the mutuelle",
+      "detail": "Provided by your mutuelle or by your employer's human resources department.",
+      "coffre": "sante"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Judgment or agreement setting the child's residence (separated parents)",
+      "detail": "Copy, only if the mutuelle asks for it to prove the child is your dependent.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "carte-tiers-payant",
+      "libelle": "The mutuelle's direct-payment card (carte de tiers payant) listing the child",
+      "detail": "Sent by the mutuelle once the child has been added. Show it to the doctor and the pharmacy.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "First check that the child is properly attached to the Assurance Maladie",
+      "detail": "Without this, the mutuelle cannot reimburse. If needed, see the guide entry \"Adding my child to my health insurance, getting their certificate of entitlement and carte Vitale\"."
+    },
+    {
+      "titre": "Read your contract or the company mutuelle's notice",
+      "detail": "Find out whether children are covered automatically, as an option or for an extra premium, and up to what age."
+    },
+    {
+      "titre": "Check before sending your file",
+      "detail": "Up-to-date certificate of entitlement listing the child, birth certificate or family record book, RIB, ID, signed form. Ask the mutuelle in writing whether proof of the child's residence is required in case of separation."
+    },
+    {
+      "titre": "Ask for the child to be added",
+      "detail": "With your mutuelle, or the human resources department for a company contract. Keep a copy of the request."
+    },
+    {
+      "titre": "Separated parents: agree on which contract covers the child",
+      "detail": "Ask the mutuelle whether it accepts a Noémie link on both parents' files. If not, the parent who is not linked sends their reimbursement statements themselves."
+    },
+    {
+      "titre": "Check the first reimbursement",
+      "detail": "On your ameli statement, a note saying it was forwarded to the top-up insurer confirms that the link works."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Your mutuelle or your employer's human resources department",
+      "detail": "To add the child to the contract and find out any cost."
+    },
+    {
+      "nom": "CGSS de la Martinique (Assurance Maladie)",
+      "detail": "For the certificate of entitlement and attaching the child.",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Exemptions from joining the company mutuelle (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740"
+    },
+    {
+      "titre": "Company top-up health insurance (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739"
+    },
+    {
+      "titre": "Complémentaire santé solidaire: free or low-cost top-up insurance (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Child's Assurance Maladie certificate of entitlement",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Mutuelle direct-payment card",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Mutuelle contract or notice",
+      "categorie": "sante"
+    },
+    {
+      "type": "depense",
+      "titre": "Mutuelle premium for the child",
+      "categorie": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Check the child's mutuelle coverage every year",
+      "evenement": "sante"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed with your mutuelle: the age limit for covering children and the documents required for a child of separated parents vary between contracts."
+  ],
+  "motsCles": [
+    "mutuelle",
+    "top-up health insurance",
+    "dependent",
+    "Noémie",
+    "separated parents",
+    "reimbursement"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F20740 Exemptions from joining the company mutuelle",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740",
+      "verifieLe": "2024-05-16"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F20739 Company top-up health insurance",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739",
+      "verifieLe": "2024-05-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (free or low-cost top-up insurance)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027",
+      "verifieLe": "2026-07-01"
+    },
+    {
+      "titre": "ameli policyholders' forum, expert answer: dual attachment and top-up health insurance (October 29, 2025)",
+      "url": "https://forum-assures.ameli.fr/questions/3657009-parents-separes-double-rattachement-secu-enfant-seule-complementaire-sante-papa"
+    }
+  ]
+}

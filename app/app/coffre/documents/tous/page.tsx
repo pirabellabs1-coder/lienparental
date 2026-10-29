@@ -53,8 +53,9 @@ function AllDocuments() {
       (!needle || d.name.toLocaleLowerCase('fr').includes(needle) || d.source.toLocaleLowerCase('fr').includes(needle)),
     )
     return out.sort((a, b) =>
-      sort === 'recent' ? b.docDate.localeCompare(a.docDate)
-      : sort === 'ancien' ? a.docDate.localeCompare(b.docDate)
+      // Ex æquo sur la date du document : départagé par la date d'ajout.
+      sort === 'recent' ? b.docDate.localeCompare(a.docDate) || b.addedAt.localeCompare(a.addedAt)
+      : sort === 'ancien' ? a.docDate.localeCompare(b.docDate) || a.addedAt.localeCompare(b.addedAt)
       : sort === 'nom' ? a.name.localeCompare(b.name, 'fr')
       : b.size - a.size,
     )

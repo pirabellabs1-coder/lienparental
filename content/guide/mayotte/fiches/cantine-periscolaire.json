@@ -1,0 +1,63 @@
+{
+  "slug": "cantine-periscolaire",
+  "territoire": "mayotte",
+  "categorie": "ecole",
+  "titre": "Repas à l'école (collation, cantine) et périscolaire",
+  "resume": "À Mayotte, la plupart des écoles primaires n'ont pas de cantine mais servent une collation, et peu de lycées ont un restaurant scolaire. Ce qu'il faut savoir, les pièces à préparer et où demander une aide.",
+  "aQuoiCaSert": "En métropole, la plupart des écoles proposent une cantine. À Mayotte, la situation est différente : dans le premier degré, les élèves reçoivent en général une collation plutôt qu'un repas chaud, et en 2025 seuls deux lycées disposaient d'une cantine selon les débats parlementaires sur la refondation de Mayotte. Renseignez-vous auprès de l'école ou de la mairie sur ce qui est servi, son coût et l'accueil périscolaire proposé.",
+  "quiEstConcerne": [
+    "Les parents d'enfants scolarisés en maternelle ou en élémentaire.",
+    "Les parents de collégiens et de lycéens.",
+    "Les parents d'un enfant allergique ou suivant un régime pour raison de santé."
+  ],
+  "aSavoir": [
+    "Premier degré : la collation remplace souvent le repas. Une participation des familles peut être demandée : son montant est fixé localement.",
+    "Quand un service de restauration existe à l'école, tout enfant scolarisé a le droit d'y être inscrit ; le réserver aux enfants dont les parents travaillent est illégal.",
+    "Au collège et au lycée, le fonds social pour les cantines peut aider les familles. Il est attribué par le chef d'établissement.",
+    "Allergie ou régime pour raison de santé : un projet d'accueil individualisé (PAI) peut être mis en place avec le médecin.",
+    "Parents séparés : l'inscription relève de la vie courante de l'enfant. Mettez-vous d'accord sur le paiement et notez-le dans le Journal."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Dernier avis d'impôt sur le revenu ou attestation de la CSSM", "detail": "Copie. Peut servir à calculer un tarif réduit.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Copie.", "coffre": "scolarite" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité du parent qui inscrit", "detail": "Original ou copie selon la structure.", "coffre": "scolarite" },
+    { "id": "assurance", "libelle": "Attestation d'assurance responsabilité civile", "detail": "Souvent exigée pour le périscolaire.", "coffre": "scolarite" },
+    { "id": "carnet-vaccins", "libelle": "Pages vaccins du carnet de santé", "detail": "Copie, souvent demandée pour l'accueil périscolaire.", "coffre": "sante" },
+    { "id": "pai", "libelle": "Projet d'accueil individualisé (PAI) et certificat médical, si besoin", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Jugement ou convention de résidence, si vous êtes séparés", "detail": "Copie. Utile pour la liste des personnes autorisées à récupérer l'enfant.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Renseignez-vous sur ce qui est proposé", "detail": "Collation, repas, accueil avant ou après la classe : demandez à l'école, à la mairie ou à l'intendance du collège ou du lycée, avec les tarifs et les pièces." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Justificatif de ressources, justificatif de domicile, pièce d'identité, attestation d'assurance, pages vaccins, PAI si besoin, jugement en cas de séparation." },
+    { "titre": "Inscrivez votre enfant", "detail": "Auprès de la structure indiquée par l'école ou la mairie." },
+    { "titre": "Demandez une aide si nécessaire", "detail": "Au collège et au lycée, adressez-vous à l'assistante sociale ou au secrétariat pour le fonds social cantine. En primaire, renseignez-vous en mairie." },
+    { "titre": "Enregistrez les paiements", "detail": "Dans le Journal, pour garder l'historique et faciliter le partage avec l'autre parent." }
+  ],
+  "ou": [
+    { "nom": "École ou mairie de votre commune", "detail": "Collation et accueil périscolaire dans le premier degré." },
+    { "nom": "Secrétariat ou intendance du collège ou du lycée", "detail": "Restauration et fonds social cantine." }
+  ],
+  "liens": [
+    { "titre": "Cantine scolaire à l'école primaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570" },
+    { "titre": "Aide financière pour la cantine (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294" },
+    { "titre": "Assemblée nationale, amendement n° 43 sur la restauration scolaire à Mayotte (2025)", "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1573/AN/43.pdf" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Collation ou cantine scolaire", "categorie": "cantine" },
+    { "type": "depense", "titre": "Accueil périscolaire", "categorie": "ecole" },
+    { "type": "coffre", "titre": "Projet d'accueil individualisé (PAI)", "categorie": "sante" },
+    { "type": "rappel", "titre": "Inscription collation et périscolaire avant la rentrée", "evenement": "ecole" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : organisateur de la collation (commune, rectorat ou prestataire), montant de la participation des familles et existence d'une cantine dans l'école de votre enfant.",
+    "À confirmer localement : tarifs de demi-pension et calendrier du fonds social dans les collèges et lycées de Mayotte.",
+    "Les chiffres sur les cantines viennent de débats parlementaires de 2025 : la situation peut avoir évolué depuis."
+  ],
+  "motsCles": ["cantine", "collation", "repas", "périscolaire", "demi-pension", "PAI", "fonds social"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F24570 Cantine scolaire à l'école primaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F19294 Aide financière pour la cantine", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2026-10-29" },
+    { "titre": "Assemblée nationale, projet de loi de programmation pour la refondation de Mayotte, amendement n° 43", "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1573/AN/43.pdf", "verifieLe": "2026-10-29" }
+  ]
+}

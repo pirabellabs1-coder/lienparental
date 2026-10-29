@@ -1,0 +1,166 @@
+{
+  "slug": "accueil-loisirs-vacances",
+  "territoire": "france",
+  "categorie": "loisirs",
+  "titre": "Centres de loisirs et aides pour les vacances",
+  "resume": "Trouver un accueil de loisirs pour les mercredis et les vacances, le dossier à préparer (vaccins à jour, quotient familial) et les aides aux vacances et aux temps libres de votre Caf.",
+  "aQuoiCaSert": "Les accueils de loisirs sans hébergement (ALSH, souvent appelés centres de loisirs) accueillent les enfants dès leur scolarisation et jusqu'à l'adolescence, y compris les enfants en situation de handicap. Selon les communes, ils fonctionnent le mercredi, avant ou après la classe, à la pause de midi et pendant les vacances. Chaque organisateur fixe ses tarifs, souvent selon les revenus du foyer et en tenant compte des aides de la Caf.",
+  "quiEstConcerne": [
+    "Les parents d'enfants scolarisés qui cherchent un mode d'accueil le mercredi ou pendant les vacances.",
+    "Les familles allocataires aux revenus modestes, pour les aides aux vacances et aux temps libres de la Caf."
+  ],
+  "aSavoir": [
+    "Les places sont limitées : renseignez-vous plusieurs semaines avant les vacances ou la rentrée. L'inscription se fait en général auprès de la mairie ou de la structure.",
+    "Les vaccinations obligatoires sont exigées pour l'admission en collectivité, y compris en garderie et en colonie, sauf contre-indication médicale reconnue. Leur liste dépend de l'année de naissance de l'enfant.",
+    "Si les vaccins ne sont pas à jour, une admission provisoire de 3 mois est possible le temps de les faire. Le carnet de santé, rempli par le médecin, sert de justificatif.",
+    "Les aides aux vacances et aux temps libres relèvent de l'action sociale propre à chaque Caf : montant, quotient familial maximum et conditions varient d'un département à l'autre. Beaucoup de Caf passent par Vacaf, leur service commun, pour les séjours.",
+    "Parents séparés : chaque parent peut inscrire l'enfant pour ses propres semaines de vacances. Indiquez à la structure les personnes autorisées à récupérer l'enfant et transmettez si besoin la décision fixant la résidence."
+  ],
+  "documents": [
+    {
+      "id": "dossier-inscription",
+      "libelle": "Dossier d'inscription ou fiche sanitaire de la structure",
+      "detail": "À demander à la mairie ou à la structure : il précise les autorisations (sortie, photo, personnes habilitées).",
+      "coffre": "autres"
+    },
+    {
+      "id": "carnet-sante",
+      "libelle": "Copie des pages vaccins du carnet de santé",
+      "detail": "Vaccins en retard : prenez rendez-vous chez le médecin ou en centre de PMI.",
+      "coffre": "sante"
+    },
+    {
+      "id": "attestation-caf",
+      "libelle": "Attestation de quotient familial de la Caf",
+      "detail": "Téléchargeable dans votre espace Caf. Elle sert à calculer votre tarif.",
+      "coffre": "finances"
+    },
+    {
+      "id": "notification-aide",
+      "libelle": "Notification d'aide aux temps libres ou aux vacances, si vous en bénéficiez",
+      "coffre": "finances"
+    },
+    {
+      "id": "assurance",
+      "libelle": "Attestation d'assurance responsabilité civile ou extra-scolaire de l'enfant",
+      "detail": "Souvent demandée par les structures.",
+      "coffre": "autres"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Jugement ou convention fixant la résidence de l'enfant, si la structure le demande",
+      "detail": "Copie. Utile pour préciser qui peut inscrire et récupérer l'enfant.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Repérez les accueils de loisirs près de chez vous",
+      "detail": "Sur monenfant.fr ou auprès de votre mairie."
+    },
+    {
+      "titre": "Renseignez-vous sur les aides de votre Caf",
+      "detail": "Rubrique offre de service de votre Caf départementale sur caf.fr, ou à l'accueil. Certaines Caf envoient une notification de droits en début d'année."
+    },
+    {
+      "titre": "Coordonnez-vous avec l'autre parent",
+      "detail": "Notez dans le calendrier qui a l'enfant chaque semaine de vacances."
+    },
+    {
+      "titre": "Vérifiez avant de vous déplacer",
+      "detail": "Dates d'ouverture des inscriptions, dossier de la structure rempli, copie des vaccins à jour, attestation de quotient familial, attestation d'assurance, liste des personnes autorisées à récupérer l'enfant avec leurs pièces d'identité."
+    },
+    {
+      "titre": "Inscrivez votre enfant tôt",
+      "detail": "Les places pendant les vacances partent vite."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "monenfant.fr",
+      "detail": "Annuaire des accueils de loisirs.",
+      "url": "https://monenfant.fr"
+    },
+    {
+      "nom": "Mairie de votre commune",
+      "detail": "Accueils de loisirs municipaux et inscriptions.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    },
+    {
+      "nom": "Caf de votre département",
+      "detail": "Aides aux temps libres et aux vacances (selon votre Caf).",
+      "url": "https://www.caf.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "monenfant.fr, accueils de loisirs",
+      "url": "https://monenfant.fr/les-accueils-de-loisirs"
+    },
+    {
+      "titre": "Vaccination et accueil en collectivité (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Vacaf, séjours et aides aux vacances des Caf",
+      "url": "https://www.vacaf.org"
+    },
+    {
+      "titre": "Caf.fr, offre de service de votre Caf",
+      "url": "https://www.caf.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Ouverture des inscriptions au centre de loisirs des vacances",
+      "evenement": "activite"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Centre de loisirs pendant les vacances",
+      "evenement": "activite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Attestation de quotient familial Caf",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Copie des vaccins de l'enfant",
+      "categorie": "sante"
+    },
+    {
+      "type": "depense",
+      "titre": "Centre de loisirs",
+      "categorie": "loisirs"
+    }
+  ],
+  "aConfirmer": [
+    "L'aide aux temps libres (ATL) et les aides aux vacances (familles, enfants) existent dans de nombreuses Caf, mais leur barème est fixé localement : consultez la page de votre Caf départementale.",
+    "La participation de votre Caf au dispositif Vacaf et les séjours concernés sont à vérifier sur caf.fr ou vacaf.org.",
+    "Les pièces exactes du dossier d'inscription sont fixées par chaque mairie ou structure."
+  ],
+  "motsCles": [
+    "centre de loisirs",
+    "ALSH",
+    "vacances",
+    "colonie",
+    "ATL",
+    "mercredi",
+    "périscolaire"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "monenfant.fr, Accueils de loisirs",
+      "url": "https://monenfant.fr/les-accueils-de-loisirs"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F767 Vaccination et admission en collectivité",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

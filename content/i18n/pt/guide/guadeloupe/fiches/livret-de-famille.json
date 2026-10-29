@@ -1,0 +1,188 @@
+{
+  "slug": "livret-de-famille",
+  "territoire": "guadeloupe",
+  "categorie": "naissance",
+  "titre": "Obter ou atualizar o livro de família (livret de famille): segunda via, segundo livro",
+  "resume": "Primeiro livro no nascimento, atualização após um reconhecimento ou divórcio, segundo livro quando se está separado ou o perdeu: onde ir, quais documentos levar, e é gratuito.",
+  "aQuoiCaSert": "O livro de família (livret de famille) reúne os extratos dos registros civis dos pais e dos filhos que têm em comum. Ele é pedido com frequência: matrícula na escola ou na creche, dossiê na Caf (Caisse d'allocations familiales, órgão de benefícios familiares), assistência jurídica gratuita (aide juridictionnelle), abertura de conta para o filho. Após uma separação, o genitor que não o tem mais pode obter seu próprio livro, gratuitamente.",
+  "quiEstConcerne": [
+    "Os pais, casados ou não, no nascimento do primeiro filho em comum.",
+    "O genitor separado ou divorciado que não está com o livro original.",
+    "Quem tem um livro perdido, roubado ou danificado, ou que precisa ser atualizado (nascimento, reconhecimento, divórcio, mudança de nome)."
+  ],
+  "aSavoir": [
+    "Pais não casados: o livro é entregue gratuitamente pela prefeitura (mairie) do local de nascimento por ocasião do primeiro filho em comum. Um genitor só aparece nele se constar na certidão de nascimento da criança; daí a importância do reconhecimento (reconnaissance).",
+    "Pais casados: o livro é entregue no casamento e completado a cada nascimento.",
+    "É possível ter vários livros quando há filhos de uniões diferentes: um livro só contém os filhos comuns aos dois genitores nele mencionados.",
+    "Segundo livro após separação ou divórcio: pode ser pedido a qualquer momento, gratuitamente, na prefeitura do seu domicílio. Pais casados: levem a prova do divórcio ou da separação judicial. Pais em PACS (união civil) ou que vivem juntos sem casamento nem PACS: expliquem por que precisam do próprio livro e anexem um comprovante.",
+    "Perda ou roubo: o segundo livro é reconstituído pela prefeitura a partir dos registros civis e leva a menção « second livret ». Livro danificado: uma segunda via é emitida mediante a entrega do antigo. A emissão é gratuita, mas a prefeitura pode cobrar as vias a partir da segunda.",
+    "Atualização: nascimento, reconhecimento, divórcio, mudança de sobrenome ou de prenome devem ser anotados no livro, gratuitamente, em geral na prefeitura onde o evento foi registrado. O segundo livro é atualizado da mesma forma que o original.",
+    "Usar um livro falsificado ou desatualizado pode ser punido com multa de até 1.500 €.",
+    "Prazo: em geral algumas semanas, pois a prefeitura precisa receber os registros dos outros municípios envolvidos (casamento, nascimentos). Antecipe-se se precisar dele para algum procedimento."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Documento de identidade do genitor que faz o pedido (original)",
+      "detail": "Carteira de identidade, passaporte ou título de residência válido. Exigido também na retirada do livro.",
+      "coffre": "autres"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço com menos de 3 meses",
+      "detail": "Pedido em caso de perda, roubo ou dano. Conta, recibo de aluguel, aviso de imposto.",
+      "coffre": "autres"
+    },
+    {
+      "id": "preuve-separation",
+      "libelle": "Prova do divórcio ou da separação (cópia)",
+      "detail": "Pais casados: sentença de divórcio, acordo homologado ou acordo de divórcio consensual. PACS ou vida em comum sem casamento: prova de endereços separados, declarações, declaração do outro genitor.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "infos-actes",
+      "libelle": "Informações sobre os registros a anotar",
+      "detail": "Sobrenomes, prenomes, datas e locais de nascimento dos pais e dos filhos, data e local do casamento. Anote-os antes de ir à prefeitura.",
+      "coffre": "autres"
+    },
+    {
+      "id": "attestation-perte",
+      "libelle": "Declaração sob compromisso de perda ou roubo, ou o livro danificado",
+      "detail": "Em caso de roubo, o registro na delegacia ou na gendarmerie não é obrigatório, mas é recomendado (guarde o comprovante).",
+      "coffre": "courriers"
+    },
+    {
+      "id": "acte-ou-jugement",
+      "libelle": "Registro ou decisão a anotar (atualização)",
+      "detail": "Certidão de nascimento, termo de reconhecimento, sentença de divórcio, decisão de mudança de nome, conforme o evento.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret",
+      "libelle": "Livro de família (cópia digitalizada de todas as páginas)",
+      "detail": "Depois de obtido ou atualizado, guarde uma cópia completa: ela basta para muitos procedimentos.",
+      "coffre": "autres"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Identifique sua situação",
+      "detail": "Primeiro livro (nascimento ou casamento), atualização após um evento, segundo livro após uma separação, ou substituição após perda, roubo ou dano."
+    },
+    {
+      "titre": "Encontre a prefeitura certa",
+      "detail": "Segundo livro ou substituição: prefeitura do seu domicílio. Atualização: em geral a prefeitura onde o evento foi registrado. Evento ocorrido no exterior: Service central d'état civil (Scec, serviço central de registro civil) de Nantes, por correio."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Documento de identidade original, comprovante de endereço com menos de 3 meses, sentença de divórcio ou prova de separação, informações completas sobre todos os registros a anotar, livro antigo se estiver danificado. Ligue para a prefeitura para saber o horário e se é preciso agendar."
+    },
+    {
+      "titre": "Faça o pedido na prefeitura"
+    },
+    {
+      "titre": "Retire o livro",
+      "detail": "Na prefeitura onde fez o pedido, apresentando seu documento de identidade, em geral após algumas semanas."
+    },
+    {
+      "titre": "Digitalize-o no Cofre",
+      "detail": "Todas as páginas, para poder fornecer uma cópia sem precisar se deslocar."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Prefeitura (mairie) do seu domicílio",
+      "detail": "Segundo livro após separação; livro perdido, roubado ou danificado."
+    },
+    {
+      "nom": "Prefeitura do local do evento",
+      "detail": "Atualização após nascimento, reconhecimento, casamento ou divórcio."
+    },
+    {
+      "nom": "Service central d'état civil (Scec, serviço central de registro civil), Nantes",
+      "detail": "Para um evento ocorrido no exterior. Sem atendimento ao público; procedimento por correio."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Livro de família: todas as situações (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/N31784"
+    },
+    {
+      "titre": "Segundo livro em caso de divórcio ou separação (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996"
+    },
+    {
+      "titre": "Livro perdido, roubado ou danificado (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994"
+    },
+    {
+      "titre": "Atualização do livro de família (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Cópia completa do livro de família",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Sentença de divórcio ou prova de separação",
+      "categorie": "jaf"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Prefeitura: pedido de segundo livro de família",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Retirar o livro de família na prefeitura",
+      "evenement": "rdv"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: prazo de emissão e horários do serviço de registro civil da sua prefeitura em Guadalupe, e eventuais taxas de segunda via decididas pelo município a partir da segunda.",
+    "A confirmar localmente: se a sua prefeitura pode encaminhar um pedido de atualização a outro município (nem todas fazem isso)."
+  ],
+  "motsCles": [
+    "livro de família",
+    "livret de famille",
+    "segundo livro",
+    "segunda via",
+    "perda",
+    "divórcio",
+    "separação",
+    "atualização"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F11991 Livro de família no nascimento do primeiro filho",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991",
+      "verifieLe": "2026-08-12"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F11996 Segundo livro em caso de divórcio ou separação",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996",
+      "verifieLe": "2026-04-21"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F11994 Segundo livro em caso de perda, roubo ou dano",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994",
+      "verifieLe": "2026-10-08"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F18910 Atualização do livro de família",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910",
+      "verifieLe": "2025-02-26"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F39789 É possível ter vários livros de família?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39789",
+      "verifieLe": "2026-08-04"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "slug": "cantine-periscolaire",
+  "territoire": "mayotte",
+  "categorie": "ecole",
+  "titre": "School meals (snack, canteen) and after-school care",
+  "resume": "In Mayotte, most primary schools have no canteen but serve a snack, and few high schools have a school restaurant. What you need to know, the documents to prepare and where to ask for help.",
+  "aQuoiCaSert": "In mainland France, most schools offer a canteen. In Mayotte, the situation is different: in primary education, pupils usually receive a snack (collation) rather than a hot meal, and in 2025 only two high schools (lycées) had a canteen, according to the parliamentary debates on the rebuilding of Mayotte (refondation de Mayotte). Ask the school or the town hall (mairie) what is served, how much it costs and what after-school care (périscolaire) is offered.",
+  "quiEstConcerne": [
+    "Parents of children in nursery or primary school.",
+    "Parents of middle and high school students.",
+    "Parents of a child with an allergy or on a special diet for health reasons."
+  ],
+  "aSavoir": [
+    "Primary education: the snack often replaces the meal. Families may be asked to contribute: the amount is set locally.",
+    "Where a school meal service exists, every child enrolled at the school has the right to use it; restricting it to children whose parents work is illegal.",
+    "In middle and high school, the canteen social fund (fonds social pour les cantines) can help families. It is granted by the head of the school.",
+    "Allergy or diet for health reasons: an individual care plan (PAI, projet d'accueil individualisé) can be set up with the doctor.",
+    "Separated parents: enrollment is part of the child's everyday life. Agree on who pays and note it in the Journal."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Latest income tax notice or certificate from the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund)", "detail": "Copy. May be used to calculate a reduced rate.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Recent proof of address", "detail": "Copy.", "coffre": "scolarite" },
+    { "id": "identite-parent", "libelle": "ID of the parent enrolling the child", "detail": "Original or copy, depending on the organization.", "coffre": "scolarite" },
+    { "id": "assurance", "libelle": "Civil liability insurance certificate", "detail": "Often required for after-school care.", "coffre": "scolarite" },
+    { "id": "carnet-vaccins", "libelle": "Vaccination pages of the health record book", "detail": "Copy, often requested for after-school care.", "coffre": "sante" },
+    { "id": "pai", "libelle": "Individual care plan (PAI) and medical certificate, if needed", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Judgment or residence agreement, if you are separated", "detail": "Copy. Useful for the list of people allowed to pick up the child.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Find out what is offered", "detail": "Snack, meal, care before or after class: ask the school, the town hall or the middle or high school's bursar's office (intendance) for the prices and the documents." },
+    { "titre": "Check before you go", "detail": "Proof of income, proof of address, ID, insurance certificate, vaccination pages, PAI if needed, judgment if separated." },
+    { "titre": "Enroll your child", "detail": "With the organization indicated by the school or the town hall." },
+    { "titre": "Ask for help if needed", "detail": "In middle and high school, contact the social worker or the school office about the canteen social fund. In primary school, ask at the town hall." },
+    { "titre": "Record the payments", "detail": "In the Journal, to keep a history and make sharing with the other parent easier." }
+  ],
+  "ou": [
+    { "nom": "School or town hall of your town", "detail": "Snack and after-school care in primary education." },
+    { "nom": "Middle or high school office or bursar's office (intendance)", "detail": "School meals and canteen social fund." }
+  ],
+  "liens": [
+    { "titre": "School canteen in primary school (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570" },
+    { "titre": "Financial help for the canteen (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294" },
+    { "titre": "Assemblée nationale, amendment n° 43 on school meals in Mayotte (2025)", "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1573/AN/43.pdf" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "School snack or canteen", "categorie": "cantine" },
+    { "type": "depense", "titre": "Before/after-school care", "categorie": "ecole" },
+    { "type": "coffre", "titre": "Individual care plan (PAI)", "categorie": "sante" },
+    { "type": "rappel", "titre": "Snack and after-school care enrollment before school starts", "evenement": "ecole" }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: who provides the snack (town, rectorat (regional education authority) or contractor), the amount families pay, and whether your child's school has a canteen.",
+    "To be confirmed locally: school lunch (demi-pension) prices and the social fund calendar in Mayotte's middle and high schools.",
+    "The figures on canteens come from 2025 parliamentary debates: the situation may have changed since."
+  ],
+  "motsCles": ["canteen", "snack", "meal", "after-school care", "demi-pension", "PAI", "social fund"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F24570 School canteen in primary school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F19294 Financial help for the canteen", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2026-10-29" },
+    { "titre": "Assemblée nationale, programming bill for the rebuilding of Mayotte (projet de loi de programmation pour la refondation de Mayotte), amendment n° 43", "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1573/AN/43.pdf", "verifieLe": "2026-10-29" }
+  ]
+}

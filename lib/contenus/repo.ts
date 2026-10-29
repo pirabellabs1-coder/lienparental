@@ -18,7 +18,9 @@ import 'server-only'
  */
 import { randomUUID } from 'node:crypto'
 import type { SupabaseClient } from '@supabase/supabase-js'
-import { getFiches, getParcoursList, listTerritoires as listFileTerritoires } from '@/lib/guide/load'
+import path from 'node:path'
+import { getFiches, getParcoursList } from '@/lib/guide/load'
+import { readFileTerritoires } from '@/lib/guide/territories-fs'
 import { territoireSchema, type Territoire } from '@/lib/guide/types'
 import { SEED_TEMPLATES } from '@/lib/modeles/seeds'
 import { readSeedPosts } from '@/lib/blog/seed'
@@ -401,10 +403,19 @@ export async function importSeeds(ctx: AdminCtx, what: SeedSet): Promise<ImportR
     }
   }
   if (what === 'guide') {
-    for (const t of listFileTerritoires()) {
-      await saveTerritoire(ctx, t)
-      await run('fiche', getFiches(t.code).map((f) => ({ data: f, statut: 'publie' as const })))
-      await run('parcours', getParcoursList(t.code).map((p) => ({ data: p, statut: 'publie' as const })))
+    // Chaque territoire de content/guide/ : créé, ou mis à jour (nom, disponibilité, ordre) depuis son
+    // territoire.json (saveTerritoire = upsert) ; un territoire « Bientôt » passe ainsi « Disponible ».
+    // Un territoire au contenu invalide est signalé sans bloquer l'import des autres.
+    for (const t of readFileTerritoires(path.join(process.cwd(), 'content', 'guide'))) {
+      try {
+        const fiches = getFiches(t.code)
+        const parcours = getParcoursList(t.code)
+        await saveTerritoire(ctx, t)
+        await run('fiche', fiches.map((f) => ({ data: f, statut: 'publie' as const })))
+        await run('parcours', parcours.map((p) => ({ data: p, statut: 'publie' as const })))
+      } catch (e) {
+        report.errors.push(`${t.code} : ${e instanceof Error ? e.message : 'erreur'}`)
+      }
     }
   } else if (what === 'modeles') {
     await run('modele', SEED_TEMPLATES.map((t) => ({ data: t, statut: 'brouillon' as const })))

@@ -1,0 +1,190 @@
+{
+  "slug": "aides-logement",
+  "territoire": "france",
+  "categorie": "logement",
+  "titre": "Auxílios-moradia (APL, ALF, ALS)",
+  "resume": "APL, auxílio-moradia familiar ou social: qual se aplica a você, os documentos a preparar (inclusive o atestado de aluguel assinado pelo proprietário) e o pedido à Caf após uma separação.",
+  "aQuoiCaSert": "Os auxílios-moradia reduzem o valor do seu aluguel. Há três: a APL, ligada à moradia (moradia conveniada com o Estado, logement conventionné, como a maioria das HLM); o auxílio-moradia familiar (allocation de logement familiale, ALF), ligado à sua situação familiar, por exemplo se você tem filhos ou recebe benefícios familiares; e o auxílio-moradia social (allocation de logement sociale, ALS) para os demais casos. Após uma separação, cada genitor que passa a ter uma moradia pode fazer o próprio pedido, calculado apenas com a sua renda e a sua nova situação familiar.",
+  "quiEstConcerne": [
+    "Os locatários ou sublocatários de uma moradia digna, ocupada como residência principal na França.",
+    "APL: os ocupantes de uma moradia conveniada, qualquer que seja a situação familiar.",
+    "ALF: em especial quem recebe benefícios familiares ou a AEEH, tem um filho a cargo com menos de 21 anos, ou a gestante que vive sozinha.",
+    "ALS: quem não preenche as condições da APL nem as da ALF. Estrangeiros devem ter um título de residência válido."
+  ],
+  "aSavoir": [
+    "APL, ALF e ALS não se acumulam. O valor depende da sua renda dos últimos 12 meses (atualizada a cada 3 meses), do seu patrimônio (acima de 30.000 €), do aluguel, da situação familiar e do local da moradia: só o simulador da Caf (Caisse d'allocations familiales, órgão de benefícios familiares) dá uma estimativa.",
+    "O subinquilino não pode ser parente do inquilino principal nem do proprietário.",
+    "O auxílio é pago no dia 5 de cada mês. O direito começa no 1º dia do mês seguinte à análise do pedido, cerca de 2 meses após o pedido: faça-o assim que entrar na moradia.",
+    "Em caso de recusa da Caf, você tem 2 meses a partir da notificação para contestar; se não der certo, são possíveis uma mediação e depois a comissão de recurso amigável (commission de recours amiable).",
+    "Separação: declare-a à Caf. Cada genitor declara a própria moradia e a própria situação familiar; o valor é recalculado. Em residência alternada, o auxílio-moradia não é dividido entre os pais."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Cópia frente e verso do seu documento de identidade ou autorização de residência",
+      "detail": "Válido.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (comprovante de dados bancários) em seu nome",
+      "detail": "Abra uma conta pessoal se você só tinha conta conjunta: veja a ficha «Ter a sua própria conta bancária após a separação».",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Atestado de aluguel (cerfa n° 10842), datado e assinado pelo proprietário",
+      "detail": "Baixe e peça ao proprietário ou à empresa de habitação social para preencher. Sem a assinatura, o processo fica incompleto.",
+      "coffre": "finances"
+    },
+    {
+      "id": "bail",
+      "libelle": "Contrato de locação",
+      "detail": "Cópia. Ele indica o aluguel, os encargos e a data de entrada.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Valores da sua renda dos últimos 12 meses",
+      "detail": "Contracheques, auxílios, pensão alimentícia recebida ou paga: serão pedidos no formulário on-line.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo que fixa a residência dos filhos, se houver",
+      "detail": "Cópia. Útil se a Caf pedir para comprovar a residência dos filhos após a separação.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "notification",
+      "libelle": "Notificação de direitos da Caf",
+      "detail": "Guarde-a: indica o valor e a data de início do direito.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Faça uma simulação em caf.fr",
+      "detail": "Com o aluguel da nova moradia e a sua renda atual. O simulador também indica qual auxílio se aplica."
+    },
+    {
+      "titre": "Declare primeiro a mudança de situação",
+      "detail": "Separação, mudança de endereço, residência dos filhos: no seu espaço Caf."
+    },
+    {
+      "titre": "Peça o preenchimento do atestado de aluguel",
+      "detail": "Pelo proprietário ou locador, datado e assinado."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "O pedido é feito on-line. Se for ao atendimento da Caf: agendamento se necessário, número de beneficiário (numéro allocataire), cópia frente e verso do documento de identidade, RIB em seu nome, atestado de aluguel assinado, contrato de locação, valores da sua renda dos últimos 12 meses."
+    },
+    {
+      "titre": "Faça o pedido on-line no seu espaço Caf",
+      "detail": "Assim que entrar na moradia, juntando os documentos. No regime agrícola, dirija-se à MSA."
+    },
+    {
+      "titre": "Depois, declare qualquer mudança",
+      "detail": "Mudança de endereço, novos dados bancários, chegada ou saída de um filho, mudança de residência dos filhos."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf do seu departamento",
+      "detail": "Pedido on-line no espaço « Mon Compte »; atendimentos e agendamentos em caf.fr com o seu código postal.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, seguridade social agrícola)",
+      "detail": "Se você é do regime agrícola.",
+      "url": "https://www.msa.fr"
+    },
+    {
+      "nom": "France Services",
+      "detail": "Ajuda gratuita para fazer o pedido on-line. Encontre o ponto mais próximo no diretório da administração (annuaire de l'administration).",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    },
+    {
+      "nom": "ADIL do seu departamento",
+      "detail": "Agence départementale d'information sur le logement (agência departamental de informação sobre moradia): informação gratuita sobre seus direitos de locatário e os auxílios.",
+      "url": "https://www.anil.org/qui-sommes-nous/reseau-des-adil/"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Auxílios-moradia: APL, ALF, ALS (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864"
+    },
+    {
+      "titre": "Auxílio-moradia familiar (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    },
+    {
+      "titre": "Caf.fr, simuladores e pedido on-line",
+      "url": "https://www.caf.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Atestado de aluguel assinado",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notificação de auxílio-moradia",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Pedir o auxílio-moradia para a nova moradia",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Recurso possível: 2 meses após uma recusa de auxílio-moradia",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "2 meses após a notificação para contestar uma decisão da Caf"
+    }
+  ],
+  "aConfirmer": [
+    "A forma como a Caf considera um filho em residência alternada no cálculo do auxílio-moradia de cada genitor não está detalhada nas fichas consultadas: pergunte à sua Caf.",
+    "As tabelas dependem da zona geográfica da moradia: use o simulador da Caf em vez de um valor indicativo."
+  ],
+  "motsCles": [
+    "moradia",
+    "APL",
+    "ALF",
+    "ALS",
+    "aluguel",
+    "Caf",
+    "atestado de aluguel"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F31864 Auxílios-moradia",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13132 Auxílio-moradia familiar",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "ANIL, rede das ADIL",
+      "url": "https://www.anil.org/qui-sommes-nous/reseau-des-adil/",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

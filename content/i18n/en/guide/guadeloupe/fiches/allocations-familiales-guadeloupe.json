@@ -1,0 +1,167 @@
+{
+  "slug": "allocations-familiales-guadeloupe",
+  "territoire": "guadeloupe",
+  "categorie": "aides",
+  "titre": "Family allowances in Guadeloupe (from the 1st child)",
+  "resume": "In Guadeloupe, family allowances are paid from just one dependent child. Who is eligible, how to apply, and how they are split under shared residence.",
+  "aQuoiCaSert": "Family allowances (allocations familiales) help families cover children's everyday expenses. In mainland France, they are only paid from 2 children. In Guadeloupe, as in the other overseas departments and in Saint-Martin and Saint-Barthélemy, special rules apply: an allowance is paid from the first dependent child, with increases linked to the child's age.",
+  "quiEstConcerne": [
+    "Families living in Guadeloupe with at least one dependent child under 20.",
+    "Separated parents whose child lives in shared residence.",
+    "Parents who do not yet receive benefits from the Caf (Caisse d'allocations familiales, the family benefits office)."
+  ],
+  "aSavoir": [
+    "With only one dependent child, a family allowance is paid in Guadeloupe, with increases linked to the child's age: from age 11, then raised from age 16 (Cnaf, the national family benefits fund, network letter LR-2026-051 of February 26, 2026). The same rule applies in Saint-Martin and Saint-Barthélemy.",
+    "From 2 children, the rules are the same as in mainland France. Since March 1, 2026, the age-related increase is paid at 18 instead of 14 for children born on or after March 1, 2012, in families with at least 2 children (Cnaf, LR-2026-051).",
+    "For 2 children, the basic amount ranges from €38.07 to €152.25 per month depending on household income (service-public.gouv.fr, checked on June 1, 2026).",
+    "The complément familial (family supplement) has different conditions and amounts in the overseas departments, including Guadeloupe (service-public.gouv.fr).",
+    "Shared residence: parents can choose to split the family allowances, each receiving half, using form cerfa n° 14000. This choice can only be changed after one year, unless the child's residence changes. If the parents disagree, each parent automatically receives a share.",
+    "Only family allowances can be split. The Paje (prestation d'accueil du jeune enfant, early childhood benefit), complément familial, housing benefits, back-to-school allowance, family support allowance and AEEH (disabled child education allowance) are paid in full to the designated parent."
+  ],
+  "documents": [
+    {
+      "id": "identite-parents",
+      "libelle": "ID or residence permit of each parent",
+      "detail": "Valid copy, requested with your first application to the Caf.",
+      "coffre": "finances"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Family record book (livret de famille) or birth certificate of each child",
+      "detail": "Copy. Certificate free on service-public.gouv.fr or from the town hall (mairie) where the child was born.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank details slip) of the parent receiving the benefits",
+      "detail": "In your name.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Previous year's tax notice",
+      "detail": "Copy, downloadable from your account on impots.gouv.fr. Your income is used in the calculation.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address",
+      "detail": "Recent copy (bill, rent receipt or certificate of accommodation).",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Judgment or agreement setting shared residence",
+      "detail": "Copy, to attach to the split form if shared residence was set by the judge or by an agreement.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Form cerfa n° 14000, declaration in case of shared residence",
+      "detail": "Signed by both parents if you agree on the split. Keep a copy.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Register with the Caf if you have not already",
+      "detail": "Apply for benefits on caf.fr. If you already receive Caf benefits, simply declare the child's birth or arrival."
+    },
+    {
+      "titre": "Check before sending your file",
+      "detail": "Children correctly declared, income up to date, RIB, correct address, family situation (couple, separated, single parent). If you have separated, declare the actual date."
+    },
+    {
+      "titre": "Shared residence: choose a split or a single beneficiary",
+      "detail": "Fill in form cerfa n° 14000 together and send it to the Caf with the judge's decision or the agreement if you have one."
+    },
+    {
+      "titre": "Check your entitlements",
+      "detail": "View the details of your payments in your \"Mon Compte\" account and use the Caf simulator to check the amount."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Guadeloupe",
+      "detail": "Online procedures in your \"Mon Compte\" account. Reception points listed on the Caf page.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Family allowances (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213"
+    },
+    {
+      "titre": "Shared residence and family benefits (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Complément familial, family supplement (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214"
+    },
+    {
+      "titre": "Caf de la Guadeloupe",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Family allowance split form (cerfa n° 14000)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Caf notice of entitlement",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Report any change in family situation to the Caf",
+      "evenement": "autre"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally with the Caf de la Guadeloupe: the 2026 monthly amount for a single child and the amounts of the increases at ages 11 and 16 are not given on the national pages consulted. Use the Caf simulator.",
+    "To be confirmed locally with the Caf de la Guadeloupe: how the split works under shared residence when the family has only one dependent child.",
+    "To be confirmed locally: the conditions of the complément familial in Guadeloupe (age and number of children, ceilings, amount).",
+    "To be confirmed with the Caf: the situation of civil servants posted in Guadeloupe who have only one child, for whom special rules may apply.",
+    "To be confirmed locally: addresses, opening hours and appointment arrangements at the Caf de la Guadeloupe reception points (caf.fr page unavailable during the check on October 29, 2026)."
+  ],
+  "motsCles": [
+    "family allowances",
+    "one child",
+    "DOM",
+    "Caf",
+    "shared residence",
+    "split"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Cnaf, network letter LR-2026-051 of February 26, 2026 (increase in family allowances, DOM provisions)",
+      "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13213 Family allowances",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213",
+      "verifieLe": "2026-06-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Shared residence and family benefits",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13214 Complément familial (family supplement)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214",
+      "verifieLe": "2026-04-01"
+    },
+    {
+      "titre": "Caf.fr, Caf de la Guadeloupe page",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ]
+}

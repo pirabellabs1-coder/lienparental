@@ -1,0 +1,68 @@
+{
+  "slug": "allocation-rentree-scolaire",
+  "territoire": "reunion",
+  "categorie": "aides",
+  "titre": "Allocation de rentrée scolaire (ARS)",
+  "resume": "Une aide de la Caf versée à La Réunion à partir du 4 août 2026 pour chaque enfant de 6 à 18 ans scolarisé, sous condition de ressources. Automatique avant 16 ans, à déclarer pour les 16-18 ans.",
+  "aQuoiCaSert": "L'allocation de rentrée scolaire aide à payer les dépenses de la rentrée (fournitures, vêtements, équipement) pour chaque enfant scolarisé de 6 à 18 ans, si les ressources du foyer ne dépassent pas un plafond. À La Réunion, la rentrée ayant lieu plus tôt qu'en métropole, elle est versée dès le début du mois d'août. Si vous êtes déjà allocataire et que vos déclarations sont à jour, elle arrive sans démarche pour les enfants de moins de 16 ans. Pour un jeune de 16 à 18 ans, vous devez déclarer en ligne qu'il reste scolarisé ou apprenti, sinon rien n'est versé.",
+  "quiEstConcerne": [
+    "Les familles avec un enfant de 6 à 18 ans scolarisé ou inscrit au Cned. Pour la rentrée 2026 : enfant né entre le 16 septembre 2008 et le 31 décembre 2020 inclus.",
+    "Un enfant de moins de 6 ans déjà inscrit en CP ouvre aussi droit à l'ARS.",
+    "Un enfant instruit en famille n'ouvre pas droit à l'ARS. Un apprenti dont la rémunération dépasse un plafond non plus."
+  ],
+  "aSavoir": [
+    "Montants rentrée 2026, après CRDS : 426,87 € de 6 à 10 ans, 450,41 € de 11 à 14 ans, 466,02 € de 15 à 18 ans (âge au 31 décembre 2025). Ce sont les montants du cas général, qui s'appliquent à La Réunion.",
+    "Plafonds de ressources rentrée 2026 (revenus 2024) : 28 956 € pour 1 enfant, 35 638 € pour 2, 42 320 € pour 3, plus 6 682 € par enfant supplémentaire.",
+    "En cas de léger dépassement du plafond, une allocation réduite (différentielle) peut être versée.",
+    "À La Réunion, le versement commence à partir du 4 août 2026, au lieu du 18 août dans le cas général.",
+    "Pour un jeune de 16 à 18 ans : il faut avoir déclaré vos revenus 2025 aux impôts et vos ressources 2024 à la Caf, puis déclarer à partir de mi-juillet sa scolarité ou son apprentissage à la rentrée 2026. Une déclaration tardive est payée quelques jours après réception par la Caf.",
+    "Parents séparés : l'ARS est versée à un seul allocataire. Même en résidence alternée, elle ne se partage pas : elle va au parent désigné."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Déclaration de revenus 2025 faite aux impôts", "detail": "Indispensable pour que la Caf connaisse vos ressources. Avis téléchargeable sur impots.gouv.fr.", "coffre": "finances" },
+    { "id": "certificat-scolarite", "libelle": "Certificat de scolarité", "detail": "Pour un enfant de moins de 6 ans entrant en CP si vous n'êtes pas allocataire, ou si la Caf le demande. Délivré par l'école.", "coffre": "scolarite" },
+    { "id": "contrat-apprentissage", "libelle": "Contrat d'apprentissage et bulletins de salaire, pour un apprenti de 16 à 18 ans", "detail": "Copie. La Caf vérifie que la rémunération ne dépasse pas le plafond.", "coffre": "scolarite" },
+    { "id": "declaration-situation", "libelle": "Déclaration de situation et déclaration de ressources 2024", "detail": "Seulement si vous n'êtes pas encore allocataire. Formulaires sur caf.fr.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB", "detail": "Si vous n'êtes pas encore allocataire.", "coffre": "finances" },
+    { "id": "notification-caf", "libelle": "Notification ou attestation de versement de l'ARS", "detail": "Téléchargeable dans votre espace Caf.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez que vos déclarations sont à jour", "detail": "Déclaration de revenus faite aux impôts, situation familiale et nombre d'enfants à jour dans votre espace Caf." },
+    { "titre": "Enfant de moins de 16 ans et vous êtes allocataire", "detail": "Aucune démarche : l'ARS est versée automatiquement si vous y avez droit." },
+    { "titre": "Jeune de 16 à 18 ans : déclarez sa scolarité", "detail": "Sur caf.fr ou l'application Caf, à partir de mi-juillet. Faites-le avant le 4 août pour être payé dès le premier versement à La Réunion." },
+    { "titre": "Vous n'êtes pas allocataire", "detail": "Faites une déclaration de situation et de ressources auprès de la Caf, avec un RIB, et le certificat de scolarité pour un enfant de moins de 6 ans en CP." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Si vous allez à un accueil de la Caf : numéro d'allocataire, pièce d'identité, avis d'impôt, certificat de scolarité ou contrat d'apprentissage selon le cas. La plupart des démarches se font en ligne." },
+    { "titre": "Notez les dépenses de rentrée", "detail": "Enregistrez fournitures et vêtements dans le Journal pour suivre les frais de chaque enfant." }
+  ],
+  "ou": [
+    { "nom": "Caf de La Réunion", "detail": "Espace en ligne Mon Compte sur caf.fr ou application Caf.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" },
+    { "nom": "MSA", "detail": "Si vous relevez du régime agricole." },
+    { "nom": "France Services", "detail": "Aide gratuite aux démarches en ligne près de chez vous." }
+  ],
+  "liens": [
+    { "titre": "Allocation de rentrée scolaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878" },
+    { "titre": "Résidence alternée et prestations familiales (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248" },
+    { "titre": "Caf de La Réunion", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Déclarer la scolarité des 16-18 ans pour l'ARS (mi-juillet)", "evenement": "ecole" },
+    { "type": "rappel", "titre": "Vérifier le versement de l'ARS (4 août 2026 à La Réunion)", "evenement": "autre" },
+    { "type": "coffre", "titre": "Attestation de versement de l'ARS", "categorie": "finances" },
+    { "type": "depense", "titre": "Fournitures de rentrée", "categorie": "ecole" },
+    { "type": "depense", "titre": "Vêtements de rentrée", "categorie": "vetements" }
+  ],
+  "datesLimites": [
+    { "libelle": "Déclaration des 16-18 ans à partir de mi-juillet", "detail": "Une déclaration faite après la date de versement est payée quelques jours après réception par la Caf." },
+    { "libelle": "Versement à La Réunion à partir du 4 août 2026" }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la Caf de La Réunion : le parent qui perçoit l'ARS en cas de résidence alternée, lorsque vous n'avez pas désigné d'allocataire unique.",
+    "À confirmer : le plafond de rémunération d'un apprenti au-delà duquel l'ARS n'est pas versée, non indiqué sur la fiche consultée."
+  ],
+  "motsCles": ["ARS", "rentrée", "fournitures", "Caf", "allocation", "16-18 ans"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1878 Allocation de rentrée scolaire (section La Réunion)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -6,7 +6,79 @@
     "pricing": "Preços",
     "testimonials": "Depoimentos",
     "faq": "Perguntas frequentes",
-    "blog": "Blog"
+    "blog": "Blog",
+    "partners": "Parceiros",
+    "resources": "Recursos",
+    "app": "O aplicativo",
+    "mega": {
+      "app": {
+        "features": {
+          "t": "Funcionalidades",
+          "d": "Agenda compartilhada, mensagens, cofre, diário"
+        },
+        "pricing": {
+          "t": "Preços",
+          "d": "Gratuito, Premium ou Coparentalité+"
+        },
+        "testimonials": {
+          "t": "Depoimentos",
+          "d": "Pais contam o seu dia a dia"
+        },
+        "install": {
+          "t": "Instalar o aplicativo",
+          "d": "No iPhone ou Android, em segundos"
+        },
+        "cardTitle": "Coparentalidade com mais tranquilidade",
+        "cardText": "Organize, comunique e guarde o essencial, no interesse do seu filho.",
+        "cardCta": "Criar uma conta gratuita"
+      },
+      "guide": {
+        "intro": "Trâmites, auxílios e órgãos explicados passo a passo, verificados em fontes oficiais.",
+        "territories": "Escolha o seu território",
+        "all": "Ver todo o guia",
+        "cardTitle": "O Guia parental",
+        "cardText": "Escola, saúde, nascimento, separação, moradia: as etapas certas, na hora certa."
+      },
+      "partners": {
+        "overview": {
+          "t": "Nossos parceiros",
+          "d": "Quem se engaja conosco pelas famílias"
+        },
+        "institution": {
+          "t": "Institucionais",
+          "d": "Órgãos públicos ao lado das famílias"
+        },
+        "association": {
+          "t": "Associativos",
+          "d": "Associações que informam e acompanham"
+        },
+        "createur": {
+          "t": "Criadores de conteúdo",
+          "d": "Vozes engajadas pela parentalidade"
+        },
+        "cardTitle": "Tornar-se parceiro",
+        "cardText": "Associação, instituição, profissional ou criador: proponha uma parceria.",
+        "cardCta": "Enviar candidatura"
+      },
+      "resources": {
+        "blog": {
+          "t": "Blog",
+          "d": "Dicas práticas para pais separados"
+        },
+        "help": {
+          "t": "Central de ajuda",
+          "d": "Respostas às perguntas frequentes"
+        },
+        "about": {
+          "t": "Sobre",
+          "d": "Quem somos, nosso método"
+        },
+        "donate": {
+          "t": "Fazer uma doação",
+          "d": "Apoiar ferramentas gratuitas para as famílias"
+        }
+      }
+    }
   },
   "header": {
     "login": "Entrar",
@@ -85,13 +157,15 @@
     "available": "Disponível",
     "soon": "Em breve",
     "rights": "© {year} Lien Parental. Hospedagem segura na Europa.",
-    "disclaimer": "O Lien Parental não substitui um advogado."
+    "disclaimer": "O Lien Parental não substitui um advogado.",
+    "partners": "Parceiros"
   },
   "partners": {
     "titleActive": "Nossos parceiros",
     "titlePlaceholder": "Parceiros do Lien Parental",
     "placeholder": "Parcerias com instituições voltadas à família estão em preparação. Seus logotipos aparecerão aqui.",
-    "slot": "Logotipo do parceiro"
+    "slot": "Logotipo do parceiro",
+    "more": "Conheça nossos parceiros e torne-se um deles"
   },
   "video": {
     "title": "Conheça o Lien Parental em vídeo",
@@ -234,7 +308,7 @@
   "guide": {
     "title": "O Guia parental",
     "lead": "Todas as informações essenciais para os pais, reunidas num só lugar, onde você vive. Cada ficha diz o que fazer, com quais documentos, e onde.",
-    "pointSheets": "Escola, saúde, auxílios, moradia, separação: {count} fichas para a Guiana Francesa",
+    "pointSheets": "Escola, saúde, auxílios, moradia, separação: {count} fichas práticas, adaptadas ao seu território",
     "pointSheetsNoCount": "Escola, saúde, auxílios, moradia, separação",
     "point2": "Os documentos a reunir e as etapas, em ordem",
     "point3": "Um lembrete, um documento ou uma despesa adicionados com um toque",
@@ -280,7 +354,7 @@
     "a2": "Abra o site no seu navegador e escolha “Adicionar à Tela de Início” (menu de compartilhamento no iPhone, menu do navegador no Android). Nossa página Instalar o aplicativo guia você passo a passo.",
     "a2Link": "Instalar o aplicativo",
     "q3": "O Guia parental está disponível em todo lugar?",
-    "a3": "Ainda não. O Guia começa pela Guiana Francesa, com fichas sobre escola, saúde, auxílios, separação e vida cotidiana. Martinica, Guadalupe, Reunião, Maiote e a França metropolitana virão em seguida.",
+    "a3": "Ainda não. O Guia começa pela Guiana Francesa, com fichas sobre escola, saúde, auxílios, separação e vida cotidiana, e se abre território por território: Martinica, Guadalupe, Reunião, Maiote e a França metropolitana. A página do Guia parental mostra os territórios já disponíveis.",
     "q4": "Os meus dados estão seguros?",
     "a4": "Sim. As conversas são criptografadas em trânsito (HTTPS/TLS) e os dados criptografados em repouso. Seus dados são armazenados na União Europeia (Irlanda); alguns prestadores (pagamento, e-mails, Coach com IA) podem tratar parte deles fora da UE, com as garantias previstas pelo RGPD (detalhes na política de privacidade). Os dados de saúde contam com criptografia adicional. O seu espaço é pessoal: nada é compartilhado sem o seu consentimento.",
     "q5": "Posso compartilhar informações com o outro pai ou mãe?",

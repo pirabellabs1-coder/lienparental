@@ -11,7 +11,7 @@
     "Si l'autre parent est hors d'état de payer (insolvabilité, chômage, incarcération, RSA...) : la Caf peut aussi verser l'ASF après avoir vérifié sa situation."
   ],
   "aSavoir": [
-    "Montant : 200,78 € par mois et par enfant (service-public.gouv.fr, fiche vérifiée le 1er avril 2026).",
+    "Montant : 200,78 € par mois et par enfant au 1er avril 2026 (service-public.gouv.fr).",
     "ASF différentielle : si la pension reçue est inférieure à 200,78 €, la Caf verse la différence. Elle n'est pas versée si l'écart est inférieur à 15 €, et elle est payée tous les 3 mois en une fois.",
     "Pension fixée mais impayée (jugement, convention homologuée ou convention de divorce déposée chez un notaire) : l'ASF est une avance, et la Caf engage le recouvrement de la pension.",
     "Aucune pension fixée : l'ASF est versée 4 mois seulement. Pour la garder, saisissez le juge aux affaires familiales dans ce délai (ou demandez la révision d'une décision qui ne fixe pas de pension).",
@@ -59,15 +59,14 @@
     { "libelle": "1 mois sans participation de l'autre parent", "detail": "C'est la durée minimale à partir de laquelle l'ASF peut être demandée." }
   ],
   "aConfirmer": [
-    "La fiche officielle affiche à un endroit 201,78 € et ailleurs 200,78 € : vérifiez le montant en vigueur sur caf.fr ou auprès de la Caf de la Guyane.",
     "La liste exacte des pièces justificatives n'est pas publiée par service-public.gouv.fr (elle dépend de votre situation) : la Caf peut en demander d'autres.",
     "Cas de l'enfant non reconnu par l'un des parents ou orphelin : non traités dans la fiche « parents séparés », renseignez-vous auprès de la Caf.",
     "À confirmer localement : horaires et conditions de rendez-vous des accueils de la Caf de la Guyane à Cayenne, Kourou et Saint-Laurent-du-Maroni."
   ],
   "motsCles": ["ASF", "parent isolé", "Caf", "pension impayée", "allocation", "parent seul"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F815 Allocation de soutien familial (parents séparés)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F815 Allocation de soutien familial (parents séparés)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F36407 Intermédiation financière des pensions alimentaires", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-04-01" },
     { "titre": "ARIPA, intermédiation financière", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" }
   ]

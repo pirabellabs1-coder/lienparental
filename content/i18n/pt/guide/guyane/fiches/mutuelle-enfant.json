@@ -55,11 +55,11 @@
     "A confirmar com a sua mutuelle: a idade-limite de cobertura dos filhos e os documentos exigidos para filhos de pais separados variam conforme o contrato."
   ],
   "motsCles": ["mutuelle", "plano de saúde complementar", "dependente", "Noémie", "pais separados", "reembolso"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F20740 Dispensas de adesão à mutuelle da empresa", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740", "verifieLe": "2024-05-16" },
-    { "titre": "Service-public.gouv.fr, F20739 Plano de saúde complementar da empresa", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739", "verifieLe": "2024-05-15" },
-    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (plano complementar gratuito ou barato)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-07-01" },
-    { "titre": "Fórum dos segurados ameli, resposta de especialista: duplo vínculo e plano complementar (29 de outubro de 2025)", "url": "https://forum-assures.ameli.fr/questions/3657009-parents-separes-double-rattachement-secu-enfant-seule-complementaire-sante-papa" }
+    { "titre": "Service-public.gouv.fr, F20740 Dispensas de adesão à mutuelle da empresa", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F20739 Plano de saúde complementar da empresa", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (plano complementar gratuito ou barato)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" },
+    { "titre": "Fórum dos segurados ameli, resposta de especialista: duplo vínculo e plano complementar (29 de outubro de 2025)", "url": "https://forum-assures.ameli.fr/questions/3657009-parents-separes-double-rattachement-secu-enfant-seule-complementaire-sante-papa", "verifieLe": "2026-10-29" }
   ]
 }

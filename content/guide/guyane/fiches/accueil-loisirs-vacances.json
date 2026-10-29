@@ -54,10 +54,10 @@
     "À confirmer localement : les pièces exactes du dossier d'inscription, fixées par chaque mairie ou structure."
   ],
   "motsCles": ["centre de loisirs", "ALSH", "vacances", "colonie", "ATL", "mercredi", "périscolaire"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
     { "titre": "monenfant.fr, Accueils de loisirs", "url": "https://monenfant.fr/les-accueils-de-loisirs" },
-    { "titre": "Service-public.gouv.fr, F767 Vaccination et admission en collectivité", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccination et admission en collectivité", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
     { "titre": "Caf de la Guyane, Aide aux temps libres", "url": "https://www.caf.fr/allocataires/caf-de-la-guyane/offre-de-service/vie-personnelle/aide-aux-temps-libres-atl" }
   ]
 }

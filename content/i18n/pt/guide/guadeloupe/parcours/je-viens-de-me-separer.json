@@ -1,0 +1,96 @@
+{
+  "slug": "je-viens-de-me-separer",
+  "territoire": "guadeloupe",
+  "titre": "Acabei de me separar",
+  "resume": "Os trâmites essenciais das primeiras semanas, para garantir seus direitos e a organização dos filhos.",
+  "ordre": 1,
+  "elements": [
+    {
+      "id": "situation-caf",
+      "titre": "Verificar minha situação na CAF (órgão de benefícios familiares)",
+      "detail": "Declare a separação para que seus direitos sejam recalculados apenas com base na sua renda.",
+      "fiche": "declarer-separation-caf"
+    },
+    {
+      "id": "adresse-enfant",
+      "titre": "Mudar o endereço da criança",
+      "detail": "Caf, escola, seguridade social, impostos: quem avisar e com quais comprovantes.",
+      "fiche": "changer-adresse-enfant-separation"
+    },
+    {
+      "id": "mettre-a-jour-ecole",
+      "titre": "Atualizar os dados na escola",
+      "detail": "Contatos, endereço e pessoas autorizadas a buscar a criança.",
+      "fiche": "inscrire-enfant-ecole"
+    },
+    {
+      "id": "compte-bancaire",
+      "titre": "Ter minha própria conta bancária",
+      "fiche": "compte-bancaire-droit-au-compte"
+    },
+    {
+      "id": "assurance-scolaire",
+      "titre": "Verificar o seguro escolar",
+      "detail": "Responsabilidade civil e garantia individual contra acidentes em dia.",
+      "fiche": "assurance-scolaire"
+    },
+    {
+      "id": "mutuelle",
+      "titre": "Verificar o plano de saúde complementar (mutuelle) que cobre a criança",
+      "fiche": "mutuelle-enfant"
+    },
+    {
+      "id": "documents-enfant",
+      "titre": "Organizar os documentos da criança",
+      "detail": "Documento de identidade, caderneta de saúde, atestados: guarde-os no cofre.",
+      "fiche": "papiers-identite-mineur"
+    },
+    {
+      "id": "livret-famille",
+      "titre": "Pedir uma segunda via do livro de família (livret de famille)",
+      "fiche": "livret-de-famille"
+    },
+    {
+      "id": "rendez-vous",
+      "titre": "Adicionar os compromissos importantes",
+      "detail": "Saúde, escola, audiências: anote-os no calendário com um lembrete."
+    },
+    {
+      "id": "aides",
+      "titre": "Verificar os benefícios a que tenho direito",
+      "detail": "Por exemplo, a allocation de soutien familial (auxílio de apoio familiar) se o outro genitor paga pouca ou nenhuma pensão.",
+      "fiche": "allocation-soutien-familial"
+    },
+    {
+      "id": "pension-impayee",
+      "titre": "Se a pensão não for paga: a ARIPA (órgão de cobrança de pensões)",
+      "fiche": "pension-alimentaire-aripa"
+    },
+    {
+      "id": "mediation",
+      "titre": "Encontrar um serviço de mediação",
+      "detail": "Um terceiro neutro para ajudar vocês a chegar a um acordo sobre a organização dos filhos.",
+      "fiche": "mediation-familiale"
+    },
+    {
+      "id": "aide-juridictionnelle",
+      "titre": "Verificar se tenho direito à assistência jurídica gratuita (aide juridictionnelle)",
+      "fiche": "aide-juridictionnelle"
+    },
+    {
+      "id": "jaf",
+      "titre": "Recorrer ao juiz de família (juge aux affaires familiales) se necessário",
+      "fiche": "saisir-juge-affaires-familiales"
+    },
+    {
+      "id": "voyage",
+      "titre": "Viagem da criança: autorização de saída do território",
+      "fiche": "autorisation-sortie-territoire"
+    },
+    {
+      "id": "decisions",
+      "titre": "Guardar as decisões e os documentos importantes",
+      "detail": "Sentenças, acordos, cartas: guarde-os na pasta Processo judicial do cofre."
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+{
+  "slug": "demande-logement-social",
+  "territoire": "reunion",
+  "categorie": "logement",
+  "titre": "Applying for social housing",
+  "resume": "Submitting a social housing application in Réunion, getting your unique number, gathering the right documents (including those related to a separation) and renewing the application on time.",
+  "aQuoiCaSert": "Social housing has a regulated rent and is allocated subject to income limits. The application, online or at a registration office, gives you a unique number (numéro unique), which starts the clock on how long your application has been waiting. After a separation, you can have only your own income taken into account, provided you supply the right supporting documents.",
+  "quiEstConcerne": [
+    "Households whose income does not exceed the limits set for the overseas territories.",
+    "Parents who are separating and need to find new housing with their children.",
+    "Foreign nationals holding a valid residence permit or receipt (récépissé)."
+  ],
+  "aSavoir": [
+    "Income limits in the overseas territories, including Réunion, for an application made in 2026 (2024 income, general case): €27,382 for 1 person, €36,567 for 2, €43,973 for 3, €53,088 for 4. They apply to the total income of all the people to be housed.",
+    "Single parent: with 1 dependent, the limit used is the one for 3 people (€43,973); with 2 dependents, the one for 4 people (€53,088).",
+    "Separation: to have only your income taken into account, attach proof such as the document referring the case to the family court judge (juge aux affaires familiales, JAF), the divorce judgment or the birth certificate noting the dissolution of the PACS (civil partnership).",
+    "Everyone to be housed must be declared, including children in shared residence.",
+    "Renewal: an application that has not been met must be renewed every year. According to service-public.gouv.fr, it must be renewed within 11 months of its registration; without renewal, it is cancelled and you lose the time your application has been waiting.",
+    "Update the application as soon as your situation changes (separation, birth, new address, drop in income)."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Applicant's ID document",
+      "detail": "Front-and-back copy of the ID card or passport. For a non-EU national: copy of the valid residence permit or receipt.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "identite-cotitulaire",
+      "libelle": "ID document or residence permit of each adult to be housed",
+      "detail": "Valid copy.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "2025 tax notice on 2024 income for each person to be housed",
+      "detail": "Copy. Download it from your impots.gouv.fr account.",
+      "coffre": "finances"
+    },
+    {
+      "id": "justificatif-separation",
+      "libelle": "Proof of separation",
+      "detail": "Copy of the document referring the case to the family court judge, the divorce judgment or the birth certificate noting the dissolution of the PACS.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Judgment or agreement setting the children's residence",
+      "detail": "Copy, to show the children to be housed with you or a shared residence arrangement.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Family record book (livret de famille) or the children's birth certificates",
+      "detail": "Copy, to show your dependents.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Proof of recent income",
+      "detail": "Latest payslips, Caf (Caisse d'allocations familiales, the family benefits office) or France Travail certificates.",
+      "coffre": "finances"
+    },
+    {
+      "id": "situation-logement",
+      "libelle": "Proof of your current housing situation",
+      "detail": "Lease, rent receipt, certificate of accommodation, or landlord's notice to quit if applicable.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "attestation-enregistrement",
+      "libelle": "Registration certificate with the unique number",
+      "detail": "Download it from your personal account. Keep it safe.",
+      "coffre": "courriers"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Create your application on the national website",
+      "detail": "On demande-logement-social.gouv.fr, or with the Cerfa n° 14069 form submitted at a registration office (town hall, social landlord)."
+    },
+    {
+      "titre": "Check before sending your application",
+      "detail": "Valid ID document or residence permit for each adult, everyone's 2025 tax notice, proof of separation and judgment on the children's residence if you are separated, family record book."
+    },
+    {
+      "titre": "Get your registration certificate",
+      "detail": "It shows your unique number and the application date, which counts for how long you have been waiting."
+    },
+    {
+      "titre": "Update the application when your situation changes",
+      "detail": "Declare the change and add the supporting document."
+    },
+    {
+      "titre": "Renew on time",
+      "detail": "Before the end of the deadline shown in your account or in the reminder letter. Without renewal, the application is cancelled."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "National social housing application portal",
+      "detail": "Submit, track, update and renew online.",
+      "url": "https://www.demande-logement-social.gouv.fr"
+    },
+    {
+      "nom": "Registration offices in Réunion (town halls, social landlords)",
+      "detail": "To submit a paper application or get help. Ask at your town hall (mairie)."
+    },
+    {
+      "nom": "ADIL de La Réunion",
+      "detail": "Free, neutral advice on housing. Head office: 24 rue Henri Vavasseur, Saint-Denis.",
+      "url": "https://www.anil.org/adil-974/",
+      "telephone": "02 62 41 14 24"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Social housing application (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007"
+    },
+    {
+      "titre": "Renewing a social housing application (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010"
+    },
+    {
+      "titre": "Online social housing application",
+      "url": "https://www.demande-logement-social.gouv.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Social housing application registration certificate",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Proof of separation for the housing application",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Renew the social housing application (within 11 months)",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Annual renewal of the application",
+      "detail": "Within 11 months of registration according to service-public.gouv.fr, otherwise the application is cancelled."
+    }
+  ],
+  "aConfirmer": [
+    "The two official pages consulted describe the renewal timetable differently: follow the date shown in your demande-logement-social.gouv.fr account or in the reminder letter.",
+    "The phone helpline 0 806 000 113 is listed for Île-de-France and the rest of mainland France: whether it can be reached from Réunion is to be confirmed.",
+    "To be confirmed locally: the list of registration offices in Réunion and waiting times, and additional documents requested by social landlords at the time of allocation."
+  ],
+  "motsCles": [
+    "social housing",
+    "HLM",
+    "unique number",
+    "renewal",
+    "separation",
+    "income limits",
+    "ADIL"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F10007 Social housing application",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F35010 Renewing a social housing application",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F869 Conditions for getting social housing (overseas income limits)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "ANIL, ADIL de La Réunion",
+      "url": "https://www.anil.org/adil-974/",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

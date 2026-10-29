@@ -16,7 +16,7 @@
     "En cas de léger dépassement du plafond, une allocation réduite (différentielle) peut être versée.",
     "Versement à partir du 18 août 2026 dans le cas général. La Guyane n'a pas de date distincte sur la fiche officielle, contrairement à La Réunion et Mayotte.",
     "Pour toucher l'ARS d'un jeune de 16 à 18 ans, vous devez avoir déclaré vos revenus 2025 aux impôts et vos ressources 2024 à la Caf, puis déclarer à partir de mi-juillet sa scolarité ou son apprentissage à la rentrée 2026.",
-    "Parents séparés : l'ARS est versée à un seul allocataire. En résidence alternée, le partage possible des allocations familiales ne s'applique pas automatiquement à l'ARS."
+    "Parents séparés : l'ARS n'est jamais partagée. Même en résidence alternée, elle est versée en totalité au parent désigné comme allocataire : seules les allocations familiales peuvent être partagées (service-public.gouv.fr)."
   ],
   "documents": [
     { "id": "avis-impot", "libelle": "Déclaration de revenus 2025 faite aux impôts", "detail": "Indispensable pour que la Caf connaisse vos ressources. Avis téléchargeable sur impots.gouv.fr.", "coffre": "finances" },
@@ -56,15 +56,14 @@
     { "libelle": "Versement à partir du 18 août 2026", "detail": "Cas général." }
   ],
   "aConfirmer": [
-    "À confirmer localement : date exacte de versement en Guyane, la fiche officielle ne citant que le cas général, La Réunion et Mayotte.",
-    "À confirmer localement : parent bénéficiaire de l'ARS en cas de résidence alternée, auprès de la Caf de la Guyane."
+    "À confirmer localement : date exacte de versement en Guyane, la fiche officielle ne citant que le cas général, La Réunion et Mayotte."
   ],
   "motsCles": ["ARS", "rentrée", "fournitures", "Caf", "allocation", "16-18 ans"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1878 Allocation de rentrée scolaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-08-04" },
+    { "titre": "Service-public.gouv.fr, F1878 Allocation de rentrée scolaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-10-29" },
     { "titre": "Caf, barème de l'allocation de rentrée scolaire", "url": "https://www.caf.fr/professionnels/offres-et-services/accompagnement-des-allocataires/bareme-allocation-de-rentree-scolaire" },
     { "titre": "Caf du Tarn, ARS et résidence alternée", "url": "https://www.caf.fr/allocataires/caf-du-tarn/actualites-departementales/allocation-de-rentree-scolaire" },
-    { "titre": "Service-public.gouv.fr, F21248 Allocations familiales en résidence alternée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248" }
+    { "titre": "Service-public.gouv.fr, F21248 Allocations familiales en résidence alternée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" }
   ]
 }

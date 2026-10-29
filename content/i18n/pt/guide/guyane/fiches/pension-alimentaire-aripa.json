@@ -73,11 +73,11 @@
     "A confirmar localmente: como apresentar queixa por abandono de família (delegacia, gendarmerie ou carta ao promotor do tribunal judiciaire de Cayenne)."
   ],
   "motsCles": ["pensão alimentícia", "ARIPA", "intermediação", "pensão não paga", "Caf", "cobrança", "título executivo"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1249 Pensão alimentícia não paga", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-01-30" },
-    { "titre": "Service-public.gouv.fr, F36407 Intermediação financeira das pensões alimentícias", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-04-01" },
-    { "titre": "Service-public.gouv.fr, F815 Auxílio de apoio familiar (ASF)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F1249 Pensão alimentícia não paga", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F36407 Intermediação financeira das pensões alimentícias", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F815 Auxílio de apoio familiar (ASF)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-10-29" },
     { "titre": "ARIPA, intermediação financeira", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" },
     { "titre": "ARIPA, pedido de título executivo", "url": "https://pension-alimentaire.caf.fr/usagers/demande-titre-executoire" }
   ]

@@ -1,0 +1,63 @@
+{
+  "slug": "acte-naissance",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Obtenir un acte de naissance",
+  "resume": "Copie intégrale ou extrait, avec ou sans filiation : qui peut le demander, comment l'obtenir gratuitement en mairie, par courrier ou en ligne, et que faire si l'acte établi à Mayotte comporte une erreur.",
+  "aQuoiCaSert": "L'acte de naissance prouve l'identité et la filiation de votre enfant. On vous le demande souvent pour une première carte d'identité ou un premier passeport, une procédure devant le juge ou certaines inscriptions. La demande est toujours gratuite. Pour une naissance à Mayotte, c'est la mairie de la commune de naissance qui le délivre.",
+  "quiEstConcerne": [
+    "Les parents qui ont besoin de l'acte de naissance de leur enfant mineur (ils en sont les représentants légaux).",
+    "Toute personne qui a besoin de son propre acte de naissance, ou de celui d'un ascendant, d'un descendant, de son conjoint ou partenaire de Pacs."
+  ],
+  "aSavoir": [
+    "Trois formats existent. Copie intégrale : tout l'acte, avec les parents et les mentions en marge. Extrait avec filiation : résumé avec les parents. Extrait sans filiation : identité, date et lieu de naissance seulement.",
+    "Copie intégrale et extrait avec filiation : réservés à la personne concernée ou à son représentant légal, au conjoint ou partenaire de Pacs, aux ascendants et descendants, et à certains professionnels. L'extrait sans filiation peut être demandé par toute personne.",
+    "La demande est gratuite : ne payez jamais un site privé pour obtenir un acte de naissance.",
+    "Sur place, à la mairie du lieu de naissance, l'acte est remis immédiatement sur présentation d'une pièce d'identité.",
+    "Enfant ou parent né à l'étranger et de nationalité française : l'acte est délivré par le Service central d'état civil (Scec) de Nantes, en ligne ou par courrier uniquement.",
+    "Parents séparés : chaque parent peut demander seul la copie intégrale de l'acte de son enfant, sans l'accord de l'autre.",
+    "La commission de révision de l'état civil de Mayotte, chargée de reconstituer les actes anciens, n'est plus active depuis 2011 environ. Une erreur dans un acte se corrige aujourd'hui auprès de l'officier d'état civil ou du procureur de la République."
+  ],
+  "documents": [
+    { "id": "infos-naissance", "libelle": "Les informations exactes sur la naissance", "detail": "Nom, prénoms, date et lieu de naissance de l'enfant, noms et prénoms des deux parents. Recopiez-les depuis le livret de famille.", "coffre": "autres" },
+    { "id": "identite-demandeur", "libelle": "Pièce d'identité du parent demandeur (original)", "detail": "Obligatoire au guichet de la mairie.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Livret de famille (original ou copie)", "detail": "Utile pour prouver votre lien avec l'enfant.", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Copie intégrale de l'acte de naissance reçue", "detail": "Notez la date de délivrance : beaucoup de démarches exigent un acte de moins de 3 mois.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez si vous en avez vraiment besoin", "detail": "Demandez à l'organisme quel format il veut (copie intégrale le plus souvent) et s'il doit dater de moins de 3 mois." },
+    { "titre": "Allez ou écrivez à la mairie du lieu de naissance", "detail": "Par courrier sur papier libre : type d'acte voulu, nom, prénoms, date de naissance, noms des parents, votre lien avec l'enfant et votre adresse." },
+    { "titre": "Ou faites la demande en ligne", "detail": "Sur service-public.gouv.fr, service gratuit « Demande d'acte de naissance », si la commune de naissance y est proposée." },
+    { "titre": "Vérifiez avant de vous déplacer en mairie", "detail": "Bonne mairie (celle du lieu de naissance), pièce d'identité originale, livret de famille, noms exacts des deux parents, type d'acte voulu." },
+    { "titre": "Né à l'étranger : passez par le Scec de Nantes", "detail": "Demande en ligne sur service-public.gouv.fr ou par courrier au Service central d'état civil, 11 rue de la Maison Blanche, 44941 Nantes Cedex 09." },
+    { "titre": "Rangez l'acte reçu", "detail": "Scannez-le dans le coffre-fort et notez sa date." }
+  ],
+  "ou": [
+    { "nom": "Mairie du lieu de naissance, service de l'état civil", "detail": "Délivrance immédiate au guichet, sur présentation d'une pièce d'identité." },
+    { "nom": "Service-public.gouv.fr, demande d'acte de naissance en ligne", "detail": "Gratuit, pour une naissance en France si la commune est raccordée.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406" },
+    { "nom": "Service central d'état civil (Scec), Nantes", "detail": "Pour les Français nés à l'étranger. En ligne ou par courrier.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1405" }
+  ],
+  "liens": [
+    { "titre": "Acte de naissance : copie intégrale ou extrait (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427" },
+    { "titre": "Demande d'acte de naissance en ligne (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Copie intégrale de l'acte de naissance de l'enfant", "categorie": "autres" },
+    { "type": "rappel", "titre": "Acte de naissance : validité de 3 mois pour les démarches", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Passage en mairie : retrait d'un acte de naissance", "evenement": "rdv" }
+  ],
+  "datesLimites": [
+    { "libelle": "Moins de 3 mois", "detail": "Ancienneté souvent exigée pour l'acte fourni." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : les communes de Mayotte proposées pour la demande en ligne et raccordées à l'échange dématérialisé des actes (la liste n'a pas pu être consultée).",
+    "À confirmer localement : la démarche pour un acte ancien établi selon l'état civil de droit local, ou un acte comportant une erreur, auprès de la mairie ou du procureur du tribunal judiciaire de Mamoudzou."
+  ],
+  "motsCles": ["acte de naissance", "copie intégrale", "extrait", "filiation", "état civil", "mairie", "Scec"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1427 Acte de naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1406 Demande d'acte de naissance en ligne", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406", "verifieLe": "2026-10-29" },
+    { "titre": "Assemblée nationale, réponse à la question n° 65409 (commission de révision de l'état civil de Mayotte)", "url": "https://www.assemblee-nationale.fr/dyn/13/questions/QANR5L13QE65409.pdf", "verifieLe": "2026-10-29" }
+  ]
+}

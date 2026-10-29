@@ -11,7 +11,7 @@
     "Se o outro genitor não tem condições de pagar (insolvência, desemprego, prisão, RSA, a renda mínima...): a Caf também pode pagar o ASF após verificar a situação dele."
   ],
   "aSavoir": [
-    "Valor: 200,78 € por mês e por filho (service-public.gouv.fr, página verificada em 1º de abril de 2026).",
+    "Valor: 200,78 € por mês e por filho em 1º de abril de 2026 (service-public.gouv.fr).",
     "ASF diferencial (ASF différentielle): se a pensão recebida for menor que 200,78 €, a Caf paga a diferença. Não é paga se a diferença for inferior a 15 €, e é paga a cada 3 meses de uma só vez.",
     "Pensão fixada mas não paga (sentença, acordo homologado ou acordo de divórcio depositado junto a um notário): o ASF é um adiantamento, e a Caf inicia a cobrança da pensão.",
     "Nenhuma pensão fixada: o ASF é pago só por 4 meses. Para mantê-lo, recorra ao juiz de família (juge aux affaires familiales, JAF) nesse prazo (ou peça a revisão de uma decisão que não fixa pensão).",
@@ -59,15 +59,14 @@
     { "libelle": "1 mês sem contribuição do outro genitor", "detail": "É o prazo mínimo a partir do qual o ASF pode ser pedido." }
   ],
   "aConfirmer": [
-    "A página oficial mostra 201,78 € em um ponto e 200,78 € em outro: verifique o valor em vigor em caf.fr ou com a Caf de la Guyane.",
     "A lista exata de documentos não é publicada pelo service-public.gouv.fr (depende da sua situação): a Caf pode pedir outros.",
     "Criança não reconhecida por um dos pais ou órfã: casos não tratados na página «pais separados»; informe-se com a Caf.",
     "A confirmar localmente: horários e condições de agendamento do atendimento da Caf de la Guyane em Cayenne, Kourou e Saint-Laurent-du-Maroni."
   ],
   "motsCles": ["ASF", "mãe solo", "Caf", "pensão não paga", "auxílio", "pai solo"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F815 Auxílio de apoio familiar (pais separados)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F815 Auxílio de apoio familiar (pais separados)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F36407 Intermediação financeira das pensões alimentícias", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-04-01" },
     { "titre": "ARIPA, intermediação financeira", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" }
   ]

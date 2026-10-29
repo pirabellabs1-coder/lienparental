@@ -1,0 +1,74 @@
+{
+  "slug": "cantine-periscolaire",
+  "territoire": "france",
+  "categorie": "ecole",
+  "titre": "Inscrire mon enfant à la cantine et au périscolaire",
+  "resume": "Qui organise la cantine en primaire, au collège et au lycée, les pièces à préparer pour obtenir le bon tarif, et où demander une aide si le prix pose problème.",
+  "aQuoiCaSert": "La cantine et l'accueil périscolaire (garderie du matin et du soir, études, activités) permettent à votre enfant d'être pris en charge autour du temps scolaire. En maternelle et en élémentaire, c'est la commune qui les organise et fixe les tarifs, souvent selon votre quotient familial : sans attestation de quotient, vous risquez de payer le tarif le plus élevé. Au collège et au lycée, l'inscription à la demi-pension se fait auprès de l'établissement.",
+  "quiEstConcerne": [
+    "Les parents d'enfants scolarisés en maternelle ou en élémentaire.",
+    "Les parents de collégiens et de lycéens pour la demi-pension.",
+    "Les parents d'un enfant allergique ou suivant un régime pour raison de santé."
+  ],
+  "aSavoir": [
+    "La cantine n'est pas obligatoire, ni en primaire ni dans le secondaire. Mais quand elle existe, tout enfant scolarisé a le droit d'y être inscrit : la situation sociale des parents ne peut pas l'empêcher, et réserver l'accès aux enfants dont les parents travaillent est illégal.",
+    "Les tarifs sont fixés par la commune en primaire, par le conseil départemental pour les collèges et par la région pour les lycées. Chacun peut appliquer un quotient familial pour adapter le prix à vos revenus.",
+    "Certaines communes, départements ou régions accordent en plus des aides pour la cantine. Dans certains départements, une aide existe aussi pour un enfant d'école élémentaire éloignée du domicile qui doit déjeuner sur place.",
+    "Au collège et au lycée, le fonds social pour les cantines peut aider les familles. Il est attribué par le chef d'établissement, qui en précise les conditions en début d'année.",
+    "Allergie ou régime pour raison de santé : un projet d'accueil individualisé (PAI) peut être mis en place avec le médecin. Vous pouvez aussi fournir un panier-repas, dont vous êtes alors responsable (repas, conditionnement, transport).",
+    "Parents séparés : l'inscription à la cantine relève de la vie courante de l'enfant. Si vous êtes en résidence alternée, demandez à la mairie si chaque parent peut être facturé pour ses semaines et avec quel quotient familial."
+  ],
+  "documents": [
+    { "id": "attestation-caf", "libelle": "Attestation de quotient familial de la Caf", "detail": "Téléchargeable gratuitement dans votre espace Caf (Mon compte, Attestations). Sans elle, le tarif maximal peut être appliqué.", "coffre": "finances" },
+    { "id": "avis-impot", "libelle": "Dernier avis d'impôt sur le revenu", "detail": "Copie. Souvent demandé si vous n'êtes pas allocataire Caf. Téléchargeable sur impots.gouv.fr.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Copie. Facture ou quittance de loyer à votre nom.", "coffre": "scolarite" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité du parent qui inscrit", "detail": "Original ou copie selon la mairie.", "coffre": "scolarite" },
+    { "id": "livret-famille", "libelle": "Livret de famille ou acte de naissance de l'enfant", "detail": "Copie. Acte de naissance gratuit en ligne sur service-public.gouv.fr.", "coffre": "scolarite" },
+    { "id": "assurance", "libelle": "Attestation d'assurance responsabilité civile", "detail": "Souvent exigée pour la cantine et le périscolaire. Demandez-la à votre assureur habitation ou scolaire.", "coffre": "scolarite" },
+    { "id": "carnet-vaccins", "libelle": "Pages vaccins du carnet de santé", "detail": "Copie, souvent demandée pour l'accueil périscolaire.", "coffre": "sante" },
+    { "id": "pai", "libelle": "Projet d'accueil individualisé (PAI) et certificat médical, si besoin", "detail": "À préparer avec votre médecin et la direction de l'école avant le premier repas.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Jugement ou convention de résidence, si vous êtes séparés", "detail": "Copie. Utile pour la facturation en résidence alternée et la liste des personnes autorisées à récupérer l'enfant.", "coffre": "jaf" },
+    { "id": "rib", "libelle": "RIB", "detail": "Si vous choisissez le prélèvement automatique.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Renseignez-vous sur les modalités", "detail": "En primaire, auprès du service scolaire ou périscolaire de la mairie. Au collège et au lycée, auprès du secrétariat ou de l'intendance. Demandez les dates d'inscription, la liste des pièces et la grille de tarifs." },
+    { "titre": "Téléchargez vos attestations", "detail": "Attestation de quotient familial sur caf.fr, avis d'impôt sur impots.gouv.fr, attestation d'assurance auprès de votre assureur." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Attestation de quotient familial, justificatif de domicile, pièce d'identité, livret de famille, attestation d'assurance, pages vaccins, PAI si besoin, jugement en cas de séparation, RIB pour le prélèvement. Notez les jours de présence de l'enfant." },
+    { "titre": "Inscrivez votre enfant", "detail": "Au guichet ou sur le portail famille de la commune s'il existe. Précisez les jours de cantine et de garderie." },
+    { "titre": "Demandez une aide si nécessaire", "detail": "En primaire, renseignez-vous en mairie ou auprès de l'assistante sociale scolaire. Au collège et au lycée, adressez-vous à l'assistante sociale ou au secrétariat pour le fonds social cantine, et consultez le site de votre département ou de votre région." },
+    { "titre": "Enregistrez les factures", "detail": "Notez chaque paiement dans votre Journal pour garder l'historique des frais de l'enfant et faciliter le partage avec l'autre parent." }
+  ],
+  "ou": [
+    { "nom": "Mairie de votre commune", "detail": "Cantine et périscolaire en maternelle et élémentaire. Coordonnées dans l'annuaire de l'administration.", "url": "https://lannuaire.service-public.gouv.fr" },
+    { "nom": "Secrétariat ou intendance du collège ou du lycée", "detail": "Demi-pension et fonds social cantine." },
+    { "nom": "Caf de votre département", "detail": "Attestation de quotient familial dans votre espace en ligne.", "url": "https://www.caf.fr" },
+    { "nom": "Conseil départemental (collèges) ou conseil régional (lycées)", "detail": "Tarifs de restauration et aides éventuelles, sur le site de votre collectivité." }
+  ],
+  "liens": [
+    { "titre": "Cantine scolaire à l'école primaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570" },
+    { "titre": "Aide financière pour la cantine (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294" },
+    { "titre": "Cantine au collège et au lycée (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Cantine scolaire", "categorie": "cantine" },
+    { "type": "depense", "titre": "Garderie ou accueil périscolaire", "categorie": "ecole" },
+    { "type": "coffre", "titre": "Attestation de quotient familial Caf", "categorie": "finances" },
+    { "type": "coffre", "titre": "Fiche d'inscription cantine et périscolaire", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Projet d'accueil individualisé (PAI)", "categorie": "sante" },
+    { "type": "rappel", "titre": "Inscription cantine et périscolaire avant la rentrée", "evenement": "ecole" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : tarifs, pièces demandées, portail famille et organisation du périscolaire, propres à chaque commune.",
+    "À confirmer en mairie : certaines communes appliquent un tarif social de cantine (repas à 1 € ou moins pour les familles aux revenus modestes) avec une aide de l'État ; ce n'est pas le cas partout.",
+    "À confirmer localement : tarifs de demi-pension et aides du département ou de la région, et calendrier du fonds social, à demander à l'établissement.",
+    "À confirmer localement : facturation en résidence alternée (une facture par parent ou non), selon la commune."
+  ],
+  "motsCles": ["cantine", "garderie", "périscolaire", "demi-pension", "repas", "PAI", "quotient familial"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F24570 Cantine scolaire à l'école primaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F19294 Aide financière pour la cantine", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F24569 Cantine au collège et au lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569", "verifieLe": "2026-10-29" },
+    { "titre": "Ministère des Solidarités, présentation de la tarification sociale des cantines (cantine à 1 €)", "url": "https://solidarites.gouv.fr/sites/solidarite/files/2024-02/Presentation-cantine-un-euro-janvier-2024.pdf" }
+  ]
+}

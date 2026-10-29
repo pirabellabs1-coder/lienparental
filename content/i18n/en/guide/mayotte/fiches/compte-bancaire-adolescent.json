@@ -1,0 +1,63 @@
+{
+  "slug": "compte-bancaire-adolescent",
+  "territoire": "mayotte",
+  "categorie": "argent",
+  "titre": "Opening a bank account for my teenager",
+  "resume": "At what age, with which card, the parents' consent (including separated parents) and the precise list of documents to bring to the bank so you don't make the trip for nothing.",
+  "aQuoiCaSert": "An account in your teenager's name lets them receive pocket money or wages from a summer job, and learn to manage a budget with a card suited to their age. A minor cannot open an account alone: their legal representatives (usually the parents) act on their behalf. The parents remain responsible for the funds and transactions of the minor child.",
+  "quiEstConcerne": [
+    "Parents of a teenager aged 12 to 17 who want to open an account or a savings account with a card for them.",
+    "Separated parents who need to agree on opening the child's account or on the transactions made on it."
+  ],
+  "aSavoir": [
+    "From birth, the parents can open an account in the child's name.",
+    "From age 12: with their parents' consent, the young person can request a Livret jeune (a youth savings account). Withdrawals can be limited and a parent's signature is required.",
+    "From age 16: the young person can open an account at most banks with their parents' permission, and get a bank card with that permission.",
+    "The bank may offer a systematic authorization card, which checks the balance at each payment: it limits the risk of an overdraft.",
+    "Parents may only use the child's money for expenses that directly concern the child. From age 16, they must account to the child for this use.",
+    "Separated parents who share parental authority: an act that changes the account, such as a large withdrawal, requires both parents' agreement (Cour de cassation, France's highest court, June 12, 2025).",
+    "If you hold parental authority alone by court decision, bring that decision."
+  ],
+  "documents": [
+    { "id": "identite-ado", "libelle": "Teenager's ID document (valid original)", "detail": "If it has expired or been lost, get a new one from the town hall (mairie) first.", "coffre": "finances" },
+    { "id": "identite-parent-1", "libelle": "First parent's ID document (original)", "coffre": "finances" },
+    { "id": "identite-parent-2", "libelle": "Second parent's ID document (original or copy depending on the bank)", "detail": "Ask the bank whether they need to come and sign in person.", "coffre": "finances" },
+    { "id": "filiation", "libelle": "Family record book (livret de famille) or the child's birth certificate showing parentage", "detail": "Proves you are the parents.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Recent proof of address", "detail": "If you are housed by someone: certificate of accommodation and your host's ID document.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Court decision or agreement on parental authority (copy)", "coffre": "jaf" },
+    { "id": "accord-autre-parent", "libelle": "Written, signed consent from the other parent", "detail": "If the other parent cannot come and the bank accepts it, with a copy of their ID document.", "coffre": "finances" },
+    { "id": "contrat", "libelle": "Account opening contract and fee terms", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Choose the right product for their age", "detail": "Livret jeune from age 12, an account with a card from age 16. Compare the fees." },
+    { "titre": "Talk it over with the other parent", "detail": "Agree on the product, the card and the limits." },
+    { "titre": "Book an appointment at your bank", "detail": "Ask for the exact list of documents and whether both parents must be present." },
+    { "titre": "Check before you go", "detail": "Original ID of the teenager and of each parent, family record book or birth certificate, proof of address, judgment if you are separated, written consent of the other parent if absent." },
+    { "titre": "Set up the card and limits", "detail": "A systematic authorization card if you want to avoid any overdraft." },
+    { "titre": "Store the contract in the Vault" }
+  ],
+  "ou": [
+    { "nom": "Your bank", "detail": "Offers and required documents vary from one bank to another." },
+    { "nom": "IEDOM (Institut d'émission des départements d'outre-mer, the overseas central bank institute), Mayotte branch", "detail": "If a bank refuses to open an account: right to an account (droit au compte).", "url": "https://www.iedom.fr/rubrique19", "telephone": "02 62 90 71 00" }
+  ],
+  "liens": [
+    { "titre": "Can a minor have a bank account? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035" },
+    { "titre": "A minor's account: consent of both parents (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Teenager's bank account contract", "categorie": "finances" },
+    { "type": "coffre", "titre": "Other parent's written consent for the account", "categorie": "finances" },
+    { "type": "calendrier", "titre": "Bank appointment: teenager's account", "evenement": "rdv" },
+    { "type": "depense", "titre": "Teenager's card or account fees", "categorie": "frais-administratifs" }
+  ],
+  "aConfirmer": [
+    "Each bank sets its own conditions: minimum age for the card, presence of both parents, how recent the proof of address must be.",
+    "To be confirmed locally: youth offers available at branches in Mayotte and the related fees."
+  ],
+  "motsCles": ["bank account", "teenager", "minor", "bank card", "pocket money", "livret jeune"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F21035 Can a minor have a bank account?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, news item A18386 A minor's account: consent of both parents", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" }
+  ]
+}

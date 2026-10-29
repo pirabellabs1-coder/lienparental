@@ -1,0 +1,65 @@
+{
+  "slug": "declarer-separation-caf",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Declarar a separação à CSSM",
+  "resume": "Informar a separação em «Mon Compte» no caf.fr para que a CSSM recalcule os seus benefícios só com a sua renda, e organizar o pagamento dos auxílios quando os filhos moram com os dois pais.",
+  "aQuoiCaSert": "Em Mayotte, os benefícios familiares são administrados pela CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte), na área «Mon Compte» (Minha conta) do site caf.fr. Após uma separação, os seus direitos (auxílios familiares, complément familial (complemento familiar), auxílio-moradia, CMG...) são recalculados sem a renda do ex-cônjuge. Declarar logo a mudança abre novos direitos e evita ter de devolver valores recebidos a mais.",
+  "quiEstConcerne": [
+    "Todo beneficiário da CSSM que se separa, seja casado, em PACS (união civil) ou vivendo junto sem casamento nem PACS.",
+    "O ex-cônjuge que não era o beneficiário e precisa abrir o próprio cadastro para receber benefícios.",
+    "Os pais em residência alternada, que precisam entrar em acordo sobre o beneficiário."
+  ],
+  "aSavoir": [
+    "O acesso a «Mon Compte» é feito com os 13 primeiros dígitos do seu número de seguridade social. É por essa área que se atualiza a situação junto à CSSM.",
+    "O complément de libre choix du mode de garde (CMG, auxílio para cuidados infantis) pode ser recebido pelos dois pais em guarda alternada desde dezembro de 2025 (CSSM).",
+    "A allocation de soutien familial (ASF, auxílio de apoio familiar) e a intermediação das pensões pela ARIPA (Agence de recouvrement et d'intermédiation des pensions alimentaires, agência de cobrança de pensões) ainda não existem em Mayotte (previstas para 2035). Para uma pensão não paga, veja a ficha «Pensão alimentícia não paga em Mayotte: os recursos».",
+    "Vítima de violência conjugal: a CSSM paga um auxílio de emergência mediante comprovante de menos de 12 meses (queixa, comunicação ao promotor ou medida protetiva)."
+  ],
+  "documents": [
+    { "id": "identifiants", "libelle": "Número de seguridade social e senha de «Mon Compte»", "detail": "Se você não era o beneficiário, crie a sua própria conta.", "coffre": "finances" },
+    { "id": "date-separation", "libelle": "Data exata da separação e novo endereço", "detail": "A data da saída efetiva da moradia comum.", "coffre": "courriers" },
+    { "id": "rib", "libelle": "RIB (dados bancários) só em seu nome", "detail": "Se os benefícios eram pagos numa conta conjunta.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Sua renda recente", "detail": "Contracheques ou valores de benefícios.", "coffre": "finances" },
+    { "id": "bail", "libelle": "Contrato de aluguel ou declaração de aluguel da nova moradia", "detail": "Para pedir o auxílio-moradia.", "coffre": "courriers" },
+    { "id": "jugement", "libelle": "Sentença ou acordo que fixa a residência da criança (cópia), se houver", "detail": "Peça uma cópia ao cartório do tribunal (greffe), ao advogado ou ao notário se não a tiver mais.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Entre em «Mon Compte» no caf.fr", "detail": "Seção de declaração de mudança de situação. O ex-cônjuge que não é beneficiário cria o próprio cadastro." },
+    { "titre": "Informe a data da separação, o seu novo endereço e a residência dos filhos" },
+    { "titre": "Residência alternada: declare-a e entrem em acordo sobre o beneficiário", "detail": "Pergunte à CSSM o procedimento para dividir os auxílios familiares." },
+    { "titre": "Confira antes de enviar a declaração", "detail": "Data exata da separação, endereço de cada um atualizado, RIB só em seu nome, cópia da sentença ou do acordo anexada, se houver. Guarde o comprovante de envio." },
+    { "titre": "Faça os pedidos que se aplicam a você", "detail": "Auxílio-moradia para a nova moradia, CMG se alguém cuida do seu filho." },
+    { "titre": "Avise também os outros órgãos", "detail": "Seguro de saúde (vínculo dos filhos), escola, imposto de renda (case T se você cria os filhos sozinho)." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "On-line em «Mon Compte» no caf.fr, ou atendimento com hora marcada no Centre Kinga, Kawéni, Mamoudzou.", "url": "https://www.cssm.fr/page/famille", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Ajuda gratuita com procedimentos on-line.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Família (CSSM)", "url": "https://www.cssm.fr/page/famille" },
+    { "titre": "Benefícios familiares em Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Auxílio às vítimas de violência conjugal (CSSM)", "url": "https://www.cssm.fr/page/aide-aux-victimes-de-violences-conjugales" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Declarar a separação à CSSM", "evenement": "autre" },
+    { "type": "coffre", "titre": "Comprovante da declaração de mudança de situação", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Sentença ou acordo sobre a residência da criança", "categorie": "jaf" }
+  ],
+  "datesLimites": [
+    { "libelle": "Logo após a separação", "detail": "Declare sem esperar, para evitar ter de devolver valores recebidos a mais." }
+  ],
+  "aConfirmer": [
+    "A confirmar com a CSSM: o procedimento exato em residência alternada (formulário cerfa n° 14000 ou outro), a possível divisão dos auxílios familiares e a duração mínima da escolha do beneficiário.",
+    "A confirmar com a CSSM: o comprovante de separação aceito se vocês ainda morarem sob o mesmo teto.",
+    "A confirmar: horários do atendimento e dos plantões, a verificar em cssm.fr antes de ir até lá."
+  ],
+  "motsCles": ["separação", "CSSM", "mudança de situação", "residência alternada", "Mon Compte", "auxílios"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Família", "url": "https://www.cssm.fr/page/famille", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Benefícios familiares", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Auxílio às vítimas de violência conjugal", "url": "https://www.cssm.fr/page/aide-aux-victimes-de-violences-conjugales", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, relatório ao Presidente sobre a ordonnance n° 2026-647 de 22 de julho de 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" }
+  ]
+}

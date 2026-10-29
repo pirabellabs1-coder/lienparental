@@ -1,0 +1,185 @@
+{
+  "slug": "rattacher-enfant-carte-vitale",
+  "territoire": "france",
+  "categorie": "sante",
+  "titre": "Adding my child to my health insurance, getting their certificate of entitlement and carte Vitale",
+  "resume": "Add the child to both parents' carte Vitale (health insurance card), download their certificate of entitlement on ameli (the French health insurance website), and request their own carte Vitale from age 12 or 16.",
+  "aQuoiCaSert": "Before age 16, a child is a dependent (ayant droit) of one or both parents. If the child is on both cartes Vitale, the parent who takes them to the doctor or the pharmacy is reimbursed directly: this is valuable when parents are separated. The certificate of entitlement (attestation de droits) proves the child is covered; the daycare, school, holiday club or hospital often ask for it. Finally, the child can have their own carte Vitale: from 12 to 15 at a parent's request, and from age 16.",
+  "quiEstConcerne": [
+    "Parents of a newborn, or of a child covered under only one of the two parents.",
+    "Separated parents who each want to be reimbursed for the child's healthcare.",
+    "Parents who are asked for a certificate of entitlement (daycare, school, holiday camp, hospital).",
+    "Young people aged 12 to 18 who need their own carte Vitale."
+  ],
+  "aSavoir": [
+    "The child is automatically added to the card of the parent who registered the birth. Adding the child to both parents is then possible, unless one of the parents is a cross-border worker.",
+    "If the child is on both cards, the reimbursement goes to the parent who presented their carte Vitale. If one of the parents is no longer insured, reimbursements go to the other.",
+    "Adding the child to the other parent is requested from the ameli account of the parent whose card the child is already on, or by post with cerfa n° 14445.",
+    "Child's carte Vitale: from 12 to 15, at a parent's request; from 16, with the consent of a parent who exercises parental authority. It is free. At 16, the Assurance Maladie (French public health insurance) sends a letter and the card usually arrives within 3 weeks.",
+    "Enclose a RIB (bank details slip) in the young person's name if you want them to be reimbursed directly. A parent can block the carte Vitale app of their minor child.",
+    "From 16 to 18, the young person can remain their parents' dependent or become an independent beneficiary (ayant droit autonome). The link ends if they work, including as an apprentice."
+  ],
+  "documents": [
+    {
+      "id": "livret-famille",
+      "libelle": "Copy of the up-to-date family record book (livret de famille) or an extract of the child's birth certificate",
+      "detail": "Only one of these is needed to add the child. Birth certificate free online on service-public.gouv.fr or from the town hall (mairie) of the place of birth.",
+      "coffre": "sante"
+    },
+    {
+      "id": "cerfa-14445",
+      "libelle": "Form cerfa n° 14445, if you add the child by post",
+      "detail": "Completed and signed, sent to your health insurance fund (CPAM, Caisse primaire d'assurance maladie).",
+      "coffre": "sante"
+    },
+    {
+      "id": "tutelle",
+      "libelle": "Guardianship judgment or proof of taking in the child, if you are not the parent",
+      "detail": "Copy. For a guardian or a person who has taken in the child.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "photo-enfant",
+      "libelle": "Recent ID photo of the child, for their carte Vitale",
+      "detail": "Online, a scanned photo is enough.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-enfant",
+      "libelle": "Child's ID, for their carte Vitale",
+      "detail": "Copy or scan of their ID card or passport.",
+      "coffre": "sante"
+    },
+    {
+      "id": "rib-jeune",
+      "libelle": "RIB in the young person's name",
+      "detail": "Optional, so they are reimbursed into their own account.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-droits",
+      "libelle": "Certificate of entitlement listing the child",
+      "detail": "Free to download on ameli. Get a new one if your situation changes.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check which carte Vitale the child is on",
+      "detail": "In your ameli account, or at a pharmacy."
+    },
+    {
+      "titre": "Add the child to the other parent's card",
+      "detail": "From the ameli account of the parent who already has the child: section \"Mes démarches\", \"Inscrire votre enfant sur la carte Vitale de l'autre parent\". Or by post to the CPAM, cerfa n° 14445 with a copy of the family record book or the birth certificate."
+    },
+    {
+      "titre": "Download the certificate of entitlement",
+      "detail": "In your ameli account (website or app), by selecting the child. If the child does not appear, they are not yet attached to your file."
+    },
+    {
+      "titre": "Request the child's carte Vitale if needed",
+      "detail": "From the ameli account of the parent the child is attached to, with the child's scanned photo and ID, or by a form sent to the fund."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "If you go to the CPAM office: your carte Vitale, your ID, the family record book or the child's birth certificate, the child's photo and ID for a carte Vitale, and the guardianship judgment if applicable."
+    },
+    {
+      "titre": "Update your carte Vitale",
+      "detail": "At a pharmacy, once you have received the notification confirming the child has been added."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "ameli account (website and app)",
+      "detail": "Adding a child, certificate of entitlement, ordering a carte Vitale.",
+      "url": "https://www.ameli.fr"
+    },
+    {
+      "nom": "CPAM of your département",
+      "detail": "Caisse primaire d'assurance maladie (local health insurance fund). Offices and contacts on ameli.fr, addresses and contacts section.",
+      "url": "https://www.ameli.fr"
+    },
+    {
+      "nom": "Pharmacy",
+      "detail": "Updating the carte Vitale."
+    },
+    {
+      "nom": "France Services",
+      "detail": "Free help to create your ameli account and complete procedures online. Addresses in the government directory.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Adding a minor as a dependent (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620"
+    },
+    {
+      "titre": "Carte Vitale for minors (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693"
+    },
+    {
+      "titre": "Getting a certificate of entitlement (ameli.fr)",
+      "url": "https://www.ameli.fr/assure/adresses-et-contacts/l-obtention-d-un-document/obtenir-une-attestation/obtenir-une-attestation-de-droits"
+    },
+    {
+      "titre": "Requesting your carte Vitale (ameli.fr)",
+      "url": "https://www.ameli.fr/assure/remboursements/etre-bien-rembourse/carte-vitale/carte-vitale-application/demander-sa-carte-vitale-conditions-et-demarches"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "The child's Assurance Maladie (French public health insurance) certificate of entitlement",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Copy of the child's carte Vitale",
+      "categorie": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Update the carte Vitale after adding the child",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Request the child's carte Vitale when they turn 16",
+      "evenement": "sante"
+    }
+  ],
+  "aConfirmer": [
+    "The ameli.fr pages could not be consulted during the check: the exact menu labels of the ameli account and how to get the certificate without an account (phone, kiosk) should be checked on ameli.fr.",
+    "The service-public news item on adding the child to both cartes Vitale dates from January 2025: the online process may have changed.",
+    "To be confirmed locally: addresses and opening hours of your CPAM offices, on ameli.fr, before you go."
+  ],
+  "motsCles": [
+    "carte Vitale",
+    "ameli",
+    "dependent",
+    "certificate of entitlement",
+    "reimbursement",
+    "health insurance",
+    "CPAM"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F16620 Adding a minor as a dependent",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, news A17693 Carte Vitale for minors (September 10, 2026)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, news A18009 Adding your child to both cartes Vitale",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18009",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

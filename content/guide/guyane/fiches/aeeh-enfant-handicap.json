@@ -63,11 +63,11 @@
     "À confirmer localement : les délais réels de traitement en Guyane peuvent dépasser le délai légal."
   ],
   "motsCles": ["AEEH", "MDPH", "handicap", "CDAPH", "certificat médical", "allocation"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F14809 Allocation d'éducation de l'enfant handicapé", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-06-01" },
-    { "titre": "Service-public.gouv.fr, R19993 Formulaire de demande à la MDPH", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-07-13" },
-    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
+    { "titre": "Service-public.gouv.fr, F14809 Allocation d'éducation de l'enfant handicapé", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R19993 Formulaire de demande à la MDPH", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
     { "titre": "Mon Parcours Handicap, annuaire", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
   ]
 }

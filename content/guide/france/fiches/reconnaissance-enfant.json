@@ -1,0 +1,64 @@
+{
+  "slug": "reconnaissance-enfant",
+  "territoire": "france",
+  "categorie": "naissance",
+  "titre": "Reconnaître mon enfant quand on n'est pas mariés",
+  "resume": "Avant ou après la naissance, gratuitement dans n'importe quelle mairie : la reconnaissance établit la filiation du père. Les deux pièces à apporter et ses effets sur l'autorité parentale.",
+  "aQuoiCaSert": "Quand les parents ne sont pas mariés, la filiation du père n'est pas automatique : il doit reconnaître l'enfant. La mère, elle, n'a rien à faire si son nom figure dans l'acte de naissance. La reconnaissance peut se faire avant la naissance (reconnaissance anticipée), lors de la déclaration de naissance ou plus tard. Faite avant le premier anniversaire de l'enfant, elle permet au père d'exercer l'autorité parentale avec la mère.",
+  "quiEstConcerne": [
+    "Les parents non mariés, en particulier le père.",
+    "La mère qui souhaite faire une reconnaissance anticipée (facultative).",
+    "Les couples de femmes : une procédure distincte, la reconnaissance conjointe anticipée, est nécessaire."
+  ],
+  "aSavoir": [
+    "La reconnaissance est un acte personnel : l'accord de l'autre parent n'est pas nécessaire. Elle se fait gratuitement dans n'importe quelle mairie, ou chez un notaire (75,46 € hors taxes selon service-public.gouv.fr).",
+    "Aucun certificat de grossesse n'est demandé pour une reconnaissance anticipée. L'officier d'état civil rédige l'acte, que vous signez.",
+    "Reconnaissance après la naissance : l'autre parent est informé par lettre recommandée et la reconnaissance est mentionnée sur l'acte de naissance.",
+    "Le père qui reconnaît l'enfant après son premier anniversaire n'exerce pas l'autorité parentale. Il peut l'obtenir par une déclaration conjointe avec la mère (cerfa n° 12785, en 3 exemplaires, au greffe du tribunal judiciaire du domicile de l'enfant) ou, sans accord, en saisissant le juge aux affaires familiales.",
+    "Le mariage des parents après la naissance ne donne pas automatiquement l'autorité parentale au père. La reconnaissance ne change pas non plus le nom de l'enfant : une déclaration de choix de nom est possible lors de la reconnaissance par le second parent ou pendant toute la minorité.",
+    "Si l'enfant a déjà une filiation établie avec un autre homme, elle doit d'abord être contestée en justice."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité du parent qui reconnaît", "detail": "Original : carte d'identité, passeport ou titre de séjour.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Justificatif de domicile de moins de 3 mois à votre nom", "detail": "Original. Facture, quittance de loyer ou attestation. Un justificatif pour chacun si vous venez à deux.", "coffre": "jaf" },
+    { "id": "acte-naissance-enfant", "libelle": "Acte de naissance de l'enfant ou livret de famille, si l'enfant est déjà né", "detail": "Conseillé. Acte de naissance gratuit en ligne sur service-public.gouv.fr ou à la mairie du lieu de naissance.", "coffre": "jaf" },
+    { "id": "acte-reconnaissance", "libelle": "Copie de l'acte de reconnaissance", "detail": "À présenter lors de la déclaration de naissance si la reconnaissance est anticipée.", "coffre": "jaf" },
+    { "id": "declaration-conjointe", "libelle": "Déclaration conjointe d'exercice de l'autorité parentale (cerfa n° 12785), si l'enfant a plus d'un an", "detail": "En 3 exemplaires, signée par les deux parents. L'exemplaire visé par le greffe est l'unique original : gardez-le précieusement.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Choisissez une mairie", "detail": "N'importe laquelle. Appelez le service de l'état civil pour savoir si un rendez-vous est nécessaire." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pièce d'identité originale, justificatif de domicile de moins de 3 mois à votre nom (un par parent si vous venez à deux), acte de naissance ou livret de famille si l'enfant est déjà né." },
+    { "titre": "Présentez-vous en mairie et signez l'acte", "detail": "Relisez l'orthographe des noms et prénoms avant de signer." },
+    { "titre": "Gardez la copie de l'acte", "detail": "En cas de reconnaissance anticipée, apportez-la lors de la déclaration de naissance." },
+    { "titre": "Si l'enfant a plus d'un an, faites la déclaration conjointe d'autorité parentale", "detail": "Avec l'accord de la mère : cerfa n° 12785 en 3 exemplaires, déposé ou envoyé en recommandé au greffe du tribunal judiciaire du domicile de l'enfant. Sans accord : demande au juge aux affaires familiales (cerfa n° 11530)." }
+  ],
+  "ou": [
+    { "nom": "N'importe quelle mairie, service de l'état civil", "detail": "Reconnaissance gratuite." },
+    { "nom": "Un notaire", "detail": "Reconnaissance payante. Reconnaissance conjointe anticipée pour un couple de femmes." },
+    { "nom": "Tribunal judiciaire du domicile de l'enfant, greffe", "detail": "Déclaration conjointe d'exercice de l'autorité parentale, si l'enfant a plus d'un an. Coordonnées dans l'annuaire de l'administration ou sur justice.fr.", "url": "https://lannuaire.service-public.gouv.fr" }
+  ],
+  "liens": [
+    { "titre": "Reconnaissance d'un enfant (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887" },
+    { "titre": "Enfant reconnu tardivement et autorité parentale (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942" },
+    { "titre": "Demander un acte de naissance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Acte de reconnaissance", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Déclaration conjointe d'autorité parentale visée par le greffe", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Rendez-vous en mairie : reconnaissance", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Reconnaître l'enfant avant son premier anniversaire", "evenement": "rdv" }
+  ],
+  "datesLimites": [
+    { "libelle": "Avant le premier anniversaire de l'enfant", "detail": "Pour que le père exerce l'autorité parentale sans démarche supplémentaire." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : prise de rendez-vous et horaires du service d'état civil de la mairie choisie.",
+    "À confirmer localement : tribunal judiciaire compétent selon la commune de résidence de l'enfant et adresse du greffe, dans l'annuaire officiel."
+  ],
+  "motsCles": ["reconnaissance", "filiation", "père", "non mariés", "autorité parentale", "reconnaissance anticipée"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F887 Reconnaissance d'un enfant (couple non marié)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F942 Enfant reconnu tardivement : conséquences sur l'autorité parentale", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2026-10-29" }
+  ]
+}

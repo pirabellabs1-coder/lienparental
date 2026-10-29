@@ -1,0 +1,66 @@
+{
+  "slug": "assurance-habitation-demenagement",
+  "territoire": "mayotte",
+  "categorie": "assurances",
+  "titre": "Assurance habitation quand on change de logement",
+  "resume": "Après une séparation : assurer le nouveau logement avant la remise des clés, prévenir l'assureur de l'ancien, résilier sans frais et vérifier que les enfants restent couverts.",
+  "aQuoiCaSert": "Quand on quitte le logement familial, il faut à la fois régler le sort de l'ancien contrat d'assurance habitation et assurer le nouveau logement. Le locataire doit être assuré au minimum pour les risques locatifs. C'est aussi le moment de vérifier la responsabilité civile, souvent incluse dans le contrat habitation, qui couvre les dommages causés par les enfants. À Mayotte, les baux non écrits sont fréquents : un bail écrit protège les deux parties.",
+  "quiEstConcerne": [
+    "Le parent qui déménage après une séparation, qu'il soit locataire ou propriétaire.",
+    "Le parent qui reste dans le logement et doit adapter le contrat.",
+    "Les deux parents, pour vérifier que les enfants sont couverts en responsabilité civile chez chacun."
+  ],
+  "aSavoir": [
+    "Locataire : l'assurance des risques locatifs (incendie, explosion, dégât des eaux) est obligatoire. Remettez l'attestation au propriétaire à la remise des clés, puis chaque année s'il la demande.",
+    "Déménagement : prévenez votre assureur avant de partir ou au plus tard dans les 15 jours après avoir quitté le logement, par lettre recommandée.",
+    "Résiliation pour déménagement : possible si le changement de logement modifie les risques assurés, au plus tard 3 mois après le départ. Le contrat prend fin 1 mois après réception par l'assureur, sans indemnité de résiliation.",
+    "Vous pouvez aussi transférer le contrat vers le nouveau logement si l'assureur l'accepte.",
+    "Les règles de la loi du 6 juillet 1989 sur les baux d'habitation, dont l'obligation d'assurance du locataire, ont été rendues applicables à Mayotte par une ordonnance de 2012, avec des adaptations."
+  ],
+  "documents": [
+    { "id": "contrat-actuel", "libelle": "Contrat d'assurance habitation actuel et numéro de contrat", "coffre": "finances" },
+    { "id": "bail-nouveau", "libelle": "Bail ou état des lieux d'entrée du nouveau logement", "detail": "Copie. L'assureur vous demandera l'adresse, la surface et le nombre de pièces.", "coffre": "finances" },
+    { "id": "attestation-nouveau", "libelle": "Attestation d'assurance du nouveau logement", "detail": "À remettre au propriétaire le jour de la remise des clés.", "coffre": "finances" },
+    { "id": "lettre-resiliation", "libelle": "Lettre de résiliation ou d'information à l'ancien assureur", "detail": "Indiquez la date de départ et le lien avec le déménagement.", "coffre": "courriers" },
+    { "id": "accuse-reception", "libelle": "Accusé de réception de l'assureur", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Assurez le nouveau logement avant la remise des clés", "detail": "Le propriétaire vous demandera l'attestation." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Attestation d'assurance, pièce d'identité, bail signé. Pour l'assureur : numéro de contrat, nouvelle adresse, surface, date d'entrée." },
+    { "titre": "Prévenez l'assureur de l'ancien logement", "detail": "Avant le départ ou dans les 15 jours qui suivent. Résiliez au plus tard 3 mois après le départ si vous le souhaitez." },
+    { "titre": "Contrat au nom des deux ex-conjoints", "detail": "Voyez avec l'assureur comment retirer un nom ou faire un nouveau contrat." },
+    { "titre": "Vérifiez la responsabilité civile des enfants", "detail": "Assurez-vous que les enfants restent couverts chez chaque parent et partagez les attestations." },
+    { "titre": "Conservez les preuves d'envoi", "detail": "Rangez la lettre et l'accusé de réception dans le coffre-fort." }
+  ],
+  "ou": [
+    { "nom": "Votre assureur habitation" },
+    { "nom": "ADIL de Mayotte", "detail": "Conseils juridiques gratuits sur les droits du locataire. Résidence Nyrora, quartier Hamaha, Mamoudzou.", "url": "https://www.anil.org/adil-976/", "telephone": "06 39 21 53 91" }
+  ],
+  "liens": [
+    { "titre": "Assurance habitation du locataire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300" },
+    { "titre": "Assurance habitation et déménagement (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827" },
+    { "titre": "ADIL de Mayotte (anil.org)", "url": "https://www.anil.org/adil-976/" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation d'assurance habitation du nouveau logement", "categorie": "finances" },
+    { "type": "coffre", "titre": "Lettre de résiliation de l'ancienne assurance", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Prévenir l'assureur de l'ancien logement (15 jours après le départ)", "evenement": "autre" },
+    { "type": "depense", "titre": "Assurance habitation", "categorie": "assurance" }
+  ],
+  "datesLimites": [
+    { "libelle": "15 jours après le départ pour prévenir l'assureur" },
+    { "libelle": "3 mois après le départ pour résilier au motif du déménagement" }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de l'ADIL de Mayotte : les adaptations prévues pour Mayotte par l'ordonnance n° 2012-576 en matière de bail et d'assurance du locataire.",
+    "Si le contrat est au nom des deux ex-conjoints, les modalités de modification sont à voir directement avec l'assureur."
+  ],
+  "motsCles": ["assurance habitation", "déménagement", "locataire", "résiliation", "responsabilité civile", "bail"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F31300 Assurance habitation du locataire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10827 Assurance habitation et déménagement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2026-10-29" },
+    { "titre": "Sénat, réponse ministérielle du 16 mars 2017 (loi de 1989 applicable à Mayotte)", "url": "https://www.senat.fr/questions/base/2016/qSEQ160521560.html", "verifieLe": "2026-10-29" },
+    { "titre": "ANIL, ADIL de Mayotte", "url": "https://www.anil.org/adil-976/", "verifieLe": "2026-10-29" }
+  ]
+}

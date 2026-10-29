@@ -52,10 +52,10 @@
     "Le modèle d'attestation d'hébergement et la façon de déposer les pièces sont précisés dans l'application : vérifiez au moment de l'inscription."
   ],
   "motsCles": ["pass Culture", "culture", "ado", "livres", "cinéma", "musique", "17 ans", "18 ans"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2025-12-18" },
-    { "titre": "Service-public.gouv.fr, actualité A18775 Pass Culture : changements en 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775" },
-    { "titre": "pass Culture, Réforme du pass Culture", "url": "https://pass.culture.fr/reforme-du-pass-culture" }
+    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A18775 Pass Culture : changements en 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775", "verifieLe": "2026-10-29" },
+    { "titre": "pass Culture, Réforme du pass Culture", "url": "https://pass.culture.fr/reforme-du-pass-culture", "verifieLe": "2026-10-29" }
   ]
 }

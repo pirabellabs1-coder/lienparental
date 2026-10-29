@@ -1,0 +1,65 @@
+{
+  "slug": "college-lycee-bourses",
+  "territoire": "mayotte",
+  "categorie": "ecole",
+  "titre": "Applying for a middle school or high school grant",
+  "resume": "Automatic assessment at enrollment or an application before October 15: income limits, amounts, the tax notice to provide and the rules when parents are separated or have shared residence.",
+  "aQuoiCaSert": "The bourse de collège (middle school grant) and the bourse de lycée (high school grant) help low-income families pay school costs. They are paid every term. For the 2026-2027 school year, what counts is the reference tax income (revenu fiscal de référence) on the 2026 tax notice for 2025 income. Most of the time you apply by agreeing to automatic assessment when you enroll your child.",
+  "quiEstConcerne": [
+    "Families of a middle or high school student attending a public school, a state-contracted private school (privé sous contrat) or the Cned (national distance-learning center) in a full class.",
+    "Parents of a child in CM2 (last year of primary school) moving up to 6e (first year of collège), or in 3e moving up to high school.",
+    "Separated parents: only one parent can apply."
+  ],
+  "aSavoir": [
+    "Middle school grant 2026-2027: €40, €112 or €175 per term depending on income. 2025 income limits: €18,488 for 1 dependent child, €22,754 for 2, €27,020 for 3, €31,286 for 4, €35,553 for 5.",
+    "High school grant 2026-2027: 6 levels (échelons), from €168 to €357 per term. The official simulator tells you your level.",
+    "Married or civil-partnership (PACS) couple: one joint tax notice. Unmarried couple living together: each partner's tax notice. Single parent living alone: only your tax notice.",
+    "Shared residence (middle school grant): the parents choose which of them applies. If both submit an application, both are rejected.",
+    "Agreeing to automatic assessment at enrollment in a public school counts as an application for the child's whole time in middle and high school. Without this agreement, you must apply again every year.",
+    "Paid in 3 installments. For a child who eats at the canteen (demi-pensionnaire) or boards (interne), canteen or boarding fees are deducted first."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "2026 tax notice on 2025 income", "detail": "Copy of every page. Both notices for unmarried couples. No notice? File your tax return or ask the school's social fund (fonds social).", "coffre": "finances" },
+    { "id": "rib", "libelle": "Bank details (RIB) in the name of the applying parent", "detail": "Required in private schools or without automatic assessment.", "coffre": "finances" },
+    { "id": "formulaire-bourse", "libelle": "Paper grant application form, if you do not use EduConnect", "detail": "Available from the school office.", "coffre": "scolarite" },
+    { "id": "jugement", "libelle": "Judgment or agreement setting the child's residence, if you are separated", "detail": "Copy.", "coffre": "jaf" },
+    { "id": "attestation-cssm", "libelle": "Certificate from the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) listing dependent children", "detail": "May be requested to prove the number of children.", "coffre": "finances" },
+    { "id": "notification", "libelle": "Notice granting or refusing the grant", "detail": "Keep it in case you appeal.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Estimate your entitlement with the simulator", "detail": "Can be reached from the service-public.gouv.fr pages, with your 2026 tax notice." },
+    { "titre": "At enrollment, agree to automatic assessment", "detail": "Online with EduConnect or on the paper file, in public schools." },
+    { "titre": "Otherwise, apply between September 1 and October 15", "detail": "Online on Scolarité services with EduConnect, or on a paper form at the school office." },
+    { "titre": "Check before you go", "detail": "Full 2026 tax notice, RIB, signed form, residence judgment if you are separated. With shared residence, agree on who applies." },
+    { "titre": "Keep the notice", "detail": "If refused in middle school, you can appeal within 2 months. In high school, 15 full days (jours francs) after the notice." }
+  ],
+  "ou": [
+    { "nom": "Middle or high school office (secrétariat)", "detail": "Paper grant file and social fund." },
+    { "nom": "Scolarité services (EduConnect)", "detail": "Online grant application.", "url": "https://educonnect.education.gouv.fr" },
+    { "nom": "Rectorat de Mayotte (regional education authority)", "detail": "Grant decisions and appeals.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "telephone": "02 69 61 10 24" }
+  ],
+  "liens": [
+    { "titre": "Middle school grant (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984" },
+    { "titre": "High school grant (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Grant application: deadline October 15", "evenement": "ecole" },
+    { "type": "rappel", "titre": "Agree to automatic grant assessment at enrollment", "evenement": "ecole" },
+    { "type": "coffre", "titre": "Tax notice used for the grant", "categorie": "finances" },
+    { "type": "coffre", "titre": "Grant notice", "categorie": "scolarite" }
+  ],
+  "datesLimites": [
+    { "libelle": "Grant without automatic assessment: September 1 to October 15, 2026" }
+  ],
+  "aConfirmer": [
+    "The national guidance does not mention Mayotte: whether the same amounts, income limits and dates apply should be confirmed with the school or the Rectorat de Mayotte.",
+    "To be confirmed locally: the shared-residence rule for the high school grant, as the official guidance only details it for middle school."
+  ],
+  "motsCles": ["grant", "middle school", "high school", "6e", "EduConnect", "tax notice", "shared residence"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F984 Middle school grant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F616 High school grant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public (public services directory), Rectorat de Mayotte", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "verifieLe": "2026-10-29" }
+  ]
+}

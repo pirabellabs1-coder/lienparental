@@ -10,9 +10,9 @@
     "Parents with shared residence, who must declare both addresses and choose how to split family benefits."
   ],
   "aSavoir": [
-    "The free online service \"Je change de coordonnées\" (\"I am changing my contact details\") on service-public.gouv.fr, the official French government website, sends your new address in a single step to more than 30 national bodies (tax office, Assurance Maladie, France Travail, pension funds, some energy suppliers) and to more than 4,500 connected town halls (mairies). It does not update the electoral rolls, your bank or your insurance.",
+    "The free online service \"Je change de coordonnées\" (\"I am changing my contact details\") on service-public.gouv.fr, the official French government website, sends your new address in a single step to more than 30 national bodies (tax office, Assurance Maladie, France Travail, pension funds, some energy suppliers) and to more than 4,500 connected town halls (mairies). It has no effect on your registration on the electoral rolls; notify your bank and your insurer yourself.",
     "Caf (Caisse d'allocations familiales, the family benefits office): report the separation in your online account under \"Déclaration de situation\", and the move with the \"Déclaration de changement d'adresse\" service. For housing benefits, make a new application as soon as you move in. If you forgot in good faith, the \"droit à l'erreur\" (right to make a mistake) applies if you correct it quickly.",
-    "Shared residence and the Caf: fill in form cerfa n° 14000. Parents can name a single beneficiary or split the family allowances; if they disagree, each parent automatically receives a share. Only family allowances and the complément de libre choix du mode de garde (CMG, childcare allowance) can be split; other benefits go to one parent only. The choice can be changed after one year.",
+    "Shared residence and the Caf: fill in form cerfa n° 14000. Parents can name a single beneficiary or split the family allowances; if they disagree, each parent automatically receives a share. Only family allowances can be split; other benefits go to one parent only. Since December 1, 2025, however, each parent can receive the complément de libre choix du mode de garde (CMG, childcare allowance) according to their own situation (the amount is not split). The choice can be changed after one year.",
     "Assurance Maladie (French public health insurance): change your address in your ameli online account, under \"Mes démarches\", by phone at 3646, or by mail with a front-and-back copy of your ID.",
     "Tax office: report your address in your personal account on impots.gouv.fr, then state the move and its date in your income tax return.",
     "School: you must inform the school of any change in family situation or address, and of any decision by the family court judge (juge aux affaires familiales, JAF) concerning the child. The school gives the same information to each parent, in person or at the addresses provided at the start of the year.",
@@ -71,15 +71,15 @@
     "To be confirmed locally: whether your town hall is connected to the \"Je change de coordonnées\" online service."
   ],
   "motsCles": ["change of address", "moving", "separation", "shared residence", "Caf", "ameli", "school", "taxes", "cerfa 14000"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
     { "titre": "Service-public.gouv.fr, news item A18901 Je change de coordonnées (May 6, 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901" },
-    { "titre": "Service-public.gouv.fr, F827 Reporting a change of situation to the Caf", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F21248 Family allowances with shared residence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F737 Social security: change in personal situation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F383 Income tax: change of address", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383", "verifieLe": "2026-04-15" },
-    { "titre": "Service-public.gouv.fr, F11389 Can a separated parent move freely?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2025-05-28" },
-    { "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "Service-public.gouv.fr, F1391 Nursery and primary school: informing parents", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2025-07-30" }
+    { "titre": "Service-public.gouv.fr, F827 Reporting a change of situation to the Caf", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Family allowances with shared residence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F737 Social security: change in personal situation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F383 Income tax: change of address", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11389 Can a separated parent move freely?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1391 Nursery and primary school: informing parents", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2026-10-29" }
   ]
 }

@@ -1,0 +1,161 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "martinique",
+  "categorie": "sante",
+  "titre": "Vaccinations obligatoires et suivi en PMI",
+  "resume": "Les vaccins exigés pour la crèche, l'école et le centre de loisirs en Martinique, le suivi gratuit des moins de 6 ans en PMI, et la fièvre jaune si vous partez en Guyane.",
+  "aQuoiCaSert": "Les vaccinations obligatoires sont exigées pour entrer en crèche, à l'école, en garderie ou en colonie : sans justificatif, l'inscription peut être refusée ou seulement provisoire. Le justificatif, c'est le carnet de santé rempli par le médecin. En Martinique, la liste des vaccins obligatoires est la même qu'en métropole. La protection maternelle et infantile (PMI), service de la Collectivité territoriale de Martinique, assure gratuitement des consultations pour les femmes enceintes et les enfants de moins de 6 ans, vaccinations comprises.",
+  "quiEstConcerne": [
+    "Tous les parents d'enfants mineurs, en particulier avant une entrée en crèche, à l'école ou en centre de loisirs.",
+    "Les familles qui partent en Guyane avec un enfant de 12 mois ou plus : la fièvre jaune y est obligatoire."
+  ],
+  "aSavoir": [
+    "Enfant né avant 2018 : diphtérie, tétanos et poliomyélite (DTP) obligatoires pour l'école.",
+    "Enfant né entre le 1er janvier 2018 et le 31 décembre 2022 : 11 vaccins obligatoires (diphtérie, tétanos, poliomyélite, coqueluche, Haemophilus influenzae b, hépatite B, pneumocoque, méningocoque C, rougeole, oreillons, rubéole).",
+    "Enfant né à partir de 2023 : même liste, avec les méningocoques A, B, C, W et Y à la place du seul méningocoque C.",
+    "Fièvre jaune : elle n'est pas obligatoire en Martinique. Elle l'est en Guyane, pour les résidents et toute personne qui y séjourne, à partir de 1 an : parlez-en à votre médecin avant un séjour.",
+    "Un enfant pas à jour peut être admis provisoirement : vous avez alors 3 mois pour régulariser, sinon il peut être exclu. Si l'enfant reste plus d'un an, le justificatif est demandé chaque année.",
+    "Avant 6 ans, l'enfant bénéficie de 16 des 20 examens de santé obligatoires (prévus jusqu'à 16 ans), chez le médecin ou en PMI. Ils sont pris en charge à 100 % sans avance de frais, hors dépassements d'honoraires.",
+    "Parents séparés : le parent qui emmène l'enfant se faire vacciner a intérêt à informer l'autre et à lui transmettre une copie des pages vaccins, pour que chacun dispose du justificatif."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "Carnet de santé de l'enfant",
+      "detail": "Original à apporter à chaque rendez-vous. C'est le justificatif des vaccinations : gardez une photocopie ou une photo des pages vaccins. Perdu ? Renseignez-vous auprès de la PMI ou de votre médecin.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Carte Vitale du parent ou attestation de droits de l'enfant",
+      "detail": "Attestation téléchargeable gratuitement sur votre compte ameli.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Pièce d'identité du parent ou de l'adulte qui accompagne",
+      "detail": "Original. Si un tiers accompagne l'enfant, prévoyez une autorisation écrite d'un parent.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Certificat médical de contre-indication, le cas échéant",
+      "detail": "Délivré par le médecin. À présenter à la place du justificatif de vaccin.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Vérifiez le carnet de santé",
+      "detail": "Comparez avec la liste des vaccins obligatoires selon l'année de naissance de votre enfant."
+    },
+    {
+      "titre": "Prenez rendez-vous",
+      "detail": "Chez votre médecin traitant ou pédiatre, ou dans un centre de PMI de la Collectivité territoriale de Martinique pour les moins de 6 ans. Appelez avant : horaires et jours de consultation varient selon les centres."
+    },
+    {
+      "titre": "Vérifiez avant de vous déplacer",
+      "detail": "Carnet de santé, carte Vitale ou attestation de droits, pièce d'identité, autorisation écrite si ce n'est pas un parent qui accompagne."
+    },
+    {
+      "titre": "Faites vacciner votre enfant",
+      "detail": "Le professionnel inscrit le vaccin dans le carnet de santé."
+    },
+    {
+      "titre": "Présentez le justificatif",
+      "detail": "Photocopie des pages vaccins à la crèche, à l'école ou au centre de loisirs, chaque année si l'enfant y reste plus d'un an."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Centres de PMI de la Collectivité territoriale de Martinique (CTM)",
+      "detail": "Consultations gratuites et vaccins pour les moins de 6 ans, dans de nombreuses communes. Annuaire par commune sur sante.fr.",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/972-martinique"
+    },
+    {
+      "nom": "Votre médecin traitant ou pédiatre"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vaccins exigés pour la crèche et l'école (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Centres de PMI en Martinique (sante.fr)",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/972-martinique"
+    },
+    {
+      "titre": "Examens de santé obligatoires jusqu'à 6 ans (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Rendez-vous vaccination",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Rappel de vaccin",
+      "evenement": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Pages vaccins du carnet de santé",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 mois pour régulariser après une admission provisoire",
+      "detail": "Sans vaccins à jour à l'issue de ce délai, l'enfant peut être exclu de la collectivité."
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : adresses, horaires et jours de consultation des centres de PMI de la CTM ; appelez avant de vous déplacer.",
+    "Le nombre de doses et l'âge de chaque vaccin suivent le calendrier vaccinal en vigueur : à vérifier avec votre médecin ou la PMI."
+  ],
+  "motsCles": [
+    "vaccin",
+    "PMI",
+    "carnet de santé",
+    "pédiatre",
+    "bébé",
+    "CTM"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-01-06"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1879 Santé à l'école primaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879",
+      "verifieLe": "2026-10-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F967 Examens médicaux obligatoires de l'enfant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967",
+      "verifieLe": "2026-07-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2025-06-20"
+    },
+    {
+      "titre": "Santé.fr, annuaire des centres de PMI en Martinique",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/972-martinique",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Collectivité territoriale de Martinique, site officiel",
+      "url": "https://www.collectivitedemartinique.mq",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "slug": "pension-alimentaire-impayee",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Unpaid child support in Mayotte: your options",
+  "resume": "ARIPA and the family support allowance do not yet operate in Mayotte. The options available today: reminder, judicial officer (commissaire de justice), Public Treasury through the prosecutor, criminal complaint for family abandonment.",
+  "aQuoiCaSert": "In mainland France, the Caf (Caisse d'allocations familiales, the family benefits office), through its ARIPA agency (the child support collection agency), can collect child support and pay an advance. In Mayotte, this service does not exist yet: financial intermediation and the family support allowance (allocation de soutien familial) are planned for 2035, and recovery of unpaid child support by the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) from 2031. Until then, the parent who does not receive the support set by a court decision or an agreement can start the legal procedures themselves.",
+  "quiEstConcerne": [
+    "The parent who does not receive, or does not receive in full, the support set for the child.",
+    "You need a court decision, a court-approved parenting agreement or a divorce by mutual consent agreement. Without one, you must first apply to the family court judge (juge aux affaires familiales, JAF)."
+  ],
+  "aSavoir": [
+    "Direct payment: a judicial officer (commissaire de justice) asks the paying parent's employer or bank to pay the support to you. It recovers the last 6 months of arrears and future payments.",
+    "Seizures: the judicial officer can also carry out a wage garnishment, a bank account seizure or a seizure and sale of property (saisie-vente).",
+    "Recovery by the Public Treasury (Trésor public): only possible after one of these procedures has failed, which you must prove. The request goes to the public prosecutor (procureur de la République) at the Tribunal judiciaire (court) of your home area, in Mayotte the one in Mamoudzou.",
+    "Criminal complaint for family abandonment (abandon de famille): possible if the support has not been paid in full for more than 2 months. The offense is punishable by 2 years in prison and a €15,000 fine.",
+    "Support can be claimed for up to 5 years back.",
+    "Legal aid (aide juridictionnelle) can cover procedure costs depending on your income (see the dedicated guide entry)."
+  ],
+  "documents": [
+    { "id": "titre", "libelle": "Decision or agreement setting the support (copy)", "detail": "Judgment, approved agreement or divorce agreement. If you have lost it, ask the court registry (greffe), the lawyer or the notary for a copy.", "coffre": "jaf" },
+    { "id": "preuves-impayes", "libelle": "Table of unpaid amounts and proof", "detail": "Month by month: amount due, amount received, date. Bank statements, written exchanges. The Lien Parental Journal can help you prepare it.", "coffre": "finances" },
+    { "id": "coordonnees-autre-parent", "libelle": "Known contact details of the other parent", "detail": "Last address, employer and bank if you know them: useful to the judicial officer.", "coffre": "jaf" },
+    { "id": "relance", "libelle": "Copy of the reminder letter to the other parent", "detail": "Optional, preferably by registered mail.", "coffre": "courriers" },
+    { "id": "identite", "libelle": "Your ID document (copy)", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Gather proof of the missed payments", "detail": "List month by month what is due and what was received. If possible, send a written reminder to the other parent." },
+    { "titre": "Check that the support is set by a decision or an agreement", "detail": "Otherwise, apply to the family court judge (see the dedicated guide entry)." },
+    { "titre": "Contact a judicial officer", "detail": "For direct payment or a seizure. Ask about the cost and whether legal aid can cover it." },
+    { "titre": "Check before you go", "detail": "Complete copy of the decision or agreement, table of missed payments and proof, the other parent's contact details, ID document. Keep a copy of everything." },
+    { "titre": "If that fails, write to the prosecutor or file a complaint", "detail": "Recovery by the Public Treasury through the prosecutor at the Tribunal judiciaire de Mamoudzou, or a complaint for family abandonment after more than 2 months of non-payment (police station, gendarmerie or letter to the prosecutor)." },
+    { "titre": "Track each payment in the Journal", "detail": "With the proof. Lien Parental does not certify that a payment was made, but helps you keep a record." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Mamoudzou (Mamoudzou court)", "detail": "Family court judge and public prosecutor. Reception by phone or email.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" },
+    { "nom": "Points-justice de Mayotte (CDAD, the local legal access council)", "detail": "Free legal information in several towns.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271" },
+    { "nom": "A judicial officer (commissaire de justice)", "detail": "For direct payment and seizures." }
+  ],
+  "liens": [
+    { "titre": "Unpaid child support (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249" },
+    { "titre": "Ordonnance n° 2026-647, convergence timetable (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Decision or agreement setting the support", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Table and proof of unpaid child support", "categorie": "finances" },
+    { "type": "depense", "titre": "Child support", "categorie": "pension" },
+    { "type": "rappel", "titre": "Check the monthly child support payment", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Complaint for family abandonment possible after more than 2 months of non-payment" },
+    { "libelle": "Arrears can be claimed for up to 5 years", "detail": "Direct payment only covers the last 6 months." }
+  ],
+  "aConfirmer": [
+    "The official page on unpaid child support does not mention Mayotte: the procedures described fall under national law, but check how they are applied locally with a point-justice (free legal information center) or a lawyer.",
+    "To be confirmed locally: contact details of judicial officers practicing in Mayotte and time frames.",
+    "The 2031 and 2035 dates come from the report on ordonnance n° 2026-647 and may be clarified by implementing texts."
+  ],
+  "motsCles": ["child support", "unpaid", "commissaire de justice", "direct payment", "family abandonment", "ARIPA", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1249 Unpaid child support", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, report to the President on ordonnance n° 2026-647 of July 22, 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public directory, Tribunal judiciaire de Mamoudzou", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "verifieLe": "2026-10-29" }
+  ]
+}

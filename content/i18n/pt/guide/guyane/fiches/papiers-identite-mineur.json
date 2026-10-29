@@ -78,14 +78,14 @@
     "O custo da renovação da carteira sem apresentar a antiga não é informado pela página oficial: pergunte à prefeitura."
   ],
   "motsCles": ["carteira de identidade", "passaporte", "CNI", "ANTS", "prefeitura (mairie)", "selo fiscal", "viagem"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1342 Carteira de identidade de menor: primeiro pedido", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-04-27" },
-    { "titre": "Service-public.gouv.fr, F21090 Renovação da carteira de identidade de menor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090", "verifieLe": "2026-06-19" },
-    { "titre": "Service-public.gouv.fr, F1153 Carteira de identidade de menor perdida", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153", "verifieLe": "2026-06-19" },
-    { "titre": "Service-public.gouv.fr, F14930 Passaporte de menor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930", "verifieLe": "2026-06-19" },
-    { "titre": "Service-public.gouv.fr, F21244 Passaporte de menor perdido", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244" },
-    { "titre": "Service-public.gouv.fr, F34752 Taxas do passaporte", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752", "verifieLe": "2026-08-05" },
-    { "titre": "Service-public.gouv.fr, F1427 Certidão de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" }
+    { "titre": "Service-public.gouv.fr, F1342 Carteira de identidade de menor: primeiro pedido", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21090 Renovação da carteira de identidade de menor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1153 Carteira de identidade de menor perdida", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F14930 Passaporte de menor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21244 Passaporte de menor perdido", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F34752 Taxas do passaporte", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1427 Certidão de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" }
   ]
 }

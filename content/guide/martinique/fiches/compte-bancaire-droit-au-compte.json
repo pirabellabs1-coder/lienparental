@@ -1,0 +1,167 @@
+{
+  "slug": "compte-bancaire-droit-au-compte",
+  "territoire": "martinique",
+  "categorie": "argent",
+  "titre": "Avoir son propre compte bancaire après une séparation",
+  "resume": "Ouvrir un compte à votre nom pour recevoir pension et allocations, et, si une banque refuse, utiliser le droit au compte auprès de l'IEDOM à Fort-de-France : pièces exactes et délais.",
+  "aQuoiCaSert": "Après une séparation, un compte personnel permet de recevoir la pension alimentaire et les prestations de la Caf, et de payer les frais de l'enfant en gardant des traces claires. Si une banque refuse de vous ouvrir un compte, une banque est désignée et elle est obligée de le faire, avec des services bancaires de base gratuits. En métropole, c'est la Banque de France qui désigne la banque ; en Martinique, cette mission est assurée par l'IEDOM (Institut d'émission des départements d'outre-mer). Cette procédure est possible même en cas d'interdit bancaire, d'inscription au fichier des incidents de crédit ou de surendettement.",
+  "quiEstConcerne": [
+    "Le parent qui n'a pas de compte à son nom, ou seulement un compte joint avec son ex-conjoint.",
+    "Toute personne domiciliée en France qui n'a aucun compte de dépôt en France et s'est vu refuser l'ouverture d'un compte.",
+    "Le titulaire d'un seul compte joint peut aussi demander le droit au compte pour un compte individuel."
+  ],
+  "aSavoir": [
+    "La banque a 15 jours pour répondre à votre demande d'ouverture. Sans réponse, c'est un refus : elle doit alors vous remettre une lettre de refus motivée.",
+    "Une banque est désignée sous 1 jour ouvré après réception du dossier complet. Cette désignation est valable 6 mois : contactez la banque désignée dans ce délai.",
+    "La banque désignée vous envoie la liste de ses pièces sous 3 jours ouvrés, puis doit ouvrir le compte 3 jours ouvrés au plus tard après réception de toutes les pièces, en général lors d'un rendez-vous.",
+    "Services bancaires de base gratuits : tenue et clôture du compte, carte de paiement, prélèvements et virements SEPA, dépôts et retraits au guichet, 2 chèques de banque par mois. Frais d'incident plafonnés à 4 € par opération et 20 € par mois.",
+    "La banque désignée ne peut fermer ce compte que dans des cas précis (par exemple informations inexactes, ouverture d'un second compte de dépôt), avec en général un préavis de 2 mois."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Pièce d'identité valide",
+      "detail": "Carte d'identité, passeport ou titre de séjour. Copie pour le dossier Banque de France, original au rendez-vous à la banque.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Justificatif de domicile de moins de 3 mois",
+      "detail": "Facture d'électricité, d'eau, quittance de loyer. Hébergé : attestation d'hébergement, pièce d'identité et justificatif de domicile de l'hébergeant (à confirmer avec la banque).",
+      "coffre": "finances"
+    },
+    {
+      "id": "lettre-refus",
+      "libelle": "Lettre de refus de la banque",
+      "detail": "Ou, sans réponse, l'accusé de réception de votre demande datant de plus de 15 jours.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "attestation-honneur",
+      "libelle": "Déclaration sur l'honneur de ne pas avoir de compte de dépôt",
+      "detail": "Modèle proposé par la Banque de France lors de la demande.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-residence",
+      "libelle": "Attestation de résidence, si vous êtes ressortissant d'un autre pays de l'Union européenne",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB du nouveau compte",
+      "detail": "À transmettre à la Caf, à l'ARIPA, à votre employeur et à l'autre parent si la pension vous est versée directement.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Demandez l'ouverture d'un compte à une banque",
+      "detail": "Par écrit si possible, et gardez une preuve de la date de demande."
+    },
+    {
+      "titre": "En cas de refus, demandez la lettre de refus",
+      "detail": "Ou attendez 15 jours sans réponse. Vous pouvez aussi demander à la banque qui refuse de transmettre elle-même votre dossier à l'IEDOM."
+    },
+    {
+      "titre": "Déposez votre dossier à l'IEDOM Martinique",
+      "detail": "À l'agence de Fort-de-France, uniquement sur rendez-vous (pris au 05 96 59 44 00), ou par courrier. Formulaire signé, lettre de refus, pièce d'identité et justificatif de domicile de moins de 3 mois."
+    },
+    {
+      "titre": "Vérifiez avant de vous déplacer",
+      "detail": "Pour la banque désignée : rendez-vous pris dans les 6 mois, pièce d'identité valide en original, justificatif de domicile de moins de 3 mois, courrier de désignation, liste des pièces envoyée par la banque."
+    },
+    {
+      "titre": "Ouvrez le compte à la banque désignée",
+      "detail": "Elle a 3 jours ouvrés après réception de toutes les pièces."
+    },
+    {
+      "titre": "Transmettez votre nouveau RIB",
+      "detail": "À la Caf (espace en ligne), à l'ARIPA si elle verse la pension, à l'employeur et, si besoin, à l'autre parent."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "IEDOM Martinique",
+      "detail": "1 boulevard du Général de Gaulle, CS 50512, 97206 Fort-de-France Cedex. Accueil uniquement sur rendez-vous, les mardis et jeudis matin ; pièce d'identité exigée.",
+      "url": "https://www.iedom.fr/Martinique",
+      "telephone": "05 96 59 44 00"
+    },
+    {
+      "nom": "La banque de votre choix",
+      "detail": "Première demande d'ouverture."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Droit au compte (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417"
+    },
+    {
+      "titre": "IEDOM Martinique, informations pratiques",
+      "url": "https://www.iedom.fr/Martinique"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Lettre de refus d'ouverture de compte",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Courrier de désignation d'une banque (IEDOM)",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "RIB de mon compte personnel",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Contacter la banque désignée (6 mois maximum)",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Transmettre mon nouveau RIB à la Caf et à l'ARIPA",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "15 jours : délai de réponse de la banque, au-delà son silence vaut refus"
+    },
+    {
+      "libelle": "6 mois : validité de la désignation par l'IEDOM (Banque de France en métropole)"
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de l'IEDOM Martinique : formulaire de demande à utiliser, possibilité de dépôt par courriel et jours d'accueil, susceptibles de changer.",
+    "La fiche service-public.gouv.fr décrit la procédure de la Banque de France sans mentionner l'outre-mer : les délais indiqués ici sont ceux de la procédure nationale.",
+    "Les règles de désolidarisation d'un compte joint dépendent de votre banque : la fiche officielle sur le droit au compte ne les détaille pas."
+  ],
+  "motsCles": [
+    "compte bancaire",
+    "RIB",
+    "droit au compte",
+    "IEDOM",
+    "Banque de France",
+    "compte joint",
+    "séparation"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2417 Droit au compte",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417",
+      "verifieLe": "2026-10-19"
+    },
+    {
+      "titre": "IEDOM Martinique, informations pratiques",
+      "url": "https://www.iedom.fr/Martinique",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

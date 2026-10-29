@@ -1,0 +1,21 @@
+{
+  "slug": "arrivee-bebe",
+  "territoire": "mayotte",
+  "titre": "Chegada de um bebê",
+  "resume": "Do reconhecimento à escolha de quem vai cuidar do bebê: as etapas administrativas dos primeiros meses em Mayotte.",
+  "ordre": 3,
+  "elements": [
+    { "id": "reconnaissance", "titre": "Reconhecer a criança (pais não casados)", "detail": "Em Mayotte, fora da declaração de nascimento, o reconhecimento é feito na prefeitura (mairie) de Mamoudzou.", "fiche": "reconnaissance-enfant" },
+    { "id": "prestations", "titre": "Saber quais auxílios existem em Mayotte", "detail": "A prime à la naissance (auxílio-nascimento) e a allocation de base (auxílio básico) da Paje ainda não são pagas em Mayotte (previstas a partir de 2027 para o auxílio básico e em 2029 para o auxílio-nascimento).", "fiche": "prestations-familiales-mayotte" },
+    { "id": "declaration", "titre": "Registrar o nascimento na prefeitura (mairie)", "detail": "Em 5 dias.", "fiche": "declaration-naissance" },
+    { "id": "livret-famille", "titre": "Retirar ou atualizar o livro de família (livret de famille)", "fiche": "livret-de-famille" },
+    { "id": "acte-naissance", "titre": "Saber como obter a certidão de nascimento da criança", "detail": "É gratuita e será pedida em muitos trâmites.", "fiche": "acte-naissance" },
+    { "id": "conge-paternite", "titre": "Tirar a licença-paternidade e de acolhimento da criança", "fiche": "conge-paternite" },
+    { "id": "carte-vitale", "titre": "Vincular o bebê ao seguro-saúde (CSSM, órgão de seguridade social de Mayotte)", "fiche": "rattacher-enfant-carte-vitale" },
+    { "id": "mutuelle", "titre": "Incluir o bebê no plano de saúde complementar (mutuelle) ou na C2S (Complémentaire santé solidaire)", "fiche": "mutuelle-enfant" },
+    { "id": "pmi", "titre": "Organizar o acompanhamento e as vacinas (médico ou PMI, serviço de saúde materno-infantil)", "fiche": "vaccinations-pmi" },
+    { "id": "cssm", "titre": "Informar o nascimento à CSSM e verificar os auxílios familiares", "detail": "Em Mayotte, eles são pagos desde o primeiro filho.", "fiche": "allocations-familiales-mayotte" },
+    { "id": "mode-garde", "titre": "Procurar uma forma de cuidado infantil", "detail": "As vagas são raras: antecipe desde a gravidez.", "fiche": "mode-de-garde-petite-enfance" },
+    { "id": "epargne", "titre": "Abrir uma caderneta de poupança para a criança", "fiche": "livret-epargne-mineur" }
+  ]
+}

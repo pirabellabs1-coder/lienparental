@@ -1,0 +1,251 @@
+{
+  "slug": "changer-adresse-enfant-separation",
+  "territoire": "reunion",
+  "categorie": "separation",
+  "titre": "Mudar o endereço da criança após uma separação (Caf, escola, seguridade social)",
+  "resume": "Quem avisar e em que ordem quando o endereço da criança muda: Caf, escola, Assurance Maladie (CGSS), Receita, de uma só vez se possível, com os documentos a preparar e as obrigações em relação ao outro genitor.",
+  "aQuoiCaSert": "Após uma separação, o endereço da criança muda com frequência, ou ela passa a viver em dois lares. Atualizar esse endereço evita cartas perdidas, benefícios mal calculados ou pagos ao genitor errado e esquecimentos da escola. Esta ficha reúne os procedimentos, órgão por órgão, e lembra o que a lei prevê para informar o outro genitor.",
+  "quiEstConcerne": [
+    "O genitor com quem a criança passa a morar, ou que se muda com ela.",
+    "Os pais em residência alternada, que devem declarar os dois endereços e escolher como dividir os benefícios."
+  ],
+  "aSavoir": [
+    "O serviço on-line gratuito « Je change de coordonnées » (« Mudo meus dados ») do service-public.gouv.fr, site oficial do governo francês, envia seu novo endereço de uma só vez a mais de 30 órgãos nacionais (Receita, Assurance Maladie, France Travail, caixas de aposentadoria, alguns fornecedores de energia) e a mais de 4.500 prefeituras (mairies) conectadas. Não atualiza as listas eleitorais.",
+    "Caf (Caisse d'allocations familiales, órgão de benefícios familiares): declare a separação no seu espaço on-line (« Déclaration de situation ») e depois a mudança de endereço. Para o auxílio-moradia, faça um novo pedido assim que entrar no novo imóvel. Em caso de esquecimento de boa-fé, vale o « droit à l'erreur » (direito ao erro) se você regularizar rápido.",
+    "Residência alternada e Caf: formulário cerfa n° 14000. Os pais indicam um só beneficiário ou dividem os auxílios familiares; em caso de desacordo, cada genitor recebe uma parte. A escolha vale por pelo menos 1 ano. Na Reunião, os auxílios familiares são pagos desde o primeiro filho: veja a ficha dedicada.",
+    "Assurance Maladie (seguro de saúde público; CGSS de La Réunion, caixa local de seguridade social): mude o endereço na conta ameli, em « Mes démarches », pelo telefone 3646, ou por carta com seu número de seguridade social, o endereço antigo e o novo, a data da mudança e uma cópia do seu documento de identidade.",
+    "Receita (impostos): informe o novo endereço no seu espaço em impots.gouv.fr ou pelo serviço on-line de mudança de endereço; a declaração de renda também pede essa informação.",
+    "Escola: você deve informar qualquer mudança de situação familiar ou de endereço, e qualquer decisão do juiz de família (juge aux affaires familiales, JAF) sobre a criança. A escola passa as mesmas informações a cada genitor que exerce a autoridade parental. Se você a exerce sozinho(a), entregue uma cópia da sentença ao diretor.",
+    "Um genitor separado tem o direito de se mudar. Se isso alterar o exercício da autoridade parental (por exemplo, o direito de visita, ainda mais em caso de mudança para a França continental), ele deve avisar o outro genitor com antecedência, o quanto antes.",
+    "Se a criança mora com você por sentença ou acordo, você deve informar seu novo endereço ao outro genitor no mês seguinte à mudança, sob pena de 6 meses de prisão e multa de 7.500 €.",
+    "Em caso de desacordo sobre a mudança ou a residência da criança: mediação familiar ou pedido ao juiz de família (JAF) do local onde a criança mora (advogado não obrigatório)."
+  ],
+  "documents": [
+    {
+      "id": "domicile",
+      "libelle": "Comprovante do novo endereço",
+      "detail": "Contrato ou recibo de aluguel, conta de água ou luz. Se você está hospedado(a): declaração de hospedagem, documento de identidade e comprovante de endereço de quem hospeda.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "identite",
+      "libelle": "Documento de identidade do genitor que declara (cópia)",
+      "detail": "Para uma carta à CGSS e para criar uma conta na Caf.",
+      "coffre": "autres"
+    },
+    {
+      "id": "numeros",
+      "libelle": "Números de beneficiário da Caf, de seguridade social e fiscal",
+      "detail": "Nas cartas da Caf, na sua carte Vitale (cartão do seguro de saúde) e no seu aviso de imposto. Indispensáveis para qualquer procedimento on-line ou por escrito.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo sobre a residência da criança (cópia)",
+      "detail": "Para a escola, a Caf e a Assurance Maladie, se uma decisão fixa a residência ou confia a autoridade parental a um só genitor.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Formulário de declaração em caso de residência alternada (cerfa n° 14000)",
+      "detail": "Só em residência alternada. Assinado pelos dois pais se houver acordo.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "courrier-autre-parent",
+      "libelle": "Cópia da carta que informa o novo endereço ao outro genitor",
+      "detail": "Guarde uma prova datada (carta registrada, e-mail ou mensagem).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "fiche-ecole",
+      "libelle": "Ficha de informações da escola atualizada",
+      "detail": "Com os contatos dos dois pais e as pessoas autorizadas a buscar a criança.",
+      "coffre": "scolarite"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Informe o outro genitor",
+      "detail": "Antes da mudança se a rotina da criança mudar e, no máximo, no mês seguinte se a criança mora com você por sentença ou acordo. Guarde um registro escrito."
+    },
+    {
+      "titre": "Faça a declaração única on-line",
+      "detail": "No service-public.gouv.fr, serviço « Je change de coordonnées »: marque os órgãos a avisar."
+    },
+    {
+      "titre": "Declare a separação e o endereço à Caf",
+      "detail": "No « Mon Compte »: declaração de situação, mudança de endereço, novo pedido de auxílio-moradia. Em residência alternada, envie o cerfa n° 14000."
+    },
+    {
+      "titre": "Atualize a Assurance Maladie",
+      "detail": "Conta ameli, em « Mes démarches », ou 3646. Verifique a qual genitor a criança está vinculada."
+    },
+    {
+      "titre": "Confira antes de ir à escola",
+      "detail": "Comprovante do novo endereço, sentença ou acordo se houver, contatos completos dos dois pais, lista das pessoas autorizadas a buscar a criança."
+    },
+    {
+      "titre": "Avise a escola",
+      "detail": "Entregue a ficha de informações atualizada. Pense também na cantina, nas atividades extraescolares e no transporte escolar."
+    },
+    {
+      "titre": "Termine pelos órgãos não incluídos",
+      "detail": "Banco, seguro residencial e escolar, mutuelle (plano de saúde complementar), médico, atividades da criança, listas eleitorais na prefeitura."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Service-public.gouv.fr, Je change de coordonnées",
+      "detail": "Declaração única e gratuita a mais de 30 órgãos.",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901"
+    },
+    {
+      "nom": "Caf de La Réunion",
+      "detail": "« Mon Compte » em caf.fr ou aplicativo Caf.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    },
+    {
+      "nom": "CGSS de La Réunion (Assurance Maladie)",
+      "detail": "Conta ameli ou 3646.",
+      "url": "https://www.cgss.re",
+      "telephone": "3646"
+    },
+    {
+      "nom": "Impots.gouv.fr",
+      "detail": "Espaço pessoal ou centro de finanças públicas (centre des finances publiques).",
+      "url": "https://www.impots.gouv.fr"
+    },
+    {
+      "nom": "Escola da criança (école, collège ou lycée)",
+      "detail": "Diretor da escola ou secretaria do estabelecimento."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Je change de coordonnées, mudar seus dados on-line (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901"
+    },
+    {
+      "titre": "Informar uma mudança de situação à Caf (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827"
+    },
+    {
+      "titre": "Residência alternada e benefícios familiares (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Um genitor separado pode se mudar livremente? (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389"
+    },
+    {
+      "titre": "Escola e pais separados: informação aos pais (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Comprovante do novo endereço",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Prova de que o outro genitor foi informado (novo endereço)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Formulário de residência alternada da Caf (cerfa 14000)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Informar o novo endereço ao outro genitor (máximo de 1 mês)",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Residência alternada: escolha na Caf alterável após 1 ano",
+      "evenement": "autre"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Reunião na escola: atualização do endereço",
+      "evenement": "ecole"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "No mês seguinte à mudança",
+      "detail": "Para informar o novo endereço ao outro genitor, quando a criança mora com você por sentença ou acordo."
+    },
+    {
+      "libelle": "Assim que entrar no imóvel",
+      "detail": "Novo pedido de auxílio-moradia à Caf."
+    },
+    {
+      "libelle": "1 ano",
+      "detail": "Duração mínima da escolha de beneficiário ou da divisão em residência alternada, salvo mudança da residência da criança."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar com a Caf de La Réunion: as consequências de uma residência alternada com um só filho, já que os auxílios familiares são pagos desde o primeiro filho nos departamentos ultramarinos (DOM).",
+    "A confirmar localmente: se a sua prefeitura está conectada ao serviço « Je change de coordonnées ».",
+    "A confirmar localmente: horários e locais de atendimento da CGSS de La Réunion, em cgss.re."
+  ],
+  "motsCles": [
+    "mudança de endereço",
+    "mudança",
+    "separação",
+    "residência alternada",
+    "Caf",
+    "ameli",
+    "CGSS",
+    "escola",
+    "impostos"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, notícia A18901 Je change de coordonnées (6 de maio de 2026)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F827 Informar uma mudança de situação à Caf",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F737 Seguridade social: mudança de situação pessoal",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F383 Imposto de renda: mudança de endereço",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F11389 Um genitor separado pode se mudar livremente?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1391 Educação infantil e ensino fundamental: informação aos pais",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Carta-circular da Cnaf LR-2026-051 (auxílios familiares nos DOM)",
+      "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import { GuideHeader } from '@/components/guide/GuideHeader'
 import { FicheStatusBadge } from '@/components/guide/Progress'
 import { CategoryIcon } from '@/components/guide/icons'
 import { loadGuide } from '@/lib/guide/load'
+import { wantedTerritoire } from '@/lib/guide/territory-server'
 import { GUIDE_CATEGORIES, getCategory } from '@/lib/guide/types'
 import { categoryHref, ficheHref, homeHref } from '@/lib/guide/links'
 import { contentLangAttr } from '@/lib/contenus/locale'
@@ -33,7 +34,7 @@ export default async function GuideCategoryPage({ params, searchParams }: Props)
   if (!category) notFound()
   const t = await getTranslations('coach.guide')
   const locale = await getLocale()
-  const g = await loadGuide(sp.territoire, locale)
+  const g = await loadGuide(await wantedTerritoire(sp.territoire), locale)
   const { territoire } = g
   const fiches = g.fiches.filter((f) => f.categorie === category.key)
 

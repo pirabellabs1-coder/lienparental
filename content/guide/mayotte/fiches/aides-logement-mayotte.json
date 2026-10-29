@@ -1,0 +1,60 @@
+{
+  "slug": "aides-logement-mayotte",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Aides au logement à Mayotte (ALF et ALS)",
+  "resume": "Allocation de logement familiale ou sociale versée par la CSSM : conditions propres à Mayotte (logement décent, occupé 8 mois par an), pièces à préparer et demande après une séparation.",
+  "aQuoiCaSert": "Les aides au logement réduisent votre loyer. À Mayotte, la CSSM verse l'allocation de logement familiale (ALF), prioritaire pour les foyers avec enfants, ou l'allocation de logement sociale (ALS). Un seul droit est ouvert par foyer. Après une séparation, chaque parent qui prend un logement peut faire sa propre demande, calculée sur sa nouvelle situation.",
+  "quiEstConcerne": [
+    "Les locataires d'un logement décent occupé comme résidence principale au moins 8 mois par an.",
+    "Les familles avec enfants à charge, pour l'ALF ; les autres personnes, pour l'ALS.",
+    "Ne sont pas concernés : le logement loué à un membre de sa famille, ou l'hébergement gratuit."
+  ],
+  "aSavoir": [
+    "Conditions de décence retenues par la CSSM : au moins 9 m² pour une personne, 16 m² pour deux, plus 9 m² par personne supplémentaire.",
+    "Le droit s'ouvre le mois qui suit la demande et le montant est recalculé tous les 3 mois : faites la demande dès l'entrée dans le logement.",
+    "La demande se fait dans « Mon Compte » sur caf.fr, espace utilisé par la CSSM.",
+    "Séparation : déclarez-la. Chaque parent déclare son propre logement et sa situation familiale ; le montant est recalculé en conséquence.",
+    "Un bail écrit et une attestation de loyer signée par le propriétaire facilitent le dossier. L'ADIL de Mayotte peut vous conseiller gratuitement si vous n'avez pas de bail écrit."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Copie recto verso de votre pièce d'identité ou de votre titre de séjour", "detail": "En cours de validité.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB à votre nom", "detail": "Ouvrez un compte personnel si vous n'aviez qu'un compte joint : voir la fiche sur le droit au compte.", "coffre": "finances" },
+    { "id": "attestation-loyer", "libelle": "Attestation de loyer datée et signée par le propriétaire", "detail": "À faire remplir par votre propriétaire ou votre bailleur social.", "coffre": "finances" },
+    { "id": "bail", "libelle": "Bail ou contrat de location", "detail": "Copie. Il précise le loyer, la surface et la date d'entrée.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Justificatifs de vos ressources", "detail": "Bulletins de salaire, indemnités, pension alimentaire reçue ou versée.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant la résidence des enfants, si vous en avez un", "detail": "Copie, utile pour justifier la résidence des enfants après la séparation.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Déclarez d'abord votre changement de situation", "detail": "Séparation, déménagement, résidence des enfants : dans « Mon Compte »." },
+    { "titre": "Faites remplir l'attestation de loyer", "detail": "Par le propriétaire ou le bailleur, datée et signée." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Rendez-vous pris, numéro de sécurité sociale, copie de la pièce d'identité, RIB à votre nom, attestation de loyer signée, bail, justificatifs de ressources." },
+    { "titre": "Faites la demande dès l'entrée dans le logement", "detail": "En ligne, ou avec l'aide de l'accueil de la CSSM ou d'une France Services." },
+    { "titre": "Déclarez ensuite tout changement", "detail": "Déménagement, nouveau compte bancaire, arrivée ou départ d'un enfant, changement de résidence des enfants." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Demande dans « Mon Compte » sur caf.fr ; accueil sur rendez-vous à Mamoudzou.", "url": "https://www.cssm.fr/page/aides-au-logement", "telephone": "02 69 61 91 91" },
+    { "nom": "ADIL de Mayotte", "detail": "Conseils juridiques gratuits sur le logement. Résidence Nyrora, quartier Hamaha, Mamoudzou.", "url": "https://www.anil.org/adil-976/", "telephone": "06 39 21 53 91" },
+    { "nom": "France Services", "detail": "Aide gratuite pour la demande en ligne.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Aides au logement (CSSM)", "url": "https://www.cssm.fr/page/aides-au-logement" },
+    { "titre": "ADIL de Mayotte (anil.org)", "url": "https://www.anil.org/adil-976/" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation de loyer signée", "categorie": "finances" },
+    { "type": "coffre", "titre": "Notification d'aide au logement", "categorie": "finances" },
+    { "type": "rappel", "titre": "Faire la demande d'aide au logement pour le nouveau logement", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la CSSM : l'APL ne concernerait à Mayotte que certains logements-foyers ; pour un logement ordinaire, c'est l'ALF ou l'ALS.",
+    "À confirmer auprès de la CSSM : barèmes et montants, non publiés sur la page consultée. Utilisez le simulateur ou demandez à l'accueil.",
+    "À confirmer auprès de la CSSM : le délai et la commission pour contester une décision, ainsi que la répartition de l'aide en résidence alternée."
+  ],
+  "motsCles": ["logement", "ALF", "ALS", "loyer", "CSSM", "attestation de loyer", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Aides au logement", "url": "https://www.cssm.fr/page/aides-au-logement", "verifieLe": "2026-10-29" },
+    { "titre": "ANIL, ADIL de Mayotte", "url": "https://www.anil.org/adil-976/", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "slug": "changer-adresse-enfant-separation",
+  "territoire": "guadeloupe",
+  "categorie": "separation",
+  "titre": "Changer l'adresse de l'enfant après une séparation (CAF, école, sécurité sociale)",
+  "resume": "Qui prévenir et dans quel ordre quand l'enfant change d'adresse : Caf, école, Assurance maladie, impôts, en une fois si possible, avec les pièces à préparer et les obligations envers l'autre parent.",
+  "aQuoiCaSert": "Après une séparation, l'adresse de l'enfant change souvent, ou il vit désormais dans deux foyers. Mettre à jour cette adresse évite les courriers perdus, les allocations mal calculées ou versées au mauvais parent, et les oublis de l'école. Cette fiche rassemble les démarches, organisme par organisme, et rappelle ce que la loi prévoit pour informer l'autre parent.",
+  "quiEstConcerne": [
+    "Le parent chez qui l'enfant vit désormais, ou qui déménage avec lui.",
+    "Les parents en résidence alternée qui doivent déclarer les deux adresses et choisir comment partager les allocations."
+  ],
+  "aSavoir": [
+    "Le téléservice gratuit « Je change de coordonnées » de service-public.gouv.fr transmet votre nouvelle adresse en une seule démarche à plus de 30 organismes nationaux (impôts, Assurance maladie, France Travail, caisses de retraite, certains fournisseurs d'énergie) et à plus de 4 500 mairies raccordées. Il ne met pas à jour les listes électorales, ni votre banque ou votre assurance.",
+    "Caf : déclarez la séparation dans votre espace en ligne, rubrique « Déclaration de situation », et le déménagement avec le service « Déclaration de changement d'adresse ». Pour les aides au logement, faites une nouvelle demande dès l'entrée dans le nouveau logement. En cas d'oubli de bonne foi, le droit à l'erreur s'applique si vous régularisez vite.",
+    "Résidence alternée et Caf : remplissez le formulaire cerfa n° 14000. Les parents peuvent désigner un seul allocataire ou partager les allocations familiales ; en cas de désaccord, chaque parent reçoit automatiquement une part. Seules les allocations familiales (et le CMG) se partagent, les autres prestations vont à un seul parent. Le choix est modifiable après un an.",
+    "Assurance maladie : changement d'adresse depuis le compte ameli, rubrique « Mes démarches », par téléphone au 3646, ou par courrier avec une copie recto verso de votre pièce d'identité.",
+    "Impôts : signalez l'adresse depuis votre espace sur impots.gouv.fr, puis indiquez le déménagement et sa date dans votre déclaration de revenus.",
+    "École : vous devez signaler à l'école tout changement de situation familiale ou d'adresse, ainsi que toute décision du juge aux affaires familiales concernant l'enfant. L'école transmet les mêmes informations à chaque parent, en main propre ou aux adresses indiquées en début d'année.",
+    "Si vous exercez seul l'autorité parentale, remettez une copie du jugement au directeur d'école ou au chef d'établissement.",
+    "Déménagement d'un parent : un parent séparé a le droit de déménager. Si cela modifie l'exercice de l'autorité parentale (par exemple les droits de visite), il doit informer l'autre parent à l'avance, le plus tôt possible. Si l'enfant vit chez lui en vertu d'un jugement ou d'une convention, il doit communiquer sa nouvelle adresse au plus tard 1 mois après le déménagement, sous peine de 6 mois d'emprisonnement et 7 500 € d'amende.",
+    "En cas de désaccord sur le déménagement ou la résidence de l'enfant : médiation familiale ou saisine du juge aux affaires familiales du lieu de résidence de l'enfant (avocat non obligatoire)."
+  ],
+  "documents": [
+    { "id": "domicile", "libelle": "Justificatif du nouveau domicile (de moins de 3 mois de préférence)", "detail": "Bail ou quittance de loyer, facture d'eau ou d'électricité. Si vous êtes hébergé : attestation d'hébergement, pièce d'identité et justificatif de domicile de l'hébergeant.", "coffre": "courriers" },
+    { "id": "ancien-domicile", "libelle": "Justificatif de l'ancien domicile", "detail": "Demandé par l'Assurance maladie si vous faites la démarche par courrier.", "coffre": "courriers" },
+    { "id": "identite", "libelle": "Pièce d'identité du parent déclarant (copie recto verso)", "detail": "Pour les courriers à la CPAM ou CGSS et pour créer un compte Caf.", "coffre": "autres" },
+    { "id": "numeros", "libelle": "Numéros d'allocataire Caf, de sécurité sociale et fiscal", "detail": "Sur vos courriers Caf, votre carte Vitale et votre avis d'imposition. Indispensables pour toute démarche en ligne ou par écrit.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Jugement ou convention sur la résidence de l'enfant (copie)", "detail": "Pour l'école, la Caf et la sécurité sociale si une décision fixe la résidence ou confie l'autorité parentale à un seul parent.", "coffre": "jaf" },
+    { "id": "cerfa-14000", "libelle": "Formulaire « Enfant(s) en résidence alternée : déclaration et choix des parents » (cerfa n° 14000)", "detail": "En résidence alternée uniquement. Signé par les deux parents si vous êtes d'accord. Disponible sur service-public.gouv.fr et caf.fr.", "coffre": "jaf" },
+    { "id": "courrier-autre-parent", "libelle": "Copie du courrier informant l'autre parent de la nouvelle adresse", "detail": "Gardez une preuve datée (lettre recommandée, courriel ou message) de l'information donnée.", "coffre": "jaf" },
+    { "id": "fiche-ecole", "libelle": "Fiche de renseignements de l'école mise à jour", "detail": "Avec les coordonnées des deux parents et les personnes autorisées à récupérer l'enfant.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Informez l'autre parent", "detail": "Avant le déménagement si l'organisation de l'enfant change, et dans tous les cas au plus tard 1 mois après si l'enfant vit chez vous selon un jugement ou une convention. Gardez une trace écrite." },
+    { "titre": "Faites la déclaration groupée en ligne", "detail": "Sur service-public.gouv.fr, téléservice « Je change de coordonnées » : cochez les organismes à prévenir (impôts, Assurance maladie, mairie si raccordée, énergie)." },
+    { "titre": "Déclarez la séparation et l'adresse à la Caf", "detail": "Espace Mon Compte : « Déclaration de situation » pour la séparation, « Déclaration de changement d'adresse » pour le déménagement, nouvelle demande d'aide au logement. En résidence alternée, envoyez le cerfa n° 14000." },
+    { "titre": "Mettez à jour l'Assurance maladie", "detail": "Compte ameli, rubrique « Mes démarches », ou 3646. Vérifiez à cette occasion à quel parent l'enfant est rattaché." },
+    { "titre": "Vérifiez avant d'aller à l'école", "detail": "Justificatif du nouveau domicile, jugement ou convention s'il existe, coordonnées complètes des deux parents, liste des personnes autorisées à venir chercher l'enfant. Demandez que les courriers soient envoyés aux deux adresses." },
+    { "titre": "Prévenez l'école ou l'établissement", "detail": "Remettez au directeur ou au secrétariat la fiche de renseignements mise à jour. Pensez aussi à la cantine, au périscolaire et au transport scolaire." },
+    { "titre": "Terminez par les organismes non couverts", "detail": "Banque, assurance habitation et assurance scolaire, mutuelle, médecin, activités de l'enfant, inscription sur les listes électorales en mairie." }
+  ],
+  "ou": [
+    { "nom": "Service-public.gouv.fr, Je change de coordonnées", "detail": "Déclaration unique et gratuite auprès de plus de 30 organismes.", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901" },
+    { "nom": "Caf de la Guadeloupe", "detail": "Espace Mon Compte sur caf.fr ou application Caf - Mon Compte.", "url": "https://www.caf.fr" },
+    { "nom": "Assurance maladie (CGSS de la Guadeloupe)", "detail": "Compte ameli ou 3646.", "url": "https://www.ameli.fr", "telephone": "3646" },
+    { "nom": "Impots.gouv.fr", "detail": "Espace particulier, ou centre des finances publiques.", "url": "https://www.impots.gouv.fr" },
+    { "nom": "École, collège ou lycée de l'enfant", "detail": "Directeur d'école ou secrétariat de l'établissement." }
+  ],
+  "liens": [
+    { "titre": "Je change de coordonnées (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901" },
+    { "titre": "Signaler un changement de situation à la Caf (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827" },
+    { "titre": "Allocations familiales en résidence alternée (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248" },
+    { "titre": "Un parent séparé peut-il déménager librement ? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389" },
+    { "titre": "École et parents séparés : information des parents (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Justificatif du nouveau domicile", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Preuve d'information de l'autre parent (nouvelle adresse)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Formulaire résidence alternée Caf (cerfa 14000)", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Communiquer la nouvelle adresse à l'autre parent (1 mois maximum)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Résidence alternée : choix Caf modifiable après 1 an", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Rendez-vous à l'école : mise à jour de l'adresse", "evenement": "ecole" }
+  ],
+  "datesLimites": [
+    { "libelle": "Au plus tard 1 mois après le déménagement", "detail": "Pour communiquer la nouvelle adresse à l'autre parent, quand l'enfant vit chez vous en vertu d'un jugement ou d'une convention." },
+    { "libelle": "Dès l'entrée dans le logement", "detail": "Nouvelle demande d'aide au logement à la Caf." },
+    { "libelle": "1 an", "detail": "Durée minimale du choix d'allocataire ou de partage en résidence alternée, sauf changement de la résidence des enfants." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : la Caf de la Guadeloupe applique des règles propres aux départements d'outre-mer pour les allocations familiales (par exemple dès le premier enfant) ; vérifiez auprès d'elle les conséquences d'une résidence alternée avec un seul enfant.",
+    "À confirmer localement : raccordement de votre mairie au téléservice « Je change de coordonnées »."
+  ],
+  "motsCles": ["changement d'adresse", "déménagement", "séparation", "résidence alternée", "Caf", "ameli", "école", "impôts", "cerfa 14000"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, actualité A18901 Je change de coordonnées (6 mai 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901" },
+    { "titre": "Service-public.gouv.fr, F827 Signaler un changement de situation à la Caf", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827", "verifieLe": "2026-03-13" },
+    { "titre": "Service-public.gouv.fr, F21248 Allocations familiales en résidence alternée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
+    { "titre": "Service-public.gouv.fr, F737 Sécurité sociale : changement de situation personnelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737", "verifieLe": "2026-03-13" },
+    { "titre": "Service-public.gouv.fr, F383 Impôt sur le revenu : changement d'adresse", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383", "verifieLe": "2026-04-15" },
+    { "titre": "Service-public.gouv.fr, F11389 Un parent séparé peut-il déménager librement ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2025-05-28" },
+    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
+    { "titre": "Service-public.gouv.fr, F1391 Maternelle et élémentaire : information des parents", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2025-07-30" }
+  ]
+}

@@ -1,12 +1,15 @@
 'use client'
 
-import { useId } from 'react'
+import { useEffect, useId } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { ChevronDown, MapPin } from 'lucide-react'
 import type { Territoire } from '@/lib/guide/types'
+import { homeHref } from '@/lib/guide/links'
+import { rememberGuideTerritory } from './RememberGuideTerritory'
 
-// Bandeau « Territoire : … ». Prêt pour plusieurs territoires (un dossier content/guide/<code> chacun).
+// Bandeau « Territoire : … » : un choix par territoire disponible (content/guide/<code> ou guide_territoires).
+// Le territoire affiché est mémorisé (cookie) : /app/guide et /guide s'ouvrent dessus à la visite suivante.
 export function TerritorySelect({ current, territoires }: { current: Territoire; territoires: Territoire[] }) {
   const t = useTranslations('coach.guide.header')
   const id = useId()
@@ -15,8 +18,13 @@ export function TerritorySelect({ current, territoires }: { current: Territoire;
   const options = territoires.filter((ter) => ter.disponible)
   const single = options.length <= 1
 
+  useEffect(() => { rememberGuideTerritory(current.code) }, [current.code])
+
   const onChange = (code: string) => {
-    router.push(`${pathname}?${new URLSearchParams({ territoire: code }).toString()}`)
+    rememberGuideTerritory(code)
+    // Accueil et catégories existent dans chaque territoire ; une fiche ou un parcours non : retour à l'accueil du Guide.
+    const keep = pathname === '/app/guide' || pathname.startsWith('/app/guide/categorie/')
+    router.push(keep ? `${pathname}?${new URLSearchParams({ territoire: code }).toString()}` : homeHref(code))
   }
 
   return (

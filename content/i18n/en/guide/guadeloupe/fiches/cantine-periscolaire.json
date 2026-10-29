@@ -1,0 +1,210 @@
+{
+  "slug": "cantine-periscolaire",
+  "territoire": "guadeloupe",
+  "categorie": "ecole",
+  "titre": "Enrolling my child in the school canteen and after-school care",
+  "resume": "Who runs the canteen in primary school, middle school and high school, the documents to prepare to get the right rate, and where to ask for help if the cost is a problem.",
+  "aQuoiCaSert": "The canteen and périscolaire (before- and after-school care, supervised homework, activities) mean your child is looked after around school hours. In nursery and primary school, the town (commune) runs them and sets the prices, often based on your family quotient (quotient familial, a family income index calculated by the Caf (Caisse d'allocations familiales, the family benefits office)): without a quotient certificate, you may pay the highest rate. In middle and high school (collège and lycée), you enroll for school lunches (demi-pension) with the school itself.",
+  "quiEstConcerne": [
+    "Parents of children in nursery or primary school.",
+    "Parents of middle and high school students, for school lunches (demi-pension).",
+    "Parents of a child with an allergy or on a special diet for health reasons."
+  ],
+  "aSavoir": [
+    "In primary school, the town is not required to set up a canteen. But where one exists, every child enrolled at the school has the right to use it. Restricting access to children whose parents work is illegal.",
+    "Prices are set by the town for primary schools, by the département for middle schools and by the region for high schools. In Guadeloupe, this means the town, the Département de la Guadeloupe (departmental council) and the Région Guadeloupe (regional council). Prices may take the family quotient into account.",
+    "In middle and high school, the canteen social fund (fonds social pour les cantines) can help families. It is granted by the head of the school, who sets out the conditions at the start of the year.",
+    "Allergy or diet for health reasons: an individual care plan (PAI, projet d'accueil individualisé) can be set up with the doctor. You can also provide a packed lunch, for which you are then responsible.",
+    "Separated parents: enrolling in the canteen is part of the child's everyday life. If you have shared residence, ask the town hall (mairie) whether each parent can be billed for their own weeks, and with which family quotient."
+  ],
+  "documents": [
+    {
+      "id": "attestation-caf",
+      "libelle": "Family quotient certificate from the Caf (Caisse d'allocations familiales, the family benefits office)",
+      "detail": "Free download from your Caf account (Mon compte, Attestations). Without it, the maximum rate may apply.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Latest income tax notice",
+      "detail": "Copy. Often requested if you do not receive Caf benefits. Downloadable on impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Recent proof of address",
+      "detail": "Copy. Bill or rent receipt in your name.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "ID of the parent enrolling the child",
+      "detail": "Original or copy, depending on the town hall.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Family record book (livret de famille) or the child's birth certificate",
+      "detail": "Copy. Birth certificate free online on service-public.gouv.fr.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "assurance",
+      "libelle": "Civil liability insurance certificate",
+      "detail": "Often required for the canteen and after-school care. Ask your home or school insurer.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "carnet-vaccins",
+      "libelle": "Vaccination pages of the health record book",
+      "detail": "Copy, often requested for after-school care.",
+      "coffre": "sante"
+    },
+    {
+      "id": "pai",
+      "libelle": "Individual care plan (PAI) and medical certificate, if needed",
+      "detail": "To prepare with your doctor and the school management before the first meal.",
+      "coffre": "sante"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or residence agreement, if you are separated",
+      "detail": "Copy. Useful for billing under shared residence and for the list of people allowed to pick up the child.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank details slip)",
+      "detail": "If you choose automatic direct debit.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Find out how it works",
+      "detail": "In primary school, ask the town hall's school or after-school service. In middle and high school, ask the school office or the bursar's office (intendance). Ask for the enrollment dates, the list of documents and the price list."
+    },
+    {
+      "titre": "Download your certificates",
+      "detail": "Family quotient certificate on caf.fr, tax notice on impots.gouv.fr, insurance certificate from your insurer."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Family quotient certificate, proof of address, ID, family record book, insurance certificate, vaccination pages, PAI if needed, judgment if separated, RIB for direct debit. Note which days your child will attend."
+    },
+    {
+      "titre": "Enroll your child",
+      "detail": "At the counter or on the town's family portal (portail famille) if there is one. Specify the canteen and after-school care days."
+    },
+    {
+      "titre": "Ask for help if needed",
+      "detail": "In primary school, ask at the town hall or the school social worker. In middle and high school, contact the social worker or the school office about the canteen social fund."
+    },
+    {
+      "titre": "Record the bills",
+      "detail": "Log each payment in your Journal to keep a history of your child's expenses and make sharing costs with the other parent easier."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Your town hall (mairie)",
+      "detail": "Canteen and after-school care in nursery and primary school."
+    },
+    {
+      "nom": "Middle or high school office or bursar's office (intendance)",
+      "detail": "School lunches (demi-pension) and canteen social fund."
+    },
+    {
+      "nom": "Caf de la Guadeloupe",
+      "detail": "Family quotient certificate in your online account.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    },
+    {
+      "nom": "The school (collège or lycée)",
+      "detail": "School lunch prices, set by the Département de la Guadeloupe for middle schools and by the Région Guadeloupe for high schools, and access to the social fund."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "School canteen in primary school (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570"
+    },
+    {
+      "titre": "Financial help for the canteen (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294"
+    },
+    {
+      "titre": "Canteen in middle and high school (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "School canteen",
+      "categorie": "cantine"
+    },
+    {
+      "type": "depense",
+      "titre": "Before/after-school care",
+      "categorie": "ecole"
+    },
+    {
+      "type": "coffre",
+      "titre": "Caf family quotient certificate",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Canteen and after-school care enrollment form",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Individual care plan (PAI)",
+      "categorie": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Canteen and after-school care enrollment before school starts",
+      "evenement": "ecole"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: prices, required documents, family portal and how after-school care is organized, which are specific to each town in Guadeloupe.",
+    "To be confirmed locally: school lunch prices in middle schools (Département) and high schools (Région), and the social fund calendar; ask the school.",
+    "To be confirmed locally: billing under shared residence (one bill per parent or not), depending on the town."
+  ],
+  "motsCles": [
+    "canteen",
+    "after-school care",
+    "périscolaire",
+    "school lunch",
+    "meals",
+    "PAI",
+    "quotient familial"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F24570 School canteen in primary school",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570",
+      "verifieLe": "2025-05-20"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F19294 Financial help for the canteen",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294",
+      "verifieLe": "2025-10-20"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F24569 Canteen in middle and high school",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569",
+      "verifieLe": "2026-02-25"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1871 School insurance",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871",
+      "verifieLe": "2025-09-15"
+    }
+  ]
+}

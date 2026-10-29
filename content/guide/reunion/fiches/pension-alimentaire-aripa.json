@@ -1,0 +1,79 @@
+{
+  "slug": "pension-alimentaire-aripa",
+  "territoire": "reunion",
+  "categorie": "separation",
+  "titre": "Que faire si l'autre parent ne paie pas la pension (ARIPA)",
+  "resume": "Pension impayée ou en retard : les pièces pour demander à la Caf (ARIPA) de récupérer les sommes et de verser la pension chaque mois, que faire sans titre exécutoire, et l'ASF en complément.",
+  "aQuoiCaSert": "Avec l'intermédiation financière, l'agence de recouvrement des pensions alimentaires (ARIPA, rattachée à la Caf) collecte chaque mois la pension auprès du parent qui paie et vous la reverse. En cas d'impayé, c'est elle qui engage le recouvrement, gratuitement pour vous. Pour agir, elle a besoin d'un titre exécutoire qui fixe la pension. En attendant, l'allocation de soutien familial (ASF) peut vous être versée par la Caf de La Réunion.",
+  "quiEstConcerne": [
+    "Le parent qui doit recevoir une pension pour un enfant et ne la reçoit pas, pas en entier, ou en retard.",
+    "Les parents séparés, mariés ou non.",
+    "Ne sont pas concernées : la prestation compensatoire entre ex-époux et les pensions versées à d'autres membres de la famille."
+  ],
+  "aSavoir": [
+    "Il faut un titre exécutoire : jugement, convention homologuée par le juge, convention de divorce par consentement mutuel déposée chez un notaire, acte notarié, accord de médiation, de conciliation ou de procédure participative revêtu de la formule exécutoire, ou titre délivré par la Caf ou la MSA.",
+    "Titre Caf : il est réservé aux parents non mariés qui sont d'accord sur le montant. Sans accord, il faut saisir le juge aux affaires familiales.",
+    "Le premier versement par l'ARIPA intervient au plus tard 60 jours après réception des pièces demandées. Pendant l'instruction, la pension reste payée directement entre parents.",
+    "Le service est gratuit pour les deux parents. En cas d'impayé, le parent qui ne paie pas supporte des frais de 7,5 % (recouvrement amiable) ou 10 % de l'arriéré (recouvrement forcé).",
+    "Violences intrafamiliales : l'intermédiation est imposée et ne peut pas être écartée, même d'un commun accord.",
+    "Arriérés : ils peuvent être réclamés sur 5 ans au maximum. Par un commissaire de justice, le paiement direct ne récupère que les 6 derniers mois, mais permet aussi de sécuriser les échéances à venir.",
+    "Plainte pour abandon de famille : possible si la pension n'est pas payée intégralement depuis plus de 2 mois.",
+    "En complément, l'ASF (200,78 € par enfant et par mois) peut être versée en avance quand la pension fixée n'est pas payée : voir la fiche ASF."
+  ],
+  "documents": [
+    { "id": "titre-executoire", "libelle": "Titre exécutoire fixant la pension (copie complète)", "detail": "Jugement, convention homologuée, convention de divorce, acte notarié ou titre Caf. Perdu ? Demandez une copie au greffe du tribunal, à l'avocat ou au notaire.", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Votre pièce d'identité (copie)", "coffre": "jaf" },
+    { "id": "rib", "libelle": "RIB à votre nom", "detail": "Compte sur lequel l'ARIPA versera la pension.", "coffre": "finances" },
+    { "id": "coordonnees-autre-parent", "libelle": "Coordonnées connues de l'autre parent", "detail": "Nom, date de naissance, dernière adresse connue, employeur si vous le connaissez.", "coffre": "jaf" },
+    { "id": "preuves-impayes", "libelle": "Tableau des impayés et preuves", "detail": "Mois par mois : montant dû, montant reçu, date. Relevés bancaires, échanges écrits, relance. Le Journal de Lien Parental peut vous aider à le préparer.", "coffre": "finances" },
+    { "id": "numero-allocataire", "libelle": "Numéro d'allocataire Caf ou MSA, si vous en avez un", "coffre": "finances" },
+    { "id": "relance", "libelle": "Copie du courrier de relance à l'autre parent", "detail": "Facultatif, mais utile comme preuve d'une démarche amiable.", "coffre": "courriers" },
+    { "id": "courriers-aripa", "libelle": "Courriers et attestations de l'ARIPA", "detail": "Dont le courrier indiquant la date de début de l'intermédiation.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Réunissez la preuve de l'impayé", "detail": "Listez mois par mois ce qui est dû et ce qui a été reçu. Vous pouvez d'abord envoyer une relance écrite à l'autre parent ou proposer une médiation." },
+    { "titre": "Vérifiez que vous avez un titre exécutoire", "detail": "Sans titre : demandez un titre Caf si vous n'êtes pas mariés et êtes d'accord sur le montant, sinon saisissez le juge aux affaires familiales. Demandez l'ASF en parallèle." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Copie lisible et complète du titre exécutoire, pièce d'identité, RIB à votre nom, coordonnées de l'autre parent, tableau des impayés avec justificatifs. Gardez une copie de l'ensemble." },
+    { "titre": "Faites la demande en ligne sur le site de l'ARIPA", "detail": "Demande d'intermédiation financière et de recouvrement. L'ARIPA écrit ensuite à chaque parent : répondez vite et tenez vos informations à jour." },
+    { "titre": "Demandez l'ASF à la Caf si la pension n'est pas payée", "detail": "Elle peut être versée en avance pendant le recouvrement." },
+    { "titre": "Suivez chaque versement dans le Journal", "detail": "Avec le justificatif. Lien Parental ne certifie pas qu'un paiement a eu lieu, mais vous aide à garder l'historique." },
+    { "titre": "Autres recours si besoin", "detail": "Commissaire de justice (paiement direct, saisie), recouvrement par le Trésor public demandé au procureur de la République après l'échec d'une autre procédure, ou plainte pour abandon de famille. Un avocat ou un point-justice peut vous orienter." }
+  ],
+  "ou": [
+    { "nom": "ARIPA, service public des pensions alimentaires", "detail": "Demande en ligne d'intermédiation et de recouvrement, simulateur de pension, page de contact.", "url": "https://pension-alimentaire.caf.fr/usagers/nous-contacter" },
+    { "nom": "Caf de La Réunion", "detail": "Demande d'ASF et titre exécutoire Caf.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" },
+    { "nom": "Juge aux affaires familiales : tribunal judiciaire de Saint-Denis ou de Saint-Pierre", "detail": "Selon le lieu de résidence de l'enfant, pour fixer ou modifier la pension. Voir la fiche « Saisir le juge aux affaires familiales »." },
+    { "nom": "Points-justice de La Réunion", "detail": "Information juridique gratuite et orientation.", "url": "https://lannuaire.service-public.gouv.fr/navigation/la-reunion/point_justice" }
+  ],
+  "liens": [
+    { "titre": "Pension alimentaire impayée (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249" },
+    { "titre": "Intermédiation financière des pensions (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407" },
+    { "titre": "ARIPA : intermédiation financière", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" },
+    { "titre": "ARIPA : demander un titre exécutoire Caf", "url": "https://pension-alimentaire.caf.fr/usagers/demande-titre-executoire" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Titre exécutoire fixant la pension", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Tableau et preuves des pensions impayées", "categorie": "finances" },
+    { "type": "coffre", "titre": "Courrier de l'ARIPA (début de l'intermédiation)", "categorie": "courriers" },
+    { "type": "depense", "titre": "Pension alimentaire", "categorie": "pension" },
+    { "type": "rappel", "titre": "Vérifier le versement mensuel de la pension", "evenement": "autre" },
+    { "type": "rappel", "titre": "Relancer l'ARIPA si aucun versement 60 jours après le dossier complet", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Premier versement par l'ARIPA au plus tard 60 jours après réception des pièces" },
+    { "libelle": "Plainte pour abandon de famille possible après plus de 2 mois d'impayés" },
+    { "libelle": "Arriérés réclamables sur 5 ans au maximum", "detail": "Le paiement direct par commissaire de justice ne couvre que les 6 derniers mois." }
+  ],
+  "aConfirmer": [
+    "La liste exacte des pièces demandées par l'ARIPA n'est pas publiée : elle peut demander des documents complémentaires pendant l'instruction.",
+    "À confirmer : le numéro de téléphone de l'ARIPA à composer depuis La Réunion, indiqué sur la page « Nous contacter » (site non relu aujourd'hui).",
+    "À confirmer localement : le tribunal judiciaire compétent (Saint-Denis ou Saint-Pierre) selon votre commune, et les modalités de dépôt d'une plainte pour abandon de famille (commissariat, gendarmerie ou courrier au procureur)."
+  ],
+  "motsCles": ["pension", "ARIPA", "intermédiation", "impayé", "Caf", "recouvrement", "titre exécutoire"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1249 Pension alimentaire impayée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F36407 Intermédiation financière des pensions alimentaires", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F815 Allocation de soutien familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "slug": "conge-paternite",
+  "territoire": "reunion",
+  "categorie": "naissance",
+  "titre": "Congé de paternité et d'accueil de l'enfant",
+  "resume": "Durée du congé, délais pour prévenir l'employeur, indemnités journalières versées par la CGSS de La Réunion et pièces à envoyer, plus le congé supplémentaire de naissance.",
+  "aQuoiCaSert": "Le congé de paternité et d'accueil de l'enfant permet au père, ou au conjoint, partenaire de Pacs ou concubin de la mère, d'arrêter de travailler après la naissance pour s'occuper de l'enfant. Pendant ce congé, le contrat de travail est suspendu et l'Assurance maladie, gérée à La Réunion par la CGSS, peut verser des indemnités journalières. Un congé supplémentaire de naissance peut ensuite s'y ajouter.",
+  "quiEstConcerne": [
+    "Le père salarié de l'enfant.",
+    "Le conjoint, partenaire de Pacs ou concubin de la mère, s'il n'est pas le père.",
+    "Cette fiche concerne les salariés du secteur privé : fonctionnaires, indépendants et autres régimes ont leurs propres règles."
+  ],
+  "aSavoir": [
+    "Parents séparés : le père de l'enfant a droit au congé sans condition de mariage, de Pacs ou de vie commune avec la mère.",
+    "Durée : 25 jours calendaires pour une naissance (32 en cas de naissances multiples), après le congé de naissance de 3 jours ouvrables. Une période de 4 jours est obligatoire juste après ce congé de naissance.",
+    "Les jours restants (21, ou 28 pour des naissances multiples) sont facultatifs et se prennent dans les 6 mois qui suivent la naissance.",
+    "Prévenez l'employeur au moins 1 mois avant la date prévue de l'accouchement, puis au moins 1 mois avant le début du congé, en indiquant sa durée. Un écrit est conseillé. Si ces délais sont respectés, l'employeur ne peut pas refuser.",
+    "Indemnités journalières : il faut notamment avoir un numéro de sécurité sociale depuis au moins 6 mois et avoir travaillé 150 heures dans les 3 mois précédents, ou cotisé sur au moins 12 058,20 € de salaire sur 6 mois. Montant : de 11,12 € à 104,02 € par jour.",
+    "Congé supplémentaire de naissance : il peut être pris à la suite du congé de paternité. Ses conditions et son indemnisation sont détaillées sur le Code du travail numérique."
+  ],
+  "documents": [
+    { "id": "acte-naissance", "libelle": "Copie intégrale de l'acte de naissance de l'enfant ou livret de famille mis à jour", "detail": "À envoyer à l'Assurance maladie. Acte gratuit en ligne ou à la mairie du lieu de naissance.", "coffre": "finances" },
+    { "id": "lien-mere", "libelle": "Justificatif du lien avec la mère si vous n'êtes pas le père", "detail": "Acte de mariage, Pacs, ou justificatif de vie commune selon votre situation.", "coffre": "finances" },
+    { "id": "courrier-employeur", "libelle": "Courrier d'information à l'employeur", "detail": "Copie de la lettre recommandée ou de la décharge signée, avec les dates du congé.", "coffre": "courriers" },
+    { "id": "attestation-salaire", "libelle": "Attestation de salaire", "detail": "Transmise par l'employeur à l'Assurance maladie. Vérifiez qu'elle a bien été envoyée.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB", "detail": "Si vos coordonnées bancaires ne sont pas à jour sur votre compte ameli.", "coffre": "finances" },
+    { "id": "decomptes-ij", "libelle": "Relevés de paiement des indemnités journalières", "detail": "Téléchargeables dans votre compte ameli.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Prévenez votre employeur par écrit", "detail": "Au moins 1 mois avant la naissance prévue, puis au moins 1 mois avant le début du congé." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Acte de naissance ou livret de famille à jour, justificatif du lien avec la mère si vous n'êtes pas le père, attestation de salaire envoyée par l'employeur, RIB et adresse à jour sur ameli." },
+    { "titre": "Envoyez les justificatifs à l'Assurance maladie", "detail": "Par votre compte ameli ou par courrier à la CGSS de La Réunion." },
+    { "titre": "Prenez la période obligatoire de 4 jours", "detail": "Juste après le congé de naissance de 3 jours payé par l'employeur." },
+    { "titre": "Planifiez le reste du congé dans les 6 mois", "detail": "Et, si vous le souhaitez, le congé supplémentaire de naissance : vérifiez ses conditions sur le Code du travail numérique." }
+  ],
+  "ou": [
+    { "nom": "Votre employeur", "detail": "Information préalable et attestation de salaire." },
+    { "nom": "CGSS de La Réunion (Assurance maladie)", "detail": "Indemnités journalières. Téléphone : 36 46.", "url": "https://www.cgss.re", "telephone": "36 46" }
+  ],
+  "liens": [
+    { "titre": "Congé de paternité et d'accueil de l'enfant (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156" },
+    { "titre": "Congé supplémentaire de naissance (code.travail.gouv.fr)", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Prévenir l'employeur du congé de paternité (1 mois avant la naissance prévue)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Prendre la fin du congé de paternité dans les 6 mois après la naissance", "evenement": "autre" },
+    { "type": "coffre", "titre": "Courrier de congé de paternité à l'employeur", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Relevés d'indemnités journalières du congé de paternité", "categorie": "finances" }
+  ],
+  "datesLimites": [
+    { "libelle": "Informer l'employeur au moins 1 mois avant la naissance prévue", "detail": "Puis au moins 1 mois avant le début du congé." },
+    { "libelle": "Congé à prendre dans les 6 mois suivant la naissance" }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la CGSS de La Réunion : modalités d'envoi des justificatifs et délai de paiement des indemnités journalières.",
+    "Les conditions et montants du congé supplémentaire de naissance n'ont pas été revérifiés dans le détail lors de cette mise à jour : consultez le Code du travail numérique ou votre employeur."
+  ],
+  "motsCles": ["congé de paternité", "naissance", "indemnités journalières", "employeur", "congé supplémentaire de naissance", "CGSS"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F3156 Congé de paternité et d'accueil de l'enfant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156", "verifieLe": "2026-10-29" }
+  ]
+}

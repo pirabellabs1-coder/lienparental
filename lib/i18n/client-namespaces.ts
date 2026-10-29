@@ -28,6 +28,9 @@ export const CLIENT_NS_SITE_HOME = ['featureTabs', 'testimonials', 'video.dialog
 /** En plus de CLIENT_NS_SITE sur /installer (app/installer/page.tsx). */
 export const CLIENT_NS_SITE_INSTALL = ['public.install'] as const
 
+/** En plus de CLIENT_NS_SITE sur /partenaires/candidature (formulaire client). */
+export const CLIENT_NS_SITE_PARTNER_APPLY = ['public.partners.apply'] as const
+
 /** Parcours publics app/(public)/** : connexion, inscription, onboarding, mots de passe. */
 export const CLIENT_NS_PUBLIC_FLOWS = [
   ...CLIENT_NS_ROOT,

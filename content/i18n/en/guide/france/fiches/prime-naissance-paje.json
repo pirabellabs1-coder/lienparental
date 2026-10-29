@@ -1,0 +1,167 @@
+{
+  "slug": "prime-naissance-paje",
+  "territoire": "france",
+  "categorie": "naissance",
+  "titre": "Birth grant and basic allowance (Paje)",
+  "resume": "The two Caf benefits linked to a baby's arrival: income conditions, 2026 amounts, payment dates and what you must report in time.",
+  "aQuoiCaSert": "The Paje (prestation d'accueil du jeune enfant, early childhood benefit) includes in particular the birth grant (prime à la naissance), paid once during pregnancy, and the basic allowance (allocation de base), paid every month until the child turns 3. They help cover the costs of a baby's arrival and of raising a young child. Both are paid by the Caf (Caisse d'allocations familiales, the family benefits office) and are subject to income conditions.",
+  "quiEstConcerne": [
+    "Parents-to-be and parents of a child under 3 whose income does not exceed the limits.",
+    "Families receiving benefits from the Caf, or from the MSA for the agricultural scheme."
+  ],
+  "aSavoir": [
+    "Birth grant: €1,093.11 net per expected child (service-public.gouv.fr, checked on April 1, 2026).",
+    "For the grant, you must have had the first prenatal exam and declared the pregnancy before the end of the 3rd month. It is paid before the last day of the calendar month following the 6th month of pregnancy.",
+    "2026 income limits (2024 net income by category) for 1 child: €49,054 for a couple with two incomes or a single parent, €37,118 for a couple with one income, plus €8,908 per additional child.",
+    "Basic allowance: €198.16 per month if your income is below the lower threshold (for 1 child: €41,055 for a couple with two incomes or a single parent, €31,066 for a couple with one income), €99.08 between the two thresholds.",
+    "It is paid from the month after the birth until the month before the child turns 3. It cannot be combined with the complément familial (family supplement); in mainland France, it can be combined with family allowances.",
+    "Separated parents: the Paje is not shared, even with shared residence. It is paid in full to the parent designated as the beneficiary; only family allowances can be shared."
+  ],
+  "documents": [
+    {
+      "id": "declaration-grossesse",
+      "libelle": "Pregnancy declaration",
+      "detail": "Made by the doctor or midwife at the first prenatal exam, before the end of the 3rd month. Keep the form copy or the acknowledgment.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parents",
+      "libelle": "ID or residence permit of each parent",
+      "detail": "Valid copy, requested if you are not yet a Caf beneficiary.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank details slip) of the parent receiving the benefits",
+      "detail": "In your name, for the payment.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "2025 tax notice on 2024 income",
+      "detail": "Copy, downloadable from your impots.gouv.fr account. Income is used to check the limits.",
+      "coffre": "finances"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "Child's birth certificate and updated family record book (livret de famille)",
+      "detail": "Copies, to send to the Caf or the MSA after the birth. Free certificate on service-public.gouv.fr or from the town hall (mairie) of the place of birth.",
+      "coffre": "finances"
+    },
+    {
+      "id": "notification-caf",
+      "libelle": "Caf notices of entitlement",
+      "detail": "Available in your Mon Compte area on caf.fr.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Have the first prenatal exam before the end of the 3rd month",
+      "detail": "The health professional makes the pregnancy declaration. It is what opens entitlement to the grant."
+    },
+    {
+      "titre": "Create or update your account on caf.fr",
+      "detail": "If you are not yet a Caf beneficiary, apply for benefits online. Report the pregnancy if the Caf has not received it."
+    },
+    {
+      "titre": "Check before sending your file",
+      "detail": "Pregnancy declaration sent, contact details and RIB up to date, income declared, accurate family situation (couple, single parent). An incorrectly declared situation can delay or distort the calculation."
+    },
+    {
+      "titre": "Report the birth to the Caf",
+      "detail": "In your online account, under change of situation, with copies of the family record book and the birth certificate."
+    },
+    {
+      "titre": "Track your payments",
+      "detail": "The grant is paid before the last day of the calendar month following the 6th month of pregnancy. The basic allowance is paid every month from the month after the birth."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf of your département",
+      "detail": "Online procedures in your Mon Compte area; contacts and offices in the \"Ma Caf\" section.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, the farmers' social security fund)",
+      "detail": "If you are covered by the agricultural scheme.",
+      "url": "https://www.msa.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Birth grant (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550"
+    },
+    {
+      "titre": "Paje basic allowance (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552"
+    },
+    {
+      "titre": "Shared residence and family benefits (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "First prenatal exam and pregnancy declaration before the end of the 3rd month",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Report the birth to the Caf",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Pregnancy declaration",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Caf Paje notice of entitlement",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Pregnancy declaration before the end of the 3rd month",
+      "detail": "Condition for receiving the birth grant."
+    },
+    {
+      "libelle": "Basic allowance until the month before the child turns 3"
+    }
+  ],
+  "aConfirmer": [
+    "Amounts and limits are indexed every year: use the caf.fr simulator for your situation.",
+    "The choice of beneficiary parent after a separation is settled with the Caf: check with them if the child changes residence."
+  ],
+  "motsCles": [
+    "Paje",
+    "birth grant",
+    "basic allowance",
+    "pregnancy",
+    "Caf",
+    "baby"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2550 Birth grant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2552 Paje basic allowance",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Shared residence and family benefits",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

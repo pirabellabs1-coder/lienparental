@@ -1,0 +1,274 @@
+{
+  "slug": "saisir-juge-affaires-familiales",
+  "territoire": "reunion",
+  "categorie": "separation",
+  "titre": "Recorrer ao juiz de família (JAF)",
+  "resume": "O formulário cerfa n° 11530, a lista dos documentos (certidões de nascimento com menos de 3 meses), o tribunal competente na Reunião (Saint-Denis ou Saint-Pierre), o selo de 50 € e os casos em que ele não é devido.",
+  "aQuoiCaSert": "O juiz de família (juge aux affaires familiales, JAF) decide os desacordos entre os pais sobre o exercício da autoridade parental, a residência da criança, o direito de visita e de hospedagem ou a pensão alimentícia. Ele também pode modificar uma decisão existente quando a situação muda, ou homologar um acordo feito entre os pais para lhe dar a força de uma sentença. Na Reunião, dois tribunais judiciaires cuidam desses casos: Saint-Denis e Saint-Pierre.",
+  "quiEstConcerne": [
+    "Os pais, casados ou não, que não conseguem chegar a um acordo sobre os filhos.",
+    "O genitor que quer modificar uma decisão existente (mudança de endereço, mudança de renda, nova organização).",
+    "Os pais que estão de acordo e querem homologar o seu acordo parental (convention parentale).",
+    "O genitor que recebe o ASF (allocation de soutien familial, auxílio de apoio familiar) sem pensão fixada e precisa recorrer ao juiz em até 4 meses."
+  ],
+  "aSavoir": [
+    "Formulário: cerfa n° 11530 «Demande au juge aux affaires familiales» (pedido ao juiz de família), para preencher on-line ou em papel. Também é possível fazer o pedido totalmente on-line.",
+    "Tribunal competente: o do local onde mora o genitor com quem a criança reside habitualmente; se os pais ainda moram juntos, o do local de residência da família. Na Reunião: tribunal judiciaire de Saint-Denis ou de Saint-Pierre, conforme o seu município.",
+    "O advogado não é obrigatório perante o juiz de família (é obrigatório no recurso). A assistência jurídica gratuita (aide juridictionnelle) pode cobrir os custos conforme a sua renda: veja a ficha «Pedir assistência jurídica gratuita (aide juridictionnelle)».",
+    "Selo fiscal (timbre fiscal) de 50 €, apenas eletrônico, comprado on-line com cartão bancário antes do pedido. Não é cobrado com assistência jurídica gratuita, para homologar um acordo parental, nem para uma medida protetiva. Válido por 12 meses, reembolsável em até 18 meses se não for usado.",
+    "Mediação prévia: a experiência que a impunha no tribunal de Saint-Denis antes de certos pedidos terminou em 31 de dezembro de 2024. Ela continua recomendada, mas não é mais obrigatória para recorrer ao juiz.",
+    "Pais de acordo: pedido conjunto de homologação do acordo parental (cerfa n° 16139), assinado pelos dois.",
+    "Violência: a medida protetiva (ordonnance de protection) é pedida ao juiz de família, sem necessidade de queixa prévia. A audiência acontece em até 6 dias após ser marcada. Perigo imediato: 17 ou 112. Atendimento: 3919, gratuito a partir da Reunião, 24 horas por dia.",
+    "Este guia não substitui uma orientação jurídica: para a sua situação, procure um advogado ou um point-justice (posto gratuito de informação jurídica)."
+  ],
+  "documents": [
+    {
+      "id": "cerfa-11530",
+      "libelle": "Formulário cerfa n° 11530 preenchido, datado e assinado",
+      "detail": "Original para o tribunal, cópia para você. Pode ser preenchido on-line em service-public.gouv.fr.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "acte-naissance-parent",
+      "libelle": "Cópia integral (copie intégrale) da sua certidão de nascimento com menos de 3 meses",
+      "detail": "Não um extrato. Pedido gratuito on-line em service-public.gouv.fr (veja a ficha «Obter uma certidão de nascimento»).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "actes-naissance-enfants",
+      "libelle": "Cópia integral da certidão de nascimento de cada filho envolvido, com menos de 3 meses",
+      "detail": "Mesmo procedimento, na prefeitura (mairie) do lugar de nascimento da criança. Conte com o prazo de envio, sobretudo se a criança nasceu na França metropolitana.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Livro de família (livret de famille) ou cópia integral da certidão de casamento com menos de 3 meses",
+      "coffre": "jaf"
+    },
+    {
+      "id": "identite",
+      "libelle": "Cópia do seu documento de identidade",
+      "detail": "Carteira de identidade ou passaporte, frente e verso.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "jugements",
+      "libelle": "Cópia das sentenças anteriores (divórcio, separação, autoridade parental, pensão)",
+      "detail": "Se não tiver mais, peça uma cópia ao cartório (greffe) do tribunal que a proferiu.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de residência recente",
+      "detail": "Conforme o pedido: conta, recibo de aluguel ou declaração de hospedagem (attestation d'hébergement).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Comprovantes de renda e de despesas",
+      "detail": "Sobretudo se o pedido for sobre a pensão: último aviso de imposto e declaração de renda, 3 últimos contracheques, comprovante de benefícios da Caf (órgão de benefícios familiares), aluguel, empréstimos, despesas da criança.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "timbre",
+      "libelle": "Selo fiscal eletrônico de 50 € (PDF ou SMS com 16 dígitos)",
+      "detail": "Exceto com assistência jurídica gratuita ou homologação de acordo parental.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "aj",
+      "libelle": "Decisão de assistência jurídica gratuita ou recibo do pedido, se você a solicitou",
+      "coffre": "jaf"
+    },
+    {
+      "id": "pieces-situation",
+      "libelle": "Documentos úteis para o seu pedido",
+      "detail": "Por exemplo: atestado de matrícula escolar, mensagens escritas sobre a organização, declarações. Evite documentos sem relação com o pedido.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Tente primeiro uma solução amigável",
+      "detail": "Mediação familiar ou acordo escrito para homologar. O formulário pergunta se houve tentativa amigável. Não há mediação em caso de violência."
+    },
+    {
+      "titre": "Peça as certidões de nascimento desde já",
+      "detail": "Devem ter menos de 3 meses na data do protocolo e chegam pelo correio: muitas vezes é o documento que atrasa o processo."
+    },
+    {
+      "titre": "Preencha o cerfa n° 11530 ou o pedido on-line",
+      "detail": "Explique claramente o que você pede (residência, direito de visita, valor da pensão) e por quê."
+    },
+    {
+      "titre": "Compre o selo de 50 € se não estiver isento",
+      "detail": "On-line, com cartão bancário, antes de enviar o pedido."
+    },
+    {
+      "titre": "Confira antes de enviar o processo",
+      "detail": "Cerfa assinado; cópias integrais das certidões de nascimento com menos de 3 meses (sua e de cada filho); livro de família ou certidão de casamento; documento de identidade; sentenças anteriores; comprovantes de renda se pedir pensão; selo ou decisão de assistência jurídica gratuita. Faça uma cópia completa."
+    },
+    {
+      "titre": "Envie ou entregue o processo no cartório do tribunal competente",
+      "detail": "Saint-Denis ou Saint-Pierre conforme o local de residência da criança, ou pedido on-line. Guarde a cópia na seção Processo judicial do Cofre."
+    },
+    {
+      "titre": "Prepare a audiência",
+      "detail": "A data é informada a você e o outro genitor é convocado por carta registrada. Adicione-a ao calendário com um lembrete e leve os originais dos seus documentos."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Tribunal judiciaire de Saint-Denis",
+      "detail": "Atendimento de segunda a sexta, das 7h45 às 12h15 e das 13h30 às 15h30. E-mail: accueil.tj-st-denis-de-la-reunion@justice.fr.",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/89e93007-f1cf-40e9-92b1-c8880c9a4d8a",
+      "telephone": "02 62 40 23 45"
+    },
+    {
+      "nom": "Tribunal judiciaire de Saint-Pierre",
+      "detail": "28 rue Augustin Archambaud, 97410 Saint-Pierre. Atendimento de segunda a sexta, das 8h às 12h e das 13h30 às 15h30.",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b",
+      "telephone": "02 62 96 10 00"
+    },
+    {
+      "nom": "Points-justice da Reunião",
+      "detail": "Informação jurídica gratuita, ajuda para montar o processo e para pedir a assistência jurídica gratuita.",
+      "url": "https://lannuaire.service-public.gouv.fr/navigation/la-reunion/point_justice"
+    },
+    {
+      "nom": "Violences Femmes Info (atendimento à mulher em situação de violência)",
+      "detail": "Escuta e orientação, gratuito e anônimo, 24 horas por dia, inclusive a partir da Reunião. Em perigo imediato, ligue para o 17 ou o 112.",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544",
+      "telephone": "3919"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Pedido ao juiz de família, cerfa 11530 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764"
+    },
+    {
+      "titre": "Homologação de acordo parental, cerfa 16139 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771"
+    },
+    {
+      "titre": "Selo fiscal de 50 € (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227"
+    },
+    {
+      "titre": "Autoridade parental em caso de separação (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133"
+    },
+    {
+      "titre": "Violência doméstica e medida protetiva (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Selo fiscal para recorrer ao juiz de família",
+      "categorie": "frais-administratifs",
+      "montant": 50,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764"
+    },
+    {
+      "type": "coffre",
+      "titre": "Pedido ao juiz de família (cópia completa)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Certidões de nascimento com menos de 3 meses",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Comprovantes de renda e de despesas",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Convocação e decisão do juiz de família",
+      "categorie": "jaf"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Audiência com o juiz de família",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Verificar a data das certidões de nascimento (menos de 3 meses)",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Certidões de nascimento com menos de 3 meses no momento do protocolo"
+    },
+    {
+      "libelle": "Selo fiscal válido por 12 meses após a compra",
+      "detail": "Reembolso possível on-line em até 18 meses se não for usado."
+    },
+    {
+      "libelle": "ASF sem pensão fixada: recorrer ao juiz em até 4 meses"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: a divisão dos municípios entre os tribunais judiciaires de Saint-Denis e de Saint-Pierre não pôde ser verificada (sites justice.fr e da cour d'appel em manutenção): pergunte no cartório ou num point-justice.",
+    "A confirmar localmente: o endereço exato de atendimento do tribunal judiciaire de Saint-Denis (o diretório indica a avenue Desbassyns; o escritório de assistência jurídica gratuita, o 5 avenue André Malraux).",
+    "A confirmar localmente: o papel dos tribunais de proximité de Saint-Paul e de Saint-Benoît nos casos de família, e os prazos médios de audiência.",
+    "O prazo para regularizar um pedido feito sem selo fiscal não é indicado nas fichas oficiais: informe-se no cartório do tribunal."
+  ],
+  "motsCles": [
+    "JAF",
+    "juiz",
+    "tribunal",
+    "guarda",
+    "residência",
+    "direito de visita",
+    "cerfa 11530",
+    "homologação",
+    "Saint-Denis",
+    "Saint-Pierre"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, R15764 Pedido ao juiz de família (cerfa 11530)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F33227 Selo fiscal",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F942 Autoridade parental e pedido ao JAF (advogado não obrigatório)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F12544 Violência doméstica",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Annuaire service-public, Tribunal judiciaire de Saint-Denis",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/89e93007-f1cf-40e9-92b1-c8880c9a4d8a",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Annuaire service-public, Tribunal judiciaire de Saint-Pierre",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Légifrance, lei n° 2016-1547 de 18 de novembro de 2016, artigo 7 (fim da mediação prévia obrigatória em 31 de dezembro de 2024)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000033418805",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

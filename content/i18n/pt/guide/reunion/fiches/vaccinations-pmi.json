@@ -1,0 +1,175 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "reunion",
+  "categorie": "sante",
+  "titre": "Vacinas obrigatórias e acompanhamento na PMI",
+  "resume": "As vacinas exigidas para a creche, a escola e o centro de lazer conforme o ano de nascimento, as novidades do calendário de 2026 divulgadas pela ARS La Réunion e o acompanhamento das crianças pequenas na PMI.",
+  "aQuoiCaSert": "As vacinas obrigatórias são exigidas para entrar na creche, na escola, no atendimento pós-escola ou na colônia de férias: sem comprovante, a matrícula pode ser recusada ou apenas provisória. O comprovante é a caderneta de saúde (carnet de santé) preenchida pelo profissional de saúde. Os centros de proteção materno-infantil (protection maternelle et infantile, PMI) do Département de La Réunion (governo departamental) fazem o acompanhamento médico das crianças pequenas, vacinas incluídas. A ARS La Réunion (Agence régionale de santé, agência regional de saúde) divulga todo ano o calendário vacinal e faz campanhas com os jovens junto com a académie (administração regional da educação).",
+  "quiEstConcerne": [
+    "Todos os pais de filhos menores, sobretudo antes da entrada na creche, na escola ou em centro de lazer.",
+    "Os pais de crianças com menos de 6 anos, para o acompanhamento na PMI.",
+    "Os pais de alunos do collège (anos finais do ensino fundamental), para as campanhas de vacinação organizadas na escola (HPV, meningococos)."
+  ],
+  "aSavoir": [
+    "Criança nascida antes de 2018: difteria, tétano e poliomielite (DTP) obrigatórias.",
+    "Criança nascida de 2018 a 2022: 11 vacinas obrigatórias (difteria, tétano, poliomielite, coqueluche, Haemophilus influenzae b, hepatite B, pneumococo, meningococo C, sarampo, caxumba, rubéola).",
+    "Criança nascida a partir de 2023: mesma lista, com os meningococos A, B, C, W e Y no lugar do meningococo C apenas. Uma vacinação de recuperação contra os meningococos é oferecida às crianças de 2 a 4 anos (calendário de 2026).",
+    "Nenhuma vacina adicional é obrigatória na Reunião: a febre amarela só é obrigatória na Guiana Francesa.",
+    "Uma criança com vacinas atrasadas pode ser admitida provisoriamente: você tem então 3 meses para regularizar, senão ela pode ser excluída. Se a criança ficar mais de um ano no estabelecimento, o comprovante é pedido todo ano.",
+    "HPV: vacinação prioritária dos 11 aos 14 anos, com uma campanha gratuita na classe de 5e (equivalente ao 7º ano), e recuperação agora possível até os 26 anos.",
+    "Os 20 exames de saúde obrigatórios da criança (até os 16 anos) são cobertos 100% sem adiantamento de despesas, exceto honorários excedentes. Até os 6 anos, podem ser feitos pelo médico de referência (médecin traitant), outro médico ou um centro de PMI; depois, por um clínico geral ou pediatra.",
+    "Pais separados: o genitor que leva a criança para vacinar deve, de preferência, avisar o outro e enviar uma cópia das páginas de vacinas, para que cada um tenha o comprovante."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "Caderneta de saúde da criança (carnet de santé)",
+      "detail": "Original, a levar a cada consulta. É o comprovante das vacinas: guarde uma cópia ou foto das páginas de vacinas.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Carte Vitale (cartão do seguro de saúde) do genitor ou atestado de direitos da criança",
+      "detail": "Atestado disponível gratuitamente na sua conta ameli.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Documento de identidade do genitor ou do adulto acompanhante",
+      "detail": "Se outra pessoa acompanhar a criança, leve uma autorização escrita de um dos pais.",
+      "coffre": "sante"
+    },
+    {
+      "id": "autorisation-college",
+      "libelle": "Formulário de autorização dos pais para a vacinação no collège",
+      "detail": "Entregue pela escola nas campanhas de HPV e meningococos: devolva antes da data indicada.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Atestado médico de contraindicação, se for o caso",
+      "detail": "Emitido pelo médico. Apresentado no lugar do comprovante de vacina.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique a caderneta de saúde",
+      "detail": "Compare com a lista de vacinas obrigatórias conforme o ano de nascimento do seu filho e com o calendário vacinal de 2026."
+    },
+    {
+      "titre": "Marque uma consulta",
+      "detail": "Com seu médico de referência ou pediatra, ou num centro de PMI do Département para menores de 6 anos. Ligue antes de ir."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Caderneta de saúde, carte Vitale ou atestado de direitos, documento de identidade, autorização escrita se quem acompanha não for um dos pais."
+    },
+    {
+      "titre": "Vacine seu filho",
+      "detail": "O profissional registra a vacina na caderneta de saúde."
+    },
+    {
+      "titre": "Apresente o comprovante",
+      "detail": "Cópia das páginas de vacinas para a creche, a escola ou o centro de lazer, e todo ano se a criança ficar lá mais de um ano."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "PMI do Département de La Réunion",
+      "detail": "Acompanhamento médico das crianças pequenas, vacinas e apoio à parentalidade. Central telefônica do Département: de segunda a sexta, das 8h às 16h30.",
+      "url": "https://www.departement974.fr/protection-maternelle-infantile-pmi",
+      "telephone": "0262 90 30 30"
+    },
+    {
+      "nom": "Seu médico de referência ou pediatra",
+      "detail": "Vacinas e exames de saúde obrigatórios."
+    },
+    {
+      "nom": "ARS La Réunion",
+      "detail": "Calendário vacinal e campanhas de vacinação na ilha.",
+      "url": "https://www.lareunion.ars.sante.fr/calendrier-des-vaccinations-2026"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vacinas exigidas para a creche e a escola (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Calendário de vacinação 2026 (ARS La Réunion)",
+      "url": "https://www.lareunion.ars.sante.fr/calendrier-des-vaccinations-2026"
+    },
+    {
+      "titre": "Exames médicos obrigatórios da criança (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Consulta de vacinação",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Reforço de vacina",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Devolver a autorização de vacinação no collège (HPV, meningococos)",
+      "evenement": "ecole"
+    },
+    {
+      "type": "coffre",
+      "titre": "Páginas de vacinas da caderneta de saúde",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 meses para regularizar após uma admissão provisória",
+      "detail": "Sem vacinas em dia ao fim desse prazo, a criança pode ser excluída da creche, escola ou centro."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: a lista, os endereços e os horários dos centros de PMI do Département, pois o site oficial não publica uma lista atualizada. Ligue para a central do Département antes de ir.",
+    "A confirmar: a gratuidade das consultas na PMI não é indicada na página do Département consultada.",
+    "A confirmar com o collège: as datas das próximas campanhas de vacinação contra HPV e meningococos.",
+    "O número de doses e a idade de cada vacina seguem o calendário vacinal em vigor: verifique com seu médico ou a PMI."
+  ],
+  "motsCles": [
+    "vacina",
+    "PMI",
+    "caderneta de saúde",
+    "sarampo",
+    "meningococo",
+    "HPV",
+    "pediatra",
+    "bebê"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F967 Exames médicos obrigatórios da criança",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "ARS La Réunion, Calendário de vacinação 2026",
+      "url": "https://www.lareunion.ars.sante.fr/calendrier-des-vaccinations-2026",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Département de La Réunion, Proteção materno-infantil (PMI)",
+      "url": "https://www.departement974.fr/protection-maternelle-infantile-pmi",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

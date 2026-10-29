@@ -1,0 +1,63 @@
+{
+  "slug": "complementaire-sante-solidaire",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Complémentaire santé solidaire (C2S, top-up health cover) in Mayotte",
+  "resume": "Free or low-cost top-up health cover for the whole household, children included, based on your income over the last 12 months. It has existed in Mayotte since January 1, 2024, with its own income limits.",
+  "aQuoiCaSert": "The Complémentaire santé solidaire covers the share of health expenses not reimbursed by health insurance (the ticket modérateur, or patient co-payment), up to the Sécurité sociale (social security) rates. It is free or comes with a small monthly contribution depending on your resources, and covers everyone in the household, so your children too. In Mayotte, it is managed by the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) and has existed since January 1, 2024.",
+  "quiEstConcerne": [
+    "Low-income households living in Mayotte on a stable and lawful basis.",
+    "People receiving the RSA (revenu de solidarité active, the minimum income benefit): free C2S is granted automatically.",
+    "Single parents and families who have no top-up health cover for their children."
+  ],
+  "aSavoir": [
+    "Annual limits in Mayotte for free C2S, since April 1, 2026: €11,599 for 1 person, €17,398 for 2, €20,878 for 3, €24,358 for 4, plus €4,640 per additional person.",
+    "C2S with a contribution: resources up to €15,659 for 1 person, €23,488 for 2, €28,185 for 3, €32,883 for 4, plus €6,263 per additional person.",
+    "Monthly contribution per person, depending on age on January 1: €8 up to age 29, €14 from 30 to 49, €21 from 50 to 59, €25 from 60 to 69, €30 from age 70.",
+    "The resources counted are those of the 12 months before the application.",
+    "Reply within 2 months at most. If refused, you have 2 months to refer the matter to the CSSM's amicable appeals board (commission de recours amiable).",
+    "The C2S is granted for 1 year. Renewal is generally requested 2 to 4 months before the end date; it is automatic for people receiving the RSA.",
+    "When you apply, you choose whether your C2S is managed by the CSSM or by a top-up health insurer (organisme complémentaire).",
+    "Separated parents: the C2S is granted to the household that applies. Ask the CSSM about a child in shared residence."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "C2S application, completed and signed, if you are not applying online", "detail": "It includes the list of household members and their resources over the last 12 months.", "coffre": "sante" },
+    { "id": "avis-impot", "libelle": "Tax notice (avis d'impôt)", "detail": "Copy. Download it from impots.gouv.fr.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Proof of resources for the last 12 months, if requested", "detail": "Payslips, allowances, child support received.", "coffre": "finances" },
+    { "id": "identite", "libelle": "ID document or residence permit", "detail": "Copy.", "coffre": "sante" },
+    { "id": "decision-c2s", "libelle": "C2S award decision", "detail": "It shows the end date of your entitlement: note it for the renewal.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Estimate your entitlement", "detail": "Add up the household's resources over 12 months and compare them with the Mayotte limits." },
+    { "titre": "Apply", "detail": "Online with the \"Demande de complémentaire santé solidaire (Mayotte)\" service or with the CSSM." },
+    { "titre": "Check before you go", "detail": "If you submit the file at the CSSM front desk: signed form, tax notice, proof of resources, ID document and carte Vitale (health insurance card). Make photocopies." },
+    { "titre": "Wait for the decision", "detail": "It is made within 2 months." },
+    { "titre": "Remember to renew", "detail": "Before the end date shown on your certificate." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM), Mayotte's social security fund", "detail": "Centre Kinga, Route nationale 1, Kawéni, 97600 Mamoudzou. Front desk by appointment.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Help with online procedures near you.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Complémentaire santé solidaire (service-public.gouv.fr, Mayotte section)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "C2S award decision", "categorie": "sante" },
+    { "type": "coffre", "titre": "Tax notice used for the C2S", "categorie": "finances" },
+    { "type": "rappel", "titre": "Renew the C2S before the end date", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Entitlement granted for 1 year", "detail": "Request renewal 2 to 4 months before the end date." },
+    { "libelle": "Appeal within 2 months after a refusal", "detail": "To the CSSM's amicable appeals board." }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the CSSM: which parent's household a child in shared residence is attached to for the C2S."
+  ],
+  "motsCles": ["C2S", "mutuelle", "top-up cover", "health", "CSSM", "free", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (Mayotte section)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" },
+    { "titre": "Assurance Maladie, circular CIR-16-2024 (C2S in Mayotte from January 1, 2024)", "url": "https://circulaires.ameli.fr/sites/default/files/directives/cir/2024/CIR-16-2024.pdf" },
+    { "titre": "CSSM, Contacts", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" }
+  ]
+}

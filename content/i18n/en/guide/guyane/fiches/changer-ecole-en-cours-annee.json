@@ -57,10 +57,10 @@
     "To be confirmed locally: the documents requested may vary slightly between town halls in French Guiana."
   ],
   "motsCles": ["change of school", "certificat de radiation", "exeat", "moving", "town hall", "middle school", "high school"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F10722 Changing schools during the year", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722", "verifieLe": "2025-07-08" },
-    { "titre": "Service-public.gouv.fr, F20393 Changing collège or lycée during the year", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393", "verifieLe": "2025-10-09" },
+    { "titre": "Service-public.gouv.fr, F10722 Changing schools during the year", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F20393 Changing collège or lycée during the year", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1865 Enrolling in primary school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" }
   ]
 }

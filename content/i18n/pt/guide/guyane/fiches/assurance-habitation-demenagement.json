@@ -12,7 +12,7 @@
   ],
   "aSavoir": [
     "Inquilino: só o seguro contra riscos locativos (incêndio, explosão, danos causados por água) é obrigatório. Entregue o atestado ao proprietário na entrega das chaves e depois todo ano, se ele pedir.",
-    "Sem seguro, após uma carta registrada e um prazo de um mês, o proprietário pode contratar por você e cobrar o prêmio com acréscimo de até 10%, ou pedir a rescisão do contrato de aluguel.",
+    "Sem seguro, o proprietário tem duas opções. Ou ele envia uma carta registrada: um mês depois, pode contratar o seguro por você e cobrar o prêmio com acréscimo de até 10%, mas não pode mais pedir a rescisão do contrato de aluguel por esse motivo. Ou ele manda entregar uma intimação (commandement) por um commissaire de justice (oficial de justiça): se você continuar sem seguro um mês depois, ele pode pedir ao juiz que declare a rescisão do contrato de aluguel.",
     "Mudança: avise a sua seguradora antes de sair ou no máximo 15 dias corridos após deixar a moradia, por carta registrada ou envio registrado eletrônico.",
     "Cancelamento por mudança: possível se a troca de moradia altera os riscos segurados. Envie a carta no máximo 3 meses após a saída, explicando a ligação com a mudança. O contrato termina 1 mês após o recebimento pela seguradora.",
     "Nenhuma multa de cancelamento pode ser cobrada por motivo de mudança, e os prêmios pagos pelo período após o cancelamento devem ser devolvidos a você.",
@@ -55,13 +55,13 @@
     { "libelle": "3 meses após a saída para cancelar por motivo de mudança" }
   ],
   "aConfirmer": [
-    "A confirmar localmente: se existe uma ADIL na Guiana Francesa e os seus horários de atendimento, em anil.org.",
+    "A confirmar localmente: o endereço e os horários de atendimento da ADIL de la Guyane, em anil.org.",
     "Se o contrato estiver no nome dos dois ex-cônjuges, as formas de alterá-lo devem ser vistas diretamente com a seguradora: as páginas oficiais não tratam desse caso."
   ],
   "motsCles": ["seguro residencial", "mudança", "inquilino", "cancelamento", "responsabilidade civil", "separação"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F31300 Seguro residencial do inquilino", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2025-04-16" },
-    { "titre": "Service-public.gouv.fr, F10827 Seguro residencial e mudança", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2025-05-02" }
+    { "titre": "Service-public.gouv.fr, F31300 Seguro residencial do inquilino", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10827 Seguro residencial e mudança", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2026-10-29" }
   ]
 }

@@ -1,0 +1,210 @@
+{
+  "slug": "inscrire-enfant-ecole",
+  "territoire": "martinique",
+  "categorie": "ecole",
+  "titre": "Matricular meu filho na educação infantil ou no ensino fundamental",
+  "resume": "Duas etapas: a prefeitura (mairie) emite um certificado de matrícula e depois a escola admite a criança. A lista exata de documentos a levar e o que muda quando os pais estão separados.",
+  "aQuoiCaSert": "A escolarização é obrigatória dos 3 aos 16 anos. Para uma primeira matrícula numa escola pública de educação infantil (école maternelle) ou de ensino fundamental (école élémentaire), você passa primeiro pelo serviço escolar da prefeitura (mairie), que entrega um certificado de matrícula com a escola designada. Depois, a direção da escola admite o seu filho mediante esse certificado e o comprovante de vacinação. Preparar os documentos com antecedência evita voltar uma segunda vez.",
+  "quiEstConcerne": [
+    "Pais de uma criança que fará 3 anos no ano civil do início do ano letivo.",
+    "Pais que se mudam ou trocam o filho de escola.",
+    "As famílias recém-chegadas à Martinica, inclusive com uma criança que ainda não fala francês."
+  ],
+  "aSavoir": [
+    "A criança deve ser matriculada na educação infantil no início do ano letivo do ano civil em que faz 3 anos. A escola pública é gratuita.",
+    "A matrícula na prefeitura deve ser feita no máximo em junho, antes do início das aulas. As matrículas costumam abrir em março, às vezes antes, conforme a cidade.",
+    "A prefeitura aceita como documento de identidade o livro de família (livret de famille), a carteira de identidade, o passaporte ou uma cópia de extrato da certidão de nascimento. Uma declaração sob compromisso de honra (attestation sur l'honneur) pode ser aceita para a identidade e para o endereço.",
+    "Em princípio, a matrícula é na escola do setor definido pela cidade. Outra escola exige uma dérogation (autorização especial), que não é automática.",
+    "Pais separados: matricular ou desmatricular numa escola pública é um ato usual. Um dos pais pode fazê-lo sozinho e presume-se que tem o acordo do outro, mas deve informá-lo. Se o outro avisar a escola que discorda, ela deve levar isso em conta. Em caso de desacordo, o juiz de família (juge aux affaires familiales, JAF) pode decidir.",
+    "Autoridade parental exclusiva: se uma sentença a atribui a um só dos pais, ele decide sozinho. Leve uma cópia da sentença para que a escola e a prefeitura a levem em conta.",
+    "Troca de escola durante a escolaridade: a nova escola geralmente pede o certificat de radiation (certificat de radiation da escola) emitido pela escola anterior, além do certificado de matrícula da prefeitura."
+  ],
+  "documents": [
+    {
+      "id": "identite-enfant",
+      "libelle": "Livro de família, carteira de identidade, passaporte ou cópia de extrato da certidão de nascimento da criança",
+      "detail": "Original a apresentar. Não tem certidão de nascimento? Peça-a gratuitamente on-line em service-public.gouv.fr ou na prefeitura do local de nascimento.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Documento de identidade de quem faz a matrícula",
+      "detail": "Original. Carteira de identidade, passaporte ou título de residência.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço recente",
+      "detail": "Conta, recibo de aluguel ou aviso de imposto. Mora na casa de alguém? Leve uma declaração de hospedagem dessa pessoa, com o documento de identidade e o comprovante de endereço dela. Uma declaração sob compromisso de honra pode ser aceita.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "vaccins",
+      "libelle": "Caderneta de saúde (carnet de santé, páginas de vacinas) ou atestado de contraindicação",
+      "detail": "Original a mostrar; muitas vezes é pedida uma fotocópia das páginas de vacinas.",
+      "coffre": "sante"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo que fixa a autoridade parental e a residência, se vocês estiverem separados",
+      "detail": "Cópia. Indispensável em caso de autoridade parental exclusiva ou de residência fixada com um dos pais.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "radiation",
+      "libelle": "Certificat de radiation da escola anterior",
+      "detail": "Só em caso de troca de escola. Peça à direção da escola anterior.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "certificat-inscription",
+      "libelle": "Certificado de matrícula emitido pela prefeitura",
+      "detail": "Original a entregar à direção da escola. Guarde uma foto ou cópia.",
+      "coffre": "scolarite"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Entre em contato com o serviço escolar da sua prefeitura",
+      "detail": "Pergunte as datas de matrícula, se é preciso agendar, se existe serviço on-line e a lista exata de documentos: ela varia de uma cidade para outra."
+    },
+    {
+      "titre": "Confira antes de sair de casa",
+      "detail": "Documento de identidade da criança (ou livret de famille), seu documento de identidade, comprovante de residência recente (ou declaração de hospedagem), caderneta de saúde em dia, sentença se vocês forem separados, certificat de radiation em caso de mudança de escola. Leve fotocópias."
+    },
+    {
+      "titre": "Entregue o dossiê na prefeitura e retire o certificado de matrícula",
+      "detail": "O certificado indica a escola para a qual o seu filho foi designado. Peça a dérogation nesse momento se quiser outra escola."
+    },
+    {
+      "titre": "Faça a admissão do seu filho na escola",
+      "detail": "Apresente o certificado de matrícula e o comprovante de vacinação à direção da escola. Informe os contatos dos dois pais e a lista das pessoas autorizadas a buscar a criança."
+    },
+    {
+      "titre": "Informe o outro genitor",
+      "detail": "Se vocês estiverem separados, avise o outro genitor da matrícula, de preferência por escrito (mensagem ou e-mail)."
+    },
+    {
+      "titre": "Não é preciso nova matrícula todo ano",
+      "detail": "A matrícula vale para toda a educação infantil. A passagem para o CP (1º ano) é automática se a cidade tiver escola de ensino fundamental."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Prefeitura (mairie) do seu município, serviço escolar",
+      "detail": "Matrícula, certificado de matrícula e dérogations de setor."
+    },
+    {
+      "nom": "Direção da escola",
+      "detail": "Admissão da criança e certificat de radiation."
+    },
+    {
+      "nom": "CASNAV de l'académie de la Martinique (alunos alófonos)",
+      "detail": "Acolhimento e avaliação de nível dos alunos alófonos recém-chegados. A matrícula na educação infantil e no ensino fundamental I é feita primeiro na prefeitura.",
+      "url": "https://site.ac-martinique.fr/casnav/"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Matrícula na educação infantil (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864"
+    },
+    {
+      "titre": "Matricular o filho no ensino fundamental (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865"
+    },
+    {
+      "titre": "Pedir uma certidão de nascimento (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427"
+    },
+    {
+      "titre": "Autoridade parental em caso de separação (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Certificado de matrícula escolar",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Páginas de vacinas da caderneta de saúde",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Sentença ou acordo (autoridade parental, residência)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Matrícula escolar na prefeitura, no máximo em junho",
+      "evenement": "ecole"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Horário de admissão na escola",
+      "evenement": "ecole"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Matrícula na prefeitura no máximo em junho, antes do início das aulas",
+      "detail": "As matrículas costumam abrir em março. Confira o calendário da sua prefeitura."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: datas de matrícula, agendamento, serviço on-line e lista exata de documentos, próprios de cada prefeitura da Martinica.",
+    "A confirmar localmente: aceitação de declaração sob compromisso de honra ou de declaração de hospedagem no lugar do comprovante de endereço, conforme a prefeitura.",
+    "A confirmar localmente: documentos exigidos em caso de troca de escola (certificat de radiation, último boletim escolar), a pedir à prefeitura e à nova escola.",
+    "A confirmar localmente: contatos e procedimento de acolhimento do CASNAV de la Martinique para uma criança alófona."
+  ],
+  "motsCles": [
+    "educação infantil",
+    "ensino fundamental",
+    "CP",
+    "prefeitura (mairie)",
+    "matrícula",
+    "dérogation",
+    "desligamento"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1864 Matrícula na educação infantil",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864",
+      "verifieLe": "2025-11-06"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1865 Matricular o filho no ensino fundamental",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865",
+      "verifieLe": "2025-01-10"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1898 Escolarização obrigatória",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1898",
+      "verifieLe": "2025-11-06"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2025-06-20"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-01-06"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1427 Pedido de certidão de nascimento",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427",
+      "verifieLe": "2026-08-14"
+    },
+    {
+      "titre": "CASNAV de l'académie de la Martinique",
+      "url": "https://site.ac-martinique.fr/casnav/"
+    }
+  ]
+}

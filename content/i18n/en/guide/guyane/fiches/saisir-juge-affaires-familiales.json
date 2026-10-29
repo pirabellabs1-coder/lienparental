@@ -78,13 +78,13 @@
     "To be confirmed locally: average waiting times for a hearing at the tribunal judiciaire de Cayenne."
   ],
   "motsCles": ["JAF", "judge", "family court", "custody", "residence", "visiting rights", "cerfa 11530", "court approval"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, R15764 Application to the family court judge (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-02-26" },
-    { "titre": "Service-public.gouv.fr, F33227 Tax stamp", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-04-10" },
-    { "titre": "Service-public.gouv.fr, R58771 Approval of a parenting agreement (cerfa 16139)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2025-11-26" },
-    { "titre": "Service-public.gouv.fr, F3133 Parental authority after separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "Service-public.gouv.fr, F12544 Domestic violence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-04-01" },
-    { "titre": "Service-public directory, Tribunal judiciaire de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/9fd0ecd0-af48-4635-a700-067ebceebcef", "verifieLe": "2026-09-16" }
+    { "titre": "Service-public.gouv.fr, R15764 Application to the family court judge (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F33227 Tax stamp", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R58771 Approval of a parenting agreement (cerfa 16139)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Parental authority after separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F12544 Domestic violence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public directory, Tribunal judiciaire de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/9fd0ecd0-af48-4635-a700-067ebceebcef", "verifieLe": "2026-10-29" }
   ]
 }

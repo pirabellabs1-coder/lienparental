@@ -78,13 +78,13 @@
     "À confirmer localement : les délais moyens d'audience au tribunal judiciaire de Cayenne."
   ],
   "motsCles": ["JAF", "juge", "tribunal", "garde", "résidence", "droit de visite", "cerfa 11530", "homologation"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, R15764 Demande au juge aux affaires familiales (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-02-26" },
-    { "titre": "Service-public.gouv.fr, F33227 Timbre fiscal", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-04-10" },
-    { "titre": "Service-public.gouv.fr, R58771 Homologation d'une convention parentale (cerfa 16139)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2025-11-26" },
-    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "Service-public.gouv.fr, F12544 Violences conjugales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-04-01" },
-    { "titre": "Annuaire service-public, Tribunal judiciaire de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/9fd0ecd0-af48-4635-a700-067ebceebcef", "verifieLe": "2026-09-16" }
+    { "titre": "Service-public.gouv.fr, R15764 Demande au juge aux affaires familiales (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F33227 Timbre fiscal", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R58771 Homologation d'une convention parentale (cerfa 16139)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F12544 Violences conjugales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public, Tribunal judiciaire de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/9fd0ecd0-af48-4635-a700-067ebceebcef", "verifieLe": "2026-10-29" }
   ]
 }

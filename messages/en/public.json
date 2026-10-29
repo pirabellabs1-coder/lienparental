@@ -963,7 +963,8 @@
         "parcoursHint": "The procedures to follow, in order, for the big moments of family life.",
         "stepsCount": "{count, plural, one {# step} other {# steps}}",
         "categoriesTitle": "Topics",
-        "fichesTitle": "All guides"
+        "fichesTitle": "All guides",
+        "change": "Change territory"
       },
       "category": {
         "metaTitle": "{category} · {territory} guide",
@@ -1021,6 +1022,125 @@
           "title": "From reading to doing",
           "text": "With a Lien Parental account, add a reminder, a document or a date from any guide, and track your procedures.",
           "signup": "Create a free account"
+        }
+      }
+    },
+    "partners": {
+      "page": {
+        "metaTitle": "Our partners",
+        "metaDescription": "Lien Parental’s partners: public bodies, nonprofits and content creators committed to supporting families in mainland France and the French overseas territories.",
+        "eyebrow": "Lien Parental partners",
+        "title": "Our partners committed",
+        "titleAccent": "to families",
+        "lead": "Partnerships that share our values and help support families in mainland France and the French overseas territories.",
+        "soon": "Partnerships in progress",
+        "categories": {
+          "institution": {
+            "title": "Public sector partners",
+            "text": "Public bodies working alongside families"
+          },
+          "association": {
+            "title": "Nonprofit partners",
+            "text": "A network of nonprofits that inform, guide and support parents"
+          },
+          "createur": {
+            "title": "Content creators & influencers",
+            "text": "Committed voices who share their experience and support parenting"
+          }
+        },
+        "slot": "Coming soon",
+        "slotText": "The first partners in this category will appear here, with their consent.",
+        "prev": "Previous partners",
+        "next": "Next partners",
+        "visit": "{name} (opens in a new tab)",
+        "social": "{name} on {network} (opens in a new tab)",
+        "ctaTitle": "Together, let’s support",
+        "ctaAccent": "more families.",
+        "ctaText": "Are you a nonprofit, a public body or a committed content creator? Join the Lien Parental network and help support families in mainland France and the French overseas territories.",
+        "cta": "Become a partner",
+        "pause": "Pause the scrolling logos",
+        "play": "Resume the scrolling logos",
+        "example": "Example"
+      },
+      "apply": {
+        "metaTitle": "Become a partner",
+        "metaDescription": "Nonprofit, public body, professional or content creator: propose a partnership with Lien Parental to support families in France and the French overseas territories.",
+        "eyebrow": "Become a partner",
+        "title": "Join",
+        "titleAccent": "Lien Parental",
+        "lead": "Are you a nonprofit, a public body, a professional or a content creator? Help support families in mainland France and the French overseas territories.",
+        "benefits": {
+          "visibility": "Gain visibility",
+          "actions": "Showcase your work",
+          "inform": "Inform and guide families",
+          "network": "Join a committed network"
+        },
+        "imageAlt": "A father, a mother and their daughter sitting cross-legged, high-fiving and smiling",
+        "back": "Back to partners",
+        "formTitle": "Application form",
+        "formLead": "Tell us about your organization, your work and your partnership proposal. We review every application carefully.",
+        "requiredNote": "Fields marked with an asterisk (*) are required.",
+        "optional": "(optional)",
+        "s1": "Your profile",
+        "s1Help": "Select the category that matches your work.",
+        "profiles": {
+          "association": "Nonprofit (association)",
+          "institution": "Public body or institution",
+          "professionnel": "Professional or service provider",
+          "createur": "Content creator or influencer"
+        },
+        "s2": "Your contact details",
+        "structure": "Organization name",
+        "structurePh": "Name shown on the website",
+        "contactName": "Contact name",
+        "contactNamePh": "First and last name",
+        "email": "Work email address",
+        "emailPh": "contact@example.com",
+        "phone": "Phone",
+        "phonePh": "+594 …",
+        "territory": "Main territory",
+        "territories": {
+          "guyane": "French Guiana",
+          "france": "Mainland France",
+          "martinique": "Martinique",
+          "guadeloupe": "Guadeloupe",
+          "reunion": "Réunion",
+          "mayotte": "Mayotte",
+          "autre": "Other territory"
+        },
+        "s3": "Your work",
+        "site": "Website",
+        "sitePh": "https://…",
+        "networks": "Social media",
+        "networksPh": "Instagram, TikTok, YouTube…\nOne link per line",
+        "presentation": "About your work",
+        "presentationPh": "Your mission, the people you serve and your areas of work…",
+        "s4": "Your proposal",
+        "proposition": "Why do you want to join Lien Parental?",
+        "propositionPh": "Your partnership proposal, your ideas, your shared goals…",
+        "counter": "{n} / {max} characters",
+        "s5": "Privacy and application",
+        "consent": "I agree that my information may be used to review my application and contact me.",
+        "reviewTitle": "Application review",
+        "reviewText": "Sending an application does not guarantee a partnership. No photo, logo or profile will be published automatically. How we process your data is explained in our <link>privacy policy</link>.",
+        "submit": "Send my application",
+        "sending": "Sending…",
+        "errors": {
+          "required": "This field is required.",
+          "invalid": "This value isn’t valid.",
+          "invalidEmail": "Enter a valid email address.",
+          "invalidPhone": "Enter a valid phone number.",
+          "invalidUrl": "Enter an address that starts with https://",
+          "tooShort": "Write at least {min} characters.",
+          "consent": "Check the box to send your application.",
+          "summary": "{count, plural, one {One field needs fixing.} other {# fields need fixing.}}",
+          "rateLimited": "Too many submissions from your connection. Try again in a few minutes.",
+          "failed": "Your application couldn’t be sent. Try again, or email us at {email}."
+        },
+        "success": {
+          "title": "Application sent",
+          "text": "Thank you! We’ve received your application. Our team will review it and reply by email at {email}.",
+          "back": "Back to partners"
         }
       }
     }

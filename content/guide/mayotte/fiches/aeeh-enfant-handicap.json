@@ -1,0 +1,72 @@
+{
+  "slug": "aeeh-enfant-handicap",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Allocation d'éducation de l'enfant handicapé (AEEH) et MDPH de Mayotte",
+  "resume": "Constituer un dossier complet à la MDPH pour l'AEEH, versée ensuite par la CSSM : montants 2026-2027 à Mayotte, certificat médical de moins d'un an, délais et recours.",
+  "aQuoiCaSert": "L'AEEH aide les parents à faire face aux frais d'éducation et de soins d'un enfant en situation de handicap. Elle comprend un montant de base et, selon les besoins, un complément et une majoration pour parent isolé. La demande se fait auprès de la maison départementale des personnes handicapées (MDPH). La commission des droits et de l'autonomie (CDAPH) décide, puis la CSSM verse l'allocation et vous informe de son montant.",
+  "quiEstConcerne": [
+    "Les parents d'un enfant de moins de 20 ans dont le taux d'incapacité est d'au moins 80 %.",
+    "Les parents d'un enfant dont le taux est de 50 % à moins de 80 %, s'il fréquente un établissement ou un service spécialisé ou si des soins sont préconisés par la CDAPH.",
+    "Les parents séparés, quel que soit le mode de résidence de l'enfant (l'AEEH est versée à un seul parent)."
+  ],
+  "aSavoir": [
+    "Montants à Mayotte du 1er avril 2026 au 31 mars 2027 (CSSM) : base de 153,01 € par mois, sans condition de ressources.",
+    "Compléments selon le niveau de besoins : 114,76 € (1), 310,80 € (2), 439,91 € (3), 681,71 € (4), 871,26 € (5), 1 298,44 € (6) par mois.",
+    "Majoration pour parent isolé, à partir du niveau 2 : 62,16 € (2), 86,07 € (3), 272,55 € (4), 349,06 € (5), 511,63 € (6) par mois.",
+    "Le certificat médical (cerfa n° 15695) doit dater d'un an au maximum au moment du dépôt.",
+    "La CDAPH doit répondre dans un délai de 4 mois. Sans réponse au bout de 4 mois, la demande est considérée comme rejetée.",
+    "En cas de refus, un recours administratif préalable obligatoire est possible dans les 2 mois, puis un recours devant le tribunal judiciaire dans les 2 mois suivant la réponse.",
+    "Le formulaire de demande est disponible à la MDPH, au CCAS de votre commune ou en ligne."
+  ],
+  "documents": [
+    { "id": "formulaire-mdph", "libelle": "Formulaire de demande à la MDPH (cerfa n° 15692)", "detail": "Original daté et signé par le représentant légal.", "coffre": "sante" },
+    { "id": "certificat-medical", "libelle": "Certificat médical (cerfa n° 15695) de moins d'un an", "detail": "Original rempli par le médecin qui suit l'enfant. Joignez les comptes rendus utiles.", "coffre": "sante" },
+    { "id": "identite-enfant", "libelle": "Pièce d'identité de l'enfant ou livret de famille", "detail": "Photocopie recto verso. Pour un enfant étranger, titre de séjour ou document de circulation.", "coffre": "sante" },
+    { "id": "identite-representants", "libelle": "Pièce d'identité de chaque représentant légal", "detail": "Photocopie recto verso en cours de validité, ou titre de séjour.", "coffre": "sante" },
+    { "id": "domicile", "libelle": "Justificatif de domicile", "detail": "Photocopie. Si vous êtes hébergé, ajoutez une attestation de la personne qui vous héberge.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Décision sur l'autorité parentale ou jugement de protection, le cas échéant", "detail": "Copie.", "coffre": "jaf" },
+    { "id": "accuse-reception", "libelle": "Accusé de réception du dossier par la MDPH", "detail": "À conserver : il fait partir le délai de 4 mois.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Prenez rendez-vous avec le médecin pour le certificat médical", "detail": "Le certificat doit avoir moins d'un an au dépôt. Demandez-lui de détailler les besoins de l'enfant au quotidien." },
+    { "titre": "Remplissez le formulaire de demande", "detail": "Décrivez la vie de l'enfant, ses besoins, l'école et vos frais." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Formulaire signé, certificat médical original de moins d'un an, pièces d'identité de l'enfant et des représentants légaux, justificatif de domicile, bilans. Un dossier incomplet retarde l'examen." },
+    { "titre": "Déposez le dossier à la MDPH ou au CCAS", "detail": "Ou envoyez-le de préférence en recommandé avec accusé de réception. Gardez une copie complète." },
+    { "titre": "Suivez la décision", "detail": "La CDAPH a 4 mois pour répondre. Notez la date pour pouvoir relancer et, en cas de refus, faire un recours dans les 2 mois." }
+  ],
+  "ou": [
+    { "nom": "MDPH de Mayotte", "detail": "BP 1060, 97600 Mamoudzou ; courriel accueil@mdph976.fr (coordonnées indiquées par la CSSM). Adresse d'accueil et horaires dans l'annuaire Mon Parcours Handicap.", "url": "https://www.monparcourshandicap.gouv.fr/annuaire", "telephone": "02 69 62 96 20" },
+    { "nom": "CCAS de votre commune", "detail": "Formulaire disponible et dépôt possible du dossier, selon la CSSM." },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Verse l'AEEH après la décision de la CDAPH.", "url": "https://www.cssm.fr/page/prestations-familiales", "telephone": "02 69 61 91 91" }
+  ],
+  "liens": [
+    { "titre": "Prestations familiales à Mayotte, dont l'AEEH (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Allocation d'éducation de l'enfant handicapé (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809" },
+    { "titre": "Formulaire de demande à la MDPH (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993" },
+    { "titre": "Trouver sa MDPH (monparcourshandicap.gouv.fr)", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Certificat médical MDPH de l'enfant", "categorie": "sante" },
+    { "type": "coffre", "titre": "Dossier MDPH complet (copie)", "categorie": "sante" },
+    { "type": "coffre", "titre": "Notification de décision de la CDAPH", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Relancer la MDPH si pas de réponse 4 mois après le dépôt", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Rendez-vous médecin pour le certificat médical MDPH", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Certificat médical de moins d'un an au dépôt du dossier" },
+    { "libelle": "Réponse de la CDAPH sous 4 mois", "detail": "Sans réponse, la demande est considérée comme rejetée." },
+    { "libelle": "Recours dans les 2 mois après une décision de refus" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : adresse d'accueil physique et horaires de la MDPH de Mayotte (une adresse rue Mariazé à Mamoudzou est citée, mais le site de la MDPH n'a pas pu être consulté).",
+    "À confirmer localement : délais réels de traitement à Mayotte, qui peuvent dépasser le délai légal."
+  ],
+  "motsCles": ["AEEH", "MDPH", "handicap", "CDAPH", "CSSM", "certificat médical"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Prestations familiales (AEEH, barème 2026-2027)", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F14809 Allocation d'éducation de l'enfant handicapé", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R19993 Formulaire de demande à la MDPH", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-10-29" }
+  ]
+}

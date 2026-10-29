@@ -1,0 +1,175 @@
+{
+  "slug": "rattacher-enfant-carte-vitale",
+  "territoire": "reunion",
+  "categorie": "sante",
+  "titre": "Vincular meu filho ao seguro-saúde, obter o atestado de direitos e a carte Vitale dele",
+  "resume": "Incluir a criança na carte Vitale dos dois pais, baixar o atestado de direitos no ameli e pedir a carte Vitale própria dos 12 aos 15 anos ou a partir dos 16 anos.",
+  "aQuoiCaSert": "Uma criança com menos de 16 anos é dependente (ayant droit) de um ou dos dois pais. Quando ela está incluída nas duas cartes Vitale (cartão do seguro de saúde), o genitor que a leva ao médico ou à farmácia é reembolsado diretamente: muito útil quando os pais são separados. O atestado de direitos (attestation de droits) prova que a criança tem cobertura; a creche, a escola, o centro de lazer ou o hospital costumam pedi-lo. Por fim, a criança pode ter a própria carte Vitale, a pedido de um dos pais dos 12 aos 15 anos, e a partir dos 16 anos. Na Reunião, a Assurance Maladie (seguro de saúde público francês) é administrada pela CGSS (Caisse générale de sécurité sociale).",
+  "quiEstConcerne": [
+    "Os pais de um recém-nascido, ou de uma criança vinculada a apenas um dos pais.",
+    "Os pais separados que querem, cada um, ser reembolsados pelos cuidados de saúde da criança.",
+    "Os pais a quem pedem um atestado de direitos (creche, escola, colônia de férias, hospital).",
+    "Os jovens de 12 a 18 anos que precisam da própria carte Vitale."
+  ],
+  "aSavoir": [
+    "A inclusão nos dois pais é possível qualquer que seja a situação familiar, se cada um tiver seguro. O reembolso vai para o genitor cuja carte Vitale foi apresentada. Se um dos pais não tiver mais seguro, os reembolsos vão para o outro.",
+    "On-line, o procedimento é feito pela conta ameli (site do seguro-saúde francês), a partir do cadastro do genitor em cuja carte a criança já está. Pelo correio: cerfa n° 14445 com uma cópia do livro de família (livret de famille) atualizado ou um extrato da certidão de nascimento.",
+    "Atestado de direitos: é baixado gratuitamente na conta ameli (site ou aplicativo). Se a criança não aparecer, ela ainda não está vinculada ao seu cadastro.",
+    "Carte Vitale da criança: dos 12 aos 15 anos, a pedido de um dos pais; a partir dos 16, com o acordo de um dos pais que exerce a autoridade parental. É gratuita. Aos 16 anos, a Assurance Maladie envia uma carta e o cartão chega em cerca de 3 semanas.",
+    "Anexe um RIB (dados bancários) em nome do jovem se quiser que os reembolsos sejam pagos diretamente a ele. Um dos pais pode bloquear o acesso do filho menor ao aplicativo carte Vitale.",
+    "Dos 16 aos 18 anos, o jovem pode continuar dependente dos pais ou se tornar beneficiário autônomo. O vínculo termina se ele trabalhar, inclusive como aprendiz."
+  ],
+  "documents": [
+    {
+      "id": "livret-famille",
+      "libelle": "Cópia do livro de família atualizado ou extrato da certidão de nascimento da criança",
+      "detail": "Basta um desses documentos para o vínculo. Certidão gratuita on-line em service-public.gouv.fr ou na prefeitura (mairie) do lugar de nascimento.",
+      "coffre": "sante"
+    },
+    {
+      "id": "cerfa-14445",
+      "libelle": "Formulário cerfa n° 14445, se fizer o vínculo pelo correio",
+      "detail": "Preenchido e assinado, enviado à CGSS de La Réunion.",
+      "coffre": "sante"
+    },
+    {
+      "id": "tutelle",
+      "libelle": "Sentença de tutela ou comprovante de guarda, se você não for o genitor",
+      "detail": "Cópia. Para um tutor ou uma pessoa que acolheu a criança.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "photo-enfant",
+      "libelle": "Foto de identidade recente da criança, para a carte Vitale",
+      "detail": "On-line, basta uma foto digitalizada.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-enfant",
+      "libelle": "Documento de identidade da criança, para a carte Vitale",
+      "detail": "Cópia ou versão digitalizada da carteira de identidade ou do passaporte.",
+      "coffre": "sante"
+    },
+    {
+      "id": "rib-jeune",
+      "libelle": "RIB em nome do jovem",
+      "detail": "Opcional, para que ele seja reembolsado na própria conta.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-droits",
+      "libelle": "Atestado de direitos com o nome da criança",
+      "detail": "Baixe gratuitamente no ameli. Renove em caso de mudança de situação.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique em qual carte Vitale a criança está",
+      "detail": "Na sua conta ameli, seção de beneficiários, ou na farmácia."
+    },
+    {
+      "titre": "Inclua a criança no cartão do outro genitor",
+      "detail": "Pela conta ameli, ou pelo correio com o cerfa n° 14445 e a cópia do livro de família ou a certidão de nascimento."
+    },
+    {
+      "titre": "Baixe o atestado de direitos",
+      "detail": "Na conta ameli, seção de procedimentos: selecione a criança. Sem conta, ligue para o 36 46."
+    },
+    {
+      "titre": "Peça a carte Vitale da criança, se precisar",
+      "detail": "Pela conta ameli do genitor ao qual a criança está vinculada, com a foto e o documento de identidade dela digitalizados, ou por formulário enviado à caixa."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Se for a um posto de atendimento da CGSS: sua carte Vitale, seu documento de identidade, o livro de família ou a certidão de nascimento da criança, a foto e o documento dela para uma carte Vitale e, se for o caso, a sentença de tutela."
+    },
+    {
+      "titre": "Atualize a sua carte Vitale",
+      "detail": "Na farmácia ou num terminal de autoatendimento, depois que o vínculo for registrado."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Conta ameli (site e aplicativo)",
+      "detail": "Vínculo, atestado de direitos, pedido de carte Vitale.",
+      "url": "https://www.ameli.fr"
+    },
+    {
+      "nom": "CGSS de La Réunion (Assurance Maladie)",
+      "detail": "Caixa de seguro-saúde na Reunião. Telefone 36 46, com a carte Vitale em mãos.",
+      "url": "https://www.cgss.re",
+      "telephone": "36 46"
+    },
+    {
+      "nom": "Farmácia",
+      "detail": "Atualização da carte Vitale."
+    },
+    {
+      "nom": "France Services",
+      "detail": "Ajuda gratuita para criar a conta ameli e fazer os procedimentos on-line."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vínculo de um menor como dependente (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620"
+    },
+    {
+      "titre": "Carte Vitale dos menores (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693"
+    },
+    {
+      "titre": "Obter um atestado de direitos (ameli.fr)",
+      "url": "https://www.ameli.fr/assure/adresses-et-contacts/l-obtention-d-un-document/obtenir-une-attestation/obtenir-une-attestation-de-droits"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Atestado de direitos da Assurance Maladie da criança",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Cópia da carte Vitale da criança",
+      "categorie": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Atualizar a carte Vitale depois do vínculo",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Pedir a carte Vitale da criança aos 16 anos",
+      "evenement": "sante"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: endereços e horários dos postos de atendimento da CGSS de La Réunion (o site cgss.re estava indisponível na verificação).",
+    "A confirmar: os nomes exatos dos menus da conta ameli, pois as páginas do ameli.fr não foram revisadas hoje."
+  ],
+  "motsCles": [
+    "carte Vitale",
+    "ameli",
+    "dependente",
+    "atestado de direitos",
+    "reembolso",
+    "seguro-saúde",
+    "CGSS"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F16620 Vínculo de um menor como dependente",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, notícia A17693 Carte Vitale dos menores (10 de setembro de 2026)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

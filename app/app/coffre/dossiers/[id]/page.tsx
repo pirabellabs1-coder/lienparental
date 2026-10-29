@@ -182,7 +182,7 @@ export default function DossierPage({ params }: { params: Promise<{ id: string }
             </p>
           ) : (
             <ul className="mt-2 space-y-2.5 lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0">
-              {docs.map((d) => <li key={d.id}><DocRow doc={d} onMore={openActions} /></li>)}
+              {[...docs].sort((a, b) => b.docDate.localeCompare(a.docDate) || b.addedAt.localeCompare(a.addedAt)).map((d) => <li key={d.id}><DocRow doc={d} onMore={openActions} /></li>)}
             </ul>
           )}
         </section>

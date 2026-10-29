@@ -1,0 +1,72 @@
+{
+  "slug": "aeeh-enfant-handicap",
+  "territoire": "reunion",
+  "categorie": "aides",
+  "titre": "Allocation d'éducation de l'enfant handicapé (AEEH) et MDPH",
+  "resume": "Constituer un dossier complet à la MDPH de La Réunion pour l'AEEH : formulaire, certificat médical de moins d'un an, pièces exactes, délai de réponse et recours.",
+  "aQuoiCaSert": "L'AEEH aide les parents à faire face aux frais d'éducation et de soins d'un enfant en situation de handicap. Elle comprend un montant de base auquel peuvent s'ajouter un complément, selon les besoins de l'enfant et l'effet sur l'activité des parents. La demande se dépose à la maison départementale des personnes handicapées (MDPH). La commission des droits et de l'autonomie (CDAPH) décide, puis la Caf de La Réunion verse l'allocation.",
+  "quiEstConcerne": [
+    "Les parents d'un enfant de moins de 20 ans dont le taux d'incapacité est d'au moins 80 %.",
+    "Les parents d'un enfant dont le taux est de 50 % à moins de 80 %, s'il est suivi par un service médico-social, bénéficie d'une scolarisation adaptée ou de soins.",
+    "Les parents séparés, quel que soit le mode de résidence de l'enfant."
+  ],
+  "aSavoir": [
+    "Montant de base : 153,01 € par mois. Des compléments s'y ajoutent selon la catégorie du handicap et l'effet sur le travail du parent (service-public.gouv.fr).",
+    "Le certificat médical (cerfa n° 15695) doit dater d'un an au plus au moment du dépôt.",
+    "La CDAPH a 4 mois pour se prononcer. Sans réponse au bout de 4 mois, la demande est considérée comme refusée.",
+    "En cas de refus : recours administratif préalable obligatoire auprès de la MDPH dans les 2 mois, puis, sans réponse ou en cas de rejet, recours devant le tribunal judiciaire de votre domicile dans les 2 mois.",
+    "Durée : 3 à 5 ans si le taux est d'au moins 80 %, 2 à 5 ans entre 50 et 80 %, ou sans limite jusqu'aux 20 ans si l'état de l'enfant ne peut pas s'améliorer.",
+    "En résidence alternée, l'AEEH ne se partage pas : elle est versée en totalité au parent désigné comme allocataire (règle des prestations familiales autres que les allocations familiales).",
+    "Une loi du 12 juin 2026 prévoit une expérimentation pour raccourcir les délais, avec une avance automatique sans réponse de la CDAPH. Elle ne s'applique qu'après publication des décrets."
+  ],
+  "documents": [
+    { "id": "formulaire-mdph", "libelle": "Formulaire de demande à la MDPH (cerfa n° 15692)", "detail": "Original daté et signé par le représentant légal. Disponible sur service-public.gouv.fr ou auprès de la MDPH.", "coffre": "sante" },
+    { "id": "certificat-medical", "libelle": "Certificat médical (cerfa n° 15695) de moins d'un an", "detail": "Original rempli par le médecin qui suit l'enfant. Joignez les comptes rendus utiles (bilans, examens).", "coffre": "sante" },
+    { "id": "identite", "libelle": "Pièce d'identité recto verso ou titre de séjour", "detail": "Photocopie en cours de validité, pour l'enfant et pour le représentant légal.", "coffre": "sante" },
+    { "id": "domicile", "libelle": "Justificatif de domicile", "detail": "Photocopie. Si vous êtes hébergé, ajoutez une attestation sur l'honneur de la personne qui vous héberge.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Jugement de protection ou décision sur l'autorité parentale, le cas échéant", "detail": "Copie, si une décision fixe qui exerce l'autorité parentale ou si une mesure de protection existe.", "coffre": "jaf" },
+    { "id": "bilans", "libelle": "Bilans complémentaires (audition, vision, psychologue, école)", "detail": "Copies. Le formulaire prévoit des volets facultatifs pour les bilans auditif et ophtalmologique.", "coffre": "sante" },
+    { "id": "accuse-reception", "libelle": "Accusé de réception du dossier par la MDPH", "detail": "À conserver : il fait partir le délai de 4 mois.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Prenez rendez-vous avec le médecin pour le certificat médical", "detail": "Il doit avoir moins d'un an au dépôt. Demandez-lui de détailler les besoins de l'enfant au quotidien." },
+    { "titre": "Remplissez le formulaire de demande", "detail": "Décrivez la vie de l'enfant, ses besoins, sa scolarité et vos frais. Le projet de vie aide la commission à comprendre la situation." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Formulaire signé, certificat médical original de moins d'un an, pièces d'identité, justificatif de domicile, jugement éventuel, bilans. Un dossier incomplet retarde l'examen." },
+    { "titre": "Envoyez le dossier à la MDPH de La Réunion", "detail": "De préférence en recommandé avec accusé de réception, ou en ligne si la MDPH le propose. Gardez une copie complète." },
+    { "titre": "Suivez la décision", "detail": "Notez la date de dépôt : sans réponse après 4 mois, relancez ; en cas de refus, faites le recours dans les 2 mois." }
+  ],
+  "ou": [
+    { "nom": "MDPH de La Réunion", "detail": "Coordonnées à vérifier dans l'annuaire officiel Mon Parcours Handicap.", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" },
+    { "nom": "Caf de La Réunion", "detail": "Verse l'AEEH après la décision de la CDAPH.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" }
+  ],
+  "liens": [
+    { "titre": "Allocation d'éducation de l'enfant handicapé (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809" },
+    { "titre": "Formulaire de demande à la MDPH (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993" },
+    { "titre": "Trouver sa MDPH (monparcourshandicap.gouv.fr)", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Certificat médical MDPH de l'enfant", "categorie": "sante" },
+    { "type": "coffre", "titre": "Dossier MDPH complet (copie)", "categorie": "sante" },
+    { "type": "coffre", "titre": "Notification de décision de la CDAPH", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Relancer la MDPH si pas de réponse 4 mois après le dépôt", "evenement": "autre" },
+    { "type": "rappel", "titre": "Préparer le renouvellement de l'AEEH avant la fin des droits", "evenement": "sante" },
+    { "type": "calendrier", "titre": "Rendez-vous médecin pour le certificat médical MDPH", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Certificat médical de moins d'un an au dépôt du dossier" },
+    { "libelle": "Réponse de la CDAPH sous 4 mois", "detail": "Sans réponse, la demande est considérée comme refusée." },
+    { "libelle": "Recours dans les 2 mois après une décision de refus" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : adresse, antennes, horaires et dépôt en ligne de la MDPH de La Réunion, à vérifier dans l'annuaire Mon Parcours Handicap (non confirmés sur une source officielle lors de la vérification).",
+    "À confirmer localement : délais réels de traitement à La Réunion, qui peuvent dépasser le délai légal."
+  ],
+  "motsCles": ["AEEH", "MDPH", "handicap", "CDAPH", "certificat médical", "allocation"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F14809 Allocation d'éducation de l'enfant handicapé", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R19993 Formulaire de demande à la MDPH", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Mon Parcours Handicap, annuaire", "url": "https://www.monparcourshandicap.gouv.fr/annuaire", "verifieLe": "2026-10-29" }
+  ]
+}

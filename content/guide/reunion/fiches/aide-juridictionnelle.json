@@ -1,0 +1,80 @@
+{
+  "slug": "aide-juridictionnelle",
+  "territoire": "reunion",
+  "categorie": "aides",
+  "titre": "Demander l'aide juridictionnelle",
+  "resume": "Faire prendre en charge par l'État tout ou partie des frais d'avocat et de procédure, par exemple devant le juge aux affaires familiales : plafonds 2026, formulaire, pièces et bureaux de Saint-Denis et Saint-Pierre.",
+  "aQuoiCaSert": "L'aide juridictionnelle (AJ) paie, en totalité ou en partie, les honoraires d'avocat et les frais de justice quand vos ressources sont modestes. Elle sert notamment pour une procédure devant le juge aux affaires familiales : résidence de l'enfant, pension alimentaire, autorité parentale. Vous gardez le libre choix de votre avocat.",
+  "quiEstConcerne": [
+    "Les parents dont le revenu fiscal de référence et le patrimoine restent sous les plafonds, qui engagent ou subissent une procédure.",
+    "Les enfants mineurs entendus par le juge dans une procédure qui les concerne : l'aide leur est accordée sans examen des ressources.",
+    "Les victimes de violences conjugales, qui peuvent obtenir une aide provisoire."
+  ],
+  "aSavoir": [
+    "Plafonds 2026 pour l'aide totale (revenu fiscal de référence) : 12 957 € pour 1 personne, 15 289 € pour 2, 17 621 € pour 3, 19 095 € pour 4, 20 568 € pour 5, 22 041 € pour 6, 23 514 € pour 7.",
+    "Juste au-dessus du plafond, une aide partielle est possible. Pour une personne seule : de 12 958 € à 15 316 € pour une prise en charge de 55 %, de 15 317 € à 19 433 € pour 25 %.",
+    "Le patrimoine compte aussi (hors résidence principale). Pour 1 personne : 12 957 € de patrimoine mobilier et 38 866 € de patrimoine immobilier au maximum. Dépasser l'un de ces plafonds exclut toute aide.",
+    "En cas de conflit avec l'autre parent membre du même foyer fiscal, les ressources sont examinées séparément.",
+    "Vérifiez d'abord vos contrats (habitation, carte bancaire, protection juridique) : si une protection juridique couvre les frais, l'AJ peut être refusée. Une attestation de non prise en charge de l'assureur est demandée.",
+    "Les frais engagés avant la décision du bureau d'aide juridictionnelle ne sont pas couverts : déposez la demande le plus tôt possible.",
+    "Le droit de plaidoirie (13 €) et les éventuelles condamnations ne sont pas couverts par l'AJ.",
+    "Aucun délai de réponse n'est fixé : la décision est envoyée « dans les meilleurs délais ». Recours contre la décision : 15 jours après sa notification, auprès du bureau qui a statué.",
+    "Une fois l'aide accordée, vous avez 1 an à compter de la décision pour engager l'action en justice ; passé ce délai, la décision devient caduque.",
+    "En urgence, une aide provisoire peut être accordée, les ressources étant vérifiées ensuite."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "Formulaire de demande d'aide juridictionnelle (cerfa n° 16146)", "detail": "Rempli en ligne sur service-public.gouv.fr, imprimé, daté et signé, puis déposé ou envoyé au bureau compétent.", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Copie recto verso de votre pièce d'identité", "detail": "Carte d'identité ou passeport valide. Ressortissant étranger : titre de séjour ou document équivalent.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent (copie)", "detail": "Facture, quittance de loyer. Si vous êtes hébergé : attestation d'hébergement en plus.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Copie du livret de famille", "detail": "Livret perdu : second livret gratuit en mairie.", "coffre": "jaf" },
+    { "id": "avis-imposition", "libelle": "Dernier avis d'imposition (copie)", "detail": "À télécharger dans votre espace impots.gouv.fr.", "coffre": "finances" },
+    { "id": "changement-situation", "libelle": "Justificatif d'un changement de situation familiale ou de ressources", "detail": "Par exemple séparation récente, perte d'emploi : attestation, jugement, notification France Travail.", "coffre": "jaf" },
+    { "id": "patrimoine", "libelle": "Justificatifs d'épargne et de biens immobiliers hors résidence principale", "detail": "Relevés de livrets, taxe foncière, si vous en avez.", "coffre": "finances" },
+    { "id": "attestation-assurance", "libelle": "Attestation de non prise en charge par votre assureur (protection juridique)", "detail": "À demander à votre assureur habitation, auto ou carte bancaire.", "coffre": "jaf" },
+    { "id": "pieces-affaire", "libelle": "Pièces de l'affaire", "detail": "Selon le cas : convocation à l'audience, jugement précédent, lettre d'acceptation de l'avocat choisi.", "coffre": "jaf" },
+    { "id": "decision-baj", "libelle": "Décision du bureau d'aide juridictionnelle", "detail": "À conserver et à transmettre à votre avocat.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez votre assurance protection juridique", "detail": "Appelez votre assureur : s'il prend en charge, l'AJ n'est pas nécessaire ; sinon demandez une attestation de non prise en charge." },
+    { "titre": "Estimez votre droit", "detail": "Comparez votre revenu fiscal de référence aux plafonds, ou utilisez le simulateur sur service-public.gouv.fr." },
+    { "titre": "Choisissez un avocat si vous le souhaitez", "detail": "Demandez-lui d'accepter votre dossier au titre de l'AJ et joignez sa lettre d'acceptation. Sinon, le bâtonnier peut en désigner un." },
+    { "titre": "Remplissez la demande", "detail": "Formulaire cerfa n° 16146, ou demande en ligne sur aidejuridictionnelle.justice.fr avec FranceConnect (réservée aux personnes majeures, pour les juridictions judiciaires)." },
+    { "titre": "Vérifiez avant de déposer ou d'envoyer", "detail": "Formulaire signé, pièce d'identité, justificatif de domicile, livret de famille, dernier avis d'imposition, attestation de l'assureur, convocation ou jugement. Gardez une copie complète." },
+    { "titre": "Déposez le dossier au bon bureau", "detail": "Avant d'avoir saisi le juge : bureau du tribunal judiciaire de votre domicile (Saint-Denis ou Saint-Pierre). Après : bureau du tribunal où l'affaire est traitée." },
+    { "titre": "Suivez la décision", "detail": "Transmettez-la à votre avocat. En cas de refus, vous avez 15 jours pour contester." }
+  ],
+  "ou": [
+    { "nom": "Bureau d'aide juridictionnelle du tribunal judiciaire de Saint-Denis", "detail": "5 avenue André Malraux, 97400 Saint-Denis. Courrier : CS 81027, 97495 Sainte-Clotilde Cedex.", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-saint-denis", "telephone": "+33 2 62 40 23 45" },
+    { "nom": "Bureau d'aide juridictionnelle du tribunal judiciaire de Saint-Pierre", "detail": "Au tribunal, 28 rue Augustin Archambaud, 97410 Saint-Pierre.", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-saint-pierre-reunion" },
+    { "nom": "Points-justice de La Réunion", "detail": "Information juridique gratuite et aide pour constituer le dossier.", "url": "https://lannuaire.service-public.gouv.fr/navigation/la-reunion/point_justice" },
+    { "nom": "Demande d'aide juridictionnelle en ligne", "detail": "Service gratuit avec FranceConnect.", "url": "https://www.aidejuridictionnelle.justice.fr/authentification" }
+  ],
+  "liens": [
+    { "titre": "Aide juridictionnelle : conditions et démarches (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074" },
+    { "titre": "Formulaire de demande d'aide juridictionnelle (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444" },
+    { "titre": "Demande d'aide juridictionnelle en ligne (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Demande d'aide juridictionnelle (copie du dossier)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Décision du bureau d'aide juridictionnelle", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Attestation de non prise en charge de l'assureur", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Aide juridictionnelle : recours dans les 15 jours", "evenement": "autre" },
+    { "type": "depense", "titre": "Droit de plaidoirie (non couvert par l'AJ)", "categorie": "frais-administratifs", "montant": 13, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074" }
+  ],
+  "datesLimites": [
+    { "libelle": "Avant l'audience", "detail": "Les frais engagés avant la décision du bureau ne sont pas couverts : déposez la demande le plus tôt possible." },
+    { "libelle": "15 jours", "detail": "Délai de recours contre une décision du bureau d'aide juridictionnelle, à partir de sa notification." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : le tribunal judiciaire compétent selon votre commune (Saint-Denis ou Saint-Pierre). Le partage des communes n'a pas pu être vérifié, les sites justice.fr et de la cour d'appel étant en maintenance.",
+    "À confirmer localement : horaires d'accueil et téléphone du bureau d'aide juridictionnelle de Saint-Pierre (non confirmés sur l'annuaire officiel)."  ],
+  "motsCles": ["aide juridictionnelle", "AJ", "avocat", "JAF", "frais de justice", "cerfa 16146", "Saint-Denis", "Saint-Pierre"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F18074 Aide juridictionnelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1444 Formulaire de demande d'aide juridictionnelle (cerfa n° 16146*04)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R66463 Demande d'aide juridictionnelle en ligne", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463", "verifieLe": "2026-10-29" },
+    { "titre": "Justice.gouv.fr, annuaire : Bureau d'aide juridictionnelle du tribunal judiciaire de Saint-Denis", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-saint-denis", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public, Tribunal judiciaire de Saint-Pierre", "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b", "verifieLe": "2026-10-29" }
+  ]
+}

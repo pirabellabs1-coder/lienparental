@@ -1,0 +1,25 @@
+{
+  "slug": "je-viens-de-me-separer",
+  "territoire": "mayotte",
+  "titre": "Je viens de me séparer",
+  "resume": "Les démarches essentielles des premières semaines, pour sécuriser vos droits et l'organisation des enfants.",
+  "ordre": 1,
+  "elements": [
+    { "id": "situation-cssm", "titre": "Vérifier ma situation auprès de la CSSM", "detail": "Déclarer la séparation pour que vos prestations soient recalculées sur vos seules ressources.", "fiche": "declarer-separation-caf" },
+    { "id": "adresse-enfant", "titre": "Changer l'adresse de l'enfant", "detail": "CSSM, école, impôts : qui prévenir et avec quels justificatifs.", "fiche": "changer-adresse-enfant-separation" },
+    { "id": "mettre-a-jour-ecole", "titre": "Mettre à jour l'école", "detail": "Coordonnées, adresse et personnes autorisées à récupérer l'enfant.", "fiche": "inscrire-enfant-ecole" },
+    { "id": "compte-bancaire", "titre": "Avoir mon propre compte bancaire", "fiche": "compte-bancaire-droit-au-compte" },
+    { "id": "assurance-scolaire", "titre": "Vérifier l'assurance scolaire", "detail": "Responsabilité civile et garantie individuelle accident à jour.", "fiche": "assurance-scolaire" },
+    { "id": "mutuelle", "titre": "Vérifier la mutuelle qui couvre l'enfant", "fiche": "mutuelle-enfant" },
+    { "id": "documents-enfant", "titre": "Organiser les documents de l'enfant", "detail": "Pièce d'identité, carnet de santé, certificats : rangez-les dans le coffre-fort.", "fiche": "papiers-identite-mineur" },
+    { "id": "livret-famille", "titre": "Demander un second livret de famille", "fiche": "livret-de-famille" },
+    { "id": "rendez-vous", "titre": "Ajouter les rendez-vous importants", "detail": "Santé, école, audiences : notez-les dans le calendrier avec un rappel." },
+    { "id": "aides", "titre": "Vérifier les aides auxquelles j'ai droit", "detail": "À Mayotte, l'allocation de soutien familial n'existe pas encore : voyez ce que verse la CSSM.", "fiche": "prestations-familiales-mayotte" },
+    { "id": "pension-impayee", "titre": "Si la pension n'est pas payée : les recours", "fiche": "pension-alimentaire-impayee" },
+    { "id": "mediation", "titre": "Trouver un service de médiation", "detail": "Un tiers neutre pour vous aider à vous accorder sur l'organisation des enfants.", "fiche": "mediation-familiale" },
+    { "id": "aide-juridictionnelle", "titre": "Vérifier si j'ai droit à l'aide juridictionnelle", "fiche": "aide-juridictionnelle" },
+    { "id": "jaf", "titre": "Saisir le juge aux affaires familiales si besoin", "fiche": "saisir-juge-affaires-familiales" },
+    { "id": "voyage", "titre": "Voyage de l'enfant : autorisation de sortie du territoire", "fiche": "autorisation-sortie-territoire" },
+    { "id": "decisions", "titre": "Ranger les décisions et documents importants", "detail": "Jugements, conventions, courriers : classez-les dans le Dossier JAF du coffre-fort." }
+  ]
+}

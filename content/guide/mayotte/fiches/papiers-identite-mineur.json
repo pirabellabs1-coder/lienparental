@@ -1,0 +1,78 @@
+{
+  "slug": "papiers-identite-mineur",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Faire la carte d'identité ou le passeport de mon enfant",
+  "resume": "Les pièces exactes à apporter en mairie selon votre cas (première demande, renouvellement, perte, parents séparés, résidence alternée), les tarifs applicables à Mayotte et les règles de présence de l'enfant.",
+  "aQuoiCaSert": "La carte d'identité et le passeport prouvent l'identité et la nationalité française de votre enfant et lui permettent de voyager. Un mineur peut en avoir à tout âge. La demande se fait dans une mairie équipée d'une station d'enregistrement, pas forcément celle de votre commune. Le dossier refusé faute d'une pièce est la cause la plus fréquente de déplacement pour rien : préparez la liste correspondant à votre situation.",
+  "quiEstConcerne": [
+    "Le parent (ou le tuteur) qui exerce l'autorité parentale : c'est lui qui dépose la demande, avec l'enfant.",
+    "Les parents séparés, en résidence alternée ou avec un seul parent titulaire de l'autorité parentale : des pièces supplémentaires sont demandées.",
+    "Le représentant légal qui n'est pas un parent (tuteur, aide sociale à l'enfance) : il doit prouver sa délégation d'autorité parentale."
+  ],
+  "aSavoir": [
+    "Carte d'identité : gratuite pour une première demande et pour un renouvellement si vous présentez l'ancienne carte. En cas de perte ou de vol, timbre fiscal de 25 €. Valable 10 ans.",
+    "Passeport à Mayotte : tarifs nationaux, 17 € pour un enfant de moins de 15 ans, 42 € de 15 à 17 ans si vous fournissez la photo (20 € et 45 € si la photo est prise au guichet). Les tarifs réduits de la Guyane ne s'appliquent pas à Mayotte. Valable 5 ans.",
+    "L'enfant et le parent doivent venir ensemble au dépôt. Empreintes à partir de 12 ans.",
+    "Retrait : avant 12 ans, le parent vient seul ; à partir de 12 ans, l'enfant doit être présent. Le titre doit être retiré dans les 3 mois, sinon il est détruit.",
+    "Parents séparés en résidence alternée : les deux adresses peuvent figurer sur le titre si vous apportez la preuve de la résidence alternée et un justificatif de domicile de chaque parent.",
+    "Un seul parent exerce l'autorité parentale : apportez le document qui le prouve (par exemple le jugement).",
+    "Acte de naissance : demandé seulement si l'enfant n'a pas de titre valide ou périmé depuis moins de 5 ans, et si l'état civil de sa commune de naissance n'est pas dématérialisé. Il doit dater de moins de 3 mois."
+  ],
+  "documents": [
+    { "id": "photo", "libelle": "Une photo d'identité de moins de 6 mois, conforme aux normes", "detail": "Original. Pour le passeport, une photo fournie coûte moins cher qu'une photo prise au guichet.", "coffre": "autres" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité valide du parent qui dépose la demande", "detail": "Original. Ce parent doit exercer l'autorité parentale et venir avec l'enfant.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Justificatif de domicile au nom du parent qui dépose", "detail": "Original, récent (facture, avis d'imposition, quittance de loyer).", "coffre": "autres" },
+    { "id": "ancien-titre", "libelle": "Ancienne carte d'identité et passeport de l'enfant, s'il en a", "detail": "Originaux, même périmés depuis moins de 5 ans.", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Acte de naissance de l'enfant de moins de 3 mois, si demandé", "detail": "Gratuit, à la mairie de naissance.", "coffre": "autres" },
+    { "id": "nationalite", "libelle": "Justificatif de nationalité française, si elle ne ressort pas de l'acte de naissance", "detail": "Par exemple un certificat de nationalité française : la mairie précise la pièce adaptée.", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant l'autorité parentale ou la résidence de l'enfant", "detail": "Copie. Obligatoire si un seul parent exerce l'autorité parentale, ou pour deux adresses en résidence alternée.", "coffre": "jaf" },
+    { "id": "domicile-autre-parent", "libelle": "Justificatif de domicile de l'autre parent (résidence alternée)", "detail": "Uniquement si vous voulez les deux adresses sur le titre.", "coffre": "autres" },
+    { "id": "declaration-perte", "libelle": "Déclaration de perte (cerfa n° 14011) ou récépissé de déclaration de vol", "detail": "En cas de vol, déclarez-le d'abord à la police ou à la gendarmerie.", "coffre": "autres" },
+    { "id": "timbre", "libelle": "Timbre fiscal, si nécessaire", "detail": "Passeport, ou carte d'identité perdue ou volée. Achat en ligne (timbres.impots.gouv.fr) ou en bureau de tabac agréé.", "coffre": "autres" },
+    { "id": "pre-demande", "libelle": "Numéro ou QR code de pré-demande ANTS", "detail": "Facultatif, mais fait gagner du temps au guichet.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Identifiez votre cas", "detail": "Première demande, renouvellement, perte ou vol, puis votre situation familiale. La liste des pièces en dépend." },
+    { "titre": "Faites la pré-demande en ligne sur le site de l'ANTS", "detail": "Facultatif. Achetez le timbre fiscal si nécessaire." },
+    { "titre": "Prenez rendez-vous dans une mairie équipée", "detail": "Les rendez-vous peuvent être loin : anticipez avant un voyage." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Originaux uniquement. Photo de moins de 6 mois, votre pièce d'identité valide, justificatif de domicile, ancien titre de l'enfant, timbre fiscal si besoin, jugement ou convention si vous êtes séparés, acte de naissance si demandé. L'enfant vient avec vous." },
+    { "titre": "Déposez le dossier avec votre enfant", "detail": "Empreintes à partir de 12 ans." },
+    { "titre": "Retirez le titre dans les 3 mois", "detail": "À partir de 12 ans, l'enfant doit être présent. Rangez ensuite une copie dans le coffre-fort." }
+  ],
+  "ou": [
+    { "nom": "Mairies équipées d'une station d'enregistrement", "detail": "Liste et prise de rendez-vous sur le site de l'ANTS.", "url": "https://passeport.ants.gouv.fr/services/geolocaliser-une-mairie-habilitee" },
+    { "nom": "France Services", "detail": "Aide gratuite pour la pré-demande en ligne et l'achat du timbre fiscal.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Carte d'identité d'un mineur : première demande (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342" },
+    { "titre": "Carte d'identité d'un mineur perdue (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153" },
+    { "titre": "Passeport d'un mineur (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930" },
+    { "titre": "Tarifs du passeport (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Rendez-vous en mairie : papiers d'identité de l'enfant", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Retirer le titre d'identité de l'enfant en mairie (3 mois maximum)", "evenement": "rdv" },
+    { "type": "depense", "titre": "Passeport d'un enfant de moins de 15 ans", "categorie": "frais-administratifs", "montant": 17, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752" },
+    { "type": "depense", "titre": "Passeport d'un enfant de 15 à 17 ans", "categorie": "frais-administratifs", "montant": 42, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752" },
+    { "type": "depense", "titre": "Carte d'identité perdue ou volée", "categorie": "frais-administratifs", "montant": 25, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153" },
+    { "type": "coffre", "titre": "Copie de la carte d'identité de l'enfant", "categorie": "autres" },
+    { "type": "coffre", "titre": "Copie du passeport de l'enfant", "categorie": "autres" }
+  ],
+  "datesLimites": [
+    { "libelle": "Retrait du titre dans les 3 mois suivant sa mise à disposition", "detail": "Passé ce délai, il est détruit." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : liste des mairies équipées à Mayotte, délais de rendez-vous et de fabrication.",
+    "À confirmer localement : si l'état civil de la commune de naissance de votre enfant est dématérialisé (dans ce cas l'acte de naissance n'est pas demandé).",
+    "À confirmer en mairie : justificatif de nationalité française demandé pour un enfant né à Mayotte, selon la situation des parents."
+  ],
+  "motsCles": ["carte d'identité", "passeport", "CNI", "ANTS", "mairie", "timbre fiscal", "voyage"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1342 Carte d'identité d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1153 Carte d'identité d'un mineur perdue", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F14930 Passeport d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F34752 Tarifs du passeport", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752", "verifieLe": "2026-10-29" }
+  ]
+}

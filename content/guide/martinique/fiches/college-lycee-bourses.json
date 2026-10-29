@@ -1,0 +1,241 @@
+{
+  "slug": "college-lycee-bourses",
+  "territoire": "martinique",
+  "categorie": "ecole",
+  "titre": "Demander la bourse de collège ou de lycée",
+  "resume": "L'étude automatique à l'inscription ou une demande avant le 15 octobre : les plafonds, les montants, l'avis d'impôt à fournir et les règles quand les parents sont séparés ou en résidence alternée.",
+  "aQuoiCaSert": "La bourse de collège et la bourse de lycée aident les familles aux revenus modestes à payer les frais de scolarité. Elles sont versées chaque trimestre. Pour l'année 2026-2027, c'est le revenu fiscal de référence de l'avis d'impôt 2026 sur les revenus de 2025 qui compte. La demande se fait le plus souvent en cochant l'accord pour l'étude automatique au moment de l'inscription. Cette fiche rappelle aussi les étapes de l'inscription au collège et au lycée.",
+  "quiEstConcerne": [
+    "Les familles d'un collégien ou d'un lycéen scolarisé dans un établissement public, privé sous contrat ou au Cned dans une classe complète.",
+    "Les parents d'un élève de CM2 qui entre en 6e, ou de 3e qui entre au lycée.",
+    "Les parents séparés : un seul parent peut faire la demande."
+  ],
+  "aSavoir": [
+    "Bourse de collège 2026-2027 : 40 €, 112 € ou 175 € par trimestre selon les revenus. Plafonds de revenus 2025 : 18 488 € pour 1 enfant à charge, 22 754 € pour 2, 27 020 € pour 3, 31 286 € pour 4, 35 553 € pour 5.",
+    "Bourse de lycée 2026-2027 : 6 échelons, de 168 € à 357 € par trimestre. Exemple pour 1 enfant à charge : plafond de 22 037 € pour l'échelon 1. Le simulateur officiel donne votre échelon.",
+    "Couple marié ou pacsé : un avis d'impôt commun. Couple en union libre : l'avis d'impôt de chacun des deux. Parent isolé vivant seul : uniquement votre avis d'impôt.",
+    "Résidence alternée (bourse de collège) : les parents choisissent lequel des deux fait la demande. Si les deux déposent un dossier, les deux demandes sont rejetées. Une attestation de renonciation de l'autre parent n'est pas admise.",
+    "L'accord pour l'étude automatique, donné à l'inscription dans le public, vaut demande pour toute la scolarité au collège et au lycée. Sans cet accord, il faut redemander chaque année, même si l'enfant était boursier l'année précédente.",
+    "Versement en 3 fois, vers fin décembre, fin mars et fin juin. Pour un demi-pensionnaire ou un interne, les frais de cantine ou d'internat sont déduits d'abord.",
+    "Des absences injustifiées répétées de plus de 15 jours peuvent réduire la bourse. Au lycée, une bourse au mérite peut s'ajouter en cas de mention au brevet."
+  ],
+  "documents": [
+    {
+      "id": "avis-impot",
+      "libelle": "Avis d'impôt 2026 sur les revenus de 2025",
+      "detail": "Copie de chaque page. Les deux avis en union libre. Téléchargeable dans votre espace sur impots.gouv.fr. Pas d'avis ? Faites votre déclaration ou demandez au fonds social de l'établissement.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB au nom du parent qui demande",
+      "detail": "Original ou copie. Exigé dans le privé ou sans étude automatique.",
+      "coffre": "finances"
+    },
+    {
+      "id": "formulaire-bourse",
+      "libelle": "Formulaire de demande de bourse papier, si vous ne passez pas par EduConnect",
+      "detail": "À retirer au secrétariat de l'établissement.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "procuration",
+      "libelle": "Procuration signée, dans le privé",
+      "detail": "Si vous voulez que l'établissement perçoive la bourse pour vous.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Jugement ou convention fixant la résidence de l'enfant, si vous êtes séparés",
+      "detail": "Copie. Peut être demandé pour prouver que l'enfant est à votre charge.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "caf",
+      "libelle": "Attestation de paiement de la Caf mentionnant les enfants à charge",
+      "detail": "Téléchargeable dans votre espace Caf. Peut être demandée pour justifier le nombre d'enfants.",
+      "coffre": "finances"
+    },
+    {
+      "id": "formulaire-inscription",
+      "libelle": "Dossier d'inscription de l'établissement",
+      "detail": "Remis en CM2 pour la 6e, ou avec la décision d'affectation au lycée.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "identite",
+      "libelle": "Pièce d'identité du parent et livret de famille",
+      "detail": "Pour l'inscription. Copie souvent suffisante.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Justificatif de domicile",
+      "detail": "Pour l'inscription. Copie.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "orientation",
+      "libelle": "Décision d'orientation et dernier bulletin (lycée)",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "notification",
+      "libelle": "Notification d'attribution ou de refus de la bourse",
+      "detail": "Envoyée par le rectorat. À conserver : elle sert en cas de recours.",
+      "coffre": "scolarite"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Estimez vos droits avec le simulateur",
+      "detail": "Munissez-vous de votre avis d'impôt 2026 et du nombre d'enfants à charge. Le simulateur est accessible depuis les fiches service-public.gouv.fr."
+    },
+    {
+      "titre": "À l'inscription, cochez l'accord pour l'étude automatique",
+      "detail": "En ligne avec EduConnect ou sur le dossier papier, dans le public. C'est la façon la plus simple : il n'y a rien d'autre à faire."
+    },
+    {
+      "titre": "Sinon, déposez une demande entre le 1er septembre et le 15 octobre",
+      "detail": "En ligne sur Scolarité services avec EduConnect, ou sur formulaire papier au secrétariat."
+    },
+    {
+      "titre": "Vérifiez avant de vous déplacer",
+      "detail": "Avis d'impôt 2026 complet (les deux en union libre), RIB, formulaire rempli et signé, procuration dans le privé, jugement de résidence si vous êtes séparés. En résidence alternée, mettez-vous d'accord avec l'autre parent sur celui qui dépose."
+    },
+    {
+      "titre": "Déposez le dossier au secrétariat avant la date limite",
+      "detail": "Demandez un récépissé ou notez la date de dépôt."
+    },
+    {
+      "titre": "Conservez la notification",
+      "detail": "En cas de refus au collège, recours possible dans les 2 mois. Au lycée, 15 jours francs après la notification pour saisir le rectorat."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Secrétariat du collège ou du lycée",
+      "detail": "Inscription, dossier de bourse papier et fonds social."
+    },
+    {
+      "nom": "Scolarité services (EduConnect)",
+      "detail": "Inscription et demande de bourse en ligne.",
+      "url": "https://educonnect.education.gouv.fr"
+    },
+    {
+      "nom": "Rectorat de l'académie de la Martinique",
+      "detail": "Décision d'attribution et recours.",
+      "url": "https://www.ac-martinique.fr"
+    },
+    {
+      "nom": "CASNAV de l'académie de la Martinique",
+      "detail": "Accueil et positionnement des élèves allophones nouvellement arrivés.",
+      "url": "https://site.ac-martinique.fr/casnav/"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Bourse de collège (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984"
+    },
+    {
+      "titre": "Bourse de lycée (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616"
+    },
+    {
+      "titre": "Calendrier national des campagnes de bourse (education.gouv.fr)",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-1-calendrier-des-campagnes-de-bourse-de-college-et-de-lycee-516926.pdf"
+    },
+    {
+      "titre": "Inscription au collège (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322"
+    },
+    {
+      "titre": "Inscription au lycée (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2323"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Demande de bourse : date limite le 15 octobre",
+      "evenement": "ecole"
+    },
+    {
+      "type": "rappel",
+      "titre": "Cocher l'étude automatique de la bourse à l'inscription",
+      "evenement": "ecole"
+    },
+    {
+      "type": "coffre",
+      "titre": "Avis d'impôt utilisé pour la bourse",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notification de bourse",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "depense",
+      "titre": "Fournitures scolaires",
+      "categorie": "ecole"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Bourse sans étude automatique : du 1er septembre au 15 octobre 2026",
+      "detail": "Collège et lycée publics et privés : campagne 2026-2027 close. Pour le Cned, jusqu'à fin octobre 2026. Un calendrier comparable est fixé à chaque rentrée."
+    },
+    {
+      "libelle": "Inscription au lycée dans le délai indiqué par la décision d'affectation",
+      "detail": "Sans inscription dans le délai, la place peut être perdue."
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : date limite exacte pour les élèves du Cned (31 octobre 2026 selon service-public.gouv.fr, 30 octobre 2026 selon le calendrier du ministère).",
+    "À confirmer localement : calendrier propre à l'académie de la Martinique (dossier de 6e, affectation au lycée, versement), auprès de l'établissement ou du rectorat.",
+    "À confirmer localement : règle de la résidence alternée pour la bourse de lycée, la fiche officielle ne la détaillant que pour le collège.",
+    "À confirmer localement : coordonnées et modalités d'accueil du CASNAV de la Martinique, non détaillées sur sa page d'accueil."
+  ],
+  "motsCles": [
+    "bourse",
+    "collège",
+    "lycée",
+    "6e",
+    "EduConnect",
+    "avis d'impôt",
+    "résidence alternée"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F984 Bourse de collège",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984",
+      "verifieLe": "2026-04-30"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F616 Bourse de lycée",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616",
+      "verifieLe": "2026-04-30"
+    },
+    {
+      "titre": "Ministère de l'Éducation nationale, calendrier des campagnes de bourse 2026-2027",
+      "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-1-calendrier-des-campagnes-de-bourse-de-college-et-de-lycee-516926.pdf"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2322 Inscription au collège",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322",
+      "verifieLe": "2026-03-20"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2323 Inscription au lycée",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2323",
+      "verifieLe": "2026-01-23"
+    },
+    {
+      "titre": "CASNAV de l'académie de la Martinique",
+      "url": "https://site.ac-martinique.fr/casnav/"
+    }
+  ]
+}

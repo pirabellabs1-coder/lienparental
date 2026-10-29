@@ -1,0 +1,64 @@
+{
+  "slug": "declaration-naissance",
+  "territoire": "reunion",
+  "categorie": "naissance",
+  "titre": "Déclarer la naissance de mon enfant",
+  "resume": "Une démarche obligatoire et gratuite à la mairie du lieu de naissance, dans les 5 jours qui suivent l'accouchement. Les pièces à apporter, et le livret de famille remis à cette occasion.",
+  "aQuoiCaSert": "La déclaration de naissance permet d'établir l'acte de naissance de l'enfant : sans elle, il n'a pas d'état civil. Pour un premier enfant, la mairie remet aussi gratuitement le livret de famille. C'est le point de départ des droits auprès de la Caf et de l'Assurance maladie. Passé le délai, la mairie ne peut plus enregistrer la naissance seule : il faut une décision du tribunal.",
+  "quiEstConcerne": [
+    "Le père, la deuxième mère, ou toute personne ayant assisté à l'accouchement (médecin, sage-femme, responsable de l'établissement).",
+    "Si la mère accouche seule à l'hôpital, l'établissement fait la déclaration."
+  ],
+  "aSavoir": [
+    "Délai : 5 jours après l'accouchement, le jour de l'accouchement n'étant pas compté. Si le dernier jour est un samedi, un dimanche ou un jour férié, il est reporté au premier jour ouvrable suivant.",
+    "À La Réunion, ce délai de 5 jours s'applique dans toutes les communes : la fiche officielle ne prévoit pas d'exception pour l'île.",
+    "La déclaration se fait à la mairie du lieu de naissance, qui n'est pas forcément celle de votre domicile (par exemple la commune de la maternité).",
+    "Après le délai, une déclaration judiciaire devant le tribunal judiciaire est nécessaire.",
+    "Parents non mariés : le père doit reconnaître l'enfant pour que la filiation paternelle soit établie. Il peut le faire avant la naissance ou au moment de la déclaration.",
+    "Livret de famille : pour un premier enfant, il est remis gratuitement par la mairie du lieu de naissance, sur présentation d'une pièce d'identité."
+  ],
+  "documents": [
+    { "id": "certificat-accouchement", "libelle": "Certificat médical d'accouchement", "detail": "Original, remis par la maternité ou la sage-femme.", "coffre": "sante" },
+    { "id": "identite-parents", "libelle": "Pièce d'identité de chacun des parents", "detail": "Carte d'identité, passeport ou titre de séjour. Apportez celles des deux parents, même si un seul se déplace.", "coffre": "autres" },
+    { "id": "reconnaissance", "libelle": "Acte de reconnaissance anticipée, s'il a été fait avant la naissance", "detail": "Copie remise par la mairie ou le notaire au moment de la reconnaissance.", "coffre": "jaf" },
+    { "id": "choix-nom", "libelle": "Déclaration conjointe de choix de nom, si vous en faites une", "detail": "Signée par les deux parents. Formulaire disponible en mairie.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Livret de famille, si vous en avez déjà un", "detail": "Original, pour y inscrire l'enfant.", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Copies de l'acte de naissance de l'enfant", "detail": "Gratuites. À demander après la déclaration, en mairie ou en ligne.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Récupérez le certificat d'accouchement à la maternité", "detail": "Demandez aussi si la maternité organise la transmission de la déclaration à la mairie." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Certificat d'accouchement, pièces d'identité des deux parents, reconnaissance anticipée si elle existe, déclaration de choix de nom signée si vous en faites une, livret de famille existant. Calculez la date limite : 5 jours." },
+    { "titre": "Présentez-vous à la mairie du lieu de naissance dans le délai", "detail": "Service de l'état civil. Le père non marié qui n'a pas encore reconnu l'enfant peut le faire au même moment." },
+    { "titre": "Récupérez l'acte de naissance et le livret de famille", "detail": "Demandez plusieurs copies de l'acte : Caf, Assurance maladie et mutuelle les demandent." },
+    { "titre": "Signalez la naissance à la Caf et à l'Assurance maladie", "detail": "Dans votre espace Caf, et sur votre compte ameli pour rattacher l'enfant." }
+  ],
+  "ou": [
+    { "nom": "Mairie du lieu de naissance, service de l'état civil", "detail": "Déclaration, acte de naissance et livret de famille." }
+  ],
+  "liens": [
+    { "titre": "Déclaration de naissance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961" },
+    { "titre": "Livret de famille à la naissance du premier enfant (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991" },
+    { "titre": "Demander un acte de naissance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Déclarer la naissance en mairie (5 jours)", "evenement": "rdv" },
+    { "type": "coffre", "titre": "Acte de naissance de l'enfant", "categorie": "autres" },
+    { "type": "coffre", "titre": "Copie du livret de famille", "categorie": "autres" },
+    { "type": "coffre", "titre": "Certificat d'accouchement", "categorie": "sante" },
+    { "type": "rappel", "titre": "Signaler la naissance à la Caf et à l'Assurance maladie", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "5 jours après l'accouchement", "detail": "Le jour de l'accouchement n'est pas compté. Report au premier jour ouvrable si le dernier jour tombe un week-end ou un jour férié." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : possibilité de déclarer la naissance directement depuis la maternité, selon l'établissement et la mairie.",
+    "À confirmer localement : horaires du service d'état civil et éventuelles permanences le samedi, selon la mairie.",
+    "La liste précise des pièces demandées en mairie n'a pas été revérifiée dans le détail : appelez le service d'état civil avant de vous déplacer."
+  ],
+  "motsCles": ["naissance", "bébé", "état civil", "mairie", "acte de naissance", "maternité", "livret de famille"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F961 Déclaration de naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11991 Livret de famille à la naissance du premier enfant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" }
+  ]
+}

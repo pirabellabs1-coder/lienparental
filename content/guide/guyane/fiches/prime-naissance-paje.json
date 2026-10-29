@@ -54,11 +54,11 @@
     "À confirmer localement auprès de la Caf de la Guyane : les fiches nationales ne donnent pas de montant ou de plafond propre à la Guyane, et la Caf choisit entre allocation de base et allocations familiales selon la règle de non cumul applicable dans les DOM."
   ],
   "motsCles": ["Paje", "prime de naissance", "allocation de base", "grossesse", "Caf", "bébé"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F2550 Prime à la naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550", "verifieLe": "2026-04-01" },
-    { "titre": "Service-public.gouv.fr, F2552 Allocation de base de la Paje", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552", "verifieLe": "2026-04-01" },
-    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
+    { "titre": "Service-public.gouv.fr, F2550 Prime à la naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2552 Allocation de base de la Paje", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
     { "titre": "Caf de la Guyane", "url": "https://caf.fr/allocataires/caf-de-la-guyane" }
   ]
 }

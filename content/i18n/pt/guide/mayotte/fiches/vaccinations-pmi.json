@@ -1,0 +1,65 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Vacinas obrigatórias e acompanhamento na PMI",
+  "resume": "As vacinas exigidas para a creche, a escola e as colônias de férias, as recomendações próprias de Mayotte e o acompanhamento dos menores de 6 anos na PMI, administrada pelo Département.",
+  "aQuoiCaSert": "As vacinas obrigatórias são exigidas para entrar na creche, na escola, no cuidado extraescolar ou na colônia de férias: sem comprovante, a matrícula pode ser recusada ou apenas provisória. O comprovante é a caderneta de saúde (carnet de santé) preenchida pelo médico. A PMI (protection maternelle et infantile, serviço de saúde materno-infantil), que em Mayotte depende do Département (governo departamental), oferece consultas para gestantes e crianças pequenas, vacinas incluídas.",
+  "quiEstConcerne": [
+    "Todos os pais de filhos menores, sobretudo antes da entrada na creche, na escola ou em centro de lazer.",
+    "Os pais de recém-nascidos, para as vacinas recomendadas desde o nascimento em Mayotte."
+  ],
+  "aSavoir": [
+    "Criança nascida antes de 2018: difteria, tétano e poliomielite (DTP) obrigatórias para a escola.",
+    "Criança nascida entre 1º de janeiro de 2018 e 31 de dezembro de 2022: 11 vacinas obrigatórias (difteria, tétano, poliomielite, coqueluche, Haemophilus influenzae b, hepatite B, pneumococo, meningococo C, sarampo, caxumba, rubéola).",
+    "Criança nascida a partir de 2023: mesma lista, com os meningococos A, B, C, W e Y no lugar do meningococo C apenas.",
+    "Essas obrigações se aplicam em Mayotte; a ARS Mayotte (agência regional de saúde) também divulga um reforço das recomendações contra a coqueluche.",
+    "Uma criança com vacinas atrasadas pode ser admitida provisoriamente: você tem então 3 meses para regularizar, senão ela pode ser excluída.",
+    "A criança tem direito a 20 exames médicos obrigatórios do nascimento aos 16 anos (16 antes dos 6 anos), cobertos 100%, sem adiantar dinheiro, exceto honorários acima da tabela (dépassements d'honoraires).",
+    "Pais separados: o genitor que leva a criança para vacinar deve, de preferência, avisar o outro e enviar uma cópia das páginas de vacinas."
+  ],
+  "documents": [
+    { "id": "carnet-sante", "libelle": "Caderneta de saúde da criança (carnet de santé)", "detail": "Original, a levar a cada consulta. Guarde uma foto das páginas de vacinas.", "coffre": "sante" },
+    { "id": "carte-vitale", "libelle": "Carte Vitale (cartão do seguro de saúde) do genitor ou atestado de direitos da criança", "detail": "Atestado na sua conta ameli ou na CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte).", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "Documento de identidade do genitor ou do adulto acompanhante", "detail": "Se outra pessoa acompanhar a criança, leve uma autorização escrita de um dos pais.", "coffre": "sante" },
+    { "id": "contre-indication", "libelle": "Atestado médico de contraindicação, se for o caso", "detail": "Apresentado no lugar do comprovante de vacina.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Verifique a caderneta de saúde", "detail": "Compare com a lista de vacinas obrigatórias conforme o ano de nascimento do seu filho." },
+    { "titre": "Marque uma consulta", "detail": "Com seu médico, ou num centro de PMI do Département de Mayotte para crianças pequenas." },
+    { "titre": "Confira antes de ir", "detail": "Caderneta de saúde, carte Vitale ou atestado de direitos, documento de identidade, autorização escrita se quem acompanha não for um dos pais." },
+    { "titre": "Vacine seu filho", "detail": "O profissional registra a vacina na caderneta de saúde." },
+    { "titre": "Apresente o comprovante", "detail": "Fotocópia das páginas de vacinas para a creche, a escola ou o centro de lazer." }
+  ],
+  "ou": [
+    { "nom": "Département de Mayotte (PMI)", "detail": "Central telefônica do Département, 112 boulevard Halidi Sélémani, Mamoudzou: orientação para o centro de PMI mais próximo.", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "telephone": "02 69 66 10 00" },
+    { "nom": "ARS Mayotte", "detail": "Informações sobre vacinação. Centre Kinga, Kawéni, Mamoudzou.", "url": "https://www.mayotte.ars.sante.fr/vaccination-24", "telephone": "02 69 61 12 25" },
+    { "nom": "Seu médico de referência ou pediatra" }
+  ],
+  "liens": [
+    { "titre": "Vacinas exigidas para a creche e a escola (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Vacinação (ARS Mayotte)", "url": "https://www.mayotte.ars.sante.fr/vaccination-24" },
+    { "titre": "Exames médicos obrigatórios da criança (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Consulta de vacinação", "evenement": "sante" },
+    { "type": "rappel", "titre": "Reforço de vacina", "evenement": "sante" },
+    { "type": "coffre", "titre": "Páginas de vacinas da caderneta de saúde", "categorie": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "3 meses para regularizar após uma admissão provisória", "detail": "Sem vacinas em dia ao fim desse prazo, a criança pode ser excluída da creche, escola ou centro." }
+  ],
+  "aConfirmer": [
+    "A confirmar com seu médico ou a PMI: o calendário vacinal adaptado a Mayotte recomenda vacinas adicionais (em especial a BCG e a hepatite B desde o nascimento).",
+    "A confirmar localmente: lista, endereços e horários dos centros de PMI de Mayotte, não publicados no site do Département na verificação.",
+    "A confirmar localmente: gratuidade das consultas e das vacinas na PMI para as crianças, conforme o centro."
+  ],
+  "motsCles": ["vacina", "PMI", "caderneta de saúde", "BCG", "coqueluche", "pediatra", "bebê"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
+    { "titre": "ARS Mayotte, Vacinação", "url": "https://www.mayotte.ars.sante.fr/vaccination-24", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F967 Exames médicos obrigatórios da criança", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967", "verifieLe": "2026-10-29" },
+    { "titre": "Département de Mayotte, Fale conosco", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "verifieLe": "2026-10-29" }
+  ]
+}

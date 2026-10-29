@@ -1,0 +1,69 @@
+{
+  "slug": "conge-paternite",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Licença-paternidade e de acolhimento da criança",
+  "resume": "Duração da licença, prazos para avisar o empregador, diárias pagas pela CSSM e documentos a enviar, além da nova licença adicional de nascimento.",
+  "aQuoiCaSert": "A licença-paternidade e de acolhimento da criança (congé de paternité et d'accueil de l'enfant) permite ao pai, ou ao cônjuge, parceiro de PACS (união civil) ou companheiro da mãe, parar de trabalhar após o nascimento para cuidar da criança. Durante essa licença, o contrato de trabalho fica suspenso e, em Mayotte, é a CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte) que pode pagar diárias (indemnités journalières). O Código do Trabalho nacional (code du travail) se aplica em Mayotte desde 1º de janeiro de 2018.",
+  "quiEstConcerne": [
+    "O pai da criança, se for assalariado.",
+    "O cônjuge, parceiro de PACS ou companheiro da mãe, se não for o pai.",
+    "Estas regras dizem respeito ao setor privado: servidores públicos, autônomos e outros regimes têm regras próprias."
+  ],
+  "aSavoir": [
+    "Pais separados: o pai tem direito sem exigência de casamento, PACS ou vida em comum com a mãe.",
+    "Duração: 25 dias corridos para um nascimento (32 em caso de nascimentos múltiplos), além da licença de nascimento de 3 dias úteis. Um período de 4 dias é obrigatório logo após a licença de nascimento.",
+    "Os 21 dias restantes (28 para nascimentos múltiplos) podem ser tirados de uma vez ou em 2 períodos de no mínimo 5 dias, nos 6 meses seguintes ao nascimento.",
+    "Avise o empregador pelo menos 1 mês antes da data prevista do parto e depois pelo menos 1 mês antes do início de cada período. Recomenda-se fazê-lo por escrito: carta registrada ou entrega em mãos contra recibo.",
+    "Diárias: em Mayotte, são pagas pela CSSM, que atende pelo 02 69 61 91 91 (service-public.gouv.fr).",
+    "Licença adicional de nascimento: desde 1º de julho de 2026, cada genitor pode tirar de 1 a 2 meses de licença remunerada após a licença-maternidade ou paternidade, para uma criança nascida a partir de 1º de janeiro de 2026. Um decreto de 30 de maio de 2026 fixou as regras para os assalariados de Mayotte."
+  ],
+  "documents": [
+    { "id": "acte-naissance", "libelle": "Cópia integral da certidão de nascimento da criança ou livro de família (livret de famille) atualizado", "detail": "A enviar à CSSM.", "coffre": "finances" },
+    { "id": "lien-mere", "libelle": "Comprovante do vínculo com a mãe, se você não for o pai", "detail": "Certidão de casamento, cópia do PACS, atestado de vida em comum ou declaração sob compromisso de união estável assinada pelos dois.", "coffre": "finances" },
+    { "id": "courrier-employeur", "libelle": "Carta informando o empregador", "detail": "Cópia da carta registrada ou do recibo assinado, com as datas da licença.", "coffre": "courriers" },
+    { "id": "attestation-salaire", "libelle": "Atestado de salário (attestation de salaire)", "detail": "Enviado pelo empregador à CSSM. Confirme com ele que foi enviado.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (dados bancários)", "detail": "Se os seus dados bancários não estiverem atualizados.", "coffre": "finances" },
+    { "id": "decomptes-ij", "libelle": "Extratos de pagamento das diárias", "detail": "Para guardar.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Avise o seu empregador por escrito", "detail": "Pelo menos 1 mês antes da data prevista do nascimento e depois pelo menos 1 mês antes de cada período de licença." },
+    { "titre": "Confira antes de enviar o seu processo", "detail": "Certidão de nascimento ou livro de família atualizado, comprovante do vínculo com a mãe se você não for o pai, atestado de salário enviado pelo empregador, RIB e endereço atualizados." },
+    { "titre": "Envie os comprovantes à CSSM", "detail": "Pela sua conta ameli (site do seguro-saúde francês), se tiver uma, ou por correio ou no atendimento da CSSM." },
+    { "titre": "Tire o período obrigatório de 4 dias", "detail": "Logo após a licença de nascimento de 3 dias paga pelo empregador." },
+    { "titre": "Planeje o restante da licença nos 6 meses", "detail": "E, se quiser, a licença adicional de nascimento nos 9 meses seguintes ao nascimento." }
+  ],
+  "ou": [
+    { "nom": "O seu empregador", "detail": "Para o aviso prévio e o atestado de salário." },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Diárias. Centre Kinga, Kawéni, Mamoudzou. Atendimento com agendamento.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" }
+  ],
+  "liens": [
+    { "titre": "Licença-paternidade e de acolhimento da criança (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156" },
+    { "titre": "Licença adicional de nascimento (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685" },
+    { "titre": "Licença adicional de nascimento (code.travail.gouv.fr)", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Avisar o empregador da licença-paternidade (1 mês antes do parto previsto)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Tirar o resto da licença-paternidade nos 6 meses após o nascimento", "evenement": "autre" },
+    { "type": "coffre", "titre": "Carta de licença-paternidade ao empregador", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Extratos das diárias da licença-paternidade", "categorie": "finances" }
+  ],
+  "datesLimites": [
+    { "libelle": "Informar o empregador pelo menos 1 mês antes do nascimento previsto", "detail": "Depois, pelo menos 1 mês antes de cada período." },
+    { "libelle": "Licença a tirar nos 6 meses seguintes ao nascimento" },
+    { "libelle": "Licença adicional de nascimento nos 9 meses seguintes ao nascimento", "detail": "Para uma criança nascida entre 1º de janeiro e 30 de junho de 2026: a tirar entre 1º de julho de 2026 e 31 de março de 2027." }
+  ],
+  "aConfirmer": [
+    "A confirmar com a CSSM: condições de acesso e valor das diárias de paternidade em Mayotte, que podem ser diferentes da tabela nacional.",
+    "A confirmar com a CSSM: valor e procedimento da licença adicional de nascimento para um assalariado de Mayotte (décret n° 2026-426 du 30 mai 2026).",
+    "A confirmar com a CSSM: horário do atendimento telefônico (às sextas até 12h ou 12h30, conforme as fontes)."
+  ],
+  "motsCles": ["licença-paternidade", "nascimento", "diárias", "empregador", "licença adicional de nascimento", "CSSM"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F3156 Licença-paternidade e de acolhimento da criança (contato Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39685 Licença adicional de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685", "verifieLe": "2026-10-29" },
+    { "titre": "Code du travail numérique, licença adicional de nascimento a partir de 1º de julho de 2026", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Contatos", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" }
+  ]
+}

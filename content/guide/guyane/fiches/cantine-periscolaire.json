@@ -62,11 +62,11 @@
     "À confirmer localement : facturation en résidence alternée (une facture par parent ou non), selon la commune."
   ],
   "motsCles": ["cantine", "garderie", "périscolaire", "demi-pension", "repas", "PAI", "quotient familial"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F24570 Cantine scolaire à l'école primaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2025-05-20" },
-    { "titre": "Service-public.gouv.fr, F19294 Aide financière pour la cantine", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2025-10-20" },
-    { "titre": "Service-public.gouv.fr, F24569 Cantine au collège et au lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569", "verifieLe": "2026-02-25" },
-    { "titre": "Service-public.gouv.fr, F1871 Assurance scolaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2025-09-15" }
+    { "titre": "Service-public.gouv.fr, F24570 Cantine scolaire à l'école primaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F19294 Aide financière pour la cantine", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F24569 Cantine au collège et au lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1871 Assurance scolaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2026-10-29" }
   ]
 }

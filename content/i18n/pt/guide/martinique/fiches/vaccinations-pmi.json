@@ -1,0 +1,161 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "martinique",
+  "categorie": "sante",
+  "titre": "Vacinas obrigatórias e acompanhamento na PMI",
+  "resume": "As vacinas exigidas para a creche, a escola e o centro de lazer na Martinica, o acompanhamento gratuito dos menores de 6 anos na PMI e a febre amarela se você for à Guiana Francesa.",
+  "aQuoiCaSert": "As vacinas obrigatórias são exigidas para entrar na creche, na escola, no atendimento pós-escola ou na colônia de férias: sem comprovante, a matrícula pode ser recusada ou apenas provisória. O comprovante é a caderneta de saúde (carnet de santé) preenchida pelo médico. Na Martinica, a lista de vacinas obrigatórias é a mesma da França continental. A proteção materno-infantil (protection maternelle et infantile, PMI), serviço da Collectivité territoriale de Martinique (CTM, a coletividade territorial), oferece consultas gratuitas para gestantes e crianças com menos de 6 anos, vacinas incluídas.",
+  "quiEstConcerne": [
+    "Todos os pais de filhos menores, sobretudo antes da entrada na creche, na escola ou em centro de lazer.",
+    "As famílias que vão à Guiana Francesa com uma criança de 12 meses ou mais: a vacina contra a febre amarela é obrigatória lá."
+  ],
+  "aSavoir": [
+    "Criança nascida antes de 2018: difteria, tétano e poliomielite (DTP) obrigatórias para a escola.",
+    "Criança nascida entre 1º de janeiro de 2018 e 31 de dezembro de 2022: 11 vacinas obrigatórias (difteria, tétano, poliomielite, coqueluche, Haemophilus influenzae b, hepatite B, pneumococo, meningococo C, sarampo, caxumba, rubéola).",
+    "Criança nascida a partir de 2023: mesma lista, com os meningococos A, B, C, W e Y no lugar do meningococo C apenas.",
+    "Febre amarela: não é obrigatória na Martinica. É obrigatória na Guiana Francesa, para os residentes e qualquer pessoa que fique lá, a partir de 1 ano: fale com seu médico antes da viagem.",
+    "Uma criança com vacinas atrasadas pode ser admitida provisoriamente: você tem então 3 meses para regularizar, senão ela pode ser excluída. Se a criança ficar mais de um ano, o comprovante é pedido todo ano.",
+    "Antes dos 6 anos, a criança faz 16 dos 20 exames de saúde obrigatórios (previstos até os 16 anos), com o médico ou na PMI. Eles são cobertos 100% sem adiantamento de despesas, exceto honorários excedentes.",
+    "Pais separados: o genitor que leva a criança para vacinar deve, de preferência, avisar o outro e enviar uma cópia das páginas de vacinas, para que cada um tenha o comprovante."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "Caderneta de saúde da criança (carnet de santé)",
+      "detail": "Original, a levar a cada consulta. É o comprovante das vacinas: guarde uma fotocópia ou foto das páginas de vacinas. Perdeu? Informe-se na PMI ou com seu médico.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Carte Vitale (cartão do seguro de saúde) do genitor ou atestado de direitos da criança",
+      "detail": "Atestado disponível gratuitamente na sua conta ameli.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Documento de identidade do genitor ou do adulto acompanhante",
+      "detail": "Original. Se outra pessoa acompanhar a criança, leve uma autorização escrita de um dos pais.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Atestado médico de contraindicação, se for o caso",
+      "detail": "Emitido pelo médico. Apresentado no lugar do comprovante de vacina.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique a caderneta de saúde",
+      "detail": "Compare com a lista de vacinas obrigatórias conforme o ano de nascimento do seu filho."
+    },
+    {
+      "titre": "Marque uma consulta",
+      "detail": "Com seu médico de referência (médecin traitant) ou pediatra, ou num centro de PMI da Collectivité territoriale de Martinique para menores de 6 anos. Ligue antes: horários e dias de consulta variam de um centro para outro."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Caderneta de saúde, carte Vitale ou atestado de direitos, documento de identidade, autorização escrita se quem acompanha não for um dos pais."
+    },
+    {
+      "titre": "Vacine seu filho",
+      "detail": "O profissional registra a vacina na caderneta de saúde."
+    },
+    {
+      "titre": "Apresente o comprovante",
+      "detail": "Fotocópia das páginas de vacinas para a creche, a escola ou o centro de lazer, todo ano se a criança ficar mais de um ano."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Centros de PMI da Collectivité territoriale de Martinique (CTM)",
+      "detail": "Consultas gratuitas e vacinas para menores de 6 anos, em vários municípios. Diretório por município no sante.fr.",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/972-martinique"
+    },
+    {
+      "nom": "Seu médico de referência ou pediatra"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vacinas exigidas para a creche e a escola (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Centros de PMI na Martinica (sante.fr)",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/972-martinique"
+    },
+    {
+      "titre": "Exames de saúde obrigatórios até os 6 anos (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Consulta de vacinação",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Reforço de vacina",
+      "evenement": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Páginas de vacinas da caderneta de saúde",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 meses para regularizar após uma admissão provisória",
+      "detail": "Sem vacinas em dia ao fim desse prazo, a criança pode ser excluída da creche, escola ou centro."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: endereços, horários e dias de consulta dos centros de PMI da CTM; ligue antes de ir.",
+    "O número de doses e a idade de cada vacina seguem o calendário vacinal em vigor: verifique com seu médico ou a PMI."
+  ],
+  "motsCles": [
+    "vacina",
+    "PMI",
+    "caderneta de saúde",
+    "pediatra",
+    "bebê",
+    "CTM"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-01-06"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1879 Saúde na escola primária",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879",
+      "verifieLe": "2026-10-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F967 Exames médicos obrigatórios da criança",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967",
+      "verifieLe": "2026-07-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2025-06-20"
+    },
+    {
+      "titre": "Santé.fr, diretório dos centros de PMI na Martinica",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/972-martinique",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Collectivité territoriale de Martinique, site oficial",
+      "url": "https://www.collectivitedemartinique.mq",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

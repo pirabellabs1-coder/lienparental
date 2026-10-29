@@ -1,0 +1,59 @@
+{
+  "slug": "accueil-loisirs-vacances",
+  "territoire": "mayotte",
+  "categorie": "loisirs",
+  "titre": "Centros de lazer e atividades durante as férias",
+  "resume": "Encontrar um centro de lazer para as quartas-feiras e as férias, o processo a preparar (vacinas em dia, seguro) e os auxílios possíveis em Mayotte.",
+  "aQuoiCaSert": "Os centros de lazer sem pernoite (ALSH, accueils de loisirs sans hébergement, muitas vezes chamados de centres de loisirs) recebem as crianças às quartas-feiras e nas férias, conforme o município. Cada organizador define os preços. Em Mayotte, a CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte) não divulga auxílio de férias ou de tempo livre comparável aos das Caf (Caisse d'allocations familiales, órgão de benefícios familiares): informe-se na prefeitura (mairie) ou nas associações.",
+  "quiEstConcerne": [
+    "Os pais de crianças em idade escolar que procuram onde deixá-las às quartas-feiras ou nas férias.",
+    "As famílias em dificuldade, que podem pedir um auxílio pontual."
+  ],
+  "aSavoir": [
+    "As vagas são limitadas: informe-se várias semanas antes das férias. A inscrição geralmente é feita na prefeitura ou no próprio centro.",
+    "As vacinas obrigatórias são exigidas para a admissão em coletividade, inclusive em creche e colônia de férias. A lista depende do ano de nascimento da criança.",
+    "Se as vacinas não estiverem em dia, é possível uma admissão provisória de 3 meses enquanto são aplicadas.",
+    "A CSSM oferece um auxílio financeiro individual pontual, analisado por uma comissão, para algumas despesas do dia a dia.",
+    "Pais separados: cada um pode inscrever a criança nas próprias semanas de férias. Informe ao centro as pessoas autorizadas a buscar a criança."
+  ],
+  "documents": [
+    { "id": "dossier-inscription", "libelle": "Ficha de inscrição ou ficha de saúde do centro", "detail": "Ela define as autorizações (saídas, fotos, pessoas autorizadas).", "coffre": "autres" },
+    { "id": "carnet-sante", "libelle": "Cópia das páginas de vacinas da caderneta de saúde (carnet de santé)", "detail": "Vacinas atrasadas: marque consulta com o médico ou na PMI (protection maternelle et infantile, serviço de saúde materno-infantil).", "coffre": "sante" },
+    { "id": "ressources", "libelle": "Comprovante de renda (aviso de imposto ou atestado da CSSM)", "detail": "Se o centro aplicar um preço conforme a renda.", "coffre": "finances" },
+    { "id": "assurance", "libelle": "Atestado de seguro de responsabilidade civil ou extraescolar da criança", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Sentença ou acordo que fixa a residência da criança, se o centro pedir", "detail": "Cópia.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Encontre os centros de lazer perto de você", "detail": "Na sua prefeitura, em monenfant.fr ou nas associações do bairro." },
+    { "titre": "Combine com o outro genitor", "detail": "Anote no calendário quem fica com a criança em cada semana de férias." },
+    { "titre": "Confira antes de ir", "detail": "Datas de inscrição, ficha preenchida, cópia das vacinas, comprovante de renda, atestado de seguro, lista das pessoas autorizadas a buscar a criança." },
+    { "titre": "Inscreva o seu filho cedo", "detail": "As vagas nas férias acabam rápido." },
+    { "titre": "Em caso de dificuldade financeira", "detail": "Informe-se no CCAS (centro municipal de ação social) do seu município ou peça o auxílio financeiro individual da CSSM." }
+  ],
+  "ou": [
+    { "nom": "Prefeitura (mairie) do seu município", "detail": "Centros de lazer municipais e inscrições." },
+    { "nom": "monenfant.fr", "detail": "Diretório nacional dos centros de lazer.", "url": "https://monenfant.fr" },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Auxílio financeiro individual (ação social).", "url": "https://www.cssm.fr/page/action-sociale", "telephone": "02 69 61 91 91" }
+  ],
+  "liens": [
+    { "titre": "Vacinação e admissão em coletividade (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Ação social (CSSM)", "url": "https://www.cssm.fr/page/action-sociale" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Abertura das inscrições no centro de lazer das férias", "evenement": "activite" },
+    { "type": "calendrier", "titre": "Centro de lazer durante as férias", "evenement": "activite" },
+    { "type": "coffre", "titre": "Cópia das vacinas da criança", "categorie": "sante" },
+    { "type": "depense", "titre": "Centro de lazer", "categorie": "loisirs" }
+  ],
+  "aConfirmer": [
+    "A confirmar na CSSM: a existência de auxílios de férias ou de tempo livre (como aide aux temps libres ou VACAF), não mencionados no site dela.",
+    "A confirmar localmente: lista dos centros de lazer do seu município e documentos exatos da ficha de inscrição.",
+    "A confirmar: cobertura de Mayotte em monenfant.fr (site inacessível no momento da verificação)."
+  ],
+  "motsCles": ["centro de lazer", "ALSH", "férias", "colônia de férias", "quarta-feira", "contraturno"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vacinação e admissão em coletividade", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Ação social", "url": "https://www.cssm.fr/page/action-sociale", "verifieLe": "2026-10-29" }
+  ]
+}

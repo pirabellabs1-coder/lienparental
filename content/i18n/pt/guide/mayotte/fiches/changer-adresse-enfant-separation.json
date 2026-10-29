@@ -1,0 +1,71 @@
+{
+  "slug": "changer-adresse-enfant-separation",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Mudar o endereço da criança após uma separação (CSSM, escola, impostos)",
+  "resume": "Quem avisar e em que ordem quando o endereço da criança muda: CSSM (benefícios e seguro de saúde), escola, Receita, com os documentos a preparar e as obrigações em relação ao outro genitor.",
+  "aQuoiCaSert": "Após uma separação, o endereço da criança muda com frequência, ou ela passa a viver em dois lares. Atualizar esse endereço evita cartas perdidas, benefícios mal calculados ou pagos ao genitor errado e esquecimentos da escola. Em Mayotte, a CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte) cuida ao mesmo tempo dos benefícios familiares e do seguro de saúde, mas não consta da lista de órgãos avisados pelo serviço nacional de mudança de endereço: é preciso avisá-la diretamente.",
+  "quiEstConcerne": [
+    "O genitor com quem a criança passa a morar, ou que se muda com ela.",
+    "Os pais em residência alternada, que devem declarar os dois endereços."
+  ],
+  "aSavoir": [
+    "O serviço gratuito « Déclaration de changement d'adresse » (declaração de mudança de endereço) do service-public.gouv.fr, site oficial do governo francês, avisa vários órgãos em um só procedimento (Receita e France Travail, entre outros). A CSSM não está incluída.",
+    "CSSM, benefícios familiares: declare a separação e a mudança no « Mon Compte » em caf.fr. Para o auxílio-moradia, faça um novo pedido assim que entrar no imóvel.",
+    "CSSM, seguro de saúde: atualize o endereço na sua conta ameli ou no atendimento da CSSM, e verifique a qual genitor a criança está vinculada.",
+    "Receita (impostos): informe o endereço no seu espaço em impots.gouv.fr e depois indique a mudança na sua declaração de renda.",
+    "Escola: você deve informar qualquer mudança de situação familiar ou de endereço, e qualquer decisão do juiz de família (juge aux affaires familiales, JAF) sobre a criança.",
+    "Mudança de um genitor: se isso alterar o exercício da autoridade parental (por exemplo, o direito de visita), ele deve avisar o outro com antecedência. Se a criança mora com ele por sentença ou acordo, deve informar o novo endereço em até 1 mês após a mudança, sob pena de 6 meses de prisão e multa de 7.500 €.",
+    "Em caso de desacordo sobre a mudança ou a residência da criança: mediação familiar ou pedido ao juiz de família (JAF) de Mamoudzou."
+  ],
+  "documents": [
+    { "id": "domicile", "libelle": "Comprovante do novo endereço (de preferência com menos de 3 meses)", "detail": "Contrato, recibo de aluguel, conta de água ou luz. Se você está hospedado(a): declaração de hospedagem e documentos de quem hospeda.", "coffre": "courriers" },
+    { "id": "identite", "libelle": "Documento de identidade do genitor que declara (cópia frente e verso)", "coffre": "autres" },
+    { "id": "numeros", "libelle": "Número de seguridade social e número fiscal", "detail": "Na sua carte Vitale (cartão do seguro de saúde) e no seu aviso de imposto.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Sentença ou acordo sobre a residência da criança (cópia)", "detail": "Para a escola e a CSSM, se houver uma decisão.", "coffre": "jaf" },
+    { "id": "courrier-autre-parent", "libelle": "Cópia da carta que informa o novo endereço ao outro genitor", "detail": "Guarde uma prova datada.", "coffre": "jaf" },
+    { "id": "fiche-ecole", "libelle": "Ficha de informações da escola atualizada", "detail": "Com os contatos dos dois pais e as pessoas autorizadas a buscar a criança.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Informe o outro genitor", "detail": "Antes da mudança se a rotina da criança mudar, e em até 1 mês depois se a criança mora com você por sentença ou acordo. Guarde um registro escrito." },
+    { "titre": "Faça a declaração única on-line", "detail": "Serviço « Déclaration de changement d'adresse » no service-public.gouv.fr, para os órgãos propostos." },
+    { "titre": "Declare a separação e o endereço à CSSM", "detail": "No « Mon Compte » em caf.fr para os benefícios, e na sua conta ameli ou no atendimento para o seguro de saúde." },
+    { "titre": "Confira antes de ir à escola", "detail": "Comprovante do novo endereço, sentença ou acordo se houver, contatos dos dois pais, lista das pessoas autorizadas a buscar a criança." },
+    { "titre": "Avise a escola ou o estabelecimento", "detail": "Pense também nas atividades extraescolares e no transporte escolar." },
+    { "titre": "Termine pelos outros órgãos", "detail": "Banco, seguro residencial e escolar, mutuelle (plano de saúde complementar), médico, atividades da criança, listas eleitorais na prefeitura (mairie)." }
+  ],
+  "ou": [
+    { "nom": "Service-public.gouv.fr, Déclaration de changement d'adresse", "detail": "Declaração única e gratuita a vários órgãos.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R11193" },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM), órgão de seguridade social de Mayotte", "detail": "Benefícios familiares e seguro de saúde. Atendimento com hora marcada.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "Impots.gouv.fr", "detail": "Espaço pessoal.", "url": "https://www.impots.gouv.fr" },
+    { "nom": "Escola da criança (école, collège ou lycée)", "detail": "Diretor da escola ou secretaria do estabelecimento." }
+  ],
+  "liens": [
+    { "titre": "Declaração de mudança de endereço (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R11193" },
+    { "titre": "Um genitor separado pode se mudar livremente? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389" },
+    { "titre": "Escola e pais separados: informação aos pais (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Comprovante do novo endereço", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Prova de que o outro genitor foi informado (novo endereço)", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Informar o novo endereço ao outro genitor (máximo de 1 mês)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Avisar a CSSM da mudança de endereço", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Reunião na escola: atualização do endereço", "evenement": "ecole" }
+  ],
+  "datesLimites": [
+    { "libelle": "Até 1 mês após a mudança", "detail": "Para informar o novo endereço ao outro genitor, quando a criança mora com você por sentença ou acordo." },
+    { "libelle": "Assim que entrar no imóvel", "detail": "Novo pedido de auxílio-moradia à CSSM." }
+  ],
+  "aConfirmer": [
+    "A confirmar com a CSSM: se uma mudança de endereço declarada no « Mon Compte » também vale para o seguro de saúde, ou se são necessários dois procedimentos.",
+    "A confirmar com a CSSM: declaração da residência alternada e divisão dos auxílios familiares."
+  ],
+  "motsCles": ["mudança de endereço", "mudança", "separação", "residência alternada", "CSSM", "escola", "impostos"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, R11193 Declaração de mudança de endereço", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R11193", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11389 Um genitor separado pode se mudar livremente?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1391 Informação aos pais na escola", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Família", "url": "https://www.cssm.fr/page/famille", "verifieLe": "2026-10-29" }
+  ]
+}

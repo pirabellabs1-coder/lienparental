@@ -12,7 +12,7 @@
   ],
   "aSavoir": [
     "Plafonds de ressources dans les DOM, dont la Guyane, pour une demande faite en 2026 (revenus 2024) : 27 382 € pour 1 personne, 36 567 € pour 2 personnes, 43 973 € pour 3 personnes ou pour une personne seule avec 1 personne à charge, 53 088 € pour 4 personnes ou pour une personne seule avec 2 personnes à charge (service-public.gouv.fr, cas général).",
-    "Séparation : pour que seuls vos revenus soient pris en compte, joignez un justificatif comme l'ordonnance de non-conciliation, l'acte de saisine du juge aux affaires familiales, le jugement de divorce ou l'acte de naissance portant mention de la dissolution du Pacs.",
+    "Séparation : pour que seuls vos revenus soient pris en compte, joignez selon votre cas : divorce en cours (copie de l'acte de saisine du juge aux affaires familiales, ou attestation de l'avocat pour un divorce par consentement mutuel), jugement ou convention de divorce, récépissé de la déclaration de rupture du Pacs ou acte de naissance portant mention de la rupture, récépissé de plainte en cas de violences au sein du couple.",
     "Si vos revenus ont baissé d'au moins 10 %, vous pouvez le faire valoir avec des justificatifs (fiches de paie, attestation de l'employeur). Une attestation sur l'honneur n'est pas acceptée.",
     "Hors Île-de-France, il faut un dossier par département : une demande en Guyane ne vaut que pour la Guyane.",
     "Renouvellement : chaque année, entre le 10e et le 12e mois suivant la création ou le dernier renouvellement. Un rappel est envoyé au moins 1 mois avant. Dans les DOM, une demande non renouvelée est automatiquement annulée et il faut tout recommencer avec un nouveau numéro unique (service-public.gouv.fr).",
@@ -22,7 +22,7 @@
     { "id": "identite", "libelle": "Pièce d'identité du demandeur", "detail": "Copie recto verso de la carte d'identité ou du passeport. Pour un ressortissant hors Union européenne : copie du titre de séjour ou du récépissé en cours de validité. Obligatoire au dépôt.", "coffre": "courriers" },
     { "id": "identite-cotitulaire", "libelle": "Pièce d'identité ou titre de séjour de chaque adulte à loger", "detail": "Copie en cours de validité.", "coffre": "courriers" },
     { "id": "avis-imposition", "libelle": "Avis d'imposition 2025 sur les revenus 2024 de chaque personne à loger", "detail": "Copie. Téléchargeable dans votre espace impots.gouv.fr ou à demander au centre des finances publiques.", "coffre": "finances" },
-    { "id": "justificatif-separation", "libelle": "Justificatif de séparation", "detail": "Copie de l'ordonnance de non-conciliation, de l'acte de saisine du juge aux affaires familiales, du jugement de divorce ou de l'acte de naissance mentionnant la dissolution du Pacs.", "coffre": "jaf" },
+    { "id": "justificatif-separation", "libelle": "Justificatif de séparation", "detail": "Copie, selon votre cas, de l'acte de saisine du juge aux affaires familiales ou de l'attestation d'avocat (divorce en cours), du jugement ou de la convention de divorce, du récépissé de rupture du Pacs ou de l'acte de naissance la mentionnant, ou du récépissé de plainte en cas de violences.", "coffre": "jaf" },
     { "id": "jugement-residence", "libelle": "Jugement ou convention fixant la résidence des enfants", "detail": "Copie, pour justifier des enfants à loger avec vous ou d'une résidence alternée.", "coffre": "jaf" },
     { "id": "livret-famille", "libelle": "Livret de famille ou actes de naissance des enfants", "detail": "Copie, pour justifier des personnes à charge.", "coffre": "courriers" },
     { "id": "ressources", "libelle": "Justificatifs de ressources récentes", "detail": "Copies des derniers bulletins de salaire, attestations Caf ou France Travail. Exigés en cas de baisse de revenus d'au moins 10 %.", "coffre": "finances" },
@@ -42,7 +42,8 @@
   ],
   "liens": [
     { "titre": "Demande de logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007" },
-    { "titre": "Renouvellement de la demande de logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010" },
+    { "titre": "Renouvellement de la demande de logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32880" },
+    { "titre": "Conditions et plafonds du logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869" },
     { "titre": "Demande de logement social en ligne", "url": "https://www.demande-logement-social.gouv.fr" }
   ],
   "actions": [
@@ -58,9 +59,10 @@
     "À confirmer localement : les bailleurs sociaux peuvent demander des pièces supplémentaires au moment de l'attribution."
   ],
   "motsCles": ["logement social", "HLM", "numéro unique", "renouvellement", "séparation", "plafonds"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F10007 Demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-09-11" },
-    { "titre": "Service-public.gouv.fr, F35010 Renouvellement d'une demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010", "verifieLe": "2026-09-08" }
+    { "titre": "Service-public.gouv.fr, F10007 Demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F32880 Renouvellement d'une demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32880", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F869 Conditions pour obtenir un logement social (plafonds, assistance téléphonique)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869", "verifieLe": "2026-10-29" }
   ]
 }

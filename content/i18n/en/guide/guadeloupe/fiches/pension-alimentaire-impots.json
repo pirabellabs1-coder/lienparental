@@ -1,0 +1,176 @@
+{
+  "slug": "pension-alimentaire-impots",
+  "territoire": "guadeloupe",
+  "categorie": "argent",
+  "titre": "Child support and your tax return",
+  "resume": "The paying parent can deduct child support, the receiving parent declares it. With shared residence, no deduction but the tax shares are split. What to keep as proof.",
+  "aQuoiCaSert": "Child support paid for a child affects both parents' income tax: a deduction for one, taxable income for the other. It never appears on the pre-filled tax return: each parent must enter it themselves. Declaring it correctly, with the right proof, avoids mistakes and tax reassessments (redressements).",
+  "quiEstConcerne": [
+    "The parent who pays support for a minor child who lives with the other parent.",
+    "The parent who receives the support.",
+    "Parents with shared residence (résidence alternée).",
+    "The parent raising their children alone (box T)."
+  ],
+  "aSavoir": [
+    "Paying parent, minor child: support is deductible if the child usually lives with the other parent and is not counted in your family quotient (quotient familial, the system of tax shares per household). With a judgment, it is the amount set (indexed); you can also deduct expenses paid directly (school canteen, schooling, medical costs). Costs related to your visiting rights are not deductible.",
+    "Support not set by a judgment: only sums matching the child's needs and your means are deductible, and you must be able to prove the payments.",
+    "Receiving parent: support is taxable up to the amount the other parent can deduct. Declare it under \"Pensions, retraites, rentes\", on the line \"Pensions alimentaires perçues\". A 10% allowance is applied automatically.",
+    "Shared residence: no support is deductible. Each child counts as a 1/4 share for each parent for the first two, then a 1/2 share from the third child.",
+    "Box T (case T): a single, divorced or separated parent who lives alone with their dependent children ticks box T and gets an extra half share.",
+    "Adult child not attached to your tax household: support is deductible up to €6,855 per child (scale checked on April 15, 2026), with the child declaring the amount received."
+  ],
+  "documents": [
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement setting the support (copy)",
+      "detail": "Ask the court registry (greffe), the lawyer or the notary for a copy if you no longer have it.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "preuves-versement",
+      "libelle": "Proof of each payment during the year",
+      "detail": "Bank statements, transfer notices, ARIPA certificate if the support is paid through the Caf (Caisse d'allocations familiales, the family benefits office). Cash without a receipt is hard to prove.",
+      "coffre": "finances"
+    },
+    {
+      "id": "depenses-directes",
+      "libelle": "Invoices for expenses paid directly for the child",
+      "detail": "School canteen, schooling, medical costs, if you deduct them on top of the support.",
+      "coffre": "finances"
+    },
+    {
+      "id": "recapitulatif",
+      "libelle": "Annual summary of amounts paid or received",
+      "detail": "Total for the calendar year. You can export it from the Lien Parental Journal.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Latest tax notice (avis d'impôt)",
+      "detail": "Download it from your personal account on impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "decision-residence",
+      "libelle": "Decision or agreement setting the residence (shared or not)",
+      "detail": "To justify the split of shares or box T if the tax authorities ask.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Add up the amounts paid or received over the calendar year",
+      "detail": "The Journal (Finances filter, Pension category) gives you the history of recorded payments."
+    },
+    {
+      "titre": "Check before filling in your tax return",
+      "detail": "The total matches your bank statements; the child is not declared as your dependent if you deduct the support; with shared residence you deduct nothing; the proof is stored in the Vault."
+    },
+    {
+      "titre": "Declare the support",
+      "detail": "As deductible expenses if you pay it, under \"Pensions alimentaires perçues\" if you receive it. It is never pre-filled."
+    },
+    {
+      "titre": "Tick box T if you are raising your children alone",
+      "detail": "Only if you live alone with them and are single, divorced or separated."
+    },
+    {
+      "titre": "Keep the proof",
+      "detail": "The tax authorities may ask for it."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "impots.gouv.fr, your personal account",
+      "detail": "Online tax return and secure messaging.",
+      "url": "https://www.impots.gouv.fr"
+    },
+    {
+      "nom": "Tax information service",
+      "detail": "Monday to Friday, 8:30 a.m. to 7 p.m., except public holidays (free service plus the cost of a call).",
+      "telephone": "0809 401 401"
+    },
+    {
+      "nom": "Your local public finance center (centre des finances publiques)"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Deducting child support (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2"
+    },
+    {
+      "titre": "Declaring child support received (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170"
+    },
+    {
+      "titre": "Family quotient, shared residence and box T (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Child support for the month",
+      "categorie": "pension"
+    },
+    {
+      "type": "coffre",
+      "titre": "Proof of child support payments for the year",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Annual child support summary",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Tax return: declare the child support (April)",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Declaration of 2026 income from April 2027",
+      "detail": "The exact deadlines are published every year on impots.gouv.fr."
+    }
+  ],
+  "aConfirmer": [
+    "The box numbers on the tax return change from year to year: check them in that year's guidance notes on impots.gouv.fr.",
+    "To be confirmed locally: whether 0809 401 401 can be reached from Guadeloupe; if not, use the secure messaging in your impots.gouv.fr account.",
+    "The filing deadline that applies in Guadeloupe is published every year by the DGFiP (French tax administration): check it on impots.gouv.fr."
+  ],
+  "motsCles": [
+    "taxes",
+    "child support",
+    "deduction",
+    "family quotient",
+    "tax shares",
+    "tax return",
+    "box T"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2 Deducting child support",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2",
+      "verifieLe": "2026-04-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3170 Child support received",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170",
+      "verifieLe": "2026-04-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2633 Shared residence, family quotient and box T",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633",
+      "verifieLe": "2026-04-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F12 (contact details of the tax information service)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12",
+      "verifieLe": "2026-04-15"
+    }
+  ]
+}

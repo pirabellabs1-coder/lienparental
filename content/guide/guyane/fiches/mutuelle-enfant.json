@@ -55,11 +55,11 @@
     "À confirmer auprès de votre mutuelle : l'âge limite de couverture des enfants et les justificatifs exigés pour un enfant de parents séparés varient selon les contrats."
   ],
   "motsCles": ["mutuelle", "complémentaire santé", "ayant droit", "Noémie", "parents séparés", "remboursement"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F20740 Dispenses d'adhésion à la mutuelle d'entreprise", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740", "verifieLe": "2024-05-16" },
-    { "titre": "Service-public.gouv.fr, F20739 Complémentaire santé d'entreprise", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739", "verifieLe": "2024-05-15" },
-    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-07-01" },
-    { "titre": "Forum des assurés ameli, réponse d'expert : double rattachement et complémentaire santé (29 octobre 2025)", "url": "https://forum-assures.ameli.fr/questions/3657009-parents-separes-double-rattachement-secu-enfant-seule-complementaire-sante-papa" }
+    { "titre": "Service-public.gouv.fr, F20740 Dispenses d'adhésion à la mutuelle d'entreprise", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F20739 Complémentaire santé d'entreprise", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" },
+    { "titre": "Forum des assurés ameli, réponse d'expert : double rattachement et complémentaire santé (29 octobre 2025)", "url": "https://forum-assures.ameli.fr/questions/3657009-parents-separes-double-rattachement-secu-enfant-seule-complementaire-sante-papa", "verifieLe": "2026-10-29" }
   ]
 }

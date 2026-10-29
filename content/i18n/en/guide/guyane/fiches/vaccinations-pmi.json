@@ -15,7 +15,7 @@
     "Child born in 2023 or later: same list, with meningococcus A, B, C, W and Y instead of meningococcus C alone.",
     "Yellow fever: recommended from 9 months and mandatory in French Guiana from 12 months. A single injection protects for life. If the child was vaccinated before age 2, a second dose is recommended between 6 and 10. The vaccine given in French Guiana is reimbursed by the Assurance Maladie (French public health insurance).",
     "A child who is not up to date can be admitted provisionally: you then have 3 months to catch up, otherwise the child may be excluded. If the child stays more than a year, proof is requested every year.",
-    "The 20 mandatory health check-ups up to age 6 are covered 100% with no upfront payment, excluding extra fees charged by the doctor (dépassements d'honoraires).",
+    "The child's 20 mandatory health check-ups, from birth to age 16 (16 of them before age 6), are covered 100% with no upfront payment, excluding extra fees charged by the doctor (dépassements d'honoraires).",
     "Separated parents: the parent who takes the child to be vaccinated should inform the other parent and send them a copy of the vaccination pages, so that each parent has the proof."
   ],
   "documents": [
@@ -41,7 +41,7 @@
   "liens": [
     { "titre": "Vaccines required for daycare and school (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
     { "titre": "Health advice for newcomers (ARS Guyane)", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires" },
-    { "titre": "Mandatory health check-ups up to age 6 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490" }
+    { "titre": "Mandatory health check-ups up to age 6 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0" }
   ],
   "actions": [
     { "type": "calendrier", "titre": "Vaccination appointment", "evenement": "sante" },
@@ -60,14 +60,14 @@
     "The number of doses and the age for each vaccine follow the current vaccination schedule: check with your doctor or the PMI."
   ],
   "motsCles": ["vaccine", "yellow fever", "PMI", "health record book", "carnet jaune", "pediatrician", "baby"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F767 Vaccination for school, daycare or after-school care", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccination for school, daycare or after-school care", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1879 Health at primary school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879", "verifieLe": "2026-10-15" },
-    { "titre": "Service-public.gouv.fr, F35490 Mandatory check-ups up to age 6", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490", "verifieLe": "2026-07-29" },
+    { "titre": "Service-public.gouv.fr, F35490 Mandatory check-ups up to age 6", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "ARS Guyane, Newcomers: health advice", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires", "verifieLe": "2023-01-09" },
+    { "titre": "ARS Guyane, Newcomers: health advice", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires", "verifieLe": "2026-10-29" },
     { "titre": "CTG, PMI: framework of its partnership with the CHU de Guyane (university hospital)", "url": "https://www.ctguyane.fr/pmi-la-ctg-clarifie-le-cadre-de-son-partenariat-avec-le-chu-de-guyane/", "verifieLe": "2026-09-08" },
-    { "titre": "Service-public directory, PMI de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3" }
+    { "titre": "Service-public directory, PMI de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3", "verifieLe": "2026-10-29" }
   ]
 }

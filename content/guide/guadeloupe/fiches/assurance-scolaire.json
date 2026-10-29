@@ -1,0 +1,51 @@
+{
+  "slug": "assurance-scolaire",
+  "territoire": "guadeloupe",
+  "categorie": "assurances",
+  "titre": "Assurance scolaire",
+  "resume": "Quand elle peut être exigée (cantine, périscolaire), ce qu'elle couvre, comment vérifier que votre enfant n'est pas déjà assuré et comment l'organiser entre parents séparés.",
+  "aQuoiCaSert": "L'assurance scolaire protège votre enfant pendant les activités scolaires et sur le trajet. Elle réunit deux garanties : la responsabilité civile, pour les dommages que l'enfant cause aux autres, et l'individuelle accident corporel, pour les dommages qu'il subit, même s'il se blesse seul. Une formule « extra-scolaire » couvre aussi les loisirs et les vacances, 24 heures sur 24.",
+  "quiEstConcerne": [
+    "Les parents d'enfants scolarisés, de la maternelle au lycée.",
+    "Les parents dont l'enfant mange à la cantine ou fréquente le périscolaire communal, où l'attestation peut être exigée."
+  ],
+  "aSavoir": [
+    "En principe, l'assurance scolaire est facultative, que les activités soient obligatoires (piscine, gymnase inscrits à l'emploi du temps) ou facultatives (sorties, séjours organisés par l'établissement).",
+    "Elle peut être exigée pour la cantine et pour les activités périscolaires organisées par la commune (études surveillées, activités culturelles ou sportives).",
+    "La responsabilité civile est souvent déjà incluse dans votre assurance multirisque habitation, et certains contrats personnels couvrent les accidents corporels : vérifiez avant de souscrire.",
+    "Garanties complémentaires possibles selon les contrats : vol ou racket, assistance scolaire à domicile pour un enfant malade.",
+    "En cas de changement d'école ou d'établissement, prévenez votre assureur.",
+    "Coût indicatif selon service-public.gouv.fr : à partir d'environ 10 € par an et par enfant."
+  ],
+  "documents": [
+    { "id": "contrat-habitation", "libelle": "Contrat multirisque habitation de chaque parent", "detail": "Pour vérifier la garantie responsabilité civile et savoir si l'enfant y figure comme assuré.", "coffre": "finances" },
+    { "id": "contrats-perso", "libelle": "Autres contrats personnels (garantie des accidents de la vie, individuelle accident)", "detail": "Ils peuvent déjà couvrir les accidents corporels de l'enfant.", "coffre": "finances" },
+    { "id": "attestation", "libelle": "Attestation d'assurance scolaire ou de responsabilité civile au nom de l'enfant", "detail": "Original ou copie selon la demande de l'école, de la mairie (cantine, périscolaire) ou du centre de loisirs. Pensez à une copie pour l'autre parent.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez vos contrats existants", "detail": "Habitation, garantie des accidents de la vie, individuelle accident : demandez à votre assureur si l'enfant est couvert pour les activités scolaires et périscolaires." },
+    { "titre": "Parents séparés : décidez qui assure l'enfant", "detail": "Inutile de payer deux fois la même garantie. Un seul contrat suffit si l'enfant y est bien désigné ; partagez l'attestation." },
+    { "titre": "Souscrivez si besoin", "detail": "Auprès de l'assureur de votre choix, ou d'un contrat collectif proposé par une association de parents d'élèves ou un établissement privé." },
+    { "titre": "Vérifiez avant de remettre le dossier", "detail": "Attestation au nom de l'enfant, pour l'année scolaire en cours, mentionnant la responsabilité civile et, si demandé, l'individuelle accident." },
+    { "titre": "Remettez l'attestation", "detail": "À l'école, à la mairie (cantine, périscolaire) ou au centre de loisirs si elle est demandée." }
+  ],
+  "ou": [
+    { "nom": "Votre assureur ou une association de parents d'élèves" }
+  ],
+  "liens": [
+    { "titre": "Assurance scolaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation d'assurance scolaire", "categorie": "scolarite" },
+    { "type": "depense", "titre": "Assurance scolaire", "categorie": "assurance" },
+    { "type": "rappel", "titre": "Renouveler l'attestation d'assurance scolaire pour la rentrée", "evenement": "ecole" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : les attestations demandées par votre école, votre commune (cantine, périscolaire) ou l'établissement privé."
+  ],
+  "motsCles": ["assurance", "responsabilité civile", "accident", "école", "attestation", "cantine"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1871 Assurance scolaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2025-09-15" }
+  ]
+}

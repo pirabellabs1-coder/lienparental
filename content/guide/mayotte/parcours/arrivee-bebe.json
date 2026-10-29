@@ -1,0 +1,21 @@
+{
+  "slug": "arrivee-bebe",
+  "territoire": "mayotte",
+  "titre": "Arrivée d'un bébé",
+  "resume": "De la reconnaissance au mode de garde : les étapes administratives des premiers mois à Mayotte.",
+  "ordre": 3,
+  "elements": [
+    { "id": "reconnaissance", "titre": "Reconnaître l'enfant (parents non mariés)", "detail": "À Mayotte, hors déclaration de naissance, la reconnaissance se fait à la mairie de Mamoudzou.", "fiche": "reconnaissance-enfant" },
+    { "id": "prestations", "titre": "Savoir quelles aides existent à Mayotte", "detail": "Prime à la naissance et allocation de base de la Paje ne sont pas encore versées à Mayotte (arrivée prévue à partir de 2027 pour l'allocation de base, en 2029 pour la prime).", "fiche": "prestations-familiales-mayotte" },
+    { "id": "declaration", "titre": "Déclarer la naissance en mairie", "detail": "Dans les 5 jours.", "fiche": "declaration-naissance" },
+    { "id": "livret-famille", "titre": "Récupérer ou mettre à jour le livret de famille", "fiche": "livret-de-famille" },
+    { "id": "acte-naissance", "titre": "Savoir obtenir un acte de naissance de l'enfant", "detail": "Gratuit, il sera demandé pour de nombreuses démarches.", "fiche": "acte-naissance" },
+    { "id": "conge-paternite", "titre": "Prendre le congé de paternité et d'accueil de l'enfant", "fiche": "conge-paternite" },
+    { "id": "carte-vitale", "titre": "Rattacher bébé à l'assurance maladie (CSSM)", "fiche": "rattacher-enfant-carte-vitale" },
+    { "id": "mutuelle", "titre": "Ajouter bébé à la mutuelle ou à la C2S", "fiche": "mutuelle-enfant" },
+    { "id": "pmi", "titre": "Organiser le suivi et les vaccins (médecin ou PMI)", "fiche": "vaccinations-pmi" },
+    { "id": "cssm", "titre": "Signaler la naissance à la CSSM et vérifier les allocations familiales", "detail": "À Mayotte, elles sont versées dès le premier enfant.", "fiche": "allocations-familiales-mayotte" },
+    { "id": "mode-garde", "titre": "Chercher un mode de garde", "detail": "Les places sont rares : à anticiper dès la grossesse.", "fiche": "mode-de-garde-petite-enfance" },
+    { "id": "epargne", "titre": "Ouvrir un livret d'épargne pour l'enfant", "fiche": "livret-epargne-mineur" }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "slug": "allocations-familiales-reunion",
+  "territoire": "reunion",
+  "categorie": "aides",
+  "titre": "Allocations familiales à La Réunion (dès le 1er enfant)",
+  "resume": "À La Réunion, les allocations familiales sont versées dès un seul enfant à charge, avec des majorations selon son âge. Qui y a droit, comment les demander et ce qui change en résidence alternée.",
+  "aQuoiCaSert": "Les allocations familiales aident les familles à faire face aux dépenses courantes des enfants. En métropole, elles ne sont versées qu'à partir de 2 enfants. Dans les départements d'outre-mer, dont La Réunion, des règles particulières s'appliquent : une allocation est versée dès le premier enfant à charge, avec des majorations liées à son âge. À partir de 2 enfants, les règles redeviennent celles de la métropole.",
+  "quiEstConcerne": [
+    "Les familles qui résident à La Réunion avec au moins un enfant à charge de moins de 20 ans.",
+    "Les parents séparés dont l'enfant vit en résidence alternée.",
+    "Les parents qui ne sont pas encore allocataires de la Caf."
+  ],
+  "aSavoir": [
+    "Famille avec un seul enfant à charge dans les DOM : une allocation familiale est versée, majorée à partir des 11 ans de l'enfant, puis revalorisée à partir de ses 16 ans (Cnaf, lettre réseau LR-2026-051 ; article D. 755-5 du code de la sécurité sociale).",
+    "À partir de 2 enfants, les règles sont celles de la métropole. Depuis le 1er mars 2026, la majoration pour âge est versée à 18 ans au lieu de 14 ans pour les enfants nés à partir du 1er mars 2012 (l'aîné d'une famille de 2 enfants n'y ouvre pas droit).",
+    "Pour 2 enfants, le montant de base va de 38,07 € à 152,25 € par mois selon les ressources du foyer (barème national, service-public.gouv.fr).",
+    "Le complément familial a, dans les DOM, des conditions et un montant différents de la métropole (service-public.gouv.fr renvoie au site de la Caf).",
+    "Dans les DOM, l'allocation de base de la Paje ne se cumule pas avec les allocations familiales versées pour un enfant à charge.",
+    "Résidence alternée : les parents peuvent désigner un seul allocataire ou partager les allocations familiales par moitié (cerfa n° 14000). Le choix vaut au moins 1 an, sauf changement de résidence de l'enfant. En cas de désaccord, chaque parent reçoit automatiquement une part.",
+    "Seules les allocations familiales se partagent (et le CMG, que chaque parent peut percevoir selon sa situation depuis le 1er décembre 2025). Paje, complément familial, aides au logement, ARS, ASF et AEEH vont en totalité au parent désigné."
+  ],
+  "documents": [
+    { "id": "identite-parents", "libelle": "Pièce d'identité ou titre de séjour de chaque parent", "detail": "Copie en cours de validité, demandée lors de la première demande à la Caf.", "coffre": "finances" },
+    { "id": "livret-famille", "libelle": "Livret de famille ou acte de naissance de chaque enfant", "detail": "Copie. Acte gratuit en ligne ou à la mairie du lieu de naissance.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB du parent allocataire", "detail": "À votre nom.", "coffre": "finances" },
+    { "id": "avis-imposition", "libelle": "Avis d'imposition de l'année précédente", "detail": "Copie, téléchargeable sur impots.gouv.fr. Les ressources servent au calcul.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Justificatif de domicile", "detail": "Copie récente (facture, quittance de loyer ou attestation d'hébergement).", "coffre": "finances" },
+    { "id": "jugement-residence", "libelle": "Jugement ou convention fixant la résidence alternée", "detail": "Copie, à joindre au formulaire de partage si la résidence alternée a été fixée par le juge ou une convention.", "coffre": "jaf" },
+    { "id": "cerfa-14000", "libelle": "Formulaire cerfa n° 14000 de déclaration en cas de résidence alternée", "detail": "Signé par les deux parents si vous êtes d'accord. Gardez une copie.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Devenez allocataire si ce n'est pas déjà fait", "detail": "Faites une demande de prestations sur caf.fr. Si vous êtes déjà allocataire, déclarez simplement la naissance ou l'arrivée de l'enfant." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Enfants bien déclarés, ressources à jour, RIB, adresse exacte, situation familiale (en couple, séparé, parent isolé). En cas de séparation, indiquez la date réelle." },
+    { "titre": "Résidence alternée : choisissez le partage ou un seul allocataire", "detail": "Remplissez ensemble le cerfa n° 14000 et envoyez-le à la Caf, avec la décision du juge ou la convention si vous en avez une." },
+    { "titre": "Contrôlez vos droits", "detail": "Consultez le détail des paiements dans votre espace Mon Compte et utilisez le simulateur de la Caf pour vérifier le montant." }
+  ],
+  "ou": [
+    { "nom": "Caf de La Réunion", "detail": "Démarches en ligne dans l'espace Mon Compte ; accueils sur l'île.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" }
+  ],
+  "liens": [
+    { "titre": "Allocations familiales (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213" },
+    { "titre": "Résidence alternée et prestations familiales (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248" },
+    { "titre": "Complément familial (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214" },
+    { "titre": "Caf de La Réunion", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Formulaire de partage des allocations (cerfa n° 14000)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Notification de droits de la Caf", "categorie": "finances" },
+    { "type": "rappel", "titre": "Signaler à la Caf tout changement de situation familiale", "evenement": "autre" },
+    { "type": "rappel", "titre": "Les 11 ans de l'enfant : vérifier la majoration des allocations (enfant unique)", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la Caf de La Réunion : le montant mensuel 2026 de l'allocation pour un seul enfant et de ses majorations à 11 et 16 ans, non publié sur les fiches nationales consultées. Utilisez le simulateur de la Caf.",
+    "À confirmer auprès de la Caf de La Réunion : le partage en résidence alternée quand la famille n'a qu'un seul enfant (la fiche nationale, écrite pour la métropole, indique qu'un parent avec un seul enfant ne perçoit pas d'allocations familiales).",
+    "À confirmer auprès de la Caf de La Réunion : les conditions (âge et nombre d'enfants, plafonds) et le montant du complément familial dans les DOM, qui n'ont pas pu être vérifiés sur une source officielle à jour.",
+    "À confirmer localement : adresses et horaires des accueils de la Caf de La Réunion (site caf.fr non lisible lors de la vérification)."
+  ],
+  "motsCles": ["allocations familiales", "un enfant", "DOM", "Caf", "résidence alternée", "partage", "complément familial"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Cnaf, lettre réseau LR-2026-051 du 26 février 2026 (majoration des allocations familiales, dispositions DOM)", "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13213 Allocations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13214 Complément familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2552 Allocation de base de la Paje (non-cumul dans les DOM)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552", "verifieLe": "2026-10-29" }
+  ]
+}

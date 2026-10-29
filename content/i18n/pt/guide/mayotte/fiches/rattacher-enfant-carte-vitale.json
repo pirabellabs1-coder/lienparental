@@ -1,0 +1,65 @@
+{
+  "slug": "rattacher-enfant-carte-vitale",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Vincular meu filho à CSSM, obter o atestado de direitos e a carte Vitale dele",
+  "resume": "Incluir a criança no seu cadastro do seguro-saúde na CSSM, baixar o atestado de direitos no ameli e pedir a carte Vitale própria dela a partir dos 12 ou 16 anos.",
+  "aQuoiCaSert": "Uma criança menor de idade é, em princípio, dependente (ayant droit) de um ou dos dois pais. Em Mayotte, o seguro-saúde é administrado pela CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte), que emite a carte Vitale (cartão do seguro de saúde) e o atestado de direitos (attestation de droits). O atestado prova que a criança tem cobertura: a creche, a escola, o centro de lazer ou o hospital costumam pedi-lo. Os segurados da CSSM podem usar uma conta ameli (site do seguro-saúde francês) para alguns procedimentos.",
+  "quiEstConcerne": [
+    "Os pais de um recém-nascido, ou de uma criança vinculada a apenas um dos pais.",
+    "Os pais separados que querem, cada um, ser reembolsados pelos cuidados de saúde da criança.",
+    "Os pais a quem pedem um atestado de direitos.",
+    "Os jovens de 12 a 18 anos que precisam da própria carte Vitale."
+  ],
+  "aSavoir": [
+    "Recém-nascido: o nascimento é declarado pela conta ameli, seção «Mes démarches»; a criança é então incluída no seu cadastro e registrada na sua carte Vitale (ficha da CSSM no Services Publics+).",
+    "Atestado de direitos: pode ser baixado na conta ameli depois que a criança for vinculada, ou pedido no atendimento da CSSM.",
+    "Carte Vitale da criança (regra nacional desde agosto de 2026): dos 12 aos 15 anos, a pedido de um dos pais; a partir dos 16, com o acordo de um dos pais que exerce a autoridade parental. É gratuita.",
+    "O telefone da CSSM é 02 69 61 91 91; não use o 36 46 citado nas páginas nacionais do ameli."
+  ],
+  "documents": [
+    { "id": "livret-famille", "libelle": "Cópia do livro de família (livret de famille) atualizado ou certidão de nascimento da criança", "detail": "Para o vínculo. Certidão gratuita na prefeitura (mairie) do lugar de nascimento.", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "Documento de identidade do genitor segurado", "detail": "Cópia dentro da validade.", "coffre": "sante" },
+    { "id": "tutelle", "libelle": "Sentença de tutela ou de delegação, se você não for o genitor", "detail": "Cópia.", "coffre": "jaf" },
+    { "id": "photo-enfant", "libelle": "Foto de identidade recente da criança, para a carte Vitale", "coffre": "sante" },
+    { "id": "identite-enfant", "libelle": "Documento de identidade da criança, para a carte Vitale", "detail": "Cópia ou versão digitalizada.", "coffre": "sante" },
+    { "id": "attestation-droits", "libelle": "Atestado de direitos com o nome da criança", "detail": "Renove em caso de mudança de situação.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Verifique a qual dos pais a criança está vinculada", "detail": "Na sua conta ameli, seção de beneficiários, ou com a CSSM." },
+    { "titre": "Crie sua conta ameli se precisar", "detail": "Em caso de dificuldade, peça ajuda no atendimento da CSSM ou num France Services (ponto de atendimento ao público)." },
+    { "titre": "Vincule a criança", "detail": "Pela conta ameli («Mes démarches») ou no atendimento da CSSM, com o livro de família ou a certidão de nascimento." },
+    { "titre": "Confira antes de ir", "detail": "Hora marcada, sua carte Vitale, seu documento de identidade, o livro de família ou a certidão de nascimento da criança, a foto e o documento dela para uma carte Vitale." },
+    { "titre": "Baixe o atestado de direitos", "detail": "Na conta ameli, selecionando a criança." },
+    { "titre": "Atualize a sua carte Vitale", "detail": "Na farmácia ou num terminal de autoatendimento, depois que o vínculo for registrado." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Seguro-saúde em Mayotte. Centre Kinga, Kawéni, Mamoudzou. Atendimento com hora marcada (agendamento on-line em cssm.fr).", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "Conta ameli (site e aplicativo)", "detail": "Vínculo, atestado de direitos.", "url": "https://www.ameli.fr" },
+    { "nom": "France Services", "detail": "Ajuda gratuita para criar a sua conta e fazer os procedimentos.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Ficha da CSSM no Services Publics+", "url": "https://www.plus.transformation.gouv.fr/caisse-de-securite-sociale-de-mayotte-cssm" },
+    { "titre": "Regime de seguridade social de Mayotte (Cleiss)", "url": "https://www.cleiss.fr/docs/regimes/regime_mayotte.html" },
+    { "titre": "Vínculo de um menor como dependente (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Atestado de direitos da criança", "categorie": "sante" },
+    { "type": "coffre", "titre": "Cópia da carte Vitale da criança", "categorie": "sante" },
+    { "type": "rappel", "titre": "Atualizar a carte Vitale depois do vínculo", "evenement": "sante" }
+  ],
+  "aConfirmer": [
+    "A confirmar com a CSSM: a inclusão da criança nas cartes Vitale dos dois pais, possível na França metropolitana, não foi confirmada para Mayotte.",
+    "A confirmar com a CSSM: a aplicação em Mayotte das novas regras da carte Vitale para 12 a 15 anos e o procedimento a seguir.",
+    "A ficha da CSSM no Services Publics+ remete a páginas do ameli escritas para uma caixa da França metropolitana: confira os nomes dos procedimentos.",
+    "A confirmar com a CSSM: como um segurado de Mayotte obtém o código para criar uma conta ameli."
+  ],
+  "motsCles": ["carte Vitale", "ameli", "dependente", "atestado de direitos", "CSSM", "seguridade social"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Services Publics+, Caisse de sécurité sociale de Mayotte", "url": "https://www.plus.transformation.gouv.fr/caisse-de-securite-sociale-de-mayotte-cssm", "verifieLe": "2026-10-29" },
+    { "titre": "Cleiss, O regime de seguridade social de Mayotte", "url": "https://www.cleiss.fr/docs/regimes/regime_mayotte.html", "verifieLe": "2026-10-29" },
+    { "titre": "Sante.fr, carte Vitale dos menores", "url": "https://www.sante.fr/node/20110525", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Contatos", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" }
+  ]
+}

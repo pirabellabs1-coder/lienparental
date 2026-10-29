@@ -1,0 +1,145 @@
+{
+  "slug": "prime-demenagement",
+  "territoire": "france",
+  "categorie": "logement",
+  "titre": "Auxílio-mudança da Caf (prime de déménagement)",
+  "resume": "Um auxílio para famílias com pelo menos 3 filhos que se mudam perto de um nascimento: condições de datas, valores máximos, documentos a enviar e prazo de 6 meses.",
+  "aQuoiCaSert": "O auxílio-mudança (prime de déménagement) reembolsa suas despesas reais de mudança, até um teto, se você tem pelo menos 3 filhos e se muda durante a gravidez ou nos dois anos seguintes ao nascimento do caçula. É pago de uma só vez, mediante comprovantes. Se sua situação for precária, é possível um adiantamento com base em orçamento.",
+  "quiEstConcerne": [
+    "As famílias com pelo menos 3 filhos dependentes, nascidos ou por nascer.",
+    "Que tenham direito, para a nova moradia, à APL (aide personnalisée au logement, ajuda personalizada à moradia) ou à ALF (allocation de logement familiale, auxílio-moradia familiar).",
+    "Genitor separado: essas condições são avaliadas para a sua própria família beneficiária."
+  ],
+  "aSavoir": [
+    "Datas: a mudança deve ocorrer entre o 1º dia do mês civil seguinte ao fim do 3º mês de gravidez e o último dia do mês anterior ao 2º aniversário do filho mais novo.",
+    "Tetos em vigor (service-public.gouv.fr, verificado em 1º de abril de 2026): 1.147,58 € para 3 filhos, 1.243,21 € para 4 filhos, mais 95,63 € por filho adicional. Você é reembolsado pelas despesas reais dentro desse limite.",
+    "Adiantamento em caso de situação precária: de 50% a 75% do orçamento. A fatura quitada deve depois ser entregue nos 6 meses seguintes à mudança para receber o saldo.",
+    "O pedido é feito à Caf (Caisse d'allocations familiales, órgão de benefícios familiares), ou à MSA para o regime agrícola, do novo local de residência, nos 6 meses seguintes à mudança.",
+    "Em caso de recusa, você tem 2 meses após receber a decisão para recorrer por carta à comissão de recurso amigável (commission de recours amiable)."
+  ],
+  "documents": [
+    {
+      "id": "cerfa-11363",
+      "libelle": "Formulário de pedido de auxílio-mudança (Cerfa n° 11363)",
+      "detail": "Baixe no service-public.gouv.fr, preencha e assine.",
+      "coffre": "finances"
+    },
+    {
+      "id": "facture",
+      "libelle": "Nota fiscal paga da transportadora ou comprovantes dos gastos",
+      "detail": "Todas as notas ligadas à mudança, em seu nome. Guarde uma cópia de cada documento enviado.",
+      "coffre": "finances"
+    },
+    {
+      "id": "devis",
+      "libelle": "Orçamento da transportadora, para pedir um adiantamento",
+      "detail": "Somente se a sua situação for precária.",
+      "coffre": "finances"
+    },
+    {
+      "id": "grossesse",
+      "libelle": "Declaração de gravidez ou certidão de nascimento do filho mais novo",
+      "detail": "Somente se a Caf pedir para verificar o período: muitas vezes ela já tem a informação.",
+      "coffre": "sante"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Declaração de aluguel (attestation de loyer) da nova moradia",
+      "detail": "Necessária para abrir o direito ao auxílio-moradia, condição do auxílio-mudança.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique as condições de datas e de número de filhos",
+      "detail": "Calcule o período autorizado a partir do início da gravidez ou da data de nascimento do filho mais novo."
+    },
+    {
+      "titre": "Peça o auxílio-moradia para a nova moradia",
+      "detail": "Sem direito à APL ou à ALF, não há auxílio-mudança."
+    },
+    {
+      "titre": "Guarde todas as notas da mudança",
+      "detail": "Ou peça um orçamento se precisar de adiantamento."
+    },
+    {
+      "titre": "Confira antes de enviar",
+      "detail": "Formulário Cerfa n° 11363 preenchido e assinado, notas fiscais pagas e legíveis, número de beneficiário, envio em até 6 meses após a mudança. Guarde uma cópia de tudo."
+    },
+    {
+      "titre": "Envie o pedido à Caf do seu novo domicílio",
+      "detail": "No máximo 6 meses após a mudança. Informe também sua mudança de endereço."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf do seu novo departamento",
+      "detail": "Encontre sua Caf e os contatos dela na seção « Ma Caf » do caf.fr.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, seguridade social agrícola)",
+      "detail": "Se você é do regime agrícola.",
+      "url": "https://www.msa.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Auxílio-mudança (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008"
+    },
+    {
+      "titre": "Auxílio-moradia familiar (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Gastos de mudança",
+      "categorie": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Enviar o pedido de auxílio-mudança (no máximo 6 meses)",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Nota fiscal da mudança",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Pedido de auxílio-mudança enviado (cópia)",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Pedido no máximo 6 meses após a mudança"
+    },
+    {
+      "libelle": "Nota fiscal paga em até 6 meses após a mudança, se você recebeu um adiantamento"
+    }
+  ],
+  "aConfirmer": [
+    "Os tetos costumam ser reajustados todo ano: verifique o valor em vigor no service-public.gouv.fr ou com sua Caf no momento do pedido."
+  ],
+  "motsCles": [
+    "mudança",
+    "auxílio",
+    "família numerosa",
+    "Caf",
+    "nascimento",
+    "cerfa 11363"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2008 Auxílio-mudança",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

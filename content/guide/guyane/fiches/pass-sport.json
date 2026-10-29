@@ -55,9 +55,9 @@
     "Le montant et les modalités de l'aide équipement de la Caf annoncée pour 2027 sont à vérifier auprès de la Caf de la Guyane."
   ],
   "motsCles": ["sport", "club", "Pass'Sport", "licence", "activité", "réduction"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, actualité A15850 Pass'Sport 2026-2027", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-09-02" },
-    { "titre": "Pass'Sport, jeunes et parents", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" }
+    { "titre": "Service-public.gouv.fr, actualité A15850 Pass'Sport 2026-2027", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-10-29" },
+    { "titre": "Pass'Sport, jeunes et parents", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents", "verifieLe": "2026-10-29" }
   ]
 }

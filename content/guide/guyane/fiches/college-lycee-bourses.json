@@ -70,11 +70,11 @@
     "À confirmer localement : règle de la résidence alternée pour la bourse de lycée, la fiche officielle ne la détaillant que pour le collège."
   ],
   "motsCles": ["bourse", "collège", "lycée", "6e", "EduConnect", "avis d'impôt", "résidence alternée"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F984 Bourse de collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-04-30" },
-    { "titre": "Service-public.gouv.fr, F616 Bourse de lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-04-30" },
-    { "titre": "Ministère de l'Éducation nationale, calendrier des campagnes de bourse 2026-2027", "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-1-calendrier-des-campagnes-de-bourse-de-college-et-de-lycee-516926.pdf" },
+    { "titre": "Service-public.gouv.fr, F984 Bourse de collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F616 Bourse de lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-10-29" },
+    { "titre": "Ministère de l'Éducation nationale, calendrier des campagnes de bourse 2026-2027", "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-1-calendrier-des-campagnes-de-bourse-de-college-et-de-lycee-516926.pdf", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F2322 Inscription au collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322", "verifieLe": "2026-03-20" },
     { "titre": "Service-public.gouv.fr, F2323 Inscription au lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2323", "verifieLe": "2026-01-23" }
   ]

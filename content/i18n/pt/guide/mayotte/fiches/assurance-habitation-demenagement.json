@@ -1,0 +1,66 @@
+{
+  "slug": "assurance-habitation-demenagement",
+  "territoire": "mayotte",
+  "categorie": "assurances",
+  "titre": "Seguro residencial ao mudar de moradia",
+  "resume": "Após uma separação: segurar a nova moradia antes de receber as chaves, avisar a seguradora da antiga, cancelar sem custo e verificar se os filhos continuam cobertos.",
+  "aQuoiCaSert": "Ao deixar a moradia da família, é preciso resolver o contrato antigo de seguro residencial (assurance habitation) e segurar a nova moradia. O inquilino deve ter, no mínimo, seguro contra os riscos locativos (risques locatifs). É também o momento de verificar a responsabilidade civil (responsabilité civile), muitas vezes incluída no seguro residencial, que cobre os danos causados pelos filhos. Em Mayotte, contratos de aluguel não escritos são frequentes: um contrato escrito protege as duas partes.",
+  "quiEstConcerne": [
+    "O genitor que se muda após a separação, seja inquilino ou proprietário.",
+    "O genitor que fica na moradia e precisa adaptar o contrato.",
+    "Os dois pais, para verificar se os filhos têm cobertura de responsabilidade civil na casa de cada um."
+  ],
+  "aSavoir": [
+    "Inquilino: o seguro contra riscos locativos (incêndio, explosão, danos causados por água) é obrigatório. Entregue o atestado ao proprietário na entrega das chaves e depois todo ano, se ele pedir.",
+    "Mudança: avise a sua seguradora antes de sair ou no máximo 15 dias após deixar a moradia, por carta registrada.",
+    "Cancelamento por mudança: possível se a troca de moradia altera os riscos segurados, no máximo 3 meses após a saída. O contrato termina 1 mês após o recebimento pela seguradora, sem multa de cancelamento.",
+    "Você também pode transferir o contrato para a nova moradia, se a seguradora aceitar.",
+    "As regras da lei de 6 de julho de 1989 sobre aluguéis residenciais, incluindo a obrigação de seguro do inquilino, passaram a valer em Mayotte por uma ordonnance (decreto-lei) de 2012, com adaptações."
+  ],
+  "documents": [
+    { "id": "contrat-actuel", "libelle": "Contrato atual de seguro residencial e número do contrato", "coffre": "finances" },
+    { "id": "bail-nouveau", "libelle": "Contrato de aluguel ou vistoria de entrada (état des lieux) da nova moradia", "detail": "Cópia. A seguradora vai pedir o endereço, a área e o número de cômodos.", "coffre": "finances" },
+    { "id": "attestation-nouveau", "libelle": "Atestado de seguro da nova moradia", "detail": "A entregar ao proprietário no dia da entrega das chaves.", "coffre": "finances" },
+    { "id": "lettre-resiliation", "libelle": "Carta de cancelamento ou de aviso à seguradora antiga", "detail": "Informe a data de saída e a ligação com a mudança.", "coffre": "courriers" },
+    { "id": "accuse-reception", "libelle": "Aviso de recebimento da seguradora", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Segure a nova moradia antes de receber as chaves", "detail": "O proprietário vai pedir o atestado." },
+    { "titre": "Confira antes de sair de casa", "detail": "Atestado de seguro, documento de identidade, contrato de aluguel assinado. Para a seguradora: número do contrato, novo endereço, área, data de entrada." },
+    { "titre": "Avise a seguradora da moradia antiga", "detail": "Antes da saída ou nos 15 dias seguintes. Cancele no máximo 3 meses após a saída, se quiser." },
+    { "titre": "Contrato no nome dos dois ex-cônjuges", "detail": "Veja com a seguradora como retirar um nome ou fazer um novo contrato." },
+    { "titre": "Verifique a responsabilidade civil dos filhos", "detail": "Certifique-se de que os filhos continuam cobertos na casa de cada genitor e compartilhem os atestados." },
+    { "titre": "Guarde os comprovantes de envio", "detail": "Guarde a carta e o aviso de recebimento no Cofre." }
+  ],
+  "ou": [
+    { "nom": "Sua seguradora residencial" },
+    { "nom": "ADIL de Mayotte", "detail": "Agence départementale d'information sur le logement (agência departamental de informação sobre moradia): orientação jurídica gratuita sobre os direitos do inquilino. Résidence Nyrora, quartier Hamaha, Mamoudzou.", "url": "https://www.anil.org/adil-976/", "telephone": "06 39 21 53 91" }
+  ],
+  "liens": [
+    { "titre": "Seguro residencial do inquilino (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300" },
+    { "titre": "Seguro residencial e mudança (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827" },
+    { "titre": "ADIL de Mayotte (anil.org)", "url": "https://www.anil.org/adil-976/" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Atestado de seguro residencial da nova moradia", "categorie": "finances" },
+    { "type": "coffre", "titre": "Carta de cancelamento do seguro antigo", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Avisar a seguradora da moradia antiga (15 dias após a saída)", "evenement": "autre" },
+    { "type": "depense", "titre": "Seguro residencial", "categorie": "assurance" }
+  ],
+  "datesLimites": [
+    { "libelle": "15 dias após a saída para avisar a seguradora" },
+    { "libelle": "3 meses após a saída para cancelar por motivo de mudança" }
+  ],
+  "aConfirmer": [
+    "A confirmar com a ADIL de Mayotte: as adaptações previstas para Mayotte pela ordonnance n° 2012-576 em matéria de aluguel e de seguro do inquilino.",
+    "Se o contrato estiver no nome dos dois ex-cônjuges, as formas de alterá-lo devem ser vistas diretamente com a seguradora."
+  ],
+  "motsCles": ["seguro residencial", "mudança", "inquilino", "cancelamento", "responsabilidade civil", "aluguel"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F31300 Seguro residencial do inquilino", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10827 Seguro residencial e mudança", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2026-10-29" },
+    { "titre": "Sénat, resposta ministerial de 16 de março de 2017 (lei de 1989 aplicável a Mayotte)", "url": "https://www.senat.fr/questions/base/2016/qSEQ160521560.html", "verifieLe": "2026-10-29" },
+    { "titre": "ANIL, ADIL de Mayotte", "url": "https://www.anil.org/adil-976/", "verifieLe": "2026-10-29" }
+  ]
+}

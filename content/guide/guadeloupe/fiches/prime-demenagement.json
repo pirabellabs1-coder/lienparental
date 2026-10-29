@@ -1,0 +1,145 @@
+{
+  "slug": "prime-demenagement",
+  "territoire": "guadeloupe",
+  "categorie": "logement",
+  "titre": "Prime de déménagement de la Caf",
+  "resume": "Une aide pour les familles d'au moins 3 enfants qui déménagent autour d'une naissance : conditions de dates, plafonds, pièces à envoyer et délai de 6 mois.",
+  "aQuoiCaSert": "La prime de déménagement rembourse les frais réels de déménagement, dans la limite d'un plafond, aux familles d'au moins 3 enfants qui déménagent pendant la grossesse du 3e enfant ou plus, ou dans les deux ans qui suivent la naissance du plus jeune. Elle est versée en une fois, sur justificatifs. Une avance sur devis est possible si votre situation est précaire.",
+  "quiEstConcerne": [
+    "Les familles qui ont au moins 3 enfants à charge, nés ou à naître.",
+    "Qui ont droit, pour le nouveau logement, à l'APL ou à l'allocation de logement familiale (ALF).",
+    "Parent séparé : ces conditions s'apprécient pour votre propre foyer allocataire."
+  ],
+  "aSavoir": [
+    "Dates : le déménagement doit avoir lieu entre le 1er jour du mois qui suit la fin du 3e mois de grossesse et le dernier jour du mois qui précède les 2 ans du plus jeune enfant.",
+    "Plafonds depuis le 1er avril 2026 : 1 147,58 € pour 3 enfants, 1 243,21 € pour 4 enfants, plus 95,63 € par enfant supplémentaire. Vous êtes remboursé de vos frais réels dans cette limite.",
+    "Avance en cas de situation précaire : 50 % à 75 % du devis, dans la limite de la prime due. La facture acquittée doit ensuite être envoyée dans les 6 mois suivant le déménagement.",
+    "La demande se fait auprès de la Caf du nouveau lieu de résidence, au plus tard 6 mois après le déménagement.",
+    "En cas de refus, vous avez 2 mois à compter de la décision pour saisir la commission de recours amiable de la Caf."
+  ],
+  "documents": [
+    {
+      "id": "cerfa-11363",
+      "libelle": "Formulaire de demande de prime de déménagement (cerfa n° 11363)",
+      "detail": "À télécharger sur service-public.gouv.fr, à remplir et signer.",
+      "coffre": "finances"
+    },
+    {
+      "id": "facture",
+      "libelle": "Facture acquittée du déménageur ou justificatifs des frais",
+      "detail": "Toutes les factures liées au déménagement, à votre nom. Gardez une copie de chaque pièce envoyée.",
+      "coffre": "finances"
+    },
+    {
+      "id": "devis",
+      "libelle": "Devis du déménageur, pour demander une avance",
+      "detail": "Uniquement si votre situation est précaire.",
+      "coffre": "finances"
+    },
+    {
+      "id": "grossesse",
+      "libelle": "Déclaration de grossesse ou acte de naissance du plus jeune enfant",
+      "detail": "Uniquement si la Caf le demande pour vérifier la période : elle dispose souvent déjà de l'information.",
+      "coffre": "sante"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Attestation de loyer du nouveau logement",
+      "detail": "Nécessaire pour ouvrir le droit à l'aide au logement, condition de la prime.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Vérifiez les conditions de dates et de nombre d'enfants",
+      "detail": "Calculez la période autorisée à partir de la date de début de grossesse ou de la date de naissance du plus jeune."
+    },
+    {
+      "titre": "Demandez l'aide au logement pour le nouveau logement",
+      "detail": "Sans droit à l'APL ou à l'ALF, pas de prime."
+    },
+    {
+      "titre": "Conservez toutes les factures du déménagement",
+      "detail": "Ou demandez un devis si vous avez besoin d'une avance."
+    },
+    {
+      "titre": "Vérifiez avant d'envoyer",
+      "detail": "Formulaire cerfa n° 11363 rempli et signé, factures acquittées lisibles, numéro allocataire, envoi dans les 6 mois suivant le déménagement. Gardez une copie de tout."
+    },
+    {
+      "titre": "Envoyez la demande à la Caf de votre nouveau domicile",
+      "detail": "Au plus tard 6 mois après le déménagement."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Guadeloupe",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Prime de déménagement (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008"
+    },
+    {
+      "titre": "Allocation de logement familiale (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Frais de déménagement",
+      "categorie": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Envoyer la demande de prime de déménagement (6 mois maximum)",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Facture du déménagement",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Demande de prime de déménagement envoyée (copie)",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Demande au plus tard 6 mois après le déménagement"
+    },
+    {
+      "libelle": "Facture acquittée dans les 6 mois suivant le déménagement si vous avez reçu une avance"
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : en Guadeloupe, le droit à l'aide au logement exigé correspond en pratique à l'ALF (l'APL ne concernant pas les logements ordinaires). Vérifiez auprès de la Caf de la Guadeloupe.",
+    "À confirmer localement : les plafonds cités sont ceux de service-public.gouv.fr ; la fiche ne précise pas de montant différent pour l'outre-mer."
+  ],
+  "motsCles": [
+    "déménagement",
+    "prime",
+    "famille nombreuse",
+    "Caf",
+    "naissance",
+    "cerfa 11363"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2008 Prime de déménagement",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008",
+      "verifieLe": "2026-04-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13132 Allocation de logement familiale",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132",
+      "verifieLe": "2026-07-01"
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import { PartnersBlock } from '@/components/guide/PartnersBlock'
 import { CategoryIcon } from '@/components/guide/icons'
 import { DEMO_MODE } from '@/lib/demo-auth'
 import { guideAsync, loadGuide } from '@/lib/guide/load'
+import { wantedTerritoire } from '@/lib/guide/territory-server'
 import { getCategory } from '@/lib/guide/types'
 import { categoryHref, parcoursHref } from '@/lib/guide/links'
 import { intlLocale } from '@/lib/i18n/config'
@@ -26,7 +27,7 @@ const formatDate = (iso: string, locale: string) =>
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const [{ slug }, sp] = await Promise.all([params, searchParams])
   const locale = await getLocale()
-  const f = (await guideAsync.fiche(sp.territoire, slug, locale)) ?? (await guideAsync.ficheParDefaut(slug, locale))
+  const f = (await guideAsync.fiche(await wantedTerritoire(sp.territoire), slug, locale)) ?? (await guideAsync.ficheParDefaut(slug, locale))
   const t = await getTranslations('coach.guide')
   return { title: f?.titre ?? t('title'), description: f?.resume, robots: { index: false, follow: false } }
 }
@@ -46,7 +47,7 @@ const extLink = 'inline-flex items-center gap-1 font-semibold text-leaf-700 unde
 export default async function GuideFichePage({ params, searchParams }: Props) {
   const [{ slug }, sp] = await Promise.all([params, searchParams])
   const locale = await getLocale()
-  const g = await loadGuide(sp.territoire, locale)
+  const g = await loadGuide(await wantedTerritoire(sp.territoire), locale)
   const { territoire } = g
   const fiche = g.fiches.find((f) => f.slug === slug)
   if (!fiche) notFound()

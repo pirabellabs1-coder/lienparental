@@ -1,0 +1,74 @@
+{
+  "slug": "mode-de-garde-petite-enfance",
+  "territoire": "reunion",
+  "categorie": "naissance",
+  "titre": "Crèche ou assistante maternelle : trouver un mode de garde",
+  "resume": "Où chercher une place à La Réunion, quelles pièces préparer pour le dossier de crèche, et comment obtenir l'aide de la Caf (CMG) quand vous employez une assistante maternelle agréée.",
+  "aQuoiCaSert": "Faire garder son jeune enfant permet de travailler, de chercher un emploi ou de se former. Les places en crèche sont rares et se demandent tôt, souvent dès la grossesse. Si vous employez directement une assistante maternelle agréée, la Caf peut verser le complément de libre choix du mode de garde (CMG) et prendre en charge les cotisations sociales. Un dossier complet dès la première demande évite de perdre son tour sur une liste d'attente.",
+  "quiEstConcerne": [
+    "Les parents d'un enfant de moins de 6 ans, ou de moins de 12 ans pour un parent isolé, pour le CMG.",
+    "En règle générale, le parent ou les deux parents doivent travailler pour le CMG. Sont assimilés : arrêt maladie, congé de maternité ou de paternité, formation rémunérée, chômage indemnisé. Aucune condition d'activité pour les étudiants, les bénéficiaires de l'AAH, et certains bénéficiaires du RSA ou de l'ASS."
+  ],
+  "aSavoir": [
+    "Crèche municipale : le dossier se demande en général à la mairie. Crèche associative ou privée : la demande se fait auprès de la direction de l'établissement. Renseignez-vous dès la grossesse.",
+    "Les assistantes maternelles sont agréées par le service de PMI du Département de La Réunion. En les employant directement, vous devenez leur employeur et signez un contrat de travail.",
+    "CMG emploi direct : son montant dépend de vos ressources mensuelles, du nombre d'enfants, du coût horaire de la garde (plafonné) et du nombre d'heures. Les cotisations sociales sont prises en charge à 100 % pour une assistante maternelle agréée, dans la limite d'un plafond mensuel.",
+    "Le CMG peut être versé à partir du mois qui précède la demande si les conditions sont remplies. Les familles qui le percevaient déjà au 31 août 2025 n'ont pas eu à refaire de demande.",
+    "Garde alternée : depuis le 1er décembre 2025, chacun des deux parents peut percevoir le CMG, calculé selon sa propre situation. Ce n'est pas un partage : les montants peuvent être différents.",
+    "Il faut s'inscrire sur Pajemploi et y déclarer chaque mois le salaire. Pajemploi calcule et verse le CMG ; l'option Pajemploi+ gère aussi le paiement du salaire.",
+    "Le CMG ne se cumule pas, en général, avec le congé supplémentaire de naissance pour le même enfant (sauf exceptions pour certains enfants nés au 1er semestre 2026)."
+  ],
+  "documents": [
+    { "id": "livret-famille", "libelle": "Livret de famille ou acte de naissance de l'enfant", "detail": "Copie. Pendant la grossesse, une attestation de grossesse est souvent demandée à la place. Acte de naissance gratuit sur service-public.gouv.fr.", "coffre": "autres" },
+    { "id": "identite-parents", "libelle": "Pièce d'identité de chaque parent", "detail": "Copie en cours de validité.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Copie. Les crèches municipales réservent souvent leurs places aux habitants de la commune.", "coffre": "autres" },
+    { "id": "avis-impot", "libelle": "Dernier avis d'imposition ou numéro d'allocataire Caf", "detail": "Copie. Sert à calculer le tarif de la crèche.", "coffre": "finances" },
+    { "id": "travail", "libelle": "Justificatifs d'activité des parents", "detail": "Contrat de travail, bulletins de salaire, attestation de formation ou de France Travail selon le cas.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant la résidence et l'autorité parentale, si vous êtes séparés", "detail": "Copie. Indique qui peut récupérer l'enfant et les semaines de chaque parent.", "coffre": "jaf" },
+    { "id": "vaccins", "libelle": "Pages vaccins du carnet de santé", "detail": "Copie. Les vaccins obligatoires selon l'année de naissance sont exigés à l'entrée en crèche.", "coffre": "sante" },
+    { "id": "attestation-droits", "libelle": "Attestation de droits Assurance maladie de l'enfant", "detail": "Téléchargeable sur votre compte ameli.", "coffre": "sante" },
+    { "id": "assurance", "libelle": "Attestation d'assurance responsabilité civile", "detail": "Souvent demandée par les crèches.", "coffre": "autres" },
+    { "id": "contrat-assmat", "libelle": "Contrat de travail de l'assistante maternelle et attestation d'agrément", "detail": "Original signé par les deux parties. Demandez une copie de l'agrément délivré par la PMI.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB", "detail": "Pour le prélèvement de la crèche ou le versement du CMG.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Recherchez les modes d'accueil près de chez vous", "detail": "Sur monenfant.fr, auprès d'un relais petite enfance (RPE) ou de la mairie." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Livret de famille ou attestation de grossesse, pièces d'identité des parents, justificatif de domicile, avis d'impôt ou numéro Caf, justificatifs d'activité, jugement si vous êtes séparés, pages vaccins. Demandez par téléphone la liste exacte de la crèche." },
+    { "titre": "Déposez une demande de place en crèche", "detail": "En mairie pour une crèche municipale, auprès de la direction sinon. Notez la date de dépôt et relancez régulièrement." },
+    { "titre": "Avec une assistante maternelle, vérifiez son agrément et signez le contrat", "detail": "L'agrément est délivré par la PMI du Département de La Réunion." },
+    { "titre": "Demandez le CMG", "detail": "Auprès de la Caf de La Réunion, dans votre espace en ligne. Pas encore allocataire ? Créez d'abord votre compte. Inscrivez-vous ensuite comme employeur sur Pajemploi et déclarez le salaire chaque mois." },
+    { "titre": "Enregistrez les frais de garde", "detail": "Dans le Journal, pour suivre la dépense par enfant et le partage avec l'autre parent." }
+  ],
+  "ou": [
+    { "nom": "monenfant.fr", "detail": "Annuaire national des crèches, assistantes maternelles et relais petite enfance.", "url": "https://monenfant.fr" },
+    { "nom": "Mairie de votre commune", "detail": "Crèches municipales et relais petite enfance." },
+    { "nom": "Caf de La Réunion", "detail": "Complément de libre choix du mode de garde.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" },
+    { "nom": "Pajemploi (Urssaf)", "detail": "Déclaration mensuelle du salaire de l'assistante maternelle.", "url": "https://www.pajemploi.urssaf.fr" },
+    { "nom": "PMI du Département de La Réunion", "detail": "Agrément et suivi des assistantes maternelles. Standard du Département : 0262 90 30 30, du lundi au vendredi de 8 h à 16 h 30.", "url": "https://www.departement974.fr/protection-maternelle-infantile-pmi", "telephone": "0262 90 30 30" }
+  ],
+  "liens": [
+    { "titre": "Complément de libre choix du mode de garde, emploi direct (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152" },
+    { "titre": "Simulateur du CMG (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72489" },
+    { "titre": "Vaccins exigés pour la crèche (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Relancer la demande de place en crèche", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Déclarer le salaire de l'assistante maternelle sur Pajemploi", "evenement": "autre" },
+    { "type": "coffre", "titre": "Contrat d'accueil ou contrat de l'assistante maternelle", "categorie": "finances" },
+    { "type": "coffre", "titre": "Attestation d'agrément de l'assistante maternelle", "categorie": "finances" },
+    { "type": "depense", "titre": "Frais de garde", "categorie": "autre" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : nombre de places, critères d'attribution et délais d'attente en crèche, très variables selon les communes de La Réunion.",
+    "À confirmer localement : liste exacte des pièces du dossier de crèche et grille de tarifs, propres à chaque établissement (le site monenfant.fr n'a pas pu être lu lors de la vérification).",
+    "À confirmer localement : coordonnées du service de PMI chargé des agréments et liste des centres, le site du Département ne publiant pas de liste à jour.",
+    "Les montants du CMG dépendent de vos ressources, du nombre d'enfants et du coût horaire : utilisez le simulateur officiel."
+  ],
+  "motsCles": ["crèche", "assistante maternelle", "nounou", "CMG", "Pajemploi", "garde", "RPE"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F39152 CMG emploi direct", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
+    { "titre": "Département de La Réunion, Protection maternelle et infantile (PMI)", "url": "https://www.departement974.fr/protection-maternelle-infantile-pmi", "verifieLe": "2026-10-29" }
+  ]
+}

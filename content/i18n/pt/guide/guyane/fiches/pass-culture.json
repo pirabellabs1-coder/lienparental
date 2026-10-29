@@ -52,10 +52,10 @@
     "O modelo de declaração de hospedagem e a forma de enviar os documentos são explicados no aplicativo: confira no momento da inscrição."
   ],
   "motsCles": ["pass Culture", "cultura", "adolescente", "livros", "cinema", "música", "17 anos", "18 anos"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2025-12-18" },
-    { "titre": "Service-public.gouv.fr, notícia A18775 Pass Culture: mudanças em 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775" },
-    { "titre": "pass Culture, Reforma do pass Culture", "url": "https://pass.culture.fr/reforme-du-pass-culture" }
+    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, notícia A18775 Pass Culture: mudanças em 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775", "verifieLe": "2026-10-29" },
+    { "titre": "pass Culture, Reforma do pass Culture", "url": "https://pass.culture.fr/reforme-du-pass-culture", "verifieLe": "2026-10-29" }
   ]
 }

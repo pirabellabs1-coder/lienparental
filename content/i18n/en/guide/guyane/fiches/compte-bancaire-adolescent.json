@@ -16,7 +16,7 @@
     "The bank may require a systematic authorization card, which checks the balance at each payment: this is what limits the risk of an overdraft. Ask for one if you want this control.",
     "Opening an account is free, but the bank may charge account or card fees: ask for the price list before signing.",
     "Parents may only use the child's money for expenses that directly concern the child (education, upkeep). From age 16, they must account to the child for this use.",
-    "Separated parents who share parental authority: one parent alone can carry out routine management acts, but an act of disposal, such as changing the account or making a large withdrawal, requires both parents' agreement (Cour de cassation, France's highest court, June 12, 2025). If there is a problem, the guardianship judge (juge des tutelles) can be asked to decide.",
+    "Separated parents who share parental authority: one parent alone can carry out routine management acts, but an act of disposal, such as a transfer out of the child's account or savings book, requires both parents' agreement (Cour de cassation, France's highest court, June 12, 2025). If there is a problem, the guardianship judge (juge des tutelles) can be asked to decide.",
     "If you hold parental authority alone by court decision, bring that decision: it explains to the bank why the other parent is not signing."
   ],
   "documents": [
@@ -45,7 +45,7 @@
   "liens": [
     { "titre": "Can a minor have a bank account? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035" },
     { "titre": "Individual bank account: documents to provide (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413" },
-    { "titre": "A minor's account: both parents' consent (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" }
+    { "titre": "A minor's account: both parents' consent (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" }
   ],
   "actions": [
     { "type": "coffre", "titre": "Teenager's bank account contract", "categorie": "finances" },
@@ -58,11 +58,11 @@
     "To be confirmed locally: youth offers available in branches in French Guiana and the related fees."
   ],
   "motsCles": ["bank account", "teenager", "minor", "bank card", "pocket money", "livret jeune", "bank"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F21035 Can a minor have a bank account or a savings product?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2025-11-17" },
-    { "titre": "Service-public.gouv.fr, F2413 Individual bank account", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413", "verifieLe": "2026-05-22" },
-    { "titre": "Service-public.gouv.fr, news item A18386 A minor's account: both parents' consent (July 8, 2025)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" },
+    { "titre": "Service-public.gouv.fr, F21035 Can a minor have a bank account or a savings product?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2413 Individual bank account", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, news item A18386 A minor's account: both parents' consent (July 8, 2025)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" },
     { "titre": "Mes questions d'argent (Banque de France), Opening an account", "url": "https://www.mesquestionsdargent.fr/comptes-moyens-de-paiement/ouvrir-un-compte" }
   ]
 }

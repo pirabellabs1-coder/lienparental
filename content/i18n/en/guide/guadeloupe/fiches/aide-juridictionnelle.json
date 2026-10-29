@@ -1,0 +1,246 @@
+{
+  "slug": "aide-juridictionnelle",
+  "territoire": "guadeloupe",
+  "categorie": "aides",
+  "titre": "Applying for legal aid (aide juridictionnelle)",
+  "resume": "Have the State pay all or part of your lawyer's and court fees, for example before the family court judge: 2026 income limits, form, exact documents and where to submit your application in Guadeloupe.",
+  "aQuoiCaSert": "Legal aid (aide juridictionnelle, AJ) covers, fully or partly, lawyer's fees and court costs if your income is modest. It is useful for proceedings before the family court judge (juge aux affaires familiales, JAF): the child's residence, child support, parental authority. You remain free to choose your lawyer.",
+  "quiEstConcerne": [
+    "Parents whose reference tax income (revenu fiscal de référence) and assets are below the limits, who are bringing or defending proceedings.",
+    "Minor children heard by the judge in proceedings that concern them: aid is granted to them without any means test.",
+    "Victims of domestic violence, who can obtain provisional aid."
+  ],
+  "aSavoir": [
+    "2026 limits for full aid (reference tax income): €12,957 for 1 person, €15,289 for 2, €17,621 for 3, €19,095 for 4, €20,568 for 5, €22,041 for 6, €23,514 for 7.",
+    "If your income is slightly above the limit, partial aid of 55% or 25% is possible. For a single person: up to €15,316 of reference tax income for 55%, up to €19,433 for 25%.",
+    "Assets also count (excluding your main home). For 1 person: a maximum of €12,957 in movable assets (savings) and €38,866 in real estate. Exceeding an asset limit rules out any aid.",
+    "If you are in conflict with the other parent and belong to the same tax household, your resources are assessed individually.",
+    "First check your insurance policies (home, bank card, legal protection): if legal protection insurance already covers the costs, your AJ application may be rejected. You must provide a certificate stating the insurer does not cover the costs.",
+    "Costs incurred before the decision of the legal aid office (bureau d'aide juridictionnelle) are not covered. Apply as early as possible, before the hearing.",
+    "The pleading fee (droit de plaidoirie, €13) and any sums you are ordered to pay (damages, fines) are not covered by the AJ.",
+    "Appeal against a refusal: 15 days after notification. Once AJ is granted, legal action must be started within the year.",
+    "In an emergency, provisional aid can be granted, with your resources checked afterwards."
+  ],
+  "documents": [
+    {
+      "id": "formulaire",
+      "libelle": "Legal aid application form (Cerfa n° 16146)",
+      "detail": "Filled in online on service-public.gouv.fr, printed, dated and signed. Mandatory if the application concerns another person, for example your minor child.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "identite",
+      "libelle": "Front-and-back copy of your ID document",
+      "detail": "Valid ID card or passport. Foreign nationals: residence permit or equivalent document.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address less than 3 months old (copy)",
+      "detail": "Bill, rent receipt. If you are housed by someone: also a certificate of accommodation (attestation d'hébergement).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Copy of the family record book (livret de famille)",
+      "detail": "Or equivalent document for a foreign national. Lost book: a free second book from the town hall (mairie).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Latest tax notice (avis d'imposition) (copy)",
+      "detail": "Download it from your account on impots.gouv.fr. Otherwise, proof of income for the last 6 months.",
+      "coffre": "finances"
+    },
+    {
+      "id": "changement-situation",
+      "libelle": "Proof of a change in family situation or income",
+      "detail": "For example a recent separation or job loss: certificate, judgment, France Travail notification.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "patrimoine",
+      "libelle": "Proof of savings and real estate other than your main home",
+      "detail": "Savings account statements, property tax (taxe foncière), if you have any.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-assurance",
+      "libelle": "Certificate from your insurer stating it does not cover the costs (legal protection)",
+      "detail": "Ask your home, car or bank card insurer.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "pieces-affaire",
+      "libelle": "Case documents",
+      "detail": "Depending on the case: summons to the hearing, previous judgment, acceptance letter from the lawyer you have chosen.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "decision-baj",
+      "libelle": "Decision of the legal aid office",
+      "detail": "Keep it and send it to your lawyer.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check your legal protection insurance",
+      "detail": "Call your insurer: if it covers the costs, you do not need AJ; otherwise ask for a certificate stating it does not cover them."
+    },
+    {
+      "titre": "Estimate your entitlement",
+      "detail": "Compare your reference tax income (on your tax notice) with the limits, or use the official simulator on service-public.gouv.fr."
+    },
+    {
+      "titre": "Choose a lawyer if you wish",
+      "detail": "You can ask a lawyer to take your case under AJ and attach their acceptance letter. If no one accepts, the head of the bar (bâtonnier) can appoint one."
+    },
+    {
+      "titre": "Fill in the application",
+      "detail": "Cerfa n° 16146 form online on service-public.gouv.fr, or an online application on aidejuridictionnelle.justice.fr with FranceConnect if your situation allows."
+    },
+    {
+      "titre": "Check before submitting or sending",
+      "detail": "Signed form, copy of ID, proof of address less than 3 months old, family record book, latest tax notice, insurer's certificate, summons or judgment. Make a full copy of the file for yourself."
+    },
+    {
+      "titre": "Submit or send the file to the legal aid office",
+      "detail": "Before going to court: the office of the tribunal judiciaire (judicial court) where you live (Pointe-à-Pitre or Basse-Terre). After: the office of the court handling the case."
+    },
+    {
+      "titre": "Follow up the decision",
+      "detail": "Send the decision to your lawyer. If refused, you have 15 days to challenge it."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Legal aid office of the Tribunal judiciaire de Pointe-à-Pitre (Pointe-à-Pitre court)",
+      "detail": "16 rue Dugommier, 97110 Pointe-à-Pitre (Ministry of Justice directory).",
+      "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-pointe-a-pitre",
+      "telephone": "05 90 89 69 50"
+    },
+    {
+      "nom": "Legal aid office of the Tribunal judiciaire de Basse-Terre (Basse-Terre court)",
+      "detail": "4 boulevard Félix Éboué, 97100 Basse-Terre (Ministry of Justice directory).",
+      "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-basse-terre",
+      "telephone": "05 90 80 63 62"
+    },
+    {
+      "nom": "Online legal aid application",
+      "detail": "Free service with FranceConnect, for disputes before the civil and criminal courts (juridictions judiciaires).",
+      "url": "https://www.aidejuridictionnelle.justice.fr/authentification"
+    },
+    {
+      "nom": "Allô Service Public",
+      "detail": "Free information, without access to individual files.",
+      "telephone": "3939"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Legal aid: conditions and procedure (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074"
+    },
+    {
+      "titre": "Legal aid application form (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444"
+    },
+    {
+      "titre": "Online legal aid application (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Legal aid application (copy of the file)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Decision of the legal aid office",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Insurer's certificate of non-coverage",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Legal aid: appeal within 15 days",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Start legal action within a year of aid being granted",
+      "evenement": "autre"
+    },
+    {
+      "type": "depense",
+      "titre": "Pleading fee (not covered by AJ)",
+      "categorie": "frais-administratifs",
+      "montant": 13,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Before the hearing",
+      "detail": "Costs incurred before the office's decision are not covered: apply as early as possible."
+    },
+    {
+      "libelle": "15 days",
+      "detail": "Time limit to appeal against a decision of the legal aid office, from its notification."
+    },
+    {
+      "libelle": "1 year",
+      "detail": "Time limit to take legal action after aid is granted."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: which court has jurisdiction for your town (Pointe-à-Pitre or Basse-Terre). Check it with the \"Trouver une juridiction\" tool on justice.fr or with the court registry (greffe).",
+    "To be confirmed locally: opening hours of the Pointe-à-Pitre and Basse-Terre legal aid offices, which are not given in the official directory.",
+    "Saint-Martin and Saint-Barthélemy: ask the tribunal de proximité (local court) of Saint-Martin or the Tribunal judiciaire de Basse-Terre where to submit your application.",
+    "The official online application service has been reported as limited to certain situations: check whether it is open for your proceedings, otherwise use the paper form."
+  ],
+  "motsCles": [
+    "legal aid",
+    "AJ",
+    "lawyer",
+    "JAF",
+    "court fees",
+    "cerfa 16146",
+    "Pointe-à-Pitre",
+    "Basse-Terre"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F18074 Legal aid (aide juridictionnelle)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074",
+      "verifieLe": "2026-06-12"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R1444 Legal aid application form (Cerfa n° 16146*04)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444",
+      "verifieLe": "2026-09-02"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R66463 Online legal aid application",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463",
+      "verifieLe": "2025-10-15"
+    },
+    {
+      "titre": "Justice.gouv.fr, directory: Legal aid office of the Tribunal judiciaire de Pointe-à-Pitre",
+      "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-pointe-a-pitre",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Justice.gouv.fr, directory: Legal aid office of the Tribunal judiciaire de Basse-Terre",
+      "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-basse-terre",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

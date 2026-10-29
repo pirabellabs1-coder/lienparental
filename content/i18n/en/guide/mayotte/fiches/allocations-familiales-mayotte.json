@@ -1,0 +1,61 @@
+{
+  "slug": "allocations-familiales-mayotte",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Family allowances in Mayotte (from the 1st child)",
+  "resume": "In Mayotte, the CSSM pays family allowances from just one child, with rates specific to the territory. 2026-2027 amounts, family supplement and online procedures.",
+  "aQuoiCaSert": "Family allowances (allocations familiales) help families cover children's everyday expenses. In Mayotte, there is no Caf (Caisse d'allocations familiales, the family benefits office): the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) pays them. They are paid from the first child, but the amounts still differ from those in mainland France. An ordinance of July 22, 2026 provides for gradual alignment, completed in 2030 for family allowances and their age supplement. The complément familial (family supplement), specific to the overseas departments, may be added when a child is between 3 and 5 years old.",
+  "quiEstConcerne": [
+    "Families living in Mayotte with at least one dependent child under 20.",
+    "Separated parents, including with shared residence.",
+    "Parents of a child aged 3 to 5 with no other child under 3, for the family supplement."
+  ],
+  "aSavoir": [
+    "Monthly amounts from April 1, 2026 to March 31, 2027 (CSSM): €28.12 for 1 child (€57.28 if you were already receiving the allowances before January 2012), €153.01 for 2 children, €229.52 for 3 children, plus €22.14 per additional child.",
+    "Family supplement: €159.28 per month, or €113.75 if your income is slightly above the limit (income from year N-2). It is paid from the month after the youngest child turns 3 until the month before they turn 5, if there is no child under 3 in the household.",
+    "You apply and follow up in the « Mon Compte » area on caf.fr, logging in with the first 13 digits of your social security number (CSSM).",
+    "Ordinance n° 2026-647 of July 22, 2026 provides for full alignment of family allowances and the age supplement with mainland France in 2030.",
+    "Separated parents: report the separation and the children's residence without delay; the other benefits (family supplement, ARS, housing benefits, AEEH) are paid to a single parent."
+  ],
+  "documents": [
+    { "id": "identite-parents", "libelle": "ID document or residence permit of each parent", "detail": "Valid copy, requested with the first application.", "coffre": "finances" },
+    { "id": "numero-secu", "libelle": "Social security number (carte Vitale or CSSM certificate)", "detail": "Its first 13 digits are used to log in to « Mon Compte ».", "coffre": "finances" },
+    { "id": "livret-famille", "libelle": "Family record book (livret de famille) or birth certificate of each child", "detail": "Copy. Free certificate from the town hall (mairie) of the place of birth.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (bank details slip) of the parent receiving the benefits", "detail": "In your name.", "coffre": "finances" },
+    { "id": "avis-imposition", "libelle": "Tax notice or proof of income", "detail": "Income is used in particular to calculate the family supplement.", "coffre": "finances" },
+    { "id": "jugement-residence", "libelle": "Judgment or agreement setting the child's residence", "detail": "Copy, useful if you are separated, especially with shared residence.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Create or open your « Mon Compte » area on caf.fr", "detail": "CSSM benefits are managed in this area. Log in with the first 13 digits of your social security number." },
+    { "titre": "Check before sending your file", "detail": "Children correctly declared, income up to date, RIB, exact address, family situation (couple, separated, single parent). If you separate, declare the actual date." },
+    { "titre": "Shared residence: agree on who receives the benefits", "detail": "Ask the CSSM how to declare the sharing of family allowances or the choice of a single beneficiary." },
+    { "titre": "Track your payments", "detail": "Check the payment details in « Mon Compte » and report any change of situation without delay." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Centre Kinga, Route nationale 1, Kawéni, 97600 Mamoudzou. Reception by appointment (book online on cssm.fr).", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Free help with online procedures, in several towns in Mayotte.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Family benefits in Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Family (CSSM)", "url": "https://www.cssm.fr/page/famille" },
+    { "titre": "Ordonnance n° 2026-647 of July 22, 2026, report to the President (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "CSSM entitlement notice", "categorie": "finances" },
+    { "type": "coffre", "titre": "Judgment or agreement on the child's residence", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Report any change in family situation to the CSSM", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the CSSM: whether family allowances can be shared with shared residence and how (national form cerfa n° 14000 or a specific procedure), especially with only one child.",
+    "To be confirmed with the CSSM: the 2026-2027 amounts of the age supplements and the income limits for the family supplement, not shown on the page consulted.",
+    "To be confirmed with the CSSM: the rule for tenured civil servants who have only one child.",
+    "To be confirmed with the CSSM: whether there is an office in Petite-Terre (Dzaoudzi-Labattoir) and local sessions in the towns, not mentioned on the Contacts page consulted."
+  ],
+  "motsCles": ["family allowances", "CSSM", "one child", "family supplement", "Mayotte", "shared residence"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Family benefits (rates from April 1, 2026 to March 31, 2027)", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Contacts", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, report to the President on ordonnance n° 2026-647 of July 22, 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" }
+  ]
+}
