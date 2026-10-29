@@ -1,6 +1,6 @@
 {
   "code": "france",
   "nom": "Mainland France",
-  "disponible": false,
+  "disponible": true,
   "ordre": 2
 }

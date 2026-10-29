@@ -80,9 +80,8 @@ export default async function GuidePublicIndex() {
                     : <MapPin className="h-6 w-6 shrink-0 text-leaf-700" strokeWidth={1.75} aria-hidden="true" />}
                   <span className="min-w-0 flex-1">
                     <span className="block text-[16px] font-bold text-night-900">{x.nom}</span>
-                    <span className={cn('block text-[13.5px]', x.disponible ? 'font-semibold text-leaf-700' : 'text-night-600')}>
-                      {x.disponible ? t('landing.available') : t('landing.soon')}
-                    </span>
+                    {/* Territoire ouvert : la couleur suffit ; seul un territoire fermé est signalé. */}
+                    {!x.disponible && <span className="block text-[13.5px] text-night-600">{t('landing.soon')}</span>}
                   </span>
                 </>
               )

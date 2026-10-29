@@ -44,6 +44,7 @@ const PUBLIC_PATTERNS: RegExp[] = [
   /^\/don$/,
   /^\/installer$/,
   /^\/a-propos$/,
+  /^\/partenaires(?:\/candidature)?$/,
   /^\/onboarding\/(?:connexion|inscription)$/,
 ]
 

@@ -88,6 +88,7 @@ function zoneOf(rel: string): [string, readonly string[]] {
   // Tout le reste est le site public, rendu dans SiteShell (+ extraNamespaces propres à la page).
   if (r === 'app/page.tsx') return ['SITE+HOME', [...Z.CLIENT_NS_SITE, ...Z.CLIENT_NS_SITE_HOME]]
   if (r.startsWith('app/installer/')) return ['SITE+INSTALL', [...Z.CLIENT_NS_SITE, ...Z.CLIENT_NS_SITE_INSTALL]]
+  if (r.startsWith('app/partenaires/candidature/')) return ['SITE+PARTNER_APPLY', [...Z.CLIENT_NS_SITE, ...Z.CLIENT_NS_SITE_PARTNER_APPLY]]
   return ['SITE', Z.CLIENT_NS_SITE]
 }
 

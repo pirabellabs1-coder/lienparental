@@ -1,6 +1,6 @@
 {
   "code": "france",
   "nom": "França metropolitana",
-  "disponible": false,
+  "disponible": true,
   "ordre": 2
 }

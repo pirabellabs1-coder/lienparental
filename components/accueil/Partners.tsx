@@ -1,6 +1,9 @@
 import Image from 'next/image'
-import { getTranslations } from 'next-intl/server'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { cn } from '@/lib/cn'
+import { localePathFor } from '@/lib/i18n/routing'
 import { CONTAINER } from './ui'
 
 // Bandeau des partenaires (sous la barre des modules), sur une ligne.
@@ -17,6 +20,7 @@ const SLOTS = 6
 
 export async function Partners() {
   const t = await getTranslations('partners')
+  const lp = localePathFor(await getLocale())
   const empty = Math.max(0, SLOTS - PARTNERS.length)
   return (
     <section aria-labelledby="partners-title" className="pb-4 pt-12 lg:pt-16">
@@ -55,6 +59,11 @@ export async function Partners() {
             </li>
           ))}
         </ul>
+        <p className="mt-5 text-center">
+          <Link href={lp('/partenaires')} className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg text-[14.5px] font-semibold text-leaf-700 underline-offset-4 hover:underline">
+            {t('more')} <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </p>
       </div>
     </section>
   )

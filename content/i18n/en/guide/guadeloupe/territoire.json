@@ -1,6 +1,6 @@
 {
   "code": "guadeloupe",
   "nom": "Guadeloupe",
-  "disponible": false,
+  "disponible": true,
   "ordre": 4
 }

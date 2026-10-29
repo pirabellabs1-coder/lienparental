@@ -1024,6 +1024,122 @@
           "signup": "Criar uma conta grátis"
         }
       }
+    },
+    "partners": {
+      "page": {
+        "metaTitle": "Nossos parceiros",
+        "metaDescription": "Os parceiros do Lien Parental: instituições, associações e criadores de conteúdo engajados em apoiar as famílias na França e nos territórios ultramarinos.",
+        "eyebrow": "Parceiros do Lien Parental",
+        "title": "Nossos parceiros engajados",
+        "titleAccent": "com as famílias",
+        "lead": "Parcerias que compartilham nossos valores e ajudam a apoiar as famílias na França e nos territórios ultramarinos.",
+        "soon": "Parcerias em preparação",
+        "categories": {
+          "institution": {
+            "title": "Parceiros institucionais",
+            "text": "Órgãos públicos engajados ao lado das famílias"
+          },
+          "association": {
+            "title": "Parceiros associativos",
+            "text": "Uma rede de associações para informar, orientar e apoiar os pais"
+          },
+          "createur": {
+            "title": "Criadores de conteúdo e influenciadores",
+            "text": "Vozes engajadas que compartilham sua experiência e apoiam a parentalidade"
+          }
+        },
+        "slot": "Em breve aqui",
+        "slotText": "Os primeiros parceiros desta categoria aparecerão aqui, com a autorização deles.",
+        "prev": "Parceiros anteriores",
+        "next": "Próximos parceiros",
+        "visit": "{name} (abre em nova aba)",
+        "social": "{name} no {network} (abre em nova aba)",
+        "ctaTitle": "Juntos, vamos apoiar",
+        "ctaAccent": "mais famílias.",
+        "ctaText": "Você representa uma associação, uma instituição ou é um criador de conteúdo engajado? Junte-se à rede Lien Parental e ajude a apoiar as famílias na França e nos territórios ultramarinos.",
+        "cta": "Tornar-se parceiro"
+      },
+      "apply": {
+        "metaTitle": "Tornar-se parceiro",
+        "metaDescription": "Associação, instituição, profissional ou criador de conteúdo: proponha uma parceria ao Lien Parental para apoiar as famílias na França e nos territórios ultramarinos.",
+        "eyebrow": "Tornar-se parceiro",
+        "title": "Junte-se ao",
+        "titleAccent": "Lien Parental",
+        "lead": "Você representa uma associação, uma instituição, é um profissional ou um criador de conteúdo? Ajude a apoiar as famílias na França e nos territórios ultramarinos.",
+        "benefits": {
+          "visibility": "Ganhar visibilidade",
+          "actions": "Valorizar suas ações",
+          "inform": "Informar e orientar as famílias",
+          "network": "Participar de uma rede engajada"
+        },
+        "imageAlt": "Um pai, uma mãe e a filha sentados de pernas cruzadas, batendo as mãos e sorrindo",
+        "back": "Voltar aos parceiros",
+        "formTitle": "Formulário de candidatura",
+        "formLead": "Apresente sua organização, sua atividade e sua proposta de parceria. Analisamos cada pedido com atenção.",
+        "requiredNote": "Os campos marcados com asterisco (*) são obrigatórios.",
+        "optional": "(opcional)",
+        "s1": "Seu perfil",
+        "s1Help": "Selecione a categoria que corresponde à sua atividade.",
+        "profiles": {
+          "association": "Associação",
+          "institution": "Instituição ou órgão público",
+          "professionnel": "Profissional ou prestador de serviços",
+          "createur": "Criador de conteúdo ou influenciador"
+        },
+        "s2": "Seus dados de contato",
+        "structure": "Nome da organização",
+        "structurePh": "Nome exibido no site",
+        "contactName": "Nome do contato",
+        "contactNamePh": "Nome e sobrenome",
+        "email": "E-mail profissional",
+        "emailPh": "contato@exemplo.com",
+        "phone": "Telefone",
+        "phonePh": "+594 …",
+        "territory": "Território principal",
+        "territories": {
+          "guyane": "Guiana Francesa",
+          "france": "França metropolitana",
+          "martinique": "Martinica",
+          "guadeloupe": "Guadalupe",
+          "reunion": "Reunião",
+          "mayotte": "Mayotte",
+          "autre": "Outro território"
+        },
+        "s3": "Sua atividade",
+        "site": "Site",
+        "sitePh": "https://…",
+        "networks": "Redes sociais",
+        "networksPh": "Instagram, TikTok, YouTube…\nUm link por linha",
+        "presentation": "Apresentação da sua atividade",
+        "presentationPh": "Suas missões, seus públicos e suas áreas de atuação…",
+        "s4": "Sua proposta",
+        "proposition": "Por que você quer se juntar ao Lien Parental?",
+        "propositionPh": "Sua proposta de parceria, suas ideias, seus objetivos em comum…",
+        "counter": "{n} / {max} caracteres",
+        "s5": "Privacidade e candidatura",
+        "consent": "Aceito que minhas informações sejam usadas para analisar minha candidatura e entrar em contato comigo.",
+        "reviewTitle": "Análise da candidatura",
+        "reviewText": "O envio de um pedido não garante uma parceria. Nenhuma foto, logotipo ou perfil será publicado automaticamente. O tratamento dos dados está descrito na nossa <link>política de privacidade</link>.",
+        "submit": "Enviar minha candidatura",
+        "sending": "Enviando…",
+        "errors": {
+          "required": "Este campo é obrigatório.",
+          "invalid": "Este valor não é válido.",
+          "invalidEmail": "Informe um e-mail válido.",
+          "invalidPhone": "Informe um número de telefone válido.",
+          "invalidUrl": "Informe um endereço que comece com https://",
+          "tooShort": "Escreva pelo menos {min} caracteres.",
+          "consent": "Marque a caixa para enviar sua candidatura.",
+          "summary": "{count, plural, one {Um campo precisa ser corrigido.} other {# campos precisam ser corrigidos.}}",
+          "rateLimited": "Muitos envios a partir da sua conexão. Tente novamente em alguns minutos.",
+          "failed": "Não foi possível enviar. Tente novamente ou escreva para {email}."
+        },
+        "success": {
+          "title": "Candidatura enviada",
+          "text": "Obrigado! Recebemos sua candidatura. Nossa equipe vai analisá-la e responderá por e-mail para {email}.",
+          "back": "Voltar aos parceiros"
+        }
+      }
     }
   }
 }

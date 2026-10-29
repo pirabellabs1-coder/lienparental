@@ -1024,6 +1024,122 @@
           "signup": "Créer un compte gratuit"
         }
       }
+    },
+    "partners": {
+      "page": {
+        "metaTitle": "Nos partenaires",
+        "metaDescription": "Les partenaires de Lien Parental : institutions, associations et créateurs de contenu engagés pour accompagner les familles en France et en Outre-mer.",
+        "eyebrow": "Partenaires de Lien Parental",
+        "title": "Nos partenaires engagés",
+        "titleAccent": "pour les familles",
+        "lead": "Des partenariats qui partagent nos valeurs et contribuent à l’accompagnement des familles en France et en Outre-mer.",
+        "soon": "Partenariats en préparation",
+        "categories": {
+          "institution": {
+            "title": "Partenaires institutionnels",
+            "text": "Des acteurs publics engagés aux côtés des familles"
+          },
+          "association": {
+            "title": "Partenaires associatifs",
+            "text": "Un réseau d’associations pour informer, accompagner et soutenir les parents"
+          },
+          "createur": {
+            "title": "Créateurs de contenu & influenceurs",
+            "text": "Des voix engagées qui partagent leur expérience et soutiennent la parentalité"
+          }
+        },
+        "slot": "Bientôt ici",
+        "slotText": "Les premiers partenaires de cette catégorie apparaîtront ici, avec leur accord.",
+        "prev": "Partenaires précédents",
+        "next": "Partenaires suivants",
+        "visit": "{name} (nouvel onglet)",
+        "social": "{name} sur {network} (nouvel onglet)",
+        "ctaTitle": "Ensemble, accompagnons",
+        "ctaAccent": "davantage de familles.",
+        "ctaText": "Vous êtes une association, une institution ou un créateur de contenu engagé ? Rejoignez le réseau Lien Parental et contribuez à soutenir les familles en France et en Outre-mer.",
+        "cta": "Devenir partenaire"
+      },
+      "apply": {
+        "metaTitle": "Devenir partenaire",
+        "metaDescription": "Association, institution, professionnel ou créateur de contenu : proposez un partenariat à Lien Parental pour soutenir les familles en France et en Outre-mer.",
+        "eyebrow": "Devenir partenaire",
+        "title": "Rejoignez",
+        "titleAccent": "Lien Parental",
+        "lead": "Vous êtes une association, une institution, un professionnel ou un créateur de contenu ? Contribuez à soutenir les familles en France et en Outre-mer.",
+        "benefits": {
+          "visibility": "Gagner en visibilité",
+          "actions": "Valoriser vos actions",
+          "inform": "Informer et accompagner les familles",
+          "network": "Participer à un réseau engagé"
+        },
+        "imageAlt": "Un père, une mère et leur fille, assis en tailleur, se tapent dans la main en souriant",
+        "back": "Retour aux partenaires",
+        "formTitle": "Formulaire de candidature",
+        "formLead": "Présentez votre structure, votre activité et votre proposition de collaboration. Nous étudions chaque demande avec attention.",
+        "requiredNote": "Les champs marqués d’un astérisque (*) sont obligatoires.",
+        "optional": "(facultatif)",
+        "s1": "Votre profil",
+        "s1Help": "Sélectionnez la catégorie qui correspond à votre activité.",
+        "profiles": {
+          "association": "Association",
+          "institution": "Institution ou organisme public",
+          "professionnel": "Professionnel ou prestataire",
+          "createur": "Créateur de contenu ou influenceur"
+        },
+        "s2": "Vos coordonnées",
+        "structure": "Nom de la structure",
+        "structurePh": "Nom affiché sur le site",
+        "contactName": "Nom du contact",
+        "contactNamePh": "Prénom et nom",
+        "email": "Adresse e-mail professionnelle",
+        "emailPh": "contact@exemple.fr",
+        "phone": "Téléphone",
+        "phonePh": "+594 …",
+        "territory": "Territoire principal",
+        "territories": {
+          "guyane": "Guyane",
+          "france": "France métropolitaine",
+          "martinique": "Martinique",
+          "guadeloupe": "Guadeloupe",
+          "reunion": "La Réunion",
+          "mayotte": "Mayotte",
+          "autre": "Autre territoire"
+        },
+        "s3": "Votre activité",
+        "site": "Site internet",
+        "sitePh": "https://…",
+        "networks": "Réseaux sociaux",
+        "networksPh": "Instagram, TikTok, YouTube…\nUn lien par ligne",
+        "presentation": "Présentation de votre activité",
+        "presentationPh": "Vos missions, vos publics et vos domaines d’intervention…",
+        "s4": "Votre proposition",
+        "proposition": "Pourquoi souhaitez-vous rejoindre Lien Parental ?",
+        "propositionPh": "Votre proposition de collaboration, vos idées, vos objectifs communs…",
+        "counter": "{n} / {max} caractères",
+        "s5": "Confidentialité et candidature",
+        "consent": "J’accepte que mes informations soient utilisées pour étudier ma candidature et me recontacter.",
+        "reviewTitle": "Examen de la candidature",
+        "reviewText": "L’envoi d’une demande ne garantit pas un partenariat. Aucune photo, aucun logo ni profil ne sera publié automatiquement. Les modalités de traitement des données figurent dans notre <link>politique de confidentialité</link>.",
+        "submit": "Envoyer ma candidature",
+        "sending": "Envoi en cours…",
+        "errors": {
+          "required": "Ce champ est obligatoire.",
+          "invalid": "Cette valeur n’est pas valide.",
+          "invalidEmail": "Indiquez une adresse e-mail valide.",
+          "invalidPhone": "Indiquez un numéro de téléphone valide.",
+          "invalidUrl": "Indiquez une adresse qui commence par https://",
+          "tooShort": "Écrivez au moins {min} caractères.",
+          "consent": "Cochez la case pour envoyer votre candidature.",
+          "summary": "{count, plural, one {Un champ est à corriger.} other {# champs sont à corriger.}}",
+          "rateLimited": "Trop d’envois depuis votre connexion. Réessayez dans quelques minutes.",
+          "failed": "L’envoi n’a pas abouti. Réessayez, ou écrivez-nous à {email}."
+        },
+        "success": {
+          "title": "Candidature envoyée",
+          "text": "Merci ! Votre candidature est bien arrivée. Notre équipe l’étudie et vous répondra par e-mail à {email}.",
+          "back": "Retour aux partenaires"
+        }
+      }
     }
   }
 }

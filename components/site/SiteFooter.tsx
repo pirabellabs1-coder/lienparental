@@ -11,6 +11,7 @@ import { guidePaths } from '@/lib/seo/site'
 // Pied de page unique des pages publiques.
 const LINKS: { key: string; href: string }[] = [
   { key: 'about', href: '/a-propos' },
+  { key: 'partners', href: '/partenaires' },
   { key: 'features', href: '/#fonctionnalites' },
   { key: 'guide', href: '/guide' },
   { key: 'pricing', href: '/#tarifs' },
@@ -61,10 +62,10 @@ export async function SiteFooter() {
                   <>
                     <TerritoryShape path={terr.path} available={terr.available} className="h-6 w-6 shrink-0" />
                     <span className="font-semibold text-night-900">{tTerr(terr.code)}</span>
-                    <span className={terr.available ? 'font-semibold text-leaf-700' : 'text-night-600'}>{terr.available ? t('available') : t('soon')}</span>
+                    {!terr.available && <span className="text-night-600">{t('soon')}</span>}
                   </>
                 )
-                const pill = 'inline-flex min-h-[44px] items-center gap-2 rounded-full py-1.5 pl-2 pr-3 text-[13px] ring-1'
+                const pill = 'inline-flex min-h-[44px] items-center gap-2 rounded-full py-1.5 pl-2 pr-3.5 text-[13px] ring-1 transition-colors'
                 return (
                   <li key={terr.code}>
                     {terr.available ? (

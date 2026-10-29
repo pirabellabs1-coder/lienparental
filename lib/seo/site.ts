@@ -16,6 +16,8 @@ export const SITE_NAME = 'Lien Parental'
 export const PUBLISHER_NAME = 'Pirabel Labs'
 /** Adresse de contact publiée dans les mentions légales. */
 export const CONTACT_EMAIL = 'contact@lienparental.fr'
+/** Boîte interne qui reçoit les candidatures du formulaire /partenaires/candidature. */
+export const PARTNERSHIP_EMAIL = 'partenaires@lienparental.fr'
 /** Logo carré utilisé par les données structurées (512×512). */
 export const LOGO_PATH = '/icons/icon-512.png'
 /** Image Open Graph par défaut (app/opengraph-image.tsx, 1200×630). */

@@ -5,7 +5,7 @@ import { ScopedIntlProvider } from '@/components/i18n/ScopedIntlProvider'
 import { CLIENT_NS_SITE } from '@/lib/i18n/client-namespaces'
 import { graph, organization, website } from '@/lib/seo/jsonld'
 import { SiteFooter } from './SiteFooter'
-import { SiteHeader } from './SiteHeader'
+import { SiteHeaderServer } from './SiteHeaderServer'
 
 // Gabarit des pages publiques : lien d'évitement, en-tête et pied de page partagés, <main id="contenu">,
 // et graphe schema.org Organization + WebSite (référencé par @id depuis les autres données structurées).
@@ -48,7 +48,7 @@ export function SiteShell({ children, className, mainClassName, ownMain = false,
       >
         {t('skipToContent')}
       </a>
-      <SiteHeader />
+      <SiteHeaderServer />
       <Main id="contenu" tabIndex={-1} className={cn('flex-1 outline-none', mainClassName)}>
         {children}
       </Main>

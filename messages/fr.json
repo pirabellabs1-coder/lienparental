@@ -6,7 +6,79 @@
     "pricing": "Tarifs",
     "testimonials": "Témoignages",
     "faq": "FAQ",
-    "blog": "Blog"
+    "blog": "Blog",
+    "partners": "Partenaires",
+    "resources": "Ressources",
+    "app": "L’application",
+    "mega": {
+      "app": {
+        "features": {
+          "t": "Fonctionnalités",
+          "d": "Agenda partagé, messagerie, coffre-fort, journal"
+        },
+        "pricing": {
+          "t": "Tarifs",
+          "d": "Gratuit, Premium ou Coparentalité+"
+        },
+        "testimonials": {
+          "t": "Témoignages",
+          "d": "Des parents racontent leur quotidien"
+        },
+        "install": {
+          "t": "Installer l’application",
+          "d": "Sur iPhone ou Android, en quelques secondes"
+        },
+        "cardTitle": "Coparentez plus sereinement",
+        "cardText": "Organisez, communiquez et conservez l’essentiel, dans l’intérêt de votre enfant.",
+        "cardCta": "Créer un compte gratuit"
+      },
+      "guide": {
+        "intro": "Démarches, aides et organismes expliqués pas à pas, vérifiés sur des sources officielles.",
+        "territories": "Choisissez votre territoire",
+        "all": "Voir tout le guide",
+        "cardTitle": "Le Guide parental",
+        "cardText": "École, santé, naissance, séparation, logement : les bonnes étapes, au bon moment."
+      },
+      "partners": {
+        "overview": {
+          "t": "Nos partenaires",
+          "d": "Ceux qui s’engagent avec nous pour les familles"
+        },
+        "institution": {
+          "t": "Institutionnels",
+          "d": "Acteurs publics aux côtés des familles"
+        },
+        "association": {
+          "t": "Associatifs",
+          "d": "Associations qui informent et accompagnent"
+        },
+        "createur": {
+          "t": "Créateurs de contenu",
+          "d": "Des voix engagées pour la parentalité"
+        },
+        "cardTitle": "Devenir partenaire",
+        "cardText": "Association, institution, professionnel ou créateur : proposez-nous une collaboration.",
+        "cardCta": "Déposer une candidature"
+      },
+      "resources": {
+        "blog": {
+          "t": "Blog",
+          "d": "Conseils pratiques pour les parents séparés"
+        },
+        "help": {
+          "t": "Centre d’aide",
+          "d": "Réponses aux questions fréquentes"
+        },
+        "about": {
+          "t": "À propos",
+          "d": "Qui nous sommes, notre méthode"
+        },
+        "donate": {
+          "t": "Faire un don",
+          "d": "Soutenir des outils gratuits pour les familles"
+        }
+      }
+    }
   },
   "header": {
     "login": "Se connecter",
@@ -85,13 +157,15 @@
     "available": "Disponible",
     "soon": "Bientôt",
     "rights": "© {year} Lien Parental. Hébergement sécurisé en Europe.",
-    "disclaimer": "Lien Parental ne remplace pas un avocat."
+    "disclaimer": "Lien Parental ne remplace pas un avocat.",
+    "partners": "Partenaires"
   },
   "partners": {
     "titleActive": "Nos partenaires",
     "titlePlaceholder": "Partenaires de Lien Parental",
     "placeholder": "Des partenariats sont en préparation avec les acteurs de la famille. Leurs logos apparaîtront ici.",
-    "slot": "Logo partenaire"
+    "slot": "Logo partenaire",
+    "more": "Découvrir nos partenaires et devenir partenaire"
   },
   "video": {
     "title": "Découvrez Lien Parental en vidéo",

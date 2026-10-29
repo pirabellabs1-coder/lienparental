@@ -6,7 +6,79 @@
     "pricing": "Pricing",
     "testimonials": "Testimonials",
     "faq": "FAQ",
-    "blog": "Blog"
+    "blog": "Blog",
+    "partners": "Partners",
+    "resources": "Resources",
+    "app": "The app",
+    "mega": {
+      "app": {
+        "features": {
+          "t": "Features",
+          "d": "Shared calendar, messaging, vault, journal"
+        },
+        "pricing": {
+          "t": "Pricing",
+          "d": "Free, Premium or Coparentalité+"
+        },
+        "testimonials": {
+          "t": "Testimonials",
+          "d": "Parents share their everyday life"
+        },
+        "install": {
+          "t": "Install the app",
+          "d": "On iPhone or Android, in seconds"
+        },
+        "cardTitle": "Co-parent with more peace of mind",
+        "cardText": "Organize, communicate and keep what matters, in your child’s best interest.",
+        "cardCta": "Create a free account"
+      },
+      "guide": {
+        "intro": "Procedures, benefits and offices explained step by step, checked against official sources.",
+        "territories": "Choose your territory",
+        "all": "See the whole guide",
+        "cardTitle": "The Parenting guide",
+        "cardText": "School, health, birth, separation, housing: the right steps at the right time."
+      },
+      "partners": {
+        "overview": {
+          "t": "Our partners",
+          "d": "Those who work with us for families"
+        },
+        "institution": {
+          "t": "Public sector",
+          "d": "Public bodies working alongside families"
+        },
+        "association": {
+          "t": "Nonprofits",
+          "d": "Nonprofits that inform and support"
+        },
+        "createur": {
+          "t": "Content creators",
+          "d": "Committed voices for parenting"
+        },
+        "cardTitle": "Become a partner",
+        "cardText": "Nonprofit, public body, professional or creator: propose a partnership.",
+        "cardCta": "Apply now"
+      },
+      "resources": {
+        "blog": {
+          "t": "Blog",
+          "d": "Practical tips for separated parents"
+        },
+        "help": {
+          "t": "Help center",
+          "d": "Answers to frequently asked questions"
+        },
+        "about": {
+          "t": "About",
+          "d": "Who we are, how we work"
+        },
+        "donate": {
+          "t": "Donate",
+          "d": "Support free tools for families"
+        }
+      }
+    }
   },
   "header": {
     "login": "Log in",
@@ -85,13 +157,15 @@
     "available": "Available",
     "soon": "Coming soon",
     "rights": "© {year} Lien Parental. Secure hosting in Europe.",
-    "disclaimer": "Lien Parental is not a substitute for a lawyer."
+    "disclaimer": "Lien Parental is not a substitute for a lawyer.",
+    "partners": "Partners"
   },
   "partners": {
     "titleActive": "Our partners",
     "titlePlaceholder": "Lien Parental partners",
     "placeholder": "Partnerships with family-focused organizations are in the works. Their logos will appear here.",
-    "slot": "Partner logo"
+    "slot": "Partner logo",
+    "more": "Meet our partners and become one"
   },
   "video": {
     "title": "Discover Lien Parental in video",

@@ -60,7 +60,8 @@ export async function Guide() {
                   <TerritoryShape path={terr.path} available={terr.available} className="h-10 w-10 shrink-0" />
                   <span className="flex min-w-0 flex-col leading-tight">
                     <span className="text-[14.5px] font-semibold text-night-900">{tTerr(terr.code)}</span>
-                    <span className={cn('mt-0.5 text-[13.5px]', terr.available ? 'font-semibold text-leaf-700' : 'text-night-600')}>{terr.available ? t('available') : t('soon')}</span>
+                    {/* Territoire ouvert : la couleur suffit ; seul un territoire fermé est signalé. */}
+                    {!terr.available && <span className="mt-0.5 text-[13.5px] text-night-600">{t('soon')}</span>}
                   </span>
                 </>
               )

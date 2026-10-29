@@ -1,6 +1,6 @@
 {
   "code": "reunion",
   "nom": "Réunion",
-  "disponible": false,
+  "disponible": true,
   "ordre": 5
 }
