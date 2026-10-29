@@ -1,227 +1,101 @@
 import 'server-only'
 /**
- * Quotas du Coach IA (CDC §6.2).
- * - Analyses : gratuit = 5, premium = 50, coparentalité+ = 100 par fenêtre glissante de 30 jours
- *   (COACH_ANALYSES, components/profil/pricing.ts), selon le plan EFFECTIF : un parent lié à
- *   un abonné Coparentalité+ bénéficie du quota Premium (getEffectivePlan, 0380). Une analyse =
- *   un appel /api/coach/analyze réussi. Les analyses archivées ou supprimées restent
- *   décomptées jusqu'à leur sortie de la fenêtre (sinon archiver « rendrait » du quota).
- * - Supabase : le décompte s'appuie sur public.ai_usage (0270), registre écrit
- *   UNIQUEMENT par le service_role via reserve_ai_usage() (verrou par utilisateur,
- *   comptage + insertion atomiques). Supprimer ou modifier ses analyses ne rend
- *   donc aucun quota. compute_ai_cycle_window (service_role) n'est pas utilisée.
- * - Crédits (0510) : quota atteint → 1 crédit acheté (lot non expiré le plus ancien), consommé dans
- *   la MÊME transaction et sous le MÊME verrou (reserve_ai_analysis) ; rendu si l'analyse échoue
- *   (release_ai_usage). Les analyses payées par crédit (ai_usage.credit_id) ne comptent pas dans le quota.
- * - Démo : comptes de démonstration → profil de démo + cookie lp_demo_ai (lib/ai/credits) ;
- *   autre session sans Supabase → compteur en mémoire (lignes d'analyses du magasin mémoire).
- * - Chat (assistant + questions de suivi) : non décompté du quota d'analyses, limite
- *   douce de 50 messages / jour / utilisateur (compteur en mémoire, par instance).
+ * Crédits IA du Coach (cahier V6) : vues et réservations des analyses, au-dessus du portefeuille
+ * (lib/ai/wallet.ts, fonctions SQL 0520).
+ * - Solde A : crédits mensuels de la formule PROPRE du compte (5 / 60 / 200 par défaut, configuration
+ *   active), remis à zéro à chaque période de facturation, sans report. Solde B : crédits achetés.
+ * - Coût par action (catalogue versionné) : question au Coach 1, analyse de situation (message,
+ *   capture) 2, analyse de document (PDF, texte) 3. Réservé AVANT l'appel, confirmé au succès,
+ *   restitué en cas d'échec, de refus ou de délai dépassé. Clé d'idempotence fournie par le client.
+ * - Chat : décompté (1 crédit par réponse produite) + anti-abus : limites par minute et par jour
+ *   (limiteur partagé en base, `chatPerMinute` / `chatPerDay` de la configuration, route chat).
  */
 import { getCurrentUser, type CurrentUser } from '@/lib/auth/session'
-import { AI_ENABLED, SUPABASE_ENABLED } from '@/lib/supabase/config'
+import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { mockCoachCycles, mockCoachLog, mockCoachUsage } from '@/lib/mock-data'
 import { getDemoBilling } from '@/lib/billing/demo'
 import { demoCoachUsage } from './quota-demo'
-import type { PlanId } from '@/components/profil/pricing'
-import { getEffectivePlan } from '@/lib/billing/entitlements'
-import { ANALYSIS_QUOTA_BY_PLAN } from '@/lib/billing/plans'
-import { demoQuotaBase, getCreditBalance, readDemoAi, writeDemoAi } from './credits'
-import { demoReserve, type CreditBalance, type ReservationSource } from './credits-core'
+import { MONTHLY_CREDITS, type PlanId } from '@/components/profil/pricing'
+import { getCreditBalance, readDemoAi } from './credits'
+import type { CreditBalance } from './credits-core'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { defaultLocale, intlLocale, isLocale, type Locale } from '@/lib/i18n/config'
-import {
-  CYCLE_DAYS, aiServiceDb, cancelPending, cycleRows, insertPending, newAnalysisUuid, type CoachKind, type StoredAnalysis,
-} from './analyses'
+import { CYCLE_DAYS, aiServiceDb, cancelPending, cycleRows, insertPending, newAnalysisUuid, type CoachKind, type StoredAnalysis } from './analyses'
+import { actionForKind } from './credit-config'
+import { getWallet, releaseCredits, reserveCredits, type Reservation as CreditReservation, type WalletView } from './wallet'
 
-export const ANALYSIS_QUOTA: Record<PlanId, number> = ANALYSIS_QUOTA_BY_PLAN
-export const CHAT_DAILY_SOFT_LIMIT = 50
+/** Crédits mensuels par défaut (statistiques admin : base du compte gratuit). */
+export const ANALYSIS_QUOTA: Record<PlanId, number> = { ...MONTHLY_CREDITS }
 
 const DAY_MS = 86_400_000
 
 export type QuotaStatus = {
-  /** Plan effectif (abonnement propre ou accès partagé de la famille). */
+  /** Formule propre (base des crédits mensuels). */
   plan: PlanId
+  /** Crédits mensuels consommés ou réservés sur la période. */
   used: number
+  /** Crédits mensuels de la période. */
   quota: number
+  /** Solde A. */
   remaining: number
-  /** Date à laquelle la plus ancienne analyse décomptée sort de la fenêtre (une place se libère). */
+  /** Fin de la période (prochaine allocation). */
   nextReleaseAt: string | null
 }
 
-/** Erreur PostgREST / PostgreSQL « fonction ou colonne absente » (migration 0510 pas encore appliquée). */
-function isMissingSchema(error: { code?: string } | null): boolean {
-  return !!error && ['PGRST202', 'PGRST204', '42883', '42703'].includes(error.code ?? '')
-}
-
-/**
- * Horodatages de consommation (ai_usage en Supabase, magasin mémoire en démo) depuis `since`.
- * `quotaOnly` : seulement les analyses décomptées du quota (hors analyses payées par crédit, 0510).
- */
-async function usageTimes(user: CurrentUser, since: Date, quotaOnly = true): Promise<number[]> {
-  if (SUPABASE_ENABLED) {
-    // Lecture service_role bornée à l'utilisateur (la policy select self suffirait,
-    // mais on évite une dépendance à la session pour un contrôle d'accès).
-    const query = (onlyQuota: boolean) => {
-      const q = aiServiceDb()
-        .from('ai_usage')
-        .select('created_at')
-        .eq('user_id', user.id)
-        .eq('kind', 'analysis')
-        .gt('created_at', since.toISOString())
-      return (onlyQuota ? q.is('credit_id', null) : q).order('created_at', { ascending: true }).limit(1000)
-    }
-    let { data, error } = await query(quotaOnly)
-    // Avant 0510 (colonne credit_id absente) : toutes les lignes sont des analyses du quota.
-    if (quotaOnly && isMissingSchema(error)) ({ data, error } = await query(false))
-    if (error) throw new Error('ai_usage read failed')
-    return ((data ?? []) as Array<{ created_at: string }>).map((r) => new Date(r.created_at).getTime())
-  }
-  return (await cycleRows(user, since)).map((r) => new Date(r.cycle).getTime())
-}
-
-/** Plan effectif et quota d'analyses associé. */
-async function planQuota(user: CurrentUser): Promise<{ plan: PlanId; quota: number }> {
-  const { plan } = await getEffectivePlan(user.id, user.plan)
-  return { plan, quota: ANALYSIS_QUOTA[plan] ?? ANALYSIS_QUOTA.gratuit }
+export function quotaFromWallet(w: WalletView): QuotaStatus {
+  return { plan: w.plan, used: Math.min(w.monthlyUsed, w.monthlyQuota), quota: w.monthlyQuota, remaining: w.monthly, nextReleaseAt: w.periodEnd }
 }
 
 export async function getQuotaStatus(user: CurrentUser): Promise<QuotaStatus> {
-  const since = new Date(Date.now() - CYCLE_DAYS * DAY_MS)
-  const [times, { plan, quota }] = await Promise.all([usageTimes(user, since), planQuota(user)])
-  const used = times.length
-  const oldest = [...times].sort((a, b) => a - b)[0]
-  return {
-    plan,
-    used,
-    quota,
-    remaining: Math.max(0, quota - used),
-    nextReleaseAt: oldest ? new Date(oldest + CYCLE_DAYS * DAY_MS).toISOString() : null,
-  }
+  return quotaFromWallet(await getWallet(user))
 }
 
-export type Reservation =
-  | { ok: true; analysis: StoredAnalysis; status: QuotaStatus; source: ReservationSource }
-  | { ok: false; status: QuotaStatus }
-
-/** Réservation en base : quota puis crédit (0510), repli sur le seul quota (0270) avant la migration. */
-async function reserveInDb(userId: string, quota: number, id: string): Promise<ReservationSource | null> {
-  const db = aiServiceDb()
-  const { data, error } = await db.rpc('reserve_ai_analysis', {
-    p_user_id: userId, p_limit: quota, p_window_days: CYCLE_DAYS, p_analysis_id: id,
-  })
-  if (!error) {
-    const source = (data as { source?: string } | null)?.source
-    return source === 'credit' ? 'credit' : source === 'quota' ? 'quota' : null
-  }
-  if (!isMissingSchema(error)) throw new Error('reserve_ai_analysis failed')
-  const legacy = await db.rpc('reserve_ai_usage', {
-    p_user_id: userId, p_kind: 'analysis', p_limit: quota, p_window_days: CYCLE_DAYS, p_analysis_id: id,
-  })
-  if (legacy.error) throw new Error('reserve_ai_usage failed')
-  return legacy.data ? 'quota' : null
-}
+export type AnalysisReservation =
+  | { ok: true; analysis: StoredAnalysis; actionId: string; cost: number; balance: WalletView }
+  | Exclude<CreditReservation, { ok: true }>
 
 /**
- * Réservation d'un compte de DÉMONSTRATION (sans Supabase) : profil de démo + cookie lp_demo_ai,
- * même ordre quota → crédits que la base. Null si la session n'est pas un compte de démonstration.
- * À appeler AVANT l'envoi de la réponse (écriture du cookie) : aucun remboursement possible une fois
- * le flux SSE ouvert. Sans clé d'IA, le parcours simulé n'échoue pas ; avec une vraie clé d'IA en
- * démonstration, une analyse échouée reste décomptée du compteur simulé (limite connue, sans paiement).
+ * Réserve le coût d'une analyse AVANT l'appel au modèle, puis crée l'analyse « en attente ».
+ * Échec de création : réservation restituée. En cas d'échec ultérieur : releaseAnalysis.
  */
-export async function reserveDemoAnalysis(): Promise<{ ok: true; source: ReservationSource } | { ok: false; status: QuotaStatus } | null> {
-  const demo = await readDemoAi()
-  if (!demo) return null
-  const base = await demoQuotaBase()
-  const r = demoReserve(demo.state, base.baseUsed, base.quota)
-  if (!r) {
-    const used = Math.min(base.quota, base.baseUsed + demo.state.extraUsed)
-    return { ok: false, status: { plan: base.plan, used, quota: base.quota, remaining: 0, nextReleaseAt: null } }
+export async function reserveAnalysis(user: CurrentUser, meta: { kind: CoachKind; title: string }, key: string): Promise<AnalysisReservation> {
+  const id = SUPABASE_ENABLED ? newAnalysisUuid() : undefined
+  const r = await reserveCredits(user, actionForKind(meta.kind), key, id)
+  if (!r.ok) return r
+  try {
+    const analysis = await insertPending(user, { ...meta, id })
+    return { ok: true, analysis, actionId: r.actionId, cost: r.cost, balance: r.balance }
+  } catch (e) {
+    await releaseCredits(user, r.actionId, 'failed')
+    throw e
   }
-  await writeDemoAi(demo.account, r.next)
-  return { ok: true, source: r.source }
 }
 
-/**
- * Réserve une analyse AVANT l'appel au modèle : deux requêtes simultanées ne peuvent dépasser ni le
- * quota ni le solde de crédits (Supabase : reserve_ai_analysis sous verrou, 0510 ; démo : cookie ou
- * insertion puis recomptage). En cas d'échec, appeler releaseAnalysis (rend le quota ou le crédit).
- * Sans service_role : erreur (fail-closed).
- */
-export async function reserveAnalysis(
+/** Analyse non aboutie : ligne « en attente » supprimée et crédits restitués (coût de l'appel conservé). */
+export async function releaseAnalysis(
   user: CurrentUser,
-  meta: { kind: CoachKind; title: string },
-): Promise<Reservation> {
-  const { quota } = await planQuota(user)
-  if (SUPABASE_ENABLED) {
-    // Réservation atomique côté base (service_role) AVANT de créer la ligne d'analyse :
-    // quota de la formule, sinon 1 crédit acheté (même transaction, même verrou).
-    const id = newAnalysisUuid()
-    const source = await reserveInDb(user.id, quota, id)
-    if (!source) {
-      const status = await getQuotaStatus(user)
-      return { ok: false, status: { ...status, used: Math.min(status.used, status.quota), remaining: 0 } }
-    }
-    let analysis: StoredAnalysis
-    try {
-      analysis = await insertPending(user, { ...meta, id })
-    } catch (e) {
-      await cancelPending(user, id).catch(() => undefined) // rembourse la réservation orpheline (quota ou crédit)
-      throw e
-    }
-    return { ok: true, analysis, status: await getQuotaStatus(user), source }
-  }
-
-  // Compte de démonstration : même règle que la base (profil de démo + crédits simulés).
-  // Compteur simulé (cookie non signé) seulement sans vraie clé d'IA : avec une clé, le compteur
-  // serveur ci-dessous s'applique (effacer le cookie ne doit pas ouvrir des appels illimités).
-  const demo = AI_ENABLED ? null : await reserveDemoAnalysis()
-  if (demo) {
-    if (!demo.ok) return demo
-    const analysis = await insertPending(user, meta)
-    return { ok: true, analysis, status: await getQuotaStatus(user), source: demo.source }
-  }
-
-  const before = await getQuotaStatus(user)
-  if (before.remaining <= 0) return { ok: false, status: before }
-  const analysis = await insertPending(user, meta)
-  const after = await getQuotaStatus(user)
-  if (after.used > after.quota) {
-    await cancelPending(user, analysis.id)
-    return { ok: false, status: { ...after, used: after.quota, remaining: 0 } }
-  }
-  return { ok: true, analysis, status: after, source: 'quota' }
+  analysisId: string,
+  actionId: string,
+  reason: Parameters<typeof releaseCredits>[2] = 'failed',
+  call?: Parameters<typeof releaseCredits>[3],
+): Promise<void> {
+  await cancelPending(user, analysisId).catch(() => undefined)
+  await releaseCredits(user, actionId, reason, call)
 }
 
-export async function releaseAnalysis(user: CurrentUser, id: string): Promise<void> {
-  await cancelPending(user, id).catch((err) => {
-    // Quota ou crédit payé non rendu : trace exploitable (identifiant tronqué, aucune donnée personnelle).
-    console.error('[ai-credits] remboursement de réservation impossible', { analysis: id.slice(-8), msg: err instanceof Error ? err.message : 'unknown' })
-  })
-}
-
-// --- Limite douce du chat ------------------------------------------------------------
-
-const g = globalThis as unknown as { __lpCoachChat?: Map<string, number> }
-const chatCounters: Map<string, number> = (g.__lpCoachChat ??= new Map())
-
-const parisDay = new Intl.DateTimeFormat('fr-CA', { timeZone: 'America/Cayenne', year: 'numeric', month: '2-digit', day: '2-digit' })
-
-/** Incrémente et vérifie le compteur du jour. */
-export function consumeChatMessage(userId: string): { ok: boolean; used: number; limit: number } {
-  const key = `${userId}:${parisDay.format(new Date())}`
-  if (chatCounters.size > 5000) chatCounters.clear()
-  const used = (chatCounters.get(key) ?? 0) + 1
-  if (used > CHAT_DAILY_SOFT_LIMIT) return { ok: false, used: CHAT_DAILY_SOFT_LIMIT, limit: CHAT_DAILY_SOFT_LIMIT }
-  chatCounters.set(key, used)
-  return { ok: true, used, limit: CHAT_DAILY_SOFT_LIMIT }
-}
-
-/** Rend un message non servi (erreur fournisseur) au compteur du jour. */
-export function refundChatMessage(userId: string): void {
-  const key = `${userId}:${parisDay.format(new Date())}`
-  const v = chatCounters.get(key)
-  if (v && v > 0) chatCounters.set(key, v - 1)
+/** Crédits consommés (actions confirmées) depuis `since` : horodatage et crédits. */
+async function consumption(user: CurrentUser, since: Date): Promise<Array<{ at: number; credits: number }>> {
+  if (!SUPABASE_ENABLED) return []
+  const { data, error } = await aiServiceDb()
+    .from('ai_actions')
+    .select('credits, reserved_at')
+    .eq('user_id', user.id)
+    .eq('status', 'succeeded')
+    .gt('reserved_at', since.toISOString())
+    .order('reserved_at', { ascending: true })
+    .limit(2000)
+  if (error) throw new Error('ai_actions read failed')
+  return ((data ?? []) as Array<{ credits: number; reserved_at: string }>).map((r) => ({ at: Date.parse(r.reserved_at), credits: r.credits }))
 }
 
 // --- Vue « utilisation » -------------------------------------------------------------
@@ -298,8 +172,8 @@ export async function getUsageOverview(user: CurrentUser, locale?: Locale): Prom
   const now = Date.now()
   const sixCycles = new Date(now - 6 * CYCLE_DAYS * DAY_MS)
   const rows = (await cycleRows(user, sixCycles)).filter((r) => r.status !== 'pending')
-  // Consommation réelle (ai_usage) ; le journal ci-dessous reste issu des analyses (titres).
-  const usage = await usageTimes(user, sixCycles, false)
+  // Crédits réellement consommés (ai_actions confirmées) ; le journal reste issu des analyses (titres).
+  const usage = await consumption(user, sixCycles)
   const cycles = Array.from({ length: 6 }, (_, i) => {
     const back = 5 - i
     const end = now - back * CYCLE_DAYS * DAY_MS
@@ -307,7 +181,7 @@ export async function getUsageOverview(user: CurrentUser, locale?: Locale): Prom
     return {
       label: back === 0 ? labels.current : labels.cycleN(back),
       startLabel: fmt.short(new Date(start)),
-      used: usage.filter((t) => t > start && t <= end).length,
+      used: back === 0 ? status.used : usage.filter((u) => u.at > start && u.at <= end).reduce((n, u) => n + u.credits, 0),
       current: back === 0,
     }
   })
@@ -337,7 +211,7 @@ export type CoachUsageView = {
   cycles: UsageOverview['cycles']
   log: UsageOverview['log']
   live: boolean
-  /** Crédits d'analyses achetés (solde des lots non expirés, expiration la plus proche). */
+  /** Crédits achetés (solde B : lots non expirés, expiration la plus proche). */
   credits: CreditBalance
 }
 
@@ -368,7 +242,6 @@ export async function loadCoachUsage(locale?: Locale): Promise<CoachUsageView> {
     const o = await getUsageOverview(user, locale)
     return { used: Math.min(o.used, o.quota), total: o.quota, resetInDays: o.resetInDays, resetDateLabel: o.resetDateLabel, cycles: o.cycles, log: o.log, live: true, credits }
   } catch {
-    const { quota } = await planQuota(user)
-    return { used: 0, total: quota, resetInDays: null, resetDateLabel: null, cycles: [], log: [], live: true, credits }
+    return { used: 0, total: 0, resetInDays: null, resetDateLabel: null, cycles: [], log: [], live: true, credits }
   }
 }

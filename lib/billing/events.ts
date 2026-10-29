@@ -8,7 +8,8 @@ export const HANDLED_STRIPE_EVENTS = [
   'customer.subscription.deleted',
   'invoice.paid',
   'invoice.payment_failed',
-  // Crédits IA : remboursement total ou litige → lot révoqué (revokeCreditsForPayment).
+  // Crédits IA (recharges) : remboursement total ou litige → solde restant du lot révoqué et
+  // journalisé (credits_revoke_payment, 0520). L'achat lui-même passe par checkout.session.completed.
   'charge.refunded',
   'charge.dispute.created',
 ] as const

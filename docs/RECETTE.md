@@ -46,7 +46,7 @@ Détail dans [SECURITY_FIXES.md](./SECURITY_FIXES.md).
 
 ## Points en attente de décision client (chap. 13 CDC)
 
-- Prix Premium : 11,99 € / 99 € OU 19,99 € / 199,99 € ?
+- Prix : tranché par le cahier V6 (Premium 14,99 € / 149 €, Coparentalité+ 24,99 € / 249 €).
 - Coach IA : décidé le 28/10/2026 — Gratuit 5, Premium 50, Coparentalité+ 100 analyses / 30 jours ; au-delà, crédits d’analyses achetables (10 / 30 / 100 analyses, valables 12 mois, migration 0510).
 - Messagerie entre parents en V1 ?
 - Validation manuelle des témoignages ou classement automatique ?

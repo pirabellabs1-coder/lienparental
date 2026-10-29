@@ -2,7 +2,7 @@
 // simple, bouton unique par formule, explication des changements (prorata).
 // Module PUR (testé dans tests/billing.test.ts), importable côté client.
 import {
-  COACH_ANALYSES,
+  MONTHLY_CREDITS,
   PLAN_NAME,
   formatPrice,
   periodFor,
@@ -315,14 +315,14 @@ export type ChangeImpact = 'none' | 'cancel_pending' | 'scheduled' | 'upgrade' |
 export function changeImpact(current: Offer, pending: Offer | null, target: Offer): ChangeImpact {
   if (sameOffer(target, pending ?? current)) return 'none'
   if (sameOffer(target, current)) return 'cancel_pending'
-  const d = planDirection(current.plan, target.plan)
-  return d === 'same' ? 'scheduled' : d
+  // Cahier V6 : seule la MONTÉE est immédiate ; descente et changement de cycle à l'échéance.
+  return planDirection(current.plan, target.plan) === 'upgrade' ? 'upgrade' : 'scheduled'
 }
 
 /**
  * Explication en français simple de l'effet d'un changement (fenêtre de confirmation).
- * Mêmes règles que lib/billing/change-core.ts : le changement de NIVEAU est immédiat sur
- * le cycle en cours ; un changement de CYCLE s'applique toujours à la prochaine échéance.
+ * Mêmes règles que lib/billing/change-core.ts : la MONTÉE de niveau est immédiate sur le cycle
+ * en cours ; une descente et un changement de CYCLE s'appliquent à la prochaine échéance.
  * Pendant un essai, rien n'est prélevé le jour du changement.
  */
 export function changeImpactText(
@@ -343,7 +343,7 @@ export function changeImpactText(
   const thenPrice = cyclePart ? '' : `, puis ${priceOf(now)}`
   const trialThen = cyclePart ? '' : ` ; à la fin de l’essai, ${priceOf(now)}`
   const family = target.plan === 'coparentalite'
-    ? ' Les parents liés à vos enfants profitent aussitôt des avantages Premium.'
+    ? ' Les parents liés à vos enfants profitent aussitôt des avantages Premium (hors crédits IA, propres à chaque compte).'
     : ' Les parents liés à vos enfants perdent l’accès partagé.'
   switch (impact) {
     case 'none':
@@ -371,7 +371,7 @@ export const BILLING_INFO: Record<string, string> = {
   pending_change_canceled: 'Le changement de formule programmé a été annulé.',
   unchanged: 'Votre formule reste inchangée.',
   upgraded: 'Votre nouvelle formule est active. La différence au prorata éventuelle est facturée aujourd’hui.',
-  downgraded: 'Votre nouvelle formule est active. Le temps non utilisé est crédité sur vos prochaines factures.',
+  downgraded: 'Changement de formule enregistré : il s’appliquera à votre prochaine échéance.',
   canceled: 'Résiliation enregistrée. Vos avantages restent actifs jusqu’à la fin de la période payée.',
   resumed: 'Votre abonnement continue : la résiliation est annulée.',
   portal: 'Vos modifications sur Stripe ont été prises en compte.',
@@ -384,8 +384,8 @@ export const BILLING_INFO: Record<string, string> = {
 /** `?raison=` : pourquoi l'utilisateur arrive sur l'abonnement depuis une fonctionnalité. */
 export const PAYWALL_REASONS: Record<string, { title: string; text: string; formule: PaidPlan }> = {
   coach: {
-    title: 'Vous avez utilisé vos analyses gratuites',
-    text: `L’offre Gratuite inclut ${COACH_ANALYSES.gratuit} analyses du Coach IA par mois. Premium en offre ${COACH_ANALYSES.premium}, et des crédits d’analyses sont disponibles à l’achat.`,
+    title: 'Vous avez utilisé vos crédits IA du mois',
+    text: `L’offre Gratuite inclut ${MONTHLY_CREDITS.gratuit} crédits IA par mois. Premium en inclut ${MONTHLY_CREDITS.premium}, et des recharges de crédits sont disponibles à l’achat.`,
     formule: 'premium',
   },
   stockage: {

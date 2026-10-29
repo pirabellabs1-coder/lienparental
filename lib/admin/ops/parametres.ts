@@ -12,7 +12,8 @@ import { listTerritoiresAdmin } from '@/lib/contenus/repo'
 import { AI_ENABLED, EMAIL_ENABLED, STRIPE_ENABLED, SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { DEMO_MODE } from '@/lib/demo-auth'
 import { BILLING_GRACE_DAYS, STRIPE_TAX_ENABLED, appOrigin } from '@/lib/billing/config'
-import { ANALYSIS_QUOTA_BY_PLAN, supportPriorityFor } from '@/lib/billing/plans'
+import { supportPriorityFor } from '@/lib/billing/plans'
+import { getCreditConfig } from '@/lib/ai/credit-config-server'
 import { isOfferConfigured } from '@/lib/billing/prices'
 import { PLAN_NAME, PRICING, formatPrice, type PlanId } from '@/components/profil/pricing'
 import { googleCalendarConfigured, googleOAuthConfig } from '@/lib/integrations/google/config'
@@ -28,6 +29,7 @@ const on = (b: boolean, okLabel = 'Configuré', offLabel = 'Non configuré'): Pi
 const PLANS: PlanId[] = ['gratuit', 'premium', 'coparentalite']
 
 export async function getSettings(ctx: AdminCtx): Promise<{ groups: SettingsGroup[]; territoires: { code: string; nom: string; disponible: boolean }[]; territoiresError: boolean }> {
+  const { config: credits } = await getCreditConfig()
   const groups: SettingsGroup[] = [
     {
       title: 'Déploiement',
@@ -53,15 +55,15 @@ export async function getSettings(ctx: AdminCtx): Promise<{ groups: SettingsGrou
     },
     {
       title: 'Formules et quotas',
-      description: 'Définis dans le code (lib/billing/plans.ts, components/profil/pricing.ts). Les montants réellement facturés sont ceux des prix Stripe.',
+      description: 'Tarifs d’abonnement définis dans le code (components/profil/pricing.ts) et dans Stripe (prix immuables). Crédits IA : configuration versionnée, modifiable dans « Crédits IA ».',
       items: PLANS.flatMap((p) => [
         {
           label: `${PLAN_NAME[p]} : tarif`,
           value: p === 'gratuit' ? 'Gratuit' : `${formatPrice(PRICING[p].monthly)} / mois · ${formatPrice(PRICING[p].yearly)} / an`,
         },
         {
-          label: `${PLAN_NAME[p]} : stockage, analyses IA, support`,
-          value: `${p === 'gratuit' ? PRICING.storage.free : PRICING.storage[p]} Go · ${ANALYSIS_QUOTA_BY_PLAN[p]} analyses / 30 jours · priorité ${PRIORITY_LABEL[supportPriorityFor(p)].split(' ')[0].toLowerCase()}`,
+          label: `${PLAN_NAME[p]} : stockage, crédits IA, support`,
+          value: `${p === 'gratuit' ? PRICING.storage.free : PRICING.storage[p]} Go · ${credits.monthlyCredits[p]} crédits IA / mois · priorité ${PRIORITY_LABEL[supportPriorityFor(p)].split(' ')[0].toLowerCase()}`,
         },
       ]),
     },

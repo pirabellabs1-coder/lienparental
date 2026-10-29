@@ -16,6 +16,7 @@ import {
   type RawOverview,
 } from './compute'
 import { weekStart } from './compute'
+import { PRICING } from '@/components/profil/pricing'
 import { attachSparklines, mrrSeries } from './trends'
 import type {
   Cohorts,
@@ -105,7 +106,7 @@ function simulate(today: string): Day[] {
     activeY = Math.max(0, activeY + nY - cY)
     yearlyBuys.push(nY)
     const renewals = i >= 365 ? Math.round(yearlyBuys[i - 365] * 0.82) : 0
-    const subsEur = round2((activeM * 11.99) / 30.4 + (nY + renewals) * 99)
+    const subsEur = round2((activeM * PRICING.premium.monthly) / 30.4 + (nY + renewals) * PRICING.premium.yearly)
     const donEur = rnd(i, 6) < 0.2 ? [5, 10, 10, 15, 20, 30, 50][Math.floor(rnd(i, 7) * 7)] : 0
     const prem = activeM + activeY
     const ai = Math.round((prem * 0.09 + free * 0.0045) * wd * noise(8))

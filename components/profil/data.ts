@@ -3,7 +3,7 @@
 // abonnement (lib/billing). Ces valeurs ne servent qu'en démonstration ou comme repli neutre.
 import { mockUser } from '@/lib/mock-data'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { COACH_ANALYSES, PRICING, type Cycle, type PlanId } from './pricing'
+import { MONTHLY_CREDITS, PRICING, type Cycle, type PlanId } from './pricing'
 
 export const APP_VERSION = '1.0.0'
 export const SUPPORT_EMAIL = 'support@lienparental.fr'
@@ -38,17 +38,17 @@ export const subscription = {
 
 /** Démonstration uniquement (comptes réels : loadProfileUsage, components/profil/usage-server). */
 export const usage = {
-  gratuit: { storageUsed: 1.2, storageMax: PRICING.storage.free, coachUsed: 1, coachMax: COACH_ANALYSES.gratuit },
-  premium: { storageUsed: 5, storageMax: PRICING.storage.premium, coachUsed: 7, coachMax: COACH_ANALYSES.premium },
-  coparentalite: { storageUsed: 5, storageMax: PRICING.storage.coparentalite, coachUsed: 7, coachMax: COACH_ANALYSES.coparentalite },
+  gratuit: { storageUsed: 1.2, storageMax: PRICING.storage.free, coachUsed: 1, coachMax: MONTHLY_CREDITS.gratuit },
+  premium: { storageUsed: 5, storageMax: PRICING.storage.premium, coachUsed: 7, coachMax: MONTHLY_CREDITS.premium },
+  coparentalite: { storageUsed: 5, storageMax: PRICING.storage.coparentalite, coachUsed: 7, coachMax: MONTHLY_CREDITS.coparentalite },
 }
 
 export const invoices = [
-  { id: 'in_5', date: '12 juil. 2025', amount: 11.99, status: 'paye' as const },
-  { id: 'in_4', date: '12 juin 2025', amount: 11.99, status: 'paye' as const },
-  { id: 'in_3', date: '12 mai 2025', amount: 11.99, status: 'paye' as const },
-  { id: 'in_2', date: '12 avr. 2025', amount: 11.99, status: 'paye' as const },
-  { id: 'in_1', date: '12 mars 2025', amount: 11.99, status: 'paye' as const },
+  { id: 'in_5', date: '12 juil. 2025', amount: 14.99, status: 'paye' as const },
+  { id: 'in_4', date: '12 juin 2025', amount: 14.99, status: 'paye' as const },
+  { id: 'in_3', date: '12 mai 2025', amount: 14.99, status: 'paye' as const },
+  { id: 'in_2', date: '12 avr. 2025', amount: 14.99, status: 'paye' as const },
+  { id: 'in_1', date: '12 mars 2025', amount: 14.99, status: 'paye' as const },
 ]
 
 /** Clé sessionStorage : récapitulatif affiché après l'assistant "Informations personnelles". */

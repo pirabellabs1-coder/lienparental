@@ -14,7 +14,7 @@ export type PublicPage = {
 
 export const LEGAL_UPDATED = {
   mentions: '2026-10-25',
-  cgu: '2026-10-28',
+  cgu: '2026-10-29',
   confidentialite: '2026-10-26',
 } as const
 

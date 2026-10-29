@@ -4,7 +4,8 @@ import type Stripe from 'stripe'
 import { getCurrentUser } from '@/lib/auth/session'
 import { readDemoAi, writeDemoAi } from '@/lib/ai/credits'
 import { demoAddCredits } from '@/lib/ai/credits-core'
-import { AI_CREDIT_CURRENCY, AI_CREDIT_VALIDITY_MONTHS, AI_CREDITS_KIND, parseCreditPack } from '@/lib/billing/credit-packs'
+import { AI_CREDIT_CURRENCY, AI_CREDITS_KIND, packsFromConfig, parseCreditPack } from '@/lib/billing/credit-packs'
+import { getCreditConfig } from '@/lib/ai/credit-config-server'
 import { appOrigin, STRIPE_TAX_ENABLED } from '@/lib/billing/config'
 import { DEMO_BILLING } from '@/lib/billing/demo'
 import { apiError, fail, isSameOrigin, limitBilling, logError, readBody, requireBillingUser, seeOther, wantsJson } from '@/lib/billing/http'
@@ -15,14 +16,16 @@ import { rateLimit, rateLimitedResponse, userKey } from '@/lib/data/server/rate-
 import { isLocale, type Locale } from '@/lib/i18n/config'
 
 /**
- * POST /api/stripe/credits — achat d'un pack de crédits d'analyses du Coach IA (paiement unique).
+ * POST /api/stripe/credits — achat d'un pack de crédits IA (recharge, paiement unique).
  *
- * Corps (formulaire ou JSON) : `pack=pack10|pack30|pack100` et `renonciation=on` (case obligatoire :
- * accès immédiat demandé et perte du droit de rétractation dès la première utilisation).
- * Le montant, la devise et la quantité viennent UNIQUEMENT de lib/billing/credit-packs.ts
- * (Stripe Checkout `price_data`) : le client n'envoie qu'un identifiant de pack.
- * Le crédit est accordé par le webhook (checkout.session.completed, payée) ou au retour de paiement,
- * de façon idempotente (session Stripe unique, grant_ai_credits 0510).
+ * Corps (formulaire ou JSON) : `pack=<identifiant d'un pack ACTIF>` et `renonciation=on` (case
+ * obligatoire : accès immédiat demandé et perte du droit de rétractation dès la première utilisation).
+ * Le montant, la devise, la quantité et la validité viennent UNIQUEMENT de la configuration active
+ * (public.credit_config, 0520 ; Stripe Checkout `price_data`, identifiant de commande = session
+ * unique) : le client n'envoie qu'un identifiant de pack. Ils sont figés dans la session.
+ * Le crédit est accordé UNIQUEMENT après confirmation serveur : webhook checkout.session.completed
+ * (payée) ou relecture de la session chez Stripe au retour, de façon idempotente (session unique,
+ * grant_ai_credits 0520) ; jamais sur la seule redirection. Une recharge n'ouvre aucun droit Premium.
  * Démonstration (sans Supabase ni Stripe) : achat SIMULÉ, crédits ajoutés au compte de démo (cookie).
  * Réponses : formulaire → 303 vers Stripe Checkout (ou retour /app/coach/credits?erreur=code) ;
  * JSON → 200 `{ url }` ; 400 invalid_pack / waiver_required · 401 · 403 invalid_origin · 429 · 503.
@@ -55,10 +58,11 @@ export async function POST(req: Request) {
     const rl = await rateLimit(userKey('billing:demo', user.id), limit, windowMs)
     if (!rl.ok) return rateLimitedResponse(rl)
     const body = await readBody(req)
-    const pack = parseCreditPack(body.pack)
+    const { config } = await getCreditConfig()
+    const pack = parseCreditPack(body.pack, packsFromConfig(config))
     if (!pack) return demoBack(400, 'invalid_pack', t('creditsInvalidPack'))
     if (!waiverAccepted(body.renonciation)) return demoBack(400, 'waiver_required', t('creditsWaiverRequired'))
-    await writeDemoAi(demo.account, demoAddCredits(demo.state, pack))
+    await writeDemoAi(demo.account, demoAddCredits(demo.state, pack, Date.now(), config.purchasedValidityMonths))
     const target = `${BACK}?achat=demo&pack=${pack.id}`
     if (wantsJson(req)) return NextResponse.json({ url: target, demo: true }, { headers: { 'Cache-Control': 'no-store' } })
     return NextResponse.redirect(new URL(target, appOrigin() ?? req.url), 303)
@@ -74,7 +78,8 @@ export async function POST(req: Request) {
   if (limited) return limited
 
   const body = await readBody(req)
-  const pack = parseCreditPack(body.pack)
+  const { config } = await getCreditConfig()
+  const pack = parseCreditPack(body.pack, packsFromConfig(config))
   if (!pack) return fail(req, 400, 'invalid_pack', t('creditsInvalidPack'), BACK)
   if (!waiverAccepted(body.renonciation)) return fail(req, 400, 'waiver_required', t('creditsWaiverRequired'), BACK)
 
@@ -87,7 +92,8 @@ export async function POST(req: Request) {
     const now = Math.floor(Date.now() / 1000)
     // Prix et quantité figés dans la session (écrite par le serveur seul) : un changement de tarif
     // pendant les 30 minutes de validité ne fait jamais perdre un paiement encaissé.
-    const meta = { kind: AI_CREDITS_KIND, pack: pack.id, user_id: user.id, price_cents: String(pack.priceCents), analyses: String(pack.analyses) }
+    const months = config.purchasedValidityMonths
+    const meta = { kind: AI_CREDITS_KIND, pack: pack.id, user_id: user.id, price_cents: String(pack.priceCents), credits: String(pack.credits), validity_months: String(months) }
     const session = await getStripe().checkout.sessions.create({
       mode: 'payment',
       // Durée minimale autorisée par Stripe : une session oubliée ne reste pas payable 24 h.
@@ -103,8 +109,8 @@ export async function POST(req: Request) {
             // Prix affichés TTC : avec Stripe Tax, la taxe est incluse dans le montant.
             ...(STRIPE_TAX_ENABLED ? { tax_behavior: 'inclusive' as const } : {}),
             product_data: {
-              name: `Lien Parental – ${tc('packName', { count: pack.analyses })}`,
-              description: tc('validity', { months: AI_CREDIT_VALIDITY_MONTHS }),
+              name: `Lien Parental – ${tc('packName', { count: pack.credits })}`,
+              description: tc('validity', { months }),
             },
           },
         },

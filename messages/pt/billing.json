@@ -26,8 +26,8 @@
         "annuel": "anual"
       },
       "freeMonths": "{count, plural, one {# mês grátis} other {# meses grátis}}",
-      "discount": "-{pct}%",
-      "saveDiscount": "Economize {pct}%",
+      "discount": "cerca de -{pct}%",
+      "saveDiscount": "Economize cerca de {pct}%",
       "zeroPrice": "€ 0",
       "unknownDate": "data desconhecida",
       "noCommitment": "Sem fidelidade",
@@ -38,13 +38,13 @@
     "features": {
       "gratuit": {
         "vault": "Cofre de {gb} GB",
-        "coach": "{count} análises do Coach com IA por mês",
+        "coach": "{count} créditos de IA por mês",
         "journalCalendar": "Diário e calendário",
         "exportPdf": "Exportação em PDF"
       },
       "premium": {
         "vault": "Cofre de {gb} GB",
-        "coach": "{count} análises do Coach com IA por mês",
+        "coach": "{count} créditos de IA por mês",
         "templatesAll": "Todos os modelos de cartas e documentos",
         "journalAdvanced": "Diário cronológico avançado",
         "exportAll": "Exportação em PDF, Word e Canva",
@@ -52,12 +52,13 @@
       },
       "coparentalite": {
         "allPremium": "Tudo do Premium",
-        "multiParents": "Vários pais: a família vinculada aproveita os benefícios Premium",
+        "multiParents": "Espaço familiar compartilhado por convite (2 adultos, até 5 crianças)",
         "expenses": "Acompanhamento reforçado das despesas compartilhadas",
         "exportAdvanced": "Exportação avançada (dossiê para advogado, mediador)",
         "supportPriority": "Atendimento prioritário",
         "webPwa": "Acesso web e aplicativo instalável (PWA)",
-        "coach": "{count} análises do Coach com IA por mês"
+        "coach": "{count} créditos de IA por mês",
+        "vault": "Cofre de {gb} GB"
       }
     },
     "comparison": {
@@ -70,7 +71,7 @@
         "journalCalendar": "Diário e calendário",
         "templates": "Modelos de cartas e documentos",
         "export": "Exportação em PDF, Word e Canva",
-        "multiParents": "Vários pais (acesso compartilhado)",
+        "multiParents": "Espaço familiar compartilhado (2 adultos, por convite)",
         "expenses": "Acompanhamento reforçado das despesas",
         "exportAdvanced": "Exportação avançada (advogado, mediador)",
         "support": "Atendimento",
@@ -78,9 +79,9 @@
       },
       "cells": {
         "coach": {
-          "gratuit": "{count} análises / mês",
-          "premium": "{count} análises / mês",
-          "coparentalite": "{count} análises / mês"
+          "gratuit": "{count} créditos / mês",
+          "premium": "{count} créditos / mês",
+          "coparentalite": "{count} créditos / mês"
         },
         "vault": {
           "gratuit": "{gb} GB",
@@ -259,7 +260,7 @@
       "cyclePart": " A mudança para o plano {cycle} ({price}) será aplicada depois, em {date}.",
       "thenPrice": ", depois {price}",
       "trialThen": "; ao fim do teste, {price}",
-      "familyGain": " Os pais vinculados aos seus filhos recebem imediatamente os benefícios Premium.",
+      "familyGain": " Os pais vinculados aos seus filhos recebem imediatamente as vantagens Premium (exceto os créditos de IA, próprios de cada conta).",
       "familyLoss": " Os pais vinculados aos seus filhos perdem o acesso compartilhado.",
       "upgradeTrial": "Efeito imediato: você passa para o {offer}. Nada é cobrado hoje durante o teste{trialThen}.{cyclePart}{family}",
       "upgrade": "Efeito imediato: você passa para o {offer}. Hoje você paga apenas a diferença proporcional aos dias restantes até {date}{thenPrice}.{cyclePart}{family}",
@@ -271,7 +272,7 @@
       "pending_change_canceled": "A mudança de plano programada foi cancelada.",
       "unchanged": "Seu plano continua o mesmo.",
       "upgraded": "Seu novo plano está ativo. A eventual diferença proporcional é cobrada hoje.",
-      "downgraded": "Seu novo plano está ativo. O tempo não utilizado é creditado nas suas próximas faturas.",
+      "downgraded": "Mudança de plano registrada: ela será aplicada no seu próximo vencimento.",
       "canceled": "Cancelamento registrado. Seus benefícios continuam ativos até o fim do período pago.",
       "resumed": "Sua assinatura continua: o cancelamento foi desfeito.",
       "portal": "Suas alterações na Stripe foram registradas.",
@@ -280,8 +281,8 @@
     },
     "paywall": {
       "coach": {
-        "title": "Você usou suas análises gratuitas",
-        "text": "O plano Grátis inclui {free} análises do Coach com IA por mês. O Premium oferece {premium}, e créditos de análise estão disponíveis para compra."
+        "title": "Você usou os créditos de IA do mês",
+        "text": "O plano Gratuito inclui {free} créditos de IA por mês. O Premium inclui {premium}, e recargas de créditos estão disponíveis para compra."
       },
       "stockage": {
         "title": "Seu cofre está quase cheio",
@@ -377,7 +378,7 @@
       "noCommitment": "Sem fidelidade, cancele quando quiser.",
       "annualBanner": "Anual: <strong>{premiumPromo}</strong> no Premium ({savings} economizados por ano), <strong>{copaPromo}</strong> no Coparentalité+.",
       "monthlyBanner": "Mude para o anual e economize até <strong>{amount} por ano</strong>.",
-      "changeRules": "Mudança de plano (Premium ou Coparentalité+): imediata, no seu ciclo atual, proporcional (diferença cobrada ou creditada). Mudança de ciclo (mensal ou anual): sempre no próximo vencimento, sem custos.",
+      "changeRules": "Passar para um plano superior: imediato, a diferença proporcional é paga na hora. Passar para um plano inferior ou mudar de ciclo (mensal ou anual): no próximo vencimento, sem taxas nem reembolso do ciclo em curso. Seus créditos comprados são sempre mantidos.",
       "compare": "Comparar os planos em detalhe",
       "sharedNote": "Acesso compartilhado Coparentalité+: cada um dos pais vinculados aos seus filhos (titular ou convidado) aproveita os benefícios Premium, sem assinatura própria. Os familiares convidados não têm esse benefício.",
       "payOnStripe": "Concluir o pagamento na Stripe",
@@ -424,6 +425,12 @@
       "viewSubscription": "Ver minha assinatura",
       "checkAgain": "Verificar novamente",
       "backToSubscription": "Voltar para Minha assinatura"
+    },
+    "credits": {
+      "title": "Créditos de IA",
+      "summary": "{monthly} / {quota} créditos mensais restantes (renovação em {date}) · {purchased} créditos comprados",
+      "note": "Os créditos mensais não se acumulam; os créditos comprados são mantidos se você mudar de plano ou cancelar.",
+      "link": "Meus créditos"
     }
   }
 }

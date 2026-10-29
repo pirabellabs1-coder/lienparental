@@ -2,11 +2,14 @@
 // Module PUR : Stripe et la base sont injectés (fausse implémentation Stripe dans
 // tests/billing.test.ts, y compris le cache d'idempotence de Stripe).
 //
-// Règles (affichées telles quelles par lib/billing/ui-state.ts) :
+// Règles (cahier V6, validées ; affichées par lib/billing/ui-state.ts) :
 //  - même niveau, autre cycle (mensuel ↔ annuel) : à la PROCHAINE échéance, sans prorata ;
-//  - changement de niveau : IMMÉDIAT sur le cycle en cours (montée : différence au prorata
-//    facturée tout de suite ; descente : crédit au prorata) ; si le cycle change aussi,
-//    la partie « cycle » est programmée à la prochaine échéance ;
+//  - MONTÉE de niveau : IMMÉDIATE sur le cycle en cours, différence au prorata facturée et payée
+//    tout de suite (les droits ne changent qu'après paiement confirmé) ; crédits IA : seule la
+//    différence de crédits mensuels est allouée sur la période (credits_reserve, 0520) ; si le cycle
+//    change aussi, la partie « cycle » est programmée à la prochaine échéance ;
+//  - DESCENTE de niveau : à la PROCHAINE échéance (subscription schedule, proration_behavior
+//    'none') : aucun remboursement du cycle en cours, droits actuels conservés jusqu'à cette date ;
 //  - choisir à nouveau la formule actuelle annule un changement programmé.
 // Jamais de confiance dans l'objet renvoyé par la mise à jour : l'abonnement est relu
 // chez Stripe et le Price vérifié AVANT d'écrire en base.
@@ -87,13 +90,13 @@ export async function changePlanCore(deps: ChangeDeps, subId: string, offer: Off
 
   const direction = planDirection(current.plan, offer.plan)
 
-  // --- Même niveau, autre cycle : à la prochaine échéance, sans prorata.
-  if (direction === 'same') {
+  // --- Même niveau, autre cycle, ou DESCENTE de niveau : à la prochaine échéance, sans prorata.
+  if (direction === 'same' || direction === 'downgrade') {
     await deps.scheduleNext(sub, currentPrice, target)
     return done('scheduled', periodEnd, offer)
   }
 
-  // --- Changement de niveau : immédiat, sur le cycle EN COURS.
+  // --- Montée de niveau : immédiate, sur le cycle EN COURS.
   const immediate = deps.priceIdForOffer({ plan: offer.plan, cycle: current.cycle })
   if (!immediate) return err(503, 'misconfigured', 'Service momentanément indisponible.')
   if (sub.schedule) await deps.releaseSchedule(sub.schedule)
@@ -102,7 +105,7 @@ export async function changePlanCore(deps: ChangeDeps, subId: string, offer: Off
   // dédupliqué, mais P → C → P → C ne rejoue jamais une réponse en cache.
   const key = `change-plan:${sub.id}:${sub.latest_invoice ?? 'none'}:${immediate}:${requestId}`
   try {
-    await deps.updatePrice(sub, immediate, direction === 'upgrade' ? 'always_invoice' : 'create_prorations', key)
+    await deps.updatePrice(sub, immediate, 'always_invoice', key)
   } catch (e) {
     if (isPaymentError(e)) {
       return err(402, 'payment_failed', 'Le paiement de la différence a été refusé. Vérifiez votre moyen de paiement puis réessayez.')
@@ -124,5 +127,5 @@ export async function changePlanCore(deps: ChangeDeps, subId: string, offer: Off
     pending = offer
   }
   await deps.sync(sub.id)
-  return done(direction === 'upgrade' ? 'upgraded' : 'downgraded', new Date().toISOString(), pending)
+  return done('upgraded', new Date().toISOString(), pending)
 }

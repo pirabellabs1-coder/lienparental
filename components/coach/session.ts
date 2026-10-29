@@ -10,6 +10,13 @@ export type CoachDraft = {
   sizeKb?: number
   text?: string
   createdAt: string // ISO
+  /** Clé d'idempotence de l'analyse (même clé = aucun second débit de crédits). */
+  idempotencyKey?: string
+}
+
+/** Clé d'idempotence d'une action IA (32 caractères hexadécimaux, format accepté par le serveur). */
+export function newIdempotencyKey(): string {
+  return crypto.randomUUID().replace(/-/g, '')
 }
 
 const DRAFT_KEY = 'lp:coach:draft'

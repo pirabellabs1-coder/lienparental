@@ -22,7 +22,11 @@
       "ai_misconfigured": "Le Coach IA est indisponible pour le moment.",
       "ai_bad_request": "Ce contenu ne peut pas être analysé. Vérifiez le fichier (format, lisibilité) et réessayez.",
       "ai_unavailable": "Le Coach IA est momentanément indisponible. Réessayez dans un instant.",
-      "internal": "Une erreur est survenue. Réessayez dans un instant."
+      "internal": "Une erreur est survenue. Réessayez dans un instant.",
+      "chatInsufficientCredits": "Une réponse du Coach coûte {cost, plural, one {# crédit} other {# crédits}} et votre solde est de {total}. Achetez des crédits pour continuer : votre question est conservée.",
+      "chatDuplicate": "Cette question a déjà été envoyée : aucun crédit supplémentaire n’a été débité.",
+      "chatSpendCap": "Le Coach IA a atteint sa limite d’utilisation pour aujourd’hui. Réessayez plus tard : aucun crédit n’a été débité.",
+      "chatInactive": "Les questions au Coach sont momentanément indisponibles."
     },
     "analyze": {
       "textTooLong": "Message trop long ({max} caractères maximum).",
@@ -34,15 +38,18 @@
       "badContentType": "Format de requête invalide.",
       "truncated": "Le contenu est trop long pour être analysé en une fois. Essayez avec un extrait plus court.",
       "invalidOutput": "L’analyse n’a pas pu aboutir. Réessayez dans un instant.",
-      "quotaExceededPaid": "Vous avez utilisé vos {quota} analyses de ce cycle de 30 jours. Achetez des crédits d’analyses pour continuer dès maintenant.",
-      "quotaExceededFree": "Vous avez utilisé vos {quota} analyses gratuites de ce cycle de 30 jours. Achetez des crédits d’analyses pour continuer, ou passez à Premium ({premium} analyses par mois).",
       "disclaimer": "Le Coach IA ne donne pas de conseil juridique.",
       "titles": {
         "message": "Message écrit",
         "capture": "Capture d’écran",
         "pdf": "Document PDF",
         "document": "Document texte"
-      }
+      },
+      "insufficientCredits": "Cette analyse coûte {cost, plural, one {# crédit} other {# crédits}} et votre solde est de {total}. Achetez des crédits pour continuer : votre contenu est conservé et rien n’a été débité.",
+      "duplicateRequest": "Cette demande a déjà été prise en compte : aucun crédit supplémentaire n’a été débité. Retrouvez le résultat dans votre historique.",
+      "spendCap": "Le Coach IA a atteint sa limite d’utilisation pour aujourd’hui. Réessayez plus tard : aucun crédit n’a été débité.",
+      "actionInactive": "Cette fonction n’est pas disponible pour le moment.",
+      "pdfTooManyPages": "Ce PDF compte {pages} pages : le maximum est de {max} pages par analyse. Envoyez un extrait plus court (aucun crédit débité)."
     },
     "history": {
       "unauthenticated": "Connectez-vous pour accéder à vos analyses.",

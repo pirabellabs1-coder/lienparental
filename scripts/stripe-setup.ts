@@ -10,12 +10,17 @@
  *
  * Crée ou met à jour :
  *  1. deux produits (metadata lp_product = premium | coparentalite) ;
- *  2. quatre prix EUR récurrents, retrouvés par lookup_key :
- *       lp_premium_monthly 11,99 €   lp_premium_yearly 99 €
- *       lp_coparentalite_monthly 19,99 €   lp_coparentalite_yearly 189 €
+ *  2. quatre prix EUR récurrents (tarifs V6, components/profil/pricing.ts), retrouvés par lookup_key :
+ *       lp_premium_monthly 14,99 €   lp_premium_yearly 149 €
+ *       lp_coparentalite_monthly 24,99 €   lp_coparentalite_yearly 249 €
  *     tax_behavior « inclusive » (prix TTC) si STRIPE_TAX=on, sinon « unspecified ».
  *     Un prix existant au mauvais montant n'est jamais modifié (Stripe l'interdit) :
- *     un nouveau prix reprend la lookup_key (transfer_lookup_key) ;
+ *     un nouveau prix reprend la lookup_key (transfer_lookup_key), l'ancien est archivé. Les
+ *     abonnés existants restent sur l'ancien prix (reconnu grâce à ses metadata) tant qu'ils ne
+ *     sont pas migrés depuis le Dashboard ;
+ *     Les recharges de crédits IA n'ont PAS de prix Stripe : leur montant est construit à chaque
+ *     paiement depuis la configuration active (Checkout `price_data`, app/api/stripe/credits),
+ *     pour rester modifiable depuis l'administration sans créer de prix immuables ;
  *  3. l'endpoint webhook <base>/api/stripe/webhook, version d'API STRIPE_API_VERSION, abonné
  *     EXACTEMENT aux événements traités par le code (lib/billing/events.ts). Son secret n'est lisible qu'à la
  *     création : il est affiché UNE seule fois ;
@@ -77,8 +82,8 @@ const stripe = new Stripe(KEY, { apiVersion: STRIPE_API_VERSION, maxNetworkRetri
 // --- Catalogue ------------------------------------------------------------------
 
 const PRODUCTS: Record<PlanKey, { name: string; description: string }> = {
-  premium: { name: 'Lien Parental Premium', description: 'Coach IA étendu, tous les modèles, coffre-fort de 10 Go, exports.' },
-  coparentalite: { name: 'Lien Parental Coparentalité+', description: 'Tout Premium, et les parents liés profitent aussi des avantages Premium.' },
+  premium: { name: 'Lien Parental Premium', description: '60 crédits IA par mois, tous les modèles, coffre-fort de 10 Go, exports.' },
+  coparentalite: { name: 'Lien Parental Coparentalité+', description: 'Tout Premium, 200 crédits IA par mois, coffre-fort de 25 Go, espace familial partagé sur invitation.' },
 }
 
 const PRICES: { plan: PlanKey; interval: Interval; amount: number; lookupKey: string; env: string }[] = [
@@ -115,7 +120,7 @@ async function ensureProducts(): Promise<Record<PlanKey, string>> {
     const found = existing.find(p => p.metadata?.lp_product === plan)
     const spec = PRODUCTS[plan]
     if (found) {
-      if (!DRY_RUN && (!found.active || found.name !== spec.name)) {
+      if (!DRY_RUN && (!found.active || found.name !== spec.name || found.description !== spec.description)) {
         await stripe.products.update(found.id, { active: true, name: spec.name, description: spec.description })
         log(`Produit ${plan} mis à jour (${found.id})`)
       } else log(`Produit ${plan} : déjà présent (${found.id})`)

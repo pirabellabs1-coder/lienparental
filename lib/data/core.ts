@@ -51,7 +51,7 @@ export class DataError extends Error {
   }
 }
 
-type PgLikeError = { code?: string; message?: string; status?: number; statusCode?: string | number }
+type PgLikeError = { code?: string; message?: string; hint?: string | null; status?: number; statusCode?: string | number }
 
 /**
  * Convertit une erreur Supabase/Postgres/réseau en DataError française.
@@ -62,6 +62,8 @@ export function toDataError(err: unknown, op: string, fallback?: string): DataEr
   const e = (err ?? {}) as PgLikeError
   const code = String(e.code ?? e.statusCode ?? e.status ?? 'unknown')
   console.warn(`[data] ${op} a échoué (code ${code})`)
+  // Limite de 5 fiches enfants par titulaire (trigger children_limit_guard, 0520).
+  if (code === '54000' && e.hint === 'children_limit') return new DataError(dataMsg('errors.childrenLimit'), 'children_limit')
   if (code === '23505') return new DataError(dataMsg('errors.duplicate'), code)
   if (code === '23503') return new DataError(dataMsg('errors.relatedNotFound'), code)
   if (code === '23514' || code === '22P02' || code === '22023') return new DataError(dataMsg('errors.invalid'), code)

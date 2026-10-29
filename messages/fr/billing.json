@@ -26,8 +26,8 @@
         "annuel": "annuel"
       },
       "freeMonths": "{count, plural, one {# mois offert} other {# mois offerts}}",
-      "discount": "-{pct} %",
-      "saveDiscount": "Économisez {pct} %",
+      "discount": "environ -{pct} %",
+      "saveDiscount": "Économisez environ {pct} %",
       "zeroPrice": "0 €",
       "unknownDate": "date inconnue",
       "noCommitment": "Sans engagement",
@@ -38,13 +38,13 @@
     "features": {
       "gratuit": {
         "vault": "Coffre-fort de {gb} Go",
-        "coach": "{count} analyses du Coach IA par mois",
+        "coach": "{count} crédits IA par mois",
         "journalCalendar": "Journal et calendrier",
         "exportPdf": "Export PDF"
       },
       "premium": {
         "vault": "Coffre-fort de {gb} Go",
-        "coach": "{count} analyses du Coach IA par mois",
+        "coach": "{count} crédits IA par mois",
         "templatesAll": "Tous les modèles de courriers et dossiers",
         "journalAdvanced": "Journal chronologique avancé",
         "exportAll": "Export PDF, Word et Canva",
@@ -52,12 +52,13 @@
       },
       "coparentalite": {
         "allPremium": "Tout Premium",
-        "multiParents": "Plusieurs parents : la famille liée profite des avantages Premium",
+        "multiParents": "Espace familial partagé sur invitation (2 adultes, jusqu’à 5 enfants)",
         "expenses": "Suivi renforcé des dépenses partagées",
         "exportAdvanced": "Export avancé (dossier pour avocat, médiateur)",
         "supportPriority": "Assistance prioritaire",
         "webPwa": "Accès web et application installable (PWA)",
-        "coach": "{count} analyses du Coach IA par mois"
+        "coach": "{count} crédits IA par mois",
+        "vault": "Coffre-fort de {gb} Go"
       }
     },
     "comparison": {
@@ -70,7 +71,7 @@
         "journalCalendar": "Journal et calendrier",
         "templates": "Modèles de courriers et dossiers",
         "export": "Export PDF, Word et Canva",
-        "multiParents": "Plusieurs parents (accès partagé)",
+        "multiParents": "Espace familial partagé (2 adultes, sur invitation)",
         "expenses": "Suivi renforcé des dépenses",
         "exportAdvanced": "Export avancé (avocat, médiateur)",
         "support": "Assistance",
@@ -78,9 +79,9 @@
       },
       "cells": {
         "coach": {
-          "gratuit": "{count} analyses / mois",
-          "premium": "{count} analyses / mois",
-          "coparentalite": "{count} analyses / mois"
+          "gratuit": "{count} crédits / mois",
+          "premium": "{count} crédits / mois",
+          "coparentalite": "{count} crédits / mois"
         },
         "vault": {
           "gratuit": "{gb} Go",
@@ -259,7 +260,7 @@
       "cyclePart": " Le passage en {cycle} ({price}) s’appliquera ensuite le {date}.",
       "thenPrice": ", puis {price}",
       "trialThen": " ; à la fin de l’essai, {price}",
-      "familyGain": " Les parents liés à vos enfants profitent aussitôt des avantages Premium.",
+      "familyGain": " Les parents liés à vos enfants profitent aussitôt des avantages Premium (hors crédits IA, propres à chaque compte).",
       "familyLoss": " Les parents liés à vos enfants perdent l’accès partagé.",
       "upgradeTrial": "Effet immédiat : vous passez en {offer}. Rien n’est prélevé aujourd’hui pendant l’essai{trialThen}.{cyclePart}{family}",
       "upgrade": "Effet immédiat : vous passez en {offer}. Vous payez aujourd’hui uniquement la différence au prorata des jours restants jusqu’au {date}{thenPrice}.{cyclePart}{family}",
@@ -271,7 +272,7 @@
       "pending_change_canceled": "Le changement de formule programmé a été annulé.",
       "unchanged": "Votre formule reste inchangée.",
       "upgraded": "Votre nouvelle formule est active. La différence au prorata éventuelle est facturée aujourd’hui.",
-      "downgraded": "Votre nouvelle formule est active. Le temps non utilisé est crédité sur vos prochaines factures.",
+      "downgraded": "Changement de formule enregistré : il s’appliquera à votre prochaine échéance.",
       "canceled": "Résiliation enregistrée. Vos avantages restent actifs jusqu’à la fin de la période payée.",
       "resumed": "Votre abonnement continue : la résiliation est annulée.",
       "portal": "Vos modifications sur Stripe ont été prises en compte.",
@@ -280,8 +281,8 @@
     },
     "paywall": {
       "coach": {
-        "title": "Vous avez utilisé vos analyses gratuites",
-        "text": "L’offre Gratuite inclut {free} analyses du Coach IA par mois. Premium en offre {premium}, et des crédits d’analyses sont disponibles à l’achat."
+        "title": "Vous avez utilisé vos crédits IA du mois",
+        "text": "L’offre Gratuite inclut {free} crédits IA par mois. Premium en inclut {premium}, et des recharges de crédits sont disponibles à l’achat."
       },
       "stockage": {
         "title": "Votre coffre-fort est presque plein",
@@ -377,7 +378,7 @@
       "noCommitment": "Sans engagement, résiliable à tout moment.",
       "annualBanner": "Annuel : <strong>{premiumPromo}</strong> sur Premium ({savings} économisés par an), <strong>{copaPromo}</strong> sur Coparentalité+.",
       "monthlyBanner": "Passez à l’annuel pour économiser jusqu’à <strong>{amount} par an</strong>.",
-      "changeRules": "Changement de formule (Premium ou Coparentalité+) : immédiat, sur votre cycle actuel, au prorata (différence facturée ou crédit). Changement de cycle (mensuel ou annuel) : toujours à la prochaine échéance, sans frais.",
+      "changeRules": "Passer à une formule supérieure : immédiat, la différence au prorata est payée tout de suite. Passer à une formule inférieure ou changer de cycle (mensuel ou annuel) : à la prochaine échéance, sans frais ni remboursement du cycle en cours. Vos crédits achetés sont toujours conservés.",
       "compare": "Comparer les formules en détail",
       "sharedNote": "Accès partagé Coparentalité+ : chaque parent lié à vos enfants (titulaire ou parent invité) profite des avantages Premium, sans abonnement de son côté. Les proches invités n’en bénéficient pas.",
       "payOnStripe": "Finaliser le paiement sur Stripe",
@@ -424,6 +425,12 @@
       "viewSubscription": "Voir mon abonnement",
       "checkAgain": "Vérifier à nouveau",
       "backToSubscription": "Retour à Mon abonnement"
+    },
+    "credits": {
+      "title": "Crédits IA",
+      "summary": "{monthly} / {quota} crédits mensuels restants (renouvellement le {date}) · {purchased} crédits achetés",
+      "note": "Les crédits mensuels ne sont pas reportés ; les crédits achetés sont conservés si vous changez de formule ou résiliez.",
+      "link": "Mes crédits"
     }
   }
 }

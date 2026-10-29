@@ -10,11 +10,11 @@ Premium élargit l'espace, les témoignages et l'accès au Coach IA.
 
    ![step 1](/content/tutoriels/passer-a-premium/step-1.png)
 
-2. **Comparez les formules.** Gratuit ou Premium (11,99 €/mois ou 99 €/an). Vérifiez ce qui vous est utile aujourd'hui : espace supplémentaire, témoignages illimités, Coach IA illimité, OCR, exports JAF enrichis.
+2. **Comparez les formules.** Gratuit, Premium (14,99 €/mois ou 149 €/an) ou Coparentalité+ (24,99 €/mois ou 249 €/an). Vérifiez ce qui vous est utile aujourd'hui : espace supplémentaire, témoignages illimités, plus de crédits IA chaque mois, OCR, exports JAF enrichis.
 
    ![step 2](/content/tutoriels/passer-a-premium/step-2.png)
 
-3. **Choisissez la périodicité.** Mensuel pour tester, annuel si vous êtes dans une période de procédure prolongée (économie d'environ 30 %).
+3. **Choisissez la périodicité.** Mensuel pour tester, annuel si vous êtes dans une période de procédure prolongée (économie d'environ 17 %).
 
    ![step 3](/content/tutoriels/passer-a-premium/step-3.png)
 

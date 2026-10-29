@@ -17,7 +17,7 @@ Cœur, dans cet ordre :
 7. Finances intégrées au Journal
 8. Guide Parent Guyane
 
-Support : profil, sécurité, stockage, abonnement (Gratuit / Premium 11,99 €/mois ou annuel, Stripe), notifications, aide.
+Support : profil, sécurité, stockage, abonnement (Gratuit / Premium 14,99 €/mois ou 149 €/an, Coparentalité+ 24,99 €/mois ou 249 €/an, Stripe), notifications, aide.
 Les modules ajoutés en dehors de cette liste (messagerie entre parents, planning de garde, frais partagés séparés) ne doivent plus être mis en avant.
 
 ## Nouveauté 1 : Finances dans le Journal (pas de module Finances indépendant)

@@ -127,14 +127,15 @@ test('changement programmé : « Garder cette formule » et cible marquée « Pr
 test('règles de changement (miroir de changePlan côté serveur) et texte du prorata', () => {
   const cur = { plan: 'premium', cycle: 'mensuel' } as const
   assert.equal(changeImpact(cur, null, { plan: 'coparentalite', cycle: 'mensuel' }), 'upgrade')
-  assert.equal(changeImpact({ plan: 'coparentalite', cycle: 'annuel' }, null, { plan: 'premium', cycle: 'annuel' }), 'downgrade')
+  // Cahier V6 : la descente de niveau est programmée à l'échéance (jamais immédiate).
+  assert.equal(changeImpact({ plan: 'coparentalite', cycle: 'annuel' }, null, { plan: 'premium', cycle: 'annuel' }), 'scheduled')
   assert.equal(changeImpact(cur, null, { plan: 'premium', cycle: 'annuel' }), 'scheduled')
   assert.equal(changeImpact(cur, null, cur), 'none')
   assert.equal(changeImpact(cur, { plan: 'premium', cycle: 'annuel' }, cur), 'cancel_pending')
   assert.equal(planChangeLabel(cur, { plan: 'premium', cycle: 'mensuel' }), 'Passer au mensuel')
   const up = changeImpactText('upgrade', cur, { plan: 'coparentalite', cycle: 'mensuel' }, null)
   assert.match(up, /prorata/)
-  assert.match(up, /19,99/)
+  assert.match(up, /24,99/)
   assert.match(changeImpactText('scheduled', cur, { plan: 'premium', cycle: 'annuel' }, '2026-11-15T15:00:00Z'), /15 novembre 2026, sans frais/)
   for (const i of ['none', 'cancel_pending', 'scheduled', 'upgrade', 'downgrade'] as const) noDash(changeImpactText(i, cur, { plan: 'coparentalite', cycle: 'annuel' }, null))
 })
@@ -386,9 +387,9 @@ test('sync : second abonnement en cours signalé comme doublon (jamais écrit) ;
 
 test('statut : changement programmé, impayé, paiement à finaliser', () => {
   const pending = describeStatus({ ...premium, pending: { plan: 'premium', cycle: 'annuel' } })
-  assert.match(pending.detail, /99,00/)
+  assert.match(pending.detail, /149,00/)
   assert.match(pending.detail, /Premium annuel/)
-  assert.doesNotMatch(pending.detail, /11,99/)
+  assert.doesNotMatch(pending.detail, /14,99/)
   const unpaid = describeStatus({ ...premium, status: 'unpaid' })
   assert.equal(unpaid.label, 'Paiement en échec')
   assert.match(unpaid.detail, /suspendus/)
@@ -404,8 +405,8 @@ test('changement de niveau + de cycle : niveau immédiat sur le cycle actuel, cy
   const cur = { plan: 'premium', cycle: 'mensuel' } as const
   const t = changeImpactText('upgrade', cur, { plan: 'coparentalite', cycle: 'annuel' }, '2026-11-15T15:00:00Z')
   assert.match(t, /Coparentalité\+ mensuel/)
-  assert.match(t, /annuel \(189,00\s€ \/ an\) s’appliquera ensuite le 15 novembre 2026/)
-  assert.doesNotMatch(t, /puis 19,99/)
+  assert.match(t, /annuel \(249,00\s€ \/ an\) s’appliquera ensuite le 15 novembre 2026/)
+  assert.doesNotMatch(t, /puis 24,99/)
   const trial = changeImpactText('upgrade', cur, { plan: 'coparentalite', cycle: 'mensuel' }, null, { trialing: true })
   assert.match(trial, /Rien n’est prélevé aujourd’hui/)
   assert.doesNotMatch(trial, /payez aujourd’hui/)
@@ -446,16 +447,24 @@ function fakeStripe(start = 'price_PM', opts: { failPayment?: boolean } = {}) {
   return { deps, state, db }
 }
 
-test('changePlan : P → C → P → C, chaque clic appliqué, base = Stripe (jamais de réponse en cache)', async () => {
+test('changePlan (T13/T14) : montée immédiate payée ; descente programmée à l’échéance, sans prorata ni remboursement', async () => {
   const f = fakeStripe()
-  const seq = ['coparentalite', 'premium', 'coparentalite'] as const
-  for (const plan of seq) {
-    const r = await changePlanCore(f.deps, 'sub_1', { plan, cycle: 'mensuel' }, crypto.randomUUID())
-    assert.ok(r.ok, JSON.stringify(r))
-    assert.equal(f.state.price, PRICE_ID[`${plan}:mensuel`])
-    assert.equal(f.db.plan, f.state.price)
-  }
-  assert.deepEqual(f.state.charges, ['price_CM', 'price_CM'])
+  // Montée P → C : immédiate, différence facturée tout de suite.
+  const up = await changePlanCore(f.deps, 'sub_1', { plan: 'coparentalite', cycle: 'mensuel' }, crypto.randomUUID())
+  assert.ok(up.ok && up.status === 'upgraded', JSON.stringify(up))
+  assert.equal(f.state.price, 'price_CM')
+  assert.equal(f.db.plan, 'price_CM')
+  assert.deepEqual(f.state.charges, ['price_CM'])
+  // Descente C → P : rien ne change avant l'échéance (formule actuelle conservée), aucun crédit au prorata.
+  const down = await changePlanCore(f.deps, 'sub_1', { plan: 'premium', cycle: 'mensuel' }, crypto.randomUUID())
+  assert.ok(down.ok && down.status === 'scheduled' && down.effective_at === new Date(1_800_000_000 * 1000).toISOString(), JSON.stringify(down))
+  assert.equal(f.state.price, 'price_CM', 'droits actuels conservés jusqu’à l’échéance')
+  assert.equal(f.state.pendingPrice, 'price_PM')
+  assert.deepEqual(f.state.charges, ['price_CM'])
+  // Choisir à nouveau la formule actuelle annule la descente programmée.
+  const keep = await changePlanCore(f.deps, 'sub_1', { plan: 'coparentalite', cycle: 'mensuel' }, crypto.randomUUID())
+  assert.ok(keep.ok && keep.status === 'pending_change_canceled')
+  assert.equal(f.state.pendingPrice, null)
 })
 
 test('changePlan : double clic (même request_id) dédupliqué ; réponse en cache détectée, rien écrit de faux', async () => {

@@ -16,7 +16,7 @@ export default async function ParametresPage() {
       <OpsHeader title="Paramètres" description="État réel du déploiement, en lecture seule. Aucun secret n’est affiché : seulement s’il est configuré ou non." />
       <DemoNotice mode={ctx.mode}>Le déploiement de recette n’a pas de base de données : les intégrations apparaissent non configurées.</DemoNotice>
       <Note>
-        Les formules, quotas et tarifs sont définis dans le code et dans Stripe, pas en base : les modifier passe par un déploiement
+        Les formules et tarifs d’abonnement sont définis dans le code et dans Stripe : les modifier passe par un déploiement
         (et par le tableau de bord Stripe pour les prix facturés). Les réglages réellement stockés en base sont listés en bas de page.
       </Note>
 

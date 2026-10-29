@@ -96,7 +96,8 @@
         "notConfigured": "Online storage is not configured.",
         "notFound": "Item not found.",
         "relatedNotFound": "Linked item not found.",
-        "sessionExpired": "Your session has expired. Please sign in again."
+        "sessionExpired": "Your session has expired. Please sign in again.",
+        "childrenLimit": "You have reached the maximum of 5 child profiles."
       },
       "family": {
         "linkedParent": "a linked parent"

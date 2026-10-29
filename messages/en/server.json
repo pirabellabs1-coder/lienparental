@@ -30,7 +30,8 @@
         "merge_incomplete": "The health information changed during the merge. Please try again.",
         "invalid_payload": "Invalid request.",
         "cooldown": "Please wait a minute before resending the invitation.",
-        "too_many": "Limit reached for today. Please try again tomorrow."
+        "too_many": "Limit reached for today. Please try again tomorrow.",
+        "adult_limit": "A family space holds at most two adults: the account holder and one invited parent. An invitation is already pending or a parent is already linked to this child."
       },
       "validation": {
         "invalidEmail": "Invalid email address.",

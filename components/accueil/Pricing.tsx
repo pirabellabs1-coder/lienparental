@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import { signupPath } from '@/lib/i18n/routing'
 import { Check, ChevronDown, Minus } from 'lucide-react'
-import { COACH_ANALYSES, PLAN_COMPARISON, PLAN_FEATURE_KEYS, PLAN_FEATURES, PRICING, formatPriceIn, planPromo, storageGb, type ComparisonValue, type PaidPlan, type PlanId } from '@/components/profil/pricing'
+import { MONTHLY_CREDITS, PLAN_COMPARISON, PLAN_FEATURE_KEYS, PLAN_FEATURES, PRICING, formatPriceIn, planPromo, storageGb, type ComparisonValue, type PaidPlan, type PlanId } from '@/components/profil/pricing'
 import { intlLocale } from '@/lib/i18n/config'
 import { cn } from '@/lib/cn'
 import { BTN_OUTLINE, BTN_PRIMARY, H2, LEAD } from './ui'
@@ -104,7 +104,7 @@ export async function Pricing({ signedIn = false }: { signedIn?: boolean }) {
               {PLAN_FEATURES[p.key].map((f, i) => (
                 <li key={f} className="flex items-start gap-3 text-[15px] leading-snug text-night-800">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" strokeWidth={2.25} aria-hidden />
-                  {PLAN_FEATURE_KEYS[p.key][i] ? t(`features.${p.key}.${PLAN_FEATURE_KEYS[p.key][i]}`, { gb: storageGb(p.key), count: COACH_ANALYSES[p.key] }) : f}
+                  {PLAN_FEATURE_KEYS[p.key][i] ? t(`features.${p.key}.${PLAN_FEATURE_KEYS[p.key][i]}`, { gb: storageGb(p.key), count: MONTHLY_CREDITS[p.key] }) : f}
                 </li>
               ))}
             </ul>
@@ -134,7 +134,7 @@ export async function Pricing({ signedIn = false }: { signedIn?: boolean }) {
               {PLAN_COMPARISON.map(row => (
                 <tr key={row.label}>
                   <th scope="row" className="px-5 py-3.5 font-medium text-night-900">{row.key ? t(`comparison.rows.${row.key}`) : row.label}</th>
-                  {PLANS.map(p => <td key={p.key} className="px-4 py-3.5 text-center text-night-700"><Cell value={row.values[p.key]} labels={cellLabels} text={row.key && typeof row.values[p.key] === 'string' ? t(`comparison.cells.${row.key}.${p.key}`, { gb: storageGb(p.key), count: COACH_ANALYSES[p.key] }) : undefined} /></td>)}
+                  {PLANS.map(p => <td key={p.key} className="px-4 py-3.5 text-center text-night-700"><Cell value={row.values[p.key]} labels={cellLabels} text={row.key && typeof row.values[p.key] === 'string' ? t(`comparison.cells.${row.key}.${p.key}`, { gb: storageGb(p.key), count: MONTHLY_CREDITS[p.key] }) : undefined} /></td>)}
                 </tr>
               ))}
             </tbody>

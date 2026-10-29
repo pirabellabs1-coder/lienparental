@@ -26,8 +26,8 @@
         "annuel": "yearly"
       },
       "freeMonths": "{count, plural, one {# month free} other {# months free}}",
-      "discount": "-{pct}%",
-      "saveDiscount": "Save {pct}%",
+      "discount": "about -{pct}%",
+      "saveDiscount": "Save about {pct}%",
       "zeroPrice": "€0",
       "unknownDate": "unknown date",
       "noCommitment": "No commitment",
@@ -38,13 +38,13 @@
     "features": {
       "gratuit": {
         "vault": "{gb} GB vault",
-        "coach": "{count} AI Coach analyses per month",
+        "coach": "{count} AI credits per month",
         "journalCalendar": "Journal and calendar",
         "exportPdf": "PDF export"
       },
       "premium": {
         "vault": "{gb} GB vault",
-        "coach": "{count} AI Coach analyses per month",
+        "coach": "{count} AI credits per month",
         "templatesAll": "All letter and file templates",
         "journalAdvanced": "Advanced chronological journal",
         "exportAll": "PDF, Word and Canva export",
@@ -52,12 +52,13 @@
       },
       "coparentalite": {
         "allPremium": "Everything in Premium",
-        "multiParents": "Multiple parents: your linked family gets Premium benefits",
+        "multiParents": "Shared family space by invitation (2 adults, up to 5 children)",
         "expenses": "Enhanced tracking of shared expenses",
         "exportAdvanced": "Advanced export (file for a lawyer or mediator)",
         "supportPriority": "Priority support",
         "webPwa": "Web access and installable app (PWA)",
-        "coach": "{count} AI Coach analyses per month"
+        "coach": "{count} AI credits per month",
+        "vault": "{gb} GB vault"
       }
     },
     "comparison": {
@@ -70,7 +71,7 @@
         "journalCalendar": "Journal and calendar",
         "templates": "Letter and file templates",
         "export": "PDF, Word and Canva export",
-        "multiParents": "Multiple parents (shared access)",
+        "multiParents": "Shared family space (2 adults, by invitation)",
         "expenses": "Enhanced expense tracking",
         "exportAdvanced": "Advanced export (lawyer, mediator)",
         "support": "Support",
@@ -78,9 +79,9 @@
       },
       "cells": {
         "coach": {
-          "gratuit": "{count} analyses / month",
-          "premium": "{count} analyses / month",
-          "coparentalite": "{count} analyses / month"
+          "gratuit": "{count} credits / month",
+          "premium": "{count} credits / month",
+          "coparentalite": "{count} credits / month"
         },
         "vault": {
           "gratuit": "{gb} GB",
@@ -259,7 +260,7 @@
       "cyclePart": " The switch to {cycle} billing ({price}) will then apply on {date}.",
       "thenPrice": ", then {price}",
       "trialThen": "; at the end of the trial, {price}",
-      "familyGain": " Parents linked to your children immediately get Premium benefits.",
+      "familyGain": " Parents linked to your children immediately get Premium benefits (excluding AI credits, which belong to each account).",
       "familyLoss": " Parents linked to your children lose shared access.",
       "upgradeTrial": "Takes effect immediately: you switch to {offer}. Nothing is charged today during the trial{trialThen}.{cyclePart}{family}",
       "upgrade": "Takes effect immediately: you switch to {offer}. Today you only pay the prorated difference for the days remaining until {date}{thenPrice}.{cyclePart}{family}",
@@ -271,7 +272,7 @@
       "pending_change_canceled": "The scheduled plan change has been canceled.",
       "unchanged": "Your plan is unchanged.",
       "upgraded": "Your new plan is active. Any prorated difference is charged today.",
-      "downgraded": "Your new plan is active. Unused time is credited to your next invoices.",
+      "downgraded": "Plan change saved: it will apply at your next renewal.",
       "canceled": "Cancellation saved. Your benefits remain active until the end of the paid period.",
       "resumed": "Your subscription continues: the cancellation has been withdrawn.",
       "portal": "Your changes on Stripe have been applied.",
@@ -280,8 +281,8 @@
     },
     "paywall": {
       "coach": {
-        "title": "You have used your free analyses",
-        "text": "The Free plan includes {free} AI Coach analyses per month. Premium offers {premium}, and analysis credits are available to buy."
+        "title": "You have used this month’s AI credits",
+        "text": "The Free plan includes {free} AI credits per month. Premium includes {premium}, and credit top-ups are available to buy."
       },
       "stockage": {
         "title": "Your vault is almost full",
@@ -377,7 +378,7 @@
       "noCommitment": "No commitment, cancel anytime.",
       "annualBanner": "Yearly: <strong>{premiumPromo}</strong> on Premium ({savings} saved per year), <strong>{copaPromo}</strong> on Coparentalité+.",
       "monthlyBanner": "Switch to yearly to save up to <strong>{amount} per year</strong>.",
-      "changeRules": "Plan change (Premium or Coparentalité+): immediate, on your current billing cycle, prorated (difference charged or credited). Billing cycle change (monthly or yearly): always on your next billing date, at no cost.",
+      "changeRules": "Moving to a higher plan: immediate, the prorated difference is paid right away. Moving to a lower plan or changing billing cycle (monthly or yearly): at your next renewal, with no fee and no refund of the current cycle. Your purchased credits are always kept.",
       "compare": "Compare plans in detail",
       "sharedNote": "Coparentalité+ shared access: every parent linked to your children (account holder or invited parent) gets Premium benefits without a subscription of their own. Invited relatives do not.",
       "payOnStripe": "Complete payment on Stripe",
@@ -424,6 +425,12 @@
       "viewSubscription": "View my subscription",
       "checkAgain": "Check again",
       "backToSubscription": "Back to My subscription"
+    },
+    "credits": {
+      "title": "AI credits",
+      "summary": "{monthly} / {quota} monthly credits left (renews on {date}) · {purchased} purchased credits",
+      "note": "Monthly credits do not carry over; purchased credits are kept if you change plan or cancel.",
+      "link": "My credits"
     }
   }
 }

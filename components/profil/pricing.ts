@@ -3,6 +3,12 @@
 //   Premium        : STRIPE_PRICE_MONTHLY / STRIPE_PRICE_YEARLY
 //   Coparentalité+ : STRIPE_PRICE_COPARENTALITE_MONTHLY / STRIPE_PRICE_COPARENTALITE_YEARLY
 // Les prix ci-dessous sont modifiables : tous les libellés promotionnels en sont dérivés.
+// Un Price Stripe est IMMUABLE : changer un prix d'abonnement = créer un nouveau Price (scripts/
+// stripe-setup.ts), reporter son identifiant dans les variables d'environnement, puis déployer
+// (docs/STRIPE.md). Les crédits IA, eux, sont configurables sans déploiement (admin, 0520).
+// Communication (cahier V6) : jamais « illimité » pour le Coach IA (quota de crédits), jamais
+// « 2 mois offerts » : l'économie annuelle est d'ENVIRON 17 % par rapport à douze mensualités.
+import { DEFAULT_CREDIT_CONFIG } from '@/lib/ai/credit-config'
 
 export type Cycle = 'mensuel' | 'annuel'
 /** Formules payantes, de la moins à la plus complète. */
@@ -18,8 +24,8 @@ const round2 = (n: number) => Math.round(n * 100) / 100
 export function derivePlanPricing(monthly: number, yearly: number) {
   const reference = round2(monthly * 12)
   const savings = round2(reference - yearly)
-  const discountPct = Math.max(0, Math.floor((savings / reference) * 100))
-  const freeMonths = Math.floor(savings / monthly)
+  // Arrondi (et non troncature) : 17,2 % et 16,97 % s'affichent tous deux « environ 17 % ».
+  const discountPct = Math.max(0, Math.round((savings / reference) * 100))
   return {
     monthly,
     yearly,
@@ -29,27 +35,28 @@ export function derivePlanPricing(monthly: number, yearly: number) {
     yearlyReference: reference,
     /** Économie annuelle réelle par rapport au mensuel. */
     yearlySavings: savings,
-    freeMonthsLabel: freeMonths >= 1 ? `${freeMonths} mois offerts` : `-${discountPct} %`,
-    discountLabel: `-${discountPct} %`,
-    discountShortLabel: `Économisez ${discountPct} %`,
+    /** Historique : plus de « mois offerts » (V6) ; même libellé que discountLabel. */
+    freeMonthsLabel: `environ -${discountPct} %`,
+    discountLabel: `environ -${discountPct} %`,
+    discountShortLabel: `Économisez environ ${discountPct} %`,
   } as const
 }
 
-/** Premium : 11,99 €/mois, 99 €/an. */
-const PREMIUM = derivePlanPricing(11.99, 99)
-/**
- * Coparentalité+ : 19,99 €/mois. Annuel 189 € (≈ 15,75 €/mois, 2 mois offerts) :
- * proposition modifiable, à valider par le client puis à reporter dans le Price Stripe.
- */
-const COPARENTALITE = derivePlanPricing(19.99, 189)
+/** Premium : 14,99 €/mois, 149 €/an (≈ 12,42 €/mois, économie d'environ 17 %). */
+const PREMIUM = derivePlanPricing(14.99, 149)
+/** Coparentalité+ : 24,99 €/mois, 249 €/an (≈ 20,75 €/mois, économie d'environ 17 %). */
+const COPARENTALITE = derivePlanPricing(24.99, 249)
 
 /**
- * Analyses du Coach IA par fenêtre glissante de 30 jours, selon le plan EFFECTIF : SOURCE UNIQUE
- * (quota appliqué par lib/ai/quota.ts via ANALYSIS_QUOTA_BY_PLAN, libellés des écrans et catalogues
- * `{count}`). Un parent lié à un abonné Coparentalité+ reçoit le niveau Premium (getEffectivePlan).
- * Au-delà : crédits d'analyses achetés (lib/billing/credit-packs.ts).
+ * Crédits IA mensuels inclus par formule (solde A, cahier V6) : 5 / 60 / 200. Valeurs PAR DÉFAUT
+ * affichées sur les pages publiques ; la valeur appliquée est celle de la configuration active
+ * (public.credit_config, modifiable dans l'administration). Remis à zéro à chaque période de
+ * facturation, sans report. Selon la formule PROPRE du compte : un parent invité ne profite jamais
+ * des crédits du titulaire (non mutualisés). Au-delà : crédits achetés (lib/billing/credit-packs.ts).
  */
-export const COACH_ANALYSES: Readonly<Record<PlanId, number>> = { gratuit: 5, premium: 50, coparentalite: 100 }
+export const MONTHLY_CREDITS: Readonly<Record<PlanId, number>> = DEFAULT_CREDIT_CONFIG.monthlyCredits
+/** @deprecated Nom historique (« analyses ») : utiliser MONTHLY_CREDITS. */
+export const COACH_ANALYSES = MONTHLY_CREDITS
 
 export const PRICING = {
   currency: 'EUR',
@@ -57,7 +64,7 @@ export const PRICING = {
   ...PREMIUM,
   premium: PREMIUM,
   coparentalite: COPARENTALITE,
-  storage: { free: 2, premium: 10, coparentalite: 10 }, // Go
+  storage: { free: 2, premium: 10, coparentalite: 25 }, // Go
 } as const
 
 const eur = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2 })
@@ -118,7 +125,7 @@ export function isPaidPlan(value: unknown): value is PaidPlan {
 }
 
 export const PREMIUM_FEATURES = [
-  `Coach IA étendu : ${COACH_ANALYSES.premium} analyses par mois`,
+  `Coach IA étendu : ${MONTHLY_CREDITS.premium} crédits IA par mois`,
   'Tous les modèles de courriers et dossiers',
   'Coffre-fort sécurisé et stockage étendu',
   'Journal chronologique avancé',
@@ -130,7 +137,7 @@ export const PREMIUM_FEATURES = [
 
 /** Ce que Coparentalité+ ajoute à Premium. */
 export const COPARENTALITE_EXTRAS = [
-  'Plusieurs parents : la famille liée profite des avantages Premium',
+  'Espace familial partagé sur invitation (2 adultes, jusqu’à 5 enfants)',
   'Suivi renforcé des dépenses partagées',
   'Export avancé (dossier pour avocat, médiateur)',
   'Assistance prioritaire',
@@ -143,13 +150,13 @@ export const COPARENTALITE_EXTRAS = [
 export const PLAN_FEATURES: Record<PlanId, readonly string[]> = {
   gratuit: [
     `Coffre-fort de ${PRICING.storage.free} Go`,
-    `${COACH_ANALYSES.gratuit} analyses du Coach IA par mois`,
+    `${MONTHLY_CREDITS.gratuit} crédits IA par mois`,
     'Journal et calendrier',
     'Export PDF',
   ],
   premium: [
     `Coffre-fort de ${PRICING.storage.premium} Go`,
-    `${COACH_ANALYSES.premium} analyses du Coach IA par mois`,
+    `${MONTHLY_CREDITS.premium} crédits IA par mois`,
     'Tous les modèles de courriers et dossiers',
     'Journal chronologique avancé',
     'Export PDF, Word et Canva',
@@ -157,7 +164,7 @@ export const PLAN_FEATURES: Record<PlanId, readonly string[]> = {
   ],
   // « Accès web et PWA » : demandé dans la liste Coparentalité+, mais disponible pour toutes
   // les formules (ne pas le présenter comme exclusif ; voir PLAN_COMPARISON).
-  coparentalite: ['Tout Premium', `${COACH_ANALYSES.coparentalite} analyses du Coach IA par mois`, ...COPARENTALITE_EXTRAS, 'Accès web et application installable (PWA)'],
+  coparentalite: ['Tout Premium', `${MONTHLY_CREDITS.coparentalite} crédits IA par mois`, `Coffre-fort de ${PRICING.storage.coparentalite} Go`, ...COPARENTALITE_EXTRAS, 'Accès web et application installable (PWA)'],
 }
 
 /**
@@ -177,12 +184,12 @@ export type ComparisonValue = boolean | string
 
 /** Comparatif des trois formules (Mon abonnement /app/abonnement, page d'accueil). */
 export const PLAN_COMPARISON: ReadonlyArray<{ /** Clé stable de traduction (i18n, additif). */ key?: string; label: string; values: Record<PlanId, ComparisonValue> }> = [
-  { key: 'coach', label: 'Coach IA', values: { gratuit: `${COACH_ANALYSES.gratuit} analyses / mois`, premium: `${COACH_ANALYSES.premium} analyses / mois`, coparentalite: `${COACH_ANALYSES.coparentalite} analyses / mois` } },
+  { key: 'coach', label: 'Coach IA', values: { gratuit: `${MONTHLY_CREDITS.gratuit} crédits / mois`, premium: `${MONTHLY_CREDITS.premium} crédits / mois`, coparentalite: `${MONTHLY_CREDITS.coparentalite} crédits / mois` } },
   { key: 'vault', label: 'Coffre-fort sécurisé', values: { gratuit: `${PRICING.storage.free} Go`, premium: `${PRICING.storage.premium} Go`, coparentalite: `${PRICING.storage.coparentalite} Go` } },
   { key: 'journalCalendar', label: 'Journal et calendrier', values: { gratuit: true, premium: true, coparentalite: true } },
   { key: 'templates', label: 'Modèles de courriers et dossiers', values: { gratuit: 'Essentiels', premium: 'Tous', coparentalite: 'Tous' } },
   { key: 'export', label: 'Export PDF, Word et Canva', values: { gratuit: 'PDF', premium: true, coparentalite: true } },
-  { key: 'multiParents', label: 'Plusieurs parents (accès partagé)', values: { gratuit: false, premium: false, coparentalite: true } },
+  { key: 'multiParents', label: 'Espace familial partagé (2 adultes, sur invitation)', values: { gratuit: false, premium: false, coparentalite: true } },
   { key: 'expenses', label: 'Suivi renforcé des dépenses', values: { gratuit: false, premium: false, coparentalite: true } },
   { key: 'exportAdvanced', label: 'Export avancé (avocat, médiateur)', values: { gratuit: false, premium: false, coparentalite: true } },
   { key: 'support', label: 'Assistance', values: SUPPORT_LABEL },
@@ -209,15 +216,19 @@ export const SUBSCRIBE_STEPS = ['Choix de l’offre', 'Paiement', 'Confirmation'
 export const PLAN_FEATURE_KEYS: Record<PlanId, readonly string[]> = {
   gratuit: ['vault', 'coach', 'journalCalendar', 'exportPdf'],
   premium: ['vault', 'coach', 'templatesAll', 'journalAdvanced', 'exportAll', 'sync'],
-  coparentalite: ['allPremium', 'coach', 'multiParents', 'expenses', 'exportAdvanced', 'supportPriority', 'webPwa'],
+  coparentalite: ['allPremium', 'coach', 'vault', 'multiParents', 'expenses', 'exportAdvanced', 'supportPriority', 'webPwa'],
 }
 
-/** Valeurs numériques des libellés promotionnels (mêmes calculs que derivePlanPricing). */
+/**
+ * Valeurs numériques des libellés promotionnels (mêmes calculs que derivePlanPricing).
+ * `freeMonths` vaut toujours 0 : le cahier V6 interdit « 2 mois offerts » (l'économie réelle est
+ * d'environ 17 %) ; les écrans affichent donc le pourcentage arrondi.
+ */
 export function planPromo(plan: PaidPlan): { freeMonths: number; discountPct: number } {
   const p = PRICING[plan]
   return {
-    freeMonths: Math.floor(p.yearlySavings / p.monthly),
-    discountPct: Math.max(0, Math.floor((p.yearlySavings / p.yearlyReference) * 100)),
+    freeMonths: 0,
+    discountPct: Math.max(0, Math.round((p.yearlySavings / p.yearlyReference) * 100)),
   }
 }
 

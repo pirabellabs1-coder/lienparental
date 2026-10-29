@@ -1,11 +1,14 @@
 'use client'
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
+import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
-import { Send, Square, HeartPulse } from 'lucide-react'
+import { Coins, Send, Square, HeartPulse } from 'lucide-react'
 import { ChatBubble, type ChatMessage } from './ChatBubble'
 import { DemoNote, LegalNote } from './ui'
 import { errorMessage, readSse } from './sse-client'
+import { newIdempotencyKey } from './session'
+import { useCredits } from './CreditCost'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
 
@@ -43,6 +46,10 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
   const [includeMedical, setIncludeMedical] = useState(false)
   const [demo, setDemo] = useState(!aiEnabled)
   const [status, setStatus] = useState('')
+  // Solde insuffisant (402) : message + packs proposés ; la question reste dans le champ.
+  const [blocked, setBlocked] = useState<string | null>(null)
+  const { data: credits, refresh: refreshCredits } = useCredits()
+  const chatCost = credits?.costs.chat_question ?? 1
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const endRef = useRef<HTMLLIElement>(null)
   const abortRef = useRef<AbortController | null>(null)
@@ -77,6 +84,9 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
       history.push({ role: 'user', content: text })
 
       const medical = includeMedical
+      // Une clé par question : une relance réseau ou un double envoi ne débite qu'un crédit.
+      const key = newIdempotencyKey()
+      setBlocked(null)
       setMessages((m) => [...m, { id: uid('me'), from: 'me', text, time: nowLabel(locale) }, { id: uid('ia'), from: 'ia', text: '', time: '', streaming: true }])
       setQ('')
       setIncludeMedical(false) // l'autorisation vaut pour une seule question
@@ -100,10 +110,21 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
       try {
         const res = await fetch('/api/coach/chat', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'Idempotency-Key': key },
           body: JSON.stringify({ messages: history, analysisId, includeMedical: medical }),
           signal: ctrl.signal,
         })
+        if (res.status === 402) {
+          // Aucun crédit débité : la question revient dans le champ, les bulles sont retirées.
+          const body = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
+          const msg = body?.error?.message ?? t('insufficient')
+          setMessages((list) => list.slice(0, -2))
+          setQ(text)
+          setBlocked(msg)
+          setStatus(msg)
+          finalTone = 'error'
+          return
+        }
         if (!res.ok || !(res.headers.get('content-type') ?? '').includes('text/event-stream')) {
           const msg = await errorMessage(res, tc('errors.generic'), { sessionExpired: tc('errors.sessionExpired'), tooLarge: tc('errors.tooLarge') })
           finalTone = 'error'
@@ -138,14 +159,15 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
       } finally {
         if (raf) cancelAnimationFrame(raf)
         flush()
-        patchLast((m) => ({ ...m, streaming: false, time: nowLabel(locale) }))
+        patchLast((m) => (m.streaming ? { ...m, streaming: false, time: nowLabel(locale) } : m))
         setStreaming(false)
         setStatus(finalTone === 'error' ? t('statusFailed') : t('statusDone'))
         abortRef.current = null
+        refreshCredits()
         requestAnimationFrame(scrollToEnd)
       }
     },
-    [messages, streaming, includeMedical, analysisId, scrollToEnd, t, tc, locale],
+    [messages, streaming, includeMedical, analysisId, scrollToEnd, t, tc, locale, refreshCredits],
   )
 
   // Question transmise par le dashboard : envoyée une seule fois.
@@ -250,8 +272,18 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
           )}
         </div>
         <p id={hintId} className="mt-1.5 text-[11.5px] text-night-500">
-          {t('hint')}
+          {t('hint')} {t('costHint', { count: chatCost })}
+          {credits ? ` ${t('balanceHint', { total: credits.total })}` : ''}
         </p>
+        {blocked && (
+          <div role="alert" className="mt-3 rounded-xl2 border border-alert-200 bg-alert-50 p-3 text-[12.5px] leading-relaxed text-night-900">
+            <p>{blocked}</p>
+            <Link href="/app/coach/credits#packs" className="mt-2 inline-flex items-center gap-1.5 font-semibold underline underline-offset-2">
+              <Coins className="h-4 w-4" aria-hidden="true" />
+              {t('buyCredits')}
+            </Link>
+          </div>
+        )}
 
         <label
           htmlFor={medId}

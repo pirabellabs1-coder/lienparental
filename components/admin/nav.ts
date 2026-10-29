@@ -9,7 +9,7 @@ import {
   LifeBuoy,
   ScrollText,
   Settings,
-} from 'lucide-react'
+ Coins } from 'lucide-react'
 
 export type NavItem = { href: string; label: string; icon: React.ComponentType<{ className?: string }> }
 export type NavGroup = { title: string; items: NavItem[] }
@@ -40,6 +40,7 @@ export const NAV_GROUPS: NavGroup[] = [
     title: 'Exploitation',
     items: [
       { href: '/admin/support', label: 'Support', icon: LifeBuoy },
+      { href: '/admin/credits', label: 'Crédits IA', icon: Coins },
       { href: '/admin/journaux', label: 'Journaux', icon: ScrollText },
       { href: '/admin/parametres', label: 'Paramètres', icon: Settings },
     ],

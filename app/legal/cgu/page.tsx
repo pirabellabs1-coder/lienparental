@@ -5,7 +5,8 @@ import { intlLocale } from '@/lib/i18n/config';
 import { localePath } from '@/lib/i18n/routing';
 import { pageMetadata } from '@/lib/seo/metadata';
 import { LEGAL_UPDATED, isoDate } from '@/lib/seo/pages';
-import { AI_CREDIT_VALIDITY_MONTHS, packSummaries } from '@/lib/billing/credit-packs';
+import { packSummaries, packsFromConfig } from '@/lib/billing/credit-packs';
+import { getCreditConfig } from '@/lib/ai/credit-config-server';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('public.legal.cgu');
@@ -13,10 +14,14 @@ export async function generateMetadata(): Promise<Metadata> {
   return pageMetadata({ title: t('metaTitle'), description: ts('description'), path: '/legal/cgu', locale: await getLocale() });
 }
 
+// Revalidée toutes les 5 minutes : une nouvelle version de la configuration des crédits s'y reflète.
+export const revalidate = 300;
+
 // Date partagée avec le sitemap (lib/seo/pages.ts).
 const LAST_UPDATED = isoDate(LEGAL_UPDATED.cgu);
 
-// `credits` : crédits d'analyses du Coach IA (prix et validité issus de lib/billing/credit-packs.ts).
+// `credits` : crédits IA et recharges (valeurs de la configuration ACTIVE, public.credit_config :
+// les conditions affichées suivent toujours celles appliquées).
 const SECTIONS = ['s1', 's2', 's3', 's4', 's5', 'credits', 's6'] as const;
 
 export default async function CGUPage() {
@@ -24,10 +29,20 @@ export default async function CGUPage() {
   const tl = await getTranslations('public.legal');
   const locale = await getLocale();
   const lastUpdated = new Intl.DateTimeFormat(intlLocale(locale), { dateStyle: 'long', timeZone: 'UTC' }).format(LAST_UPDATED);
+  const { config } = await getCreditConfig();
   const packs = new Intl.ListFormat(intlLocale(locale), { style: 'long', type: 'disjunction' }).format(
-    packSummaries(intlLocale(locale), (count, price) => t('credits.packItem', { count, price })),
+    packSummaries(intlLocale(locale), (count, price) => t('credits.packItem', { count, price }), packsFromConfig(config)),
   );
-  const values = { packs, months: AI_CREDIT_VALIDITY_MONTHS };
+  const values = {
+    packs,
+    months: config.purchasedValidityMonths,
+    free: config.monthlyCredits.gratuit,
+    premium: config.monthlyCredits.premium,
+    copa: config.monthlyCredits.coparentalite,
+    chat: config.actions.chat_question.cost,
+    situation: config.actions.situation_analysis.cost,
+    document: config.actions.document_analysis.cost,
+  };
   return (
     <div className="px-5 py-12 text-night-900 sm:px-8 sm:py-16">
       <article className="mx-auto max-w-[760px] rounded-3xl bg-white p-6 ring-1 ring-[#E5E7EB] sm:p-10">

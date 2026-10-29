@@ -217,16 +217,16 @@
           "help": "Help center",
           "helpSub": "FAQ, guides and support contact",
           "credits": "AI credits",
-          "creditsSub": "{count, plural, =0 {No credits: buy extra analyses} one {# extra analysis available} other {# extra analyses available}}",
+          "creditsSub": "{count, plural, =0 {No purchased credits: top up} one {# purchased credit available} other {# purchased credits available}}",
           "creditsExpiry": "{label} · earliest expiry on {date}"
         },
         "storageUsed": "Space used",
         "storageAria": "Storage space used",
         "storageUnavailable": "Usage unavailable right now. Please try again later.",
         "coachUsage": "Current usage",
-        "coachCount": "{used} / {quota} analyses",
-        "coachCount30": "{used} / {quota} analyses over 30 days",
-        "coachAria": "AI Coach analyses used",
+        "coachCount": "{used} / {quota} credits",
+        "coachCount30": "{used} / {quota} credits this month",
+        "coachAria": "Monthly AI credits used",
         "coachUnavailable": "Usage unavailable right now. Please try again later.",
         "logout": {
           "button": "Log out",
@@ -615,7 +615,7 @@
         },
         "n3": {
           "title": "AI Coach renewed",
-          "body": "You have 10 new analyses this month.",
+          "body": "Your monthly AI credits have been renewed.",
           "time": "Yesterday"
         }
       },

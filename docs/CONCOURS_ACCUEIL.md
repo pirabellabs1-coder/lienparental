@@ -17,7 +17,7 @@ Modules réels (écrans existants dans `app/app/**`) :
 - **Coach IA** (Claude) : analyse un message reçu de l'autre parent, mesure le ton, propose une réponse apaisée. Ne donne pas de conseil juridique.
 - **Messagerie** entre parents, **Frais partagés** et suivi de la **pension alimentaire**, **Mes enfants** (fiches, infos médicales chiffrées), partage avocat par lien limité et révocable, notifications.
 
-Tarifs : lire `components/profil/pricing.ts` (`PRICING`, `formatPrice`) — Gratuit, Premium 11,99 €/mois ou 99 €/an. Ne jamais coder un prix en dur.
+Tarifs : lire `components/profil/pricing.ts` (`PRICING`, `formatPrice`) — Gratuit, Premium 14,99 €/mois ou 149 €/an, Coparentalité+ 24,99 €/mois ou 249 €/an. Ne jamais coder un prix en dur.
 Le FAQ et les promesses de confiance réelles sont dans `app/page.tsx` actuel (TRUST, VALUES, FAQ) : réutiliser leur fond, pas forcément leur forme.
 
 ## Identité (non négociable)

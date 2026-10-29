@@ -1,6 +1,6 @@
 import { Check, Minus } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
-import { COACH_ANALYSES, PLAN_COMPARISON, PRICING, formatPriceIn, storageGb, type ComparisonValue, type PlanId } from './pricing'
+import { MONTHLY_CREDITS, PLAN_COMPARISON, PRICING, formatPriceIn, storageGb, type ComparisonValue, type PlanId } from './pricing'
 import { intlLocale } from '@/lib/i18n/config'
 import { cn } from '@/lib/cn'
 
@@ -49,7 +49,7 @@ export function PlanComparison({
               <th scope="row" className="px-2.5 py-2.5 font-normal leading-snug">{row.key ? t(`comparison.rows.${row.key}`) : row.label}</th>
               {plans.map(p => (
                 <td key={p} className={cn('px-1.5 py-2.5 text-center leading-snug', highlight === p && 'bg-gold-50/60')}>
-                  <Cell value={row.values[p]} text={row.key && typeof row.values[p] === 'string' ? t(`comparison.cells.${row.key}.${p}`, { gb: storageGb(p), count: COACH_ANALYSES[p] }) : undefined} />
+                  <Cell value={row.values[p]} text={row.key && typeof row.values[p] === 'string' ? t(`comparison.cells.${row.key}.${p}`, { gb: storageGb(p), count: MONTHLY_CREDITS[p] }) : undefined} />
                 </td>
               ))}
             </tr>

@@ -72,6 +72,8 @@ const HINTS: Record<string, number> = {
   invalid_payload: 422,
   cooldown: 429,
   too_many: 429,
+  // 2 adultes au maximum par enfant : titulaire + 1 parent invité (0520).
+  adult_limit: 409,
 }
 
 /**

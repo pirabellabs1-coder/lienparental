@@ -2,13 +2,17 @@ import { getRequestTz } from '@/lib/tz-server'
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { TopBar } from '@/components/mobile/TopBar'
-import { COACH_ANALYSES, isPaidPlan, parseCycle, type Cycle } from '@/components/profil/pricing'
+import { MONTHLY_CREDITS, isPaidPlan, parseCycle, type Cycle } from '@/components/profil/pricing'
 import { loadBillingPage } from '@/lib/billing/page-state'
 import type { BillingView } from '@/lib/billing/types'
 import { BILLING_INFO, hasManagedSubscription, paywallReason } from '@/lib/billing/ui-state'
 import { billingFormat, type BillingFmt } from './_components/billing-i18n'
 import { firstParam } from './_components/BillingNotice'
 import { SubscriptionCenter } from './_components/SubscriptionCenter'
+import Link from 'next/link'
+import { Coins } from 'lucide-react'
+import { getCurrentUser } from '@/lib/auth/session'
+import { getWallet, type WalletView } from '@/lib/ai/wallet'
 
 export const dynamic = 'force-dynamic'
 export async function generateMetadata(): Promise<Metadata> {
@@ -41,12 +45,15 @@ export default async function AbonnementPage({ searchParams }: PageProps) {
   // Raison du paywall traduite (la clé est validée par paywallReason).
   const reasonKey = Array.isArray(sp.raison) ? sp.raison[0] : sp.raison
   const reasonText = reason && reasonKey
-    ? { title: t(`paywall.${reasonKey}.title`), text: t(`paywall.${reasonKey}.text`, { free: COACH_ANALYSES.gratuit, premium: COACH_ANALYSES.premium }) }
+    ? { title: t(`paywall.${reasonKey}.title`), text: t(`paywall.${reasonKey}.text`, { free: MONTHLY_CREDITS.gratuit, premium: MONTHLY_CREDITS.premium }) }
     : null
   const focusPlan = isPaidPlan(formule) ? formule : reason?.formule ?? null
   const managed = hasManagedSubscription(view)
   // Cycle présélectionné : celui de l'URL, sinon celui de l'abonnement en cours.
   const initialCycle: Cycle = sp.cycle ? parseCycle(sp.cycle) : managed ? view.cycle : 'mensuel'
+  // Crédits IA (soldes A et B) : résumé et lien vers « Mes crédits » (indisponible → bloc masqué).
+  const user = await getCurrentUser()
+  const wallet: WalletView | null = user ? await getWallet(user).catch(() => null) : null
 
   return (
     <>
@@ -65,6 +72,25 @@ export default async function AbonnementPage({ searchParams }: PageProps) {
         scrollToInvoices={firstParam(sp.section) === 'factures'}
         demoInvoices={mode === 'demo' ? demoInvoices(view, f) : []}
       />
+      {wallet && (
+        <section aria-labelledby="sub-credits" className="mx-auto w-full max-w-5xl px-4 pb-8">
+          <div className="flex flex-col gap-3 rounded-xl2 border border-night-100 bg-white p-4 shadow-soft sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-3">
+              <Coins className="mt-0.5 h-5 w-5 shrink-0 text-iris-600" aria-hidden="true" />
+              <div>
+                <h2 id="sub-credits" className="text-[14px] font-bold text-night-900">{t('credits.title')}</h2>
+                <p className="text-[13px] text-night-700">
+                  {t('credits.summary', { monthly: wallet.monthly, quota: wallet.monthlyQuota, purchased: wallet.purchased, date: f.date(wallet.periodEnd) })}
+                </p>
+                <p className="mt-0.5 text-[12px] text-night-600">{t('credits.note')}</p>
+              </div>
+            </div>
+            <Link href="/app/coach/credits" className="inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-xl border border-night-200 px-4 text-[14px] font-semibold text-night-900 hover:bg-night-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500">
+              {t('credits.link')}
+            </Link>
+          </div>
+        </section>
+      )}
     </>
   )
 }

@@ -22,7 +22,11 @@
       "ai_misconfigured": "The AI Coach is unavailable for now.",
       "ai_bad_request": "This content cannot be analyzed. Check the file (format, readability) and try again.",
       "ai_unavailable": "The AI Coach is temporarily unavailable. Please try again in a moment.",
-      "internal": "Something went wrong. Please try again in a moment."
+      "internal": "Something went wrong. Please try again in a moment.",
+      "chatInsufficientCredits": "An answer from the Coach costs {cost, plural, one {# credit} other {# credits}} and your balance is {total}. Buy credits to continue: your question is kept.",
+      "chatDuplicate": "This question has already been sent: no extra credit was charged.",
+      "chatSpendCap": "The AI Coach has reached its usage limit for today. Try again later: no credits were charged.",
+      "chatInactive": "Questions to the Coach are temporarily unavailable."
     },
     "analyze": {
       "textTooLong": "Message too long ({max} characters maximum).",
@@ -34,15 +38,18 @@
       "badContentType": "Invalid request format.",
       "truncated": "The content is too long to be analyzed in one go. Try a shorter excerpt.",
       "invalidOutput": "The analysis could not be completed. Please try again in a moment.",
-      "quotaExceededPaid": "You have used your {quota} analyses for this 30-day cycle. Buy analysis credits to keep going right away.",
-      "quotaExceededFree": "You have used your {quota} free analyses for this 30-day cycle. Buy analysis credits to keep going, or upgrade to Premium ({premium} analyses per month).",
       "disclaimer": "The AI Coach does not give legal advice.",
       "titles": {
         "message": "Written message",
         "capture": "Screenshot",
         "pdf": "PDF document",
         "document": "Text document"
-      }
+      },
+      "insufficientCredits": "This analysis costs {cost, plural, one {# credit} other {# credits}} and your balance is {total}. Buy credits to continue: your content is kept and nothing was charged.",
+      "duplicateRequest": "This request has already been taken into account: no extra credit was charged. Find the result in your history.",
+      "spendCap": "The AI Coach has reached its usage limit for today. Try again later: no credits were charged.",
+      "actionInactive": "This feature is not available at the moment.",
+      "pdfTooManyPages": "This PDF has {pages} pages: the maximum is {max} pages per analysis. Send a shorter extract (no credits charged)."
     },
     "history": {
       "unauthenticated": "Sign in to access your analyses.",

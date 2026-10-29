@@ -10,11 +10,11 @@ Premium expands your storage space, testimonials and access to the AI Coach.
 
    ![step 1](/content/tutoriels/passer-a-premium/step-1.png)
 
-2. **Compare the plans.** Free or Premium (€11.99/month or €99/year). Check what is useful to you today: extra space, unlimited testimonials, unlimited AI Coach, OCR, enhanced JAF exports.
+2. **Compare the plans.** Free, Premium (€14.99/month or €149/year) or Coparentalité+ (€24.99/month or €249/year). Check what is useful to you today: extra space, unlimited testimonials, more AI credits every month, OCR, enhanced JAF exports.
 
    ![step 2](/content/tutoriels/passer-a-premium/step-2.png)
 
-3. **Choose the billing period.** Monthly to try it out, annual if you are in a long period of proceedings (a saving of about 30%).
+3. **Choose the billing period.** Monthly to try it out, annual if you are in a long period of proceedings (a saving of about 17%).
 
    ![step 3](/content/tutoriels/passer-a-premium/step-3.png)
 

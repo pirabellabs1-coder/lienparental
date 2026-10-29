@@ -69,7 +69,7 @@ const samples: Record<string, (l: Locale) => Rendered> = {
   invoice: (l) =>
     invoiceEmail({
       prenom: 'Camille',
-      montant: '11,99 €',
+      montant: '14,99 €',
       cycle: 'mensuel',
       nextPeriodEnd: inDays(30),
       invoiceUrl: 'https://invoice.stripe.com/i/exemple',
@@ -86,12 +86,12 @@ const samples: Record<string, (l: Locale) => Rendered> = {
   'payment-failed': (l) =>
     paymentFailedEmail({
       prenom: 'Camille',
-      montant: '11,99 €',
+      montant: '14,99 €',
       nextAttemptIso: inDays(3),
       invoiceUrl: 'https://invoice.stripe.com/i/exemple',
     }, l),
   'payment-failed-final': (l) =>
-    paymentFailedEmail({ prenom: 'Camille', montant: '11,99 €', nextAttemptIso: null }, l),
+    paymentFailedEmail({ prenom: 'Camille', montant: '14,99 €', nextAttemptIso: null }, l),
   'subscription-canceled': (l) =>
     subscriptionCanceledEmail({
       prenom: 'Camille',

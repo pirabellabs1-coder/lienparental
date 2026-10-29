@@ -13,8 +13,7 @@ import {
   parsePaidPlan,
   planLabel,
   priceFor,
-  priceForPlan,
-} from '../components/profil/pricing'
+  priceForPlan, planPromo } from '../components/profil/pricing'
 import {
   ANALYSIS_QUOTA_BY_PLAN,
   dbTierFor,
@@ -35,44 +34,47 @@ const plain = (s: string) => s.replace(/[  ]/g, ' ')
 
 // --- Libellés de prix -----------------------------------------------------------
 
-test('Premium : prix et libellés historiques inchangés (champs à plat)', () => {
-  assert.equal(PRICING.monthly, 11.99)
-  assert.equal(PRICING.yearly, 99)
-  assert.equal(PRICING.yearlyReference, 143.88)
-  assert.equal(PRICING.yearlySavings, 44.88)
-  assert.equal(PRICING.yearlyPerMonth, 8.25)
-  assert.equal(PRICING.freeMonthsLabel, '3 mois offerts')
-  assert.equal(PRICING.discountLabel, '-31 %')
-  assert.equal(PRICING.discountShortLabel, 'Économisez 31 %')
+test('Premium V6 : 14,99 €/mois, 149 €/an, environ 17 % (jamais « mois offerts »)', () => {
+  assert.equal(PRICING.monthly, 14.99)
+  assert.equal(PRICING.yearly, 149)
+  assert.equal(PRICING.yearlyReference, 179.88)
+  assert.equal(PRICING.yearlySavings, 30.88)
+  assert.equal(PRICING.yearlyPerMonth, 12.42)
+  assert.equal(PRICING.freeMonthsLabel, 'environ -17 %')
+  assert.equal(PRICING.discountLabel, 'environ -17 %')
+  assert.equal(PRICING.discountShortLabel, 'Économisez environ 17 %')
+  assert.deepEqual(planPromo('premium'), { freeMonths: 0, discountPct: 17 })
   // Les champs à plat et PRICING.premium sont la même source.
   assert.equal(PRICING.premium.monthly, PRICING.monthly)
   assert.equal(PRICING.premium.freeMonthsLabel, PRICING.freeMonthsLabel)
 })
 
-test('Coparentalité+ : 19,99 €/mois, 189 €/an, libellés dérivés', () => {
+test('Coparentalité+ V6 : 24,99 €/mois, 249 €/an, environ 17 % ; coffre-fort 25 Go', () => {
   const c = PRICING.coparentalite
-  assert.equal(c.monthly, 19.99)
-  assert.equal(c.yearly, 189)
-  assert.equal(c.yearlyReference, 239.88)
+  assert.equal(c.monthly, 24.99)
+  assert.equal(c.yearly, 249)
+  assert.equal(c.yearlyReference, 299.88)
   assert.equal(c.yearlySavings, 50.88)
-  assert.equal(c.yearlyPerMonth, 15.75)
-  assert.equal(c.freeMonthsLabel, '2 mois offerts')
-  assert.equal(c.discountLabel, '-21 %')
-  assert.equal(c.discountShortLabel, 'Économisez 21 %')
+  assert.equal(c.yearlyPerMonth, 20.75)
+  // 16,97 % : arrondi à « environ 17 % », jamais tronqué à 16 ni « 2 mois offerts ».
+  assert.equal(c.discountLabel, 'environ -17 %')
+  assert.equal(c.discountShortLabel, 'Économisez environ 17 %')
+  assert.deepEqual(planPromo('coparentalite'), { freeMonths: 0, discountPct: 17 })
+  assert.deepEqual({ ...PRICING.storage }, { free: 2, premium: 10, coparentalite: 25 })
 })
 
 test('derivePlanPricing : sans économie suffisante, pas de « mois offerts »', () => {
   const p = derivePlanPricing(10, 115)
   assert.equal(p.yearlySavings, 5)
-  assert.equal(p.freeMonthsLabel, '-4 %')
+  assert.equal(p.freeMonthsLabel, 'environ -4 %')
   // Annuel plus cher que 12 mensualités : jamais de remise négative affichée.
-  assert.equal(derivePlanPricing(10, 130).discountLabel, '-0 %')
+  assert.equal(derivePlanPricing(10, 130).discountLabel, 'environ -0 %')
 })
 
 test('formatPrice au format français', () => {
-  assert.equal(plain(formatPrice(19.99)), '19,99 €')
-  assert.equal(plain(formatPrice(189)), '189,00 €')
-  assert.equal(plain(formatPrice(PRICING.coparentalite.yearlyPerMonth)), '15,75 €')
+  assert.equal(plain(formatPrice(24.99)), '24,99 €')
+  assert.equal(plain(formatPrice(249)), '249,00 €')
+  assert.equal(plain(formatPrice(PRICING.coparentalite.yearlyPerMonth)), '20,75 €')
 })
 
 test('libellés de formule', () => {
@@ -87,10 +89,10 @@ test('libellés de formule', () => {
 })
 
 test('prix par formule et cycle', () => {
-  assert.equal(priceForPlan('coparentalite', 'mensuel'), 19.99)
-  assert.equal(priceForPlan('coparentalite', 'annuel'), 189)
-  assert.equal(priceForPlan('premium', 'annuel'), 99)
-  assert.equal(priceFor('mensuel'), 11.99)
+  assert.equal(priceForPlan('coparentalite', 'mensuel'), 24.99)
+  assert.equal(priceForPlan('coparentalite', 'annuel'), 249)
+  assert.equal(priceForPlan('premium', 'annuel'), 149)
+  assert.equal(priceFor('mensuel'), 14.99)
 })
 
 test('paramètres d’URL', () => {
@@ -173,9 +175,9 @@ test('droits selon le plan effectif', () => {
 })
 
 test('quotas, stockage et priorité support par niveau', () => {
-  assert.deepEqual(ANALYSIS_QUOTA_BY_PLAN, { gratuit: 5, premium: 50, coparentalite: 100 })
+  assert.deepEqual(ANALYSIS_QUOTA_BY_PLAN, { gratuit: 5, premium: 60, coparentalite: 200 })
   assert.equal(storageGbFor('gratuit'), 2)
-  assert.equal(storageGbFor('coparentalite'), PRICING.storage.coparentalite)
+  assert.equal(storageGbFor('coparentalite'), 25)
   assert.equal(supportPriorityFor('gratuit'), 'low')
   assert.equal(supportPriorityFor('premium'), 'normal')
   assert.equal(supportPriorityFor('coparentalite'), 'high')

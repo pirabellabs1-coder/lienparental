@@ -96,7 +96,8 @@
         "notConfigured": "Le stockage en ligne n’est pas configuré.",
         "notFound": "Élément introuvable.",
         "relatedNotFound": "Élément lié introuvable.",
-        "sessionExpired": "Votre session a expiré. Reconnectez-vous."
+        "sessionExpired": "Votre session a expiré. Reconnectez-vous.",
+        "childrenLimit": "Vous avez atteint le maximum de 5 fiches enfants."
       },
       "family": {
         "linkedParent": "un parent lié"

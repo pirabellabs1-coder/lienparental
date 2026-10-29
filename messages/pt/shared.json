@@ -96,7 +96,8 @@
         "notConfigured": "O armazenamento online não está configurado.",
         "notFound": "Item não encontrado.",
         "relatedNotFound": "Item vinculado não encontrado.",
-        "sessionExpired": "Sua sessão expirou. Entre novamente."
+        "sessionExpired": "Sua sessão expirou. Entre novamente.",
+        "childrenLimit": "Você atingiu o máximo de 5 fichas de crianças."
       },
       "family": {
         "linkedParent": "um pai/mãe vinculado(a)"

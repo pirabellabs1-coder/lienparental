@@ -1,7 +1,7 @@
 import { Check, Loader2 } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { btn } from '@/components/profil/kit'
-import { COACH_ANALYSES, PLAN_FEATURE_KEYS, PLAN_FEATURES, PRICING, storageGb, type Cycle, type PlanId } from '@/components/profil/pricing'
+import { MONTHLY_CREDITS, PLAN_FEATURE_KEYS, PLAN_FEATURES, PRICING, storageGb, type Cycle, type PlanId } from '@/components/profil/pricing'
 import type { PlanAction } from '@/lib/billing/ui-state'
 import { cn } from '@/lib/cn'
 import { billingFormat } from './billing-i18n'
@@ -72,7 +72,7 @@ export function PlanCard({
         {PLAN_FEATURES[plan].map((feature, i) => (
           <li key={feature} className="flex items-start gap-2.5 text-[13px] leading-snug text-night-900">
             <Check className="mt-0.5 h-4 w-4 shrink-0 text-leaf-600" strokeWidth={2.75} aria-hidden />
-            {PLAN_FEATURE_KEYS[plan][i] ? t(`features.${plan}.${PLAN_FEATURE_KEYS[plan][i]}`, { gb: storageGb(plan), count: COACH_ANALYSES[plan] }) : feature}
+            {PLAN_FEATURE_KEYS[plan][i] ? t(`features.${plan}.${PLAN_FEATURE_KEYS[plan][i]}`, { gb: storageGb(plan), count: MONTHLY_CREDITS[plan] }) : feature}
           </li>
         ))}
       </ul>

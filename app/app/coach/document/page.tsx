@@ -7,6 +7,8 @@ import { useLocale, useTranslations } from 'next-intl'
 import { CheckCheck, CheckCircle2, FileImage, FileText, Lock, RefreshCw, Trash2, WandSparkles } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { btn, ScreenTitle } from '@/components/coach/ui'
+import { CreditCost, costState, useCredits } from '@/components/coach/CreditCost'
+import { actionForKind } from '@/lib/ai/credit-config'
 import {
   DOC_ACCEPT,
   IMAGE_ACCEPT,
@@ -17,6 +19,7 @@ import {
   saveDraft,
   setPendingFile,
   fileErrorCode,
+  newIdempotencyKey,
   type CoachDraft,
 } from '@/components/coach/session'
 import { mockCoachCapture } from '@/lib/mock-data'
@@ -42,6 +45,9 @@ export default function CoachDocumentPage() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const [empty, setEmpty] = useState(false)
+  // Coût affiché avant l'action ; confirmation explicite à partir de 3 crédits (cahier V6).
+  const { data: credits } = useCredits()
+  const [costConfirmed, setCostConfirmed] = useState(false)
 
   useEffect(() => {
     const saved = loadDraft()
@@ -107,6 +113,14 @@ export default function CoachDocumentPage() {
       ? mockCoachCapture.messages
       : []
   const fileMissing = !isDemo && !isMessage && !file
+  const action = actionForKind(draft.kind)
+  const costBlocked = draft.kind !== 'word' && costState(action, credits, costConfirmed).blocked
+
+  /** Lancement : nouvelle clé d'idempotence (un double clic ou une relance réseau ne débite qu'une fois). */
+  const start = () => {
+    if (!isDemo) saveDraft({ ...draft, idempotencyKey: newIdempotencyKey() })
+    router.push('/app/coach/analyse')
+  }
 
   const replaceFile = (file: File | undefined) => {
     if (!file) return
@@ -120,6 +134,7 @@ export default function CoachDocumentPage() {
     saveDraft(d)
     setDraft(d)
     setSavedToVault(false)
+    setCostConfirmed(false)
   }
 
   return (
@@ -192,8 +207,12 @@ export default function CoachDocumentPage() {
           </div>
         </section>
 
+        {draft.kind !== 'word' && (
+          <CreditCost action={action} credits={credits} confirmed={costConfirmed} onConfirmedChange={setCostConfirmed} className="mt-4" />
+        )}
+
         <div className="mt-6 space-y-3.5">
-          <button type="button" onClick={() => router.push('/app/coach/analyse')} disabled={fileMissing || draft.kind === 'word'} className={btn.primary}>
+          <button type="button" onClick={start} disabled={fileMissing || draft.kind === 'word' || costBlocked} className={btn.primary}>
             <WandSparkles className="h-5 w-5" aria-hidden="true" />
             {t('start')}
           </button>

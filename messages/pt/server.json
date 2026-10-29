@@ -30,7 +30,8 @@
         "merge_incomplete": "As informações de saúde mudaram durante a mesclagem. Tente novamente.",
         "invalid_payload": "Solicitação inválida.",
         "cooldown": "Aguarde um minuto antes de reenviar o convite.",
-        "too_many": "Limite atingido por hoje. Tente novamente amanhã."
+        "too_many": "Limite atingido por hoje. Tente novamente amanhã.",
+        "adult_limit": "Um espaço familiar comporta no máximo dois adultos: o titular e um pai ou mãe convidado. Já existe um convite pendente ou um pai/mãe já vinculado a esta criança."
       },
       "validation": {
         "invalidEmail": "Endereço de e-mail inválido.",

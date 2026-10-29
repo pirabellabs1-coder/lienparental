@@ -1,6 +1,7 @@
-// Crédits d'analyses du Coach IA : logique PURE (testée dans tests/ai-credits.test.ts).
-//  - ordre de consommation : quota mensuel de la formule, puis crédits (miroir de reserve_ai_analysis, 0510) ;
-//  - solde : lots non expirés, expiration la plus proche ;
+// Crédits IA du Coach : logique PURE (tests/ai-credits.test.ts, tests/credits-v6.test.ts).
+//  - ordre de consommation : crédits mensuels (solde A), puis crédits achetés (solde B) — miroir
+//    simplifié de credits_reserve (0520) ; le portefeuille complet est dans ./wallet-core ;
+//  - solde B : lots non expirés, expiration la plus proche ;
 //  - achat : validation d'une session Stripe Checkout (aucune donnée de confiance côté client) et
 //    crédit idempotent par identifiant de session (magasin injecté) ;
 //  - démonstration : état simulé dans un cookie (aucun paiement, aucune base).
@@ -18,11 +19,14 @@ import {
 
 export type ReservationSource = 'quota' | 'credit'
 
-/** Source d'une nouvelle analyse : quota s'il en reste, sinon un crédit, sinon refus (null). */
-export function reservationSource(used: number, quota: number, credits: number): ReservationSource | null {
-  if (used < quota) return 'quota'
-  if (credits > 0) return 'credit'
-  return null
+/**
+ * Source principale d'une action de coût `cost` : solde mensuel (A) s'il couvre au moins une partie,
+ * sinon crédits achetés (B), sinon refus (null). Le coût total doit être couvert par A + B.
+ */
+export function reservationSource(used: number, quota: number, credits: number, cost = 1): ReservationSource | null {
+  const monthly = Math.max(0, quota - used)
+  if (monthly + Math.max(0, credits) < cost) return null
+  return monthly > 0 ? 'quota' : 'credit'
 }
 
 // --- Solde -------------------------------------------------------------------------------
@@ -85,11 +89,12 @@ export function isCreditSession(s: Pick<CreditSessionLike, 'mode' | 'metadata'>)
 /** Quantité et prix figés dans la session (metadata écrites par le serveur à la création). */
 function sessionPack(meta: Record<string, string> | null): CreditPack | null {
   const id = meta?.pack ?? ''
-  const analyses = Number(meta?.analyses)
+  // `credits` (V6) ; `analyses` : sessions créées avant la V6 (même valeur, ancien nom).
+  const credits = Number(meta?.credits ?? meta?.analyses)
   const priceCents = Number(meta?.price_cents)
-  if (!/^[a-z0-9_]{1,32}$/.test(id) || !Number.isInteger(analyses) || analyses < 1 || analyses > 1000) return null
+  if (!/^[a-z0-9_]{1,32}$/.test(id) || !Number.isInteger(credits) || credits < 1 || credits > 1000) return null
   if (!Number.isInteger(priceCents) || priceCents < 0) return null
-  return { id: id as CreditPackId, analyses, priceCents }
+  return { id: id as CreditPackId, credits, priceCents }
 }
 
 /**
@@ -132,10 +137,14 @@ export type CreditStore = { grant(g: CreditGrant, validityMonths: number): Promi
 export async function grantCreditsFromSession(
   store: CreditStore,
   s: CreditSessionLike,
+  validityMonths: number = AI_CREDIT_VALIDITY_MONTHS,
 ): Promise<{ outcome: GrantOutcome | GrantSkip; grant?: CreditGrant }> {
   const parsed = creditGrantFromSession(s)
   if (!parsed.ok) return { outcome: parsed.reason }
-  return { outcome: await store.grant(parsed.grant, AI_CREDIT_VALIDITY_MONTHS), grant: parsed.grant }
+  // Validité : figée dans la session à la création (affichée avant paiement), sinon configuration active.
+  const frozen = Number(s.metadata?.validity_months)
+  const months = Number.isInteger(frozen) && frozen >= 1 && frozen <= 36 ? frozen : validityMonths
+  return { outcome: await store.grant(parsed.grant, months), grant: parsed.grant }
 }
 
 /** Magasin mémoire (tests) : unicité par session, comme l'index uq_ai_credits_session. */
@@ -145,7 +154,7 @@ export function memoryCreditStore(knownUsers: readonly string[]) {
     async grant(g, months) {
       if (!knownUsers.includes(g.userId)) return 'unknown_user'
       if (lots.has(g.sessionId)) return 'duplicate'
-      lots.set(g.sessionId, { ...g, remaining: g.pack.analyses, expiresAt: creditExpiry(new Date(g.purchasedAt), months).toISOString() })
+      lots.set(g.sessionId, { ...g, remaining: g.pack.credits, expiresAt: creditExpiry(new Date(g.purchasedAt), months).toISOString() })
       return 'granted'
     },
   }
@@ -158,12 +167,12 @@ export const DEMO_AI_COOKIE = 'lp_demo_ai'
 const DAY = 86_400_000
 const MAX_LOTS = 12
 
-/** État simulé : analyses lancées en démo (en plus du compteur du profil) et lots de crédits. */
+/** État simulé : crédits mensuels consommés en démo (en plus du compteur du profil) et lots achetés. */
 export type DemoAiState = { extraUsed: number; lots: Array<{ remaining: number; expiresDay: number }> }
 
 export const emptyDemoAi = (): DemoAiState => ({ extraUsed: 0, lots: [] })
 
-/** `3|10-21000,5-21100` : analyses en plus | lots restant-jourExpiration. */
+/** `3|10-21000,5-21100` : crédits mensuels consommés en plus | lots restant-jourExpiration. */
 export function serializeDemoAi(s: DemoAiState): string {
   return `${s.extraUsed}|${s.lots.map((l) => `${l.remaining}-${l.expiresDay}`).join(',')}`
 }
@@ -183,27 +192,39 @@ export function demoAiLots(s: DemoAiState): CreditLot[] {
   return s.lots.map((l) => ({ remaining: l.remaining, expiresAt: new Date(l.expiresDay * DAY).toISOString() }))
 }
 
-/** Achat simulé : nouveau lot valable AI_CREDIT_VALIDITY_MONTHS mois (lots expirés ou vides retirés). */
-export function demoAddCredits(s: DemoAiState, pack: CreditPack, now = Date.now()): DemoAiState {
-  const expiresDay = Math.floor(creditExpiry(new Date(now)).getTime() / DAY)
+/** Achat simulé : nouveau lot valable `months` mois (lots expirés ou vides retirés). */
+export function demoAddCredits(s: DemoAiState, pack: CreditPack, now = Date.now(), months = AI_CREDIT_VALIDITY_MONTHS): DemoAiState {
+  const expiresDay = Math.floor(creditExpiry(new Date(now), months).getTime() / DAY)
   const lots = s.lots.filter((l) => l.remaining > 0 && l.expiresDay * DAY > now)
-  return { ...s, lots: [...lots, { remaining: pack.analyses, expiresDay }].slice(-MAX_LOTS) }
+  return { ...s, lots: [...lots, { remaining: pack.credits, expiresDay }].slice(-MAX_LOTS) }
 }
 
 /**
- * Réservation simulée (même ordre que la base) : `baseUsed` = compteur du profil de démonstration.
- * Retourne la source et le nouvel état, ou null si ni quota ni crédit.
+ * Réservation simulée (même ordre que la base : A puis B, lot qui expire le plus tôt d'abord) :
+ * `baseUsed` = compteur du profil de démonstration, `cost` = coût de l'action en crédits.
+ * Retourne la source principale et le nouvel état, ou null si A + B ne couvrent pas le coût.
  */
-export function demoReserve(s: DemoAiState, baseUsed: number, quota: number, now = Date.now()): { source: ReservationSource; next: DemoAiState } | null {
+export function demoReserve(s: DemoAiState, baseUsed: number, quota: number, now = Date.now(), cost = 1): { source: ReservationSource; next: DemoAiState } | null {
   const used = baseUsed + s.extraUsed
   const lots = s.lots.map((l, i) => ({ ...l, i, expiresAt: new Date(l.expiresDay * DAY).toISOString() }))
-  const source = reservationSource(used, quota, creditBalance(lots, now).balance)
-  if (source === 'quota') return { source, next: { ...s, extraUsed: Math.min(9999, s.extraUsed + 1) } }
-  if (source === 'credit') {
-    const lot = usableLots(lots, now)[0]
-    return { source, next: { ...s, lots: s.lots.map((l, i) => (i === lot.i ? { ...l, remaining: l.remaining - 1 } : l)) } }
+  const source = reservationSource(used, quota, creditBalance(lots, now).balance, cost)
+  if (!source) return null
+  const fromMonthly = Math.min(Math.max(0, quota - used), cost)
+  let rest = cost - fromMonthly
+  const take = new Map<number, number>()
+  for (const lot of usableLots(lots, now)) {
+    if (rest === 0) break
+    const n = Math.min(lot.remaining, rest)
+    take.set(lot.i, n)
+    rest -= n
   }
-  return null
+  return {
+    source,
+    next: {
+      extraUsed: Math.min(9999, s.extraUsed + fromMonthly),
+      lots: s.lots.map((l, i) => (take.has(i) ? { ...l, remaining: l.remaining - (take.get(i) as number) } : l)),
+    },
+  }
 }
 
 export type { CreditPackId }

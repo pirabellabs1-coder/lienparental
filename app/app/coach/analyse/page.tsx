@@ -8,7 +8,7 @@ import { Check, Coins, RefreshCw, Sparkles } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ProgressRing } from '@/components/coach/ProgressRing'
 import { btn, ScreenTitle } from '@/components/coach/ui'
-import { getPendingFile, loadDraft, saveAnalysis, type CoachAnalysisResult, type CoachDraft } from '@/components/coach/session'
+import { getPendingFile, loadDraft, newIdempotencyKey, saveAnalysis, saveDraft, type CoachAnalysisResult, type CoachDraft } from '@/components/coach/session'
 import { errorMessage, readSse } from '@/components/coach/sse-client'
 import { cn } from '@/lib/cn'
 import { mockCoachCapture } from '@/lib/mock-data'
@@ -19,8 +19,11 @@ const STAGES = ['sending', 'received', 'thinking', 'reading', 'writing', 'done']
 // Critères affichés pendant l'analyse (libellés : coach.analysis.checks.<clé>).
 const CHECKS = ['tone', 'hurtful', 'clarity', 'respect', 'impact'] as const
 
-/** `quota` : quota du cycle et crédits épuisés (429 quota_exceeded) ; `upgrade` : formule Gratuite. */
-type Failure = { message: string; quota?: boolean; upgrade?: boolean }
+/**
+ * `quota` : solde de crédits insuffisant (402 insufficient_credits) ; `upgrade` : formule Gratuite ;
+ * `duplicate` : même clé d'idempotence déjà traitée (409, aucun second débit).
+ */
+type Failure = { message: string; quota?: boolean; upgrade?: boolean; duplicate?: boolean }
 
 // M09 — étape 3 « Analyse en cours » (maquette 12.12.07 (2)).
 // La progression suit le flux réel de /api/coach/analyze : étapes du serveur, puis
@@ -71,21 +74,31 @@ export default function CoachAnalysePage() {
     setStage('sending')
     setChecksDone(0)
 
+    // Clé d'idempotence posée au lancement (écran précédent) : un double envoi ne débite qu'une fois.
+    let key = draft?.idempotencyKey
+    if (!key) {
+      key = newIdempotencyKey()
+      if (draft) saveDraft({ ...draft, idempotencyKey: key })
+    }
+
     try {
-      const res = await fetch('/api/coach/analyze', { method: 'POST', body: form })
+      const res = await fetch('/api/coach/analyze', { method: 'POST', body: form, headers: { 'Idempotency-Key': key } })
       if (!res.ok || !(res.headers.get('content-type') ?? '').includes('text/event-stream')) {
         let quota = false
         let upgrade = false
+        let duplicate = false
         let message: string
-        if (res.status === 429) {
-          const body = (await res.json().catch(() => null)) as { error?: { code?: string; message?: string }; upgrade?: boolean } | null
-          quota = body?.error?.code === 'quota_exceeded'
+        if (res.status === 402 || res.status === 409 || res.status === 429 || res.status === 503) {
+          const body = (await res.json().catch(() => null)) as { error?: { code?: string; message?: string }; upgrade?: boolean; status?: string } | null
+          quota = body?.error?.code === 'insufficient_credits'
+          // Clé déjà utilisée par une tentative restituée (échec) : rien n'a été débité, on peut relancer.
+          duplicate = body?.error?.code === 'duplicate_request' && body?.status !== 'released'
           upgrade = quota && body?.upgrade === true
-          message = body?.error?.message ?? t('tooMany')
+          message = body?.error?.message ?? (res.status === 429 ? t('tooMany') : tc('errors.generic'))
         } else {
           message = await errorMessage(res, tc('errors.generic'), { sessionExpired: tc('errors.sessionExpired'), tooLarge: tc('errors.tooLarge') })
         }
-        if (mounted.current) setFailure({ message, quota, upgrade })
+        if (mounted.current) setFailure({ message, quota, upgrade, duplicate })
         return
       }
       let finished = false
@@ -111,12 +124,17 @@ export default function CoachAnalysePage() {
           finished = true
           window.clearInterval(creep.current)
           saveAnalysis({ id: d.id, title, kind, demo: d.demo === true, result: d.result as CoachAnalysisResult })
+          // Action terminée : la clé ne doit plus servir (une nouvelle analyse = une nouvelle clé).
+          if (draft) saveDraft({ ...draft, idempotencyKey: undefined })
           setChecksDone(5)
           setStage('done')
           setProgress(100)
         } else if (event === 'error' && typeof d.message === 'string') {
           finished = true
           window.clearInterval(creep.current)
+          // Échec : crédits restitués côté serveur ; la prochaine tentative aura une nouvelle clé.
+          const cur = loadDraft()
+          if (cur) saveDraft({ ...cur, idempotencyKey: undefined })
           setFailure({ message: d.message })
         }
       })
@@ -177,8 +195,21 @@ export default function CoachAnalysePage() {
                   </Link>
                 )}
               </>
+            ) : failure.duplicate ? (
+              <Link href="/app/coach/historique" className={btn.primary}>
+                {t('seeHistory')}
+              </Link>
             ) : (
-              <button type="button" onClick={() => setAttempt((a) => a + 1)} className={btn.primary}>
+              <button
+                type="button"
+                onClick={() => {
+                  // Nouvelle tentative explicite : nouvelle clé (la précédente a été restituée).
+                  const d = loadDraft()
+                  if (d) saveDraft({ ...d, idempotencyKey: newIdempotencyKey() })
+                  setAttempt((a) => a + 1)
+                }}
+                className={btn.primary}
+              >
                 <RefreshCw className="h-5 w-5" aria-hidden="true" />
                 {t('retry')}
               </button>

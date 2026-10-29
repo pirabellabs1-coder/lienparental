@@ -30,7 +30,8 @@
         "merge_incomplete": "Les informations de santé ont changé pendant la fusion. Réessayez.",
         "invalid_payload": "Requête invalide.",
         "cooldown": "Patientez une minute avant de renvoyer l’invitation.",
-        "too_many": "Limite atteinte pour aujourd’hui. Réessayez demain."
+        "too_many": "Limite atteinte pour aujourd’hui. Réessayez demain.",
+        "adult_limit": "Un espace familial accueille deux adultes au maximum : le titulaire et un parent invité. Une invitation est déjà en cours ou un parent est déjà lié à cet enfant."
       },
       "validation": {
         "invalidEmail": "Adresse e-mail invalide.",

@@ -14,7 +14,7 @@ place (et l'application redéployée), les boutons « S'abonner » ouvrent Strip
 | Entrée | `/app/abonnement` (profil, menu latéral, paywalls, tarifs de la page d'accueil) | Statut en tête, formules avec sélecteur Mensuel / Annuel, un bouton par formule |
 | S'abonner | `POST /api/stripe/checkout` | Prix résolu côté serveur, redirection vers Stripe Checkout |
 | Retour | `/app/abonnement/confirmation?session_id=cs_…` | Session vérifiée (appartenance au compte) et abonnement synchronisé tout de suite ; l'écran interroge `GET /api/stripe/status` toutes les 3 s pendant 60 s si besoin |
-| Changer de formule | `POST /api/stripe/change-plan` | Changement de niveau (Premium ou Coparentalité+) : immédiat sur le cycle en cours, différence au prorata ou crédit (rien de prélevé pendant un essai) ; changement de cycle (mensuel ou annuel) : toujours à la prochaine échéance. Les deux à la fois : niveau tout de suite, cycle à l'échéance |
+| Changer de formule | `POST /api/stripe/change-plan` | Cahier V6 : **montée** de niveau immédiate sur le cycle en cours, différence au prorata facturée et payée tout de suite (`always_invoice`, `error_if_incomplete` : rien n'est appliqué si le paiement échoue ; rien de prélevé pendant un essai) ; **descente** de niveau et changement de cycle : à la prochaine échéance (subscription schedule, `proration_behavior: 'none'`, aucun remboursement du cycle en cours). Montée + cycle : niveau tout de suite, cycle à l'échéance |
 | Résilier / reprendre | `POST /api/stripe/cancel` | Résiliation en fin de période, réversible jusqu'à cette date |
 | Moyen de paiement | `POST /api/stripe/portal` | Portail client Stripe (carte, factures, résiliation en fin de période ; les changements de formule restent dans l'application) ; au retour (`?info=portal`) l'abonnement est resynchronisé |
 | Factures | `GET /api/stripe/invoices` | Liste avec liens Stripe (page et PDF) |
@@ -68,9 +68,10 @@ prévenus (BroadcastChannel) : les fonctionnalités payantes se débloquent imm�
 
    Il crée ou met à jour, sans doublon (rejouable) :
    - les produits **Lien Parental Premium** et **Lien Parental Coparentalité+** (metadata `lp_product`) ;
-   - les prix EUR, retrouvés par `lookup_key` : `lp_premium_monthly` 11,99 €, `lp_premium_yearly` 99 €,
-     `lp_coparentalite_monthly` 19,99 €, `lp_coparentalite_yearly` 189 € (montants tirés de
-     `components/profil/pricing.ts`). Comportement fiscal `inclusive` (TTC) si `STRIPE_TAX=on`, sinon `unspecified` ;
+   - les prix EUR (tarifs V6), retrouvés par `lookup_key` : `lp_premium_monthly` 14,99 €, `lp_premium_yearly` 149 €,
+     `lp_coparentalite_monthly` 24,99 €, `lp_coparentalite_yearly` 249 € (montants tirés de
+     `components/profil/pricing.ts`). Un prix existant à l'ancien montant est archivé et remplacé (un Price Stripe est
+     immuable) ; les abonnés existants restent sur l'ancien prix jusqu'à leur migration depuis le Dashboard. Comportement fiscal `inclusive` (TTC) si `STRIPE_TAX=on`, sinon `unspecified` ;
    - l'endpoint webhook `https://lienparental.fr/api/stripe/webhook` abonné exactement aux six événements, avec la
      version d'API du code (`2025-02-24.acacia`, `STRIPE_API_VERSION` dans `lib/billing/events.ts`) ; un endpoint
      existant d'une autre version est recréé (nouveau secret affiché) ;
@@ -143,18 +144,49 @@ Sans clés Supabase (comptes de démo), « S'abonner » simule l'abonnement (coo
 | `BILLING_GRACE_DAYS` | non | jours d'avantages conservés après un échec de paiement (14) |
 | `CRON_SECRET` | oui | secret de la tâche quotidienne `/api/stripe/cron` (déjà utilisé par les autres tâches planifiées) |
 
-## Crédits d'analyses du Coach IA (paiement unique, 28/10/2026)
+## Crédits IA (cahier V6, 29/10/2026)
 
-- **Packs** : `lib/billing/credit-packs.ts` (source unique : 10 = 2,99 €, 30 = 6,99 €, 100 = 19,99 € TTC, validité 12 mois).
-  Aucun produit ni prix à créer dans Stripe : la route `POST /api/stripe/credits` construit `price_data` côté serveur
-  (Checkout `mode: 'payment'`, carte uniquement, `metadata.kind = 'ai_credits'` + pack, prix et quantité figés).
-- **Crédit** : webhook `checkout.session.completed` (déjà abonné) → session relue chez Stripe → `grant_ai_credits`
-  (migration `0510`), idempotent par identifiant de session ; le retour `/app/coach/credits?achat=succes` crédite aussi
-  (même fonction) sans attendre le webhook. Aucun effet sur l'abonnement.
-- **Base** : appliquer `supabase/migrations/0510_ai_credits.sql` **avant** de déployer le code.
-- **Remboursement total ou litige** : `charge.refunded` (remboursement complet) et `charge.dispute.created` remettent
-  automatiquement `remaining = 0` sur le lot (`ai_credits.stripe_payment_intent`). **Ajouter ces deux événements à
-  l'endpoint webhook** (relancer `scripts/stripe-setup.ts` ou les cocher dans le Dashboard). Remboursement partiel :
-  journalisé, ajuster `remaining` à la main ; ne jamais supprimer un lot déjà consommé (refusé par la clé étrangère). Journal `[ai-credits] PAIEMENT NON CRÉDITÉ` = paiement encaissé sans crédit (créditer ou rembourser).
+### Règles
+
+| Sujet | Règle |
+|---|---|
+| Crédits mensuels (solde A) | Gratuit 5, Premium 60, Coparentalité+ 200, selon la formule **propre** du compte. Période : `subscriptions.current_period_start` (formule payante ; annuel = une allocation à chaque mois du cycle, jamais douze d'un coup), sinon date d'inscription. Allocation paresseuse et idempotente (clé = période + quota). Aucun report : reliquat journalisé « expiration » à la période suivante. |
+| Montée en gamme | Même période de facturation : solde A = nouveau quota − consommé sur la période (seule la différence positive est allouée, une fois). |
+| Descente / résiliation | À l'échéance (Stripe). Ensuite, quota de la nouvelle formule ; plus aucune allocation payante après la fin de l'abonnement. |
+| Crédits achetés (solde B) | Lots `ai_credits`, valables 24 mois, conservés au changement de formule et à la résiliation. Une recharge n'ouvre aucun droit Premium et ne change pas le stockage. |
+| Coût par action | Question au Coach 1, analyse de situation (message, capture) 2, analyse de document (PDF, texte) 3. Courrier personnalisé (3) et dossier complet (5) : au catalogue, **inactifs** (fonctions inexistantes). |
+| Débit | A d'abord, puis B (lot qui expire le plus tôt d'abord). Réservation atomique AVANT l'appel IA (`credits_reserve`, verrou `credits:<uid>` + `FOR UPDATE`), confirmation au succès (`credits_confirm`), restitution en cas d'échec / refus / interruption (`credits_release`) ou de délai dépassé (`credits_sweep`, tâche quotidienne, et à la prochaine action du compte). Jamais de solde négatif. |
+| Idempotence | En-tête `Idempotency-Key` (16-80 caractères `[A-Za-z0-9_-]`) fourni par le client pour chaque action : la même clé ne débite jamais deux fois (409 `duplicate_request`). |
+| Journal | `credit_ledger` immuable (UPDATE / DELETE / TRUNCATE refusés par trigger, sauf cascade de suppression du compte) : allocation, réservation, consommation, restitution, achat, révocation, expiration, ajustement admin (motif + `admin_id`). `ai_actions` : type, crédits, statut, version du tarif, modèle, tokens, coût fournisseur estimé en €. |
+| Garde-fous | Taille et pages des PDF contrôlées **avant** réservation (413 `pdf_too_many_pages`), plafond de tokens de sortie et délai par action, limite de fréquence du chat (par minute et par jour), plafonds de dépense IA par jour (compte et global, 503 `ai_spend_cap` + `ai_spend_alerts`, sans contenu). |
+| Non-mutualisation | Un parent invité (plan effectif Premium via Coparentalité+) garde SES crédits (formule propre) : il ne consomme jamais ceux du titulaire. |
+
+### Configuration (sans déploiement)
+
+`public.credit_config` (versionnée, ajout seul) : crédits mensuels, coûts et activation des actions, packs (prix,
+quantité, actif), validité, plafonds, tarifs fournisseur (claude-opus-5-5 : 4 $ / 20 $ par million de tokens) et
+conversion USD → EUR. Écran **Admin › Crédits IA** (`/admin/credits`) : publication d'une nouvelle version avec motif,
+historique, tableau de bord (abonnés, MRR / ARR, recharges, crédits attribués / consommés / achetés / expirés, coût IA
+moyen et P95 par action et par modèle, marge estimée, paiements échoués, alertes) et ajustement manuel d'un solde.
+Les **prix d'abonnement ne sont pas configurables** ainsi : un Price Stripe est immuable ; les changer = modifier
+`components/profil/pricing.ts`, relancer `scripts/stripe-setup.ts`, mettre à jour les variables `STRIPE_PRICE_*`,
+déployer. Les pages publiques et la FAQ affichent les valeurs par défaut du code (les CGU et « Mes crédits » lisent la
+configuration active).
+
+### Recharges (paiement unique)
+
+- **Packs** (version 1) : 10 = 2,49 €, 30 = 5,99 €, 75 = 11,99 €, 150 = 19,99 € TTC. Aucun produit ni prix à créer dans
+  Stripe : `POST /api/stripe/credits` construit `price_data` côté serveur depuis la configuration active (prix, quantité
+  et validité figés dans la session), Checkout `mode: 'payment'`, carte uniquement.
+- **Crédit** : UNIQUEMENT après confirmation serveur — webhook `checkout.session.completed` (session relue chez
+  Stripe) ou retour `/app/coach/credits?achat=succes` (session relue chez Stripe, même fonction `grant_ai_credits`,
+  idempotente par session) ; jamais sur la seule redirection. Reçu Stripe et nouveau solde affichés.
+- **API** : `GET /api/coach/credits` (soldes et coûts affichés avant une action), `POST /api/coach/analyze`,
+  `POST /api/coach/chat` (402 `insufficient_credits` sans débit, saisie conservée à l'écran).
+- **Base** : appliquer `supabase/migrations/0520_credits_v6.sql` **avant** de déployer le code.
+- **Remboursement total ou litige** : `charge.refunded` (remboursement complet) et `charge.dispute.created` révoquent le
+  solde restant du lot (`credits_revoke_payment`, journalisé) ; une réservation en cours sur ce lot n'y est jamais
+  restituée. Remboursement partiel : journalisé, ajustement manuel motivé dans l'admin. Journal
+  `[ai-credits] PAIEMENT NON CRÉDITÉ` = paiement encaissé sans crédit (créditer par ajustement ou rembourser).
 - **Rétractation** : case obligatoire avant paiement (horodatage `withdrawal_waiver_at`) ; tant qu'aucun crédit du pack
   n'est utilisé, rétractation possible 14 jours via l'assistance (CGU § 6).

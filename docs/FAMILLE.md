@@ -117,7 +117,7 @@ Bloc commenté en fin de 0340 ; pour `list_linked_parents`, ré-appliquer la dé
 
 ## 12. Accès partagé Coparentalité+ (plan effectif, 0380)
 
-Formule **Coparentalité+** (19,99 €/mois) : un adulte lié à un abonné Coparentalité+ profite des avantages **Premium** sans abonnement de son côté.
+Formule **Coparentalité+** (24,99 €/mois) : un adulte lié à un abonné Coparentalité+ profite des avantages **Premium** sans abonnement de son côté, **hors crédits IA** (cahier V6 : crédits non mutualisés, chaque compte garde les crédits de sa formule propre). Espace familial : 2 adultes au maximum par enfant (titulaire + 1 parent invité, contrôlé en base, 0520) et 5 fiches enfants par titulaire ; les proches ne sont pas concernés.
 
 **Règle** (`public.effective_plan_details(user)` / `public.effective_plan(user)`, miroir TS `resolveEffectivePlan`, `lib/billing/plans.ts`) :
 

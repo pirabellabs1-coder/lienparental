@@ -22,7 +22,11 @@
       "ai_misconfigured": "O Coach com IA está indisponível no momento.",
       "ai_bad_request": "Este conteúdo não pode ser analisado. Verifique o arquivo (formato, legibilidade) e tente novamente.",
       "ai_unavailable": "O Coach com IA está temporariamente indisponível. Tente novamente em instantes.",
-      "internal": "Ocorreu um erro. Tente novamente em instantes."
+      "internal": "Ocorreu um erro. Tente novamente em instantes.",
+      "chatInsufficientCredits": "Uma resposta do Coach custa {cost, plural, one {# crédito} other {# créditos}} e seu saldo é de {total}. Compre créditos para continuar: sua pergunta foi mantida.",
+      "chatDuplicate": "Esta pergunta já foi enviada: nenhum crédito adicional foi cobrado.",
+      "chatSpendCap": "O Coach com IA atingiu seu limite de uso por hoje. Tente novamente mais tarde: nenhum crédito foi cobrado.",
+      "chatInactive": "As perguntas ao Coach estão temporariamente indisponíveis."
     },
     "analyze": {
       "textTooLong": "Mensagem longa demais (no máximo {max} caracteres).",
@@ -34,15 +38,18 @@
       "badContentType": "Formato de solicitação inválido.",
       "truncated": "O conteúdo é longo demais para ser analisado de uma só vez. Tente com um trecho mais curto.",
       "invalidOutput": "Não foi possível concluir a análise. Tente novamente em instantes.",
-      "quotaExceededPaid": "Você usou as suas {quota} análises deste ciclo de 30 dias. Compre créditos de análise para continuar agora mesmo.",
-      "quotaExceededFree": "Você usou as suas {quota} análises gratuitas deste ciclo de 30 dias. Compre créditos de análise para continuar, ou assine o Premium ({premium} análises por mês).",
       "disclaimer": "O Coach com IA não dá aconselhamento jurídico.",
       "titles": {
         "message": "Mensagem escrita",
         "capture": "Captura de tela",
         "pdf": "Documento PDF",
         "document": "Documento de texto"
-      }
+      },
+      "insufficientCredits": "Esta análise custa {cost, plural, one {# crédito} other {# créditos}} e seu saldo é de {total}. Compre créditos para continuar: seu conteúdo foi mantido e nada foi cobrado.",
+      "duplicateRequest": "Este pedido já foi considerado: nenhum crédito adicional foi cobrado. Encontre o resultado no seu histórico.",
+      "spendCap": "O Coach com IA atingiu seu limite de uso por hoje. Tente novamente mais tarde: nenhum crédito foi cobrado.",
+      "actionInactive": "Esta função não está disponível no momento.",
+      "pdfTooManyPages": "Este PDF tem {pages} páginas: o máximo é de {max} páginas por análise. Envie um trecho mais curto (nenhum crédito cobrado)."
     },
     "history": {
       "unauthenticated": "Entre na sua conta para acessar as suas análises.",

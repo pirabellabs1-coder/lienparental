@@ -307,13 +307,15 @@ Aucune carte n'est saisie dans l'application : le paiement se fait sur Stripe Ch
 | Champ | Valeur |
 | --- | --- |
 | Nom | Lien Parental Premium |
-| Prix 1 | **11,99 €** · Récurrent · **Mensuel** · Taxe : « TTC » (prix taxes incluses) |
-| Prix 2 | **99,00 €** · Récurrent · **Annuel** · Taxe : « TTC » |
+| Prix 1 | **14,99 €** · Récurrent · **Mensuel** · Taxe : « TTC » (prix taxes incluses) |
+| Prix 2 | **149,00 €** · Récurrent · **Annuel** · Taxe : « TTC » |
 
 Copier les identifiants `price_...` :
 
-- `STRIPE_PRICE_MONTHLY=price_...` (11,99 € / mois)
-- `STRIPE_PRICE_YEARLY=price_...` (99 € / an)
+- `STRIPE_PRICE_MONTHLY=price_...` (14,99 € / mois)
+- `STRIPE_PRICE_YEARLY=price_...` (149 € / an)
+
+Recommandé : laisser `scripts/stripe-setup.ts` créer ces prix (lookup_key, métadonnées, webhook) plutôt que la saisie manuelle (docs/STRIPE.md).
 
 Les montants affichés dans l'app viennent de `components/profil/pricing.ts` : **les garder alignés** avec ces prix.
 Les montants réellement facturés et affichés dans « Mon abonnement » viennent toujours de Stripe.
@@ -325,15 +327,15 @@ Troisième formule, au-dessus de Premium. **Second produit** dans le catalogue :
 | Champ | Valeur |
 | --- | --- |
 | Nom | Lien Parental Coparentalité+ |
-| Prix 1 | **19,99 €** · Récurrent · **Mensuel** · TTC · métadonnée `plan` = `coparentalite` |
-| Prix 2 | **189,00 €** · Récurrent · **Annuel** · TTC · métadonnée `plan` = `coparentalite` |
+| Prix 1 | **24,99 €** · Récurrent · **Mensuel** · TTC · métadonnée `plan` = `coparentalite` |
+| Prix 2 | **249,00 €** · Récurrent · **Annuel** · TTC · métadonnée `plan` = `coparentalite` |
 
-- `STRIPE_PRICE_COPARENTALITE_MONTHLY=price_...` (19,99 € / mois)
-- `STRIPE_PRICE_COPARENTALITE_YEARLY=price_...` (189 € / an)
+- `STRIPE_PRICE_COPARENTALITE_MONTHLY=price_...` (24,99 € / mois)
+- `STRIPE_PRICE_COPARENTALITE_YEARLY=price_...` (249 € / an)
 
-Le prix annuel de **189 €** est une **proposition** (≈ 15,75 €/mois, 2 mois offerts, -21 %) : il est modifiable.
-Pour le changer : créer un nouveau Price chez Stripe, mettre à jour la variable, et la constante
-`COPARENTALITE` de `components/profil/pricing.ts` (tous les libellés « mois offerts », « -X % », barré, se recalculent).
+Tarifs validés (cahier V6) : 249 € / an ≈ 20,75 €/mois, économie d’**environ 17 %** par rapport à douze mensualités (jamais « 2 mois offerts »).
+Pour changer un prix : un Price Stripe est immuable ; créer un nouveau Price (`scripts/stripe-setup.ts`), mettre à jour la variable et
+la constante de `components/profil/pricing.ts` (libellés « environ -X % » et barré recalculés), puis déployer.
 La métadonnée `plan=coparentalite` sur les Prices sert de filet de sécurité : si un Price est remplacé sans mise à jour
 des variables, le webhook reconnaît quand même la formule (sinon il la classerait en Premium).
 
@@ -443,10 +445,10 @@ Pour simuler le temps (renouvellements, fin de période) : **Test clocks** (Fact
 | --- | --- | --- |
 | `STRIPE_SECRET_KEY` | oui | `sk_test_...` / `rk_live_...` |
 | `STRIPE_WEBHOOK_SECRET` | oui | `whsec_...` |
-| `STRIPE_PRICE_MONTHLY` | oui | `price_...` (11,99 €/mois) |
-| `STRIPE_PRICE_YEARLY` | oui | `price_...` (99 €/an) |
-| `STRIPE_PRICE_COPARENTALITE_MONTHLY` | oui pour vendre Coparentalité+ | `price_...` (19,99 €/mois) |
-| `STRIPE_PRICE_COPARENTALITE_YEARLY` | oui pour vendre Coparentalité+ | `price_...` (189 €/an, modifiable) |
+| `STRIPE_PRICE_MONTHLY` | oui | `price_...` (14,99 €/mois) |
+| `STRIPE_PRICE_YEARLY` | oui | `price_...` (149 €/an) |
+| `STRIPE_PRICE_COPARENTALITE_MONTHLY` | oui pour vendre Coparentalité+ | `price_...` (24,99 €/mois) |
+| `STRIPE_PRICE_COPARENTALITE_YEARLY` | oui pour vendre Coparentalité+ | `price_...` (249 €/an) |
 | `NEXT_PUBLIC_APP_URL` | oui | `https://lienparental.fr` (exactement l'origine servie : contrôle anti-CSRF) |
 | `SUPABASE_SERVICE_ROLE_KEY` | oui | utilisée par le webhook et les routes `/api/stripe/*` |
 | `STRIPE_TAX` | non | `on` pour activer Stripe Tax |

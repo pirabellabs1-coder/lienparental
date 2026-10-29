@@ -217,16 +217,16 @@
           "help": "Centre d'aide",
           "helpSub": "FAQ, guides et contact support",
           "credits": "Crédits IA",
-          "creditsSub": "{count, plural, =0 {Aucun crédit : acheter des analyses supplémentaires} one {# analyse supplémentaire disponible} other {# analyses supplémentaires disponibles}}",
+          "creditsSub": "{count, plural, =0 {Aucun crédit acheté : recharger} one {# crédit acheté disponible} other {# crédits achetés disponibles}}",
           "creditsExpiry": "{label} · expiration la plus proche le {date}"
         },
         "storageUsed": "Espace utilisé",
         "storageAria": "Espace de stockage utilisé",
         "storageUnavailable": "Consommation indisponible pour le moment. Réessayez plus tard.",
         "coachUsage": "Utilisation actuelle",
-        "coachCount": "{used} / {quota} analyses",
-        "coachCount30": "{used} / {quota} analyses sur 30 jours",
-        "coachAria": "Analyses du Coach IA utilisées",
+        "coachCount": "{used} / {quota} crédits",
+        "coachCount30": "{used} / {quota} crédits ce mois-ci",
+        "coachAria": "Crédits IA mensuels utilisés",
         "coachUnavailable": "Utilisation indisponible pour le moment. Réessayez plus tard.",
         "logout": {
           "button": "Se déconnecter",
@@ -615,7 +615,7 @@
         },
         "n3": {
           "title": "Coach IA renouvelé",
-          "body": "Vous disposez de 10 nouvelles analyses ce mois-ci.",
+          "body": "Vos crédits IA du mois ont été renouvelés.",
           "time": "Hier"
         }
       },
