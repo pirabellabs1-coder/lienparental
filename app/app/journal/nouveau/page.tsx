@@ -19,7 +19,7 @@ import { useFinanceLabels } from '@/components/journal/financeLabels'
 import { JOURNAL_TYPES, JOURNAL_TYPE_ORDER } from '@/components/journal/journalTypes'
 import { useChildOptions } from '@/lib/data/children'
 import { createJournal, updateJournal, useJournalEntry } from '@/lib/data/journal'
-import { clearDraft, useImageDraft } from '@/components/journal/imageDraft'
+import { clearDraft, dropFormDraft, peekFormDraft, saveFormDraft, useImageDraft } from '@/components/journal/imageDraft'
 import {
   DEPENSE_CATEGORIES, DEPENSE_CATEGORIE_LABELS, DEPENSE_MODES_AUTRES, DEPENSE_MODES_PRINCIPAUX,
   DEPENSE_SENS, DEVISES, MODES_AVEC_SERVICE,
@@ -38,6 +38,18 @@ import { addDaysToKey, timeInTz, todayKey } from '@/lib/tz'
 // `type`, `titre`, `montant`, `categorie`, `enfant`, `date`, `source=guide:<slug>` — validés et bornés,
 // valeurs invalides ignorées silencieusement. Champs avancés (0350) dans « Plus de détails ».
 const DRAFT_KEY = 'nouveau'
+
+/** Champs gardés pendant l'aller-retour vers « Ajouter des images ». */
+type FormDraft = {
+  editId?: string
+  type: JournalType
+  date: string
+  heure: string
+  titre: string
+  description: string
+  lieu: string
+  childIds: string[]
+}
 
 type Search = Record<string, string | string[] | undefined>
 
@@ -62,6 +74,11 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
   const editId = typeof sp.id === 'string' ? sp.id : undefined
   const router = useRouter()
   const images = useImageDraft(DRAFT_KEY)
+  // Brouillon laissé en partant ajouter des images (lu une fois, puis retiré au montage).
+  const [formDraft] = useState(() => {
+    const d = peekFormDraft<FormDraft>(DRAFT_KEY)
+    return d && d.editId === editId ? d : undefined
+  })
   const { options: rawChildOptions } = useChildOptions()
   // Libellé « Prénom (n ans) » traduit au rendu (lib/data/children est partagé).
   const childOptions = rawChildOptions.map((c) => ({ ...c, label: t('childOption', { name: c.prenom, count: c.age }) }))
@@ -118,6 +135,16 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
         ? t('editLoading')
         : t('editNotFound')
 
+  function applyDraft(d: FormDraft) {
+    setType(d.type)
+    setDate(d.date)
+    setHeure(d.heure)
+    setTitre(d.titre)
+    setDescription(d.description)
+    setLieu(d.lieu)
+    setChildIds(d.childIds)
+  }
+
   const patchDetails = (p: Partial<DepenseDetailsValues>) => setDetails((d) => {
     const next = { ...d, ...p }
     // Récurrence choisie sans échéance : on propose la suivante à partir de la date.
@@ -151,6 +178,8 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
       if (p.date) setDate(p.date)
       urlChild.current = p.enfant
     }
+    if (formDraft && !editId) applyDraft(formDraft)
+    dropFormDraft(DRAFT_KEY)
     setDate((d) => d || day)
     setHeure((h) => h || nowTime())
     // eslint-disable-next-line react-hooks/exhaustive-deps -- lecture unique des paramètres d'URL
@@ -168,6 +197,10 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
   useEffect(() => {
     if (!existing || prefilled.current) return
     prefilled.current = true
+    if (formDraft) {
+      applyDraft(formDraft)
+      return
+    }
     setType(existing.type)
     setDate(existing.date)
     setHeure(existing.heure ?? '')
@@ -538,6 +571,7 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
             <FieldLabel as="p">{t('addImages')}</FieldLabel>
             <Link
               href="/app/journal/nouveau/images"
+              onClick={() => saveFormDraft<FormDraft>(DRAFT_KEY, { editId, type, date, heure, titre, description, lieu, childIds })}
               className="flex min-h-[64px] items-center gap-4 rounded-xl border border-night-100 bg-white px-4 py-3.5 transition-colors hover:border-night-200"
             >
               <ImageIcon aria-hidden="true" className="h-6 w-6 shrink-0 text-night-900" strokeWidth={1.7} />

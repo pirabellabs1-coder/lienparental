@@ -213,7 +213,8 @@
       "another": "Ajouter un autre document",
       "savedToVault": "Ajouté au coffre-fort",
       "saveToVault": "Ajouter au coffre-fort",
-      "savedStatus": "Copie enregistrée dans votre coffre-fort."
+      "savedStatus": "Copie enregistrée dans votre coffre-fort.",
+      "subtitleMessage": "Votre message est prêt à être analysé."
     },
     "response": {
       "types": {

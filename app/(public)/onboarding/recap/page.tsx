@@ -39,7 +39,7 @@ export default function RecapPage() {
 
   return (
     <OnboardingScreen
-      step={10}
+      step={9}
       align="center"
       media={<ChecklistIllustration className="mx-auto mb-4 h-24 w-24" />}
       title={t('title')}

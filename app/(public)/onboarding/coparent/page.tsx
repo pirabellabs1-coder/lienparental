@@ -41,7 +41,7 @@ export default function OnboardingCoparentPage() {
 
   return (
     <OnboardingScreen
-      step={11}
+      step={10}
       back="/onboarding/recap"
       media={<Image src="/images/onboarding/bienvenue.webp" alt="" width={720} height={376} className="mb-4 h-24 w-auto" />}
       title={issued ? t('readyTitle') : t('title')}

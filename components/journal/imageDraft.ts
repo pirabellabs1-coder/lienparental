@@ -60,3 +60,19 @@ export function toDraftImage(file: File): DraftImage {
     previewUrl: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
   }
 }
+
+// Brouillon des champs du formulaire, le temps de l'aller-retour vers « Ajouter des images »
+// (l'écran du formulaire est démonté pendant ce temps). Même vie que les images : mémoire seule.
+const forms = new Map<string, unknown>()
+
+export function saveFormDraft<T>(key: string, value: T) {
+  forms.set(key, value)
+}
+
+export function peekFormDraft<T>(key: string): T | undefined {
+  return forms.get(key) as T | undefined
+}
+
+export function dropFormDraft(key: string) {
+  forms.delete(key)
+}

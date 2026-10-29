@@ -213,7 +213,8 @@
       "another": "Add another document",
       "savedToVault": "Added to the vault",
       "saveToVault": "Add to the vault",
-      "savedStatus": "Copy saved in your vault."
+      "savedStatus": "Copy saved in your vault.",
+      "subtitleMessage": "Your message is ready to be analysed."
     },
     "response": {
       "types": {

@@ -3,10 +3,10 @@ import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 /**
- * Onboarding steps, in order: welcome carousel 1-4, connexion 5 (or inscription 6),
- * verification 7, profil 8, enfant 9, recap 10, coparent 11, pret 12.
+ * Onboarding steps, in order: welcome carousel 1-4, connexion or inscription 5 (two alternative routes),
+ * verification 6, profil 7, enfant 8, recap 9, coparent 10, pret 11.
  */
-export const ONBOARDING_TOTAL_STEPS = 12
+export const ONBOARDING_TOTAL_STEPS = 11
 
 type Props = {
   /** Current step (1-based). */

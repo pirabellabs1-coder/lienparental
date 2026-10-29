@@ -27,7 +27,7 @@ export default function PretPage() {
 
   return (
     <OnboardingScreen
-      step={12}
+      step={11}
       back={false}
       align="center"
       media={

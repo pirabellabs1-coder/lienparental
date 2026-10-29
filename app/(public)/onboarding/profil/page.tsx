@@ -84,7 +84,7 @@ export default function ProfilPage() {
 
   return (
     <OnboardingScreen
-      step={8}
+      step={7}
       title={t('title')}
       subtitle={t('subtitle')}
       onSubmit={onSubmit}

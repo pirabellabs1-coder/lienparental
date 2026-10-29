@@ -103,7 +103,10 @@
         "allergies": "Allergies",
         "bloodGroup": "Groupe sanguin",
         "treatment": "Traitement en cours",
-        "doctor": "Médecin traitant"
+        "doctor": "Médecin traitant",
+        "photoSaving": "Enregistrement de la photo…",
+        "photoSaved": "Photo enregistrée.",
+        "photoTooBig": "Choisissez une image (JPG, PNG ou WebP) de 5 Mo maximum."
       },
       "values": {
         "ageYears": "{count, plural, one {# an} other {# ans}}",

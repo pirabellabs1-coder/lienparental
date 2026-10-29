@@ -103,7 +103,10 @@
         "allergies": "Allergies",
         "bloodGroup": "Blood type",
         "treatment": "Current treatment",
-        "doctor": "Family doctor"
+        "doctor": "Family doctor",
+        "photoSaving": "Saving photo…",
+        "photoSaved": "Photo saved.",
+        "photoTooBig": "Choose an image (JPG, PNG or WebP) of 5 MB maximum."
       },
       "values": {
         "ageYears": "{count, plural, one {# year old} other {# years old}}",

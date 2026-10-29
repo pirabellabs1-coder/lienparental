@@ -83,7 +83,8 @@
         "firstNameRequired": "O primeiro nome é obrigatório.",
         "invalidDate": "Data inválida",
         "medicalSaveFailed": "Não foi possível salvar as informações médicas.",
-        "notFound": "Este perfil não existe ou foi excluído."
+        "notFound": "Este perfil não existe ou foi excluído.",
+        "photoFailed": "Não foi possível salvar a foto. Tente novamente."
       },
       "errors": {
         "duplicate": "Este item já existe.",

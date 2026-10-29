@@ -213,7 +213,8 @@
       "another": "Adicionar outro documento",
       "savedToVault": "Adicionado ao cofre",
       "saveToVault": "Adicionar ao cofre",
-      "savedStatus": "Cópia salva no seu cofre."
+      "savedStatus": "Cópia salva no seu cofre.",
+      "subtitleMessage": "Sua mensagem está pronta para ser analisada."
     },
     "response": {
       "types": {

@@ -142,7 +142,7 @@ export default function CoachDocumentPage() {
       <TopBar title={t('topTitle')} showBack backHref="/app/coach" showBell={false} />
 
       <div className="w-full px-5 pb-8 pt-3">
-        <ScreenTitle title={isMessage ? t('messageAdded') : t('documentAdded')} subtitle={t('subtitle')} />
+        <ScreenTitle title={isMessage ? t('messageAdded') : t('documentAdded')} subtitle={isMessage ? t('subtitleMessage') : t('subtitle')} />
 
         {/* Fichier + aperçu */}
         <section aria-label={t('fileSection')} className="mt-5 overflow-hidden rounded-xl2 border border-night-100 bg-white shadow-soft">

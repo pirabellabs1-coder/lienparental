@@ -83,7 +83,8 @@
         "firstNameRequired": "Le prénom est requis.",
         "invalidDate": "Date invalide",
         "medicalSaveFailed": "Les informations médicales n’ont pas pu être enregistrées.",
-        "notFound": "Ce profil n’existe pas ou a été supprimé."
+        "notFound": "Ce profil n’existe pas ou a été supprimé.",
+        "photoFailed": "La photo n’a pas pu être enregistrée. Réessayez."
       },
       "errors": {
         "duplicate": "Cet élément existe déjà.",

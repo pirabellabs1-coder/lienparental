@@ -905,7 +905,7 @@
         "remove": "Retirer « {name} »",
         "dateAuto": "Date reprise de la photo",
         "dateManual": "Date à vérifier",
-        "submit": "{count, plural, one {Ajouter # photo} other {Ajouter # photos}}",
+        "submit": "{count, plural, =0 {Ajouter des photos} one {Ajouter # photo} other {Ajouter # photos}}",
         "sending": "Envoi {n} sur {total}…",
         "status": {
           "sending": "Envoi…",
