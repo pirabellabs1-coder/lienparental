@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-label="Parents Relais (logo d’exemple)">
+  <g transform="translate(6 8)"><circle cx="18" cy="20" r="7" fill="#2e7d32"/><circle cx="38" cy="20" r="7" fill="#f59e0b"/><path d="M6 44c2-9 7-13 12-13s10 4 12 13M26 44c2-9 7-13 12-13s10 4 12 13" fill="none" stroke="#365c93" stroke-width="3" stroke-linecap="round"/></g>
+  <text x="70" y="32" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="0.5" fill="#2e7d32">Parents</text>
+  <text x="70" y="54" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#365c93">Relais</text>
+</svg>
