@@ -80,7 +80,7 @@ const CSS = `
 const BTN = 'inline-flex min-h-[44px] items-center justify-center whitespace-nowrap rounded-full px-5 text-[14.5px] font-semibold transition-colors duration-200'
 const BTN_PRIMARY = cn(BTN, 'bg-leaf-500 text-white hover:bg-leaf-600')
 const BTN_OUTLINE = cn(BTN, 'bg-white text-night-900 ring-1 ring-inset ring-night-900/20 hover:bg-night-50')
-const TOP = 'relative z-10 inline-flex h-10 items-center gap-1 whitespace-nowrap rounded-full px-3.5 text-[14.5px] font-medium transition-colors duration-200'
+const TOP = 'relative z-10 inline-flex h-10 items-center gap-1 whitespace-nowrap rounded-full px-3 text-[14.5px] font-medium transition-colors duration-200'
 
 /** Délais d'ouverture / fermeture au survol : évite les volets qui clignotent en traversant la barre. */
 const OPEN_DELAY = 70
@@ -352,7 +352,8 @@ export function SiteHeader({ territories, soonLabel }: { territories: HeaderTerr
                   </button>
                 </li>
               ))}
-              <li>
+              {/* Lien direct seulement sur grand écran : en dessous, « Tarifs » reste dans le volet « L'application ». */}
+              <li className="hidden min-[1440px]:block">
                 <Link
                   href={lp('/#tarifs')}
                   data-nav="pricing"
