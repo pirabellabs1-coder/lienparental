@@ -1,79 +1,49 @@
-LIEN PARENTAL - VIDÉO DE PRÉSENTATION (98 s) - SCRIPT DE VOIX OFF
+LIEN PARENTAL - VIDÉO DE PRÉSENTATION (66 s) - SCRIPT DE VOIX OFF
 =================================================================
 
-Vidéo : public/video/presentation.mp4 (1920x1080, 30 i/s, 98,0 s, voix off intégrée : voix « Sophie - Publicité et Réseaux sociaux », ElevenLabs multilingual v2)
-Sous-titres : public/video/presentation.fr.vtt (calés sur ce script)
-
-Direction de voix
-- Voix féminine française (accent de France), douce et animée : souriante, rythmée, jamais criée.
-- Chaque phrase commence au temps indiqué et doit être terminée avant la fin de sa plage :
-  le texte à l'écran change ensuite. Laisser respirer les silences entre les scènes.
-- Prononcer « lienparental.fr » : « lien parental point f r ».
-- Total parlé : environ 70 s sur 90 s.
+Vidéo : public/video/presentation.mp4 (1920x1080, 30 i/s, 66 s). Sous-titres : public/video/presentation.fr.vtt.
+Voix : « Koraly – Promo Video » (ElevenLabs, id rbFGGoDXFHtVghjHuS3E), modèle eleven_multilingual_v2, rythmée et souriante (vitesse 1,1).
+Musique originale (116 BPM), baissée sous la voix ; mixage normalisé à -16 LUFS.
 
 -----------------------------------------------------------------
-[00:00.5 - 00:05.0]  1. Intro, « Séparés. Toujours parents. »
-Quand on est parents séparés, tout ce qui concerne l'enfant s'éparpille.
+[00:00.4 - 00:02.0]
+Séparés… mais toujours parents.
 
-[00:05.5 - 00:12.5]  1. Intro, les éléments s'envolent puis se rangent dans le téléphone
-Des papiers, des messages, des rendez-vous...
-(courte pause, vers 00:09.3)
-Et si tout se rangeait au même endroit ?
+[00:02.7 - 00:05.4]
+Papiers, messages, rendez-vous : tout s'éparpille.
 
-[00:13.5 - 00:19.5]  2. Logo et modules de l'application
-Bienvenue sur Lien Parental : l'organisation, les échanges, les documents et les démarches, au même endroit.
+[00:06.1 - 00:07.6]
+Et si tout tenait au même endroit ?
 
-[00:20.5 - 00:28.5]  3. Journal et dépenses
-Le Journal garde une trace datée du quotidien.
-Les dépenses et les paiements y sont aussi, avec leurs justificatifs.
+[00:08.3 - 00:12.1]
+Voici Lien Parental : toute la vie de votre enfant, dans une seule appli !
 
-[00:29.5 - 00:36.5]  4. Calendrier et Google Agenda
-Le calendrier suit les rendez-vous, l'école et la santé de chaque enfant.
-Il se synchronise avec Google Agenda.
+[00:12.9 - 00:17.9]
+Le Journal garde le quotidien, daté. Les dépenses ? Partagées, avec justificatifs.
 
-[00:37.5 - 00:44.5]  5. Coffre-fort (code ou empreinte)
-Jugements, certificats, factures : le coffre-fort les garde à l'abri, protégés par un code ou par votre empreinte.
+[00:18.7 - 00:24.2]
+École, santé, rendez-vous : tout est dans le calendrier, synchronisé avec Google Agenda.
 
-[00:45.0 - 00:53.0]  5b. Album de l'enfant (photos datées, note, privée -> partagée)
-L'album de l'enfant range ses photos par date. Privées, ou partagées avec l'autre parent.
+[00:25.0 - 00:29.4]
+Vos documents importants ? À l'abri dans le coffre-fort, sous code ou empreinte.
 
-[00:53.5 - 01:01.5]  6. Coach IA (message tendu, réponse apaisée)
-Un message tendu ? Le Coach IA vous aide à répondre avec calme.
-Il ne donne pas de conseil juridique.
+[00:30.1 - 00:34.6]
+L'album range ses photos par date. Privées… ou partagées avec l'autre parent.
 
-[01:02.5 - 01:08.5]  7. Témoignages horodatés
-Vos proches peuvent vous envoyer un témoignage horodaté, sans créer de compte.
+[00:35.4 - 00:40.2]
+Un message tendu ? Le Coach IA vous aide à répondre avec calme. Sans conseil juridique.
 
-[01:09.5 - 01:16.5]  8. Guide parental (checklist qui se coche)
-Le Guide parental explique vos démarches pas à pas, avec la liste des documents à apporter.
+[00:41.0 - 00:44.4]
+Vos proches envoient un témoignage horodaté, sans créer de compte.
 
-[01:17.5 - 01:23.5]  9. Parents liés
-Invitez l'autre parent à vous rejoindre, et partagez ce qui concerne l'enfant.
+[00:45.1 - 00:48.1]
+Le Guide parental vous explique chaque démarche, pas à pas.
 
-[01:24.5 - 01:30.5]  10. Installation sans store (web, iPhone, Android)
-Sur ordinateur, iPhone ou Android, elle s'installe sans passer par un store.
+[00:49.1 - 00:52.3]
+Invitez l'autre parent, et avancez ensemble pour votre enfant.
 
-[01:31.5 - 01:37.5]  11. Conclusion
-Lien Parental : informer, accompagner, préserver.
-Commencez gratuitement sur lienparental.fr.
+[00:53.0 - 00:57.2]
+Ordinateur, iPhone ou Android : elle s'installe en un instant, sans store.
 
------------------------------------------------------------------
-Mixage (une fois la voix enregistrée en WAV ou MP3, durée <= 90 s, départ à 0 s)
-Binaire ffmpeg installé (commandes à lancer depuis C:\Users\HP\lien-parental) :
-<FFMPEG> = C:\Users\HP\AppData\Local\Temp\claude\C--Users-HP-lien-parental\c8c32519-a70f-4396-a115-c39b54f0f2d2\scratchpad\video\node_modules\@ffmpeg-installer\win32-x64\ffmpeg.exe
-(ou n'importe quel ffmpeg récent). Remplacer voix-off.wav par le fichier réel. La vidéo n'est pas réencodée (-c:v copy),
-l'audio est normalisé (-16 LUFS) et complété par du silence jusqu'à la fin de l'image.
-
-"<FFMPEG>" -i public/video/presentation.mp4 -i voix-off.wav ^
-  -map 0:v:0 -map 1:a:0 -c:v copy ^
-  -af "loudnorm=I=-16:TP=-1.5:LRA=11,apad" -c:a aac -b:a 160k -ar 48000 ^
-  -shortest -movflags +faststart public/video/presentation-avec-voix.mp4
-
-Avec une musique de fond en plus (musique.mp3 baissée à -20 dB sous la voix) :
-
-"<FFMPEG>" -i public/video/presentation.mp4 -i voix-off.wav -i musique.mp3 ^
-  -filter_complex "[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,apad[v];[2:a]volume=-20dB,afade=t=out:st=86:d=4[m];[v][m]amix=inputs=2:duration=first:normalize=0[a]" ^
-  -map 0:v:0 -map "[a]" -c:v copy -c:a aac -b:a 160k -ar 48000 ^
-  -shortest -movflags +faststart public/video/presentation-avec-voix.mp4
-
-Contrôler le résultat puis remplacer presentation.mp4 par presentation-avec-voix.mp4.
+[00:57.9 - 01:04.4]
+Lien Parental : informer, accompagner, préserver. Commencez gratuitement sur lien parental point f r !
