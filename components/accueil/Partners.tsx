@@ -38,11 +38,11 @@ export async function Partners() {
           <PartnerMarquee pauseLabel={tp('pause')} playLabel={tp('play')} speed={loop.length * 4} className="mt-6">
             {loop.map((p, i) => {
               const repeat = i >= logos.length
-              const logo = <span className="relative block h-12 w-full"><Image src={p.image} alt={p.name} fill sizes="200px" className="object-contain" /></span>
+              const logo = <span className="relative block h-16 w-full"><Image src={p.image} alt={p.name} fill sizes="240px" className="object-contain" /></span>
               return (
-                <li key={`${p.name}-${i}`} aria-hidden={repeat || undefined} inert={repeat || undefined} className="relative flex h-20 w-[200px] shrink-0 items-center justify-center rounded-2xl bg-white px-4 ring-1 ring-[#E5E7EB]">
+                <li key={`${p.name}-${i}`} aria-hidden={repeat || undefined} inert={repeat || undefined} className="relative flex h-28 w-[250px] shrink-0 items-center justify-center rounded-2xl bg-white px-6 pt-3 ring-1 ring-night-100 shadow-[0_2px_6px_rgba(11,45,91,0.06),0_14px_30px_-18px_rgba(11,45,91,0.35)]">
                   {p.href ? <a href={p.href} target="_blank" rel="noopener noreferrer" aria-label={tp('visit', { name: p.name })} className="block w-full">{logo}</a> : logo}
-                  {p.demo && <span className="absolute right-1.5 top-1.5 rounded-full bg-gold-50 px-1.5 py-px text-[10px] font-bold uppercase tracking-wide text-gold-700 ring-1 ring-gold-200">{tp('example')}</span>}
+                  {p.demo && <span className="absolute right-2.5 top-2.5 rounded-full bg-gold-50 px-2 py-0.5 text-[10.5px] font-bold uppercase tracking-wide text-gold-700 ring-1 ring-gold-200">{tp('example')}</span>}
                 </li>
               )
             })}

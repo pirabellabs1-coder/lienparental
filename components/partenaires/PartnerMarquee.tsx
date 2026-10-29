@@ -30,8 +30,10 @@ export function PartnerMarquee({ children, pauseLabel, playLabel, speed = 40, cl
   }, [])
 
   if (reduced) {
+    // Sans animation : tous les logos visibles d'un coup, sur plusieurs lignes, sans barre de défilement.
+    // Les copies ajoutées pour la boucle (marquées inert) sont retirées.
     return (
-      <ul className={cn('flex snap-x gap-3 overflow-x-auto pb-1 [scrollbar-width:thin] sm:gap-4', className)}>
+      <ul className={cn('flex flex-wrap justify-center gap-4 sm:gap-5 [&>[inert]]:hidden', className)}>
         {children}
       </ul>
     )
@@ -39,13 +41,14 @@ export function PartnerMarquee({ children, pauseLabel, playLabel, speed = 40, cl
 
   return (
     <div className={cn('group/marquee', className)}>
-      <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)]">
+      {/* py : place pour l'ombre des cartes ; fondu des bords discret (les logos restent nets). */}
+      <div className="overflow-hidden py-3 [mask-image:linear-gradient(to_right,transparent,#000_3%,#000_97%,transparent)]">
         <div
           className="flex w-max animate-[partner-marquee_var(--marquee-duration)_linear_infinite] group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused]"
           style={{ '--marquee-duration': `${speed}s`, animationPlayState: paused ? 'paused' : undefined } as React.CSSProperties}
         >
-          <ul className="flex shrink-0 gap-3 pr-3 sm:gap-4 sm:pr-4">{children}</ul>
-          <ul aria-hidden inert className="flex shrink-0 gap-3 pr-3 sm:gap-4 sm:pr-4">{children}</ul>
+          <ul className="flex shrink-0 gap-4 pr-4 sm:gap-5 sm:pr-5">{children}</ul>
+          <ul aria-hidden inert className="flex shrink-0 gap-4 pr-4 sm:gap-5 sm:pr-5">{children}</ul>
         </div>
       </div>
       <div className="mt-3 flex justify-end">

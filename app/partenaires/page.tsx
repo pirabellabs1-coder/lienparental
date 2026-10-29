@@ -42,7 +42,7 @@ const CARD = 'flex min-h-[176px] w-[78%] shrink-0 snap-start flex-col items-cent
 type T = Awaited<ReturnType<typeof getTranslations>>
 
 /** Carte d'un bandeau défilant : largeur fixe (la piste boucle sur sa propre largeur). */
-const MARQUEE_CARD = 'relative flex min-h-[150px] w-[250px] shrink-0 flex-col items-center justify-center rounded-2xl bg-white p-5 text-center ring-1 ring-[#E5E7EB] shadow-[0_1px_2px_rgba(11,45,91,0.04),0_12px_28px_-22px_rgba(11,45,91,0.3)] sm:w-[290px]'
+const MARQUEE_CARD = 'relative flex min-h-[170px] w-[260px] shrink-0 flex-col items-center justify-center rounded-2xl bg-white px-5 pb-5 pt-8 text-center ring-1 ring-night-100 shadow-[0_2px_6px_rgba(11,45,91,0.06),0_14px_30px_-18px_rgba(11,45,91,0.35)] sm:w-[280px]'
 
 /** `repeat` : copie ajoutée pour boucler le défilement, masquée aux lecteurs d'écran et au clavier. */
 function PartnerCard({ p, t, repeat = false }: { p: Partner; t: T; repeat?: boolean }) {
@@ -50,7 +50,7 @@ function PartnerCard({ p, t, repeat = false }: { p: Partner; t: T; repeat?: bool
   return (
     <li aria-hidden={repeat || undefined} inert={repeat || undefined} className={cn(MARQUEE_CARD, creator && 'flex-row items-center justify-start gap-4 text-left')}>
       {p.demo && <span className="absolute right-3 top-3 rounded-full bg-gold-50 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-gold-700 ring-1 ring-gold-200">{t('example')}</span>}
-      <span className={cn('relative block shrink-0 overflow-hidden', creator ? 'h-20 w-20 rounded-full' : 'h-20 w-full')}>
+      <span className={cn('relative block shrink-0 overflow-hidden', creator ? 'h-20 w-20 rounded-full' : 'h-24 w-full')}>
         <Image src={p.image} alt={creator ? '' : p.name} fill sizes={creator ? '80px' : '240px'} className={creator ? 'object-cover' : 'object-contain'} />
       </span>
       <span className={cn('min-w-0', !creator && 'mt-3')}>
