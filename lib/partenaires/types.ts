@@ -35,6 +35,20 @@ const INVISIBLE = /[\u200B-\u200F\u202A-\u202E\u2066-\u2069]/g
 const clean = (v: unknown) => (typeof v === 'string' ? v.replace(INVISIBLE, '') : v)
 const text = (min: number, max: number, msg: string) => z.preprocess(clean, z.string().trim().min(min, msg).max(max))
 
+/** Catégorie d'affichage proposée d'après le profil déclaré (modifiable à la validation). */
+export const CATEGORY_FOR_PROFILE = {
+  association: 'association',
+  institution: 'institution',
+  professionnel: 'professionnel',
+  createur: 'createur',
+} as const satisfies Record<PartnerProfile, 'institution' | 'association' | 'createur' | 'professionnel'>
+
+/** Logo (ou photo pour un créateur) : PNG, JPEG ou WebP, 2 Mo au plus, type vérifié sur les octets. */
+export const LOGO_MAX_BYTES = 2 * 1024 * 1024
+export const LOGO_ACCEPT = 'image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp'
+export const LOGO_EXT = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp' } as const
+export type LogoMime = keyof typeof LOGO_EXT
+
 export const partnerApplicationSchema = z.object({
   profil: z.enum(PARTNER_PROFILES),
   // Identité de la structure

@@ -8,7 +8,9 @@
  * emplacements neutres et le badge « Partenariats en préparation ».
  */
 
-export const PARTNER_CATEGORIES = ['institution', 'association', 'createur'] as const
+export const PARTNER_CATEGORIES = ['institution', 'association', 'createur', 'professionnel'] as const
+/** Catégories toujours affichées (maquette) ; les autres n'apparaissent qu'avec au moins un partenaire. */
+export const CORE_CATEGORIES: readonly PartnerCategory[] = ['institution', 'association', 'createur']
 export type PartnerCategory = (typeof PARTNER_CATEGORIES)[number]
 
 export type PartnerSocial = { network: 'instagram' | 'tiktok' | 'youtube' | 'facebook' | 'linkedin'; href: string }
@@ -59,6 +61,8 @@ export const partnersOf = (category: PartnerCategory, list: readonly Partner[] =
  */
 export function displayedPartners(category: PartnerCategory, showDemo: boolean, real: readonly Partner[] = PARTNERS): Partner[] {
   const list = partnersOf(category, real)
+  // Pas d'exemples hors des catégories de la maquette (« professionnel » n'apparaît qu'avec un vrai partenaire).
+  if (!CORE_CATEGORIES.includes(category)) return list
   return list.length || !showDemo ? list : partnersOf(category, DEMO_PARTNERS)
 }
 

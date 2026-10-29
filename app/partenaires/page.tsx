@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { LucideIcon } from 'lucide-react'
-import { ArrowRight, Facebook, Gem, Handshake, Instagram, Landmark, Linkedin, Music2, Users, Youtube } from 'lucide-react'
+import { ArrowRight, BriefcaseBusiness, Facebook, Gem, Handshake, Instagram, Landmark, Linkedin, Music2, Users, Youtube } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { SiteShell } from '@/components/site/SiteShell'
 import { PartnerRail } from '@/components/partenaires/PartnerRail'
@@ -11,7 +11,8 @@ import { BTN_PRIMARY, CONTAINER } from '@/components/accueil/ui'
 import { cn } from '@/lib/cn'
 import { localePathFor } from '@/lib/i18n/routing'
 import { pageMetadata } from '@/lib/seo/metadata'
-import { EMPTY_SLOTS, PARTNER_CATEGORIES, demoPartnersAllowed, displayedPartners, type Partner, type PartnerCategory, type PartnerSocial } from '@/lib/partenaires/catalog'
+import { CORE_CATEGORIES, EMPTY_SLOTS, PARTNERS, PARTNER_CATEGORIES, demoPartnersAllowed, displayedPartners, type Partner, type PartnerCategory, type PartnerSocial } from '@/lib/partenaires/catalog'
+import { listPublishedPartners } from '@/lib/partenaires/server'
 
 // Langue lue dans un cookie (comme les autres pages publiques) : rendu à chaque requête.
 export const dynamic = 'force-dynamic'
@@ -28,6 +29,7 @@ const STYLE: Record<PartnerCategory, { icon: LucideIcon; tone: 'night' | 'leaf' 
   institution: { icon: Landmark, tone: 'night', panel: 'bg-gradient-to-br from-night-50 to-white ring-night-100', badge: 'text-night-700 ring-night-100', disc: 'bg-night-600' },
   association: { icon: Users, tone: 'leaf', panel: 'bg-gradient-to-br from-leaf-50 to-white ring-leaf-100', badge: 'text-leaf-700 ring-leaf-100', disc: 'bg-leaf-500' },
   createur: { icon: Gem, tone: 'pink', panel: 'bg-gradient-to-br from-pink-50 to-white ring-pink-100', badge: 'text-pink-700 ring-pink-100', disc: 'bg-pink-500' },
+  professionnel: { icon: BriefcaseBusiness, tone: 'night', panel: 'bg-gradient-to-br from-gold-50 to-white ring-gold-100', badge: 'text-gold-700 ring-gold-100', disc: 'bg-gold-500' },
 }
 
 const SOCIAL_ICON: Record<PartnerSocial['network'], LucideIcon> = {
@@ -86,6 +88,8 @@ export default async function PartnersPage() {
   const t = await getTranslations('public.partners.page')
   const lp = localePathFor(await getLocale())
   const showDemo = demoPartnersAllowed()
+  // Partenaires validés dans l'administration (base) + éventuels partenaires déclarés dans le code.
+  const published = [...(await listPublishedPartners()), ...PARTNERS]
 
   return (
     <SiteShell mainClassName="bg-[#F7F9FC]">
@@ -107,7 +111,9 @@ export default async function PartnersPage() {
         {PARTNER_CATEGORIES.map((cat) => {
           const s = STYLE[cat]
           const Icon = s.icon
-          const list = displayedPartners(cat, showDemo)
+          const list = displayedPartners(cat, showDemo, published)
+          // Catégorie hors maquette (professionnels) : affichée seulement si elle a un partenaire.
+          if (!CORE_CATEGORIES.includes(cat) && list.length === 0) return null
           const real = list.some((p) => !p.demo)
           // Piste assez longue pour boucler sans trou sur grand écran (logos répétés si peu nombreux).
           const loop = list.length ? Array.from({ length: Math.ceil(6 / list.length) }, () => list).flat() : []

@@ -5,7 +5,8 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { PartnerMarquee } from '@/components/partenaires/PartnerMarquee'
 import { cn } from '@/lib/cn'
 import { localePathFor } from '@/lib/i18n/routing'
-import { demoPartnersAllowed, displayedPartners } from '@/lib/partenaires/catalog'
+import { PARTNERS, demoPartnersAllowed, displayedPartners } from '@/lib/partenaires/catalog'
+import { listPublishedPartners } from '@/lib/partenaires/server'
 import { CONTAINER } from './ui'
 
 // Bandeau des partenaires (sous la barre des modules) : logos des organismes partenaires en défilement.
@@ -19,7 +20,8 @@ export async function Partners() {
   const tp = await getTranslations('public.partners.page')
   const lp = localePathFor(await getLocale())
   const showDemo = demoPartnersAllowed()
-  const logos = [...displayedPartners('institution', showDemo), ...displayedPartners('association', showDemo)]
+  const published = [...(await listPublishedPartners()), ...PARTNERS]
+  const logos = [...displayedPartners('institution', showDemo, published), ...displayedPartners('association', showDemo, published), ...displayedPartners('professionnel', showDemo, published)]
   const real = logos.some((p) => !p.demo)
   const loop = logos.length ? Array.from({ length: Math.ceil(8 / logos.length) }, () => logos).flat() : []
 

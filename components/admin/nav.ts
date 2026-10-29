@@ -1,15 +1,4 @@
-import {
-  LayoutDashboard,
-  Users,
-  FileText,
-  BookOpen,
-  FileStack,
-  Newspaper,
-  MessageSquareHeart,
-  LifeBuoy,
-  ScrollText,
-  Settings,
- Coins } from 'lucide-react'
+import { BookOpen, Coins, FileStack, FileText, Handshake, LayoutDashboard, LifeBuoy, MessageSquareHeart, Newspaper, ScrollText, Settings, Users } from 'lucide-react'
 
 export type NavItem = { href: string; label: string; icon: React.ComponentType<{ className?: string }> }
 export type NavGroup = { title: string; items: NavItem[] }
@@ -40,6 +29,7 @@ export const NAV_GROUPS: NavGroup[] = [
     title: 'Exploitation',
     items: [
       { href: '/admin/support', label: 'Support', icon: LifeBuoy },
+      { href: '/admin/partenaires', label: 'Partenaires', icon: Handshake },
       { href: '/admin/credits', label: 'Crédits IA', icon: Coins },
       { href: '/admin/journaux', label: 'Journaux', icon: ScrollText },
       { href: '/admin/parametres', label: 'Paramètres', icon: Settings },

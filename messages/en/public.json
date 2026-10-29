@@ -1050,6 +1050,10 @@
           "createur": {
             "title": "Content creators & influencers",
             "text": "Committed voices who share their experience and support parenting"
+          },
+          "professionnel": {
+            "title": "Professionals & service providers",
+            "text": "Committed professionals serving families"
           }
         },
         "slot": "Coming soon",
@@ -1139,13 +1143,20 @@
           "consent": "Check the box to send your application.",
           "summary": "{count, plural, one {One field needs fixing.} other {# fields need fixing.}}",
           "rateLimited": "Too many submissions from your connection. Try again in a few minutes.",
-          "failed": "Your application couldn’t be sent. Try again, or email us at {email}."
+          "failed": "Your application couldn’t be sent. Try again, or email us at {email}.",
+          "logoType": "Choose a PNG, JPG or WebP image.",
+          "logoTooBig": "The image is larger than 2 MB. Choose a lighter one."
         },
         "success": {
           "title": "Application sent",
           "text": "Thank you! We’ve received your application. Our team will review it and reply by email at {email}.",
           "back": "Back to partners"
-        }
+        },
+        "logo": "Logo (or profile photo for a creator)",
+        "logoHelp": "PNG, JPG or WebP, 2 MB max. It will only be shown on the website once your partnership is approved.",
+        "logoPick": "Choose an image",
+        "logoChange": "Change the image",
+        "logoPreviewAlt": "Preview of the chosen logo"
       }
     }
   }
