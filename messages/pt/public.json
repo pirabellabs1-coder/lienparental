@@ -1050,6 +1050,10 @@
           "createur": {
             "title": "Criadores de conteúdo e influenciadores",
             "text": "Vozes engajadas que compartilham sua experiência e apoiam a parentalidade"
+          },
+          "professionnel": {
+            "title": "Profissionais e prestadores",
+            "text": "Profissionais engajados a serviço das famílias"
           }
         },
         "slot": "Em breve aqui",
@@ -1139,13 +1143,20 @@
           "consent": "Marque a caixa para enviar sua candidatura.",
           "summary": "{count, plural, one {Um campo precisa ser corrigido.} other {# campos precisam ser corrigidos.}}",
           "rateLimited": "Muitos envios a partir da sua conexão. Tente novamente em alguns minutos.",
-          "failed": "Não foi possível enviar. Tente novamente ou escreva para {email}."
+          "failed": "Não foi possível enviar. Tente novamente ou escreva para {email}.",
+          "logoType": "Escolha uma imagem PNG, JPG ou WebP.",
+          "logoTooBig": "A imagem ultrapassa 2 MB. Escolha uma imagem mais leve."
         },
         "success": {
           "title": "Candidatura enviada",
           "text": "Obrigado! Recebemos sua candidatura. Nossa equipe vai analisá-la e responderá por e-mail para {email}.",
           "back": "Voltar aos parceiros"
-        }
+        },
+        "logo": "Logotipo (ou foto de perfil para um criador)",
+        "logoHelp": "PNG, JPG ou WebP, 2 MB no máximo. Ele só será exibido no site depois que sua parceria for validada.",
+        "logoPick": "Escolher uma imagem",
+        "logoChange": "Trocar a imagem",
+        "logoPreviewAlt": "Prévia do logotipo escolhido"
       }
     }
   }

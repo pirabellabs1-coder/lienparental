@@ -97,7 +97,8 @@
         "notFound": "Élément introuvable.",
         "relatedNotFound": "Élément lié introuvable.",
         "sessionExpired": "Votre session a expiré. Reconnectez-vous.",
-        "childrenLimit": "Vous avez atteint le maximum de 5 fiches enfants."
+        "childrenLimit": "Vous avez atteint le maximum de 5 fiches enfants.",
+        "storageQuota": "Votre espace de stockage est plein : libérez de la place (corbeille comprise) ou passez à une offre supérieure."
       },
       "family": {
         "linkedParent": "un parent lié"

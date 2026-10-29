@@ -389,6 +389,20 @@ const uploadMetaSchema = () => z.object({
 })
 export type UploadMeta = z.infer<ReturnType<typeof uploadMetaSchema>>
 
+export type StorageQuota = { usedBytes: number; quotaBytes: number }
+
+/**
+ * Espace utilisé et quota de l'offre effective (my_storage_usage, 0560) : documents, corbeille
+ * et vignettes de l'album. null si indisponible (pas d'alerte inventée ; la base bloque quand même).
+ */
+export async function getStorageQuota(): Promise<StorageQuota | null> {
+  if (!LIVE) return { usedBytes: 5 * 1024 ** 3, quotaBytes: 10 * 1024 ** 3 }
+  const { data, error } = await db().rpc('my_storage_usage' as never)
+  const row = (Array.isArray(data) ? data[0] : data) as { used_bytes?: number | string; quota_bytes?: number | string } | null
+  if (error || !row) return null
+  return { usedBytes: Number(row.used_bytes) || 0, quotaBytes: Number(row.quota_bytes) || 0 }
+}
+
 /** Envoie le fichier dans Storage puis crée la ligne `documents` (rollback Storage si l'insert échoue). */
 export async function uploadDocument(file: File, meta: UploadMeta): Promise<VaultDocumentRecord> {
   const mime = validateVaultFile(file)

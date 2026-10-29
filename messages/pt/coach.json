@@ -54,7 +54,11 @@
       "costHint": "Cada resposta usa {count, plural, one {# crédito} other {# créditos}}.",
       "balanceHint": "Saldo: {total}.",
       "insufficient": "Saldo de créditos insuficiente: sua pergunta foi mantida.",
-      "buyCredits": "Comprar créditos"
+      "buyCredits": "Comprar créditos",
+      "noCredits": "Você não tem mais créditos para fazer uma pergunta. Recarregue seu saldo ou mude para um plano superior.",
+      "lowCredits": "Restam apenas {total, plural, one {# crédito} other {# créditos}}.",
+      "upgradePlan": "Mudar para o Premium",
+      "seePlans": "Ver os planos"
     },
     "list": {
       "opFailed": "A operação falhou. Tente novamente.",
@@ -633,7 +637,8 @@
       "buy": "Comprar créditos",
       "kept": "Sua mensagem é mantida. Um arquivo importado pode precisar ser adicionado novamente após a compra.",
       "confirm": "Confirmo o uso de {count, plural, one {# crédito} other {# créditos}} para esta análise.",
-      "inactive": "Esta ação não está disponível no momento."
+      "inactive": "Esta ação não está disponível no momento.",
+      "lowAfter": "Depois desta ação, restarão {left, plural, =0 {0 crédito} one {# crédito} other {# créditos}}."
     }
   }
 }

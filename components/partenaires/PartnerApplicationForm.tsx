@@ -1,17 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import { useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { AlertCircle, ArrowLeft, ArrowRight, CheckCircle2, ChevronDown, FileText, ShieldCheck } from 'lucide-react'
+import { AlertCircle, ArrowLeft, ArrowRight, CheckCircle2, ChevronDown, FileText, ImagePlus, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { localePathFor } from '@/lib/i18n/routing'
-import { PARTNER_PROFILES, PARTNER_TERRITORIES, partnerApplicationSchema, type PartnerProfile, type PartnerTerritory } from '@/lib/partenaires/types'
+import { LOGO_ACCEPT, LOGO_MAX_BYTES, PARTNER_PROFILES, PARTNER_TERRITORIES, partnerApplicationSchema, type PartnerProfile, type PartnerTerritory } from '@/lib/partenaires/types'
 import { PARTNERSHIP_EMAIL } from '@/lib/seo/site'
 
-type Field = 'profil' | 'structure' | 'contactName' | 'email' | 'telephone' | 'territoire' | 'site' | 'reseaux' | 'presentation' | 'proposition' | 'consent'
+type Field = 'profil' | 'structure' | 'contactName' | 'email' | 'telephone' | 'territoire' | 'site' | 'reseaux' | 'logo' | 'presentation' | 'proposition' | 'consent'
 /** Ordre de focus en cas d'erreurs (ordre visuel du formulaire). */
-const ORDER: Field[] = ['profil', 'structure', 'contactName', 'email', 'telephone', 'territoire', 'site', 'reseaux', 'presentation', 'proposition', 'consent']
+const ORDER: Field[] = ['profil', 'structure', 'contactName', 'email', 'telephone', 'territoire', 'site', 'reseaux', 'logo', 'presentation', 'proposition', 'consent']
 const MIN_TEXT = 30
 const MAX_TEXT = 2000
 
@@ -34,7 +34,16 @@ const INITIAL: Values = {
   site: '', reseaux: '', presentation: '', proposition: '', consent: false,
 }
 
-const KNOWN = new Set(['required', 'invalidEmail', 'invalidPhone', 'invalidUrl', 'tooShort'])
+const KNOWN = new Set(['required', 'invalidEmail', 'invalidPhone', 'invalidUrl', 'tooShort', 'logoTooBig', 'logoType'])
+const LOGO_TYPES = /^image\/(png|jpeg|webp)$/
+
+/** Logo : présent, image PNG / JPEG / WebP, 2 Mo au plus (le serveur revérifie les octets). */
+function logoError(file: File | null): string | undefined {
+  if (!file) return 'required'
+  if (!LOGO_TYPES.test(file.type)) return 'logoType'
+  if (file.size > LOGO_MAX_BYTES) return 'logoTooBig'
+  return undefined
+}
 
 /** Erreurs zod (client ou renvoyées par l'API) → codes de message par champ. */
 function errorsFrom(issues: { path: string; message: string }[]): Partial<Record<Field, string>> {
@@ -47,9 +56,11 @@ function errorsFrom(issues: { path: string; message: string }[]): Partial<Record
   return out
 }
 
-function validate(v: Values): Partial<Record<Field, string>> {
+function validate(v: Values, logo: File | null): Partial<Record<Field, string>> {
   const r = partnerApplicationSchema.safeParse(v)
-  return r.success ? {} : errorsFrom(r.error.issues.map((i) => ({ path: i.path.join('.'), message: i.message })))
+  const out = r.success ? {} : errorsFrom(r.error.issues.map((i) => ({ path: i.path.join('.'), message: i.message })))
+  const le = logoError(logo)
+  return le ? { ...out, logo: le } : out
 }
 
 const input = 'block w-full rounded-xl border bg-white px-3.5 text-[15px] text-night-900 outline-none transition-colors placeholder:text-night-400 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100'
@@ -82,12 +93,21 @@ export function PartnerApplicationForm() {
   const [tried, setTried] = useState(false)
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
   const [sendError, setSendError] = useState('')
+  const [logo, setLogo] = useState<File | null>(null)
+  const [logoPreview, setLogoPreview] = useState<string | null>(null)
+  const logoInput = useRef<HTMLInputElement>(null)
+  useEffect(() => () => { if (logoPreview) URL.revokeObjectURL(logoPreview) }, [logoPreview])
+  const pickLogo = (file: File | null) => {
+    setLogo(file)
+    setLogoPreview(file && LOGO_TYPES.test(file.type) ? URL.createObjectURL(file) : null)
+    if (tried) setErrors(validate(v, file))
+  }
 
   const set = <K extends keyof Values>(k: K, value: Values[K]) => {
     const next = { ...v, [k]: value }
     setV(next)
     // Après une première tentative, les erreurs se mettent à jour pendant la saisie.
-    if (tried) setErrors(validate(next))
+    if (tried) setErrors(validate(next, logo))
   }
 
   const msg = (f: Field) => {
@@ -125,7 +145,7 @@ export function PartnerApplicationForm() {
     if (status === 'sending') return
     setTried(true)
     setSendError('')
-    const errs = validate(v)
+    const errs = validate(v, logo)
     setErrors(errs)
     if (Object.keys(errs).length) {
       summaryRef.current?.focus()
@@ -134,11 +154,11 @@ export function PartnerApplicationForm() {
     }
     setStatus('sending')
     try {
-      const res = await fetch('/api/partenaires/candidature', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...v, url_confirm: trap }),
-      })
+      const fd = new FormData()
+      for (const [k, val] of Object.entries(v)) fd.append(k, String(val))
+      fd.append('url_confirm', trap)
+      if (logo) fd.append('logo', logo)
+      const res = await fetch('/api/partenaires/candidature', { method: 'POST', body: fd })
       if (res.status === 201) {
         setStatus('sent')
         requestAnimationFrame(() => successRef.current?.focus())
@@ -152,7 +172,7 @@ export function PartnerApplicationForm() {
         focusFirst(errs2)
         return
       }
-      setSendError(res.status === 429 ? t('errors.rateLimited') : t('errors.failed', { email: PARTNERSHIP_EMAIL }))
+      setSendError(res.status === 429 ? t('errors.rateLimited') : res.status === 413 ? t('errors.logoTooBig') : t('errors.failed', { email: PARTNERSHIP_EMAIL }))
     } catch {
       setStatus('idle')
       setSendError(t('errors.failed', { email: PARTNERSHIP_EMAIL }))
@@ -294,6 +314,36 @@ export function PartnerApplicationForm() {
               <Label f="reseaux" optional>{t('networks')}</Label>
               <textarea id={id('reseaux')} name="reseaux" rows={2} value={v.reseaux} onChange={(e) => set('reseaux', e.target.value)} placeholder={t('networksPh')} maxLength={1000} {...a11y('reseaux')} className={cn(input, 'min-h-[76px] resize-y py-3 leading-relaxed', border('reseaux'))} />
               <ErrorText f="reseaux" />
+            </div>
+            <div>
+              <Label f="logo">{t('logo')}</Label>
+              <p id={id('logo-help')} className="-mt-0.5 mb-2 text-[13px] text-night-600">{t('logoHelp')}</p>
+              <input
+                ref={logoInput}
+                id={id('logo')}
+                name="logo"
+                type="file"
+                accept={LOGO_ACCEPT}
+                onChange={(e) => pickLogo(e.target.files?.[0] ?? null)}
+                className="sr-only"
+                aria-required="true"
+                {...a11y('logo', id('logo-help'))}
+              />
+              <div className={cn('flex items-center gap-4 rounded-2xl border border-dashed p-3', errors.logo ? 'border-alert-400' : 'border-night-200')}>
+                <span className="grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-xl bg-night-50 ring-1 ring-night-100">
+                  {logoPreview
+                    // eslint-disable-next-line @next/next/no-img-element
+                    ? <img src={logoPreview} alt={t('logoPreviewAlt')} className="h-full w-full object-contain" />
+                    : <ImagePlus className="h-7 w-7 text-night-400" aria-hidden />}
+                </span>
+                <div className="min-w-0">
+                  <button type="button" onClick={() => logoInput.current?.click()} className="inline-flex min-h-[44px] items-center rounded-full bg-white px-4 text-[14px] font-semibold text-night-900 ring-1 ring-inset ring-night-900/20 hover:bg-night-50">
+                    {logo ? t('logoChange') : t('logoPick')}
+                  </button>
+                  {logo && <p className="mt-1 truncate text-[12.5px] text-night-600">{logo.name}</p>}
+                </div>
+              </div>
+              <ErrorText f="logo" />
             </div>
             <div>
               <Label f="presentation">{t('presentation')}</Label>

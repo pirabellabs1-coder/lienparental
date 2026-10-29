@@ -54,7 +54,11 @@
       "costHint": "Chaque réponse utilise {count, plural, one {# crédit} other {# crédits}}.",
       "balanceHint": "Solde : {total}.",
       "insufficient": "Solde de crédits insuffisant : votre question est conservée.",
-      "buyCredits": "Acheter des crédits"
+      "buyCredits": "Acheter des crédits",
+      "noCredits": "Vous n’avez plus de crédits pour poser une question. Rechargez votre solde ou passez à une offre supérieure.",
+      "lowCredits": "Il ne vous reste que {total, plural, one {# crédit} other {# crédits}}.",
+      "upgradePlan": "Passer à Premium",
+      "seePlans": "Voir les offres"
     },
     "list": {
       "opFailed": "L’opération a échoué. Réessayez.",
@@ -633,7 +637,8 @@
       "buy": "Acheter des crédits",
       "kept": "Votre message est conservé. Un fichier importé peut devoir être ajouté à nouveau après l’achat.",
       "confirm": "Je confirme l’utilisation de {count, plural, one {# crédit} other {# crédits}} pour cette analyse.",
-      "inactive": "Cette action n’est pas disponible pour le moment."
+      "inactive": "Cette action n’est pas disponible pour le moment.",
+      "lowAfter": "Après cette action, il vous restera {left, plural, =0 {0 crédit} one {# crédit} other {# crédits}}."
     }
   }
 }

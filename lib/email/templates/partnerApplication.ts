@@ -83,7 +83,8 @@ export function partnerApplicationEmail(props: PartnerApplicationProps): { subje
     <p style="margin:0 0 16px 0;white-space:pre-wrap;">${proposition}</p>
     <p style="margin:24px 0 0 0;font-size:12px;color:${t.colors.textMuted};">
       Reçue le ${date} · IP ${ip}.<br>
-      Répondez directement à cet e-mail : le reply-to pointe vers l'adresse du candidat.
+      Répondez directement à cet e-mail : le reply-to pointe vers l'adresse du candidat.<br>
+      Logo et décision : administration, rubrique Partenaires (/admin/partenaires). Le partenaire n'apparaît sur le site qu'après validation.
     </p>
   `
 

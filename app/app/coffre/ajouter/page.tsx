@@ -19,6 +19,7 @@ import { useVaultI18n } from '@/components/coffre/i18n'
 import { cn } from '@/lib/cn'
 import { LIVE } from '@/lib/data/core'
 import { addDemoDocument, uploadDocument, validateVaultFile } from '@/lib/data/vault'
+import { StorageQuotaNotice, useStorageQuota } from '@/components/coffre/StorageQuotaNotice'
 import { useChildOptions } from '@/lib/data/children'
 import { matchCategory, parseVaultPrefill, type RawParams } from '@/lib/prefill'
 import { photoDateFromFile } from '@/lib/vault/photo-date'
@@ -105,6 +106,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
   const [file, setFile] = useState<Picked | null>(null)
   const [rawFile, setRawFile] = useState<File | null>(null)
   const [saving, setSaving] = useState(false)
+  const storage = useStorageQuota()
   const [saveError, setSaveError] = useState('')
   const [fileError, setFileError] = useState('')
   const [dragging, setDragging] = useState(false)
@@ -298,6 +300,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
       <ScreenHeader title={t('title')} onBack={back} backLabel={step > 1 ? t('prevStep') : tc('back')} />
       <div className="px-5">
         <Stepper steps={STEP_KEYS.map((k) => t(`steps.${k}`))} current={step} className="mt-1" />
+        <StorageQuotaNotice quota={storage.quota} className="mt-3" />
         {destinationLabel && (
           <p className="mt-3 flex items-center gap-2 rounded-xl bg-leaf-50/70 px-3 py-2 text-[12.5px] font-semibold text-night-800">
             <FolderInput className="h-4 w-4 shrink-0 text-leaf-700" aria-hidden="true" />
@@ -584,7 +587,7 @@ export default function AddDocumentPage({ searchParams }: { searchParams: Promis
             {saveError && <p role="alert" className="mb-2 text-center text-[12.5px] font-semibold text-alert-600">{saveError}</p>}
             <div className="grid grid-cols-2 gap-3">
               <button type="button" onClick={() => setStep(1)} disabled={saving} className={btn({ variant: 'secondary' })}>{t('edit')}</button>
-              <button type="button" onClick={() => void save()} disabled={saving} aria-busy={saving} className={btn({ variant: 'primary' })}>
+              <button type="button" onClick={() => void save()} disabled={saving || storage.full} aria-busy={saving} className={btn({ variant: 'primary' })}>
                 {saving ? t('sending') : tc('save')}
               </button>
             </div>

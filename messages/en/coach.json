@@ -54,7 +54,11 @@
       "costHint": "Each answer uses {count, plural, one {# credit} other {# credits}}.",
       "balanceHint": "Balance: {total}.",
       "insufficient": "Insufficient credit balance: your question is kept.",
-      "buyCredits": "Buy credits"
+      "buyCredits": "Buy credits",
+      "noCredits": "You have no credits left to ask a question. Top up your balance or upgrade your plan.",
+      "lowCredits": "You only have {total, plural, one {# credit} other {# credits}} left.",
+      "upgradePlan": "Upgrade to Premium",
+      "seePlans": "See plans"
     },
     "list": {
       "opFailed": "The operation failed. Please try again.",
@@ -633,7 +637,8 @@
       "buy": "Buy credits",
       "kept": "Your message is kept. An imported file may need to be added again after the purchase.",
       "confirm": "I confirm using {count, plural, one {# credit} other {# credits}} for this analysis.",
-      "inactive": "This action is not available at the moment."
+      "inactive": "This action is not available at the moment.",
+      "lowAfter": "After this action, you will have {left, plural, =0 {0 credits} one {# credit} other {# credits}} left."
     }
   }
 }

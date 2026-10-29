@@ -11,6 +11,7 @@ import { useVaultI18n } from '@/components/coffre/i18n'
 import { useChildOptions } from '@/lib/data/children'
 import { addAlbumPhoto } from '@/lib/data/album'
 import { VAULT_MAX_BYTES } from '@/lib/data/vault'
+import { StorageQuotaNotice, useStorageQuota } from '@/components/coffre/StorageQuotaNotice'
 import { photoDateFromFile } from '@/lib/vault/photo-date'
 import { PHOTO_ACCEPT } from '@/lib/vault/photo-process'
 import { ALBUMS, MAX_PHOTOS_PER_BATCH, NOTE_MAX, type AlbumKey } from '@/lib/album/types'
@@ -53,6 +54,7 @@ export default function AddPhotosPage({ searchParams }: { searchParams: Promise<
   const [pickError, setPickError] = useState('')
   const [tried, setTried] = useState(false)
   const [running, setRunning] = useState(false)
+  const storage = useStorageQuota()
   const [finished, setFinished] = useState(false)
   const [dragging, setDragging] = useState(false)
 
@@ -152,6 +154,7 @@ export default function AddPhotosPage({ searchParams }: { searchParams: Promise<
     <>
       <ScreenHeader title={tu('title')} backHref="/app/coffre/album" />
       <div className="space-y-6 px-5 pb-6">
+        <StorageQuotaNotice quota={storage.quota} />
         {/* Enfant */}
         <fieldset aria-describedby={childError ? `${uid}-child-err` : undefined}>
           <legend className="text-[15px] font-bold text-night-900">{tu('child')} <span aria-hidden="true" className="text-alert-500">*</span></legend>
@@ -292,7 +295,7 @@ export default function AddPhotosPage({ searchParams }: { searchParams: Promise<
       </div>
 
       <StickyActions>
-        <button type="button" onClick={() => void submit()} disabled={running} aria-busy={running} className={btn({ variant: 'primary' })}>
+        <button type="button" onClick={() => void submit()} disabled={running || storage.full} aria-busy={running} className={btn({ variant: 'primary' })}>
           {running ? tu('sending', { n: sendingIndex + 1, total: items.length }) : tu('submit', { count: Math.max(1, pending.length) })}
         </button>
       </StickyActions>

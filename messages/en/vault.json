@@ -896,6 +896,14 @@
       "noteLabel": "Note",
       "notePlaceholder": "A short note about this moment (optional)",
       "noteCount": "{n} / {max}"
+    },
+    "quota": {
+      "warnTitle": "Your storage is almost full",
+      "warnText": "{used} used of {max} ({pct}%). Consider emptying the trash or upgrading your plan.",
+      "fullTitle": "Your storage space is full",
+      "fullText": "{used} used of {max}. Free up space (the trash counts until it is purged) or upgrade your plan to add files.",
+      "upgrade": "See plans",
+      "trash": "Open the trash"
     }
   }
 }

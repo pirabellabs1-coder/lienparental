@@ -62,6 +62,12 @@ export function UsageCard({ usedBytes, maxBytes, caption, compact }: { usedBytes
       </p>
       <ProgressBar className="mt-4 h-2" tone="leaf" value={usedBytes} max={maxBytes} label={t('progress', { pct })} />
       <p className="mt-3 text-[11.5px] text-night-700">{caption.replace('{pct}', String(pct))}</p>
+      {maxBytes > 0 && usedBytes >= maxBytes * 0.8 && (
+        <p role={usedBytes >= maxBytes ? 'alert' : 'status'} className={cn('mt-3 rounded-lg px-3 py-2 text-[12px] font-semibold', usedBytes >= maxBytes ? 'bg-alert-50 text-alert-800' : 'bg-gold-50 text-gold-900')}>
+          {usedBytes >= maxBytes ? t('full') : t('warn', { left: formatBytes(maxBytes - usedBytes, locale) })}{' '}
+          <Link href="/app/abonnement" className="underline underline-offset-2">{t('upgrade')}</Link>
+        </p>
+      )}
     </section>
   )
 }

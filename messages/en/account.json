@@ -56,7 +56,10 @@
     "storage": {
       "usage": {
         "title": "Space used",
-        "progress": "{pct}% of space used"
+        "progress": "{pct}% of space used",
+        "warn": "Only {left} left: consider freeing up space or upgrading your plan.",
+        "full": "Storage full: new uploads are blocked.",
+        "upgrade": "Get more space"
       },
       "vault": {
         "title": "Your files are managed in the vault",

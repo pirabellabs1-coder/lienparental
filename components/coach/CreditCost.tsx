@@ -76,7 +76,13 @@ export function CreditCost({
           </Link>
           <p className="mt-1 text-night-700">{t('kept')}</p>
         </div>
-      ) : cost >= credits.confirmFrom ? (
+      ) : credits.total - cost < cost ? (
+        <p role="status" className="mt-3 rounded-lg bg-gold-50 px-3 py-2 text-[12.5px] font-semibold text-gold-900">
+          {t('lowAfter', { left: credits.total - cost })}{' '}
+          <Link href="/app/coach/credits#packs" className="underline underline-offset-2">{t('buy')}</Link>
+        </p>
+      ) : null}
+      {enough && cost >= credits.confirmFrom ? (
         <label htmlFor={id} className="mt-3 flex cursor-pointer items-start gap-2.5 text-[12.5px] leading-relaxed">
           <input id={id} type="checkbox" checked={confirmed} onChange={(e) => onConfirmedChange(e.target.checked)} className="mt-0.5 h-4 w-4 shrink-0 accent-iris-500" />
           <span>{t('confirm', { count: cost })}</span>
