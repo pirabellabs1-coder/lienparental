@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-label="Bureau Enfance Jeunesse (logo d’exemple)">
+  <g transform="translate(6 8)"><path d="M28 8l20 12v4H8v-4z" fill="#365c93"/><rect x="12" y="26" width="32" height="18" rx="2" fill="none" stroke="#365c93" stroke-width="3"/><circle cx="28" cy="35" r="4" fill="#4caf50"/></g>
+  <text x="70" y="32" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="0.5" fill="#0b2d5b">BUREAU ENFANCE</text>
+  <text x="70" y="54" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="18" font-weight="600" fill="#2e7d32">Jeunesse</text>
+</svg>
