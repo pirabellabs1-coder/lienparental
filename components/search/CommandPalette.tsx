@@ -466,10 +466,10 @@ export function CommandPalette() {
             type="button"
             onClick={close}
             aria-label={t('close')}
-            className="inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-xl px-2 text-[14px] font-semibold text-leaf-600 hover:text-leaf-700 sm:px-1"
+            className="inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-xl px-2 text-[14px] font-semibold text-leaf-600 hover:text-leaf-700 sm:min-w-[44px] sm:px-0 sm:text-night-500 sm:hover:bg-night-50 sm:hover:text-night-900"
           >
             <span aria-hidden className="sm:hidden">{t('cancel')}</span>
-            <kbd aria-hidden className="hidden rounded-md border border-night-200 bg-night-50 px-1.5 py-0.5 font-sans text-[11.5px] font-semibold text-night-600 sm:inline">{t('keys.esc')}</kbd>
+            <X aria-hidden className="hidden h-5 w-5 sm:block" strokeWidth={2} />
           </button>
         </div>
 
@@ -578,20 +578,7 @@ export function CommandPalette() {
           )}
         </div>
 
-        <div aria-hidden className="hidden items-center gap-4 border-t border-night-100 bg-night-50/50 px-4 py-2.5 text-[12px] text-night-500 sm:flex">
-          <span className="inline-flex items-center gap-1.5"><Kbd>↑</Kbd><Kbd>↓</Kbd> {t('keys.navigate')}</span>
-          <span className="inline-flex items-center gap-1.5"><Kbd>{t('keys.enter')}</Kbd> {t('keys.open')}</span>
-          <span className="inline-flex items-center gap-1.5"><Kbd>{t('keys.esc')}</Kbd> {t('keys.close')}</span>
-        </div>
       </div>
     </div>
-  )
-}
-
-function Kbd({ children }: { children: ReactNode }) {
-  return (
-    <kbd className="inline-flex min-w-[22px] items-center justify-center rounded-md border border-night-200 bg-white px-1.5 py-0.5 font-sans text-[11px] font-semibold text-night-600">
-      {children}
-    </kbd>
   )
 }

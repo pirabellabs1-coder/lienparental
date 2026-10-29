@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Search } from 'lucide-react'
 import { cn } from '@/lib/cn'
@@ -18,12 +17,6 @@ export function openSearch() {
 
 export function SearchTrigger({ variant = 'sidebar', className }: Props) {
   const t = useTranslations('account.search')
-  // Le raccourci affiché s'adapte au Mac après hydratation (rendu serveur : « Ctrl K »).
-  const [isMac, setIsMac] = useState(false)
-  useEffect(() => {
-    setIsMac(/Mac|iPhone|iPad|iPod/i.test(navigator.userAgent))
-  }, [])
-
   if (variant === 'icon') {
     return (
       <button
@@ -47,16 +40,14 @@ export function SearchTrigger({ variant = 'sidebar', className }: Props) {
       onClick={openSearch}
       aria-haspopup="dialog"
       aria-keyshortcuts="Control+K Meta+K"
+      // Même gabarit que les liens du menu (h-11, rounded-xl) ; raccourci clavier conservé mais non affiché.
       className={cn(
-        'flex h-11 w-full items-center gap-2.5 rounded-xl border border-night-200 bg-white px-3 text-left text-[14px] text-night-500 transition-colors hover:border-night-300 hover:text-night-700',
+        'group flex h-11 w-full items-center gap-3 rounded-xl bg-night-50 px-3 text-left text-[14px] font-medium text-night-500 ring-1 ring-inset ring-night-100 transition-colors hover:bg-white hover:text-night-800 hover:ring-night-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500',
         className,
       )}
     >
-      <Search aria-hidden className="h-4 w-4 shrink-0 text-night-400" strokeWidth={2.2} />
+      <Search aria-hidden className="h-[18px] w-[18px] shrink-0 text-night-400 transition-colors group-hover:text-night-700" strokeWidth={2} />
       <span className="min-w-0 flex-1 truncate">{t('triggerPlaceholder')}</span>
-      <kbd aria-hidden className="shrink-0 rounded-md border border-night-200 bg-night-50 px-1.5 py-0.5 font-sans text-[11px] font-semibold text-night-600">
-        {isMac ? '⌘ K' : 'Ctrl K'}
-      </kbd>
     </button>
   )
 }
