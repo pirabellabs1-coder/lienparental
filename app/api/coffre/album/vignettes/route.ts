@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
   if (!vault.ok) return vaultDeniedResponse(vault)
   if (vault.principal.userId !== user.id) return jsonError(401, 'unauthenticated', tc('denied.unauthenticated'))
 
-  const rl = await rateLimit(userKey('coffre:album-vignettes', user.id), 30, 60_000, { failClosed: true })
+  const rl = await rateLimit(userKey('coffre:album-vignettes', user.id), 60, 60_000, { failClosed: true })
   if (!rl.ok) return rateLimitedResponse(rl, t('rateLimited'))
 
   const parsed = thumbsRequestSchema.safeParse(await readJson(req))

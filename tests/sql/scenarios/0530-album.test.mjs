@@ -13,15 +13,18 @@ let pass = 0, fail = 0
 function check(name, cond, extra = '') {
   if (cond) { pass++; console.log('  ok  ', name) } else { fail++; console.log('  FAIL', name, extra) }
 }
-async function as(db, who, sql, params = []) {
+async function as(db, who, sql, params = [], sid = null) {
   return db.transaction(async (tx) => {
-    const claims = { sub: who.id, email: who.email, aal: 'aal1', role: 'authenticated' }
+    const claims = { sub: who.id, email: who.email, aal: 'aal1', role: 'authenticated', ...(sid ? { session_id: sid } : {}) }
     await tx.query(`select set_config('request.jwt.claims', $1, true)`, [JSON.stringify(claims)])
     await tx.exec('set local role authenticated')
     return (await tx.query(sql, params)).rows
   })
 }
 async function err(p) { try { await p; return null } catch (e) { return e } }
+async function svc(db, sql, params = []) {
+  return db.transaction(async (tx) => { await tx.exec('set local role service_role'); return (await tx.query(sql, params)).rows })
+}
 const objs = async (db, who) => (await as(db, who, `select name from storage.objects where bucket_id = 'documents' order by name`)).map((r) => r.name)
 
 export default async function run(db) {
@@ -56,6 +59,10 @@ export default async function run(db) {
     (await err(as(db, A, `insert into public.documents (user_id, name, mime, size_bytes, storage_path, thumb_path) values ($1::uuid, 'x', 'image/jpeg', 1, $1::text || '/x.jpg', $2::text || '/secret.jpg')`, [A.id, X.id])))?.code === '23514')
   check('vignette avec « .. » refusée (23514)',
     (await err(as(db, A, `insert into public.documents (user_id, name, mime, size_bytes, storage_path, thumb_path) values ($1::uuid, 'x', 'image/jpeg', 1, $1::text || '/x.jpg', $1::text || '/../x.jpg')`, [A.id])))?.code === '23514')
+  check('vignette = fichier principal refusée (23514)',
+    (await err(as(db, A, `insert into public.documents (user_id, name, mime, size_bytes, storage_path, thumb_path) values ($1::uuid, 'x', 'image/jpeg', 1, $1::text || '/same.jpg', $1::text || '/same.jpg')`, [A.id])))?.code === '23514')
+  check('vignette déjà utilisée par une autre photo refusée (23505)',
+    (await err(as(db, A, `insert into public.documents (user_id, name, mime, size_bytes, storage_path, thumb_path) values ($1::uuid, 'x', 'image/jpeg', 1, $1::text || '/other.jpg', $1::text || '/p1-thumb.jpg')`, [A.id])))?.code === '23505')
   check('vignette non modifiable après coup (aucun droit UPDATE)',
     (await err(as(db, A, `update public.documents set thumb_path = $1::text || '/autre.jpg' where id = $2`, [A.id, pShared]))) !== null)
 
@@ -84,6 +91,28 @@ export default async function run(db) {
   await as(db, A, `update public.documents set family_shared = true where id = $1`, [pShared])
   await as(db, A, `select public.soft_delete_document($1)`, [pShared])
   check('photo en corbeille : B ne lit plus la vignette', !(await objs(db, B)).includes(`${A.id}/p1-thumb.jpg`))
+
+  // --- 5. Verrou du coffre : la vignette est un fichier du coffre ----------------
+  console.log(' -- verrou du coffre')
+  await db.exec(`grant insert, update, delete on storage.objects to authenticated`)
+  await svc(db, `update public.vault_lock_settings set enabled = true where user_id = $1`, [A.id])
+  const sid = '00000000-0000-4000-8000-0000000005aa'
+  const locked = (await as(db, A, `select name from storage.objects where bucket_id = 'documents' order by name`, [], sid)).map((r) => r.name)
+  check('coffre verrouillé : le propriétaire ne liste plus ses vignettes', !locked.includes(`${A.id}/p2-thumb.jpg`), locked.join(','))
+  check('coffre verrouillé : ni ses photos', !locked.includes(`${A.id}/p2.jpg`))
+  await as(db, A, `delete from storage.objects where bucket_id = 'documents' and name = $1`, [`${A.id}/p2-thumb.jpg`], sid)
+  check('coffre verrouillé : suppression de la vignette sans effet',
+    (await db.query(`select 1 from storage.objects where name = $1`, [`${A.id}/p2-thumb.jpg`])).rows.length === 1)
+  await svc(db, `insert into public.vault_unlocks (user_id, session_id, expires_at) values ($1, $2, now() + interval '10 minutes')`, [A.id, sid])
+  const opened = (await as(db, A, `select name from storage.objects where bucket_id = 'documents' order by name`, [], sid)).map((r) => r.name)
+  check('coffre déverrouillé : la vignette redevient lisible', opened.includes(`${A.id}/p2-thumb.jpg`), opened.join(','))
+  await svc(db, `update public.vault_lock_settings set enabled = false where user_id = $1`, [A.id])
+
+  // --- 6. Purge automatique : photo ET vignette ------------------------------------
+  console.log(' -- purge')
+  await svc(db, `update public.documents set deleted_at = now() - interval '31 days' where id = $1`, [pShared])
+  const purged = (await svc(db, `select public.purge_expired_trash() as p`))[0].p ?? []
+  check('purge à 30 jours : renvoie la photo et sa vignette', purged.includes(`${A.id}/p1.jpg`) && purged.includes(`${A.id}/p1-thumb.jpg`), JSON.stringify(purged))
 
   console.log(`\n0530 : ${pass} ok, ${fail} échec(s)`)
   if (fail) process.exitCode = 1

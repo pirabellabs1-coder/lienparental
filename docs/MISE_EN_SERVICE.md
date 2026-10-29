@@ -240,7 +240,7 @@ select cron.schedule('purge-trash', '30 3 * * *', $$ select public.purge_expired
 `purge_expired_trash()` n'est exécutable que par `postgres` (propriétaire, cas de pg_cron) et `service_role` (0270) :
 un worker externe doit l'appeler avec la clé service_role.
 
-Le worker de purge doit aussi supprimer : les fichiers renvoyés par `purge_expired_trash()`, les pièces jointes de
+Le worker de purge doit aussi supprimer : les fichiers renvoyés par `purge_expired_trash()` (depuis 0530 : photos de l'album ET leurs vignettes), les pièces jointes de
 témoins **non rattachées** à un témoignage après 24 h (dépôt sans envoi), et les lignes `journal_entries` / `expenses` /
 `children` / `calendar_events` à `deleted_at` > 30 jours (+ leurs fichiers).
 
