@@ -1,0 +1,161 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "martinique",
+  "categorie": "sante",
+  "titre": "Mandatory vaccinations and check-ups at the PMI",
+  "resume": "The vaccines required for daycare, school and leisure centers in Martinique, free check-ups for children under 6 at the PMI, and yellow fever if you travel to French Guiana.",
+  "aQuoiCaSert": "Mandatory vaccinations are required to enter daycare, school, after-school care or holiday camps: without proof, enrollment may be refused or only provisional. The proof is the health record book (carnet de santé) filled in by the doctor. In Martinique, the list of mandatory vaccines is the same as in mainland France. Mother and child health protection (protection maternelle et infantile, PMI), a service of the Collectivité territoriale de Martinique (CTM, the territorial authority), provides free consultations for pregnant women and children under 6, vaccinations included.",
+  "quiEstConcerne": [
+    "All parents of minor children, especially before starting daycare, school or a holiday club.",
+    "Families traveling to French Guiana with a child aged 12 months or older: yellow fever vaccination is mandatory there."
+  ],
+  "aSavoir": [
+    "Child born before 2018: diphtheria, tetanus and polio (DTP) are mandatory for school.",
+    "Child born between January 1, 2018 and December 31, 2022: 11 mandatory vaccines (diphtheria, tetanus, polio, whooping cough, Haemophilus influenzae b, hepatitis B, pneumococcus, meningococcus C, measles, mumps, rubella).",
+    "Child born in 2023 or later: same list, with meningococcus A, B, C, W and Y instead of meningococcus C alone.",
+    "Yellow fever: it is not mandatory in Martinique. It is mandatory in French Guiana, for residents and anyone staying there, from age 1: talk to your doctor before a trip.",
+    "A child who is not up to date can be admitted provisionally: you then have 3 months to catch up, otherwise the child may be excluded. If the child stays more than a year, proof is requested every year.",
+    "Before age 6, the child receives 16 of the 20 mandatory health check-ups (scheduled up to age 16), with the doctor or at the PMI. They are covered 100% with no upfront payment, excluding extra fees.",
+    "Separated parents: the parent who takes the child to be vaccinated should inform the other parent and send them a copy of the vaccination pages, so that each parent has the proof."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "The child's health record book (carnet de santé)",
+      "detail": "Bring the original to every appointment. It is the proof of vaccination: keep a photocopy or photo of the vaccination pages. Lost it? Ask the PMI or your doctor.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Parent's carte Vitale (health insurance card) or the child's certificate of entitlement",
+      "detail": "Certificate can be downloaded free of charge from your ameli account.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "ID of the parent or the accompanying adult",
+      "detail": "Original. If another person accompanies the child, bring written authorization from a parent.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Medical certificate of contraindication, if applicable",
+      "detail": "Issued by the doctor. To be shown instead of proof of vaccination.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check the health record book",
+      "detail": "Compare it with the list of mandatory vaccines for your child's year of birth."
+    },
+    {
+      "titre": "Make an appointment",
+      "detail": "With your regular doctor (médecin traitant) or pediatrician, or at a PMI center of the Collectivité territoriale de Martinique for children under 6. Call first: consultation hours and days vary from center to center."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Health record book, carte Vitale or certificate of entitlement, ID, written authorization if the child is not accompanied by a parent."
+    },
+    {
+      "titre": "Have your child vaccinated",
+      "detail": "The health professional records the vaccine in the health record book."
+    },
+    {
+      "titre": "Show the proof",
+      "detail": "A photocopy of the vaccination pages to the daycare, school or holiday club, every year if the child stays more than a year."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "PMI centers of the Collectivité territoriale de Martinique (CTM)",
+      "detail": "Free consultations and vaccines for children under 6, in many towns. Directory by town on sante.fr.",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/972-martinique"
+    },
+    {
+      "nom": "Your regular doctor or pediatrician"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vaccines required for daycare and school (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "PMI centers in Martinique (sante.fr)",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/972-martinique"
+    },
+    {
+      "titre": "Mandatory health check-ups up to age 6 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Vaccination appointment",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Vaccine booster",
+      "evenement": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Vaccination pages of the health record book",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 months to catch up after provisional admission",
+      "detail": "If vaccinations are still not up to date after this period, the child may be excluded from the daycare, school or club."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: addresses, opening hours and consultation days of the CTM's PMI centers; call before you go.",
+    "The number of doses and the age for each vaccine follow the current vaccination schedule: check with your doctor or the PMI."
+  ],
+  "motsCles": [
+    "vaccine",
+    "PMI",
+    "health record book",
+    "pediatrician",
+    "baby",
+    "CTM"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vaccination for school, daycare or after-school care",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-01-06"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1879 Health at primary school",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879",
+      "verifieLe": "2026-10-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F967 Mandatory medical check-ups for children",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967",
+      "verifieLe": "2026-07-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2025-06-20"
+    },
+    {
+      "titre": "Santé.fr, directory of PMI centers in Martinique",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/972-martinique",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Collectivité territoriale de Martinique, official website",
+      "url": "https://www.collectivitedemartinique.mq",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

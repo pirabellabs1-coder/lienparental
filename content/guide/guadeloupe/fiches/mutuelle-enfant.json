@@ -1,0 +1,176 @@
+{
+  "slug": "mutuelle-enfant",
+  "territoire": "guadeloupe",
+  "categorie": "sante",
+  "titre": "Mutuelle et complémentaire santé de l'enfant",
+  "resume": "Ajouter votre enfant sur votre mutuelle, choisir quel parent le couvre après une séparation et éviter les remboursements bloqués.",
+  "aQuoiCaSert": "L'Assurance maladie (en Guadeloupe, la CGSS) rembourse une partie des soins. La complémentaire santé, souvent appelée mutuelle, prend en charge tout ou partie du reste. Un enfant est en général couvert comme ayant droit sur le contrat de l'un de ses parents. Quand la liaison entre l'Assurance maladie et la mutuelle (appelée liaison Noémie) est en place, le remboursement complémentaire arrive automatiquement, sans envoyer de papier.",
+  "quiEstConcerne": [
+    "Les parents salariés couverts par la complémentaire santé obligatoire de leur entreprise, qui veulent y ajouter leur enfant.",
+    "Les parents qui ont une mutuelle individuelle.",
+    "Les parents séparés qui doivent décider sur quel contrat l'enfant est couvert.",
+    "Les foyers aux revenus modestes, qui peuvent avoir droit à la complémentaire santé solidaire, gratuite ou à petit prix."
+  ],
+  "aSavoir": [
+    "La couverture des enfants dépend de votre contrat : certains contrats d'entreprise couvrent obligatoirement la famille, d'autres laissent le choix, avec ou sans supplément de cotisation. Lisez la notice d'information remise par votre employeur ou votre mutuelle.",
+    "Un salarié déjà couvert comme ayant droit par un autre contrat collectif obligatoire (par exemple celui de son conjoint) ou bénéficiaire de la complémentaire santé solidaire peut demander à être dispensé d'adhérer à la mutuelle de son entreprise (service-public.gouv.fr).",
+    "Un enfant peut être rattaché à l'Assurance maladie des deux parents. Côté mutuelle, la liaison Noémie sur le dossier des deux parents dépend de chaque organisme complémentaire : l'Assurance maladie ne peut pas l'imposer (réponse d'un expert ameli, octobre 2025).",
+    "Sans liaison Noémie sur votre dossier, vous êtes quand même remboursé par l'Assurance maladie, mais vous devez envoyer vous-même le relevé de remboursement à la mutuelle qui couvre l'enfant.",
+    "Si vos revenus sont modestes, la complémentaire santé solidaire couvre toute la famille, enfants compris : voyez la fiche dédiée du guide."
+  ],
+  "documents": [
+    {
+      "id": "attestation-droits",
+      "libelle": "Attestation de droits à l'Assurance maladie de l'enfant (ou du parent sur laquelle il figure)",
+      "detail": "Copie. Téléchargeable gratuitement dans votre compte ameli, rubrique Mes démarches, ou à demander à la CGSS de la Guadeloupe.",
+      "coffre": "sante"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "Acte de naissance de l'enfant ou livret de famille",
+      "detail": "Copie, pour prouver le lien de filiation. Acte gratuit à demander en ligne sur service-public.gouv.fr ou à la mairie du lieu de naissance.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Pièce d'identité du parent titulaire du contrat",
+      "detail": "Copie recto verso en cours de validité.",
+      "coffre": "sante"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB du parent qui recevra les remboursements",
+      "detail": "Original ou copie, à votre nom.",
+      "coffre": "finances"
+    },
+    {
+      "id": "formulaire-ajout",
+      "libelle": "Formulaire d'ajout d'un bénéficiaire ou demande écrite à la mutuelle",
+      "detail": "Fourni par votre mutuelle ou par le service des ressources humaines de votre employeur.",
+      "coffre": "sante"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Jugement ou convention fixant la résidence de l'enfant (parents séparés)",
+      "detail": "Copie, seulement si la mutuelle la demande pour justifier que l'enfant est à votre charge.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "carte-tiers-payant",
+      "libelle": "Carte de tiers payant de la mutuelle mentionnant l'enfant",
+      "detail": "Envoyée par la mutuelle une fois l'enfant ajouté. À présenter au médecin et à la pharmacie.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Vérifiez d'abord que l'enfant est bien rattaché à l'Assurance maladie",
+      "detail": "Sans rattachement, la mutuelle ne peut pas rembourser. Consultez si besoin la fiche du guide sur le rattachement de l'enfant et sa carte Vitale."
+    },
+    {
+      "titre": "Lisez votre contrat ou la notice de la mutuelle d'entreprise",
+      "detail": "Repérez si les enfants sont couverts d'office, en option ou avec un supplément, et jusqu'à quel âge."
+    },
+    {
+      "titre": "Vérifiez avant d'envoyer votre dossier",
+      "detail": "Attestation de droits à jour où figure l'enfant, acte de naissance ou livret de famille, RIB, pièce d'identité, formulaire signé. Demandez à la mutuelle par écrit si un justificatif de résidence de l'enfant est exigé en cas de séparation."
+    },
+    {
+      "titre": "Demandez l'ajout de l'enfant",
+      "detail": "Auprès de votre mutuelle, ou du service des ressources humaines pour un contrat d'entreprise. Gardez une copie de la demande."
+    },
+    {
+      "titre": "Parents séparés : accordez-vous sur le contrat qui couvre l'enfant",
+      "detail": "Demandez à la mutuelle si elle accepte une liaison Noémie sur le dossier des deux parents. Sinon, celui qui n'est pas relié envoie lui-même ses relevés de remboursement."
+    },
+    {
+      "titre": "Contrôlez le premier remboursement",
+      "detail": "Sur votre relevé ameli, la mention de la transmission à la complémentaire confirme que la liaison fonctionne."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Votre mutuelle ou le service des ressources humaines de votre employeur",
+      "detail": "Pour ajouter l'enfant au contrat et connaître le coût éventuel."
+    },
+    {
+      "nom": "CGSS de la Guadeloupe (Assurance maladie)",
+      "detail": "Pour l'attestation de droits et le rattachement de l'enfant.",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Dispenses d'adhésion à la mutuelle d'entreprise (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740"
+    },
+    {
+      "titre": "Complémentaire santé d'entreprise (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739"
+    },
+    {
+      "titre": "Complémentaire santé solidaire (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Attestation de droits Assurance maladie de l'enfant",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Carte de tiers payant de la mutuelle",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Contrat ou notice de la mutuelle",
+      "categorie": "sante"
+    },
+    {
+      "type": "depense",
+      "titre": "Cotisation de mutuelle pour l'enfant",
+      "categorie": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Vérifier chaque année la couverture de l'enfant par la mutuelle",
+      "evenement": "sante"
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de votre mutuelle : l'âge limite de couverture des enfants et les justificatifs exigés pour un enfant de parents séparés varient selon les contrats."
+  ],
+  "motsCles": [
+    "mutuelle",
+    "complémentaire santé",
+    "ayant droit",
+    "Noémie",
+    "parents séparés",
+    "remboursement"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F20740 Dispenses d'adhésion à la mutuelle d'entreprise",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740",
+      "verifieLe": "2024-05-16"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F20739 Complémentaire santé d'entreprise",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739",
+      "verifieLe": "2024-05-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027",
+      "verifieLe": "2026-07-01"
+    },
+    {
+      "titre": "Forum des assurés ameli, réponse d'expert : double rattachement et complémentaire santé (29 octobre 2025)",
+      "url": "https://forum-assures.ameli.fr/questions/3657009-parents-separes-double-rattachement-secu-enfant-seule-complementaire-sante-papa"
+    }
+  ]
+}

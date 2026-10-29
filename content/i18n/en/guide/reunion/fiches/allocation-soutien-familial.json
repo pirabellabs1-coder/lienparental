@@ -1,0 +1,194 @@
+{
+  "slug": "allocation-soutien-familial",
+  "territoire": "reunion",
+  "categorie": "aides",
+  "titre": "Family support allowance (ASF, allocation de soutien familial)",
+  "resume": "€200.78 per month per child, paid by the Caf to a parent raising a child alone when the other parent pays little or no child support. The documents to gather and the 4-month deadline you must not miss.",
+  "aQuoiCaSert": "The ASF helps a parent living alone with their child when the other parent no longer contributes to the child's upkeep, or pays child support lower than the ASF amount. If child support has been set and is not paid, the Caf (Caisse d'allocations familiales, the family benefits office) pays the ASF as an advance and then claims the money from the non-paying parent itself. If no child support has been set, the ASF is paid for 4 months, giving you time to apply to the judge.",
+  "quiEstConcerne": [
+    "A parent living alone (no spouse, live-in partner or PACS partner (civil partnership)), residing in France, with at least one dependent child.",
+    "If the other parent has not contributed to the child's upkeep for at least 1 month, or pays child support below €200.78 per month per child.",
+    "If the other parent is unable to pay: the Caf can also pay the ASF after checking their situation."
+  ],
+  "aSavoir": [
+    "Amount: €200.78 per month per child since the April 1, 2026 increase (service-public.gouv.fr, a page covering mainland France and overseas France).",
+    "Top-up ASF (ASF différentielle): if the child support you receive is below €200.78, the Caf pays the difference. It is not paid if the gap is under €15, and it is paid in a single payment every 3 months.",
+    "Child support set but unpaid (judgment, court-approved agreement, divorce agreement filed with a notary, document issued by the Caf): the ASF is an advance and the Caf takes action to recover the child support.",
+    "No child support set: the ASF is paid for 4 months only. To keep it, apply to the family court judge (juge aux affaires familiales, JAF) within that period, or ask for a review of a decision that does not set child support.",
+    "The ASF stops as soon as you live as a couple: report any change quickly to avoid an overpayment you would have to pay back.",
+    "You do not need the other parent's agreement to apply for the ASF."
+  ],
+  "documents": [
+    {
+      "id": "cerfa-12038",
+      "libelle": "Family support allowance application (cerfa n° 12038)",
+      "detail": "Signed original, or apply online from your Caf account. Keep a copy.",
+      "coffre": "finances"
+    },
+    {
+      "id": "cerfa-11423",
+      "libelle": "Statement of situation (Déclaration de situation, cerfa n° 11423)",
+      "detail": "To attach to the ASF application if you do not yet receive Caf benefits.",
+      "coffre": "finances"
+    },
+    {
+      "id": "identite",
+      "libelle": "Your ID (copy)",
+      "detail": "Valid ID card, passport or residence permit.",
+      "coffre": "finances"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Family record book (livret de famille) or birth certificate of each child (copy)",
+      "detail": "The birth certificate can be requested free of charge from the town hall (mairie) of the place of birth, online on service-public.gouv.fr.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment, court-approved agreement or document setting child support (copy), if there is one",
+      "detail": "If you lost it, ask the court registry (greffe), the lawyer or the notary for a copy.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "preuves-impayes",
+      "libelle": "Proof of unpaid or partly paid child support",
+      "detail": "Bank statements, written exchanges, reminder letter. Note the missing months and amounts.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank details slip) in your name",
+      "detail": "If you do not yet receive Caf benefits or if you have changed accounts.",
+      "coffre": "finances"
+    },
+    {
+      "id": "saisine-jaf",
+      "libelle": "Proof that you applied to the family court judge",
+      "detail": "Copy of the application or the court registry's acknowledgment, if no child support is set. Send it to the Caf before the 4 months are up.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check that you meet the conditions",
+      "detail": "You live alone with the child and the other parent has paid nothing for at least 1 month, or pays less than €200.78 per child. The Caf simulator lets you estimate your entitlement."
+    },
+    {
+      "titre": "Apply",
+      "detail": "Online from your Caf account, or with cerfa n° 12038 (and the statement of situation if you do not receive Caf benefits)."
+    },
+    {
+      "titre": "Check before sending your file",
+      "detail": "Forms dated and signed, readable ID, family record book or each child's birth certificate, judgment or agreement if there is one, month-by-month proof of non-payment, up-to-date RIB. Keep a copy of everything."
+    },
+    {
+      "titre": "Send the file to the Caf de La Réunion",
+      "detail": "Or to the MSA (Mutualité sociale agricole, the farmers' social security fund) if you are covered by the agricultural scheme."
+    },
+    {
+      "titre": "With no child support set, apply to the family court judge within 4 months",
+      "detail": "This is the condition for continuing to receive the ASF. See the guide entry \"Applying to the family court judge (JAF)\", then send the proof to the Caf."
+    },
+    {
+      "titre": "Track payments in the Journal",
+      "detail": "Record each child support payment received or missed, with the proof: useful for the Caf, ARIPA (the child support collection agency) or the judge."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de La Réunion",
+      "detail": "Online account on caf.fr or the Caf app.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    },
+    {
+      "nom": "MSA",
+      "detail": "If you are covered by the agricultural scheme."
+    },
+    {
+      "nom": "ARIPA, the public child support service",
+      "detail": "Recovery of unpaid child support and financial intermediation.",
+      "url": "https://pension-alimentaire.caf.fr/usagers"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Family support allowance for separated parents (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815"
+    },
+    {
+      "titre": "Financial intermediation of child support (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407"
+    },
+    {
+      "titre": "Caf de La Réunion",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "ASF application sent to the Caf",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Judgment or agreement setting child support",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Proof of unpaid child support",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Proof of application to the family court judge",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Apply to the judge before the 4 months of ASF end",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Report any change to the Caf (new partner, child support received)",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "4 months to apply to the judge if no child support is set",
+      "detail": "Otherwise, ASF payments stop at the end of the 4th month."
+    },
+    {
+      "libelle": "1 month without any contribution from the other parent",
+      "detail": "Minimum period after which you can apply for the ASF."
+    }
+  ],
+  "aConfirmer": [
+    "The exact list of documents depends on your situation: the Caf de La Réunion may ask for others.",
+    "To be confirmed locally: addresses, opening hours and appointment arrangements at the Caf de La Réunion reception desks."
+  ],
+  "motsCles": [
+    "ASF",
+    "single parent",
+    "Caf",
+    "unpaid child support",
+    "allowance",
+    "lone parent"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F815 Family support allowance (separated parents)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F36407 Financial intermediation of child support",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

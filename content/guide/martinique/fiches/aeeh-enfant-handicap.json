@@ -1,0 +1,198 @@
+{
+  "slug": "aeeh-enfant-handicap",
+  "territoire": "martinique",
+  "categorie": "aides",
+  "titre": "Allocation d'éducation de l'enfant handicapé (AEEH) et MDPH",
+  "resume": "Constituer un dossier complet à la MDPH pour l'AEEH : formulaire, certificat médical de moins d'un an, pièces exactes, délais de réponse et recours.",
+  "aQuoiCaSert": "L'AEEH aide les parents à faire face aux frais d'éducation et de soins d'un enfant en situation de handicap. Elle se compose d'un montant de base et, selon les besoins, d'un complément et d'une majoration pour parent isolé. La demande se fait auprès de la maison départementale des personnes handicapées (MDPH). La décision est prise par la commission des droits et de l'autonomie (CDAPH), puis la Caf verse l'allocation.",
+  "quiEstConcerne": [
+    "Les parents d'un enfant de moins de 20 ans dont le taux d'incapacité est d'au moins 80 %.",
+    "Les parents d'un enfant dont le taux est de 50 % à moins de 80 %, s'il fréquente un établissement ou un service spécialisé ou si des soins sont préconisés par la CDAPH.",
+    "Les parents séparés, quel que soit le mode de résidence de l'enfant (l'AEEH n'est toutefois pas partagée en résidence alternée)."
+  ],
+  "aSavoir": [
+    "Montant de base : 153,01 € par mois. Des compléments existent selon la catégorie de besoins (1 à 6) et une majoration est prévue pour le parent isolé (service-public.gouv.fr, vérifié au 1er juin 2026).",
+    "Le certificat médical (cerfa n° 15695) doit dater d'un an au maximum au moment du dépôt.",
+    "La CDAPH doit répondre dans un délai de 4 mois. Sans réponse au bout de 4 mois, la demande est considérée comme rejetée.",
+    "En cas de refus, un recours administratif préalable obligatoire est possible dans les 2 mois, puis un recours devant le tribunal judiciaire dans les 2 mois suivant la réponse.",
+    "L'AEEH est accordée pour 3 à 5 ans si le taux est d'au moins 80 %, pour 2 à 5 ans entre 50 et 80 %, ou sans limitation de durée jusqu'aux 20 ans si l'état de l'enfant ne peut pas s'améliorer.",
+    "En résidence alternée, l'AEEH n'est pas partagée : elle est versée en totalité au parent désigné comme allocataire (service-public.gouv.fr).",
+    "Une loi du 12 juin 2026 prévoit des changements, dont une expérimentation d'instruction plus rapide. Ils ne s'appliquent qu'après la publication des décrets."
+  ],
+  "documents": [
+    {
+      "id": "formulaire-mdph",
+      "libelle": "Formulaire de demande à la MDPH (cerfa n° 15692)",
+      "detail": "Original daté et signé par le représentant légal. Disponible sur service-public.gouv.fr ou auprès de la MDPH.",
+      "coffre": "sante"
+    },
+    {
+      "id": "certificat-medical",
+      "libelle": "Certificat médical (cerfa n° 15695) de moins d'un an",
+      "detail": "Original rempli par le médecin qui suit l'enfant. Joignez les comptes rendus utiles (bilans, examens).",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-enfant",
+      "libelle": "Pièce d'identité de l'enfant ou livret de famille",
+      "detail": "Photocopie recto verso. Pour un enfant étranger, titre de séjour ou document de circulation.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-representants",
+      "libelle": "Pièce d'identité de chaque représentant légal",
+      "detail": "Photocopie recto verso en cours de validité, ou titre de séjour.",
+      "coffre": "sante"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Justificatif de domicile",
+      "detail": "Photocopie. Si vous êtes hébergé, ajoutez une attestation sur l'honneur de la personne qui vous héberge.",
+      "coffre": "sante"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Jugement de protection ou décision sur l'autorité parentale, le cas échéant",
+      "detail": "Copie, si un jugement fixe qui exerce l'autorité parentale ou si une mesure de protection existe.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "bilans",
+      "libelle": "Bilans complémentaires (audition, vision, psychologue, école)",
+      "detail": "Copies. Le formulaire indique les volets facultatifs (bilan auditif, bilan ophtalmologique).",
+      "coffre": "sante"
+    },
+    {
+      "id": "accuse-reception",
+      "libelle": "Accusé de réception du dossier par la MDPH",
+      "detail": "À conserver : il fait partir le délai de 4 mois.",
+      "coffre": "courriers"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Prenez rendez-vous avec le médecin pour le certificat médical",
+      "detail": "Le certificat doit avoir moins d'un an au dépôt. Demandez-lui de détailler les besoins de l'enfant au quotidien."
+    },
+    {
+      "titre": "Remplissez le formulaire de demande",
+      "detail": "Décrivez la vie de l'enfant, ses besoins, l'école et vos frais. Le projet de vie aide la commission à comprendre la situation."
+    },
+    {
+      "titre": "Vérifiez avant d'envoyer votre dossier",
+      "detail": "Formulaire signé, certificat médical original de moins d'un an, pièces d'identité de l'enfant et des représentants légaux, justificatif de domicile, bilans. Un dossier incomplet retarde l'examen."
+    },
+    {
+      "titre": "Envoyez le dossier à la MDPH",
+      "detail": "De préférence par lettre recommandée avec accusé de réception, ou en ligne si la MDPH propose ce service. Gardez une copie complète."
+    },
+    {
+      "titre": "Suivez la décision",
+      "detail": "La CDAPH a 4 mois pour répondre. Notez la date pour pouvoir relancer et, en cas de refus, faire un recours dans les 2 mois."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "MDPH de la Martinique",
+      "detail": "Coordonnées à vérifier dans l'annuaire officiel Mon Parcours Handicap.",
+      "url": "https://www.monparcourshandicap.gouv.fr/annuaire"
+    },
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "Verse l'AEEH après la décision de la CDAPH.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Allocation d'éducation de l'enfant handicapé (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809"
+    },
+    {
+      "titre": "Formulaire de demande à la MDPH (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993"
+    },
+    {
+      "titre": "Trouver sa MDPH (monparcourshandicap.gouv.fr)",
+      "url": "https://www.monparcourshandicap.gouv.fr/annuaire"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Certificat médical MDPH de l'enfant",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Dossier MDPH complet (copie)",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notification de décision de la CDAPH",
+      "categorie": "courriers"
+    },
+    {
+      "type": "rappel",
+      "titre": "Relancer la MDPH si pas de réponse 4 mois après le dépôt",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Préparer le renouvellement de l'AEEH avant la fin des droits",
+      "evenement": "sante"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Rendez-vous médecin pour le certificat médical MDPH",
+      "evenement": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Certificat médical de moins d'un an au dépôt du dossier"
+    },
+    {
+      "libelle": "Réponse de la CDAPH sous 4 mois",
+      "detail": "Sans réponse, la demande est considérée comme rejetée."
+    },
+    {
+      "libelle": "Recours dans les 2 mois après une décision de refus"
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : l'adresse, les horaires et la possibilité de déposer le dossier en ligne auprès de la MDPH de la Martinique (annuaire Mon Parcours Handicap).",
+    "À confirmer localement : les délais réels de traitement en Martinique peuvent dépasser le délai légal."
+  ],
+  "motsCles": [
+    "AEEH",
+    "MDPH",
+    "handicap",
+    "CDAPH",
+    "certificat médical",
+    "allocation"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F14809 Allocation d'éducation de l'enfant handicapé",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809",
+      "verifieLe": "2026-06-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R19993 Formulaire de demande à la MDPH",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993",
+      "verifieLe": "2026-07-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Mon Parcours Handicap, annuaire",
+      "url": "https://www.monparcourshandicap.gouv.fr/annuaire"
+    }
+  ]
+}

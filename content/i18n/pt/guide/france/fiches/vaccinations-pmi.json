@@ -1,0 +1,158 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "france",
+  "categorie": "sante",
+  "titre": "Vacinas obrigatórias e acompanhamento na PMI",
+  "resume": "As vacinas exigidas para a creche, a escola e o centro de lazer conforme o ano de nascimento, incluindo meningococos A, B, C, W e Y, e o acompanhamento dos menores de 6 anos na PMI (serviço de saúde materno-infantil).",
+  "aQuoiCaSert": "Salvo contraindicação médica, as vacinas obrigatórias são exigidas para entrar na creche, na escola, na guarderia ou na colônia de férias: sem comprovante, a matrícula pode ser apenas provisória e depois recusada. O comprovante é a caderneta de saúde (carnet de santé) preenchida pelo médico. Os centros de proteção materno-infantil (protection maternelle et infantile, PMI), ligados ao conseil départemental (conselho departamental), oferecem consultas gratuitas para gestantes e crianças com menos de 6 anos.",
+  "quiEstConcerne": [
+    "Todos os pais de filhos menores, em especial antes da entrada na creche, na escola, na guarderia ou na colônia de férias.",
+    "Os pais de crianças com menos de 6 anos, para as consultas e vacinas na PMI."
+  ],
+  "aSavoir": [
+    "Criança nascida antes de 2018: só a vacinação primária contra difteria, tétano e poliomielite (DTP) é exigida para a escola.",
+    "Criança nascida entre 2018 e 2022: 11 vacinas obrigatórias (difteria, tétano, poliomielite, coqueluche, Haemophilus influenzae b, hepatite B, pneumococo, meningococo C, sarampo, caxumba, rubéola).",
+    "Criança nascida a partir de 2023: mesma lista, mas a vacinação contra os meningococos cobre os sorogrupos A, B, C, W e Y (e não mais só o C).",
+    "Uma criança com vacinas atrasadas pode ser admitida provisoriamente: você tem 3 meses para pôr as vacinas em dia; caso contrário, o estabelecimento pode excluí-la. Se a criança for admitida por mais de um ano, o comprovante é pedido todo ano.",
+    "20 exames de saúde obrigatórios do nascimento aos 16 anos, dos quais 16 antes dos 6 anos. São reembolsados a 100% sem adiantamento, exceto honorários excedentes (dépassements d'honoraires). Até os 6 anos, podem ser feitos pelo médico de referência, por outro médico ou pela PMI.",
+    "Pais separados: o genitor que leva a criança para vacinar deve avisar o outro e enviar uma cópia das páginas de vacinas, para que cada um tenha o comprovante."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "Caderneta de saúde da criança (carnet de santé)",
+      "detail": "Original a levar a cada consulta. É o comprovante das vacinas: guarde uma fotocópia ou uma foto das páginas de vacinas.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Carte Vitale (cartão do seguro de saúde) do genitor ou atestado de direitos da criança",
+      "detail": "Atestado disponível gratuitamente na sua conta ameli.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Documento de identidade do genitor ou do adulto acompanhante",
+      "detail": "Original. Se outra pessoa acompanhar a criança, leve uma autorização escrita de um dos pais.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Atestado médico de contraindicação, se for o caso",
+      "detail": "Emitido pelo médico. Apresentado no lugar do comprovante de vacina.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique a caderneta de saúde",
+      "detail": "Compare com a lista de vacinas obrigatórias conforme o ano de nascimento do seu filho."
+    },
+    {
+      "titre": "Marque uma consulta",
+      "detail": "Com seu médico de referência ou pediatra, ou num centro de PMI do seu departamento para os menores de 6 anos. Ligue antes para saber os dias de consulta."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Caderneta de saúde, carte Vitale ou atestado de direitos, documento de identidade, autorização escrita se quem acompanha não for um dos pais."
+    },
+    {
+      "titre": "Vacine seu filho",
+      "detail": "O profissional registra a vacina na caderneta de saúde."
+    },
+    {
+      "titre": "Apresente o comprovante",
+      "detail": "Fotocópia das páginas de vacinas para a creche, a escola ou o centro de lazer, todo ano se a criança ficar mais de um ano."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Centros de PMI do conseil départemental",
+      "detail": "Consultas gratuitas, prevenção e acompanhamento para gestantes e menores de 6 anos. Encontre o centro mais próximo no diretório da administração ou no site do seu departamento.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    },
+    {
+      "nom": "Seu médico de referência ou pediatra",
+      "detail": "Vacinas e exames de saúde obrigatórios."
+    },
+    {
+      "nom": "Conta ameli",
+      "detail": "Atestado de direitos da criança e informações sobre vacinação.",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vacinas exigidas para a creche e a escola (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Exames médicos obrigatórios da criança (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967"
+    },
+    {
+      "titre": "As vacinas obrigatórias (ameli.fr)",
+      "url": "https://www.ameli.fr/assure/sante/themes/vaccination/vaccins-obligatoires"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Consulta de vacinação",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Reforço de vacina",
+      "evenement": "sante"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Exame de saúde obrigatório da criança",
+      "evenement": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Páginas de vacinas da caderneta de saúde",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 meses para regularizar após uma admissão provisória",
+      "detail": "Sem vacinas em dia ao fim desse prazo, a criança pode ser excluída da creche, escola ou centro."
+    }
+  ],
+  "aConfirmer": [
+    "O número de doses e a idade de cada vacina seguem o calendário vacinal em vigor: verifique com seu médico ou a PMI.",
+    "As páginas do ameli.fr e do vaccination-info-service.fr não puderam ser consultadas na verificação; a lista acima segue a ficha do service-public.gouv.fr. A atualização das vacinas meningocócicas para uma criança já vacinada só contra o meningococo C deve ser vista com o médico.",
+    "A confirmar localmente: endereços, dias de consulta e agendamento dos centros de PMI, que variam conforme o departamento."
+  ],
+  "motsCles": [
+    "vacina",
+    "vacinas obrigatórias",
+    "meningococo",
+    "PMI",
+    "caderneta de saúde",
+    "pediatra",
+    "bebê"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F967 Exames médicos obrigatórios da criança",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Diretório service-public, exemplo de ficha de um centro de PMI (missões dos centros)",
+      "url": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/yonne/5f0cff59-99c9-49ca-9ec7-9c1ba117b650",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

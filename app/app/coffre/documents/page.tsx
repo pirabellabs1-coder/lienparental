@@ -26,7 +26,8 @@ export default function DocumentsHub() {
   const { announce, node } = useAnnounce()
   const { openActions, sheet } = useDocActions(announce, { onRemoved: refresh })
   const total = categories.reduce((s, c) => s + c.count, 0)
-  const recent = [...docs].sort((a, b) => b.addedAt.localeCompare(a.addedAt)).slice(0, 4)
+  // Tri par date du document (prise de vue pour une photo), puis par ajout en cas d'ex æquo.
+  const recent = [...docs].sort((a, b) => b.docDate.localeCompare(a.docDate) || b.addedAt.localeCompare(a.addedAt)).slice(0, 4)
 
   return (
     <>

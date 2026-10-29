@@ -1,0 +1,65 @@
+{
+  "slug": "pass-sport",
+  "territoire": "france",
+  "categorie": "loisirs",
+  "titre": "Pass'Sport : une réduction sur l'inscription en club",
+  "resume": "50 € de réduction sur l'adhésion à un club sportif pour 2026-2027, à utiliser avant le 31 décembre 2026 : qui y a droit, comment récupérer son code et quoi apporter au club.",
+  "aQuoiCaSert": "Le Pass'Sport allège le coût de l'inscription de votre enfant dans un club, une association ou une salle de sport partenaire. La réduction de 50 € est appliquée directement par le club sur la licence ou l'abonnement. Si l'inscription coûte moins de 50 €, le club s'engage à faire profiter le jeune de la différence, par exemple en équipement.",
+  "quiEstConcerne": [
+    "Les jeunes de 6 à 17 ans révolus dont le foyer allocataire a un quotient familial Caf ou MSA inférieur ou égal à 699 €.",
+    "Les jeunes de 6 à 19 ans révolus bénéficiaires de l'AEEH, et ceux de 16 à 30 ans révolus bénéficiaires de l'AAH.",
+    "Les étudiants boursiers jusqu'à 28 ans révolus (bourse du Crous ou bourse régionale pour une formation sanitaire et sociale, attribuée avant le 15 octobre 2026)."
+  ],
+  "aSavoir": [
+    "Montant 2026-2027 : 50 € par jeune, contre 70 € en 2025-2026.",
+    "Utilisable pour les inscriptions faites entre le 1er septembre et le 31 décembre 2026.",
+    "Les codes ont été envoyés par courriel entre le 9 et le 13 septembre 2026, à l'adresse connue de la Caf, de la MSA ou du Crous, avec un courriel distinct pour chaque enfant mineur éligible. Regardez aussi dans les courriers indésirables.",
+    "Pas de courriel ? Testez l'éligibilité sur le site officiel, puis faites la demande en ligne (de préférence avec FranceConnect). Le code arrive par courriel dans un délai pouvant aller jusqu'à 72 heures.",
+    "Le Pass'Sport est accepté par plus de 85 000 structures en France. Un club n'est pas obligé d'adhérer au dispositif ; un club absent de la liste indicative peut quand même l'accepter.",
+    "Parents séparés : l'éligibilité dépend du quotient familial du foyer allocataire. Le code est donc envoyé à l'adresse du parent allocataire : transmettez-le si c'est l'autre parent qui inscrit l'enfant.",
+    "Une aide complémentaire de la Caf pour l'équipement sportif est annoncée au 1er trimestre 2027 pour les allocataires de 6 à 17 ans ayant activé leur Pass'Sport à la rentrée 2026. Son montant n'est pas précisé."
+  ],
+  "documents": [
+    { "id": "code-pass", "libelle": "Code Pass'Sport de l'enfant", "detail": "Dans le courriel reçu ou obtenu en ligne. Un code par enfant.", "coffre": "autres" },
+    { "id": "certificat", "libelle": "Certificat médical ou questionnaire de santé, si le club le demande", "detail": "Les règles dépendent du sport et de la fédération : demandez au club.", "coffre": "sante" },
+    { "id": "dossier-club", "libelle": "Dossier d'inscription du club et pièces qu'il demande", "detail": "La liste dépend du club : demandez-la avant de vous déplacer.", "coffre": "autres" },
+    { "id": "licence", "libelle": "Licence ou reçu d'adhésion indiquant la réduction", "detail": "À conserver comme preuve du paiement et de la réduction appliquée.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez l'éligibilité de votre enfant", "detail": "Sur le site officiel du Pass'Sport." },
+    { "titre": "Récupérez votre code", "detail": "Dans le courriel reçu en septembre, ou en faisant la demande en ligne." },
+    { "titre": "Choisissez un club partenaire", "detail": "Liste indicative sur le site officiel. Si le club n'y figure pas, demandez-lui directement s'il accepte le Pass'Sport." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Code Pass'Sport noté ou imprimé, dossier d'inscription du club rempli, certificat ou questionnaire de santé si demandé, moyen de paiement pour le reste à payer, inscription avant le 31 décembre 2026." },
+    { "titre": "Présentez le code au club lors de l'inscription", "detail": "Le club déduit 50 € de l'adhésion ou de la licence." },
+    { "titre": "Enregistrez la dépense restante dans le Journal" }
+  ],
+  "ou": [
+    { "nom": "Site officiel du Pass'Sport", "detail": "Test d'éligibilité, demande de code, liste indicative des clubs.", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" },
+    { "nom": "France Services ou CCAS de votre commune", "detail": "Accompagnement gratuit pour faire la demande en ligne. Adresses dans l'annuaire de l'administration.", "url": "https://lannuaire.service-public.gouv.fr" }
+  ],
+  "liens": [
+    { "titre": "Pass'Sport, jeunes et parents (sports.gouv.fr)", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" },
+    { "titre": "Pass'Sport 2026-2027, actualité (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Utiliser le Pass'Sport avant le 31 décembre 2026", "evenement": "activite" },
+    { "type": "depense", "titre": "Inscription au club sportif", "categorie": "activites" },
+    { "type": "calendrier", "titre": "Entraînement sportif", "evenement": "activite" },
+    { "type": "coffre", "titre": "Licence sportive", "categorie": "autres" },
+    { "type": "coffre", "titre": "Certificat médical sportif", "categorie": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "31 décembre 2026 : dernière date d'inscription avec le Pass'Sport 2026-2027" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : les clubs qui acceptent le Pass'Sport près de chez vous, sur le site officiel ou directement auprès du club.",
+    "Le montant et les modalités de l'aide équipement annoncée par la Caf pour 2027 sont à vérifier auprès de la Caf de votre département.",
+    "D'autres aides locales au sport peuvent exister (mairie, CCAS, conseil départemental ou régional) : renseignez-vous auprès d'eux."
+  ],
+  "motsCles": ["sport", "club", "Pass'Sport", "licence", "activité", "réduction"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, actualité A15850 Pass'Sport 2026-2027 (publiée le 2 septembre 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-10-29" },
+    { "titre": "Pass'Sport, jeunes et parents", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents", "verifieLe": "2026-10-29" }
+  ]
+}

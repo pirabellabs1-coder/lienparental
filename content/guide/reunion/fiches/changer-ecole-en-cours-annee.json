@@ -1,0 +1,67 @@
+{
+  "slug": "changer-ecole-en-cours-annee",
+  "territoire": "reunion",
+  "categorie": "ecole",
+  "titre": "Changer d'école en cours d'année (déménagement, certificat de radiation)",
+  "resume": "Faire changer votre enfant d'école, de collège ou de lycée en cours d'année à La Réunion : certificat de radiation, accord de la mairie, pièces à fournir et cas des parents séparés.",
+  "aQuoiCaSert": "Après un déménagement ou une séparation, votre enfant peut changer d'établissement en cours d'année. Ce changement n'est jamais automatique : il faut une place libre dans la nouvelle école. L'ancien établissement vous remet un certificat de radiation, sans lequel la nouvelle inscription n'est pas possible. Pour une école maternelle ou élémentaire publique, la mairie doit d'abord donner son accord et délivrer un certificat d'inscription.",
+  "quiEstConcerne": [
+    "Les parents qui déménagent en cours d'année, dans la même commune ou dans une autre commune de l'île.",
+    "Les parents séparés dont l'enfant change de résidence principale.",
+    "Les parents qui souhaitent une autre école, un autre collège ou un autre lycée que celui du secteur."
+  ],
+  "aSavoir": [
+    "École publique dans la même commune : l'accord du maire est nécessaire, et la mairie délivre un certificat d'inscription. Dans une autre commune : il faut l'accord du maire de la commune de résidence et de celui de la commune d'accueil, qui délivre le certificat.",
+    "Parents séparés : si l'un des parents s'oppose au changement d'école, le directeur doit attendre la décision du juge aux affaires familiales saisi par ce parent. Un accord écrit des deux parents qui exercent l'autorité parentale évite ce blocage.",
+    "Si un jugement vous confie seul l'exercice de l'autorité parentale, présentez-le à la mairie et à l'école : vous décidez alors seul.",
+    "Collège ou lycée public du secteur : demandez le certificat de radiation (exeat) à l'ancien établissement, puis inscrivez l'enfant dans le nouveau. L'inscription dépend des places et doit être acceptée par le chef d'établissement. S'il n'y a plus de place, ce sont les services départementaux de l'Éducation nationale qui affectent l'élève.",
+    "Collège ou lycée public hors secteur : il faut d'abord l'accord du directeur académique (Dasen), avant l'inscription.",
+    "Établissement privé : les conditions dépendent de l'établissement, contactez directement son secrétariat."
+  ],
+  "documents": [
+    { "id": "certificat-radiation", "libelle": "Certificat de radiation de l'ancienne école (exeat au collège et au lycée)", "detail": "Original remis par la direction de l'ancien établissement quand vous signalez le départ. Indispensable dans tous les cas.", "coffre": "scolarite" },
+    { "id": "certificat-inscription", "libelle": "Certificat d'inscription délivré par la mairie (école publique)", "detail": "Original, délivré par la mairie de la commune d'accueil.", "coffre": "scolarite" },
+    { "id": "filiation", "libelle": "Livret de famille ou extrait d'acte de naissance de l'enfant", "detail": "Copie, pour prouver l'identité et la filiation. L'acte de naissance se demande gratuitement en ligne ou à la mairie du lieu de naissance.", "coffre": "scolarite" },
+    { "id": "vaccins", "libelle": "Justificatif des vaccinations obligatoires", "detail": "Copie des pages vaccins du carnet de santé ou certificat de contre-indication. La liste dépend de l'année de naissance de l'enfant.", "coffre": "sante" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Copie d'une facture ou d'une quittance au nouveau domicile. Demandé notamment au collège et au lycée.", "coffre": "scolarite" },
+    { "id": "bulletins", "libelle": "Bulletins de l'année et décision d'orientation (collège, lycée)", "detail": "Copies, souvent téléchargeables sur l'espace numérique de l'établissement.", "coffre": "scolarite" },
+    { "id": "fiche-renseignements", "libelle": "Fiche de renseignements sur les parents", "detail": "Remplie avec les coordonnées des deux parents. Demandée par le collège ou le lycée.", "coffre": "scolarite" },
+    { "id": "accord-autre-parent", "libelle": "Accord écrit de l'autre parent", "detail": "Daté et signé, avec la copie de sa pièce d'identité. Recommandé quand l'autorité parentale est partagée.", "coffre": "jaf" },
+    { "id": "jugement", "libelle": "Jugement ou convention (résidence de l'enfant, autorité parentale)", "detail": "Copie, si une décision fixe la résidence ou confie l'autorité parentale à un seul parent.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez qu'il reste une place", "detail": "Appelez la nouvelle école ou le nouvel établissement. Pour une école publique, contactez aussi le service scolaire de la mairie." },
+    { "titre": "Obtenez les accords nécessaires", "detail": "Certificat d'inscription de la mairie pour une école publique. Accord du directeur académique pour un collège ou un lycée hors secteur." },
+    { "titre": "Signalez le départ à l'ancien établissement", "detail": "Demandez le certificat de radiation ou l'exeat, et informez l'autre parent par écrit." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Certificat de radiation, certificat d'inscription de la mairie, livret de famille ou acte de naissance, carnet de vaccination, justificatif de domicile, bulletins, accord écrit de l'autre parent ou jugement si besoin." },
+    { "titre": "Finalisez l'inscription", "detail": "Auprès de la direction de la nouvelle école ou du secrétariat de l'établissement. Pensez à réinscrire l'enfant à la cantine, au périscolaire et au transport scolaire." }
+  ],
+  "ou": [
+    { "nom": "Mairie de votre nouvelle commune (service scolaire)", "detail": "Certificat d'inscription pour une école maternelle ou élémentaire publique." },
+    { "nom": "Académie de La Réunion", "detail": "Services départementaux de l'Éducation nationale : affectation en collège ou lycée quand l'établissement est complet, ou demande hors secteur.", "url": "https://www.ac-reunion.fr" },
+    { "nom": "Secrétariat du collège ou du lycée", "detail": "Exeat, dossier d'inscription et pièces demandées." }
+  ],
+  "liens": [
+    { "titre": "Changer d'école en cours d'année (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722" },
+    { "titre": "Changer de collège ou de lycée en cours d'année (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393" },
+    { "titre": "Académie de La Réunion", "url": "https://www.ac-reunion.fr" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Certificat de radiation de l'ancienne école", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Certificat d'inscription de la mairie", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Accord écrit de l'autre parent pour le changement d'école", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Rendez-vous d'inscription dans la nouvelle école", "evenement": "ecole" },
+    { "type": "rappel", "titre": "Réinscrire l'enfant à la cantine et au périscolaire", "evenement": "ecole" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : le service de l'académie de La Réunion chargé des affectations en cours d'année et ses délais de réponse.",
+    "À confirmer localement : les pièces exactes demandées par chaque mairie de La Réunion pour le certificat d'inscription."
+  ],
+  "motsCles": ["changement d'école", "certificat de radiation", "exeat", "déménagement", "mairie", "collège", "lycée"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10722 Changement d'école en cours d'année", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F20393 Changement de collège ou de lycée en cours d'année", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" }
+  ]
+}

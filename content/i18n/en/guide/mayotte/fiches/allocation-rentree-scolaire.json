@@ -1,0 +1,58 @@
+{
+  "slug": "allocation-rentree-scolaire",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Back-to-school allowance (ARS, allocation de rentrée scolaire) in Mayotte",
+  "resume": "Paid by the CSSM from August 4, 2026 for each child aged 6 to 20 in school, subject to income limits. In Mayotte, the amount depends on the school level and the income limits are specific to the territory.",
+  "aQuoiCaSert": "The back-to-school allowance helps pay for school supplies, clothes and equipment for the new school year. In Mayotte, it is paid by the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund), earlier than in mainland France, and up to age 20. Its amount depends on the child's level (primary school, middle school, high school) and not on their age. If you have already received it, no action is normally needed: schooling is checked with the rectorat (regional education authority). If you have never received it, you must first declare your situation and your income.",
+  "quiEstConcerne": [
+    "Families with a child aged 6 to 20 in school. For the 2026 school year: a child born between September 16, 2006 and December 31, 2020.",
+    "A 5-year-old child already in primary school may also be eligible, according to the CSSM."
+  ],
+  "aSavoir": [
+    "2026 back-to-school amounts in Mayotte: €429.01 for a child in primary school, €452.67 in middle school (collège), €468.36 in high school (lycée) (service-public.gouv.fr, Mayotte section).",
+    "2026 income limits (2024 income): €35,634 for 1 child, €38,874 for 2, €42,114 for 3, plus €3,240 per additional child. A reduced ARS (differential) may be paid if you are slightly over the limit.",
+    "Payment from August 4, 2026 in Mayotte (August 18 in mainland France).",
+    "First application: fill in a declaration of situation and a declaration of 2024 income. In all cases, your 2025 income must have been declared to the tax office.",
+    "Child under 6 already in first grade (CP): send their school attendance certificate.",
+    "Separated parents: the ARS is paid to a single beneficiary, even with shared residence."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Income tax return filed with the tax office", "detail": "It shows your income. Tax notice downloadable from impots.gouv.fr.", "coffre": "finances" },
+    { "id": "certificat-scolarite", "libelle": "School attendance certificate (certificat de scolarité)", "detail": "Normally obtained by the CSSM from the rectorat. Keep a copy in case it is requested.", "coffre": "scolarite" },
+    { "id": "notification-ars", "libelle": "ARS notice or payment certificate", "detail": "In your « Mon Compte » area.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Check that your information is up to date", "detail": "Tax return filed, family situation and number of children up to date in « Mon Compte » on caf.fr." },
+    { "titre": "Check that your child is enrolled in a school", "detail": "The CSSM relies on the information sent by the rectorat." },
+    { "titre": "Check the payment in early August", "detail": "If nothing is paid and you think you are entitled, contact the CSSM with the school attendance certificate." },
+    { "titre": "Record back-to-school expenses", "detail": "Record supplies and clothes in the Journal to track each child's costs." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "« Mon Compte » area on caf.fr or reception by appointment in Mamoudzou.", "url": "https://www.cssm.fr/page/prestations-familiales", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Free help with online procedures.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Back-to-school allowance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878" },
+    { "titre": "Family benefits in Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Check the ARS payment (August 4, 2026)", "evenement": "autre" },
+    { "type": "coffre", "titre": "ARS payment certificate", "categorie": "finances" },
+    { "type": "depense", "titre": "Back-to-school supplies", "categorie": "ecole" },
+    { "type": "depense", "titre": "Back-to-school clothes", "categorie": "vetements" }
+  ],
+  "datesLimites": [
+    { "libelle": "Payment from August 4, 2026 in Mayotte" }
+  ],
+  "aConfirmer": [
+    "Young people aged 16 to 20: the Mayotte section of service-public.gouv.fr does not mention a declaration of schooling (it is described for mainland France). Check with the CSSM that no action is expected, especially after age 18.",
+    "To be confirmed with the CSSM: which parent receives the ARS with shared residence and how to designate them."
+  ],
+  "motsCles": ["ARS", "back to school", "school supplies", "CSSM", "allowance", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1878 Back-to-school allowance (Mayotte section)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Family benefits", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" }
+  ]
+}

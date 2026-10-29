@@ -57,10 +57,10 @@
     "À confirmer localement : les pièces demandées par chaque mairie de Guyane peuvent varier légèrement."
   ],
   "motsCles": ["changement d'école", "certificat de radiation", "exeat", "déménagement", "mairie", "collège", "lycée"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F10722 Changement d'école en cours d'année", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722", "verifieLe": "2025-07-08" },
-    { "titre": "Service-public.gouv.fr, F20393 Changement de collège ou de lycée en cours d'année", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393", "verifieLe": "2025-10-09" },
+    { "titre": "Service-public.gouv.fr, F10722 Changement d'école en cours d'année", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F20393 Changement de collège ou de lycée en cours d'année", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1865 Inscription à l'école élémentaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" }
   ]
 }

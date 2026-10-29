@@ -4,7 +4,9 @@ import { Logo } from '@/components/brand/Logo'
 import { SUPPORT_EMAIL } from '@/components/profil/data'
 import { cn } from '@/lib/cn'
 import { localePathFor } from '@/lib/i18n/routing'
-import { TERRITORIES, TerritoryShape } from './territories'
+import { TerritoryShape } from './territories'
+import { territoryStatuses } from './territory-status'
+import { guidePaths } from '@/lib/seo/site'
 
 // Pied de page unique des pages publiques.
 const LINKS: { key: string; href: string }[] = [
@@ -28,6 +30,7 @@ export async function SiteFooter() {
   const ta = await getTranslations('a11y')
   // Liens dans la langue de la page (/en/aide…) ; mailto: et liens externes inchangés.
   const lp = localePathFor(await getLocale())
+  const territories = await territoryStatuses()
   return (
     <footer className="site-footer border-t border-[#E5E7EB] bg-white text-night-900">
       <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-10 px-5 py-12 sm:px-8 lg:grid-cols-[1fr_2fr] lg:gap-16 [&>*]:min-w-0">
@@ -53,13 +56,25 @@ export async function SiteFooter() {
             <h2 className="text-[13px] font-semibold uppercase tracking-[0.12em] text-night-700">{t('territoriesTitle')}</h2>
             <p className="mt-1 text-[14px] text-night-700">{t('territoriesSub')}</p>
             <ul className="mt-4 flex flex-wrap gap-2">
-              {TERRITORIES.map(terr => (
-                <li key={terr.code} className={cn('inline-flex items-center gap-2 rounded-full py-1.5 pl-2 pr-3 text-[13px] ring-1', terr.available ? 'bg-leaf-50 ring-leaf-200' : 'bg-white ring-[#E5E7EB]')}>
-                  <TerritoryShape path={terr.path} available={terr.available} className="h-6 w-6 shrink-0" />
-                  <span className="font-semibold text-night-900">{tTerr(terr.code)}</span>
-                  <span className={terr.available ? 'font-semibold text-leaf-700' : 'text-night-600'}>{terr.available ? t('available') : t('soon')}</span>
-                </li>
-              ))}
+              {territories.map(terr => {
+                const body = (
+                  <>
+                    <TerritoryShape path={terr.path} available={terr.available} className="h-6 w-6 shrink-0" />
+                    <span className="font-semibold text-night-900">{tTerr(terr.code)}</span>
+                    <span className={terr.available ? 'font-semibold text-leaf-700' : 'text-night-600'}>{terr.available ? t('available') : t('soon')}</span>
+                  </>
+                )
+                const pill = 'inline-flex min-h-[44px] items-center gap-2 rounded-full py-1.5 pl-2 pr-3 text-[13px] ring-1'
+                return (
+                  <li key={terr.code}>
+                    {terr.available ? (
+                      <Link href={lp(guidePaths.territoire(terr.code))} className={cn(pill, 'bg-leaf-50 ring-leaf-200 hover:ring-leaf-400')}>{body}</Link>
+                    ) : (
+                      <span className={cn(pill, 'bg-white ring-[#E5E7EB]')}>{body}</span>
+                    )}
+                  </li>
+                )
+              })}
             </ul>
           </div>
         </div>

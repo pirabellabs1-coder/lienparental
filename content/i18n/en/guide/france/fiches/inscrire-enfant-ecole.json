@@ -1,0 +1,195 @@
+{
+  "slug": "inscrire-enfant-ecole",
+  "territoire": "france",
+  "categorie": "ecole",
+  "titre": "Enrolling my child in preschool or elementary school",
+  "resume": "Two steps: the town hall (mairie) issues an enrollment certificate, then the school admits the child. The list of documents to bring, and what changes when the parents are separated.",
+  "aQuoiCaSert": "Education is compulsory from age 3 to 16. For a first enrollment in a public preschool (école maternelle) or elementary school (école élémentaire), you first go to the school affairs department of the town hall (mairie), which gives you an enrollment certificate stating the assigned school. Then the school's principal admits your child on presentation of this certificate and proof of vaccinations. Preparing the documents in advance saves you a second trip.",
+  "quiEstConcerne": [
+    "Parents of a child who turns 3 in the calendar year of the start of the school year.",
+    "Parents who are moving or changing their child's school.",
+    "Families who have just moved to a town."
+  ],
+  "aSavoir": [
+    "The child must be enrolled in preschool at the start of the school year in the calendar year they turn 3, and in elementary school at the start of the school year in the calendar year they turn 6. Public school is free.",
+    "Enrollment at the town hall must be done by June at the latest before the school year starts. Enrollment usually opens in March.",
+    "As a rule, children are enrolled in the school of the catchment area set by the town. Another school requires an exemption (dérogation) from the town hall, which is not automatic. Enrolling in another town requires the agreement of its mayor.",
+    "Vaccinations: they must be up to date for the child's age, unless there is a medical contraindication. Otherwise, admission may be provisional and the parents have 3 months to have the child vaccinated.",
+    "Separated parents: enrolling in or withdrawing from a public school is a routine decision. One parent can do it alone and is presumed to have the other's consent, but must inform them. If the other parent tells the school they disagree, it must take this into account. In case of disagreement, the family court judge (juge aux affaires familiales, JAF) can decide, in urgent proceedings (référé) if urgent.",
+    "Sole parental authority: if a judgment gives it to only one parent, that parent decides alone. Bring a copy of the judgment so the school and the town hall take it into account.",
+    "Moving up to CP (first grade): it is automatic if the preschool and the elementary school are in the same school group; otherwise, the child is assigned to the elementary school of the catchment area."
+  ],
+  "documents": [
+    {
+      "id": "identite-enfant",
+      "libelle": "The child's ID, family record book (livret de famille) or copy of birth certificate extract",
+      "detail": "Original to present. No birth certificate? Request it free of charge online on service-public.gouv.fr or at the town hall of the place of birth.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "ID of the parent doing the enrollment",
+      "detail": "Original. ID card, passport or residence permit.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Recent proof of address",
+      "detail": "Utility bill, rent receipt or tax notice. Living with someone? Bring a letter of accommodation (attestation d'hébergement) from your host, with their ID and their own proof of address.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "vaccins",
+      "libelle": "Health record book (carnet de santé, vaccination pages) or certificate of contraindication",
+      "detail": "Original to show; a photocopy of the vaccination pages is often requested.",
+      "coffre": "sante"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement setting parental authority and residence, if you are separated",
+      "detail": "Copy. Essential in case of sole parental authority or if residence is set with one parent.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "radiation",
+      "libelle": "Certificat de radiation (proof of removal from the school roll) from the previous school",
+      "detail": "Only when changing schools. Ask the former school's principal for it.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "certificat-inscription",
+      "libelle": "Enrollment certificate issued by the town hall",
+      "detail": "Original to hand to the school's principal. Keep a photo or a copy.",
+      "coffre": "scolarite"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Contact your town hall's school affairs department",
+      "detail": "Ask for the enrollment dates, whether you need an appointment, whether there is an online service, and the exact list of documents: it varies from one town to another."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "The child's ID (or livret de famille), your ID, recent proof of address (or letter of accommodation), up-to-date health record book, judgment if you are separated, certificat de radiation if changing schools. Bring photocopies."
+    },
+    {
+      "titre": "Submit the file at the town hall and collect the enrollment certificate",
+      "detail": "The certificate states the school your child is assigned to. Ask for an exemption at this point if you want another school."
+    },
+    {
+      "titre": "Have your child admitted to the school",
+      "detail": "Present the enrollment certificate and proof of vaccinations to the school's principal. Give both parents' contact details and the list of people allowed to pick up the child."
+    },
+    {
+      "titre": "Inform the other parent",
+      "detail": "If you are separated, let the other parent know about the enrollment, preferably in writing (text message or email)."
+    },
+    {
+      "titre": "No new enrollment every year",
+      "detail": "The enrollment is valid for the whole of preschool. For CP, ask the town hall if the elementary school is not in the same school group."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Your town hall, school affairs department",
+      "detail": "Enrollment, enrollment certificate and catchment-area exemptions. Contact details in the service-public.fr directory.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    },
+    {
+      "nom": "School principal's office",
+      "detail": "Admission of the child and certificat de radiation."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Enrollment in preschool (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864"
+    },
+    {
+      "titre": "Enrolling your child in elementary school (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865"
+    },
+    {
+      "titre": "Vaccinations for school, daycare or after-school care (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Parental authority after a separation (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "School enrollment certificate",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Vaccination pages of the health record book",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Judgment or agreement (parental authority, residence)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "School enrollment at the town hall, by June at the latest",
+      "evenement": "ecole"
+    },
+    {
+      "type": "calendrier",
+      "titre": "School admission appointment",
+      "evenement": "ecole"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Enrollment at the town hall by June at the latest before the school year starts",
+      "detail": "Enrollment often opens in March. Check your town hall's calendar."
+    },
+    {
+      "libelle": "3 months to bring vaccinations up to date",
+      "detail": "If a child whose compulsory vaccinations are not up to date is admitted provisionally."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: enrollment dates, appointments, online service and exact list of documents, specific to each town hall.",
+    "To be confirmed locally: whether a sworn statement or a letter of accommodation is accepted instead of proof of address, depending on the town hall.",
+    "To be confirmed locally: documents required when changing schools (certificat de radiation, latest school report), to be asked of the town hall and the new school."
+  ],
+  "motsCles": [
+    "preschool",
+    "elementary school",
+    "CP",
+    "town hall",
+    "enrollment",
+    "exemption",
+    "withdrawal"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1864 Enrollment in preschool",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1865 Enrolling your child in elementary school",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F767 Vaccinations for school, daycare or after-school care",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

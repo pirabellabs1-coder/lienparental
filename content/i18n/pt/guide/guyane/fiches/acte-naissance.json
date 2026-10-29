@@ -14,7 +14,7 @@
     "Cópia integral e extrato com filiação: reservados à própria pessoa (maior de idade) ou ao seu representante legal, ao cônjuge ou parceiro de PACS, aos ascendentes e descendentes e a certos profissionais, como um advogado. O extrato sem filiação pode ser pedido por qualquer pessoa.",
     "O pedido é gratuito. O service-public.gouv.fr alerta contra sites que cobram por esse procedimento: nunca pague por uma certidão de nascimento.",
     "Pessoalmente, na prefeitura (mairie) do lugar de nascimento, a certidão é entregue na hora mediante documento de identidade. Pelo correio ou on-line, conte alguns dias, conforme a prefeitura e os Correios (La Poste).",
-    "Criança ou pai/mãe de nacionalidade francesa nascido no exterior: a certidão é emitida pelo Service central d'état civil (Scec, serviço central de registro civil) de Nantes, só on-line ou pelo correio (sem atendimento ao público). Prazo indicado: cerca de 30 dias.",
+    "Criança ou pai/mãe de nacionalidade francesa nascido no exterior: a certidão é emitida pelo Service central d'état civil (Scec, serviço central de registro civil) de Nantes, só on-line ou pelo correio (sem atendimento ao público). Prazo indicado: cerca de 30 dias pelo correio, cerca de 20 dias on-line.",
     "Carteira de identidade ou passaporte de menor: se o município de nascimento digitalizou o registro civil, você não precisa apresentar a certidão. Caso contrário, exige-se uma certidão com menos de 3 meses. Se a criança já tem passaporte, a certidão pode não ser pedida: confira o seu caso na ficha oficial.",
     "Pais separados: cada um, como ascendente, pode pedir sozinho a cópia integral da certidão do filho, sem o acordo do outro."
   ],
@@ -55,10 +55,10 @@
     "A confirmar localmente: horários e eventual agendamento no serviço de registro civil da prefeitura de nascimento."
   ],
   "motsCles": ["certidão de nascimento", "cópia integral", "extrato", "filiação", "registro civil", "prefeitura", "Scec", "Nantes"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1427 Certidão de nascimento: pedido de cópia integral ou de extrato", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, R1406 Pedido de certidão de nascimento on-line (nascimento na França)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, F1342 Carteira de identidade de menor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-04-27" }
+    { "titre": "Service-public.gouv.fr, F1427 Certidão de nascimento: pedido de cópia integral ou de extrato", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1406 Pedido de certidão de nascimento on-line (nascimento na França)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1342 Carteira de identidade de menor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-10-29" }
   ]
 }

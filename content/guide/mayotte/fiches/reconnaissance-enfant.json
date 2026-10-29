@@ -1,0 +1,68 @@
+{
+  "slug": "reconnaissance-enfant",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Reconnaître mon enfant quand on n'est pas mariés",
+  "resume": "Gratuite, la reconnaissance établit la filiation du père. À Mayotte, une règle propre : hors déclaration de naissance, elle se fait à la mairie de Mamoudzou et son enregistrement peut être suspendu par le procureur.",
+  "aQuoiCaSert": "Quand les parents ne sont pas mariés, la filiation du père n'est pas automatique : il doit reconnaître l'enfant. La mère n'a rien à faire si son nom figure dans l'acte de naissance. La reconnaissance peut se faire avant la naissance, au moment de la déclaration de naissance, ou plus tard. Faite avant le premier anniversaire de l'enfant, elle permet au père d'exercer l'autorité parentale avec la mère. À Mayotte, la loi du 11 août 2025 de programmation pour la refondation de Mayotte a prévu des règles particulières.",
+  "quiEstConcerne": [
+    "Les parents non mariés, en particulier le père.",
+    "La mère qui souhaite faire une reconnaissance anticipée (facultative).",
+    "Les couples de femmes : une reconnaissance conjointe anticipée devant notaire est nécessaire."
+  ],
+  "aSavoir": [
+    "À Mayotte, une reconnaissance faite devant un officier d'état civil est reçue par celui de la commune de Mamoudzou, sauf si elle est faite en même temps que la déclaration de naissance (article 2496 du code civil).",
+    "Lors de la reconnaissance d'un enfant né à Mayotte, son auteur est informé de ses obligations envers l'enfant (entretien, éducation) et des sanctions en cas de reconnaissance frauduleuse.",
+    "En cas de doute sur la sincérité de la reconnaissance, le procureur peut suspendre son enregistrement 2 mois, renouvelable une fois (3 mois si l'enquête se fait à l'étranger) (article 2497 du code civil).",
+    "Une reconnaissance faite uniquement pour obtenir un titre de séjour ou la nationalité est un délit (article L. 823-11 du code de l'entrée et du séjour des étrangers) ; la loi du 11 août 2025 a porté l'amende à 75 000 €.",
+    "La reconnaissance est gratuite en mairie. Elle est aussi possible chez un notaire, de façon payante.",
+    "Le père qui reconnaît l'enfant après son premier anniversaire n'exerce pas l'autorité parentale. Il peut l'obtenir par une déclaration conjointe avec la mère (cerfa n° 12785, envoyée au greffe du tribunal judiciaire) ou en saisissant le juge aux affaires familiales.",
+    "La reconnaissance ne change pas d'elle-même le nom de l'enfant : le choix du nom fait l'objet d'une déclaration distincte."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité du parent qui reconnaît", "detail": "Original : carte d'identité, passeport ou titre de séjour.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Justificatif de domicile ou de résidence de moins de 3 mois à votre nom", "detail": "Original. Un justificatif pour chacun si vous venez à deux.", "coffre": "jaf" },
+    { "id": "acte-naissance-enfant", "libelle": "Acte de naissance de l'enfant ou livret de famille, si l'enfant est déjà né", "detail": "Conseillé. Acte gratuit à la mairie du lieu de naissance.", "coffre": "jaf" },
+    { "id": "acte-reconnaissance", "libelle": "Copie de l'acte de reconnaissance", "detail": "À présenter lors de la déclaration de naissance si la reconnaissance est anticipée.", "coffre": "jaf" },
+    { "id": "declaration-conjointe", "libelle": "Déclaration conjointe d'exercice de l'autorité parentale (cerfa n° 12785), si l'enfant a plus d'un an", "detail": "Signée par les deux parents. Gardez l'exemplaire visé par le greffe.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Choisissez le moment", "detail": "Au moment de la déclaration de naissance, dans la mairie du lieu de naissance ; sinon, à Mayotte, à la mairie de Mamoudzou. Appelez avant pour savoir si un rendez-vous est nécessaire." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pièce d'identité originale, justificatif de domicile de moins de 3 mois à votre nom (un par parent si vous venez à deux), acte de naissance ou livret de famille si l'enfant est déjà né." },
+    { "titre": "Présentez-vous en mairie et signez l'acte", "detail": "Relisez l'orthographe des noms et prénoms avant de signer." },
+    { "titre": "Gardez la copie de l'acte", "detail": "Si l'enregistrement est suspendu par le procureur, conservez le courrier reçu et répondez aux demandes." },
+    { "titre": "Si l'enfant a plus d'un an, faites la déclaration conjointe d'autorité parentale", "detail": "Avec l'accord de la mère, cerfa n° 12785 déposé au greffe du tribunal judiciaire de Mamoudzou. Sans accord, la demande se fait devant le juge aux affaires familiales." }
+  ],
+  "ou": [
+    { "nom": "Mairie de Mamoudzou, service de l'état civil", "detail": "Reconnaissance faite à Mayotte en dehors de la déclaration de naissance." },
+    { "nom": "Mairie du lieu de naissance", "detail": "Reconnaissance faite en même temps que la déclaration de naissance." },
+    { "nom": "Tribunal judiciaire de Mamoudzou, greffe", "detail": "Déclaration conjointe d'exercice de l'autorité parentale.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" }
+  ],
+  "liens": [
+    { "titre": "Reconnaissance d'un enfant (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887" },
+    { "titre": "Enfant reconnu tardivement et autorité parentale (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942" },
+    { "titre": "Loi n° 2025-797 du 11 août 2025 de programmation pour la refondation de Mayotte (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052075903" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Acte de reconnaissance", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Déclaration conjointe d'autorité parentale visée par le greffe", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Rendez-vous en mairie : reconnaissance", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Reconnaître l'enfant avant son premier anniversaire", "evenement": "rdv" }
+  ],
+  "datesLimites": [
+    { "libelle": "Avant le premier anniversaire de l'enfant", "detail": "Pour que le père exerce l'autorité parentale sans démarche supplémentaire." },
+    { "libelle": "Suspension possible de 2 mois, renouvelable une fois", "detail": "Délai pendant lequel le procureur peut vérifier une reconnaissance à Mayotte." }
+  ],
+  "aConfirmer": [
+    "La fiche nationale de service-public.gouv.fr ne détaille pas encore les règles propres à Mayotte : pièces exactes et prise de rendez-vous à confirmer auprès de la mairie de Mamoudzou.",
+    "À confirmer : la reconnaissance anticipée (avant la naissance) à Mayotte doit, selon la loi, être faite à Mamoudzou ; vérifiez les modalités auprès de l'état civil.",
+    "À confirmer : la peine d'emprisonnement prévue pour une reconnaissance frauduleuse (le texte de 2025 consulté ne modifie que l'amende)."
+  ],
+  "motsCles": ["reconnaissance", "filiation", "père", "non mariés", "autorité parentale", "Mamoudzou"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Légifrance, loi n° 2025-797 du 11 août 2025 (articles 9 à 11)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052075903", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F887 Reconnaissance d'un enfant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F942 Enfant reconnu tardivement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2026-10-29" }
+  ]
+}

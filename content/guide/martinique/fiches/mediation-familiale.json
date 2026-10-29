@@ -1,0 +1,202 @@
+{
+  "slug": "mediation-familiale",
+  "territoire": "martinique",
+  "categorie": "separation",
+  "titre": "Médiation familiale",
+  "resume": "Un professionnel neutre pour trouver ensemble des accords sur les enfants. Premier entretien gratuit, tarif selon vos revenus dans un service conventionné, accord homologable par le juge.",
+  "aQuoiCaSert": "La médiation familiale aide les parents à renouer le dialogue et à construire eux-mêmes leurs accords : résidence de l'enfant, droit de visite et d'hébergement, pension alimentaire, vacances, frais exceptionnels. Le médiateur est indépendant et impartial : il ne décide rien à votre place. L'accord écrit peut ensuite être homologué par le juge aux affaires familiales et devient alors exécutoire comme un jugement. La médiation peut avoir lieu avant toute procédure ou pendant une procédure.",
+  "quiEstConcerne": [
+    "Les parents séparés ou en cours de séparation, mariés ou non.",
+    "Les grands-parents, pour maintenir des relations avec leurs petits-enfants.",
+    "La médiation n'est pas possible en cas de violences commises par un parent sur l'autre ou sur l'enfant : dans ce cas, appelez le 3919 (écoute) ou le 17 (urgence)."
+  ],
+  "aSavoir": [
+    "L'entretien d'information est gratuit et sans engagement. Vous pouvez y aller seul ou avec l'autre parent.",
+    "Les séances durent en général de 1 h 30 à 2 h ; leur nombre varie selon la situation. Elles peuvent se tenir à distance dans certains cas (éloignement géographique, par exemple).",
+    "Dans un service conventionné par la Caf, le prix de chaque séance dépend de vos revenus (barème national). Un médiateur privé fixe librement ses tarifs ; à défaut d'accord, les frais sont partagés par moitié.",
+    "Médiation ordonnée par le juge : elle dure au plus 5 mois, renouvelable une fois 3 mois. Les frais sont partagés à parts égales sauf décision contraire, et pris en charge par l'État si vous avez l'aide juridictionnelle.",
+    "Le juge peut ordonner aux parents de rencontrer un médiateur. Ne pas s'y rendre peut entraîner une amende civile pouvant atteindre 10 000 €.",
+    "Les avocats peuvent assister aux séances, mais c'est le médiateur qui mène les échanges."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Pièce d'identité (original à présenter)",
+      "coffre": "jaf"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Dernier avis d'imposition ou justificatifs de revenus (copie)",
+      "detail": "Pour calculer votre tarif dans un service conventionné. Téléchargeable dans votre espace impots.gouv.fr. Si vous percevez des prestations, attestation de paiement Caf.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-caf",
+      "libelle": "Attestation de paiement Caf (copie), si vous êtes allocataire",
+      "detail": "À télécharger dans votre espace caf.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Jugement ou décision ordonnant la médiation (copie), s'il existe",
+      "detail": "Il indique le médiateur désigné, la durée, la provision et le délai pour la verser.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "aj",
+      "libelle": "Décision d'aide juridictionnelle (copie), si vous en bénéficiez",
+      "detail": "Elle dispense de payer la provision en médiation judiciaire.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "planning",
+      "libelle": "Calendrier de l'enfant et budget (école, activités, frais)",
+      "detail": "Facultatif, mais utile pour des séances concrètes : vous pouvez l'exporter depuis le calendrier et le Journal.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "accord-mediation",
+      "libelle": "Accord écrit issu de la médiation",
+      "detail": "Original signé par les deux parents, à joindre à la demande d'homologation.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Trouvez un service de médiation familiale",
+      "detail": "Demandez à la Caf de la Martinique les services de médiation familiale conventionnés (tarif selon revenus), ou consultez la liste des médiateurs de la cour d'appel de Fort-de-France."
+    },
+    {
+      "titre": "Prenez rendez-vous pour l'entretien d'information gratuit",
+      "detail": "Seul ou avec l'autre parent. Il présente le déroulement et ce qui peut être abordé."
+    },
+    {
+      "titre": "Vérifiez avant de vous déplacer",
+      "detail": "Pièce d'identité ; avis d'imposition ou attestation Caf pour le tarif ; décision du juge si la médiation est ordonnée ; décision d'aide juridictionnelle si vous l'avez ; liste des sujets à aborder ; calendrier de l'enfant."
+    },
+    {
+      "titre": "Suivez les séances",
+      "detail": "Ajoutez chaque séance au calendrier. Notez entre deux séances les points à revoir."
+    },
+    {
+      "titre": "Faites homologuer l'accord si vous le souhaitez",
+      "detail": "Requête conjointe au juge aux affaires familiales (cerfa n° 16139), sans avocat obligatoire, sans timbre fiscal. L'accord homologué a la même force qu'un jugement."
+    },
+    {
+      "titre": "Sans accord, vous pouvez saisir le juge",
+      "detail": "Voir la fiche « Saisir le juge aux affaires familiales »."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "Orientation vers les services de médiation familiale conventionnés.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    },
+    {
+      "nom": "Cour d'appel de Fort-de-France, liste des médiateurs",
+      "detail": "Liste officielle 2024-2026 des médiateurs inscrits, avec leurs domaines d'intervention, dont le familial.",
+      "url": "https://www.cours-appel.justice.fr/sites/default/files/2024-02/LISTE%20DES%20MEDIATEURS%20CA%20Fort-de-France%202024-2026.pdf"
+    },
+    {
+      "nom": "Point-justice",
+      "detail": "Information juridique gratuite et orientation."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Médiation familiale (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355"
+    },
+    {
+      "titre": "Homologation d'une convention parentale, cerfa 16139 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771"
+    },
+    {
+      "titre": "Violences conjugales : numéros et protection (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Entretien d'information de médiation familiale",
+      "evenement": "rdv"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Séance de médiation familiale",
+      "evenement": "rdv"
+    },
+    {
+      "type": "coffre",
+      "titre": "Accord de médiation familiale signé",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Décision ordonnant la médiation",
+      "categorie": "jaf"
+    },
+    {
+      "type": "depense",
+      "titre": "Séance de médiation familiale",
+      "categorie": "frais-administratifs"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Médiation judiciaire : délai fixé par le juge pour verser la provision",
+      "detail": "Sans versement dans ce délai, la médiation ne peut pas avoir lieu (sauf aide juridictionnelle)."
+    },
+    {
+      "libelle": "Médiation judiciaire : 5 mois maximum",
+      "detail": "Renouvelable une fois pour 3 mois."
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : liste à jour des services de médiation familiale conventionnés par la Caf de la Martinique et de leurs lieux de permanence. Demandez-la à la Caf.",
+    "À confirmer localement : la liste des médiateurs de la cour d'appel de Fort-de-France couvre 2024-2026 ; vérifiez qu'une version plus récente n'a pas été publiée (le site était en maintenance lors de la vérification).",
+    "À confirmer localement : la tentative de médiation familiale préalable obligatoire ne semble pas s'appliquer au tribunal judiciaire de Fort-de-France. Renseignez-vous auprès du greffe avant de saisir le juge."
+  ],
+  "motsCles": [
+    "médiation",
+    "médiateur",
+    "accord",
+    "dialogue",
+    "conflit",
+    "homologation"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F34355 Médiation familiale",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355",
+      "verifieLe": "2025-10-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R58771 Requête conjointe d'homologation d'une convention parentale (cerfa 16139)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771",
+      "verifieLe": "2025-11-26"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F33227 Timbre fiscal (dispense pour l'homologation de convention parentale)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227",
+      "verifieLe": "2026-04-10"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F12544 Violences conjugales",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544",
+      "verifieLe": "2026-04-01"
+    },
+    {
+      "titre": "Code civil, article 373-2-10 (Légifrance)",
+      "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042193469",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Cour d'appel de Fort-de-France, liste des médiateurs 2024-2026",
+      "url": "https://www.cours-appel.justice.fr/sites/default/files/2024-02/LISTE%20DES%20MEDIATEURS%20CA%20Fort-de-France%202024-2026.pdf"
+    }
+  ]
+}

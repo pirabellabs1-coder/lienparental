@@ -1,0 +1,65 @@
+{
+  "slug": "demande-logement-social",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Faire une demande de logement social",
+  "resume": "Déposer une demande de logement social à Mayotte, obtenir votre numéro unique, réunir les bonnes pièces (dont celles liées à une séparation) et renouveler la demande chaque année.",
+  "aQuoiCaSert": "Un logement social est un logement dont le loyer est encadré, attribué sous conditions de ressources. La demande, en ligne ou au guichet, vous donne un numéro unique, qui fait courir l'ancienneté de votre demande. Après une séparation, il est possible de faire compter uniquement vos propres revenus, à condition de fournir les bons justificatifs.",
+  "quiEstConcerne": [
+    "Les ménages dont les revenus ne dépassent pas les plafonds fixés pour les départements d'outre-mer, Mayotte comprise.",
+    "Les parents qui se séparent et doivent se reloger avec leurs enfants.",
+    "Les ressortissants étrangers titulaires d'un titre de séjour ou d'un récépissé en cours de validité."
+  ],
+  "aSavoir": [
+    "Plafonds dans les DOM, dont Mayotte, pour une demande faite en 2026 (revenus 2024, cas général) : 27 382 € pour 1 personne, 36 567 € pour 2, 43 973 € pour 3 personnes ou une personne seule avec 1 personne à charge, 53 088 € pour 4 ou une personne seule avec 2 personnes à charge, 62 450 € pour 5, 70 383 € pour 6, plus 7 851 € par personne supplémentaire.",
+    "Séparation : pour que seuls vos revenus soient pris en compte, joignez un justificatif comme l'acte de saisine du juge aux affaires familiales, le jugement de divorce ou l'acte de naissance portant mention de la dissolution du Pacs.",
+    "Dans les départements d'outre-mer, il faut un dossier par département : une demande à Mayotte ne vaut que pour Mayotte.",
+    "La demande doit être renouvelée chaque année ; sans renouvellement, elle est radiée."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité du demandeur", "detail": "Copie recto verso. Ressortissant hors Union européenne : titre de séjour ou récépissé en cours de validité.", "coffre": "courriers" },
+    { "id": "identite-cotitulaire", "libelle": "Pièce d'identité ou titre de séjour de chaque adulte à loger", "coffre": "courriers" },
+    { "id": "avis-imposition", "libelle": "Avis d'imposition 2025 sur les revenus 2024 de chaque personne à loger", "detail": "Copie.", "coffre": "finances" },
+    { "id": "justificatif-separation", "libelle": "Justificatif de séparation", "detail": "Acte de saisine du juge aux affaires familiales, jugement de divorce ou acte de naissance mentionnant la dissolution du Pacs.", "coffre": "jaf" },
+    { "id": "jugement-residence", "libelle": "Jugement ou convention fixant la résidence des enfants", "detail": "Copie.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Livret de famille ou actes de naissance des enfants", "detail": "Copie.", "coffre": "courriers" },
+    { "id": "situation-logement", "libelle": "Justificatif de votre situation de logement actuelle", "detail": "Bail, attestation d'hébergement, ou congé du propriétaire.", "coffre": "courriers" },
+    { "id": "attestation-enregistrement", "libelle": "Attestation d'enregistrement avec le numéro unique", "detail": "À conserver précieusement.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Créez votre demande", "detail": "En ligne sur service-public.gouv.fr ou demande-logement-social.gouv.fr, ou avec le formulaire cerfa n° 14069 déposé dans un guichet enregistreur." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Pièce d'identité ou titre de séjour de chaque adulte, avis d'imposition de chacun, justificatif de séparation et jugement sur la résidence des enfants si vous êtes séparé, livret de famille. Toutes les personnes à loger doivent être déclarées." },
+    { "titre": "Récupérez l'attestation d'enregistrement", "detail": "Elle contient votre numéro unique et la date de la demande." },
+    { "titre": "Mettez à jour la demande dès que votre situation change", "detail": "Séparation, naissance, nouvelle adresse, baisse de revenus." },
+    { "titre": "Renouvelez chaque année", "detail": "Sans renouvellement, la demande est radiée." }
+  ],
+  "ou": [
+    { "nom": "Portail national de la demande de logement social", "detail": "Dépôt, suivi et renouvellement en ligne.", "url": "https://www.demande-logement-social.gouv.fr" },
+    { "nom": "Guichets enregistreurs (mairies, bailleurs sociaux)", "detail": "Pour déposer un dossier papier ou se faire aider." },
+    { "nom": "ADIL de Mayotte", "detail": "Conseils gratuits sur le logement.", "url": "https://www.anil.org/adil-976/", "telephone": "06 39 21 53 91" }
+  ],
+  "liens": [
+    { "titre": "Logement social : plafonds de ressources (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007" },
+    { "titre": "Demande de logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869" },
+    { "titre": "Renouvellement de la demande (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation d'enregistrement de la demande de logement social", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Justificatif de séparation pour la demande de logement", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Renouveler la demande de logement social chaque année", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Renouvellement annuel de la demande", "detail": "Sinon la demande est radiée." }
+  ],
+  "aConfirmer": [
+    "À confirmer : la période exacte de renouvellement et l'envoi d'un rappel, non précisés sur la fiche consultée.",
+    "À confirmer localement : la liste des guichets enregistreurs et des bailleurs sociaux à Mayotte, et les délais d'attente."
+  ],
+  "motsCles": ["logement social", "HLM", "numéro unique", "renouvellement", "séparation", "plafonds"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10007 Plafonds de ressources du logement social (DOM, dont Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F869 Demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F35010 Renouvellement d'une demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010", "verifieLe": "2026-10-29" }
+  ]
+}

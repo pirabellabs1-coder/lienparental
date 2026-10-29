@@ -59,8 +59,8 @@
     "A confirmar localmente: endereços e horários dos postos de atendimento da CGSS de la Guyane."
   ],
   "motsCles": ["C2S", "CMU", "mutuelle", "plano complementar", "saúde", "reembolso", "gratuito"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (seção Guiana Francesa, Guadalupe, Martinica, La Réunion)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-07-01" }
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (seção Guiana Francesa, Guadalupe, Martinica, La Réunion)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" }
   ]
 }

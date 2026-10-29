@@ -1,0 +1,184 @@
+{
+  "slug": "compte-bancaire-adolescent",
+  "territoire": "guadeloupe",
+  "categorie": "argent",
+  "titre": "Abrir uma conta bancária para meu filho adolescente",
+  "resume": "A partir de que idade, com qual cartão, a autorização dos pais (inclusive separados) e a lista precisa de documentos a levar ao banco para não perder a viagem.",
+  "aQuoiCaSert": "Uma conta em nome do seu adolescente permite que ele receba mesada, o salário de um trabalho de férias ou um auxílio, e aprenda a administrar um orçamento com um cartão adequado à sua idade. Um menor não pode abrir uma conta sozinho: são seus representantes legais (em geral os pais) que agem por ele. Os pais continuam responsáveis pelos fundos, pelas operações e por eventuais dívidas do filho menor.",
+  "quiEstConcerne": [
+    "Os pais de um adolescente de 12 a 17 anos que querem abrir para ele uma conta ou uma caderneta de poupança com cartão.",
+    "Os pais separados que precisam chegar a um acordo sobre a abertura ou sobre as operações da conta do filho."
+  ],
+  "aSavoir": [
+    "Desde o nascimento, os pais podem abrir uma conta em nome da criança, sem a concordância dela.",
+    "A partir dos 12 anos: com a autorização dos pais, o jovem pode pedir um Livret jeune (poupança para jovens) e depositar ou sacar dinheiro. Os saques podem ser limitados em valor e frequência, e a assinatura de um dos pais é necessária para sacar.",
+    "A partir dos 16 anos: o jovem pode abrir uma conta na maioria dos bancos com a autorização dos pais, depositar e sacar livremente, e obter cartão bancário e talão de cheques com essa autorização.",
+    "O banco pode impor um cartão com autorização sistemática, que verifica o saldo a cada pagamento: é isso que limita o risco de ficar no negativo. Peça esse cartão se quiser esse controle.",
+    "A abertura da conta é gratuita, mas o banco pode cobrar tarifas de manutenção ou de cartão: peça a tabela de tarifas antes de assinar.",
+    "Os pais só podem usar o dinheiro do filho em despesas que o envolvam diretamente (educação, sustento). A partir dos 16 anos, devem prestar contas a ele sobre esse uso.",
+    "Pais separados que exercem juntos a autoridade parental: um só pode fazer os atos de administração do dia a dia, mas um ato de disposição, como alterar a conta ou fazer um saque grande, exige a concordância dos dois (Cour de cassation, tribunal superior francês, 12 de junho de 2025). Em caso de dificuldade, pode-se recorrer ao juiz de tutelas (juge des tutelles).",
+    "Se você exerce sozinho a autoridade parental por decisão judicial, leve essa decisão: ela explica ao banco por que o outro genitor não assina."
+  ],
+  "documents": [
+    {
+      "id": "identite-ado",
+      "libelle": "Documento de identidade do adolescente (original válido)",
+      "detail": "Carteira de identidade ou passaporte. Se estiver vencido ou perdido, refaça-o primeiro na prefeitura (mairie).",
+      "coffre": "finances"
+    },
+    {
+      "id": "identite-parent-1",
+      "libelle": "Documento de identidade do primeiro genitor (original)",
+      "detail": "Carteira de identidade, passaporte ou título de residência válido, com foto.",
+      "coffre": "finances"
+    },
+    {
+      "id": "identite-parent-2",
+      "libelle": "Documento de identidade do segundo genitor (original ou cópia, conforme o banco)",
+      "detail": "Muitas vezes pedido quando os dois exercem a autoridade parental. Pergunte ao banco se ele precisa ir assinar pessoalmente.",
+      "coffre": "finances"
+    },
+    {
+      "id": "filiation",
+      "libelle": "Livro de família (livret de famille) ou certidão de nascimento com filiação do filho",
+      "detail": "Prova que vocês são os pais. Certidão gratuita on-line no service-public.gouv.fr; livro perdido: segundo livro gratuito na prefeitura.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço recente",
+      "detail": "Conta de água ou luz, recibo de aluguel ou aviso de imposto. Se mora na casa de alguém: declaração de hospedagem e documento de identidade de quem hospeda.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Decisão do juiz ou acordo sobre a autoridade parental (cópia)",
+      "detail": "Leve se você exerce sozinho a autoridade parental ou se uma decisão organiza a situação do filho.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "accord-autre-parent",
+      "libelle": "Autorização escrita e assinada do outro genitor",
+      "detail": "Se o outro genitor não puder ir e o banco aceitar: carta datada e assinada, com cópia do documento de identidade dele.",
+      "coffre": "finances"
+    },
+    {
+      "id": "contrat",
+      "libelle": "Contrato de abertura e condições tarifárias",
+      "detail": "Entregue pelo banco na assinatura. Guarde-o para acompanhar as tarifas e os limites do cartão.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Escolha o produto adequado à idade",
+      "detail": "Livret jeune a partir dos 12 anos, com cartão de saque conforme o banco; conta com cartão e talão de cheques a partir dos 16 anos, com a sua autorização. Compare as tarifas e os limites oferecidos pelo seu banco."
+    },
+    {
+      "titre": "Converse com o outro genitor",
+      "detail": "Se vocês exercem juntos a autoridade parental, combinem o produto, o cartão e os limites. Um acordo por escrito evita bloqueios."
+    },
+    {
+      "titre": "Marque um horário no seu banco",
+      "detail": "Pergunte por telefone a lista exata de documentos e se os dois pais e o adolescente precisam estar presentes."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Documento de identidade original do adolescente e de cada genitor, livro de família ou certidão de nascimento com filiação, comprovante de endereço recente, sentença ou acordo se vocês são separados, autorização escrita do outro genitor se ele não for. Presença do adolescente para assinar a partir dos 16 anos."
+    },
+    {
+      "titre": "Configure o cartão e os limites",
+      "detail": "Peça um cartão com autorização sistemática se quiser evitar qualquer saldo negativo, e defina limites de pagamento e de saque."
+    },
+    {
+      "titre": "Guarde o contrato no Cofre",
+      "detail": "Guarde o contrato, o RIB (dados bancários) e a tabela de tarifas."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Seu banco",
+      "detail": "Agência ou banco on-line: as ofertas e os documentos exigidos variam conforme a instituição."
+    },
+    {
+      "nom": "IEDOM (instituto emissor dos departamentos ultramarinos), direito à conta",
+      "detail": "Em Guadalupe, se um banco se recusar a abrir uma conta, o procedimento de direito à conta passa pelo IEDOM.",
+      "url": "https://www.iedom.fr/Guadeloupe"
+    },
+    {
+      "nom": "Mes questions d'argent (Banque de France)",
+      "detail": "Site público de educação financeira, com uma seção sobre dinheiro e filhos.",
+      "url": "https://www.mesquestionsdargent.fr/comptes-moyens-de-paiement/ouvrir-un-compte"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Um menor pode ter conta bancária? (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035"
+    },
+    {
+      "titre": "Conta bancária individual: documentos exigidos (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413"
+    },
+    {
+      "titre": "Conta de um menor: concordância dos dois pais (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Contrato da conta bancária do adolescente",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Autorização escrita do outro genitor para a conta",
+      "categorie": "finances"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Horário no banco: conta do adolescente",
+      "evenement": "rdv"
+    },
+    {
+      "type": "depense",
+      "titre": "Tarifas de cartão ou de conta do adolescente",
+      "categorie": "frais-administratifs"
+    }
+  ],
+  "aConfirmer": [
+    "Cada banco define suas próprias condições: idade mínima para o cartão, presença dos dois pais, data do comprovante de endereço. Peça a lista exata antes do atendimento.",
+    "A confirmar localmente: ofertas para jovens disponíveis nas agências em Guadalupe e tarifas associadas."
+  ],
+  "motsCles": [
+    "conta bancária",
+    "adolescente",
+    "menor de idade",
+    "cartão bancário",
+    "mesada",
+    "livret jeune",
+    "banco"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F21035 Um menor pode ter conta bancária ou produto de poupança?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035",
+      "verifieLe": "2025-11-17"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2413 Conta bancária individual",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413",
+      "verifieLe": "2026-05-22"
+    },
+    {
+      "titre": "Service-public.gouv.fr, notícia A18386 Conta de um menor: concordância dos dois pais (8 de julho de 2025)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386"
+    },
+    {
+      "titre": "Mes questions d'argent (Banque de France), Abrir uma conta",
+      "url": "https://www.mesquestionsdargent.fr/comptes-moyens-de-paiement/ouvrir-un-compte"
+    }
+  ]
+}

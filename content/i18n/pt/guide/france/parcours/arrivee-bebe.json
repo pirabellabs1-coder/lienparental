@@ -1,0 +1,74 @@
+{
+  "slug": "arrivee-bebe",
+  "territoire": "france",
+  "titre": "Chegada de um bebê",
+  "resume": "Do reconhecimento antes do nascimento à escolha de quem vai cuidar do bebê: as etapas administrativas dos primeiros meses.",
+  "ordre": 3,
+  "elements": [
+    {
+      "id": "reconnaissance",
+      "titre": "Reconhecer a criança antes do nascimento (pais não casados)",
+      "fiche": "reconnaissance-enfant"
+    },
+    {
+      "id": "prime-naissance",
+      "titre": "Pedir a prime à la naissance (auxílio-nascimento) e a allocation de base (auxílio básico)",
+      "detail": "Declare a gravidez dentro do prazo para não perder o auxílio.",
+      "fiche": "prime-naissance-paje"
+    },
+    {
+      "id": "declaration",
+      "titre": "Registrar o nascimento na prefeitura (mairie)",
+      "detail": "Nos 5 dias seguintes ao nascimento.",
+      "fiche": "declaration-naissance"
+    },
+    {
+      "id": "livret-famille",
+      "titre": "Retirar ou atualizar o livro de família (livret de famille)",
+      "fiche": "livret-de-famille"
+    },
+    {
+      "id": "acte-naissance",
+      "titre": "Saber como obter a certidão de nascimento da criança",
+      "detail": "É gratuita e será pedida em muitos trâmites.",
+      "fiche": "acte-naissance"
+    },
+    {
+      "id": "conge-paternite",
+      "titre": "Tirar a licença-paternidade e de acolhimento da criança",
+      "fiche": "conge-paternite"
+    },
+    {
+      "id": "carte-vitale",
+      "titre": "Vincular o bebê ao Carte Vitale (cartão do seguro-saúde) dos dois pais",
+      "fiche": "rattacher-enfant-carte-vitale"
+    },
+    {
+      "id": "mutuelle",
+      "titre": "Incluir o bebê no plano de saúde complementar (mutuelle)",
+      "fiche": "mutuelle-enfant"
+    },
+    {
+      "id": "pmi",
+      "titre": "Organizar o acompanhamento e as vacinas (médico ou PMI, serviço de saúde materno-infantil)",
+      "fiche": "vaccinations-pmi"
+    },
+    {
+      "id": "caf",
+      "titre": "Informar o nascimento à Caf (órgão de benefícios familiares) e verificar os abonos familiares",
+      "detail": "Na França metropolitana, eles são pagos a partir do 2º filho dependente.",
+      "fiche": "allocations-familiales"
+    },
+    {
+      "id": "mode-garde",
+      "titre": "Procurar uma forma de cuidado infantil",
+      "detail": "Antecipe desde a gravidez.",
+      "fiche": "mode-de-garde-petite-enfance"
+    },
+    {
+      "id": "epargne",
+      "titre": "Abrir uma caderneta de poupança para a criança",
+      "fiche": "livret-epargne-mineur"
+    }
+  ]
+}

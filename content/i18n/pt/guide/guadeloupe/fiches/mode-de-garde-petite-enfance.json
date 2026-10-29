@@ -1,0 +1,218 @@
+{
+  "slug": "mode-de-garde-petite-enfance",
+  "territoire": "guadeloupe",
+  "categorie": "naissance",
+  "titre": "Creche ou assistente maternal: encontrar quem cuide da criança",
+  "resume": "Onde procurar uma vaga, quais documentos preparar para a inscrição na creche (crèche) e como obter a ajuda da Caf (CMG) quando você emprega uma assistente maternal credenciada (assistante maternelle).",
+  "aQuoiCaSert": "Deixar o seu filho pequeno aos cuidados de alguém permite trabalhar ou estudar. As vagas em creche (crèche) devem ser pedidas cedo, muitas vezes já na gravidez. Se você emprega uma assistente maternal credenciada (assistante maternelle agréée), a Caf (Caisse d'allocations familiales, órgão de benefícios familiares) pode pagar o complément de libre choix du mode de garde (CMG, auxílio para cuidados infantis) e assumir as contribuições sociais. Ter o dossiê completo desde o primeiro pedido evita perder a vez na lista de espera.",
+  "quiEstConcerne": [
+    "Pais de uma criança com menos de 6 anos (menos de 12 anos para pai ou mãe solo, no caso do CMG).",
+    "Em casal, pelo menos um dos pais deve trabalhar para ter o CMG. Equivalem a trabalho: auxílio-doença ou maternidade, seguro-desemprego, formação remunerada. Algumas situações dispensam: estudos, AAH (auxílio a adultos com deficiência), RSA (renda mínima) com inscrição como candidato a emprego, ASS (auxílio de solidariedade a desempregados)."
+  ],
+  "aSavoir": [
+    "Creche pública: o formulário é retirado na prefeitura (mairie). Creche associativa ou particular: a inscrição é feita com a direção. É aconselhável começar já na gravidez.",
+    "Na maioria das creches financiadas pela Caf, o valor segue uma tabela nacional conforme a sua renda e o número de filhos.",
+    "As assistentes maternais devem ser credenciadas (agréées) pela PMI (protection maternelle et infantile, serviço de saúde materno-infantil). Você as encontra em monenfant.fr. Você se torna empregador e assina um contrato de trabalho.",
+    "CMG: o valor depende da sua renda, do número de filhos, do custo por hora do cuidado (com teto) e do número de horas. As contribuições sociais são cobertas 100% para uma assistente maternal credenciada. Pode ser pago desde o mês anterior ao pedido se as condições forem cumpridas.",
+    "Residência alternada: desde 1º de dezembro de 2025, cada um dos pais pode receber o CMG, calculado conforme a própria situação. O valor não é dividido entre eles.",
+    "É preciso se inscrever no Pajemploi e declarar todo mês o salário pago. A opção Pajemploi+ automatiza o débito e o pagamento do salário."
+  ],
+  "documents": [
+    {
+      "id": "livret-famille",
+      "libelle": "Livro de família (livret de famille) ou certidão de nascimento da criança",
+      "detail": "Cópia. Durante a gravidez, em geral pede-se um atestado de gravidez no lugar. Certidão de nascimento gratuita em service-public.gouv.fr.",
+      "coffre": "autres"
+    },
+    {
+      "id": "identite-parents",
+      "libelle": "Documento de identidade de cada um dos pais",
+      "detail": "Cópia.",
+      "coffre": "autres"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço com menos de 3 meses",
+      "detail": "Cópia. As creches municipais costumam reservar as vagas aos moradores da cidade.",
+      "coffre": "autres"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Último aviso de imposto ou número de beneficiário da Caf",
+      "detail": "Cópia. Serve para calcular o valor por hora da creche.",
+      "coffre": "finances"
+    },
+    {
+      "id": "travail",
+      "libelle": "Comprovantes de atividade dos pais",
+      "detail": "Contrato de trabalho, contracheques, atestado de formação ou do France Travail (serviço público de emprego), conforme o caso.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo que fixa a residência e a autoridade parental, se vocês estiverem separados",
+      "detail": "Cópia. Indica quem pode buscar a criança e as semanas de cada um dos pais.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "vaccins",
+      "libelle": "Páginas de vacinas da caderneta de saúde (carnet de santé)",
+      "detail": "Cópia. Vacinas obrigatórias exigidas para entrar na creche.",
+      "coffre": "sante"
+    },
+    {
+      "id": "attestation-droits",
+      "libelle": "Atestado de direitos da Assurance Maladie (seguro de saúde público francês) da criança",
+      "detail": "Pode ser baixado na sua conta ameli.",
+      "coffre": "sante"
+    },
+    {
+      "id": "assurance",
+      "libelle": "Atestado de seguro de responsabilidade civil",
+      "detail": "Muitas vezes pedido pelas creches.",
+      "coffre": "autres"
+    },
+    {
+      "id": "contrat-assmat",
+      "libelle": "Contrato de trabalho da assistente maternal e atestado de credenciamento",
+      "detail": "Original assinado pelas duas partes. Peça uma cópia do credenciamento emitido pela PMI.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (dados bancários)",
+      "detail": "Para o débito da creche ou o pagamento do CMG.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Procure as opções de cuidado perto de você",
+      "detail": "Em monenfant.fr, num relais petite enfance (RPE, centro de informação sobre a primeira infância) ou na prefeitura."
+    },
+    {
+      "titre": "Confira antes de sair de casa",
+      "detail": "Livro de família ou atestado de gravidez, documentos dos pais, comprovante de endereço com menos de 3 meses, aviso de imposto ou número da Caf, comprovantes de atividade, sentença se vocês estiverem separados, páginas de vacinas. Ligue para a creche e peça a lista exata."
+    },
+    {
+      "titre": "Peça uma vaga na creche",
+      "detail": "Na prefeitura para creche pública; senão, com a direção. Anote a data do pedido e cobre regularmente."
+    },
+    {
+      "titre": "Com uma assistente maternal, verifique o credenciamento e assine o contrato",
+      "detail": "Credenciamento emitido pelo Département de la Guadeloupe (conselho departamental, serviço de PMI)."
+    },
+    {
+      "titre": "Peça o CMG",
+      "detail": "Na sua conta on-line da Caf, seção cuidados infantis. Ainda não é beneficiário? Crie antes uma conta na Caf. Depois, inscreva-se como empregador no Pajemploi e declare o salário todo mês."
+    },
+    {
+      "titre": "Registre os gastos com cuidados",
+      "detail": "No Diário, para acompanhar a despesa por filho e a divisão com o outro genitor."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "monenfant.fr",
+      "detail": "Lista de creches, assistentes maternais e centros de informação sobre a primeira infância.",
+      "url": "https://monenfant.fr"
+    },
+    {
+      "nom": "Prefeitura (mairie) do seu município",
+      "detail": "Creches municipais."
+    },
+    {
+      "nom": "Caf de la Guadeloupe",
+      "detail": "Auxílio para cuidados infantis (complément de libre choix du mode de garde).",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    },
+    {
+      "nom": "Pajemploi (Urssaf)",
+      "detail": "Declaração mensal do salário da assistente maternal, gerida pela Urssaf (órgão de contribuições sociais).",
+      "url": "https://www.pajemploi.urssaf.fr"
+    },
+    {
+      "nom": "Département de la Guadeloupe (PMI)",
+      "detail": "Emite os credenciamentos das assistentes maternais e cuida da formação delas.",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Escolher um cuidado coletivo (monenfant.fr)",
+      "url": "https://monenfant.fr/choisir-un-mode-d-accueil-collectif"
+    },
+    {
+      "titre": "Auxílio para cuidados infantis, CMG (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152"
+    },
+    {
+      "titre": "Simulador do CMG (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72489"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Cobrar o pedido de vaga na creche",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Declarar o salário da assistente maternal no Pajemploi",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Contrato da creche ou da assistente maternal",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Atestado de credenciamento da assistente maternal",
+      "categorie": "finances"
+    },
+    {
+      "type": "depense",
+      "titre": "Gastos com cuidados infantis",
+      "categorie": "autre"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: número de vagas, critérios de atribuição e prazos de espera na creche, muito variáveis entre os municípios de Guadalupe.",
+    "A confirmar localmente: lista exata de documentos para a inscrição na creche, própria de cada estabelecimento.",
+    "Os valores do CMG dependem da sua renda, do número de filhos e do custo por hora: use o simulador oficial."
+  ],
+  "motsCles": [
+    "creche",
+    "assistente maternal",
+    "babá",
+    "CMG",
+    "Pajemploi",
+    "cuidados infantis",
+    "RPE"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "monenfant.fr, Escolher um cuidado coletivo",
+      "url": "https://monenfant.fr/choisir-un-mode-d-accueil-collectif",
+      "verifieLe": "2026-08-14"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F39152 CMG emprego direto",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152",
+      "verifieLe": "2026-06-26"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-01-06"
+    },
+    {
+      "titre": "Département de la Guadeloupe, Infância, juventude e família (PMI, credenciamento das assistentes maternais, ASE)",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

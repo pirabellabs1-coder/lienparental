@@ -73,11 +73,11 @@
     "To be confirmed locally: how to file a complaint for family abandonment (police station, gendarmerie or letter to the public prosecutor at the Tribunal judiciaire de Cayenne)."
   ],
   "motsCles": ["child support", "ARIPA", "intermediation", "unpaid support", "Caf", "debt recovery", "enforceable order"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1249 Unpaid child support", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-01-30" },
-    { "titre": "Service-public.gouv.fr, F36407 Financial intermediation of child support", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-04-01" },
-    { "titre": "Service-public.gouv.fr, F815 Family support allowance (ASF)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F1249 Unpaid child support", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F36407 Financial intermediation of child support", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F815 Family support allowance (ASF)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-10-29" },
     { "titre": "ARIPA, financial intermediation", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" },
     { "titre": "ARIPA, request for an enforceable order", "url": "https://pension-alimentaire.caf.fr/usagers/demande-titre-executoire" }
   ]

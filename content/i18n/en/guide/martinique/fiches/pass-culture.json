@@ -1,0 +1,146 @@
+{
+  "slug": "pass-culture",
+  "territoire": "martinique",
+  "categorie": "loisirs",
+  "titre": "Pass Culture for 15 to 18-year-olds",
+  "resume": "Free offers at 15 and 16, €50 at 17, €150 at 18: the documents to prepare for registering in the app and the time limits for using it.",
+  "aQuoiCaSert": "The pass Culture (France's culture pass for young people) makes culture easier to access: books, cinema tickets, concerts, shows, lessons, musical instruments. It has an individual part, used by the young person in the app, and a collective part, used by teachers for class outings. Bookings are made in the app, with partner venues.",
+  "quiEstConcerne": [
+    "Young people aged 15 to 18 living in mainland France or overseas, including Martinique.",
+    "Young foreign nationals who have lived in France for at least 1 year."
+  ],
+  "aSavoir": [
+    "Young people registered since March 1, 2025: free offers at 15 and 16, €50 at 17, €150 at 18. The credits at 17 and 18 add up.",
+    "The money can be used until the day before the young person turns 21.",
+    "Since early 2026, purchases of online (digital) offers are capped at €50.",
+    "A €50 bonus after 18 is planned for young people with a disability (AEEH, disabled child education allowance; AAH, adult disability allowance) or based on social criteria (family quotient).",
+    "Registration: ID and proof of address in the young person's name. If they live with someone else, you also need that person's proof of address, a letter confirming they house the young person (attestation d'hébergement) and that person's ID."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Young person's valid ID",
+      "detail": "Copy (photo or scan) sent through the app. No ID? See the guide entry \"Getting my child's ID card or passport\".",
+      "coffre": "autres"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address in the young person's name",
+      "detail": "Copy. Otherwise, the host's documents below.",
+      "coffre": "autres"
+    },
+    {
+      "id": "hebergement",
+      "libelle": "Housing certificate (attestation d'hébergement) signed by the parent or host",
+      "detail": "With a copy of the host's ID and proof of address. The most common case for a minor who lives with their parents.",
+      "coffre": "autres"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Download the pass Culture app",
+      "detail": "Or go to pass.culture.fr. Do it from age 15 for the free offers."
+    },
+    {
+      "titre": "Check before starting registration",
+      "detail": "Young person's valid ID, proof of address in their name or, failing that, a signed housing certificate with the ID and proof of address of the parent housing them, the young person's email address and phone number."
+    },
+    {
+      "titre": "Create the young person's account and send the documents"
+    },
+    {
+      "titre": "Wait for approval",
+      "detail": "The account is credited once the registration is accepted."
+    },
+    {
+      "titre": "Book offers",
+      "detail": "Help your teen with their first choices if needed."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "pass Culture",
+      "detail": "Official app and website, with an online help service.",
+      "url": "https://pass.culture.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Pass Culture (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959"
+    },
+    {
+      "titre": "Pass Culture: changes in 2026 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775"
+    },
+    {
+      "titre": "Pass Culture reform (pass.culture.fr)",
+      "url": "https://pass.culture.fr/reforme-du-pass-culture"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Turning 17: activate the pass Culture credit",
+      "evenement": "activite"
+    },
+    {
+      "type": "rappel",
+      "titre": "Use the pass Culture credit before turning 21",
+      "evenement": "activite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Housing certificate for the pass Culture",
+      "categorie": "autres"
+    },
+    {
+      "type": "depense",
+      "titre": "Cultural outing or activity",
+      "categorie": "loisirs"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Cultural outing",
+      "evenement": "activite"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Credits can be used until the day before turning 21"
+    }
+  ],
+  "aConfirmer": [
+    "The exact conditions and payment date of the €50 bonus after 18 should be checked on pass.culture.fr.",
+    "To be confirmed locally: the offers available in Martinique depend on partner venues, which you can see in the app.",
+    "The housing certificate template and how to upload documents are explained in the app: check when you register."
+  ],
+  "motsCles": [
+    "pass Culture",
+    "culture",
+    "teen",
+    "books",
+    "cinema",
+    "music",
+    "17 years old",
+    "18 years old"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F34959 Pass Culture",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959",
+      "verifieLe": "2025-12-18"
+    },
+    {
+      "titre": "Service-public.gouv.fr, news A18775 Pass Culture: changes in 2026",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "pass Culture, Pass Culture reform",
+      "url": "https://pass.culture.fr/reforme-du-pass-culture",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

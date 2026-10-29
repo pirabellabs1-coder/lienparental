@@ -1,0 +1,65 @@
+{
+  "slug": "compte-bancaire-droit-au-compte",
+  "territoire": "mayotte",
+  "categorie": "argent",
+  "titre": "Avoir son propre compte bancaire après une séparation",
+  "resume": "Ouvrir un compte à votre nom pour recevoir pension et prestations, et, si une banque refuse, utiliser le droit au compte auprès de l'IEDOM à Mamoudzou ou de la Banque de France : pièces exactes et délais.",
+  "aQuoiCaSert": "Après une séparation, un compte personnel permet de recevoir la pension alimentaire et les prestations de la CSSM, et de payer les frais de l'enfant en gardant des traces claires. Si une banque refuse de vous ouvrir un compte, une banque peut être désignée et sera obligée de le faire, avec des services bancaires de base gratuits. À Mayotte, le dossier peut être déposé à l'Institut d'émission des départements d'outre-mer (IEDOM) ou en ligne auprès de la Banque de France.",
+  "quiEstConcerne": [
+    "Le parent qui n'a pas de compte à son nom, ou seulement un compte joint avec son ex-conjoint.",
+    "Toute personne domiciliée en France qui n'a aucun compte de dépôt et s'est vu refuser l'ouverture d'un compte.",
+    "Le titulaire d'un seul compte joint peut aussi demander le droit au compte pour un compte individuel."
+  ],
+  "aSavoir": [
+    "La banque a 15 jours pour répondre à votre demande d'ouverture. Sans réponse, c'est un refus : elle doit alors vous remettre une lettre de refus.",
+    "La banque est désignée sous 1 jour ouvré. Cette désignation est valable 6 mois : contactez la banque désignée dans ce délai.",
+    "La banque désignée doit ouvrir le compte 3 jours ouvrés au plus tard après réception de toutes les pièces.",
+    "Services bancaires de base gratuits : tenue et clôture du compte, carte de paiement, prélèvements et virements, dépôts et retraits au guichet, 2 chèques de banque par mois. Frais d'incident plafonnés à 4 € par opération et 20 € par mois.",
+    "À Mayotte, l'IEDOM reçoit les demandes à Mamoudzou ; la demande en ligne passe par le site de la Banque de France."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité valide", "detail": "Carte d'identité, passeport ou titre de séjour. Copie pour le dossier, original au rendez-vous à la banque.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Justificatif de domicile de moins de 3 mois", "detail": "Facture, quittance de loyer. Hébergé : attestation d'hébergement et pièces de l'hébergeant (à confirmer avec la banque).", "coffre": "finances" },
+    { "id": "lettre-refus", "libelle": "Lettre de refus de la banque", "detail": "Ou, sans réponse, la preuve de votre demande datant de plus de 15 jours.", "coffre": "courriers" },
+    { "id": "attestation-honneur", "libelle": "Déclaration sur l'honneur de ne pas avoir de compte de dépôt", "detail": "Modèle proposé lors de la demande.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB du nouveau compte", "detail": "À transmettre à la CSSM, à votre employeur et à l'autre parent si la pension vous est versée directement.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Demandez l'ouverture d'un compte à une banque", "detail": "Par écrit si possible, et gardez une preuve de la date." },
+    { "titre": "En cas de refus, demandez la lettre de refus", "detail": "Ou attendez 15 jours sans réponse." },
+    { "titre": "Déposez votre dossier de droit au compte", "detail": "À l'agence IEDOM de Mamoudzou ou en ligne sur le site de la Banque de France." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pièce d'identité valide en original, justificatif de domicile de moins de 3 mois, lettre de refus, courrier de désignation pour la banque désignée." },
+    { "titre": "Ouvrez le compte à la banque désignée", "detail": "Dans les 6 mois suivant la désignation." },
+    { "titre": "Transmettez votre nouveau RIB", "detail": "À la CSSM (« Mon Compte » sur caf.fr et assurance maladie), à l'employeur et, si besoin, à l'autre parent." }
+  ],
+  "ou": [
+    { "nom": "IEDOM, agence de Mayotte", "detail": "Avenue de la Préfecture, BP 500, 97600 Mamoudzou. Accueil des particuliers sans rendez-vous le mardi et le jeudi de 8 h à 12 h ; sur rendez-vous le lundi et le mercredi (8 h à 15 h 30) et le vendredi (8 h à 12 h). Courriel : particuliers-mayotte@iedom.fr. Pièce d'identité exigée.", "url": "https://www.iedom.fr/rubrique19", "telephone": "02 62 90 71 00" },
+    { "nom": "Banque de France, demande en ligne", "detail": "Droit au compte avec FranceConnect.", "url": "https://www.banque-france.fr/fr/a-votre-service/particuliers/droit-au-compte-bancaire" },
+    { "nom": "La banque de votre choix", "detail": "Première demande d'ouverture." }
+  ],
+  "liens": [
+    { "titre": "Droit au compte (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417" },
+    { "titre": "Notice droit au compte à Mayotte (IEDOM)", "url": "https://www.iedom.fr/IMG/pdf/mayotte-notice-droit_au_compte.pdf" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Lettre de refus d'ouverture de compte", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Courrier de désignation de la banque", "categorie": "courriers" },
+    { "type": "coffre", "titre": "RIB de mon compte personnel", "categorie": "finances" },
+    { "type": "rappel", "titre": "Contacter la banque désignée (6 mois maximum)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Transmettre mon nouveau RIB à la CSSM", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "15 jours : délai de réponse de la banque, au-delà son silence vaut refus" },
+    { "libelle": "6 mois : validité de la désignation" }
+  ],
+  "aConfirmer": [
+    "Les règles de désolidarisation d'un compte joint dépendent de votre banque."
+  ],
+  "motsCles": ["compte bancaire", "RIB", "droit au compte", "IEDOM", "Banque de France", "compte joint", "séparation"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2417 Droit au compte", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417", "verifieLe": "2026-10-29" },
+    { "titre": "IEDOM, notice droit au compte à Mayotte", "url": "https://www.iedom.fr/IMG/pdf/mayotte-notice-droit_au_compte.pdf", "verifieLe": "2026-10-29" },
+    { "titre": "IEDOM, agence de Mayotte", "url": "https://www.iedom.fr/rubrique19", "verifieLe": "2026-10-29" }
+  ]
+}

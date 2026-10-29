@@ -55,9 +55,9 @@
     "O valor e as condições do auxílio para equipamento da Caf anunciado para 2027 devem ser confirmados com a Caf de la Guyane."
   ],
   "motsCles": ["esporte", "clube", "Pass'Sport", "licença esportiva", "atividade", "desconto"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, notícia A15850 Pass'Sport 2026-2027", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-09-02" },
-    { "titre": "Pass'Sport, jovens e pais", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" }
+    { "titre": "Service-public.gouv.fr, notícia A15850 Pass'Sport 2026-2027", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-10-29" },
+    { "titre": "Pass'Sport, jovens e pais", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents", "verifieLe": "2026-10-29" }
   ]
 }

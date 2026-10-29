@@ -16,7 +16,7 @@
     "O banco pode impor um cartão com autorização sistemática, que verifica o saldo a cada pagamento: é isso que limita o risco de ficar no negativo. Peça esse cartão se quiser esse controle.",
     "A abertura da conta é gratuita, mas o banco pode cobrar tarifas de manutenção ou de cartão: peça a tabela de tarifas antes de assinar.",
     "Os pais só podem usar o dinheiro do filho em despesas que o envolvam diretamente (educação, sustento). A partir dos 16 anos, devem prestar contas a ele sobre esse uso.",
-    "Pais separados que exercem juntos a autoridade parental: um só pode fazer os atos de administração do dia a dia, mas um ato de disposição, como alterar a conta ou fazer um saque grande, exige a concordância dos dois (Cour de cassation, tribunal superior francês, 12 de junho de 2025). Em caso de dificuldade, pode-se recorrer ao juiz de tutelas (juge des tutelles).",
+    "Pais separados que exercem juntos a autoridade parental: um só pode fazer os atos de administração do dia a dia, mas um ato de disposição, como uma transferência a débito da conta ou da caderneta da criança, exige a concordância dos dois (Cour de cassation, tribunal superior francês, 12 de junho de 2025). Em caso de dificuldade, pode-se recorrer ao juiz de tutelas (juge des tutelles).",
     "Se você exerce sozinho a autoridade parental por decisão judicial, leve essa decisão: ela explica ao banco por que o outro genitor não assina."
   ],
   "documents": [
@@ -45,7 +45,7 @@
   "liens": [
     { "titre": "Um menor pode ter conta bancária? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035" },
     { "titre": "Conta bancária individual: documentos exigidos (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413" },
-    { "titre": "Conta de um menor: concordância dos dois pais (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" }
+    { "titre": "Conta de um menor: concordância dos dois pais (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" }
   ],
   "actions": [
     { "type": "coffre", "titre": "Contrato da conta bancária do adolescente", "categorie": "finances" },
@@ -58,11 +58,11 @@
     "A confirmar localmente: ofertas para jovens disponíveis nas agências da Guiana Francesa e tarifas correspondentes."
   ],
   "motsCles": ["conta bancária", "adolescente", "menor de idade", "cartão bancário", "mesada", "livret jeune", "banco"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F21035 Um menor pode ter conta bancária ou produto de poupança?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2025-11-17" },
-    { "titre": "Service-public.gouv.fr, F2413 Conta bancária individual", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413", "verifieLe": "2026-05-22" },
-    { "titre": "Service-public.gouv.fr, notícia A18386 Conta de um menor: concordância dos dois pais (8 de julho de 2025)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" },
+    { "titre": "Service-public.gouv.fr, F21035 Um menor pode ter conta bancária ou produto de poupança?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2413 Conta bancária individual", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, notícia A18386 Conta de um menor: concordância dos dois pais (8 de julho de 2025)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" },
     { "titre": "Mes questions d'argent (Banque de France), Abrir uma conta", "url": "https://www.mesquestionsdargent.fr/comptes-moyens-de-paiement/ouvrir-un-compte" }
   ]
 }

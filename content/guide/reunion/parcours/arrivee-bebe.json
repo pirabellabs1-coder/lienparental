@@ -1,0 +1,21 @@
+{
+  "slug": "arrivee-bebe",
+  "territoire": "reunion",
+  "titre": "Arrivée d'un bébé",
+  "resume": "De la reconnaissance avant la naissance au mode de garde : les étapes administratives des premiers mois.",
+  "ordre": 3,
+  "elements": [
+    { "id": "reconnaissance", "titre": "Reconnaître l'enfant avant la naissance (parents non mariés)", "fiche": "reconnaissance-enfant" },
+    { "id": "prime-naissance", "titre": "Demander la prime à la naissance et l'allocation de base", "detail": "Déclarez la grossesse dans les délais pour ne pas perdre la prime.", "fiche": "prime-naissance-paje" },
+    { "id": "declaration", "titre": "Déclarer la naissance en mairie", "detail": "Dans les 5 jours qui suivent l'accouchement.", "fiche": "declaration-naissance" },
+    { "id": "livret-famille", "titre": "Récupérer ou mettre à jour le livret de famille", "fiche": "livret-de-famille" },
+    { "id": "acte-naissance", "titre": "Savoir obtenir un acte de naissance de l'enfant", "detail": "Gratuit, il sera demandé pour de nombreuses démarches.", "fiche": "acte-naissance" },
+    { "id": "conge-paternite", "titre": "Prendre le congé de paternité et d'accueil de l'enfant", "fiche": "conge-paternite" },
+    { "id": "carte-vitale", "titre": "Rattacher bébé aux cartes Vitale des deux parents", "fiche": "rattacher-enfant-carte-vitale" },
+    { "id": "mutuelle", "titre": "Ajouter bébé à la mutuelle", "fiche": "mutuelle-enfant" },
+    { "id": "pmi", "titre": "Organiser le suivi et les vaccins (médecin ou PMI)", "fiche": "vaccinations-pmi" },
+    { "id": "caf", "titre": "Signaler la naissance à la Caf et vérifier les allocations familiales", "detail": "À La Réunion, comme dans les autres DOM, elles sont versées dès le premier enfant.", "fiche": "allocations-familiales-reunion" },
+    { "id": "mode-garde", "titre": "Chercher un mode de garde", "detail": "À anticiper dès la grossesse.", "fiche": "mode-de-garde-petite-enfance" },
+    { "id": "epargne", "titre": "Ouvrir un livret d'épargne pour l'enfant", "fiche": "livret-epargne-mineur" }
+  ]
+}

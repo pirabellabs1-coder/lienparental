@@ -1,0 +1,63 @@
+{
+  "slug": "mutuelle-enfant",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Your child's mutuelle and top-up health insurance",
+  "resume": "What the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) reimburses, what you still pay, how to cover your child with a mutuelle or the C2S, and how to organize things after a separation.",
+  "aQuoiCaSert": "In Mayotte, health insurance (the CSSM) reimburses part of the cost of care. The rest, called the ticket modérateur (patient's share), is paid by you or by your top-up health insurance (mutuelle). A child is usually covered as a dependent (ayant droit) on one parent's contract. Since 2024, the complémentaire santé solidaire (C2S, free or low-cost top-up health insurance) also exists in Mayotte for low-income households.",
+  "quiEstConcerne": [
+    "Employed parents covered by a company top-up health insurance who want to add their child to it.",
+    "Parents who have an individual mutuelle.",
+    "Separated parents who need to decide which contract covers the child.",
+    "Low-income households, who may be entitled to the C2S."
+  ],
+  "aSavoir": [
+    "Visit to a general practitioner: the CSSM reimburses 70%; the remaining 30% is paid by you or your top-up insurance (Cleiss, the French agency for international social security liaison).",
+    "At the centre hospitalier de Mayotte (Mayotte's hospital) and its clinics (dispensaires), the insured person pays nothing upfront for consultations and hospital stays, according to the Cleiss.",
+    "Some situations are covered at 100%, for example long-term conditions (affections de longue durée) and pregnant women from the 6th month.",
+    "Children's coverage depends on your contract: read the information notice given by your employer or your mutuelle.",
+    "If your income is low, the C2S covers the whole family, children included: see the dedicated guide entry."
+  ],
+  "documents": [
+    { "id": "attestation-droits", "libelle": "The child's health insurance certificate of entitlement", "detail": "Copy. In your ameli account or request it from the CSSM.", "coffre": "sante" },
+    { "id": "acte-naissance", "libelle": "The child's birth certificate or family record book (livret de famille)", "detail": "Copy, to prove parentage.", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "ID of the parent who holds the contract", "detail": "Copy of both sides.", "coffre": "sante" },
+    { "id": "rib", "libelle": "RIB (bank account details) of the parent who will receive the reimbursements", "coffre": "finances" },
+    { "id": "formulaire-ajout", "libelle": "Form to add a beneficiary, or written request to the mutuelle", "detail": "Provided by your mutuelle or by your employer.", "coffre": "sante" },
+    { "id": "jugement-residence", "libelle": "Judgment or agreement setting the child's residence (separated parents)", "detail": "Copy, if the mutuelle asks for it.", "coffre": "jaf" },
+    { "id": "carte-tiers-payant", "libelle": "The mutuelle's direct-payment card (carte de tiers payant) listing the child", "detail": "Show it to the doctor and the pharmacy.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "First check that the child is properly attached to the CSSM", "detail": "Without this attachment, the mutuelle cannot reimburse. See the guide entry on attaching your child." },
+    { "titre": "Read your contract or your company mutuelle's notice", "detail": "Find out whether children are covered automatically, as an option or for an extra premium." },
+    { "titre": "Check before you send your file", "detail": "Certificate of entitlement listing the child, birth certificate or family record book, RIB, ID, signed form." },
+    { "titre": "Ask for the child to be added", "detail": "With your mutuelle or your employer. Keep a copy of the request." },
+    { "titre": "Separated parents: agree on which contract covers the child", "detail": "The parent whose file is not linked to the mutuelle sends their reimbursement statements themselves." },
+    { "titre": "Check the first reimbursement", "detail": "Make sure the top-up share has actually been paid." }
+  ],
+  "ou": [
+    { "nom": "Your mutuelle or your employer's human resources department" },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Certificate of entitlement and attaching the child.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" }
+  ],
+  "liens": [
+    { "titre": "Mayotte's social security system (Cleiss)", "url": "https://www.cleiss.fr/docs/regimes/regime_mayotte.html" },
+    { "titre": "Free or low-cost top-up health insurance: complémentaire santé solidaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "The child's certificate of entitlement", "categorie": "sante" },
+    { "type": "coffre", "titre": "The mutuelle's direct-payment card", "categorie": "sante" },
+    { "type": "depense", "titre": "Mutuelle premium for the child", "categorie": "sante" },
+    { "type": "rappel", "titre": "Check the child's mutuelle coverage every year", "evenement": "sante" }
+  ],
+  "aConfirmer": [
+    "To be confirmed: whether employers in Mayotte must offer group top-up health insurance, which the national page does not mention.",
+    "To be confirmed with the CSSM: whether reimbursements are sent automatically to mutuelles (Noémie link) in Mayotte.",
+    "To be confirmed with your mutuelle: the age limit for covering children and the documents required for a child of separated parents."
+  ],
+  "motsCles": ["mutuelle", "top-up health insurance", "ticket modérateur", "dependent", "CSSM", "reimbursement"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Cleiss, Mayotte's social security system", "url": "https://www.cleiss.fr/docs/regimes/regime_mayotte.html", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" }
+  ]
+}

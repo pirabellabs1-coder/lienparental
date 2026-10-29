@@ -1,0 +1,73 @@
+{
+  "slug": "inscrire-enfant-ecole",
+  "territoire": "france",
+  "categorie": "ecole",
+  "titre": "Inscrire mon enfant à l'école maternelle ou élémentaire",
+  "resume": "Deux étapes : la mairie délivre un certificat d'inscription, puis l'école admet l'enfant. La liste des pièces à apporter, et ce qui change quand les parents sont séparés.",
+  "aQuoiCaSert": "L'instruction est obligatoire de 3 à 16 ans. Pour une première inscription dans une école publique maternelle ou élémentaire, vous passez d'abord par le service scolaire de la mairie, qui vous remet un certificat d'inscription indiquant l'école d'affectation. Ensuite, la direction de l'école admet votre enfant sur présentation de ce certificat et du justificatif de vaccinations. Préparer les pièces à l'avance évite de revenir une deuxième fois.",
+  "quiEstConcerne": [
+    "Les parents d'un enfant qui aura 3 ans dans l'année civile de la rentrée.",
+    "Les parents qui déménagent ou changent d'école pour leur enfant.",
+    "Les familles nouvellement installées dans une commune."
+  ],
+  "aSavoir": [
+    "L'enfant doit être inscrit en maternelle à la rentrée de l'année civile de ses 3 ans, et en élémentaire à la rentrée de l'année civile de ses 6 ans. L'école publique est gratuite.",
+    "L'inscription en mairie doit être faite au plus tard en juin avant la rentrée. Les inscriptions débutent en général en mars.",
+    "On inscrit en principe à l'école du secteur fixé par la commune. Une autre école demande une dérogation de la mairie, qui n'est pas automatique. Une inscription dans une autre commune suppose l'accord de son maire.",
+    "Vaccinations : elles doivent être à jour pour l'âge de l'enfant, sauf contre-indication médicale. Sinon, l'admission peut être provisoire et les parents ont 3 mois pour faire vacciner l'enfant.",
+    "Parents séparés : l'inscription ou la radiation dans un établissement public est un acte usuel. Un parent peut la faire seul, il est présumé avoir l'accord de l'autre, mais doit l'informer. Si l'autre parent signale son désaccord à l'école, elle doit en tenir compte. En cas de désaccord, le juge aux affaires familiales peut trancher, en référé si c'est urgent.",
+    "Autorité parentale exclusive : si un jugement la confie à un seul parent, ce parent décide seul. Apportez une copie du jugement pour que l'école et la mairie en tiennent compte.",
+    "Passage en CP : il est automatique si la maternelle et l'élémentaire sont dans le même groupe scolaire ; sinon, l'enfant est affecté à l'école élémentaire du secteur."
+  ],
+  "documents": [
+    { "id": "identite-enfant", "libelle": "Pièce d'identité de l'enfant, livret de famille ou copie d'extrait d'acte de naissance", "detail": "Original à présenter. Pas d'acte de naissance ? Demandez-le gratuitement en ligne sur service-public.gouv.fr ou à la mairie du lieu de naissance.", "coffre": "scolarite" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité du parent qui fait l'inscription", "detail": "Original. Carte d'identité, passeport ou titre de séjour.", "coffre": "scolarite" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Facture, quittance de loyer ou avis d'imposition. Hébergé ? Apportez une attestation d'hébergement de la personne qui vous loge, avec sa pièce d'identité et son propre justificatif.", "coffre": "scolarite" },
+    { "id": "vaccins", "libelle": "Carnet de santé (pages vaccins) ou certificat de contre-indication", "detail": "Original à montrer, photocopie des pages vaccins souvent demandée.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant l'autorité parentale et la résidence, si vous êtes séparés", "detail": "Copie. Indispensable en cas d'autorité parentale exclusive ou de résidence fixée chez un parent.", "coffre": "jaf" },
+    { "id": "radiation", "libelle": "Certificat de radiation de l'ancienne école", "detail": "Seulement en cas de changement d'école. À demander à la direction de l'ancienne école.", "coffre": "scolarite" },
+    { "id": "certificat-inscription", "libelle": "Certificat d'inscription délivré par la mairie", "detail": "Original à remettre à la direction de l'école. Gardez une photo ou une copie.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Contactez le service scolaire de votre mairie", "detail": "Demandez les dates d'inscription, s'il faut un rendez-vous, s'il existe un téléservice, et la liste exacte des pièces : elle varie d'une commune à l'autre." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pièce d'identité de l'enfant (ou livret de famille), votre pièce d'identité, justificatif de domicile récent (ou attestation d'hébergement), carnet de santé à jour, jugement si vous êtes séparés, certificat de radiation en cas de changement d'école. Prévoyez les photocopies." },
+    { "titre": "Déposez le dossier en mairie et récupérez le certificat d'inscription", "detail": "Le certificat indique l'école où votre enfant est affecté. Demandez une dérogation à ce moment si vous souhaitez une autre école." },
+    { "titre": "Faites admettre votre enfant à l'école", "detail": "Présentez le certificat d'inscription et le justificatif de vaccinations à la direction de l'école. Donnez les coordonnées des deux parents et la liste des personnes autorisées à récupérer l'enfant." },
+    { "titre": "Informez l'autre parent", "detail": "Si vous êtes séparés, prévenez l'autre parent de l'inscription, par écrit de préférence (message ou courriel)." },
+    { "titre": "Pas de nouvelle inscription chaque année", "detail": "L'inscription vaut pour toute la maternelle. Pour le CP, renseignez-vous auprès de la mairie si l'école élémentaire n'est pas dans le même groupe scolaire." }
+  ],
+  "ou": [
+    { "nom": "Mairie de votre commune, service scolaire", "detail": "Inscription, certificat d'inscription et dérogations de secteur. Coordonnées sur l'annuaire de service-public.fr.", "url": "https://lannuaire.service-public.gouv.fr" },
+    { "nom": "Direction de l'école", "detail": "Admission de l'enfant et certificat de radiation." }
+  ],
+  "liens": [
+    { "titre": "Inscription à l'école maternelle (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864" },
+    { "titre": "Inscrire son enfant à l'école élémentaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" },
+    { "titre": "Vaccination pour l'école, la crèche ou la garderie (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Autorité parentale en cas de séparation (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Certificat d'inscription scolaire", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Pages vaccins du carnet de santé", "categorie": "sante" },
+    { "type": "coffre", "titre": "Jugement ou convention (autorité parentale, résidence)", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Inscription à l'école en mairie, au plus tard en juin", "evenement": "ecole" },
+    { "type": "calendrier", "titre": "Rendez-vous d'admission à l'école", "evenement": "ecole" }
+  ],
+  "datesLimites": [
+    { "libelle": "Inscription en mairie au plus tard en juin avant la rentrée", "detail": "Les inscriptions débutent souvent en mars. Vérifiez le calendrier de votre mairie." },
+    { "libelle": "3 mois pour mettre les vaccins à jour", "detail": "En cas d'admission provisoire d'un enfant dont les vaccinations obligatoires ne sont pas à jour." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : dates d'inscription, prise de rendez-vous, téléservice et liste exacte des pièces, propres à chaque mairie.",
+    "À confirmer localement : acceptation d'une attestation sur l'honneur ou d'une attestation d'hébergement à la place d'un justificatif de domicile, selon la mairie.",
+    "À confirmer localement : pièces exigées en cas de changement d'école (certificat de radiation, dernier livret scolaire), à demander à la mairie et à la nouvelle école."
+  ],
+  "motsCles": ["maternelle", "primaire", "CP", "mairie", "inscription", "dérogation", "radiation"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1864 Inscription à l'école maternelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1865 Inscrire son enfant à l'école élémentaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" }
+  ]
+}

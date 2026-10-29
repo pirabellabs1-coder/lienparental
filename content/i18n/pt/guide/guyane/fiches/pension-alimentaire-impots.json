@@ -59,11 +59,11 @@
     "O prazo de declaração aplicável na Guiana Francesa é publicado todo ano pela DGFiP (administração fiscal francesa): confira em impots.gouv.fr."
   ],
   "motsCles": ["impostos", "pensão alimentícia", "dedução", "quociente familiar", "cotas", "declaração", "case T"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F2 Dedução de uma pensão alimentícia", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2", "verifieLe": "2026-04-15" },
-    { "titre": "Service-public.gouv.fr, F3170 Pensão alimentícia recebida", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170", "verifieLe": "2026-04-15" },
-    { "titre": "Service-public.gouv.fr, F2633 Residência alternada, quociente familiar e case T", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-04-15" },
+    { "titre": "Service-public.gouv.fr, F2 Dedução de uma pensão alimentícia", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3170 Pensão alimentícia recebida", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2633 Residência alternada, quociente familiar e case T", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F12 (contatos do serviço de informação fiscal)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12", "verifieLe": "2026-04-15" }
   ]
 }

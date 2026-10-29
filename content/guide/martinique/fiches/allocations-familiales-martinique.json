@@ -1,0 +1,162 @@
+{
+  "slug": "allocations-familiales-martinique",
+  "territoire": "martinique",
+  "categorie": "aides",
+  "titre": "Allocations familiales en Martinique (dès le 1er enfant)",
+  "resume": "En Martinique, les allocations familiales sont versées dès un seul enfant à charge. Qui y a droit, comment les demander et comment elles se partagent en résidence alternée.",
+  "aQuoiCaSert": "Les allocations familiales aident les familles à assumer les dépenses courantes des enfants. En métropole, elles ne sont versées qu'à partir de 2 enfants. Dans les départements d'outre-mer, dont la Martinique, des règles particulières s'appliquent : une allocation est versée dès le premier enfant à charge, avec des majorations liées à l'âge de l'enfant.",
+  "quiEstConcerne": [
+    "Les familles qui résident en Martinique avec au moins un enfant à charge de moins de 20 ans.",
+    "Les parents séparés dont l'enfant vit en résidence alternée.",
+    "Les parents qui ne sont pas encore allocataires de la Caf."
+  ],
+  "aSavoir": [
+    "Dans les DOM, pour une famille avec un seul enfant à charge, une allocation familiale est versée, avec une majoration à partir des 11 ans de l'enfant, revalorisée à partir de 16 ans (Cnaf, lettre réseau LR-2026-051 du 26 février 2026).",
+    "À partir de 2 enfants, les règles sont les mêmes qu'en métropole. Depuis le 1er mars 2026, la majoration pour âge est versée à 18 ans au lieu de 14 ans pour les enfants nés à partir du 1er mars 2012, dans les familles d'au moins 2 enfants (Cnaf, LR-2026-051).",
+    "Pour 2 enfants, le montant de base va de 38,07 € à 152,25 € par mois selon les ressources du foyer (service-public.gouv.fr, vérifié au 1er juin 2026).",
+    "Le complément familial a des conditions et un montant différents dans les DOM, dont la Martinique (service-public.gouv.fr).",
+    "Résidence alternée : les parents peuvent choisir de partager les allocations familiales, chacun recevant la moitié, avec le formulaire cerfa n° 14000. Ce choix ne peut être modifié qu'au bout d'un an, sauf changement de résidence de l'enfant. En cas de désaccord, chaque parent reçoit automatiquement une part.",
+    "Seules les allocations familiales se partagent. Paje, complément familial, aides au logement, allocation de rentrée scolaire, allocation de soutien familial ou AEEH sont versées en totalité au parent désigné."
+  ],
+  "documents": [
+    {
+      "id": "identite-parents",
+      "libelle": "Pièce d'identité ou titre de séjour de chaque parent",
+      "detail": "Copie en cours de validité, demandée lors de la première demande à la Caf.",
+      "coffre": "finances"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Livret de famille ou acte de naissance de chaque enfant",
+      "detail": "Copie. Acte gratuit sur service-public.gouv.fr ou à la mairie du lieu de naissance.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB du parent allocataire",
+      "detail": "À votre nom.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Avis d'imposition de l'année précédente",
+      "detail": "Copie, téléchargeable dans votre espace impots.gouv.fr. Les ressources servent au calcul.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Justificatif de domicile",
+      "detail": "Copie récente (facture, quittance de loyer ou attestation d'hébergement).",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Jugement ou convention fixant la résidence alternée",
+      "detail": "Copie, à joindre au formulaire de partage si la résidence alternée a été fixée par le juge ou une convention.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Formulaire cerfa n° 14000 de déclaration en cas de résidence alternée",
+      "detail": "Signé par les deux parents si vous êtes d'accord sur le partage. Gardez une copie.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Devenez allocataire si ce n'est pas déjà fait",
+      "detail": "Faites une demande de prestations sur caf.fr. Si vous êtes déjà allocataire, déclarez simplement la naissance ou l'arrivée de l'enfant."
+    },
+    {
+      "titre": "Vérifiez avant d'envoyer votre dossier",
+      "detail": "Enfants bien déclarés, ressources à jour, RIB, adresse exacte, situation familiale (en couple, séparé, parent isolé). En cas de séparation, déclarez la date réelle."
+    },
+    {
+      "titre": "Résidence alternée : choisissez le partage ou un seul allocataire",
+      "detail": "Remplissez ensemble le formulaire cerfa n° 14000 et envoyez-le à la Caf avec la décision du juge ou la convention si vous en avez une."
+    },
+    {
+      "titre": "Contrôlez vos droits",
+      "detail": "Consultez le détail de vos paiements dans votre espace Mon Compte et utilisez le simulateur de la Caf pour vérifier le montant."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "Démarches en ligne dans l'espace Mon Compte. Accueil sur place : adresses et rendez-vous dans la rubrique de la Caf de la Martinique sur caf.fr.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Allocations familiales (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213"
+    },
+    {
+      "titre": "Résidence alternée et prestations familiales (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Complément familial (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214"
+    },
+    {
+      "titre": "Caf de la Martinique",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Formulaire de partage des allocations (cerfa n° 14000)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notification de droits de la Caf",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Signaler à la Caf tout changement de situation familiale",
+      "evenement": "autre"
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer localement auprès de la Caf de la Martinique : le montant mensuel 2026 pour un seul enfant et le montant des majorations (11 et 16 ans) ne figurent pas sur les sources nationales consultées. Utilisez le simulateur de la Caf.",
+    "À confirmer localement auprès de la Caf de la Martinique : les modalités de partage en résidence alternée quand la famille n'a qu'un seul enfant à charge.",
+    "À confirmer localement : les conditions du complément familial en Martinique (âge et nombre d'enfants, plafonds).",
+    "À confirmer auprès de la Caf : la situation des agents de la fonction publique en poste en Martinique qui n'ont qu'un enfant, pour lesquels des règles particulières peuvent s'appliquer."
+  ],
+  "motsCles": [
+    "allocations familiales",
+    "un enfant",
+    "DOM",
+    "Caf",
+    "résidence alternée",
+    "partage"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Cnaf, lettre réseau LR-2026-051 du 26 février 2026 (majoration des allocations familiales, dispositions DOM)",
+      "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13213 Allocations familiales",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213",
+      "verifieLe": "2026-06-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Résidence alternée et prestations familiales",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13214 Complément familial",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214",
+      "verifieLe": "2026-04-01"
+    }
+  ]
+}

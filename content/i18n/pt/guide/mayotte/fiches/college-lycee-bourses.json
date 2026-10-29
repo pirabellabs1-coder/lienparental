@@ -1,0 +1,65 @@
+{
+  "slug": "college-lycee-bourses",
+  "territoire": "mayotte",
+  "categorie": "ecole",
+  "titre": "Pedir a bolsa do collège ou do lycée",
+  "resume": "Análise automática na matrícula ou pedido até 15 de outubro: tetos de renda, valores, aviso de imposto a apresentar e regras para pais separados ou com residência alternada.",
+  "aQuoiCaSert": "A bolsa do collège (anos finais do ensino fundamental) e a bolsa do lycée (ensino médio) ajudam as famílias de baixa renda a pagar as despesas escolares. São pagas a cada trimestre. Para o ano letivo 2026-2027, conta a renda fiscal de referência (revenu fiscal de référence) do aviso de imposto 2026 sobre a renda de 2025. Na maioria das vezes, o pedido é feito dando a autorização para a análise automática no momento da matrícula.",
+  "quiEstConcerne": [
+    "Famílias de um aluno do collège ou do lycée matriculado em escola pública, particular conveniada (privé sous contrat) ou no Cned (centro nacional de ensino a distância) em turma completa.",
+    "Pais de um aluno do CM2 (último ano do primário) que entra na 6e (1º ano do collège), ou da 3e que entra no lycée.",
+    "Pais separados: só um dos pais pode fazer o pedido."
+  ],
+  "aSavoir": [
+    "Bolsa do collège 2026-2027: 40 €, 112 € ou 175 € por trimestre conforme a renda. Tetos de renda 2025: 18.488 € para 1 filho a cargo, 22.754 € para 2, 27.020 € para 3, 31.286 € para 4, 35.553 € para 5.",
+    "Bolsa do lycée 2026-2027: 6 níveis (échelons), de 168 € a 357 € por trimestre. O simulador oficial indica o seu nível.",
+    "Casal casado ou em PACS (união civil): um aviso de imposto conjunto. Casal que vive junto sem casamento nem PACS: o aviso de imposto de cada um. Pai ou mãe solo que vive só: apenas o seu aviso de imposto.",
+    "Residência alternada (bolsa do collège): os pais escolhem qual dos dois faz o pedido. Se os dois fizerem um pedido, ambos são recusados.",
+    "A autorização para a análise automática, dada na matrícula na rede pública, vale como pedido para todo o collège e o lycée. Sem ela, é preciso pedir de novo todo ano.",
+    "Pagamento em 3 parcelas. Para quem almoça na escola (demi-pensionnaire) ou é interno, as despesas de cantina ou internato são descontadas primeiro."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Aviso de imposto 2026 sobre a renda de 2025", "detail": "Cópia de todas as páginas. Os dois avisos se o casal vive junto sem casamento nem PACS. Sem aviso? Faça a declaração ou procure o fundo social (fonds social) da escola.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (dados bancários) em nome de quem faz o pedido", "detail": "Exigido na rede particular ou sem análise automática.", "coffre": "finances" },
+    { "id": "formulaire-bourse", "libelle": "Formulário de bolsa em papel, se você não usar o EduConnect", "detail": "Retire na secretaria.", "coffre": "scolarite" },
+    { "id": "jugement", "libelle": "Sentença ou acordo que fixa a residência da criança, se vocês são separados", "detail": "Cópia.", "coffre": "jaf" },
+    { "id": "attestation-cssm", "libelle": "Declaração da CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte) com os filhos a cargo", "detail": "Pode ser pedida para comprovar o número de filhos.", "coffre": "finances" },
+    { "id": "notification", "libelle": "Notificação de concessão ou de recusa da bolsa", "detail": "Guarde-a em caso de recurso.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Estime seus direitos com o simulador", "detail": "Acessível pelas fichas de service-public.gouv.fr, com o seu aviso de imposto 2026." },
+    { "titre": "Na matrícula, dê a autorização para a análise automática", "detail": "On-line com o EduConnect ou na ficha em papel, na rede pública." },
+    { "titre": "Caso contrário, faça o pedido entre 1º de setembro e 15 de outubro", "detail": "On-line no Scolarité services com o EduConnect, ou em formulário de papel na secretaria." },
+    { "titre": "Confira antes de ir", "detail": "Aviso de imposto 2026 completo, RIB, formulário assinado, sentença de residência se forem separados. Em residência alternada, combinem quem faz o pedido." },
+    { "titre": "Guarde a notificação", "detail": "Em caso de recusa no collège, recurso possível em até 2 meses. No lycée, 15 dias corridos completos (jours francs) após a notificação." }
+  ],
+  "ou": [
+    { "nom": "Secretaria do collège ou do lycée", "detail": "Pedido de bolsa em papel e fundo social." },
+    { "nom": "Scolarité services (EduConnect)", "detail": "Pedido de bolsa on-line.", "url": "https://educonnect.education.gouv.fr" },
+    { "nom": "Rectorat de Mayotte (secretaria regional de educação)", "detail": "Decisão de concessão e recursos.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "telephone": "02 69 61 10 24" }
+  ],
+  "liens": [
+    { "titre": "Bolsa do collège (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984" },
+    { "titre": "Bolsa do lycée (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Pedido de bolsa: prazo final 15 de outubro", "evenement": "ecole" },
+    { "type": "rappel", "titre": "Dar a autorização para a análise automática da bolsa na matrícula", "evenement": "ecole" },
+    { "type": "coffre", "titre": "Aviso de imposto usado para a bolsa", "categorie": "finances" },
+    { "type": "coffre", "titre": "Notificação da bolsa", "categorie": "scolarite" }
+  ],
+  "datesLimites": [
+    { "libelle": "Bolsa sem análise automática: de 1º de setembro a 15 de outubro de 2026" }
+  ],
+  "aConfirmer": [
+    "As fichas nacionais não mencionam Mayotte: a aplicação dos mesmos valores, tetos e datas deve ser confirmada com a escola ou o Rectorat de Mayotte.",
+    "A confirmar localmente: regra da residência alternada para a bolsa do lycée, pois a ficha oficial só a detalha para o collège."
+  ],
+  "motsCles": ["bolsa", "collège", "lycée", "6e", "EduConnect", "aviso de imposto", "residência alternada"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F984 Bolsa do collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F616 Bolsa do lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public (diretório dos serviços públicos), Rectorat de Mayotte", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "verifieLe": "2026-10-29" }
+  ]
+}

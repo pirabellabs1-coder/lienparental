@@ -1,0 +1,63 @@
+{
+  "slug": "complementaire-sante-solidaire",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Complémentaire santé solidaire (C2S, cobertura de saúde complementar) em Mayotte",
+  "resume": "Uma cobertura de saúde complementar gratuita ou de baixo custo para toda a família, inclusive os filhos, conforme a renda dos últimos 12 meses. Existe em Mayotte desde 1º de janeiro de 2024, com limites próprios.",
+  "aQuoiCaSert": "A Complémentaire santé solidaire cobre a parte das despesas de saúde não reembolsada pelo seguro de saúde (o ticket modérateur, coparticipação do paciente), dentro das tarifas da Sécurité sociale (seguridade social). Ela é gratuita ou tem uma pequena contribuição mensal conforme a sua renda, e cobre todas as pessoas da família, ou seja, também os seus filhos. Em Mayotte, é gerida pela CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte) e existe desde 1º de janeiro de 2024.",
+  "quiEstConcerne": [
+    "As famílias de renda modesta que residem em Mayotte de forma estável e regular.",
+    "Os beneficiários do RSA (revenu de solidarité active, renda mínima de inserção): a C2S gratuita é concedida automaticamente.",
+    "Os pais que criam os filhos sozinhos e as famílias sem cobertura complementar para os filhos."
+  ],
+  "aSavoir": [
+    "Limites anuais em Mayotte para a C2S gratuita, desde 1º de abril de 2026: 11.599 € para 1 pessoa, 17.398 € para 2, 20.878 € para 3, 24.358 € para 4, mais 4.640 € por pessoa adicional.",
+    "C2S com contribuição: renda até 15.659 € para 1 pessoa, 23.488 € para 2, 28.185 € para 3, 32.883 € para 4, mais 6.263 € por pessoa adicional.",
+    "Contribuição mensal por pessoa, conforme a idade em 1º de janeiro: 8 € até 29 anos, 14 € de 30 a 49 anos, 21 € de 50 a 59 anos, 25 € de 60 a 69 anos, 30 € a partir de 70 anos.",
+    "A renda considerada é a dos 12 meses anteriores ao pedido.",
+    "Resposta em até 2 meses. Em caso de recusa, você tem 2 meses para recorrer à comissão de recurso amigável (commission de recours amiable) da CSSM.",
+    "A C2S é concedida por 1 ano. A renovação é pedida em geral 2 a 4 meses antes do vencimento; é automática para os beneficiários do RSA.",
+    "No pedido, você escolhe se a C2S será gerida pela CSSM ou por um organismo complementar (organisme complémentaire).",
+    "Pais separados: a C2S é concedida à família que faz o pedido. Informe-se na CSSM no caso de uma criança em residência alternada."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "Pedido de C2S preenchido e assinado, se você não fizer o pedido on-line", "detail": "Inclui a lista das pessoas da família e a renda delas nos últimos 12 meses.", "coffre": "sante" },
+    { "id": "avis-impot", "libelle": "Aviso de imposto (avis d'impôt)", "detail": "Cópia. Pode ser baixado em impots.gouv.fr.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Comprovantes de renda dos últimos 12 meses, se forem pedidos", "detail": "Contracheques, indenizações, pensões alimentícias recebidas.", "coffre": "finances" },
+    { "id": "identite", "libelle": "Documento de identidade ou autorização de residência (titre de séjour)", "detail": "Cópia.", "coffre": "sante" },
+    { "id": "decision-c2s", "libelle": "Decisão de concessão da C2S", "detail": "Ela indica a data de fim do direito: anote-a para a renovação.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Estime seus direitos", "detail": "Some a renda da família em 12 meses e compare com os limites de Mayotte." },
+    { "titre": "Faça o pedido", "detail": "On-line com o serviço « Demande de complémentaire santé solidaire (Mayotte) » ou junto à CSSM." },
+    { "titre": "Confira antes de ir", "detail": "Se for entregar o dossiê no atendimento da CSSM: formulário assinado, aviso de imposto, comprovantes de renda, documento de identidade e carte Vitale (cartão do seguro de saúde). Tire fotocópias." },
+    { "titre": "Aguarde a decisão", "detail": "Ela sai em até 2 meses." },
+    { "titre": "Lembre-se da renovação", "detail": "Antes da data de fim indicada no seu certificado." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM), órgão de seguridade social de Mayotte", "detail": "Centre Kinga, Route nationale 1, Kawéni, 97600 Mamoudzou. Atendimento com hora marcada.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Ajuda com procedimentos on-line perto de você.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Complémentaire santé solidaire (service-public.gouv.fr, seção Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Decisão de concessão da C2S", "categorie": "sante" },
+    { "type": "coffre", "titre": "Aviso de imposto usado para a C2S", "categorie": "finances" },
+    { "type": "rappel", "titre": "Renovar a C2S antes do vencimento", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Direito concedido por 1 ano", "detail": "Peça a renovação 2 a 4 meses antes do vencimento." },
+    { "libelle": "Recurso em até 2 meses após uma recusa", "detail": "Junto à comissão de recurso amigável da CSSM." }
+  ],
+  "aConfirmer": [
+    "A confirmar com a CSSM: a qual família (de qual genitor) uma criança em residência alternada fica vinculada para a C2S."
+  ],
+  "motsCles": ["C2S", "mutuelle", "plano complementar", "saúde", "CSSM", "gratuito", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (seção Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" },
+    { "titre": "Assurance Maladie, circular CIR-16-2024 (C2S em Mayotte a partir de 1º de janeiro de 2024)", "url": "https://circulaires.ameli.fr/sites/default/files/directives/cir/2024/CIR-16-2024.pdf" },
+    { "titre": "CSSM, Contatos", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "slug": "complementaire-sante-solidaire",
+  "territoire": "france",
+  "categorie": "sante",
+  "titre": "Complémentaire santé solidaire (C2S): free or low-cost top-up health cover",
+  "resume": "Free or low-cost top-up health cover for the whole household, children included, based on your income over the last 12 months: income limits in mainland France, applying on ameli, renewal.",
+  "aQuoiCaSert": "The complémentaire santé solidaire covers the share of health costs not reimbursed by the Assurance Maladie (French public health insurance), up to the Sécurité sociale (social security) rates. It is free or comes with a small monthly contribution depending on your resources, and covers everyone in the household, including your children. It is often the solution when you have no mutuelle (top-up health insurance) and a low income.",
+  "quiEstConcerne": [
+    "Low-income households who have lived in France on a stable and lawful basis for more than 3 months.",
+    "People receiving the RSA (revenu de solidarité active, the minimum income benefit): free C2S is granted automatically, unless they object.",
+    "Single parents and families who have no top-up health cover for their children."
+  ],
+  "aSavoir": [
+    "With the C2S: no extra fees above the standard rate (dépassements d'honoraires), no upfront payment (tiers payant) if you follow the coordinated care pathway (parcours de soins), hospital daily charge covered, no medical deductible (franchise médicale) or flat-rate contribution, fixed allowances for glasses, dentures and hearing aids.",
+    "Annual income limits in mainland France (excluding Alsace-Moselle) for free C2S: €10,421 for 1 person, €15,632 for 2, €18,758 for 3, €21,885 for 4, plus €4,169 per additional person.",
+    "C2S with a contribution in mainland France: resources up to €14,069 for 1 person, €21,103 for 2, €25,324 for 3, €29,544 for 4, plus €5,628 per additional person.",
+    "The resources counted are those of the 12 months before the application. A flat-rate housing amount (forfait logement) is added if you receive housing benefit, are housed free of charge or own your home (for example €78.20 per month for a single person).",
+    "Decision within 2 months. Without a reply within this time, the application is accepted. If refused, an amicable appeal is possible within 2 months.",
+    "The C2S is granted for 1 year. Renewal is usually requested between 4 and 2 months before the end date, unless it is automatic (RSA, Aspa, Asi, and AAH with no change of situation).",
+    "Separated parents: the C2S is granted to the household that applies. A child in shared residence is in principle part of only one parent's household: ask your CPAM (Caisse primaire d'assurance maladie, the local health insurance fund)."
+  ],
+  "documents": [
+    {
+      "id": "formulaire",
+      "libelle": "Cerfa n° 12504 form, completed and signed, if you are not applying online",
+      "detail": "It includes the list of household members and their resources over the last 12 months.",
+      "coffre": "sante"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Tax notice (avis d'impôt) or tax return statement (Asdir)",
+      "detail": "Copy. Download it from impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "taxe-fonciere",
+      "libelle": "Property tax notice (taxe foncière), if you own your home",
+      "detail": "Copy.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Proof of resources for the last 12 months, if requested",
+      "detail": "Payslips, allowances, child support received. The fund may ask for additional information.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-caf",
+      "libelle": "Statement of resources from the Caf or the MSA (Mutualité sociale agricole, the farmers' social security fund), if an RSA application is under way",
+      "detail": "Downloadable from your Caf account.",
+      "coffre": "finances"
+    },
+    {
+      "id": "etranger",
+      "libelle": "Tax and social security documents from each country, if you lived abroad in the last 12 months",
+      "coffre": "finances"
+    },
+    {
+      "id": "decision-c2s",
+      "libelle": "C2S award decision",
+      "detail": "It shows the end date of your entitlement: note it for the renewal.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Estimate your entitlement",
+      "detail": "Add up the household's resources over 12 months and compare them with the mainland France limits, or use the simulator on service-public.gouv.fr. Have your tax notice and your statements of resources ready."
+    },
+    {
+      "titre": "Apply online",
+      "detail": "From your ameli account: this is the fastest way. You can also send form cerfa n° 12504 to your CPAM."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "If you submit the file at the front desk: signed form, tax notice, property tax notice, Caf certificate if an RSA claim is under way, proof of resources, ID and carte Vitale (health insurance card). Make photocopies."
+    },
+    {
+      "titre": "Wait for the decision",
+      "detail": "It is made within 2 months. If refused, refer the matter to the amicable appeals board (commission de recours amiable) within 2 months."
+    },
+    {
+      "titre": "Remember to renew",
+      "detail": "Between 4 and 2 months before the end date shown on your certificate."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "CPAM of your département",
+      "detail": "Apply online in your ameli account or at the front desk, phone 3646. MSA for the agricultural scheme.",
+      "url": "https://www.ameli.fr",
+      "telephone": "3646"
+    },
+    {
+      "nom": "France Services",
+      "detail": "Help with online procedures near you, listed in the government directory (annuaire de l'administration).",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Complémentaire santé solidaire (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027"
+    },
+    {
+      "titre": "ameli.fr, Assurance Maladie",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "C2S award decision",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Tax notice used for the C2S",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Renew the C2S (4 to 2 months before the end date)",
+      "evenement": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Renewal between 4 and 2 months before the end date",
+      "detail": "Automatic for people receiving the RSA, Aspa, Asi or AAH with no change of situation."
+    },
+    {
+      "libelle": "Appeal against a refusal within 2 months",
+      "detail": "To the fund's amicable appeals board."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed on ameli.fr or with your CPAM: the monthly contribution for paid C2S by age (between €8 and €30 per person according to ameli.fr, a page that cannot be accessed directly today).",
+    "Alsace-Moselle (Bas-Rhin, Haut-Rhin, Moselle): different income limits and contributions; check on service-public.gouv.fr.",
+    "To be confirmed with your CPAM: whether a child in shared residence is attached to one parent's or the other parent's household for the C2S."
+  ],
+  "motsCles": [
+    "C2S",
+    "CMU",
+    "mutuelle",
+    "top-up cover",
+    "health",
+    "reimbursement",
+    "free"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (mainland France, general case)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

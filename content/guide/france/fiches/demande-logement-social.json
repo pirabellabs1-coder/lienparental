@@ -1,0 +1,71 @@
+{
+  "slug": "demande-logement-social",
+  "territoire": "france",
+  "categorie": "logement",
+  "titre": "Faire une demande de logement social",
+  "resume": "Déposer une demande de logement social, obtenir votre numéro unique, réunir les bonnes pièces (dont celles liées à une séparation) et renouveler la demande chaque année.",
+  "aQuoiCaSert": "Un logement social est un logement dont le loyer est encadré, attribué sous conditions de ressources. La demande, en ligne ou au guichet, vous donne un numéro unique national, qui fait courir l'ancienneté de votre demande. Après une séparation, il est possible de faire compter uniquement vos propres revenus, à condition de fournir les bons justificatifs.",
+  "quiEstConcerne": [
+    "Les ménages dont les revenus ne dépassent pas les plafonds fixés selon la zone (Paris et communes limitrophes, reste de l'Île-de-France, autres régions).",
+    "Les parents qui se séparent et doivent se reloger avec leurs enfants.",
+    "Les ressortissants étrangers titulaires d'un titre de séjour ou d'un récépissé en cours de validité."
+  ],
+  "aSavoir": [
+    "Plafonds annuels hors Île-de-France, cas général, pour une demande en 2026 (revenu fiscal de référence 2024) : 30 424 € pour 1 personne, 40 630 € pour 2, 48 859 € pour 3, 58 986 € pour 4 personnes à loger (service-public.gouv.fr).",
+    "Paris et Île-de-France, cas général : 34 996 € pour 1 personne et 52 303 € pour 2 ; pour 3 personnes, 68 562 € à Paris et communes limitrophes, 62 871 € dans le reste de l'Île-de-France ; pour 4, respectivement 81 858 € et 75 309 €.",
+    "Séparation : pour que seuls vos revenus comptent, joignez selon le cas le jugement de divorce, l'acte de saisine du juge aux affaires familiales ou un justificatif d'avocat (divorce amiable en cours), la mention de rupture du Pacs, ou le récépissé de plainte en cas de violences au sein du couple.",
+    "Si vos revenus ont baissé d'au moins 10 %, vous pouvez le faire valoir avec des justificatifs (fiches de paie, par exemple). Une attestation sur l'honneur n'est pas acceptée.",
+    "Hors Île-de-France, il faut un dossier par département visé. En Île-de-France, un seul dossier couvre toute la région.",
+    "Renouvellement : chaque année. Faute de renouvellement avant la date anniversaire, la demande est radiée et il faut en principe recommencer avec un nouveau numéro unique.",
+    "Aide par téléphone sur la démarche : 0 806 000 113, du lundi au vendredi de 9 h à 19 h. Ce service ne donne pas l'état d'avancement de votre dossier."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité du demandeur", "detail": "Copie recto verso de la carte d'identité ou du passeport. Pour un ressortissant hors Union européenne : copie du titre de séjour ou du récépissé en cours de validité. Obligatoire au dépôt.", "coffre": "courriers" },
+    { "id": "identite-cotitulaire", "libelle": "Pièce d'identité ou titre de séjour de chaque adulte à loger", "detail": "Copie en cours de validité.", "coffre": "courriers" },
+    { "id": "avis-imposition", "libelle": "Avis d'imposition 2025 sur les revenus 2024 de chaque personne à loger", "detail": "Copie. Téléchargeable dans votre espace impots.gouv.fr ou à demander au centre des finances publiques.", "coffre": "finances" },
+    { "id": "justificatif-separation", "libelle": "Justificatif de séparation", "detail": "Copie du jugement de divorce, de l'acte de saisine du juge aux affaires familiales, du justificatif d'avocat, de la mention de rupture du Pacs ou du récépissé de plainte selon votre situation.", "coffre": "jaf" },
+    { "id": "jugement-residence", "libelle": "Jugement ou convention fixant la résidence des enfants", "detail": "Copie, pour justifier des enfants à loger avec vous ou d'une résidence alternée.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Livret de famille ou actes de naissance des enfants", "detail": "Copie, pour justifier des personnes à charge.", "coffre": "courriers" },
+    { "id": "ressources", "libelle": "Justificatifs de ressources récentes", "detail": "Copies des derniers bulletins de salaire, attestations Caf ou France Travail. Exigés en cas de baisse de revenus d'au moins 10 %.", "coffre": "finances" },
+    { "id": "situation-logement", "libelle": "Justificatif de votre situation de logement actuelle", "detail": "Copie de bail, quittance, attestation d'hébergement, ou jugement d'expulsion ou congé du propriétaire si c'est le cas.", "coffre": "courriers" },
+    { "id": "attestation-enregistrement", "libelle": "Attestation d'enregistrement avec le numéro unique", "detail": "Téléchargeable dans votre espace personnel. À conserver précieusement.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Créez votre demande sur le site national", "detail": "Sur demande-logement-social.gouv.fr, ou avec le formulaire cerfa n° 14069 déposé dans un guichet enregistreur (mairie, bailleur social, selon les départements)." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Pièce d'identité ou titre de séjour valide pour chaque adulte, avis d'imposition 2025 de chacun, justificatif de séparation et jugement sur la résidence des enfants si vous êtes séparé, livret de famille. Toutes les personnes à loger doivent être déclarées." },
+    { "titre": "Récupérez l'attestation d'enregistrement", "detail": "Elle contient votre numéro unique national et la date de la demande, qui compte pour l'ancienneté." },
+    { "titre": "Mettez à jour la demande dès que votre situation change", "detail": "Séparation, naissance, nouvelle adresse, baisse de revenus : déclarez le changement et ajoutez le justificatif." },
+    { "titre": "Renouvelez chaque année", "detail": "Avant la date anniversaire de la demande, après réception du rappel. Sans renouvellement, la demande est radiée." }
+  ],
+  "ou": [
+    { "nom": "Portail national de la demande de logement social", "detail": "Dépôt, suivi, mise à jour et renouvellement en ligne.", "url": "https://www.demande-logement-social.gouv.fr" },
+    { "nom": "Guichets enregistreurs de votre département (mairies, bailleurs sociaux)", "detail": "Pour déposer un dossier papier ou se faire aider. Renseignez-vous auprès de votre mairie, que vous trouverez sur l'annuaire de service-public.fr.", "url": "https://lannuaire.service-public.gouv.fr" },
+    { "nom": "ADIL de votre département", "detail": "Conseil gratuit sur le logement, y compris en cas de radiation de la demande.", "url": "https://www.anil.org/qui-sommes-nous/reseau-des-adil/" }
+  ],
+  "liens": [
+    { "titre": "Conditions et plafonds du logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869" },
+    { "titre": "Demande de logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007" },
+    { "titre": "Radiation d'une demande de logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32881" },
+    { "titre": "Demande de logement social en ligne", "url": "https://www.demande-logement-social.gouv.fr" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation d'enregistrement de la demande de logement social", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Justificatif de séparation pour la demande de logement", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Renouveler la demande de logement social avant la date anniversaire", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Renouvellement annuel de la demande", "detail": "Dans le mois qui précède la date anniversaire, sinon la demande est radiée." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : la liste des guichets enregistreurs de votre département et le délai d'attente jugé « anormalement long », fixé par arrêté préfectoral.",
+    "À confirmer localement : les bailleurs sociaux peuvent demander des pièces supplémentaires au moment de l'attribution.",
+    "Si vous n'avez pas pu renouveler à temps, une contestation de la radiation est possible auprès d'un guichet enregistreur : les conditions sont à vérifier avec lui ou avec l'ADIL."
+  ],
+  "motsCles": ["logement social", "HLM", "numéro unique", "renouvellement", "séparation", "plafonds"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10007 Demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F32881 Radiation d'une demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32881", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F869 Conditions pour obtenir un logement social (plafonds, formulaire, assistance téléphonique)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869", "verifieLe": "2026-10-29" }
+  ]
+}

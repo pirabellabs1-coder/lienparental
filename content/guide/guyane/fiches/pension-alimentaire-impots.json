@@ -59,11 +59,11 @@
     "La date limite de déclaration applicable en Guyane est publiée chaque année par la DGFiP : à vérifier sur impots.gouv.fr."
   ],
   "motsCles": ["impôts", "pension", "déduction", "quotient familial", "parts", "déclaration", "case T"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F2 Déduction d'une pension alimentaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2", "verifieLe": "2026-04-15" },
-    { "titre": "Service-public.gouv.fr, F3170 Pension alimentaire reçue", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170", "verifieLe": "2026-04-15" },
-    { "titre": "Service-public.gouv.fr, F2633 Résidence alternée, quotient familial et case T", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-04-15" },
+    { "titre": "Service-public.gouv.fr, F2 Déduction d'une pension alimentaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3170 Pension alimentaire reçue", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2633 Résidence alternée, quotient familial et case T", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F12 (coordonnées du service d'information des impôts)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12", "verifieLe": "2026-04-15" }
   ]
 }

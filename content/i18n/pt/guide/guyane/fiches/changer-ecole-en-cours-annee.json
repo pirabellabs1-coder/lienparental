@@ -57,10 +57,10 @@
     "A confirmar localmente: os documentos pedidos por cada prefeitura da Guiana Francesa podem variar um pouco."
   ],
   "motsCles": ["transferência escolar", "certificat de radiation", "exeat", "mudança", "prefeitura", "collège", "lycée"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F10722 Mudança de escola durante o ano", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722", "verifieLe": "2025-07-08" },
-    { "titre": "Service-public.gouv.fr, F20393 Mudança de collège ou de lycée durante o ano", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393", "verifieLe": "2025-10-09" },
+    { "titre": "Service-public.gouv.fr, F10722 Mudança de escola durante o ano", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F20393 Mudança de collège ou de lycée durante o ano", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1865 Inscrição no ensino fundamental", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" }
   ]
 }

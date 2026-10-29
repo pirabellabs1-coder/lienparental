@@ -1,0 +1,72 @@
+{
+  "slug": "inscrire-enfant-ecole",
+  "territoire": "mayotte",
+  "categorie": "ecole",
+  "titre": "Matricular meu filho na educação infantil ou no ensino fundamental",
+  "resume": "Duas etapas: a prefeitura emite um certificado de matrícula e depois a escola admite a criança. A lista de documentos que a prefeitura pode pedir, o que ela não pode exigir e o que muda quando os pais estão separados.",
+  "aQuoiCaSert": "A escolarização é obrigatória dos 3 aos 16 anos. Para uma primeira matrícula numa escola pública, você passa primeiro pelo serviço escolar da prefeitura (mairie), que entrega um certificado de matrícula com a escola designada. Depois, a direção da escola admite o seu filho mediante esse certificado e o comprovante de vacinação. Em Mayotte, as matrículas muitas vezes começam cedo no ano: informe-se na sua prefeitura já no inverno.",
+  "quiEstConcerne": [
+    "Pais de uma criança que fará 3 anos no ano civil do início do ano letivo.",
+    "Pais que se mudam ou trocam o filho de escola.",
+    "Famílias recém-chegadas a Mayotte, inclusive com uma criança que ainda não fala francês."
+  ],
+  "aSavoir": [
+    "A criança deve ser matriculada na educação infantil no início do ano letivo do ano civil em que faz 3 anos. A escola pública é gratuita.",
+    "A lista de documentos que a prefeitura pode pedir é fixada pela regulamentação: identidade da criança e dos responsáveis legais, endereço, vacinas. Uma declaração sob compromisso de honra (attestation sur l'honneur) pode ser aceita para a identidade e para o endereço.",
+    "Em princípio, a matrícula é na escola do setor definido pela cidade. Outra escola exige uma dérogation (autorização especial), que não é automática.",
+    "Pais separados: matricular numa escola pública é um ato usual. Um dos pais pode fazê-lo sozinho e presume-se que tem o acordo do outro, mas deve informá-lo. Se o outro avisar a escola que discorda, ela deve levar isso em conta.",
+    "Autoridade parental exclusiva: leve uma cópia da sentença para que a escola e a prefeitura a levem em conta.",
+    "Troca de escola: a nova escola geralmente pede o certificat de radiation (certificado de desligamento da escola) emitido pela escola anterior."
+  ],
+  "documents": [
+    { "id": "identite-enfant", "libelle": "Livro de família (livret de famille), carteira de identidade, passaporte ou cópia de extrato da certidão de nascimento da criança", "detail": "Original a apresentar. Não tem certidão de nascimento? Peça-a na prefeitura do local de nascimento.", "coffre": "scolarite" },
+    { "id": "identite-parent", "libelle": "Documento de identidade de quem faz a matrícula", "detail": "Original. Carteira de identidade, passaporte ou título de residência.", "coffre": "scolarite" },
+    { "id": "domicile", "libelle": "Comprovante de endereço recente", "detail": "Conta, recibo de aluguel ou aviso de imposto. Mora na casa de alguém? Declaração de hospedagem. Uma declaração sob compromisso de honra pode ser aceita.", "coffre": "scolarite" },
+    { "id": "vaccins", "libelle": "Caderneta de saúde (carnet de santé, páginas de vacinas) ou atestado de contraindicação", "detail": "Original a mostrar; fotocópia muitas vezes pedida.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Sentença ou acordo que fixa a autoridade parental e a residência, se vocês estiverem separados", "detail": "Cópia.", "coffre": "jaf" },
+    { "id": "radiation", "libelle": "Certificat de radiation da escola anterior", "detail": "Só em caso de troca de escola.", "coffre": "scolarite" },
+    { "id": "certificat-inscription", "libelle": "Certificado de matrícula emitido pela prefeitura", "detail": "Original a entregar à direção da escola. Guarde uma cópia.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Entre em contato com o serviço escolar da sua prefeitura", "detail": "Pergunte as datas de matrícula, se é preciso agendar ou enviar por e-mail, e a lista de documentos." },
+    { "titre": "Confira antes de sair de casa", "detail": "Documento de identidade da criança (ou livro de família), o seu documento, comprovante de endereço (ou declaração de hospedagem ou sob compromisso de honra), caderneta de saúde em dia, sentença se vocês estiverem separados, certificat de radiation em caso de troca de escola. Leve fotocópias." },
+    { "titre": "Entregue o dossiê e retire o certificado de matrícula", "detail": "Ele indica a escola designada. Peça a dérogation nesse momento se quiser outra escola." },
+    { "titre": "Faça a admissão do seu filho na escola", "detail": "Apresente o certificado de matrícula e o comprovante de vacinação. Informe os contatos dos dois pais e a lista das pessoas autorizadas a buscar a criança." },
+    { "titre": "Informe o outro genitor", "detail": "Se vocês estiverem separados, avise-o, de preferência por escrito." },
+    { "titre": "Se a prefeitura recusar ou não responder", "detail": "Peça uma resposta por escrito e contate a direção acadêmica (rectorat de Mayotte, secretaria regional de educação)." }
+  ],
+  "ou": [
+    { "nom": "Prefeitura (mairie) do seu município, serviço escolar", "detail": "Matrícula, certificado de matrícula e dérogations de setor." },
+    { "nom": "Direção da escola", "detail": "Admissão da criança e certificat de radiation." },
+    { "nom": "Rectorat de Mayotte", "detail": "Rue Sarahangué, 97600 Mamoudzou.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "telephone": "02 69 61 10 24" }
+  ],
+  "liens": [
+    { "titre": "Matrícula na educação infantil (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864" },
+    { "titre": "Matricular o filho no ensino fundamental (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865" },
+    { "titre": "Autoridade parental em caso de separação (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133" },
+    { "titre": "Académie de Mayotte (secretaria regional de educação)", "url": "https://www.ac-mayotte.fr" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Certificado de matrícula escolar", "categorie": "scolarite" },
+    { "type": "coffre", "titre": "Páginas de vacinas da caderneta de saúde", "categorie": "sante" },
+    { "type": "coffre", "titre": "Sentença ou acordo (autoridade parental, residência)", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Matrícula escolar na prefeitura", "evenement": "ecole" },
+    { "type": "calendrier", "titre": "Horário de admissão na escola", "evenement": "ecole" }
+  ],
+  "datesLimites": [
+    { "libelle": "Matrícula na prefeitura antes do início das aulas", "detail": "Os períodos são fixados por cada cidade e podem começar já em dezembro: confira o calendário da sua prefeitura." }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: datas de matrícula, agendamento e documentos pedidos, próprios de cada prefeitura de Mayotte.",
+    "A confirmar: procedimento e contatos do CASNAV de Mayotte (centro de apoio a alunos recém-chegados) para matricular alunos recém-chegados que não falam francês (o site do rectorat não pôde ser consultado).",
+    "A confirmar localmente: aceitação de declaração sob compromisso de honra no lugar do comprovante de endereço, conforme a prefeitura."
+  ],
+  "motsCles": ["educação infantil", "ensino fundamental", "CP", "prefeitura (mairie)", "matrícula", "dérogation", "rectorat"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1864 Matrícula na educação infantil", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1865 Matricular o filho no ensino fundamental", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Diretório service-public, Rectorat de Mayotte", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/ad90d0af-a808-4120-84ec-303b71a757cb", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "slug": "prime-demenagement",
+  "territoire": "france",
+  "categorie": "logement",
+  "titre": "Caf moving grant (prime de déménagement)",
+  "resume": "A grant for families with at least 3 children who move around the time of a birth: date conditions, maximum amounts, documents to send and the 6-month deadline.",
+  "aQuoiCaSert": "The moving grant (prime de déménagement) reimburses your actual moving costs, up to a ceiling, if you have at least 3 children and move during pregnancy or within two years of the youngest child's birth. It is paid in one installment, on proof. If your situation is precarious, an advance based on a quote is possible.",
+  "quiEstConcerne": [
+    "Families with at least 3 dependent children, born or expected.",
+    "Who are entitled, for the new home, to the APL (aide personnalisée au logement, personalized housing aid) or the ALF (allocation de logement familiale, family housing allowance).",
+    "Separated parent: these conditions are assessed for your own Caf household."
+  ],
+  "aSavoir": [
+    "Dates: the move must take place between the 1st day of the calendar month following the end of the 3rd month of pregnancy and the last day of the month before the youngest child's 2nd birthday.",
+    "Current ceilings (service-public.gouv.fr, checked on April 1, 2026): €1,147.58 for 3 children, €1,243.21 for 4 children, plus €95.63 per additional child. You are reimbursed for your actual costs within this limit.",
+    "Advance if your situation is precarious: 50% to 75% of the quote. The paid invoice must then be provided within 6 months of the move to receive the balance.",
+    "The application is made to the Caf (Caisse d'allocations familiales, the family benefits office), or the MSA for the agricultural scheme, of your new place of residence, within 6 months of the move.",
+    "If you are refused, you have 2 months after receiving the decision to appeal by letter to the amicable appeals board (commission de recours amiable)."
+  ],
+  "documents": [
+    {
+      "id": "cerfa-11363",
+      "libelle": "Moving grant application form (Cerfa n° 11363)",
+      "detail": "Download it from service-public.gouv.fr, fill it in and sign it.",
+      "coffre": "finances"
+    },
+    {
+      "id": "facture",
+      "libelle": "Paid invoice from the removal company or proof of costs",
+      "detail": "All invoices related to the move, in your name. Keep a copy of every document you send.",
+      "coffre": "finances"
+    },
+    {
+      "id": "devis",
+      "libelle": "Removal company's quote, to request an advance",
+      "detail": "Only if your situation is precarious.",
+      "coffre": "finances"
+    },
+    {
+      "id": "grossesse",
+      "libelle": "Pregnancy declaration or birth certificate of the youngest child",
+      "detail": "Only if the Caf asks for it to check the period: it often already has the information.",
+      "coffre": "sante"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Rent certificate (attestation de loyer) for the new home",
+      "detail": "Needed to open entitlement to housing benefit, a condition of the grant.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check the date conditions and number of children",
+      "detail": "Work out the authorized period from the start of pregnancy or the youngest child's date of birth."
+    },
+    {
+      "titre": "Apply for housing benefit for the new home",
+      "detail": "Without entitlement to the APL or the ALF, there is no grant."
+    },
+    {
+      "titre": "Keep all the moving invoices",
+      "detail": "Or ask for a quote if you need an advance."
+    },
+    {
+      "titre": "Check before sending",
+      "detail": "Cerfa n° 11363 form completed and signed, legible paid invoices, Caf beneficiary number, sent within 6 months of the move. Keep a copy of everything."
+    },
+    {
+      "titre": "Send the application to the Caf of your new home",
+      "detail": "No later than 6 months after the move. Also report your change of address."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf of your new département",
+      "detail": "Find your Caf and its contact details in the \"Ma Caf\" section of caf.fr.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, the farmers' social security fund)",
+      "detail": "If you are covered by the agricultural scheme.",
+      "url": "https://www.msa.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Moving grant (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008"
+    },
+    {
+      "titre": "Family housing allowance (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Moving costs",
+      "categorie": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Send the moving grant application (6 months maximum)",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Moving invoice",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Moving grant application sent (copy)",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Application no later than 6 months after the move"
+    },
+    {
+      "libelle": "Paid invoice within 6 months of the move if you received an advance"
+    }
+  ],
+  "aConfirmer": [
+    "The ceilings are usually indexed every year: check the current amount on service-public.gouv.fr or with your Caf when you apply."
+  ],
+  "motsCles": [
+    "moving",
+    "grant",
+    "large family",
+    "Caf",
+    "birth",
+    "cerfa 11363"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2008 Moving grant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "slug": "livret-epargne-mineur",
+  "territoire": "reunion",
+  "categorie": "argent",
+  "titre": "Abrir um Livret A ou um Livret jeune (poupança) para meu filho",
+  "resume": "Qual poupança escolher, quais documentos levar ao banco, os limites, quem pode sacar conforme a idade e o que muda se vocês estão separados.",
+  "aQuoiCaSert": "Uma poupança em nome da criança permite guardar dinheiro para ela, sem tarifas e com juros isentos de imposto. O Livret A (poupança regulamentada isenta de imposto) pode ser aberto desde o nascimento, o Livret jeune (poupança para jovens) a partir dos 12 anos. O dinheiro pertence à criança: os pais o administram por ela e só podem usá-lo em despesas diretamente ligadas a ela. Aos 16 anos, devem prestar contas a ela sobre esse uso.",
+  "quiEstConcerne": [
+    "Os pais (ou o tutor) que querem poupar para o filho, desde o nascimento no caso do Livret A.",
+    "Os jovens de 12 a 25 anos, para o Livret jeune.",
+    "Avós ou parentes que querem dar dinheiro: podem depositar na poupança, mas a abertura é feita pelo representante legal."
+  ],
+  "aSavoir": [
+    "Livret A: um só por pessoa, limite de 22.950 € (sem contar os juros), depósito mínimo de 10 € (1,50 € no La Banque Postale). Taxa de 1,7% de 1º de agosto de 2026 a 31 de janeiro de 2027.",
+    "Livret jeune: de 12 a 25 anos, limite de depósitos de 1.600 €, taxa fixada pelo banco mas nunca inferior à do Livret A, abertura com no mínimo 10 €. Para um menor, o banco exige a assinatura do representante legal.",
+    "Antes dos 16 anos, a criança não pode sacar sozinha: no Livret jeune, o representante legal deve autorizar os saques e pode limitar o valor.",
+    "Dos 16 aos 18 anos, o jovem pode sacar sozinho do seu Livret A ou Livret jeune, salvo se um representante legal se opuser por carta registrada com aviso de recebimento enviada ao banco.",
+    "Pais que exercem juntos a autoridade parental, mesmo separados: alterar a conta de um menor é um ato de disposição que exige o acordo dos dois (Cour de cassation, mais alta corte francesa, 12 de junho de 2025, n° 24-13.604). O banco pode, portanto, pedir as duas assinaturas para um saque ou uma transferência.",
+    "Se só um genitor exerce a autoridade parental, ele age sozinho: leve a decisão que comprova isso."
+  ],
+  "documents": [
+    { "id": "identite-enfant", "libelle": "Documento de identidade da criança ou, na falta dele, o livro de família (livret de famille)", "detail": "Serve também como prova da idade para o Livret jeune. Sem carteira de identidade: veja a ficha «Fazer a carteira de identidade ou o passaporte do meu filho».", "coffre": "finances" },
+    { "id": "livret-famille", "libelle": "Livro de família (livret de famille)", "detail": "Comprova a filiação. Na falta dele, certidão de nascimento da criança com filiação, gratuita.", "coffre": "finances" },
+    { "id": "identite-parent", "libelle": "Documento de identidade válido do genitor que assina", "detail": "Se o banco pedir a assinatura dos dois pais, providencie também a do outro genitor.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Comprovante de endereço recente", "detail": "Conta, aviso de imposto ou recibo de aluguel em nome do genitor.", "coffre": "finances" },
+    { "id": "jugement-autorite", "libelle": "Decisão que fixa a autoridade parental, se você a exerce sozinho(a)", "detail": "Cópia da sentença do juiz de família (juge aux affaires familiales, JAF).", "coffre": "jaf" },
+    { "id": "accord-autre-parent", "libelle": "Acordo escrito do outro genitor, se o banco pedir", "detail": "Carta datada e assinada, com cópia do documento de identidade dele.", "coffre": "finances" },
+    { "id": "contrat", "libelle": "Contrato de abertura e extratos anuais", "detail": "Guarde-os: comprovam os valores depositados e sacados.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Escolha a poupança", "detail": "Livret A desde o nascimento, Livret jeune a partir dos 12 anos. Verifique se nenhum Livret A já foi aberto em nome da criança: um só por pessoa." },
+    { "titre": "Converse com o outro genitor", "detail": "Combinem a poupança, o banco e os depósitos. Um acordo escrito evita bloqueios na hora dos saques." },
+    { "titre": "Marque um horário no banco", "detail": "Peça a lista exata de documentos, sobretudo quanto à presença ou à assinatura dos dois pais." },
+    { "titre": "Confira antes de ir", "detail": "Documento de identidade da criança ou livro de família, seu documento de identidade, comprovante de endereço recente, sentença se você exerce sozinho(a) a autoridade parental, acordo do outro genitor se pedido, primeiro depósito." },
+    { "titre": "Assine a abertura", "detail": "O genitor assina pela criança." },
+    { "titre": "Guarde o contrato e acompanhe os extratos", "detail": "Anote as grandes etapas: 12 anos, 16 anos (saques sozinho), 18 anos." }
+  ],
+  "ou": [
+    { "nom": "O banco de sua escolha ou o La Banque Postale", "detail": "O Livret A e o Livret jeune são oferecidos pela maioria dos bancos. Compare a taxa do Livret jeune, que varia conforme o banco." }
+  ],
+  "liens": [
+    { "titre": "Livret A (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" },
+    { "titre": "Livret jeune (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904" },
+    { "titre": "Conta bancária de um menor (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035" },
+    { "titre": "Conta de um menor: acordo dos dois pais (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Horário no banco: poupança da criança", "evenement": "rdv" },
+    { "type": "coffre", "titre": "Contrato da poupança da criança", "categorie": "finances" },
+    { "type": "coffre", "titre": "Extrato anual da poupança da criança", "categorie": "finances" },
+    { "type": "coffre", "titre": "Acordo do outro genitor para a poupança", "categorie": "finances" },
+    { "type": "rappel", "titre": "16 anos da criança: poderá sacar sozinha da poupança", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "Os documentos exatos e a exigência da presença ou da assinatura dos dois pais são definidos por cada banco: peça a lista antes do atendimento.",
+    "As páginas oficiais não fixam idade mínima para que um menor abra sozinho um Livret A: seu banco pode ter regras próprias."
+  ],
+  "motsCles": ["Livret A", "Livret jeune", "poupança", "banco", "menor de idade", "conta da criança"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2365 Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2904 Livret jeune", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21035 Conta bancária de um menor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, notícia A18386 (Cour de cassation, 12 de junho de 2025, n° 24-13.604)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" }
+  ]
+}

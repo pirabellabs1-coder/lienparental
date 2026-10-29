@@ -16,7 +16,7 @@
     "La banque peut imposer une carte à autorisation systématique, qui vérifie le solde à chaque paiement : c'est ce qui limite le risque de découvert. Demandez-la si vous souhaitez ce contrôle.",
     "L'ouverture d'un compte est gratuite, mais la banque peut facturer des frais de tenue de compte ou de carte : demandez la plaquette tarifaire avant de signer.",
     "Les parents ne peuvent utiliser l'argent de l'enfant que pour des dépenses qui le concernent directement (éducation, entretien). À partir de 16 ans, ils doivent lui rendre des comptes sur cet usage.",
-    "Parents séparés exerçant ensemble l'autorité parentale : un parent seul peut faire les actes d'administration courants, mais un acte de disposition, comme modifier le compte ou faire un retrait important, exige l'accord des deux parents (Cour de cassation, 12 juin 2025). En cas de difficulté, le juge des tutelles peut être saisi.",
+    "Parents séparés exerçant ensemble l'autorité parentale : un parent seul peut faire les actes d'administration courants, mais un acte de disposition, comme un virement au débit du compte ou du livret de l'enfant, exige l'accord des deux parents (Cour de cassation, 12 juin 2025). En cas de difficulté, le juge des tutelles peut être saisi.",
     "Si vous exercez seul l'autorité parentale par décision de justice, apportez cette décision : elle explique à la banque pourquoi l'autre parent ne signe pas."
   ],
   "documents": [
@@ -45,7 +45,7 @@
   "liens": [
     { "titre": "Un mineur peut-il avoir un compte bancaire ? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035" },
     { "titre": "Compte bancaire individuel : pièces à fournir (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413" },
-    { "titre": "Compte d'un mineur : accord des deux parents (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" }
+    { "titre": "Compte d'un mineur : accord des deux parents (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" }
   ],
   "actions": [
     { "type": "coffre", "titre": "Contrat de compte bancaire de l'adolescent", "categorie": "finances" },
@@ -58,11 +58,11 @@
     "À confirmer localement : offres jeunes disponibles en agence en Guyane et frais associés."
   ],
   "motsCles": ["compte bancaire", "adolescent", "mineur", "carte bancaire", "argent de poche", "livret jeune", "banque"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F21035 Un mineur peut-il avoir un compte bancaire ou un produit d'épargne ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2025-11-17" },
-    { "titre": "Service-public.gouv.fr, F2413 Compte bancaire individuel", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413", "verifieLe": "2026-05-22" },
-    { "titre": "Service-public.gouv.fr, actualité A18386 Compte d'un mineur : accord des deux parents (8 juillet 2025)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" },
+    { "titre": "Service-public.gouv.fr, F21035 Un mineur peut-il avoir un compte bancaire ou un produit d'épargne ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2413 Compte bancaire individuel", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A18386 Compte d'un mineur : accord des deux parents (8 juillet 2025)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" },
     { "titre": "Mes questions d'argent (Banque de France), Ouvrir un compte", "url": "https://www.mesquestionsdargent.fr/comptes-moyens-de-paiement/ouvrir-un-compte" }
   ]
 }

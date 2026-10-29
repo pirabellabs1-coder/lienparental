@@ -1,0 +1,162 @@
+{
+  "slug": "conge-paternite",
+  "territoire": "martinique",
+  "categorie": "naissance",
+  "titre": "Licença-paternidade e de acolhimento da criança",
+  "resume": "Duração da licença, prazos para avisar o empregador, diárias e documentos a enviar à Assurance Maladie, além da nova licença adicional de nascimento.",
+  "aQuoiCaSert": "A licença-paternidade e de acolhimento da criança (congé de paternité et d'accueil de l'enfant) permite ao pai, ou ao cônjuge, parceiro de PACS (união civil) ou companheiro da mãe, parar de trabalhar após o nascimento para cuidar da criança. Durante essa licença, o contrato de trabalho fica suspenso e a Assurance Maladie (seguro de saúde público francês; na Martinica, a CGSS) pode pagar diárias (indemnités journalières). Desde 1º de julho de 2026, uma licença adicional de nascimento pode ser somada.",
+  "quiEstConcerne": [
+    "O pai da criança que é assalariado.",
+    "O cônjuge, parceiro de PACS ou companheiro da mãe, se não for o pai.",
+    "Estas informações valem para o setor privado: servidores públicos, autônomos e outros regimes têm regras próprias."
+  ],
+  "aSavoir": [
+    "Pais separados: o pai da criança tem direito sem condição de casamento, PACS ou de morar com a mãe. A condição de viver em casal só vale para o cônjuge ou companheiro que não é o pai.",
+    "Duração: 25 dias corridos para um nascimento (32 em caso de gêmeos ou mais), além da licença de nascimento de 3 dias úteis. Um período de 4 dias é obrigatório logo após a licença de nascimento.",
+    "Os 21 dias restantes (28 para nascimentos múltiplos) podem ser tirados de uma vez ou em 2 períodos de pelo menos 5 dias, nos 6 meses seguintes ao nascimento.",
+    "Avise o empregador pelo menos 1 mês antes da data prevista do parto e depois pelo menos 1 mês antes do início de cada período, informando datas e duração. Recomenda-se por escrito: carta registrada com aviso de recebimento ou entrega em mãos contra recibo.",
+    "Diárias: é preciso, entre outras condições, estar inscrito há pelo menos 6 meses e ter trabalhado 150 horas nos 3 meses anteriores, ou ter contribuído sobre pelo menos 12.058,20 € de salário em 6 meses. Valor de 11,12 € a 104,02 € por dia (service-public.gouv.fr, verificado em 1º de junho de 2026).",
+    "Licença adicional de nascimento: desde 1º de julho de 2026, cada genitor pode tirar de 1 a 2 meses de licença remunerada após a licença-maternidade ou paternidade. Assalariado: 70% do salário líquido no 1º mês, 60% no 2º, até o teto da previdência social. Avise o empregador com pelo menos 1 mês de antecedência (15 dias se ela vier logo após a licença-paternidade). Aplicação sujeita aos decretos de regulamentação (code.travail.gouv.fr)."
+  ],
+  "documents": [
+    {
+      "id": "acte-naissance",
+      "libelle": "Cópia integral da certidão de nascimento da criança ou livro de família (livret de famille) atualizado",
+      "detail": "A enviar à Assurance Maladie. Certidão gratuita em service-public.gouv.fr ou na prefeitura (mairie) do lugar de nascimento.",
+      "coffre": "finances"
+    },
+    {
+      "id": "lien-mere",
+      "libelle": "Comprovante do vínculo com a mãe, se você não for o pai",
+      "detail": "Extrato da certidão de casamento, cópia do PACS, certificado de vida em comum com menos de um ano ou declaração sob palavra de vida em comum assinada pelos dois.",
+      "coffre": "finances"
+    },
+    {
+      "id": "courrier-employeur",
+      "libelle": "Carta de aviso ao empregador",
+      "detail": "Cópia da carta registrada ou do recibo assinado, com as datas da licença.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "attestation-salaire",
+      "libelle": "Atestado de salário (attestation de salaire)",
+      "detail": "Enviado pelo empregador à Assurance Maladie. Confirme com ele que foi enviado.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (dados bancários)",
+      "detail": "Se os seus dados bancários não estiverem atualizados na sua conta ameli.",
+      "coffre": "finances"
+    },
+    {
+      "id": "decomptes-ij",
+      "libelle": "Extratos de pagamento das diárias",
+      "detail": "Disponíveis na sua conta ameli.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Avise o seu empregador por escrito",
+      "detail": "Pelo menos 1 mês antes da data prevista do nascimento e depois pelo menos 1 mês antes de cada período de licença."
+    },
+    {
+      "titre": "Confira antes de enviar o processo",
+      "detail": "Certidão de nascimento ou livro de família atualizado, comprovante do vínculo com a mãe se você não for o pai, atestado de salário enviado pelo empregador, RIB e endereço atualizados no ameli."
+    },
+    {
+      "titre": "Envie os comprovantes à Assurance Maladie",
+      "detail": "Na sua conta ameli ou por correio à CGSS de la Martinique."
+    },
+    {
+      "titre": "Tire o período obrigatório de 4 dias",
+      "detail": "Logo após a licença de nascimento de 3 dias paga pelo empregador."
+    },
+    {
+      "titre": "Planeje o resto da licença em até 6 meses",
+      "detail": "E, se quiser, a licença adicional de nascimento em até 9 meses após o nascimento."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "O seu empregador",
+      "detail": "Para o aviso prévio e o atestado de salário."
+    },
+    {
+      "nom": "CGSS de la Martinique (Assurance Maladie)",
+      "detail": "Para as diárias.",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Licença-paternidade e de acolhimento da criança (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156"
+    },
+    {
+      "titre": "Licença adicional de nascimento (code.travail.gouv.fr)",
+      "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Avisar o empregador da licença-paternidade (1 mês antes do parto previsto)",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Tirar o resto da licença-paternidade em até 6 meses após o nascimento",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Carta de licença-paternidade ao empregador",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Extratos das diárias da licença-paternidade",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Avisar o empregador pelo menos 1 mês antes do nascimento previsto",
+      "detail": "Depois, pelo menos 1 mês antes de cada período."
+    },
+    {
+      "libelle": "Licença a tirar em até 6 meses após o nascimento",
+      "detail": "Adiamento possível em certos casos previstos em lei, por exemplo em caso de falecimento da mãe."
+    },
+    {
+      "libelle": "Licença adicional de nascimento em até 9 meses após o nascimento",
+      "detail": "Para um filho nascido a partir de 1º de junho de 2026. Nascido entre 1º de janeiro e 31 de maio de 2026: a tirar entre 1º de julho de 2026 e 31 de março de 2027."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar com a CGSS de la Martinique: como enviar os comprovantes na prática e o prazo de pagamento das diárias."
+  ],
+  "motsCles": [
+    "licença-paternidade",
+    "nascimento",
+    "diárias",
+    "empregador",
+    "licença adicional de nascimento",
+    "CGSS"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F3156 Licença-paternidade e de acolhimento da criança",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156",
+      "verifieLe": "2026-06-01"
+    },
+    {
+      "titre": "Code du travail numérique, Licença adicional de nascimento: o que muda em 1º de julho de 2026",
+      "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

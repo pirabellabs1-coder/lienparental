@@ -1,0 +1,181 @@
+{
+  "slug": "aides-logement-martinique",
+  "territoire": "martinique",
+  "categorie": "logement",
+  "titre": "Aides au logement en Martinique",
+  "resume": "Allocation de logement familiale ou sociale : qui y a droit, les pièces à préparer (dont l'attestation de loyer signée du propriétaire) et la demande à la Caf après une séparation.",
+  "aQuoiCaSert": "Les aides au logement réduisent le montant de votre loyer. Avec des enfants ou des prestations familiales, l'aide qui vous concerne est en général l'allocation de logement familiale (ALF) ; sinon l'allocation de logement sociale (ALS). Après une séparation, chaque parent qui prend un logement peut faire sa propre demande, calculée sur ses seules ressources et sa nouvelle situation familiale.",
+  "quiEstConcerne": [
+    "Les locataires ou sous-locataires d'un logement décent, occupé comme résidence principale.",
+    "ALF : notamment les personnes qui perçoivent des prestations familiales ou l'AEEH, ou qui ont un enfant à charge de moins de 21 ans, ou les femmes enceintes seules sous conditions.",
+    "ALS : les personnes qui ne remplissent ni les conditions de l'APL ni celles de l'ALF.",
+    "Les personnes étrangères doivent avoir un titre de séjour en cours de validité."
+  ],
+  "aSavoir": [
+    "APL, ALF et ALS ne se cumulent pas. Leur montant dépend de vos ressources des 12 derniers mois, de votre patrimoine (au-delà de 30 000 €), de votre loyer, de votre situation familiale et du lieu du logement : seul le simulateur de la Caf donne une estimation.",
+    "Un sous-locataire ne doit pas avoir de lien de parenté avec le locataire principal ou le propriétaire.",
+    "L'aide est versée le 5 de chaque mois. Le droit démarre le 1er jour du mois suivant le traitement du dossier et le premier versement peut prendre environ 2 mois : faites la demande dès l'entrée dans le logement.",
+    "En cas de refus, vous avez 2 mois à compter de la notification pour saisir la commission de recours amiable de la Caf.",
+    "Séparation : déclarez-la à la Caf. Chaque parent déclare son propre logement et sa propre situation familiale ; le montant est recalculé en conséquence."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Copie recto verso de votre pièce d'identité ou de votre titre de séjour",
+      "detail": "En cours de validité.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB, RIP ou RICE à votre nom",
+      "detail": "Ouvrez un compte personnel si vous n'aviez qu'un compte joint : voir la fiche sur le droit au compte.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Attestation de loyer (cerfa n° 10842), datée et signée par le propriétaire",
+      "detail": "À télécharger, à faire remplir par votre propriétaire ou votre bailleur social. Sans sa signature, le dossier est incomplet.",
+      "coffre": "finances"
+    },
+    {
+      "id": "bail",
+      "libelle": "Bail ou contrat de location",
+      "detail": "Copie. Il précise le loyer, les charges et la date d'entrée.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Montants de vos ressources des 12 derniers mois",
+      "detail": "Bulletins de salaire, indemnités, pension alimentaire reçue ou versée : ils vous seront demandés dans le formulaire en ligne.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Jugement ou convention fixant la résidence des enfants, si vous en avez un",
+      "detail": "Copie. Utile si la Caf vous demande de justifier la résidence des enfants après la séparation.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "notification",
+      "libelle": "Notification de droits de la Caf",
+      "detail": "À conserver : elle indique le montant et la date de début du droit.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Faites une simulation sur caf.fr",
+      "detail": "Avec le loyer du nouveau logement et vos ressources actuelles."
+    },
+    {
+      "titre": "Déclarez d'abord votre changement de situation",
+      "detail": "Séparation, déménagement, résidence des enfants : dans votre espace Caf."
+    },
+    {
+      "titre": "Faites remplir l'attestation de loyer",
+      "detail": "Par le propriétaire ou le bailleur, datée et signée."
+    },
+    {
+      "titre": "Vérifiez avant de vous déplacer",
+      "detail": "La demande se fait en ligne. Si vous allez à l'accueil de la Caf : rendez-vous éventuel, numéro allocataire, copie recto verso de votre pièce d'identité, RIB à votre nom, attestation de loyer signée, bail, montants de vos ressources des 12 derniers mois."
+    },
+    {
+      "titre": "Faites la demande en ligne dans votre espace Caf",
+      "detail": "Dès l'entrée dans le logement, en joignant les pièces."
+    },
+    {
+      "titre": "Déclarez ensuite tout changement",
+      "detail": "Déménagement, nouvelle coordonnée bancaire, arrivée ou départ d'un enfant, changement de résidence des enfants."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "Demande en ligne dans l'espace Mon Compte ; accueil sur place pour être accompagné.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    },
+    {
+      "nom": "France Services",
+      "detail": "Aide gratuite pour faire la demande en ligne."
+    },
+    {
+      "nom": "ADIL de la Martinique",
+      "detail": "Conseils juridiques gratuits sur le logement (bail, loyer, impayés). 13 rue du Commerce, Fort-de-France, sur rendez-vous ; permanences à Ducos, Le François et Saint-Joseph.",
+      "url": "https://www.anil.org/adil-972/horaires-et-permanences/",
+      "telephone": "05 96 71 48 45"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Aides au logement : APL, ALF, ALS (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864"
+    },
+    {
+      "titre": "Allocation de logement familiale (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    },
+    {
+      "titre": "Caf.fr, simulateurs et demande en ligne",
+      "url": "https://www.caf.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Attestation de loyer signée",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notification d'aide au logement",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Faire la demande d'aide au logement pour le nouveau logement",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Recours possible : 2 mois après un refus d'aide au logement",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "2 mois après la notification pour contester une décision de la Caf"
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : dans les départements d'outre-mer, l'APL ne s'appliquerait pas aux logements ordinaires (seulement à certains logements-foyers). Pour un logement ordinaire, ce serait l'ALF ou l'ALS. Vérifiez auprès de la Caf de la Martinique.",
+    "À confirmer localement : les barèmes propres à l'outre-mer. Utilisez le simulateur de la Caf plutôt qu'un montant indicatif.",
+    "La manière dont la Caf répartit l'enfant entre les deux foyers en résidence alternée pour l'aide au logement n'est pas détaillée dans les fiches consultées : demandez à la Caf de la Martinique."
+  ],
+  "motsCles": [
+    "logement",
+    "APL",
+    "ALF",
+    "ALS",
+    "loyer",
+    "Caf",
+    "attestation de loyer"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F31864 Aides au logement",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864",
+      "verifieLe": "2026-01-30"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13132 Allocation de logement familiale",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132",
+      "verifieLe": "2026-07-01"
+    },
+    {
+      "titre": "ADIL de la Martinique (anil.org), horaires et permanences",
+      "url": "https://www.anil.org/adil-972/horaires-et-permanences/",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

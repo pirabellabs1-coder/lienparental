@@ -60,9 +60,9 @@
     "Les pages d'ameli.fr n'ont pas pu être consultées directement lors de la vérification : les libellés des menus peuvent avoir changé."
   ],
   "motsCles": ["carte Vitale", "ameli", "ayant droit", "attestation de droits", "remboursement", "sécurité sociale", "CGSS"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F16620 Rattachement d'un mineur en tant qu'ayant droit", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620", "verifieLe": "2024-11-13" },
+    { "titre": "Service-public.gouv.fr, F16620 Rattachement d'un mineur en tant qu'ayant droit", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, actualité A17693 Carte Vitale des mineurs (10 septembre 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693" },
     { "titre": "Service-public.gouv.fr, actualité A18009 Inscrire son enfant sur les deux cartes Vitale", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18009" },
     { "titre": "ameli.fr, Obtenir une attestation de droits", "url": "https://www.ameli.fr/assure/adresses-et-contacts/l-obtention-d-un-document/obtenir-une-attestation/obtenir-une-attestation-de-droits" },

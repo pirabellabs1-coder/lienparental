@@ -62,11 +62,11 @@
     "A confirmar localmente: cobrança em residência alternada (uma fatura por genitor ou não), conforme o município."
   ],
   "motsCles": ["cantina", "contraturno", "extraescolar", "meia-pensão", "refeição", "PAI", "quociente familiar"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F24570 Cantina escolar no primário", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2025-05-20" },
-    { "titre": "Service-public.gouv.fr, F19294 Ajuda financeira para a cantina", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2025-10-20" },
-    { "titre": "Service-public.gouv.fr, F24569 Cantina no collège e no lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569", "verifieLe": "2026-02-25" },
-    { "titre": "Service-public.gouv.fr, F1871 Seguro escolar", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2025-09-15" }
+    { "titre": "Service-public.gouv.fr, F24570 Cantina escolar no primário", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F19294 Ajuda financeira para a cantina", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F24569 Cantina no collège e no lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24569", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1871 Seguro escolar", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2026-10-29" }
   ]
 }

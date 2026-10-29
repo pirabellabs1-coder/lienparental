@@ -1,0 +1,279 @@
+{
+  "slug": "papiers-identite-mineur",
+  "territoire": "france",
+  "categorie": "logement",
+  "titre": "Getting my child's ID card or passport",
+  "resume": "The exact documents to bring to the town hall (mairie) for your situation (first application, renewal, loss, separated parents, shared residence), fees in mainland France and the rules on the child being present.",
+  "aQuoiCaSert": "The ID card and the passport prove your child's identity and French nationality and allow them to travel. A minor can have one at any age, even as a baby. You can apply at any town hall (mairie) equipped with a registration station, not necessarily the one in your own town. An application turned down because a document is missing is the most common reason for a wasted trip: prepare the list that matches your situation.",
+  "quiEstConcerne": [
+    "The parent (or guardian) who holds parental authority: they submit the application, together with the child.",
+    "Separated parents, parents with shared residence, or families where only one parent holds parental authority: additional documents are required.",
+    "A legal representative who is not a parent (guardian, ASE, the child welfare service): they must prove the delegation of parental authority."
+  ],
+  "aSavoir": [
+    "ID card: free for a first application, and for a renewal if you present the old card. If it was lost or stolen, a €25 tax stamp (timbre fiscal) in mainland France. Valid for 10 years.",
+    "Passport in mainland France: €17 tax stamp for a child under 15, €42 from 15 to 17. Bought online, at an authorized tobacco shop (bureau de tabac) or at the end of the pre-application. Valid for 5 years.",
+    "The child and the parent must come together to submit the application. Fingerprints are taken from age 12. From age 13, the child may sign if their legal representative agrees.",
+    "Collection: under 12, the parent comes alone; from age 12, the child must be present. The document must be collected within 3 months of being made available, otherwise it is destroyed.",
+    "Renewing the ID card: possible in the year before its expiry date.",
+    "Separated parents with shared residence: both addresses can appear on the document if you bring proof of the shared residence and a proof of address for each parent.",
+    "Only one parent holds parental authority: bring the document that proves it (for example the judgment). Without it, the application may be refused.",
+    "Birth certificate: it is only requested if the child has no document that is valid or expired less than 5 years ago, and only if the civil registry of their town of birth is not digitized. It must be less than 3 months old. It is free."
+  ],
+  "documents": [
+    {
+      "id": "photo",
+      "libelle": "An ID photo less than 6 months old that meets the standards",
+      "detail": "Original. Taken by a photographer or in an approved photo booth.",
+      "coffre": "autres"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Valid ID of the parent submitting the application",
+      "detail": "Original. This parent must hold parental authority and come with the child.",
+      "coffre": "autres"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address in the name of the parent submitting the application",
+      "detail": "Original, recent (utility bill, tax notice, rent receipt). For a lost passport, it must be less than one year old.",
+      "coffre": "autres"
+    },
+    {
+      "id": "ancien-titre",
+      "libelle": "The child's old ID card and passport, if they have any",
+      "detail": "Originals, even if expired less than 5 years ago. They spare you from providing a birth certificate and make the ID card renewal free.",
+      "coffre": "autres"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "The child's birth certificate, less than 3 months old, if requested",
+      "detail": "Only if there is no document valid or expired less than 5 years ago, and if the town of birth is not digitized. Free online on service-public.gouv.fr or at the town hall of the place of birth.",
+      "coffre": "autres"
+    },
+    {
+      "id": "nationalite",
+      "libelle": "Proof of French nationality, if it is not shown on the birth certificate",
+      "detail": "For example a certificate of French nationality or a document proving a parent's nationality: the town hall will tell you which document fits.",
+      "coffre": "autres"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement setting parental authority or the child's residence",
+      "detail": "Copy. Required if only one parent holds parental authority, or to have both addresses shown in shared residence.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile-autre-parent",
+      "libelle": "Proof of address of the other parent (shared residence)",
+      "detail": "Only if you want both addresses on the document. Original or copy depending on the town hall: ask.",
+      "coffre": "autres"
+    },
+    {
+      "id": "delegation",
+      "libelle": "Proof of delegation of parental authority (guardian, ASE)",
+      "detail": "Delegation or guardianship judgment. A child welfare (aide sociale à l'enfance) officer adds their professional card or certificate.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "declaration-perte",
+      "libelle": "Declaration of loss (Cerfa n° 14011) or receipt for a theft report",
+      "detail": "For a loss, it can be filled in on site on the day you apply. If you do not replace the document right away, report the loss to the police or gendarmerie; for a theft, report it first.",
+      "coffre": "autres"
+    },
+    {
+      "id": "timbre",
+      "libelle": "Tax stamp (timbre fiscal), if needed",
+      "detail": "Passport, or lost or stolen ID card. Buy it online (timbres.impots.gouv.fr) or at an authorized tobacco shop, before the appointment.",
+      "coffre": "autres"
+    },
+    {
+      "id": "pre-demande",
+      "libelle": "ANTS pre-application number or QR code",
+      "detail": "Optional, but it saves time at the counter.",
+      "coffre": "autres"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Identify your situation",
+      "detail": "First application, renewal, loss or theft, then your family situation (parents together, separated, shared residence, only one parent holding parental authority). The list of documents depends on it."
+    },
+    {
+      "titre": "Complete the online pre-application on the ANTS website",
+      "detail": "Optional. The ANTS (Agence nationale des titres sécurisés) is the national agency for secure documents. For a passport or a lost card, buy the tax stamp at the end of the pre-application."
+    },
+    {
+      "titre": "Book an appointment at an equipped town hall",
+      "detail": "Any of them, even outside your département. Appointments may take a long time to get, especially before summer: plan ahead before a trip."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Originals only. Photo less than 6 months old, your valid ID, proof of address, the child's old document, tax stamp bought if needed, judgment or agreement if you are separated, second proof of address for shared residence, birth certificate less than 3 months old if requested. The child comes with you."
+    },
+    {
+      "titre": "Submit the application with your child",
+      "detail": "Fingerprints from age 12. The parent signs for a child under 13."
+    },
+    {
+      "titre": "Track the production",
+      "detail": "Several weeks. A text message lets you know if you gave a mobile number; you can also track it on the ANTS website."
+    },
+    {
+      "titre": "Collect the document within 3 months",
+      "detail": "From age 12, the child must be present. Then store a copy in the Vault."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Town halls (mairies) equipped with a registration station",
+      "detail": "List and appointment booking on the ANTS website.",
+      "url": "https://passeport.ants.gouv.fr/services/geolocaliser-une-mairie-habilitee"
+    },
+    {
+      "nom": "France Services",
+      "detail": "Free public help desks: assistance with the online pre-application and buying the tax stamp. Find the nearest one in the service-public.fr directory.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "ID card for a minor: first application (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342"
+    },
+    {
+      "titre": "Renewing a minor's ID card (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090"
+    },
+    {
+      "titre": "Lost ID card of a minor (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153"
+    },
+    {
+      "titre": "Passport for a minor (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930"
+    },
+    {
+      "titre": "Lost passport of a minor (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244"
+    },
+    {
+      "titre": "Passport fees (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752"
+    },
+    {
+      "titre": "Traveling without parents: authorization to leave the country (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Town hall appointment: child's identity documents",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Collect the child's identity document at the town hall (within 3 months)",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Renew the child's ID card (one year before expiry)",
+      "evenement": "autre"
+    },
+    {
+      "type": "depense",
+      "titre": "Passport for a child under 15",
+      "categorie": "frais-administratifs",
+      "montant": 17,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752"
+    },
+    {
+      "type": "depense",
+      "titre": "Passport for a child aged 15 to 17",
+      "categorie": "frais-administratifs",
+      "montant": 42,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752"
+    },
+    {
+      "type": "depense",
+      "titre": "Lost or stolen ID card",
+      "categorie": "frais-administratifs",
+      "montant": 25,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153"
+    },
+    {
+      "type": "coffre",
+      "titre": "Copy of the child's ID card",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Copy of the child's passport",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Judgment or agreement (parental authority, residence)",
+      "categorie": "jaf"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Collect the document within 3 months of it being made available",
+      "detail": "After this period, it is destroyed."
+    },
+    {
+      "libelle": "The ID card can be renewed in the year before it expires"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: appointment and production times vary between town halls and depending on the time of year.",
+    "To be confirmed locally: whether the civil registry of your child's town of birth is digitized (if so, the birth certificate is not requested). Ask the town hall when you book.",
+    "The official pages do not say whether the other parent's consent is required to issue the passport when parental authority is shared: if you disagree, ask at the town hall or at a point-justice (free legal information center).",
+    "The cost of renewing an ID card without presenting the old card is not specified by the official page: ask the town hall."
+  ],
+  "motsCles": [
+    "ID card",
+    "passport",
+    "CNI",
+    "ANTS",
+    "town hall",
+    "tax stamp",
+    "travel"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1342 ID card for a minor: first application",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21090 Renewing a minor's ID card",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1153 Lost ID card of a minor",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F14930 Passport for a minor",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21244 Lost passport of a minor",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F34752 Passport fees",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

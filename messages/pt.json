@@ -234,7 +234,7 @@
   "guide": {
     "title": "O Guia parental",
     "lead": "Todas as informações essenciais para os pais, reunidas num só lugar, onde você vive. Cada ficha diz o que fazer, com quais documentos, e onde.",
-    "pointSheets": "Escola, saúde, auxílios, moradia, separação: {count} fichas para a Guiana Francesa",
+    "pointSheets": "Escola, saúde, auxílios, moradia, separação: {count} fichas práticas, adaptadas ao seu território",
     "pointSheetsNoCount": "Escola, saúde, auxílios, moradia, separação",
     "point2": "Os documentos a reunir e as etapas, em ordem",
     "point3": "Um lembrete, um documento ou uma despesa adicionados com um toque",
@@ -280,7 +280,7 @@
     "a2": "Abra o site no seu navegador e escolha “Adicionar à Tela de Início” (menu de compartilhamento no iPhone, menu do navegador no Android). Nossa página Instalar o aplicativo guia você passo a passo.",
     "a2Link": "Instalar o aplicativo",
     "q3": "O Guia parental está disponível em todo lugar?",
-    "a3": "Ainda não. O Guia começa pela Guiana Francesa, com fichas sobre escola, saúde, auxílios, separação e vida cotidiana. Martinica, Guadalupe, Reunião, Maiote e a França metropolitana virão em seguida.",
+    "a3": "Ainda não. O Guia começa pela Guiana Francesa, com fichas sobre escola, saúde, auxílios, separação e vida cotidiana, e se abre território por território: Martinica, Guadalupe, Reunião, Maiote e a França metropolitana. A página do Guia parental mostra os territórios já disponíveis.",
     "q4": "Os meus dados estão seguros?",
     "a4": "Sim. As conversas são criptografadas em trânsito (HTTPS/TLS) e os dados criptografados em repouso. Seus dados são armazenados na União Europeia (Irlanda); alguns prestadores (pagamento, e-mails, Coach com IA) podem tratar parte deles fora da UE, com as garantias previstas pelo RGPD (detalhes na política de privacidade). Os dados de saúde contam com criptografia adicional. O seu espaço é pessoal: nada é compartilhado sem o seu consentimento.",
     "q5": "Posso compartilhar informações com o outro pai ou mãe?",

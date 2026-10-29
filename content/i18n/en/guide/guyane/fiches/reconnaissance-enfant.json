@@ -57,9 +57,9 @@
     "To be confirmed locally: which tribunal judiciaire has jurisdiction depending on the town where the child lives, and the court registry's address, on justice.fr."
   ],
   "motsCles": ["recognition", "parentage", "father", "unmarried", "parental authority", "prenatal recognition"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F887 Recognizing a child (unmarried couple)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-01-27" },
-    { "titre": "Service-public.gouv.fr, F942 Child recognized late: consequences for parental authority", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2025-09-24" }
+    { "titre": "Service-public.gouv.fr, F887 Recognizing a child (unmarried couple)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F942 Child recognized late: consequences for parental authority", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2026-10-29" }
   ]
 }

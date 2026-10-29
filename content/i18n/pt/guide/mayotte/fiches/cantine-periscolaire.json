@@ -1,0 +1,63 @@
+{
+  "slug": "cantine-periscolaire",
+  "territoire": "mayotte",
+  "categorie": "ecole",
+  "titre": "Refeições na escola (lanche, cantina) e atividades extraescolares",
+  "resume": "Em Mayotte, a maioria das escolas primárias não tem cantina, mas serve um lanche, e poucos lycées têm restaurante escolar. O que é preciso saber, os documentos a preparar e onde pedir ajuda.",
+  "aQuoiCaSert": "Na França metropolitana, a maioria das escolas oferece cantina. Em Mayotte, a situação é diferente: no primário, os alunos geralmente recebem um lanche (collation) em vez de uma refeição quente, e em 2025 só dois lycées (ensino médio) tinham cantina, segundo os debates parlamentares sobre a refundação de Mayotte (refondation de Mayotte). Informe-se na escola ou na prefeitura (mairie) sobre o que é servido, o custo e o cuidado extraescolar (périscolaire) oferecido.",
+  "quiEstConcerne": [
+    "Os pais de crianças matriculadas na educação infantil ou no ensino fundamental (maternelle ou élémentaire).",
+    "Os pais de alunos de collège e lycée.",
+    "Os pais de uma criança alérgica ou que segue dieta por motivo de saúde."
+  ],
+  "aSavoir": [
+    "Primário: o lanche muitas vezes substitui a refeição. Pode ser pedida uma participação das famílias: o valor é fixado localmente.",
+    "Quando existe um serviço de refeição na escola, toda criança matriculada tem direito a se inscrever; reservá-lo às crianças cujos pais trabalham é ilegal.",
+    "No collège e no lycée, o fundo social para as cantinas (fonds social pour les cantines) pode ajudar as famílias. É concedido pelo diretor do estabelecimento.",
+    "Alergia ou dieta por motivo de saúde: um plano de acolhimento individualizado (PAI, projet d'accueil individualisé) pode ser feito com o médico.",
+    "Pais separados: a inscrição faz parte da vida cotidiana da criança. Combinem quem paga e anotem no Diário."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Último aviso de imposto de renda ou atestado da CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte)", "detail": "Cópia. Pode servir para calcular uma tarifa reduzida.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Comprovante de endereço recente", "detail": "Cópia.", "coffre": "scolarite" },
+    { "id": "identite-parent", "libelle": "Documento de identidade do genitor que faz a inscrição", "detail": "Original ou cópia, conforme a estrutura.", "coffre": "scolarite" },
+    { "id": "assurance", "libelle": "Atestado de seguro de responsabilidade civil", "detail": "Muitas vezes exigido para as atividades extraescolares.", "coffre": "scolarite" },
+    { "id": "carnet-vaccins", "libelle": "Páginas de vacinas da caderneta de saúde", "detail": "Cópia, muitas vezes pedida para o cuidado extraescolar.", "coffre": "sante" },
+    { "id": "pai", "libelle": "Plano de acolhimento individualizado (PAI) e atestado médico, se necessário", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Sentença ou acordo de residência, se vocês estão separados", "detail": "Cópia. Útil para a lista de pessoas autorizadas a buscar a criança.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Informe-se sobre o que é oferecido", "detail": "Lanche, refeição, cuidado antes ou depois das aulas: pergunte à escola, à prefeitura ou à tesouraria (intendance) do collège ou do lycée, com as tarifas e os documentos." },
+    { "titre": "Confira antes de ir", "detail": "Comprovante de renda, comprovante de endereço, documento de identidade, atestado de seguro, páginas de vacinas, PAI se necessário, sentença em caso de separação." },
+    { "titre": "Inscreva seu filho", "detail": "Na estrutura indicada pela escola ou pela prefeitura." },
+    { "titre": "Peça ajuda se necessário", "detail": "No collège e no lycée, procure a assistente social ou a secretaria para o fundo social da cantina. No primário, informe-se na prefeitura." },
+    { "titre": "Registre os pagamentos", "detail": "No Diário, para manter o histórico e facilitar a divisão com o outro genitor." }
+  ],
+  "ou": [
+    { "nom": "Escola ou prefeitura do seu município", "detail": "Lanche e cuidado extraescolar no primário." },
+    { "nom": "Secretaria ou tesouraria (intendance) do collège ou do lycée", "detail": "Refeições e fundo social da cantina." }
+  ],
+  "liens": [
+    { "titre": "Cantina escolar no primário (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570" },
+    { "titre": "Ajuda financeira para a cantina (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294" },
+    { "titre": "Assemblée nationale, emenda n° 43 sobre a alimentação escolar em Mayotte (2025)", "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1573/AN/43.pdf" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Lanche ou cantina escolar", "categorie": "cantine" },
+    { "type": "depense", "titre": "Cuidado antes/depois das aulas", "categorie": "ecole" },
+    { "type": "coffre", "titre": "Plano de acolhimento individualizado (PAI)", "categorie": "sante" },
+    { "type": "rappel", "titre": "Inscrição no lanche e no extraescolar antes da volta às aulas", "evenement": "ecole" }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: quem organiza o lanche (município, rectorat (secretaria regional de educação) ou prestador), valor da participação das famílias e existência de cantina na escola do seu filho.",
+    "A confirmar localmente: tarifas da meia-pensão (demi-pension) e calendário do fundo social nos collèges e lycées de Mayotte.",
+    "Os números sobre as cantinas vêm de debates parlamentares de 2025: a situação pode ter mudado desde então."
+  ],
+  "motsCles": ["cantina", "lanche", "refeição", "extraescolar", "demi-pension", "PAI", "fundo social"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F24570 Cantina escolar no primário", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F24570", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F19294 Ajuda financeira para a cantina", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F19294", "verifieLe": "2026-10-29" },
+    { "titre": "Assemblée nationale, projeto de lei de programação para a refundação de Mayotte (projet de loi de programmation pour la refondation de Mayotte), emenda n° 43", "url": "https://www.assemblee-nationale.fr/dyn/17/amendements/1573/AN/43.pdf", "verifieLe": "2026-10-29" }
+  ]
+}

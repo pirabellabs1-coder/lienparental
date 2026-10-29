@@ -57,9 +57,9 @@
     "A confirmar localmente: tribunal judiciaire competente conforme o município de residência da criança, e endereço do cartório, em justice.fr."
   ],
   "motsCles": ["reconhecimento", "filiação", "pai", "não casados", "autoridade parental", "reconhecimento antecipado"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F887 Reconhecimento de um filho (casal não casado)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-01-27" },
-    { "titre": "Service-public.gouv.fr, F942 Filho reconhecido tardiamente: consequências para a autoridade parental", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2025-09-24" }
+    { "titre": "Service-public.gouv.fr, F887 Reconhecimento de um filho (casal não casado)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F942 Filho reconhecido tardiamente: consequências para a autoridade parental", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2026-10-29" }
   ]
 }

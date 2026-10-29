@@ -1,0 +1,195 @@
+{
+  "slug": "mediation-familiale",
+  "territoire": "france",
+  "categorie": "separation",
+  "titre": "Mediação familiar",
+  "resume": "Um profissional neutro para chegarem juntos a acordos sobre os filhos. Primeira conversa gratuita, valor conforme a sua renda num serviço conveniado, acordo que pode ser homologado pelo juiz.",
+  "aQuoiCaSert": "A mediação familiar (médiation familiale) ajuda os pais a retomar o diálogo e a construir eles mesmos os seus acordos: residência da criança, direito de visita e de hospedagem, pensão alimentícia, férias, despesas excepcionais. O mediador é independente e imparcial: não decide nada no seu lugar. O acordo escrito pode depois ser homologado pelo juiz de família (juge aux affaires familiales, JAF) e passa a ter força executória como uma sentença. A mediação pode acontecer antes de qualquer processo ou durante um processo.",
+  "quiEstConcerne": [
+    "Pais separados ou em processo de separação, casados ou não.",
+    "Avós, para manter o convívio com os netos.",
+    "A mediação não é possível em caso de violência de um dos pais contra o outro ou contra a criança: nesse caso, ligue para o 3919 (escuta, gratuito, 24 horas por dia) ou o 17 (emergência), ou envie um SMS para o 114."
+  ],
+  "aSavoir": [
+    "A conversa de informação é gratuita e sem compromisso. Você pode ir sozinho ou com o outro genitor.",
+    "As sessões duram em geral de 1h30 a 2h. O número costuma ser limitado a 6.",
+    "Num serviço conveniado com a Caf (Caisse d'allocations familiales, órgão de benefícios familiares), o preço de cada sessão depende da sua renda (tabela nacional). Um mediador particular define livremente o valor; sem acordo, os custos são divididos pela metade.",
+    "Mediação ordenada pelo juiz: dura no máximo 5 meses, renovável uma vez por 3 meses. Os custos são divididos igualmente, salvo decisão contrária, e pagos pelo Estado se você tiver assistência jurídica gratuita (aide juridictionnelle).",
+    "O juiz pode ordenar que os pais se encontrem com um mediador. Não comparecer pode resultar em multa civil de até 10.000 €.",
+    "Os advogados podem assistir às sessões, mas é o mediador quem conduz a conversa."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Documento de identidade (original a apresentar)",
+      "coffre": "jaf"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Último aviso de imposto ou comprovantes de renda (cópia)",
+      "detail": "Para calcular o seu valor num serviço conveniado. Pode ser baixado na sua conta impots.gouv.fr. Se você recebe benefícios, atestado de pagamento da Caf.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-caf",
+      "libelle": "Atestado de pagamento da Caf (cópia), se você for beneficiário",
+      "detail": "Baixe-o na sua conta caf.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou decisão que ordena a mediação (cópia), se houver",
+      "detail": "Indica o mediador designado, a duração, o depósito prévio (provision) e o prazo para pagá-lo.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "aj",
+      "libelle": "Decisão de assistência jurídica gratuita (cópia), se você a tiver",
+      "detail": "Dispensa o pagamento do depósito prévio na mediação judicial.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "planning",
+      "libelle": "Agenda da criança e orçamento (escola, atividades, despesas)",
+      "detail": "Opcional, mas útil para sessões concretas: você pode exportá-lo do calendário e do Diário.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "accord-mediation",
+      "libelle": "Acordo escrito resultante da mediação",
+      "detail": "Original assinado pelos dois pais, a anexar ao pedido de homologação.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Encontre um serviço de mediação familiar",
+      "detail": "Peça à sua Caf os serviços conveniados (valor conforme a renda) ou consulte a lista de mediadores da sua cour d'appel (tribunal de apelação), na seção “Partenaires de justice” do site. Um point-justice (posto gratuito de informação jurídica) também pode orientar você."
+    },
+    {
+      "titre": "Agende a conversa de informação gratuita",
+      "detail": "Sozinho ou com o outro genitor. Ela explica como funciona e o que pode ser tratado."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Documento de identidade; aviso de imposto ou atestado da Caf para o valor; decisão do juiz se a mediação for ordenada; decisão de assistência jurídica gratuita se tiver; lista dos assuntos a tratar; agenda da criança."
+    },
+    {
+      "titre": "Participe das sessões",
+      "detail": "Adicione cada sessão ao calendário. Entre uma sessão e outra, anote os pontos a rever."
+    },
+    {
+      "titre": "Peça a homologação do acordo, se quiser",
+      "detail": "Pedido conjunto ao juiz de família com o formulário cerfa n° 16139, a enviar ao tribunal competente. O acordo homologado tem a mesma força de uma sentença."
+    },
+    {
+      "titre": "Sem acordo, você pode acionar o juiz",
+      "detail": "Veja a ficha «Recorrer ao juiz de família (JAF)»."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf do seu departamento",
+      "detail": "Encaminhamento para os serviços de mediação familiar conveniados. Encontre a sua Caf pelo código postal em caf.fr.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "Cour d'appel (tribunal de apelação) da sua região",
+      "detail": "Lista de mediadores familiares, seção “Partenaires de justice” do site da cour d'appel.",
+      "url": "https://www.cours-appel.justice.fr"
+    },
+    {
+      "nom": "Point-justice",
+      "detail": "Informação jurídica gratuita e orientação. Diretório por município, ou número único de acesso ao direito, gratuito e anônimo.",
+      "url": "https://www.justice.gouv.fr/annuaire/lieux-daccueil-dinformation/point-justice",
+      "telephone": "3039"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Mediação familiar (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355"
+    },
+    {
+      "titre": "Homologação de um acordo parental, Cerfa 16139 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771"
+    },
+    {
+      "titre": "Violência doméstica: números e proteção (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Conversa de informação sobre mediação familiar",
+      "evenement": "rdv"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Sessão de mediação familiar",
+      "evenement": "rdv"
+    },
+    {
+      "type": "coffre",
+      "titre": "Acordo de mediação familiar assinado",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Decisão que ordena a mediação",
+      "categorie": "jaf"
+    },
+    {
+      "type": "depense",
+      "titre": "Sessão de mediação familiar",
+      "categorie": "frais-administratifs"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Mediação judicial: prazo fixado pelo juiz para pagar o depósito prévio",
+      "detail": "Sem pagamento nesse prazo, a mediação não pode acontecer (salvo assistência jurídica gratuita)."
+    },
+    {
+      "libelle": "Mediação judicial: no máximo 5 meses",
+      "detail": "Renovável uma vez por 3 meses."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: a tentativa prévia obrigatória de mediação familiar (antes de acionar o juiz para alterar uma decisão) só existe em certos tribunaux judiciaires (tribunais judiciários) designados. A lista atualizada não pôde ser verificada: informe-se no cartório (greffe) do seu tribunal ou num point-justice.",
+    "A confirmar localmente: lista dos serviços conveniados com a sua Caf, valores e possibilidade de sessões a distância.",
+    "A confirmar: as instruções do cerfa n° 16139 indicam se é preciso advogado e se há selo fiscal a pagar; leia-as antes do envio."
+  ],
+  "motsCles": [
+    "mediação",
+    "mediador",
+    "acordo",
+    "diálogo",
+    "conflito",
+    "homologação"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F34355 Mediação familiar",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R58771 Pedido conjunto de homologação de acordo parental (Cerfa 16139)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F12544 Violência doméstica",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Ministério da Justiça, diretório dos points-justice e número 3039",
+      "url": "https://www.justice.gouv.fr/annuaire/lieux-daccueil-dinformation/point-justice",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

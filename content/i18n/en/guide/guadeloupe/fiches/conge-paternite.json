@@ -1,0 +1,162 @@
+{
+  "slug": "conge-paternite",
+  "territoire": "guadeloupe",
+  "categorie": "naissance",
+  "titre": "Paternity and childcare leave",
+  "resume": "Length of the leave, notice periods for your employer, daily allowances and documents to send to the Assurance Maladie, plus the new additional birth leave.",
+  "aQuoiCaSert": "Paternity and childcare leave (congé de paternité et d'accueil de l'enfant) allows the father, or the mother's spouse, PACS partner (civil partnership) or cohabiting partner, to stop working after the birth to look after the child. During this leave, the employment contract is suspended and the Assurance Maladie (French public health insurance; in Guadeloupe, the CGSS) may pay daily allowances. Since July 1, 2026, an additional birth leave can be added.",
+  "quiEstConcerne": [
+    "The child's father, if employed.",
+    "The mother's spouse, PACS partner or cohabiting partner, if not the father.",
+    "These pages concern the private sector: civil servants, self-employed people and other schemes have their own rules."
+  ],
+  "aSavoir": [
+    "Separated parents: the child's father is entitled to it with no requirement of marriage, PACS or living with the mother. The requirement to live as a couple only applies to a spouse or partner who is not the father.",
+    "Length: 25 calendar days for a birth (32 for multiple births), in addition to the 3-working-day birth leave. A 4-day period is mandatory right after the birth leave.",
+    "The remaining 21 days (28 for multiple births) can be taken all at once or in 2 periods of at least 5 days, within 6 months of the birth.",
+    "Tell your employer at least 1 month before the expected date of delivery, then at least 1 month before the start of each period, stating the dates and length. Doing so in writing is advised: registered letter with acknowledgment of receipt, or hand delivery against a signed receipt.",
+    "Daily allowances: among other conditions, you must have been registered for at least 6 months and have worked 150 hours in the previous 3 months, or paid contributions on at least €12,058.20 of salary over 6 months. They range from €11.12 to €104.02 per day (service-public.gouv.fr, checked as of June 1, 2026).",
+    "Additional birth leave: planned from July 1, 2026, subject to the implementing decrees. Each parent can take 1 to 2 months of paid leave (70% of net salary the 1st month, 60% the 2nd, up to the social security ceiling). Tell your employer at least 1 month in advance (15 days if it immediately follows paternity leave) (code.travail.gouv.fr)."
+  ],
+  "documents": [
+    {
+      "id": "acte-naissance",
+      "libelle": "Full copy of the child's birth certificate or updated family record book (livret de famille)",
+      "detail": "To send to the Assurance Maladie. Certificate free on service-public.gouv.fr or from the town hall (mairie) of the place of birth.",
+      "coffre": "finances"
+    },
+    {
+      "id": "lien-mere",
+      "libelle": "Proof of your relationship with the mother if you are not the father",
+      "detail": "Extract of the marriage certificate, copy of the PACS, certificate of cohabitation less than a year old, or sworn statement of living together signed by both.",
+      "coffre": "finances"
+    },
+    {
+      "id": "courrier-employeur",
+      "libelle": "Letter informing your employer",
+      "detail": "Copy of the registered letter or the signed receipt, with the dates of the leave.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "attestation-salaire",
+      "libelle": "Salary statement (attestation de salaire)",
+      "detail": "Sent by the employer to the Assurance Maladie. Check with them that it has been sent.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "Bank details (RIB)",
+      "detail": "If your bank details are not up to date in your ameli account.",
+      "coffre": "finances"
+    },
+    {
+      "id": "decomptes-ij",
+      "libelle": "Daily allowance payment statements",
+      "detail": "Downloadable from your ameli account.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Tell your employer in writing",
+      "detail": "At least 1 month before the expected date of birth, then at least 1 month before each period of leave."
+    },
+    {
+      "titre": "Check before sending your file",
+      "detail": "Birth certificate or updated family record book, proof of relationship with the mother if you are not the father, salary statement sent by the employer, bank details and address up to date on ameli."
+    },
+    {
+      "titre": "Send the supporting documents to the Assurance Maladie",
+      "detail": "In your ameli account or by post to the CGSS de la Guadeloupe."
+    },
+    {
+      "titre": "Take the mandatory 4-day period",
+      "detail": "Right after the 3-day birth leave paid by the employer."
+    },
+    {
+      "titre": "Plan the rest of the leave within 6 months",
+      "detail": "And, if you wish, the additional birth leave within 9 months of the birth."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Your employer",
+      "detail": "For advance notice and the salary statement."
+    },
+    {
+      "nom": "CGSS de la Guadeloupe (Assurance Maladie)",
+      "detail": "For daily allowances.",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Paternity and childcare leave (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156"
+    },
+    {
+      "titre": "Additional birth leave (code.travail.gouv.fr)",
+      "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Tell the employer about paternity leave (1 month before due date)",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Take the rest of paternity leave within 6 months of the birth",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Paternity leave letter to the employer",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Paternity leave daily allowance statements",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Inform the employer at least 1 month before the expected birth",
+      "detail": "Then at least 1 month before each period."
+    },
+    {
+      "libelle": "Leave to be taken within 6 months of the birth",
+      "detail": "Can be postponed in certain cases provided for by law, for example if the mother dies."
+    },
+    {
+      "libelle": "Additional birth leave within 9 months of the birth",
+      "detail": "For a child born on or after June 1, 2026. For a birth between January 1 and May 31, 2026: between July 1, 2026 and March 31, 2027."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the CGSS de la Guadeloupe: how to send the supporting documents in practice and how long daily allowance payments take."
+  ],
+  "motsCles": [
+    "paternity leave",
+    "birth",
+    "daily allowances",
+    "employer",
+    "additional birth leave",
+    "CGSS"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F3156 Paternity and childcare leave",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156",
+      "verifieLe": "2026-06-01"
+    },
+    {
+      "titre": "Code du travail numérique, Additional birth leave: what changes on July 1, 2026 (updated October 26, 2026)",
+      "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

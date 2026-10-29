@@ -1,0 +1,167 @@
+{
+  "slug": "compte-bancaire-droit-au-compte",
+  "territoire": "martinique",
+  "categorie": "argent",
+  "titre": "Having your own bank account after a separation",
+  "resume": "Open an account in your own name to receive child support and benefits and, if a bank refuses, use the right to a bank account through the IEDOM in Fort-de-France: exact documents and time limits.",
+  "aQuoiCaSert": "After a separation, a personal account lets you receive child support and Caf benefits, and pay for the child's expenses while keeping clear records. If a bank refuses to open an account for you, a bank is designated and must do so, with free basic banking services. In mainland France, the Banque de France designates the bank; in Martinique, this is done by the IEDOM (Institut d'émission des départements d'outre-mer, the overseas central bank institute). This procedure is available even if you are banned from writing checks, listed in the credit incident register or over-indebted.",
+  "quiEstConcerne": [
+    "The parent who has no account in their name, or only a joint account with their ex-partner.",
+    "Anyone residing in France who has no deposit account in France and has been refused an account.",
+    "A holder of only a joint account can also use the right to a bank account to get an individual account."
+  ],
+  "aSavoir": [
+    "The bank has 15 days to respond to your request to open an account. No answer means a refusal: it must then give you a letter of refusal stating the reasons.",
+    "A bank is designated within 1 business day of receipt of the complete file. This designation is valid for 6 months: contact the designated bank within this period.",
+    "The designated bank sends you its list of documents within 3 business days, then must open the account no later than 3 business days after receiving all the documents, usually at an appointment.",
+    "Free basic banking services: account maintenance and closure, payment card, SEPA direct debits and transfers, deposits and withdrawals at the counter, 2 bank checks per month. Incident fees capped at €4 per transaction and €20 per month.",
+    "The designated bank can only close this account in specific cases (for example inaccurate information, opening a second deposit account), usually with 2 months' notice."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Valid ID",
+      "detail": "ID card, passport or residence permit. Copy for the Banque de France file, original at the bank appointment.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address less than 3 months old",
+      "detail": "Electricity or water bill, rent receipt. Living with someone: letter of accommodation, host's ID and proof of address (to be confirmed with the bank).",
+      "coffre": "finances"
+    },
+    {
+      "id": "lettre-refus",
+      "libelle": "The bank's letter of refusal",
+      "detail": "Or, if there was no answer, the acknowledgment of receipt of your request dated more than 15 days ago.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "attestation-honneur",
+      "libelle": "Sworn statement that you have no deposit account",
+      "detail": "Template provided by the Banque de France when you apply.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-residence",
+      "libelle": "Certificate of residence, if you are a national of another European Union country",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank account details) of the new account",
+      "detail": "To send to the Caf, the ARIPA (Agence de recouvrement et d'intermédiation des pensions alimentaires, the child support collection agency), your employer and the other parent if child support is paid to you directly.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Ask a bank to open an account",
+      "detail": "In writing if possible, and keep proof of the date of your request."
+    },
+    {
+      "titre": "If refused, ask for the letter of refusal",
+      "detail": "Or wait 15 days without a reply. You can also ask the bank that refuses to send your file to the IEDOM itself."
+    },
+    {
+      "titre": "File your application with the IEDOM Martinique",
+      "detail": "At the Fort-de-France office, by appointment only (booked on 05 96 59 44 00), or by mail. Signed form, refusal letter, ID and proof of address less than 3 months old."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "For the designated bank: appointment booked within 6 months, original valid ID, proof of address less than 3 months old, the designation letter, list of documents sent by the bank."
+    },
+    {
+      "titre": "Open the account at the designated bank",
+      "detail": "It has 3 business days after receiving all the documents."
+    },
+    {
+      "titre": "Send your new RIB",
+      "detail": "To the Caf (online account), to the ARIPA if it pays the child support, to your employer and, if needed, to the other parent."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "IEDOM Martinique",
+      "detail": "1 boulevard du Général de Gaulle, CS 50512, 97206 Fort-de-France Cedex. By appointment only, on Tuesday and Thursday mornings; ID required.",
+      "url": "https://www.iedom.fr/Martinique",
+      "telephone": "05 96 59 44 00"
+    },
+    {
+      "nom": "The bank of your choice",
+      "detail": "First request to open an account."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Right to a bank account (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417"
+    },
+    {
+      "titre": "IEDOM Martinique, practical information",
+      "url": "https://www.iedom.fr/Martinique"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Letter refusing to open an account",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Bank designation letter (IEDOM)",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "RIB of my personal account",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Contact the designated bank (within 6 months)",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Send my new RIB to the Caf and the ARIPA",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "15 days: the bank's deadline to respond; after that, its silence counts as a refusal"
+    },
+    {
+      "libelle": "6 months: validity of the designation by the IEDOM (Banque de France in mainland France)"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the IEDOM Martinique: which application form to use, whether you can apply by email, and reception days, which may change.",
+    "The service-public.gouv.fr page describes the Banque de France procedure without mentioning the overseas territories: the time limits given here are those of the national procedure.",
+    "The rules for withdrawing from a joint account depend on your bank: the official page on the right to a bank account does not detail them."
+  ],
+  "motsCles": [
+    "bank account",
+    "RIB",
+    "right to a bank account",
+    "IEDOM",
+    "Banque de France",
+    "joint account",
+    "separation"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2417 Right to a bank account",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417",
+      "verifieLe": "2026-10-19"
+    },
+    {
+      "titre": "IEDOM Martinique, practical information",
+      "url": "https://www.iedom.fr/Martinique",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

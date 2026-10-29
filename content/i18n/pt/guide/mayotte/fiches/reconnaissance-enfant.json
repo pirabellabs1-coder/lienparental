@@ -1,0 +1,68 @@
+{
+  "slug": "reconnaissance-enfant",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Reconhecer meu filho quando não somos casados",
+  "resume": "Gratuito, o reconhecimento (reconnaissance) estabelece a filiação do pai. Em Mayotte, uma regra própria: fora do registro de nascimento, é feito na prefeitura de Mamoudzou e o seu registro pode ser suspenso pelo promotor.",
+  "aQuoiCaSert": "Quando os pais não são casados, a filiação do pai não é automática: ele precisa reconhecer a criança. A mãe não precisa fazer nada se o nome dela constar da certidão de nascimento. O reconhecimento pode ser feito antes do nascimento, no momento do registro do nascimento ou mais tarde. Feito antes do primeiro aniversário da criança, permite ao pai exercer a autoridade parental junto com a mãe. Em Mayotte, a lei de 11 de agosto de 2025 de programação para a refundação de Mayotte (loi de programmation pour la refondation de Mayotte) previu regras específicas.",
+  "quiEstConcerne": [
+    "Os pais não casados, em especial o pai.",
+    "A mãe que deseja fazer um reconhecimento antecipado (opcional).",
+    "Os casais de mulheres: é necessário um reconhecimento conjunto antecipado perante notário."
+  ],
+  "aSavoir": [
+    "Em Mayotte, um reconhecimento feito perante um oficial de registro civil (officier d'état civil) é recebido pelo do município de Mamoudzou, exceto se for feito junto com o registro do nascimento (artigo 2496 do Código Civil).",
+    "No reconhecimento de uma criança nascida em Mayotte, quem reconhece é informado das suas obrigações para com a criança (sustento, educação) e das sanções em caso de reconhecimento fraudulento.",
+    "Em caso de dúvida sobre a sinceridade do reconhecimento, o promotor (procureur) pode suspender o seu registro por 2 meses, renováveis uma vez (3 meses se a investigação for feita no exterior) (artigo 2497 do Código Civil).",
+    "Um reconhecimento feito apenas para obter uma autorização de residência ou a nacionalidade é crime (artigo L. 823-11 do code de l'entrée et du séjour des étrangers, código francês de imigração); a lei de 11 de agosto de 2025 elevou a multa para 75.000 €.",
+    "O reconhecimento é gratuito na prefeitura (mairie). Também é possível com um notário, mediante pagamento.",
+    "O pai que reconhece a criança após o primeiro aniversário dela não exerce a autoridade parental. Pode obtê-la por declaração conjunta com a mãe (cerfa n° 12785, enviada ao cartório (greffe) do tribunal judiciaire (tribunal judiciário)) ou recorrendo ao juiz de família (juge aux affaires familiales, JAF).",
+    "O reconhecimento não muda por si só o sobrenome da criança: a escolha do nome é objeto de uma declaração separada."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Documento de identidade do genitor que reconhece", "detail": "Original: carteira de identidade, passaporte ou autorização de residência (titre de séjour).", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Comprovante de endereço ou de residência com menos de 3 meses, em seu nome", "detail": "Original. Um comprovante para cada um se vierem os dois.", "coffre": "jaf" },
+    { "id": "acte-naissance-enfant", "libelle": "Certidão de nascimento da criança ou livro de família (livret de famille), se a criança já nasceu", "detail": "Recomendado. Certidão gratuita na prefeitura do local de nascimento.", "coffre": "jaf" },
+    { "id": "acte-reconnaissance", "libelle": "Cópia do termo de reconhecimento (acte de reconnaissance)", "detail": "Apresente-a no registro do nascimento se o reconhecimento for antecipado.", "coffre": "jaf" },
+    { "id": "declaration-conjointe", "libelle": "Declaração conjunta de exercício da autoridade parental (cerfa n° 12785), se a criança tiver mais de um ano", "detail": "Assinada pelos dois pais. Guarde a via carimbada pelo cartório.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Escolha o momento", "detail": "No registro do nascimento, na prefeitura do local de nascimento; caso contrário, em Mayotte, na prefeitura de Mamoudzou. Ligue antes para saber se é preciso marcar horário." },
+    { "titre": "Confira antes de ir", "detail": "Documento de identidade original, comprovante de endereço com menos de 3 meses em seu nome (um por genitor se vierem os dois), certidão de nascimento ou livro de família se a criança já nasceu." },
+    { "titre": "Vá à prefeitura e assine o termo", "detail": "Confira a grafia dos sobrenomes e nomes antes de assinar." },
+    { "titre": "Guarde a cópia do termo", "detail": "Se o registro for suspenso pelo promotor, guarde a carta recebida e responda aos pedidos." },
+    { "titre": "Se a criança tiver mais de um ano, faça a declaração conjunta de autoridade parental", "detail": "Com o acordo da mãe, cerfa n° 12785 entregue no cartório do tribunal judiciaire de Mamoudzou. Sem acordo, o pedido é feito ao juiz de família." }
+  ],
+  "ou": [
+    { "nom": "Prefeitura de Mamoudzou, serviço de registro civil (état civil)", "detail": "Reconhecimento feito em Mayotte fora do registro de nascimento." },
+    { "nom": "Prefeitura do local de nascimento", "detail": "Reconhecimento feito junto com o registro do nascimento." },
+    { "nom": "Tribunal judiciaire de Mamoudzou (tribunal de Mamoudzou), cartório", "detail": "Declaração conjunta de exercício da autoridade parental.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" }
+  ],
+  "liens": [
+    { "titre": "Reconhecimento de um filho (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887" },
+    { "titre": "Filho reconhecido tardiamente e autoridade parental (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942" },
+    { "titre": "Loi n° 2025-797 du 11 août 2025, programação para a refundação de Mayotte (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052075903" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Termo de reconhecimento", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Declaração conjunta de autoridade parental carimbada pelo cartório", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Horário na prefeitura: reconhecimento", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Reconhecer a criança antes do primeiro aniversário", "evenement": "rdv" }
+  ],
+  "datesLimites": [
+    { "libelle": "Antes do primeiro aniversário da criança", "detail": "Para que o pai exerça a autoridade parental sem nenhum procedimento adicional." },
+    { "libelle": "Suspensão possível de 2 meses, renovável uma vez", "detail": "Prazo durante o qual o promotor pode verificar um reconhecimento em Mayotte." }
+  ],
+  "aConfirmer": [
+    "A página nacional do service-public.gouv.fr ainda não detalha as regras próprias de Mayotte: documentos exatos e agendamento a confirmar com a prefeitura de Mamoudzou.",
+    "A confirmar: segundo a lei, o reconhecimento antecipado (antes do nascimento) em Mayotte deve ser feito em Mamoudzou; verifique os procedimentos com o registro civil.",
+    "A confirmar: a pena de prisão prevista para um reconhecimento fraudulento (o texto de 2025 consultado só altera a multa)."
+  ],
+  "motsCles": ["reconhecimento", "filiação", "pai", "não casados", "autoridade parental", "Mamoudzou"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Légifrance, loi n° 2025-797 du 11 août 2025 (artigos 9 a 11)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052075903", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F887 Reconhecimento de um filho", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F942 Filho reconhecido tardiamente", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2026-10-29" }
+  ]
+}

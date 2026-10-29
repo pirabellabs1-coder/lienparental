@@ -15,7 +15,7 @@
     "Enfant né à partir de 2023 : même liste, avec les méningocoques A, B, C, W et Y à la place du seul méningocoque C.",
     "Fièvre jaune : recommandée dès 9 mois et obligatoire en Guyane dès 12 mois. Une seule injection protège à vie. Si l'enfant a été vacciné avant 2 ans, une seconde dose est recommandée entre 6 et 10 ans. Le vaccin fait en Guyane est remboursé par l'Assurance Maladie.",
     "Un enfant pas à jour peut être admis provisoirement : vous avez alors 3 mois pour régulariser, sinon il peut être exclu. Si l'enfant reste plus d'un an, le justificatif est demandé chaque année.",
-    "Les 20 examens de santé obligatoires jusqu'à 6 ans sont pris en charge à 100 % sans avance de frais, hors dépassements d'honoraires.",
+    "Les 20 examens de santé obligatoires de l'enfant, de la naissance à 16 ans (dont 16 avant 6 ans), sont pris en charge à 100 % sans avance de frais, hors dépassements d'honoraires.",
     "Parents séparés : le parent qui emmène l'enfant se faire vacciner a intérêt à informer l'autre et à lui transmettre une copie des pages vaccins, pour que chacun dispose du justificatif."
   ],
   "documents": [
@@ -41,7 +41,7 @@
   "liens": [
     { "titre": "Vaccins exigés pour la crèche et l'école (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
     { "titre": "Conseils sanitaires aux nouveaux arrivants (ARS Guyane)", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires" },
-    { "titre": "Examens de santé obligatoires jusqu'à 6 ans (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490" }
+    { "titre": "Examens de santé obligatoires jusqu'à 6 ans (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0" }
   ],
   "actions": [
     { "type": "calendrier", "titre": "Rendez-vous vaccination", "evenement": "sante" },
@@ -60,14 +60,14 @@
     "Le nombre de doses et l'âge de chaque vaccin suivent le calendrier vaccinal en vigueur : à vérifier avec votre médecin ou la PMI."
   ],
   "motsCles": ["vaccin", "fièvre jaune", "PMI", "carnet de santé", "carnet jaune", "pédiatre", "bébé"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1879 Santé à l'école primaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879", "verifieLe": "2026-10-15" },
-    { "titre": "Service-public.gouv.fr, F35490 Examens obligatoires jusqu'à 6 ans", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490", "verifieLe": "2026-07-29" },
+    { "titre": "Service-public.gouv.fr, F35490 Examens obligatoires jusqu'à 6 ans", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F3133 Autorité parentale en cas de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "ARS Guyane, Nouveaux arrivants : conseils sanitaires", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires", "verifieLe": "2023-01-09" },
+    { "titre": "ARS Guyane, Nouveaux arrivants : conseils sanitaires", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires", "verifieLe": "2026-10-29" },
     { "titre": "CTG, PMI : cadre du partenariat avec le CHU de Guyane", "url": "https://www.ctguyane.fr/pmi-la-ctg-clarifie-le-cadre-de-son-partenariat-avec-le-chu-de-guyane/", "verifieLe": "2026-09-08" },
-    { "titre": "Annuaire service-public, PMI de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3" }
+    { "titre": "Annuaire service-public, PMI de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3", "verifieLe": "2026-10-29" }
   ]
 }

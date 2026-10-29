@@ -1,0 +1,171 @@
+{
+  "slug": "reconnaissance-enfant",
+  "territoire": "reunion",
+  "categorie": "naissance",
+  "titre": "Reconhecer meu filho quando não somos casados",
+  "resume": "Antes ou depois do nascimento, de graça em qualquer prefeitura: o reconhecimento (reconnaissance) estabelece a filiação do pai. Os dois documentos a levar e os efeitos sobre a autoridade parental.",
+  "aQuoiCaSert": "Quando os pais não são casados, a filiação do pai não é automática: ele precisa reconhecer a criança. A mãe não precisa fazer nada se o nome dela constar da certidão de nascimento. O reconhecimento pode ser feito antes do nascimento (reconnaissance anticipée, reconhecimento antecipado), no momento do registro do nascimento ou mais tarde. Feito antes do primeiro aniversário da criança, permite ao pai exercer a autoridade parental junto com a mãe.",
+  "quiEstConcerne": [
+    "Os pais não casados, em especial o pai.",
+    "A mãe que deseja fazer um reconhecimento antecipado (opcional).",
+    "Os casais de mulheres: é necessário um reconhecimento conjunto antecipado (procedimento distinto)."
+  ],
+  "aSavoir": [
+    "O reconhecimento é feito de graça em qualquer prefeitura (mairie), seja qual for o local de nascimento, o domicílio ou a nacionalidade. Também é possível com um notário, mediante pagamento (75,46 € sem impostos, HT), se você deseja confidencialidade.",
+    "Cada genitor pode reconhecer a criança sem o acordo do outro. Nenhum atestado de gravidez é exigido para um reconhecimento antecipado. O termo é lavrado na hora e uma cópia é entregue a você.",
+    "Reconhecimento após o nascimento: ele é anotado à margem da certidão de nascimento e no livro de família (livret de famille), e a prefeitura informa o outro genitor por carta registrada com aviso de recebimento.",
+    "Reconhecimento feito pelos dois: os dois pais devem estar presentes, cada um com um comprovante de endereço em seu nome.",
+    "O pai que reconhece a criança após o primeiro aniversário dela não exerce a autoridade parental. Pode obtê-la por declaração conjunta com a mãe (cerfa n° 12785, em 3 vias, no cartório (greffe) do tribunal judiciaire ou do tribunal de proximité do domicílio da criança) ou recorrendo ao juiz de família (juge aux affaires familiales, JAF).",
+    "O casamento dos pais após o nascimento não dá automaticamente a autoridade parental ao pai. A declaração conjunta também não muda o sobrenome da criança: a escolha do nome é objeto de uma declaração separada.",
+    "Se a criança já tem filiação estabelecida com outro homem, ela deve primeiro ser contestada na Justiça."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Documento de identidade do genitor que reconhece",
+      "detail": "Original, válido ou não: carteira de identidade, passaporte ou autorização de residência (titre de séjour).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço ou de residência com menos de 3 meses, em seu nome",
+      "detail": "Original. Um comprovante para cada um se vierem os dois.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "acte-naissance-enfant",
+      "libelle": "Certidão de nascimento da criança ou livro de família, se a criança já nasceu",
+      "detail": "Recomendado. Certidão gratuita on-line em service-public.gouv.fr ou na prefeitura do local de nascimento.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "acte-reconnaissance",
+      "libelle": "Cópia do termo de reconhecimento (acte de reconnaissance)",
+      "detail": "Entregue na hora. Apresente-a no registro do nascimento se o reconhecimento for antecipado.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "declaration-conjointe",
+      "libelle": "Declaração conjunta de exercício da autoridade parental (cerfa n° 12785), se a criança tiver mais de um ano",
+      "detail": "Em 3 vias, assinada pelos dois pais. A via carimbada pelo cartório do tribunal é o único original: guarde-a com cuidado.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Escolha uma prefeitura",
+      "detail": "Qualquer uma. Ligue para o serviço de registro civil (état civil) para saber se é preciso marcar horário."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Documento de identidade original, comprovante de endereço com menos de 3 meses em seu nome (um por genitor se vierem os dois), certidão de nascimento ou livro de família se a criança já nasceu."
+    },
+    {
+      "titre": "Vá à prefeitura e assine o termo",
+      "detail": "O termo é lavrado na hora. Confira a grafia dos sobrenomes e nomes antes de assinar."
+    },
+    {
+      "titre": "Guarde a cópia do termo",
+      "detail": "Em caso de reconhecimento antecipado, leve-a no registro do nascimento."
+    },
+    {
+      "titre": "Se a criança tiver mais de um ano, faça a declaração conjunta de autoridade parental",
+      "detail": "Com o acordo da mãe: cerfa n° 12785 em 3 vias, entregue ou enviado por carta registrada ao cartório do tribunal judiciaire do domicílio da criança (Saint-Denis ou Saint-Pierre). Sem acordo, pedido ao juiz de família."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Qualquer prefeitura, serviço de registro civil (état civil)",
+      "detail": "Reconhecimento gratuito."
+    },
+    {
+      "nom": "Um notário",
+      "detail": "Reconhecimento pago, se você deseja confidencialidade."
+    },
+    {
+      "nom": "Tribunal judiciaire de Saint-Denis, cartório (greffe)",
+      "detail": "Declaração conjunta de autoridade parental, se a criança morar na sua jurisdição. Atendimento de segunda a sexta.",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/89e93007-f1cf-40e9-92b1-c8880c9a4d8a",
+      "telephone": "02 62 40 23 45"
+    },
+    {
+      "nom": "Tribunal judiciaire de Saint-Pierre, cartório (greffe)",
+      "detail": "28 rue Augustin Archambaud, 97410 Saint-Pierre, se a criança morar na sua jurisdição.",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b",
+      "telephone": "02 62 96 10 00"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Reconhecimento de um filho (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887"
+    },
+    {
+      "titre": "Filho reconhecido tardiamente e autoridade parental (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Termo de reconhecimento",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Declaração conjunta de autoridade parental carimbada pelo cartório",
+      "categorie": "jaf"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Horário na prefeitura: reconhecimento",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Reconhecer a criança antes do primeiro aniversário",
+      "evenement": "rdv"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Antes do primeiro aniversário da criança",
+      "detail": "Para que o pai exerça a autoridade parental sem nenhum procedimento adicional."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: agendamento e horários do serviço de registro civil, conforme as prefeituras da Reunião.",
+    "A confirmar localmente: o tribunal judiciaire competente (Saint-Denis ou Saint-Pierre) conforme o município onde a criança mora; a divisão dos municípios não pôde ser verificada, pois os sites justice.fr e da cour d'appel (tribunal de recursos) estavam em manutenção."
+  ],
+  "motsCles": [
+    "reconhecimento",
+    "filiação",
+    "pai",
+    "não casados",
+    "autoridade parental",
+    "reconhecimento antecipado"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F887 Reconhecimento de um filho (casal não casado)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F942 Filho reconhecido tardiamente: consequências para a autoridade parental",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Annuaire service-public, Tribunal judiciaire de Saint-Denis",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/89e93007-f1cf-40e9-92b1-c8880c9a4d8a",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Annuaire service-public, Tribunal judiciaire de Saint-Pierre",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

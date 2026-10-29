@@ -1,0 +1,182 @@
+{
+  "slug": "changer-ecole-en-cours-annee",
+  "territoire": "guadeloupe",
+  "categorie": "ecole",
+  "titre": "Changing schools during the school year (moving, certificat de radiation)",
+  "resume": "Moving your child to a new primary school, middle school (collège) or high school (lycée) mid-year: certificat de radiation, registration at the town hall then at the school, exact documents, and the case of separated parents.",
+  "aQuoiCaSert": "A child can change schools during the year, for example after a move or a separation. The change is never automatic: it depends on available places. The previous school issues a certificat de radiation (certificate of withdrawal from the school roll), which you need to enroll the child in the new one. For public nursery and primary schools, registration goes through the town hall (mairie) first.",
+  "quiEstConcerne": [
+    "Parents moving during the school year, within the same town or elsewhere in Guadeloupe.",
+    "Separated parents whose child changes main residence.",
+    "Parents who want a different school, collège or lycée from the one in their catchment area."
+  ],
+  "aSavoir": [
+    "Public school, another school in the same town: you need the mayor's approval, who issues a registration certificate (certificat d'inscription). In another town: approval from the mayor of your town of residence and from the mayor of the receiving town (service-public.gouv.fr).",
+    "Separated parents: if one parent objects to the change of school, the principal must wait for the decision of the family court judge (juge aux affaires familiales, JAF) to whom that parent has applied (service-public.gouv.fr). Changing schools is an important decision for the child: it is best to have the written agreement of both parents who hold parental authority.",
+    "If a judgment gives you sole parental authority, show it to the school and the town hall.",
+    "Public collège or lycée in your catchment area: get the certificat de radiation (called an exeat) from the previous school, then enroll the child at the new one. The head of the school must accept the enrollment. If there are no places left, the education authority's services assign the student.",
+    "Collège or lycée outside your catchment area: you first need the approval of the director of education services (Dasen, directeur académique) before enrolling.",
+    "Enrollment in a public primary school is free (service-public.gouv.fr)."
+  ],
+  "documents": [
+    {
+      "id": "certificat-radiation",
+      "libelle": "Certificat de radiation from the previous school (exeat for collège and lycée)",
+      "detail": "Original issued by the previous school's management once the change has been reported. Required in all cases.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "certificat-inscription",
+      "libelle": "Registration certificate issued by the town hall (public school)",
+      "detail": "Original, to request from the school services department of the new town's town hall.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "filiation",
+      "libelle": "Family record book (livret de famille) or extract of the child's birth certificate",
+      "detail": "Copy, to prove identity and parentage. Certificate free on service-public.gouv.fr or from the town hall where the child was born.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "vaccins",
+      "libelle": "Proof of mandatory vaccinations",
+      "detail": "Copy of the vaccination pages of the health record book or a certificate of contraindication.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parents",
+      "libelle": "ID of each parent making the application",
+      "detail": "Valid copy, requested by the town hall for registration.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Recent proof of address",
+      "detail": "Copy of a bill or rent receipt at the new address. If someone is housing you, a sworn statement (attestation sur l'honneur) from them with their proof of address.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "bulletins",
+      "libelle": "This year's report cards and guidance decision (collège, lycée)",
+      "detail": "Copies, downloadable from the school's online portal.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "accord-autre-parent",
+      "libelle": "Written agreement of the other parent",
+      "detail": "Dated and signed, with a copy of their ID. Recommended when parental authority is shared.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement (child's residence, parental authority)",
+      "detail": "Copy, if a decision sets the residence or gives parental authority to one parent only.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Contact the new school",
+      "detail": "Check that there are places available. For a public school, also call the town hall's school services department."
+    },
+    {
+      "titre": "Get the required approval",
+      "detail": "Registration certificate from the town hall for a public school; approval from the director of education services for a collège or lycée outside your catchment area."
+    },
+    {
+      "titre": "Inform the previous school that your child is leaving",
+      "detail": "Ask for the certificat de radiation or exeat. Let the other parent know."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Certificat de radiation, town hall registration certificate, family record book or birth certificate, up-to-date vaccination record, proof of address, IDs, report cards, written agreement of the other parent or judgment if needed."
+    },
+    {
+      "titre": "Complete enrollment at the new school",
+      "detail": "Remember to re-enroll your child in the canteen, after-school care and school transport too."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Town hall of your new town (school services)",
+      "detail": "For the registration certificate for a public school."
+    },
+    {
+      "nom": "Rectorat de l'académie de la Guadeloupe (regional education authority)",
+      "detail": "In Les Abymes. For placement in a collège or lycée when the school is full or outside your catchment area.",
+      "url": "https://www.ac-guadeloupe.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Changing schools during the year (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722"
+    },
+    {
+      "titre": "Changing collège or lycée during the year (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393"
+    },
+    {
+      "titre": "Enrolling in primary school (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Certificat de radiation from the previous school",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Town hall registration certificate",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Other parent's written agreement to the change of school",
+      "categorie": "jaf"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Enrollment appointment at the new school",
+      "evenement": "ecole"
+    },
+    {
+      "type": "rappel",
+      "titre": "Re-enroll your child in the canteen and after-school care",
+      "evenement": "ecole"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: in Guadeloupe, which rectorat department handles mid-year placements, and how long it takes to respond.",
+    "To be confirmed locally: the documents requested may vary slightly between town halls in Guadeloupe.",
+    "Saint-Martin and Saint-Barthélemy are separate territories (collectivités): school organization and contacts may differ there."
+  ],
+  "motsCles": [
+    "change of school",
+    "certificat de radiation",
+    "exeat",
+    "moving",
+    "town hall",
+    "middle school",
+    "high school"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F10722 Changing schools during the year",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10722",
+      "verifieLe": "2025-07-08"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F20393 Changing collège or lycée during the year",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20393",
+      "verifieLe": "2025-10-09"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1865 Enrolling in primary school",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "guadeloupe",
+  "categorie": "sante",
+  "titre": "Mandatory vaccinations and check-ups at the PMI",
+  "resume": "The vaccines required for daycare, school and holiday clubs, the same in Guadeloupe as in mainland France, and free check-ups for children under 6 at the Département's PMI centers.",
+  "aQuoiCaSert": "Mandatory vaccinations are required to start daycare, school, after-school care or holiday camp: without proof, enrollment may be refused or only temporary. The proof is the child's health record book (carnet de santé) filled in by the doctor. The PMI (protection maternelle et infantile, the mother and child health service), run by the Département de la Guadeloupe (departmental council), supports families free of charge during pregnancy and the child's first 6 years, and hands out the health record book free of charge.",
+  "quiEstConcerne": [
+    "All parents of minor children, especially before starting daycare, school or a holiday club.",
+    "Parents-to-be and parents of children under 6, for check-ups at the PMI."
+  ],
+  "aSavoir": [
+    "Child born before 2018: diphtheria, tetanus and polio (DTP) are mandatory for school.",
+    "Child born between January 1, 2018 and December 31, 2022: 11 mandatory vaccines (diphtheria, tetanus, polio, whooping cough, Haemophilus influenzae b, hepatitis B, pneumococcus, meningococcus C, measles, mumps, rubella).",
+    "Child born in 2023 or later: same list, with meningococcus A, B, C, W and Y instead of meningococcus C alone.",
+    "In Guadeloupe, the list of mandatory vaccines is the same as in mainland France: the official page only provides an additional requirement (yellow fever) for French Guiana.",
+    "A child who is not up to date can be admitted provisionally: you then have 3 months to catch up, otherwise the child may be excluded. If the child stays more than a year, proof is requested every year.",
+    "The child's mandatory health check-ups (16 between birth and age 6, out of 20 up to age 16) are reimbursed 100% with no upfront payment, excluding extra fees charged by the doctor (dépassements d'honoraires). They can be done by the doctor of your choice or at the PMI.",
+    "Separated parents: the parent who takes the child to be vaccinated should inform the other parent and send them a copy of the vaccination pages, so that each parent has the proof."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "The child's health record book (carnet de santé)",
+      "detail": "Bring the original to every appointment. It is the proof of vaccination: keep a photocopy or photo of the vaccination pages. Lost it? Ask the PMI or your doctor.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Parent's carte Vitale (health insurance card) or the child's certificate of entitlement",
+      "detail": "Certificate can be downloaded free of charge from your ameli account.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "ID of the parent or the accompanying adult",
+      "detail": "Original. If another person accompanies the child, bring written authorization from a parent.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Medical certificate of contraindication, if applicable",
+      "detail": "Issued by the doctor. To be shown instead of proof of vaccination.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check the health record book",
+      "detail": "Compare it with the list of mandatory vaccines for your child's year of birth."
+    },
+    {
+      "titre": "Make an appointment",
+      "detail": "With your regular doctor (médecin traitant) or pediatrician, or at a PMI center of the Département for children under 6. Call first to find out the consultation days."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Health record book, carte Vitale or certificate of entitlement, ID, written authorization if the child is not accompanied by a parent."
+    },
+    {
+      "titre": "Have your child vaccinated",
+      "detail": "The health professional records the vaccine in the health record book."
+    },
+    {
+      "titre": "Show the proof",
+      "detail": "A photocopy of the vaccination pages to the daycare, school or holiday club, every year if the child stays more than a year."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "PMI centers of the Département de la Guadeloupe",
+      "detail": "Free support during pregnancy and until the child is 6. To find the nearest center, check the santé.fr directory or contact the Département.",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/"
+    },
+    {
+      "nom": "Santé.fr directory, PMI in Guadeloupe",
+      "detail": "Search for PMI locations by town.",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/971-guadeloupe"
+    },
+    {
+      "nom": "Your regular doctor or pediatrician",
+      "detail": "Mandatory vaccinations and health check-ups."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vaccines required for daycare and school (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Childhood, youth and family, PMI (Département de la Guadeloupe)",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/"
+    },
+    {
+      "titre": "Mandatory health check-ups up to age 6 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Vaccination appointment",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Vaccine booster",
+      "evenement": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Vaccination pages of the health record book",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 months to catch up after provisional admission",
+      "detail": "If vaccinations are still not up to date after this period, the child may be excluded from the daycare, school or club."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: addresses, days and consultation hours of the Département's PMI centers, which are not given on the official page consulted. Call before you go.",
+    "The number of doses and the age for each vaccine follow the current vaccination schedule: check with your doctor or the PMI.",
+    "Travel: a yellow fever vaccination certificate may be required to enter Guadeloupe from an at-risk country, or to travel to French Guiana. Ask the ARS Guadeloupe (regional health agency) or an international vaccination center.",
+    "Saint-Martin and Saint-Barthélemy are separate territories (collectivités): PMI services may be organized differently there, ask locally."
+  ],
+  "motsCles": [
+    "vaccine",
+    "PMI",
+    "health record book",
+    "pediatrician",
+    "baby",
+    "Département"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vaccination for school, daycare or after-school care",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-01-06"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1879 Health at primary school",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879",
+      "verifieLe": "2026-10-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F35490 Child medical visits: mandatory check-ups up to age 6",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0",
+      "verifieLe": "2026-07-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2025-06-20"
+    },
+    {
+      "titre": "Département de la Guadeloupe, Childhood, youth and family (PMI)",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Santé.fr, PMI directory Guadeloupe (971)",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/971-guadeloupe",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

@@ -59,9 +59,9 @@
     "A forma como a Caf divide a criança entre as duas casas em residência alternada para o auxílio-moradia não é detalhada nas fichas consultadas: pergunte à Caf de la Guyane."
   ],
   "motsCles": ["moradia", "APL", "ALF", "ALS", "aluguel", "Caf", "atestado de aluguel"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F31864 Auxílios-moradia", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864", "verifieLe": "2026-01-30" },
-    { "titre": "Service-public.gouv.fr, F13132 Auxílio-moradia familiar", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132", "verifieLe": "2026-07-01" }
+    { "titre": "Service-public.gouv.fr, F31864 Auxílios-moradia", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13132 Auxílio-moradia familiar", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132", "verifieLe": "2026-10-29" }
   ]
 }

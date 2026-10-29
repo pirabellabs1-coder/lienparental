@@ -1,0 +1,160 @@
+{
+  "slug": "declaration-naissance",
+  "territoire": "reunion",
+  "categorie": "naissance",
+  "titre": "Registrar o nascimento do meu filho",
+  "resume": "Um procedimento obrigatório e gratuito na prefeitura (mairie) do local de nascimento, nos 5 dias seguintes ao parto. Os documentos a levar e o livro de família (livret de famille) entregue nessa ocasião.",
+  "aQuoiCaSert": "O registro de nascimento permite lavrar a certidão de nascimento da criança: sem ele, a criança não tem registro civil. Para um primeiro filho, a prefeitura também entrega gratuitamente o livro de família. É o ponto de partida dos direitos junto à Caf (Caisse d'allocations familiales, órgão de benefícios familiares) e à Assurance Maladie (seguro de saúde público francês). Passado o prazo, a prefeitura não pode mais registrar o nascimento sozinha: é preciso uma decisão judicial.",
+  "quiEstConcerne": [
+    "O pai, a segunda mãe ou qualquer pessoa que tenha assistido ao parto (médico, parteira, responsável pelo estabelecimento).",
+    "Se a mãe der à luz sozinha no hospital, o estabelecimento faz o registro."
+  ],
+  "aSavoir": [
+    "Prazo: 5 dias após o parto, sem contar o dia do parto. Se o último dia cair num sábado, domingo ou feriado, ele passa para o primeiro dia útil seguinte.",
+    "Na Reunião, esse prazo de 5 dias vale em todos os municípios: a ficha oficial não prevê exceção para a ilha.",
+    "O registro é feito na prefeitura do local de nascimento, que não é necessariamente a do seu domicílio (por exemplo, o município da maternidade).",
+    "Depois do prazo, é necessária uma declaração judicial perante o tribunal judiciaire (tribunal judiciário).",
+    "Pais não casados: o pai precisa reconhecer a criança (reconnaissance) para que a filiação paterna seja estabelecida. Ele pode fazê-lo antes do nascimento ou no momento do registro.",
+    "Livro de família: para um primeiro filho, ele é entregue gratuitamente pela prefeitura do local de nascimento, mediante apresentação de um documento de identidade."
+  ],
+  "documents": [
+    {
+      "id": "certificat-accouchement",
+      "libelle": "Atestado médico de parto (certificat d'accouchement)",
+      "detail": "Original, entregue pela maternidade ou pela parteira.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parents",
+      "libelle": "Documento de identidade de cada um dos pais",
+      "detail": "Carteira de identidade, passaporte ou título de residência. Leve os dos dois pais, mesmo que só um vá.",
+      "coffre": "autres"
+    },
+    {
+      "id": "reconnaissance",
+      "libelle": "Termo de reconhecimento antecipado, se foi feito antes do nascimento",
+      "detail": "Cópia entregue pela prefeitura ou pelo notário no momento do reconhecimento.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "choix-nom",
+      "libelle": "Declaração conjunta de escolha do sobrenome, se vocês fizerem uma",
+      "detail": "Assinada pelos dois pais. Formulário disponível na prefeitura.",
+      "coffre": "autres"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Livro de família, se já tiverem um",
+      "detail": "Original, para incluir a criança.",
+      "coffre": "autres"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "Cópias da certidão de nascimento da criança",
+      "detail": "Gratuitas. Peça após o registro, na prefeitura ou on-line.",
+      "coffre": "autres"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Pegue o atestado de parto na maternidade",
+      "detail": "Pergunte também se a maternidade envia o registro à prefeitura."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Atestado de parto, documentos de identidade dos dois pais, reconhecimento antecipado se houver, declaração de escolha de sobrenome assinada se vocês fizerem uma, livro de família já existente. Calcule o prazo final: 5 dias."
+    },
+    {
+      "titre": "Vá à prefeitura do local de nascimento dentro do prazo",
+      "detail": "Serviço de registro civil (état civil). O pai não casado que ainda não reconheceu a criança pode fazê-lo no mesmo momento."
+    },
+    {
+      "titre": "Retire a certidão de nascimento e o livro de família",
+      "detail": "Peça várias cópias da certidão: a Caf, a Assurance Maladie e a mutuelle (plano de saúde complementar) as pedem."
+    },
+    {
+      "titre": "Informe o nascimento à Caf e à Assurance Maladie",
+      "detail": "No seu espaço Caf, e na sua conta ameli para vincular a criança."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Prefeitura (mairie) do local de nascimento, serviço de registro civil",
+      "detail": "Registro, certidão de nascimento e livro de família."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Registro de nascimento (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961"
+    },
+    {
+      "titre": "Livro de família no nascimento do primeiro filho (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991"
+    },
+    {
+      "titre": "Pedir uma certidão de nascimento (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Declarar o nascimento na prefeitura (5 dias)",
+      "evenement": "rdv"
+    },
+    {
+      "type": "coffre",
+      "titre": "Certidão de nascimento da criança",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Cópia do livro de família",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Atestado de parto",
+      "categorie": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Informar o nascimento à Caf e à Assurance Maladie",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "5 dias após o parto",
+      "detail": "O dia do parto não conta. Passa para o primeiro dia útil se o último dia cair num fim de semana ou feriado."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: possibilidade de registrar o nascimento diretamente na maternidade, conforme o estabelecimento e a prefeitura.",
+    "A confirmar localmente: horário do serviço de registro civil e eventuais plantões aos sábados, conforme a prefeitura.",
+    "A lista exata de documentos pedidos na prefeitura não foi verificada em detalhe: ligue para o serviço de registro civil antes de ir."
+  ],
+  "motsCles": [
+    "nascimento",
+    "bebê",
+    "registro civil",
+    "prefeitura",
+    "certidão de nascimento",
+    "maternidade",
+    "livro de família"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F961 Registro de nascimento",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F11991 Livro de família no nascimento do primeiro filho",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

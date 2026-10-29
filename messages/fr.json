@@ -234,7 +234,7 @@
   "guide": {
     "title": "Le Guide parental",
     "lead": "Toutes les informations essentielles pour les parents, réunies au même endroit, là où vous vivez. Chaque fiche vous dit quoi faire, avec quels documents, et où.",
-    "pointSheets": "École, santé, aides, logement, séparation : {count} fiches pour la Guyane",
+    "pointSheets": "École, santé, aides, logement, séparation : {count} fiches pratiques, adaptées à votre territoire",
     "pointSheetsNoCount": "École, santé, aides, logement, séparation",
     "point2": "Les documents à réunir et les étapes, dans l’ordre",
     "point3": "Un rappel, un document ou une dépense ajoutés en un geste",
@@ -280,7 +280,7 @@
     "a2": "Ouvrez le site dans votre navigateur, puis choisissez « Ajouter à l’écran d’accueil » (menu de partage sur iPhone, menu du navigateur sur Android). Notre page Installer l’application vous guide pas à pas.",
     "a2Link": "Installer l’application",
     "q3": "Le Guide parental est-il disponible partout ?",
-    "a3": "Pas encore. Le Guide commence par la Guyane, avec des fiches sur l’école, la santé, les aides, la séparation et la vie quotidienne. La Martinique, la Guadeloupe, La Réunion, Mayotte et l’Hexagone suivront.",
+    "a3": "Pas encore. Le Guide commence par la Guyane, avec des fiches sur l’école, la santé, les aides, la séparation et la vie quotidienne, puis s’ouvre territoire par territoire : Martinique, Guadeloupe, La Réunion, Mayotte et l’Hexagone. La page du Guide parental indique les territoires déjà disponibles.",
     "q4": "Mes données sont-elles sécurisées ?",
     "a4": "Oui. Les échanges sont chiffrés en transit (HTTPS/TLS) et les données chiffrées au repos. Vos données sont stockées dans l’Union européenne (Irlande) ; certains prestataires (paiement, e-mails, Coach IA) peuvent en traiter une partie hors UE, avec les garanties prévues par le RGPD (détail dans la politique de confidentialité). Les données de santé bénéficient d’un chiffrement supplémentaire. Votre espace est personnel : rien n’est partagé sans votre accord.",
     "q5": "Puis-je partager des informations avec l’autre parent ?",

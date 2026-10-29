@@ -78,14 +78,14 @@
     "Le coût d'un renouvellement de carte sans présenter l'ancienne carte n'est pas précisé par la fiche officielle : demandez à la mairie."
   ],
   "motsCles": ["carte d'identité", "passeport", "CNI", "ANTS", "mairie", "timbre fiscal", "voyage"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1342 Carte d'identité d'un mineur : première demande", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-04-27" },
-    { "titre": "Service-public.gouv.fr, F21090 Renouvellement de la carte d'identité d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090", "verifieLe": "2026-06-19" },
-    { "titre": "Service-public.gouv.fr, F1153 Carte d'identité d'un mineur perdue", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153", "verifieLe": "2026-06-19" },
-    { "titre": "Service-public.gouv.fr, F14930 Passeport d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930", "verifieLe": "2026-06-19" },
-    { "titre": "Service-public.gouv.fr, F21244 Passeport d'un mineur perdu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244" },
-    { "titre": "Service-public.gouv.fr, F34752 Tarifs du passeport", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752", "verifieLe": "2026-08-05" },
-    { "titre": "Service-public.gouv.fr, F1427 Acte de naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" }
+    { "titre": "Service-public.gouv.fr, F1342 Carte d'identité d'un mineur : première demande", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21090 Renouvellement de la carte d'identité d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1153 Carte d'identité d'un mineur perdue", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F14930 Passeport d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21244 Passeport d'un mineur perdu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F34752 Tarifs du passeport", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1427 Acte de naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" }
   ]
 }

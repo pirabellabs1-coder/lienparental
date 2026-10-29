@@ -1,0 +1,62 @@
+{
+  "slug": "acte-naissance",
+  "territoire": "reunion",
+  "categorie": "naissance",
+  "titre": "Obter uma certidão de nascimento",
+  "resume": "Cópia integral ou extrato, com ou sem filiação: quem pode pedir, como obter gratuitamente on-line, pelo correio ou na prefeitura, e quando ela não é mais necessária.",
+  "aQuoiCaSert": "A certidão de nascimento (acte de naissance) comprova a identidade e a filiação do seu filho. Ela é pedida para a primeira carteira de identidade ou o primeiro passaporte, um certificado de nacionalidade, um processo judicial ou algumas matrículas. O pedido é sempre gratuito e, em muitos casos, a própria administração a obtém, sem que você precise apresentá-la.",
+  "quiEstConcerne": [
+    "Os pais que precisam da certidão de nascimento do filho menor, do qual são os representantes legais.",
+    "Qualquer pessoa que precise da própria certidão, ou da de um ascendente, de um descendente, do cônjuge ou do parceiro de PACS (união civil)."
+  ],
+  "aSavoir": [
+    "Existem três formatos. Cópia integral (copie intégrale): todo o conteúdo do registro, com os pais e as anotações à margem. Extrato com filiação (extrait avec filiation): resumo que cita os pais. Extrato sem filiação (extrait sans filiation): só identidade, data e lugar de nascimento.",
+    "Cópia integral e extrato com filiação são reservados à própria pessoa (maior de idade) ou ao seu representante legal, ao cônjuge ou parceiro de PACS, aos ascendentes, aos descendentes e a certos profissionais autorizados. O extrato sem filiação pode ser pedido por qualquer pessoa.",
+    "O procedimento é gratuito. Desconfie de sites que cobram por ele: você não precisa passar por eles.",
+    "Na prefeitura (mairie) do lugar de nascimento, a certidão é entregue na hora mediante documento de identidade. Pelo correio ou on-line, chega em alguns dias, conforme a prefeitura e o envio postal (preveja mais tempo para um envio para a Reunião ou a partir dela).",
+    "Criança ou pai/mãe francês nascido no exterior: a certidão é emitida pelo Service central d'état civil (Scec, serviço central de registro civil) de Nantes, on-line ou pelo correio, sem atendimento ao público. Prazo indicado: cerca de 30 dias.",
+    "Carteira de identidade de menor sem passaporte válido (ou vencido há mais de 5 anos): se o registro civil do município de nascimento for digitalizado, a certidão não é pedida; caso contrário, é preciso uma certidão com menos de 3 meses.",
+    "Pais separados: cada um, como ascendente, pode pedir sozinho a cópia integral da certidão do filho."
+  ],
+  "documents": [
+    { "id": "infos-naissance", "libelle": "Os dados exatos do nascimento", "detail": "Sobrenome, nomes, data e lugar de nascimento da criança, sobrenomes e nomes dos dois pais. Copie-os do livro de família (livret de famille) para evitar recusa.", "coffre": "autres" },
+    { "id": "identite-demandeur", "libelle": "Documento de identidade de quem faz o pedido (original)", "detail": "Exigido no balcão da prefeitura. Pelo correio ou on-line, o oficial de registro civil pode pedi-lo em caso de dúvida.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Livro de família (original ou cópia)", "detail": "Útil para comprovar o seu vínculo com a criança. Se não o tiver mais, veja a ficha «Obter ou atualizar o livro de família (livret de famille): segunda via, segundo livro».", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Cópia integral da certidão de nascimento recebida", "detail": "Anote a data de emissão: muitos procedimentos exigem uma certidão com menos de 3 meses.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Verifique se você realmente precisa dela", "detail": "Para carteira de identidade ou passaporte, pergunte na prefeitura ou consulte o site da ANTS (Agence nationale des titres sécurisés, agência nacional de documentos seguros) para saber se o município de nascimento digitalizou o registro civil. Pergunte também qual formato é esperado e se deve ter menos de 3 meses." },
+    { "titre": "Nascido na França: faça o pedido on-line", "detail": "No service-public.gouv.fr, serviço gratuito de pedido de certidão de nascimento. Escolha o município de nascimento, o seu vínculo com a criança, o tipo de certidão e o número de vias. A certidão chega pelo correio." },
+    { "titre": "Ou escreva à prefeitura do lugar de nascimento", "detail": "Em papel simples: tipo de certidão, sobrenome, nomes, data de nascimento, nomes dos pais, o seu vínculo com a criança e o seu endereço. Um envelope selado com o seu endereço costuma acelerar a resposta." },
+    { "titre": "Confira antes de ir à prefeitura", "detail": "Prefeitura certa (a do lugar de nascimento, não a do domicílio), documento de identidade original válido, livro de família, nomes exatos dos dois pais, tipo de certidão. Ligue para saber o horário do serviço de registro civil (état civil)." },
+    { "titre": "Nascido no exterior: passe pelo Scec de Nantes", "detail": "Pedido on-line no service-public.gouv.fr ou pelo correio ao Service central d'état civil, 11 rue de la Maison Blanche, 44941 Nantes Cedex 09." },
+    { "titre": "Guarde a certidão recebida", "detail": "Digitalize-a no Cofre e anote a data: depois de 3 meses, muitas vezes será preciso pedir outra." }
+  ],
+  "ou": [
+    { "nom": "Service-public.gouv.fr, pedido de certidão de nascimento on-line", "detail": "Gratuito, para nascimento na França.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427" },
+    { "nom": "Prefeitura (mairie) do lugar de nascimento", "detail": "Entrega na hora no balcão do registro civil, mediante documento de identidade." },
+    { "nom": "Service central d'état civil (Scec), Nantes", "detail": "Para franceses nascidos no exterior. Sem atendimento ao público: on-line ou pelo correio." }
+  ],
+  "liens": [
+    { "titre": "Certidão de nascimento: cópia integral ou extrato (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427" },
+    { "titre": "Carteira de identidade de menor: documentos a apresentar (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Cópia integral da certidão de nascimento da criança", "categorie": "autres" },
+    { "type": "rappel", "titre": "Certidão de nascimento: validade de 3 meses para os procedimentos", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Ida à prefeitura: retirada de certidão de nascimento", "evenement": "rdv" }
+  ],
+  "datesLimites": [
+    { "libelle": "Menos de 3 meses", "detail": "Validade muitas vezes exigida, por exemplo para a primeira carteira de identidade se o registro civil do município de nascimento não for digitalizado." }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: se o registro civil do seu município de nascimento na Reunião é digitalizado; pergunte à prefeitura ou verifique no site da ANTS.",
+    "A confirmar localmente: horários e eventual agendamento no serviço de registro civil da prefeitura de nascimento."
+  ],
+  "motsCles": ["certidão de nascimento", "cópia integral", "extrato", "filiação", "registro civil", "prefeitura", "Scec", "Nantes"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1427 Certidão de nascimento: pedido de cópia integral ou de extrato", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1342 Carteira de identidade de menor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-10-29" }
+  ]
+}

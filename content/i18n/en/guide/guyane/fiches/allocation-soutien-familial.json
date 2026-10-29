@@ -11,7 +11,7 @@
     "If the other parent is unable to pay (insolvency, unemployment, imprisonment, RSA minimum income...): the Caf can also pay the ASF after checking their situation."
   ],
   "aSavoir": [
-    "Amount: €200.78 per month per child (service-public.gouv.fr, page checked on April 1, 2026).",
+    "Amount: €200.78 per month per child as of April 1, 2026 (service-public.gouv.fr).",
     "Top-up ASF (ASF différentielle): if the child support you receive is below €200.78, the Caf pays the difference. It is not paid if the gap is under €15, and it is paid every 3 months in a single payment.",
     "Child support set but unpaid (judgment, court-approved agreement, or divorce agreement filed with a notary): the ASF is an advance, and the Caf takes action to recover the child support.",
     "No child support set: the ASF is paid for 4 months only. To keep it, apply to the family court judge (juge aux affaires familiales, JAF) within that period (or ask for a review of a decision that does not set child support).",
@@ -59,15 +59,14 @@
     { "libelle": "1 month without any contribution from the other parent", "detail": "This is the minimum period after which you can apply for the ASF." }
   ],
   "aConfirmer": [
-    "The official page shows €201.78 in one place and €200.78 elsewhere: check the current amount on caf.fr or with the Caf de la Guyane.",
     "The exact list of supporting documents is not published by service-public.gouv.fr (it depends on your situation): the Caf may ask for others.",
     "Children not legally recognized by one parent, or orphans: not covered by the \"separated parents\" page; ask the Caf.",
     "To be confirmed locally: opening hours and appointment arrangements at the Caf de la Guyane reception desks in Cayenne, Kourou and Saint-Laurent-du-Maroni."
   ],
   "motsCles": ["ASF", "single parent", "Caf", "unpaid child support", "allowance", "lone parent"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F815 Family support allowance (separated parents)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-04-01" },
+    { "titre": "Service-public.gouv.fr, F815 Family support allowance (separated parents)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F36407 Financial intermediation of child support", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-04-01" },
     { "titre": "ARIPA, financial intermediation", "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere" }
   ]

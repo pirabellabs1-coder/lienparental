@@ -11,12 +11,12 @@
     "Os pais que ainda não são beneficiários da Caf (Caisse d'allocations familiales, órgão de benefícios familiares)."
   ],
   "aSavoir": [
-    "Nos DOM (departamentos ultramarinos), para uma família com um só filho a cargo, é pago um auxílio familiar, com acréscimos ligados à idade da criança (Cnaf, caixa nacional de benefícios familiares, carta de rede LR-2026-051 de 26 de fevereiro de 2026).",
-    "A partir de 2 filhos, as regras são as mesmas da França metropolitana. Desde 1º de março de 2026, o acréscimo por idade é pago aos 18 anos em vez de 14 para os filhos nascidos a partir de 1º de março de 2012, nas famílias com pelo menos 2 filhos (Cnaf, LR-2026-051).",
+    "Nos DOM (departamentos ultramarinos), para uma família com um só filho a cargo, é pago um auxílio familiar, com acréscimos ligados à idade da criança, a partir dos 11 anos e depois reajustados a partir dos 16 anos (Cnaf, caixa nacional de benefícios familiares, carta de rede LR-2026-051 de 26 de fevereiro de 2026).",
+    "A partir de 2 filhos, as regras são as mesmas da França metropolitana. Desde 1º de março de 2026, o acréscimo por idade é pago aos 18 anos em vez de 14 para os filhos nascidos a partir de 1º de março de 2012, nas famílias com pelo menos 2 filhos (exceto o mais velho de uma família de 2 filhos) (Cnaf, LR-2026-051).",
     "Para 2 filhos, o valor básico vai de 38,07 € a 152,25 € por mês, conforme a renda da família (service-public.gouv.fr, verificado em 1º de junho de 2026).",
     "O complément familial (complemento familiar) tem condições e valor diferentes nos DOM, entre eles a Guiana Francesa (service-public.gouv.fr).",
     "Residência alternada: os pais podem escolher dividir os auxílios familiares, cada um recebendo a metade, com o formulário cerfa n° 14000. Essa escolha só pode ser alterada após um ano, salvo mudança de residência da criança. Em caso de desacordo, cada genitor recebe automaticamente uma parte.",
-    "Só os auxílios familiares se dividem. Paje (prestation d'accueil du jeune enfant, benefício da primeira infância), complément familial, auxílios-moradia, auxílio de volta às aulas, auxílio de apoio familiar ou AEEH (auxílio de educação da criança com deficiência) são pagos integralmente ao genitor designado."
+    "Só os auxílios familiares se dividem. Paje (prestation d'accueil du jeune enfant, benefício da primeira infância), complément familial, auxílios-moradia, auxílio de volta às aulas, auxílio de apoio familiar ou AEEH (auxílio de educação da criança com deficiência) são pagos integralmente ao genitor designado. Exceção: desde 1º de dezembro de 2025, cada um dos pais pode receber o CMG (complément de libre choix du mode de garde, auxílio para cuidados infantis) conforme a própria situação."
   ],
   "documents": [
     { "id": "identite-parents", "libelle": "Documento de identidade ou autorização de residência (titre de séjour) de cada genitor", "detail": "Cópia válida, pedida no primeiro pedido à Caf.", "coffre": "finances" },
@@ -48,17 +48,17 @@
     { "type": "rappel", "titre": "Informar à Caf qualquer mudança de situação familiar", "evenement": "autre" }
   ],
   "aConfirmer": [
-    "A confirmar localmente com a Caf de la Guyane: o valor mensal de 2026 para um só filho e as idades dos acréscimos não constam nas páginas nacionais consultadas. Use o simulador da Caf.",
+    "A confirmar localmente com a Caf de la Guyane: o valor mensal de 2026 para um só filho e o valor dos acréscimos não constam nas páginas nacionais consultadas. Use o simulador da Caf.",
     "A confirmar localmente com a Caf de la Guyane: como funciona a divisão em residência alternada quando a família tem um só filho a cargo.",
     "A confirmar localmente: as condições do complément familial na Guiana Francesa (idade e número de filhos, tetos).",
     "A confirmar com a Caf: a situação dos servidores públicos lotados na Guiana Francesa que têm um só filho, para os quais podem valer regras específicas."
   ],
   "motsCles": ["auxílios familiares", "um filho", "DOM", "Caf", "residência alternada", "divisão"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Cnaf, carta de rede LR-2026-051 de 26 de fevereiro de 2026 (acréscimo dos auxílios familiares, disposições DOM)", "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf" },
-    { "titre": "Service-public.gouv.fr, F13213 Auxílios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213", "verifieLe": "2026-06-01" },
-    { "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F13214 Complément familial (complemento familiar)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214", "verifieLe": "2026-04-01" }
+    { "titre": "Cnaf, carta de rede LR-2026-051 de 26 de fevereiro de 2026 (acréscimo dos auxílios familiares, disposições DOM)", "url": "https://caf.fr/sites/default/files/medias/cnaf/Nous_connaitre/qui%20sommes%20nous/Textes%20de%20r%C3%A9f%C3%A9rence/Circulaires/2026/LR-2026-051.pdf", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13213 Auxílios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13214 Complément familial (complemento familiar)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214", "verifieLe": "2026-10-29" }
   ]
 }

@@ -1,0 +1,60 @@
+{
+  "slug": "pass-sport",
+  "territoire": "mayotte",
+  "categorie": "loisirs",
+  "titre": "Pass'Sport : une réduction sur l'inscription en club",
+  "resume": "50 € de réduction sur l'adhésion à un club sportif pour 2026-2027, à utiliser avant le 31 décembre 2026. Le décret prévoit une adaptation pour Mayotte : qui y a droit et comment obtenir son code.",
+  "aQuoiCaSert": "Le Pass'Sport réduit le coût de l'inscription de votre enfant dans un club sportif partenaire. Le club déduit directement 50 € de la licence ou de l'adhésion. Le décret du 28 août 2026 qui fixe les règles 2026-2027 comporte un article d'adaptation à Mayotte, où les prestations familiales sont versées par la CSSM.",
+  "quiEstConcerne": [
+    "Les jeunes de 6 à 17 ans dont le quotient familial est inférieur ou égal à 699 €.",
+    "Les jeunes de 6 à 19 ans bénéficiaires de l'AEEH, et de 16 à 30 ans bénéficiaires de l'AAH.",
+    "Les étudiants boursiers de 28 ans ou moins."
+  ],
+  "aSavoir": [
+    "Montant 2026-2027 : 50 € par jeune.",
+    "Valable pour les inscriptions faites entre le 1er septembre et le 31 décembre 2026.",
+    "Les codes sont envoyés par courriel aux familles éligibles. Sans courriel : testez l'éligibilité sur le site officiel, puis demandez le code en ligne.",
+    "Parents séparés : l'éligibilité dépend du quotient familial de l'allocataire. Le code est envoyé à ce parent : partagez-le si c'est l'autre parent qui inscrit l'enfant."
+  ],
+  "documents": [
+    { "id": "code-pass", "libelle": "Code Pass'Sport de l'enfant", "detail": "Dans le courriel reçu ou obtenu en ligne. Un code par enfant.", "coffre": "autres" },
+    { "id": "certificat", "libelle": "Certificat médical ou questionnaire de santé, si le club le demande", "coffre": "sante" },
+    { "id": "dossier-club", "libelle": "Dossier d'inscription du club et pièces qu'il demande", "coffre": "autres" },
+    { "id": "licence", "libelle": "Licence ou reçu d'adhésion indiquant la réduction", "detail": "À conserver.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez l'éligibilité de votre enfant", "detail": "Sur le site officiel du Pass'Sport." },
+    { "titre": "Récupérez votre code", "detail": "Dans le courriel reçu, ou en faisant la demande en ligne." },
+    { "titre": "Choisissez un club partenaire", "detail": "Liste sur le site officiel, ou demandez directement au club." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Code noté ou imprimé, dossier d'inscription rempli, certificat ou questionnaire de santé si demandé, inscription avant le 31 décembre 2026." },
+    { "titre": "Présentez le code au club lors de l'inscription", "detail": "Le club déduit 50 €." },
+    { "titre": "Enregistrez la dépense restante dans le Journal" }
+  ],
+  "ou": [
+    { "nom": "Site officiel du Pass'Sport", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" },
+    { "nom": "France Services ou CCAS de votre commune", "detail": "Aide gratuite pour faire la demande en ligne.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Pass'Sport, jeunes et parents (sports.gouv.fr)", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents" },
+    { "titre": "Décret n° 2026-830 du 28 août 2026 relatif au Pass'Sport (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054761806" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Utiliser le Pass'Sport avant le 31 décembre 2026", "evenement": "activite" },
+    { "type": "depense", "titre": "Inscription au club sportif", "categorie": "activites" },
+    { "type": "coffre", "titre": "Licence sportive", "categorie": "autres" }
+  ],
+  "datesLimites": [
+    { "libelle": "31 décembre 2026 : dernière date d'inscription avec le Pass'Sport 2026-2027" }
+  ],
+  "aConfirmer": [
+    "À confirmer : comment le quotient familial des familles suivies par la CSSM est pris en compte (le décret cite le quotient établi par la Cnaf ou la MSA) et si les codes leur sont envoyés automatiquement.",
+    "À confirmer localement : liste des clubs partenaires à Mayotte."
+  ],
+  "motsCles": ["sport", "club", "Pass'Sport", "licence", "activité", "réduction"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Légifrance, décret n° 2026-830 du 28 août 2026 (Pass'Sport, article d'adaptation à Mayotte)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054761806", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A15850 Pass'Sport 2026-2027", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A15850", "verifieLe": "2026-10-29" },
+    { "titre": "Pass'Sport, jeunes et parents", "url": "https://www.pass.sports.gouv.fr/v2/jeunes-et-parents", "verifieLe": "2026-10-29" }
+  ]
+}

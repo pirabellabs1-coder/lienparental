@@ -1,0 +1,160 @@
+{
+  "slug": "declaration-naissance",
+  "territoire": "reunion",
+  "categorie": "naissance",
+  "titre": "Registering my child's birth",
+  "resume": "A mandatory, free procedure at the town hall of the place of birth, within 5 days after delivery. The documents to bring, and the family record book (livret de famille) given to you on this occasion.",
+  "aQuoiCaSert": "Registering the birth creates the child's birth certificate (acte de naissance): without it, the child has no civil status. For a first child, the town hall (mairie) also issues the family record book (livret de famille), free of charge. It is the starting point for rights with the Caf (Caisse d'allocations familiales, the family benefits office) and the Assurance Maladie (French public health insurance). After the deadline, the town hall can no longer register the birth on its own: a court decision is needed.",
+  "quiEstConcerne": [
+    "The father, the second mother, or anyone who attended the birth (doctor, midwife, head of the facility).",
+    "If the mother gives birth alone in hospital, the facility registers the birth."
+  ],
+  "aSavoir": [
+    "Deadline: 5 days after delivery, not counting the day of delivery. If the last day falls on a Saturday, Sunday or public holiday, it is moved to the next working day.",
+    "In Réunion, this 5-day deadline applies in every town: the official page provides no exception for the island.",
+    "The birth is registered at the town hall of the place of birth, which is not necessarily the one where you live (for example the town where the maternity unit is located).",
+    "After the deadline, a court declaration before the tribunal judiciaire (judicial court) is required.",
+    "Unmarried parents: the father must recognize the child (reconnaissance) for paternal parentage to be established. He can do so before the birth or when registering it.",
+    "Family record book: for a first child, it is issued free of charge by the town hall of the place of birth, on presentation of an ID document."
+  ],
+  "documents": [
+    {
+      "id": "certificat-accouchement",
+      "libelle": "Medical certificate of delivery (certificat d'accouchement)",
+      "detail": "Original, given by the maternity unit or the midwife.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parents",
+      "libelle": "ID document of each parent",
+      "detail": "ID card, passport or residence permit. Bring both parents' documents, even if only one goes.",
+      "coffre": "autres"
+    },
+    {
+      "id": "reconnaissance",
+      "libelle": "Prenatal recognition certificate, if done before the birth",
+      "detail": "Copy given by the town hall or the notary at the time of recognition.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "choix-nom",
+      "libelle": "Joint declaration choosing the child's surname, if you make one",
+      "detail": "Signed by both parents. Form available at the town hall.",
+      "coffre": "autres"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Family record book, if you already have one",
+      "detail": "Original, to add the child.",
+      "coffre": "autres"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "Copies of the child's birth certificate",
+      "detail": "Free. Request them after registration, at the town hall or online.",
+      "coffre": "autres"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Get the delivery certificate from the maternity unit",
+      "detail": "Also ask whether the maternity unit arranges for the registration to be sent to the town hall."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Delivery certificate, both parents' ID documents, prenatal recognition if there is one, signed surname declaration if you make one, existing family record book. Work out the deadline: 5 days."
+    },
+    {
+      "titre": "Go to the town hall of the place of birth within the deadline",
+      "detail": "Civil registry office (état civil). An unmarried father who has not yet recognized the child can do so at the same time."
+    },
+    {
+      "titre": "Collect the birth certificate and the family record book",
+      "detail": "Ask for several copies of the certificate: the Caf, the Assurance Maladie and the mutuelle (top-up health insurance) ask for them."
+    },
+    {
+      "titre": "Report the birth to the Caf and the Assurance Maladie",
+      "detail": "In your Caf account, and in your ameli account to add the child."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Town hall of the place of birth, civil registry office",
+      "detail": "Registration, birth certificate and family record book."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Registering a birth (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961"
+    },
+    {
+      "titre": "Family record book at the birth of the first child (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991"
+    },
+    {
+      "titre": "Requesting a birth certificate (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Register the birth at the town hall (5 days)",
+      "evenement": "rdv"
+    },
+    {
+      "type": "coffre",
+      "titre": "Child's birth certificate",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Copy of the family record book",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Delivery certificate",
+      "categorie": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Report the birth to the Caf and the Assurance Maladie",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "5 days after delivery",
+      "detail": "The day of delivery is not counted. Moved to the next working day if the last day falls on a weekend or public holiday."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: whether the birth can be registered directly from the maternity unit, depending on the facility and the town hall.",
+    "To be confirmed locally: opening hours of the civil registry office and any Saturday sessions, depending on the town hall.",
+    "The exact list of documents requested at the town hall was not rechecked in detail: call the civil registry office before you go."
+  ],
+  "motsCles": [
+    "birth",
+    "baby",
+    "civil status",
+    "town hall",
+    "birth certificate",
+    "maternity",
+    "family record book"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F961 Registering a birth",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F961",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F11991 Family record book at the birth of the first child",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

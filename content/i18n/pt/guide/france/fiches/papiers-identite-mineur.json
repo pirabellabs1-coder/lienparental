@@ -1,0 +1,279 @@
+{
+  "slug": "papiers-identite-mineur",
+  "territoire": "france",
+  "categorie": "logement",
+  "titre": "Fazer a carteira de identidade ou o passaporte do meu filho",
+  "resume": "Os documentos exatos para levar à prefeitura (mairie) conforme o seu caso (primeiro pedido, renovação, perda, pais separados, residência alternada), as taxas na França metropolitana e as regras de presença da criança.",
+  "aQuoiCaSert": "A carteira de identidade e o passaporte comprovam a identidade e a nacionalidade francesa do seu filho e permitem que ele viaje. Um menor pode tê-los em qualquer idade, mesmo bebê. O pedido é feito em qualquer prefeitura (mairie) equipada com uma estação de registro, não necessariamente a da sua cidade. Um pedido recusado por falta de um documento é o motivo mais comum de viagem perdida: prepare a lista que corresponde à sua situação.",
+  "quiEstConcerne": [
+    "O genitor (ou o tutor) que exerce a autoridade parental: é quem faz o pedido, junto com a criança.",
+    "Pais separados, em residência alternada ou com apenas um dos pais titular da autoridade parental: documentos adicionais são exigidos.",
+    "O representante legal que não é pai nem mãe (tutor, ASE, o serviço de proteção à infância): deve comprovar a delegação da autoridade parental."
+  ],
+  "aSavoir": [
+    "Carteira de identidade: gratuita no primeiro pedido e na renovação, se você apresentar a carteira antiga. Em caso de perda ou roubo, selo fiscal (timbre fiscal) de 25 € na França metropolitana. Válida por 10 anos.",
+    "Passaporte na França metropolitana: selo fiscal de 17 € para criança com menos de 15 anos, 42 € de 15 a 17 anos. Comprado on-line, em tabacaria (bureau de tabac) credenciada ou no fim da pré-solicitação. Válido por 5 anos.",
+    "A criança e o genitor devem ir juntos na entrega do pedido. Impressões digitais a partir de 12 anos. A partir de 13 anos, a criança pode assinar se o representante legal concordar.",
+    "Retirada: antes dos 12 anos, o genitor vai sozinho; a partir dos 12 anos, a criança deve estar presente. O documento deve ser retirado em até 3 meses após ficar disponível; senão, é destruído.",
+    "Renovação da carteira: possível no ano anterior à data de vencimento.",
+    "Pais separados em residência alternada: os dois endereços podem constar no documento se você apresentar a prova da residência alternada e um comprovante de endereço de cada um dos pais.",
+    "Só um dos pais exerce a autoridade parental: leve o documento que comprova isso (por exemplo, a sentença). Sem ele, o pedido pode ser recusado.",
+    "Certidão de nascimento: só é pedida se a criança não tiver documento válido ou vencido há menos de 5 anos, e só se o registro civil da cidade de nascimento não for digitalizado. Deve ter menos de 3 meses. É gratuita."
+  ],
+  "documents": [
+    {
+      "id": "photo",
+      "libelle": "Uma foto 3x4 com menos de 6 meses, dentro das normas",
+      "detail": "Original. Tirada em fotógrafo ou cabine credenciada.",
+      "coffre": "autres"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Documento de identidade válido do genitor que faz o pedido",
+      "detail": "Original. Essa pessoa deve exercer a autoridade parental e ir com a criança.",
+      "coffre": "autres"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Comprovante de endereço em nome de quem faz o pedido",
+      "detail": "Original, recente (conta, aviso de imposto, recibo de aluguel). Para passaporte perdido, deve ter menos de um ano.",
+      "coffre": "autres"
+    },
+    {
+      "id": "ancien-titre",
+      "libelle": "Carteira de identidade e passaporte antigos da criança, se tiver",
+      "detail": "Originais, mesmo vencidos há menos de 5 anos. Dispensam a certidão de nascimento e tornam gratuita a renovação da carteira.",
+      "coffre": "autres"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "Certidão de nascimento da criança com menos de 3 meses, se pedida",
+      "detail": "Só sem documento válido ou vencido há menos de 5 anos, e se a cidade de nascimento não for digitalizada. Gratuita on-line em service-public.gouv.fr ou na prefeitura de nascimento.",
+      "coffre": "autres"
+    },
+    {
+      "id": "nationalite",
+      "libelle": "Comprovante de nacionalidade francesa, se ela não constar na certidão de nascimento",
+      "detail": "Por exemplo, um certificado de nacionalidade francesa ou um documento que prove a nacionalidade de um dos pais: a prefeitura indica o documento adequado.",
+      "coffre": "autres"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo que fixa a autoridade parental ou a residência da criança",
+      "detail": "Cópia. Obrigatório se só um dos pais exerce a autoridade parental, ou para incluir os dois endereços em residência alternada.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile-autre-parent",
+      "libelle": "Comprovante de endereço do outro genitor (residência alternada)",
+      "detail": "Só se você quiser os dois endereços no documento. Original ou cópia, conforme a prefeitura: pergunte.",
+      "coffre": "autres"
+    },
+    {
+      "id": "delegation",
+      "libelle": "Comprovante de delegação da autoridade parental (tutor, ASE)",
+      "detail": "Sentença de delegação ou de tutela. Um agente da aide sociale à l'enfance (proteção à infância) acrescenta sua carteira ou declaração profissional.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "declaration-perte",
+      "libelle": "Declaração de perda (Cerfa n° 14011) ou comprovante do boletim de ocorrência de roubo",
+      "detail": "Em caso de perda, pode ser preenchida no local no dia do pedido. Se não for refazer o documento logo, declare a perda à polícia ou à gendarmerie; em caso de roubo, registre-o antes.",
+      "coffre": "autres"
+    },
+    {
+      "id": "timbre",
+      "libelle": "Selo fiscal (timbre fiscal), se necessário",
+      "detail": "Passaporte, ou carteira perdida ou roubada. Compra on-line (timbres.impots.gouv.fr) ou em tabacaria credenciada, antes do agendamento.",
+      "coffre": "autres"
+    },
+    {
+      "id": "pre-demande",
+      "libelle": "Número ou QR code da pré-solicitação ANTS",
+      "detail": "Opcional, mas economiza tempo no guichê.",
+      "coffre": "autres"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Identifique o seu caso",
+      "detail": "Primeiro pedido, renovação, perda ou roubo e, depois, a sua situação familiar (pais juntos, separados, residência alternada, só um dos pais titular da autoridade parental). A lista de documentos depende disso."
+    },
+    {
+      "titre": "Faça a pré-solicitação on-line no site da ANTS",
+      "detail": "Opcional. A ANTS (Agence nationale des titres sécurisés) é a agência nacional de documentos seguros. Para passaporte ou carteira perdida, compre o selo fiscal no final da pré-solicitação."
+    },
+    {
+      "titre": "Agende um horário numa prefeitura equipada",
+      "detail": "Qualquer uma, mesmo fora do seu departamento. Os prazos para agendar podem ser longos, sobretudo antes do verão: antecipe-se antes de uma viagem."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Só originais. Foto com menos de 6 meses, seu documento de identidade válido, comprovante de endereço, documento antigo da criança, selo fiscal comprado se necessário, sentença ou acordo se vocês estiverem separados, segundo comprovante de endereço em residência alternada, certidão de nascimento com menos de 3 meses se pedida. A criança vai com você."
+    },
+    {
+      "titre": "Entregue o pedido com o seu filho",
+      "detail": "Impressões digitais a partir de 12 anos. O genitor assina pela criança com menos de 13 anos."
+    },
+    {
+      "titre": "Acompanhe a fabricação",
+      "detail": "Várias semanas. Um SMS avisa se você informou um número de celular; o acompanhamento também é feito no site da ANTS."
+    },
+    {
+      "titre": "Retire o documento em até 3 meses",
+      "detail": "A partir de 12 anos, a criança deve estar presente. Depois, guarde uma cópia no Cofre."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Prefeituras (mairies) equipadas com estação de registro",
+      "detail": "Lista e agendamento no site da ANTS.",
+      "url": "https://passeport.ants.gouv.fr/services/geolocaliser-une-mairie-habilitee"
+    },
+    {
+      "nom": "France Services",
+      "detail": "Balcões públicos de atendimento: ajuda gratuita com a pré-solicitação on-line e a compra do selo fiscal. Encontre o mais próximo no diretório do service-public.fr.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Carteira de identidade de menor: primeiro pedido (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342"
+    },
+    {
+      "titre": "Renovação da carteira de identidade de menor (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090"
+    },
+    {
+      "titre": "Carteira de identidade de menor perdida (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153"
+    },
+    {
+      "titre": "Passaporte de menor (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930"
+    },
+    {
+      "titre": "Passaporte de menor perdido (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244"
+    },
+    {
+      "titre": "Taxas do passaporte (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752"
+    },
+    {
+      "titre": "Viagem sem os pais: autorização de saída do território (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Horário na prefeitura: documentos de identidade da criança",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Retirar o documento de identidade da criança na prefeitura (até 3 meses)",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Renovar a carteira de identidade da criança (um ano antes do vencimento)",
+      "evenement": "autre"
+    },
+    {
+      "type": "depense",
+      "titre": "Passaporte de criança com menos de 15 anos",
+      "categorie": "frais-administratifs",
+      "montant": 17,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752"
+    },
+    {
+      "type": "depense",
+      "titre": "Passaporte de criança de 15 a 17 anos",
+      "categorie": "frais-administratifs",
+      "montant": 42,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752"
+    },
+    {
+      "type": "depense",
+      "titre": "Carteira de identidade perdida ou roubada",
+      "categorie": "frais-administratifs",
+      "montant": 25,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153"
+    },
+    {
+      "type": "coffre",
+      "titre": "Cópia da carteira de identidade da criança",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Cópia do passaporte da criança",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Sentença ou acordo (autoridade parental, residência)",
+      "categorie": "jaf"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Retirada do documento em até 3 meses após ficar disponível",
+      "detail": "Após esse prazo, ele é destruído."
+    },
+    {
+      "libelle": "Renovação da carteira possível no ano anterior ao vencimento"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: os prazos de agendamento e de fabricação variam conforme a prefeitura e a época do ano.",
+    "A confirmar localmente: se o registro civil da cidade de nascimento do seu filho é digitalizado (nesse caso, a certidão de nascimento não é pedida). Pergunte à prefeitura ao agendar.",
+    "As páginas oficiais não dizem se o acordo do outro genitor é exigido para emitir o passaporte quando a autoridade parental é compartilhada: em caso de desacordo, informe-se na prefeitura ou num point-justice (posto gratuito de informação jurídica).",
+    "O custo da renovação da carteira sem apresentar a antiga não é informado pela página oficial: pergunte à prefeitura."
+  ],
+  "motsCles": [
+    "carteira de identidade",
+    "passaporte",
+    "CNI",
+    "ANTS",
+    "prefeitura",
+    "selo fiscal",
+    "viagem"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1342 Carteira de identidade de menor: primeiro pedido",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21090 Renovação da carteira de identidade de menor",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1153 Carteira de identidade de menor perdida",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F14930 Passaporte de menor",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21244 Passaporte de menor perdido",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F34752 Taxas do passaporte",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

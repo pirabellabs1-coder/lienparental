@@ -14,7 +14,7 @@
     "Limites de 2026 para a assistência total (renda fiscal de referência): 12.957 € para 1 pessoa, 15.289 € para 2, 17.621 € para 3, 19.095 € para 4, 20.568 € para 5, 22.041 € para 6, 23.514 € para 7.",
     "Se a sua renda ultrapassar um pouco o limite, é possível uma assistência parcial de 55% ou 25%. Para uma pessoa sozinha: até 15.316 € de renda fiscal de referência para 55%, até 19.433 € para 25%.",
     "O patrimônio também conta (exceto a residência principal). Para 1 pessoa: no máximo 12.957 € de bens móveis (poupança) e 38.866 € de imóveis. Ultrapassar um limite de patrimônio exclui qualquer assistência.",
-    "Em caso de conflito com o outro genitor que faz parte do mesmo domicílio fiscal, a renda de cada um é analisada individualmente.",
+    "Em caso de conflito com o outro genitor que faz parte do mesmo domicílio fiscal (por exemplo, num divórcio), o teto de patrimônio é analisado individualmente.",
     "Verifique primeiro seus seguros (residencial, cartão bancário, proteção jurídica): se uma proteção jurídica já cobre as despesas, o pedido de AJ pode ser recusado. É preciso apresentar uma declaração de não cobertura.",
     "As despesas feitas antes da decisão do escritório de assistência jurídica gratuita (bureau d'aide juridictionnelle) não são cobertas. Faça o pedido o quanto antes, antes da audiência.",
     "A taxa de sustentação oral (droit de plaidoirie, 13 €) e eventuais condenações (indenizações, multas) não são cobertas pela AJ.",
@@ -67,14 +67,14 @@
   ],
   "aConfirmer": [
     "A confirmar localmente: horário de atendimento do escritório de assistência jurídica gratuita de Cayenne e possibilidade de entrega nos outros locais judiciais da Guiana Francesa (Saint-Laurent-du-Maroni).",
-    "O serviço oficial de pedido on-line foi indicado como reservado a certas situações: verifique se está aberto para um processo na Guiana Francesa; caso contrário, use o formulário em papel."
-  ],
+    "O serviço oficial de pedido on-line foi indicado como reservado a certas situações: verifique se está aberto para um processo na Guiana Francesa; caso contrário, use o formulário em papel.",
+    "A confirmar no escritório de assistência jurídica gratuita: se a sua renda (e não só o seu patrimônio) é analisada individualmente em caso de conflito com o outro genitor do mesmo domicílio fiscal; a página oficial só indica isso para o patrimônio."  ],
   "motsCles": ["assistência jurídica gratuita", "AJ", "advogado", "JAF", "custas judiciais", "cerfa 16146", "tribunal Cayenne"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F18074 Assistência jurídica gratuita (aide juridictionnelle)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-06-12" },
-    { "titre": "Service-public.gouv.fr, R1444 Formulário de pedido de assistência jurídica gratuita (Cerfa n° 16146*04)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-09-02" },
-    { "titre": "Service-public.gouv.fr, R66463 Pedido on-line de assistência jurídica gratuita", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463", "verifieLe": "2025-10-15" },
-    { "titre": "Justice.gouv.fr, diretório: Escritório de assistência jurídica gratuita do Tribunal judiciaire de Cayenne", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-cayenne" }
+    { "titre": "Service-public.gouv.fr, F18074 Assistência jurídica gratuita (aide juridictionnelle)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1444 Formulário de pedido de assistência jurídica gratuita (Cerfa n° 16146*04)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R66463 Pedido on-line de assistência jurídica gratuita", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463", "verifieLe": "2026-10-29" },
+    { "titre": "Justice.gouv.fr, diretório: Escritório de assistência jurídica gratuita do Tribunal judiciaire de Cayenne", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-cayenne", "verifieLe": "2026-10-29" }
   ]
 }

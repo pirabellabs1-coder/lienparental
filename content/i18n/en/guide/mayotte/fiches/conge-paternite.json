@@ -1,0 +1,69 @@
+{
+  "slug": "conge-paternite",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Paternity and childcare leave",
+  "resume": "Length of the leave, notice periods for your employer, daily allowances paid by the CSSM and documents to send, plus the new additional birth leave.",
+  "aQuoiCaSert": "Paternity and childcare leave (congé de paternité et d'accueil de l'enfant) allows the father, or the mother's spouse, PACS partner (civil partnership) or cohabiting partner, to stop working after the birth to look after the child. During this leave, the employment contract is suspended and, in Mayotte, it is the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) that may pay daily allowances. The national Labor Code (code du travail) has applied in Mayotte since January 1, 2018.",
+  "quiEstConcerne": [
+    "The child's father, if employed.",
+    "The mother's spouse, PACS partner or cohabiting partner, if not the father.",
+    "These rules concern the private sector: civil servants, self-employed people and other schemes have their own rules."
+  ],
+  "aSavoir": [
+    "Separated parents: the father is entitled to it with no requirement of marriage, PACS or living with the mother.",
+    "Length: 25 calendar days for a birth (32 for multiple births), in addition to the 3-working-day birth leave. A 4-day period is mandatory right after the birth leave.",
+    "The remaining 21 days (28 for multiple births) can be taken all at once or in 2 periods of at least 5 days, within 6 months of the birth.",
+    "Tell your employer at least 1 month before the expected date of delivery, then at least 1 month before the start of each period. Doing so in writing is advised: registered letter, or hand delivery against a signed receipt.",
+    "Daily allowances: in Mayotte, they are paid by the CSSM, reachable at 02 69 61 91 91 (service-public.gouv.fr).",
+    "Additional birth leave: since July 1, 2026, each parent can take 1 to 2 months of paid leave after maternity or paternity leave, for a child born on or after January 1, 2026. A decree of May 30, 2026 set out the arrangements for employees in Mayotte."
+  ],
+  "documents": [
+    { "id": "acte-naissance", "libelle": "Full copy of the child's birth certificate or updated family record book (livret de famille)", "detail": "To send to the CSSM.", "coffre": "finances" },
+    { "id": "lien-mere", "libelle": "Proof of your relationship with the mother if you are not the father", "detail": "Marriage certificate, copy of the PACS, certificate of cohabitation or sworn statement of living together signed by both.", "coffre": "finances" },
+    { "id": "courrier-employeur", "libelle": "Letter informing your employer", "detail": "Copy of the registered letter or the signed receipt, with the dates of the leave.", "coffre": "courriers" },
+    { "id": "attestation-salaire", "libelle": "Salary statement (attestation de salaire)", "detail": "Sent by the employer to the CSSM. Check with them that it has been sent.", "coffre": "finances" },
+    { "id": "rib", "libelle": "Bank details (RIB)", "detail": "If your bank details are not up to date.", "coffre": "finances" },
+    { "id": "decomptes-ij", "libelle": "Daily allowance payment statements", "detail": "To keep.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Tell your employer in writing", "detail": "At least 1 month before the expected date of birth, then at least 1 month before each period of leave." },
+    { "titre": "Check before sending your file", "detail": "Birth certificate or updated family record book, proof of relationship with the mother if you are not the father, salary statement sent by the employer, bank details and address up to date." },
+    { "titre": "Send the supporting documents to the CSSM", "detail": "Through your ameli account (the French health insurance website) if you have one, or by post or at the CSSM front desk." },
+    { "titre": "Take the mandatory 4-day period", "detail": "Right after the 3-day birth leave paid by the employer." },
+    { "titre": "Plan the rest of the leave within 6 months", "detail": "And, if you wish, the additional birth leave within 9 months of the birth." }
+  ],
+  "ou": [
+    { "nom": "Your employer", "detail": "For advance notice and the salary statement." },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Daily allowances. Centre Kinga, Kawéni, Mamoudzou. Front desk by appointment.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" }
+  ],
+  "liens": [
+    { "titre": "Paternity and childcare leave (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156" },
+    { "titre": "Additional birth leave (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685" },
+    { "titre": "Additional birth leave (code.travail.gouv.fr)", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Tell the employer about paternity leave (1 month before due date)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Take the rest of paternity leave within 6 months of the birth", "evenement": "autre" },
+    { "type": "coffre", "titre": "Paternity leave letter to the employer", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Paternity leave daily allowance statements", "categorie": "finances" }
+  ],
+  "datesLimites": [
+    { "libelle": "Inform the employer at least 1 month before the expected birth", "detail": "Then at least 1 month before each period." },
+    { "libelle": "Leave to be taken within 6 months of the birth" },
+    { "libelle": "Additional birth leave within 9 months of the birth", "detail": "For a child born between January 1 and June 30, 2026: to be taken between July 1, 2026 and March 31, 2027." }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the CSSM: eligibility conditions and amount of paternity daily allowances in Mayotte, which may differ from the national scale.",
+    "To be confirmed with the CSSM: amount and procedure for the additional birth leave for an employee in Mayotte (décret n° 2026-426 du 30 mai 2026).",
+    "To be confirmed with the CSSM: phone line hours (on Friday until 12 p.m. or 12:30 p.m. depending on the source)."
+  ],
+  "motsCles": ["paternity leave", "birth", "daily allowances", "employer", "additional birth leave", "CSSM"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F3156 Paternity and childcare leave (Mayotte contact)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39685 Additional birth leave", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685", "verifieLe": "2026-10-29" },
+    { "titre": "Code du travail numérique, additional birth leave as of July 1, 2026", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Contacts", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,8 +1,9 @@
-import { DEFAULT_TERRITOIRE } from './types'
-
-/** Ajoute `?territoire=` aux liens internes du guide quand ce n'est pas le territoire par défaut. */
+/**
+ * Ajoute TOUJOURS `?territoire=` aux liens internes du Guide (Guyane comprise) : sans paramètre, la page
+ * s'ouvre sur le territoire mémorisé (cookie lp_guide_territoire), qui peut différer de celui affiché.
+ */
 export function guideHref(path: string, territoire: string): string {
-  return territoire === DEFAULT_TERRITOIRE ? path : `${path}?${new URLSearchParams({ territoire }).toString()}`
+  return `${path}?${new URLSearchParams({ territoire }).toString()}`
 }
 
 export const ficheHref = (slug: string, t: string) => guideHref(`/app/guide/${slug}`, t)

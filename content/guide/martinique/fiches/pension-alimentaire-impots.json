@@ -1,0 +1,171 @@
+{
+  "slug": "pension-alimentaire-impots",
+  "territoire": "martinique",
+  "categorie": "argent",
+  "titre": "Pension alimentaire et déclaration d'impôts",
+  "resume": "Le parent qui paie peut déduire la pension, celui qui la reçoit la déclare. En résidence alternée, pas de déduction mais un partage des parts. Ce qu'il faut garder comme justificatifs.",
+  "aQuoiCaSert": "La pension versée pour un enfant a des effets sur l'impôt sur le revenu des deux parents : déduction pour l'un, revenu imposable pour l'autre. Elle n'apparaît jamais dans la déclaration préremplie : chacun doit la saisir lui-même. Bien la déclarer, avec les bons justificatifs, évite les erreurs et les redressements.",
+  "quiEstConcerne": [
+    "Le parent qui verse une pension pour un enfant mineur qui vit chez l'autre parent.",
+    "Le parent qui reçoit la pension.",
+    "Les parents en résidence alternée.",
+    "Le parent qui élève seul ses enfants (case T)."
+  ],
+  "aSavoir": [
+    "Parent qui paie, enfant mineur : la pension est déductible si l'enfant a sa résidence habituelle chez l'autre parent et n'est pas compté dans votre quotient familial. Avec un jugement, c'est le montant fixé (revalorisé) ; vous pouvez aussi déduire les dépenses payées directement (cantine, scolarité, frais médicaux). Les frais liés à votre droit de visite ne sont pas déductibles.",
+    "Pension non fixée par un jugement : seules les sommes correspondant aux besoins de l'enfant et à vos moyens sont déductibles, et vous devez pouvoir prouver les versements.",
+    "Parent qui reçoit : la pension est imposable dans la limite de ce que l'autre parent peut déduire. Elle se déclare dans « Pensions, retraites, rentes », ligne « Pensions alimentaires perçues ». Un abattement de 10 % est appliqué automatiquement.",
+    "Résidence alternée : aucune pension n'est déductible. Chaque enfant compte pour 1/4 de part pour chaque parent pour les deux premiers, puis 1/2 part à partir du troisième.",
+    "Case T : le parent célibataire, divorcé ou séparé qui vit seul avec ses enfants à charge coche la case T et obtient une demi-part supplémentaire.",
+    "Enfant majeur non rattaché : pension déductible dans la limite de 6 855 € par enfant (barème vérifié le 15 avril 2026), l'enfant déclarant lui-même la somme reçue."
+  ],
+  "documents": [
+    {
+      "id": "jugement",
+      "libelle": "Jugement ou convention fixant la pension (copie)",
+      "detail": "Copie à demander au greffe, à l'avocat ou au notaire si vous ne l'avez plus.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "preuves-versement",
+      "libelle": "Preuves de chaque versement de l'année",
+      "detail": "Relevés bancaires, avis de virement, attestation de l'ARIPA si la pension passe par la Caf. Les espèces sans reçu sont difficiles à justifier.",
+      "coffre": "finances"
+    },
+    {
+      "id": "depenses-directes",
+      "libelle": "Factures des dépenses payées directement pour l'enfant",
+      "detail": "Cantine, scolarité, frais médicaux, si vous les déduisez en plus de la pension.",
+      "coffre": "finances"
+    },
+    {
+      "id": "recapitulatif",
+      "libelle": "Récapitulatif annuel des sommes versées ou reçues",
+      "detail": "Total de l'année civile. Vous pouvez l'exporter depuis le Journal de Lien Parental.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Dernier avis d'impôt",
+      "detail": "Téléchargeable dans votre espace particulier sur impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "decision-residence",
+      "libelle": "Décision ou convention fixant la résidence (alternée ou non)",
+      "detail": "Pour justifier le partage des parts ou la case T si l'administration le demande.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Additionnez les montants versés ou reçus sur l'année civile",
+      "detail": "Le Journal (filtre Finances, catégorie Pension) vous donne l'historique des paiements enregistrés."
+    },
+    {
+      "titre": "Vérifiez avant de remplir votre déclaration",
+      "detail": "Le total correspond aux relevés bancaires ; l'enfant n'est pas déclaré à charge chez vous si vous déduisez la pension ; en résidence alternée vous ne déduisez rien ; les justificatifs sont rangés dans le coffre-fort."
+    },
+    {
+      "titre": "Déclarez la pension",
+      "detail": "En charges déductibles si vous la versez, dans « Pensions alimentaires perçues » si vous la recevez. Elle n'est jamais préremplie."
+    },
+    {
+      "titre": "Cochez la case T si vous élevez seul vos enfants",
+      "detail": "Seulement si vous vivez seul avec eux et êtes célibataire, divorcé ou séparé."
+    },
+    {
+      "titre": "Conservez les justificatifs",
+      "detail": "L'administration fiscale peut les demander."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "impots.gouv.fr, votre espace particulier",
+      "detail": "Déclaration en ligne et messagerie sécurisée.",
+      "url": "https://www.impots.gouv.fr"
+    },
+    {
+      "nom": "Service d'information des impôts",
+      "detail": "Du lundi au vendredi, 8 h 30 à 19 h, hors jours fériés (service gratuit et prix d'un appel).",
+      "telephone": "0809 401 401"
+    },
+    {
+      "nom": "Centre des finances publiques de votre secteur"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Déduire une pension alimentaire (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2"
+    },
+    {
+      "titre": "Déclarer une pension alimentaire reçue (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170"
+    },
+    {
+      "titre": "Quotient familial, résidence alternée et case T (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Pension alimentaire du mois",
+      "categorie": "pension"
+    },
+    {
+      "type": "coffre",
+      "titre": "Preuves de versement de la pension de l'année",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Récapitulatif annuel de la pension",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Déclaration de revenus : déclarer la pension (avril)",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Déclaration des revenus 2026 à partir d'avril 2027",
+      "detail": "Les dates limites exactes sont publiées chaque année sur impots.gouv.fr."
+    }
+  ],
+  "aConfirmer": [
+    "Les numéros de cases de la déclaration changent selon les années : vérifiez-les dans la notice de l'année sur impots.gouv.fr.",
+    "À confirmer localement : l'accessibilité du 0809 401 401 depuis la Martinique ; à défaut, utilisez la messagerie sécurisée de votre espace impots.gouv.fr.",
+    "La date limite de déclaration applicable en Martinique est publiée chaque année par la DGFiP : à vérifier sur impots.gouv.fr."
+  ],
+  "motsCles": [
+    "impôts",
+    "pension",
+    "déduction",
+    "quotient familial",
+    "parts",
+    "déclaration",
+    "case T"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2 Déduction d'une pension alimentaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2",
+      "verifieLe": "2026-04-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3170 Pension alimentaire reçue",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170",
+      "verifieLe": "2026-04-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2633 Résidence alternée, quotient familial et case T",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633",
+      "verifieLe": "2026-04-15"
+    }
+  ]
+}

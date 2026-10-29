@@ -1,0 +1,274 @@
+{
+  "slug": "saisir-juge-affaires-familiales",
+  "territoire": "reunion",
+  "categorie": "separation",
+  "titre": "Applying to the family court judge (JAF)",
+  "resume": "Form Cerfa n° 11530, the list of documents (birth certificates less than 3 months old), the competent court in Réunion (Saint-Denis or Saint-Pierre), the €50 stamp and when it is not due.",
+  "aQuoiCaSert": "The family court judge (juge aux affaires familiales, JAF) settles disagreements between parents about how parental authority is exercised, where the child lives, visiting and staying rights, or child support. The judge can also change an existing decision when circumstances change, or give court approval (homologation) to an agreement reached by the parents so that it has the force of a judgment. In Réunion, two courts (tribunaux judiciaires) handle these cases: Saint-Denis and Saint-Pierre.",
+  "quiEstConcerne": [
+    "Parents, married or not, who cannot reach an agreement about their children.",
+    "A parent who wants an existing decision changed (moving house, change in income, new arrangements).",
+    "Parents who agree with each other and want their parenting agreement (convention parentale) approved by the court.",
+    "A parent who receives the ASF (allocation de soutien familial, family support allowance) with no child support set and must apply to the judge within 4 months."
+  ],
+  "aSavoir": [
+    "Form: Cerfa n° 11530 \"Demande au juge aux affaires familiales\" (application to the family court judge), to fill in online or on paper. A fully online application is also possible.",
+    "Competent court: the one for the place where the parent the child usually lives with resides; if the parents still live together, the one for the family's place of residence. In Réunion: the tribunal judiciaire de Saint-Denis or de Saint-Pierre, depending on your municipality.",
+    "A lawyer is not mandatory before the family court judge (one is required on appeal). Legal aid (aide juridictionnelle) can cover the costs depending on your income: see the guide entry \"Applying for legal aid (aide juridictionnelle)\".",
+    "€50 tax stamp (timbre fiscal), electronic only, bought online by bank card before you apply. It is not due if you receive legal aid, for approval of a parenting agreement, or for a protection order. Valid for 12 months, refundable within 18 months if unused.",
+    "Prior mediation: the pilot scheme that required it at the Saint-Denis court before certain applications ended on December 31, 2024. It is still recommended, but no longer mandatory to apply to the judge.",
+    "Parents in agreement: joint application for approval of the parenting agreement (Cerfa n° 16139), signed by both.",
+    "Violence: a protection order (ordonnance de protection) is requested from the family court judge, with no prior police complaint required. The hearing takes place within 6 days of being scheduled. Immediate danger: 17 or 112. Helpline: 3919, free from Réunion, 24 hours a day.",
+    "This guide does not replace legal advice: for your situation, contact a lawyer or a point-justice (free legal information center)."
+  ],
+  "documents": [
+    {
+      "id": "cerfa-11530",
+      "libelle": "Form Cerfa n° 11530, completed, dated and signed",
+      "detail": "Original for the court, a copy for you. Can be filled in online on service-public.gouv.fr.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "acte-naissance-parent",
+      "libelle": "Full copy (copie intégrale) of your birth certificate, less than 3 months old",
+      "detail": "Not an extract. Request it free of charge online on service-public.gouv.fr (see the guide entry \"Getting a birth certificate\").",
+      "coffre": "jaf"
+    },
+    {
+      "id": "actes-naissance-enfants",
+      "libelle": "Full copy of the birth certificate of each child concerned, less than 3 months old",
+      "detail": "Same process, from the town hall (mairie) of the child's place of birth. Allow time for delivery, especially if the child was born in mainland France.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Family record book (livret de famille) or full copy of the marriage certificate less than 3 months old",
+      "coffre": "jaf"
+    },
+    {
+      "id": "identite",
+      "libelle": "Copy of your ID",
+      "detail": "ID card or passport, front and back.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "jugements",
+      "libelle": "Copy of previous judgments (divorce, separation, parental authority, child support)",
+      "detail": "If you no longer have it, ask the court registry (greffe) of the court that issued it for a copy.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Recent proof of address",
+      "detail": "Depending on your application: a bill, a rent receipt or a letter confirming you are housed by someone (attestation d'hébergement).",
+      "coffre": "jaf"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Proof of income and expenses",
+      "detail": "Especially if your application concerns child support: latest tax notice and income tax return, last 3 payslips, benefit statement from the Caf (Caisse d'allocations familiales, the family benefits office), rent, loans, child-related costs.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "timbre",
+      "libelle": "€50 electronic tax stamp (PDF or 16-digit SMS)",
+      "detail": "Unless you have legal aid or are applying for approval of a parenting agreement.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "aj",
+      "libelle": "Legal aid decision or receipt of your application, if you applied for it",
+      "coffre": "jaf"
+    },
+    {
+      "id": "pieces-situation",
+      "libelle": "Documents supporting your application",
+      "detail": "For example: school attendance certificate, written exchanges about arrangements, witness statements. Avoid documents unrelated to your application.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "First try to reach an amicable solution",
+      "detail": "Family mediation or a written agreement to have approved. The form asks whether an amicable approach has been tried. No mediation in cases of violence."
+    },
+    {
+      "titre": "Order the birth certificates now",
+      "detail": "They must be less than 3 months old when you file and arrive by post: they are often the document that delays the file."
+    },
+    {
+      "titre": "Fill in Cerfa n° 11530 or the online application",
+      "detail": "Explain clearly what you are asking for (residence, visiting rights, amount of child support) and why."
+    },
+    {
+      "titre": "Buy the €50 stamp if you are not exempt",
+      "detail": "Online, by bank card, before sending your application."
+    },
+    {
+      "titre": "Check before sending your file",
+      "detail": "Signed Cerfa; full copies of birth certificates less than 3 months old (yours and each child's); family record book or marriage certificate; ID; previous judgments; proof of income if you mention child support; stamp or legal aid decision. Make a full copy."
+    },
+    {
+      "titre": "Send or hand in the file at the court registry of the competent court",
+      "detail": "Saint-Denis or Saint-Pierre depending on where the child lives, or file the application online. Store the copy in the Court file section of your Vault."
+    },
+    {
+      "titre": "Prepare for the hearing",
+      "detail": "You are informed of the date and the other parent is summoned by registered letter. Add it to the calendar with a reminder and bring the originals of your documents."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Tribunal judiciaire de Saint-Denis",
+      "detail": "Open Monday to Friday, 7:45 a.m. to 12:15 p.m. and 1:30 p.m. to 3:30 p.m. Email: accueil.tj-st-denis-de-la-reunion@justice.fr.",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/89e93007-f1cf-40e9-92b1-c8880c9a4d8a",
+      "telephone": "02 62 40 23 45"
+    },
+    {
+      "nom": "Tribunal judiciaire de Saint-Pierre",
+      "detail": "28 rue Augustin Archambaud, 97410 Saint-Pierre. Open Monday to Friday, 8 a.m. to 12 p.m. and 1:30 p.m. to 3:30 p.m.",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b",
+      "telephone": "02 62 96 10 00"
+    },
+    {
+      "nom": "Points-justice in Réunion",
+      "detail": "Free legal information, help putting your file together and applying for legal aid.",
+      "url": "https://lannuaire.service-public.gouv.fr/navigation/la-reunion/point_justice"
+    },
+    {
+      "nom": "Violences Femmes Info (violence against women helpline)",
+      "detail": "Listening and guidance, free and anonymous, 24 hours a day, including from Réunion. In immediate danger, call 17 or 112.",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544",
+      "telephone": "3919"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Application to the family court judge, cerfa 11530 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764"
+    },
+    {
+      "titre": "Approval of a parenting agreement, cerfa 16139 (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771"
+    },
+    {
+      "titre": "€50 tax stamp (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227"
+    },
+    {
+      "titre": "Parental authority after separation (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133"
+    },
+    {
+      "titre": "Domestic violence and protection order (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Tax stamp for applying to the family court judge",
+      "categorie": "frais-administratifs",
+      "montant": 50,
+      "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764"
+    },
+    {
+      "type": "coffre",
+      "titre": "Application to the family court judge (full copy)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Birth certificates less than 3 months old",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Proof of income and expenses",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Summons and decision of the family court judge",
+      "categorie": "jaf"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Hearing before the family court judge",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Check the date of the birth certificates (under 3 months)",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Birth certificates less than 3 months old at the time of filing"
+    },
+    {
+      "libelle": "Tax stamp valid for 12 months after purchase",
+      "detail": "Refund possible online within 18 months if unused."
+    },
+    {
+      "libelle": "ASF with no child support set: apply to the judge within 4 months"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the split of municipalities between the Saint-Denis and Saint-Pierre courts could not be checked (justice.fr and court of appeal websites under maintenance): ask the court registry or a point-justice.",
+    "To be confirmed locally: the exact reception address of the tribunal judiciaire de Saint-Denis (the directory gives avenue Desbassyns, and 5 avenue André Malraux for the legal aid office).",
+    "To be confirmed locally: the role of the local courts (tribunaux de proximité) of Saint-Paul and Saint-Benoît in family cases, and average waiting times for a hearing.",
+    "The deadline for correcting an application filed without a tax stamp is not specified in the official guidance: ask the court registry."
+  ],
+  "motsCles": [
+    "JAF",
+    "judge",
+    "family court",
+    "custody",
+    "residence",
+    "visiting rights",
+    "cerfa 11530",
+    "court approval",
+    "Saint-Denis",
+    "Saint-Pierre"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, R15764 Application to the family court judge (cerfa 11530)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F33227 Tax stamp",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F942 Parental authority and applying to the JAF (lawyer not mandatory)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F12544 Domestic violence",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public directory, Tribunal judiciaire de Saint-Denis",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/89e93007-f1cf-40e9-92b1-c8880c9a4d8a",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public directory, Tribunal judiciaire de Saint-Pierre",
+      "url": "https://lannuaire.service-public.gouv.fr/la-reunion/reunion/65e110da-ad27-4221-8b82-27842c79e63b",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Légifrance, Law no. 2016-1547 of November 18, 2016, article 7 (end of mandatory prior mediation on December 31, 2024)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000033418805",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

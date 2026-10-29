@@ -1,0 +1,63 @@
+{
+  "slug": "complementaire-sante-solidaire",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Complémentaire santé solidaire (C2S) à Mayotte",
+  "resume": "Une complémentaire santé gratuite ou à petit prix pour tout le foyer, enfants compris, selon vos revenus des 12 derniers mois. Elle existe à Mayotte depuis le 1er janvier 2024, avec des plafonds propres.",
+  "aQuoiCaSert": "La complémentaire santé solidaire prend en charge la part des dépenses de santé non remboursée par l'assurance maladie (le ticket modérateur), dans la limite des tarifs de la sécurité sociale. Elle est gratuite ou avec une petite participation mensuelle selon vos ressources, et couvre toutes les personnes du foyer, donc vos enfants. À Mayotte, elle est gérée par la CSSM et existe depuis le 1er janvier 2024.",
+  "quiEstConcerne": [
+    "Les foyers aux revenus modestes résidant à Mayotte de façon stable et régulière.",
+    "Les bénéficiaires du RSA : la C2S gratuite est attribuée automatiquement.",
+    "Les parents isolés et les familles qui n'ont pas de complémentaire santé pour leurs enfants."
+  ],
+  "aSavoir": [
+    "Plafonds annuels à Mayotte pour la C2S gratuite, depuis le 1er avril 2026 : 11 599 € pour 1 personne, 17 398 € pour 2, 20 878 € pour 3, 24 358 € pour 4, plus 4 640 € par personne supplémentaire.",
+    "C2S avec participation : ressources jusqu'à 15 659 € pour 1 personne, 23 488 € pour 2, 28 185 € pour 3, 32 883 € pour 4, plus 6 263 € par personne supplémentaire.",
+    "Participation mensuelle par personne, selon l'âge au 1er janvier : 8 € jusqu'à 29 ans, 14 € de 30 à 49 ans, 21 € de 50 à 59 ans, 25 € de 60 à 69 ans, 30 € à partir de 70 ans.",
+    "Les ressources comptées sont celles des 12 mois précédant la demande.",
+    "Réponse sous 2 mois au maximum. En cas de refus, vous avez 2 mois pour saisir la commission de recours amiable de la CSSM.",
+    "La C2S est accordée pour 1 an. Le renouvellement se demande en général 2 à 4 mois avant l'échéance ; il est automatique pour les bénéficiaires du RSA.",
+    "À la demande, vous choisissez si la C2S est gérée par la CSSM ou par un organisme complémentaire.",
+    "Parents séparés : la C2S est attribuée au foyer qui fait la demande. Renseignez-vous auprès de la CSSM pour un enfant en résidence alternée."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "Demande de C2S remplie et signée, si vous ne la faites pas en ligne", "detail": "Elle comprend la liste des personnes du foyer et leurs ressources des 12 derniers mois.", "coffre": "sante" },
+    { "id": "avis-impot", "libelle": "Avis d'impôt", "detail": "Copie. Téléchargeable sur impots.gouv.fr.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Justificatifs de ressources des 12 derniers mois, s'ils sont demandés", "detail": "Bulletins de salaire, indemnités, pensions alimentaires reçues.", "coffre": "finances" },
+    { "id": "identite", "libelle": "Pièce d'identité ou titre de séjour", "detail": "Copie.", "coffre": "sante" },
+    { "id": "decision-c2s", "libelle": "Décision d'attribution de la C2S", "detail": "Elle indique la date de fin de droits : notez-la pour le renouvellement.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Estimez vos droits", "detail": "Additionnez les ressources du foyer sur 12 mois et comparez-les aux plafonds de Mayotte." },
+    { "titre": "Faites la demande", "detail": "En ligne avec le service « Demande de complémentaire santé solidaire (Mayotte) » ou auprès de la CSSM." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Si vous déposez le dossier à l'accueil de la CSSM : formulaire signé, avis d'impôt, justificatifs de ressources, pièce d'identité et carte Vitale. Faites des photocopies." },
+    { "titre": "Attendez la décision", "detail": "Elle est rendue sous 2 mois." },
+    { "titre": "Pensez au renouvellement", "detail": "Avant la date de fin indiquée sur votre attestation." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Centre Kinga, Route nationale 1, Kawéni, 97600 Mamoudzou. Accueil sur rendez-vous.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Aide aux démarches en ligne près de chez vous.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Complémentaire santé solidaire (service-public.gouv.fr, section Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Décision d'attribution C2S", "categorie": "sante" },
+    { "type": "coffre", "titre": "Avis d'impôt utilisé pour la C2S", "categorie": "finances" },
+    { "type": "rappel", "titre": "Renouveler la C2S avant l'échéance", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Droit accordé pour 1 an", "detail": "Demandez le renouvellement 2 à 4 mois avant l'échéance." },
+    { "libelle": "Recours dans les 2 mois après un refus", "detail": "Devant la commission de recours amiable de la CSSM." }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la CSSM : rattachement d'un enfant en résidence alternée au foyer de l'un ou l'autre parent pour la C2S."
+  ],
+  "motsCles": ["C2S", "mutuelle", "complémentaire", "santé", "CSSM", "gratuit", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (section Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" },
+    { "titre": "Assurance maladie, circulaire CIR-16-2024 (C2S à Mayotte au 1er janvier 2024)", "url": "https://circulaires.ameli.fr/sites/default/files/directives/cir/2024/CIR-16-2024.pdf" },
+    { "titre": "CSSM, Contacts", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" }
+  ]
+}

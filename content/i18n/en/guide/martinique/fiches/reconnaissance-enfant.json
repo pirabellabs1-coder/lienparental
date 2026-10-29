@@ -1,0 +1,158 @@
+{
+  "slug": "reconnaissance-enfant",
+  "territoire": "martinique",
+  "categorie": "naissance",
+  "titre": "Legally recognizing my child when we are not married",
+  "resume": "Before or after the birth, free of charge at any town hall: recognition (reconnaissance) establishes the father's legal parentage. The two documents to bring and the effects on parental authority.",
+  "aQuoiCaSert": "When the parents are not married, the father's legal parentage is not automatic: he must recognize the child. The mother has nothing to do if her name appears on the birth certificate. Recognition can be done before the birth (reconnaissance anticipée, prenatal recognition), when the birth is registered, or later. If done before the child's first birthday, it allows the father to exercise parental authority jointly with the mother.",
+  "quiEstConcerne": [
+    "Unmarried parents, especially the father.",
+    "A mother who wishes to make a prenatal recognition (optional).",
+    "Female couples: a joint prenatal recognition before a notary is required."
+  ],
+  "aSavoir": [
+    "Recognition is free at any town hall (mairie), wherever the birth takes place or you live. It can also be done with a notary, for a fee.",
+    "No pregnancy certificate is required for a prenatal recognition. The document is drawn up immediately and you are given a copy.",
+    "Recognition after the birth: the civil registrar (officier d'état civil) informs the other parent by registered letter, and the recognition is noted in the margin of the birth certificate.",
+    "Recognition by both parents together: both must be present, each with proof of address in their own name.",
+    "A father who recognizes the child after their first birthday does not exercise parental authority. He can obtain it through a joint declaration with the mother (cerfa n° 12785, sent to the court registry (greffe) of the tribunal judiciaire (judicial court) where the child lives) or by applying to the family court judge (juge aux affaires familiales, JAF).",
+    "The parents marrying after the birth does not automatically give the father parental authority. Nor does recognition change the child's surname by itself: choosing the name requires a separate declaration.",
+    "If the child already has legal parentage established with another man, it must first be challenged in court."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "ID of the parent making the recognition",
+      "detail": "Original, even if expired: ID card, passport or residence permit.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address or residence less than 3 months old, in your name",
+      "detail": "Original. Bill, rent receipt or certificate. One proof each if you come together.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "acte-naissance-enfant",
+      "libelle": "Child's birth certificate or family record book (livret de famille), if the child is already born",
+      "detail": "Recommended. Birth certificate free online on service-public.gouv.fr or from the town hall where the child was born.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "acte-reconnaissance",
+      "libelle": "Copy of the recognition certificate (acte de reconnaissance)",
+      "detail": "Given to you on the spot. Show it when registering the birth if the recognition was made before the birth.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "declaration-conjointe",
+      "libelle": "Joint declaration of exercise of parental authority (cerfa n° 12785), if the child is over one year old",
+      "detail": "In 3 copies, signed by both parents. The copy stamped by the court registry is the only original: keep it safe.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Choose a town hall",
+      "detail": "Any town hall will do. Call the civil registry office (état civil) to find out whether you need an appointment."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Original ID, proof of address less than 3 months old in your name (one per parent if you come together), birth certificate or family record book if the child is already born."
+    },
+    {
+      "titre": "Go to the town hall and sign the document",
+      "detail": "The document is drawn up immediately. Check the spelling of the surnames and first names before signing."
+    },
+    {
+      "titre": "Keep the copy of the document",
+      "detail": "If you recognized the child before birth, bring it when registering the birth."
+    },
+    {
+      "titre": "If the child is over one year old, make the joint declaration of parental authority",
+      "detail": "With the mother's agreement: cerfa n° 12785 in 3 copies, sent or handed in to the court registry of the tribunal judiciaire where the child lives. Without agreement, the request is made to the family court judge."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Any town hall, civil registry office (état civil)",
+      "detail": "Free recognition."
+    },
+    {
+      "nom": "A notary",
+      "detail": "Recognition for a fee. Mandatory for the joint prenatal recognition by a female couple."
+    },
+    {
+      "nom": "Tribunal judiciaire de Fort-de-France, court registry (greffe)",
+      "detail": "Joint declaration of exercise of parental authority, if the child is over one year old and lives within its jurisdiction. 35 boulevard du Général de Gaulle, Fort-de-France.",
+      "url": "https://www.justice.fr/annuaire/tribunal-judiciaire-fort-france"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Recognizing a child (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887"
+    },
+    {
+      "titre": "Child recognized late and parental authority (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942"
+    },
+    {
+      "titre": "Requesting a birth certificate (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Recognition certificate",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Joint declaration of parental authority stamped by the court registry",
+      "categorie": "jaf"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Town hall appointment: recognition",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Recognize the child before their first birthday",
+      "evenement": "rdv"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Before the child's first birthday",
+      "detail": "So that the father exercises parental authority without any further procedure."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: appointments and opening hours of the civil registry office, which vary between town halls in Martinique.",
+    "To be confirmed locally: which tribunal judiciaire has jurisdiction depending on the town where the child lives, and the court registry's address, on justice.fr."
+  ],
+  "motsCles": [
+    "recognition",
+    "parentage",
+    "father",
+    "unmarried",
+    "parental authority",
+    "prenatal recognition"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F887 Recognizing a child (unmarried couple)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887",
+      "verifieLe": "2026-01-27"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F942 Child recognized late: consequences for parental authority",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942",
+      "verifieLe": "2025-09-24"
+    }
+  ]
+}

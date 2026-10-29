@@ -7,6 +7,7 @@ import { GuideSearch } from '@/components/guide/GuideSearch'
 import { ParcoursCard } from '@/components/guide/Progress'
 import { CategoryIcon } from '@/components/guide/icons'
 import { loadGuide, toResume } from '@/lib/guide/load'
+import { wantedTerritoire } from '@/lib/guide/territory-server'
 import { GUIDE_CATEGORIES } from '@/lib/guide/types'
 import { categoryHref } from '@/lib/guide/links'
 import { contentLangAttr } from '@/lib/contenus/locale'
@@ -23,7 +24,7 @@ export default async function GuidePage({ searchParams }: Props) {
   const t = await getTranslations('coach.guide')
   const sp = await searchParams
   const locale = await getLocale()
-  const g = await loadGuide(sp.territoire, locale)
+  const g = await loadGuide(await wantedTerritoire(sp.territoire), locale)
   const { territoire, fiches, parcours } = g
   const counts = Object.fromEntries(GUIDE_CATEGORIES.map((c) => [c.key, fiches.filter((f) => f.categorie === c.key).length]))
 

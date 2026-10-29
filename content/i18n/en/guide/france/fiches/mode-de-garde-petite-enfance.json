@@ -1,0 +1,213 @@
+{
+  "slug": "mode-de-garde-petite-enfance",
+  "territoire": "france",
+  "categorie": "naissance",
+  "titre": "Daycare or childminder: finding childcare",
+  "resume": "Where to look for a place, which documents to prepare for the daycare (crèche) application, and how to get help from the Caf (CMG) when you employ a registered childminder (assistante maternelle).",
+  "aQuoiCaSert": "Having your young child looked after lets you work or train. Daycare (crèche) places should be requested early, often during pregnancy. If you employ a registered childminder (assistante maternelle agréée), the Caf (Caisse d'allocations familiales, the family benefits office), or the MSA (Mutualité sociale agricole, the farmers' social security fund), can pay the complément de libre choix du mode de garde (CMG, childcare allowance) and cover the social security contributions. Having a complete file from your very first request avoids losing your place on the waiting list.",
+  "quiEstConcerne": [
+    "Parents of a child under 6 (up to the child's 12th birthday for a single parent, for the direct-employment CMG).",
+    "As a couple, at least one parent must work to receive the CMG. Treated as work: paid sick or maternity leave, paid unemployment, paid training. Some situations exempt you: studies, civic service (service civique), AAH (adult disability allowance), RSA (minimum income) with registration as a job seeker, ASS (solidarity allowance for job seekers)."
+  ],
+  "aSavoir": [
+    "Public daycare: the application is usually submitted to the early childhood department of the town hall (mairie) or of the group of towns (intercommunalité). Non-profit or private daycare: you register with the management. It is advisable to start during pregnancy.",
+    "In daycares funded by the Caf, the hourly rate follows a national scale set by the Cnaf (the national family benefits fund), based on your income and the number of dependent children.",
+    "Childminders must be registered (agréées) by the PMI service (protection maternelle et infantile, the mother and child health service) of the conseil départemental (département council). You become their employer and sign an employment contract.",
+    "CMG: the amount depends on your income, the number of children, the hourly cost of childcare (capped) and the number of hours. Contributions are covered 100% for a registered childminder, up to a monthly ceiling.",
+    "Shared residence: since December 1, 2025, each parent can receive the CMG, calculated according to their own situation. It is not a split of the amount.",
+    "You must register on Pajemploi and declare the salary paid each month. The Pajemploi+ option lets the center debit and pay the salary, with your employee's agreement."
+  ],
+  "documents": [
+    {
+      "id": "livret-famille",
+      "libelle": "Family record book (livret de famille) or the child's birth certificate",
+      "detail": "Copy. During pregnancy, a certificate of pregnancy is usually requested instead. Birth certificate free on service-public.gouv.fr.",
+      "coffre": "autres"
+    },
+    {
+      "id": "identite-parents",
+      "libelle": "ID of each parent",
+      "detail": "Copy.",
+      "coffre": "autres"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address less than 3 months old",
+      "detail": "Copy. Municipal daycares often reserve places for residents of the town.",
+      "coffre": "autres"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Latest tax notice or Caf beneficiary number",
+      "detail": "Copy. Used to calculate the daycare's hourly rate.",
+      "coffre": "finances"
+    },
+    {
+      "id": "travail",
+      "libelle": "Proof of the parents' activity",
+      "detail": "Employment contract, payslips, certificate of training or from France Travail (the public employment service), depending on the case.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement setting residence and parental authority, if you are separated",
+      "detail": "Copy. Shows who may pick up the child and each parent's weeks.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "vaccins",
+      "libelle": "Vaccination pages of the health record book",
+      "detail": "Copy. The vaccines compulsory for the child's age are required to start daycare, unless there is a contraindication.",
+      "coffre": "sante"
+    },
+    {
+      "id": "attestation-droits",
+      "libelle": "The child's Assurance Maladie (French public health insurance) certificate of entitlement",
+      "detail": "Downloadable from your ameli account.",
+      "coffre": "sante"
+    },
+    {
+      "id": "assurance",
+      "libelle": "Civil liability insurance certificate",
+      "detail": "Often requested by daycares.",
+      "coffre": "autres"
+    },
+    {
+      "id": "contrat-assmat",
+      "libelle": "The childminder's employment contract and certificate of registration",
+      "detail": "Original signed by both parties. Ask for a copy of the registration issued by the PMI.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank details slip)",
+      "detail": "For the daycare's direct debit or the payment of the CMG.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Look for childcare options near you",
+      "detail": "On monenfant.fr (the website of the family benefits branch), through a relais petite enfance (RPE, early childhood information center) or at the town hall."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Family record book or certificate of pregnancy, parents' ID, proof of address less than 3 months old, tax notice or Caf number, proof of activity, judgment if you are separated, vaccination pages. Ask the daycare for its exact list."
+    },
+    {
+      "titre": "Apply for a daycare place",
+      "detail": "With the town hall's early childhood department for a public daycare, otherwise with the management. Note the date you applied and follow up regularly."
+    },
+    {
+      "titre": "With a childminder, check their registration and sign the contract",
+      "detail": "Registration issued by the PMI of the conseil départemental."
+    },
+    {
+      "titre": "Apply for the CMG",
+      "detail": "In your Caf (or MSA) online account, childcare section, as soon as childcare starts. Not yet a beneficiary? First create an account. Then register as an employer on Pajemploi and declare the salary each month."
+    },
+    {
+      "titre": "Record the childcare costs",
+      "detail": "In the Journal, to track the expense per child and the split with the other parent."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "monenfant.fr",
+      "detail": "Directory of daycares, childminders and early childhood information centers.",
+      "url": "https://monenfant.fr"
+    },
+    {
+      "nom": "Your town hall, early childhood department",
+      "detail": "Municipal daycares. Contact details in the service-public.fr directory.",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    },
+    {
+      "nom": "Caf in your département",
+      "detail": "Childcare allowance (complément de libre choix du mode de garde).",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "Pajemploi (Urssaf)",
+      "detail": "Monthly declaration of the childminder's salary, run by the Urssaf (social contributions agency).",
+      "url": "https://www.pajemploi.urssaf.fr"
+    },
+    {
+      "nom": "PMI of the conseil départemental",
+      "detail": "Registration and monitoring of childminders. Contact details on your département's website."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Childcare allowance (CMG), direct employment (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152"
+    },
+    {
+      "titre": "CMG simulator (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72489"
+    },
+    {
+      "titre": "Finding childcare (monenfant.fr)",
+      "url": "https://monenfant.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Follow up on the daycare place application",
+      "evenement": "rdv"
+    },
+    {
+      "type": "rappel",
+      "titre": "Declare the childminder's salary on Pajemploi",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Daycare agreement or childminder's contract",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Childminder's certificate of registration",
+      "categorie": "finances"
+    },
+    {
+      "type": "depense",
+      "titre": "Childcare costs",
+      "categorie": "autre"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: number of places, allocation criteria and waiting times for daycare, which vary widely between towns.",
+    "To be confirmed locally: exact list of documents for the daycare application, specific to each facility or town.",
+    "CMG amounts depend on your income, the number of children and the hourly cost: use the official simulator.",
+    "The monenfant.fr website could not be consulted today (automated access blocked): its information has not been rechecked."
+  ],
+  "motsCles": [
+    "daycare (crèche)",
+    "childminder",
+    "nanny",
+    "CMG",
+    "Pajemploi",
+    "childcare",
+    "RPE"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F39152 CMG for direct employment",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F767 Vaccinations for school, daycare or after-school care",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Caf.fr, 2026 scale of family contributions in early childhood facilities",
+      "url": "https://www.caf.fr/sites/default/files/medias/661/Espace-Partenaires/Documents-Partenaires/2026-Baremes-Participation-Famille-Eaje.pdf"
+    }
+  ]
+}

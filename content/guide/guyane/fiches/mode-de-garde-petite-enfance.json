@@ -13,7 +13,7 @@
     "Crèche publique : le dossier se retire à la mairie. Crèche associative ou privée : l'inscription se fait auprès de la direction. Il est conseillé de s'y prendre dès la grossesse.",
     "Dans la plupart des crèches financées par la Caf, le tarif suit un barème national selon vos ressources et le nombre d'enfants.",
     "Les assistantes maternelles doivent être agréées par la PMI. Vous les trouvez sur monenfant.fr. Vous devenez leur employeur et signez un contrat de travail.",
-    "CMG : son montant dépend de vos ressources, du nombre d'enfants, du coût horaire de la garde (plafonné) et du nombre d'heures. Les cotisations sont prises en charge à 100 % pour une assistante maternelle agréée, dans la limite d'un plafond. Il est versé à partir du mois de la demande.",
+    "CMG : son montant dépend de vos ressources, du nombre d'enfants, du coût horaire de la garde (plafonné) et du nombre d'heures. Les cotisations sont prises en charge à 100 % pour une assistante maternelle agréée, dans la limite d'un plafond. Il peut être versé dès le mois qui précède votre demande, si les conditions sont alors remplies.",
     "Garde alternée : depuis le 1er décembre 2025, chacun des deux parents peut percevoir le CMG, calculé selon sa propre situation. Le montant n'est pas partagé entre eux.",
     "Il faut s'inscrire sur Pajemploi et déclarer chaque mois le salaire versé. L'option Pajemploi+ automatise le prélèvement et le versement du salaire."
   ],
@@ -63,10 +63,10 @@
     "Les montants du CMG dépendent de vos ressources, du nombre d'enfants et du coût horaire : utilisez le simulateur officiel."
   ],
   "motsCles": ["crèche", "assistante maternelle", "nounou", "CMG", "Pajemploi", "garde", "RPE"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
     { "titre": "monenfant.fr, Choisir un mode d'accueil collectif", "url": "https://monenfant.fr/choisir-un-mode-d-accueil-collectif", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, F39152 CMG emploi direct", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152", "verifieLe": "2026-06-26" },
-    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" }
+    { "titre": "Service-public.gouv.fr, F39152 CMG emploi direct", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" }
   ]
 }

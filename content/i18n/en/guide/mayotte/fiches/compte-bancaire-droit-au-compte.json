@@ -1,0 +1,65 @@
+{
+  "slug": "compte-bancaire-droit-au-compte",
+  "territoire": "mayotte",
+  "categorie": "argent",
+  "titre": "Having your own bank account after a separation",
+  "resume": "Open an account in your name to receive child support and benefits and, if a bank refuses, use the right to an account through the IEDOM in Mamoudzou or the Banque de France: exact documents and timeframes.",
+  "aQuoiCaSert": "After a separation, a personal account lets you receive child support and benefits from the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund), and pay the child's expenses while keeping clear records. If a bank refuses to open an account for you, a bank can be designated and will be required to do so, with free basic banking services. In Mayotte, the application can be filed with the Institut d'émission des départements d'outre-mer (IEDOM, the overseas central bank institute) or online with the Banque de France (the French central bank).",
+  "quiEstConcerne": [
+    "A parent who has no account in their own name, or only a joint account with their ex-partner.",
+    "Anyone living in France who has no deposit account and has been refused an account.",
+    "Someone who holds only a joint account can also apply for the right to an account to get an individual account."
+  ],
+  "aSavoir": [
+    "The bank has 15 days to reply to your account opening request. No reply means a refusal: the bank must then give you a refusal letter.",
+    "A bank is designated within 1 business day. This designation is valid for 6 months: contact the designated bank within that period.",
+    "The designated bank must open the account no later than 3 business days after receiving all the documents.",
+    "Free basic banking services: keeping and closing the account, a payment card, direct debits and transfers, deposits and withdrawals at the counter, 2 cashier's checks per month. Incident fees are capped at €4 per transaction and €20 per month.",
+    "In Mayotte, the IEDOM receives applications in Mamoudzou; online applications go through the Banque de France website."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Valid ID document", "detail": "ID card, passport or residence permit. Copy for the file, original at the bank appointment.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Proof of address less than 3 months old", "detail": "Bill, rent receipt. If housed by someone: certificate of accommodation and your host's documents (to be confirmed with the bank).", "coffre": "finances" },
+    { "id": "lettre-refus", "libelle": "Bank's refusal letter", "detail": "Or, with no reply, proof of your request dated more than 15 days ago.", "coffre": "courriers" },
+    { "id": "attestation-honneur", "libelle": "Sworn statement that you have no deposit account", "detail": "Template provided when you apply.", "coffre": "finances" },
+    { "id": "rib", "libelle": "Bank details (RIB) of the new account", "detail": "To send to the CSSM, your employer and the other parent if child support is paid to you directly.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Ask a bank to open an account", "detail": "In writing if possible, and keep proof of the date." },
+    { "titre": "If refused, ask for the refusal letter", "detail": "Or wait 15 days without a reply." },
+    { "titre": "File your right-to-an-account application", "detail": "At the IEDOM branch in Mamoudzou or online on the Banque de France website." },
+    { "titre": "Check before you go", "detail": "Original valid ID, proof of address less than 3 months old, refusal letter, designation letter for the designated bank." },
+    { "titre": "Open the account at the designated bank", "detail": "Within 6 months of the designation." },
+    { "titre": "Send your new bank details (RIB)", "detail": "To the CSSM (\"Mon Compte\" on caf.fr and health insurance), your employer and, if needed, the other parent." }
+  ],
+  "ou": [
+    { "nom": "IEDOM, Mayotte branch", "detail": "Avenue de la Préfecture, BP 500, 97600 Mamoudzou. Walk-in service for individuals on Tuesday and Thursday from 8 a.m. to 12 p.m.; by appointment on Monday and Wednesday (8 a.m. to 3:30 p.m.) and Friday (8 a.m. to 12 p.m.). Email: particuliers-mayotte@iedom.fr. ID required.", "url": "https://www.iedom.fr/rubrique19", "telephone": "02 62 90 71 00" },
+    { "nom": "Banque de France, online application", "detail": "Right to an account with FranceConnect.", "url": "https://www.banque-france.fr/fr/a-votre-service/particuliers/droit-au-compte-bancaire" },
+    { "nom": "The bank of your choice", "detail": "First account opening request." }
+  ],
+  "liens": [
+    { "titre": "Right to an account (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417" },
+    { "titre": "Right-to-an-account notice for Mayotte (IEDOM)", "url": "https://www.iedom.fr/IMG/pdf/mayotte-notice-droit_au_compte.pdf" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Account opening refusal letter", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Bank designation letter", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Bank details (RIB) of my personal account", "categorie": "finances" },
+    { "type": "rappel", "titre": "Contact the designated bank (6 months maximum)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Send my new bank details (RIB) to the CSSM", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "15 days: time for the bank to reply; after that, its silence counts as a refusal" },
+    { "libelle": "6 months: validity of the designation" }
+  ],
+  "aConfirmer": [
+    "The rules for removing a name from a joint account depend on your bank."
+  ],
+  "motsCles": ["bank account", "RIB", "right to an account", "IEDOM", "Banque de France", "joint account", "separation"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2417 Right to an account", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417", "verifieLe": "2026-10-29" },
+    { "titre": "IEDOM, right-to-an-account notice for Mayotte", "url": "https://www.iedom.fr/IMG/pdf/mayotte-notice-droit_au_compte.pdf", "verifieLe": "2026-10-29" },
+    { "titre": "IEDOM, Mayotte branch", "url": "https://www.iedom.fr/rubrique19", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "slug": "pension-alimentaire-aripa",
+  "territoire": "reunion",
+  "categorie": "separation",
+  "titre": "What to do if the other parent does not pay child support (ARIPA)",
+  "resume": "Unpaid or late child support: the documents to ask the Caf (ARIPA) to recover the money and pay you the support every month, what to do without an enforceable order, and the ASF as a top-up.",
+  "aQuoiCaSert": "With financial intermediation, the child support collection agency (ARIPA, Agence de recouvrement et d'intermédiation des pensions alimentaires, part of the Caf, the Caisse d'allocations familiales or family benefits office) collects the support every month from the paying parent and passes it on to you. If payments are missed, it starts recovery, free of charge for you. To act, it needs an enforceable order (titre exécutoire) setting the amount of support. In the meantime, the family support allowance (allocation de soutien familial, ASF) can be paid to you by the Caf de La Réunion.",
+  "quiEstConcerne": [
+    "The parent who is owed child support and does not receive it, receives only part of it, or receives it late.",
+    "Separated parents, married or not.",
+    "Not covered: the compensatory allowance between former spouses (prestation compensatoire) and support paid to other family members."
+  ],
+  "aSavoir": [
+    "You need an enforceable order: a judgment, an agreement approved by the judge, a divorce by mutual consent agreement filed with a notary, a notarial deed, a mediation, conciliation or participatory procedure agreement bearing the enforcement clause, or an order issued by the Caf or the MSA (Mutualité sociale agricole, the farmers' social security fund).",
+    "Caf order: it is only for unmarried parents who agree on the amount. If you do not agree, you must apply to the family court judge (juge aux affaires familiales, JAF).",
+    "ARIPA makes its first payment no later than 60 days after receiving the requested documents. While your application is being processed, support is still paid directly between the parents.",
+    "The service is free for both parents. If payments are missed, the non-paying parent bears fees of 7.5% (amicable recovery) or 10% of the arrears (enforced recovery).",
+    "Domestic violence: intermediation is mandatory and cannot be set aside, even by mutual agreement.",
+    "Arrears: they can be claimed for up to 5 years. Through a judicial officer (commissaire de justice), direct payment only recovers the last 6 months, but it also secures future payments.",
+    "Complaint for family abandonment (abandon de famille): possible if the support has not been paid in full for more than 2 months.",
+    "In addition, the ASF (€200.78 per child per month) can be paid in advance when the set support is not paid: see the guide entry \"Family support allowance (ASF, allocation de soutien familial)\"."
+  ],
+  "documents": [
+    {
+      "id": "titre-executoire",
+      "libelle": "Enforceable order setting the support (complete copy)",
+      "detail": "Judgment, approved agreement, divorce agreement, notarial deed or Caf order. Lost it? Ask the court registry (greffe), the lawyer or the notary for a copy.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "identite",
+      "libelle": "Your ID document (copy)",
+      "coffre": "jaf"
+    },
+    {
+      "id": "rib",
+      "libelle": "Bank details (RIB) in your name",
+      "detail": "Account into which ARIPA will pay the support.",
+      "coffre": "finances"
+    },
+    {
+      "id": "coordonnees-autre-parent",
+      "libelle": "Known contact details of the other parent",
+      "detail": "Name, date of birth, last known address, employer if you know it.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "preuves-impayes",
+      "libelle": "Table of unpaid amounts and proof",
+      "detail": "Month by month: amount due, amount received, date. Bank statements, written exchanges, reminder. The Lien Parental Journal can help you prepare it.",
+      "coffre": "finances"
+    },
+    {
+      "id": "numero-allocataire",
+      "libelle": "Caf or MSA beneficiary number, if you have one",
+      "coffre": "finances"
+    },
+    {
+      "id": "relance",
+      "libelle": "Copy of the reminder letter to the other parent",
+      "detail": "Optional, but useful as proof of an attempt to settle amicably.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "courriers-aripa",
+      "libelle": "Letters and certificates from ARIPA",
+      "detail": "Including the letter stating the start date of intermediation.",
+      "coffre": "courriers"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Gather proof of the missed payments",
+      "detail": "List month by month what is due and what was received. You can first send a written reminder to the other parent or suggest mediation."
+    },
+    {
+      "titre": "Check that you have an enforceable order",
+      "detail": "No order: ask for a Caf order if you are not married and agree on the amount, otherwise apply to the family court judge. Apply for the ASF at the same time."
+    },
+    {
+      "titre": "Check before sending your application",
+      "detail": "Legible, complete copy of the enforceable order, ID document, bank details (RIB) in your name, the other parent's contact details, table of missed payments with proof. Keep a copy of everything."
+    },
+    {
+      "titre": "Apply online on the ARIPA website",
+      "detail": "Application for financial intermediation and recovery. ARIPA then writes to each parent: reply quickly and keep your information up to date."
+    },
+    {
+      "titre": "Apply to the Caf for the ASF if support is not paid",
+      "detail": "It can be paid in advance during recovery."
+    },
+    {
+      "titre": "Track each payment in the Journal",
+      "detail": "With the proof. Lien Parental does not certify that a payment was made, but helps you keep a record."
+    },
+    {
+      "titre": "Other options if needed",
+      "detail": "Judicial officer (direct payment, seizure), recovery by the Public Treasury requested from the public prosecutor (procureur de la République) after another procedure has failed, or a complaint for family abandonment. A lawyer or a point-justice (free legal information center) can advise you."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "ARIPA, public child support service",
+      "detail": "Online application for intermediation and recovery, child support simulator, contact page.",
+      "url": "https://pension-alimentaire.caf.fr/usagers/nous-contacter"
+    },
+    {
+      "nom": "Caf de La Réunion",
+      "detail": "ASF application and Caf enforceable order.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    },
+    {
+      "nom": "Family court judge: tribunal judiciaire de Saint-Denis or de Saint-Pierre",
+      "detail": "Depending on where the child lives, to set or change the support. See the guide entry \"Applying to the family court judge (JAF)\"."
+    },
+    {
+      "nom": "Points-justice in Réunion",
+      "detail": "Free legal information and guidance.",
+      "url": "https://lannuaire.service-public.gouv.fr/navigation/la-reunion/point_justice"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Unpaid child support (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249"
+    },
+    {
+      "titre": "Financial intermediation of child support (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407"
+    },
+    {
+      "titre": "ARIPA: financial intermediation",
+      "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere"
+    },
+    {
+      "titre": "ARIPA: requesting a Caf enforceable order",
+      "url": "https://pension-alimentaire.caf.fr/usagers/demande-titre-executoire"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Enforceable order setting the child support",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Table and proof of unpaid child support",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "ARIPA letter (start of intermediation)",
+      "categorie": "courriers"
+    },
+    {
+      "type": "depense",
+      "titre": "Child support",
+      "categorie": "pension"
+    },
+    {
+      "type": "rappel",
+      "titre": "Check the monthly child support payment",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Follow up with ARIPA if no payment 60 days after the complete application",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "First ARIPA payment no later than 60 days after receipt of the documents"
+    },
+    {
+      "libelle": "Complaint for family abandonment possible after more than 2 months of non-payment"
+    },
+    {
+      "libelle": "Arrears can be claimed for up to 5 years",
+      "detail": "Direct payment through a judicial officer only covers the last 6 months."
+    }
+  ],
+  "aConfirmer": [
+    "The exact list of documents ARIPA requires is not published: it may ask for additional documents while processing your application.",
+    "To be confirmed: the ARIPA phone number to call from Réunion, given on the \"Nous contacter\" page (website not rechecked today).",
+    "To be confirmed locally: the competent tribunal judiciaire (Saint-Denis or Saint-Pierre) depending on your municipality, and how to file a complaint for family abandonment (police station, gendarmerie or letter to the public prosecutor)."
+  ],
+  "motsCles": [
+    "child support",
+    "ARIPA",
+    "intermediation",
+    "unpaid support",
+    "Caf",
+    "debt recovery",
+    "enforceable order"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1249 Unpaid child support",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F36407 Financial intermediation of child support",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F815 Family support allowance (ASF)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

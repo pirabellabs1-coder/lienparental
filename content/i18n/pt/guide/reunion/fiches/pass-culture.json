@@ -1,0 +1,59 @@
+{
+  "slug": "pass-culture",
+  "territoire": "reunion",
+  "categorie": "loisirs",
+  "titre": "Pass Culture para jovens de 15 a 18 anos",
+  "resume": "Ofertas gratuitas aos 15 e 16 anos, 50 € aos 17 e 150 € aos 18: os documentos a preparar para a inscrição no aplicativo e os prazos de uso.",
+  "aQuoiCaSert": "O pass Culture (passe cultural francês para jovens) facilita o acesso dos jovens à cultura: livros, ingressos de cinema, shows, espetáculos, aulas, instrumentos musicais. Ele tem uma parte individual, usada pelo jovem no aplicativo, e uma parte coletiva, usada pelos professores em passeios com a turma, da 6e (6º ano) à terminale (último ano do ensino médio). As reservas são feitas no aplicativo, nos locais parceiros.",
+  "quiEstConcerne": [
+    "Os jovens de 15 a 18 anos que moram na França continental ou num território ultramarino, entre eles a Reunião.",
+    "Os jovens de nacionalidade estrangeira que moram na França há pelo menos 1 ano."
+  ],
+  "aSavoir": [
+    "Jovens sujeitos às regras em vigor desde 1º de março de 2025: ofertas gratuitas aos 15 e 16 anos, 50 € aos 17 e 150 € aos 18.",
+    "O crédito pode ser usado até a véspera dos 21 anos.",
+    "Desde o início de 2026, as compras de ofertas on-line (música, vídeo, videogames, audiolivros, imprensa digital) têm limite de 50 €. Esse limite não se aplica aos jovens com deficiência reconhecida.",
+    "Um bônus de 50 € após os 18 anos está previsto para jovens com deficiência ou que cumprem critérios sociais.",
+    "Inscrição: documento de identidade e comprovante de residência do jovem. Se ele mora na casa de alguém, é preciso também uma declaração de hospedagem (attestation d'hébergement) e o documento de identidade de quem o hospeda."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Documento de identidade válido do jovem", "detail": "Cópia (foto ou digitalização) enviada pelo aplicativo. Sem documento de identidade? Veja a ficha «Fazer a carteira de identidade ou o passaporte do meu filho».", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Comprovante de residência", "detail": "Cópia. Para um menor que mora com os pais, providencie os documentos de hospedagem abaixo.", "coffre": "autres" },
+    { "id": "hebergement", "libelle": "Declaração de hospedagem assinada pelo genitor ou por quem hospeda", "detail": "Com a cópia do documento de identidade de quem hospeda. É o caso mais comum para um menor.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Baixe o aplicativo pass Culture", "detail": "Ou acesse pass.culture.fr. Faça isso a partir dos 15 anos para as ofertas gratuitas. Um aluno também pode criar a conta com o EduConnect." },
+    { "titre": "Confira antes de começar a inscrição", "detail": "Documento de identidade válido do jovem, comprovante de residência, ou declaração de hospedagem assinada com o documento de identidade do genitor que o hospeda, e-mail e telefone do jovem." },
+    { "titre": "Crie a conta do jovem e envie os comprovantes" },
+    { "titre": "Aguarde a validação", "detail": "A conta recebe o crédito quando a inscrição é aceita." },
+    { "titre": "Reserve as ofertas", "detail": "Acompanhe o seu filho adolescente nas primeiras escolhas, se precisar." }
+  ],
+  "ou": [
+    { "nom": "pass Culture", "detail": "Aplicativo e site oficial, com serviço de ajuda on-line.", "url": "https://pass.culture.fr" }
+  ],
+  "liens": [
+    { "titre": "Pass Culture (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959" },
+    { "titre": "Pass Culture: mudanças em 2026 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Aos 17 anos: ativar o crédito do pass Culture", "evenement": "activite" },
+    { "type": "rappel", "titre": "Usar o crédito do pass Culture antes dos 21 anos", "evenement": "activite" },
+    { "type": "coffre", "titre": "Declaração de hospedagem para o pass Culture", "categorie": "autres" },
+    { "type": "depense", "titre": "Passeio ou atividade cultural", "categorie": "loisirs" },
+    { "type": "calendrier", "titre": "Passeio cultural", "evenement": "activite" }
+  ],
+  "datesLimites": [
+    { "libelle": "Créditos utilizáveis até a véspera dos 21 anos" }
+  ],
+  "aConfirmer": [
+    "As condições exatas e a data de pagamento do bônus de 50 € após os 18 anos não são detalhadas pelas páginas oficiais: verifique em pass.culture.fr.",
+    "A confirmar localmente: as ofertas disponíveis na Reunião dependem dos locais parceiros, a consultar no aplicativo.",
+    "O modelo de declaração de hospedagem e a forma de enviar os documentos são explicados no aplicativo: confira no momento da inscrição."
+  ],
+  "motsCles": ["pass Culture", "cultura", "adolescente", "livros", "cinema", "música", "17 anos", "18 anos"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, notícia A18775 Pass Culture: mudanças em 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "slug": "assurance-scolaire",
+  "territoire": "france",
+  "categorie": "assurances",
+  "titre": "Seguro escolar",
+  "resume": "Quando ele pode ser exigido (cantina, atividades extraescolares), o que cobre, como verificar se seu filho já não está segurado e como organizá-lo entre pais separados.",
+  "aQuoiCaSert": "O seguro escolar (assurance scolaire) protege seu filho durante as atividades escolares e no trajeto. Ele reúne duas garantias: a responsabilidade civil (responsabilité civile), para os danos que a criança causa a outras pessoas, e o seguro de acidentes pessoais (individuelle accident corporel), para os danos que ela sofre, mesmo que se machuque sozinha. Uma opção « extra-scolaire » cobre também o lazer e as férias, 24 horas por dia.",
+  "quiEstConcerne": [
+    "Os pais de crianças matriculadas na escola, da educação infantil ao ensino médio.",
+    "Os pais cujo filho almoça na cantina ou frequenta as atividades extraescolares do município, onde o atestado pode ser exigido."
+  ],
+  "aSavoir": [
+    "Em princípio, o seguro escolar é opcional, quer as atividades sejam obrigatórias (piscina, ginásio previstos no horário escolar) ou opcionais (passeios, viagens organizadas pelo estabelecimento).",
+    "Ele pode ser exigido para a cantina e para as atividades extraescolares organizadas pelo município (estudo supervisionado, atividades culturais ou esportivas).",
+    "A responsabilidade civil muitas vezes já está incluída no seu seguro residencial multirriscos (assurance multirisque habitation), e alguns contratos pessoais cobrem acidentes pessoais: verifique antes de contratar.",
+    "Garantias complementares possíveis conforme o contrato: roubo ou extorsão (racket), reforço escolar em casa para uma criança doente.",
+    "Em caso de mudança de escola ou de estabelecimento, avise sua seguradora.",
+    "Custo indicativo segundo o service-public.gouv.fr: a partir de cerca de 10 € por ano e por filho."
+  ],
+  "documents": [
+    {
+      "id": "contrat-habitation",
+      "libelle": "Contrato de seguro residencial multirriscos de cada genitor",
+      "detail": "Para verificar a garantia de responsabilidade civil e se a criança consta como segurada.",
+      "coffre": "finances"
+    },
+    {
+      "id": "contrats-perso",
+      "libelle": "Outros contratos pessoais (garantie des accidents de la vie, individuelle accident)",
+      "detail": "Podem já cobrir os acidentes pessoais da criança.",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation",
+      "libelle": "Atestado de seguro escolar ou de responsabilidade civil em nome da criança",
+      "detail": "Original ou cópia, conforme o pedido da escola, da prefeitura (mairie: cantina, extraescolar) ou do centro de lazer. Pense numa cópia para o outro genitor.",
+      "coffre": "scolarite"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique seus contratos atuais",
+      "detail": "Residencial, garantie des accidents de la vie (seguro de acidentes da vida), acidentes pessoais: pergunte à sua seguradora se a criança está coberta nas atividades escolares e extraescolares."
+    },
+    {
+      "titre": "Pais separados: decidam quem faz o seguro da criança",
+      "detail": "Não adianta pagar duas vezes pela mesma garantia. Um só contrato basta se a criança estiver bem identificada nele; compartilhe o atestado."
+    },
+    {
+      "titre": "Contrate, se necessário",
+      "detail": "Com a seguradora de sua escolha, ou por um contrato coletivo oferecido por uma associação de pais de alunos ou por uma escola particular."
+    },
+    {
+      "titre": "Confira antes de entregar os documentos",
+      "detail": "Atestado em nome da criança, válido para o ano letivo em curso, com a responsabilidade civil e, se pedido, o seguro de acidentes pessoais."
+    },
+    {
+      "titre": "Entregue o atestado",
+      "detail": "À escola, à prefeitura (cantina, extraescolar) ou ao centro de lazer, se for pedido."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Sua seguradora ou uma associação de pais de alunos (association de parents d'élèves)"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Seguro escolar (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Atestado de seguro escolar",
+      "categorie": "scolarite"
+    },
+    {
+      "type": "depense",
+      "titre": "Seguro escolar",
+      "categorie": "assurance"
+    },
+    {
+      "type": "rappel",
+      "titre": "Renovar o atestado de seguro escolar para a volta às aulas",
+      "evenement": "ecole"
+    }
+  ],
+  "aConfirmer": [
+    "Os atestados exigidos variam: verifique com sua escola, seu município (cantina, extraescolar) ou a escola particular."
+  ],
+  "motsCles": [
+    "seguro",
+    "responsabilidade civil",
+    "acidente",
+    "escola",
+    "atestado",
+    "cantina"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1871 Seguro escolar",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

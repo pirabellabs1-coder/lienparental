@@ -1,0 +1,63 @@
+{
+  "slug": "autorisation-sortie-territoire",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Authorization for a child to leave the country (AST)",
+  "resume": "When your child travels abroad without either parent (Comoros, Madagascar or elsewhere), or to mainland France with a stopover abroad: the free form, the documents, and what to do if you fear the child will leave without your consent.",
+  "aQuoiCaSert": "The autorisation de sortie du territoire (AST, authorization to leave the country) allows a minor who lives in France to travel abroad without being accompanied by a parent or a person holding parental authority: school trip, stay with a relative, summer camp. You fill it in without going to the town hall (mairie) or the préfecture. From Mayotte, a stay in the Comoros or Madagascar, or a flight to La Réunion or mainland France with a stopover abroad, is concerned if the child travels without their parents.",
+  "quiEstConcerne": [
+    "Minors who live in France and travel abroad without any parent or holder of parental authority.",
+    "Separated parents who need to sign or check an AST, or who fear the child will be taken abroad without their consent."
+  ],
+  "aSavoir": [
+    "No AST is needed if the child travels with one of their parents, even if the parents are separated.",
+    "Only one parent holding parental authority signs the form. The other parent's consent is not requested.",
+    "The period of validity is chosen by the signing parent, up to a maximum of one year.",
+    "The form is free and is filled in online on service-public.gouv.fr (or printed and completed by hand).",
+    "The child must also have their own valid ID (ID card or passport depending on the country), and a visa if the country requires one.",
+    "Overseas territories: a journey between an overseas department and mainland France with a stopover abroad requires an AST if the child travels without their parents.",
+    "Fear of abduction: in an emergency, an opposition de sortie du territoire (OST) is requested in person at the préfecture (police station or gendarmerie if it is closed and departure is imminent). It lasts 15 days at most. For a lasting measure, only the family court judge (juge aux affaires familiales, JAF) can order a ban (IST).",
+    "IST in force: the child can only leave the country with both parents' consent. It must also be temporarily lifted for a flight to an overseas territory or mainland France with a stopover abroad."
+  ],
+  "documents": [
+    { "id": "formulaire-ast", "libelle": "AST form completed and signed (Cerfa n° 15646)", "detail": "Original signed by one parent holding parental authority. The child keeps it on them throughout the trip.", "coffre": "autres" },
+    { "id": "identite-signataire", "libelle": "Legible photocopy of the signing parent's ID", "detail": "French parent: ID card or passport, valid or expired less than 5 years ago. Parent from outside the European Union: valid passport and valid French residence permit.", "coffre": "autres" },
+    { "id": "identite-enfant", "libelle": "The child's ID (original, currently valid)", "detail": "ID card or passport depending on the destination, with a visa if the country requires one.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Copy of the family record book (livret de famille)", "detail": "Recommended if the child and the signing parent have different surnames.", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Court decision on parental authority (copy)", "detail": "Useful if you hold parental authority alone or in case of an IST. Essential for an OST request, together with evidence of the risk.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Check whether an AST is needed", "detail": "Is the child going abroad, or traveling via another country, without either parent? If so, an AST is needed." },
+    { "titre": "Fill in the form online", "detail": "On service-public.gouv.fr. Enter the period of validity (one year at most), then print and sign." },
+    { "titre": "Check before departure", "detail": "Original signed form, photocopy of the signing parent's ID, the child's valid ID (and visa if needed), copy of the family record book. Ask the airline about its own requirements." },
+    { "titre": "Hand everything to the child or the accompanying adult", "detail": "Keep a scanned copy in the Vault." },
+    { "titre": "If you fear a departure without your consent", "detail": "Go in person to the Préfecture de Mayotte with proof of parental authority, your ID, the child's ID and evidence of the risk. For lasting protection, apply to the family court judge." }
+  ],
+  "ou": [
+    { "nom": "Online AST form (service-public.gouv.fr)", "detail": "Free, no trip needed.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46121" },
+    { "nom": "Préfecture de Mayotte (State administration office)", "detail": "Avenue de la Préfecture, 97600 Mamoudzou. Only for an emergency opposition to leaving the country (OST).", "telephone": "02 69 63 50 00" }
+  ],
+  "liens": [
+    { "titre": "Authorization to leave the country (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359" },
+    { "titre": "Parental conflict over leaving the country: OST and IST (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Signed authorization to leave the country", "categorie": "autres" },
+    { "type": "coffre", "titre": "Judgment on parental authority or IST", "categorie": "jaf" },
+    { "type": "rappel", "titre": "End of validity of the child's AST", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "One year at most", "detail": "Period of validity of the AST." },
+    { "libelle": "15 days at most", "detail": "Duration of an opposition to leaving the country decided by the préfet." }
+  ],
+  "aConfirmer": [
+    "To be confirmed: the ID and documents required for a minor by the destination country (Comoros, Madagascar), with the airline or the consulate.",
+    "To be confirmed locally: the Préfecture de Mayotte's opening hours for an emergency OST (address and phone number taken from the service-public directory)."
+  ],
+  "motsCles": ["AST", "leaving the country", "travel", "minor", "Comoros", "Madagascar", "OST", "IST"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1359 Authorization to leave the country", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1774 Parental conflict over leaving the country", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774", "verifieLe": "2026-10-29" }
+  ]
+}

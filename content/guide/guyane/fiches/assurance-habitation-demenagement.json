@@ -12,7 +12,7 @@
   ],
   "aSavoir": [
     "Locataire : seule l'assurance des risques locatifs (incendie, explosion, dégât des eaux) est obligatoire. Remettez l'attestation au propriétaire à la remise des clés, puis chaque année s'il la demande.",
-    "Sans assurance, après une lettre recommandée et un délai d'un mois, le propriétaire peut souscrire pour vous et vous refacturer la prime majorée de 10 % au plus, ou demander la résiliation du bail.",
+    "Sans assurance, le propriétaire a deux options. Soit il vous envoie une lettre recommandée : un mois après, il peut souscrire pour vous et vous refacturer la prime majorée de 10 % au plus, mais il ne peut plus demander la résiliation du bail pour ce motif. Soit il vous fait remettre un commandement par commissaire de justice : sans assurance un mois après, il peut demander au juge de constater la résiliation du bail.",
     "Déménagement : prévenez votre assureur avant de partir ou au plus tard dans les 15 jours calendaires après avoir quitté le logement, par lettre recommandée ou envoi recommandé électronique.",
     "Résiliation pour déménagement : possible si le changement de logement modifie les risques assurés. Courrier à envoyer au plus tard 3 mois après le départ, en expliquant le lien avec le déménagement. Le contrat prend fin 1 mois après réception par l'assureur.",
     "Aucune indemnité de résiliation ne peut être réclamée pour cause de déménagement, et les cotisations payées pour la période après la résiliation doivent vous être remboursées.",
@@ -55,13 +55,13 @@
     { "libelle": "3 mois après le départ pour résilier au motif du déménagement" }
   ],
   "aConfirmer": [
-    "À confirmer localement : la présence d'une ADIL en Guyane et ses permanences, sur anil.org.",
+    "À confirmer localement : l'adresse et les permanences de l'ADIL de la Guyane, sur anil.org.",
     "Si le contrat est au nom des deux ex-conjoints, les modalités de modification sont à voir directement avec l'assureur : les fiches officielles ne traitent pas ce cas."
   ],
   "motsCles": ["assurance habitation", "déménagement", "locataire", "résiliation", "responsabilité civile", "séparation"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F31300 Assurance habitation du locataire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2025-04-16" },
-    { "titre": "Service-public.gouv.fr, F10827 Assurance habitation et déménagement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2025-05-02" }
+    { "titre": "Service-public.gouv.fr, F31300 Assurance habitation du locataire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10827 Assurance habitation et déménagement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2026-10-29" }
   ]
 }

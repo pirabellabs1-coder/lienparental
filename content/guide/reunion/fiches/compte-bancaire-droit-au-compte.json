@@ -1,0 +1,69 @@
+{
+  "slug": "compte-bancaire-droit-au-compte",
+  "territoire": "reunion",
+  "categorie": "argent",
+  "titre": "Avoir son propre compte bancaire après une séparation",
+  "resume": "Ouvrir un compte à votre nom pour recevoir pension et allocations, et, si une banque refuse, utiliser le droit au compte, géré à La Réunion par l'IEDOM : pièces et délais.",
+  "aQuoiCaSert": "Après une séparation, un compte personnel permet de recevoir la pension alimentaire et les prestations de la Caf, et de payer les frais de l'enfant en gardant des traces claires. Si une banque refuse de vous ouvrir un compte, la procédure gratuite du droit au compte permet de faire désigner une banque, qui doit vous ouvrir un compte avec des services bancaires de base gratuits. À La Réunion, cette procédure est assurée par l'IEDOM (Institut d'émission des départements d'outre-mer), qui joue ici le rôle de la Banque de France.",
+  "quiEstConcerne": [
+    "Le parent qui n'a pas de compte à son nom, ou seulement un compte joint avec son ex-conjoint.",
+    "Toute personne qui réside en France, n'a pas de compte bancaire et s'est vu refuser l'ouverture d'un compte.",
+    "Le titulaire d'un seul compte joint peut aussi demander le droit au compte pour avoir un compte individuel."
+  ],
+  "aSavoir": [
+    "La banque a 15 jours pour répondre à votre demande d'ouverture. Sans réponse dans ce délai, c'est un refus.",
+    "La banque est désignée dans le jour ouvré qui suit la réception de votre dossier complet. La désignation est valable 6 mois : contactez la banque désignée dans ce délai.",
+    "La banque désignée vous envoie la liste de ses pièces sous 3 jours ouvrés, puis doit ouvrir le compte 3 jours ouvrés au plus tard après réception de toutes les pièces.",
+    "Services bancaires de base gratuits, dont une carte de paiement, les virements et prélèvements. Frais d'incident plafonnés à 4 € par opération et 20 € par mois.",
+    "La banque désignée ne peut fermer ce compte que dans des cas précis, avec en général un préavis de 2 mois.",
+    "À La Réunion, comme dans les autres départements d'outre-mer, c'est l'IEDOM, et non la Banque de France, qui reçoit la demande et désigne la banque : dossier en ligne sur iedom.fr, par courrier ou en agence. La procédure est gratuite. À La Réunion, l'IEDOM reçoit les particuliers sur rendez-vous à Saint-Denis et tient une permanence sur rendez-vous à Saint-Pierre."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "Formulaire de demande d'exercice du droit au compte", "detail": "Disponible auprès de l'IEDOM ou sur son site.", "coffre": "finances" },
+    { "id": "identite", "libelle": "Pièce d'identité en cours de validité", "detail": "Carte d'identité, passeport ou titre de séjour. Original au rendez-vous à la banque.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Justificatif de domicile de moins de 3 mois", "detail": "Facture d'électricité ou d'eau, quittance de loyer. Si vous êtes hébergé, la banque peut demander une attestation d'hébergement.", "coffre": "finances" },
+    { "id": "lettre-refus", "libelle": "Lettre de refus de la banque", "detail": "Ou la preuve de votre demande d'ouverture datant de plus de 15 jours sans réponse.", "coffre": "courriers" },
+    { "id": "rib", "libelle": "RIB du nouveau compte", "detail": "À transmettre à la Caf, à l'ARIPA, à votre employeur et à l'autre parent si la pension vous est versée directement.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Demandez l'ouverture d'un compte à une banque", "detail": "Par écrit si possible, et gardez une preuve de la date de la demande." },
+    { "titre": "En cas de refus, demandez la lettre de refus", "detail": "Ou attendez 15 jours sans réponse. Gardez la preuve de votre demande." },
+    { "titre": "Prenez rendez-vous à l'IEDOM", "detail": "Agence de La Réunion à Saint-Denis, ou permanence de Saint-Pierre. Le formulaire est disponible auprès de l'IEDOM." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Formulaire rempli, pièce d'identité valide, justificatif de domicile de moins de 3 mois, lettre de refus ou preuve de demande de plus de 15 jours. Pour la banque désignée ensuite : le courrier de désignation et les pièces qu'elle vous a listées." },
+    { "titre": "Ouvrez le compte à la banque désignée", "detail": "Dans les 6 mois. Elle a 3 jours ouvrés après réception de toutes les pièces." },
+    { "titre": "Transmettez votre nouveau RIB", "detail": "À la Caf (espace en ligne), à l'ARIPA si elle verse la pension, à l'employeur et, si besoin, à l'autre parent." }
+  ],
+  "ou": [
+    { "nom": "IEDOM, agence de La Réunion", "detail": "Accueil des particuliers sur rendez-vous, du mardi au jeudi de 8 h à 12 h, 4 rue du Maréchal Leclerc, 97400 Saint-Denis (courriel : particuliers-reunion@iedom.fr). Permanence le lundi sur rendez-vous à la Maison de justice et du droit de Saint-Pierre, 26 rue Marius et Ary Leblond (02 62 91 84 92).", "url": "https://www.iedom.fr/rubrique20", "telephone": "02 62 90 71 00" },
+    { "nom": "La banque de votre choix", "detail": "Première demande d'ouverture." }
+  ],
+  "liens": [
+    { "titre": "Droit au compte (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417" },
+    { "titre": "IEDOM, agence de La Réunion", "url": "https://www.iedom.fr/rubrique20" },
+    { "titre": "Guide du droit au compte (IEDOM)", "url": "https://www.iedom.fr/IMG/pdf/guide-droit_au_compte_vdef.pdf" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Lettre de refus d'ouverture de compte", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Courrier de désignation de la banque", "categorie": "courriers" },
+    { "type": "coffre", "titre": "RIB de mon compte personnel", "categorie": "finances" },
+    { "type": "calendrier", "titre": "Rendez-vous IEDOM : droit au compte", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Contacter la banque désignée (6 mois maximum)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Transmettre mon nouveau RIB à la Caf et à l'ARIPA", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "15 jours : délai de réponse de la banque, au-delà son silence vaut refus" },
+    { "libelle": "6 mois : validité de la désignation de la banque" }
+  ],
+  "aConfirmer": [
+    "Les délais indiqués ci-dessus viennent de la fiche nationale (Banque de France) : ceux appliqués par l'IEDOM sont à confirmer auprès de son agence.",
+    "Les horaires de l'IEDOM peuvent changer : vérifiez-les sur iedom.fr avant de vous déplacer.",
+    "Les règles de désolidarisation d'un compte joint dépendent de votre banque : la fiche officielle sur le droit au compte ne les détaille pas."
+  ],
+  "motsCles": ["compte bancaire", "RIB", "droit au compte", "IEDOM", "Banque de France", "compte joint", "séparation"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2417 Droit au compte", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2417", "verifieLe": "2026-10-29" },
+    { "titre": "IEDOM, agence de La Réunion (services aux particuliers)", "url": "https://www.iedom.fr/rubrique20", "verifieLe": "2026-10-29" },
+    { "titre": "IEDOM, guide du droit au compte", "url": "https://www.iedom.fr/IMG/pdf/guide-droit_au_compte_vdef.pdf", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "slug": "prime-demenagement",
+  "territoire": "reunion",
+  "categorie": "logement",
+  "titre": "Auxílio-mudança da Caf (prime de déménagement)",
+  "resume": "Um auxílio para famílias com pelo menos 3 filhos que se mudam perto de um nascimento: condições de datas, valores máximos, documentos a enviar e prazo de 6 meses.",
+  "aQuoiCaSert": "O auxílio-mudança (prime de déménagement) reembolsa os gastos reais de mudança, até um valor máximo, às famílias com pelo menos 3 filhos que se mudam durante a gravidez do 3º filho ou seguinte, ou nos dois anos após o nascimento do caçula. Ele é pago de uma só vez, mediante comprovantes. Um adiantamento com base num orçamento é possível se a sua situação for precária.",
+  "quiEstConcerne": [
+    "As famílias com pelo menos 3 filhos dependentes, nascidos ou por nascer.",
+    "Que tenham direito, para a nova moradia, à APL (aide personnalisée au logement, ajuda personalizada à moradia) ou à ALF (allocation de logement familiale, auxílio-moradia familiar).",
+    "Genitor separado: essas condições são avaliadas para a sua própria família beneficiária."
+  ],
+  "aSavoir": [
+    "Datas: a mudança deve ocorrer entre o 1º dia do mês seguinte ao 3º mês de gravidez e o último dia do mês anterior aos 2 anos do filho mais novo.",
+    "Valores máximos desde 1º de abril de 2026: 1.147,58 € para 3 filhos, 1.243,21 € para 4 filhos, mais 95,63 € por filho adicional. Você é reembolsado dos gastos reais até esse limite.",
+    "Adiantamento em situação precária: 50% a 75% do orçamento, até o valor do auxílio devido. A nota fiscal paga deve depois ser enviada em até 6 meses após a mudança para receber o saldo.",
+    "O pedido (Cerfa n° 11363) é enviado à Caf (Caisse d'allocations familiales, órgão de benefícios familiares), ou à MSA (seguridade social agrícola) no regime agrícola, no máximo 6 meses após a mudança.",
+    "Em caso de recusa, você tem 2 meses a partir do recebimento da decisão para recorrer à comissão de recurso amigável (commission de recours amiable)."
+  ],
+  "documents": [
+    {
+      "id": "cerfa-11363",
+      "libelle": "Formulário de pedido de auxílio-mudança (Cerfa n° 11363)",
+      "detail": "Baixe no service-public.gouv.fr, preencha e assine.",
+      "coffre": "finances"
+    },
+    {
+      "id": "facture",
+      "libelle": "Nota fiscal paga da transportadora ou comprovantes dos gastos",
+      "detail": "Todas as notas ligadas à mudança, em seu nome. Guarde uma cópia de cada documento enviado.",
+      "coffre": "finances"
+    },
+    {
+      "id": "devis",
+      "libelle": "Orçamento da transportadora, para pedir um adiantamento",
+      "detail": "Somente se a sua situação for precária.",
+      "coffre": "finances"
+    },
+    {
+      "id": "grossesse",
+      "libelle": "Declaração de gravidez ou certidão de nascimento do filho mais novo",
+      "detail": "Somente se a Caf pedir para verificar o período.",
+      "coffre": "sante"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Declaração de aluguel (attestation de loyer) da nova moradia",
+      "detail": "Necessária para abrir o direito ao auxílio-moradia, condição do auxílio-mudança.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique as condições de datas e de número de filhos",
+      "detail": "Calcule o período permitido a partir do início da gravidez ou da data de nascimento do filho mais novo."
+    },
+    {
+      "titre": "Peça o auxílio-moradia para a nova moradia",
+      "detail": "Sem direito à APL ou à ALF, não há auxílio-mudança. Veja a ficha «Auxílios-moradia na Reunião»."
+    },
+    {
+      "titre": "Guarde todas as notas da mudança",
+      "detail": "Ou peça um orçamento se precisar de adiantamento."
+    },
+    {
+      "titre": "Confira antes de enviar",
+      "detail": "Formulário Cerfa n° 11363 preenchido e assinado, notas fiscais pagas e legíveis, número de beneficiário, envio em até 6 meses após a mudança. Guarde uma cópia de tudo."
+    },
+    {
+      "titre": "Envie o pedido à Caf de La Réunion",
+      "detail": "No máximo 6 meses após a mudança."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de La Réunion",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-reunion"
+    },
+    {
+      "nom": "MSA",
+      "detail": "Se você pertence ao regime agrícola."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Auxílio-mudança (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008"
+    },
+    {
+      "titre": "Auxílio-moradia familiar (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Gastos de mudança",
+      "categorie": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Enviar o pedido de auxílio-mudança (no máximo 6 meses)",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Nota fiscal da mudança",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Pedido de auxílio-mudança enviado (cópia)",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Pedido no máximo 6 meses após a mudança"
+    },
+    {
+      "libelle": "Nota fiscal paga em até 6 meses após a mudança, se você recebeu um adiantamento"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar com a Caf de La Réunion: o auxílio-moradia (APL ou ALF) ao qual a sua nova moradia dá direito, condição do auxílio-mudança.",
+    "A confirmar: os valores máximos citados são os do service-public.gouv.fr; a ficha não indica valor diferente para os territórios ultramarinos."
+  ],
+  "motsCles": [
+    "mudança",
+    "auxílio",
+    "família numerosa",
+    "Caf",
+    "nascimento",
+    "cerfa 11363"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2008 Auxílio-mudança",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13132 Auxílio-moradia familiar",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

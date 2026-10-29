@@ -1,0 +1,66 @@
+{
+  "slug": "mode-de-garde-petite-enfance",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Daycare or childminder: finding childcare",
+  "resume": "Childcare places are scarce in Mayotte: where to look, which documents to prepare, and how to get the complément de libre choix du mode de garde (CMG, childcare allowance) paid by the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund).",
+  "aQuoiCaSert": "Having your young child looked after lets you work or train. In Mayotte, daycare (crèche) places are few: you need to start very early. If you employ a registered childminder (assistante maternelle agréée) or a home childcare worker, or if the child attends an eligible daycare or micro-daycare (micro-crèche), the CSSM can pay the complément de libre choix du mode de garde (CMG) and cover all or part of the social security contributions.",
+  "quiEstConcerne": [
+    "Parents of a child aged 6 or under (under 12 for a single-parent family), for the CMG.",
+    "Separated parents with shared residence: each can receive the CMG since December 2025."
+  ],
+  "aSavoir": [
+    "The CMG exists in Mayotte. Since September 1, 2025, its amount no longer depends on flat rates by bracket: it is calculated according to your monthly resources, the family's composition, the hourly cost and the number of hours of childcare.",
+    "It covers a childminder, home childcare, a daycare or a micro-daycare, depending on the case (CSSM).",
+    "Direct employer of a childminder or home childcare worker: declare the pay every month on pajemploi.urssaf.fr.",
+    "Childminders must be registered (agréées) by the PMI (protection maternelle et infantile, the mother and child health service) of the Département de Mayotte (local council). You become their employer and sign an employment contract.",
+    "Public daycare: the application form is usually picked up at the town hall (mairie). Non-profit or private daycare: you register with the management."
+  ],
+  "documents": [
+    { "id": "livret-famille", "libelle": "Family record book (livret de famille) or the child's birth certificate", "detail": "Copy. During pregnancy, a certificate of pregnancy is usually requested instead.", "coffre": "autres" },
+    { "id": "identite-parents", "libelle": "ID of each parent", "detail": "Copy.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Proof of address less than 3 months old", "detail": "Copy.", "coffre": "autres" },
+    { "id": "ressources", "libelle": "Latest tax notice or CSSM certificate", "detail": "Copy. Used to calculate the daycare fee.", "coffre": "finances" },
+    { "id": "travail", "libelle": "Proof of the parents' activity", "detail": "Employment contract, payslips, certificate of training or from France Travail (the public employment service).", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Judgment or agreement setting residence and parental authority, if you are separated", "detail": "Copy. Shows who may pick up the child.", "coffre": "jaf" },
+    { "id": "vaccins", "libelle": "Vaccination pages of the health record book (carnet de santé)", "detail": "Copy. Compulsory vaccines are required to start in a group setting.", "coffre": "sante" },
+    { "id": "contrat-assmat", "libelle": "The childminder's employment contract and certificate of registration", "detail": "Signed original. Ask for a copy of the registration issued by the PMI.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Look for childcare options near you", "detail": "On monenfant.fr, at your town hall or at the PMI." },
+    { "titre": "Check before you go", "detail": "Family record book or certificate of pregnancy, parents' ID, proof of address, tax notice, proof of activity, judgment if you are separated, vaccination pages. Phone the facility to ask for its exact list." },
+    { "titre": "Apply for a place", "detail": "Note the date you applied and follow up regularly." },
+    { "titre": "With a childminder, check their registration and sign the contract", "detail": "Registration issued by the PMI of the Département de Mayotte." },
+    { "titre": "Apply for the CMG", "detail": "In \"Mon Compte\" on caf.fr, the online space used by the CSSM. Then register as an employer on Pajemploi if you employ someone directly." },
+    { "titre": "Record the childcare costs", "detail": "In the Journal, to track the expense per child and the split with the other parent." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Complément de libre choix du mode de garde (childcare allowance).", "url": "https://www.cssm.fr/page/prestations-familiales", "telephone": "02 69 61 91 91" },
+    { "nom": "Département de Mayotte (PMI)", "detail": "Registration and monitoring of childminders. Département switchboard, 112 boulevard Halidi Sélémani, Mamoudzou.", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "telephone": "02 69 66 10 00" },
+    { "nom": "monenfant.fr", "detail": "National directory of daycares and childminders.", "url": "https://monenfant.fr" },
+    { "nom": "Pajemploi (Urssaf)", "detail": "Monthly salary declaration.", "url": "https://www.pajemploi.urssaf.fr" }
+  ],
+  "liens": [
+    { "titre": "Family benefits in Mayotte, including the CMG (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Childcare allowance: complément de libre choix du mode de garde (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Follow up on the daycare place application", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Declare the childminder's salary on Pajemploi", "evenement": "autre" },
+    { "type": "coffre", "titre": "Daycare agreement or childminder's contract", "categorie": "finances" },
+    { "type": "coffre", "titre": "Childminder's certificate of registration", "categorie": "finances" },
+    { "type": "depense", "titre": "Childcare costs", "categorie": "garde" }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: whether monenfant.fr covers Mayotte (site unavailable when checked) and whether there are relais petite enfance (early childhood information centers).",
+    "To be confirmed with the Département: the PMI department and address in charge of registering childminders.",
+    "To be confirmed with the CSSM: the parents' activity requirements for the CMG and the amount for your situation."
+  ],
+  "motsCles": ["daycare", "childminder", "nanny", "CMG", "Pajemploi", "childcare", "CSSM"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Family benefits (CMG)", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "Département de Mayotte, Contact us", "url": "https://www.mayotte.fr/contacts/informations-pratiques/nous-contacter", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39152 CMG for direct employment", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "slug": "assurance-habitation-demenagement",
+  "territoire": "mayotte",
+  "categorie": "assurances",
+  "titre": "Home insurance when you move",
+  "resume": "After a separation: insure the new home before you get the keys, notify the old home's insurer, cancel at no cost and check that the children remain covered.",
+  "aQuoiCaSert": "When you leave the family home, you need both to deal with the old home insurance (assurance habitation) contract and to insure the new home. A tenant must at least be insured against tenant's risks (risques locatifs). It is also the time to check your civil liability cover (responsabilité civile), often included in the home insurance contract, which covers damage caused by the children. In Mayotte, unwritten leases are common: a written lease protects both parties.",
+  "quiEstConcerne": [
+    "The parent who moves after a separation, whether a tenant or an owner.",
+    "The parent who stays in the home and needs to adapt the contract.",
+    "Both parents, to check that the children have civil liability cover at each parent's home."
+  ],
+  "aSavoir": [
+    "Tenant: insurance against tenant's risks (fire, explosion, water damage) is compulsory. Give the certificate to the landlord when you get the keys, then every year if they ask for it.",
+    "Moving: notify your insurer before you leave or at the latest within 15 days after leaving the home, by registered letter.",
+    "Cancellation because of a move: possible if the change of home alters the insured risks, no later than 3 months after leaving. The contract ends 1 month after the insurer receives the letter, with no cancellation fee.",
+    "You can also transfer the contract to the new home if the insurer agrees.",
+    "The rules of the law of July 6, 1989 on residential leases, including the tenant's obligation to be insured, were made applicable to Mayotte by a 2012 ordinance (ordonnance), with adaptations."
+  ],
+  "documents": [
+    { "id": "contrat-actuel", "libelle": "Current home insurance contract and contract number", "coffre": "finances" },
+    { "id": "bail-nouveau", "libelle": "Lease or move-in inspection report (état des lieux) for the new home", "detail": "Copy. The insurer will ask for the address, floor area and number of rooms.", "coffre": "finances" },
+    { "id": "attestation-nouveau", "libelle": "Insurance certificate for the new home", "detail": "To give to the landlord on the day you get the keys.", "coffre": "finances" },
+    { "id": "lettre-resiliation", "libelle": "Cancellation or notification letter to the former insurer", "detail": "State the date you left and the link with the move.", "coffre": "courriers" },
+    { "id": "accuse-reception", "libelle": "Insurer's acknowledgment of receipt", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Insure the new home before you get the keys", "detail": "The landlord will ask for the certificate." },
+    { "titre": "Check before you go", "detail": "Insurance certificate, ID, signed lease. For the insurer: contract number, new address, floor area, move-in date." },
+    { "titre": "Notify the old home's insurer", "detail": "Before leaving or within the following 15 days. Cancel no later than 3 months after leaving if you wish." },
+    { "titre": "Contract in both ex-partners' names", "detail": "Check with the insurer how to remove a name or take out a new contract." },
+    { "titre": "Check the children's civil liability cover", "detail": "Make sure the children remain covered at each parent's home and share the certificates." },
+    { "titre": "Keep proof of sending", "detail": "Store the letter and the acknowledgment of receipt in the Vault." }
+  ],
+  "ou": [
+    { "nom": "Your home insurer" },
+    { "nom": "ADIL de Mayotte", "detail": "Agence départementale d'information sur le logement (departmental housing information agency): free legal advice on tenants' rights. Résidence Nyrora, quartier Hamaha, Mamoudzou.", "url": "https://www.anil.org/adil-976/", "telephone": "06 39 21 53 91" }
+  ],
+  "liens": [
+    { "titre": "Tenant's home insurance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300" },
+    { "titre": "Home insurance and moving (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827" },
+    { "titre": "ADIL de Mayotte (anil.org)", "url": "https://www.anil.org/adil-976/" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Home insurance certificate for the new home", "categorie": "finances" },
+    { "type": "coffre", "titre": "Cancellation letter for the old insurance", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Notify the old home's insurer (15 days after leaving)", "evenement": "autre" },
+    { "type": "depense", "titre": "Home insurance", "categorie": "assurance" }
+  ],
+  "datesLimites": [
+    { "libelle": "15 days after leaving to notify the insurer" },
+    { "libelle": "3 months after leaving to cancel on the grounds of the move" }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the ADIL de Mayotte: the adaptations for Mayotte made by ordonnance n° 2012-576 regarding leases and tenant's insurance.",
+    "If the contract is in both ex-partners' names, how to change it must be discussed directly with the insurer."
+  ],
+  "motsCles": ["home insurance", "moving", "tenant", "cancellation", "civil liability", "lease"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F31300 Tenant's home insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31300", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F10827 Home insurance and moving", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10827", "verifieLe": "2026-10-29" },
+    { "titre": "Sénat, ministerial answer of March 16, 2017 (1989 law applicable to Mayotte)", "url": "https://www.senat.fr/questions/base/2016/qSEQ160521560.html", "verifieLe": "2026-10-29" },
+    { "titre": "ANIL, ADIL de Mayotte", "url": "https://www.anil.org/adil-976/", "verifieLe": "2026-10-29" }
+  ]
+}

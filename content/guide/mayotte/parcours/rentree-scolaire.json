@@ -1,0 +1,17 @@
+{
+  "slug": "rentree-scolaire",
+  "territoire": "mayotte",
+  "titre": "Rentrée scolaire",
+  "resume": "Inscription, repas, assurance, aides : tout ce qu'il faut préparer avant la rentrée.",
+  "ordre": 2,
+  "elements": [
+    { "id": "inscription", "titre": "Inscrire mon enfant à l'école", "detail": "Les inscriptions en mairie peuvent commencer dès décembre.", "fiche": "inscrire-enfant-ecole" },
+    { "id": "changement-ecole", "titre": "Changer d'école après un déménagement", "detail": "Certificat de radiation et accord des deux parents.", "fiche": "changer-ecole-en-cours-annee" },
+    { "id": "college-lycee", "titre": "Demander la bourse de collège ou de lycée", "fiche": "college-lycee-bourses" },
+    { "id": "vaccins", "titre": "Vérifier que les vaccins sont à jour", "fiche": "vaccinations-pmi" },
+    { "id": "cantine", "titre": "Se renseigner sur la collation, la cantine et le périscolaire", "fiche": "cantine-periscolaire" },
+    { "id": "assurance", "titre": "Vérifier l'assurance scolaire", "fiche": "assurance-scolaire" },
+    { "id": "ars", "titre": "Vérifier l'allocation de rentrée scolaire", "detail": "Versée par la CSSM début août, jusqu'à 20 ans.", "fiche": "allocation-rentree-scolaire" },
+    { "id": "activites", "titre": "Inscrire à une activité sportive avec le Pass'Sport", "fiche": "pass-sport" }
+  ]
+}

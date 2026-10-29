@@ -70,11 +70,11 @@
     "To be confirmed locally: the shared-residence rule for the high school grant, as the official guidance only details it for middle school."
   ],
   "motsCles": ["grant", "middle school", "high school", "6e", "EduConnect", "tax notice", "shared residence"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F984 Middle school grant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-04-30" },
-    { "titre": "Service-public.gouv.fr, F616 High school grant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-04-30" },
-    { "titre": "French Ministry of Education, 2026-2027 calendar of grant campaigns", "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-1-calendrier-des-campagnes-de-bourse-de-college-et-de-lycee-516926.pdf" },
+    { "titre": "Service-public.gouv.fr, F984 Middle school grant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F616 High school grant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-10-29" },
+    { "titre": "French Ministry of Education, 2026-2027 calendar of grant campaigns", "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-1-calendrier-des-campagnes-de-bourse-de-college-et-de-lycee-516926.pdf", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F2322 Enrolling in middle school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322", "verifieLe": "2026-03-20" },
     { "titre": "Service-public.gouv.fr, F2323 Enrolling in high school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2323", "verifieLe": "2026-01-23" }
   ]

@@ -1,0 +1,79 @@
+{
+  "slug": "saisir-juge-affaires-familiales",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Recorrer ao juiz de família (JAF)",
+  "resume": "O formulário cerfa n° 11530, a lista exata de documentos (certidões de nascimento com menos de 3 meses), o tribunal judiciaire de Mamoudzou, a contribuição de 50 € e os casos em que ela não é cobrada.",
+  "aQuoiCaSert": "O juiz de família (juge aux affaires familiales, JAF) decide os desacordos entre os pais sobre o exercício da autoridade parental, a residência da criança, o direito de visita e de hospedagem ou a pensão alimentícia. Ele também pode modificar uma decisão existente quando a situação muda, ou homologar um acordo feito entre os pais para lhe dar a força de uma sentença. Em Mayotte, o competente é o tribunal judiciaire (tribunal judiciário) de Mamoudzou.",
+  "quiEstConcerne": [
+    "Os pais, casados ou não, que não conseguem chegar a um acordo sobre os filhos.",
+    "O genitor que quer modificar uma decisão existente (mudança de endereço, mudança de renda, nova organização).",
+    "Os pais que estão de acordo e querem homologar o seu acordo parental (convention parentale).",
+    "O genitor que quer fixar uma pensão, condição prévia para qualquer recurso em caso de não pagamento."
+  ],
+  "aSavoir": [
+    "Formulário: cerfa n° 11530 «Demande au juge aux affaires familiales» (pedido ao juiz de família), para preencher on-line ou em papel. Também é possível fazer o pedido totalmente on-line.",
+    "Tribunal competente: o do lugar onde mora o genitor com quem a criança reside habitualmente. Em Mayotte: tribunal judiciaire de Mamoudzou.",
+    "O advogado não é obrigatório. A assistência jurídica gratuita (aide juridictionnelle) pode cobrir os custos conforme a sua renda.",
+    "Contribuição de 50 €, restabelecida para as ações cíveis iniciadas desde 1º de março de 2026, na forma de selo eletrônico comprado on-line antes do pedido. Aplica-se nos departamentos ultramarinos. Não é cobrada se você tem assistência jurídica gratuita, para homologar um acordo parental, nem para uma medida protetiva.",
+    "Pais de acordo: pedido conjunto de homologação (cerfa n° 16139), assinado pelos dois.",
+    "Violência: a medida protetiva (ordonnance de protection) é pedida ao juiz de família, sem necessidade de queixa prévia. O tribunal de Mamoudzou tem um núcleo de violência intrafamiliar (pôle violences intrafamiliales). Emergência: 17 ou 112; atendimento: 3919, gratuito a partir de Mayotte.",
+    "Este guia não substitui uma orientação jurídica: procure um advogado ou um point-justice (posto gratuito de informação jurídica)."
+  ],
+  "documents": [
+    { "id": "cerfa-11530", "libelle": "Formulário cerfa n° 11530 preenchido, datado e assinado", "detail": "Original para o tribunal, cópia para você.", "coffre": "jaf" },
+    { "id": "acte-naissance-parent", "libelle": "Cópia integral (copie intégrale) da sua certidão de nascimento com menos de 3 meses", "detail": "Não um extrato. Peça à prefeitura (mairie) do lugar de nascimento (veja a ficha «Obter uma certidão de nascimento»).", "coffre": "jaf" },
+    { "id": "actes-naissance-enfants", "libelle": "Cópia integral da certidão de nascimento de cada filho envolvido, com menos de 3 meses", "detail": "Na prefeitura do lugar de nascimento da criança. Conte com o prazo de envio.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Livro de família (livret de famille, cópia de todas as páginas preenchidas) ou cópia integral da certidão de casamento com menos de 3 meses", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Cópia do seu documento de identidade", "detail": "Carteira de identidade, passaporte ou autorização de residência válidos, frente e verso.", "coffre": "jaf" },
+    { "id": "jugements", "libelle": "Cópia das sentenças anteriores (divórcio, autoridade parental, pensão)", "detail": "Se não tiver mais, peça uma cópia ao cartório do tribunal (greffe) que a proferiu.", "coffre": "jaf" },
+    { "id": "ressources", "libelle": "Comprovantes de renda e de despesas", "detail": "Sobretudo se o pedido for sobre a pensão: aviso de imposto, 3 últimos contracheques, comprovante de benefícios da CSSM (Caisse de sécurité sociale de Mayotte, órgão de seguridade social de Mayotte), aluguel, empréstimos, despesas da criança.", "coffre": "jaf" },
+    { "id": "timbre", "libelle": "Selo eletrônico de 50 € (contribuição)", "detail": "Exceto com assistência jurídica gratuita, homologação de acordo parental ou medida protetiva.", "coffre": "jaf" },
+    { "id": "aj", "libelle": "Decisão de assistência jurídica gratuita ou recibo do pedido, se você a solicitou", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Tente primeiro uma solução amigável", "detail": "Mediação familiar ou acordo escrito para homologar. Não há mediação em caso de violência." },
+    { "titre": "Peça as certidões de nascimento desde já", "detail": "Devem ter menos de 3 meses na data do protocolo: muitas vezes é o documento que atrasa o processo." },
+    { "titre": "Preencha o cerfa n° 11530 ou o pedido on-line", "detail": "Explique claramente o que você pede (residência, direito de visita, valor da pensão) e por quê." },
+    { "titre": "Compre o selo de 50 € se não estiver isento", "detail": "On-line, com cartão bancário, antes de enviar o pedido." },
+    { "titre": "Confira antes de enviar o processo", "detail": "Cerfa assinado; cópias integrais das certidões de nascimento com menos de 3 meses (sua e de cada filho); livro de família; identidade; sentenças anteriores; comprovantes de renda se pedir pensão; selo ou decisão de assistência jurídica gratuita. Faça uma cópia completa." },
+    { "titre": "Envie ou entregue o processo no cartório do tribunal judiciaire de Mamoudzou", "detail": "Ou faça o pedido on-line. Guarde a cópia na seção Processo judicial do Cofre." },
+    { "titre": "Prepare a audiência", "detail": "Adicione a data ao calendário assim que receber a convocação, com um lembrete. Leve os originais dos seus documentos." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Mamoudzou (Tribunal Judiciário de Mamoudzou)", "detail": "97600 Mamoudzou. E-mail de atendimento: accueil.tj-mamoudzou@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" },
+    { "nom": "Points-justice de Mayotte (CDAD, Conseil départemental de l'accès au droit, conselho local de acesso ao direito)", "detail": "Informação jurídica gratuita e ajuda para montar o processo. E-mail: cdad-mayotte@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271" },
+    { "nom": "Violences Femmes Info (atendimento à mulher em situação de violência)", "detail": "Escuta e orientação, gratuito e anônimo, 24 horas por dia. Em perigo imediato, ligue para o 17 ou o 112.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "telephone": "3919" }
+  ],
+  "liens": [
+    { "titre": "Pedido ao juiz de família, cerfa 11530 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764" },
+    { "titre": "Homologação de acordo parental, cerfa 16139 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771" },
+    { "titre": "Contribuição de 50 € e selo fiscal (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227" },
+    { "titre": "Violência doméstica e medida protetiva (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Contribuição de 50 € para recorrer ao juiz de família", "categorie": "frais-administratifs", "montant": 50, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227" },
+    { "type": "coffre", "titre": "Pedido ao juiz de família (cópia completa)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Certidões de nascimento com menos de 3 meses", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Convocação e decisão do juiz de família", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Audiência com o juiz de família", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Verificar a data das certidões de nascimento (menos de 3 meses)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Certidões de nascimento com menos de 3 meses no momento do protocolo" }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: endereço postal completo e horários do tribunal judiciaire de Mamoudzou (o diretório oficial só indica o município; o site justice.fr estava indisponível na verificação).",
+    "A confirmar localmente: prazos médios de audiência com o juiz de família de Mamoudzou.",
+    "A confirmar com o cartório: modalidades práticas da contribuição de 50 € para um pedido em Mayotte."
+  ],
+  "motsCles": ["JAF", "juiz", "tribunal", "Mamoudzou", "residência", "direito de visita", "cerfa 11530", "homologação"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, R15764 Pedido ao juiz de família (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F33227 Selo fiscal e contribuição de 50 €", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-10-29" },
+    { "titre": "BOFiP, contribuição para a assistência jurídica (aplicação nos departamentos ultramarinos)", "url": "https://bofip.impots.gouv.fr/doctrine/pgp/6037-PGP", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F12544 Violência doméstica", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-10-29" },
+    { "titre": "Diretório service-public, Tribunal judiciaire de Mamoudzou", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "verifieLe": "2026-10-29" }
+  ]
+}

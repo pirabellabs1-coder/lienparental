@@ -12,7 +12,7 @@
   ],
   "aSavoir": [
     "Income limits in the DOM, including French Guiana, for an application made in 2026 (2024 income): €27,382 for 1 person, €36,567 for 2 people, €43,973 for 3 people or for a single person with 1 dependent, €53,088 for 4 people or for a single person with 2 dependents (service-public.gouv.fr, general case).",
-    "Separation: to have only your income taken into account, attach proof such as the non-conciliation order (ordonnance de non-conciliation), the document referring the case to the family court judge (juge aux affaires familiales, JAF), the divorce judgment or the birth certificate noting the dissolution of the PACS (civil partnership).",
+    "Separation: to have only your income taken into account, attach whichever applies: divorce in progress (copy of the document referring the case to the family court judge (juge aux affaires familiales, JAF), or a lawyer's certificate for a divorce by mutual consent), divorce judgment or agreement, receipt for the declaration ending the PACS (civil partnership) or birth certificate noting it, police complaint receipt in case of domestic violence.",
     "If your income has dropped by at least 10%, you can claim this with supporting documents (payslips, employer's certificate). A sworn statement is not accepted.",
     "Outside the Île-de-France region, you need one application per department: an application in French Guiana only covers French Guiana.",
     "Renewal: every year, between the 10th and 12th month after the application was created or last renewed. A reminder is sent at least 1 month before. In the DOM, an application that is not renewed is automatically cancelled and you must start again with a new unique number (service-public.gouv.fr).",
@@ -22,7 +22,7 @@
     { "id": "identite", "libelle": "Applicant's ID document", "detail": "Front-and-back copy of the ID card or passport. For a non-EU national: copy of the valid residence permit or receipt. Mandatory when applying.", "coffre": "courriers" },
     { "id": "identite-cotitulaire", "libelle": "ID document or residence permit of each adult to be housed", "detail": "Valid copy.", "coffre": "courriers" },
     { "id": "avis-imposition", "libelle": "2025 tax notice on 2024 income for each person to be housed", "detail": "Copy. Download it from your impots.gouv.fr account or ask your public finance center (centre des finances publiques).", "coffre": "finances" },
-    { "id": "justificatif-separation", "libelle": "Proof of separation", "detail": "Copy of the non-conciliation order, the document referring the case to the family court judge, the divorce judgment or the birth certificate noting the dissolution of the PACS.", "coffre": "jaf" },
+    { "id": "justificatif-separation", "libelle": "Proof of separation", "detail": "Copy, as applicable, of the document referring the case to the family court judge or the lawyer's certificate (divorce in progress), the divorce judgment or agreement, the PACS dissolution receipt or the birth certificate noting it, or the police complaint receipt (violence).", "coffre": "jaf" },
     { "id": "jugement-residence", "libelle": "Judgment or agreement setting the children's residence", "detail": "Copy, to show the children to be housed with you or a shared residence arrangement.", "coffre": "jaf" },
     { "id": "livret-famille", "libelle": "Family record book (livret de famille) or the children's birth certificates", "detail": "Copy, to show your dependents.", "coffre": "courriers" },
     { "id": "ressources", "libelle": "Proof of recent income", "detail": "Copies of your latest payslips, Caf (Caisse d'allocations familiales, the family benefits office) or France Travail certificates. Required if your income has dropped by at least 10%.", "coffre": "finances" },
@@ -42,7 +42,8 @@
   ],
   "liens": [
     { "titre": "Social housing application (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007" },
-    { "titre": "Renewing a social housing application (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010" },
+    { "titre": "Renewing a social housing application (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32880" },
+    { "titre": "Social housing conditions and income limits (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869" },
     { "titre": "Online social housing application", "url": "https://www.demande-logement-social.gouv.fr" }
   ],
   "actions": [
@@ -58,9 +59,10 @@
     "To be confirmed locally: social landlords may ask for additional documents at the time of allocation."
   ],
   "motsCles": ["social housing", "HLM", "unique number", "renewal", "separation", "income limits"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F10007 Social housing application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-09-11" },
-    { "titre": "Service-public.gouv.fr, F35010 Renewing a social housing application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010", "verifieLe": "2026-09-08" }
+    { "titre": "Service-public.gouv.fr, F10007 Social housing application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F32880 Renewing a social housing application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32880", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F869 Conditions for getting social housing (income limits, phone assistance)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869", "verifieLe": "2026-10-29" }
   ]
 }

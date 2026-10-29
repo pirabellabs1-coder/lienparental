@@ -44,8 +44,8 @@
     "À confirmer localement : les attestations demandées par votre école, votre commune (cantine, périscolaire) ou l'établissement privé."
   ],
   "motsCles": ["assurance", "responsabilité civile", "accident", "école", "attestation", "cantine"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1871 Assurance scolaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2025-09-15" }
+    { "titre": "Service-public.gouv.fr, F1871 Assurance scolaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2026-10-29" }
   ]
 }

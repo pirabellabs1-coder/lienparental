@@ -1,0 +1,68 @@
+{
+  "slug": "mediation-familiale",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Médiation familiale",
+  "resume": "Un professionnel neutre pour trouver ensemble des accords sur les enfants. Premier entretien gratuit, accord homologable par le juge, et les structures repérées à Mayotte.",
+  "aQuoiCaSert": "La médiation familiale aide les parents à renouer le dialogue et à construire eux-mêmes leurs accords : résidence de l'enfant, droit de visite et d'hébergement, pension alimentaire, vacances, frais exceptionnels. Le médiateur est indépendant et impartial : il ne décide rien à votre place. L'accord écrit peut ensuite être homologué par le juge aux affaires familiales et devient alors exécutoire comme un jugement. La médiation peut avoir lieu avant toute procédure ou pendant une procédure.",
+  "quiEstConcerne": [
+    "Les parents séparés ou en cours de séparation, mariés ou non.",
+    "Les grands-parents, pour maintenir des relations avec leurs petits-enfants.",
+    "La médiation n'est pas possible en cas de violences commises par un parent sur l'autre ou sur l'enfant : dans ce cas, appelez le 3919 (écoute) ou le 17 (urgence)."
+  ],
+  "aSavoir": [
+    "L'entretien d'information est gratuit et sans engagement. Vous pouvez y aller seul ou avec l'autre parent.",
+    "Les séances durent en général de 1 h 30 à 2 h. Leur nombre est souvent limité à 6.",
+    "Médiation ordonnée par le juge : elle dure au plus 5 mois, renouvelable une fois 3 mois. Les frais sont partagés à parts égales sauf décision contraire, et pris en charge par l'État si vous avez l'aide juridictionnelle.",
+    "Le juge peut ordonner aux parents de rencontrer un médiateur. Ne pas s'y rendre peut entraîner une amende civile pouvant atteindre 10 000 €.",
+    "L'homologation de l'accord se demande par requête conjointe (cerfa n° 16139), sans avocat obligatoire et sans contribution de 50 €."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité (original à présenter)", "coffre": "jaf" },
+    { "id": "avis-impot", "libelle": "Dernier avis d'imposition ou justificatifs de revenus (copie)", "detail": "Pour calculer votre tarif si le service applique un barème selon les revenus.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Décision ordonnant la médiation (copie), s'il existe", "detail": "Elle indique le médiateur désigné, la durée et la provision à verser.", "coffre": "jaf" },
+    { "id": "aj", "libelle": "Décision d'aide juridictionnelle (copie), si vous en bénéficiez", "coffre": "jaf" },
+    { "id": "planning", "libelle": "Calendrier de l'enfant et budget (école, activités, frais)", "detail": "Facultatif, mais utile : vous pouvez l'exporter depuis le calendrier et le Journal.", "coffre": "jaf" },
+    { "id": "accord-mediation", "libelle": "Accord écrit issu de la médiation", "detail": "Original signé par les deux parents, à joindre à la demande d'homologation.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Trouvez un service de médiation familiale", "detail": "Contactez l'UDAF de Mayotte ou l'ACFAV, ou demandez une orientation au point-justice ou au tribunal judiciaire de Mamoudzou." },
+    { "titre": "Prenez rendez-vous pour l'entretien d'information gratuit", "detail": "Seul ou avec l'autre parent." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pièce d'identité ; avis d'imposition pour le tarif ; décision du juge si la médiation est ordonnée ; décision d'aide juridictionnelle si vous l'avez ; liste des sujets à aborder ; calendrier de l'enfant." },
+    { "titre": "Suivez les séances", "detail": "Ajoutez chaque séance au calendrier et notez entre deux séances les points à revoir." },
+    { "titre": "Faites homologuer l'accord si vous le souhaitez", "detail": "Requête conjointe au juge aux affaires familiales de Mamoudzou (cerfa n° 16139)." },
+    { "titre": "Sans accord, vous pouvez saisir le juge", "detail": "Voir la fiche « Saisir le juge aux affaires familiales »." }
+  ],
+  "ou": [
+    { "nom": "UDAF de Mayotte (UDAF 976)", "detail": "31/7 rue Cité de Doujani 2, Mtsapéré, 97600 Mamoudzou (annuaire du ministère de la Justice).", "url": "https://www.justice.gouv.fr/annuaire/fiche/udaf-976-mayotte-12-61829", "telephone": "02 69 61 99 14" },
+    { "nom": "ACFAV, Point info famille", "detail": "119 route nationale, Mtsapéré, Mamoudzou (annuaire du ministère de la Justice).", "url": "https://www.justice.gouv.fr/annuaire/fiche/association-pour-la-condition-feminine-et-l-aide-aux-victimes-acfav-point-info-famille-12-45266", "telephone": "02 69 61 29 49" },
+    { "nom": "Points-justice de Mayotte (CDAD)", "detail": "Information juridique gratuite et orientation.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271" }
+  ],
+  "liens": [
+    { "titre": "Médiation familiale (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355" },
+    { "titre": "Homologation d'une convention parentale, cerfa 16139 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771" },
+    { "titre": "Violences conjugales : numéros et protection (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Entretien d'information de médiation familiale", "evenement": "rdv" },
+    { "type": "calendrier", "titre": "Séance de médiation familiale", "evenement": "rdv" },
+    { "type": "coffre", "titre": "Accord de médiation familiale signé", "categorie": "jaf" },
+    { "type": "depense", "titre": "Séance de médiation familiale", "categorie": "frais-administratifs" }
+  ],
+  "datesLimites": [
+    { "libelle": "Médiation judiciaire : 5 mois maximum", "detail": "Renouvelable une fois pour 3 mois." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : l'UDAF 976 et l'ACFAV proposent-elles de la médiation familiale au sens strict (avec médiateur diplômé), et à quel tarif ? L'annuaire de la Justice les recense sans le préciser.",
+    "À confirmer auprès de la CSSM : existence de services de médiation familiale conventionnés appliquant le barème national selon les revenus.",
+    "À confirmer : liste des médiateurs agréés par la cour d'appel de Saint-Denis pour Mayotte (site des cours d'appel indisponible lors de la vérification)."
+  ],
+  "motsCles": ["médiation", "médiateur", "accord", "UDAF", "conflit", "homologation"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F34355 Médiation familiale", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R58771 Homologation d'une convention parentale", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2026-10-29" },
+    { "titre": "Ministère de la Justice, annuaire : UDAF 976 Mayotte", "url": "https://www.justice.gouv.fr/annuaire/fiche/udaf-976-mayotte-12-61829", "verifieLe": "2026-10-29" },
+    { "titre": "Ministère de la Justice, annuaire : ACFAV Point info famille", "url": "https://www.justice.gouv.fr/annuaire/fiche/association-pour-la-condition-feminine-et-l-aide-aux-victimes-acfav-point-info-famille-12-45266", "verifieLe": "2026-10-29" }
+  ]
+}

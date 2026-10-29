@@ -1,0 +1,58 @@
+{
+  "slug": "allocation-rentree-scolaire",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Allocation de rentrée scolaire (ARS) à Mayotte",
+  "resume": "Versée par la CSSM dès le 4 août 2026 pour chaque enfant de 6 à 20 ans scolarisé, sous condition de ressources. À Mayotte, le montant dépend du niveau scolaire et les plafonds sont propres au territoire.",
+  "aQuoiCaSert": "L'allocation de rentrée scolaire aide à financer les fournitures, vêtements et équipements de la rentrée. À Mayotte, elle est versée par la CSSM, plus tôt qu'en métropole, et jusqu'à 20 ans. Son montant dépend du niveau de l'enfant (primaire, collège, lycée) et non de son âge. Si vous l'avez déjà perçue, aucune démarche n'est en principe nécessaire : la scolarité est vérifiée auprès du rectorat. Si vous ne l'avez jamais perçue, il faut d'abord déclarer votre situation et vos ressources.",
+  "quiEstConcerne": [
+    "Les familles avec un enfant de 6 à 20 ans scolarisé. Pour la rentrée 2026 : enfant né entre le 16 septembre 2006 et le 31 décembre 2020.",
+    "Un enfant de 5 ans déjà scolarisé en primaire peut aussi y ouvrir droit, selon la CSSM."
+  ],
+  "aSavoir": [
+    "Montants rentrée 2026 à Mayotte : 429,01 € pour un enfant en primaire, 452,67 € au collège, 468,36 € au lycée (service-public.gouv.fr, section Mayotte).",
+    "Plafonds de ressources 2026 (revenus 2024) : 35 634 € pour 1 enfant, 38 874 € pour 2, 42 114 € pour 3, plus 3 240 € par enfant supplémentaire. Une ARS réduite (différentielle) peut être versée en cas de léger dépassement.",
+    "Versement à partir du 4 août 2026 à Mayotte (18 août en métropole).",
+    "Première demande : remplissez une déclaration de situation et une déclaration de ressources 2024. Dans tous les cas, vos revenus 2025 doivent avoir été déclarés aux impôts.",
+    "Enfant de moins de 6 ans déjà entré au CP : envoyez son certificat de scolarité.",
+    "Parents séparés : l'ARS est versée à un seul allocataire, même en résidence alternée."
+  ],
+  "documents": [
+    { "id": "avis-impot", "libelle": "Déclaration de revenus faite aux impôts", "detail": "Elle permet de connaître vos ressources. Avis téléchargeable sur impots.gouv.fr.", "coffre": "finances" },
+    { "id": "certificat-scolarite", "libelle": "Certificat de scolarité", "detail": "En principe récupéré par la CSSM auprès du rectorat. Gardez-en une copie au cas où il serait demandé.", "coffre": "scolarite" },
+    { "id": "notification-ars", "libelle": "Notification ou attestation de versement de l'ARS", "detail": "Dans votre espace « Mon Compte ».", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez que vos informations sont à jour", "detail": "Déclaration de revenus faite, situation familiale et nombre d'enfants à jour dans « Mon Compte » sur caf.fr." },
+    { "titre": "Vérifiez que l'enfant est bien inscrit dans un établissement", "detail": "La CSSM s'appuie sur les informations transmises par le rectorat." },
+    { "titre": "Contrôlez le versement début août", "detail": "Sans versement alors que vous pensez y avoir droit, contactez la CSSM avec le certificat de scolarité." },
+    { "titre": "Notez les dépenses de rentrée", "detail": "Enregistrez fournitures et vêtements dans le Journal pour suivre les frais de chaque enfant." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Espace « Mon Compte » sur caf.fr ou accueil sur rendez-vous à Mamoudzou.", "url": "https://www.cssm.fr/page/prestations-familiales", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Aide gratuite aux démarches en ligne.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Allocation de rentrée scolaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878" },
+    { "titre": "Prestations familiales à Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Vérifier le versement de l'ARS (4 août 2026)", "evenement": "autre" },
+    { "type": "coffre", "titre": "Attestation de versement de l'ARS", "categorie": "finances" },
+    { "type": "depense", "titre": "Fournitures de rentrée", "categorie": "ecole" },
+    { "type": "depense", "titre": "Vêtements de rentrée", "categorie": "vetements" }
+  ],
+  "datesLimites": [
+    { "libelle": "Versement à partir du 4 août 2026 à Mayotte" }
+  ],
+  "aConfirmer": [
+    "Jeune de 16 à 20 ans : la section Mayotte de service-public.gouv.fr ne mentionne pas de déclaration de scolarité (celle-ci est décrite pour la métropole). Vérifiez auprès de la CSSM qu'aucune démarche n'est attendue, surtout après 18 ans.",
+    "À confirmer auprès de la CSSM : quel parent perçoit l'ARS en résidence alternée et comment le désigner."
+  ],
+  "motsCles": ["ARS", "rentrée", "fournitures", "CSSM", "allocation", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1878 Allocation de rentrée scolaire (section Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Prestations familiales", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" }
+  ]
+}

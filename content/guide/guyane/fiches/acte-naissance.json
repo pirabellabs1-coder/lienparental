@@ -14,7 +14,7 @@
     "Copie intégrale et extrait avec filiation : réservés à la personne concernée (majeure) ou à son représentant légal, au conjoint ou partenaire de Pacs, aux ascendants et descendants, et à certains professionnels comme un avocat. L'extrait sans filiation peut être demandé par toute personne.",
     "La demande est gratuite. Service-public.gouv.fr met en garde contre les sites qui font payer cette démarche : ne payez jamais pour un acte de naissance.",
     "Sur place, à la mairie du lieu de naissance, l'acte est remis immédiatement sur présentation d'une pièce d'identité. Par courrier ou en ligne, comptez quelques jours selon la mairie et La Poste.",
-    "Enfant ou parent né à l'étranger et de nationalité française : l'acte est délivré par le Service central d'état civil (Scec) de Nantes, en ligne ou par courrier uniquement (pas d'accueil du public). Délai indiqué : environ 30 jours.",
+    "Enfant ou parent né à l'étranger et de nationalité française : l'acte est délivré par le Service central d'état civil (Scec) de Nantes, en ligne ou par courrier uniquement (pas d'accueil du public). Délai indiqué : environ 30 jours par courrier, environ 20 jours en ligne.",
     "Carte d'identité ou passeport d'un mineur : si la commune de naissance a dématérialisé son état civil, vous n'avez pas à fournir l'acte. Sinon, un acte de moins de 3 mois est exigé. Si l'enfant a déjà un passeport, l'acte peut ne pas être demandé : vérifiez votre cas sur la fiche officielle.",
     "Parents séparés : chaque parent, en tant qu'ascendant, peut demander seul la copie intégrale de l'acte de son enfant, sans l'accord de l'autre."
   ],
@@ -55,10 +55,10 @@
     "À confirmer localement : horaires et éventuelle prise de rendez-vous au service état civil de la mairie de naissance."
   ],
   "motsCles": ["acte de naissance", "copie intégrale", "extrait", "filiation", "état civil", "mairie", "Scec", "Nantes"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1427 Acte de naissance : demande de copie intégrale ou d'extrait", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, R1406 Demande d'acte de naissance en ligne (naissance en France)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, F1342 Carte d'identité d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-04-27" }
+    { "titre": "Service-public.gouv.fr, F1427 Acte de naissance : demande de copie intégrale ou d'extrait", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1406 Demande d'acte de naissance en ligne (naissance en France)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1342 Carte d'identité d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-10-29" }
   ]
 }

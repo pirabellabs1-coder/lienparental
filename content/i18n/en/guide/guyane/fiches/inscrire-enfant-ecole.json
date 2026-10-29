@@ -34,7 +34,7 @@
     { "titre": "Submit the file at the town hall and collect the enrollment certificate", "detail": "The certificate states the school your child is assigned to. Ask for an exemption at this point if you want another school." },
     { "titre": "Have your child admitted to the school", "detail": "Present the enrollment certificate and proof of vaccinations to the school's principal. Give both parents' contact details and the list of people allowed to pick up the child." },
     { "titre": "Inform the other parent", "detail": "If you are separated, let the other parent know about the enrollment, preferably in writing (text message or email)." },
-    { "titre": "No new enrollment every year", "detail": "The enrollment is valid for the whole of preschool. Moving up to CP (first grade) happens automatically if the town has an elementary school." }
+    { "titre": "No new enrollment every year", "detail": "The enrollment is valid for the whole of preschool. If the school also includes an elementary school (groupe scolaire), your child moves straight up to CP (first grade) after the last preschool year; otherwise, ask the town hall (mairie)." }
   ],
   "ou": [
     { "nom": "Your town hall, school affairs department", "detail": "Enrollment, enrollment certificate and catchment-area exemptions." },
@@ -63,14 +63,14 @@
     "To be confirmed locally: documents required when changing schools (certificat de radiation, latest school report), to be asked of the town hall and the new school."
   ],
   "motsCles": ["preschool", "elementary school", "CP", "town hall (mairie)", "enrollment", "exemption", "withdrawal"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1864 Enrollment in preschool", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2025-11-06" },
-    { "titre": "Service-public.gouv.fr, F1865 Enrolling your child in elementary school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2025-01-10" },
+    { "titre": "Service-public.gouv.fr, F1864 Enrollment in preschool", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1865 Enrolling your child in elementary school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1865", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1898 Compulsory education", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1898", "verifieLe": "2025-11-06" },
-    { "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "Service-public.gouv.fr, F767 Vaccinations for school, daycare or after-school care", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F3133 Parental authority after a separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccinations for school, daycare or after-school care", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1427 Requesting a birth certificate", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" },
-    { "titre": "CASNAV de Guyane, enrollment file for non-French-speaking pupils", "url": "https://casnav.ins.ac-guyane.fr/Dossier-d-inscription-211.html", "verifieLe": "2025-09-23" }
+    { "titre": "CASNAV de Guyane, enrollment file for non-French-speaking pupils", "url": "https://casnav.ins.ac-guyane.fr/Dossier-d-inscription-211.html", "verifieLe": "2026-10-29" }
   ]
 }

@@ -1,0 +1,74 @@
+{
+  "slug": "mediation-familiale",
+  "territoire": "reunion",
+  "categorie": "separation",
+  "titre": "Mediação familiar",
+  "resume": "Um profissional neutro para chegarem juntos a acordos sobre os filhos. Conversa de informação gratuita, valor conforme a renda numa associação conveniada com a Caf de La Réunion, acordo homologável pelo juiz.",
+  "aQuoiCaSert": "A mediação familiar (médiation familiale) ajuda os pais a retomar o diálogo e a construir eles mesmos os seus acordos: residência da criança, direito de visita e de hospedagem, pensão alimentícia, férias. O mediador é independente e imparcial: não decide nada no seu lugar. O acordo pode depois ser homologado pelo juiz de família (juge aux affaires familiales, JAF) e passa a ter a mesma força de uma sentença. A mediação pode acontecer antes de qualquer processo ou durante um processo.",
+  "quiEstConcerne": [
+    "Pais separados ou em processo de separação, casados ou não.",
+    "Avós, para manter o convívio com os netos.",
+    "A mediação não é possível em caso de violência de um dos pais contra o outro ou contra a criança: nesse caso, ligue para o 3919 (escuta) ou o 17 (emergência)."
+  ],
+  "aSavoir": [
+    "A conversa de informação é gratuita e sem compromisso.",
+    "As sessões duram em geral de 1h30 a 2h. Na mediação amigável (fora do juiz), o número costuma ser limitado a 6.",
+    "A tentativa obrigatória de mediação familiar prévia, testada principalmente no tribunal judiciaire de Saint-Denis, terminou em 31 de dezembro de 2024: a mediação não é mais condição para acionar o juiz, mas o juiz ainda pode ordenar que vocês se encontrem com um mediador.",
+    "Numa associação conveniada com a Caf (Caisse d'allocations familiales, órgão de benefícios familiares), o preço das sessões depende da sua renda. Um mediador particular define livremente o valor; sem acordo, os custos são divididos pela metade.",
+    "A Caf de La Réunion financia associações de mediação familiar credenciadas: é ela que pode encaminhar você para um serviço com valor conveniado.",
+    "Mediação ordenada pelo juiz: no máximo 5 meses, renovável uma vez por 3 meses. Os custos são divididos igualmente, salvo decisão contrária, e pagos pelo Estado se você tiver assistência jurídica gratuita (aide juridictionnelle).",
+    "O juiz pode ordenar que os pais se encontrem com um mediador. Recusar-se a comparecer pode resultar em multa civil de até 10.000 €.",
+    "As listas de mediadores são publicadas por cada cour d'appel (tribunal de apelação), na seção « Partenaires de justice »: para a Reunião, a cour d'appel de Saint-Denis."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Documento de identidade (original a apresentar)", "coffre": "jaf" },
+    { "id": "avis-impot", "libelle": "Último aviso de imposto ou comprovantes de renda (cópia)", "detail": "Para calcular o seu valor num serviço conveniado. Pode ser baixado na sua conta impots.gouv.fr.", "coffre": "finances" },
+    { "id": "attestation-caf", "libelle": "Atestado de pagamento da Caf (cópia), se você for beneficiário", "detail": "Baixe-o na sua conta caf.fr.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Decisão que ordena a mediação (cópia), se houver", "detail": "Indica o mediador, a duração, o depósito prévio (provision) e o prazo para pagá-lo.", "coffre": "jaf" },
+    { "id": "aj", "libelle": "Decisão de assistência jurídica gratuita (cópia), se você a tiver", "detail": "Dispensa o pagamento do depósito prévio na mediação judicial.", "coffre": "jaf" },
+    { "id": "planning", "libelle": "Agenda da criança e orçamento (escola, atividades, despesas)", "detail": "Opcional, mas útil para sessões concretas: você pode exportá-lo do calendário e do Diário.", "coffre": "jaf" },
+    { "id": "accord-mediation", "libelle": "Acordo escrito resultante da mediação", "detail": "Assinado pelos dois pais, a anexar ao pedido de homologação.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Encontre um serviço de mediação familiar", "detail": "Peça à Caf de La Réunion as associações conveniadas (valor conforme a renda), ou consulte a lista de mediadores da cour d'appel de Saint-Denis." },
+    { "titre": "Agende a conversa de informação gratuita", "detail": "Sozinho ou com o outro genitor." },
+    { "titre": "Confira antes de sair de casa", "detail": "Documento de identidade, aviso de imposto ou atestado da Caf para o valor, decisão do juiz se a mediação for ordenada, decisão de assistência jurídica gratuita se tiver, lista dos assuntos a tratar, agenda da criança." },
+    { "titre": "Participe das sessões", "detail": "Adicione-as ao calendário e anote, entre uma sessão e outra, os pontos a rever." },
+    { "titre": "Peça a homologação do acordo, se quiser", "detail": "Pedido conjunto ao juiz de família (Cerfa n° 16139), assinado pelos dois pais, no tribunal do local de residência de um ou de outro. Sem selo fiscal para essa homologação." },
+    { "titre": "Sem acordo, você pode acionar o juiz", "detail": "Veja a ficha «Recorrer ao juiz de família (JAF)»." }
+  ],
+  "ou": [
+    { "nom": "Caf de La Réunion", "detail": "Encaminhamento para as associações de mediação familiar conveniadas.", "url": "https://caf.fr/allocataires/caf-de-la-reunion/offre-de-service/accident-de-vie/la-mediation-familiale-conflits-familiaux-separation-divorce" },
+    { "nom": "Cour d'appel de Saint-Denis", "detail": "166 rue Juliette Dodu, 97400 Saint-Denis. Lista de mediadores na seção « Partenaires de justice » do seu site.", "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/8114c644-9f2c-4144-9aba-cf473e1c7433", "telephone": "02 62 40 58 58" },
+    { "nom": "Points-justice de La Réunion (postos de acesso ao direito)", "detail": "Informação jurídica gratuita e encaminhamento.", "url": "https://lannuaire.service-public.gouv.fr/navigation/la-reunion/point_justice" }
+  ],
+  "liens": [
+    { "titre": "Mediação familiar (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355" },
+    { "titre": "Homologação de um acordo parental, Cerfa 16139 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771" },
+    { "titre": "Mediação familiar, Caf de La Réunion", "url": "https://caf.fr/allocataires/caf-de-la-reunion/offre-de-service/accident-de-vie/la-mediation-familiale-conflits-familiaux-separation-divorce" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Conversa de informação sobre mediação familiar", "evenement": "rdv" },
+    { "type": "calendrier", "titre": "Sessão de mediação familiar", "evenement": "rdv" },
+    { "type": "coffre", "titre": "Acordo de mediação familiar assinado", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Decisão que ordena a mediação", "categorie": "jaf" },
+    { "type": "depense", "titre": "Sessão de mediação familiar", "categorie": "frais-administratifs" }
+  ],
+  "datesLimites": [
+    { "libelle": "Mediação judicial: prazo fixado pelo juiz para pagar o depósito prévio", "detail": "Salvo assistência jurídica gratuita." },
+    { "libelle": "Mediação judicial: no máximo 5 meses", "detail": "Renovável uma vez por 3 meses." }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: lista atualizada das associações de mediação familiar conveniadas com a Caf de La Réunion e dos seus locais de atendimento (não foi possível ler o site caf.fr automaticamente).",
+    "A confirmar: a lista de mediadores da cour d'appel de Saint-Denis, pois o site estava em manutenção no momento desta verificação."
+  ],
+  "motsCles": ["mediação", "mediador", "acordo", "diálogo", "conflito", "homologação"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F34355 Mediação familiar", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34355", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R58771 Pedido conjunto de homologação de acordo parental (Cerfa 16139)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F33227 Selo fiscal (dispensa para a homologação de acordo parental)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-10-29" },
+    { "titre": "Anuário service-public, Cour d'appel de Saint-Denis-de-La Réunion", "url": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/8114c644-9f2c-4144-9aba-cf473e1c7433", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, lei n° 2016-1547 de 18 de novembro de 2016, artigo 7 (fim da experiência em 31 de dezembro de 2024)", "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000033418805", "verifieLe": "2026-10-29" }
+  ]
+}

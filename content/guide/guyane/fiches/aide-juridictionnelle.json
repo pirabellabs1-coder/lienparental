@@ -14,7 +14,7 @@
     "Plafonds 2026 pour l'aide totale (revenu fiscal de référence) : 12 957 € pour 1 personne, 15 289 € pour 2, 17 621 € pour 3, 19 095 € pour 4, 20 568 € pour 5, 22 041 € pour 6, 23 514 € pour 7.",
     "Si vous dépassez un peu le plafond de revenu, une aide partielle de 55 % ou 25 % est possible. Pour une personne seule : jusqu'à 15 316 € de revenu fiscal de référence pour 55 %, jusqu'à 19 433 € pour 25 %.",
     "Le patrimoine compte aussi (hors résidence principale). Pour 1 personne : 12 957 € de patrimoine mobilier (épargne) et 38 866 € de patrimoine immobilier au maximum. Dépasser un plafond de patrimoine exclut toute aide.",
-    "En cas de conflit avec l'autre parent membre du même foyer fiscal, les ressources sont examinées individuellement.",
+    "En cas de conflit avec l'autre parent membre du même foyer fiscal (par exemple un divorce), le plafond de patrimoine est examiné individuellement.",
     "Vérifiez d'abord vos contrats d'assurance (habitation, carte bancaire, protection juridique) : si une protection juridique couvre déjà les frais, la demande d'AJ peut être rejetée. Il faut fournir une attestation de non prise en charge.",
     "Les frais engagés avant la décision du bureau d'aide juridictionnelle ne sont pas couverts. Faites la demande le plus tôt possible, avant l'audience.",
     "Le droit de plaidoirie (13 €) et les éventuelles condamnations (dommages et intérêts, amendes) ne sont pas couverts par l'AJ.",
@@ -67,14 +67,14 @@
   ],
   "aConfirmer": [
     "À confirmer localement : horaires d'accueil du bureau d'aide juridictionnelle de Cayenne et possibilité de dépôt dans les autres sites judiciaires de Guyane (Saint-Laurent-du-Maroni).",
-    "Le service officiel de demande en ligne a été signalé comme réservé à certaines situations : vérifiez s'il est ouvert pour une procédure en Guyane, sinon utilisez le formulaire papier."
-  ],
+    "Le service officiel de demande en ligne a été signalé comme réservé à certaines situations : vérifiez s'il est ouvert pour une procédure en Guyane, sinon utilisez le formulaire papier.",
+    "À confirmer auprès du bureau d'aide juridictionnelle : si vos revenus (et pas seulement votre patrimoine) sont appréciés individuellement en cas de conflit avec l'autre parent membre du même foyer fiscal ; la fiche officielle ne le précise que pour le patrimoine."  ],
   "motsCles": ["aide juridictionnelle", "AJ", "avocat", "JAF", "frais de justice", "cerfa 16146", "tribunal Cayenne"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F18074 Aide juridictionnelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-06-12" },
-    { "titre": "Service-public.gouv.fr, R1444 Formulaire de demande d'aide juridictionnelle (cerfa n° 16146*04)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-09-02" },
-    { "titre": "Service-public.gouv.fr, R66463 Demande d'aide juridictionnelle en ligne", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463", "verifieLe": "2025-10-15" },
-    { "titre": "Justice.gouv.fr, annuaire : Bureau d'aide juridictionnelle du tribunal judiciaire de Cayenne", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-cayenne" }
+    { "titre": "Service-public.gouv.fr, F18074 Aide juridictionnelle", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18074", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1444 Formulaire de demande d'aide juridictionnelle (cerfa n° 16146*04)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1444", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R66463 Demande d'aide juridictionnelle en ligne", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66463", "verifieLe": "2026-10-29" },
+    { "titre": "Justice.gouv.fr, annuaire : Bureau d'aide juridictionnelle du tribunal judiciaire de Cayenne", "url": "https://www.justice.gouv.fr/annuaire/fiche/bureau-d-aide-juridictionnelle-du-tribunal-judiciaire-de-cayenne", "verifieLe": "2026-10-29" }
   ]
 }

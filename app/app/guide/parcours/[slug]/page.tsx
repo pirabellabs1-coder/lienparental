@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { GuideHeader } from '@/components/guide/GuideHeader'
 import { ParcoursChecklist } from '@/components/guide/Progress'
 import { guideAsync, loadGuide } from '@/lib/guide/load'
+import { wantedTerritoire } from '@/lib/guide/territory-server'
 import { DEFAULT_TERRITOIRE } from '@/lib/guide/types'
 import { homeHref } from '@/lib/guide/links'
 import { contentLangAttr } from '@/lib/contenus/locale'
@@ -16,7 +17,7 @@ type Props = {
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const [{ slug }, sp] = await Promise.all([params, searchParams])
   const locale = await getLocale()
-  const p = (await guideAsync.parcours(sp.territoire, slug, locale)) ?? (await guideAsync.parcours(DEFAULT_TERRITOIRE, slug, locale))
+  const p = (await guideAsync.parcours(await wantedTerritoire(sp.territoire), slug, locale)) ?? (await guideAsync.parcours(DEFAULT_TERRITOIRE, slug, locale))
   const t = await getTranslations('coach.guide.parcours')
   return { title: p?.titre ?? t('metaTitle'), robots: { index: false, follow: false } }
 }
@@ -24,7 +25,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 export default async function GuideParcoursPage({ params, searchParams }: Props) {
   const [{ slug }, sp] = await Promise.all([params, searchParams])
   const locale = await getLocale()
-  const g = await loadGuide(sp.territoire, locale)
+  const g = await loadGuide(await wantedTerritoire(sp.territoire), locale)
   const { territoire } = g
   const parcours = g.parcours.find((p) => p.slug === slug)
   if (!parcours) notFound()

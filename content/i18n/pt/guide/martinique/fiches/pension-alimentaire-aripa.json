@@ -1,0 +1,230 @@
+{
+  "slug": "pension-alimentaire-aripa",
+  "territoire": "martinique",
+  "categorie": "separation",
+  "titre": "O que fazer se o outro genitor não paga a pensão alimentícia (ARIPA)",
+  "resume": "Pensão não paga ou atrasada: os documentos exatos para pedir à Caf (ARIPA) que recupere os valores e pague a pensão todo mês, o que fazer sem título executivo e o ASF como complemento.",
+  "aQuoiCaSert": "Com a intermediação financeira, a Caf (Caisse d'allocations familiales, órgão de benefícios familiares), por meio da sua agência ARIPA (Agence de recouvrement et d'intermédiation des pensions alimentaires, agência de cobrança de pensões alimentícias), recebe todo mês a pensão do genitor que paga e repassa a você. Em caso de falta de pagamento, é ela que faz a cobrança, gratuitamente para você. Para agir, ela precisa de um título executivo (titre exécutoire) que fixe a pensão. Enquanto isso, o auxílio de apoio familiar (allocation de soutien familial, ASF) pode ser pago a você antecipadamente.",
+  "quiEstConcerne": [
+    "O genitor que deve receber pensão para um filho e não a recebe, recebe só uma parte ou recebe com atraso.",
+    "Pais separados, casados ou não. Não é preciso ser beneficiário da Caf, e a concordância do outro genitor não é exigida.",
+    "Não se aplica a: pensões pagas diretamente ao filho maior de idade, entre ex-cônjuges (prestation compensatoire) ou aos avós."
+  ],
+  "aSavoir": [
+    "É preciso um título executivo: sentença do juiz de família (juge aux affaires familiales, JAF), acordo homologado pelo juiz, acordo de divórcio consensual (advogados e notário), escritura notarial, acordo de mediação ou conciliação com fórmula executória, ou título emitido pela Caf ou pela MSA (Mutualité sociale agricole, seguridade social agrícola).",
+    "Sem título executivo: se vocês não são casados e concordam com o valor, peçam juntos um título executivo à Caf (formulário em papel assinado pelos dois). Sem acordo, recorra ao juiz de família.",
+    "Se o seu título prevê a intermediação, não há nada a fazer: o cartório do tribunal (greffe), o advogado ou o notário o envia à ARIPA. Caso contrário, faça o pedido on-line.",
+    "O primeiro pagamento da ARIPA ocorre no máximo 60 dias após o recebimento de todos os documentos. Nesse período, a pensão continua sendo paga diretamente entre os pais.",
+    "Gratuito para os dois genitores. Em caso de falta de pagamento, o genitor que não paga arca com taxas de 7,5% (cobrança amigável) ou 10% (cobrança forçada).",
+    "Violência doméstica: a intermediação é obrigatória e não pode ser interrompida, nem de comum acordo.",
+    "Atrasados: as pensões podem ser cobradas até 5 anos para trás. Por meio de um oficial de justiça (commissaire de justice), o pagamento direto só recupera os últimos 6 meses.",
+    "Como complemento, o ASF (200,78 € por filho por mês) é pago antecipadamente se a pensão fixada não for paga: veja a ficha «Auxílio de apoio familiar (ASF, allocation de soutien familial)»."
+  ],
+  "documents": [
+    {
+      "id": "titre-executoire",
+      "libelle": "Título executivo que fixa a pensão (cópia)",
+      "detail": "Sentença, acordo homologado, acordo de divórcio, escritura notarial ou título da Caf. Se o perdeu, peça uma cópia ao cartório do tribunal, ao advogado ou ao notário.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "identite",
+      "libelle": "Seu documento de identidade (cópia)",
+      "coffre": "jaf"
+    },
+    {
+      "id": "rib",
+      "libelle": "Dados bancários (RIB) em seu nome",
+      "detail": "Conta na qual a ARIPA vai depositar a pensão.",
+      "coffre": "finances"
+    },
+    {
+      "id": "coordonnees-autre-parent",
+      "libelle": "Dados conhecidos do outro genitor",
+      "detail": "Nome, data de nascimento, último endereço conhecido, empregador se souber. Ajudam a ARIPA a contatá-lo.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "preuves-impayes",
+      "libelle": "Tabela dos valores não pagos e provas",
+      "detail": "Mês a mês: valor devido, valor recebido, data. Extratos bancários, mensagens escritas, carta de cobrança. O Diário do Lien Parental pode ajudar você a prepará-la.",
+      "coffre": "finances"
+    },
+    {
+      "id": "numero-allocataire",
+      "libelle": "Número de beneficiário da Caf ou da MSA, se tiver",
+      "coffre": "finances"
+    },
+    {
+      "id": "relance",
+      "libelle": "Cópia da carta de cobrança enviada ao outro genitor",
+      "detail": "Opcional: há um modelo de carta no service-public.gouv.fr.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "courriers-aripa",
+      "libelle": "Cartas e declarações da ARIPA",
+      "detail": "Inclusive a carta que informa a data de início da intermediação.",
+      "coffre": "courriers"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Reúna a prova da falta de pagamento",
+      "detail": "Liste mês a mês o que é devido e o que foi recebido. Você pode primeiro enviar uma cobrança por escrito ao outro genitor."
+    },
+    {
+      "titre": "Verifique se você tem um título executivo",
+      "detail": "Sem título: peça um título da Caf se concordam com o valor (não casados); caso contrário, recorra ao juiz de família. Peça o ASF ao mesmo tempo."
+    },
+    {
+      "titre": "Confira antes de enviar o pedido",
+      "detail": "Cópia legível e completa do título executivo (todas as páginas); documento de identidade; RIB em seu nome; dados do outro genitor; tabela dos valores não pagos com comprovantes. Guarde uma cópia de tudo."
+    },
+    {
+      "titre": "Faça o pedido on-line em pension-alimentaire.caf.fr",
+      "detail": "Pedido de intermediação financeira e de cobrança. A ARIPA escreve depois a cada genitor; responda rápido e mantenha seus dados atualizados no seu espaço."
+    },
+    {
+      "titre": "Peça o ASF à Caf se a pensão não for paga",
+      "detail": "Ele é pago antecipadamente durante a cobrança."
+    },
+    {
+      "titre": "Acompanhe cada pagamento no Diário",
+      "detail": "Com o comprovante. O Lien Parental não certifica que um pagamento foi feito, mas ajuda você a manter o histórico."
+    },
+    {
+      "titre": "Outros recursos, se necessário",
+      "detail": "Oficial de justiça (pagamento direto, penhora), cobrança pelo Tesouro Público via promotor após o fracasso de outro procedimento, ou queixa por abandono de família (abandon de famille) após mais de 2 meses sem pagamento. Um advogado ou um point-justice (posto gratuito de informação jurídica) pode orientar você."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "ARIPA, serviço público das pensões alimentícias",
+      "detail": "Pedido on-line de intermediação e cobrança, simulador de pensão. Atendentes de segunda a sexta, das 9h às 16h30 (números na página « Nous contacter »).",
+      "url": "https://pension-alimentaire.caf.fr/usagers/nous-contacter"
+    },
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "Pedido de ASF e envio do formulário de título executivo da Caf.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    },
+    {
+      "nom": "Tribunal judiciaire de Fort-de-France, juiz de família",
+      "detail": "Para fixar ou alterar a pensão em caso de desacordo.",
+      "url": "https://www.justice.fr/annuaire/tribunal-judiciaire-fort-france"
+    },
+    {
+      "nom": "Point-justice ou advogado",
+      "detail": "Informação jurídica; assistência jurídica gratuita (aide juridictionnelle) possível conforme sua renda."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Pensão alimentícia não paga (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249"
+    },
+    {
+      "titre": "Intermediação financeira das pensões (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407"
+    },
+    {
+      "titre": "ARIPA: intermediação financeira",
+      "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere"
+    },
+    {
+      "titre": "ARIPA: pedir um título executivo da Caf",
+      "url": "https://pension-alimentaire.caf.fr/usagers/demande-titre-executoire"
+    },
+    {
+      "titre": "Pensão alimentícia (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F991"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Título executivo que fixa a pensão",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Tabela e provas das pensões não pagas",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Carta da ARIPA (início da intermediação)",
+      "categorie": "courriers"
+    },
+    {
+      "type": "depense",
+      "titre": "Pensão alimentícia",
+      "categorie": "pension"
+    },
+    {
+      "type": "rappel",
+      "titre": "Verificar o pagamento mensal da pensão",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Cobrar a ARIPA se não houver pagamento 60 dias após o dossiê completo",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Primeiro pagamento da ARIPA no máximo 60 dias após o recebimento dos documentos"
+    },
+    {
+      "libelle": "Queixa por abandono de família possível após mais de 2 meses sem pagamento"
+    },
+    {
+      "libelle": "Atrasados cobráveis por no máximo 5 anos",
+      "detail": "O pagamento direto por oficial de justiça só cobre os últimos 6 meses."
+    }
+  ],
+  "aConfirmer": [
+    "A lista exata de documentos exigidos pela ARIPA não é publicada: ela pode pedir documentos adicionais durante a análise.",
+    "A ARIPA não informa o prazo de análise de um pedido de título executivo da Caf.",
+    "O período de atrasados recuperados no âmbito do ASF e da cobrança pela Caf deve ser confirmado com a ARIPA para a sua situação.",
+    "A confirmar localmente: o número de telefone da ARIPA a discar a partir da Martinica (a página de contato indica +33 9 69 32 08 08 do exterior, sem mencionar os territórios ultramarinos).",
+    "A confirmar localmente: como registrar queixa por abandono de família (delegacia, gendarmerie ou carta ao procurador do tribunal judiciaire de Fort-de-France)."
+  ],
+  "motsCles": [
+    "pensão alimentícia",
+    "ARIPA",
+    "intermediação",
+    "pensão não paga",
+    "Caf",
+    "cobrança",
+    "título executivo"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1249 Pensão alimentícia não paga",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1249",
+      "verifieLe": "2026-01-30"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F36407 Intermediação financeira das pensões alimentícias",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407",
+      "verifieLe": "2026-04-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F815 Auxílio de apoio familiar (ASF)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815",
+      "verifieLe": "2026-04-01"
+    },
+    {
+      "titre": "ARIPA, intermediação financeira",
+      "url": "https://pension-alimentaire.caf.fr/usagers/aides-et-demarches/intermediation-financiere"
+    },
+    {
+      "titre": "ARIPA, pedido de título executivo",
+      "url": "https://pension-alimentaire.caf.fr/usagers/demande-titre-executoire"
+    }
+  ]
+}

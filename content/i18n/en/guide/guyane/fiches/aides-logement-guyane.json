@@ -59,9 +59,9 @@
     "How the Caf divides the child between the two households under shared residence for housing benefit is not detailed in the pages consulted: ask the Caf de la Guyane."
   ],
   "motsCles": ["housing", "APL", "ALF", "ALS", "rent", "Caf", "rent certificate"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F31864 Housing benefits", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864", "verifieLe": "2026-01-30" },
-    { "titre": "Service-public.gouv.fr, F13132 Family housing allowance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132", "verifieLe": "2026-07-01" }
+    { "titre": "Service-public.gouv.fr, F31864 Housing benefits", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13132 Family housing allowance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132", "verifieLe": "2026-10-29" }
   ]
 }

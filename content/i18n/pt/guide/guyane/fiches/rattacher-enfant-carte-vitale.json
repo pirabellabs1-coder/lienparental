@@ -60,9 +60,9 @@
     "As páginas de ameli.fr não puderam ser consultadas diretamente na verificação: os nomes dos menus podem ter mudado."
   ],
   "motsCles": ["carte Vitale", "ameli", "dependente", "atestado de direitos", "reembolso", "seguro-saúde", "CGSS"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F16620 Vínculo de um menor como dependente", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620", "verifieLe": "2024-11-13" },
+    { "titre": "Service-public.gouv.fr, F16620 Vínculo de um menor como dependente", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, notícia A17693 Carte Vitale dos menores (10 de setembro de 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693" },
     { "titre": "Service-public.gouv.fr, notícia A18009 Incluir o filho nas duas cartes Vitale", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18009" },
     { "titre": "ameli.fr, Obter um atestado de direitos", "url": "https://www.ameli.fr/assure/adresses-et-contacts/l-obtention-d-un-document/obtenir-une-attestation/obtenir-une-attestation-de-droits" },

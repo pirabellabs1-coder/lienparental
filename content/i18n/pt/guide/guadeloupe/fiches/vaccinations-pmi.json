@@ -1,0 +1,169 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "guadeloupe",
+  "categorie": "sante",
+  "titre": "Vacinas obrigatórias e acompanhamento na PMI",
+  "resume": "As vacinas exigidas para a creche, a escola e o centro de lazer, as mesmas em Guadalupe e na França continental, e o acompanhamento gratuito dos menores de 6 anos nos centros de PMI do Département.",
+  "aQuoiCaSert": "As vacinas obrigatórias são exigidas para entrar na creche, na escola, no cuidado extraescolar ou na colônia de férias: sem comprovante, a matrícula pode ser recusada ou apenas provisória. O comprovante é a caderneta de saúde (carnet de santé) preenchida pelo médico. A PMI (protection maternelle et infantile, serviço de saúde materno-infantil), gerida pelo Département de la Guadeloupe (conselho departamental), acompanha gratuitamente as famílias durante a gravidez e os 6 primeiros anos da criança, e distribui gratuitamente a caderneta de saúde.",
+  "quiEstConcerne": [
+    "Todos os pais de filhos menores, sobretudo antes da entrada na creche, na escola ou em centro de lazer.",
+    "Os futuros pais e os pais de crianças de menos de 6 anos, para o acompanhamento na PMI."
+  ],
+  "aSavoir": [
+    "Criança nascida antes de 2018: difteria, tétano e poliomielite (DTP) obrigatórias para a escola.",
+    "Criança nascida entre 1º de janeiro de 2018 e 31 de dezembro de 2022: 11 vacinas obrigatórias (difteria, tétano, poliomielite, coqueluche, Haemophilus influenzae b, hepatite B, pneumococo, meningococo C, sarampo, caxumba, rubéola).",
+    "Criança nascida a partir de 2023: mesma lista, com os meningococos A, B, C, W e Y no lugar do meningococo C apenas.",
+    "Em Guadalupe, a lista de vacinas obrigatórias é a mesma da França continental: a página oficial só prevê uma obrigação a mais (febre amarela) para a Guiana Francesa.",
+    "Uma criança com vacinas atrasadas pode ser admitida provisoriamente: você tem então 3 meses para regularizar, senão ela pode ser excluída. Se a criança ficar mais de um ano, o comprovante é pedido todo ano.",
+    "Os exames de saúde obrigatórios da criança (16 entre o nascimento e os 6 anos, de um total de 20 até os 16 anos) são reembolsados 100%, sem adiantar dinheiro, exceto honorários acima da tabela (dépassements d'honoraires). Podem ser feitos pelo médico de sua escolha ou na PMI.",
+    "Pais separados: o genitor que leva a criança para vacinar deve, de preferência, avisar o outro e enviar uma cópia das páginas de vacinas, para que cada um tenha o comprovante."
+  ],
+  "documents": [
+    {
+      "id": "carnet-sante",
+      "libelle": "Caderneta de saúde da criança (carnet de santé)",
+      "detail": "Original, a levar a cada consulta. É o comprovante das vacinas: guarde uma fotocópia ou foto das páginas de vacinas. Perdeu? Informe-se na PMI ou com seu médico.",
+      "coffre": "sante"
+    },
+    {
+      "id": "carte-vitale",
+      "libelle": "Carte Vitale (cartão do seguro de saúde) do genitor ou atestado de direitos da criança",
+      "detail": "Atestado disponível gratuitamente na sua conta ameli.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Documento de identidade do genitor ou do adulto acompanhante",
+      "detail": "Original. Se outra pessoa acompanhar a criança, leve uma autorização escrita de um dos pais.",
+      "coffre": "sante"
+    },
+    {
+      "id": "contre-indication",
+      "libelle": "Atestado médico de contraindicação, se for o caso",
+      "detail": "Emitido pelo médico. Apresentado no lugar do comprovante de vacina.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique a caderneta de saúde",
+      "detail": "Compare com a lista de vacinas obrigatórias conforme o ano de nascimento do seu filho."
+    },
+    {
+      "titre": "Marque uma consulta",
+      "detail": "Com seu médico de referência (médecin traitant) ou pediatra, ou num centro de PMI do Département para menores de 6 anos. Ligue antes para saber os dias de consulta."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Caderneta de saúde, carte Vitale ou atestado de direitos, documento de identidade, autorização escrita se quem acompanha não for um dos pais."
+    },
+    {
+      "titre": "Vacine seu filho",
+      "detail": "O profissional registra a vacina na caderneta de saúde."
+    },
+    {
+      "titre": "Apresente o comprovante",
+      "detail": "Fotocópia das páginas de vacinas para a creche, a escola ou o centro de lazer, todo ano se a criança ficar mais de um ano."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Centros de PMI do Département de la Guadeloupe",
+      "detail": "Acompanhamento gratuito durante a gravidez e até os 6 anos da criança. Para encontrar o centro mais próximo, consulte o diretório santé.fr ou contate o Département.",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/"
+    },
+    {
+      "nom": "Diretório santé.fr, PMI em Guadalupe",
+      "detail": "Busca dos locais de PMI por município.",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/971-guadeloupe"
+    },
+    {
+      "nom": "Seu médico de referência ou pediatra",
+      "detail": "Vacinas e exames de saúde obrigatórios."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Vacinas exigidas para a creche e a escola (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Infância, juventude e família, PMI (Département de la Guadeloupe)",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/"
+    },
+    {
+      "titre": "Exames de saúde obrigatórios até os 6 anos (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0"
+    }
+  ],
+  "actions": [
+    {
+      "type": "calendrier",
+      "titre": "Consulta de vacinação",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Reforço de vacina",
+      "evenement": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Páginas de vacinas da caderneta de saúde",
+      "categorie": "sante"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "3 meses para regularizar após uma admissão provisória",
+      "detail": "Sem vacinas em dia ao fim desse prazo, a criança pode ser excluída da creche, escola ou centro."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: endereços, dias e horários de consulta dos centros de PMI do Département, que não constam da página oficial consultada. Ligue antes de ir.",
+    "O número de doses e a idade de cada vacina seguem o calendário vacinal em vigor: verifique com seu médico ou a PMI.",
+    "Viagem: um certificado de vacinação contra a febre amarela pode ser exigido para entrar em Guadalupe vindo de um país de risco, ou para ir à Guiana Francesa. Informe-se na ARS Guadeloupe (agência regional de saúde) ou num centro de vacinação internacional.",
+    "Saint-Martin e Saint-Barthélemy são coletividades distintas: os serviços de PMI podem ser organizados de outra forma lá, informe-se no local."
+  ],
+  "motsCles": [
+    "vacina",
+    "PMI",
+    "caderneta de saúde",
+    "pediatra",
+    "bebê",
+    "Département"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-01-06"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1879 Saúde na escola primária",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879",
+      "verifieLe": "2026-10-15"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F35490 Consultas médicas da criança: exames obrigatórios até os 6 anos",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0",
+      "verifieLe": "2026-07-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133",
+      "verifieLe": "2025-06-20"
+    },
+    {
+      "titre": "Département de la Guadeloupe, Infância, juventude e família (PMI)",
+      "url": "https://www.cg971.fr/solidarites/enfance-jeunesse-et-famille/",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Santé.fr, diretório de PMI Guadeloupe (971)",
+      "url": "https://www.sante.fr/categories/protection-maternelle-et-infantile-pmi/971-guadeloupe",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

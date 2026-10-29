@@ -1,0 +1,62 @@
+{
+  "slug": "autorisation-sortie-territoire",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Autorisation de sortie du territoire (AST)",
+  "resume": "Quand votre enfant voyage à l'étranger sans aucun de ses parents (Comores, Madagascar ou ailleurs), ou vers la métropole avec une escale à l'étranger : le formulaire gratuit, les pièces, et que faire si vous craignez un départ sans votre accord.",
+  "aQuoiCaSert": "L'autorisation de sortie du territoire (AST) permet à un mineur qui vit en France de voyager à l'étranger sans être accompagné d'un parent ou d'une personne exerçant l'autorité parentale : voyage scolaire, séjour chez un proche, colonie. Elle se remplit sans déplacement en mairie ou en préfecture. Depuis Mayotte, un séjour aux Comores, à Madagascar ou un vol vers La Réunion ou la métropole avec une escale à l'étranger sont concernés si l'enfant voyage sans ses parents.",
+  "quiEstConcerne": [
+    "Les mineurs qui vivent en France et voyagent à l'étranger sans aucun parent ni titulaire de l'autorité parentale.",
+    "Les parents séparés qui doivent signer ou vérifier une AST, ou qui craignent un départ de l'enfant à l'étranger sans leur accord."
+  ],
+  "aSavoir": [
+    "Pas d'AST si l'enfant voyage avec l'un de ses parents, même si les parents sont séparés.",
+    "Un seul parent titulaire de l'autorité parentale signe le formulaire. L'accord de l'autre parent n'est pas demandé.",
+    "La durée de validité est choisie par le parent signataire, dans la limite d'un an.",
+    "Le formulaire est gratuit et se remplit en ligne sur service-public.gouv.fr (ou s'imprime et se complète à la main).",
+    "L'enfant doit aussi avoir sa propre pièce d'identité valide (carte d'identité ou passeport selon le pays), et un visa si le pays l'exige.",
+    "Outre-mer : un trajet entre un département d'outre-mer et la métropole avec une escale à l'étranger nécessite une AST si l'enfant voyage sans ses parents.",
+    "Crainte d'un enlèvement : en urgence, une opposition de sortie du territoire (OST) se demande en personne à la préfecture (commissariat ou gendarmerie si elle est fermée et le départ imminent). Elle dure 15 jours au maximum. Pour une mesure durable, seul le juge aux affaires familiales peut prononcer une interdiction (IST).",
+    "IST en cours : l'enfant ne peut quitter le territoire qu'avec l'accord des deux parents. Elle doit aussi être levée temporairement pour un vol vers l'outre-mer ou la métropole avec escale à l'étranger."
+  ],
+  "documents": [
+    { "id": "formulaire-ast", "libelle": "Formulaire d'AST rempli et signé (cerfa n° 15646)", "detail": "Original signé par un parent titulaire de l'autorité parentale. L'enfant le garde sur lui pendant tout le voyage.", "coffre": "autres" },
+    { "id": "identite-signataire", "libelle": "Photocopie lisible de la pièce d'identité du parent signataire", "detail": "Parent français : carte d'identité ou passeport valide ou périmé depuis moins de 5 ans. Parent hors Union européenne : passeport valide et titre de séjour français valide.", "coffre": "autres" },
+    { "id": "identite-enfant", "libelle": "Pièce d'identité de l'enfant (original en cours de validité)", "detail": "Carte d'identité ou passeport selon la destination, avec un visa si le pays l'exige.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Copie du livret de famille", "detail": "Conseillée si l'enfant et le parent signataire n'ont pas le même nom.", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Décision du juge sur l'autorité parentale (copie)", "detail": "Utile si vous exercez seul l'autorité parentale ou en cas d'IST. Indispensable pour une demande d'OST, avec les preuves du risque.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez si une AST est nécessaire", "detail": "L'enfant part-il à l'étranger, ou transite-t-il par l'étranger, sans aucun de ses parents ? Si oui, il faut une AST." },
+    { "titre": "Remplissez le formulaire en ligne", "detail": "Sur service-public.gouv.fr. Indiquez la durée de validité (un an au maximum), puis imprimez et signez." },
+    { "titre": "Vérifiez avant le départ", "detail": "Formulaire original signé, photocopie de la pièce d'identité du parent signataire, pièce d'identité valide de l'enfant (et visa si besoin), copie du livret de famille. Renseignez-vous auprès de la compagnie sur ses propres exigences." },
+    { "titre": "Remettez le tout à l'enfant ou à l'accompagnateur", "detail": "Gardez une copie scannée dans le coffre-fort." },
+    { "titre": "En cas de crainte d'un départ sans votre accord", "detail": "Rendez-vous en personne à la préfecture de Mayotte avec le justificatif d'autorité parentale, vos pièces d'identité, la pièce d'identité de l'enfant et les preuves du risque. Pour une protection durable, saisissez le juge aux affaires familiales." }
+  ],
+  "ou": [
+    { "nom": "Formulaire d'AST en ligne (service-public.gouv.fr)", "detail": "Gratuit, sans déplacement.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46121" },
+    { "nom": "Préfecture de Mayotte", "detail": "Avenue de la Préfecture, 97600 Mamoudzou. Uniquement pour une opposition de sortie du territoire (OST) en urgence.", "telephone": "02 69 63 50 00" }
+  ],
+  "liens": [
+    { "titre": "Autorisation de sortie du territoire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359" },
+    { "titre": "Conflit parental sur la sortie du territoire : OST et IST (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Autorisation de sortie du territoire signée", "categorie": "autres" },
+    { "type": "coffre", "titre": "Jugement sur l'autorité parentale ou IST", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Fin de validité de l'AST de l'enfant", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Un an au maximum", "detail": "Durée de validité de l'AST." },
+    { "libelle": "15 jours au maximum", "detail": "Durée d'une opposition de sortie du territoire décidée par le préfet." }
+  ],
+  "aConfirmer": [
+    "À confirmer : pièce d'identité et documents exigés par le pays de destination (Comores, Madagascar) pour un mineur, auprès de la compagnie ou du consulat.",
+    "À confirmer localement : horaires d'accueil de la préfecture de Mayotte pour une OST en urgence (adresse et téléphone relevés dans l'annuaire service-public)."
+  ],
+  "motsCles": ["AST", "sortie du territoire", "voyage", "mineur", "Comores", "Madagascar", "OST", "IST"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1359 Autorisation de sortie du territoire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1774 Conflit parental sur la sortie du territoire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774", "verifieLe": "2026-10-29" }  ]
+}

@@ -58,12 +58,12 @@
     "Les sources officielles ne fixent pas d'âge minimum pour qu'un mineur ouvre seul un livret A : votre banque peut avoir ses propres règles."
   ],
   "motsCles": ["livret A", "livret jeune", "épargne", "banque", "mineur", "compte enfant"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F2365 Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365", "verifieLe": "2026-08-01" },
-    { "titre": "Service-public.gouv.fr, F2904 Livret jeune", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904", "verifieLe": "2026-08-01" },
-    { "titre": "Service-public.gouv.fr, F21035 Compte bancaire d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2025-11-17" },
-    { "titre": "Service-public.gouv.fr, actualité A18386 (Cour de cassation, 12 juin 2025, n° 24-13.604)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" },
-    { "titre": "Service-public.gouv.fr, F1427 Acte de naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" }
+    { "titre": "Service-public.gouv.fr, F2365 Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2904 Livret jeune", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2904", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21035 Compte bancaire d'un mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A18386 (Cour de cassation, 12 juin 2025, n° 24-13.604)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1427 Acte de naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" }
   ]
 }

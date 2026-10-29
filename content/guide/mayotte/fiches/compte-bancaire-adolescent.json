@@ -1,0 +1,63 @@
+{
+  "slug": "compte-bancaire-adolescent",
+  "territoire": "mayotte",
+  "categorie": "argent",
+  "titre": "Ouvrir un compte bancaire pour mon adolescent",
+  "resume": "À quel âge, avec quelle carte, l'accord des parents (y compris séparés) et la liste précise des pièces à apporter à la banque pour ne pas vous déplacer pour rien.",
+  "aQuoiCaSert": "Un compte au nom de votre adolescent lui permet de recevoir son argent de poche ou un salaire de job d'été, et d'apprendre à gérer un budget avec une carte adaptée à son âge. Un mineur ne peut pas ouvrir seul un compte : ce sont ses représentants légaux (en général les parents) qui agissent pour lui. Les parents restent responsables des fonds et des opérations de l'enfant mineur.",
+  "quiEstConcerne": [
+    "Les parents d'un adolescent de 12 à 17 ans qui souhaitent lui ouvrir un compte ou un livret avec une carte.",
+    "Les parents séparés qui doivent s'accorder sur l'ouverture ou sur les opérations du compte de l'enfant."
+  ],
+  "aSavoir": [
+    "Dès la naissance, les parents peuvent ouvrir un compte au nom de l'enfant.",
+    "Dès 12 ans : le jeune peut, avec l'accord de ses parents, demander un livret jeune. Les retraits peuvent être limités et la signature d'un parent est nécessaire.",
+    "À partir de 16 ans : le jeune peut ouvrir un compte dans la plupart des banques avec l'autorisation de ses parents, et obtenir une carte bancaire avec cette autorisation.",
+    "La banque peut proposer une carte à autorisation systématique, qui vérifie le solde à chaque paiement : elle limite le risque de découvert.",
+    "Les parents ne peuvent utiliser l'argent de l'enfant que pour des dépenses qui le concernent directement. À partir de 16 ans, ils doivent lui rendre des comptes.",
+    "Parents séparés exerçant ensemble l'autorité parentale : un acte qui modifie le compte, comme un retrait important, exige l'accord des deux parents (Cour de cassation, 12 juin 2025).",
+    "Si vous exercez seul l'autorité parentale par décision de justice, apportez cette décision."
+  ],
+  "documents": [
+    { "id": "identite-ado", "libelle": "Pièce d'identité de l'adolescent (original en cours de validité)", "detail": "Si elle est périmée ou perdue, faites-la refaire d'abord en mairie.", "coffre": "finances" },
+    { "id": "identite-parent-1", "libelle": "Pièce d'identité du premier parent (original)", "coffre": "finances" },
+    { "id": "identite-parent-2", "libelle": "Pièce d'identité du second parent (original ou copie selon la banque)", "detail": "Demandez à la banque s'il doit venir signer en personne.", "coffre": "finances" },
+    { "id": "filiation", "libelle": "Livret de famille ou acte de naissance avec filiation de l'enfant", "detail": "Prouve que vous êtes bien ses parents.", "coffre": "finances" },
+    { "id": "domicile", "libelle": "Justificatif de domicile récent", "detail": "Si vous êtes hébergé : attestation d'hébergement et pièce d'identité de l'hébergeant.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Décision du juge ou convention sur l'autorité parentale (copie)", "coffre": "jaf" },
+    { "id": "accord-autre-parent", "libelle": "Accord écrit et signé de l'autre parent", "detail": "Si l'autre parent ne peut pas venir et que la banque l'accepte, avec la copie de sa pièce d'identité.", "coffre": "finances" },
+    { "id": "contrat", "libelle": "Contrat d'ouverture et conditions tarifaires", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Choisissez le produit adapté à l'âge", "detail": "Livret jeune dès 12 ans, compte avec carte à partir de 16 ans. Comparez les frais." },
+    { "titre": "Parlez-en avec l'autre parent", "detail": "Mettez-vous d'accord sur le produit, la carte et les plafonds." },
+    { "titre": "Prenez rendez-vous à votre banque", "detail": "Demandez la liste exacte des pièces et si les deux parents doivent être présents." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pièce d'identité originale de l'ado et de chaque parent, livret de famille ou acte de naissance, justificatif de domicile, jugement si vous êtes séparés, accord écrit de l'autre parent s'il est absent." },
+    { "titre": "Réglez la carte et les plafonds", "detail": "Carte à autorisation systématique si vous voulez éviter tout découvert." },
+    { "titre": "Rangez le contrat dans le coffre-fort" }
+  ],
+  "ou": [
+    { "nom": "Votre banque", "detail": "Les offres et pièces exigées varient selon l'établissement." },
+    { "nom": "IEDOM, agence de Mayotte", "detail": "Si une banque refuse d'ouvrir un compte : droit au compte.", "url": "https://www.iedom.fr/rubrique19", "telephone": "02 62 90 71 00" }
+  ],
+  "liens": [
+    { "titre": "Un mineur peut-il avoir un compte bancaire ? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035" },
+    { "titre": "Compte d'un mineur : accord des deux parents (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Contrat de compte bancaire de l'adolescent", "categorie": "finances" },
+    { "type": "coffre", "titre": "Accord écrit de l'autre parent pour le compte", "categorie": "finances" },
+    { "type": "calendrier", "titre": "Rendez-vous à la banque : compte de l'adolescent", "evenement": "rdv" },
+    { "type": "depense", "titre": "Frais de carte ou de tenue de compte de l'adolescent", "categorie": "frais-administratifs" }
+  ],
+  "aConfirmer": [
+    "Chaque banque fixe ses conditions : âge minimal de la carte, présence des deux parents, ancienneté du justificatif de domicile.",
+    "À confirmer localement : offres jeunes disponibles en agence à Mayotte et frais associés."
+  ],
+  "motsCles": ["compte bancaire", "adolescent", "mineur", "carte bancaire", "argent de poche", "livret jeune"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F21035 Un mineur peut-il avoir un compte bancaire ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, actualité A18386 Compte d'un mineur : accord des deux parents", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "slug": "saisir-juge-affaires-familiales",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Applying to the family court judge (JAF)",
+  "resume": "Form cerfa n° 11530, the exact list of documents (birth certificates less than 3 months old), the tribunal judiciaire de Mamoudzou, the €50 contribution and when you don't have to pay it.",
+  "aQuoiCaSert": "The family court judge (juge aux affaires familiales, JAF) settles disagreements between parents about how parental authority is exercised, where the child lives, visiting and staying rights, or child support. The judge can also change an existing decision when circumstances change, or give court approval (homologation) to an agreement reached by the parents so that it has the force of a court judgment. In Mayotte, the competent court is the tribunal judiciaire (judicial court) de Mamoudzou.",
+  "quiEstConcerne": [
+    "Parents, married or not, who cannot reach an agreement about their children.",
+    "A parent who wants an existing decision changed (moving house, change in income, new arrangements).",
+    "Parents who agree with each other and want their parenting agreement (convention parentale) approved by the court.",
+    "A parent who wants child support set, a prerequisite for any action if it goes unpaid."
+  ],
+  "aSavoir": [
+    "Form: cerfa n° 11530 \"Demande au juge aux affaires familiales\" (application to the family court judge), to fill in online or on paper. A fully online application is also possible.",
+    "Competent court: the court where the parent the child usually lives with resides. In Mayotte: the tribunal judiciaire de Mamoudzou.",
+    "A lawyer is not mandatory. Legal aid (aide juridictionnelle) can cover the costs depending on your income.",
+    "€50 contribution, reinstated for civil proceedings filed since March 1, 2026, in the form of an electronic stamp bought online before you apply. It applies in the overseas departments. It is not due if you receive legal aid, for approval of a parenting agreement, or for a protection order.",
+    "Parents in agreement: joint application for approval (cerfa n° 16139), signed by both.",
+    "Violence: a protection order (ordonnance de protection) is requested from the family court judge, with no prior police complaint required. The Mamoudzou court has a domestic violence unit (pôle violences intrafamiliales). Emergency: 17 or 112; helpline: 3919, free from Mayotte.",
+    "This guide does not replace legal advice: contact a lawyer or a point-justice (free legal information center)."
+  ],
+  "documents": [
+    { "id": "cerfa-11530", "libelle": "Form cerfa n° 11530, completed, dated and signed", "detail": "Original for the court, a copy for you.", "coffre": "jaf" },
+    { "id": "acte-naissance-parent", "libelle": "Full copy (copie intégrale) of your birth certificate, less than 3 months old", "detail": "Not an extract. Request it from the town hall (mairie) of your place of birth (see the guide entry \"Getting a birth certificate\").", "coffre": "jaf" },
+    { "id": "actes-naissance-enfants", "libelle": "Full copy of the birth certificate of each child concerned, less than 3 months old", "detail": "From the town hall of the child's place of birth. Allow time for delivery.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Family record book (livret de famille, copy of all completed pages) or full copy of the marriage certificate less than 3 months old", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Copy of your ID", "detail": "Valid ID card, passport or residence permit, front and back.", "coffre": "jaf" },
+    { "id": "jugements", "libelle": "Copy of previous judgments (divorce, parental authority, child support)", "detail": "If you no longer have it, ask the court registry (greffe) of the court that issued it for a copy.", "coffre": "jaf" },
+    { "id": "ressources", "libelle": "Proof of income and expenses", "detail": "Especially if your application concerns child support: tax notice, last 3 payslips, benefit statement from the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund), rent, loans, child-related costs.", "coffre": "jaf" },
+    { "id": "timbre", "libelle": "€50 electronic stamp (contribution)", "detail": "Unless you have legal aid, are applying for approval of a parenting agreement, or for a protection order.", "coffre": "jaf" },
+    { "id": "aj", "libelle": "Legal aid decision or receipt of your application, if you applied for it", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "First try to reach an amicable solution", "detail": "Family mediation or a written agreement to have approved. No mediation in cases of violence." },
+    { "titre": "Order the birth certificates now", "detail": "They must be less than 3 months old when you file: they are often the document that delays the file." },
+    { "titre": "Fill in cerfa n° 11530 or the online application", "detail": "Explain clearly what you are asking for (residence, visiting rights, amount of child support) and why." },
+    { "titre": "Buy the €50 stamp if you are not exempt", "detail": "Online, by bank card, before sending your application." },
+    { "titre": "Check before sending your file", "detail": "Signed cerfa; full copies of birth certificates less than 3 months old (yours and each child's); family record book; ID; previous judgments; proof of income if you mention child support; stamp or legal aid decision. Make a full copy." },
+    { "titre": "Send or drop off the file at the court registry of the tribunal judiciaire de Mamoudzou", "detail": "Or file the application online. Store the copy in the Court file section of your Vault." },
+    { "titre": "Prepare for the hearing", "detail": "Add the date to the calendar as soon as you receive the summons, with a reminder. Bring the originals of your documents." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Mamoudzou (Mamoudzou Judicial Court)", "detail": "97600 Mamoudzou. Reception email: accueil.tj-mamoudzou@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" },
+    { "nom": "Points-justice in Mayotte (CDAD, Conseil départemental de l'accès au droit, the local access-to-law council)", "detail": "Free legal information and help putting your file together. Email: cdad-mayotte@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271" },
+    { "nom": "Violences Femmes Info (violence against women helpline)", "detail": "Listening and guidance, free and anonymous, 24 hours a day. In immediate danger, call 17 or 112.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "telephone": "3919" }
+  ],
+  "liens": [
+    { "titre": "Application to the family court judge, cerfa 11530 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764" },
+    { "titre": "Approval of a parenting agreement, cerfa 16139 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771" },
+    { "titre": "€50 contribution and tax stamp (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227" },
+    { "titre": "Domestic violence and protection order (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "€50 contribution for applying to the family court judge", "categorie": "frais-administratifs", "montant": 50, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227" },
+    { "type": "coffre", "titre": "Application to the family court judge (full copy)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Birth certificates less than 3 months old", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Summons and decision of the family court judge", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Hearing before the family court judge", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Check the date of the birth certificates (under 3 months)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Birth certificates less than 3 months old at the time of filing" }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: full postal address and opening hours of the tribunal judiciaire de Mamoudzou (the official directory only gives the town; the justice.fr website was unavailable when checked).",
+    "To be confirmed locally: average waiting times for a hearing before the Mamoudzou family court judge.",
+    "To be confirmed with the court registry: practical arrangements for the €50 contribution when applying in Mayotte."
+  ],
+  "motsCles": ["JAF", "judge", "court", "Mamoudzou", "residence", "visiting rights", "cerfa 11530", "court approval"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, R15764 Application to the family court judge (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F33227 Tax stamp and €50 contribution", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-10-29" },
+    { "titre": "BOFiP, contribution for legal aid (application in the overseas departments)", "url": "https://bofip.impots.gouv.fr/doctrine/pgp/6037-PGP", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F12544 Domestic violence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public directory, Tribunal judiciaire de Mamoudzou", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "verifieLe": "2026-10-29" }
+  ]
+}

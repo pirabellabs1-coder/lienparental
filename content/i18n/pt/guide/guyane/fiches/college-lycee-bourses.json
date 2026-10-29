@@ -70,11 +70,11 @@
     "A confirmar localmente: regra da residência alternada para a bolsa do lycée, pois a ficha oficial só a detalha para o collège."
   ],
   "motsCles": ["bolsa", "collège", "lycée", "6e", "EduConnect", "aviso de imposto", "residência alternada"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F984 Bolsa do collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-04-30" },
-    { "titre": "Service-public.gouv.fr, F616 Bolsa do lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-04-30" },
-    { "titre": "Ministério da Educação da França, calendário das campanhas de bolsa 2026-2027", "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-1-calendrier-des-campagnes-de-bourse-de-college-et-de-lycee-516926.pdf" },
+    { "titre": "Service-public.gouv.fr, F984 Bolsa do collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F984", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F616 Bolsa do lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F616", "verifieLe": "2026-10-29" },
+    { "titre": "Ministério da Educação da França, calendário das campanhas de bolsa 2026-2027", "url": "https://www.education.gouv.fr/sites/default/files/document/annexe-1-calendrier-des-campagnes-de-bourse-de-college-et-de-lycee-516926.pdf", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F2322 Matrícula no collège", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2322", "verifieLe": "2026-03-20" },
     { "titre": "Service-public.gouv.fr, F2323 Matrícula no lycée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2323", "verifieLe": "2026-01-23" }
   ]

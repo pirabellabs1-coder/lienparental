@@ -1,0 +1,167 @@
+{
+  "slug": "prime-naissance-paje",
+  "territoire": "france",
+  "categorie": "naissance",
+  "titre": "Bônus de nascimento e auxílio básico (Paje)",
+  "resume": "Os dois benefícios da Caf ligados à chegada de um bebê: condições de renda, valores de 2026, datas de pagamento e o que declarar a tempo.",
+  "aQuoiCaSert": "A Paje (prestation d'accueil du jeune enfant, benefício da primeira infância) inclui, entre outros, o bônus de nascimento (prime à la naissance), pago uma vez durante a gravidez, e o auxílio básico (allocation de base), pago todo mês até a criança completar 3 anos. Eles ajudam a arcar com as despesas da chegada e dos cuidados de uma criança pequena. Os dois são pagos pela Caf (Caisse d'allocations familiales, órgão de benefícios familiares) e dependem de condições de renda.",
+  "quiEstConcerne": [
+    "Os futuros pais e os pais de uma criança com menos de 3 anos cuja renda não ultrapassa os tetos.",
+    "As famílias beneficiárias da Caf, ou da MSA para o regime agrícola."
+  ],
+  "aSavoir": [
+    "Auxílio-nascimento: 1.093,11 € líquidos por filho esperado (service-public.gouv.fr, verificado em 1º de abril de 2026).",
+    "Para o auxílio, é preciso ter feito o primeiro exame pré-natal e declarado a gravidez antes do fim do 3º mês. Ele é pago antes do último dia do mês civil seguinte ao 6º mês de gravidez.",
+    "Tetos de 2026 (renda líquida por categoria de 2024) para 1 filho: 49.054 € para um casal com duas rendas ou um pai ou mãe solo, 37.118 € para um casal com uma só renda, mais 8.908 € por filho adicional.",
+    "Auxílio básico: 198,16 € por mês se sua renda estiver abaixo do limite inferior (para 1 filho: 41.055 € para um casal com duas rendas ou um pai ou mãe solo, 31.066 € para um casal com uma só renda), 99,08 € entre os dois limites.",
+    "É pago a partir do mês seguinte ao nascimento, até o mês anterior aos 3 anos da criança. Não se acumula com o complément familial (complemento familiar); na França metropolitana, acumula-se com os auxílios familiares.",
+    "Pais separados: a Paje não é dividida, mesmo em residência alternada. É paga integralmente ao genitor designado como beneficiário; apenas os auxílios familiares podem ser divididos."
+  ],
+  "documents": [
+    {
+      "id": "declaration-grossesse",
+      "libelle": "Declaração de gravidez",
+      "detail": "Feita pelo médico ou pela parteira no primeiro exame pré-natal, antes do fim do 3º mês. Guarde a via ou o comprovante de recebimento.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parents",
+      "libelle": "Documento de identidade ou autorização de residência (titre de séjour) de cada genitor",
+      "detail": "Cópia de documento válido, pedida se você ainda não é beneficiário da Caf.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (comprovante de dados bancários) do genitor beneficiário",
+      "detail": "Em seu nome, para o pagamento.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Aviso de imposto 2025 sobre a renda de 2024",
+      "detail": "Cópia, para baixar no seu espaço do impots.gouv.fr. A renda serve para verificar os tetos.",
+      "coffre": "finances"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "Certidão de nascimento da criança e livro de família (livret de famille) atualizado",
+      "detail": "Cópias, a enviar à Caf ou à MSA após o nascimento. Certidão gratuita no service-public.gouv.fr ou na prefeitura (mairie) do local de nascimento.",
+      "coffre": "finances"
+    },
+    {
+      "id": "notification-caf",
+      "libelle": "Notificações de direitos da Caf",
+      "detail": "Disponíveis no seu espaço Mon Compte em caf.fr.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Faça o primeiro exame pré-natal antes do fim do 3º mês",
+      "detail": "O profissional de saúde faz a declaração de gravidez. É ela que abre o direito ao bônus."
+    },
+    {
+      "titre": "Crie ou atualize o seu espaço em caf.fr",
+      "detail": "Se você ainda não é beneficiário, faça um pedido de benefícios on-line. Informe a gravidez se a Caf não a recebeu."
+    },
+    {
+      "titre": "Confira antes de enviar o processo",
+      "detail": "Declaração de gravidez enviada, contatos e RIB atualizados, renda declarada, situação familiar exata (casal, pai ou mãe solo). Uma situação mal declarada pode atrasar ou distorcer o cálculo."
+    },
+    {
+      "titre": "Declare o nascimento à Caf",
+      "detail": "No seu espaço on-line, seção de mudança de situação, com as cópias do livro de família e da certidão de nascimento."
+    },
+    {
+      "titre": "Acompanhe os pagamentos",
+      "detail": "O bônus é pago antes do último dia do mês civil seguinte ao 6º mês de gravidez. O auxílio básico é pago todo mês a partir do mês seguinte ao nascimento."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf do seu departamento",
+      "detail": "Procedimentos on-line no espaço Mon Compte; contatos e atendimentos na seção « Ma Caf ».",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, seguridade social agrícola)",
+      "detail": "Se você é do regime agrícola.",
+      "url": "https://www.msa.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Bônus de nascimento (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550"
+    },
+    {
+      "titre": "Auxílio básico da Paje (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552"
+    },
+    {
+      "titre": "Residência alternada e benefícios familiares (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Primeiro exame pré-natal e declaração de gravidez antes do fim do 3º mês",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Declarar o nascimento à Caf",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Declaração de gravidez",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notificação de direitos Paje da Caf",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Declaração de gravidez antes do fim do 3º mês",
+      "detail": "Condição para receber o bônus de nascimento."
+    },
+    {
+      "libelle": "Auxílio básico até o mês anterior aos 3 anos da criança"
+    }
+  ],
+  "aConfirmer": [
+    "Valores e tetos reajustados todo ano: use o simulador do caf.fr para a sua situação.",
+    "A escolha do genitor beneficiário após uma separação é resolvida com a Caf: verifique com ela se a criança mudar de residência."
+  ],
+  "motsCles": [
+    "Paje",
+    "bônus de nascimento",
+    "auxílio básico",
+    "gravidez",
+    "Caf",
+    "bebê"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2550 Bônus de nascimento",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2552 Auxílio básico da Paje",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

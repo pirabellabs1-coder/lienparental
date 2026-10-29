@@ -1,0 +1,70 @@
+{
+  "slug": "vaccinations-pmi",
+  "territoire": "reunion",
+  "categorie": "sante",
+  "titre": "Vaccinations obligatoires et suivi en PMI",
+  "resume": "Les vaccins exigés pour la crèche, l'école et le centre de loisirs selon l'année de naissance, les nouveautés du calendrier 2026 relayées par l'ARS La Réunion, et le suivi des jeunes enfants en PMI.",
+  "aQuoiCaSert": "Les vaccinations obligatoires sont exigées pour entrer en crèche, à l'école, en garderie ou en colonie : sans justificatif, l'admission peut être refusée ou seulement provisoire. Le justificatif, c'est le carnet de santé rempli par le professionnel de santé. Les centres de protection maternelle et infantile (PMI) du Département de La Réunion assurent le suivi médical des jeunes enfants, vaccinations comprises. L'ARS La Réunion relaie chaque année le calendrier vaccinal et mène des campagnes auprès des jeunes avec l'académie.",
+  "quiEstConcerne": [
+    "Tous les parents d'enfants mineurs, en particulier avant une entrée en crèche, à l'école ou en centre de loisirs.",
+    "Les parents d'enfants de moins de 6 ans, pour le suivi en PMI.",
+    "Les parents de collégiens, pour les campagnes de vaccination organisées au collège (HPV, méningocoques)."
+  ],
+  "aSavoir": [
+    "Enfant né avant 2018 : diphtérie, tétanos et poliomyélite (DTP) obligatoires.",
+    "Enfant né de 2018 à 2022 : 11 vaccins obligatoires (diphtérie, tétanos, poliomyélite, coqueluche, Haemophilus influenzae b, hépatite B, pneumocoque, méningocoque C, rougeole, oreillons, rubéole).",
+    "Enfant né à partir de 2023 : même liste, avec les méningocoques A, B, C, W et Y à la place du seul méningocoque C. Un rattrapage contre les méningocoques est proposé aux enfants de 2 à 4 ans (calendrier 2026).",
+    "Aucun vaccin supplémentaire n'est obligatoire à La Réunion : la fièvre jaune n'est obligatoire qu'en Guyane.",
+    "Un enfant pas à jour peut être admis provisoirement : vous avez alors 3 mois pour régulariser, sinon il peut être exclu. Si l'enfant reste plus d'un an dans l'établissement, le justificatif est demandé chaque année.",
+    "HPV : vaccination prioritaire de 11 à 14 ans, avec une campagne gratuite en classe de 5e, et rattrapage désormais possible jusqu'à 26 ans.",
+    "Les 20 examens de santé obligatoires de l'enfant (jusqu'à 16 ans) sont pris en charge à 100 % sans avance de frais, hors dépassements d'honoraires. Jusqu'à 6 ans, ils peuvent être faits par le médecin traitant, un autre médecin ou un centre de PMI ; ensuite par un généraliste ou un pédiatre.",
+    "Parents séparés : le parent qui fait vacciner l'enfant a intérêt à informer l'autre et à lui transmettre une copie des pages vaccins, pour que chacun dispose du justificatif."
+  ],
+  "documents": [
+    { "id": "carnet-sante", "libelle": "Carnet de santé de l'enfant", "detail": "Original à apporter à chaque rendez-vous. C'est le justificatif des vaccinations : gardez une copie ou une photo des pages vaccins.", "coffre": "sante" },
+    { "id": "carte-vitale", "libelle": "Carte Vitale du parent ou attestation de droits de l'enfant", "detail": "Attestation téléchargeable gratuitement sur votre compte ameli.", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité du parent ou de l'adulte qui accompagne", "detail": "Si un tiers accompagne l'enfant, prévoyez une autorisation écrite d'un parent.", "coffre": "sante" },
+    { "id": "autorisation-college", "libelle": "Formulaire d'autorisation parentale pour la vaccination au collège", "detail": "Remis par l'établissement lors des campagnes HPV et méningocoques : à rendre avant la date indiquée.", "coffre": "sante" },
+    { "id": "contre-indication", "libelle": "Certificat médical de contre-indication, le cas échéant", "detail": "Délivré par le médecin. À présenter à la place du justificatif de vaccin.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez le carnet de santé", "detail": "Comparez avec la liste des vaccins obligatoires selon l'année de naissance de votre enfant et avec le calendrier vaccinal 2026." },
+    { "titre": "Prenez rendez-vous", "detail": "Chez votre médecin traitant ou pédiatre, ou dans un centre de PMI du Département pour les moins de 6 ans. Appelez avant de vous déplacer." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Carnet de santé, carte Vitale ou attestation de droits, pièce d'identité, autorisation écrite si ce n'est pas un parent qui accompagne." },
+    { "titre": "Faites vacciner votre enfant", "detail": "Le professionnel inscrit le vaccin dans le carnet de santé." },
+    { "titre": "Présentez le justificatif", "detail": "Copie des pages vaccins à la crèche, à l'école ou au centre de loisirs, et chaque année si l'enfant y reste plus d'un an." }
+  ],
+  "ou": [
+    { "nom": "PMI du Département de La Réunion", "detail": "Suivi médical des jeunes enfants, vaccinations et soutien à la parentalité. Standard du Département : du lundi au vendredi, 8 h à 16 h 30.", "url": "https://www.departement974.fr/protection-maternelle-infantile-pmi", "telephone": "0262 90 30 30" },
+    { "nom": "Votre médecin traitant ou pédiatre", "detail": "Vaccinations et examens de santé obligatoires." },
+    { "nom": "ARS La Réunion", "detail": "Calendrier vaccinal et campagnes de vaccination sur l'île.", "url": "https://www.lareunion.ars.sante.fr/calendrier-des-vaccinations-2026" }
+  ],
+  "liens": [
+    { "titre": "Vaccins exigés pour la crèche et l'école (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Calendrier des vaccinations 2026 (ARS La Réunion)", "url": "https://www.lareunion.ars.sante.fr/calendrier-des-vaccinations-2026" },
+    { "titre": "Examens médicaux obligatoires de l'enfant (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967" }
+  ],
+  "actions": [
+    { "type": "calendrier", "titre": "Rendez-vous vaccination", "evenement": "sante" },
+    { "type": "rappel", "titre": "Rappel de vaccin", "evenement": "sante" },
+    { "type": "rappel", "titre": "Rendre l'autorisation de vaccination au collège (HPV, méningocoques)", "evenement": "ecole" },
+    { "type": "coffre", "titre": "Pages vaccins du carnet de santé", "categorie": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "3 mois pour régulariser après une admission provisoire", "detail": "Sans vaccins à jour à l'issue de ce délai, l'enfant peut être exclu de la collectivité." }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : la liste, les adresses et les horaires des centres de PMI du Département, le site officiel ne publiant pas de liste à jour. Appelez le standard du Département avant de vous déplacer.",
+    "À confirmer : la gratuité des consultations en PMI n'est pas indiquée sur la page du Département consultée.",
+    "À confirmer auprès du collège : les dates des prochaines campagnes de vaccination HPV et méningocoques.",
+    "Le nombre de doses et l'âge de chaque vaccin suivent le calendrier vaccinal en vigueur : à vérifier avec votre médecin ou la PMI."
+  ],
+  "motsCles": ["vaccin", "PMI", "carnet de santé", "rougeole", "méningocoque", "HPV", "pédiatre", "bébé"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F967 Examens médicaux obligatoires de l'enfant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F967", "verifieLe": "2026-10-29" },
+    { "titre": "ARS La Réunion, Calendrier des vaccinations 2026", "url": "https://www.lareunion.ars.sante.fr/calendrier-des-vaccinations-2026", "verifieLe": "2026-10-29" },
+    { "titre": "Département de La Réunion, Protection maternelle et infantile (PMI)", "url": "https://www.departement974.fr/protection-maternelle-infantile-pmi", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "slug": "conge-paternite",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Congé de paternité et d'accueil de l'enfant",
+  "resume": "Durée du congé, délais pour prévenir l'employeur, indemnités journalières versées par la CSSM et pièces à envoyer, plus le nouveau congé supplémentaire de naissance.",
+  "aQuoiCaSert": "Le congé de paternité et d'accueil de l'enfant permet au père, ou au conjoint, partenaire de Pacs ou concubin de la mère, de s'arrêter de travailler après la naissance pour s'occuper de l'enfant. Pendant ce congé, le contrat de travail est suspendu et, à Mayotte, c'est la CSSM qui peut verser des indemnités journalières. Le code du travail national s'applique à Mayotte depuis le 1er janvier 2018.",
+  "quiEstConcerne": [
+    "Le père salarié de l'enfant.",
+    "Le conjoint, partenaire de Pacs ou concubin de la mère, s'il n'est pas le père.",
+    "Ces règles concernent le secteur privé : fonctionnaires, indépendants et autres régimes ont des règles propres."
+  ],
+  "aSavoir": [
+    "Parents séparés : le père y a droit sans condition de mariage, de Pacs ou de vie commune avec la mère.",
+    "Durée : 25 jours calendaires pour une naissance (32 en cas de naissances multiples), en plus du congé de naissance de 3 jours ouvrables. Une période de 4 jours est obligatoire juste après le congé de naissance.",
+    "Les 21 jours restants (28 pour des naissances multiples) peuvent être pris en une fois ou en 2 périodes d'au moins 5 jours, dans les 6 mois qui suivent la naissance.",
+    "Prévenez l'employeur au moins 1 mois avant la date prévue de l'accouchement, puis au moins 1 mois avant le début de chaque période. Un écrit est conseillé : lettre recommandée ou remise en main propre contre décharge.",
+    "Indemnités journalières : à Mayotte, elles sont versées par la CSSM, joignable au 02 69 61 91 91 (service-public.gouv.fr).",
+    "Congé supplémentaire de naissance : depuis le 1er juillet 2026, chaque parent peut prendre 1 à 2 mois de congé indemnisé après le congé de maternité ou de paternité, pour un enfant né à partir du 1er janvier 2026. Un décret du 30 mai 2026 en a fixé les modalités pour les salariés de Mayotte."
+  ],
+  "documents": [
+    { "id": "acte-naissance", "libelle": "Copie intégrale de l'acte de naissance de l'enfant ou livret de famille mis à jour", "detail": "À envoyer à la CSSM.", "coffre": "finances" },
+    { "id": "lien-mere", "libelle": "Justificatif du lien avec la mère si vous n'êtes pas le père", "detail": "Acte de mariage, copie du Pacs, certificat de vie commune ou attestation sur l'honneur de vie maritale signée par les deux.", "coffre": "finances" },
+    { "id": "courrier-employeur", "libelle": "Courrier d'information à l'employeur", "detail": "Copie de la lettre recommandée ou de la décharge signée, avec les dates du congé.", "coffre": "courriers" },
+    { "id": "attestation-salaire", "libelle": "Attestation de salaire", "detail": "Transmise par l'employeur à la CSSM. Vérifiez auprès de lui qu'elle a été envoyée.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB", "detail": "Si vos coordonnées bancaires ne sont pas à jour.", "coffre": "finances" },
+    { "id": "decomptes-ij", "libelle": "Relevés de paiement des indemnités journalières", "detail": "À conserver.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Prévenez votre employeur par écrit", "detail": "Au moins 1 mois avant la date prévue de la naissance, puis au moins 1 mois avant chaque période de congé." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Acte de naissance ou livret de famille à jour, justificatif du lien avec la mère si vous n'êtes pas le père, attestation de salaire transmise par l'employeur, RIB et adresse à jour." },
+    { "titre": "Envoyez les justificatifs à la CSSM", "detail": "Par votre compte ameli si vous en avez un, ou par courrier ou à l'accueil de la CSSM." },
+    { "titre": "Prenez la période obligatoire de 4 jours", "detail": "Juste après le congé de naissance de 3 jours payé par l'employeur." },
+    { "titre": "Planifiez le reste du congé dans les 6 mois", "detail": "Et, si vous le souhaitez, le congé supplémentaire de naissance dans les 9 mois qui suivent la naissance." }
+  ],
+  "ou": [
+    { "nom": "Votre employeur", "detail": "Pour l'information préalable et l'attestation de salaire." },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Indemnités journalières. Centre Kinga, Kawéni, Mamoudzou. Accueil sur rendez-vous.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" }
+  ],
+  "liens": [
+    { "titre": "Congé de paternité et d'accueil de l'enfant (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156" },
+    { "titre": "Congé supplémentaire de naissance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685" },
+    { "titre": "Congé supplémentaire de naissance (code.travail.gouv.fr)", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Prévenir l'employeur du congé de paternité (1 mois avant la naissance prévue)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Prendre la fin du congé de paternité dans les 6 mois après la naissance", "evenement": "autre" },
+    { "type": "coffre", "titre": "Courrier de congé de paternité à l'employeur", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Relevés d'indemnités journalières du congé de paternité", "categorie": "finances" }
+  ],
+  "datesLimites": [
+    { "libelle": "Informer l'employeur au moins 1 mois avant la naissance prévue", "detail": "Puis au moins 1 mois avant chaque période." },
+    { "libelle": "Congé à prendre dans les 6 mois suivant la naissance" },
+    { "libelle": "Congé supplémentaire de naissance dans les 9 mois suivant la naissance", "detail": "Pour un enfant né entre le 1er janvier et le 30 juin 2026 : à prendre entre le 1er juillet 2026 et le 31 mars 2027." }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la CSSM : conditions d'ouverture et montant des indemnités journalières de paternité à Mayotte, qui peuvent différer du barème national.",
+    "À confirmer auprès de la CSSM : montant et démarche du congé supplémentaire de naissance pour un salarié de Mayotte (décret n° 2026-426 du 30 mai 2026).",
+    "À confirmer auprès de la CSSM : les horaires de l'accueil téléphonique (le vendredi jusqu'à 12 h ou 12 h 30 selon les sources)."
+  ],
+  "motsCles": ["congé de paternité", "naissance", "indemnités journalières", "employeur", "congé supplémentaire de naissance", "CSSM"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F3156 Congé de paternité et d'accueil de l'enfant (contact Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3156", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39685 Congé supplémentaire de naissance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39685", "verifieLe": "2026-10-29" },
+    { "titre": "Code du travail numérique, congé supplémentaire de naissance au 1er juillet 2026", "url": "https://code.travail.gouv.fr/actualite/conge-de-naissance-supplementaire-ce-qui-change-au-1er-juillet-2026", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Contacts", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" }
+  ]
+}

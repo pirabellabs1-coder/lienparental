@@ -1,0 +1,60 @@
+{
+  "slug": "aides-logement-mayotte",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Housing benefits in Mayotte (ALF and ALS)",
+  "resume": "Family or social housing allowance paid by the CSSM: conditions specific to Mayotte (decent housing, lived in 8 months a year), documents to prepare and applying after a separation.",
+  "aQuoiCaSert": "Housing benefits reduce your rent. In Mayotte, the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) pays the ALF (allocation de logement familiale, family housing allowance), which takes priority for households with children, or the ALS (allocation de logement sociale, social housing allowance). Only one entitlement is opened per household. After a separation, each parent who takes a home can make their own application, calculated on their new situation.",
+  "quiEstConcerne": [
+    "Tenants of decent housing lived in as their main home for at least 8 months a year.",
+    "Families with dependent children, for the ALF; other people, for the ALS.",
+    "Not eligible: housing rented from a family member, or free accommodation."
+  ],
+  "aSavoir": [
+    "Decency conditions applied by the CSSM: at least 9 m² for one person, 16 m² for two, plus 9 m² per additional person.",
+    "Entitlement starts the month after the application and the amount is recalculated every 3 months: apply as soon as you move in.",
+    "You apply in « Mon Compte » on caf.fr, the online account used by the CSSM.",
+    "Separation: report it. Each parent declares their own home and family situation; the amount is recalculated accordingly.",
+    "A written lease and a rent certificate signed by the landlord make the file easier. The ADIL de Mayotte (Agence départementale d'information sur le logement, the local housing information agency) can advise you free of charge if you do not have a written lease."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Front-and-back copy of your ID document or residence permit", "detail": "Valid.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB (bank details slip) in your name", "detail": "Open a personal account if you only had a joint account: see the guide on the right to a bank account.", "coffre": "finances" },
+    { "id": "attestation-loyer", "libelle": "Rent certificate (attestation de loyer) dated and signed by the landlord", "detail": "Have it filled in by your landlord or social housing provider.", "coffre": "finances" },
+    { "id": "bail", "libelle": "Lease or rental agreement", "detail": "Copy. It states the rent, the floor area and the move-in date.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Proof of your income", "detail": "Payslips, benefits, child support received or paid.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Judgment or agreement setting the children's residence, if you have one", "detail": "Copy, useful to prove where the children live after the separation.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "First report your change of situation", "detail": "Separation, move, children's residence: in « Mon Compte »." },
+    { "titre": "Have the rent certificate filled in", "detail": "By the landlord or housing provider, dated and signed." },
+    { "titre": "Check before you go", "detail": "Appointment booked, social security number, copy of ID, RIB in your name, signed rent certificate, lease, proof of income." },
+    { "titre": "Apply as soon as you move in", "detail": "Online, or with help from the CSSM reception desk or a France Services center (local public service help center)." },
+    { "titre": "Then report any change", "detail": "Move, new bank account, a child arriving or leaving, change in the children's residence." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Apply in « Mon Compte » on caf.fr; reception by appointment in Mamoudzou.", "url": "https://www.cssm.fr/page/aides-au-logement", "telephone": "02 69 61 91 91" },
+    { "nom": "ADIL de Mayotte", "detail": "Free legal advice on housing. Résidence Nyrora, Hamaha district, Mamoudzou.", "url": "https://www.anil.org/adil-976/", "telephone": "06 39 21 53 91" },
+    { "nom": "France Services", "detail": "Free help with the online application.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Housing benefits (CSSM)", "url": "https://www.cssm.fr/page/aides-au-logement" },
+    { "titre": "ADIL de Mayotte (anil.org)", "url": "https://www.anil.org/adil-976/" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Signed rent certificate", "categorie": "finances" },
+    { "type": "coffre", "titre": "Housing benefit notice", "categorie": "finances" },
+    { "type": "rappel", "titre": "Apply for housing benefit for the new home", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the CSSM: in Mayotte the APL reportedly only applies to certain residential facilities (logements-foyers); for ordinary housing, it is the ALF or the ALS.",
+    "To be confirmed with the CSSM: rates and amounts, not published on the page consulted. Use the simulator or ask at the reception desk.",
+    "To be confirmed with the CSSM: the time limit and the committee for challenging a decision, and how the benefit is split with shared residence."
+  ],
+  "motsCles": ["housing", "ALF", "ALS", "rent", "CSSM", "rent certificate", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Housing benefits", "url": "https://www.cssm.fr/page/aides-au-logement", "verifieLe": "2026-10-29" },
+    { "titre": "ANIL, ADIL de Mayotte", "url": "https://www.anil.org/adil-976/", "verifieLe": "2026-10-29" }
+  ]
+}

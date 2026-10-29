@@ -78,14 +78,14 @@
     "The cost of renewing an ID card without presenting the old card is not specified by the official page: ask the town hall."
   ],
   "motsCles": ["ID card", "passport", "CNI", "ANTS", "town hall (mairie)", "tax stamp", "travel"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1342 ID card for a minor: first application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-04-27" },
-    { "titre": "Service-public.gouv.fr, F21090 Renewing a minor's ID card", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090", "verifieLe": "2026-06-19" },
-    { "titre": "Service-public.gouv.fr, F1153 Lost ID card of a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153", "verifieLe": "2026-06-19" },
-    { "titre": "Service-public.gouv.fr, F14930 Passport for a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930", "verifieLe": "2026-06-19" },
-    { "titre": "Service-public.gouv.fr, F21244 Lost passport of a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244" },
-    { "titre": "Service-public.gouv.fr, F34752 Passport fees", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752", "verifieLe": "2026-08-05" },
-    { "titre": "Service-public.gouv.fr, F1427 Birth certificate", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-08-14" }
+    { "titre": "Service-public.gouv.fr, F1342 ID card for a minor: first application", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21090 Renewing a minor's ID card", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21090", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1153 Lost ID card of a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1153", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F14930 Passport for a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14930", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21244 Lost passport of a minor", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21244", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F34752 Passport fees", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34752", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1427 Birth certificate", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" }
   ]
 }

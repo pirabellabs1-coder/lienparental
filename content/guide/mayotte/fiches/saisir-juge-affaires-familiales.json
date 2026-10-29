@@ -1,0 +1,79 @@
+{
+  "slug": "saisir-juge-affaires-familiales",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Saisir le juge aux affaires familiales (JAF)",
+  "resume": "Le formulaire cerfa n° 11530, la liste exacte des pièces (actes de naissance de moins de 3 mois), le tribunal judiciaire de Mamoudzou, la contribution de 50 € et les cas où elle n'est pas due.",
+  "aQuoiCaSert": "Le juge aux affaires familiales tranche les désaccords entre parents sur l'exercice de l'autorité parentale, la résidence de l'enfant, le droit de visite et d'hébergement ou la pension alimentaire. Il peut aussi modifier une décision existante quand la situation change, ou homologuer un accord trouvé entre les parents pour lui donner la force d'un jugement. À Mayotte, c'est le tribunal judiciaire de Mamoudzou qui est compétent.",
+  "quiEstConcerne": [
+    "Les parents, mariés ou non, qui ne parviennent pas à un accord sur les enfants.",
+    "Le parent qui veut faire modifier une décision existante (déménagement, changement de revenus, nouvelle organisation).",
+    "Les parents d'accord entre eux qui veulent faire homologuer leur convention parentale.",
+    "Le parent qui veut faire fixer une pension, condition préalable à tout recours en cas d'impayé."
+  ],
+  "aSavoir": [
+    "Formulaire : cerfa n° 11530 « Demande au juge aux affaires familiales », à remplir en ligne ou sur papier. Une requête entièrement en ligne est aussi possible.",
+    "Tribunal compétent : celui du lieu où vit le parent chez qui l'enfant réside habituellement. À Mayotte : tribunal judiciaire de Mamoudzou.",
+    "L'avocat n'est pas obligatoire. L'aide juridictionnelle peut prendre en charge les frais selon vos ressources.",
+    "Contribution de 50 €, rétablie pour les instances civiles introduites depuis le 1er mars 2026, sous forme de timbre électronique acheté en ligne avant la saisine. Elle s'applique dans les départements d'outre-mer. Elle n'est pas due si vous avez l'aide juridictionnelle, pour l'homologation d'une convention parentale, ni pour une ordonnance de protection.",
+    "Parents d'accord : requête conjointe d'homologation (cerfa n° 16139), signée par les deux.",
+    "Violences : une ordonnance de protection se demande au juge aux affaires familiales, sans plainte préalable obligatoire. Le tribunal de Mamoudzou dispose d'un pôle violences intrafamiliales. Urgence : 17 ou 112 ; écoute : 3919, gratuit depuis Mayotte.",
+    "Ce guide ne remplace pas un conseil juridique : adressez-vous à un avocat ou à un point-justice."
+  ],
+  "documents": [
+    { "id": "cerfa-11530", "libelle": "Formulaire cerfa n° 11530 complété, daté et signé", "detail": "Original pour le tribunal, copie pour vous.", "coffre": "jaf" },
+    { "id": "acte-naissance-parent", "libelle": "Copie intégrale de votre acte de naissance de moins de 3 mois", "detail": "Pas un extrait. À demander à la mairie du lieu de naissance (voir la fiche « Obtenir un acte de naissance »).", "coffre": "jaf" },
+    { "id": "actes-naissance-enfants", "libelle": "Copie intégrale de l'acte de naissance de chaque enfant concerné, de moins de 3 mois", "detail": "Auprès de la mairie du lieu de naissance de l'enfant. Comptez le délai d'envoi.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Livret de famille (copie de toutes les pages remplies) ou copie intégrale de l'acte de mariage de moins de 3 mois", "coffre": "jaf" },
+    { "id": "identite", "libelle": "Copie de votre pièce d'identité", "detail": "Carte d'identité, passeport ou titre de séjour en cours de validité, recto verso.", "coffre": "jaf" },
+    { "id": "jugements", "libelle": "Copie des jugements antérieurs (divorce, autorité parentale, pension)", "detail": "Si vous ne l'avez plus, demandez une copie au greffe du tribunal qui l'a rendu.", "coffre": "jaf" },
+    { "id": "ressources", "libelle": "Justificatifs de ressources et de charges", "detail": "Surtout si la demande porte sur la pension : avis d'imposition, 3 derniers bulletins de salaire, attestation de prestations de la CSSM, loyer, crédits, frais de l'enfant.", "coffre": "jaf" },
+    { "id": "timbre", "libelle": "Timbre électronique de 50 € (contribution)", "detail": "Sauf aide juridictionnelle, homologation de convention parentale ou ordonnance de protection.", "coffre": "jaf" },
+    { "id": "aj", "libelle": "Décision d'aide juridictionnelle ou récépissé de demande, si vous l'avez demandée", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Tentez d'abord une solution amiable", "detail": "Médiation familiale ou accord écrit à faire homologuer. Pas de médiation en cas de violences." },
+    { "titre": "Commandez les actes de naissance dès maintenant", "detail": "Ils doivent dater de moins de 3 mois au dépôt : c'est souvent la pièce qui retarde le dossier." },
+    { "titre": "Remplissez le cerfa n° 11530 ou la requête en ligne", "detail": "Expliquez clairement ce que vous demandez (résidence, droit de visite, montant de pension) et pourquoi." },
+    { "titre": "Achetez le timbre de 50 € si vous n'en êtes pas dispensé", "detail": "En ligne, par carte bancaire, avant d'envoyer la demande." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Cerfa signé ; actes de naissance en copie intégrale de moins de 3 mois (vous et chaque enfant) ; livret de famille ; pièce d'identité ; jugements antérieurs ; justificatifs de ressources si vous parlez de pension ; timbre ou décision d'aide juridictionnelle. Faites une copie complète." },
+    { "titre": "Envoyez ou déposez le dossier au greffe du tribunal judiciaire de Mamoudzou", "detail": "Ou déposez la requête en ligne. Rangez la copie dans le Dossier JAF du coffre-fort." },
+    { "titre": "Préparez l'audience", "detail": "Ajoutez la date au calendrier dès réception de la convocation, avec un rappel. Apportez les originaux de vos pièces." }
+  ],
+  "ou": [
+    { "nom": "Tribunal judiciaire de Mamoudzou", "detail": "97600 Mamoudzou. Courriel d'accueil : accueil.tj-mamoudzou@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" },
+    { "nom": "Points-justice de Mayotte (CDAD)", "detail": "Information juridique gratuite et aide à la constitution du dossier. Courriel : cdad-mayotte@justice.fr.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/e5cf28e0-edab-4615-848f-cc85d6534271" },
+    { "nom": "Violences Femmes Info", "detail": "Écoute et orientation, gratuit et anonyme, 24 h sur 24. En cas de danger immédiat, appelez le 17 ou le 112.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "telephone": "3919" }
+  ],
+  "liens": [
+    { "titre": "Demande au juge aux affaires familiales, cerfa 11530 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764" },
+    { "titre": "Homologation d'une convention parentale, cerfa 16139 (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58771" },
+    { "titre": "Contribution de 50 € et timbre fiscal (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227" },
+    { "titre": "Violences conjugales et ordonnance de protection (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Contribution de 50 € pour saisir le juge aux affaires familiales", "categorie": "frais-administratifs", "montant": 50, "montantSource": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227" },
+    { "type": "coffre", "titre": "Requête au juge aux affaires familiales (copie complète)", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Actes de naissance de moins de 3 mois", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Convocation et décision du juge aux affaires familiales", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Audience devant le juge aux affaires familiales", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Vérifier la date des actes de naissance (moins de 3 mois)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Actes de naissance de moins de 3 mois au moment du dépôt" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : adresse postale complète et horaires du tribunal judiciaire de Mamoudzou (l'annuaire officiel n'indique que la commune ; le site justice.fr était indisponible lors de la vérification).",
+    "À confirmer localement : délais moyens d'audience devant le juge aux affaires familiales de Mamoudzou.",
+    "À confirmer auprès du greffe : modalités pratiques de la contribution de 50 € pour une saisine à Mayotte."
+  ],
+  "motsCles": ["JAF", "juge", "tribunal", "Mamoudzou", "résidence", "droit de visite", "cerfa 11530", "homologation"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, R15764 Demande au juge aux affaires familiales (cerfa 11530)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R15764", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F33227 Timbre fiscal et contribution de 50 €", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33227", "verifieLe": "2026-10-29" },
+    { "titre": "BOFiP, contribution pour l'aide juridique (application dans les départements d'outre-mer)", "url": "https://bofip.impots.gouv.fr/doctrine/pgp/6037-PGP", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F12544 Violences conjugales", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F12544", "verifieLe": "2026-10-29" },
+    { "titre": "Annuaire service-public, Tribunal judiciaire de Mamoudzou", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "slug": "autorisation-sortie-territoire",
+  "territoire": "reunion",
+  "categorie": "logement",
+  "titre": "Authorization for a child to leave the country (AST)",
+  "resume": "When your child travels abroad without either parent (Mauritius, Madagascar, or a flight to mainland France with a stopover abroad): the free form, the documents, and what to do if you fear a departure without your consent.",
+  "aQuoiCaSert": "The authorization to leave the country (autorisation de sortie du territoire, AST) allows a minor who lives in France to travel abroad without a parent or a person with parental authority: school trip, stay with a relative, holiday camp. It is filled in without going to the town hall or the préfecture. From Réunion, a stay in Mauritius, Madagascar or the Seychelles means leaving French territory. A journey between mainland France and Réunion with a stopover abroad also requires an AST if the child travels without their parents.",
+  "quiEstConcerne": [
+    "Minors who live in France and travel abroad without any parent or holder of parental authority (alone, with a group, a relative or another adult).",
+    "Separated parents who need to sign or check an AST, or who fear the child will be taken abroad without their consent."
+  ],
+  "aSavoir": [
+    "No AST is needed if the child travels with one of their parents, even if the parents are separated.",
+    "One parent holding parental authority is enough to sign. The other parent's consent is not required, but it is advisable to avoid conflicts. If a judgment gives parental authority to one parent only, only that parent signs.",
+    "The period of validity is chosen by the signing parent, up to a maximum of one year: a single trip or a longer period.",
+    "The form is free and is filled in online on service-public.gouv.fr, or printed and completed by hand. No trip to an office is needed.",
+    "Flight between mainland France and Réunion (or another overseas department) with a stopover abroad: the AST is needed if the child travels without their parents.",
+    "The child must have their own valid ID (ID card or passport depending on the country), and a visa if the country requires one. The family record book (livret de famille) cannot be required, but a copy avoids misunderstandings.",
+    "An AST does not allow the child to leave if they are subject to an opposition to leaving the country (OST) or a ban on leaving the country (IST).",
+    "Fear of imminent abduction: an opposition de sortie du territoire (OST) is requested in person at the préfecture or a sous-préfecture (at the police station or gendarmerie if they are closed and departure is imminent). It lasts 15 days at most, with no extension. For a lasting measure, an interdiction de sortie du territoire (IST) can be ordered by the family court judge (juge aux affaires familiales, JAF) (or, depending on the case, by the public prosecutor or the juvenile court judge).",
+    "IST in force: the child can only leave the country with both parents' consent, declared by each of them, together or separately, at a police station or gendarmerie at least 5 days before departure. If they disagree, only the family court judge can suspend the IST. A flight to mainland France with a stopover abroad also requires this suspension."
+  ],
+  "documents": [
+    {
+      "id": "formulaire-ast",
+      "libelle": "AST form completed and signed",
+      "detail": "Original signed by one parent holding parental authority, filled in online on service-public.gouv.fr then printed. The child keeps it on them during the trip.",
+      "coffre": "autres"
+    },
+    {
+      "id": "identite-signataire",
+      "libelle": "Legible photocopy of the signing parent's ID",
+      "detail": "French parent: ID card or passport, valid or expired less than 5 years ago. Parent from outside the European Union: valid passport and valid French residence permit.",
+      "coffre": "autres"
+    },
+    {
+      "id": "identite-enfant",
+      "libelle": "The child's ID (original, currently valid)",
+      "detail": "ID card or passport depending on the destination, with a visa if the country requires one. If it has expired, see the guide entry \"Getting my child's ID card or passport\".",
+      "coffre": "autres"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Copy of the family record book",
+      "detail": "Cannot be required, but recommended if the child and the signing parent have different surnames.",
+      "coffre": "autres"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Court decision on parental authority (copy)",
+      "detail": "Useful if you hold parental authority alone or in case of an IST. Essential for an OST, together with any evidence of the risk (plane ticket, messages).",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Check whether an AST is needed",
+      "detail": "Is the child going abroad, or taking a flight with a stopover abroad, without either parent? If so, an AST is required. If the child travels with one of you, it is not needed. A trip to Mayotte or mainland France on a direct flight does not mean leaving the country."
+    },
+    {
+      "titre": "Fill in the form online",
+      "detail": "On service-public.gouv.fr. Enter the period of validity (one year at most), then print and sign."
+    },
+    {
+      "titre": "Check before departure",
+      "detail": "Original signed form, legible photocopy of the signing parent's ID, the child's valid ID (and visa if needed), copy of the family record book. Ask the airline or the organizer about their own requirements."
+    },
+    {
+      "titre": "Hand everything to the child or the accompanying adult",
+      "detail": "The documents travel with the child. Keep a copy in the Vault."
+    },
+    {
+      "titre": "If you fear a departure without your consent",
+      "detail": "Emergency: go in person to the préfecture de La Réunion or a sous-préfecture with the form, proof of parental authority, your ID and proof of address, the child's ID and evidence of the risk. For lasting protection, apply to the family court judge."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Online AST form (service-public.gouv.fr)",
+      "detail": "Free, no trip needed.",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46121"
+    },
+    {
+      "nom": "Préfecture de La Réunion (Saint-Denis) or the sous-préfecture for your area (State administration offices)",
+      "detail": "Only for an emergency opposition to leaving the country (OST). Police station or gendarmerie if they are closed and departure is imminent.",
+      "url": "https://www.reunion.gouv.fr"
+    },
+    {
+      "nom": "Allô Service Public",
+      "detail": "Free information on your rights, without access to individual files.",
+      "telephone": "3939"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Authorization to leave the country (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359"
+    },
+    {
+      "titre": "Parental conflict over leaving the country: OST and IST (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Signed authorization to leave the country",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Copy of the signing parent's ID",
+      "categorie": "autres"
+    },
+    {
+      "type": "coffre",
+      "titre": "Judgment on parental authority or IST",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "End of validity of the child's AST",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "IST: declaration by both parents at least 5 days before departure",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "One year at most",
+      "detail": "Period of validity of the AST, set by the signing parent."
+    },
+    {
+      "libelle": "15 days at most",
+      "detail": "Duration of an opposition to leaving the country (OST), with no extension."
+    },
+    {
+      "libelle": "At least 5 days before departure",
+      "detail": "To temporarily suspend an IST, by declaration of both parents (together or separately) at a police station or gendarmerie."
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed: the entry documents required for a minor by the destination country (Mauritius, Madagascar, Seychelles...), to check on diplomatie.gouv.fr and with the airline.",
+    "To be confirmed locally: addresses, opening hours and appointment arrangements at the préfecture and sous-préfectures for an emergency OST, on reunion.gouv.fr (site inaccessible during the check)."
+  ],
+  "motsCles": [
+    "AST",
+    "leaving the country",
+    "travel",
+    "minor",
+    "Mauritius",
+    "Madagascar",
+    "stopover",
+    "OST",
+    "IST"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1359 Authorization to leave the country (AST)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1774 Parental conflict over a minor child leaving the country",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

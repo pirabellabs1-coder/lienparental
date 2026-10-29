@@ -1,0 +1,68 @@
+{
+  "slug": "autorisation-sortie-territoire",
+  "territoire": "reunion",
+  "categorie": "logement",
+  "titre": "Autorisation de sortie du territoire (AST)",
+  "resume": "Quand votre enfant voyage à l'étranger sans aucun de ses parents (Maurice, Madagascar, ou un vol vers la métropole avec escale à l'étranger) : le formulaire gratuit, les pièces, et que faire si vous craignez un départ sans votre accord.",
+  "aQuoiCaSert": "L'autorisation de sortie du territoire (AST) permet à un mineur qui vit en France de voyager à l'étranger sans être accompagné d'un parent ou d'une personne qui exerce l'autorité parentale : voyage scolaire, séjour chez un proche, colonie. Elle se remplit sans se déplacer en mairie ou en préfecture. Depuis La Réunion, un séjour à Maurice, Madagascar ou aux Seychelles est une sortie du territoire. Un trajet entre la métropole et La Réunion avec une escale à l'étranger exige aussi une AST si l'enfant voyage sans ses parents.",
+  "quiEstConcerne": [
+    "Les mineurs qui vivent en France et voyagent à l'étranger sans aucun parent ni titulaire de l'autorité parentale (seuls, en groupe, avec un proche ou un autre adulte).",
+    "Les parents séparés qui doivent signer ou vérifier une AST, ou qui craignent un départ de l'enfant à l'étranger sans leur accord."
+  ],
+  "aSavoir": [
+    "Pas d'AST si l'enfant voyage avec l'un de ses parents, même si les parents sont séparés.",
+    "Un seul parent titulaire de l'autorité parentale suffit pour signer. L'accord de l'autre n'est pas exigé, mais il est conseillé pour éviter les conflits. Si un jugement confie l'autorité parentale à un seul parent, lui seul signe.",
+    "La durée de validité est choisie par le parent signataire, dans la limite d'un an : un seul voyage ou une période plus longue.",
+    "Le formulaire est gratuit et se remplit en ligne sur service-public.gouv.fr, ou s'imprime pour être complété à la main. Aucun déplacement n'est nécessaire.",
+    "Vol entre la métropole et La Réunion (ou un autre département d'outre-mer) avec escale à l'étranger : l'AST est nécessaire si l'enfant voyage sans ses parents.",
+    "L'enfant doit avoir sa propre pièce d'identité valide (carte d'identité ou passeport selon le pays), et un visa si le pays l'exige. Le livret de famille ne peut pas être exigé, mais une copie évite des malentendus.",
+    "Une AST ne permet pas de partir si l'enfant fait l'objet d'une opposition (OST) ou d'une interdiction de sortie du territoire (IST).",
+    "Crainte d'un enlèvement imminent : une opposition de sortie du territoire (OST) se demande en personne à la préfecture ou à une sous-préfecture (au commissariat ou à la gendarmerie si elles sont fermées et le départ imminent). Elle dure 15 jours au maximum, sans prolongation. Pour une mesure durable, une interdiction de sortie du territoire (IST) peut être prononcée par le juge aux affaires familiales (ou, selon les cas, par le procureur de la République ou le juge des enfants).",
+    "IST en cours : l'enfant ne sort du territoire qu'avec l'accord des deux parents, déclaré par chacun d'eux, ensemble ou séparément, en commissariat ou en gendarmerie au moins 5 jours avant le départ. En cas de désaccord, seul le juge aux affaires familiales peut suspendre l'IST. Un vol vers la métropole avec escale à l'étranger nécessite aussi cette suspension."
+  ],
+  "documents": [
+    { "id": "formulaire-ast", "libelle": "Formulaire d'AST rempli et signé", "detail": "Original signé par un parent titulaire de l'autorité parentale, rempli en ligne sur service-public.gouv.fr puis imprimé. L'enfant le garde sur lui pendant le voyage.", "coffre": "autres" },
+    { "id": "identite-signataire", "libelle": "Photocopie lisible de la pièce d'identité du parent signataire", "detail": "Parent français : carte d'identité ou passeport valide ou périmé depuis moins de 5 ans. Parent hors Union européenne : passeport valide et titre de séjour français valide.", "coffre": "autres" },
+    { "id": "identite-enfant", "libelle": "Pièce d'identité de l'enfant (original en cours de validité)", "detail": "Carte d'identité ou passeport selon la destination, avec un visa si le pays l'exige. Si elle est périmée, voyez la fiche « carte d'identité et passeport ».", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Copie du livret de famille", "detail": "Ne peut pas être exigée, mais conseillée si l'enfant et le parent signataire n'ont pas le même nom.", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Décision du juge sur l'autorité parentale (copie)", "detail": "Utile si vous exercez seul l'autorité parentale ou en cas d'IST. Indispensable pour une OST, avec tout élément prouvant le risque (billet d'avion, messages).", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez si une AST est nécessaire", "detail": "L'enfant part-il à l'étranger, ou prend-il un vol avec escale à l'étranger, sans aucun de ses parents ? Si oui, il faut une AST. S'il voyage avec l'un de vous, elle n'est pas nécessaire. Un voyage vers Mayotte ou la métropole en vol direct n'est pas une sortie du territoire." },
+    { "titre": "Remplissez le formulaire en ligne", "detail": "Sur service-public.gouv.fr. Indiquez la durée de validité (un an au maximum), puis imprimez et signez." },
+    { "titre": "Vérifiez avant le départ", "detail": "Formulaire original signé, photocopie lisible de la pièce d'identité du parent signataire, pièce d'identité valide de l'enfant (et visa si besoin), copie du livret de famille. Renseignez-vous auprès de la compagnie aérienne ou de l'organisateur sur leurs propres exigences." },
+    { "titre": "Remettez le tout à l'enfant ou à l'accompagnateur", "detail": "Les documents voyagent avec l'enfant. Gardez une copie dans le coffre-fort." },
+    { "titre": "En cas de crainte d'un départ sans votre accord", "detail": "Urgence : rendez-vous en personne à la préfecture de La Réunion ou à une sous-préfecture avec le formulaire, le justificatif d'autorité parentale, vos pièces d'identité et de domicile, celle de l'enfant et les preuves du risque. Pour une protection durable, saisissez le juge aux affaires familiales." }
+  ],
+  "ou": [
+    { "nom": "Formulaire d'AST en ligne (service-public.gouv.fr)", "detail": "Gratuit, sans déplacement.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46121" },
+    { "nom": "Préfecture de La Réunion (Saint-Denis) ou sous-préfecture de votre arrondissement", "detail": "Uniquement pour une opposition de sortie du territoire (OST) en urgence. Commissariat ou gendarmerie si elles sont fermées et le départ imminent.", "url": "https://www.reunion.gouv.fr" },
+    { "nom": "Allô Service Public", "detail": "Renseignements gratuits sur vos droits, sans accès aux dossiers individuels.", "telephone": "3939" }
+  ],
+  "liens": [
+    { "titre": "Autorisation de sortie du territoire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359" },
+    { "titre": "Conflit parental sur la sortie du territoire : OST et IST (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Autorisation de sortie du territoire signée", "categorie": "autres" },
+    { "type": "coffre", "titre": "Copie de la pièce d'identité du parent signataire", "categorie": "autres" },
+    { "type": "coffre", "titre": "Jugement sur l'autorité parentale ou IST", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Fin de validité de l'AST de l'enfant", "evenement": "autre" },
+    { "type": "rappel", "titre": "IST : déclaration des deux parents au moins 5 jours avant le départ", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Un an au maximum", "detail": "Durée de validité de l'AST, fixée par le parent signataire." },
+    { "libelle": "15 jours au maximum", "detail": "Durée d'une opposition de sortie du territoire (OST), sans prolongation." },
+    { "libelle": "Au moins 5 jours avant le départ", "detail": "Pour suspendre temporairement une IST, par déclaration des deux parents (ensemble ou séparément) en commissariat ou en gendarmerie." }
+  ],
+  "aConfirmer": [
+    "À confirmer : les documents d'entrée exigés pour un mineur par le pays de destination (Maurice, Madagascar, Seychelles...), à vérifier sur diplomatie.gouv.fr et auprès de la compagnie aérienne.",
+    "À confirmer localement : adresses, horaires d'accueil et prise de rendez-vous de la préfecture et des sous-préfectures pour une OST en urgence, sur reunion.gouv.fr (site inaccessible lors de la vérification)."
+  ],
+  "motsCles": ["AST", "sortie du territoire", "voyage", "mineur", "Maurice", "Madagascar", "escale", "OST", "IST"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1359 Autorisation de sortie du territoire (AST)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1359", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1774 Conflit parental sur la sortie du territoire d'un enfant mineur", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1774", "verifieLe": "2026-10-29" }
+  ]
+}

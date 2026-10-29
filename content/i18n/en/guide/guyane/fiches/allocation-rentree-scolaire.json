@@ -16,7 +16,7 @@
     "If your income is slightly above the ceiling, a reduced (differential) allowance may be paid.",
     "Payment from August 18, 2026 in the general case. Unlike La Réunion and Mayotte, French Guiana has no separate date on the official page.",
     "To receive the ARS for a 16 to 18-year-old, you must have filed your 2025 income tax return and declared your 2024 income to the Caf, then declare from mid-July that they will be in school or an apprenticeship for the 2026 school year.",
-    "Separated parents: the ARS is paid to a single beneficiary. With shared residence, the option of splitting family allowances does not automatically apply to the ARS."
+    "Separated parents: the ARS is never split. Even with shared residence (résidence alternée), it is paid in full to the parent designated as the beneficiary: only family allowances can be split (service-public.gouv.fr)."
   ],
   "documents": [
     { "id": "avis-impot", "libelle": "2025 income tax return filed with the tax office", "detail": "Essential so the Caf knows your income. Tax notice downloadable on impots.gouv.fr.", "coffre": "finances" },
@@ -56,15 +56,14 @@
     { "libelle": "Payment from August 18, 2026", "detail": "General case." }
   ],
   "aConfirmer": [
-    "To be confirmed locally: exact payment date in French Guiana, as the official page only mentions the general case, La Réunion and Mayotte.",
-    "To be confirmed locally with the Caf de la Guyane: which parent receives the ARS under shared residence."
+    "To be confirmed locally: exact payment date in French Guiana, as the official page only mentions the general case, La Réunion and Mayotte."
   ],
   "motsCles": ["ARS", "back to school", "school supplies", "Caf", "allowance", "16-18 years"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1878 Back-to-school allowance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-08-04" },
+    { "titre": "Service-public.gouv.fr, F1878 Back-to-school allowance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-10-29" },
     { "titre": "Caf, back-to-school allowance rates", "url": "https://www.caf.fr/professionnels/offres-et-services/accompagnement-des-allocataires/bareme-allocation-de-rentree-scolaire" },
     { "titre": "Caf du Tarn, ARS and shared residence", "url": "https://www.caf.fr/allocataires/caf-du-tarn/actualites-departementales/allocation-de-rentree-scolaire" },
-    { "titre": "Service-public.gouv.fr, F21248 Family allowances with shared residence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248" }
+    { "titre": "Service-public.gouv.fr, F21248 Family allowances with shared residence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" }
   ]
 }

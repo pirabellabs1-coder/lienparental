@@ -1,5 +1,3 @@
-import { readdirSync } from 'node:fs'
-import { join } from 'node:path'
 import Link from 'next/link'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { localePathFor } from '@/lib/i18n/routing'
@@ -7,16 +5,21 @@ import { ArrowRight, Check } from 'lucide-react'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
 import { appShot } from '@/lib/i18n/shots'
-import { TERRITORIES, TerritoryShape } from '@/components/site/territories'
+import { TerritoryShape } from '@/components/site/territories'
+import { territoryStatuses } from '@/components/site/territory-status'
+import { getFiches } from '@/lib/guide/load'
+import { guidePaths } from '@/lib/seo/site'
 import { BTN_PRIMARY, CONTAINER, H2, LEAD, SECTION } from './ui'
 
-/** Nombre réel de fiches publiées pour la Guyane (lu au rendu serveur, jamais codé en dur). */
-function countGuyaneSheets(): number {
-  try {
-    return readdirSync(join(process.cwd(), 'content', 'guide', 'guyane', 'fiches')).filter(f => f.endsWith('.json')).length
-  } catch {
-    return 0
-  }
+/** Nombre réel de fiches des territoires disponibles (fichiers du dépôt, lus au rendu serveur, jamais codé en dur). */
+function countSheets(codes: string[]): number {
+  return codes.reduce((n, code) => {
+    try {
+      return n + getFiches(code).length
+    } catch {
+      return n
+    }
+  }, 0)
 }
 
 export async function Guide() {
@@ -24,7 +27,9 @@ export async function Guide() {
   // Noms des territoires traduits (catalogue shared.territories, mêmes codes que TERRITORIES).
   const tTerr = await getTranslations('shared.territories')
   const locale = await getLocale()
-  const sheets = countGuyaneSheets()
+  const lp = localePathFor(locale)
+  const territories = await territoryStatuses()
+  const sheets = countSheets(territories.filter((x) => x.available).map((x) => x.code))
   const POINTS = [
     sheets > 0 ? t('pointSheets', { count: sheets }) : t('pointSheetsNoCount'),
     t('point2'),
@@ -49,18 +54,30 @@ export async function Guide() {
 
           <h3 className="mt-10 text-[15px] font-bold text-night-900">{t('territoryTitle')}</h3>
           <ul className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-            {TERRITORIES.map(terr => (
-              <li key={terr.code} className={cn('flex items-center gap-3 rounded-2xl p-3 ring-1', terr.available ? 'bg-leaf-50 ring-leaf-300' : 'bg-white ring-[#E5E7EB]')}>
-                <TerritoryShape path={terr.path} available={terr.available} className="h-10 w-10 shrink-0" />
-                <span className="flex min-w-0 flex-col leading-tight">
-                  <span className="text-[14.5px] font-semibold text-night-900">{tTerr(terr.code)}</span>
-                  <span className={cn('mt-0.5 text-[13.5px]', terr.available ? 'font-semibold text-leaf-700' : 'text-night-600')}>{terr.available ? t('available') : t('soon')}</span>
-                </span>
-              </li>
-            ))}
+            {territories.map(terr => {
+              const body = (
+                <>
+                  <TerritoryShape path={terr.path} available={terr.available} className="h-10 w-10 shrink-0" />
+                  <span className="flex min-w-0 flex-col leading-tight">
+                    <span className="text-[14.5px] font-semibold text-night-900">{tTerr(terr.code)}</span>
+                    <span className={cn('mt-0.5 text-[13.5px]', terr.available ? 'font-semibold text-leaf-700' : 'text-night-600')}>{terr.available ? t('available') : t('soon')}</span>
+                  </span>
+                </>
+              )
+              const box = 'flex h-full items-center gap-3 rounded-2xl p-3 ring-1'
+              return (
+                <li key={terr.code}>
+                  {terr.available ? (
+                    <Link href={lp(guidePaths.territoire(terr.code))} className={cn(box, 'bg-leaf-50 ring-leaf-300 transition-shadow hover:shadow-[0_8px_24px_-16px_rgba(11,45,91,0.45)]')}>{body}</Link>
+                  ) : (
+                    <div className={cn(box, 'bg-white ring-[#E5E7EB]')}>{body}</div>
+                  )}
+                </li>
+              )
+            })}
           </ul>
 
-          <Link href={localePathFor(locale)('/guide')} className={cn(BTN_PRIMARY, 'mt-10')}>
+          <Link href={lp('/guide')} className={cn(BTN_PRIMARY, 'mt-10')}>
             {t('cta')}<ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>

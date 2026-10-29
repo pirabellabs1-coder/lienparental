@@ -1,0 +1,173 @@
+{
+  "slug": "demande-logement-social",
+  "territoire": "guadeloupe",
+  "categorie": "logement",
+  "titre": "Pedir moradia social",
+  "resume": "Fazer um pedido de moradia social em Guadalupe, obter seu número único, reunir os documentos certos (inclusive os ligados a uma separação) e renovar o pedido todo ano.",
+  "aQuoiCaSert": "Moradia social é uma moradia com aluguel controlado, atribuída conforme a renda. O pedido, on-line ou num posto de atendimento, dá a você um número único nacional (numéro unique), que marca o início da antiguidade do seu pedido. Após uma separação, é possível fazer contar apenas a sua própria renda, desde que você apresente os comprovantes certos.",
+  "quiEstConcerne": [
+    "As famílias cuja renda não ultrapassa os limites fixados para os departamentos ultramarinos (DOM).",
+    "Os pais que se separam e precisam de uma nova moradia com os filhos.",
+    "Os estrangeiros com título de residência ou protocolo (récépissé) válido."
+  ],
+  "aSavoir": [
+    "Tetos de renda nos DOM (departamentos ultramarinos), entre eles Guadalupe, para um pedido feito em 2026 (renda de 2024): 27.382 € para 1 pessoa, 36.567 € para 2 pessoas, 43.973 € para 3 pessoas ou para uma pessoa sozinha com 1 dependente, 53.088 € para 4 pessoas ou para uma pessoa sozinha com 2 dependentes (service-public.gouv.fr, caso geral).",
+    "Separação: para que só a sua renda seja levada em conta, anexe um comprovante: divórcio em andamento (cópia da citação perante o juiz de família (juge aux affaires familiales, JAF), ou atestado do advogado para um divórcio consensual), sentença ou convenção de divórcio, certidão de nascimento com a menção « Pacs dissous » (PACS, união civil, dissolvido) ou recibo da declaração de dissolução, recibo de queixa em caso de violência.",
+    "Se a sua renda caiu pelo menos 10%, você pode alegar isso com comprovantes (contracheques, declaração do empregador). Uma declaração sob compromisso não é aceita.",
+    "Fora da Île-de-France, é preciso um pedido por departamento: um pedido em Guadalupe só vale para Guadalupe (La Désirade e Marie-Galante incluídas).",
+    "Renovação: todo ano, entre o 10º e o 12º mês após a criação ou a última renovação. Um lembrete é enviado pelo menos 1 mês antes. Nos DOM, um pedido não renovado é cancelado automaticamente e é preciso recomeçar com um novo número único (service-public.gouv.fr).",
+    "Ajuda por telefone: 0 806 000 113, de segunda a sexta, das 9h às 19h (service-public.gouv.fr)."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Documento de identidade do requerente",
+      "detail": "Cópia frente e verso da carteira de identidade ou do passaporte. Para quem não é da União Europeia: cópia do título de residência ou do protocolo válido. Obrigatório no pedido.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "identite-cotitulaire",
+      "libelle": "Documento de identidade ou título de residência de cada adulto a alojar",
+      "detail": "Cópia válida.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Aviso de imposto 2025 sobre a renda de 2024 de cada pessoa a alojar",
+      "detail": "Cópia. Baixe no seu espaço impots.gouv.fr ou peça ao centro de finanças públicas (centre des finances publiques).",
+      "coffre": "finances"
+    },
+    {
+      "id": "justificatif-separation",
+      "libelle": "Comprovante de separação",
+      "detail": "Cópia da citação perante o juiz de família (ou atestado do advogado para um divórcio consensual), da sentença ou convenção de divórcio, ou da certidão de nascimento com a menção « Pacs dissous ».",
+      "coffre": "jaf"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Sentença ou acordo que fixa a residência dos filhos",
+      "detail": "Cópia, para comprovar os filhos que morarão com você ou uma residência alternada.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Livro de família (livret de famille) ou certidões de nascimento dos filhos",
+      "detail": "Cópia, para comprovar os dependentes.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Comprovantes de renda recentes",
+      "detail": "Cópias dos últimos contracheques, declarações da Caf (Caisse d'allocations familiales, órgão de benefícios familiares) ou do France Travail. Exigidos em caso de queda de renda de pelo menos 10%.",
+      "coffre": "finances"
+    },
+    {
+      "id": "situation-logement",
+      "libelle": "Comprovante da sua situação de moradia atual",
+      "detail": "Cópia do contrato de aluguel, recibo, declaração de hospedagem, ou sentença de despejo ou aviso do proprietário, se for o caso.",
+      "coffre": "courriers"
+    },
+    {
+      "id": "attestation-enregistrement",
+      "libelle": "Comprovante de registro com o número único",
+      "detail": "Pode ser baixado no seu espaço pessoal. Guarde-o com cuidado.",
+      "coffre": "courriers"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Crie seu pedido no site nacional",
+      "detail": "Em demande-logement-social.gouv.fr, ou com o formulário Cerfa n° 14069 entregue num posto de atendimento (prefeitura, órgão de habitação social)."
+    },
+    {
+      "titre": "Confira antes de enviar o pedido",
+      "detail": "Documento de identidade ou título de residência válido de cada adulto, aviso de imposto 2025 de cada um, comprovante de separação e sentença sobre a residência dos filhos se você é separado, livro de família. Todas as pessoas a alojar devem ser declaradas."
+    },
+    {
+      "titre": "Pegue o comprovante de registro",
+      "detail": "Ele traz seu número único nacional e a data do pedido, que conta para a antiguidade."
+    },
+    {
+      "titre": "Atualize o pedido assim que sua situação mudar",
+      "detail": "Separação, nascimento, novo endereço, queda de renda: declare a mudança e anexe o comprovante."
+    },
+    {
+      "titre": "Renove todo ano",
+      "detail": "Entre o 10º e o 12º mês após a criação ou a última renovação. Sem renovação, o pedido é cancelado."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Portal nacional de pedidos de moradia social",
+      "detail": "Envio, acompanhamento, atualização e renovação on-line.",
+      "url": "https://www.demande-logement-social.gouv.fr"
+    },
+    {
+      "nom": "Postos de atendimento de Guadalupe (prefeituras, órgãos de habitação social)",
+      "detail": "Para entregar um pedido em papel ou obter ajuda. Informe-se na sua prefeitura (mairie)."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Pedido de moradia social (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007"
+    },
+    {
+      "titre": "Renovação do pedido de moradia social (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32880"
+    },
+    {
+      "titre": "Pedido de moradia social on-line",
+      "url": "https://www.demande-logement-social.gouv.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Comprovante de registro do pedido de moradia social",
+      "categorie": "courriers"
+    },
+    {
+      "type": "coffre",
+      "titre": "Comprovante de separação para o pedido de moradia",
+      "categorie": "jaf"
+    },
+    {
+      "type": "rappel",
+      "titre": "Renovar o pedido de moradia social (10º ao 12º mês)",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Renovação anual do pedido",
+      "detail": "Entre o 10º e o 12º mês após a criação ou a última renovação; caso contrário, o pedido é cancelado."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: a lista dos postos de atendimento em Guadalupe e os prazos médios de espera, fixados por decisão do préfet (arrêté préfectoral).",
+    "A confirmar localmente: os órgãos de habitação social podem pedir documentos adicionais no momento da atribuição.",
+    "Saint-Martin e Saint-Barthélemy são coletividades distintas: as regras e os postos de moradia social que se aplicam lá devem ser verificados no local."
+  ],
+  "motsCles": [
+    "moradia social",
+    "HLM",
+    "número único",
+    "renovação",
+    "separação",
+    "limites de renda"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F10007 Pedido de moradia social",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007",
+      "verifieLe": "2026-09-11"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F32880 Renovação de um pedido de moradia social",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32880",
+      "verifieLe": "2026-09-08"
+    }
+  ]
+}

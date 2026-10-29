@@ -234,7 +234,7 @@
   "guide": {
     "title": "The Parenting guide",
     "lead": "All the essential information for parents, gathered in one place, where you live. Each sheet tells you what to do, with which documents, and where.",
-    "pointSheets": "School, health, benefits, housing, separation: {count} sheets for French Guiana",
+    "pointSheets": "School, health, benefits, housing, separation: {count} practical sheets, tailored to your territory",
     "pointSheetsNoCount": "School, health, benefits, housing, separation",
     "point2": "The documents to gather and the steps, in order",
     "point3": "A reminder, a document or an expense added in one tap",
@@ -280,7 +280,7 @@
     "a2": "Open the site in your browser, then choose “Add to Home Screen” (share menu on iPhone, browser menu on Android). Our Install the app page guides you step by step.",
     "a2Link": "Install the app",
     "q3": "Is the Parenting guide available everywhere?",
-    "a3": "Not yet. The Guide starts with French Guiana, with sheets on school, health, benefits, separation and daily life. Martinique, Guadeloupe, Réunion, Mayotte and mainland France will follow.",
+    "a3": "Not yet. The Guide starts with French Guiana, with sheets on school, health, benefits, separation and daily life, then opens up territory by territory: Martinique, Guadeloupe, Réunion, Mayotte and mainland France. The Parenting guide page shows which territories are already available.",
     "q4": "Is my data secure?",
     "a4": "Yes. Exchanges are encrypted in transit (HTTPS/TLS) and data is encrypted at rest. Your data is stored in the European Union (Ireland); some providers (payment, email, AI Coach) may process part of it outside the EU, with the safeguards required by the GDPR (details in the privacy policy). Health data has additional encryption. Your space is personal: nothing is shared without your consent.",
     "q5": "Can I share information with the other parent?",

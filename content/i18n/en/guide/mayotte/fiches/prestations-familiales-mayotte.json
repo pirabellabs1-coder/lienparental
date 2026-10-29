@@ -1,0 +1,57 @@
+{
+  "slug": "prestations-familiales-mayotte",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Family benefits in Mayotte: what exists and what is coming",
+  "resume": "Birth grant, basic allowance, ASF, ARIPA: several benefits from mainland France do not exist yet in Mayotte. What the CSSM pays today and the planned timeline up to 2035.",
+  "aQuoiCaSert": "Many guides describe the benefits of the Caf (Caisse d'allocations familiales, the family benefits office) in mainland France. In Mayotte, family benefits are paid by the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) under its own rules, and some benefits do not exist yet. This page helps you avoid applying for a benefit that will not be paid, and shows what is actually available. Ordonnance n° 2026-647 of July 22, 2026 provides for the French social security code (code de la sécurité sociale) to apply in Mayotte from January 1, 2028, followed by the gradual arrival of the missing benefits.",
+  "quiEstConcerne": [
+    "Parents who live in Mayotte, separated or not.",
+    "Families arriving from mainland France or another overseas département who expect the same benefits."
+  ],
+  "aSavoir": [
+    "Currently paid by the CSSM: family allowances from the 1st child, complément familial (family supplement), back-to-school allowance (allocation de rentrée scolaire), CMG (complément de libre choix du mode de garde, childcare allowance), AEEH (disabled child education allowance), daily parental attendance allowance, lump-sum allowance if a child dies, housing benefits (ALF and ALS).",
+    "Not yet in Mayotte: the Paje (prestation d'accueil du jeune enfant, early childhood benefit) basic allowance (planned from 2027, with amounts aligned by 2031), the birth grant (prime à la naissance) and the PreParE (shared child-rearing benefit), planned for 2029.",
+    "Not yet in Mayotte: the ASF (allocation de soutien familial, family support allowance) and child support intermediation by the ARIPA (Agence de recouvrement et d'intermédiation des pensions alimentaires, the child support collection agency), planned for 2035. Collection of unpaid child support by the CSSM is planned from 2031.",
+    "The French social security code will apply in Mayotte from January 1, 2028, replacing the territory's own ordinances.",
+    "Unpaid child support: in the meantime, remedies go through a commissaire de justice (bailiff), the public prosecutor or a criminal complaint (see the page \"Unpaid child support in Mayotte: your options\").",
+    "The CSSM offers one-off individual financial aid (birth, bereavement, housing, everyday costs), reviewed by a committee, and emergency aid for victims of domestic violence."
+  ],
+  "documents": [
+    { "id": "numero-secu", "libelle": "CSSM social security number", "detail": "It is your login for \"Mon Compte\" on caf.fr.", "coffre": "finances" },
+    { "id": "notifications", "libelle": "CSSM benefit notices", "detail": "Keep them: they show which benefits you receive and their amounts.", "coffre": "finances" },
+    { "id": "formulaire-afi", "libelle": "CSSM individual financial aid form, if needed", "detail": "Download it from the Action sociale page of the CSSM website.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Review your current entitlements", "detail": "In \"Mon Compte\" on caf.fr, check the benefits the CSSM pays you and your family situation." },
+    { "titre": "Do not count on a benefit that does not exist yet", "detail": "The birth grant, the basic allowance, the ASF and the ARIPA are not paid in Mayotte for now." },
+    { "titre": "Ask for one-off aid if you are struggling", "detail": "CSSM individual financial aid: send the form by mail or drop it off at the front desk." },
+    { "titre": "Keep up with the changes", "detail": "The planned dates may be specified by implementing regulations. Check with the CSSM before each step." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Centre Kinga, Route nationale 1, Kawéni, 97600 Mamoudzou. By appointment.", "url": "https://www.cssm.fr/page/famille", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services (local public service help centers)", "detail": "Free help with online procedures.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Family benefits in Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Social action (CSSM)", "url": "https://www.cssm.fr/page/action-sociale" },
+    { "titre": "Help for victims of domestic violence (CSSM)", "url": "https://www.cssm.fr/page/aide-aux-victimes-de-violences-conjugales" },
+    { "titre": "Ordonnance n° 2026-647, report to the President (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "CSSM benefit notices", "categorie": "finances" },
+    { "type": "rappel", "titre": "Check with the CSSM whether new benefits have arrived", "evenement": "autre" }
+  ],
+  "aConfirmer": [
+    "The years given are those in the report accompanying ordonnance n° 2026-647: exact effective dates and amounts will depend on the implementing regulations.",
+    "To be confirmed with the CSSM: the 2026 amounts of the emergency aid for victims of domestic violence."
+  ],
+  "motsCles": ["CSSM", "birth grant", "basic allowance", "ASF", "ARIPA", "Paje", "convergence", "Mayotte"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Légifrance, report to the President on ordonnance n° 2026-647 of July 22, 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Family benefits", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Social action", "url": "https://www.cssm.fr/page/action-sociale", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Help for victims of domestic violence", "url": "https://www.cssm.fr/page/aide-aux-victimes-de-violences-conjugales", "verifieLe": "2026-10-29" }
+  ]
+}

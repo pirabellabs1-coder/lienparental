@@ -57,9 +57,9 @@
     "À confirmer localement : tribunal judiciaire compétent selon la commune de résidence de l'enfant, et adresse du greffe, sur justice.fr."
   ],
   "motsCles": ["reconnaissance", "filiation", "père", "non mariés", "autorité parentale", "reconnaissance anticipée"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F887 Reconnaissance d'un enfant (couple non marié)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-01-27" },
-    { "titre": "Service-public.gouv.fr, F942 Enfant reconnu tardivement : conséquences sur l'autorité parentale", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2025-09-24" }
+    { "titre": "Service-public.gouv.fr, F887 Reconnaissance d'un enfant (couple non marié)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F942 Enfant reconnu tardivement : conséquences sur l'autorité parentale", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2026-10-29" }
   ]
 }

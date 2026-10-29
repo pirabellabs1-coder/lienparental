@@ -4,6 +4,7 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { ArrowRight, BadgeCheck, ListChecks, MapPin } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { loadGuide } from '@/lib/guide/load'
+import { wantedTerritoire } from '@/lib/guide/territory-server'
 import { GUIDE_CATEGORIES } from '@/lib/guide/types'
 import { guidePaths } from '@/lib/seo/site'
 import { localePathFor } from '@/lib/i18n/routing'
@@ -21,12 +22,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return guideMetadata({ title: t('metaTitle'), description: t('metaDescription'), path: guidePaths.index, locale: await getLocale() })
 }
 
-// Présentation du Guide parental public et choix du territoire (Guyane par défaut).
+// Présentation du Guide parental public et choix du territoire : dernier territoire consulté (cookie), Guyane par défaut.
 export default async function GuidePublicIndex() {
   const locale = await getLocale()
   const lp = localePathFor(locale)
   const t = await getTranslations('public.guide')
-  const g = await loadGuide(undefined, locale)
+  const g = await loadGuide(await wantedTerritoire(), locale)
+  const tTerr = await getTranslations('shared.territories')
   const def = g.territoire
   const shapes = new Map<string, string>(TERRITORIES.map((x) => [x.code, x.path]))
   const counts = Object.fromEntries(GUIDE_CATEGORIES.map((c) => [c.key, g.fiches.filter((f) => f.categorie === c.key).length]))
@@ -36,6 +38,12 @@ export default async function GuidePublicIndex() {
     { name: t('title'), path: lp(guidePaths.index) },
   ]
   const available = g.territoires.filter((x) => x.disponible)
+  // Disponibles (base ou fichiers), puis les territoires annoncés du catalogue (« Bientôt ») : en production
+  // la RLS n'expose que les territoires disponibles, le catalogue complète la liste.
+  const listed = [
+    ...available,
+    ...TERRITORIES.filter((c) => !available.some((a) => a.code === c.code)).map((c) => ({ code: c.code, nom: tTerr(c.code), disponible: false })),
+  ]
 
   return (
     <>
@@ -63,7 +71,7 @@ export default async function GuidePublicIndex() {
         <section aria-labelledby="territoires" className="mt-12">
           <h2 id="territoires" className={H2}>{t('landing.territoriesTitle')}</h2>
           <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {g.territoires.map((x) => {
+            {listed.map((x) => {
               const shape = shapes.get(x.code)
               const body = (
                 <>

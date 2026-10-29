@@ -1,0 +1,70 @@
+{
+  "slug": "aides-logement-reunion",
+  "territoire": "reunion",
+  "categorie": "logement",
+  "titre": "Aides au logement à La Réunion",
+  "resume": "Allocation de logement familiale ou sociale : qui y a droit, les pièces à préparer (dont l'attestation de loyer signée du propriétaire) et la demande à la Caf de La Réunion après une séparation.",
+  "aQuoiCaSert": "Les aides au logement diminuent le loyer que vous payez chaque mois. Avec des enfants ou des prestations familiales, l'aide qui vous concerne est en général l'allocation de logement familiale (ALF) ; à défaut, l'allocation de logement sociale (ALS). Après une séparation, chaque parent qui prend un logement peut faire sa propre demande, calculée sur ses seules ressources et sa nouvelle situation familiale.",
+  "quiEstConcerne": [
+    "Les locataires ou sous-locataires d'un logement décent, occupé comme résidence principale.",
+    "ALF : notamment les personnes qui perçoivent des prestations familiales ou l'AEEH, ou les femmes enceintes seules à partir du 5e mois de grossesse, sous conditions.",
+    "ALS : les personnes qui ne remplissent ni les conditions de l'APL ni celles de l'ALF.",
+    "Les personnes étrangères doivent avoir un titre de séjour en cours de validité."
+  ],
+  "aSavoir": [
+    "APL, ALF et ALS ne se cumulent pas. Le montant dépend de vos ressources des 12 derniers mois, de votre loyer, de votre situation familiale et du lieu du logement : seul le simulateur de la Caf donne une estimation.",
+    "Le patrimoine (immobilier et financier) du foyer est pris en compte quand il dépasse 30 000 €.",
+    "Le droit démarre le 1er jour du mois qui suit le traitement du dossier, qui peut prendre environ 2 mois. L'aide est versée le 5 de chaque mois : faites la demande dès l'entrée dans le logement.",
+    "En cas de refus, vous avez 2 mois à compter de la notification pour contester auprès de la Caf, puis saisir la commission de recours amiable.",
+    "Séparation : déclarez-la à la Caf. Chaque parent déclare son propre logement et sa propre situation familiale ; le montant est recalculé en conséquence."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Copie recto verso de votre pièce d'identité ou de votre titre de séjour", "detail": "En cours de validité.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB à votre nom", "detail": "Ouvrez un compte personnel si vous n'aviez qu'un compte joint : voir la fiche sur le droit au compte.", "coffre": "finances" },
+    { "id": "attestation-loyer", "libelle": "Attestation de loyer (cerfa n° 10842), datée et signée par le propriétaire", "detail": "À faire remplir par votre propriétaire ou votre bailleur social. Sans sa signature, le dossier est incomplet.", "coffre": "finances" },
+    { "id": "bail", "libelle": "Bail ou contrat de location", "detail": "Copie. Il indique le loyer, les charges et la date d'entrée.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Montants de vos ressources des 12 derniers mois", "detail": "Bulletins de salaire, indemnités, pension alimentaire reçue ou versée : ils sont demandés dans le formulaire en ligne.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant la résidence des enfants, si vous en avez un", "detail": "Copie. Utile si la Caf vous demande de justifier la résidence des enfants après la séparation.", "coffre": "jaf" },
+    { "id": "notification", "libelle": "Notification de droits de la Caf", "detail": "À conserver : elle indique le montant et la date de début du droit.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Faites une simulation sur caf.fr", "detail": "Avec le loyer du nouveau logement et vos ressources actuelles." },
+    { "titre": "Déclarez d'abord votre changement de situation", "detail": "Séparation, déménagement, résidence des enfants : dans votre espace Caf." },
+    { "titre": "Faites remplir l'attestation de loyer", "detail": "Par le propriétaire ou le bailleur, datée et signée." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "La demande se fait en ligne. Si vous allez à un accueil de la Caf : numéro d'allocataire, pièce d'identité, RIB à votre nom, attestation de loyer signée, bail, montants de vos ressources des 12 derniers mois." },
+    { "titre": "Faites la demande en ligne dans votre espace Caf", "detail": "Dès l'entrée dans le logement, en joignant les pièces." },
+    { "titre": "Déclarez ensuite tout changement", "detail": "Déménagement, nouveau compte bancaire, arrivée ou départ d'un enfant, changement de résidence des enfants." }
+  ],
+  "ou": [
+    { "nom": "Caf de La Réunion", "detail": "Demande en ligne dans l'espace Mon Compte ; accueils sur l'île pour être accompagné.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" },
+    { "nom": "ADIL de La Réunion", "detail": "Conseil gratuit sur vos droits de locataire. 24 rue Henri Vavasseur, 97400 Saint-Denis.", "url": "https://www.anil.org/adil-974/", "telephone": "02 62 41 14 24" },
+    { "nom": "France Services", "detail": "Aide gratuite pour faire la demande en ligne." }
+  ],
+  "liens": [
+    { "titre": "Aides au logement : APL, ALF, ALS (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864" },
+    { "titre": "Allocation de logement familiale (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132" },
+    { "titre": "Caf de La Réunion", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation de loyer signée", "categorie": "finances" },
+    { "type": "coffre", "titre": "Notification d'aide au logement", "categorie": "finances" },
+    { "type": "rappel", "titre": "Faire la demande d'aide au logement pour le nouveau logement", "evenement": "autre" },
+    { "type": "rappel", "titre": "Recours possible : 2 mois après un refus d'aide au logement", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "2 mois après la notification pour contester une décision de la Caf" }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la Caf de La Réunion : dans les départements d'outre-mer, l'APL ne concernerait pas les logements ordinaires, l'aide versée étant alors l'ALF ou l'ALS. Les fiches nationales consultées ne le précisent pas.",
+    "À confirmer localement : les barèmes propres à l'outre-mer. Utilisez le simulateur de la Caf plutôt qu'un montant indicatif.",
+    "À confirmer auprès de la Caf de La Réunion : la façon dont un enfant en résidence alternée est compté dans chacun des deux foyers pour l'aide au logement.",
+    "À confirmer localement : adresses et horaires des accueils de la Caf de La Réunion (site caf.fr non lisible lors de la vérification) et permanences de l'ADIL près de chez vous."
+  ],
+  "motsCles": ["logement", "APL", "ALF", "ALS", "loyer", "Caf", "attestation de loyer", "ADIL"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F31864 Aides au logement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13132 Allocation de logement familiale", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132", "verifieLe": "2026-10-29" },
+    { "titre": "ANIL, ADIL de La Réunion", "url": "https://www.anil.org/adil-974/", "verifieLe": "2026-10-29" }
+  ]
+}

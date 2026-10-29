@@ -63,11 +63,11 @@
     "To be confirmed locally: actual processing times in French Guiana may exceed the legal time limit."
   ],
   "motsCles": ["AEEH", "MDPH", "disability", "CDAPH", "medical certificate", "allowance"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F14809 Disabled child education allowance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-06-01" },
-    { "titre": "Service-public.gouv.fr, R19993 MDPH application form", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-07-13" },
-    { "titre": "Service-public.gouv.fr, F21248 Shared residence and family benefits", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
+    { "titre": "Service-public.gouv.fr, F14809 Disabled child education allowance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R19993 MDPH application form", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Shared residence and family benefits", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
     { "titre": "Mon Parcours Handicap, directory", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
   ]
 }

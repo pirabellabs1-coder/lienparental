@@ -1,0 +1,65 @@
+{
+  "slug": "rattacher-enfant-carte-vitale",
+  "territoire": "mayotte",
+  "categorie": "sante",
+  "titre": "Rattacher mon enfant à la CSSM, son attestation de droits et sa carte Vitale",
+  "resume": "Inscrire l'enfant sur votre dossier d'assurance maladie à la CSSM, télécharger son attestation de droits sur ameli et demander sa propre carte Vitale à partir de 12 ou 16 ans.",
+  "aQuoiCaSert": "Un enfant mineur est en principe ayant droit de l'un ou de ses deux parents. À Mayotte, l'assurance maladie est gérée par la Caisse de sécurité sociale de Mayotte (CSSM), qui délivre la carte Vitale et l'attestation de droits. L'attestation prouve que l'enfant est couvert : la crèche, l'école, le centre de loisirs ou l'hôpital la demandent souvent. Les affiliés de la CSSM peuvent utiliser un compte ameli pour certaines démarches.",
+  "quiEstConcerne": [
+    "Les parents d'un nouveau-né, ou d'un enfant rattaché à un seul des deux parents.",
+    "Les parents séparés qui veulent chacun être remboursés des soins de l'enfant.",
+    "Les parents à qui l'on demande une attestation de droits.",
+    "Les jeunes de 12 à 18 ans qui ont besoin de leur propre carte Vitale."
+  ],
+  "aSavoir": [
+    "Nouveau-né : la naissance se déclare depuis le compte ameli, rubrique « Mes démarches » ; l'enfant est alors inscrit sur votre dossier et enregistré sur votre carte Vitale (fiche CSSM de Services Publics+).",
+    "Attestation de droits : téléchargeable dans le compte ameli une fois l'enfant rattaché, ou à demander à l'accueil de la CSSM.",
+    "Carte Vitale de l'enfant (règle nationale depuis août 2026) : de 12 à 15 ans, sur demande d'un parent ; dès 16 ans, avec l'accord d'un parent exerçant l'autorité parentale. Elle est gratuite.",
+    "Le numéro de téléphone de la CSSM est le 02 69 61 91 91 ; n'utilisez pas le 36 46 cité sur les pages nationales d'ameli."
+  ],
+  "documents": [
+    { "id": "livret-famille", "libelle": "Copie du livret de famille à jour ou acte de naissance de l'enfant", "detail": "Pour le rattachement. Acte gratuit à la mairie du lieu de naissance.", "coffre": "sante" },
+    { "id": "identite-parent", "libelle": "Pièce d'identité du parent assuré", "detail": "Copie en cours de validité.", "coffre": "sante" },
+    { "id": "tutelle", "libelle": "Jugement de tutelle ou de délégation, si vous n'êtes pas le parent", "detail": "Copie.", "coffre": "jaf" },
+    { "id": "photo-enfant", "libelle": "Photo d'identité récente de l'enfant, pour sa carte Vitale", "coffre": "sante" },
+    { "id": "identite-enfant", "libelle": "Pièce d'identité de l'enfant, pour sa carte Vitale", "detail": "Copie ou version numérisée.", "coffre": "sante" },
+    { "id": "attestation-droits", "libelle": "Attestation de droits mentionnant l'enfant", "detail": "À renouveler en cas de changement de situation.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez à quel parent l'enfant est rattaché", "detail": "Dans votre compte ameli, rubrique bénéficiaires, ou auprès de la CSSM." },
+    { "titre": "Créez votre compte ameli si besoin", "detail": "En cas de difficulté, demandez de l'aide à l'accueil de la CSSM ou dans une France Services." },
+    { "titre": "Rattachez l'enfant", "detail": "Depuis le compte ameli (« Mes démarches ») ou à l'accueil de la CSSM, avec le livret de famille ou l'acte de naissance." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Rendez-vous pris, votre carte Vitale, votre pièce d'identité, le livret de famille ou l'acte de naissance de l'enfant, sa photo et sa pièce d'identité pour une carte Vitale." },
+    { "titre": "Téléchargez l'attestation de droits", "detail": "Dans le compte ameli, en sélectionnant l'enfant." },
+    { "titre": "Mettez à jour votre carte Vitale", "detail": "En pharmacie ou sur une borne, une fois le rattachement enregistré." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Assurance maladie à Mayotte. Centre Kinga, Kawéni, Mamoudzou. Accueil sur rendez-vous (prise de rendez-vous en ligne sur cssm.fr).", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "Compte ameli (site et application)", "detail": "Rattachement, attestation de droits.", "url": "https://www.ameli.fr" },
+    { "nom": "France Services", "detail": "Aide gratuite pour créer votre compte et faire les démarches.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Fiche CSSM de Services Publics+", "url": "https://www.plus.transformation.gouv.fr/caisse-de-securite-sociale-de-mayotte-cssm" },
+    { "titre": "Régime de sécurité sociale de Mayotte (Cleiss)", "url": "https://www.cleiss.fr/docs/regimes/regime_mayotte.html" },
+    { "titre": "Rattachement d'un mineur comme ayant droit (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation de droits de l'enfant", "categorie": "sante" },
+    { "type": "coffre", "titre": "Copie de la carte Vitale de l'enfant", "categorie": "sante" },
+    { "type": "rappel", "titre": "Mettre à jour la carte Vitale après le rattachement", "evenement": "sante" }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la CSSM : l'inscription de l'enfant sur les cartes Vitale des deux parents, possible en métropole, n'a pas été confirmée pour Mayotte.",
+    "À confirmer auprès de la CSSM : application à Mayotte des nouvelles règles de carte Vitale des 12-15 ans et la démarche à suivre.",
+    "La fiche Services Publics+ de la CSSM renvoie vers des pages ameli rédigées pour une caisse de métropole : vérifiez les intitulés des démarches.",
+    "À confirmer auprès de la CSSM : la façon d'obtenir le code de création d'un compte ameli pour un assuré de Mayotte."
+  ],
+  "motsCles": ["carte Vitale", "ameli", "ayant droit", "attestation de droits", "CSSM", "sécurité sociale"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Services Publics+, Caisse de sécurité sociale de Mayotte", "url": "https://www.plus.transformation.gouv.fr/caisse-de-securite-sociale-de-mayotte-cssm", "verifieLe": "2026-10-29" },
+    { "titre": "Cleiss, Le régime de sécurité sociale de Mayotte", "url": "https://www.cleiss.fr/docs/regimes/regime_mayotte.html", "verifieLe": "2026-10-29" },
+    { "titre": "Sante.fr, carte Vitale des mineurs", "url": "https://www.sante.fr/node/20110525", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Contacts", "url": "https://www.cssm.fr/page/contacts", "verifieLe": "2026-10-29" }
+  ]
+}

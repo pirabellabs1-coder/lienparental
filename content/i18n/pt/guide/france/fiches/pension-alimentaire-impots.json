@@ -1,0 +1,171 @@
+{
+  "slug": "pension-alimentaire-impots",
+  "territoire": "france",
+  "categorie": "argent",
+  "titre": "Pensão alimentícia e declaração do imposto de renda",
+  "resume": "O genitor que paga pode deduzir a pensão; quem recebe a declara. Na residência alternada, não há dedução, mas uma divisão das cotas. O que guardar como comprovante.",
+  "aQuoiCaSert": "A pensão paga para um filho entra no imposto de renda dos dois genitores: é deduzida por um e somada à renda tributável do outro. Ela nunca aparece na declaração pré-preenchida: cada um deve informá-la por conta própria. Declará-la corretamente, com os comprovantes, evita erros e autuações fiscais.",
+  "quiEstConcerne": [
+    "O genitor que paga pensão para um filho menor que mora com o outro genitor.",
+    "O genitor que recebe a pensão.",
+    "Os pais com residência alternada (résidence alternée).",
+    "O genitor que cria os filhos sozinho (case T)."
+  ],
+  "aSavoir": [
+    "Genitor que paga, filho menor: a pensão é dedutível se a criança não mora habitualmente com você e não é seu dependente fiscal. Com uma sentença, você deduz o valor fixado (reajustado), mais as despesas pagas diretamente (cantina, escolaridade, despesas médicas). Os gastos ligados ao direito de visita não são dedutíveis.",
+    "Pensão sem sentença: o valor deve corresponder às necessidades da criança e aos seus recursos, e você deve poder comprovar os pagamentos.",
+    "Genitor que recebe: a pensão é tributável, no limite do que o outro genitor pode deduzir. Ela é declarada em « Pensions, retraites, rentes », linha « Pensions alimentaires perçues ». Um abatimento de 10% é aplicado automaticamente.",
+    "Residência alternada: nenhuma pensão é dedutível. Cada genitor conta 1/4 de cota para cada um dos dois primeiros filhos, depois 1/2 cota por filho a partir do terceiro.",
+    "Casa T: o genitor solteiro, divorciado ou separado que vive sozinho com os filhos dependentes marca a casa T e obtém meia cota a mais (1/4 de cota para um filho em residência alternada, 1/2 cota para dois ou mais).",
+    "Filho maior de idade não vinculado ao seu domicílio fiscal e que não mora com você: despesas comprovadas dedutíveis no limite de 6.855 € por filho (tabela em vigor segundo o service-public.gouv.fr); o filho declara ele mesmo o valor recebido."
+  ],
+  "documents": [
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo que fixa a pensão (cópia)",
+      "detail": "Peça uma cópia ao cartório do tribunal (greffe), ao advogado ou ao notário se não a tiver mais.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "preuves-versement",
+      "libelle": "Comprovantes de cada pagamento do ano",
+      "detail": "Extratos bancários, avisos de transferência, declaração da ARIPA se a pensão passa pela Caf (Caisse d'allocations familiales, órgão de benefícios familiares). Dinheiro em espécie sem recibo é difícil de comprovar.",
+      "coffre": "finances"
+    },
+    {
+      "id": "depenses-directes",
+      "libelle": "Notas das despesas pagas diretamente para o filho",
+      "detail": "Cantina, escola, despesas médicas, se você as deduzir além da pensão.",
+      "coffre": "finances"
+    },
+    {
+      "id": "recapitulatif",
+      "libelle": "Resumo anual dos valores pagos ou recebidos",
+      "detail": "Total do ano civil. Você pode exportá-lo do Diário do Lien Parental.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-impot",
+      "libelle": "Último aviso de imposto (avis d'impôt)",
+      "detail": "Pode ser baixado no seu espaço pessoal em impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "decision-residence",
+      "libelle": "Decisão ou acordo que fixa a residência (alternada ou não)",
+      "detail": "Para justificar a divisão das cotas ou a case T se o fisco pedir.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Some os valores pagos ou recebidos no ano civil",
+      "detail": "O Diário (filtro Finanças, categoria Pensão) mostra o histórico dos pagamentos registrados."
+    },
+    {
+      "titre": "Confira antes de preencher a declaração",
+      "detail": "O total bate com os extratos bancários; o filho não é declarado como seu dependente se você deduz a pensão; na residência alternada você não deduz nada; os comprovantes estão guardados no Cofre."
+    },
+    {
+      "titre": "Declare a pensão",
+      "detail": "Como despesa dedutível se você paga, em « Pensions alimentaires perçues » se você recebe. Ela nunca vem pré-preenchida."
+    },
+    {
+      "titre": "Marque a case T se você cria os filhos sozinho",
+      "detail": "Só se você mora sozinho com eles e é solteiro, divorciado ou separado."
+    },
+    {
+      "titre": "Guarde os comprovantes",
+      "detail": "Você não os anexa, mas a administração fiscal pode pedi-los."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "impots.gouv.fr, seu espaço pessoal",
+      "detail": "Declaração on-line e mensagens seguras.",
+      "url": "https://www.impots.gouv.fr"
+    },
+    {
+      "nom": "Serviço de informação fiscal",
+      "detail": "De segunda a sexta, das 8h30 às 19h, exceto feriados (serviço gratuito, preço de uma ligação).",
+      "telephone": "0809 401 401"
+    },
+    {
+      "nom": "Centro de finanças públicas (centre des finances publiques) da sua região",
+      "detail": "Contatos na seção Contact do seu espaço no impots.gouv.fr."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Deduzir uma pensão alimentícia (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2"
+    },
+    {
+      "titre": "Declarar uma pensão alimentícia recebida (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170"
+    },
+    {
+      "titre": "Quociente familiar, residência alternada e case T (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633"
+    }
+  ],
+  "actions": [
+    {
+      "type": "depense",
+      "titre": "Pensão alimentícia do mês",
+      "categorie": "pension"
+    },
+    {
+      "type": "coffre",
+      "titre": "Comprovantes de pagamento da pensão do ano",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Resumo anual da pensão",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Declaração de renda: declarar a pensão (abril)",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Declaração da renda de 2026 a partir de abril de 2027",
+      "detail": "A campanha de 2027 começa em abril de 2027. Os prazos exatos são publicados todo ano no impots.gouv.fr."
+    }
+  ],
+  "aConfirmer": [
+    "Os números das casas da declaração mudam de um ano para outro: confira-os no manual do ano em impots.gouv.fr.",
+    "Os tetos de dedução para um filho maior de idade são revistos todo ano: verifique o valor aplicável à renda de 2026 durante a campanha de 2027."
+  ],
+  "motsCles": [
+    "impostos",
+    "pensão alimentícia",
+    "dedução",
+    "quociente familiar",
+    "cotas",
+    "declaração",
+    "case T"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2 Dedução de uma pensão alimentícia",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F3170 Pensão alimentícia recebida",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3170",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2633 Residência alternada, quociente familiar e case T",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

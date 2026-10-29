@@ -10,9 +10,9 @@
     "Os pais em residência alternada, que devem declarar os dois endereços e escolher como dividir os benefícios."
   ],
   "aSavoir": [
-    "O serviço on-line gratuito « Je change de coordonnées » (« Mudo meus dados ») do service-public.gouv.fr, site oficial do governo francês, envia seu novo endereço de uma só vez a mais de 30 órgãos nacionais (Receita, Assurance Maladie, France Travail, caixas de aposentadoria, alguns fornecedores de energia) e a mais de 4.500 prefeituras (mairies) conectadas. Não atualiza as listas eleitorais, nem seu banco ou seguro.",
+    "O serviço on-line gratuito « Je change de coordonnées » (« Mudo meus dados ») do service-public.gouv.fr, site oficial do governo francês, envia seu novo endereço de uma só vez a mais de 30 órgãos nacionais (Receita, Assurance Maladie, France Travail, caixas de aposentadoria, alguns fornecedores de energia) e a mais de 4.500 prefeituras (mairies) conectadas. Não tem efeito sobre sua inscrição nas listas eleitorais; avise você mesmo seu banco e sua seguradora.",
     "Caf (Caisse d'allocations familiales, órgão de benefícios familiares): declare a separação no seu espaço on-line, em « Déclaration de situation », e a mudança no serviço « Déclaration de changement d'adresse ». Para o auxílio-moradia, faça um novo pedido assim que entrar no imóvel. Em caso de esquecimento de boa-fé, vale o « droit à l'erreur » (direito ao erro) se você regularizar rápido.",
-    "Residência alternada e Caf: preencha o formulário cerfa n° 14000. Os pais podem indicar um só beneficiário ou dividir os auxílios familiares; em caso de desacordo, cada um recebe automaticamente uma parte. Só os auxílios familiares e o complément de libre choix du mode de garde (CMG, auxílio para cuidados infantis) se dividem; os outros benefícios vão para um só genitor. A escolha pode ser mudada após um ano.",
+    "Residência alternada e Caf: preencha o formulário cerfa n° 14000. Os pais indicam um só beneficiário ou dividem os auxílios familiares; sem acordo, cada um recebe automaticamente uma parte. Só os auxílios familiares se dividem; os outros benefícios vão para um só genitor. Desde 1º de dezembro de 2025, cada genitor pode receber o complément de libre choix du mode de garde (CMG, auxílio para cuidados infantis) conforme a própria situação (sem divisão do valor). A escolha é mudável após um ano.",
     "Assurance Maladie (seguro de saúde público francês): mude o endereço na conta ameli, em « Mes démarches », pelo telefone 3646, ou por carta com cópia frente e verso do seu documento de identidade.",
     "Receita (impostos): informe o endereço no seu espaço em impots.gouv.fr e depois indique a mudança e a data dela na sua declaração de renda.",
     "Escola: você deve informar a escola de qualquer mudança de situação familiar ou de endereço, e de qualquer decisão do juiz de família (juge aux affaires familiales, JAF) sobre a criança. A escola passa as mesmas informações a cada genitor, em mãos ou nos endereços indicados no início do ano.",
@@ -71,15 +71,15 @@
     "A confirmar localmente: se a sua prefeitura está conectada ao serviço « Je change de coordonnées »."
   ],
   "motsCles": ["mudança de endereço", "mudança", "separação", "residência alternada", "Caf", "ameli", "escola", "impostos", "cerfa 14000"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
     { "titre": "Service-public.gouv.fr, notícia A18901 Je change de coordonnées (6 de maio de 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18901" },
-    { "titre": "Service-public.gouv.fr, F827 Informar uma mudança de situação à Caf", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F21248 Auxílios familiares em residência alternada", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F737 Seguridade social: mudança de situação pessoal", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F383 Imposto de renda: mudança de endereço", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383", "verifieLe": "2026-04-15" },
-    { "titre": "Service-public.gouv.fr, F11389 Um genitor separado pode se mudar livremente?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2025-05-28" },
-    { "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "Service-public.gouv.fr, F1391 Educação infantil e ensino fundamental: informação aos pais", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2025-07-30" }
+    { "titre": "Service-public.gouv.fr, F827 Informar uma mudança de situação à Caf", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F827", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Auxílios familiares em residência alternada", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F737 Seguridade social: mudança de situação pessoal", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F737", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F383 Imposto de renda: mudança de endereço", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F383", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11389 Um genitor separado pode se mudar livremente?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1391 Educação infantil e ensino fundamental: informação aos pais", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2026-10-29" }
   ]
 }

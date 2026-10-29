@@ -1,0 +1,65 @@
+{
+  "slug": "declarer-separation-caf",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Déclarer sa séparation à la CSSM",
+  "resume": "Signaler la séparation dans « Mon Compte » sur caf.fr pour que la CSSM recalcule vos prestations sur vos seules ressources, et organiser le versement des allocations quand les enfants vivent chez les deux parents.",
+  "aQuoiCaSert": "À Mayotte, les prestations familiales sont gérées par la Caisse de sécurité sociale de Mayotte (CSSM), dans l'espace « Mon Compte » du site caf.fr. Après une séparation, vos droits (allocations familiales, complément familial, aides au logement, CMG...) sont recalculés sans les revenus de votre ex-conjoint. Déclarer vite le changement permet d'ouvrir de nouveaux droits et d'éviter de devoir rembourser des sommes trop perçues.",
+  "quiEstConcerne": [
+    "Tout allocataire de la CSSM qui se sépare, qu'il ait été marié, pacsé ou en concubinage.",
+    "L'ex-conjoint qui n'était pas allocataire et doit ouvrir son propre dossier pour percevoir des prestations.",
+    "Les parents en résidence alternée, qui doivent s'entendre sur l'allocataire."
+  ],
+  "aSavoir": [
+    "La connexion à « Mon Compte » se fait avec les 13 premiers chiffres de votre numéro de sécurité sociale. C'est par cet espace que l'on met à jour sa situation auprès de la CSSM.",
+    "Le complément de libre choix du mode de garde (CMG) peut être perçu par les deux parents en garde alternée depuis décembre 2025 (CSSM).",
+    "L'allocation de soutien familial (ASF) et l'intermédiation des pensions par l'ARIPA n'existent pas encore à Mayotte (prévues en 2035). Pour une pension non payée, voyez la fiche « Pension alimentaire impayée à Mayotte ».",
+    "Victime de violences conjugales : la CSSM verse une aide d'urgence sur justificatif de moins de 12 mois (plainte, signalement au procureur ou ordonnance de protection)."
+  ],
+  "documents": [
+    { "id": "identifiants", "libelle": "Numéro de sécurité sociale et mot de passe « Mon Compte »", "detail": "Si vous n'étiez pas l'allocataire, créez votre propre compte.", "coffre": "finances" },
+    { "id": "date-separation", "libelle": "Date exacte de la séparation et nouvelle adresse", "detail": "La date du départ effectif du logement commun.", "coffre": "courriers" },
+    { "id": "rib", "libelle": "RIB à votre seul nom", "detail": "Si les prestations étaient versées sur un compte joint.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Vos ressources récentes", "detail": "Bulletins de salaire ou montants d'allocations.", "coffre": "finances" },
+    { "id": "bail", "libelle": "Bail ou attestation de loyer du nouveau logement", "detail": "Pour une demande d'aide au logement.", "coffre": "courriers" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant la résidence de l'enfant (copie), s'il existe", "detail": "Copie à demander au greffe du tribunal, à l'avocat ou au notaire si vous ne l'avez plus.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Connectez-vous à « Mon Compte » sur caf.fr", "detail": "Rubrique de déclaration d'un changement de situation. L'ex-conjoint non allocataire crée son propre dossier." },
+    { "titre": "Indiquez la date de séparation, votre nouvelle adresse et la résidence des enfants" },
+    { "titre": "Résidence alternée : déclarez-la et mettez-vous d'accord sur l'allocataire", "detail": "Demandez à la CSSM la démarche à suivre pour le partage des allocations familiales." },
+    { "titre": "Vérifiez avant d'envoyer votre déclaration", "detail": "Date de séparation exacte, adresse de chacun à jour, RIB à votre seul nom, copie du jugement ou de la convention jointe s'il existe. Gardez l'accusé de dépôt." },
+    { "titre": "Faites les demandes qui vous concernent", "detail": "Aide au logement pour le nouveau logement, CMG si vous faites garder l'enfant." },
+    { "titre": "Prévenez aussi les autres organismes", "detail": "Assurance maladie (rattachement des enfants), école, impôts (case T si vous élevez seul vos enfants)." }
+  ],
+  "ou": [
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "En ligne dans « Mon Compte » sur caf.fr, ou accueil sur rendez-vous au Centre Kinga, Kawéni, Mamoudzou.", "url": "https://www.cssm.fr/page/famille", "telephone": "02 69 61 91 91" },
+    { "nom": "France Services", "detail": "Aide gratuite aux démarches en ligne.", "url": "https://lannuaire.service-public.gouv.fr/navigation/mayotte/france_services" }
+  ],
+  "liens": [
+    { "titre": "Famille (CSSM)", "url": "https://www.cssm.fr/page/famille" },
+    { "titre": "Prestations familiales à Mayotte (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Aide aux victimes de violences conjugales (CSSM)", "url": "https://www.cssm.fr/page/aide-aux-victimes-de-violences-conjugales" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Déclarer la séparation à la CSSM", "evenement": "autre" },
+    { "type": "coffre", "titre": "Accusé de déclaration de changement de situation", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Jugement ou convention de résidence de l'enfant", "categorie": "jaf" }
+  ],
+  "datesLimites": [
+    { "libelle": "Dès la séparation", "detail": "Déclarez sans attendre pour éviter un trop-perçu à rembourser." }
+  ],
+  "aConfirmer": [
+    "À confirmer auprès de la CSSM : la démarche exacte en résidence alternée (formulaire cerfa n° 14000 ou autre), le partage possible des allocations familiales et la durée minimale du choix de l'allocataire.",
+    "À confirmer auprès de la CSSM : le justificatif de séparation accepté si vous vivez encore sous le même toit.",
+    "À confirmer : horaires de l'accueil et des permanences, à vérifier sur cssm.fr avant de vous déplacer."
+  ],
+  "motsCles": ["séparation", "CSSM", "changement de situation", "résidence alternée", "Mon Compte", "allocations"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Famille", "url": "https://www.cssm.fr/page/famille", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Prestations familiales", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Aide aux victimes de violences conjugales", "url": "https://www.cssm.fr/page/aide-aux-victimes-de-violences-conjugales", "verifieLe": "2026-10-29" },
+    { "titre": "Légifrance, rapport au Président relatif à l'ordonnance n° 2026-647 du 22 juillet 2026", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054456298", "verifieLe": "2026-10-29" }
+  ]
+}

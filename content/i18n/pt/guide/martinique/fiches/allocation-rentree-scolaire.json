@@ -1,0 +1,184 @@
+{
+  "slug": "allocation-rentree-scolaire",
+  "territoire": "martinique",
+  "categorie": "aides",
+  "titre": "Auxílio de volta às aulas (ARS, allocation de rentrée scolaire)",
+  "resume": "Um auxílio da Caf pago a partir de 18 de agosto de 2026 para cada filho de 6 a 18 anos matriculado na escola, conforme a renda. Automático antes dos 16 anos, a declarar para os de 16 a 18.",
+  "aQuoiCaSert": "O auxílio de volta às aulas ajuda a pagar as despesas do início do ano letivo (material escolar, roupas, equipamentos) para cada filho de 6 a 18 anos matriculado, se a renda da família não ultrapassar um teto. Se você já é beneficiário da Caf (Caisse d'allocations familiales, órgão de benefícios familiares) e suas declarações estão em dia, ele é pago sem nenhum procedimento para os menores de 16 anos. Para um jovem de 16 a 18 anos, você deve declarar on-line que ele continua estudando ou é aprendiz; caso contrário, nada é pago.",
+  "quiEstConcerne": [
+    "As famílias com um filho de 6 a 18 anos matriculado na escola ou no Cned (centro nacional de ensino a distância). Para o ano letivo de 2026: criança nascida entre 16 de setembro de 2008 e 31 de dezembro de 2020, inclusive.",
+    "Uma criança de menos de 6 anos já matriculada no CP (1º ano do ensino fundamental) também tem direito ao ARS.",
+    "Uma criança educada em casa (ensino domiciliar) não tem direito ao ARS. Nem um aprendiz cujo salário ultrapasse um teto."
+  ],
+  "aSavoir": [
+    "Valores do ano letivo de 2026, após a CRDS (contribuição social descontada na fonte): 426,87 € de 6 a 10 anos, 450,41 € de 11 a 14 anos, 466,02 € de 15 a 18 anos (idade em 31 de dezembro de 2025).",
+    "Tetos de renda do ano letivo de 2026 (rendimentos líquidos por categoria de 2024): 28.956 € para 1 filho, 35.638 € para 2, 42.320 € para 3, mais 6.682 € por filho adicional.",
+    "Se a renda ultrapassar o teto por pouco, um auxílio reduzido (diferencial) pode ser pago.",
+    "Pagamento a partir de 18 de agosto de 2026 no caso geral. A página oficial não prevê data distinta para a Martinica (só para La Réunion e Mayotte).",
+    "Para receber o ARS de um jovem de 16 a 18 anos, você deve ter declarado sua renda de 2025 à Receita e seus rendimentos de 2024 à Caf, e depois declarar, a partir de meados de julho, a escolaridade ou aprendizagem dele no ano letivo de 2026.",
+    "Pais separados: o ARS é pago a um só beneficiário. Em residência alternada, a possível divisão dos auxílios familiares não se aplica automaticamente ao ARS."
+  ],
+  "documents": [
+    {
+      "id": "avis-impot",
+      "libelle": "Declaração de renda de 2025 feita à Receita",
+      "detail": "Indispensável para que a Caf conheça sua renda. Aviso de imposto disponível em impots.gouv.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "certificat-scolarite",
+      "libelle": "Declaração de matrícula escolar (certificat de scolarité)",
+      "detail": "Só para uma criança de menos de 6 anos que entra no CP se você não é beneficiário, ou se a Caf pedir. Emitida pela escola.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "contrat-apprentissage",
+      "libelle": "Contrato de aprendizagem e holerites, para um aprendiz de 16 a 18 anos",
+      "detail": "Cópia. A Caf verifica se o salário não ultrapassa o teto.",
+      "coffre": "scolarite"
+    },
+    {
+      "id": "declaration-situation",
+      "libelle": "Declaração de situação e declaração de rendimentos de 2024",
+      "detail": "Só se você ainda não é beneficiário. Formulários em caf.fr.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (comprovante de dados bancários)",
+      "detail": "Se você ainda não é beneficiário.",
+      "coffre": "finances"
+    },
+    {
+      "id": "notification-caf",
+      "libelle": "Notificação ou comprovante de pagamento do ARS",
+      "detail": "Disponível no seu espaço Caf.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique se suas declarações estão em dia",
+      "detail": "Declaração de renda feita à Receita, situação familiar e número de filhos atualizados no seu espaço Caf."
+    },
+    {
+      "titre": "Filho com menos de 16 anos e você é beneficiário",
+      "detail": "Nenhum procedimento: o ARS é pago automaticamente se você tiver direito."
+    },
+    {
+      "titre": "Jovem de 16 a 18 anos: declare a escolaridade dele",
+      "detail": "Em caf.fr ou no aplicativo Caf, a partir de meados de julho, indique que ele continuará estudando ou será aprendiz no ano letivo de 2026."
+    },
+    {
+      "titre": "Você não é beneficiário",
+      "detail": "Faça uma declaração de situação e de rendimentos à Caf, com um RIB, e a declaração de matrícula para uma criança de menos de 6 anos no CP."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Se for ao atendimento da Caf: número de beneficiário, documento de identidade, aviso de imposto, declaração de matrícula ou contrato de aprendizagem, conforme o caso. A maioria dos procedimentos é feita on-line."
+    },
+    {
+      "titre": "Anote as despesas de volta às aulas",
+      "detail": "Registre material escolar e roupas no Diário para acompanhar os gastos de cada filho."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "Espaço on-line « Mon compte » em caf.fr ou aplicativo Caf.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, seguridade social agrícola)",
+      "detail": "Se você é do regime agrícola."
+    },
+    {
+      "nom": "France Services (pontos de atendimento ao público)",
+      "detail": "Ajuda gratuita com procedimentos on-line perto de você."
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Auxílio de volta às aulas (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878"
+    },
+    {
+      "titre": "Auxílios familiares em residência alternada (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Caf de la Martinique",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Declarar a escolaridade dos 16-18 anos para o ARS (meados de julho)",
+      "evenement": "ecole"
+    },
+    {
+      "type": "rappel",
+      "titre": "Verificar o pagamento do ARS (18 de agosto de 2026)",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Comprovante de pagamento do ARS",
+      "categorie": "finances"
+    },
+    {
+      "type": "depense",
+      "titre": "Material de volta às aulas",
+      "categorie": "ecole"
+    },
+    {
+      "type": "depense",
+      "titre": "Roupas de volta às aulas",
+      "categorie": "vetements"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Declaração dos 16-18 anos a partir de meados de julho",
+      "detail": "Uma declaração feita após 18 de agosto gera o pagamento alguns dias depois do recebimento pela Caf."
+    },
+    {
+      "libelle": "Pagamento a partir de 18 de agosto de 2026",
+      "detail": "Caso geral."
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: data exata de pagamento na Martinica, pois a página oficial só cita o caso geral, La Réunion e Mayotte.",
+    "A confirmar localmente com a Caf de la Martinique: qual genitor recebe a ARS em caso de residência alternada."
+  ],
+  "motsCles": [
+    "ARS",
+    "volta às aulas",
+    "material escolar",
+    "Caf",
+    "auxílio",
+    "16-18 anos"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1878 Auxílio de volta às aulas",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878",
+      "verifieLe": "2026-08-04"
+    },
+    {
+      "titre": "Caf, tabela do auxílio de volta às aulas",
+      "url": "https://www.caf.fr/professionnels/offres-et-services/accompagnement-des-allocataires/bareme-allocation-de-rentree-scolaire"
+    },
+    {
+      "titre": "Caf du Tarn, ARS e residência alternada",
+      "url": "https://www.caf.fr/allocataires/caf-du-tarn/actualites-departementales/allocation-de-rentree-scolaire"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Auxílios familiares em residência alternada",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import { toContentLocale, type ContentLocale, type Localized } from '@/lib/conte
 import { localizeFromFiles, localizeTerritoire } from '@/lib/contenus/i18n-files'
 import type { ContentKind, ContentData } from '@/lib/contenus/types'
 import { territoryDisplayName } from './territory-name'
+import { pickAvailable, sortTerritoires } from './territories'
 
 /** Territoire dans la langue demandée, nom compris (repli sur le catalogue : « French Guiana »). */
 function localizeTerritoireNamed(t: Territoire, locale: ContentLocale): Territoire {
@@ -118,8 +119,7 @@ const listTerritoiresFr = cache((): Territoire[] => {
 /** Territoire demandé s'il est disponible, sinon le territoire par défaut. */
 export function resolveTerritoire(raw: string | string[] | undefined, locale: ContentLocale = 'fr'): Territoire {
   const wanted = Array.isArray(raw) ? raw[0] : raw
-  const all = listTerritoires(locale).filter((t) => t.disponible)
-  const found = all.find((t) => t.code === wanted) ?? all.find((t) => t.code === DEFAULT_TERRITOIRE) ?? all[0]
+  const found = pickAvailable(listTerritoires(locale), wanted)
   if (!found) throw new Error('[guide] aucun territoire disponible dans content/guide')
   return found
 }
@@ -221,16 +221,37 @@ function withFilePartnerTranslations(code: string, list: Localized<Partenaire>[]
   })
 }
 
+/**
+ * Territoires du Guide (tous, disponibles ou non selon la source) dans la langue demandée, mémoïsés par requête.
+ * Source : base (guide_territoires ; anonymement la RLS n'expose que les disponibles) ou démonstration ;
+ * base illisible ou sans aucun territoire disponible : fichiers du dépôt (content/guide/<code>/territoire.json).
+ * Léger (pas de fiches) : utilisable dans le pied de page, l'accueil, le sitemap.
+ */
+export const listGuideTerritoires = cache(async (locale: ContentLocale = 'fr'): Promise<{ territoires: Territoire[]; source: 'base' | 'fichiers' }> => {
+  try {
+    const { listPublicTerritoires } = await import('@/lib/contenus/public')
+    const all = sortTerritoires((await listPublicTerritoires())
+      .map((t) => territoireSchema.safeParse(t))
+      .flatMap((r) => (r.success ? [localizeTerritoireNamed(r.data, locale)] : [])))
+    if (all.some((t) => t.disponible)) return { territoires: all, source: 'base' }
+  } catch (e) {
+    console.warn('[guide] territoires illisibles en base, repli sur les fichiers :', e instanceof Error ? e.message : e)
+  }
+  return { territoires: listTerritoires(locale), source: 'fichiers' }
+})
+
+/** Territoires disponibles (au moins le territoire par défaut quand il existe), dans l'ordre d'affichage. */
+export async function listAvailableTerritoires(locale: ContentLocale = 'fr'): Promise<Territoire[]> {
+  return (await listGuideTerritoires(locale)).territoires.filter((t) => t.disponible)
+}
+
 // Clé de mémoïsation React : (territoire, langue) ; une page EN ne reçoit jamais le Guide FR d'une autre.
 const loadGuideCached = cache(async (wanted: string | undefined, locale: ContentLocale): Promise<GuideSnapshot> => {
-  const { listPublished, listPublicTerritoires, CONTENT_LIVE } = await import('@/lib/contenus/public')
+  const { listPublished, CONTENT_LIVE } = await import('@/lib/contenus/public')
   try {
-    const all = (await listPublicTerritoires())
-      .map((t) => territoireSchema.safeParse(t))
-      .flatMap((r) => (r.success ? [localizeTerritoireNamed(r.data, locale)] : []))
-      .sort((a, b) => a.ordre - b.ordre || a.nom.localeCompare(b.nom, 'fr'))
-    const dispo = all.filter((t) => t.disponible)
-    const territoire = dispo.find((t) => t.code === wanted) ?? dispo.find((t) => t.code === DEFAULT_TERRITOIRE) ?? dispo[0]
+    const { territoires: all, source } = await listGuideTerritoires(locale)
+    if (source === 'fichiers') return fileSnapshot(wanted, locale)
+    const territoire = pickAvailable(all, wanted)
     if (!territoire) return fileSnapshot(wanted, locale)
 
     const [fiches, parcours, partenaires] = await Promise.all([

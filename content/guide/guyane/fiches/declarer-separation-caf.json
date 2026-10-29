@@ -60,10 +60,10 @@
     "À confirmer localement : horaires et prise de rendez-vous des accueils de la Caf de la Guyane."
   ],
   "motsCles": ["séparation", "Caf", "changement de situation", "résidence alternée", "allocations familiales", "cerfa 14000"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F21248 Allocations familiales et résidence alternée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
-    { "titre": "Service-public.gouv.fr, F13213 Allocations familiales (règles différentes en outre-mer)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213", "verifieLe": "2026-06-01" },
-    { "titre": "Service-public.gouv.fr, F2633 Quotient familial (case T parent isolé)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-04-15" }
+    { "titre": "Service-public.gouv.fr, F21248 Allocations familiales et résidence alternée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F13213 Allocations familiales (règles différentes en outre-mer)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2633 Quotient familial (case T parent isolé)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2633", "verifieLe": "2026-10-29" }
   ]
 }

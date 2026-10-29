@@ -1,0 +1,68 @@
+{
+  "slug": "reconnaissance-enfant",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Legally recognizing my child when we are not married",
+  "resume": "Free of charge, recognition (reconnaissance) establishes the father's legal parentage. In Mayotte, a specific rule: outside the birth registration, it is done at the Mamoudzou town hall and its registration can be suspended by the public prosecutor.",
+  "aQuoiCaSert": "When the parents are not married, the father's legal parentage is not automatic: he must recognize the child. The mother has nothing to do if her name appears on the birth certificate. Recognition can be done before the birth, when the birth is registered, or later. If done before the child's first birthday, it allows the father to exercise parental authority jointly with the mother. In Mayotte, the law of August 11, 2025 on planning for the rebuilding of Mayotte (loi de programmation pour la refondation de Mayotte) set out specific rules.",
+  "quiEstConcerne": [
+    "Unmarried parents, especially the father.",
+    "A mother who wishes to make a prenatal recognition (optional).",
+    "Female couples: a joint prenatal recognition before a notary is required."
+  ],
+  "aSavoir": [
+    "In Mayotte, a recognition made before a civil registrar (officier d'état civil) is received by the registrar of the town of Mamoudzou, unless it is made at the same time as the birth registration (article 2496 of the Civil Code).",
+    "When a child born in Mayotte is recognized, the person making the recognition is informed of their obligations toward the child (support, upbringing) and of the penalties for fraudulent recognition.",
+    "If there is doubt about whether the recognition is genuine, the public prosecutor (procureur) can suspend its registration for 2 months, renewable once (3 months if the investigation is carried out abroad) (article 2497 of the Civil Code).",
+    "A recognition made only to obtain a residence permit or French nationality is a criminal offense (article L. 823-11 of the code de l'entrée et du séjour des étrangers, the French immigration code); the law of August 11, 2025 raised the fine to €75,000.",
+    "Recognition is free at the town hall (mairie). It is also possible with a notary, for a fee.",
+    "A father who recognizes the child after their first birthday does not exercise parental authority. He can obtain it through a joint declaration with the mother (cerfa n° 12785, sent to the court registry (greffe) of the tribunal judiciaire (judicial court)) or by applying to the family court judge (juge aux affaires familiales, JAF).",
+    "Recognition does not change the child's surname by itself: choosing the name requires a separate declaration."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "ID of the parent making the recognition", "detail": "Original: ID card, passport or residence permit.", "coffre": "jaf" },
+    { "id": "domicile", "libelle": "Proof of address or residence less than 3 months old, in your name", "detail": "Original. One proof each if you come together.", "coffre": "jaf" },
+    { "id": "acte-naissance-enfant", "libelle": "Child's birth certificate or family record book (livret de famille), if the child is already born", "detail": "Recommended. Certificate free of charge from the town hall of the place of birth.", "coffre": "jaf" },
+    { "id": "acte-reconnaissance", "libelle": "Copy of the recognition certificate (acte de reconnaissance)", "detail": "Show it when registering the birth if the recognition was made before the birth.", "coffre": "jaf" },
+    { "id": "declaration-conjointe", "libelle": "Joint declaration of exercise of parental authority (cerfa n° 12785), if the child is over one year old", "detail": "Signed by both parents. Keep the copy stamped by the court registry.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Choose when", "detail": "When registering the birth, at the town hall of the place of birth; otherwise, in Mayotte, at the Mamoudzou town hall. Call first to find out whether you need an appointment." },
+    { "titre": "Check before you go", "detail": "Original ID, proof of address less than 3 months old in your name (one per parent if you come together), birth certificate or family record book if the child is already born." },
+    { "titre": "Go to the town hall and sign the document", "detail": "Check the spelling of the surnames and first names before signing." },
+    { "titre": "Keep the copy of the document", "detail": "If the registration is suspended by the public prosecutor, keep the letter you receive and respond to any requests." },
+    { "titre": "If the child is over one year old, make the joint declaration of parental authority", "detail": "With the mother's agreement, cerfa n° 12785 handed in to the court registry of the tribunal judiciaire de Mamoudzou. Without agreement, the request is made to the family court judge." }
+  ],
+  "ou": [
+    { "nom": "Mamoudzou town hall, civil registry office (état civil)", "detail": "Recognition made in Mayotte outside the birth registration." },
+    { "nom": "Town hall of the place of birth", "detail": "Recognition made at the same time as the birth registration." },
+    { "nom": "Tribunal judiciaire de Mamoudzou (Mamoudzou court), court registry", "detail": "Joint declaration of exercise of parental authority.", "url": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/f0aaebd8-87a3-434e-820d-28c7c2f0d12a", "telephone": "02 69 61 11 15" }
+  ],
+  "liens": [
+    { "titre": "Recognizing a child (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887" },
+    { "titre": "Child recognized late and parental authority (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942" },
+    { "titre": "Loi n° 2025-797 du 11 août 2025 on planning for the rebuilding of Mayotte (Légifrance)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052075903" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Recognition certificate", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Joint declaration of parental authority stamped by the court registry", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Town hall appointment: recognition", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Recognize the child before their first birthday", "evenement": "rdv" }
+  ],
+  "datesLimites": [
+    { "libelle": "Before the child's first birthday", "detail": "So that the father exercises parental authority without any further procedure." },
+    { "libelle": "Possible suspension of 2 months, renewable once", "detail": "Period during which the public prosecutor can check a recognition in Mayotte." }
+  ],
+  "aConfirmer": [
+    "The national service-public.gouv.fr page does not yet detail the rules specific to Mayotte: exact documents and appointment booking to be confirmed with the Mamoudzou town hall.",
+    "To be confirmed: under the law, a prenatal recognition (before the birth) in Mayotte must be made in Mamoudzou; check the arrangements with the civil registry office.",
+    "To be confirmed: the prison sentence for fraudulent recognition (the 2025 text consulted only changes the fine)."
+  ],
+  "motsCles": ["recognition", "parentage", "father", "unmarried", "parental authority", "Mamoudzou"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Légifrance, loi n° 2025-797 du 11 août 2025 (articles 9 to 11)", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000052075903", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F887 Recognizing a child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F887", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F942 Child recognized late", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F942", "verifieLe": "2026-10-29" }
+  ]
+}

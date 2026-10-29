@@ -1,0 +1,178 @@
+{
+  "slug": "mutuelle-enfant",
+  "territoire": "france",
+  "categorie": "sante",
+  "titre": "Mutuelle (plano de saúde complementar) da criança",
+  "resume": "Incluir o seu filho na sua mutuelle, escolher qual dos pais o cobre após a separação e evitar reembolsos travados.",
+  "aQuoiCaSert": "A Assurance Maladie (seguro de saúde público francês: a CPAM, caixa local do seguro-saúde, para o regime geral; a MSA, seguridade social agrícola, para o regime agrícola) reembolsa parte dos atendimentos. O plano de saúde complementar (complémentaire santé), muitas vezes chamado de mutuelle, cobre todo ou parte do restante. A criança costuma ser coberta como dependente (ayant droit) no contrato de um dos pais. Quando a ligação entre a Assurance Maladie e a mutuelle (chamada ligação Noémie) está ativa, o reembolso complementar chega automaticamente, sem enviar nenhum papel.",
+  "quiEstConcerne": [
+    "Pais assalariados cobertos pelo plano complementar obrigatório da empresa, que querem incluir o filho.",
+    "Pais que têm uma mutuelle individual.",
+    "Pais separados que precisam decidir em qual contrato a criança fica coberta.",
+    "Famílias de baixa renda, que podem ter direito à complémentaire santé solidaire (C2S, plano complementar gratuito ou a preço baixo)."
+  ],
+  "aSavoir": [
+    "Todo empregador do setor privado deve oferecer um plano de saúde complementar aos assalariados e pagar pelo menos 50% dele. A cobertura dos filhos depende do contrato: alguns cobrem obrigatoriamente a família, outros deixam a escolha, com ou sem mensalidade extra. Leia o informativo entregue pelo seu empregador ou pela sua mutuelle.",
+    "Um assalariado já coberto como dependente por outro contrato coletivo obrigatório (por exemplo, o do cônjuge) ou beneficiário da complémentaire santé solidaire pode pedir dispensa de aderir à mutuelle da empresa, em geral na contratação.",
+    "A criança pode estar vinculada à Assurance Maladie dos dois pais. Do lado da mutuelle, a ligação Noémie no cadastro dos dois pais depende de cada operadora complementar: a Assurance Maladie não pode impô-la (resposta de um especialista ameli, outubro de 2025).",
+    "Sem ligação Noémie no seu cadastro, você continua sendo reembolsado pela Assurance Maladie, mas precisa enviar você mesmo o extrato de reembolso à mutuelle que cobre a criança.",
+    "Se a sua renda for baixa, a complémentaire santé solidaire é calculada conforme a composição do seu lar: veja a ficha «Complémentaire santé solidaire (C2S): cobertura de saúde complementar gratuita ou barata»."
+  ],
+  "documents": [
+    {
+      "id": "attestation-droits",
+      "libelle": "Atestado de direitos à Assurance Maladie da criança (ou do genitor em cujo cadastro ela consta)",
+      "detail": "Cópia. Pode ser baixado gratuitamente na sua conta ameli, ou pedido à sua CPAM.",
+      "coffre": "sante"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "Certidão de nascimento da criança ou livro de família (livret de famille)",
+      "detail": "Cópia, para provar a filiação. Certidão gratuita, a pedir on-line em service-public.gouv.fr ou na prefeitura (mairie) do local de nascimento.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parent",
+      "libelle": "Documento de identidade do titular do contrato",
+      "detail": "Cópia frente e verso, dentro da validade.",
+      "coffre": "sante"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (dados bancários) de quem vai receber os reembolsos",
+      "detail": "Original ou cópia, em seu nome.",
+      "coffre": "finances"
+    },
+    {
+      "id": "formulaire-ajout",
+      "libelle": "Formulário de inclusão de beneficiário ou pedido por escrito à mutuelle",
+      "detail": "Fornecido pela sua mutuelle ou pelo setor de recursos humanos do seu empregador.",
+      "coffre": "sante"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Sentença ou acordo que fixa a residência da criança (pais separados)",
+      "detail": "Cópia, só se a mutuelle pedir para comprovar que a criança está a seu cargo.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "carte-tiers-payant",
+      "libelle": "Cartão de pagamento direto (carte de tiers payant) da mutuelle com o nome da criança",
+      "detail": "Enviado pela mutuelle após a inclusão da criança. Apresente-o ao médico e na farmácia.",
+      "coffre": "sante"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Verifique primeiro se a criança está vinculada à Assurance Maladie",
+      "detail": "Sem esse vínculo, a mutuelle não pode reembolsar. Se precisar, veja a ficha «Vincular meu filho ao seguro-saúde, obter o atestado de direitos e a carte Vitale dele»."
+    },
+    {
+      "titre": "Leia o seu contrato ou o informativo da mutuelle da empresa",
+      "detail": "Veja se os filhos são cobertos automaticamente, como opção ou com mensalidade extra, e até que idade."
+    },
+    {
+      "titre": "Confira antes de enviar o processo",
+      "detail": "Atestado de direitos atualizado com o nome da criança, certidão de nascimento ou livro de família, RIB, documento de identidade, formulário assinado. Pergunte à mutuelle por escrito se é exigido comprovante de residência da criança em caso de separação."
+    },
+    {
+      "titre": "Peça a inclusão da criança",
+      "detail": "Na sua mutuelle, ou no setor de recursos humanos para um contrato de empresa. Guarde uma cópia do pedido."
+    },
+    {
+      "titre": "Pais separados: combinem qual contrato cobre a criança",
+      "detail": "Pergunte à mutuelle se ela aceita ligação Noémie no cadastro dos dois pais. Se não, quem não estiver ligado envia ele mesmo os extratos de reembolso."
+    },
+    {
+      "titre": "Confira o primeiro reembolso",
+      "detail": "No seu extrato ameli, a menção de envio à complementar confirma que a ligação funciona."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Sua mutuelle ou o setor de recursos humanos do seu empregador",
+      "detail": "Para incluir a criança no contrato e saber o eventual custo."
+    },
+    {
+      "nom": "Sua caixa da Assurance Maladie (CPAM)",
+      "detail": "Para o atestado de direitos e o vínculo da criança, pela sua conta ameli.",
+      "url": "https://www.ameli.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Dispensas de adesão à mutuelle da empresa (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740"
+    },
+    {
+      "titre": "Plano de saúde complementar da empresa (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739"
+    },
+    {
+      "titre": "Complémentaire santé solidaire (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Atestado de direitos da Assurance Maladie da criança",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Cartão de pagamento direto da mutuelle",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Contrato ou informativo da mutuelle",
+      "categorie": "sante"
+    },
+    {
+      "type": "depense",
+      "titre": "Mensalidade da mutuelle da criança",
+      "categorie": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Verificar todo ano a cobertura da criança pela mutuelle",
+      "evenement": "sante"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar com a sua mutuelle: a idade-limite de cobertura dos filhos e os documentos exigidos para filhos de pais separados variam conforme o contrato.",
+    "Alsace-Moselle: um regime local de seguro-saúde complementa os reembolsos; o efeito sobre o seu contrato deve ser verificado com a sua caixa e a sua mutuelle."
+  ],
+  "motsCles": [
+    "mutuelle",
+    "plano de saúde complementar",
+    "dependente",
+    "Noémie",
+    "pais separados",
+    "reembolso"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F20740 Dispensas de adesão à mutuelle da empresa",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20740",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F20739 Plano de saúde complementar da empresa",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20739",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (plano complementar gratuito ou barato)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Fórum dos segurados ameli, resposta de especialista: duplo vínculo e plano complementar (29 de outubro de 2025)",
+      "url": "https://forum-assures.ameli.fr/questions/3657009-parents-separes-double-rattachement-secu-enfant-seule-complementaire-sante-papa",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

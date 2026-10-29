@@ -54,11 +54,11 @@
     "A confirmar localmente com a Caf de la Guyane: as fichas nacionais não indicam valor ou teto próprio da Guiana Francesa, e a Caf escolhe entre o auxílio básico e os auxílios familiares conforme a regra de não acumulação aplicável nos departamentos ultramarinos (DOM)."
   ],
   "motsCles": ["Paje", "bônus de nascimento", "auxílio básico", "gravidez", "Caf", "bebê"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F2550 Bônus de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550", "verifieLe": "2026-04-01" },
-    { "titre": "Service-public.gouv.fr, F2552 Auxílio básico da Paje", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552", "verifieLe": "2026-04-01" },
-    { "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-03-13" },
+    { "titre": "Service-public.gouv.fr, F2550 Bônus de nascimento", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F2552 Auxílio básico da Paje", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F21248 Residência alternada e benefícios familiares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" },
     { "titre": "Caf de la Guyane", "url": "https://caf.fr/allocataires/caf-de-la-guyane" }
   ]
 }

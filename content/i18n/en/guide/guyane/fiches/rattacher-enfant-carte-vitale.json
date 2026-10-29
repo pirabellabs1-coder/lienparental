@@ -60,9 +60,9 @@
     "The ameli.fr pages could not be viewed directly during verification: menu labels may have changed."
   ],
   "motsCles": ["carte Vitale", "ameli", "dependent", "certificate of entitlement", "reimbursement", "health insurance", "CGSS"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F16620 Adding a minor as a dependent", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620", "verifieLe": "2024-11-13" },
+    { "titre": "Service-public.gouv.fr, F16620 Adding a minor as a dependent", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16620", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, news A17693 Carte Vitale for minors (September 10, 2026)", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17693" },
     { "titre": "Service-public.gouv.fr, news A18009 Adding your child to both cartes Vitale", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18009" },
     { "titre": "ameli.fr, Getting a certificate of entitlement", "url": "https://www.ameli.fr/assure/adresses-et-contacts/l-obtention-d-un-document/obtenir-une-attestation/obtenir-une-attestation-de-droits" },

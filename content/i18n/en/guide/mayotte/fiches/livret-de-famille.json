@@ -1,0 +1,67 @@
+{
+  "slug": "livret-de-famille",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Getting or updating a family record book (livret de famille): duplicate, second book",
+  "resume": "First book at birth, update after a recognition or a divorce, second book when you are separated or have lost it: where to go, which documents to bring, and it is free.",
+  "aQuoiCaSert": "The family record book (livret de famille) brings together extracts of the civil registry records of the parents and their children together. You are often asked for it: enrolling at school, a file with the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund), legal aid (aide juridictionnelle), opening an account for the child. After a separation, the parent who no longer has it can get their own book, free of charge.",
+  "quiEstConcerne": [
+    "Parents, married or not, when their first child together is born.",
+    "A separated or divorced parent who does not have the original book.",
+    "Holders of a book that has been lost, stolen or damaged, or that needs updating."
+  ],
+  "aSavoir": [
+    "Unmarried parents: the book is issued free of charge by the town hall (mairie) of the place of birth when the first child together is born. A parent only appears in it if they appear on the child's birth certificate, hence the importance of recognition (reconnaissance).",
+    "Married parents: the book is issued at the wedding, then completed at each birth.",
+    "Second book after separation or divorce: it can be requested at any time, free of charge, from the town hall where you live. Married parents: bring proof of the divorce or legal separation. Parents in a PACS (civil partnership) or living together: explain why you need your own book and attach supporting evidence.",
+    "Loss or theft: a second book is rebuilt by the town hall from civil registry records. Damaged book: a duplicate is issued when you hand in the old one. A town hall may charge for duplicates from the second one.",
+    "Updates: birth, recognition, divorce, change of name must be entered in the book, free of charge, usually at the town hall where the event was registered.",
+    "Using a falsified or out-of-date book can be punished by a fine of up to €1,500.",
+    "Time to obtain it: usually a few weeks, because the town hall must receive the records from the other towns concerned."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "ID document of the applying parent (original)", "detail": "Also required when collecting the book.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Proof of address less than 3 months old", "detail": "Requested in case of loss, theft or damage.", "coffre": "autres" },
+    { "id": "preuve-separation", "libelle": "Proof of divorce or separation (copy)", "detail": "Married parents: divorce judgment or agreement. PACS or living together: proof of separate addresses, statements.", "coffre": "jaf" },
+    { "id": "infos-actes", "libelle": "Information on the records to be entered", "detail": "Surnames, first names, dates and places of birth of the parents and children, date and place of marriage.", "coffre": "autres" },
+    { "id": "attestation-perte", "libelle": "Sworn statement of loss or theft, or the damaged book", "detail": "In case of theft, reporting it to the police or gendarmerie is recommended.", "coffre": "courriers" },
+    { "id": "livret", "libelle": "Family record book (scanned copy of every page)", "detail": "Keep a full copy: it is enough for many procedures.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Identify your situation", "detail": "First book, update, second book after a separation, or replacement after loss or theft." },
+    { "titre": "Find the right town hall", "detail": "Second book or replacement: the town hall where you live. Update: usually the town hall where the event was registered. Event that took place abroad: the Service central d'état civil (Scec, the central civil registry office) in Nantes." },
+    { "titre": "Check before you go", "detail": "Original ID document, proof of address less than 3 months old, divorce judgment or proof of separation, complete information on the records to be entered. Call the town hall for opening hours." },
+    { "titre": "Submit the request at the town hall" },
+    { "titre": "Collect the book", "detail": "Showing your ID document, usually after a few weeks." },
+    { "titre": "Scan it into the Vault", "detail": "Every page." }
+  ],
+  "ou": [
+    { "nom": "Town hall (mairie) where you live", "detail": "Second book after separation; lost, stolen or damaged book." },
+    { "nom": "Town hall of the place of the event", "detail": "Update after a birth, recognition, marriage or divorce." },
+    { "nom": "Service central d'état civil (Scec, the central civil registry office), Nantes", "detail": "For an event that took place abroad. Procedure by post." }
+  ],
+  "liens": [
+    { "titre": "Family record book: all situations (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/N31784" },
+    { "titre": "Second book in case of divorce or separation (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996" },
+    { "titre": "Lost, stolen or damaged book (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994" },
+    { "titre": "Updating the family record book (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Full copy of the family record book", "categorie": "autres" },
+    { "type": "coffre", "titre": "Divorce judgment or proof of separation", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Town hall: request for a second family record book", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Collect the family record book at the town hall", "evenement": "rdv" }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: processing time and opening hours of the civil registry office of your town hall in Mayotte, and any duplicate fees.",
+    "To be confirmed locally: rebuilding a book when some records were drawn up under the former local-law civil status (état civil de droit local)."
+  ],
+  "motsCles": ["family record book", "second book", "duplicate", "lost", "divorce", "separation", "town hall (mairie)"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F11991 Family record book at the birth of the first child", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11996 Second book in case of divorce or separation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11994 Second book in case of loss, theft or damage", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F18910 Updating the family record book", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910", "verifieLe": "2026-10-29" }
+  ]
+}

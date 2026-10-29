@@ -435,6 +435,20 @@ export async function renameDocument(id: string, name: string): Promise<void> {
   if (!data || data.length === 0) throw new DataError(NOT_AUTHOR(), 'not_author')
 }
 
+/**
+ * Modifier la date du document (prise de vue pour une photo, date officielle sinon).
+ * La vignette, les listes et la chronologie se rangent sur cette date.
+ */
+export async function updateDocDate(id: string, date: string): Promise<void> {
+  const p = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).safeParse(date)
+  if (!p.success) throw new DataError(dataMsg('vault.docDateRequired'), 'invalid')
+  if (!LIVE) return
+  const userId = await requireUserId()
+  const { data, error } = await db().from('documents').update({ doc_date: p.data }).eq('id', id).eq('user_id', userId).select('id')
+  if (error) throw toDataError(error, 'vault.updateDocDate')
+  if (!data || data.length === 0) throw new DataError(NOT_AUTHOR(), 'not_author')
+}
+
 export async function moveDocument(id: string, categoryId: string): Promise<void> {
   if (!LIVE) return
   const userId = await requireUserId()

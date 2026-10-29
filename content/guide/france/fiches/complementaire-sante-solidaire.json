@@ -1,0 +1,65 @@
+{
+  "slug": "complementaire-sante-solidaire",
+  "territoire": "france",
+  "categorie": "sante",
+  "titre": "Complémentaire santé solidaire (C2S)",
+  "resume": "Une complémentaire santé gratuite ou à faible coût pour tout le foyer, enfants compris, selon vos revenus des 12 derniers mois : plafonds en métropole, demande sur ameli, renouvellement.",
+  "aQuoiCaSert": "La complémentaire santé solidaire prend en charge la part des dépenses de santé non remboursée par l'Assurance maladie, dans la limite des tarifs de la Sécurité sociale. Elle est gratuite ou avec une petite participation mensuelle selon vos ressources, et couvre toutes les personnes du foyer, donc vos enfants. C'est souvent la solution quand on n'a pas de mutuelle et peu de revenus.",
+  "quiEstConcerne": [
+    "Les foyers aux revenus modestes résidant en France de façon stable et régulière depuis plus de 3 mois.",
+    "Les bénéficiaires du RSA : la C2S gratuite est attribuée automatiquement, sauf opposition.",
+    "Les parents isolés et les familles qui n'ont pas de complémentaire santé pour leurs enfants."
+  ],
+  "aSavoir": [
+    "Avec la C2S : pas de dépassement d'honoraires, tiers payant (pas d'avance de frais) si vous respectez le parcours de soins, forfait hospitalier pris en charge, pas de franchise médicale ni de participation forfaitaire, forfaits pour lunettes, prothèses dentaires et aides auditives.",
+    "Plafonds annuels en métropole (hors Alsace-Moselle) pour la C2S gratuite : 10 421 € pour 1 personne, 15 632 € pour 2, 18 758 € pour 3, 21 885 € pour 4, plus 4 169 € par personne supplémentaire.",
+    "C2S avec participation en métropole : ressources jusqu'à 14 069 € pour 1 personne, 21 103 € pour 2, 25 324 € pour 3, 29 544 € pour 4, plus 5 628 € par personne supplémentaire.",
+    "Les ressources comptées sont celles des 12 mois précédant la demande. Un forfait logement est ajouté si vous touchez une aide au logement, êtes logé gratuitement ou êtes propriétaire (par exemple 78,20 € par mois pour une personne seule).",
+    "Décision sous 2 mois. Sans réponse dans ce délai, la demande est acceptée. En cas de refus, recours amiable possible dans les 2 mois.",
+    "La C2S est accordée pour 1 an. Le renouvellement se demande en général entre 4 et 2 mois avant l'échéance, sauf s'il est automatique (RSA, Aspa, Asi, et AAH sans changement de situation).",
+    "Parents séparés : la C2S est attribuée au foyer qui fait la demande. Un enfant en résidence alternée figure en principe dans le foyer d'un seul parent : renseignez-vous auprès de votre CPAM."
+  ],
+  "documents": [
+    { "id": "formulaire", "libelle": "Formulaire cerfa n° 12504 rempli et signé, si vous ne faites pas la demande en ligne", "detail": "Il comprend la liste des personnes du foyer et leurs ressources des 12 derniers mois.", "coffre": "sante" },
+    { "id": "avis-impot", "libelle": "Avis d'impôt ou avis de situation déclarative (Asdir)", "detail": "Copie. Téléchargeable sur impots.gouv.fr.", "coffre": "finances" },
+    { "id": "taxe-fonciere", "libelle": "Avis de taxe foncière, si vous êtes propriétaire", "detail": "Copie.", "coffre": "finances" },
+    { "id": "ressources", "libelle": "Justificatifs de ressources des 12 derniers mois, s'ils sont demandés", "detail": "Bulletins de salaire, indemnités, pensions alimentaires reçues. La caisse peut demander des informations complémentaires.", "coffre": "finances" },
+    { "id": "attestation-caf", "libelle": "Attestation de ressources de la Caf ou de la MSA, si une demande de RSA est en cours", "detail": "Téléchargeable dans votre espace Caf.", "coffre": "finances" },
+    { "id": "etranger", "libelle": "Justificatifs fiscaux et sociaux de chaque pays, si vous avez vécu à l'étranger dans les 12 derniers mois", "coffre": "finances" },
+    { "id": "decision-c2s", "libelle": "Décision d'attribution de la C2S", "detail": "Elle indique la date de fin de droits : notez-la pour le renouvellement.", "coffre": "sante" }
+  ],
+  "etapes": [
+    { "titre": "Estimez vos droits", "detail": "Additionnez les ressources du foyer sur 12 mois et comparez-les aux plafonds de la métropole, ou utilisez le simulateur de service-public.gouv.fr. Préparez votre avis d'impôt et vos relevés de ressources." },
+    { "titre": "Faites la demande en ligne", "detail": "Depuis votre compte ameli : c'est le plus rapide. Vous pouvez aussi envoyer le formulaire cerfa n° 12504 à votre CPAM." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Si vous déposez le dossier à l'accueil : formulaire signé, avis d'impôt, avis de taxe foncière, attestation Caf si RSA en cours, justificatifs de ressources, pièce d'identité et carte Vitale. Faites des photocopies." },
+    { "titre": "Attendez la décision", "detail": "Elle est rendue sous 2 mois. En cas de refus, saisissez la commission de recours amiable dans les 2 mois." },
+    { "titre": "Pensez au renouvellement", "detail": "Entre 4 et 2 mois avant la date de fin indiquée sur votre attestation." }
+  ],
+  "ou": [
+    { "nom": "CPAM de votre département", "detail": "Demande en ligne sur le compte ameli ou à l'accueil, téléphone 3646. MSA pour le régime agricole.", "url": "https://www.ameli.fr", "telephone": "3646" },
+    { "nom": "France Services", "detail": "Aide aux démarches en ligne près de chez vous, à trouver dans l'annuaire de l'administration.", "url": "https://lannuaire.service-public.gouv.fr" }
+  ],
+  "liens": [
+    { "titre": "Complémentaire santé solidaire (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027" },
+    { "titre": "ameli.fr, Assurance maladie", "url": "https://www.ameli.fr" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Décision d'attribution C2S", "categorie": "sante" },
+    { "type": "coffre", "titre": "Avis d'impôt utilisé pour la C2S", "categorie": "finances" },
+    { "type": "rappel", "titre": "Renouveler la C2S (4 à 2 mois avant l'échéance)", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Renouvellement entre 4 et 2 mois avant l'échéance", "detail": "Automatique pour les bénéficiaires du RSA, de l'Aspa, de l'Asi et de l'AAH sans changement de situation." },
+    { "libelle": "Recours contre un refus dans les 2 mois", "detail": "Auprès de la commission de recours amiable de la caisse." }
+  ],
+  "aConfirmer": [
+    "À confirmer sur ameli.fr ou auprès de votre CPAM : montant de la participation mensuelle de la C2S payante selon l'âge (entre 8 € et 30 € par personne selon ameli.fr, page non consultable directement aujourd'hui).",
+    "Alsace-Moselle (Bas-Rhin, Haut-Rhin, Moselle) : plafonds et participation différents ; vérifiez sur service-public.gouv.fr.",
+    "À confirmer auprès de votre CPAM : rattachement d'un enfant en résidence alternée au foyer de l'un ou l'autre parent pour la C2S."
+  ],
+  "motsCles": ["C2S", "CMU", "mutuelle", "complémentaire", "santé", "remboursement", "gratuit"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10027 Complémentaire santé solidaire (France métropolitaine, cas général)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10027", "verifieLe": "2026-10-29" }
+  ]
+}

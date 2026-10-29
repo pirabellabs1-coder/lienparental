@@ -1,0 +1,158 @@
+{
+  "slug": "acte-naissance",
+  "territoire": "guadeloupe",
+  "categorie": "naissance",
+  "titre": "Obtenir un acte de naissance",
+  "resume": "Copie intégrale ou extrait, avec ou sans filiation : qui peut le demander, comment l'obtenir gratuitement en ligne, par courrier ou en mairie, et quand on n'en a plus besoin.",
+  "aQuoiCaSert": "L'acte de naissance prouve l'identité et la filiation de votre enfant. On vous le demande souvent pour une première carte d'identité ou un premier passeport, un dossier de mariage, un certificat de nationalité, une procédure devant le juge ou certaines inscriptions. Bonne nouvelle : la demande est toujours gratuite, et dans beaucoup de cas l'administration le récupère elle-même, sans que vous ayez à le fournir.",
+  "quiEstConcerne": [
+    "Les parents qui ont besoin de l'acte de naissance de leur enfant mineur (ils en sont les représentants légaux).",
+    "Toute personne qui a besoin de son propre acte de naissance, ou de celui d'un ascendant, d'un descendant, de son conjoint ou partenaire de Pacs."
+  ],
+  "aSavoir": [
+    "Trois formats existent. Copie intégrale : tout l'acte, avec les parents et les mentions en marge. Extrait avec filiation : résumé avec les parents. Extrait sans filiation : identité, date et lieu de naissance seulement.",
+    "Copie intégrale et extrait avec filiation : réservés à la personne concernée (majeure) ou à son représentant légal, au conjoint ou partenaire de Pacs, aux ascendants et descendants, et à certains professionnels comme un avocat. L'extrait sans filiation peut être demandé par toute personne.",
+    "La demande est gratuite. Service-public.gouv.fr met en garde contre les sites qui font payer cette démarche : ne payez jamais pour un acte de naissance.",
+    "Sur place, à la mairie du lieu de naissance, l'acte est remis immédiatement sur présentation d'une pièce d'identité. Par courrier ou en ligne, comptez quelques jours selon la mairie et La Poste.",
+    "Enfant ou parent né à l'étranger et de nationalité française : l'acte est délivré par le Service central d'état civil (Scec) de Nantes, en ligne ou par courrier uniquement (pas d'accueil du public). Délai indiqué : environ 30 jours.",
+    "Carte d'identité ou passeport d'un mineur : si la commune de naissance a dématérialisé son état civil, vous n'avez pas à fournir l'acte. Sinon, un acte de moins de 3 mois est exigé. Si l'enfant a déjà un passeport, l'acte peut ne pas être demandé : vérifiez votre cas sur la fiche officielle.",
+    "Parents séparés : chaque parent, en tant qu'ascendant, peut demander seul la copie intégrale de l'acte de son enfant, sans l'accord de l'autre."
+  ],
+  "documents": [
+    {
+      "id": "infos-naissance",
+      "libelle": "Les informations exactes sur la naissance",
+      "detail": "Nom, prénoms, date et lieu de naissance de l'enfant, noms et prénoms usuels des deux parents. Recopiez-les depuis le livret de famille pour éviter un refus.",
+      "coffre": "autres"
+    },
+    {
+      "id": "identite-demandeur",
+      "libelle": "Pièce d'identité du parent demandeur (original)",
+      "detail": "Obligatoire au guichet de la mairie. Par courrier ou en ligne, l'officier d'état civil peut la demander en cas de doute.",
+      "coffre": "autres"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Livret de famille (original ou copie)",
+      "detail": "Utile pour prouver votre lien avec l'enfant si on vous le demande. Si vous ne l'avez plus, voyez la fiche « livret de famille ».",
+      "coffre": "autres"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "Copie intégrale de l'acte de naissance reçue",
+      "detail": "Notez la date de délivrance : beaucoup de démarches exigent un acte de moins de 3 mois.",
+      "coffre": "autres"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Vérifiez si vous en avez vraiment besoin",
+      "detail": "Pour une carte d'identité ou un passeport, consultez la liste des villes à l'état civil dématérialisé sur le site de l'ANTS : si la commune de naissance y figure, l'acte est récupéré automatiquement. Demandez aussi à l'organisme quel format il veut (copie intégrale le plus souvent) et s'il doit dater de moins de 3 mois."
+    },
+    {
+      "titre": "Né en France : faites la demande en ligne",
+      "detail": "Sur service-public.gouv.fr, service gratuit « Demande d'acte de naissance », avec une connexion FranceConnect (identifiants impots.gouv, ameli, La Poste, etc.). Choisissez la commune de naissance, votre lien avec l'enfant, le type d'acte et le nombre d'exemplaires. L'acte arrive par courrier."
+    },
+    {
+      "titre": "Ou écrivez à la mairie du lieu de naissance",
+      "detail": "Sur papier libre : type d'acte voulu, nom, prénoms, date de naissance, noms des parents, votre lien avec l'enfant et votre adresse. Joindre une enveloppe timbrée à votre adresse accélère souvent la réponse."
+    },
+    {
+      "titre": "Vérifiez avant de vous déplacer en mairie",
+      "detail": "Bonne mairie (celle du lieu de naissance, pas celle du domicile), pièce d'identité originale en cours de validité, livret de famille, noms exacts des deux parents, type d'acte voulu. Appelez pour connaître les horaires du service état civil."
+    },
+    {
+      "titre": "Né à l'étranger : passez par le Scec de Nantes",
+      "detail": "Demande en ligne sur service-public.gouv.fr (service dédié aux Français nés à l'étranger) ou par courrier au Service central d'état civil, 11 rue de la Maison Blanche, 44941 Nantes Cedex 09."
+    },
+    {
+      "titre": "Rangez l'acte reçu",
+      "detail": "Scannez-le dans le coffre-fort et notez sa date : au-delà de 3 mois, il faudra souvent en redemander un."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Service-public.gouv.fr, demande d'acte de naissance en ligne",
+      "detail": "Gratuit, connexion FranceConnect, pour une naissance en France.",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406"
+    },
+    {
+      "nom": "Mairie du lieu de naissance",
+      "detail": "Délivrance immédiate au guichet du service état civil, sur présentation d'une pièce d'identité."
+    },
+    {
+      "nom": "Service central d'état civil (Scec), Nantes",
+      "detail": "Pour les Français nés à l'étranger. Pas d'accueil du public : en ligne ou par courrier.",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1405"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Acte de naissance : copie intégrale ou extrait (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427"
+    },
+    {
+      "titre": "Demande d'acte de naissance en ligne, naissance en France",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406"
+    },
+    {
+      "titre": "Carte d'identité d'un mineur : pièces à fournir (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Copie intégrale de l'acte de naissance de l'enfant",
+      "categorie": "autres"
+    },
+    {
+      "type": "rappel",
+      "titre": "Acte de naissance : validité de 3 mois pour les démarches",
+      "evenement": "autre"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Passage en mairie : retrait d'un acte de naissance",
+      "evenement": "rdv"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Moins de 3 mois",
+      "detail": "Ancienneté souvent exigée pour l'acte fourni, par exemple pour une première carte d'identité si l'état civil n'est pas dématérialisé."
+    }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : toutes les communes de Guadeloupe ne figurent pas forcément sur la liste des villes à l'état civil dématérialisé ; vérifiez celle de naissance sur le site de l'ANTS ou auprès de la mairie.",
+    "À confirmer localement : horaires et éventuelle prise de rendez-vous au service état civil de la mairie de naissance."
+  ],
+  "motsCles": [
+    "acte de naissance",
+    "copie intégrale",
+    "extrait",
+    "filiation",
+    "état civil",
+    "mairie",
+    "Scec",
+    "Nantes"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F1427 Acte de naissance : demande de copie intégrale ou d'extrait",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427",
+      "verifieLe": "2026-08-14"
+    },
+    {
+      "titre": "Service-public.gouv.fr, R1406 Demande d'acte de naissance en ligne (naissance en France)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406",
+      "verifieLe": "2026-08-14"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F1342 Carte d'identité d'un mineur",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1342",
+      "verifieLe": "2026-04-27"
+    }
+  ]
+}

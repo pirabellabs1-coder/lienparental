@@ -1,0 +1,70 @@
+{
+  "slug": "livret-de-famille",
+  "territoire": "france",
+  "categorie": "naissance",
+  "titre": "Obtenir ou mettre à jour un livret de famille (duplicata, second livret)",
+  "resume": "Premier livret à la naissance, mise à jour après une reconnaissance ou un divorce, second livret quand on est séparé ou qu'on l'a perdu : où aller, quelles pièces apporter, c'est gratuit.",
+  "aQuoiCaSert": "Le livret de famille regroupe les extraits d'actes d'état civil des parents et de leurs enfants communs. On vous le demande souvent : inscription à l'école ou à la crèche, dossier Caf, aide juridictionnelle, ouverture d'un compte pour l'enfant. Après une séparation, le parent qui ne l'a plus peut obtenir son propre livret, gratuitement.",
+  "quiEstConcerne": [
+    "Les parents, mariés ou non, à la naissance de leur premier enfant commun.",
+    "Le parent séparé ou divorcé qui n'a pas le livret original.",
+    "Les titulaires d'un livret perdu, volé ou abîmé, ou qui doit être mis à jour (naissance, reconnaissance, divorce, changement de nom)."
+  ],
+  "aSavoir": [
+    "Parents non mariés : le livret est remis gratuitement par la mairie du lieu de naissance à l'occasion du premier enfant commun. Un parent n'y figure que s'il apparaît dans l'acte de naissance de l'enfant, d'où l'intérêt de la reconnaissance.",
+    "Parents mariés : le livret est remis lors du mariage, puis complété à chaque naissance.",
+    "Plusieurs livrets sont possibles quand des enfants sont nés d'unions différentes : un livret ne contient que les enfants communs aux deux parents qu'il mentionne.",
+    "Second livret après séparation ou divorce : il peut être demandé à tout moment, gratuitement, à la mairie de votre domicile (à Paris, avec un formulaire dédié). Parents mariés : apportez la preuve du divorce ou de la séparation de corps. Parents pacsés ou en union libre : expliquez votre intérêt à avoir votre propre livret et joignez un justificatif.",
+    "Perte ou vol : le second livret est reconstitué par la mairie à partir des actes d'état civil et porte la mention « second livret ». Livret abîmé : un duplicata est délivré sur présentation de l'ancien. La délivrance est gratuite, mais une mairie peut facturer les duplicatas à partir du deuxième.",
+    "Mise à jour : naissance, adoption, reconnaissance, mariage, divorce, décès, changement de nom ou de prénom doivent être reportés dans le livret, gratuitement, en général à la mairie où l'événement a été enregistré.",
+    "Utiliser un livret falsifié ou non mis à jour peut être puni d'une amende allant jusqu'à 1 500 € (3 000 € en cas de récidive).",
+    "Délai d'obtention : en général quelques semaines, car la mairie doit recevoir les actes des autres communes concernées (mariage, naissances). Anticipez si vous en avez besoin pour une démarche."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité du parent demandeur (original)", "detail": "Carte d'identité, passeport ou titre de séjour en cours de validité. Exigée aussi au retrait du livret.", "coffre": "autres" },
+    { "id": "domicile", "libelle": "Justificatif de domicile de moins de 3 mois", "detail": "Demandé en cas de perte, vol ou détérioration. Facture, quittance de loyer, avis d'imposition.", "coffre": "autres" },
+    { "id": "preuve-separation", "libelle": "Preuve du divorce ou de la séparation (copie)", "detail": "Parents mariés : jugement de divorce, convention homologuée ou convention de divorce par consentement mutuel. Pacsés ou union libre : justificatif de domiciles séparés, attestations, attestation de l'autre parent.", "coffre": "jaf" },
+    { "id": "infos-actes", "libelle": "Informations sur les actes à reporter", "detail": "Noms, prénoms, dates et lieux de naissance des parents et des enfants, date et lieu du mariage. Notez-les avant d'aller en mairie.", "coffre": "autres" },
+    { "id": "attestation-perte", "libelle": "Attestation sur l'honneur de perte ou de vol, ou le livret abîmé", "detail": "En cas de vol, une déclaration au commissariat ou à la gendarmerie n'est pas obligatoire mais recommandée (récépissé à garder).", "coffre": "courriers" },
+    { "id": "acte-ou-jugement", "libelle": "Acte ou décision à inscrire (mise à jour)", "detail": "Acte de naissance, acte de reconnaissance, jugement de divorce, décision de changement de nom, selon l'événement.", "coffre": "jaf" },
+    { "id": "livret", "libelle": "Livret de famille (copie scannée de toutes les pages)", "detail": "Une fois obtenu ou mis à jour, gardez une copie complète : elle suffit pour beaucoup de démarches.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Identifiez votre situation", "detail": "Premier livret (naissance ou mariage), mise à jour après un événement, second livret après une séparation, ou remplacement après une perte, un vol ou une détérioration." },
+    { "titre": "Repérez la bonne mairie", "detail": "Second livret ou remplacement : mairie de votre domicile. Mise à jour : en général la mairie où l'événement a été enregistré. Événement survenu à l'étranger : Service central d'état civil de Nantes, par courrier." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Pièce d'identité originale, justificatif de domicile de moins de 3 mois, jugement de divorce ou justificatif de séparation, informations complètes sur tous les actes à reporter, ancien livret s'il est abîmé. Consultez les horaires de la mairie et demandez si un rendez-vous est nécessaire." },
+    { "titre": "Déposez la demande en mairie" },
+    { "titre": "Retirez le livret", "detail": "À la mairie de la demande, sur présentation de votre pièce d'identité, après quelques semaines en général." },
+    { "titre": "Scannez-le dans le coffre-fort", "detail": "Toutes les pages, pour pouvoir fournir une copie sans vous déplacer." }
+  ],
+  "ou": [
+    { "nom": "Mairie de votre domicile", "detail": "Second livret après séparation, livret perdu, volé ou abîmé. Coordonnées et horaires sur l'annuaire de service-public.fr.", "url": "https://lannuaire.service-public.gouv.fr" },
+    { "nom": "Mairie du lieu de l'événement", "detail": "Mise à jour après une naissance, une reconnaissance, un mariage ou un divorce." },
+    { "nom": "Service central d'état civil (Scec), Nantes", "detail": "Pour un événement survenu à l'étranger. Pas d'accueil du public, démarche par courrier." }
+  ],
+  "liens": [
+    { "titre": "Livret de famille : toutes les situations (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/N31784" },
+    { "titre": "Second livret en cas de divorce ou de séparation (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996" },
+    { "titre": "Livret perdu, volé ou abîmé (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994" },
+    { "titre": "Mise à jour du livret de famille (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Copie complète du livret de famille", "categorie": "autres" },
+    { "type": "coffre", "titre": "Jugement de divorce ou justificatif de séparation", "categorie": "jaf" },
+    { "type": "calendrier", "titre": "Mairie : demande de second livret de famille", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Retirer le livret de famille en mairie", "evenement": "rdv" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : délai de délivrance et horaires du service état civil de votre mairie, et éventuels frais de duplicata décidés par la commune à partir du deuxième.",
+    "À confirmer localement : possibilité pour votre mairie de transmettre une demande de mise à jour à une autre commune (toutes ne le font pas)."
+  ],
+  "motsCles": ["livret de famille", "second livret", "duplicata", "perte", "divorce", "séparation", "mise à jour", "mairie"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F11991 Livret de famille à la naissance du premier enfant", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11996 Second livret en cas de divorce ou de séparation", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11994 Second livret en cas de perte, vol ou détérioration", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F18910 Mise à jour du livret de famille", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39789 Peut-on avoir plusieurs livrets de famille ?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39789", "verifieLe": "2026-10-29" }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "slug": "allocations-familiales",
+  "territoire": "france",
+  "categorie": "aides",
+  "titre": "Family allowances (from the 2nd child)",
+  "resume": "In mainland France, family allowances are paid from 2 dependent children. 2026 amounts, age supplement, applying to the Caf and splitting under shared residence.",
+  "aQuoiCaSert": "Family allowances help families meet children's everyday expenses. In mainland France, they are paid from 2 dependent children under 20, with no means test for entitlement, but the amount varies with household income. A supplement is added when a child reaches a certain age. Unlike in the overseas départements, no family allowance is paid for an only child.",
+  "quiEstConcerne": [
+    "Families living in mainland France with at least 2 dependent children under 20.",
+    "Separated parents whose children live in shared residence.",
+    "Parents who do not yet receive benefits from the Caf (Caisse d'allocations familiales, the family benefits office) or the MSA (Mutualité sociale agricole, the farmers' social security fund)."
+  ],
+  "aSavoir": [
+    "Basic amount for 2 children: €152.25 per month if the household's 2024 income does not exceed €79,980, €76.13 up to €106,604, €38.07 above that (service-public.gouv.fr, checked on June 1, 2026).",
+    "For 3 children, the basic amount ranges from €86.83 to €347.32 per month depending on income. The ceilings rise with the number of children.",
+    "Age supplement (majoration pour âge): paid from age 14 for a child born before March 1, 2012, and from age 18 for a child born on or after March 1, 2012. With only 2 children, the eldest does not qualify for it.",
+    "Family with at least 3 children: a monthly flat-rate payment may be made for one year for a child who turns 20 and still lives at home, subject to the child's income.",
+    "Shared residence: parents can choose to split the family allowances, each receiving half, using form cerfa n° 14000. This choice can only be changed after one year, unless the child's residence changes. If the parents disagree, each parent automatically receives a share.",
+    "Only family allowances can be split. Other benefits (Paje, complément familial, housing benefits, ARS, ASF, AEEH) are paid in full to the designated parent; since December 1, 2025, however, each parent can receive the CMG (childcare supplement) according to their own situation."
+  ],
+  "documents": [
+    {
+      "id": "identite-parents",
+      "libelle": "ID or residence permit of each parent",
+      "detail": "Valid copy, requested with your first application to the Caf.",
+      "coffre": "finances"
+    },
+    {
+      "id": "livret-famille",
+      "libelle": "Family record book (livret de famille) or birth certificate of each child",
+      "detail": "Copy. Certificate free on service-public.gouv.fr or from the town hall (mairie) where the child was born.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank details slip) of the parent receiving the benefits",
+      "detail": "In your name.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "Previous year's tax notice",
+      "detail": "Copy, downloadable from your account on impots.gouv.fr. Your income is used in the calculation.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Proof of address",
+      "detail": "Recent copy (bill, rent receipt or certificate of accommodation).",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement-residence",
+      "libelle": "Judgment or agreement setting shared residence",
+      "detail": "Copy, to attach to the split form if shared residence was set by the judge or by an agreement.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "cerfa-14000",
+      "libelle": "Form cerfa n° 14000, declaration in case of shared residence",
+      "detail": "Signed by both parents if you agree on the split. Keep a copy.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Register with the Caf if you have not already",
+      "detail": "Apply for benefits on caf.fr (or msa.fr under the agricultural scheme). If you already receive Caf benefits, simply declare the birth or arrival of the 2nd child."
+    },
+    {
+      "titre": "Check before sending your file",
+      "detail": "Children correctly declared, income up to date, RIB, correct address, family situation (couple, separated, single parent). If you have separated, declare the actual date."
+    },
+    {
+      "titre": "Shared residence: choose a split or a single beneficiary",
+      "detail": "Fill in form cerfa n° 14000 together and send it to the Caf or the MSA with the judge's decision or the agreement if you have one."
+    },
+    {
+      "titre": "Check your entitlements",
+      "detail": "View the details of your payments in your \"Mon Compte\" account and use the Caf simulator to check the amount."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf of your département",
+      "detail": "Online procedures in your \"Mon Compte\" account. To find your Caf and its reception desks, enter your postcode on caf.fr.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, the farmers' social security fund)",
+      "detail": "If you are covered by the agricultural scheme.",
+      "url": "https://www.msa.fr"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Family allowances (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213"
+    },
+    {
+      "titre": "Shared residence and family benefits (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    },
+    {
+      "titre": "Complément familial, from 3 children (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214"
+    },
+    {
+      "titre": "Caf.fr, simulators and \"Mon Compte\" account",
+      "url": "https://www.caf.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Family allowance split form (cerfa n° 14000)",
+      "categorie": "jaf"
+    },
+    {
+      "type": "coffre",
+      "titre": "Caf notice of entitlement",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Report any change in family situation to the Caf",
+      "evenement": "autre"
+    }
+  ],
+  "aConfirmer": [
+    "The exact amount of each parent's share when allowances are split depends on the make-up of each household: check it with the Caf simulator or with your Caf.",
+    "The amounts shown are those published by service-public.gouv.fr (page checked on June 1, 2026): if they are increased, rely on the Caf simulator."
+  ],
+  "motsCles": [
+    "family allowances",
+    "two children",
+    "Caf",
+    "age supplement",
+    "shared residence",
+    "split"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F13213 Family allowances",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13213",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Shared residence and family benefits",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13214 Complément familial (family supplement)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13214",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

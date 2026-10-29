@@ -1,0 +1,70 @@
+{
+  "slug": "demande-logement-social",
+  "territoire": "reunion",
+  "categorie": "logement",
+  "titre": "Faire une demande de logement social",
+  "resume": "Déposer une demande de logement social à La Réunion, obtenir votre numéro unique, réunir les bonnes pièces (dont celles liées à une séparation) et renouveler la demande à temps.",
+  "aQuoiCaSert": "Un logement social a un loyer encadré et il est attribué sous conditions de ressources. La demande, en ligne ou au guichet, vous donne un numéro unique, qui fait courir l'ancienneté de votre demande. Après une séparation, il est possible de faire compter uniquement vos propres revenus, à condition de fournir les bons justificatifs.",
+  "quiEstConcerne": [
+    "Les ménages dont les revenus ne dépassent pas les plafonds fixés pour l'outre-mer.",
+    "Les parents qui se séparent et doivent se reloger avec leurs enfants.",
+    "Les ressortissants étrangers titulaires d'un titre de séjour ou d'un récépissé en cours de validité."
+  ],
+  "aSavoir": [
+    "Plafonds de ressources en outre-mer, dont La Réunion, pour une demande faite en 2026 (revenus 2024, cas général) : 27 382 € pour 1 personne, 36 567 € pour 2, 43 973 € pour 3, 53 088 € pour 4. Ils s'appliquent au total des revenus de toutes les personnes à loger.",
+    "Parent seul : avec 1 personne à charge, le plafond retenu est celui de 3 personnes (43 973 €) ; avec 2 personnes à charge, celui de 4 personnes (53 088 €).",
+    "Séparation : pour que seuls vos revenus soient pris en compte, joignez un justificatif, par exemple l'acte de saisine du juge aux affaires familiales, le jugement de divorce ou l'acte de naissance mentionnant la dissolution du Pacs.",
+    "Toutes les personnes à loger doivent être déclarées, y compris les enfants en résidence alternée.",
+    "Renouvellement : une demande non satisfaite doit être renouvelée chaque année. Selon service-public.gouv.fr, il faut la renouveler dans les 11 mois qui suivent son enregistrement ; sans renouvellement, elle est radiée et vous perdez votre ancienneté.",
+    "Mettez à jour la demande dès que votre situation change (séparation, naissance, nouvelle adresse, baisse de revenus)."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Pièce d'identité du demandeur", "detail": "Copie recto verso de la carte d'identité ou du passeport. Hors Union européenne : copie du titre de séjour ou du récépissé en cours de validité.", "coffre": "courriers" },
+    { "id": "identite-cotitulaire", "libelle": "Pièce d'identité ou titre de séjour de chaque adulte à loger", "detail": "Copie en cours de validité.", "coffre": "courriers" },
+    { "id": "avis-imposition", "libelle": "Avis d'imposition 2025 sur les revenus 2024 de chaque personne à loger", "detail": "Copie. Téléchargeable dans votre espace impots.gouv.fr.", "coffre": "finances" },
+    { "id": "justificatif-separation", "libelle": "Justificatif de séparation", "detail": "Copie de l'acte de saisine du juge aux affaires familiales, du jugement de divorce ou de l'acte de naissance mentionnant la dissolution du Pacs.", "coffre": "jaf" },
+    { "id": "jugement-residence", "libelle": "Jugement ou convention fixant la résidence des enfants", "detail": "Copie, pour justifier des enfants à loger avec vous ou d'une résidence alternée.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Livret de famille ou actes de naissance des enfants", "detail": "Copie, pour justifier des personnes à charge.", "coffre": "courriers" },
+    { "id": "ressources", "libelle": "Justificatifs de ressources récentes", "detail": "Derniers bulletins de salaire, attestations Caf ou France Travail.", "coffre": "finances" },
+    { "id": "situation-logement", "libelle": "Justificatif de votre situation de logement actuelle", "detail": "Bail, quittance, attestation d'hébergement, ou congé du propriétaire si c'est le cas.", "coffre": "courriers" },
+    { "id": "attestation-enregistrement", "libelle": "Attestation d'enregistrement avec le numéro unique", "detail": "Téléchargeable dans votre espace personnel. À conserver précieusement.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Créez votre demande sur le site national", "detail": "Sur demande-logement-social.gouv.fr, ou avec le formulaire cerfa n° 14069 déposé dans un guichet enregistreur (mairie, bailleur social)." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Pièce d'identité ou titre de séjour valide pour chaque adulte, avis d'imposition 2025 de chacun, justificatif de séparation et jugement sur la résidence des enfants si vous êtes séparé, livret de famille." },
+    { "titre": "Récupérez l'attestation d'enregistrement", "detail": "Elle contient votre numéro unique et la date de la demande, qui compte pour l'ancienneté." },
+    { "titre": "Mettez à jour la demande quand votre situation change", "detail": "Déclarez le changement et ajoutez le justificatif." },
+    { "titre": "Renouvelez à temps", "detail": "Avant la fin du délai indiqué sur votre espace ou dans le courrier de rappel. Sans renouvellement, la demande est radiée." }
+  ],
+  "ou": [
+    { "nom": "Portail national de la demande de logement social", "detail": "Dépôt, suivi, mise à jour et renouvellement en ligne.", "url": "https://www.demande-logement-social.gouv.fr" },
+    { "nom": "Guichets enregistreurs de La Réunion (mairies, bailleurs sociaux)", "detail": "Pour déposer un dossier papier ou se faire aider. Renseignez-vous auprès de votre mairie." },
+    { "nom": "ADIL de La Réunion", "detail": "Conseil gratuit et neutre sur le logement. Siège : 24 rue Henri Vavasseur, Saint-Denis.", "url": "https://www.anil.org/adil-974/", "telephone": "02 62 41 14 24" }
+  ],
+  "liens": [
+    { "titre": "Demande de logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007" },
+    { "titre": "Renouvellement de la demande de logement social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010" },
+    { "titre": "Demande de logement social en ligne", "url": "https://www.demande-logement-social.gouv.fr" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Attestation d'enregistrement de la demande de logement social", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Justificatif de séparation pour la demande de logement", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Renouveler la demande de logement social (avant 11 mois)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Renouvellement annuel de la demande", "detail": "Dans les 11 mois suivant l'enregistrement selon service-public.gouv.fr, sinon la demande est radiée." }
+  ],
+  "aConfirmer": [
+    "Les deux fiches officielles consultées décrivent le calendrier de renouvellement de façon différente : suivez la date indiquée dans votre espace demande-logement-social.gouv.fr ou dans le courrier de rappel.",
+    "Le numéro d'aide téléphonique 0 806 000 113 est indiqué pour l'Île-de-France et la province : son accès depuis La Réunion est à confirmer.",
+    "À confirmer localement : liste des guichets enregistreurs de La Réunion et délais d'attente, et pièces supplémentaires demandées par les bailleurs au moment de l'attribution."
+  ],
+  "motsCles": ["logement social", "HLM", "numéro unique", "renouvellement", "séparation", "plafonds", "ADIL"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10007 Demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F35010 Renouvellement d'une demande de logement social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F869 Conditions pour obtenir un logement social (plafonds outre-mer)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869", "verifieLe": "2026-10-29" },
+    { "titre": "ANIL, ADIL de La Réunion", "url": "https://www.anil.org/adil-974/", "verifieLe": "2026-10-29" }
+  ]
+}

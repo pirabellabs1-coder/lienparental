@@ -13,7 +13,7 @@
     "Public daycare: the application form is picked up at the town hall (mairie). Non-profit or private daycare: you register with the management. It is advisable to start during pregnancy.",
     "In most daycares funded by the Caf, the fee follows a national scale based on your income and number of children.",
     "Childminders must be registered (agréées) by the PMI (protection maternelle et infantile, the mother and child health service). You can find them on monenfant.fr. You become their employer and sign an employment contract.",
-    "CMG: the amount depends on your income, the number of children, the hourly cost of childcare (capped) and the number of hours. Contributions are covered 100% for a registered childminder, up to a ceiling. It is paid from the month of the application.",
+    "CMG: the amount depends on your income, the number of children, the hourly cost of childcare (capped) and the number of hours. Contributions are covered 100% for a registered childminder, up to a ceiling. It can be paid from the month before your application, if the conditions were already met then.",
     "Shared residence: since December 1, 2025, each parent can receive the CMG, calculated according to their own situation. The amount is not split between them.",
     "You must register on Pajemploi and declare the salary paid each month. The Pajemploi+ option automates debiting and paying the salary."
   ],
@@ -63,10 +63,10 @@
     "CMG amounts depend on your income, the number of children and the hourly cost: use the official simulator."
   ],
   "motsCles": ["daycare (crèche)", "childminder", "nanny", "CMG", "Pajemploi", "childcare", "RPE"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
     { "titre": "monenfant.fr, Choosing group childcare", "url": "https://monenfant.fr/choisir-un-mode-d-accueil-collectif", "verifieLe": "2026-08-14" },
-    { "titre": "Service-public.gouv.fr, F39152 CMG for direct employment", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152", "verifieLe": "2026-06-26" },
-    { "titre": "Service-public.gouv.fr, F767 Vaccinations for school, daycare or after-school care", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" }
+    { "titre": "Service-public.gouv.fr, F39152 CMG for direct employment", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39152", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F767 Vaccinations for school, daycare or after-school care", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" }
   ]
 }

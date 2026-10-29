@@ -1,0 +1,71 @@
+{
+  "slug": "changer-adresse-enfant-separation",
+  "territoire": "mayotte",
+  "categorie": "separation",
+  "titre": "Changing your child's address after a separation (CSSM, school, taxes)",
+  "resume": "Who to notify, and in what order, when your child's address changes: CSSM (benefits and health insurance), school, tax office, with the documents to prepare and your obligations toward the other parent.",
+  "aQuoiCaSert": "After a separation, a child's address often changes, or the child now lives in two homes. Updating this address prevents lost mail, benefits that are miscalculated or paid to the wrong parent, and missed information from the school. In Mayotte, the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) handles both family benefits and health insurance, but it is not on the list of bodies notified by the national change-of-address service: you must notify it directly.",
+  "quiEstConcerne": [
+    "The parent the child now lives with, or who is moving with the child.",
+    "Parents with shared residence, who must declare both addresses."
+  ],
+  "aSavoir": [
+    "The free \"Déclaration de changement d'adresse\" (change-of-address declaration) service on service-public.gouv.fr, the official French government website, notifies several bodies in a single step (including the tax office and France Travail). The CSSM is not one of them.",
+    "CSSM, family benefits: report the separation and the move in \"Mon Compte\" on caf.fr. For housing benefit, make a new application as soon as you move in.",
+    "CSSM, health insurance: update your address in your ameli account or at the CSSM front desk, and check which parent the child is registered under.",
+    "Tax office: report your address in your personal account on impots.gouv.fr, then state the move in your income tax return.",
+    "School: you must inform the school of any change in family situation or address, and of any decision by the family court judge (juge aux affaires familiales, JAF) concerning the child.",
+    "A parent moving: if this changes how parental authority is exercised (for example visiting rights), they must inform the other parent in advance. If the child lives with them under a judgment or an agreement, they must give their new address no later than 1 month after moving, or face 6 months' imprisonment and a €7,500 fine.",
+    "If you disagree about the move or where the child lives: family mediation, or an application to the family court judge (JAF) in Mamoudzou."
+  ],
+  "documents": [
+    { "id": "domicile", "libelle": "Proof of your new address (preferably less than 3 months old)", "detail": "Lease, rent receipt, water or electricity bill. If someone is housing you: a certificate of accommodation and that person's documents.", "coffre": "courriers" },
+    { "id": "identite", "libelle": "ID of the parent making the declaration (front-and-back copy)", "coffre": "autres" },
+    { "id": "numeros", "libelle": "Social security number and tax number", "detail": "On your carte Vitale (health insurance card) and your tax notice.", "coffre": "finances" },
+    { "id": "jugement", "libelle": "Judgment or agreement on the child's residence (copy)", "detail": "For the school and the CSSM if a decision exists.", "coffre": "jaf" },
+    { "id": "courrier-autre-parent", "libelle": "Copy of the letter informing the other parent of the new address", "detail": "Keep dated proof.", "coffre": "jaf" },
+    { "id": "fiche-ecole", "libelle": "Updated school information form", "detail": "With both parents' contact details and the people allowed to pick up the child.", "coffre": "scolarite" }
+  ],
+  "etapes": [
+    { "titre": "Inform the other parent", "detail": "Before the move if the child's arrangements change, and no later than 1 month after if the child lives with you under a judgment or agreement. Keep a written record." },
+    { "titre": "Make the combined online declaration", "detail": "\"Déclaration de changement d'adresse\" service on service-public.gouv.fr, for the bodies offered." },
+    { "titre": "Report the separation and the address to the CSSM", "detail": "In \"Mon Compte\" on caf.fr for benefits, and in your ameli account or at the front desk for health insurance." },
+    { "titre": "Check before going to the school", "detail": "Proof of new address, judgment or agreement if there is one, both parents' contact details, list of people allowed to pick up the child." },
+    { "titre": "Notify the school", "detail": "Remember after-school care and school transport too." },
+    { "titre": "Finish with the other bodies", "detail": "Bank, home and school insurance, mutuelle (top-up health insurance), doctor, the child's activities, electoral rolls at the town hall (mairie)." }
+  ],
+  "ou": [
+    { "nom": "Service-public.gouv.fr, Déclaration de changement d'adresse", "detail": "Single, free declaration to several bodies.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R11193" },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM), Mayotte's social security fund", "detail": "Family benefits and health insurance. Front desk by appointment.", "url": "https://www.cssm.fr/page/contacts", "telephone": "02 69 61 91 91" },
+    { "nom": "Impots.gouv.fr", "detail": "Personal account.", "url": "https://www.impots.gouv.fr" },
+    { "nom": "Your child's school (école, collège or lycée)", "detail": "School principal or the school office." }
+  ],
+  "liens": [
+    { "titre": "Change-of-address declaration (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R11193" },
+    { "titre": "Can a separated parent move freely? (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389" },
+    { "titre": "School and separated parents: keeping parents informed (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Proof of new address", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Proof the other parent was informed (new address)", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Give the new address to the other parent (1 month maximum)", "evenement": "autre" },
+    { "type": "rappel", "titre": "Notify the CSSM of the change of address", "evenement": "autre" },
+    { "type": "calendrier", "titre": "School appointment: address update", "evenement": "ecole" }
+  ],
+  "datesLimites": [
+    { "libelle": "No later than 1 month after the move", "detail": "To give the new address to the other parent, when the child lives with you under a judgment or an agreement." },
+    { "libelle": "As soon as you move in", "detail": "New housing benefit application to the CSSM." }
+  ],
+  "aConfirmer": [
+    "To be confirmed with the CSSM: whether a change of address reported in \"Mon Compte\" also applies to health insurance, or whether two separate steps are needed.",
+    "To be confirmed with the CSSM: declaring shared residence and splitting family allowances."
+  ],
+  "motsCles": ["change of address", "moving", "separation", "shared residence", "CSSM", "school", "taxes"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, R11193 Change-of-address declaration", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R11193", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11389 Can a separated parent move freely?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11389", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F1391 Informing parents at school", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1391", "verifieLe": "2026-10-29" },
+    { "titre": "CSSM, Family", "url": "https://www.cssm.fr/page/famille", "verifieLe": "2026-10-29" }
+  ]
+}

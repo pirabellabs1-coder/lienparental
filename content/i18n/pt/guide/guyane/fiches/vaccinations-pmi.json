@@ -15,7 +15,7 @@
     "Criança nascida a partir de 2023: mesma lista, com os meningococos A, B, C, W e Y no lugar do meningococo C apenas.",
     "Febre amarela: recomendada a partir de 9 meses e obrigatória na Guiana Francesa a partir de 12 meses. Uma só dose protege por toda a vida. Se a criança foi vacinada antes dos 2 anos, recomenda-se uma segunda dose entre 6 e 10 anos. A vacina feita na Guiana Francesa é reembolsada pela Assurance Maladie (seguro de saúde público francês).",
     "Uma criança com vacinas atrasadas pode ser admitida provisoriamente: você tem então 3 meses para regularizar, senão ela pode ser excluída. Se a criança ficar mais de um ano, o comprovante é pedido todo ano.",
-    "Os 20 exames de saúde obrigatórios até os 6 anos são cobertos 100%, sem adiantar dinheiro, exceto honorários acima da tabela (dépassements d'honoraires).",
+    "Os 20 exames de saúde obrigatórios da criança, do nascimento aos 16 anos (16 deles antes dos 6 anos), são cobertos 100%, sem adiantar dinheiro, exceto honorários acima da tabela (dépassements d'honoraires).",
     "Pais separados: o genitor que leva a criança para vacinar deve, de preferência, avisar o outro e enviar uma cópia das páginas de vacinas, para que cada um tenha o comprovante."
   ],
   "documents": [
@@ -41,7 +41,7 @@
   "liens": [
     { "titre": "Vacinas exigidas para a creche e a escola (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
     { "titre": "Orientações de saúde para recém-chegados (ARS Guyane)", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires" },
-    { "titre": "Exames de saúde obrigatórios até os 6 anos (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490" }
+    { "titre": "Exames de saúde obrigatórios até os 6 anos (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0" }
   ],
   "actions": [
     { "type": "calendrier", "titre": "Consulta de vacinação", "evenement": "sante" },
@@ -60,14 +60,14 @@
     "O número de doses e a idade de cada vacina seguem o calendário vacinal em vigor: verifique com seu médico ou a PMI."
   ],
   "motsCles": ["vacina", "febre amarela", "PMI", "caderneta de saúde", "carnet jaune", "pediatra", "bebê"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-01-06" },
+    { "titre": "Service-public.gouv.fr, F767 Vacinação para a escola, a creche ou as atividades extraescolares", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F1879 Saúde na escola primária", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1879", "verifieLe": "2026-10-15" },
-    { "titre": "Service-public.gouv.fr, F35490 Exames obrigatórios até os 6 anos", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490", "verifieLe": "2026-07-29" },
+    { "titre": "Service-public.gouv.fr, F35490 Exames obrigatórios até os 6 anos", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35490/0", "verifieLe": "2026-10-29" },
     { "titre": "Service-public.gouv.fr, F3133 Autoridade parental em caso de separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F3133", "verifieLe": "2025-06-20" },
-    { "titre": "ARS Guyane, Recém-chegados: orientações de saúde", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires", "verifieLe": "2023-01-09" },
+    { "titre": "ARS Guyane, Recém-chegados: orientações de saúde", "url": "https://www.guyane.ars.sante.fr/index.php/nouveaux-arrivants-conseils-sanitaires", "verifieLe": "2026-10-29" },
     { "titre": "CTG, PMI: quadro da parceria com o CHU de Guyane (hospital universitário)", "url": "https://www.ctguyane.fr/pmi-la-ctg-clarifie-le-cadre-de-son-partenariat-avec-le-chu-de-guyane/", "verifieLe": "2026-09-08" },
-    { "titre": "Diretório do service-public, PMI de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3" }
+    { "titre": "Diretório do service-public, PMI de Cayenne", "url": "https://lannuaire.service-public.gouv.fr/guyane/guyane/071d1624-4176-48c8-a67e-d96d78fd83c3", "verifieLe": "2026-10-29" }
   ]
 }

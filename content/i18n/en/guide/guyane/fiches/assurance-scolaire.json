@@ -44,8 +44,8 @@
     "To be confirmed locally: the certificates required by your school, your town (canteen, after-school care) or the private school."
   ],
   "motsCles": ["insurance", "civil liability", "accident", "school", "certificate", "canteen"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1871 School insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2025-09-15" }
+    { "titre": "Service-public.gouv.fr, F1871 School insurance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1871", "verifieLe": "2026-10-29" }
   ]
 }

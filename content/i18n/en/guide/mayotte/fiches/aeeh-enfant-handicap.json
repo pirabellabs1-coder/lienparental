@@ -1,0 +1,72 @@
+{
+  "slug": "aeeh-enfant-handicap",
+  "territoire": "mayotte",
+  "categorie": "aides",
+  "titre": "Disabled child education allowance (AEEH) and the MDPH de Mayotte",
+  "resume": "Putting together a complete MDPH file for the AEEH, then paid by the CSSM: 2026-2027 amounts in Mayotte, medical certificate less than a year old, response times and appeals.",
+  "aQuoiCaSert": "The AEEH (allocation d'éducation de l'enfant handicapé, disabled child education allowance) helps parents cover the education and care costs of a child with a disability. It consists of a basic amount and, depending on needs, a supplement and an increase for single parents. You apply to the MDPH (maison départementale des personnes handicapées, the local disability services center). The CDAPH (commission des droits et de l'autonomie, the rights and autonomy committee) decides, then the CSSM (Caisse de sécurité sociale de Mayotte, Mayotte's social security fund) pays the allowance and informs you of its amount.",
+  "quiEstConcerne": [
+    "Parents of a child under 20 with a disability rate of at least 80%.",
+    "Parents of a child with a rate from 50% to under 80%, if the child attends a specialized facility or service or if care is recommended by the CDAPH.",
+    "Separated parents, whatever the child's residence arrangement (the AEEH is paid to only one parent)."
+  ],
+  "aSavoir": [
+    "Amounts in Mayotte from April 1, 2026 to March 31, 2027 (CSSM): basic amount of €153.01 per month, with no income conditions.",
+    "Supplements depending on the level of needs: €114.76 (1), €310.80 (2), €439.91 (3), €681.71 (4), €871.26 (5), €1,298.44 (6) per month.",
+    "Increase for single parents, from level 2: €62.16 (2), €86.07 (3), €272.55 (4), €349.06 (5), €511.63 (6) per month.",
+    "The medical certificate (cerfa n° 15695) must be no more than one year old when you submit the file.",
+    "The CDAPH must reply within 4 months. With no reply after 4 months, the application is considered rejected.",
+    "If refused, a mandatory prior administrative appeal (recours administratif préalable obligatoire) can be made within 2 months, then an appeal to the tribunal judiciaire (judicial court) within 2 months of the reply.",
+    "The application form is available from the MDPH, from the CCAS (centre communal d'action sociale, municipal social welfare center) of your town or online."
+  ],
+  "documents": [
+    { "id": "formulaire-mdph", "libelle": "MDPH application form (cerfa n° 15692)", "detail": "Original, dated and signed by the legal representative.", "coffre": "sante" },
+    { "id": "certificat-medical", "libelle": "Medical certificate (cerfa n° 15695) less than a year old", "detail": "Original completed by the doctor who follows the child. Attach any useful reports.", "coffre": "sante" },
+    { "id": "identite-enfant", "libelle": "Child's ID or family record book (livret de famille)", "detail": "Photocopy, front and back. For a foreign child, residence permit or travel document.", "coffre": "sante" },
+    { "id": "identite-representants", "libelle": "ID of each legal representative", "detail": "Photocopy, front and back, valid, or residence permit.", "coffre": "sante" },
+    { "id": "domicile", "libelle": "Proof of address", "detail": "Photocopy. If you are housed by someone, add a statement from the person housing you.", "coffre": "sante" },
+    { "id": "jugement", "libelle": "Decision on parental authority or protection judgment, if applicable", "detail": "Copy.", "coffre": "jaf" },
+    { "id": "accuse-reception", "libelle": "MDPH acknowledgment of receipt of the file", "detail": "Keep it: it starts the 4-month period.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Make an appointment with the doctor for the medical certificate", "detail": "The certificate must be less than a year old when you submit. Ask the doctor to detail the child's everyday needs." },
+    { "titre": "Fill in the application form", "detail": "Describe the child's life, needs, schooling and your expenses." },
+    { "titre": "Check before sending your file", "detail": "Signed form, original medical certificate less than a year old, IDs of the child and legal representatives, proof of address, assessments. An incomplete file delays the review." },
+    { "titre": "Submit the file to the MDPH or the CCAS", "detail": "Or send it, preferably by registered letter with acknowledgment of receipt. Keep a full copy." },
+    { "titre": "Follow up on the decision", "detail": "The CDAPH has 4 months to reply. Note the date so you can follow up and, if refused, appeal within 2 months." }
+  ],
+  "ou": [
+    { "nom": "MDPH de Mayotte", "detail": "BP 1060, 97600 Mamoudzou; email accueil@mdph976.fr (contact details given by the CSSM). Reception address and opening hours in the Mon Parcours Handicap directory.", "url": "https://www.monparcourshandicap.gouv.fr/annuaire", "telephone": "02 69 62 96 20" },
+    { "nom": "CCAS of your town", "detail": "Form available and file can be submitted there, according to the CSSM." },
+    { "nom": "Caisse de sécurité sociale de Mayotte (CSSM)", "detail": "Pays the AEEH after the CDAPH decision.", "url": "https://www.cssm.fr/page/prestations-familiales", "telephone": "02 69 61 91 91" }
+  ],
+  "liens": [
+    { "titre": "Family benefits in Mayotte, including the AEEH (CSSM)", "url": "https://www.cssm.fr/page/prestations-familiales" },
+    { "titre": "Disabled child education allowance (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809" },
+    { "titre": "MDPH application form (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993" },
+    { "titre": "Find your MDPH (monparcourshandicap.gouv.fr)", "url": "https://www.monparcourshandicap.gouv.fr/annuaire" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Child's MDPH medical certificate", "categorie": "sante" },
+    { "type": "coffre", "titre": "Complete MDPH file (copy)", "categorie": "sante" },
+    { "type": "coffre", "titre": "CDAPH decision notice", "categorie": "courriers" },
+    { "type": "rappel", "titre": "Follow up with the MDPH if no reply 4 months after submitting", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Doctor's appointment for the MDPH medical certificate", "evenement": "sante" }
+  ],
+  "datesLimites": [
+    { "libelle": "Medical certificate less than a year old when the file is submitted" },
+    { "libelle": "CDAPH reply within 4 months", "detail": "With no reply, the application is considered rejected." },
+    { "libelle": "Appeal within 2 months after a refusal decision" }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: the physical reception address and opening hours of the MDPH de Mayotte (an address on rue Mariazé in Mamoudzou is mentioned, but the MDPH website could not be accessed).",
+    "To be confirmed locally: actual processing times in Mayotte, which may exceed the legal time limit."
+  ],
+  "motsCles": ["AEEH", "MDPH", "disability", "CDAPH", "CSSM", "medical certificate"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "CSSM, Family benefits (AEEH, 2026-2027 scale)", "url": "https://www.cssm.fr/page/prestations-familiales", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F14809 Disabled child education allowance", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14809", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R19993 MDPH application form", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R19993", "verifieLe": "2026-10-29" }
+  ]
+}

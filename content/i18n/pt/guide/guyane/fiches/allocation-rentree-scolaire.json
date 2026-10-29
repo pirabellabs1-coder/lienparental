@@ -16,7 +16,7 @@
     "Se a renda ultrapassar o teto por pouco, um auxílio reduzido (diferencial) pode ser pago.",
     "Pagamento a partir de 18 de agosto de 2026 no caso geral. Ao contrário de La Réunion e Mayotte, a Guiana Francesa não tem data própria na página oficial.",
     "Para receber o ARS de um jovem de 16 a 18 anos, você deve ter declarado sua renda de 2025 à Receita e seus rendimentos de 2024 à Caf, e depois declarar, a partir de meados de julho, a escolaridade ou aprendizagem dele no ano letivo de 2026.",
-    "Pais separados: o ARS é pago a um só beneficiário. Em residência alternada, a possível divisão dos auxílios familiares não se aplica automaticamente ao ARS."
+    "Pais separados: o ARS nunca é dividido. Mesmo em residência alternada, ele é pago integralmente ao genitor designado como beneficiário: só os auxílios familiares (allocations familiales) podem ser divididos (service-public.gouv.fr)."
   ],
   "documents": [
     { "id": "avis-impot", "libelle": "Declaração de renda de 2025 feita à Receita", "detail": "Indispensável para que a Caf conheça sua renda. Aviso de imposto disponível em impots.gouv.fr.", "coffre": "finances" },
@@ -56,15 +56,14 @@
     { "libelle": "Pagamento a partir de 18 de agosto de 2026", "detail": "Caso geral." }
   ],
   "aConfirmer": [
-    "A confirmar localmente: data exata de pagamento na Guiana Francesa, pois a página oficial só cita o caso geral, La Réunion e Mayotte.",
-    "A confirmar localmente com a Caf de la Guyane: qual genitor recebe o ARS em caso de residência alternada."
+    "A confirmar localmente: data exata de pagamento na Guiana Francesa, pois a página oficial só cita o caso geral, La Réunion e Mayotte."
   ],
   "motsCles": ["ARS", "volta às aulas", "material escolar", "Caf", "auxílio", "16-18 anos"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F1878 Auxílio de volta às aulas", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-08-04" },
+    { "titre": "Service-public.gouv.fr, F1878 Auxílio de volta às aulas", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1878", "verifieLe": "2026-10-29" },
     { "titre": "Caf, tabela do auxílio de volta às aulas", "url": "https://www.caf.fr/professionnels/offres-et-services/accompagnement-des-allocataires/bareme-allocation-de-rentree-scolaire" },
     { "titre": "Caf du Tarn, ARS e residência alternada", "url": "https://www.caf.fr/allocataires/caf-du-tarn/actualites-departementales/allocation-de-rentree-scolaire" },
-    { "titre": "Service-public.gouv.fr, F21248 Auxílios familiares em residência alternada", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248" }
+    { "titre": "Service-public.gouv.fr, F21248 Auxílios familiares em residência alternada", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248", "verifieLe": "2026-10-29" }
   ]
 }

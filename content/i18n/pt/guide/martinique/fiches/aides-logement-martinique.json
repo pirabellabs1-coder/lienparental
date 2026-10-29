@@ -1,0 +1,181 @@
+{
+  "slug": "aides-logement-martinique",
+  "territoire": "martinique",
+  "categorie": "logement",
+  "titre": "Auxílios-moradia na Martinica",
+  "resume": "Auxílio-moradia familiar ou social: quem tem direito, os documentos a preparar (inclusive o atestado de aluguel assinado pelo proprietário) e o pedido à Caf após uma separação.",
+  "aQuoiCaSert": "Os auxílios-moradia reduzem o valor do seu aluguel. Com filhos ou benefícios familiares, o auxílio que se aplica a você costuma ser a ALF (allocation de logement familiale, auxílio-moradia familiar); senão, a ALS (allocation de logement sociale, auxílio-moradia social). Após uma separação, cada um dos pais que passa a ter uma moradia pode fazer o próprio pedido à Caf (Caisse d'allocations familiales, órgão de benefícios familiares), calculado só com a sua renda e a sua nova situação familiar.",
+  "quiEstConcerne": [
+    "Os inquilinos ou subinquilinos de uma moradia digna, ocupada como residência principal.",
+    "ALF: em especial quem recebe benefícios familiares ou a AEEH (auxílio de educação da criança com deficiência), quem tem um filho a cargo com menos de 21 anos, ou gestantes sozinhas, sob condições.",
+    "ALS: quem não preenche as condições da APL (aide personnalisée au logement, ajuda personalizada à moradia) nem as da ALF.",
+    "Estrangeiros precisam ter uma autorização de residência válida."
+  ],
+  "aSavoir": [
+    "APL, ALF e ALS não se acumulam. O valor depende da sua renda dos últimos 12 meses, do seu patrimônio (acima de 30.000 €), do aluguel, da situação familiar e do local da moradia: só o simulador da Caf dá uma estimativa.",
+    "O subinquilino não pode ser parente do inquilino principal nem do proprietário.",
+    "O auxílio é pago no dia 5 de cada mês. O direito começa no 1º dia do mês seguinte à análise do processo e o primeiro pagamento pode levar cerca de 2 meses: faça o pedido assim que se mudar.",
+    "Em caso de recusa, você tem 2 meses a partir da notificação para recorrer à comissão de recurso amigável (commission de recours amiable) da Caf.",
+    "Separação: declare-a à Caf. Cada um dos pais declara a própria moradia e a própria situação familiar; o valor é recalculado de acordo."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Cópia frente e verso do seu documento de identidade ou autorização de residência",
+      "detail": "Válido.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB, RIP ou RICE (dados bancários) em seu nome",
+      "detail": "Abra uma conta pessoal se você só tinha conta conjunta: veja a ficha «Ter a sua própria conta bancária após a separação».",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Atestado de aluguel (cerfa n° 10842), datado e assinado pelo proprietário",
+      "detail": "Baixe e peça ao proprietário ou à empresa de habitação social para preencher. Sem a assinatura, o processo fica incompleto.",
+      "coffre": "finances"
+    },
+    {
+      "id": "bail",
+      "libelle": "Contrato de locação",
+      "detail": "Cópia. Ele indica o aluguel, os encargos e a data de entrada.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Valores da sua renda dos últimos 12 meses",
+      "detail": "Contracheques, auxílios, pensão alimentícia recebida ou paga: serão pedidos no formulário on-line.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo que fixa a residência dos filhos, se houver",
+      "detail": "Cópia. Útil se a Caf pedir para comprovar a residência dos filhos após a separação.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "notification",
+      "libelle": "Notificação de direitos da Caf",
+      "detail": "Guarde-a: indica o valor e a data de início do direito.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Faça uma simulação em caf.fr",
+      "detail": "Com o aluguel da nova moradia e a sua renda atual."
+    },
+    {
+      "titre": "Declare primeiro a mudança de situação",
+      "detail": "Separação, mudança de endereço, residência dos filhos: no seu espaço Caf."
+    },
+    {
+      "titre": "Peça o preenchimento do atestado de aluguel",
+      "detail": "Pelo proprietário ou locador, datado e assinado."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "O pedido é feito on-line. Se for ao atendimento da Caf: agendamento se necessário, número de beneficiário (numéro allocataire), cópia frente e verso do documento de identidade, RIB em seu nome, atestado de aluguel assinado, contrato de locação, valores da sua renda dos últimos 12 meses."
+    },
+    {
+      "titre": "Faça o pedido on-line no seu espaço Caf",
+      "detail": "Assim que se mudar, anexando os documentos."
+    },
+    {
+      "titre": "Depois, declare qualquer mudança",
+      "detail": "Mudança de endereço, novos dados bancários, chegada ou saída de um filho, mudança de residência dos filhos."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "Pedido on-line no espaço Mon Compte; atendimento presencial para quem precisa de ajuda.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    },
+    {
+      "nom": "France Services",
+      "detail": "Ajuda gratuita para fazer o pedido on-line."
+    },
+    {
+      "nom": "ADIL de la Martinique",
+      "detail": "Orientação jurídica gratuita sobre moradia (contrato de locação, aluguel, atrasos). 13 rue du Commerce, Fort-de-France, com hora marcada; plantões em Ducos, Le François e Saint-Joseph.",
+      "url": "https://www.anil.org/adil-972/horaires-et-permanences/",
+      "telephone": "05 96 71 48 45"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Auxílios-moradia: APL, ALF, ALS (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864"
+    },
+    {
+      "titre": "Auxílio-moradia familiar (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    },
+    {
+      "titre": "Caf.fr, simuladores e pedido on-line",
+      "url": "https://www.caf.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Atestado de aluguel assinado",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Notificação de auxílio-moradia",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Pedir o auxílio-moradia para a nova moradia",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Recurso possível: 2 meses após uma recusa de auxílio-moradia",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "2 meses após a notificação para contestar uma decisão da Caf"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: nos departamentos ultramarinos, a APL não se aplicaria às moradias comuns (apenas a certas residências coletivas, logements-foyers). Para uma moradia comum, seria a ALF ou a ALS. Verifique com a Caf de la Martinique.",
+    "A confirmar localmente: as tabelas próprias dos territórios ultramarinos. Use o simulador da Caf em vez de um valor indicativo.",
+    "A forma como a Caf divide a criança entre as duas casas em residência alternada para o auxílio-moradia não é detalhada nas páginas consultadas: pergunte à Caf de la Martinique."
+  ],
+  "motsCles": [
+    "moradia",
+    "APL",
+    "ALF",
+    "ALS",
+    "aluguel",
+    "Caf",
+    "atestado de aluguel"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F31864 Auxílios-moradia",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864",
+      "verifieLe": "2026-01-30"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13132 Auxílio-moradia familiar",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132",
+      "verifieLe": "2026-07-01"
+    },
+    {
+      "titre": "ADIL de la Martinique (anil.org), horários e plantões",
+      "url": "https://www.anil.org/adil-972/horaires-et-permanences/",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

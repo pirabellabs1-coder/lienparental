@@ -1,0 +1,190 @@
+{
+  "slug": "aides-logement",
+  "territoire": "france",
+  "categorie": "logement",
+  "titre": "Housing benefits (APL, ALF, ALS)",
+  "resume": "APL, family or social housing allowance: which one applies to you, the documents to prepare (including the rent certificate signed by the landlord) and applying to the Caf after a separation.",
+  "aQuoiCaSert": "Housing benefits reduce the amount of your rent. There are three: the APL, linked to the home (a conventionné home, under an agreement with the State, like most HLM social housing); the family housing allowance (allocation de logement familiale, ALF), linked to your family situation, for example if you have children or receive family benefits; and the social housing allowance (allocation de logement sociale, ALS) for other cases. After a separation, each parent who takes a home can make their own application, calculated on their own income and new family situation.",
+  "quiEstConcerne": [
+    "Tenants or subtenants of a decent home, occupied as their main residence in France.",
+    "APL: occupants of a conventionné home, whatever their family situation.",
+    "ALF: in particular people who receive family benefits or the AEEH, who have a dependent child under 21, or pregnant women living alone.",
+    "ALS: people who meet neither the APL nor the ALF conditions. Foreign nationals must have a valid residence permit."
+  ],
+  "aSavoir": [
+    "APL, ALF and ALS cannot be combined. The amount depends on your income over the last 12 months (updated every 3 months), your assets (above €30,000), your rent, your family situation and where the home is: only the simulator of the Caf (Caisse d'allocations familiales, the family benefits office) gives an estimate.",
+    "A subtenant must not be related to the main tenant or the landlord.",
+    "The benefit is paid on the 5th of each month. Entitlement starts on the 1st day of the month after the file is processed, about 2 months after the application: apply as soon as you move in.",
+    "If the Caf refuses, you have 2 months from the notification to challenge it; if that fails, mediation and then the amicable appeals board (commission de recours amiable) are possible.",
+    "Separation: declare it to the Caf. Each parent declares their own home and their own family situation; the amount is recalculated accordingly. Under shared residence, housing benefit is not shared between the parents."
+  ],
+  "documents": [
+    {
+      "id": "identite",
+      "libelle": "Copy of your ID or residence permit, front and back",
+      "detail": "Valid.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "RIB (bank details slip) in your name",
+      "detail": "Open a personal account if you only had a joint account: see the guide entry \"Having your own bank account after a separation\".",
+      "coffre": "finances"
+    },
+    {
+      "id": "attestation-loyer",
+      "libelle": "Rent certificate (cerfa n° 10842), dated and signed by the landlord",
+      "detail": "Download it and have it completed by your landlord or social housing provider. Without their signature, the file is incomplete.",
+      "coffre": "finances"
+    },
+    {
+      "id": "bail",
+      "libelle": "Lease or rental agreement",
+      "detail": "Copy. It states the rent, service charges and move-in date.",
+      "coffre": "finances"
+    },
+    {
+      "id": "ressources",
+      "libelle": "Amounts of your income over the last 12 months",
+      "detail": "Payslips, allowances, child support received or paid: you will be asked for them in the online form.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Judgment or agreement setting the children's residence, if you have one",
+      "detail": "Copy. Useful if the Caf asks you to prove where the children live after the separation.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "notification",
+      "libelle": "Caf notice of entitlement",
+      "detail": "Keep it: it shows the amount and the start date of the entitlement.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Run a simulation on caf.fr",
+      "detail": "With the rent for the new home and your current income. The simulator also tells you which benefit applies."
+    },
+    {
+      "titre": "First report your change of situation",
+      "detail": "Separation, move, children's residence: in your Caf account."
+    },
+    {
+      "titre": "Have the rent certificate filled in",
+      "detail": "By the landlord or housing provider, dated and signed."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "The application is made online. If you go to the Caf reception desk: appointment if needed, Caf number (numéro allocataire), copy of your ID front and back, bank details in your name, signed rent certificate, lease, amounts of your income over the last 12 months."
+    },
+    {
+      "titre": "Apply online in your Caf account",
+      "detail": "As soon as you move in, attaching the documents. If you are covered by the agricultural scheme, contact the MSA."
+    },
+    {
+      "titre": "Then report any change",
+      "detail": "Move, new bank details, a child arriving or leaving, change in the children's residence."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf of your département",
+      "detail": "Online application in your \"Mon Compte\" account; reception desks and appointments on caf.fr with your postcode.",
+      "url": "https://www.caf.fr"
+    },
+    {
+      "nom": "MSA (Mutualité sociale agricole, the farmers' social security fund)",
+      "detail": "If you are covered by the agricultural scheme.",
+      "url": "https://www.msa.fr"
+    },
+    {
+      "nom": "France Services",
+      "detail": "Free help to apply online. Find the nearest center in the government directory (annuaire de l'administration).",
+      "url": "https://lannuaire.service-public.gouv.fr"
+    },
+    {
+      "nom": "ADIL of your département",
+      "detail": "Agence départementale d'information sur le logement (local housing information agency): free information on your rights as a tenant and on benefits.",
+      "url": "https://www.anil.org/qui-sommes-nous/reseau-des-adil/"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Housing benefits: APL, ALF, ALS (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864"
+    },
+    {
+      "titre": "Family housing allowance (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132"
+    },
+    {
+      "titre": "Caf.fr, simulators and online application",
+      "url": "https://www.caf.fr"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Signed rent certificate",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Housing benefit notice",
+      "categorie": "finances"
+    },
+    {
+      "type": "rappel",
+      "titre": "Apply for housing benefit for the new home",
+      "evenement": "autre"
+    },
+    {
+      "type": "rappel",
+      "titre": "Appeal possible: 2 months after a housing benefit refusal",
+      "evenement": "autre"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "2 months after the notice to challenge a Caf decision"
+    }
+  ],
+  "aConfirmer": [
+    "How the Caf takes a child in shared residence into account when calculating each parent's housing benefit is not detailed in the pages consulted: ask your Caf.",
+    "The scales depend on the geographical zone of the home: use the Caf simulator rather than an indicative amount."
+  ],
+  "motsCles": [
+    "housing",
+    "APL",
+    "ALF",
+    "ALS",
+    "rent",
+    "Caf",
+    "rent certificate"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F31864 Housing benefits",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31864",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F13132 Family housing allowance",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Shared residence and family benefits",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "ANIL, network of ADIL",
+      "url": "https://www.anil.org/qui-sommes-nous/reseau-des-adil/",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

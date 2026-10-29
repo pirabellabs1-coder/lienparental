@@ -956,20 +956,21 @@
       },
       "territory": {
         "metaTitle": "Guide parental {territory}",
-        "metaDescription": "{count} fiches pratiques pour les parents en {territory} : école, santé, aides de la Caf, naissance, séparation, logement. Étapes, documents et organismes, avec sources officielles.",
+        "metaDescription": "{count} fiches pratiques pour les parents {code, select, reunion {à {territory}} mayotte {à {territory}} other {en {territory}}} : école, santé, aides de la Caf, naissance, séparation, logement. Étapes, documents et organismes, avec sources officielles.",
         "title": "Guide parental : {territory}",
-        "lead": "{count, plural, one {# fiche pratique} other {# fiches pratiques}} pour les parents en {territory}, classées par thème, et des parcours pour enchaîner les démarches dans le bon ordre.",
+        "lead": "{count, plural, one {# fiche pratique} other {# fiches pratiques}} pour les parents {code, select, reunion {à {territory}} mayotte {à {territory}} other {en {territory}}}, classées par thème, et des parcours pour enchaîner les démarches dans le bon ordre.",
         "parcoursTitle": "Parcours pas à pas",
         "parcoursHint": "Les démarches à enchaîner, dans l'ordre, pour les grands moments de la vie de famille.",
         "stepsCount": "{count, plural, one {# étape} other {# étapes}}",
         "categoriesTitle": "Thèmes",
-        "fichesTitle": "Toutes les fiches"
+        "fichesTitle": "Toutes les fiches",
+        "change": "Changer de territoire"
       },
       "category": {
         "metaTitle": "{category} · Guide {territory}",
         "metaDescription": "Guide parental {territory}, « {category} » : {count, plural, one {# fiche pratique} other {# fiches pratiques}} avec les étapes, les documents à réunir et les organismes à contacter, vérifiées sur des sources officielles.",
         "title": "{category}",
-        "lead": "{count, plural, =0 {Aucune fiche pour le moment} one {# fiche pratique} other {# fiches pratiques}} pour les parents en {territory}.",
+        "lead": "{count, plural, =0 {Aucune fiche pour le moment} one {# fiche pratique} other {# fiches pratiques}} pour les parents {code, select, reunion {à {territory}} mayotte {à {territory}} other {en {territory}}}.",
         "empty": "Aucune fiche pour le moment dans cette catégorie.",
         "others": "Autres thèmes"
       },

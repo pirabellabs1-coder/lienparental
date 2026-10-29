@@ -1,0 +1,61 @@
+{
+  "slug": "accueil-loisirs-vacances",
+  "territoire": "reunion",
+  "categorie": "loisirs",
+  "titre": "Centres de loisirs et aides pour les vacances",
+  "resume": "Trouver un accueil de loisirs pour les mercredis et les vacances, préparer le dossier (vaccins à jour, quotient familial) et connaître les aides au temps libre de la Caf de La Réunion.",
+  "aQuoiCaSert": "Les accueils de loisirs sans hébergement (ALSH, qu'on appelle souvent centres de loisirs) reçoivent les enfants dès leur entrée à l'école et jusqu'à l'adolescence, y compris les enfants en situation de handicap. Selon la commune, ils ouvrent le mercredi, avant ou après la classe, à la pause de midi et pendant les vacances scolaires. Chaque organisateur, mairie ou association, fixe ses tarifs, souvent en fonction des revenus du foyer et des aides de la Caf. La Caf de La Réunion propose aussi des aides au temps libre pour les séjours des enfants et les vacances en famille.",
+  "quiEstConcerne": [
+    "Les parents d'enfants scolarisés qui cherchent un accueil le mercredi ou pendant les vacances.",
+    "Les familles allocataires aux revenus modestes, pour les aides au temps libre et aux vacances de la Caf de La Réunion."
+  ],
+  "aSavoir": [
+    "Les places sont limitées : renseignez-vous plusieurs semaines avant les vacances ou la rentrée. L'inscription se fait le plus souvent en mairie ou directement auprès de la structure.",
+    "Les vaccinations obligatoires sont exigées pour l'admission en collectivité, centre de loisirs et colonie compris. La liste dépend de l'année de naissance de l'enfant. Il n'existe pas de vaccin obligatoire propre à La Réunion.",
+    "Si les vaccins ne sont pas à jour, l'enfant peut être admis provisoirement : vous avez alors 3 mois pour régulariser. Le carnet de santé rempli par le médecin sert de justificatif.",
+    "Les aides au temps libre font partie de l'action sociale propre à chaque Caf : leurs montants et conditions changent d'un département à l'autre et parfois d'une année à l'autre.",
+    "Parents séparés : chaque parent peut inscrire l'enfant pour ses propres semaines de vacances. Indiquez à la structure les personnes autorisées à venir chercher l'enfant et fournissez si besoin la décision qui fixe sa résidence."
+  ],
+  "documents": [
+    { "id": "dossier-inscription", "libelle": "Dossier d'inscription ou fiche sanitaire de la structure", "detail": "À demander à la mairie ou à la structure. Il précise les autorisations (sorties, photos, personnes habilitées).", "coffre": "autres" },
+    { "id": "carnet-sante", "libelle": "Copie des pages vaccins du carnet de santé", "detail": "Vaccins en retard : prenez rendez-vous chez le médecin ou dans un centre de PMI du Département.", "coffre": "sante" },
+    { "id": "attestation-caf", "libelle": "Attestation de quotient familial de la Caf", "detail": "Téléchargeable dans votre espace Caf. Elle sert à calculer votre tarif.", "coffre": "finances" },
+    { "id": "notification-aide", "libelle": "Notification d'aide au temps libre, si vous en bénéficiez", "coffre": "finances" },
+    { "id": "assurance", "libelle": "Attestation d'assurance responsabilité civile ou extrascolaire de l'enfant", "detail": "Souvent demandée par les structures.", "coffre": "autres" },
+    { "id": "jugement", "libelle": "Jugement ou convention fixant la résidence de l'enfant, si la structure le demande", "detail": "Copie. Utile pour préciser qui peut inscrire et récupérer l'enfant.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Repérez les accueils de loisirs près de chez vous", "detail": "Sur monenfant.fr ou auprès de votre mairie." },
+    { "titre": "Renseignez-vous sur les aides au temps libre de la Caf de La Réunion", "detail": "Sur la page dédiée de la Caf, dans votre espace en ligne ou auprès de la structure, qui peut recevoir l'aide directement." },
+    { "titre": "Coordonnez-vous avec l'autre parent", "detail": "Notez dans le calendrier qui a l'enfant chaque semaine de vacances." },
+    { "titre": "Vérifiez avant de vous déplacer", "detail": "Dates d'ouverture des inscriptions, dossier de la structure rempli, copie des vaccins à jour, attestation de quotient familial, attestation d'assurance, liste des personnes autorisées à récupérer l'enfant avec leurs pièces d'identité." },
+    { "titre": "Inscrivez votre enfant tôt", "detail": "Pendant les vacances, les places partent vite." }
+  ],
+  "ou": [
+    { "nom": "monenfant.fr", "detail": "Annuaire des accueils de loisirs.", "url": "https://monenfant.fr/les-accueils-de-loisirs" },
+    { "nom": "Mairie de votre commune", "detail": "Accueils de loisirs municipaux et inscriptions." },
+    { "nom": "Caf de La Réunion", "detail": "Aides au temps libre pour les séjours des enfants et les vacances en famille.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion/offre-de-service/vie-personnelle/preparez-vos-vacances-avec-les-aides-au-temps-libre" }
+  ],
+  "liens": [
+    { "titre": "monenfant.fr, accueils de loisirs", "url": "https://monenfant.fr/les-accueils-de-loisirs" },
+    { "titre": "Vaccination et accueil en collectivité (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767" },
+    { "titre": "Caf de La Réunion, aides au temps libre", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion/offre-de-service/vie-personnelle/preparez-vos-vacances-avec-les-aides-au-temps-libre" }
+  ],
+  "actions": [
+    { "type": "rappel", "titre": "Ouverture des inscriptions au centre de loisirs des vacances", "evenement": "activite" },
+    { "type": "calendrier", "titre": "Centre de loisirs pendant les vacances", "evenement": "activite" },
+    { "type": "coffre", "titre": "Attestation de quotient familial Caf", "categorie": "finances" },
+    { "type": "coffre", "titre": "Copie des vaccins de l'enfant", "categorie": "sante" },
+    { "type": "depense", "titre": "Centre de loisirs", "categorie": "loisirs" }
+  ],
+  "aConfirmer": [
+    "À confirmer localement : le barème en vigueur des aides au temps libre de la Caf de La Réunion (quotient familial maximal, âges, séjours concernés). La page de la Caf n'a pas pu être lue lors de la vérification.",
+    "À confirmer localement : la liste des structures de vacances en famille partenaires de la Caf de La Réunion pour l'année en cours.",
+    "À confirmer localement : les pièces exactes du dossier d'inscription, fixées par chaque mairie ou structure."
+  ],
+  "motsCles": ["centre de loisirs", "ALSH", "vacances", "colonie", "temps libre", "mercredi", "périscolaire"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F767 Vaccination pour l'école, la crèche ou la garderie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767", "verifieLe": "2026-10-29" }
+  ]
+}

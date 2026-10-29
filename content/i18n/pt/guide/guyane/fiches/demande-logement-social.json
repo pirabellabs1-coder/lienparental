@@ -12,7 +12,7 @@
   ],
   "aSavoir": [
     "Limites de renda nos DOM, incluindo a Guiana Francesa, para um pedido feito em 2026 (renda de 2024): 27.382 € para 1 pessoa, 36.567 € para 2, 43.973 € para 3 pessoas ou para uma pessoa sozinha com 1 dependente, 53.088 € para 4 pessoas ou para uma pessoa sozinha com 2 dependentes (service-public.gouv.fr, caso geral).",
-    "Separação: para que só a sua renda seja considerada, anexe um comprovante como a ordonnance de non-conciliation, o ato que aciona o juiz de família (juge aux affaires familiales, JAF), a sentença de divórcio ou a certidão de nascimento com a dissolução do PACS (união civil).",
+    "Separação: para que só a sua renda seja considerada, anexe conforme o seu caso: divórcio em andamento (cópia do ato que aciona o juiz de família (juge aux affaires familiales, JAF), ou atestado do advogado no divórcio por consentimento mútuo), sentença ou convenção de divórcio, recibo da declaração de dissolução do PACS (união civil) ou certidão de nascimento com essa menção, recibo de queixa em caso de violência no casal.",
     "Se a sua renda caiu pelo menos 10%, você pode alegar isso com comprovantes (contracheques, declaração do empregador). Uma declaração sob compromisso não é aceita.",
     "Fora da região Île-de-France, é preciso um pedido por departamento: um pedido na Guiana Francesa só vale para a Guiana Francesa.",
     "Renovação: todo ano, entre o 10º e o 12º mês após a criação ou a última renovação. Um lembrete é enviado pelo menos 1 mês antes. Nos DOM, um pedido não renovado é cancelado automaticamente e é preciso recomeçar com um novo número único (service-public.gouv.fr).",
@@ -22,7 +22,7 @@
     { "id": "identite", "libelle": "Documento de identidade do requerente", "detail": "Cópia frente e verso da carteira de identidade ou do passaporte. Para quem não é da União Europeia: cópia do título de residência ou do protocolo válido. Obrigatório no pedido.", "coffre": "courriers" },
     { "id": "identite-cotitulaire", "libelle": "Documento de identidade ou título de residência de cada adulto a alojar", "detail": "Cópia válida.", "coffre": "courriers" },
     { "id": "avis-imposition", "libelle": "Aviso de imposto 2025 sobre a renda de 2024 de cada pessoa a alojar", "detail": "Cópia. Baixe no seu espaço impots.gouv.fr ou peça ao centro de finanças públicas (centre des finances publiques).", "coffre": "finances" },
-    { "id": "justificatif-separation", "libelle": "Comprovante de separação", "detail": "Cópia da ordonnance de non-conciliation, do ato que aciona o juiz de família, da sentença de divórcio ou da certidão de nascimento com a dissolução do PACS.", "coffre": "jaf" },
+    { "id": "justificatif-separation", "libelle": "Comprovante de separação", "detail": "Cópia, conforme o caso, do ato que aciona o juiz de família ou do atestado do advogado (divórcio em andamento), da sentença ou convenção de divórcio, do recibo de dissolução do PACS ou da certidão de nascimento com essa menção, ou do recibo de queixa (violência).", "coffre": "jaf" },
     { "id": "jugement-residence", "libelle": "Sentença ou acordo que fixa a residência dos filhos", "detail": "Cópia, para comprovar os filhos que morarão com você ou uma residência alternada.", "coffre": "jaf" },
     { "id": "livret-famille", "libelle": "Livro de família (livret de famille) ou certidões de nascimento dos filhos", "detail": "Cópia, para comprovar os dependentes.", "coffre": "courriers" },
     { "id": "ressources", "libelle": "Comprovantes de renda recentes", "detail": "Cópias dos últimos contracheques, declarações da Caf (Caisse d'allocations familiales, órgão de benefícios familiares) ou do France Travail. Exigidos em caso de queda de renda de pelo menos 10%.", "coffre": "finances" },
@@ -42,7 +42,8 @@
   ],
   "liens": [
     { "titre": "Pedido de moradia social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007" },
-    { "titre": "Renovação do pedido de moradia social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010" },
+    { "titre": "Renovação do pedido de moradia social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32880" },
+    { "titre": "Condições e tetos de renda da moradia social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869" },
     { "titre": "Pedido de moradia social on-line", "url": "https://www.demande-logement-social.gouv.fr" }
   ],
   "actions": [
@@ -58,9 +59,10 @@
     "A confirmar localmente: os órgãos de habitação social podem pedir documentos adicionais no momento da atribuição."
   ],
   "motsCles": ["moradia social", "HLM", "número único", "renovação", "separação", "limites de renda"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F10007 Pedido de moradia social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-09-11" },
-    { "titre": "Service-public.gouv.fr, F35010 Renovação de um pedido de moradia social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010", "verifieLe": "2026-09-08" }
+    { "titre": "Service-public.gouv.fr, F10007 Pedido de moradia social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F32880 Renovação de um pedido de moradia social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32880", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F869 Condições para obter moradia social (tetos de renda, assistência telefônica)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869", "verifieLe": "2026-10-29" }
   ]
 }

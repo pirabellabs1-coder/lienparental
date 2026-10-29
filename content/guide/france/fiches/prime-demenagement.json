@@ -1,0 +1,60 @@
+{
+  "slug": "prime-demenagement",
+  "territoire": "france",
+  "categorie": "logement",
+  "titre": "Prime de déménagement de la Caf",
+  "resume": "Une aide pour les familles d'au moins 3 enfants qui déménagent autour d'une naissance : conditions de dates, plafonds, pièces à envoyer et délai de 6 mois.",
+  "aQuoiCaSert": "La prime de déménagement rembourse vos frais réels de déménagement, dans la limite d'un plafond, si vous avez au moins 3 enfants et que vous déménagez pendant la grossesse ou dans les deux ans qui suivent la naissance du plus jeune. Elle est versée en une seule fois, sur justificatifs. Si votre situation est précaire, une avance sur devis est possible.",
+  "quiEstConcerne": [
+    "Les familles qui ont au moins 3 enfants à charge, nés ou à naître.",
+    "Qui ont droit, pour le nouveau logement, à l'APL ou à l'allocation de logement familiale (ALF).",
+    "Parent séparé : ces conditions s'apprécient pour votre propre foyer allocataire."
+  ],
+  "aSavoir": [
+    "Dates : le déménagement doit avoir lieu entre le 1er jour du mois civil qui suit la fin du 3e mois de grossesse et le dernier jour du mois qui précède le 2e anniversaire du plus jeune enfant.",
+    "Plafonds en vigueur (service-public.gouv.fr, vérifié au 1er avril 2026) : 1 147,58 € pour 3 enfants, 1 243,21 € pour 4 enfants, plus 95,63 € par enfant supplémentaire. Vous êtes remboursé de vos frais réels dans cette limite.",
+    "Avance en cas de situation précaire : 50 % à 75 % du devis. La facture acquittée doit ensuite être fournie dans les 6 mois suivant le déménagement pour obtenir le solde.",
+    "La demande se fait auprès de la Caf (ou de la MSA pour le régime agricole) du nouveau lieu de résidence, dans les 6 mois qui suivent le déménagement.",
+    "En cas de refus, vous avez 2 mois après réception de la décision pour saisir par courrier la commission de recours amiable."
+  ],
+  "documents": [
+    { "id": "cerfa-11363", "libelle": "Formulaire de demande de prime de déménagement (cerfa n° 11363)", "detail": "À télécharger sur service-public.gouv.fr, à remplir et signer.", "coffre": "finances" },
+    { "id": "facture", "libelle": "Facture acquittée du déménageur ou justificatifs des frais", "detail": "Toutes les factures liées au déménagement, à votre nom. Gardez une copie de chaque pièce envoyée.", "coffre": "finances" },
+    { "id": "devis", "libelle": "Devis du déménageur, pour demander une avance", "detail": "Uniquement si votre situation est précaire.", "coffre": "finances" },
+    { "id": "grossesse", "libelle": "Déclaration de grossesse ou acte de naissance du plus jeune enfant", "detail": "Uniquement si la Caf le demande pour vérifier la période : elle dispose souvent déjà de l'information.", "coffre": "sante" },
+    { "id": "attestation-loyer", "libelle": "Attestation de loyer du nouveau logement", "detail": "Nécessaire pour ouvrir le droit à l'aide au logement, condition de la prime.", "coffre": "finances" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez les conditions de dates et de nombre d'enfants", "detail": "Calculez la période autorisée à partir du début de grossesse ou de la date de naissance du plus jeune." },
+    { "titre": "Demandez l'aide au logement pour le nouveau logement", "detail": "Sans droit à l'APL ou à l'ALF, pas de prime." },
+    { "titre": "Conservez toutes les factures du déménagement", "detail": "Ou demandez un devis si vous avez besoin d'une avance." },
+    { "titre": "Vérifiez avant d'envoyer", "detail": "Formulaire cerfa n° 11363 rempli et signé, factures acquittées lisibles, numéro allocataire, envoi dans les 6 mois suivant le déménagement. Gardez une copie de tout." },
+    { "titre": "Envoyez la demande à la Caf de votre nouveau domicile", "detail": "Au plus tard 6 mois après le déménagement. Signalez aussi votre changement d'adresse." }
+  ],
+  "ou": [
+    { "nom": "Caf de votre nouveau département", "detail": "Retrouvez votre Caf et ses contacts dans la rubrique « Ma Caf » de caf.fr.", "url": "https://www.caf.fr" },
+    { "nom": "MSA", "detail": "Si vous relevez du régime agricole.", "url": "https://www.msa.fr" }
+  ],
+  "liens": [
+    { "titre": "Prime de déménagement (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008" },
+    { "titre": "Allocation de logement familiale (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13132" }
+  ],
+  "actions": [
+    { "type": "depense", "titre": "Frais de déménagement", "categorie": "autre" },
+    { "type": "rappel", "titre": "Envoyer la demande de prime de déménagement (6 mois maximum)", "evenement": "autre" },
+    { "type": "coffre", "titre": "Facture du déménagement", "categorie": "finances" },
+    { "type": "coffre", "titre": "Demande de prime de déménagement envoyée (copie)", "categorie": "finances" }
+  ],
+  "datesLimites": [
+    { "libelle": "Demande au plus tard 6 mois après le déménagement" },
+    { "libelle": "Facture acquittée dans les 6 mois suivant le déménagement si vous avez reçu une avance" }
+  ],
+  "aConfirmer": [
+    "Les plafonds sont revalorisés en général chaque année : vérifiez le montant en vigueur sur service-public.gouv.fr ou auprès de votre Caf au moment de la demande."
+  ],
+  "motsCles": ["déménagement", "prime", "famille nombreuse", "Caf", "naissance", "cerfa 11363"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F2008 Prime de déménagement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2008", "verifieLe": "2026-10-29" }
+  ]
+}

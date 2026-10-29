@@ -1,0 +1,166 @@
+{
+  "slug": "accueil-loisirs-vacances",
+  "territoire": "guadeloupe",
+  "categorie": "loisirs",
+  "titre": "Centros de lazer e auxílios para as férias",
+  "resume": "Encontrar um centro de lazer para as quartas-feiras e as férias, o processo a preparar (vacinas em dia, quociente familiar) e os auxílios da Caf de la Guadeloupe.",
+  "aQuoiCaSert": "Os centros de lazer sem pernoite (ALSH, accueils de loisirs sans hébergement, muitas vezes chamados de centres de loisirs) recebem as crianças desde o início da escolaridade até a adolescência, inclusive crianças com deficiência. Conforme o município, funcionam às quartas-feiras, antes ou depois da aula, no intervalo do almoço e nas férias. Cada organizador define os preços, muitas vezes conforme a renda da família e levando em conta os auxílios da Caf (Caisse d'allocations familiales, órgão de benefícios familiares).",
+  "quiEstConcerne": [
+    "Os pais de crianças em idade escolar que procuram onde deixá-las às quartas-feiras ou nas férias.",
+    "As famílias beneficiárias de baixa renda, para os auxílios de férias e de tempo livre da Caf."
+  ],
+  "aSavoir": [
+    "As vagas são limitadas: informe-se várias semanas antes das férias ou da volta às aulas. A inscrição geralmente é feita na prefeitura (mairie) ou no próprio centro.",
+    "As vacinas obrigatórias são exigidas para a admissão em coletividade, inclusive no cuidado extraescolar e na colônia de férias. A lista, a mesma da França continental, depende do ano de nascimento da criança.",
+    "Se as vacinas não estiverem em dia, é possível uma admissão provisória de 3 meses enquanto são aplicadas. A caderneta de saúde (carnet de santé), preenchida pelo médico, serve de comprovante.",
+    "Os auxílios de férias e de tempo livre fazem parte da ação social própria de cada Caf: valor e condições variam de um departamento para outro.",
+    "Pais separados: cada um pode inscrever a criança nas próprias semanas de férias. Informe ao centro as pessoas autorizadas a buscar a criança e, se necessário, apresente a decisão que fixa a residência."
+  ],
+  "documents": [
+    {
+      "id": "dossier-inscription",
+      "libelle": "Ficha de inscrição ou ficha de saúde do centro",
+      "detail": "Peça à prefeitura ou ao centro: ela define as autorizações (saídas, fotos, pessoas autorizadas).",
+      "coffre": "autres"
+    },
+    {
+      "id": "carnet-sante",
+      "libelle": "Cópia das páginas de vacinas da caderneta de saúde",
+      "detail": "Vacinas atrasadas: marque uma consulta com o médico ou num centro de PMI (protection maternelle et infantile, serviço de saúde materno-infantil) do Département.",
+      "coffre": "sante"
+    },
+    {
+      "id": "attestation-caf",
+      "libelle": "Atestado de quociente familiar (attestation de quotient familial) da Caf",
+      "detail": "Disponível no seu espaço Caf. Serve para calcular o seu preço.",
+      "coffre": "finances"
+    },
+    {
+      "id": "notification-aide",
+      "libelle": "Notificação de auxílio de tempo livre ou de férias, se você o recebe",
+      "coffre": "finances"
+    },
+    {
+      "id": "assurance",
+      "libelle": "Atestado de seguro de responsabilidade civil ou extraescolar da criança",
+      "detail": "Muitas vezes pedido pelos centros.",
+      "coffre": "autres"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Sentença ou acordo que fixa a residência da criança, se o centro pedir",
+      "detail": "Cópia. Útil para definir quem pode inscrever e buscar a criança.",
+      "coffre": "jaf"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Encontre os centros de lazer perto de você",
+      "detail": "Em monenfant.fr ou na sua prefeitura."
+    },
+    {
+      "titre": "Informe-se sobre os auxílios da Caf de la Guadeloupe",
+      "detail": "No seu espaço Caf ou no atendimento."
+    },
+    {
+      "titre": "Combine com o outro genitor",
+      "detail": "Anote no calendário quem fica com a criança em cada semana de férias."
+    },
+    {
+      "titre": "Confira antes de ir",
+      "detail": "Datas de abertura das inscrições, formulário da estrutura preenchido, cópia das vacinas em dia, atestado de quociente familiar, atestado de seguro, lista das pessoas autorizadas a buscar a criança com seus documentos de identidade."
+    },
+    {
+      "titre": "Inscreva o seu filho cedo",
+      "detail": "As vagas nas férias acabam rápido."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "monenfant.fr",
+      "detail": "Diretório dos centros de lazer.",
+      "url": "https://monenfant.fr"
+    },
+    {
+      "nom": "Prefeitura (mairie) do seu município",
+      "detail": "Centros de lazer municipais e inscrições."
+    },
+    {
+      "nom": "Caf de la Guadeloupe",
+      "detail": "Auxílios para as férias (a página da Caf remete à lista das estruturas de férias credenciadas) e ação social local.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "monenfant.fr, centros de lazer",
+      "url": "https://monenfant.fr/les-accueils-de-loisirs"
+    },
+    {
+      "titre": "Vacinação e admissão em coletividade (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767"
+    },
+    {
+      "titre": "Caf de la Guadeloupe",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "Abertura das inscrições no centro de lazer das férias",
+      "evenement": "activite"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Centro de lazer durante as férias",
+      "evenement": "activite"
+    },
+    {
+      "type": "coffre",
+      "titre": "Atestado de quociente familiar da Caf",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Cópia das vacinas da criança",
+      "categorie": "sante"
+    },
+    {
+      "type": "depense",
+      "titre": "Centro de lazer",
+      "categorie": "loisirs"
+    }
+  ],
+  "aConfirmer": [
+    "A confirmar localmente: a existência, a tabela e as condições de um auxílio de tempo livre (aide aux temps libres) da Caf de la Guadeloupe não puderam ser verificadas on-line. Informe-se na sua conta Caf ou no atendimento.",
+    "A confirmar localmente: as condições dos auxílios para férias da Caf de la Guadeloupe (quociente familiar, estruturas credenciadas, participação no VACAF, auxílios para férias em família).",
+    "A confirmar localmente: os documentos exatos da ficha de inscrição, definidos por cada prefeitura ou centro.",
+    "Saint-Martin e Saint-Barthélemy são coletividades distintas de Guadalupe: os centros de lazer e os auxílios locais podem ser organizados de outra forma lá."
+  ],
+  "motsCles": [
+    "centro de lazer",
+    "ALSH",
+    "férias",
+    "colônia de férias",
+    "ATL",
+    "quarta-feira",
+    "contraturno"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "monenfant.fr, Centros de lazer",
+      "url": "https://monenfant.fr/les-accueils-de-loisirs"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F767 Vacinação e admissão em coletividade",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F767",
+      "verifieLe": "2026-01-06"
+    },
+    {
+      "titre": "Caf.fr, página da Caf de la Guadeloupe",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-guadeloupe"
+    }
+  ]
+}

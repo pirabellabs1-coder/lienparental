@@ -956,20 +956,21 @@
       },
       "territory": {
         "metaTitle": "Guia parental: {territory}",
-        "metaDescription": "{count} fichas práticas para pais em {territory}: escola, saúde, auxílios da Caf, nascimento, separação, moradia. Etapas, documentos e órgãos, com fontes oficiais.",
+        "metaDescription": "{count} fichas práticas para pais {code, select, guyane {na {territory}} martinique {na {territory}} reunion {na {territory}} france {na {territory}} other {em {territory}}}: escola, saúde, auxílios da Caf, nascimento, separação, moradia. Etapas, documentos e órgãos, com fontes oficiais.",
         "title": "Guia parental: {territory}",
-        "lead": "{count, plural, one {# ficha prática} other {# fichas práticas}} para pais em {territory}, organizadas por tema, e percursos para fazer os trâmites na ordem certa.",
+        "lead": "{count, plural, one {# ficha prática} other {# fichas práticas}} para pais {code, select, guyane {na {territory}} martinique {na {territory}} reunion {na {territory}} france {na {territory}} other {em {territory}}}, organizadas por tema, e percursos para fazer os trâmites na ordem certa.",
         "parcoursTitle": "Percursos passo a passo",
         "parcoursHint": "Os trâmites a seguir, em ordem, nos grandes momentos da vida familiar.",
         "stepsCount": "{count, plural, one {# etapa} other {# etapas}}",
         "categoriesTitle": "Temas",
-        "fichesTitle": "Todas as fichas"
+        "fichesTitle": "Todas as fichas",
+        "change": "Mudar de território"
       },
       "category": {
         "metaTitle": "{category} · Guia {territory}",
         "metaDescription": "Guia parental {territory}, “{category}”: {count, plural, one {# ficha prática} other {# fichas práticas}} com as etapas, os documentos a reunir e os órgãos a contatar, verificadas em fontes oficiais.",
         "title": "{category}",
-        "lead": "{count, plural, =0 {Nenhuma ficha por enquanto} one {# ficha prática} other {# fichas práticas}} para pais em {territory}.",
+        "lead": "{count, plural, =0 {Nenhuma ficha por enquanto} one {# ficha prática} other {# fichas práticas}} para pais {code, select, guyane {na {territory}} martinique {na {territory}} reunion {na {territory}} france {na {territory}} other {em {territory}}}.",
         "empty": "Nenhuma ficha nesta categoria por enquanto.",
         "others": "Outros temas"
       },

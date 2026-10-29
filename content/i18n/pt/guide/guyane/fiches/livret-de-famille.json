@@ -59,12 +59,12 @@
     "A confirmar localmente: se a sua prefeitura pode encaminhar um pedido de atualização a outro município (nem todas fazem isso)."
   ],
   "motsCles": ["livro de família", "livret de famille", "segundo livro", "segunda via", "perda", "divórcio", "separação", "atualização"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F11991 Livro de família no nascimento do primeiro filho", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-08-12" },
-    { "titre": "Service-public.gouv.fr, F11996 Segundo livro em caso de divórcio ou separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996", "verifieLe": "2026-04-21" },
-    { "titre": "Service-public.gouv.fr, F11994 Segundo livro em caso de perda, roubo ou dano", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994", "verifieLe": "2026-10-08" },
-    { "titre": "Service-public.gouv.fr, F18910 Atualização do livro de família", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910", "verifieLe": "2025-02-26" },
-    { "titre": "Service-public.gouv.fr, F39789 É possível ter vários livros de família?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39789", "verifieLe": "2026-08-04" }
+    { "titre": "Service-public.gouv.fr, F11991 Livro de família no nascimento do primeiro filho", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11991", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11996 Segundo livro em caso de divórcio ou separação", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11996", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F11994 Segundo livro em caso de perda, roubo ou dano", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F11994", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F18910 Atualização do livro de família", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F18910", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F39789 É possível ter vários livros de família?", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39789", "verifieLe": "2026-10-29" }
   ]
 }

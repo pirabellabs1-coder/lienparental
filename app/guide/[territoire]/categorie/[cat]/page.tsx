@@ -79,7 +79,7 @@ export default async function GuideCategoryPublicPage({ params }: Props) {
           </span>
           <div className="min-w-0">
             <h1 className={H1}>{t('category.title', { category: label, territory: territoire.nom })}</h1>
-            <p className="mt-2 text-[15.5px] leading-relaxed text-night-700">{t('category.lead', { count: fiches.length, territory: territoire.nom })}</p>
+            <p className="mt-2 text-[15.5px] leading-relaxed text-night-700">{t('category.lead', { count: fiches.length, territory: territoire.nom, code: territoire.code })}</p>
           </div>
         </header>
 

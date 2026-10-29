@@ -1,0 +1,165 @@
+{
+  "slug": "prime-naissance-paje",
+  "territoire": "martinique",
+  "categorie": "naissance",
+  "titre": "Birth grant and basic allowance (Paje)",
+  "resume": "The two Caf benefits linked to a baby's arrival: income conditions, 2026 amounts, payment dates and what you must report in time.",
+  "aQuoiCaSert": "The Paje (prestation d'accueil du jeune enfant, early childhood benefit) includes in particular the birth grant (prime à la naissance), paid once during pregnancy, and the basic allowance (allocation de base), paid every month until the child turns 3. They help cover the costs of a baby's arrival and of raising a young child. Both are paid by the Caf (Caisse d'allocations familiales, the family benefits office) and are subject to income conditions.",
+  "quiEstConcerne": [
+    "Parents-to-be and parents of a child under 3 whose income does not exceed the limits.",
+    "Families living in France, including Martinique, for more than 9 months of the year."
+  ],
+  "aSavoir": [
+    "Birth grant: €1,093.11 net per expected child (service-public.gouv.fr, amount checked as of April 1, 2026).",
+    "For the grant, the pregnancy must be declared before the end of the 3rd month and the first prenatal exam must have taken place. It is paid before the last day of the calendar month following the 6th month of pregnancy.",
+    "2026 limits (2024 net categorical income) for 1 child: €49,054 for a two-income couple or a single parent, €37,118 for a single-income couple. Plus €8,908 per additional child.",
+    "Basic allowance: €198.16 per month at the full rate or €99.08 at the partial rate depending on income. It is paid from the month after the birth until the month before the child turns 3.",
+    "In the overseas departments, including Martinique, the basic allowance cannot be combined with family allowances (allocations familiales) or their increases for one dependent child, nor with the family supplement (complément familial) (service-public.gouv.fr).",
+    "Separated parents: the Paje is not shared between parents, even under shared residence. It is paid in full to the parent designated as the beneficiary (service-public.gouv.fr)."
+  ],
+  "documents": [
+    {
+      "id": "declaration-grossesse",
+      "libelle": "Pregnancy declaration",
+      "detail": "Made by the doctor or midwife at the first prenatal exam, before the end of the 3rd month. It is sent to the Assurance Maladie (French public health insurance) and the Caf. Keep your copy or the acknowledgment.",
+      "coffre": "sante"
+    },
+    {
+      "id": "identite-parents",
+      "libelle": "ID or residence permit of each parent",
+      "detail": "Valid copy, requested if you are not yet a Caf beneficiary.",
+      "coffre": "finances"
+    },
+    {
+      "id": "rib",
+      "libelle": "Bank details (RIB) of the beneficiary parent",
+      "detail": "In your name, for the payment.",
+      "coffre": "finances"
+    },
+    {
+      "id": "avis-imposition",
+      "libelle": "2025 tax notice on 2024 income",
+      "detail": "Copy. Downloadable from your impots.gouv.fr account. Your income is used to check the limits.",
+      "coffre": "finances"
+    },
+    {
+      "id": "acte-naissance",
+      "libelle": "Child's birth certificate or updated family record book (livret de famille)",
+      "detail": "Copy, to report the birth to the Caf. Certificate free on service-public.gouv.fr or from the town hall (mairie) of the place of birth.",
+      "coffre": "finances"
+    },
+    {
+      "id": "notification-caf",
+      "libelle": "Caf notices of entitlement",
+      "detail": "Available in your Mon Compte area on caf.fr.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Have the first prenatal exam before the end of the 3rd month",
+      "detail": "The health professional makes the pregnancy declaration. It is what opens entitlement to the grant."
+    },
+    {
+      "titre": "Create or update your account on caf.fr",
+      "detail": "If you are not yet a Caf beneficiary, apply for benefits online. Report the pregnancy if the Caf has not received it."
+    },
+    {
+      "titre": "Check before sending your file",
+      "detail": "Pregnancy declaration properly sent, contact and bank details up to date, income declared, exact family situation (couple, single parent). An incorrectly reported situation can delay or distort the calculation."
+    },
+    {
+      "titre": "Report the birth to the Caf",
+      "detail": "In your online account, under change of situation, as soon as the birth certificate has been drawn up."
+    },
+    {
+      "titre": "Track your payments",
+      "detail": "The grant is paid before the last day of the calendar month following the 6th month of pregnancy. The basic allowance is paid every month from the month after the birth."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Caf de la Martinique",
+      "detail": "Online procedures in your Mon Compte account. In-person service: addresses and appointments in the Caf de la Martinique section of caf.fr.",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Birth grant (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550"
+    },
+    {
+      "titre": "Paje basic allowance (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552"
+    },
+    {
+      "titre": "Shared residence and family benefits (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248"
+    }
+  ],
+  "actions": [
+    {
+      "type": "rappel",
+      "titre": "First prenatal exam and pregnancy declaration before the end of the 3rd month",
+      "evenement": "sante"
+    },
+    {
+      "type": "rappel",
+      "titre": "Report the birth to the Caf",
+      "evenement": "autre"
+    },
+    {
+      "type": "coffre",
+      "titre": "Pregnancy declaration",
+      "categorie": "sante"
+    },
+    {
+      "type": "coffre",
+      "titre": "Caf Paje notice of entitlement",
+      "categorie": "finances"
+    }
+  ],
+  "datesLimites": [
+    {
+      "libelle": "Pregnancy declaration before the end of the 3rd month",
+      "detail": "Condition for receiving the birth grant."
+    },
+    {
+      "libelle": "Basic allowance until the month before the child turns 3"
+    }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally with the Caf de la Martinique: the national guidance gives no amount or limit specific to Martinique, and the Caf chooses between the basic allowance and family allowances according to the non-combination rule that applies in the overseas departments (DOM)."
+  ],
+  "motsCles": [
+    "Paje",
+    "birth grant",
+    "basic allowance",
+    "pregnancy",
+    "Caf",
+    "baby"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F2550 Birth grant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2550",
+      "verifieLe": "2026-04-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2552 Paje basic allowance",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2552",
+      "verifieLe": "2026-04-01"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F21248 Shared residence and family benefits",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21248",
+      "verifieLe": "2026-03-13"
+    },
+    {
+      "titre": "Caf de la Martinique (caf.fr)",
+      "url": "https://www.caf.fr/allocataires/caf-de-la-martinique-97200"
+    }
+  ]
+}

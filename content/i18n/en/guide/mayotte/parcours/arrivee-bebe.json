@@ -1,0 +1,21 @@
+{
+  "slug": "arrivee-bebe",
+  "territoire": "mayotte",
+  "titre": "A baby's arrival",
+  "resume": "From acknowledging the child to choosing childcare: the administrative steps of the first months in Mayotte.",
+  "ordre": 3,
+  "elements": [
+    { "id": "reconnaissance", "titre": "Acknowledge the child (unmarried parents)", "detail": "In Mayotte, apart from the birth registration, acknowledgment is done at the Mamoudzou town hall (mairie).", "fiche": "reconnaissance-enfant" },
+    { "id": "prestations", "titre": "Know which benefits exist in Mayotte", "detail": "The prime à la naissance (birth grant) and the Paje allocation de base (basic allowance) are not yet paid in Mayotte (expected from 2027 for the basic allowance, in 2029 for the grant).", "fiche": "prestations-familiales-mayotte" },
+    { "id": "declaration", "titre": "Register the birth at the town hall (mairie)", "detail": "Within 5 days.", "fiche": "declaration-naissance" },
+    { "id": "livret-famille", "titre": "Get or update the family record book (livret de famille)", "fiche": "livret-de-famille" },
+    { "id": "acte-naissance", "titre": "Know how to get the child's birth certificate", "detail": "It is free, and it will be requested for many procedures.", "fiche": "acte-naissance" },
+    { "id": "conge-paternite", "titre": "Take paternity and childcare leave", "fiche": "conge-paternite" },
+    { "id": "carte-vitale", "titre": "Register the baby with health insurance (CSSM, Mayotte's social security fund)", "fiche": "rattacher-enfant-carte-vitale" },
+    { "id": "mutuelle", "titre": "Add the baby to the top-up health insurance (mutuelle) or the C2S (Complémentaire santé solidaire)", "fiche": "mutuelle-enfant" },
+    { "id": "pmi", "titre": "Arrange check-ups and vaccinations (doctor or PMI, the mother and child health service)", "fiche": "vaccinations-pmi" },
+    { "id": "cssm", "titre": "Report the birth to the CSSM and check family allowances", "detail": "In Mayotte, they are paid from the first child.", "fiche": "allocations-familiales-mayotte" },
+    { "id": "mode-garde", "titre": "Look for childcare", "detail": "Places are scarce: plan ahead from pregnancy.", "fiche": "mode-de-garde-petite-enfance" },
+    { "id": "epargne", "titre": "Open a savings account for the child", "fiche": "livret-epargne-mineur" }
+  ]
+}

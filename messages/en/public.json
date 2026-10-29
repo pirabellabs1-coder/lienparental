@@ -963,7 +963,8 @@
         "parcoursHint": "The procedures to follow, in order, for the big moments of family life.",
         "stepsCount": "{count, plural, one {# step} other {# steps}}",
         "categoriesTitle": "Topics",
-        "fichesTitle": "All guides"
+        "fichesTitle": "All guides",
+        "change": "Change territory"
       },
       "category": {
         "metaTitle": "{category} · {territory} guide",

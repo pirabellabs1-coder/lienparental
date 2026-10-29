@@ -1,0 +1,180 @@
+{
+  "slug": "compte-bancaire-adolescent",
+  "territoire": "reunion",
+  "categorie": "argent",
+  "titre": "Opening a bank account for my teenager",
+  "resume": "At what age, with which card, the parents' consent (including separated parents) and the list of documents to bring to the bank so you don't make the trip for nothing.",
+  "aQuoiCaSert": "An account in your teenager's name lets them receive pocket money or wages from a part-time job, and learn to manage a budget with a card suited to their age. A minor who is not emancipated cannot open an account alone: their legal representatives, usually their parents, act on their behalf. The parents remain responsible for managing this money.",
+  "quiEstConcerne": [
+    "Parents of a teenager aged 12 to 17 who want to open an account or a savings account with a card for them.",
+    "Separated parents who need to agree on opening the child's account or on the transactions made on it."
+  ],
+  "aSavoir": [
+    "From birth, the parents can open an account in the child's name, without the child's consent.",
+    "From age 12: with your consent, the young person can request a Livret jeune (a youth savings account) and make deposits and withdrawals. Withdrawals can be limited and your signature is required.",
+    "From age 16: with your permission, they can open a bank account with a card and checkbook, and withdraw money freely.",
+    "Opening an account is free, but the bank may charge account or card fees: ask for the price information before signing.",
+    "Parents may only use the child's money for expenses that directly concern the child (education, upkeep). When the child turns 16, they must account to the child for this use.",
+    "Parents who share parental authority, even if separated: changing a minor's account is an act of disposal that requires both parents' agreement (Cour de cassation, France's highest court, June 12, 2025, no. 24-13.604). The bank may therefore ask for both signatures.",
+    "If you hold parental authority alone by court decision, bring that decision to the bank."
+  ],
+  "documents": [
+    {
+      "id": "identite-ado",
+      "libelle": "Teenager's ID document (valid original)",
+      "detail": "ID card or passport. If it has expired or been lost, get a new one from the town hall (mairie) first.",
+      "coffre": "finances"
+    },
+    {
+      "id": "identite-parent-1",
+      "libelle": "First parent's ID document (original)",
+      "detail": "Valid ID card, passport or residence permit, with photo.",
+      "coffre": "finances"
+    },
+    {
+      "id": "identite-parent-2",
+      "libelle": "Second parent's ID document",
+      "detail": "Often requested when both parents hold parental authority. Ask the bank whether they need to come and sign.",
+      "coffre": "finances"
+    },
+    {
+      "id": "filiation",
+      "libelle": "Family record book (livret de famille) or the child's birth certificate showing parentage",
+      "detail": "Proves you are the parents. Free birth certificate online or from the town hall where the child was born.",
+      "coffre": "finances"
+    },
+    {
+      "id": "domicile",
+      "libelle": "Recent proof of address",
+      "detail": "Tax notice, rent receipt, water or electricity bill. If someone is housing you, the bank may ask for a certificate of accommodation.",
+      "coffre": "finances"
+    },
+    {
+      "id": "jugement",
+      "libelle": "Court decision or agreement on parental authority (copy)",
+      "detail": "If you hold parental authority alone or if a decision sets out the child's situation.",
+      "coffre": "jaf"
+    },
+    {
+      "id": "accord-autre-parent",
+      "libelle": "Written, signed consent from the other parent",
+      "detail": "If the other parent cannot come and the bank accepts it: dated, signed letter, with a copy of their ID document.",
+      "coffre": "finances"
+    },
+    {
+      "id": "contrat",
+      "libelle": "Account opening contract and fee terms",
+      "detail": "Given at signing. Keep them to keep track of fees and card limits.",
+      "coffre": "finances"
+    }
+  ],
+  "etapes": [
+    {
+      "titre": "Choose the right product for their age",
+      "detail": "Livret jeune from age 12, an account with a card and checkbook from age 16 with your permission. Compare the fees and limits."
+    },
+    {
+      "titre": "Talk it over with the other parent",
+      "detail": "If you share parental authority, agree on the product, the card and the limits. A written agreement avoids deadlocks."
+    },
+    {
+      "titre": "Book an appointment at the bank",
+      "detail": "Ask for the exact list of documents and whether both parents and the teenager must be present."
+    },
+    {
+      "titre": "Check before you go",
+      "detail": "Original ID of the teenager and of each parent, family record book or birth certificate, recent proof of address, judgment or agreement if you are separated, written consent of the other parent if absent."
+    },
+    {
+      "titre": "Set up the card and limits",
+      "detail": "Ask the bank for a card that checks the balance at each payment if you want to avoid any overdraft, and set limits."
+    },
+    {
+      "titre": "Store the contract in the Vault",
+      "detail": "With the bank details (RIB) and the price information."
+    }
+  ],
+  "ou": [
+    {
+      "nom": "Your bank",
+      "detail": "Branch or online bank: offers and required documents vary from one bank to another."
+    },
+    {
+      "nom": "IEDOM, Réunion branch",
+      "detail": "In the overseas departments, the IEDOM (Institut d'émission des départements d'outre-mer, the overseas central bank institute) handles the right to a bank account if a bank refuses to open an account.",
+      "url": "https://www.iedom.fr/rubrique20"
+    }
+  ],
+  "liens": [
+    {
+      "titre": "Can a minor have a bank account? (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035"
+    },
+    {
+      "titre": "Individual bank account: documents to provide (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413"
+    },
+    {
+      "titre": "A minor's account: both parents' consent (service-public.gouv.fr)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386"
+    }
+  ],
+  "actions": [
+    {
+      "type": "coffre",
+      "titre": "Teenager's bank account contract",
+      "categorie": "finances"
+    },
+    {
+      "type": "coffre",
+      "titre": "Other parent's written consent for the account",
+      "categorie": "finances"
+    },
+    {
+      "type": "calendrier",
+      "titre": "Bank appointment: teenager's account",
+      "evenement": "rdv"
+    },
+    {
+      "type": "depense",
+      "titre": "Teenager's card or account fees",
+      "categorie": "frais-administratifs"
+    }
+  ],
+  "aConfirmer": [
+    "Each bank sets its own conditions: minimum age for a card, presence of both parents, how recent the proof of address must be. Ask for the exact list before the appointment.",
+    "To be confirmed locally: youth offers available in bank branches in Réunion and the related fees."
+  ],
+  "motsCles": [
+    "bank account",
+    "teenager",
+    "minor",
+    "bank card",
+    "pocket money",
+    "livret jeune",
+    "bank"
+  ],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    {
+      "titre": "Service-public.gouv.fr, F21035 Can a minor have a bank account or a savings product?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21035",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, F2413 Individual bank account",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2413",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "Service-public.gouv.fr, news item A18386 A minor's account: both parents' consent (July 8, 2025)",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18386",
+      "verifieLe": "2026-10-29"
+    },
+    {
+      "titre": "IEDOM, Réunion branch",
+      "url": "https://www.iedom.fr/rubrique20",
+      "verifieLe": "2026-10-29"
+    }
+  ]
+}

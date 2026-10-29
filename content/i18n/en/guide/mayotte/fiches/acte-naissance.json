@@ -1,0 +1,63 @@
+{
+  "slug": "acte-naissance",
+  "territoire": "mayotte",
+  "categorie": "naissance",
+  "titre": "Getting a birth certificate",
+  "resume": "Full copy or extract, with or without parentage: who can request it, how to get it free of charge at the town hall, by post or online, and what to do if a certificate drawn up in Mayotte contains an error.",
+  "aQuoiCaSert": "The birth certificate (acte de naissance) proves your child's identity and parentage (filiation). You are often asked for it for a first ID card or passport, court proceedings or some registrations. The request is always free. For a birth in Mayotte, the certificate is issued by the town hall (mairie) of the town of birth.",
+  "quiEstConcerne": [
+    "Parents who need their minor child's birth certificate (they are the child's legal representatives).",
+    "Anyone who needs their own birth certificate, or that of an ancestor, a descendant, their spouse or PACS partner (civil partnership)."
+  ],
+  "aSavoir": [
+    "There are three formats. Full copy (copie intégrale): the whole certificate, with the parents and the notes in the margin. Extract with parentage (extrait avec filiation): a summary including the parents. Extract without parentage (extrait sans filiation): identity, date and place of birth only.",
+    "Full copy and extract with parentage: reserved for the person concerned or their legal representative, their spouse or PACS partner, their ancestors and descendants, and certain professionals. Anyone can request the extract without parentage.",
+    "The request is free: never pay a private website to get a birth certificate.",
+    "In person, at the town hall of the place of birth, the certificate is handed over immediately on presentation of ID.",
+    "French child or parent born abroad: the certificate is issued by the Service central d'état civil (Scec, the central civil registry office) in Nantes, online or by post only.",
+    "Separated parents: each parent can request a full copy of their child's certificate on their own, without the other parent's agreement.",
+    "Mayotte's civil registry review commission (commission de révision de l'état civil), responsible for reconstructing old records, has not been active since around 2011. An error in a certificate is now corrected through the civil registrar (officier d'état civil) or the public prosecutor (procureur de la République)."
+  ],
+  "documents": [
+    { "id": "infos-naissance", "libelle": "The exact details of the birth", "detail": "Child's surname, first names, date and place of birth, surnames and first names of both parents. Copy them from the family record book (livret de famille).", "coffre": "autres" },
+    { "id": "identite-demandeur", "libelle": "ID of the requesting parent (original)", "detail": "Required at the town hall desk.", "coffre": "autres" },
+    { "id": "livret-famille", "libelle": "Family record book (original or copy)", "detail": "Useful to prove your link with the child.", "coffre": "autres" },
+    { "id": "acte-naissance", "libelle": "Full copy of the birth certificate received", "detail": "Note the date of issue: many procedures require a certificate less than 3 months old.", "coffre": "autres" }
+  ],
+  "etapes": [
+    { "titre": "Check whether you really need it", "detail": "Ask the organization which format it wants (usually the full copy) and whether it must be less than 3 months old." },
+    { "titre": "Go to or write to the town hall of the place of birth", "detail": "By post on plain paper: type of certificate wanted, surname, first names, date of birth, parents' names, your link with the child and your address." },
+    { "titre": "Or apply online", "detail": "On service-public.gouv.fr, free service \"Demande d'acte de naissance\", if the town of birth is offered there." },
+    { "titre": "Check before going to the town hall", "detail": "The right town hall (the one in the place of birth), original ID, family record book, exact names of both parents, type of certificate wanted." },
+    { "titre": "Born abroad: go through the Scec in Nantes", "detail": "Apply online on service-public.gouv.fr or by post to the Service central d'état civil, 11 rue de la Maison Blanche, 44941 Nantes Cedex 09." },
+    { "titre": "Store the certificate you receive", "detail": "Scan it into the Vault and note its date." }
+  ],
+  "ou": [
+    { "nom": "Town hall of the place of birth, civil registry office (état civil)", "detail": "Issued immediately at the desk, on presentation of ID." },
+    { "nom": "Service-public.gouv.fr, online birth certificate request", "detail": "Free, for a birth in France if the town is connected.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406" },
+    { "nom": "Service central d'état civil (Scec), Nantes", "detail": "For French people born abroad. Online or by post.", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1405" }
+  ],
+  "liens": [
+    { "titre": "Birth certificate: full copy or extract (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427" },
+    { "titre": "Online birth certificate request (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Full copy of the child's birth certificate", "categorie": "autres" },
+    { "type": "rappel", "titre": "Birth certificate: valid for 3 months for procedures", "evenement": "autre" },
+    { "type": "calendrier", "titre": "Town hall visit: picking up a birth certificate", "evenement": "rdv" }
+  ],
+  "datesLimites": [
+    { "libelle": "Less than 3 months old", "detail": "Age often required for the certificate provided." }
+  ],
+  "aConfirmer": [
+    "To be confirmed locally: which towns in Mayotte are offered for the online request and connected to the electronic exchange of certificates (the list could not be accessed).",
+    "To be confirmed locally: the procedure for an old certificate drawn up under local-law civil status (état civil de droit local), or a certificate containing an error, with the town hall or the public prosecutor of the tribunal judiciaire (judicial court) of Mamoudzou."
+  ],
+  "motsCles": ["birth certificate", "full copy", "extract", "parentage", "civil registry", "town hall", "Scec"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F1427 Birth certificate", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1427", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, R1406 Online birth certificate request", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1406", "verifieLe": "2026-10-29" },
+    { "titre": "Assemblée nationale, answer to question n° 65409 (Mayotte civil registry review commission)", "url": "https://www.assemblee-nationale.fr/dyn/13/questions/QANR5L13QE65409.pdf", "verifieLe": "2026-10-29" }
+  ]
+}

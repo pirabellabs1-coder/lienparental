@@ -1,0 +1,71 @@
+{
+  "slug": "allocation-soutien-familial",
+  "territoire": "reunion",
+  "categorie": "aides",
+  "titre": "Allocation de soutien familial (ASF)",
+  "resume": "200,78 € par mois et par enfant versés par la Caf au parent qui élève seul son enfant quand l'autre parent ne paie pas ou peu de pension. Les pièces à réunir et le délai de 4 mois à ne pas manquer.",
+  "aQuoiCaSert": "L'ASF aide le parent qui vit seul avec son enfant lorsque l'autre parent ne participe plus à son entretien, ou verse une pension inférieure au montant de l'ASF. Si une pension a été fixée et n'est pas payée, la Caf verse l'ASF en avance puis se retourne elle-même contre le parent qui ne paie pas. Si aucune pension n'a été fixée, l'ASF est versée pendant 4 mois, le temps de saisir le juge.",
+  "quiEstConcerne": [
+    "Le parent qui vit seul (sans conjoint, concubin ni partenaire de Pacs), réside en France et a au moins un enfant à charge.",
+    "Si l'autre parent ne participe plus à l'entretien de l'enfant depuis au moins 1 mois, ou verse une pension inférieure à 200,78 € par mois et par enfant.",
+    "Si l'autre parent est hors d'état de payer : la Caf peut aussi verser l'ASF après avoir vérifié sa situation."
+  ],
+  "aSavoir": [
+    "Montant : 200,78 € par mois et par enfant depuis la revalorisation du 1er avril 2026 (service-public.gouv.fr, page qui couvre la métropole et l'outre-mer).",
+    "ASF différentielle : si la pension reçue est inférieure à 200,78 €, la Caf verse la différence. Elle n'est pas versée si l'écart est inférieur à 15 €, et elle est payée en une fois tous les 3 mois.",
+    "Pension fixée mais impayée (jugement, convention homologuée, convention de divorce déposée chez un notaire, titre délivré par la Caf) : l'ASF est une avance et la Caf engage le recouvrement.",
+    "Aucune pension fixée : l'ASF est versée 4 mois seulement. Pour la garder, saisissez le juge aux affaires familiales dans ce délai, ou demandez la révision d'une décision qui ne fixe pas de pension.",
+    "L'ASF est supprimée dès que vous vivez en couple : déclarez tout changement rapidement pour éviter un trop-perçu à rembourser.",
+    "L'accord de l'autre parent n'est pas nécessaire pour demander l'ASF."
+  ],
+  "documents": [
+    { "id": "cerfa-12038", "libelle": "Demande d'allocation de soutien familial (cerfa n° 12038)", "detail": "Original signé, ou demande en ligne depuis votre espace Caf. Gardez une copie.", "coffre": "finances" },
+    { "id": "cerfa-11423", "libelle": "Déclaration de situation (cerfa n° 11423)", "detail": "À joindre à la demande d'ASF si vous n'êtes pas encore allocataire.", "coffre": "finances" },
+    { "id": "identite", "libelle": "Votre pièce d'identité (copie)", "detail": "Carte d'identité, passeport ou titre de séjour en cours de validité.", "coffre": "finances" },
+    { "id": "livret-famille", "libelle": "Livret de famille ou acte de naissance de chaque enfant (copie)", "detail": "L'acte de naissance se demande gratuitement auprès de la mairie du lieu de naissance, en ligne sur service-public.gouv.fr.", "coffre": "jaf" },
+    { "id": "jugement", "libelle": "Jugement, convention homologuée ou titre fixant la pension (copie), s'il existe", "detail": "Si vous l'avez perdu, demandez une copie au greffe du tribunal, à l'avocat ou au notaire.", "coffre": "jaf" },
+    { "id": "preuves-impayes", "libelle": "Preuves des pensions non payées ou payées en partie", "detail": "Relevés bancaires, échanges écrits, courrier de relance. Notez les mois et montants manquants.", "coffre": "finances" },
+    { "id": "rib", "libelle": "RIB à votre nom", "detail": "Si vous n'êtes pas encore allocataire ou si vous avez changé de compte.", "coffre": "finances" },
+    { "id": "saisine-jaf", "libelle": "Preuve de saisine du juge aux affaires familiales", "detail": "Copie de la requête ou accusé du greffe, si aucune pension n'est fixée. À transmettre à la Caf avant la fin des 4 mois.", "coffre": "jaf" }
+  ],
+  "etapes": [
+    { "titre": "Vérifiez que vous êtes dans les conditions", "detail": "Vous vivez seul avec l'enfant et l'autre parent ne paie rien depuis au moins 1 mois, ou paie moins de 200,78 € par enfant. Le simulateur de la Caf permet d'estimer vos droits." },
+    { "titre": "Faites la demande", "detail": "En ligne depuis votre espace Caf, ou avec le cerfa n° 12038 (et la déclaration de situation si vous n'êtes pas allocataire)." },
+    { "titre": "Vérifiez avant d'envoyer votre dossier", "detail": "Formulaires datés et signés, pièce d'identité lisible, livret de famille ou acte de naissance de chaque enfant, jugement ou convention s'il existe, preuves d'impayés mois par mois, RIB à jour. Gardez une copie de tout." },
+    { "titre": "Envoyez le dossier à la Caf de La Réunion", "detail": "Ou à la MSA si vous relevez du régime agricole." },
+    { "titre": "Sans pension fixée, saisissez le juge aux affaires familiales dans les 4 mois", "detail": "C'est la condition pour continuer à percevoir l'ASF. Voir la fiche « Saisir le juge aux affaires familiales », puis envoyez la preuve à la Caf." },
+    { "titre": "Suivez les paiements dans le Journal", "detail": "Notez chaque pension reçue ou manquante avec le justificatif : utile pour la Caf, l'ARIPA ou le juge." }
+  ],
+  "ou": [
+    { "nom": "Caf de La Réunion", "detail": "Espace en ligne caf.fr ou application Caf.", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" },
+    { "nom": "MSA", "detail": "Si vous relevez du régime agricole." },
+    { "nom": "ARIPA, service public des pensions alimentaires", "detail": "Recouvrement des pensions impayées et intermédiation financière.", "url": "https://pension-alimentaire.caf.fr/usagers" }
+  ],
+  "liens": [
+    { "titre": "Allocation de soutien familial pour parents séparés (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815" },
+    { "titre": "Intermédiation financière des pensions alimentaires (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407" },
+    { "titre": "Caf de La Réunion", "url": "https://www.caf.fr/allocataires/caf-de-la-reunion" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Demande d'ASF envoyée à la Caf", "categorie": "finances" },
+    { "type": "coffre", "titre": "Jugement ou convention fixant la pension", "categorie": "jaf" },
+    { "type": "coffre", "titre": "Preuves des pensions impayées", "categorie": "finances" },
+    { "type": "coffre", "titre": "Preuve de saisine du juge aux affaires familiales", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Saisir le juge avant la fin des 4 mois d'ASF", "evenement": "rdv" },
+    { "type": "rappel", "titre": "Déclarer à la Caf tout changement (remise en couple, pension reçue)", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "4 mois pour saisir le juge si aucune pension n'est fixée", "detail": "Sinon le versement de l'ASF s'arrête à la fin du 4e mois." },
+    { "libelle": "1 mois sans participation de l'autre parent", "detail": "Durée minimale à partir de laquelle l'ASF peut être demandée." }
+  ],
+  "aConfirmer": [
+    "La liste exacte des pièces dépend de votre situation : la Caf de La Réunion peut en demander d'autres.",
+    "À confirmer localement : adresses, horaires et prise de rendez-vous des accueils de la Caf de La Réunion."
+  ],
+  "motsCles": ["ASF", "parent isolé", "Caf", "pension impayée", "allocation", "parent seul"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F815 Allocation de soutien familial (parents séparés)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F815", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F36407 Intermédiation financière des pensions alimentaires", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36407", "verifieLe": "2026-10-29" }
+  ]
+}

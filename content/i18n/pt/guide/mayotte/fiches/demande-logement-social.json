@@ -1,0 +1,65 @@
+{
+  "slug": "demande-logement-social",
+  "territoire": "mayotte",
+  "categorie": "logement",
+  "titre": "Pedir moradia social",
+  "resume": "Fazer um pedido de moradia social em Mayotte, obter seu número único, reunir os documentos certos (inclusive os ligados a uma separação) e renovar o pedido todo ano.",
+  "aQuoiCaSert": "Moradia social é uma moradia com aluguel controlado, atribuída conforme a renda. O pedido, on-line ou num posto de atendimento, dá a você um número único (numéro unique), que marca o início da antiguidade do seu pedido. Após uma separação, é possível fazer contar apenas a sua própria renda, desde que você apresente os comprovantes certos.",
+  "quiEstConcerne": [
+    "As famílias cuja renda não ultrapassa os limites fixados para os departamentos ultramarinos, incluindo Mayotte.",
+    "Os pais que se separam e precisam de uma nova moradia com os filhos.",
+    "Os estrangeiros com título de residência ou protocolo (récépissé) válido."
+  ],
+  "aSavoir": [
+    "Limites nos DOM (departamentos ultramarinos), incluindo Mayotte, para um pedido feito em 2026 (renda de 2024, caso geral): 27.382 € para 1 pessoa, 36.567 € para 2, 43.973 € para 3 ou uma pessoa sozinha com 1 dependente, 53.088 € para 4 ou uma pessoa sozinha com 2 dependentes, 62.450 € para 5, 70.383 € para 6, mais 7.851 € por pessoa adicional.",
+    "Separação: para que só a sua renda seja considerada, anexe um comprovante como o ato que aciona o juiz de família (juge aux affaires familiales, JAF), a sentença de divórcio ou a certidão de nascimento com a dissolução do PACS (união civil).",
+    "Nos departamentos ultramarinos, é preciso um pedido por departamento: um pedido em Mayotte só vale para Mayotte.",
+    "O pedido deve ser renovado todo ano; sem renovação, ele é cancelado."
+  ],
+  "documents": [
+    { "id": "identite", "libelle": "Documento de identidade do requerente", "detail": "Cópia frente e verso. Para quem não é da União Europeia: título de residência ou protocolo válido.", "coffre": "courriers" },
+    { "id": "identite-cotitulaire", "libelle": "Documento de identidade ou título de residência de cada adulto a alojar", "coffre": "courriers" },
+    { "id": "avis-imposition", "libelle": "Aviso de imposto 2025 sobre a renda de 2024 de cada pessoa a alojar", "detail": "Cópia.", "coffre": "finances" },
+    { "id": "justificatif-separation", "libelle": "Comprovante de separação", "detail": "Ato que aciona o juiz de família, sentença de divórcio ou certidão de nascimento com a dissolução do PACS.", "coffre": "jaf" },
+    { "id": "jugement-residence", "libelle": "Sentença ou acordo que fixa a residência dos filhos", "detail": "Cópia.", "coffre": "jaf" },
+    { "id": "livret-famille", "libelle": "Livro de família (livret de famille) ou certidões de nascimento dos filhos", "detail": "Cópia.", "coffre": "courriers" },
+    { "id": "situation-logement", "libelle": "Comprovante da sua situação de moradia atual", "detail": "Contrato de aluguel, declaração de hospedagem ou aviso de saída do proprietário.", "coffre": "courriers" },
+    { "id": "attestation-enregistrement", "libelle": "Comprovante de registro com o número único", "detail": "Guarde-o com cuidado.", "coffre": "courriers" }
+  ],
+  "etapes": [
+    { "titre": "Crie seu pedido", "detail": "On-line em service-public.gouv.fr ou demande-logement-social.gouv.fr, ou com o formulário cerfa n° 14069 entregue num posto de atendimento." },
+    { "titre": "Confira antes de enviar o pedido", "detail": "Documento de identidade ou título de residência de cada adulto, aviso de imposto de cada um, comprovante de separação e sentença sobre a residência dos filhos se você é separado, livro de família. Todas as pessoas a alojar devem ser declaradas." },
+    { "titre": "Pegue o comprovante de registro", "detail": "Ele traz seu número único e a data do pedido." },
+    { "titre": "Atualize o pedido assim que sua situação mudar", "detail": "Separação, nascimento, novo endereço, queda de renda." },
+    { "titre": "Renove todo ano", "detail": "Sem renovação, o pedido é cancelado." }
+  ],
+  "ou": [
+    { "nom": "Portal nacional de pedidos de moradia social", "detail": "Envio, acompanhamento e renovação on-line.", "url": "https://www.demande-logement-social.gouv.fr" },
+    { "nom": "Postos de atendimento (prefeituras, órgãos de habitação social)", "detail": "Para entregar um pedido em papel ou obter ajuda." },
+    { "nom": "ADIL de Mayotte", "detail": "ADIL (Agence départementale d'information sur le logement, agência local de informação sobre moradia): orientação gratuita sobre moradia.", "url": "https://www.anil.org/adil-976/", "telephone": "06 39 21 53 91" }
+  ],
+  "liens": [
+    { "titre": "Moradia social: limites de renda (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007" },
+    { "titre": "Pedido de moradia social (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869" },
+    { "titre": "Renovação do pedido (service-public.gouv.fr)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010" }
+  ],
+  "actions": [
+    { "type": "coffre", "titre": "Comprovante de registro do pedido de moradia social", "categorie": "courriers" },
+    { "type": "coffre", "titre": "Comprovante de separação para o pedido de moradia", "categorie": "jaf" },
+    { "type": "rappel", "titre": "Renovar o pedido de moradia social todo ano", "evenement": "autre" }
+  ],
+  "datesLimites": [
+    { "libelle": "Renovação anual do pedido", "detail": "Caso contrário, o pedido é cancelado." }
+  ],
+  "aConfirmer": [
+    "A confirmar: o período exato de renovação e o envio de um lembrete, não indicados na página consultada.",
+    "A confirmar localmente: a lista dos postos de atendimento e dos órgãos de habitação social em Mayotte, e os prazos de espera."
+  ],
+  "motsCles": ["moradia social", "HLM", "número único", "renovação", "separação", "limites de renda"],
+  "derniereVerification": "2026-10-29",
+  "sources": [
+    { "titre": "Service-public.gouv.fr, F10007 Limites de renda da moradia social (DOM, incluindo Mayotte)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10007", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F869 Pedido de moradia social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F869", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, F35010 Renovação de um pedido de moradia social", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35010", "verifieLe": "2026-10-29" }
+  ]
+}

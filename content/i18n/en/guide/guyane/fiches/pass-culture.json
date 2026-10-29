@@ -52,10 +52,10 @@
     "The housing certificate template and how to upload documents are explained in the app: check when you register."
   ],
   "motsCles": ["pass Culture", "culture", "teen", "books", "cinema", "music", "17 years old", "18 years old"],
-  "derniereVerification": "2026-10-26",
+  "derniereVerification": "2026-10-29",
   "sources": [
-    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2025-12-18" },
-    { "titre": "Service-public.gouv.fr, news A18775 Pass Culture: changes in 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775" },
-    { "titre": "pass Culture, Pass Culture reform", "url": "https://pass.culture.fr/reforme-du-pass-culture" }
+    { "titre": "Service-public.gouv.fr, F34959 Pass Culture", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34959", "verifieLe": "2026-10-29" },
+    { "titre": "Service-public.gouv.fr, news A18775 Pass Culture: changes in 2026", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18775", "verifieLe": "2026-10-29" },
+    { "titre": "pass Culture, Pass Culture reform", "url": "https://pass.culture.fr/reforme-du-pass-culture", "verifieLe": "2026-10-29" }
   ]
 }
