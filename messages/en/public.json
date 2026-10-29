@@ -1057,7 +1057,10 @@
         "ctaTitle": "Together, let’s support",
         "ctaAccent": "more families.",
         "ctaText": "Are you a nonprofit, a public body or a committed content creator? Join the Lien Parental network and help support families in mainland France and the French overseas territories.",
-        "cta": "Become a partner"
+        "cta": "Become a partner",
+        "pause": "Pause the scrolling logos",
+        "play": "Resume the scrolling logos",
+        "example": "Example"
       },
       "apply": {
         "metaTitle": "Become a partner",

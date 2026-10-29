@@ -1057,7 +1057,10 @@
         "ctaTitle": "Ensemble, accompagnons",
         "ctaAccent": "davantage de familles.",
         "ctaText": "Vous êtes une association, une institution ou un créateur de contenu engagé ? Rejoignez le réseau Lien Parental et contribuez à soutenir les familles en France et en Outre-mer.",
-        "cta": "Devenir partenaire"
+        "cta": "Devenir partenaire",
+        "pause": "Mettre en pause le défilement des logos",
+        "play": "Reprendre le défilement des logos",
+        "example": "Exemple"
       },
       "apply": {
         "metaTitle": "Devenir partenaire",

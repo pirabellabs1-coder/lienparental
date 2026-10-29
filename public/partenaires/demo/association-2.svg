@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-label="Réseau Parents Ensemble (logo d’exemple)">
+  <g transform="translate(6 8)"><circle cx="18" cy="18" r="7" fill="#256a29"/><circle cx="38" cy="18" r="7" fill="#577bad"/><path d="M6 44c2-10 8-15 12-15s10 5 12 15M26 44c2-10 8-15 12-15s10 5 12 15" fill="none" stroke="#256a29" stroke-width="4" stroke-linecap="round"/></g>
+  <text x="70" y="32" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="19" font-weight="800" letter-spacing="0.5" fill="#256a29">Réseau</text>
+  <text x="70" y="54" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#365c93">Parents Ensemble</text>
+</svg>

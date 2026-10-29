@@ -1057,7 +1057,10 @@
         "ctaTitle": "Juntos, vamos apoiar",
         "ctaAccent": "mais famílias.",
         "ctaText": "Você representa uma associação, uma instituição ou é um criador de conteúdo engajado? Junte-se à rede Lien Parental e ajude a apoiar as famílias na França e nos territórios ultramarinos.",
-        "cta": "Tornar-se parceiro"
+        "cta": "Tornar-se parceiro",
+        "pause": "Pausar a rolagem dos logotipos",
+        "play": "Retomar a rolagem dos logotipos",
+        "example": "Exemplo"
       },
       "apply": {
         "metaTitle": "Tornar-se parceiro",

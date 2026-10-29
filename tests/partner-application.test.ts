@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { partnerApplicationSchema } from '../lib/partenaires/types'
 import { partnerApplicationEmail } from '../lib/email/templates/partnerApplication'
 import { isPublicLocalizable } from '../lib/i18n/routing'
-import { partnersOf, type Partner } from '../lib/partenaires/catalog'
+import { demoPartnersAllowed, displayedPartners, partnersOf, type Partner } from '../lib/partenaires/catalog'
 
 const LONG = 'Nous accompagnons les familles monoparentales de Cayenne depuis dix ans.'
 const VALID = {
@@ -92,4 +92,15 @@ test('schéma : caractères invisibles et d’inversion retirés ; objet sans do
   assert.equal(data.structure, 'Familles & Co')
   const { subject } = partnerApplicationEmail({ ...data, receivedAtIso: '2026-10-29T12:00:00.000Z', ipBucket: 'unknown' })
   assert.ok(subject.endsWith('Familles & Co'))
+})
+
+test('logos d’exemple : jamais en production, et jamais à la place d’un vrai partenaire', () => {
+  assert.equal(demoPartnersAllowed({ VERCEL_ENV: 'production' }), false)
+  assert.equal(demoPartnersAllowed({ VERCEL_ENV: 'preview' }), true)
+  assert.equal(demoPartnersAllowed({}), true) // local
+  assert.equal(demoPartnersAllowed({ VERCEL_ENV: 'preview', NEXT_PUBLIC_PARTNERS_DEMO: 'off' }), false)
+  assert.deepEqual(displayedPartners('institution', false, []), [])
+  assert.ok(displayedPartners('institution', true, []).every((p) => p.demo))
+  const real: Partner[] = [{ name: 'Vrai', category: 'institution', image: '/v.svg' }]
+  assert.deepEqual(displayedPartners('institution', true, real).map((p) => p.name), ['Vrai'])
 })

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 72" role="img" aria-label="Observatoire de l’Enfance (logo d’exemple)">
+  <g transform="translate(6 8)"><path d="M10 42V26a18 18 0 0 1 36 0v16" fill="none" stroke="#25497c" stroke-width="4"/><circle cx="28" cy="26" r="6" fill="#e9a21b"/></g>
+  <text x="70" y="32" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="19" font-weight="800" letter-spacing="0.5" fill="#25497c">OBSERVATOIRE</text>
+  <text x="70" y="54" font-family="Montserrat, Segoe UI, Arial, sans-serif" font-size="17" font-weight="600" fill="#365c93">de l’Enfance</text>
+</svg>
