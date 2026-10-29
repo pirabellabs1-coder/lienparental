@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Play, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
 // Fenêtre « Découvrez Lien Parental en vidéo ».
-// - Si la vidéo de la langue courante existe (détectée côté serveur par app/page.tsx) : lecture, voix off seule (pas de sous-titres).
+// - Si la vidéo de la langue courante existe (détectée côté serveur par app/page.tsx) : lecture automatique à l'ouverture, voix off seule (pas de sous-titres).
 // - Sinon : diaporama des vraies captures de l'application (localisées), avec la mention « Vidéo bientôt disponible ».
 // Ouverture : tout bouton <VideoTrigger> de la page (événement « home:video »). <dialog> natif : focus piégé, Échap, retour du focus.
 
@@ -63,6 +63,12 @@ export function VideoDialog({ video: media }: { video: PresentationVideo | null 
     return () => window.removeEventListener(EVENT, onOpen)
   }, [])
 
+  // Lecture automatique à l'ouverture : le clic sur « Regarder la vidéo » autorise le son.
+  // Si le navigateur refuse quand même, la vidéo reste en pause avec ses commandes visibles.
+  useEffect(() => {
+    if (open) video.current?.play().catch(() => {})
+  }, [open])
+
   const close = useCallback(() => ref.current?.close(), [])
 
   const onClose = () => {
@@ -92,9 +98,9 @@ export function VideoDialog({ video: media }: { video: PresentationVideo | null 
 
       {media ? (
         <div className="p-4 sm:p-6">
-          {/* Rendu seulement à l'ouverture : rien n'est téléchargé avant (preload="metadata" ensuite). */}
+          {/* Rendu seulement à l'ouverture : rien n'est téléchargé avant, puis lecture automatique. */}
           {open && (
-            <video key={media.src} ref={video} controls preload="metadata" playsInline poster={media.poster} className="aspect-video w-full rounded-2xl bg-night-950">
+            <video key={media.src} ref={video} controls autoPlay preload="auto" playsInline poster={media.poster} className="aspect-video w-full rounded-2xl bg-night-950">
               <source src={media.src} type="video/mp4" />
               {t('unsupported')}{' '}
               <a href={media.src}>{t('download')}</a>.
