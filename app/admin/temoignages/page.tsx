@@ -3,12 +3,16 @@ import Link from 'next/link'
 import { Lock, ShieldAlert } from 'lucide-react'
 import { pageAdminCtx } from '@/lib/contenus/api'
 import { RepoError } from '@/lib/contenus/repo'
-import { listTestimonyRequests, testimonyOverview, type TestimonyPage } from '@/lib/admin/ops/temoignages'
+import {
+  REPORT_REASON_LABEL, listTestimonyReports, listTestimonyRequests, testimonyOverview,
+  type TestimonyPage, type TestimonyReportRow,
+} from '@/lib/admin/ops/temoignages'
 import {
   TESTIMONY_STATUSES, TESTIMONY_STATUS_LABEL, flatParams, testimonyFiltersSchema,
   type TestimonyFilters, type TestimonyOverview,
 } from '@/lib/admin/ops/types'
 import { RevokeButton } from '@/components/admin/ops/RevokeButton'
+import { ReportDecision } from '@/components/admin/ops/ReportDecision'
 import { DemoNotice, Empty, ErrorBox, FilterBar, FilterField, OpsHeader, Pill, btnSecondaryCls, fieldCls, fmtDate, hrefWith, linkCls, shortId } from '@/components/admin/ops/ui'
 import { TESTIMONY_TONE } from '@/components/admin/ops/tones'
 
@@ -25,11 +29,18 @@ export default async function TemoignagesPage({ searchParams }: { searchParams: 
   const f: TestimonyFilters = parsed.success ? parsed.data : {}
   let overview: TestimonyOverview | null = null
   let page: TestimonyPage | null = null
+  let reports: TestimonyReportRow[] | null = null
+  let reportsError: string | null = null
   let error: string | null = parsed.success ? null : 'Filtres invalides : ils ont été ignorés.'
   try {
     ;[overview, page] = await Promise.all([testimonyOverview(ctx), listTestimonyRequests(ctx, f)])
   } catch (e) {
     error = e instanceof RepoError ? e.message : 'Suivi des témoignages indisponible.'
+  }
+  try {
+    reports = await listTestimonyReports(ctx, 'open')
+  } catch (e) {
+    reportsError = e instanceof RepoError ? e.message : 'Signalements indisponibles (migration 0570 appliquée ?).'
   }
   const filters = { statut: f.statut, compte: f.compte }
 
@@ -44,8 +55,8 @@ export default async function TemoignagesPage({ searchParams }: { searchParams: 
           <p className="font-bold">Confidentialité des témoignages</p>
           <p className="mt-1">
             La politique de confidentialité ne prévoit aucune lecture des témoignages par l’équipe : ni le texte, ni les réponses, ni les pièces,
-            ni le nom du témoin, ni le message du parent ne sont affichés ici, même signalés. Un signalement se traite par le support
-            (catégorie « Signalement d’abus ») et, si besoin, par la révocation du lien.
+            ni le nom du témoin, ni le message du parent ne sont affichés ici, même signalés. Un témoignage reçu est irréversible pour le
+            parent et le témoin : seul un administrateur peut le supprimer, à partir d’un signalement du parent (motif et précisions).
           </p>
         </div>
       </div>
@@ -61,6 +72,39 @@ export default async function TemoignagesPage({ searchParams }: { searchParams: 
             link={overview.reportsOpen > 0 ? hrefWith('/admin/support', { categorie: 'abus', statut: 'en_cours' }) : undefined} />
         </dl>
       )}
+
+      <section aria-labelledby="reports-title" className="mt-6">
+        <h2 id="reports-title" className="text-[17px] font-extrabold text-night-900">
+          Signalements à traiter{reports ? ` (${reports.length})` : ''}
+        </h2>
+        {reportsError && <ErrorBox message={reportsError} />}
+        {reports && (reports.length === 0 ? <div className="mt-3"><Empty>Aucun signalement en attente.</Empty></div> : (
+          <ul className="mt-3 space-y-3">
+            {reports.map((r) => (
+              <li key={r.id} className="rounded-2xl border border-[#E5E7EB] bg-white p-4 shadow-soft">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="min-w-0">
+                    <p className="flex flex-wrap items-center gap-2 text-[14px] font-bold text-night-900">
+                      <span className="font-mono">{r.reference}</span>
+                      <Pill tone="warn">{REPORT_REASON_LABEL[r.reason]}</Pill>
+                    </p>
+                    <p className="mt-1 text-[12.5px] text-night-600">
+                      Signalé le {fmtDate(r.createdAt)} · compte{' '}
+                      <Link className={`${linkCls} font-mono`} href={`/admin/comptes/${r.ownerId}`}>{shortId(r.ownerId)}</Link>
+                    </p>
+                    {r.details && (
+                      <p className="mt-2 whitespace-pre-wrap break-words rounded-xl bg-night-50 px-3 py-2 text-[13.5px] text-night-800">
+                        <span className="sr-only">Précisions du parent : </span>{r.details}
+                      </p>
+                    )}
+                  </div>
+                  <ReportDecision id={r.id} reference={r.reference} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </section>
 
       <FilterBar action="/admin/temoignages" resetHref="/admin/temoignages">
         <FilterField label="Statut" htmlFor="t-statut">

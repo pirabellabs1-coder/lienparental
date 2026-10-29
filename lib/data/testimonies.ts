@@ -200,6 +200,35 @@ export async function createTestimonyRequest(input: CreateTestimonyRequestInput)
   return { id: body.id, token: body.token, createdAt: body.created_at ?? new Date().toISOString() }
 }
 
+/* ---- Signalement (0570) ------------------------------------------------
+ * Un témoignage reçu ne peut pas être supprimé (valeur probante). Le parent le signale avec
+ * un motif ; l'équipe examine le signalement et peut alors retirer le témoignage. */
+
+export const REPORT_REASONS = ['test', 'erreur', 'faux', 'abus', 'doublon', 'autre'] as const
+export type ReportReason = (typeof REPORT_REASONS)[number]
+export type ReportStatus = 'open' | 'rejected' | 'removed'
+
+const reportSchema = () => z.object({
+  reason: z.enum(REPORT_REASONS),
+  details: z.string().trim().max(1000).optional(),
+}).refine((v) => v.reason !== 'autre' || !!v.details, { message: dataMsg('testimonies.reportDetailsRequired'), path: ['details'] })
+
+export async function reportTestimony(id: string, reason: ReportReason, details?: string): Promise<void> {
+  const p = reportSchema().safeParse({ reason, details: details || undefined })
+  if (!p.success) throw new DataError(p.error.issues[0]?.message ?? dataMsg('errors.invalidShort'), 'invalid')
+  const { error } = await db().rpc('report_testimony', { p_testimony_id: id, p_reason: p.data.reason, p_details: p.data.details ?? null })
+  if (error) throw toDataError(error, 'testimonyReports.create')
+}
+
+/** État de mes signalements, par témoignage (le plus récent l'emporte). */
+export async function listMyTestimonyReports(): Promise<Record<string, ReportStatus>> {
+  const { data, error } = await db().from('testimony_reports').select('testimony_id, status, created_at').order('created_at', { ascending: true }).limit(500)
+  if (error) throw toDataError(error, 'testimonyReports.list')
+  const out: Record<string, ReportStatus> = {}
+  for (const r of (data ?? []) as { testimony_id: string | null; status: ReportStatus }[]) if (r.testimony_id) out[r.testimony_id] = r.status
+  return out
+}
+
 /** Révoque le lien d'une demande (le témoin ne peut plus l'ouvrir). */
 export async function revokeTestimonyRequest(id: string): Promise<void> {
   const { error } = await db().from('testimony_requests').update({ revoked_at: new Date().toISOString(), status: 'revoked' }).eq('id', id)

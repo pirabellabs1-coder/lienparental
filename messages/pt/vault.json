@@ -707,7 +707,32 @@
         "receivedOn": "Recebido em",
         "confirmFailed": "Não foi possível confirmar.",
         "confirm": "Confirmar este depoimento",
-        "refuseFailed": "Não foi possível recusar."
+        "refuseFailed": "Não foi possível recusar.",
+        "permanentTitle": "Um depoimento recebido não pode ser excluído",
+        "permanentText": "Ele é guardado exatamente como foi enviado, pelo seu valor de prova. Se houver um problema (envio de teste, erro, conteúdo abusivo), denuncie-o: a equipe analisa e pode removê-lo.",
+        "report": "Denunciar este depoimento",
+        "reportTitle": "Denunciar este depoimento",
+        "reportText": "Explique por que este depoimento deve ser analisado. A equipe não lê o conteúdo: ela se baseia no seu motivo e nos seus detalhes.",
+        "reasonLabel": "Motivo da denúncia",
+        "reasons": {
+          "test": "Envio de teste",
+          "erreur": "Enviado por engano",
+          "faux": "Conteúdo falso ou enganoso",
+          "abus": "Conteúdo abusivo ou ofensivo",
+          "doublon": "Duplicado de outro depoimento",
+          "autre": "Outro motivo"
+        },
+        "detailsLabel": "Detalhes",
+        "detailsHint": "Obrigatório para “Outro motivo”. No máximo 1.000 caracteres.",
+        "detailsRequired": "Adicione um detalhe para este motivo.",
+        "reasonRequired": "Escolha um motivo.",
+        "send": "Enviar denúncia",
+        "sending": "Enviando…",
+        "cancel": "Cancelar",
+        "sent": "Denúncia enviada. A equipe vai analisá-la.",
+        "reportFailed": "Não foi possível enviar a denúncia. Tente novamente.",
+        "statusOpen": "Denúncia em análise",
+        "statusRejected": "Denúncia analisada: o depoimento foi mantido"
       },
       "download": {
         "started": "Download {label} iniciado",

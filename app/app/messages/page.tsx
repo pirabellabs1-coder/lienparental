@@ -16,7 +16,7 @@ import { useMessagesFormat } from '@/components/messages/useMessagesFormat'
 import { cn } from '@/lib/cn'
 import {
   getMe, getPendingInvite, listConversations, listMessageableParents,
-  setConversationArchived,
+  setConversationArchived, subscribeToInbox,
   type ConversationSummary, type CoparentInvite, type Participant,
 } from '@/lib/messages'
 
@@ -61,6 +61,25 @@ export default function MessagesPage() {
   }, [])
 
   useEffect(() => { void load() }, [load])
+
+  // Temps réel : un message reçu ou envoyé met la liste à jour (aperçu, non-lus, ordre) sans
+  // rechargement ; idem au retour sur l'onglet. Rechargements regroupés (rafale de messages).
+  const loaded = data !== null
+  useEffect(() => {
+    if (!loaded) return
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const refresh = () => { clearTimeout(timer); timer = setTimeout(() => void load(), 400) }
+    const unsubscribe = subscribeToInbox(refresh)
+    const onVisible = () => { if (document.visibilityState === 'visible') refresh() }
+    document.addEventListener('visibilitychange', onVisible)
+    window.addEventListener('online', refresh)
+    return () => {
+      clearTimeout(timer)
+      unsubscribe()
+      document.removeEventListener('visibilitychange', onVisible)
+      window.removeEventListener('online', refresh)
+    }
+  }, [loaded, load])
 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get('nouvelle') === '1') setCreating(true)

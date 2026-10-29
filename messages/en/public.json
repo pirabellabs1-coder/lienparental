@@ -920,7 +920,10 @@
         "downloading": "Preparing the PDF…",
         "downloadError": "The PDF could not be created. Please try again.",
         "errIncomplete": "Complete your identity, ID document, legal statement and signature before sending."
-      }
+      },
+      "finalTitle": "Sending is final",
+      "finalText": "Once sent, your testimony can no longer be edited or deleted, neither by you nor by the parent. Only the Lien Parental team can remove it, after reviewing a report.",
+      "final": "I understand that my testimony can no longer be edited or deleted once sent."
     },
     "guide": {
       "breadcrumbLabel": "Breadcrumb",

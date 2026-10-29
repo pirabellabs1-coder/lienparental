@@ -169,7 +169,8 @@
         "notSpecified": "Not specified",
         "parentRequired": "Add at least one parent.",
         "subjectRequired": "Enter the request title.",
-        "witnessN": "Witness {n}"
+        "witnessN": "Witness {n}",
+        "reportDetailsRequired": "Add some details for this reason."
       },
       "vault": {
         "badType": "Unsupported format. Accepted formats: PDF, JPG, PNG, DOCX, DOC.",

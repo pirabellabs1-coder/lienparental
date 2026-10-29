@@ -920,7 +920,10 @@
         "downloading": "Préparation du PDF…",
         "downloadError": "Le PDF n’a pas pu être créé. Réessayez.",
         "errIncomplete": "Complétez votre identité, la pièce d’identité, la mention légale et la signature avant d’envoyer."
-      }
+      },
+      "finalTitle": "L’envoi est définitif",
+      "finalText": "Une fois envoyé, votre témoignage ne pourra plus être modifié ni supprimé, ni par vous ni par le parent. Seule l’équipe Lien Parental peut le retirer, après examen d’un signalement.",
+      "final": "J’ai compris que mon témoignage ne pourra plus être modifié ni supprimé après l’envoi."
     },
     "guide": {
       "breadcrumbLabel": "Fil d'Ariane",

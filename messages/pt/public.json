@@ -920,7 +920,10 @@
         "downloading": "Preparando o PDF…",
         "downloadError": "Não foi possível criar o PDF. Tente novamente.",
         "errIncomplete": "Preencha sua identidade, o documento de identidade, a declaração legal e a assinatura antes de enviar."
-      }
+      },
+      "finalTitle": "O envio é definitivo",
+      "finalText": "Depois de enviado, seu depoimento não poderá mais ser alterado nem excluído, nem por você nem pelo genitor. Somente a equipe Lien Parental pode removê-lo, após analisar uma denúncia.",
+      "final": "Entendi que meu depoimento não poderá mais ser alterado nem excluído após o envio."
     },
     "guide": {
       "breadcrumbLabel": "Trilha de navegação",

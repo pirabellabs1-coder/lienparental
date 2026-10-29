@@ -3,13 +3,14 @@
 import { use, useId, useState, type ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { ChevronDown, FileText, UserRound } from 'lucide-react'
-import { ConfirmDialog } from '@/components/ui'
+import { ChevronDown, Flag, FileText, ShieldAlert, UserRound } from 'lucide-react'
+import { ConfirmDialog, Modal } from '@/components/ui'
 import { ScreenHeader } from '@/components/coffre/ScreenHeader'
 import { StatusBadge } from '@/components/coffre/StatusBadge'
 import { InitialsAvatar } from '@/components/coffre/InitialsAvatar'
 import { btn } from '@/components/coffre/buttons'
-import { useHandledTestimonies, useReceivedTestimonies } from '@/components/coffre/store'
+import { useHandledTestimonies, useReceivedTestimonies, useTestimonyReports } from '@/components/coffre/store'
+import { REPORT_REASONS, type ReportReason } from '@/lib/data/testimonies'
 import { LoadingState } from '@/components/mobile/StateScreens'
 import { useVaultI18n } from '@/components/coffre/i18n'
 import { cn } from '@/lib/cn'
@@ -40,6 +41,78 @@ function Disclosure({ icon, title, subtitle, children }: { icon: ReactNode; titl
   )
 }
 
+/**
+ * Signalement d'un témoignage reçu (0570) : motif obligatoire, précisions obligatoires pour « Autre ».
+ * Le témoignage n'est jamais supprimable par le parent ; l'équipe examine et peut le retirer.
+ */
+function ReportDialog({ open, onClose, onSend }: { open: boolean; onClose: () => void; onSend: (reason: ReportReason, details: string) => Promise<void> }) {
+  const t = useTranslations('vault.testimonials.received')
+  const [reason, setReason] = useState<ReportReason | ''>('')
+  const [details, setDetails] = useState('')
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+  const legendId = useId()
+  const detailsId = useId()
+
+  const submit = async () => {
+    if (!reason) { setError(t('reasonRequired')); return }
+    if (reason === 'autre' && !details.trim()) { setError(t('detailsRequired')); return }
+    setBusy(true)
+    setError('')
+    try {
+      await onSend(reason, details.trim())
+      setReason('')
+      setDetails('')
+    } catch (e) {
+      setError(e instanceof Error && e.message ? e.message : t('reportFailed'))
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <Modal
+      open={open}
+      onClose={() => { if (!busy) onClose() }}
+      size="sm"
+      title={t('reportTitle')}
+      description={t('reportText')}
+      footer={
+        <>
+          <button type="button" className={btn({ variant: 'secondary' })} onClick={onClose} disabled={busy}>{t('cancel')}</button>
+          <button type="button" className={btn({ variant: 'primary' })} onClick={() => void submit()} disabled={busy} aria-busy={busy}>
+            {busy ? t('sending') : t('send')}
+          </button>
+        </>
+      }
+    >
+      <fieldset aria-describedby={error ? `${legendId}-err` : undefined}>
+        <legend id={legendId} className="mb-2 text-[13.5px] font-bold text-night-900">{t('reasonLabel')}</legend>
+        <div className="space-y-1.5">
+          {REPORT_REASONS.map((r) => (
+            <label key={r} className="flex min-h-[44px] cursor-pointer items-center gap-3 rounded-xl border border-night-100 px-3 text-[14px] text-night-800 has-[:checked]:border-night-600 has-[:checked]:bg-night-50">
+              <input type="radio" name="report-reason" value={r} checked={reason === r} onChange={() => { setReason(r); setError('') }} className="h-4 w-4 accent-night-700" />
+              {t(`reasons.${r}`)}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <label htmlFor={detailsId} className="mb-1 mt-4 block text-[13.5px] font-bold text-night-900">{t('detailsLabel')}</label>
+      <textarea
+        id={detailsId}
+        value={details}
+        onChange={(e) => setDetails(e.target.value)}
+        maxLength={1000}
+        rows={3}
+        aria-describedby={`${detailsId}-hint`}
+        className="w-full rounded-xl border border-night-200 px-3 py-2 text-[14px] text-night-900 focus:border-night-600 focus:outline-none focus:ring-2 focus:ring-night-200"
+      />
+      <p id={`${detailsId}-hint`} className="mt-1 text-[12px] text-night-500">{t('detailsHint')}</p>
+      {error && <p id={`${legendId}-err`} role="alert" className="mt-3 text-[13px] font-semibold text-alert-600">{error}</p>}
+    </Modal>
+  )
+}
+
 // Maquette « 8. Témoignage reçu »
 export default function TemoignageRecuPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -51,6 +124,9 @@ export default function TemoignageRecuPage({ params }: { params: Promise<{ id: s
   const { mark } = useHandledTestimonies()
   const [refuseOpen, setRefuseOpen] = useState(false)
   const [failure, setFailure] = useState('')
+  const { reports, report } = useTestimonyReports()
+  const [reportOpen, setReportOpen] = useState(false)
+  const [reportSent, setReportSent] = useState(false)
 
   if (!tm && !ready) {
     return (
@@ -123,7 +199,40 @@ export default function TemoignageRecuPage({ params }: { params: Promise<{ id: s
             {t('refuse')}
           </button>
         </div>
+
+        {/* Témoignage irréversible : seule voie de retrait, le signalement examiné par l'équipe. */}
+        <section aria-labelledby="permanent" className="mt-8 rounded-2xl border border-gold-200 bg-gold-50 p-4 lg:max-w-xl">
+          <h3 id="permanent" className="flex items-center gap-2 text-[14px] font-extrabold text-night-900">
+            <ShieldAlert className="h-5 w-5 shrink-0 text-gold-700" aria-hidden="true" />
+            {t('received.permanentTitle')}
+          </h3>
+          <p className="mt-1.5 text-[13px] leading-relaxed text-night-700">{t('received.permanentText')}</p>
+          {reports[tm.id] === 'open' || reportSent ? (
+            <p role="status" className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-[13px] font-semibold text-night-800 ring-1 ring-gold-200">
+              <Flag className="h-4 w-4 text-gold-700" aria-hidden="true" />
+              {reportSent ? t('received.sent') : t('received.statusOpen')}
+            </p>
+          ) : (
+            <>
+              {reports[tm.id] === 'rejected' && <p className="mt-3 text-[13px] font-semibold text-night-700">{t('received.statusRejected')}</p>}
+              <button type="button" onClick={() => setReportOpen(true)} className={cn(btn({ variant: 'secondary' }), 'mt-3 w-auto gap-2 px-4')}>
+                <Flag className="h-4 w-4" aria-hidden="true" />
+                {t('received.report')}
+              </button>
+            </>
+          )}
+        </section>
       </div>
+
+      <ReportDialog
+        open={reportOpen}
+        onClose={() => setReportOpen(false)}
+        onSend={async (reason, details) => {
+          await report(tm.id, reason, details || undefined)
+          setReportOpen(false)
+          setReportSent(true)
+        }}
+      />
 
       <ConfirmDialog
         open={refuseOpen}

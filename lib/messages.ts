@@ -377,7 +377,7 @@ function demoSummary(s: DemoStore, c: DemoConversation): ConversationSummary {
 }
 
 function emit(conversationId: string, e: MessageEvent) {
-  demoListeners.forEach((l) => { if (l.conversationId === conversationId) l.fn(e) })
+  demoListeners.forEach((l) => { if (l.conversationId === conversationId || l.conversationId === '*') l.fn(e) })
 }
 
 function randomHex(bytes: number): string {
@@ -697,15 +697,23 @@ export async function markConversationRead(conversationId: string, meId: string)
   await sb().rpc('mark_read', { p_conversation_id: conversationId })
 }
 
-/** Abonnement aux nouveaux messages et accusés de lecture. Retourne la fonction de désabonnement. */
-export function subscribeToConversation(conversationId: string, onEvent: (e: MessageEvent) => void): () => void {
+/** Suffixe unique : un nouvel abonnement ne réutilise jamais un canal en cours de fermeture. */
+const channelId = () => Math.random().toString(36).slice(2, 10)
+
+/**
+ * Abonnement aux nouveaux messages et accusés de lecture. Retourne la fonction de désabonnement.
+ * `onResync` : appelé quand la connexion revient après une coupure (réseau, veille du téléphone),
+ * pour recharger ce qui a pu être manqué pendant ce temps.
+ */
+export function subscribeToConversation(conversationId: string, onEvent: (e: MessageEvent) => void, onResync?: () => void): () => void {
   if (!SUPABASE_ENABLED) {
     const entry = { conversationId, fn: onEvent }
     demoListeners.add(entry)
     return () => { demoListeners.delete(entry) }
   }
+  let dropped = false
   const channel = sb()
-    .channel(`messages:${conversationId}`)
+    .channel(`messages:${conversationId}:${channelId()}`)
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'messages', filter: `conversation_id=eq.${conversationId}` },
@@ -716,7 +724,39 @@ export function subscribeToConversation(conversationId: string, onEvent: (e: Mes
       { event: 'UPDATE', schema: 'public', table: 'messages', filter: `conversation_id=eq.${conversationId}` },
       (payload) => onEvent({ type: 'update', message: fromRow(payload.new as MessageRow) }),
     )
-    .subscribe()
+    .subscribe((state) => {
+      if (state === 'SUBSCRIBED') {
+        if (dropped) onResync?.()
+        dropped = false
+      } else if (state === 'CHANNEL_ERROR' || state === 'TIMED_OUT' || state === 'CLOSED') {
+        dropped = true
+      }
+    })
+  return () => { void sb().removeChannel(channel) }
+}
+
+/**
+ * Liste des conversations : prévient à chaque nouveau message reçu ou envoyé dans l'une d'elles
+ * (la RLS ne transmet que les conversations dont on est participant), et au retour de connexion.
+ */
+export function subscribeToInbox(onChange: () => void): () => void {
+  if (!SUPABASE_ENABLED) {
+    const entry = { conversationId: '*', fn: () => onChange() }
+    demoListeners.add(entry)
+    return () => { demoListeners.delete(entry) }
+  }
+  let dropped = false
+  const channel = sb()
+    .channel(`inbox:${channelId()}`)
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, () => onChange())
+    .subscribe((state) => {
+      if (state === 'SUBSCRIBED') {
+        if (dropped) onChange()
+        dropped = false
+      } else if (state === 'CHANNEL_ERROR' || state === 'TIMED_OUT' || state === 'CLOSED') {
+        dropped = true
+      }
+    })
   return () => { void sb().removeChannel(channel) }
 }
 

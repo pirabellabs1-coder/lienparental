@@ -24,7 +24,7 @@ import {
 import {
   ALLOWED_ATTACHMENT_MIME, DEFAULT_VAULT_CATEGORY, MAX_ATTACHMENT_BYTES, getConversation, getMe, listMessages, markConversationRead,
   saveToVault, sendMessage, setConversationArchived, subscribeToConversation, syncVault, validateAttachment,
-  type ConversationSummary, type Message, type Participant, type VaultLink,
+  type ConversationSummary, type Message, type MessageEvent, type Participant, type VaultLink,
 } from '@/lib/messages'
 
 const TONE_PREF_KEY = 'lp.messages.tonecheck'
@@ -147,10 +147,21 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
     [others, displayName, tm],
   )
 
-  // Temps réel : nouveaux messages et accusés de lecture.
+  // Temps réel : nouveaux messages et accusés de lecture. Le gestionnaire passe par une référence :
+  // l'abonnement ne dépend que de la conversation (pas de réabonnement à chaque rendu, qui ferait
+  // perdre des messages). Au retour de connexion ou d'onglet, on recharge ce qui a pu être manqué.
+  const onEvent = useRef<(e: MessageEvent) => void>(() => {})
+  const meId = me?.id
+  const resync = useCallback(async () => {
+    try {
+      const list = await listMessages(conversationId)
+      setMessages((prev) => (prev ? list : prev))
+      if (meId && document.visibilityState === 'visible') void markConversationRead(conversationId, meId)
+    } catch { /* nouvel essai au prochain retour */ }
+  }, [conversationId, meId])
   useEffect(() => {
-    if (status !== 'ready' || !me) return
-    return subscribeToConversation(conversationId, ({ type, message }) => {
+    if (!me) return
+    onEvent.current = ({ type, message }) => {
       setMessages((list) => {
         if (!list) return list
         const idx = list.findIndex((m) => m.id === message.id)
@@ -167,8 +178,23 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
         if (document.visibilityState === 'visible') void markConversationRead(conversationId, me.id)
         if (message.attachment) void refreshVault()
       }
-    })
-  }, [status, me, conversationId, announce, nameOf, refreshVault, t])
+    }
+  }, [me, conversationId, announce, nameOf, refreshVault, t])
+  const ready = status === 'ready' && !!meId
+  useEffect(() => {
+    if (!ready) return
+    const unsubscribe = subscribeToConversation(conversationId, (e) => onEvent.current(e), () => void resync())
+    // Retour sur l'onglet ou retour du réseau (téléphone sorti de veille) : rattrapage.
+    const onVisible = () => { if (document.visibilityState === 'visible') void resync() }
+    const onOnline = () => void resync()
+    document.addEventListener('visibilitychange', onVisible)
+    window.addEventListener('online', onOnline)
+    return () => {
+      unsubscribe()
+      document.removeEventListener('visibilitychange', onVisible)
+      window.removeEventListener('online', onOnline)
+    }
+  }, [ready, conversationId, resync])
 
   // Contenu chargé après coup (aperçus d'images, mentions « Dans le coffre-fort ») :
   // si l'on était en bas de la conversation, on y reste.
