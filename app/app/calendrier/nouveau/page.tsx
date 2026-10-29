@@ -75,13 +75,14 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
   const urlChild = prefill.enfant ? childOptions.find((c) => c.id === prefill.enfant) : undefined
 
   // Valeurs par défaut calculées côté client, dans le fuseau de l'utilisateur (pas le fuseau implicite du navigateur) :
-  // l'heure pleine suivante ; après 23 h, le lendemain à 09:00.
+  // l'heure pleine suivante ; la nuit (avant 7 h) 09:00 le jour même ; après 23 h, le lendemain à 09:00.
   useEffect(() => {
     const now = new Date()
     const h = Number(timeInTz(now).slice(0, 2))
     const late = h >= 23
+    const night = h < 7
     setDate((v) => v || (late ? addDaysToKey(todayKey(), 1) : todayKey()))
-    setTime((v) => v || (late ? '09:00' : `${String(h + 1).padStart(2, '0')}:00`))
+    setTime((v) => v || (late || night ? '09:00' : `${String(h + 1).padStart(2, '0')}:00`))
   }, [])
 
   // Modification : pré-remplissage unique dès que l'événement est chargé.

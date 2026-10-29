@@ -68,7 +68,7 @@ export default async function TemoignagesPage({ searchParams }: { searchParams: 
           <Stat label="Demandes (30 jours)" value={overview.requests30d} />
           <Stat label="Témoignages reçus (30 jours)" value={overview.submitted30d} />
           <Stat label="Liens ouverts en attente" value={(overview.byStatus.pending ?? 0) + (overview.byStatus.opened ?? 0) + (overview.byStatus.in_progress ?? 0)} />
-          <Stat label="Signalements à traiter" value={overview.reportsOpen}
+          <Stat label="Tickets d’abus au support" value={overview.reportsOpen}
             link={overview.reportsOpen > 0 ? hrefWith('/admin/support', { categorie: 'abus', statut: 'en_cours' }) : undefined} />
         </dl>
       )}

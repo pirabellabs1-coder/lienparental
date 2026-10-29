@@ -486,7 +486,8 @@
         "fillHint": "Fill in the fields, check the preview, then download the document.",
         "preview": "Preview",
         "previewPage": "Preview of page {page}, open the document",
-        "open": "Open the document"
+        "open": "Open the document",
+        "frenchDocument": "The letter itself is written in French, as it is meant for French authorities and institutions."
       },
       "generator": {
         "generating": "Generating the document…",

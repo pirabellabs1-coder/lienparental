@@ -486,7 +486,8 @@
         "fillHint": "Renseignez les champs, vérifiez l’aperçu puis téléchargez le document.",
         "preview": "Aperçu",
         "previewPage": "Aperçu page {page}, ouvrir le document",
-        "open": "Ouvrir le document"
+        "open": "Ouvrir le document",
+        "frenchDocument": "Le courrier produit est rédigé en français, car il s’adresse à une administration française."
       },
       "generator": {
         "generating": "Génération du document…",
