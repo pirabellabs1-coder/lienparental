@@ -678,5 +678,26 @@
     "contactGeneral": "Questions générales",
     "contactSupport": "Assistance",
     "contactHelp": "Consultez aussi le <link>centre d’aide</link>."
+  },
+  "homeAlbum": {
+    "badge": "Nouveau · Album de l’enfant",
+    "title": "Ne manquez plus les moments importants de votre enfant",
+    "lead": "Premier jour d’école, anniversaire, vacances : chaque parent garde les photos de son enfant dans son coffre-fort, et partage celles qu’il veut avec l’autre parent. Même quand l’enfant n’est pas chez vous, vous suivez son développement.",
+    "point1Title": "Privé ou partagé, photo par photo",
+    "point1Text": "Vous choisissez ce que l’autre parent voit. Il peut regarder et télécharger, jamais modifier ni supprimer.",
+    "point2Title": "Une chronologie qui se range seule",
+    "point2Text": "La date de prise de vue est lue dans la photo : tout se classe par année et par mois, sans effort.",
+    "point3Title": "Les moments importants en avant",
+    "point3Text": "Rentrée, anniversaire, premier spectacle : marquez-les d’une étoile pour les retrouver en un instant.",
+    "point4Title": "Protégé comme vos documents",
+    "point4Text": "Coffre-fort verrouillé, hébergement en Europe, position GPS retirée des photos. Aucune photo publique, jamais.",
+    "cta": "Créer mon album gratuitement",
+    "note": "Inclus dans le coffre-fort de votre compte.",
+    "shot1": "Rentrée",
+    "shot2": "Pique-nique",
+    "shot3": "Peinture",
+    "badge_important": "Moment important",
+    "badge_shared": "Partagée",
+    "badge_private": "Privée"
   }
 }

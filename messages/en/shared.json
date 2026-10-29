@@ -190,6 +190,10 @@
         "restoreFailed": "Unable to restore (30-day limit exceeded?).",
         "tooLarge": "File too large. Max size 20 MB.",
         "uploadFailed": "The file upload failed. Please try again."
+      },
+      "album": {
+        "thumbsFailed": "Photos can’t be displayed right now.",
+        "unreadable": "This image couldn’t be read. Choose a JPG or PNG photo."
       }
     },
     "family": {

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-import { Bell, ChevronRight, FolderOpen, Menu, Plus, Users } from 'lucide-react'
+import { Bell, ChevronRight, FolderOpen, Images, Menu, Plus, Users } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { useCategories, useRequests } from '@/components/coffre/store'
 
@@ -86,6 +86,22 @@ export default function CoffrePage() {
             </span>
           </span>
           <ChevronRight className="mt-4 h-5 w-5 shrink-0 text-leaf-600 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5" aria-hidden="true" />
+        </Link>
+
+        <Link
+          href="/app/coffre/album"
+          className="group flex items-start gap-3.5 rounded-[20px] border border-pink-100 bg-pink-50 p-4 transition-[box-shadow,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-card active:scale-[0.99]"
+        >
+          <span aria-hidden="true" className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-pink-500 text-white shadow-[0_8px_18px_-8px_rgba(236,72,153,0.8)]">
+            <Images className="h-6 w-6" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-[16px] font-extrabold text-pink-700">{t('album')}</span>
+            <span className="mt-1 block text-[13px] leading-snug text-night-600">
+              {t('albumText')}
+            </span>
+          </span>
+          <ChevronRight className="mt-4 h-5 w-5 shrink-0 text-pink-600 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5" aria-hidden="true" />
         </Link>
       </div>
 

@@ -9,6 +9,7 @@ import { HomeStyles } from '@/components/accueil/HomeStyles'
 import { Hero } from '@/components/accueil/Hero'
 import { ModuleBar } from '@/components/accueil/ModuleBar'
 import { Partners } from '@/components/accueil/Partners'
+import { AlbumSection } from '@/components/accueil/AlbumSection'
 import { VideoSection } from '@/components/accueil/VideoSection'
 import { VideoDialog, type PresentationVideo } from '@/components/accueil/VideoDialog'
 import { isLocale, type Locale } from '@/lib/i18n/config'
@@ -78,6 +79,7 @@ export default async function HomePage() {
       <VideoSection hasVideo={!!video} poster={video?.poster} />
       <WhyChoose />
       <Messaging />
+      <AlbumSection />
       <Guide />
       <Features />
       <FeatureTabs />
