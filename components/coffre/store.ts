@@ -22,7 +22,8 @@ import {
   type VaultDocumentRecord,
 } from '@/lib/data/vault'
 import {
-  listReceivedTestimonies, listTestimonyRequests, reviewTestimony, type ReceivedTestimonyRecord,
+  listMyTestimonyReports, listReceivedTestimonies, listTestimonyRequests, reportTestimony, reviewTestimony,
+  type ReceivedTestimonyRecord, type ReportReason, type ReportStatus,
 } from '@/lib/data/testimonies'
 import { listFolderDocuments } from '@/lib/data/vault'
 import { withDemoCounts } from '@/lib/vault/counts'
@@ -37,6 +38,7 @@ const KEYS = {
   hiddenCategories: 'lp.coffre.categories.deleted',
   requests: 'lp.coffre.requests',
   handledTestimonies: 'lp.coffre.testimonies.handled',
+  reportedTestimonies: 'lp.coffre.testimonies.reported',
   deletedDocs: 'lp.coffre.docs.deleted',
   /** Démo : date de mise à la corbeille par document (affichée dans la corbeille). */
   deletedAt: 'lp.coffre.docs.deletedAt',
@@ -288,6 +290,22 @@ export function useHandledTestimonies() {
     live.setData((xs) => (xs ?? []).map((t) => (t.id === id ? { ...t, decision: v } : t)))
   }
   return { handled: LIVE ? liveHandled : handled, mark, ready: LIVE ? !live.loading : storedReady }
+}
+
+/* ---- Signalements de témoignages (0570) -------------------------------- */
+
+export function useTestimonyReports() {
+  const [demo, setDemo, storedReady] = useStored<Record<string, ReportStatus>>(KEYS.reportedTestimonies, {})
+  const live = useAsyncData<Record<string, ReportStatus>>(LIVE ? listMyTestimonyReports : noLoad({}), `vault:reports:${LIVE}`)
+  const report = async (id: string, reason: ReportReason, details?: string): Promise<void> => {
+    if (!LIVE) {
+      setDemo((r) => ({ ...r, [id]: 'open' }))
+      return
+    }
+    await reportTestimony(id, reason, details)
+    live.setData((r) => ({ ...(r ?? {}), [id]: 'open' }))
+  }
+  return { reports: LIVE ? (live.data ?? {}) : demo, report, ready: LIVE ? !live.loading : storedReady }
 }
 
 /* ---- Documents supprimés ---------------------------------------------- */

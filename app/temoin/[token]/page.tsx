@@ -1,7 +1,7 @@
 'use client'
 
 import { use, useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react'
-import { Check, ChevronDown, Download, FileText, Languages, Paperclip, PenLine, Sparkles, X } from 'lucide-react'
+import { Check, ChevronDown, Download, FileText, Languages, Paperclip, PenLine, ShieldAlert, Sparkles, X } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { Logo } from '@/components/brand/Logo'
@@ -140,6 +140,8 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
   const [iaText, setIaText] = useState<string | null>(null)
   const [useIa, setUseIa] = useState(false)
   const [certified, setCertified] = useState(false)
+  // Envoi définitif : le témoignage ne peut plus être modifié ni supprimé (0570).
+  const [finalOk, setFinalOk] = useState(false)
   // Éléments de l'attestation (art. 202 CPC).
   const [identity, setIdentity] = useState<WitnessIdentity>(emptyIdentity)
   const [identityErrs, setIdentityErrs] = useState<Record<string, string>>({})
@@ -273,7 +275,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
   }
 
   const send = async () => {
-    if (!original.trim() || !certified) return
+    if (!original.trim() || !certified || !finalOk) return
     // Contrôle complet avant envoi (le serveur refait le même contrôle).
     const decl = witnessDeclarationSchema.safeParse({ ...declaration, mention, locale })
     if (!decl.success || !idDoc || !signed) {
@@ -885,7 +887,7 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                     {sendError}
                   </p>
                 )}
-                <button type="button" className={cn(btn.primary, 'w-full')} disabled={empty || !certified || !mention || !signed || !signPlace.trim() || sending} aria-busy={sending} onClick={send}>
+                <button type="button" className={cn(btn.primary, 'w-full')} disabled={empty || !certified || !finalOk || !mention || !signed || !signPlace.trim() || sending} aria-busy={sending} onClick={send}>
                   {sending ? t('sending') : t('send')}
                 </button>
                 <WitnessDots current={5} total={5} />
@@ -972,6 +974,14 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                   </p>
                 </div>
 
+                <div role="note" className="mt-5 rounded-xl border border-gold-200 bg-gold-50 p-3.5">
+                  <p className="flex items-center gap-2 text-[13px] font-bold text-night-900">
+                    <ShieldAlert className="h-4 w-4 shrink-0 text-gold-700" aria-hidden="true" />
+                    {t('finalTitle')}
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-night-700">{t('finalText')}</p>
+                </div>
+
                 <label className="mt-5 flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-night-600">
                   <input type="checkbox" checked={certified} onChange={(e) => setCertified(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-leaf-500" />
                   {t('certify')}
@@ -979,6 +989,10 @@ export default function TemoinPage({ params }: { params: Promise<{ token: string
                 <label className="mt-3 flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-night-600">
                   <input type="checkbox" checked={mention} onChange={(e) => setMention(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-leaf-500" />
                   {t('sign.mention')}
+                </label>
+                <label className="mt-3 flex cursor-pointer items-start gap-3 text-xs font-semibold leading-relaxed text-night-800">
+                  <input type="checkbox" checked={finalOk} onChange={(e) => setFinalOk(e.target.checked)} className="mt-0.5 h-5 w-5 shrink-0 accent-leaf-500" />
+                  {t('final')}
                 </label>
 
                 <section aria-labelledby="sign-title" className="mt-6">

@@ -707,7 +707,32 @@
         "receivedOn": "Received on",
         "confirmFailed": "Couldn’t confirm it.",
         "confirm": "Confirm this testimonial",
-        "refuseFailed": "Couldn’t decline it."
+        "refuseFailed": "Couldn’t decline it.",
+        "permanentTitle": "A received testimony cannot be deleted",
+        "permanentText": "It is kept exactly as it was sent, for its value as evidence. If something is wrong (test submission, mistake, abusive content), report it: our team reviews it and can remove it.",
+        "report": "Report this testimony",
+        "reportTitle": "Report this testimony",
+        "reportText": "Explain why this testimony should be reviewed. Our team does not read its content: it relies on your reason and details.",
+        "reasonLabel": "Reason for reporting",
+        "reasons": {
+          "test": "Test submission",
+          "erreur": "Sent by mistake",
+          "faux": "False or misleading content",
+          "abus": "Abusive or insulting content",
+          "doublon": "Duplicate of another testimony",
+          "autre": "Other reason"
+        },
+        "detailsLabel": "Details",
+        "detailsHint": "Required for “Other reason”. 1,000 characters maximum.",
+        "detailsRequired": "Add some details for this reason.",
+        "reasonRequired": "Choose a reason.",
+        "send": "Send report",
+        "sending": "Sending…",
+        "cancel": "Cancel",
+        "sent": "Report sent. Our team will review it.",
+        "reportFailed": "The report could not be sent. Please try again.",
+        "statusOpen": "Report under review",
+        "statusRejected": "Report reviewed: the testimony is kept"
       },
       "download": {
         "started": "Download {label} started",

@@ -169,7 +169,8 @@
         "notSpecified": "Não informado",
         "parentRequired": "Adicione pelo menos um pai/mãe.",
         "subjectRequired": "Informe o título da solicitação.",
-        "witnessN": "Testemunha {n}"
+        "witnessN": "Testemunha {n}",
+        "reportDetailsRequired": "Adicione um detalhe para este motivo."
       },
       "vault": {
         "badType": "Formato não suportado. Formatos aceitos: PDF, JPG, PNG, DOCX, DOC.",

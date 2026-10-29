@@ -16,7 +16,8 @@ const CSP = [
   "img-src 'self' data: blob: https:",
   // Notes vocales de la messagerie (enregistrements locaux blob: et fichiers du stockage Supabase).
   "media-src 'self' blob: https://*.supabase.co",
-  `connect-src 'self' https://*.supabase.co https://api.stripe.com https://api.resend.com https://api.anthropic.com${process.env.NODE_ENV === 'development' ? ' ws://localhost:*' : ''}`,
+  // wss:// : temps réel Supabase (messagerie). Sans lui, les nouveaux messages n'arrivent qu'au rechargement.
+  `connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.stripe.com https://api.resend.com https://api.anthropic.com${process.env.NODE_ENV === 'development' ? ' ws://localhost:*' : ''}`,
   "frame-src https://js.stripe.com https://hooks.stripe.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",

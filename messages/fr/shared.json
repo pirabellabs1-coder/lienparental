@@ -169,7 +169,8 @@
         "notSpecified": "Non précisé",
         "parentRequired": "Ajoutez au moins un parent.",
         "subjectRequired": "Indiquez le titre de la demande.",
-        "witnessN": "Témoin {n}"
+        "witnessN": "Témoin {n}",
+        "reportDetailsRequired": "Ajoutez une précision pour ce motif."
       },
       "vault": {
         "badType": "Format non pris en charge. Formats acceptés : PDF, JPG, PNG, DOCX, DOC.",

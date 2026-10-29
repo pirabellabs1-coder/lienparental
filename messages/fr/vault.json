@@ -707,7 +707,32 @@
         "receivedOn": "Reçu le",
         "confirmFailed": "Confirmation impossible.",
         "confirm": "Confirmer ce témoignage",
-        "refuseFailed": "Refus impossible."
+        "refuseFailed": "Refus impossible.",
+        "permanentTitle": "Un témoignage reçu ne peut pas être supprimé",
+        "permanentText": "Il est conservé tel qu’il a été envoyé, pour sa valeur de preuve. En cas de problème (envoi d’essai, erreur, contenu abusif), signalez-le : l’équipe l’examine et peut le retirer.",
+        "report": "Signaler ce témoignage",
+        "reportTitle": "Signaler ce témoignage",
+        "reportText": "Expliquez pourquoi ce témoignage doit être examiné. L’équipe ne lit pas son contenu : elle se fonde sur votre motif et vos précisions.",
+        "reasonLabel": "Motif du signalement",
+        "reasons": {
+          "test": "Envoi d’essai (message test)",
+          "erreur": "Envoyé par erreur",
+          "faux": "Contenu faux ou trompeur",
+          "abus": "Contenu abusif ou insultant",
+          "doublon": "Doublon d’un autre témoignage",
+          "autre": "Autre motif"
+        },
+        "detailsLabel": "Précisions",
+        "detailsHint": "Obligatoire pour « Autre motif ». 1 000 caractères au plus.",
+        "detailsRequired": "Ajoutez une précision pour ce motif.",
+        "reasonRequired": "Choisissez un motif.",
+        "send": "Envoyer le signalement",
+        "sending": "Envoi…",
+        "cancel": "Annuler",
+        "sent": "Signalement envoyé. L’équipe va l’examiner.",
+        "reportFailed": "Le signalement n’a pas pu être envoyé. Réessayez.",
+        "statusOpen": "Signalement en cours d’examen",
+        "statusRejected": "Signalement examiné : le témoignage est conservé"
       },
       "download": {
         "started": "Téléchargement {label} lancé",
