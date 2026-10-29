@@ -70,7 +70,10 @@
         "firstName": "Prénom",
         "firstNamePh": "Ex : Martin",
         "lastName": "Nom",
-        "lastNamePh": "Ex : Dupont"
+        "lastNamePh": "Ex : Dupont",
+        "territoryLegend": "Votre territoire",
+        "territoryHelp": "Le Guide parental vous proposera les démarches, aides et organismes de ce territoire. Vous pourrez le changer à tout moment dans votre profil.",
+        "errTerritory": "Choisissez votre territoire."
       },
       "coparent": {
         "skip": "Passer cette étape",
@@ -139,7 +142,8 @@
         "child": "Enfant",
         "noChild": "Aucun enfant ajouté pour le moment.",
         "editChild": "Modifier l’enfant {name}",
-        "addChild": "Ajouter un enfant"
+        "addChild": "Ajouter un enfant",
+        "territory": "Territoire : {name}"
       },
       "verify": {
         "errUnavailable": "Envoi impossible pour le moment. Réessayez dans un instant.",

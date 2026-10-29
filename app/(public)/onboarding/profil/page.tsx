@@ -7,19 +7,23 @@ import { cn } from '@/lib/cn'
 import { OnboardingScreen } from '@/components/onboarding/OnboardingScreen'
 import { TextField } from '@/components/onboarding/fields'
 import { PhotoPicker } from '@/components/onboarding/PhotoPicker'
+import { TerritoryPicker } from '@/components/onboarding/TerritoryPicker'
+import { rememberGuideTerritory } from '@/components/guide/RememberGuideTerritory'
+import { GUIDE_TERRITORY_COOKIE, isTerritoryCode } from '@/lib/guide/territories'
 import { btn } from '@/components/onboarding/styles'
 import { getDraftPhoto, readDraft, setDraftPhoto, writeDraft } from '@/components/onboarding/draft'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { saveOnboardingProfile } from '@/lib/auth/actions'
 import { uploadAvatar } from '@/lib/auth/browser'
 
-// Étape 8 — Configurer votre profil (photo facultative, prénom, nom)
+// Étape 8 — Configurer votre profil (photo facultative, prénom, nom, territoire du Guide parental)
 export default function ProfilPage() {
   const router = useRouter()
   const t = useTranslations('public.onboarding.profile')
   const [prenom, setPrenom] = useState('')
   const [nom, setNom] = useState('')
   const [photo, setPhoto] = useState<string | null>(null)
+  const [territoire, setTerritoire] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [saving, setSaving] = useState(false)
   const [serverError, setServerError] = useState<string | null>(null)
@@ -29,6 +33,10 @@ export default function ProfilPage() {
     setPrenom(d.prenom ?? '')
     setNom(d.nom ?? '')
     setPhoto(getDraftPhoto('parent'))
+    // Brouillon, sinon dernier territoire consulté dans le Guide (cookie) : rien d'imposé par défaut.
+    const fromCookie = document.cookie.split('; ').find((c) => c.startsWith(`${GUIDE_TERRITORY_COOKIE}=`))?.split('=')[1]
+    const guess = d.territoire ?? (fromCookie ? decodeURIComponent(fromCookie) : '')
+    if (isTerritoryCode(guess)) setTerritoire(guess)
   }, [])
 
   const onPhoto = (url: string | null) => {
@@ -38,6 +46,7 @@ export default function ProfilPage() {
 
   const prenomErr = submitted && !prenom.trim() ? t('errFirstName') : undefined
   const nomErr = submitted && !nom.trim() ? t('errLastName') : undefined
+  const territoireErr = submitted && !territoire ? t('errTerritory') : undefined
 
   // Supabase : photo → bucket privé « avatars » (${uid}/avatar.jpg), puis public.users via Server Action.
   const persist = async () => {
@@ -49,7 +58,7 @@ export default function ProfilPage() {
       if (!up.ok) { setSaving(false); setServerError(up.error); return false }
       photoPath = up.path
     }
-    const res = await saveOnboardingProfile({ prenom: prenom.trim(), nom: nom.trim(), photoPath })
+    const res = await saveOnboardingProfile({ prenom: prenom.trim(), nom: nom.trim(), photoPath, territoire })
     if (!res.ok) {
       setSaving(false)
       if (res.reason === 'unauthenticated' || res.reason === 'mfa_required') {
@@ -65,9 +74,11 @@ export default function ProfilPage() {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setSubmitted(true)
-    if (!prenom.trim() || !nom.trim() || saving) return
+    if (!prenom.trim() || !nom.trim() || !territoire || saving) return
     if (SUPABASE_ENABLED && !(await persist())) return
-    writeDraft({ prenom: prenom.trim(), nom: nom.trim() })
+    // Démo : pas de profil en base, le cookie suffit pour que le Guide s'ouvre sur ce territoire.
+    if (!SUPABASE_ENABLED) rememberGuideTerritory(territoire)
+    writeDraft({ prenom: prenom.trim(), nom: nom.trim(), territoire })
     router.push('/onboarding/enfant')
   }
 
@@ -107,6 +118,14 @@ export default function ProfilPage() {
           error={nomErr}
         />
       </div>
+      <TerritoryPicker
+        className="mt-7"
+        value={territoire}
+        onChange={setTerritoire}
+        legend={t('territoryLegend')}
+        help={t('territoryHelp')}
+        error={territoireErr}
+      />
     </OnboardingScreen>
   )
 }
