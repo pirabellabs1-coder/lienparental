@@ -678,5 +678,26 @@
     "contactGeneral": "General questions",
     "contactSupport": "Support",
     "contactHelp": "You can also visit the <link>help center</link>."
+  },
+  "homeAlbum": {
+    "badge": "New · Child’s album",
+    "title": "Never miss your child’s important moments again",
+    "lead": "First day of school, birthdays, holidays: each parent keeps their child’s photos in their vault and shares the ones they choose with the other parent. Even when your child isn’t with you, you can follow how they grow.",
+    "point1Title": "Private or shared, photo by photo",
+    "point1Text": "You choose what the other parent sees. They can view and download, never edit or delete.",
+    "point2Title": "A timeline that sorts itself",
+    "point2Text": "The date each photo was taken is read from the photo: everything is sorted by year and month, effortlessly.",
+    "point3Title": "Important moments up front",
+    "point3Text": "First day of school, birthdays, a first show: star them to find them in a second.",
+    "point4Title": "Protected like your documents",
+    "point4Text": "Locked vault, hosting in Europe, GPS location removed from photos. No public photos, ever.",
+    "cta": "Create my album for free",
+    "note": "Included in your account’s vault.",
+    "shot1": "Back to school",
+    "shot2": "Picnic",
+    "shot3": "Painting",
+    "badge_important": "Important moment",
+    "badge_shared": "Shared",
+    "badge_private": "Private"
   }
 }

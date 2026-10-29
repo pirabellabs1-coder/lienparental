@@ -190,6 +190,10 @@
         "restoreFailed": "Restauration impossible (délai de 30 jours dépassé ?).",
         "tooLarge": "Fichier trop volumineux. Taille max. 20 Mo.",
         "uploadFailed": "L’envoi du fichier a échoué. Réessayez."
+      },
+      "album": {
+        "thumbsFailed": "Impossible d’afficher les photos pour le moment.",
+        "unreadable": "Cette image n’a pas pu être lue. Choisissez une photo JPG ou PNG."
       }
     },
     "family": {

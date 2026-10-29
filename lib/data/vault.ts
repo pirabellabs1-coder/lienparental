@@ -56,7 +56,7 @@ const TONES: VaultTone[] = ['violet', 'blue', 'green', 'orange', 'pink', 'gray',
 // --- Lignes -----------------------------------------------------------------
 
 type CategoryRow = { id: string; name: string; icon: string | null; color: string | null; visible_filtres: boolean; position: number }
-type DocumentRow = {
+export type DocumentRow = {
   id: string
   category_id: string | null
   name: string
@@ -87,11 +87,11 @@ type ShareRow = {
 }
 
 const CAT_COLUMNS = 'id, name, icon, color, visible_filtres, position'
-const DOC_COLUMNS = 'id, category_id, name, mime, size_bytes, confidentialite, storage_path, doc_date, source, description, children_ids, created_at, deleted_at, user_id, family_shared, folder_id'
+export const DOC_COLUMNS = 'id, category_id, name, mime, size_bytes, confidentialite, storage_path, doc_date, source, description, children_ids, created_at, deleted_at, user_id, family_shared, folder_id'
 
-type Viewer = { userId: string; names: Map<string, string> }
+export type Viewer = { userId: string; names: Map<string, string> }
 
-async function viewer(): Promise<Viewer> {
+export async function viewer(): Promise<Viewer> {
   const [userId, names] = await Promise.all([requireUserId(), familyAuthorNames()])
   return { userId, names }
 }
@@ -138,7 +138,7 @@ function categoryFromRow(r: CategoryRow, count: number): VaultCategory {
   }
 }
 
-function docFromRow(r: DocumentRow, who?: Viewer): VaultDocumentRecord {
+export function docFromRow(r: DocumentRow, who?: Viewer): VaultDocumentRecord {
   const created = new Date(r.created_at)
   const foreign = Boolean(who && r.user_id && r.user_id !== who.userId)
   return {
@@ -470,10 +470,15 @@ export async function restoreDocument(id: string): Promise<void> {
 
 /** Suppression définitive depuis la corbeille : ligne puis fichier. */
 export async function purgeDocument(doc: Pick<VaultDocumentRecord, 'id' | 'storagePath'>): Promise<void> {
+  // Vignette d'une photo de l'album (0530) : lue avant la suppression de la ligne. Colonne absente
+  // (migration non appliquée) ou lecture refusée : rien à supprimer de plus.
+  const { data: thumb } = await db().from('documents').select('thumb_path').eq('id', doc.id).maybeSingle()
+  const thumbPath = (thumb as { thumb_path?: string | null } | null)?.thumb_path ?? null
   const { error } = await db().from('documents').delete().eq('id', doc.id).not('deleted_at', 'is', null)
   if (error) throw toDataError(error, 'vault.purge')
-  if (doc.storagePath) {
-    const { error: sErr } = await db().storage.from(DOCUMENTS_BUCKET).remove([doc.storagePath])
+  const paths = [doc.storagePath, thumbPath].filter((x): x is string => Boolean(x))
+  if (paths.length) {
+    const { error: sErr } = await db().storage.from(DOCUMENTS_BUCKET).remove(paths)
     // Ligne déjà supprimée : un fichier orphelin sera ramassé par le job de purge.
     if (sErr) console.warn('[data] vault.purge storage (code ' + String((sErr as { statusCode?: string }).statusCode ?? 'unknown') + ')')
   }

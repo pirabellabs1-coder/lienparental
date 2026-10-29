@@ -190,6 +190,10 @@
         "restoreFailed": "Não foi possível restaurar (prazo de 30 dias excedido?).",
         "tooLarge": "Arquivo muito grande. Tamanho máx. 20 MB.",
         "uploadFailed": "O envio do arquivo falhou. Tente novamente."
+      },
+      "album": {
+        "thumbsFailed": "Não foi possível exibir as fotos no momento.",
+        "unreadable": "Não foi possível ler esta imagem. Escolha uma foto JPG ou PNG."
       }
     },
     "family": {

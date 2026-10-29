@@ -678,5 +678,26 @@
     "contactGeneral": "Perguntas gerais",
     "contactSupport": "Suporte",
     "contactHelp": "Consulte também a <link>central de ajuda</link>."
+  },
+  "homeAlbum": {
+    "badge": "Novo · Álbum da criança",
+    "title": "Não perca mais os momentos importantes do seu filho",
+    "lead": "Primeiro dia de aula, aniversário, férias: cada genitor guarda as fotos do filho no seu cofre e compartilha as que quiser com o outro genitor. Mesmo quando a criança não está com você, você acompanha o crescimento dela.",
+    "point1Title": "Privada ou compartilhada, foto por foto",
+    "point1Text": "Você escolhe o que o outro genitor vê. Ele pode ver e baixar, nunca editar nem excluir.",
+    "point2Title": "Uma linha do tempo que se organiza sozinha",
+    "point2Text": "A data em que a foto foi tirada é lida da própria foto: tudo se organiza por ano e por mês, sem esforço.",
+    "point3Title": "Os momentos importantes em destaque",
+    "point3Text": "Volta às aulas, aniversário, primeira apresentação: marque com uma estrela para encontrá-los na hora.",
+    "point4Title": "Protegido como os seus documentos",
+    "point4Text": "Cofre trancado, hospedagem na Europa, localização GPS removida das fotos. Nenhuma foto pública, nunca.",
+    "cta": "Criar meu álbum gratuitamente",
+    "note": "Incluído no cofre da sua conta.",
+    "shot1": "Volta às aulas",
+    "shot2": "Piquenique",
+    "shot3": "Pintura",
+    "badge_important": "Momento importante",
+    "badge_shared": "Compartilhada",
+    "badge_private": "Privada"
   }
 }
