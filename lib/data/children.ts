@@ -67,12 +67,15 @@ const PHOTO_URL_SECONDS = 60 * 60
 /** Remplace les chemins de stockage par des URL signées (une requête pour toute la liste). */
 async function withPhotoUrls(rows: ChildRow[], children: Child[]): Promise<Child[]> {
   const paths = rows.map((r) => r.photo_url).filter((p): p is string => !!p && !/^https?:/.test(p))
-  if (!paths.length) return children
+  if (!paths.length) return children.map((c, i) => ({ ...c, photoUrl: rows[i].photo_url ?? undefined }))
   const { data } = await db().storage.from(PHOTO_BUCKET).createSignedUrls(paths, PHOTO_URL_SECONDS)
   const url = new Map<string, string>()
   for (const d of data ?? []) if (d.signedUrl && d.path) url.set(d.path, d.signedUrl)
   // Photo illisible (autre parent, fichier absent) : l'initiale s'affiche à la place.
-  return children.map((c, i) => ({ ...c, photoUrl: rows[i].photo_url ? url.get(rows[i].photo_url!) : undefined }))
+  return children.map((c, i) => {
+    const p = rows[i].photo_url
+    return { ...c, photoUrl: !p ? undefined : /^https?:/.test(p) ? p : url.get(p) }
+  })
 }
 
 /** Enregistre la photo de l'enfant (JPEG redimensionné, 2 Mo max). Renvoie l'URL à afficher. */

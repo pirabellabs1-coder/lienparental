@@ -106,7 +106,8 @@
         "doctor": "Family doctor",
         "photoSaving": "Saving photo…",
         "photoSaved": "Photo saved.",
-        "photoTooBig": "Choose an image (JPG, PNG or WebP) of 5 MB maximum."
+        "photoTooBig": "Choose an image (JPG, PNG or WebP) of 5 MB maximum.",
+        "photoFailed": "The photo could not be saved. Please try again."
       },
       "values": {
         "ageYears": "{count, plural, one {# year old} other {# years old}}",

@@ -99,7 +99,7 @@ export default function EnfantProfilePage({
       setPhotoState({ kind: 'saved', text: t('photoSaved') })
     } catch (err) {
       setPhoto(previous)
-      setPhotoState({ kind: 'error', text: err instanceof Error && err.message ? err.message : t('photoTooBig') })
+      setPhotoState({ kind: 'error', text: err instanceof Error && err.message ? err.message : t('photoFailed') })
     }
   }
 
