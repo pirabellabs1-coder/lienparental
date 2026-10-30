@@ -4,12 +4,14 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { Coins, FileImage, FileText, HeartPulse, Paperclip, Send, Square } from 'lucide-react'
+import { Coins, FileImage, FileText, HeartPulse, Paperclip, Send, Square, Volume2 } from 'lucide-react'
 import { ChatBubble, type ChatMessage } from './ChatBubble'
 import { DemoNote, LegalNote } from './ui'
 import { errorMessage, readSse } from './sse-client'
 import { DOC_ACCEPT, IMAGE_ACCEPT, draftFromFile, newIdempotencyKey, prepareCoachFile, saveDraft, setPendingFile } from './session'
 import { useCredits } from './CreditCost'
+import { useCoachVoice } from './useCoachVoice'
+import { COACH_VOICES, type CoachVoiceKey } from '@/lib/ai/voices'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
 import { CHAT_MAX_TOTAL_CHARS, CHAT_MAX_TURNS } from '@/lib/ai/schemas'
@@ -77,6 +79,8 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
   const [upgrade, setUpgrade] = useState(false)
   const { data: credits, refresh: refreshCredits } = useCredits()
   const chatCost = credits?.costs.chat_question ?? 1
+  const speechCtl = useCoachVoice(locale)
+  const voiceId = useId()
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const endRef = useRef<HTMLLIElement>(null)
   const abortRef = useRef<AbortController | null>(null)
@@ -276,7 +280,16 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
 
       <ol aria-label={conversationLabel} className="space-y-4">
         {messages.map((m) => (
-          <ChatBubble key={m.id} message={m} live={m.from === 'ia' && !m.local} />
+          <ChatBubble
+            key={m.id}
+            message={m}
+            live={m.from === 'ia' && !m.local}
+            speech={m.from === 'ia' && !m.streaming && m.tone !== 'error' && m.text.trim() ? {
+              playing: speechCtl.state.id === m.id && speechCtl.state.status === 'playing',
+              loading: speechCtl.state.id === m.id && speechCtl.state.status === 'loading',
+              onToggle: () => void speechCtl.toggle(m.id, [m.text, ...(m.bullets ?? [])].join('\n')),
+            } : undefined}
+          />
         ))}
         <li ref={endRef} aria-hidden="true" className="h-px" />
       </ol>
@@ -442,6 +455,33 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
             <Link href="/app/coach/credits#packs" className="underline underline-offset-2">{t('buyCredits')}</Link>
           </p>
         ) : null}
+
+        <div className="mt-3 flex min-h-[48px] flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-xl2 border border-night-100 bg-white px-4 py-2.5">
+          <label htmlFor={voiceId} className="flex min-w-0 items-center gap-2.5">
+            <Volume2 className="h-5 w-5 shrink-0 text-night-700" aria-hidden="true" />
+            <span>
+              <span className="block text-[13px] font-semibold text-night-900">{t('voiceTitle')}</span>
+              <span className="block text-[11.5px] text-night-600">{t('voiceDesc')}</span>
+            </span>
+          </label>
+          <select
+            id={voiceId}
+            value={speechCtl.voice}
+            onChange={(e) => speechCtl.setVoice(e.target.value as CoachVoiceKey)}
+            className="min-h-[44px] rounded-xl border border-night-200 bg-white px-3 text-[13px] font-semibold text-night-900 focus:border-iris-400 focus:outline-none focus:ring-2 focus:ring-iris-200"
+          >
+            {(['female', 'male'] as const).map((g) => (
+              <optgroup key={g} label={t(`voiceGroup.${g}`)}>
+                {COACH_VOICES.filter((v) => v.gender === g).map((v) => (
+                  <option key={v.key} value={v.key}>{t(`voices.${v.key}`)}</option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
+          {speechCtl.fallback && (
+            <p role="status" className="w-full text-[11.5px] leading-snug text-night-600">{t('voiceFallback')}</p>
+          )}
+        </div>
 
         <label
           htmlFor={medId}

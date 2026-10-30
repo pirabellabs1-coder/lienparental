@@ -26,7 +26,10 @@
       "chatInsufficientCredits": "Uma resposta do Coach custa {cost, plural, one {# crédito} other {# créditos}} e seu saldo é de {total}. Compre créditos para continuar: sua pergunta foi mantida.",
       "chatDuplicate": "Esta pergunta já foi enviada: nenhum crédito adicional foi cobrado.",
       "chatSpendCap": "O Coach com IA atingiu seu limite de uso por hoje. Tente novamente mais tarde: nenhum crédito foi cobrado.",
-      "chatInactive": "As perguntas ao Coach estão temporariamente indisponíveis."
+      "chatInactive": "As perguntas ao Coach estão temporariamente indisponíveis.",
+      "speechUnavailable": "A leitura em voz alta está indisponível no momento.",
+      "speechRateLimited": "Muitas leituras em pouco tempo. Tente novamente em um minuto.",
+      "speechDailyLimit": "Limite diário de leituras em voz alta atingido. Tente novamente amanhã."
     },
     "analyze": {
       "textTooLong": "Mensagem longa demais (no máximo {max} caracteres).",

@@ -60,7 +60,23 @@
       "upgradePlan": "Upgrade to Premium",
       "seePlans": "See plans",
       "attach": "Attach an image or a document",
-      "attachNote": "The Coach analyses the file (your current question goes with it), then you can discuss it together. The cost depends on the file type."
+      "attachNote": "The Coach analyses the file (your current question goes with it), then you can discuss it together. The cost depends on the file type.",
+      "listen": "Listen",
+      "listenStop": "Stop",
+      "listenLoading": "Preparing…",
+      "voiceTitle": "Coach voice",
+      "voiceDesc": "To hear the Coach’s answers read aloud.",
+      "voiceGroup": {
+        "female": "Female voices",
+        "male": "Male voices"
+      },
+      "voices": {
+        "koraly": "Koraly",
+        "lucie": "Lucie",
+        "marcel": "Marcel",
+        "fabien": "Fabien"
+      },
+      "voiceFallback": "The Coach’s voice is unavailable right now: reading with your device’s voice."
     },
     "list": {
       "opFailed": "The operation failed. Please try again.",
