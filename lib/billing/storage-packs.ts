@@ -56,7 +56,8 @@ export type StorageSessionLike = {
   currency: string | null
   created: number
   metadata: Record<string, string> | null
-  payment_intent: string | { id: string } | null
+  /** Développé (`expand: ['payment_intent.latest_charge']`) : un paiement remboursé ou contesté n'accorde rien. */
+  payment_intent: string | { id: string; latest_charge?: string | { refunded?: boolean; disputed?: boolean } | null } | null
 }
 
 export type StorageGrant = {
@@ -68,12 +69,27 @@ export type StorageGrant = {
   paymentIntent: string | null
   purchasedAt: string
   waiverAt: string | null
+  /** Durée figée dans la session à sa création. */
+  validityMonths: number
 }
 
-export type StorageGrantSkip = 'not_storage' | 'not_paid' | 'invalid'
+export type StorageGrantSkip = 'not_storage' | 'not_paid' | 'invalid' | 'reversed'
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 const SESSION_RE = /^cs_(test|live)_[A-Za-z0-9]{10,200}$/
+
+/**
+ * Pack FIGÉ dans la session à sa création (prix et espace des metadata écrites par le serveur) :
+ * un changement de tarif pendant la validité de la session ne fait jamais perdre un paiement.
+ */
+function sessionPack(meta: Record<string, string> | null): StoragePack | null {
+  const known = parseStoragePack(meta?.pack)
+  if (!known) return null
+  const priceCents = Number(meta?.price_cents ?? known.priceCents)
+  const gigabytes = Number(meta?.gigabytes ?? known.gigabytes)
+  if (!Number.isInteger(priceCents) || priceCents < 0 || !Number.isInteger(gigabytes) || gigabytes < 1 || gigabytes > 1000) return null
+  return { id: known.id, gigabytes, priceCents }
+}
 
 /** Session d'achat d'espace ? (pour aiguiller le webhook sans rien valider d'autre). */
 export function isStorageSession(s: Pick<StorageSessionLike, 'mode' | 'metadata'>): boolean {
@@ -88,11 +104,14 @@ export function storageGrantFromSession(s: StorageSessionLike): { ok: true; gran
   if (!isStorageSession(s)) return { ok: false, reason: 'not_storage' }
   if (s.status !== 'complete' || s.payment_status !== 'paid') return { ok: false, reason: 'not_paid' }
   const userId = s.client_reference_id
-  const pack = parseStoragePack(s.metadata?.pack)
+  const pack = sessionPack(s.metadata)
   if (!SESSION_RE.test(s.id) || !userId || !UUID_RE.test(userId) || s.metadata?.user_id !== userId || !pack) return { ok: false, reason: 'invalid' }
   if (s.amount_total !== pack.priceCents || (s.currency ?? '').toLowerCase() !== STORAGE_CURRENCY) return { ok: false, reason: 'invalid' }
-  const waiver = Number(s.metadata?.waiver_at)
   const pi = s.payment_intent
+  const charge = pi && typeof pi === 'object' ? pi.latest_charge : null
+  if (charge && typeof charge === 'object' && (charge.refunded || charge.disputed)) return { ok: false, reason: 'reversed' }
+  const waiver = Number(s.metadata?.waiver_at)
+  const months = Number(s.metadata?.validity_months)
   return {
     ok: true,
     grant: {
@@ -104,6 +123,7 @@ export function storageGrantFromSession(s: StorageSessionLike): { ok: true; gran
       paymentIntent: typeof pi === 'string' ? pi : pi?.id ?? null,
       purchasedAt: new Date(s.created * 1000).toISOString(),
       waiverAt: Number.isFinite(waiver) && waiver > 0 ? new Date(waiver * 1000).toISOString() : null,
+      validityMonths: Number.isInteger(months) && months >= 1 && months <= 36 ? months : STORAGE_VALIDITY_MONTHS,
     },
   }
 }

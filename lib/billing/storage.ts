@@ -6,12 +6,12 @@ import 'server-only'
  */
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
-import { STORAGE_VALIDITY_MONTHS, storageGrantFromSession, type StorageGrant, type StorageSessionLike } from './storage-packs'
+import { storageGrantFromSession, type StorageGrant, type StorageSessionLike } from './storage-packs'
 
 type Db = { rpc: (fn: string, args?: Record<string, unknown>) => PromiseLike<{ data: unknown; error: { code?: string } | null }>; from: (t: string) => any } // eslint-disable-line @typescript-eslint/no-explicit-any
 const serviceDb = () => createServiceClient() as unknown as Db
 
-export type StorageGrantOutcome = 'granted' | 'duplicate' | 'unknown_user' | 'not_storage' | 'not_paid' | 'invalid'
+export type StorageGrantOutcome = 'granted' | 'duplicate' | 'unknown_user' | 'not_storage' | 'not_paid' | 'invalid' | 'reversed'
 
 /** Accorde l'espace d'une session payée (webhook ou retour). Rejouable : une session n'accorde qu'une fois. */
 export async function grantStorageForSession(session: StorageSessionLike, source: 'webhook' | 'return'): Promise<{ outcome: StorageGrantOutcome; grant?: StorageGrant }> {
@@ -20,6 +20,7 @@ export async function grantStorageForSession(session: StorageSessionLike, source
   if (!v.ok) {
     // Paiement encaissé mais incohérent : à traiter à la main (marqueur stable pour une alerte de logs).
     if (v.reason === 'invalid') console.error('[storage] PAIEMENT NON ACCORDÉ', { source, session: ref, paid: session.payment_status === 'paid' })
+    if (v.reason === 'reversed') console.warn('[storage] paiement remboursé ou contesté : espace non accordé', { source, session: ref })
     return { outcome: v.reason }
   }
   const g = v.grant
@@ -32,7 +33,7 @@ export async function grantStorageForSession(session: StorageSessionLike, source
     p_session_id: g.sessionId,
     p_payment_intent: g.paymentIntent,
     p_purchased_at: g.purchasedAt,
-    p_validity_months: STORAGE_VALIDITY_MONTHS,
+    p_validity_months: g.validityMonths,
     p_waiver_at: g.waiverAt,
   })
   if (error) throw new Error(`grant_storage_pack failed: ${error.code ?? 'unknown'}`)

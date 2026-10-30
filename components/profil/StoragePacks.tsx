@@ -32,7 +32,7 @@ async function settleReturn(rawSessionId: string | undefined): Promise<Settled> 
   const rl = await rateLimit(userKey('storage-return', user.id), 20, 10 * 60_000)
   if (!rl.ok) return { state: 'pending' }
   try {
-    const session = await getStripe().checkout.sessions.retrieve(sessionId)
+    const session = await getStripe().checkout.sessions.retrieve(sessionId, { expand: ['payment_intent.latest_charge'] })
     if (session.client_reference_id !== user.id) return { state: 'pending' }
     if (session.status === 'expired' || (session.status === 'complete' && session.payment_status === 'unpaid')) return { state: 'failed' }
     const res = await grantStorageForSession(session, 'return')

@@ -111,7 +111,7 @@ export async function handleStripeEvent(event: Stripe.Event): Promise<Deferred[]
       // l'abonnement, les droits Premium ni le stockage.
       // Achat d'espace de stockage (paiement unique, 0610) : même principe, grant_storage_pack.
       if (isStorageSession(session)) {
-        const fresh = await getStripe().checkout.sessions.retrieve(session.id)
+        const fresh = await getStripe().checkout.sessions.retrieve(session.id, { expand: ['payment_intent.latest_charge'] })
         await grantStorageForSession(fresh, 'webhook')
         break
       }
