@@ -178,7 +178,7 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
       if (p.date) setDate(p.date)
       urlChild.current = p.enfant
     }
-    if (formDraft && !editId) applyDraft(formDraft)
+    if (formDraft && !editId && Object.keys(sp).length === 0) applyDraft(formDraft)
     dropFormDraft(DRAFT_KEY)
     setDate((d) => d || day)
     setHeure((h) => h || nowTime())
@@ -197,10 +197,6 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
   useEffect(() => {
     if (!existing || prefilled.current) return
     prefilled.current = true
-    if (formDraft) {
-      applyDraft(formDraft)
-      return
-    }
     setType(existing.type)
     setDate(existing.date)
     setHeure(existing.heure ?? '')
@@ -236,6 +232,9 @@ export default function NouvelleEntreePage({ searchParams }: { searchParams: Pro
       setDetailsOpen(Boolean(v.payeurType || v.beneficiaireType || v.reference || v.statut !== 'paye' || v.partageMode || v.recurrence !== 'ponctuel'))
       setKeptJustifs(allJustificatifs(d))
     }
+    // Retour de « Ajouter des images » : la saisie en cours l'emporte sur l'entrée chargée
+    // (les champs de dépense et les justificatifs, eux, restent ceux de l'entrée).
+    if (formDraft) applyDraft(formDraft)
   }, [existing])
 
   // Après une soumission invalide (erreurs rendues) : focus sur le premier champ en erreur.

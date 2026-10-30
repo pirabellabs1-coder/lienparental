@@ -106,8 +106,8 @@
         "doctor": "Médecin traitant",
         "photoSaving": "Enregistrement de la photo…",
         "photoSaved": "Photo enregistrée.",
-        "photoTooBig": "Choisissez une image (JPG, PNG ou WebP) de 5 Mo maximum.",
-        "photoFailed": "La photo n’a pas pu être enregistrée. Réessayez."
+        "photoFailed": "La photo n’a pas pu être enregistrée. Réessayez.",
+        "photoInvalid": "Choisissez une image JPG, PNG ou WebP de 5 Mo maximum."
       },
       "values": {
         "ageYears": "{count, plural, one {# an} other {# ans}}",

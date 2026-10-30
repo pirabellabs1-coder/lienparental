@@ -87,7 +87,7 @@ export default function EnfantProfilePage({
     e.target.value = ''
     if (!f) return
     if (!/^image\/(jpeg|png|webp)$/.test(f.type) || f.size > 5 * 1024 * 1024) {
-      setPhotoState({ kind: 'error', text: t('photoTooBig') })
+      setPhotoState({ kind: 'error', text: t('photoInvalid') })
       return
     }
     const previous = photo
@@ -97,6 +97,7 @@ export default function EnfantProfilePage({
       const url = await setChildPhoto(child.id, f)
       setPhoto(url)
       setPhotoState({ kind: 'saved', text: t('photoSaved') })
+      void refresh() // listes et carte « Enfant actif » : nouvelle URL signée
     } catch (err) {
       setPhoto(previous)
       setPhotoState({ kind: 'error', text: err instanceof Error && err.message ? err.message : t('photoFailed') })

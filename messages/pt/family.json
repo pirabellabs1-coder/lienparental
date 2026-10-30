@@ -106,8 +106,8 @@
         "doctor": "Médico de referência",
         "photoSaving": "Salvando a foto…",
         "photoSaved": "Foto salva.",
-        "photoTooBig": "Escolha uma imagem (JPG, PNG ou WebP) de no máximo 5 MB.",
-        "photoFailed": "Não foi possível salvar a foto. Tente novamente."
+        "photoFailed": "Não foi possível salvar a foto. Tente novamente.",
+        "photoInvalid": "Escolha uma imagem JPG, PNG ou WebP de no máximo 5 MB."
       },
       "values": {
         "ageYears": "{count, plural, one {# ano} other {# anos}}",

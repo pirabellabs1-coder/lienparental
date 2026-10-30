@@ -45,6 +45,7 @@ export function setDraft(key: string, next: DraftImage[]) {
 export function clearDraft(key: string) {
   setDraft(key, [])
   drafts.delete(key)
+  forms.delete(key)
 }
 
 export function useImageDraft(key: string): DraftImage[] {
@@ -63,14 +64,17 @@ export function toDraftImage(file: File): DraftImage {
 
 // Brouillon des champs du formulaire, le temps de l'aller-retour vers « Ajouter des images »
 // (l'écran du formulaire est démonté pendant ce temps). Même vie que les images : mémoire seule.
-const forms = new Map<string, unknown>()
+// Durée de vie courte : quitté par le menu, il ne doit pas réapparaître dans une saisie ultérieure.
+const FORM_DRAFT_TTL_MS = 15 * 60 * 1000
+const forms = new Map<string, { value: unknown; at: number }>()
 
 export function saveFormDraft<T>(key: string, value: T) {
-  forms.set(key, value)
+  forms.set(key, { value, at: Date.now() })
 }
 
 export function peekFormDraft<T>(key: string): T | undefined {
-  return forms.get(key) as T | undefined
+  const d = forms.get(key)
+  return d && Date.now() - d.at < FORM_DRAFT_TTL_MS ? (d.value as T) : undefined
 }
 
 export function dropFormDraft(key: string) {

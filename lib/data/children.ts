@@ -81,6 +81,13 @@ async function withPhotoUrls(rows: ChildRow[], children: Child[]): Promise<Child
 /** Enregistre la photo de l'enfant (JPEG redimensionné, 2 Mo max). Renvoie l'URL à afficher. */
 export async function setChildPhoto(id: string, file: File): Promise<string> {
   if (!LIVE) return URL.createObjectURL(file) // démo : aperçu local, rien n'est envoyé
+  // Seul le titulaire de la fiche change la photo (trigger 0340 côté base) : vérifié AVANT l'envoi,
+  // pour ne pas laisser de fichier orphelin dans le stockage d'un co-parent.
+  const userId = await requireUserId()
+  const { data: row, error: readError } = await db().from('children').select('user_id').eq('id', id).maybeSingle()
+  if (readError) throw toDataError(readError, 'children.get')
+  if (!row) throw new DataError(dataMsg('children.notFound'), 'not_found')
+  if ((row as { user_id: string }).user_id !== userId) throw new DataError(dataMsg('children.photoOwnerOnly'), 'forbidden')
   const up = await uploadAvatar(file, `child-${id}`)
   if (!up.ok) throw new DataError(up.error, 'upload')
   const { error } = await db().from('children').update({ photo_url: up.path }).eq('id', id)

@@ -84,7 +84,8 @@
         "invalidDate": "Date invalide",
         "medicalSaveFailed": "Les informations médicales n’ont pas pu être enregistrées.",
         "notFound": "Ce profil n’existe pas ou a été supprimé.",
-        "photoFailed": "La photo n’a pas pu être enregistrée. Réessayez."
+        "photoFailed": "La photo n’a pas pu être enregistrée. Réessayez.",
+        "photoOwnerOnly": "Seul le parent qui a créé cette fiche peut changer la photo."
       },
       "errors": {
         "duplicate": "Cet élément existe déjà.",
