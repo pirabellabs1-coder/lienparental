@@ -58,7 +58,9 @@
       "noCredits": "You have no credits left to ask a question. Top up your balance or upgrade your plan.",
       "lowCredits": "You only have {total, plural, one {# credit} other {# credits}} left.",
       "upgradePlan": "Upgrade to Premium",
-      "seePlans": "See plans"
+      "seePlans": "See plans",
+      "attach": "Attach an image or a document",
+      "attachNote": "The Coach analyses the file (your current question goes with it), then you can discuss it together. The cost depends on the file type."
     },
     "list": {
       "opFailed": "The operation failed. Please try again.",
