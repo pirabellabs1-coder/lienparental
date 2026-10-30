@@ -761,7 +761,15 @@
         "remindAria": "Relancer le témoin {n}",
         "seeTestimonials": "Voir les témoignages",
         "remindedAll": "Relance envoyée à {count, plural, one {# témoin} other {# témoins}}",
-        "remindAll": "Relancer les témoins"
+        "remindAll": "Relancer les témoins",
+        "stillOpen": "Le lien reste ouvert à d’autres témoins. Clôturez la demande quand vous avez reçu tous les témoignages attendus.",
+        "close": "Clôturer la demande",
+        "closeConfirm": "Clôturer la demande ? Le lien n’acceptera plus de nouveau témoignage. {count, plural, =0 {Aucun témoignage reçu pour l’instant.} one {Le témoignage reçu reste dans votre coffre-fort.} other {Les # témoignages reçus restent dans votre coffre-fort.}}",
+        "closeYes": "Oui, clôturer",
+        "closeCancel": "Annuler",
+        "closing": "Clôture en cours…",
+        "closed": "Demande clôturée.",
+        "closeFailed": "La demande n’a pas pu être clôturée. Réessayez."
       },
       "witnessView": {
         "title": "Témoin",

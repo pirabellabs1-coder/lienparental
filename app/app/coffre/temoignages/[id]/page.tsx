@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { use } from 'react'
+import { use, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Check, CircleCheck, Send } from 'lucide-react'
 import { ScreenHeader } from '@/components/coffre/ScreenHeader'
@@ -21,7 +21,10 @@ export default function DemandeDetailPage({ params }: { params: Promise<{ id: st
   const { id } = use(params)
   const t = useTranslations('vault.testimonials')
   const f = useVaultI18n()
-  const { requests, ready } = useRequests()
+  const { requests, ready, close } = useRequests()
+  const [confirmClose, setConfirmClose] = useState(false)
+  const [closing, setClosing] = useState(false)
+  const [closeError, setCloseError] = useState<string | null>(null)
   const { handled } = useHandledTestimonies()
   const { testimonies } = useReceivedTestimonies()
   const { announce, node } = useAnnounce()
@@ -45,7 +48,22 @@ export default function DemandeDetailPage({ params }: { params: Promise<{ id: st
   }
 
   const got = receivedCount(r)
+  // Lien réutilisable : tant que la demande est ouverte, une ligne « en attente » invite un témoin de plus.
   const total = r.witnesses.length
+
+  const doClose = async () => {
+    setClosing(true)
+    setCloseError(null)
+    try {
+      await close(r.id)
+      setConfirmClose(false)
+      announce(t('request.closed'))
+    } catch {
+      setCloseError(t('request.closeFailed'))
+    } finally {
+      setClosing(false)
+    }
+  }
   const done = r.status === 'termine'
   const pending = r.witnesses.filter((w) => w.status === 'envoi')
   const toConfirm = testimonies.filter((tm) => tm.requestId === r.id && !handled[tm.id])
@@ -64,6 +82,7 @@ export default function DemandeDetailPage({ params }: { params: Promise<{ id: st
           <p className="mt-1 text-[13px] text-night-600">
             <span className="font-bold text-night-900">{got} / {total}</span> {t('list.received')}
           </p>
+          {!done && got > 0 && <p className="mt-1 text-[12.5px] text-night-600">{t('request.stillOpen')}</p>}
           <ProgressBar className="mt-2" value={got} max={total} tone={done ? 'leaf' : 'iris'} label={t('request.receivedLabel')} />
         </section>
 
@@ -120,6 +139,24 @@ export default function DemandeDetailPage({ params }: { params: Promise<{ id: st
               {t('request.remindAll')}
             </button>
           )}
+          {!done && (confirmClose ? (
+            <div role="group" aria-labelledby="close-confirm" className="rounded-2xl border border-night-100 bg-night-50/60 p-4">
+              <p id="close-confirm" className="text-[13px] leading-relaxed text-night-800">{t('request.closeConfirm', { count: got })}</p>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                <button type="button" onClick={() => void doClose()} disabled={closing} aria-busy={closing} className={btn({ variant: 'primary' })}>
+                  {closing ? t('request.closing') : t('request.closeYes')}
+                </button>
+                <button type="button" onClick={() => setConfirmClose(false)} disabled={closing} className={btn({ variant: 'secondary' })}>
+                  {t('request.closeCancel')}
+                </button>
+              </div>
+              {closeError && <p role="alert" className="mt-2 text-[12.5px] font-semibold text-alert-600">{closeError}</p>}
+            </div>
+          ) : (
+            <button type="button" onClick={() => setConfirmClose(true)} className={btn({ variant: 'secondary' })}>
+              {t('request.close')}
+            </button>
+          ))}
         </div>
       </div>
       {node}

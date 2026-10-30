@@ -761,7 +761,15 @@
         "remindAria": "Remind witness {n}",
         "seeTestimonials": "See testimonials",
         "remindedAll": "Reminder sent to {count, plural, one {# witness} other {# witnesses}}",
-        "remindAll": "Remind witnesses"
+        "remindAll": "Remind witnesses",
+        "stillOpen": "The link stays open to other witnesses. Close the request once you have received every testimony you expect.",
+        "close": "Close the request",
+        "closeConfirm": "Close the request? The link will no longer accept new testimonies. {count, plural, =0 {No testimony received yet.} one {The testimony received stays in your vault.} other {The # testimonies received stay in your vault.}}",
+        "closeYes": "Yes, close it",
+        "closeCancel": "Cancel",
+        "closing": "Closing…",
+        "closed": "Request closed.",
+        "closeFailed": "The request could not be closed. Please try again."
       },
       "witnessView": {
         "title": "Witness",
