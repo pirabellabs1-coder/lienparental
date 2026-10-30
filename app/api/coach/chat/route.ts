@@ -173,6 +173,11 @@ export async function POST(req: Request) {
   if (!AI_ENABLED) {
     await confirmCredits(user, actionId, { model: 'demo', usage: null, latencyMs: 0 })
     const answer = mockChatAnswer(question.content, { aboutAnalysis: Boolean(analysis), userId: user.id, locale })
+    // Comme en production : le fil d'une analyse est conservé (réaffiché à la réouverture).
+    if (analysis) {
+      const at = new Date().toISOString()
+      await appendAnalysisMessages(user, analysis.id, [{ role: 'user', content: question.content, at }, { role: 'assistant', content: answer, at }]).catch(() => undefined)
+    }
     return sseResponse(async (send, signal) => {
       await sleep(450, signal)
       for (const chunk of answer.match(/\S+\s*/g) ?? []) {
