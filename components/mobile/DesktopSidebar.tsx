@@ -11,7 +11,7 @@ import { Logo } from '@/components/brand/Logo'
 import { SearchTrigger } from '@/components/search/SearchTrigger'
 import { LogoutButton } from '@/components/auth/LogoutButton'
 import { cn } from '@/lib/cn'
-import { NAV_MAIN as MAIN, NAV_SECONDARY as SECONDARY, NAV_TOOLS as TOOLS, activeNavHref, type NavItem } from './navItems'
+import { NAV_MAIN as MAIN, NAV_SECONDARY as SECONDARY, NAV_TOOLS as TOOLS, activeNavHref, navPrefetch, type NavItem } from './navItems'
 
 // Navigation tablette et ordinateur (≥ md). Sur téléphone : barre d'onglets du bas + menu complet.
 export function DesktopSidebar({ plan = 'gratuit' }: { plan?: PlanId }) {
@@ -29,6 +29,7 @@ export function DesktopSidebar({ plan = 'gratuit' }: { plan?: PlanId }) {
     <li key={href}>
       <Link
         href={href}
+        prefetch={navPrefetch(href)}
         aria-current={active(href) ? 'page' : undefined}
         className={cn(
           'flex h-11 items-center gap-3 rounded-xl px-3 text-[14.5px] font-semibold transition-colors',
@@ -43,7 +44,7 @@ export function DesktopSidebar({ plan = 'gratuit' }: { plan?: PlanId }) {
 
   return (
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col overflow-y-auto overscroll-contain border-r border-night-100 bg-white px-4 py-6 [scrollbar-width:thin] md:flex">
-      <Link href="/app" aria-label="Lien Parental, accueil" className="px-3"><Logo size="md" /></Link>
+      <Link href="/app" prefetch aria-label="Lien Parental, accueil" className="px-3"><Logo size="md" /></Link>
       <SearchTrigger variant="sidebar" className="mt-6" />
       <nav aria-label={t('mainNav')} className="mt-4 flex flex-1 flex-col">
         <ul className="space-y-1">{MAIN.map(item)}</ul>

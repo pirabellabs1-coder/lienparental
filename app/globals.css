@@ -20,6 +20,8 @@ body{
 .pwa-safe{ padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) }
 
 @keyframes showcase-progress { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+/* Barre de navigation (components/mobile/NavigationProgress) : avance vite puis ralentit, sans jamais finir. */
+@keyframes lp-nav-progress { from { transform: scaleX(0.08) } to { transform: scaleX(0.92) } }
 
 /* Scrollbar discrète */
 ::-webkit-scrollbar{ width:10px; height:10px }

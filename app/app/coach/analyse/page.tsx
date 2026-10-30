@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { usePrefetch } from '@/components/mobile/usePrefetch'
 import { useTranslations } from 'next-intl'
 import { Check, Coins, RefreshCw, Sparkles } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
@@ -32,6 +33,8 @@ export default function CoachAnalysePage() {
   const t = useTranslations('coach.analysis')
   const tc = useTranslations('coach.common')
   const router = useRouter()
+  // Écran suivant préchargé jusqu'à son squelette (loading.tsx) : retour immédiat au clic.
+  usePrefetch('/app/coach/reponse')
   const [progress, setProgress] = useState(0)
   const [stage, setStage] = useState('sending')
   const [checksDone, setChecksDone] = useState(0)

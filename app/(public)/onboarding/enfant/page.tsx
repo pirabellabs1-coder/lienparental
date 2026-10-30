@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { usePrefetch } from '@/components/mobile/usePrefetch'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState, type FormEvent } from 'react'
 import { cn } from '@/lib/cn'
@@ -17,6 +18,8 @@ import { uploadAvatar } from '@/lib/auth/browser'
 // Étape 9 — Ajouter un enfant (proposé) : photo, prénom, date de naissance, classe.
 export default function EnfantPage() {
   const router = useRouter()
+  // Écran suivant préchargé jusqu'à son squelette (loading.tsx) : retour immédiat au clic.
+  usePrefetch('/onboarding/recap')
   const t = useTranslations('public.onboarding.child')
   const tc = useTranslations('public.onboarding.classes')
   const [photo, setPhoto] = useState<string | null>(null)

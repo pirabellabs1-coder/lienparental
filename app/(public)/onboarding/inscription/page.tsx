@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { usePrefetch } from '@/components/mobile/usePrefetch'
 import { useTranslations } from 'next-intl'
 import { useLocalePath } from '@/components/i18n/useLocalePath'
 import { useEffect, useState, type FormEvent } from 'react'
@@ -34,6 +35,8 @@ async function postAuth(url: string, body: unknown, fallbacks: { unavailable: st
 // Étape 6 — Créer votre compte (formule gratuite par défaut, à appliquer côté backend).
 export default function InscriptionPage() {
   const router = useRouter()
+  // Écran suivant préchargé jusqu'à son squelette (loading.tsx) : retour immédiat au clic.
+  usePrefetch('/onboarding/verification')
   const t = useTranslations('onb.signup')
   const lp = useLocalePath()
   const [prenom, setPrenom] = useState('')

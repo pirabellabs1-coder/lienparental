@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { usePrefetch } from '@/components/mobile/usePrefetch'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { Menu, FileImage, FileText, History, Archive, Gauge, ArrowLeft, WandSparkles, MessagesSquare } from 'lucide-react'
@@ -25,6 +26,8 @@ export default function CoachPage() {
   const t = useTranslations('coach.home')
   const tc = useTranslations('coach.common')
   const router = useRouter()
+  // Écran suivant préchargé jusqu'à son squelette (loading.tsx) : retour immédiat au clic.
+  usePrefetch('/app/coach/document', '/app/coach/assistant')
   const [text, setText] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
   const [error, setError] = useState('')

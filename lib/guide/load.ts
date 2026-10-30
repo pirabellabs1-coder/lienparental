@@ -59,7 +59,26 @@ type TerritoryContent = {
   partenairesDemo: Partenaire[]
 }
 
-const loadTerritory = cache((code: string): TerritoryContent | null => {
+/**
+ * Le contenu du dépôt ne change pas pendant la vie d'un processus de production : lu et validé une
+ * seule fois (la relecture des ~800 fichiers à chaque requête coûtait ~300 ms à la page d'accueil).
+ * Hors production, relu à chaque requête (React cache) pour voir les fiches modifiées à chaud.
+ * Ni une lecture qui échoue ni un résultat null (code de territoire inconnu, souvent venu de l'URL)
+ * ne sont mémorisés : la mémoire reste bornée au contenu réel du dépôt.
+ */
+function memoContent<A extends string | void, R>(fn: (arg: A) => R | null): (arg: A) => R | null {
+  if (process.env.NODE_ENV !== 'production') return cache(fn)
+  const memo = new Map<A, R>()
+  return (arg) => {
+    const hit = memo.get(arg)
+    if (hit !== undefined) return hit
+    const value = fn(arg)
+    if (value !== null) memo.set(arg, value)
+    return value
+  }
+}
+
+const loadTerritory = memoContent((code: string): TerritoryContent | null => {
   if (!SAFE.test(code)) return null
   const dir = path.join(ROOT, code)
   const metaFile = path.join(dir, 'territoire.json')
@@ -103,11 +122,11 @@ function localizeList<K extends ContentKind>(kind: K, items: ContentData[K][], l
 
 /** Territoires présents dans `content/guide/` (un dossier = un territoire), noms traduits si `locale`. */
 export function listTerritoires(locale: ContentLocale = 'fr'): Territoire[] {
-  const all = listTerritoiresFr()
+  const all = listTerritoiresFr() ?? []
   return locale === 'fr' ? all : all.map((t) => localizeTerritoireNamed(t, locale))
 }
 
-const listTerritoiresFr = cache((): Territoire[] => {
+const listTerritoiresFr = memoContent((): Territoire[] => {
   if (!fs.existsSync(ROOT)) return []
   return fs.readdirSync(ROOT, { withFileTypes: true })
     .filter((d) => d.isDirectory() && SAFE.test(d.name))
