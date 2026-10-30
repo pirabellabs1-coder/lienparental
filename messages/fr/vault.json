@@ -672,7 +672,7 @@
       "refuse": "Refuser",
       "refuseTitle": "Refuser ce témoignage ?",
       "refuseText": "Le témoignage de {name} ne sera pas conservé dans votre coffre-fort. Cette action est irréversible.",
-      "reminderSent": "Relance envoyée au témoin {n}",
+      "reminderSent": "Relance partagée pour le témoin {n}",
       "list": {
         "title": "Mes demandes",
         "newRequest": "Nouvelle demande",
@@ -768,10 +768,10 @@
         "progress": "Statut d’avancement",
         "receivedLabel": "Témoignages reçus",
         "awaiting": "En attente d’envoi",
-        "remindAria": "Relancer le témoin {n}",
+        "remindAria": "Relancer le témoin {n} par message",
         "seeTestimonials": "Voir les témoignages",
-        "remindedAll": "Relance envoyée à {count, plural, one {# témoin} other {# témoins}}",
-        "remindAll": "Relancer les témoins",
+        "remindedAll": "Relance partagée : {count, plural, one {# témoin} other {# témoins}} en attente",
+        "remindAll": "Relancer les témoins par message",
         "stillOpen": "Le lien reste ouvert à d’autres témoins. Clôturez la demande quand vous avez reçu tous les témoignages attendus.",
         "close": "Clôturer la demande",
         "closeConfirm": "Clôturer la demande ? Le lien n’acceptera plus de nouveau témoignage. {count, plural, =0 {Aucun témoignage reçu pour l’instant.} one {Le témoignage reçu reste dans votre coffre-fort.} other {Les # témoignages reçus restent dans votre coffre-fort.}}",
@@ -779,7 +779,8 @@
         "closeCancel": "Annuler",
         "closing": "Clôture en cours…",
         "closed": "Demande clôturée.",
-        "closeFailed": "La demande n’a pas pu être clôturée. Réessayez."
+        "closeFailed": "La demande n’a pas pu être clôturée. Réessayez.",
+        "remindHint": "Les témoins reçoivent le lien de votre part : la relance part depuis votre messagerie (WhatsApp, SMS, e-mail…)."
       },
       "witnessView": {
         "title": "Témoin",
@@ -793,7 +794,7 @@
         "awaiting": "En attente d’envoi…",
         "notify": "Nous vous notifierons dès que le témoin aura envoyé son témoignage.",
         "view": "Voir le témoignage",
-        "remind": "Relancer ce témoin",
+        "remind": "Relancer ce témoin par message",
         "info": "Voir les informations du témoin",
         "invitation": "Invitation",
         "name": "Nom",
@@ -838,7 +839,10 @@
         "contextPlaceholder": "Décrivez brièvement le contexte…\n(ex : procédure JAF, garde alternée, etc.)",
         "contextNote": "Ces informations ne seront pas visibles par le témoin.",
         "creating": "Création…"
-      }
+      },
+      "reminderCopied": "Message de relance copié : collez-le dans votre conversation avec le témoin",
+      "reminderText": "Petit rappel : votre témoignage compte beaucoup pour moi. Le formulaire est sécurisé et ne prend que quelques minutes.",
+      "reminderTitle": "Lien Parental — rappel de témoignage"
     },
     "album": {
       "title": "Album de l’enfant",

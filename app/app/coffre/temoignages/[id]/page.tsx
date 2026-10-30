@@ -13,6 +13,7 @@ import { useHandledTestimonies, useReceivedTestimonies, useRequests } from '@/co
 import { LoadingState } from '@/components/mobile/StateScreens'
 import { testimonyLink } from '@/lib/data/testimonies'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
+import { useRemindWitness } from '@/components/coffre/useRemindWitness'
 import { receivedCount } from '@/lib/mock-vault'
 import { useVaultI18n } from '@/components/coffre/i18n'
 
@@ -28,6 +29,7 @@ export default function DemandeDetailPage({ params }: { params: Promise<{ id: st
   const { handled } = useHandledTestimonies()
   const { testimonies } = useReceivedTestimonies()
   const { announce, node } = useAnnounce()
+  const remind = useRemindWitness(announce)
   const r = requests.find((x) => x.id === id)
 
   if (!r) {
@@ -109,7 +111,7 @@ export default function DemandeDetailPage({ params }: { params: Promise<{ id: st
                 ) : (
                   <button
                     type="button"
-                    onClick={() => announce(t('reminderSent', { n: w.n }))}
+                    onClick={() => void remind(r.token, t('reminderSent', { n: w.n }))}
                     aria-label={t('request.remindAria', { n: w.n })}
                     className="relative z-10 -mr-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-700 hover:bg-night-50"
                   >
@@ -133,12 +135,13 @@ export default function DemandeDetailPage({ params }: { params: Promise<{ id: st
           {!done && pending.length > 0 && (
             <button
               type="button"
-              onClick={() => announce(t('request.remindedAll', { count: pending.length }))}
+              onClick={() => void remind(r.token, t('request.remindedAll', { count: pending.length }))}
               className={btn({ variant: 'secondary' })}
             >
               {t('request.remindAll')}
             </button>
           )}
+          {!done && pending.length > 0 && <p className="text-[12px] leading-relaxed text-night-500">{t('request.remindHint')}</p>}
           {!done && (confirmClose ? (
             <div role="group" aria-labelledby="close-confirm" className="rounded-2xl border border-night-100 bg-night-50/60 p-4">
               <p id="close-confirm" className="text-[13px] leading-relaxed text-night-800">{t('request.closeConfirm', { count: got })}</p>
