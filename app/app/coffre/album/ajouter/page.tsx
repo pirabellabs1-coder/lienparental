@@ -296,7 +296,7 @@ export default function AddPhotosPage({ searchParams }: { searchParams: Promise<
 
       <StickyActions>
         <button type="button" onClick={() => void submit()} disabled={running || storage.full} aria-busy={running} className={btn({ variant: 'primary' })}>
-          {running ? tu('sending', { n: sendingIndex + 1, total: items.length }) : tu('submit', { count: Math.max(1, pending.length) })}
+          {running ? tu('sending', { n: sendingIndex + 1, total: items.length }) : tu('submit', { count: pending.length })}
         </button>
       </StickyActions>
     </>

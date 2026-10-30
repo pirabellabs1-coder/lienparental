@@ -905,7 +905,7 @@
         "remove": "Remover “{name}”",
         "dateAuto": "Data lida da foto",
         "dateManual": "Verifique a data",
-        "submit": "{count, plural, one {Adicionar # foto} other {Adicionar # fotos}}",
+        "submit": "{count, plural, =0 {Adicionar fotos} one {Adicionar # foto} other {Adicionar # fotos}}",
         "sending": "Enviando {n} de {total}…",
         "status": {
           "sending": "Enviando…",

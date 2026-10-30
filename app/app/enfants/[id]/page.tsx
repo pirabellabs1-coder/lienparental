@@ -26,6 +26,7 @@ import { btn } from '@/components/onboarding/styles'
 import { BackButton, EnfantsHeader } from '@/components/enfants/EnfantsHeader'
 import { ChildAvatar, ChildStatusBadge, DetailRow } from '@/components/enfants/ChildBits'
 import { useChild } from '@/components/enfants/useChild'
+import { setChildPhoto } from '@/lib/data/children'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { ageFromBirthDate, type Child } from '@/lib/mock-data'
 import { useChildLabels } from '@/components/enfants/childLabels'
@@ -49,9 +50,10 @@ export default function EnfantProfilePage({
   const { child, loading, error, refresh } = useChild(id)
   const [open, setOpen] = useState<Record<SectionKey, boolean>>({ general: recap, physique: recap, medical: recap })
   const [photo, setPhoto] = useState<string | null>(null)
+  const [photoState, setPhotoState] = useState<{ kind: 'saving' | 'saved' | 'error'; text: string } | null>(null)
 
   useEffect(() => () => {
-    if (photo) URL.revokeObjectURL(photo)
+    if (photo?.startsWith('blob:')) URL.revokeObjectURL(photo)
   }, [photo])
 
   if (!child && (loading || error)) {
@@ -79,12 +81,27 @@ export default function EnfantProfilePage({
     )
   }
 
-  const onPhoto = (e: ChangeEvent<HTMLInputElement>) => {
+  // Aperçu immédiat, puis envoi (bucket privé « avatars ») ; en cas d'échec, retour à la photo précédente.
+  const onPhoto = async (e: ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0]
     e.target.value = ''
-    if (!f || !f.type.startsWith('image/') || f.size > 5 * 1024 * 1024) return
+    if (!f) return
+    if (!/^image\/(jpeg|png|webp)$/.test(f.type) || f.size > 5 * 1024 * 1024) {
+      setPhotoState({ kind: 'error', text: t('photoInvalid') })
+      return
+    }
+    const previous = photo
     setPhoto(URL.createObjectURL(f))
-    // TODO Supabase Storage : upload vers le bucket privé `children-photos`.
+    setPhotoState({ kind: 'saving', text: t('photoSaving') })
+    try {
+      const url = await setChildPhoto(child.id, f)
+      setPhoto(url)
+      setPhotoState({ kind: 'saved', text: t('photoSaved') })
+      void refresh() // listes et carte « Enfant actif » : nouvelle URL signée
+    } catch (err) {
+      setPhoto(previous)
+      setPhotoState({ kind: 'error', text: err instanceof Error && err.message ? err.message : t('photoFailed') })
+    }
   }
 
   const sections: { key: SectionKey; label: string; icon: ReactNode; body: ReactNode }[] = [
@@ -113,7 +130,7 @@ export default function EnfantProfilePage({
         <div className="relative">
           <ChildAvatar child={child} src={photo} size="xl" />
           <label className="absolute bottom-0.5 right-0.5 grid h-9 w-9 cursor-pointer place-items-center rounded-full bg-leaf-500 text-white ring-[3px] ring-white has-[:focus-visible]:ring-leaf-200">
-            <input type="file" accept="image/*" className="sr-only" onChange={onPhoto} />
+            <input type="file" accept="image/jpeg,image/png,image/webp" className="sr-only" onChange={(e) => void onPhoto(e)} disabled={photoState?.kind === 'saving'} />
             <Camera className="h-4 w-4" aria-hidden="true" />
             <span className="sr-only">{t('changePhoto', { name: child.prenom })}</span>
           </label>
@@ -124,6 +141,11 @@ export default function EnfantProfilePage({
           <span className="sr-only">,</span> {labels.classLabel(child.classe)}
         </p>
         <ChildStatusBadge child={child} className="mt-2" />
+        {photoState && (
+          <p role={photoState.kind === 'error' ? 'alert' : 'status'} className={cn('mt-2 text-[13px] font-semibold', photoState.kind === 'error' ? 'text-alert-600' : 'text-night-600')}>
+            {photoState.text}
+          </p>
+        )}
         {recap && (
           <p role="status" className="sr-only">
             {t('saved')}

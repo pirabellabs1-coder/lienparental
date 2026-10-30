@@ -213,7 +213,8 @@
       "another": "Add another document",
       "savedToVault": "Added to the vault",
       "saveToVault": "Add to the vault",
-      "savedStatus": "Copy saved in your vault."
+      "savedStatus": "Copy saved in your vault.",
+      "subtitleMessage": "Your message is ready to be analysed."
     },
     "response": {
       "types": {
@@ -485,7 +486,8 @@
         "fillHint": "Fill in the fields, check the preview, then download the document.",
         "preview": "Preview",
         "previewPage": "Preview of page {page}, open the document",
-        "open": "Open the document"
+        "open": "Open the document",
+        "frenchDocument": "The letter itself is written in French, as it is meant for French authorities and institutions."
       },
       "generator": {
         "generating": "Generating the document…",

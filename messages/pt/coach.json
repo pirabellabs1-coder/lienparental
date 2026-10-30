@@ -213,7 +213,8 @@
       "another": "Adicionar outro documento",
       "savedToVault": "Adicionado ao cofre",
       "saveToVault": "Adicionar ao cofre",
-      "savedStatus": "Cópia salva no seu cofre."
+      "savedStatus": "Cópia salva no seu cofre.",
+      "subtitleMessage": "Sua mensagem está pronta para ser analisada."
     },
     "response": {
       "types": {
@@ -485,7 +486,8 @@
         "fillHint": "Preencha os campos, confira a pré-visualização e depois baixe o documento.",
         "preview": "Pré-visualização",
         "previewPage": "Pré-visualização da página {page}, abrir o documento",
-        "open": "Abrir o documento"
+        "open": "Abrir o documento",
+        "frenchDocument": "A carta gerada é redigida em francês, pois é destinada a administrações francesas."
       },
       "generator": {
         "generating": "Gerando o documento…",

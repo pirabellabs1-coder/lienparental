@@ -150,7 +150,7 @@ export default function VerificationPage() {
 
   return (
     <OnboardingScreen
-      step={7}
+      step={6}
       title={t('title')}
       onSubmit={(e) => { e.preventDefault(); void verify(code) }}
       subtitle={

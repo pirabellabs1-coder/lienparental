@@ -111,7 +111,7 @@ export default function EnfantPage() {
 
   return (
     <OnboardingScreen
-      step={9}
+      step={8}
       align="center"
       title={
         <>

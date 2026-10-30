@@ -148,10 +148,10 @@ export default function CorbeillePage() {
                   </div>
                   <div className="flex justify-end gap-2">
                     <Button variant="secondary" size="sm" onClick={() => void restore(d.id)}>
-                      <RotateCcw className="h-4 w-4" aria-hidden="true" /> {t('restore')}
+                      <RotateCcw className="h-4 w-4" aria-hidden="true" /> {t('restore')}<span className="sr-only"> : {d.name}</span>
                     </Button>
                     <Button variant="danger" size="sm" onClick={() => setToDelete(d)}>
-                      <Trash2 className="h-4 w-4" aria-hidden="true" /> {tc('delete')}
+                      <Trash2 className="h-4 w-4" aria-hidden="true" /> {tc('delete')}<span className="sr-only"> : {d.name}</span>
                     </Button>
                   </div>
                 </Card>

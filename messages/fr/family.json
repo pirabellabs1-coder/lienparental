@@ -95,15 +95,19 @@
         "birthDateValue": "{date} ({count, plural, one {# an} other {# ans}})",
         "class": "Classe",
         "height": "Taille",
-        "heightValue": "{value} cm",
+        "heightValue": "{value, number} cm",
         "weight": "Poids",
-        "weightValue": "{value} kg",
+        "weightValue": "{value, number} kg",
         "eyes": "Yeux",
         "hair": "Cheveux",
         "allergies": "Allergies",
         "bloodGroup": "Groupe sanguin",
         "treatment": "Traitement en cours",
-        "doctor": "Médecin traitant"
+        "doctor": "Médecin traitant",
+        "photoSaving": "Enregistrement de la photo…",
+        "photoSaved": "Photo enregistrée.",
+        "photoFailed": "La photo n’a pas pu être enregistrée. Réessayez.",
+        "photoInvalid": "Choisissez une image JPG, PNG ou WebP de 5 Mo maximum."
       },
       "values": {
         "ageYears": "{count, plural, one {# an} other {# ans}}",

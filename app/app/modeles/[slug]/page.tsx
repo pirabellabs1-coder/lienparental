@@ -147,6 +147,8 @@ export default function ModeleDetailPage({ params }: { params: Promise<{ slug: s
         <section aria-labelledby="remplir" className="mt-8">
           <h2 id="remplir" className="text-[16px] font-extrabold text-night-900">{tr('detail.fillTitle')}</h2>
           <p className="mt-1 text-[13px] text-night-600">{tr('detail.fillHint')}</p>
+          {/* Le courrier produit reste en français (destiné aux administrations françaises). */}
+          {locale !== 'fr' && <p className="mt-2 rounded-xl bg-night-50 px-3 py-2 text-[13px] text-night-700">{tr('detail.frenchDocument')}</p>}
           <div className="mt-4">
             <ModeleGenerator template={t} contentLang={t.lang} />
           </div>

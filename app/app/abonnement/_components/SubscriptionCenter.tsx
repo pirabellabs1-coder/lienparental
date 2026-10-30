@@ -103,13 +103,12 @@ export function SubscriptionCenter({ mode, view, available, initialCycle, focusP
     if (demo) {
       const res = await postBilling('/api/stripe/demo', { action: 'subscribe', formule: plan, cycle })
       if (!res.ok) return fail(errorText(res.code))
-      // L'abonnement simulé est actif : l'écran ne doit plus rester sur « Un instant… » si la
-      // navigation vers la confirmation tarde ou est remplacée (le menu latéral se rafraîchit au même
-      // moment via notifyBillingChanged). On libère le bouton, on annonce le changement et on
-      // rafraîchit l'état de cette page AVANT de naviguer : quoi qu'il arrive, l'état affiché est à jour.
-      setBusy(null)
-      changed(t('center.demoChanged', { offer: f.offer(plan, cycle) }))
-      router.push(`/app/abonnement/confirmation?demo=1&formule=${plan}&cycle=${cycle}`)
+      // L'abonnement simulé est actif. Un router.refresh() lancé en même temps qu'un router.push()
+      // (ici et dans le menu latéral via notifyBillingChanged) annulait la navigation : l'écran
+      // restait sur l'ancienne formule. Navigation complète vers la confirmation : état recalculé partout.
+      setNotice(t('center.demoChanged', { offer: f.offer(plan, cycle) }))
+      notifyBillingChanged()
+      window.location.assign(`/app/abonnement/confirmation?demo=1&formule=${plan}&cycle=${cycle}`)
       return
     }
     const res = await startCheckout(plan, cycle)

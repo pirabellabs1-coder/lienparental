@@ -83,7 +83,9 @@
         "firstNameRequired": "First name is required.",
         "invalidDate": "Invalid date",
         "medicalSaveFailed": "The medical information could not be saved.",
-        "notFound": "This profile doesn’t exist or has been deleted."
+        "notFound": "This profile doesn’t exist or has been deleted.",
+        "photoFailed": "The photo could not be saved. Please try again.",
+        "photoOwnerOnly": "Only the parent who created this profile can change the photo."
       },
       "errors": {
         "duplicate": "This item already exists.",

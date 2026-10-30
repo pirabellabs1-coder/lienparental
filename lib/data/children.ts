@@ -12,6 +12,7 @@ import { z } from 'zod'
 import { childProfileStatus, mockChildren, ageFromBirthDate, type Child } from '@/lib/mock-data'
 import { DataError, LIVE, dataMsg, db, requireUserId, toDataError, useAsyncData } from './core'
 import { demoId, hasId, readDemoList, writeDemoList } from './demo-session'
+import { uploadAvatar } from '@/lib/auth/browser'
 
 // --- Lignes Supabase (sous-ensemble utilisé) --------------------------------
 
@@ -54,6 +55,47 @@ function fromRow(r: ChildRow, medical?: ChildMedical): Child {
     createdAt: r.created_at,
     ...medical,
   }
+}
+
+// --- Photo ------------------------------------------------------------------
+// Bucket privé « avatars » (policy : premier segment = uid du parent), chemin `<uid>/child-<id>.jpg`
+// enregistré dans children.photo_url ; affichage par URL signée (1 h).
+
+const PHOTO_BUCKET = 'avatars'
+const PHOTO_URL_SECONDS = 60 * 60
+
+/** Remplace les chemins de stockage par des URL signées (une requête pour toute la liste). */
+async function withPhotoUrls(rows: ChildRow[], children: Child[]): Promise<Child[]> {
+  const paths = rows.map((r) => r.photo_url).filter((p): p is string => !!p && !/^https?:/.test(p))
+  if (!paths.length) return children.map((c, i) => ({ ...c, photoUrl: rows[i].photo_url ?? undefined }))
+  const { data } = await db().storage.from(PHOTO_BUCKET).createSignedUrls(paths, PHOTO_URL_SECONDS)
+  const url = new Map<string, string>()
+  for (const d of data ?? []) if (d.signedUrl && d.path) url.set(d.path, d.signedUrl)
+  // Photo illisible (autre parent, fichier absent) : l'initiale s'affiche à la place.
+  return children.map((c, i) => {
+    const p = rows[i].photo_url
+    return { ...c, photoUrl: !p ? undefined : /^https?:/.test(p) ? p : url.get(p) }
+  })
+}
+
+/** Enregistre la photo de l'enfant (JPEG redimensionné, 2 Mo max). Renvoie l'URL à afficher. */
+export async function setChildPhoto(id: string, file: File): Promise<string> {
+  if (!LIVE) return URL.createObjectURL(file) // démo : aperçu local, rien n'est envoyé
+  // Seul le titulaire de la fiche change la photo (trigger 0340 côté base) : vérifié AVANT l'envoi,
+  // pour ne pas laisser de fichier orphelin dans le stockage d'un co-parent.
+  const userId = await requireUserId()
+  const { data: row, error: readError } = await db().from('children').select('user_id').eq('id', id).maybeSingle()
+  if (readError) throw toDataError(readError, 'children.get')
+  if (!row) throw new DataError(dataMsg('children.notFound'), 'not_found')
+  if ((row as { user_id: string }).user_id !== userId) throw new DataError(dataMsg('children.photoOwnerOnly'), 'forbidden')
+  const up = await uploadAvatar(file, `child-${id}`)
+  if (!up.ok) throw new DataError(up.error, 'upload')
+  const { error } = await db().from('children').update({ photo_url: up.path }).eq('id', id)
+  if (error) throw toDataError(error, 'children.update')
+  const { data } = await db().storage.from(PHOTO_BUCKET).createSignedUrl(up.path, PHOTO_URL_SECONDS)
+  if (!data?.signedUrl) throw new DataError(dataMsg('children.photoFailed'), 'upload')
+  // Même chemin à chaque envoi : paramètre anti-cache pour afficher la nouvelle photo.
+  return `${data.signedUrl}&v=${Date.now()}`
 }
 
 // --- Validation -------------------------------------------------------------
@@ -133,7 +175,8 @@ export async function listChildren(): Promise<Child[]> {
     .order('created_at', { ascending: true })
     .limit(50)
   if (error) throw toDataError(error, 'children.list')
-  return ((data ?? []) as ChildRow[]).map((r) => fromRow(r))
+  const rows = (data ?? []) as ChildRow[]
+  return withPhotoUrls(rows, rows.map((r) => fromRow(r)))
 }
 
 /** Profil complet (y compris médical déchiffré côté serveur). */
@@ -147,7 +190,8 @@ export async function getChild(id: string): Promise<Child | null> {
   if (error) throw toDataError(error, 'children.get')
   if (!data) return null
   const medical = await fetchMedical(id)
-  return fromRow(data as ChildRow, medical)
+  const row = data as ChildRow
+  return (await withPhotoUrls([row], [fromRow(row, medical)]))[0]
 }
 
 async function fetchMedical(id: string): Promise<ChildMedical | undefined> {

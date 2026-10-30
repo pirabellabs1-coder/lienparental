@@ -106,7 +106,7 @@ export default function InscriptionPage() {
 
   return (
     <OnboardingScreen
-      step={6}
+      step={5}
       title={t('title')}
       subtitle={t('subtitle')}
       onSubmit={onSubmit}
