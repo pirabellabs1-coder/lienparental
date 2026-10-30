@@ -240,6 +240,7 @@
         "enterPassword": "Enter your account password.",
         "mismatch": "The two codes don’t match. Start again.",
         "introConfirm": "Enter your code again to confirm it.",
+        "introReauth": "For your security, sign in again with Google before choosing your 6-digit code. You will come back here afterwards.",
         "introSetup": "Create a 6-digit code to protect your documents and testimonials.",
         "introPassword": "Enter your Lien Parental account password.",
         "introSettings": "Unlock the vault to change its security settings.",

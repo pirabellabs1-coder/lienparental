@@ -240,6 +240,7 @@
         "enterPassword": "Saisissez le mot de passe de votre compte.",
         "mismatch": "Les deux codes ne correspondent pas. Recommencez.",
         "introConfirm": "Saisissez à nouveau votre code pour le confirmer.",
+        "introReauth": "Pour votre sécurité, reconnectez-vous avec Google avant de choisir votre code à 6 chiffres. Vous reviendrez ici ensuite.",
         "introSetup": "Créez un code à 6 chiffres pour protéger vos documents et témoignages.",
         "introPassword": "Saisissez le mot de passe de votre compte Lien Parental.",
         "introSettings": "Déverrouillez le coffre-fort pour modifier ses réglages de sécurité.",

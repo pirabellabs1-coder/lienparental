@@ -32,6 +32,7 @@ export default async function CoachAssistantPage() {
             inputLabel={t('inputLabel')}
             placeholder={t('placeholder')}
             conversationLabel={t('conversationLabel')}
+            persistKey="assistant"
           />
         </div>
       </div>

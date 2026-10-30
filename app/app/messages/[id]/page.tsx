@@ -67,6 +67,8 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
   const [toneCheck, setToneCheck] = useState(false)
   const [busy, setBusy] = useState<'idle' | 'checking' | 'sending'>('idle')
   const [error, setError] = useState<string | null>(null)
+  // Résultat de la vérification du ton (vérifié, ou envoyé sans vérification et pourquoi), affiché sous la saisie.
+  const [toneNote, setToneNote] = useState<string | null>(null)
   const [pending, setPending] = useState<Pending | null>(null)
   const [infoOpen, setInfoOpen] = useState(false)
   const [exporting, setExporting] = useState(false)
@@ -293,6 +295,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
   const onSubmit = async () => {
     if (!me || busy !== 'idle') return
     const body = text.trim()
+    setToneNote(null)
     if (toneCheck && body.length >= 4) {
       setBusy('checking')
       // Alerte et reformulation locale dans la langue de l'interface (détection multilingue : toneLocal).
@@ -303,9 +306,16 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
         resume: tm('tone.local.resume'),
       })
       setBusy('idle')
-      if (analysis && analysis.agressivite >= TONE_THRESHOLD) {
+      if ('failed' in analysis) {
+        // Jamais bloquant : le message part, le parent sait qu'il n'a pas été vérifié et pourquoi.
+        const note = analysis.message ? tm('tone.notCheckedReason', { reason: analysis.message }) : tm('tone.notChecked')
+        setToneNote(note)
+        announce(note)
+      } else if (analysis.agressivite >= TONE_THRESHOLD) {
         setPending({ text: body, file, analysis })
         return
+      } else {
+        setToneNote(tm('tone.checkedOk'))
       }
     }
     await deliver(body, file)
@@ -468,7 +478,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
         <div className="sticky z-20 -mx-5 bg-white/95 px-3 pb-2 pt-2 backdrop-blur [bottom:calc(4rem+env(safe-area-inset-bottom,0px))] lg:mx-0 lg:px-0 lg:[bottom:1rem]">
           <Composer
             value={text}
-            onChange={(v) => { setText(v); if (error) setError(null) }}
+            onChange={(v) => { setText(v); if (error) setError(null); if (toneNote) setToneNote(null) }}
             file={file}
             onPickFile={pickFile}
             toneCheck={toneCheck}
@@ -477,6 +487,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
             onSendVoice={sendVoice}
             busy={busy}
             error={error}
+            note={toneNote}
             textareaRef={textareaRef}
             vaultCategories={autoVault ? categories : []}
             vaultCategory={vaultCategory}

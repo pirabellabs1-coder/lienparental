@@ -240,6 +240,7 @@
         "enterPassword": "Digite a senha da sua conta.",
         "mismatch": "Os dois códigos não coincidem. Recomece.",
         "introConfirm": "Digite seu código novamente para confirmá-lo.",
+        "introReauth": "Para sua segurança, entre novamente com o Google antes de escolher o seu código de 6 dígitos. Voltará aqui em seguida.",
         "introSetup": "Crie um código de 6 dígitos para proteger seus documentos e depoimentos.",
         "introPassword": "Digite a senha da sua conta Lien Parental.",
         "introSettings": "Desbloqueie o cofre para alterar as configurações de segurança.",

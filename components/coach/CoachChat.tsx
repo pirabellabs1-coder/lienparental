@@ -34,9 +34,30 @@ type Props = {
   inputLabel: string
   placeholder?: string
   conversationLabel: string
+  /**
+   * Conversation libre conservée pour l'onglet (sessionStorage, effacée à sa fermeture) : revenir
+   * sur la page ou la recharger garde le fil, donc le contexte envoyé au Coach.
+   */
+  persistKey?: string
 }
 
-export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], suggestions = [], inputLabel, placeholder, conversationLabel }: Props) {
+const STORE_PREFIX = 'lp-coach-chat:'
+const STORE_MAX = 40
+
+function loadStored(key: string | undefined): ChatMessage[] | null {
+  if (!key) return null
+  try {
+    const raw = sessionStorage.getItem(STORE_PREFIX + key)
+    const list = raw ? (JSON.parse(raw) as unknown) : null
+    if (!Array.isArray(list)) return null
+    const ok = list.filter((m): m is ChatMessage => !!m && typeof m === 'object' && typeof (m as ChatMessage).text === 'string' && ((m as ChatMessage).from === 'me' || (m as ChatMessage).from === 'ia'))
+    return ok.length ? ok : null
+  } catch {
+    return null
+  }
+}
+
+export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], suggestions = [], inputLabel, placeholder, conversationLabel, persistKey }: Props) {
   const t = useTranslations('coach.chat')
   const tc = useTranslations('coach.common')
   const locale = useLocale()
@@ -61,6 +82,23 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
   const hintId = useId()
 
   useEffect(() => () => abortRef.current?.abort(), [])
+
+  // Fil conservé de l'onglet : restauré au montage (après l'hydratation), puis réenregistré.
+  const restored = useRef(false)
+  useEffect(() => {
+    const stored = loadStored(persistKey)
+    if (stored) setMessages(stored)
+    restored.current = true
+  }, [persistKey])
+  useEffect(() => {
+    if (!persistKey || !restored.current || streaming) return
+    try {
+      const keep = messages.filter((m) => !m.streaming).slice(-STORE_MAX).map(({ streaming: _s, ...m }) => m)
+      sessionStorage.setItem(STORE_PREFIX + persistKey, JSON.stringify(keep))
+    } catch {
+      // stockage indisponible (navigation privée) : la conversation reste en mémoire
+    }
+  }, [messages, persistKey, streaming])
 
   const scrollToEnd = useCallback(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
