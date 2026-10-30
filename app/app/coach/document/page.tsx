@@ -19,7 +19,7 @@ import {
   loadDraft,
   saveDraft,
   setPendingFile,
-  fileErrorCode,
+  prepareCoachFile,
   newIdempotencyKey,
   type CoachDraft,
 } from '@/components/coach/session'
@@ -125,11 +125,11 @@ export default function CoachDocumentPage() {
     router.push('/app/coach/analyse')
   }
 
-  const replaceFile = (file: File | undefined) => {
-    if (!file) return
-    const isImage = file.type.startsWith('image/')
-    const err = fileErrorCode(file, isImage ? 'image' : 'doc')
-    if (err) return setError(tc(`fileErrors.${err}`))
+  const replaceFile = async (picked: File | undefined) => {
+    if (!picked) return
+    const ready = await prepareCoachFile(picked, picked.type.startsWith('image/') ? 'image' : 'doc')
+    if ('error' in ready) return setError(tc(`fileErrors.${ready.error}`))
+    const file = ready.file
     setError('')
     const d = draftFromFile(file)
     setPendingFile(file)
@@ -244,7 +244,7 @@ export default function CoachDocumentPage() {
             tabIndex={-1}
             aria-hidden="true"
             onChange={(e) => {
-              replaceFile(e.target.files?.[0])
+              void replaceFile(e.target.files?.[0])
               e.target.value = ''
             }}
           />

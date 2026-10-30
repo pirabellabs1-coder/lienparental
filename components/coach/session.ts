@@ -61,7 +61,8 @@ export function takePrefill(): string {
   return v
 }
 
-export const IMAGE_ACCEPT = 'image/jpeg,image/png'
+// Photos du téléphone comprises (HEIC/WebP) : réduites et converties en JPEG avant l'envoi (prepareCoachFile).
+export const IMAGE_ACCEPT = 'image/jpeg,image/png,image/webp,image/heic,image/heif'
 // Word (.doc/.docx) n'est pas lisible par le modèle : on demande un export PDF.
 export const DOC_ACCEPT = '.pdf,.txt,application/pdf,text/plain'
 export const MAX_FILE_BYTES = 10 * 1024 * 1024
@@ -153,6 +154,76 @@ export function fileErrorCode(file: File, accept: 'image' | 'doc'): FileErrorCod
   if (accept === 'doc' && /\.docx?$/i.test(file.name)) return 'word'
   if (accept === 'doc' && !/\.(pdf|txt)$/i.test(file.name)) return 'docFormat'
   return null
+}
+
+// --- Images : réduites dans le navigateur avant l'envoi --------------------------------
+// Le modèle n'accepte pas d'image de plus de 5 Mo (limite du fournisseur, pas du stockage) et
+// n'utilise pas plus de ~1 600 px de côté : une photo de téléphone (3 à 15 Mo) est redimensionnée
+// et recompressée ici, sans rien demander au parent. Rien ne quitte l'appareil avant l'envoi.
+
+const IMAGE_SIDE = [2000, 1600, 1200] as const
+const IMAGE_QUALITY = [0.85, 0.75, 0.65] as const
+/** En dessous, une image JPG/PNG part telle quelle. */
+const IMAGE_KEEP_BYTES = 1.5 * 1024 * 1024
+
+async function decodeImage(file: File): Promise<CanvasImageSource & { width: number; height: number }> {
+  if (typeof createImageBitmap === 'function') {
+    try {
+      return await createImageBitmap(file, { imageOrientation: 'from-image' })
+    } catch {
+      // format non décodable par cette API : repli sur <img>
+    }
+  }
+  const url = URL.createObjectURL(file)
+  try {
+    const img = new Image()
+    img.decoding = 'async'
+    img.src = url
+    await img.decode()
+    return Object.assign(img, { width: img.naturalWidth, height: img.naturalHeight })
+  } finally {
+    URL.revokeObjectURL(url)
+  }
+}
+
+async function shrinkImage(file: File): Promise<File | null> {
+  const src = await decodeImage(file)
+  for (let i = 0; i < IMAGE_SIDE.length; i++) {
+    const scale = Math.min(1, IMAGE_SIDE[i]! / Math.max(src.width, src.height))
+    const canvas = document.createElement('canvas')
+    canvas.width = Math.max(1, Math.round(src.width * scale))
+    canvas.height = Math.max(1, Math.round(src.height * scale))
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return null
+    ctx.fillStyle = '#fff' // PNG transparent → fond blanc en JPEG
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(src, 0, 0, canvas.width, canvas.height)
+    const blob = await new Promise<Blob | null>((ok) => canvas.toBlob(ok, 'image/jpeg', IMAGE_QUALITY[i]))
+    if (blob && blob.size <= MAX_IMAGE_BYTES) {
+      const name = file.name.replace(/\.[^.]+$/, '') || 'image'
+      return new File([blob], `${name}.jpg`, { type: 'image/jpeg', lastModified: Date.now() })
+    }
+  }
+  return null
+}
+
+/**
+ * Prépare un fichier pour le Coach : une image est réduite si besoin (jamais refusée pour sa taille
+ * tant qu'elle est lisible) ; un document passe par les contrôles habituels.
+ */
+export async function prepareCoachFile(file: File, accept: 'image' | 'doc'): Promise<{ file: File } | { error: FileErrorCode }> {
+  if (accept === 'doc') {
+    const error = fileErrorCode(file, 'doc')
+    return error ? { error } : { file }
+  }
+  if (!file.type.startsWith('image/')) return { error: 'imageFormat' }
+  if (/^image\/(jpeg|png)$/.test(file.type) && file.size <= IMAGE_KEEP_BYTES) return { file }
+  try {
+    const small = await shrinkImage(file)
+    return small ? { file: small } : { error: 'imageTooBig' }
+  } catch {
+    return { error: 'imageFormat' }
+  }
 }
 
 const FILE_ERRORS_FR: Record<FileErrorCode, string> = {

@@ -9,7 +9,7 @@ import {
   DOC_ACCEPT,
   IMAGE_ACCEPT,
   draftFromFile,
-  fileErrorCode,
+  prepareCoachFile,
   saveDraft,
   setPendingFile,
 } from '@/components/coach/session'
@@ -62,10 +62,11 @@ export function CoachQuickAccess() {
     router.push(`/app/coach/discussion?q=${encodeURIComponent(q.slice(0, 2000))}`)
   }
 
-  const onFile = (file: File | undefined, kind: 'image' | 'doc') => {
-    if (!file) return
-    const code = fileErrorCode(file, kind)
-    if (code) return setError(tc(`fileErrors.${code}`))
+  const onFile = async (picked: File | undefined, kind: 'image' | 'doc') => {
+    if (!picked) return
+    const ready = await prepareCoachFile(picked, kind)
+    if ('error' in ready) return setError(tc(`fileErrors.${ready.error}`))
+    const file = ready.file
     setError('')
     setPendingFile(file)
     saveDraft(draftFromFile(file))
@@ -164,7 +165,7 @@ export function CoachQuickAccess() {
           tabIndex={-1}
           aria-hidden="true"
           onChange={(e) => {
-            onFile(e.target.files?.[0], 'image')
+            void onFile(e.target.files?.[0], 'image')
             e.target.value = ''
           }}
         />
@@ -176,7 +177,7 @@ export function CoachQuickAccess() {
           tabIndex={-1}
           aria-hidden="true"
           onChange={(e) => {
-            onFile(e.target.files?.[0], 'doc')
+            void onFile(e.target.files?.[0], 'doc')
             e.target.value = ''
           }}
         />

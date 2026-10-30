@@ -8,7 +8,7 @@ import { Coins, FileImage, FileText, HeartPulse, Paperclip, Send, Square } from 
 import { ChatBubble, type ChatMessage } from './ChatBubble'
 import { DemoNote, LegalNote } from './ui'
 import { errorMessage, readSse } from './sse-client'
-import { DOC_ACCEPT, IMAGE_ACCEPT, draftFromFile, fileErrorCode, newIdempotencyKey, saveDraft, setPendingFile } from './session'
+import { DOC_ACCEPT, IMAGE_ACCEPT, draftFromFile, newIdempotencyKey, prepareCoachFile, saveDraft, setPendingFile } from './session'
 import { useCredits } from './CreditCost'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
@@ -92,13 +92,14 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
   const imageRef = useRef<HTMLInputElement>(null)
   const docRef = useRef<HTMLInputElement>(null)
 
-  const onFile = (file: File | undefined, accept: 'image' | 'doc') => {
-    if (!file) return
-    const err = fileErrorCode(file, accept)
-    if (err) {
-      setFileError(tc(`fileErrors.${err}`))
+  const onFile = async (picked: File | undefined, accept: 'image' | 'doc') => {
+    if (!picked) return
+    const ready = await prepareCoachFile(picked, accept)
+    if ('error' in ready) {
+      setFileError(tc(`fileErrors.${ready.error}`))
       return
     }
+    const file = ready.file
     setFileError('')
     setPendingFile(file)
     // La question en cours de saisie accompagne le fichier (limite du serveur : 2 000 caractères).
@@ -349,7 +350,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
               tabIndex={-1}
               aria-hidden="true"
               onChange={(e) => {
-                onFile(e.target.files?.[0], 'image')
+                void onFile(e.target.files?.[0], 'image')
                 e.target.value = ''
               }}
             />
@@ -361,7 +362,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
               tabIndex={-1}
               aria-hidden="true"
               onChange={(e) => {
-                onFile(e.target.files?.[0], 'doc')
+                void onFile(e.target.files?.[0], 'doc')
                 e.target.value = ''
               }}
             />

@@ -14,7 +14,7 @@
       "fileErrors": {
         "tooBig": "Arquivo grande demais (máximo de 10 MB).",
         "imageFormat": "Formato aceito: imagem JPG ou PNG.",
-        "imageTooBig": "Imagem grande demais (máximo de 5 MB).",
+        "imageTooBig": "Não foi possível reduzir esta imagem. Tente uma captura de tela ou outra foto.",
         "word": "Documentos do Word ainda não são compatíveis: salve-o em PDF.",
         "docFormat": "Formatos aceitos: PDF ou texto."
       },

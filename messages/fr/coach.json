@@ -14,7 +14,7 @@
       "fileErrors": {
         "tooBig": "Fichier trop volumineux (10 Mo maximum).",
         "imageFormat": "Format accepté : image JPG ou PNG.",
-        "imageTooBig": "Image trop volumineuse (5 Mo maximum).",
+        "imageTooBig": "Cette image n’a pas pu être réduite. Essayez une capture d’écran ou une autre photo.",
         "word": "Les documents Word ne sont pas encore pris en charge : enregistrez-le en PDF.",
         "docFormat": "Formats acceptés : PDF ou texte."
       },
