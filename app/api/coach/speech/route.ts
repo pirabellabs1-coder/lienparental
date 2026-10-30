@@ -6,9 +6,9 @@
  * - Limites : 10 lectures par minute, 60 par jour et par compte (forfait de caractères partagé).
  * - Sans clé, quota du fournisseur épuisé ou panne : 503 `tts_unavailable`, le navigateur lit
  *   alors avec la voix de l'appareil (components/coach/useCoachVoice.ts).
- * - Ne débite aucun crédit du Coach.
+ * - Ne débite aucun crédit du Coach. Modèle eleven_multilingual_v2 (celui de la vidéo), MP3 128 kb/s.
  */
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { z } from 'zod'
 import { getCurrentUser } from '@/lib/auth/session'
 import { jsonError } from '@/lib/data/server/http'
@@ -18,8 +18,10 @@ import { COACH_VOICES, SPEECH_MAX_CHARS, isCoachVoice, speechText } from '@/lib/
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// Modèle rapide et économe (0,5 crédit ElevenLabs par caractère), multilingue (FR / EN / PT).
-const MODEL = 'eleven_flash_v2_5'
+// Modèle le plus naturel d'ElevenLabs, celui de la vidéo de présentation (multilingue, langue
+// détectée dans le texte) ; 1 crédit ElevenLabs par caractère. Réglages : voix posée, timbre fidèle.
+const MODEL = 'eleven_multilingual_v2'
+const VOICE_SETTINGS = { stability: 0.45, similarity_boost: 0.8, style: 0.15, use_speaker_boost: true, speed: 1.0 }
 const MAX_BODY = 20_000
 
 const Body = z.object({
@@ -47,19 +49,13 @@ export async function POST(req: Request) {
   const text = speechText(parsed.data.text).slice(0, SPEECH_MAX_CHARS)
   if (!text) return jsonError(422, 'invalid_body', t('badRequest'))
   const voice = COACH_VOICES.find((v) => v.key === parsed.data.voice)!
-  const locale = await getLocale().catch(() => 'fr')
 
   let upstream: Response
   try {
-    upstream = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voice.id}?output_format=mp3_44100_64`, {
+    upstream = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voice.id}?output_format=mp3_44100_128`, {
       method: 'POST',
       headers: { 'xi-api-key': key, 'Content-Type': 'application/json', Accept: 'audio/mpeg' },
-      body: JSON.stringify({
-        text,
-        model_id: MODEL,
-        language_code: ['fr', 'en', 'pt'].includes(locale) ? locale : 'fr',
-        voice_settings: { stability: 0.5, similarity_boost: 0.75 },
-      }),
+      body: JSON.stringify({ text, model_id: MODEL, voice_settings: VOICE_SETTINGS }),
       signal: AbortSignal.timeout(30_000),
     })
   } catch {
