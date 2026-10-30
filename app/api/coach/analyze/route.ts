@@ -61,7 +61,7 @@ const MAX_PLAIN = 200 * 1024
 const MULTIPART_MARGIN = 512 * 1024
 
 type Prepared =
-  | { kind: 'message'; title: string; text: string }
+  | { kind: 'message'; title: string; text: string; draft?: boolean }
   | { kind: 'capture'; title: string; mediaType: 'image/jpeg' | 'image/png'; data: string; text?: string }
   | { kind: 'pdf'; title: string; data: string; text?: string }
   | { kind: 'document'; title: string; plain: string; text?: string }
@@ -81,7 +81,8 @@ async function prepare(form: FormData, t: AnalyzeT, cfg: CreditConfig): Promise<
 
   if (!(file instanceof File) || file.size === 0) {
     if (!text) return jsonError(422, 'empty', t('emptyInput'))
-    return { kind: 'message', title: t('titles.message'), text }
+    // Messagerie : brouillon que le parent s'apprête à envoyer (jamais un message reçu).
+    return { kind: 'message', title: t('titles.message'), text, draft: form.get('source') === 'draft' }
   }
 
   // Garde-fous de coût (configuration active) : refus compréhensible AVANT toute réservation.
@@ -120,7 +121,9 @@ function buildUserContent(p: Prepared, contextText: string): Anthropic.Beta.Beta
 
   const parts = [`<espace_parent>\n${contextText}\n</espace_parent>`]
   if (p.kind === 'message') {
-    parts.push(`<contenu_a_analyser type="message_ecrit">\n${neutralizeTags(p.text)}\n</contenu_a_analyser>`)
+    parts.push(`<contenu_a_analyser type="${p.draft ? 'brouillon_du_parent' : 'message_ecrit'}">\n${neutralizeTags(p.text)}\n</contenu_a_analyser>`)
+    // Brouillon de la messagerie : jamais une réponse à son propre message.
+    if (p.draft) parts.push('Ce contenu est un brouillon que le parent s’apprête à envoyer à l’autre parent : nature_reponse = "reformulation".')
   } else if (p.kind === 'document') {
     parts.push(`<contenu_a_analyser type="document_texte">\n${neutralizeTags(p.plain)}\n</contenu_a_analyser>`)
   } else {
@@ -184,7 +187,7 @@ export async function POST(req: Request) {
     let id = `demo_${Date.now().toString(36)}`
     if (!SUPABASE_ENABLED) {
       const stored = await insertPending(user, { kind: prepared.kind, title: prepared.title, demo: true })
-      await completeAnalysis(user, stored.id, prepared.kind, result, true)
+      await completeAnalysis(user, stored.id, prepared.kind, result, true, prepared.kind === 'message' && prepared.draft === true)
       id = stored.id
     }
     await confirmCredits(user, r.actionId, { model: 'demo', usage: null, latencyMs: 0 })
@@ -290,7 +293,7 @@ export async function POST(req: Request) {
         return
       }
       const result = normalizeAnalysis(valid.data, ta('disclaimer'))
-      await completeAnalysis(user, analysisId, prepared.kind, result)
+      await completeAnalysis(user, analysisId, prepared.kind, result, false, prepared.kind === 'message' && prepared.draft === true)
       charged = true
       // Débit confirmé (une seule fois) avec le coût fournisseur mesuré. Un échec ici n'annule pas
       // l'analyse livrée : la réservation sera restituée à son échéance (credits_sweep).

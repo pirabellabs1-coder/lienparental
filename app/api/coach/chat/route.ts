@@ -30,7 +30,7 @@ import { AI_MODEL, CHAT_EFFORT, fallbackParams, fallbackServed, getAnthropic, lo
 import { buildContextText } from '@/lib/ai/context'
 import { PROMPT_VERSION, chatSystemPrompt, neutralizeTags } from '@/lib/ai/prompts'
 import { CHAT_MAX_TOTAL_CHARS, CHAT_MAX_TURNS, ChatBodySchema, type ChatTurn } from '@/lib/ai/schemas'
-import { appendAnalysisMessages, getAnalysis, type StoredAnalysis } from '@/lib/ai/analyses'
+import { appendAnalysisMessages, getAnalysis, listRecentAnalyses, type StoredAnalysis } from '@/lib/ai/analyses'
 import { getCreditConfig } from '@/lib/ai/credit-config-server'
 import { confirmCredits, releaseCredits, reserveCredits } from '@/lib/ai/wallet'
 import { parseIdempotencyKey } from '@/lib/ai/wallet-core'
@@ -76,6 +76,24 @@ function analysisBlock(a: StoredAnalysis): string {
     '</analyse_en_cours>',
     'Le parent pose des questions sur cette analyse.',
   ].join('\n')
+}
+
+/** Analyses précédentes résumées : le Coach s'en souvient d'une conversation à l'autre. */
+const PAST_ANALYSES = 8
+
+/** Une ligne par analyse : pas de retour à la ligne venu d'un titre ou d'un résumé. */
+const oneLine = (s: string) => neutralizeTags(s).replace(/\s+/g, ' ').trim()
+
+function pastAnalysesBlock(list: StoredAnalysis[], currentId?: string): string {
+  // Vérifications du ton de la messagerie et analyses de démonstration exclues : seules les analyses demandées au Coach.
+  const past = list.filter((a) => a.result && a.id !== currentId && !a.draft && !a.demo).slice(0, PAST_ANALYSES)
+  if (!past.length) return ''
+  const lines = past.map((a) => {
+    const r = a.result!
+    const date = a.createdAt.slice(0, 10)
+    return `- ${date} · ${oneLine(a.title)} (${r.type_contenu}) · ton ${r.ton}/100, agressivité ${r.agressivite}/100 · ${oneLine(r.resume)}`
+  })
+  return ['<analyses_precedentes>', 'Analyses déjà faites par le parent (les plus récentes d’abord) :', ...lines, '</analyses_precedentes>'].join('\n')
 }
 
 export async function POST(req: Request) {
@@ -155,6 +173,11 @@ export async function POST(req: Request) {
   if (!AI_ENABLED) {
     await confirmCredits(user, actionId, { model: 'demo', usage: null, latencyMs: 0 })
     const answer = mockChatAnswer(question.content, { aboutAnalysis: Boolean(analysis), userId: user.id, locale })
+    // Comme en production : le fil d'une analyse est conservé (réaffiché à la réouverture).
+    if (analysis) {
+      const at = new Date().toISOString()
+      await appendAnalysisMessages(user, analysis.id, [{ role: 'user', content: question.content, at }, { role: 'assistant', content: answer, at }]).catch(() => undefined)
+    }
     return sseResponse(async (send, signal) => {
       await sleep(450, signal)
       for (const chunk of answer.match(/\S+\s*/g) ?? []) {
@@ -167,8 +190,15 @@ export async function POST(req: Request) {
   }
 
   let contextText: string
+  // Lectures en parallèle : contexte de l'espace et analyses récentes (brouillons filtrés ensuite, d'où la marge).
+  const [ctx, recent] = await Promise.allSettled([
+    buildContextText(user, { includeMedical, scope: 'full' }),
+    listRecentAnalyses(user, 30),
+  ])
+  const past = pastAnalysesBlock(recent.status === 'fulfilled' ? recent.value : [], analysis?.id)
   try {
-    contextText = await buildContextText(user, { includeMedical, scope: 'full' })
+    if (ctx.status === 'rejected') throw ctx.reason
+    contextText = ctx.value
   } catch {
     // Destiné au modèle (non affiché) : reste en français comme le reste du contexte.
     contextText = '(Les données de votre espace sont momentanément indisponibles.)'
@@ -182,6 +212,7 @@ export async function POST(req: Request) {
     const blocks: Anthropic.Beta.BetaTextBlockParam[] = [
       { type: 'text', text: `<espace_parent>\n${contextText}\n</espace_parent>`, cache_control: { type: 'ephemeral' } },
     ]
+    if (past) blocks.push({ type: 'text', text: past })
     if (analysis) blocks.push({ type: 'text', text: analysisBlock(analysis) })
     blocks.push({ type: 'text', text: q })
     return { role: 'user', content: blocks }

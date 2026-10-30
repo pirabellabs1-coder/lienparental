@@ -240,6 +240,7 @@
         "enterPassword": "Digite a senha da sua conta.",
         "mismatch": "Os dois códigos não coincidem. Recomece.",
         "introConfirm": "Digite seu código novamente para confirmá-lo.",
+        "introReauth": "Para sua segurança, entre novamente com o Google antes de escolher o seu código de 6 dígitos. Voltará aqui em seguida.",
         "introSetup": "Crie um código de 6 dígitos para proteger seus documentos e depoimentos.",
         "introPassword": "Digite a senha da sua conta Lien Parental.",
         "introSettings": "Desbloqueie o cofre para alterar as configurações de segurança.",
@@ -760,7 +761,15 @@
         "remindAria": "Lembrar a testemunha {n}",
         "seeTestimonials": "Ver depoimentos",
         "remindedAll": "Lembrete enviado a {count, plural, one {# testemunha} other {# testemunhas}}",
-        "remindAll": "Lembrar as testemunhas"
+        "remindAll": "Lembrar as testemunhas",
+        "stillOpen": "O link continua aberto a outras testemunhas. Encerre o pedido quando tiver recebido todos os testemunhos esperados.",
+        "close": "Encerrar o pedido",
+        "closeConfirm": "Encerrar o pedido? O link não aceitará mais novos testemunhos. {count, plural, =0 {Nenhum testemunho recebido por enquanto.} one {O testemunho recebido continua no seu cofre.} other {Os # testemunhos recebidos continuam no seu cofre.}}",
+        "closeYes": "Sim, encerrar",
+        "closeCancel": "Cancelar",
+        "closing": "Encerrando…",
+        "closed": "Pedido encerrado.",
+        "closeFailed": "Não foi possível encerrar o pedido. Tente novamente."
       },
       "witnessView": {
         "title": "Testemunha",

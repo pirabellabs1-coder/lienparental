@@ -22,7 +22,7 @@ import {
   type VaultDocumentRecord,
 } from '@/lib/data/vault'
 import {
-  listMyTestimonyReports, listReceivedTestimonies, listTestimonyRequests, reportTestimony, reviewTestimony,
+  listMyTestimonyReports, listReceivedTestimonies, listTestimonyRequests, reportTestimony, revokeTestimonyRequest, reviewTestimony,
   type ReceivedTestimonyRecord, type ReportReason, type ReportStatus,
 } from '@/lib/data/testimonies'
 import { listFolderDocuments } from '@/lib/data/vault'
@@ -37,6 +37,8 @@ const KEYS = {
   categories: 'lp.coffre.categories',
   hiddenCategories: 'lp.coffre.categories.deleted',
   requests: 'lp.coffre.requests',
+  /** Démo : demandes clôturées par le parent. */
+  closedRequests: 'lp.coffre.requests.closed',
   handledTestimonies: 'lp.coffre.testimonies.handled',
   reportedTestimonies: 'lp.coffre.testimonies.reported',
   deletedDocs: 'lp.coffre.docs.deleted',
@@ -248,15 +250,30 @@ export function useVaultSettings() {
 
 /* ---- Demandes de témoignage ------------------------------------------ */
 
+/** Demande clôturée : plus de témoin attendu, statut « terminée ». */
+function asClosed(r: TestimonyRequest, at: string): TestimonyRequest {
+  return { ...r, status: 'termine', tone: 'green', icon: 'check', finishedAt: r.finishedAt ?? at, witnesses: r.witnesses.filter((w) => w.status === 'recu') }
+}
+
 export function useRequests() {
   const [created, setCreated, storedReady] = useStored<TestimonyRequest[]>(KEYS.requests, [])
+  const [closed, setClosed] = useStored<Record<string, string>>(KEYS.closedRequests, {})
   const live = useAsyncData<TestimonyRequest[]>(LIVE ? listTestimonyRequests : noLoad([]), `vault:requests:${LIVE}`)
-  const requests = LIVE ? (live.data ?? []) : [...created, ...TESTIMONY_REQUESTS]
+  const requests = LIVE
+    ? (live.data ?? [])
+    : [...created, ...TESTIMONY_REQUESTS].map((r) => (closed[r.id] ? asClosed(r, closed[r.id]!) : r))
   const add = (r: TestimonyRequest) => {
     if (LIVE) live.setData((xs) => [r, ...(xs ?? [])])
     else setCreated((xs) => [r, ...xs])
   }
-  return { requests, add, ready: LIVE ? !live.loading : storedReady, error: live.error, refresh: live.refresh }
+  /** Clôture la demande : le lien n'accepte plus de nouveau témoin (revoked_at), les témoignages reçus restent. */
+  const close = async (id: string) => {
+    const at = new Date().toISOString().slice(0, 10)
+    if (!LIVE) return setClosed((m) => ({ ...m, [id]: at }))
+    await revokeTestimonyRequest(id)
+    live.setData((xs) => (xs ?? []).map((r) => (r.id === id ? asClosed(r, at) : r)))
+  }
+  return { requests, add, close, ready: LIVE ? !live.loading : storedReady, error: live.error, refresh: live.refresh }
 }
 
 /* ---- Témoignages reçus ------------------------------------------------- */

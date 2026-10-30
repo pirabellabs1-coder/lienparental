@@ -5,9 +5,11 @@
  * cet écran ne fait que recueillir le facteur et afficher la réponse.
  */
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { ArrowLeft, Fingerprint, KeyRound, LockKeyhole, ShieldCheck } from 'lucide-react'
+import { GoogleButton } from '@/components/auth/GoogleButton'
 import { Logo } from '@/components/brand/Logo'
 import { PasswordField } from '@/components/profil/fields'
 import { btn } from '@/components/profil/kit'
@@ -57,6 +59,10 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
   const [password, setPassword] = useState('')
   const [setupFirst, setSetupFirst] = useState<string | null>(null)
   const [bioAvailable, setBioAvailable] = useState(false)
+  // Compte Google sans mot de passe : choisir un code exige une reconnexion de moins de 5 minutes
+  // (serveur, /api/vault-lock/pin). On la propose AVANT la saisie plutôt qu'un refus après coup.
+  const [reauth, setReauth] = useState(() => !status.hasPassword && !status.recentLogin && !status.demo)
+  const pathname = usePathname()
   const pinRef = useRef<PinPadHandle>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const errId = useId()
@@ -137,6 +143,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
     } catch (e) {
       setSetupFirst(null)
       pinRef.current?.clear()
+      if (e instanceof VaultApiError && e.code === 'reauth_required') setReauth(true)
       fail(e)
     } finally {
       setBusy(false)
@@ -173,7 +180,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
 
   const intro =
     mode === 'setup'
-      ? setupFirst ? t('introConfirm') : t('introSetup')
+      ? reauth ? t('introReauth') : setupFirst ? t('introConfirm') : t('introSetup')
       : mode === 'password'
         ? t('introPassword')
         : context === 'settings'
@@ -222,7 +229,9 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
         <div className="mt-4 w-full">
           {(mode === 'pin' || mode === 'setup') && (
             <>
-              {mode === 'pin' && !status.hasPin ? (
+              {mode === 'setup' && reauth ? (
+                <GoogleButton next={pathname ?? '/app/coffre'} />
+              ) : mode === 'pin' && !status.hasPin ? (
                 // Ni code ni mot de passe, mais une empreinte : seul le bouton empreinte est proposé.
                 <button type="button" onClick={unlockWithBiometric} disabled={busy} className={btn.primary}>
                   <Fingerprint className="h-5 w-5" aria-hidden="true" /> {t('useBio')}

@@ -35,6 +35,8 @@ export type StoredAnalysis = {
   result: AnalysisResult | null
   messages: ChatLogTurn[]
   demo: boolean
+  /** Vérification du ton d'un brouillon de la messagerie (pas une analyse demandée au Coach). */
+  draft: boolean
 }
 
 export const CYCLE_DAYS = 30
@@ -100,6 +102,7 @@ function rowToAnalysis(r: Row): StoredAnalysis {
     result: parsed.success ? { ...parsed.data, disclaimer: parsed.data.disclaimer ?? 'Le Coach IA ne donne pas de conseil juridique.' } : null,
     messages,
     demo: Boolean(res.demo),
+    draft: res.source === 'draft',
   }
 }
 
@@ -137,26 +140,26 @@ export async function insertPending(user: CurrentUser, meta: { kind: CoachKind; 
     if (error || !data) throw new Error('ai_analyses insert failed')
     return rowToAnalysis(data as unknown as Row)
   }
-  const item: StoredAnalysis = { id: newAnalysisId(), kind: meta.kind, title, createdAt: now, cycle: now, archived: false, status: 'pending', result: null, messages: [], demo: Boolean(meta.demo) }
+  const item: StoredAnalysis = { id: newAnalysisId(), kind: meta.kind, title, createdAt: now, cycle: now, archived: false, status: 'pending', result: null, messages: [], demo: Boolean(meta.demo), draft: false }
   const list = memList(user.id)
   list.unshift(item)
   if (list.length > MAX_MEMORY_ITEMS) list.length = MAX_MEMORY_ITEMS
   return item
 }
 
-export async function completeAnalysis(user: CurrentUser, id: string, kind: CoachKind, result: AnalysisResult, demo = false): Promise<void> {
+export async function completeAnalysis(user: CurrentUser, id: string, kind: CoachKind, result: AnalysisResult, demo = false, draft = false): Promise<void> {
   if (SUPABASE_ENABLED) {
     if (!UUID_RE.test(id)) return
     const { error } = await aiServiceDb()
       .from('ai_analyses')
-      .update({ resultat: { status: 'done', kind, result, demo } })
+      .update({ resultat: { status: 'done', kind, result, demo, ...(draft ? { source: 'draft' } : {}) } })
       .eq('id', id)
       .eq('user_id', user.id)
     if (error) throw new Error('ai_analyses complete failed')
     return
   }
   const item = memList(user.id).find((a) => a.id === id)
-  if (item) Object.assign(item, { status: 'done', result, demo })
+  if (item) Object.assign(item, { status: 'done', result, demo, draft })
 }
 
 /**
@@ -208,6 +211,24 @@ export async function listAnalyses(user: CurrentUser, archived: boolean): Promis
     return items.filter((a) => a.status === 'done')
   }
   return memList(user.id).filter((a) => a.status === 'done' && a.archived === archived)
+}
+
+/**
+ * Dernières analyses terminées, SANS leur fil de discussion (lecture légère, sans purge) :
+ * mémoire du Coach dans le chat.
+ */
+export async function listRecentAnalyses(user: CurrentUser, limit: number): Promise<StoredAnalysis[]> {
+  if (SUPABASE_ENABLED) {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('ai_analyses')
+      .select('id, entree, resultat, input_kind, cycle, archived, created_at')
+      .eq('archived', false)
+      .order('created_at', { ascending: false })
+      .limit(limit)
+    return ((data ?? []) as unknown as Row[]).map(rowToAnalysis).filter((a) => a.status === 'done')
+  }
+  return memList(user.id).filter((a) => a.status === 'done' && !a.archived).slice(0, limit)
 }
 
 /** Lignes de quota (y compris archivées et supprimées) depuis `since`. */

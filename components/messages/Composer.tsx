@@ -22,6 +22,8 @@ type Props = {
   onSendVoice: (clip: VoiceClip) => Promise<boolean>
   busy: 'idle' | 'checking' | 'sending'
   error: string | null
+  /** Retour de la vérification du ton (affiché à la place de l'aide sous la saisie). */
+  note?: string | null
   textareaRef: RefObject<HTMLTextAreaElement | null>
   /** Catégories du coffre-fort proposées pour ranger la pièce jointe (vide : rangement automatique désactivé, 0420). */
   vaultCategories: string[]
@@ -39,7 +41,7 @@ const HOLD_MS = 600
 
 /** Zone de saisie : texte, pièce jointe, note vocale, « Vérification du ton », envoi. */
 export function Composer({
-  value, onChange, file, onPickFile, toneCheck, onToneCheckChange, onSubmit, onSendVoice, busy, error, textareaRef,
+  value, onChange, file, onPickFile, toneCheck, onToneCheckChange, onSubmit, onSendVoice, busy, error, note, textareaRef,
   vaultCategories, vaultCategory, onVaultCategoryChange, recipients, announce,
 }: Props) {
   const t = useTranslations('messaging.composer')
@@ -294,7 +296,9 @@ export function Composer({
         <p id={hintId} className="text-[11px] text-night-600">
           {busy === 'checking'
             ? t('coachReading')
-            : voice.phase === 'recording'
+            : note && voice.phase !== 'recording'
+              ? note
+              : voice.phase === 'recording'
               ? holding ? t('releaseToStop') : t('pressToStop')
               : t('timestamped')}
         </p>
