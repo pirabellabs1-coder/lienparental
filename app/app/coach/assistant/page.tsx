@@ -17,7 +17,7 @@ export default async function CoachAssistantPage() {
   return (
     <>
       <TopBar title={t('title')} showBack backHref="/app/coach" showBell={false} />
-      <div className="w-full px-4 pb-8 pt-3">
+      <div className="w-full px-4 pb-2 pt-3">
         <div className="flex items-center gap-3 rounded-xl2 bg-iris-50 p-4">
           <RobotMascot variant="head" size={44} />
           <p className="text-[13px] leading-relaxed text-night-800">

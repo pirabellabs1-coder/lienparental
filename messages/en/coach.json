@@ -76,7 +76,12 @@
         "marcel": "Marcel",
         "fabien": "Fabien"
       },
-      "voiceFallback": "The Coach’s voice is unavailable right now: reading with your device’s voice."
+      "voiceFallback": "The Coach’s voice is unavailable right now: reading with your device’s voice.",
+      "options": "Attach a file and options (voice, medical information)",
+      "attachImage": "Image",
+      "attachDoc": "Document",
+      "medicalOn": "Medical information included for the next question",
+      "noCreditsShort": "No credits left to ask a question."
     },
     "list": {
       "opFailed": "The operation failed. Please try again.",
