@@ -52,6 +52,28 @@ export function IconBubble({ children, tone = 'leaf', size = 'md', className }: 
   )
 }
 
+export type Point = { key: string; icon: React.ComponentType<{ strokeWidth?: number }>; tone: Tone; title: string; text: string }
+
+/**
+ * Liste d'atouts d'une section (messagerie, album) : une carte, une ligne par atout séparée d'un filet.
+ * Une seule colonne pour que le texte respire à côté du visuel (la grille à deux colonnes l'écrasait).
+ */
+export function PointList({ points, className }: { points: Point[]; className?: string }) {
+  return (
+    <ul className={cn(CARD, 'divide-y divide-[#EEF0F3] overflow-hidden', className)}>
+      {points.map(({ key, icon: Icon, tone, title, text }) => (
+        <li key={key} className="flex items-start gap-4 px-5 py-4 transition-colors duration-200 hover:bg-[#FAFBFC] sm:px-6">
+          <IconBubble size="sm" tone={tone} className="mt-0.5 rounded-xl"><Icon strokeWidth={1.75} /></IconBubble>
+          <div className="min-w-0">
+            <h3 className="text-[15.5px] font-bold leading-snug text-night-900">{title}</h3>
+            <p className="mt-0.5 text-[14.5px] leading-relaxed text-night-700">{text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 export type Tone = 'leaf' | 'night' | 'gold' | 'iris' | 'rose' | 'sky'
 // Couleurs d'icône sur fond pâle : toutes au-dessus de 3:1 (éléments graphiques, WCAG 1.4.11).
 export const TONES: Record<Tone, string> = {

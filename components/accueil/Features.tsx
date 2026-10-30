@@ -12,16 +12,16 @@ export async function Features() {
     <section id="fonctionnalites" aria-labelledby="features-title" className={SECTION}>
       <div className={CONTAINER}>
         <SectionHead id="features-title" title={t('title')} lead={t('lead')} />
-        <ul className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
-          {FEATURES.map(({ id, icon: Icon }) => {
+        <ul className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-12 xl:grid-cols-4">
+          {FEATURES.map(({ id, icon: Icon, tone }) => {
             const slug = id.replace('fct-', '')
             return (
-              <li key={id} id={id} className={cn(CARD, 'scroll-mt-28 p-6')}>
-                <div className="flex items-center gap-3">
-                  <IconBubble size="sm"><Icon strokeWidth={1.75} /></IconBubble>
+              <li key={id} id={id} className={cn(CARD, 'flex scroll-mt-28 gap-4 p-6 xl:flex-col xl:gap-0')}>
+                <IconBubble tone={tone} className="rounded-2xl"><Icon strokeWidth={1.75} /></IconBubble>
+                <div className="min-w-0 xl:mt-4">
                   <h3 className="text-[16.5px] font-bold leading-snug text-night-900">{t(`${slug}Name`)}</h3>
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-night-700">{t(`${slug}Text`)}</p>
                 </div>
-                <p className="mt-3 text-[15px] leading-relaxed text-night-700">{t(`${slug}Text`)}</p>
               </li>
             )
           })}
