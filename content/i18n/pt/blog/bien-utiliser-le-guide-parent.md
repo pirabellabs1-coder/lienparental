@@ -14,7 +14,7 @@ Abrir uma caderneta de poupança para o filho, matriculá-lo na escola, pedir um
 
 ## Fichas práticas por território
 
-Cada ficha responde às mesmas perguntas: para que serve o trâmite, quem é afetado, quais documentos preparar, quais etapas seguir e a quem se dirigir. O guia está disponível primeiro para a **Guiana Francesa**; outros territórios virão em seguida.
+Cada ficha responde às mesmas perguntas: para que serve o trâmite, quem é afetado, quais documentos preparar, quais etapas seguir e a quem se dirigir. O guia está disponível para a [Guiana Francesa](/guide/guyane), a [Martinica](/guide/martinique), [Guadalupe](/guide/guadeloupe), a [Reunião](/guide/reunion), [Mayotte](/guide/mayotte) e a [França metropolitana](/guide/france).
 
 Cada ficha indica a **data da última verificação** e as fontes oficiais. As informações locais que ainda precisam ser confirmadas são sinalizadas como tal.
 
@@ -24,7 +24,7 @@ Antes de sair, marque os documentos que você já reuniu. O seu progresso fica s
 
 ## Roteiros passo a passo
 
-Alguns períodos encadeiam vários trâmites: a chegada de um bebê, a volta às aulas, uma separação. Os **roteiros** os agrupam em ordem, com um link para cada ficha.
+Alguns períodos encadeiam vários trâmites: a chegada de um bebê, a volta às aulas, uma separação. Os **roteiros** os agrupam em ordem, com um link para cada ficha. Depois de uma separação, por exemplo, o roteiro [Acabei de me separar](/guide/guyane/parcours/je-viens-de-me-separer) encadeia a declaração à Caf, a mudança de endereço da criança, o recurso ao juiz de família e a pensão alimentícia.
 
 ## Adicionar ao Lien Parental com um toque
 

@@ -36,6 +36,8 @@ Mediation relies on both parents' willingness to engage in dialogue. It is not s
 
 ## Where to find a mediation service?
 
-Family mediation services are often supported by the CAF (Caisse d'allocations familiales, the family benefits office). The fee may depend on income: ask the service directly.
+Family mediation services are often supported by the CAF (Caisse d'allocations familiales, the family benefits office). The fee may depend on income: ask the service directly. In French Guiana, the UDAF de Guyane is one of the family mediation services listed by the French Ministry of Justice; addresses for each territory are in the Guide’s [Family mediation](/guide/guyane/mediation-familiale) page (see also [Martinique](/guide/martinique/mediation-familiale), [Guadeloupe](/guide/guadeloupe/mediation-familiale), [Réunion](/guide/reunion/mediation-familiale), [Mayotte](/guide/mayotte/mediation-familiale) and [mainland France](/guide/france/mediation-familiale)).
+
+Mediation is often a chance to agree together on the [shared custody schedule and holiday calendar](/blog/garde-alternee-rythmes-et-calendrier), or to discuss [child support that is no longer paid](/blog/pension-alimentaire-impayee-caf-aripa).
 
 For official, up-to-date information, see [Service-Public.fr](https://www.service-public.fr/) (Family section) or [justice.fr](https://www.justice.fr/), the official French government websites, and the **Parenting guide** entry on mediation in your territory.

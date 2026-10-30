@@ -22,7 +22,7 @@ Comece por uma lista comum das tarefas e, depois, atribua cada uma a um dos pais
 4. Atestados e documentos pedidos pela escola.
 5. Inscrição nas atividades do ano.
 
-O **Guia parental** do Lien Parental detalha esses trâmites, com os documentos a levar e os órgãos envolvidos no seu território.
+O **Guia parental** do Lien Parental detalha esses trâmites, com os documentos a levar e os órgãos envolvidos no seu território: [matricular o filho na escola](/guide/guyane/inscrire-enfant-ecole), [seguro escolar](/guide/guyane/assurance-scolaire), [auxílio de volta às aulas](/guide/guyane/allocation-rentree-scolaire), ou o roteiro [Volta às aulas](/guide/guyane/parcours/rentree-scolaire) (fichas da Guiana Francesa; escolha o seu território no [Guia](/guide)).
 
 ## 2. Informar a escola sobre a situação
 
@@ -34,7 +34,7 @@ Material escolar, cantina, atividades: anote quem adianta cada despesa e guarde 
 
 ## 4. Compartilhar o calendário
 
-Reuniões de início de ano, fotos da turma, férias escolares: adicione essas datas ao calendário compartilhado assim que forem conhecidas. Cada genitor vê a mesma informação, ao mesmo tempo.
+Reuniões de início de ano, fotos da turma, férias escolares: adicione essas datas ao calendário compartilhado assim que forem conhecidas. Cada genitor vê a mesma informação, ao mesmo tempo. Nos territórios ultramarinos, cada academia tem o seu próprio calendário escolar: para dividir as férias na guarda compartilhada, veja [escolher um ritmo e manter uma agenda comum](/blog/garde-alternee-rythmes-et-calendrier).
 
 ## Para lembrar
 

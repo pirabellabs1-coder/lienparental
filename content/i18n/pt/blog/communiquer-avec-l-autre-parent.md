@@ -30,10 +30,12 @@ Descrever o que aconteceu, sem atribuir intenções, limita as reações defensi
 
 Quando uma decisão é tomada oralmente (uma troca de fim de semana, uma atividade a ser paga pelos dois), uma mensagem curta de confirmação evita mal-entendidos: "Como combinamos por telefone, eu fico com a Lina no fim de semana do dia 12 e você fica com ela no do dia 19."
 
-No Lien Parental, o **diário** e as **mensagens** guardam essas conversas com data. Eles ajudam você a encontrar uma informação e, se for o caso, a apresentar um histórico claro a um mediador ou ao seu advogado.
+No Lien Parental, o **diário** e as **mensagens** guardam essas conversas com data. Eles ajudam você a encontrar uma informação e, se for o caso, a apresentar um histórico claro a um mediador ou ao seu advogado. Muitas mensagens tratam da rotina da criança: uma [agenda de guarda compartilhada](/blog/garde-alternee-rythmes-et-calendrier) evita boa parte delas.
 
 ## Quando o diálogo está travado
 
 Se as conversas se tornam sistematicamente conflituosas, a [mediação familiar](/blog/mediation-familiale-a-quoi-s-attendre) pode ajudar a restabelecer um ambiente de diálogo. Ela não substitui uma decisão judicial, mas muitas vezes permite encontrar soluções concretas, construídas pelos dois pais.
 
-Para saber mais sobre seus direitos e trâmites, consulte as fichas oficiais do [Service-Public.fr](https://www.service-public.fr/) (o site oficial de informações do governo francês), seção Família.
+Se um desacordo tiver de ser decidido pelo juiz, as pessoas que acompanharam o dia a dia da criança podem redigir uma [declaração de testemunha para o juiz de família](/blog/attestation-de-temoin-jaf-cerfa-11527).
+
+Para saber mais sobre seus direitos e trâmites, consulte as fichas oficiais do [Service-Public.fr](https://www.service-public.fr/) (o site oficial de informações do governo francês), seção Família, ou o [Guia parental](/guide) do seu território.

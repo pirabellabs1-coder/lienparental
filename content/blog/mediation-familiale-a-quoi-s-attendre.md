@@ -36,6 +36,8 @@ La médiation repose sur la volonté des deux parents de dialoguer. Elle n’est
 
 ## Où trouver un service de médiation ?
 
-Les services de médiation familiale sont souvent soutenus par la CAF. Le tarif peut dépendre des revenus : renseignez-vous directement auprès du service.
+Les services de médiation familiale sont souvent soutenus par la CAF. Le tarif peut dépendre des revenus : renseignez-vous directement auprès du service. En Guyane, l’UDAF de Guyane fait partie des services de médiation familiale référencés par le ministère de la Justice ; les adresses de chaque territoire figurent dans la fiche [Médiation familiale](/guide/guyane/mediation-familiale) du Guide (voir aussi [Martinique](/guide/martinique/mediation-familiale), [Guadeloupe](/guide/guadeloupe/mediation-familiale), [La Réunion](/guide/reunion/mediation-familiale), [Mayotte](/guide/mayotte/mediation-familiale) et [Hexagone](/guide/france/mediation-familiale)).
+
+La médiation est souvent l’occasion de fixer ensemble le [rythme de garde alternée et le calendrier des vacances](/blog/garde-alternee-rythmes-et-calendrier), ou de reparler d’une [pension alimentaire qui n’est plus payée](/blog/pension-alimentaire-impayee-caf-aripa).
 
 Pour les informations officielles et à jour, consultez [Service-Public.fr](https://www.service-public.fr/) (rubrique Famille) ou [justice.fr](https://www.justice.fr/) et la fiche du **Guide parental** consacrée à la médiation dans votre territoire.

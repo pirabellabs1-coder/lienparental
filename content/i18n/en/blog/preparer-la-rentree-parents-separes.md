@@ -22,7 +22,7 @@ Start with a shared list of tasks, then assign each one to a parent, with a date
 4. Certificates and documents requested by the school.
 5. Signing up for the year's activities.
 
-The Lien Parental **Parenting guide** details these procedures, with the documents to bring and the organizations involved in your territory.
+The Lien Parental **Parenting guide** details these procedures, with the documents to bring and the organizations involved in your territory: [enrolling your child in school](/guide/guyane/inscrire-enfant-ecole), [school insurance](/guide/guyane/assurance-scolaire), [back-to-school allowance](/guide/guyane/allocation-rentree-scolaire), or the [Back to school](/guide/guyane/parcours/rentree-scolaire) pathway (French Guiana guides; choose your territory from [the Guide](/guide)).
 
 ## 2. Inform the school of the situation
 
@@ -34,7 +34,7 @@ School supplies, canteen, activities: note who pays for which expense upfront an
 
 ## 4. Share the calendar
 
-Back-to-school meetings, class photos, school holidays: add these dates to the shared calendar as soon as they are known. Each parent sees the same information at the same time.
+Back-to-school meetings, class photos, school holidays: add these dates to the shared calendar as soon as they are known. Each parent sees the same information at the same time. Overseas, each education authority has its own school calendar: to split holidays in shared custody, see [choosing a schedule and keeping a common calendar](/blog/garde-alternee-rythmes-et-calendrier).
 
 ## Key takeaways
 
