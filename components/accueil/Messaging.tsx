@@ -4,17 +4,17 @@ import { signupPath } from '@/lib/i18n/routing'
 import { PhoneFrame } from '@/components/home/PhoneFrame'
 import { cn } from '@/lib/cn'
 import { appShot } from '@/lib/i18n/shots'
-import { BTN_PRIMARY, CONTAINER, H2, IconBubble, LEAD, SECTION } from './ui'
+import { BTN_PRIMARY, CONTAINER, H2, LEAD, PointList, SECTION } from './ui'
 import Link from 'next/link'
 
 // Section dédiée à la messagerie entre parents (fonctions vérifiées dans components/messages).
 // Formulation sécurité : chiffrement en transit et au repos, jamais « de bout en bout ».
 const POINTS = [
-  { icon: Clock, key: 'point1' },
-  { icon: Sparkles, key: 'point2' },
-  { icon: Images, key: 'point3' },
-  { icon: FolderLock, key: 'point4' },
-  { icon: FileDown, key: 'point5' },
+  { icon: Clock, key: 'point1', tone: 'sky' },
+  { icon: Sparkles, key: 'point2', tone: 'iris' },
+  { icon: Images, key: 'point3', tone: 'gold' },
+  { icon: FolderLock, key: 'point4', tone: 'leaf' },
+  { icon: FileDown, key: 'point5', tone: 'night' },
 ] as const
 
 export async function Messaging() {
@@ -35,17 +35,10 @@ export async function Messaging() {
             {t('lead')}
           </p>
 
-          <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-            {POINTS.map(({ icon: Icon, key }) => (
-              <li key={key} className="flex gap-4">
-                <IconBubble size="sm"><Icon strokeWidth={1.75} /></IconBubble>
-                <div>
-                  <h3 className="text-[16px] font-bold leading-snug text-night-900">{t(`${key}Title`)}</h3>
-                  <p className="mt-1 text-[14.5px] leading-relaxed text-night-700">{t(`${key}Text`)}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <PointList
+            className="mt-8"
+            points={POINTS.map((p) => ({ ...p, title: t(`${p.key}Title`), text: t(`${p.key}Text`) }))}
+          />
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link href={signupPath(locale)} className={cn(BTN_PRIMARY, 'h-12 px-6')}>

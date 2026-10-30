@@ -4,16 +4,16 @@ import { ArrowRight, CalendarHeart, Images, Lock, ShieldCheck, Star, Users } fro
 import { getLocale, getTranslations } from 'next-intl/server'
 import { signupPath } from '@/lib/i18n/routing'
 import { cn } from '@/lib/cn'
-import { BTN_PRIMARY, CONTAINER, H2, IconBubble, LEAD, SECTION } from './ui'
+import { BTN_PRIMARY, CONTAINER, H2, LEAD, PointList, SECTION } from './ui'
 
 // Section « Album de l'enfant » (coffre-fort, migration 0530) : photos privées ou partagées avec
 // l'autre parent, chronologie par date de prise de vue, moments importants. Visuel : montage HTML
 // d'images illustratives (aucune photo d'utilisateur).
 const POINTS = [
-  { icon: Users, key: 'point1' },
-  { icon: CalendarHeart, key: 'point2' },
-  { icon: Star, key: 'point3' },
-  { icon: ShieldCheck, key: 'point4' },
+  { icon: Users, key: 'point1', tone: 'leaf' },
+  { icon: CalendarHeart, key: 'point2', tone: 'sky' },
+  { icon: Star, key: 'point3', tone: 'gold' },
+  { icon: ShieldCheck, key: 'point4', tone: 'night' },
 ] as const
 
 const SHOTS = [
@@ -58,17 +58,10 @@ export async function AlbumSection() {
           <h2 id="album-title" className={cn(H2, 'mt-4 max-w-[22ch]')}>{t('title')}</h2>
           <p className={cn(LEAD, 'mt-4 max-w-[54ch]')}>{t('lead')}</p>
 
-          <ul className="mt-8 grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-            {POINTS.map(({ icon: Icon, key }) => (
-              <li key={key} className="flex gap-4">
-                <IconBubble size="sm"><Icon strokeWidth={1.75} /></IconBubble>
-                <div>
-                  <h3 className="text-[16px] font-bold leading-snug text-night-900">{t(`${key}Title`)}</h3>
-                  <p className="mt-1 text-[14.5px] leading-relaxed text-night-700">{t(`${key}Text`)}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <PointList
+            className="mt-8"
+            points={POINTS.map((p) => ({ ...p, title: t(`${p.key}Title`), text: t(`${p.key}Text`) }))}
+          />
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link href={signupPath(locale)} className={cn(BTN_PRIMARY, 'h-12 px-6')}>
