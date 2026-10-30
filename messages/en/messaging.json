@@ -264,6 +264,7 @@
       "indicative": "This is only a suggestion: your message is your choice.",
       "checkedOk": "Tone checked by the AI Coach: message sent.",
       "notChecked": "Message sent without a tone check: the AI Coach did not reply in time.",
+      "notCheckedGeneric": "Message sent without a tone check: the AI Coach can’t be reached right now.",
       "notCheckedReason": "Message sent without a tone check. {reason}",
       "useReformulation": "Send the rewording",
       "sendAsIs": "Send as is",

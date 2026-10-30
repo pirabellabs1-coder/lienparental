@@ -22,7 +22,7 @@ export type ToneAnalysis = {
 }
 
 /** Vérification impossible : `message` = explication du serveur (crédits, limite…), sinon raison générique. */
-export type ToneFailure = { failed: true; message?: string }
+export type ToneFailure = { failed: true; message?: string; timeout?: boolean }
 
 /**
  * Contrat de /api/coach/analyze : entrée multipart/form-data (champ `text`),
@@ -56,6 +56,7 @@ export async function analyzeTone(text: string, otherPrenom: string, labels: Ton
     if (done.demo === true) return localAnalysis(text, otherPrenom, labels)
     return parseAnalysis(done.result) ?? fallback()
   } catch {
+    if (controller.signal.aborted) return SUPABASE_ENABLED ? { failed: true, timeout: true } : localAnalysis(text, otherPrenom, labels)
     return fallback()
   } finally {
     clearTimeout(timer)

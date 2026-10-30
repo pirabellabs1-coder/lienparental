@@ -11,6 +11,7 @@ import { newIdempotencyKey } from './session'
 import { useCredits } from './CreditCost'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
+import { CHAT_MAX_TOTAL_CHARS, CHAT_MAX_TURNS } from '@/lib/ai/schemas'
 
 const MAX = 4000
 
@@ -83,22 +84,23 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
 
   useEffect(() => () => abortRef.current?.abort(), [])
 
-  // Fil conservé de l'onglet : restauré au montage (après l'hydratation), puis réenregistré.
-  const restored = useRef(false)
+  // Fil conservé de l'onglet : restauré au montage (après l'hydratation), puis réenregistré
+  // seulement une fois la restauration appliquée (sinon l'accueil seul écraserait le fil).
+  const [restored, setRestored] = useState(false)
   useEffect(() => {
     const stored = loadStored(persistKey)
     if (stored) setMessages(stored)
-    restored.current = true
+    setRestored(true)
   }, [persistKey])
   useEffect(() => {
-    if (!persistKey || !restored.current || streaming) return
+    if (!persistKey || !restored || streaming) return
     try {
       const keep = messages.filter((m) => !m.streaming).slice(-STORE_MAX).map(({ streaming: _s, ...m }) => m)
       sessionStorage.setItem(STORE_PREFIX + persistKey, JSON.stringify(keep))
     } catch {
       // stockage indisponible (navigation privée) : la conversation reste en mémoire
     }
-  }, [messages, persistKey, streaming])
+  }, [messages, persistKey, restored, streaming])
 
   const scrollToEnd = useCallback(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -118,9 +120,16 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
     async (raw: string) => {
       const text = raw.trim().slice(0, MAX)
       if (!text || streaming) return
-      const history = messages
+      let history = messages
         .filter((m) => !m.local && m.tone !== 'error' && m.text.trim())
         .map((m) => ({ role: m.from === 'me' ? ('user' as const) : ('assistant' as const), content: [m.text, ...(m.bullets ?? []).map((b) => `- ${b}`)].join('\n').slice(0, MAX) }))
+      // Fil long (réaffiché ou conservé) : seuls les derniers tours partent, dans les limites du serveur.
+      history = history.slice(-(CHAT_MAX_TURNS - 1))
+      let total = history.reduce((n, h) => n + h.content.length, text.length)
+      while (history.length && (total > CHAT_MAX_TOTAL_CHARS || history[0]!.role !== 'user')) {
+        total -= history[0]!.content.length
+        history = history.slice(1)
+      }
       history.push({ role: 'user', content: text })
 
       const medical = includeMedical

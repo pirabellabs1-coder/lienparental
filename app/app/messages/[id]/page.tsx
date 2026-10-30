@@ -251,7 +251,8 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
     }
   }
 
-  const deliver = async (body: string, attachment: File | null) => {
+  /** Envoie le message ; `note` (vérification du ton) n'est affichée et annoncée qu'après un envoi réussi. */
+  const deliver = async (body: string, attachment: File | null, note: string | null = null) => {
     if (!me) return
     setBusy('sending')
     setError(null)
@@ -262,7 +263,9 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
       setText('')
       setFile(null)
       setVaultCategory(DEFAULT_VAULT_CATEGORY)
-      announce(attachment && autoVault ? t('sentWithVault', { category }) : t('sent'))
+      const sentMsg = attachment && autoVault ? t('sentWithVault', { category }) : t('sent')
+      setToneNote(note)
+      announce(note ? `${sentMsg} ${note}` : sentMsg)
     } catch (err) {
       setError(err instanceof Error ? err.message : t('sendFailed'))
     } finally {
@@ -296,6 +299,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
     if (!me || busy !== 'idle') return
     const body = text.trim()
     setToneNote(null)
+    let note: string | null = null
     if (toneCheck && body.length >= 4) {
       setBusy('checking')
       // Alerte et reformulation locale dans la langue de l'interface (détection multilingue : toneLocal).
@@ -308,17 +312,17 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
       setBusy('idle')
       if ('failed' in analysis) {
         // Jamais bloquant : le message part, le parent sait qu'il n'a pas été vérifié et pourquoi.
-        const note = analysis.message ? tm('tone.notCheckedReason', { reason: analysis.message }) : tm('tone.notChecked')
-        setToneNote(note)
-        announce(note)
+        note = analysis.message
+          ? tm('tone.notCheckedReason', { reason: analysis.message })
+          : analysis.timeout ? tm('tone.notChecked') : tm('tone.notCheckedGeneric')
       } else if (analysis.agressivite >= TONE_THRESHOLD) {
         setPending({ text: body, file, analysis })
         return
       } else {
-        setToneNote(tm('tone.checkedOk'))
+        note = tm('tone.checkedOk')
       }
     }
-    await deliver(body, file)
+    await deliver(body, file, note)
   }
 
   const exportPdf = async () => {

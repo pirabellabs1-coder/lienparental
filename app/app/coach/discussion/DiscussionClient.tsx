@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { ArrowLeft } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { CoachChat } from '@/components/coach/CoachChat'
@@ -13,17 +13,19 @@ import { btn } from '@/components/coach/ui'
 import { loadAnalysis } from '@/components/coach/session'
 import { mockCoachChat } from '@/lib/mock-data'
 import { LIVE } from '@/lib/data/core'
+import { intlLocale } from '@/lib/i18n/config'
 
 type Props = { aiEnabled: boolean; initialQuestion?: string; analysisId?: string }
 
-function toBubble(m: ChatLogTurn, i: number): ChatMessage {
-  const time = new Date(m.at).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+function toBubble(m: ChatLogTurn, i: number, locale: string): ChatMessage {
+  const time = new Date(m.at).toLocaleTimeString(intlLocale(locale), { hour: '2-digit', minute: '2-digit' })
   return { id: `h${i}`, from: m.role === 'user' ? 'me' : 'ia', text: m.content, time: Number.isNaN(Date.parse(m.at)) ? '' : time }
 }
 
 export function DiscussionClient({ aiEnabled, initialQuestion, analysisId }: Props) {
   const t = useTranslations('coach.discussion')
   const router = useRouter()
+  const locale = useLocale()
   // undefined = pas encore résolu (lecture du sessionStorage côté client).
   const [target, setTarget] = useState<{ analysisId?: string; title?: string; history?: ChatMessage[] } | undefined>(undefined)
   const [question] = useState(initialQuestion)
@@ -46,7 +48,7 @@ export function DiscussionClient({ aiEnabled, initialQuestion, analysisId }: Pro
       .then((body: { analysis?: { title?: string; messages?: ChatLogTurn[] } } | null) => {
         if (!alive) return
         const turns = body?.analysis?.messages ?? []
-        setTarget({ analysisId: id, title: title ?? body?.analysis?.title, history: turns.map((m, i) => toBubble(m, i)) })
+        setTarget({ analysisId: id, title: title ?? body?.analysis?.title, history: turns.map((m, i) => toBubble(m, i, locale)) })
       })
       .catch(() => { if (alive) setTarget({ analysisId: id, title }) })
     return () => { alive = false }

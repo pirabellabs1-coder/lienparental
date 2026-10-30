@@ -187,7 +187,7 @@ export async function POST(req: Request) {
     let id = `demo_${Date.now().toString(36)}`
     if (!SUPABASE_ENABLED) {
       const stored = await insertPending(user, { kind: prepared.kind, title: prepared.title, demo: true })
-      await completeAnalysis(user, stored.id, prepared.kind, result, true)
+      await completeAnalysis(user, stored.id, prepared.kind, result, true, prepared.kind === 'message' && prepared.draft === true)
       id = stored.id
     }
     await confirmCredits(user, r.actionId, { model: 'demo', usage: null, latencyMs: 0 })
@@ -293,7 +293,7 @@ export async function POST(req: Request) {
         return
       }
       const result = normalizeAnalysis(valid.data, ta('disclaimer'))
-      await completeAnalysis(user, analysisId, prepared.kind, result)
+      await completeAnalysis(user, analysisId, prepared.kind, result, false, prepared.kind === 'message' && prepared.draft === true)
       charged = true
       // Débit confirmé (une seule fois) avec le coût fournisseur mesuré. Un échec ici n'annule pas
       // l'analyse livrée : la réservation sera restituée à son échéance (credits_sweep).

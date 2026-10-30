@@ -264,6 +264,7 @@
       "indicative": "Suggestion indicative, vous restez libre de votre message.",
       "checkedOk": "Ton vérifié par le Coach IA : message envoyé.",
       "notChecked": "Message envoyé sans vérification du ton : le Coach IA n’a pas répondu à temps.",
+      "notCheckedGeneric": "Message envoyé sans vérification du ton : le Coach IA n’est pas joignable pour le moment.",
       "notCheckedReason": "Message envoyé sans vérification du ton. {reason}",
       "useReformulation": "Envoyer la reformulation",
       "sendAsIs": "Envoyer tel quel",

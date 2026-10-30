@@ -30,7 +30,7 @@ import { AI_MODEL, CHAT_EFFORT, fallbackParams, fallbackServed, getAnthropic, lo
 import { buildContextText } from '@/lib/ai/context'
 import { PROMPT_VERSION, chatSystemPrompt, neutralizeTags } from '@/lib/ai/prompts'
 import { CHAT_MAX_TOTAL_CHARS, CHAT_MAX_TURNS, ChatBodySchema, type ChatTurn } from '@/lib/ai/schemas'
-import { appendAnalysisMessages, getAnalysis, listAnalyses, type StoredAnalysis } from '@/lib/ai/analyses'
+import { appendAnalysisMessages, getAnalysis, listRecentAnalyses, type StoredAnalysis } from '@/lib/ai/analyses'
 import { getCreditConfig } from '@/lib/ai/credit-config-server'
 import { confirmCredits, releaseCredits, reserveCredits } from '@/lib/ai/wallet'
 import { parseIdempotencyKey } from '@/lib/ai/wallet-core'
@@ -81,13 +81,17 @@ function analysisBlock(a: StoredAnalysis): string {
 /** Analyses précédentes résumées : le Coach s'en souvient d'une conversation à l'autre. */
 const PAST_ANALYSES = 8
 
+/** Une ligne par analyse : pas de retour à la ligne venu d'un titre ou d'un résumé. */
+const oneLine = (s: string) => neutralizeTags(s).replace(/\s+/g, ' ').trim()
+
 function pastAnalysesBlock(list: StoredAnalysis[], currentId?: string): string {
-  const past = list.filter((a) => a.result && a.id !== currentId).slice(0, PAST_ANALYSES)
+  // Vérifications du ton de la messagerie et analyses de démonstration exclues : seules les analyses demandées au Coach.
+  const past = list.filter((a) => a.result && a.id !== currentId && !a.draft && !a.demo).slice(0, PAST_ANALYSES)
   if (!past.length) return ''
   const lines = past.map((a) => {
     const r = a.result!
     const date = a.createdAt.slice(0, 10)
-    return `- ${date} · ${neutralizeTags(a.title)} (${r.type_contenu}) · ton ${r.ton}/100, agressivité ${r.agressivite}/100 · ${neutralizeTags(r.resume)}`
+    return `- ${date} · ${oneLine(a.title)} (${r.type_contenu}) · ton ${r.ton}/100, agressivité ${r.agressivite}/100 · ${oneLine(r.resume)}`
   })
   return ['<analyses_precedentes>', 'Analyses déjà faites par le parent (les plus récentes d’abord) :', ...lines, '</analyses_precedentes>'].join('\n')
 }
@@ -181,9 +185,15 @@ export async function POST(req: Request) {
   }
 
   let contextText: string
-  const past = pastAnalysesBlock(await listAnalyses(user, false).catch(() => []), analysis?.id)
+  // Lectures en parallèle : contexte de l'espace et analyses récentes (brouillons filtrés ensuite, d'où la marge).
+  const [ctx, recent] = await Promise.allSettled([
+    buildContextText(user, { includeMedical, scope: 'full' }),
+    listRecentAnalyses(user, 30),
+  ])
+  const past = pastAnalysesBlock(recent.status === 'fulfilled' ? recent.value : [], analysis?.id)
   try {
-    contextText = await buildContextText(user, { includeMedical, scope: 'full' })
+    if (ctx.status === 'rejected') throw ctx.reason
+    contextText = ctx.value
   } catch {
     // Destiné au modèle (non affiché) : reste en français comme le reste du contexte.
     contextText = '(Les données de votre espace sont momentanément indisponibles.)'

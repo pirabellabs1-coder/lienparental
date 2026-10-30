@@ -264,6 +264,7 @@
       "indicative": "Sugestão indicativa: você decide sua mensagem.",
       "checkedOk": "Tom verificado pelo Coach IA: mensagem enviada.",
       "notChecked": "Mensagem enviada sem verificação do tom: o Coach IA não respondeu a tempo.",
+      "notCheckedGeneric": "Mensagem enviada sem verificação do tom: o Coach IA não está disponível no momento.",
       "notCheckedReason": "Mensagem enviada sem verificação do tom. {reason}",
       "useReformulation": "Enviar a nova redação",
       "sendAsIs": "Enviar assim mesmo",
