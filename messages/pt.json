@@ -93,7 +93,7 @@
   },
   "home": {
     "hero": {
-      "badge": "O aplicativo para pais separados",
+      "badge": "O aplicativo de coparentalidade dos pais separados",
       "titleStart": "Tudo para o seu filho, ",
       "titleHighlight": "enfim num só lugar.",
       "subtitle": "Organize, comunique-se, guarde tudo com segurança e siga em frente com tranquilidade na sua vida de pai ou mãe separado, com ferramentas simples, práticas e confiáveis, adaptadas à sua situação.",
@@ -169,8 +169,8 @@
   },
   "video": {
     "title": "Conheça o Lien Parental em vídeo",
-    "playVideo": "Reproduzir o vídeo de apresentação",
-    "playImages": "Conheça o Lien Parental em imagens (vídeo em breve)",
+    "playVideo": "Ver o vídeo de apresentação",
+    "playImages": "Prévia em imagens do Lien Parental (vídeo em breve)",
     "seeVideo": "Ver o vídeo",
     "seeImages": "Prévia em imagens",
     "overviewTitle": "Um único aplicativo para gerenciar tudo",
@@ -316,7 +316,14 @@
     "available": "Disponível",
     "soon": "Em breve",
     "cta": "Conhecer o Guia parental",
-    "phoneAlt": "A tela do Guia parental do aplicativo: busca de trâmite e percurso passo a passo"
+    "phoneAlt": "A tela do Guia parental do aplicativo: busca de trâmite e percurso passo a passo",
+    "popularTitle": "Os trâmites mais consultados após uma separação",
+    "popular": {
+      "separation": "Acabei de me separar: os trâmites em ordem",
+      "jaf": "Recorrer ao juiz de família (JAF)",
+      "pension": "Pensão alimentícia não paga: a Caf e a ARIPA",
+      "mediation": "Encontrar mediação familiar na Guiana Francesa"
+    }
   },
   "pwa": {
     "title": "Disponível agora como PWA",
@@ -360,7 +367,12 @@
     "q5": "Posso compartilhar informações com o outro pai ou mãe?",
     "a5": "Sim, com “Pais vinculados”. Você convida o outro pai ou mãe e escolhe o que compartilha para cada criança: ficha, calendário, documentos ou despesas. O seu Diário, o Coach com IA e os documentos não compartilhados continuam privados.",
     "q6": "Posso cancelar a minha assinatura a qualquer momento?",
-    "a6": "Sim. Os planos pagos não têm fidelidade e podem ser cancelados pelo seu perfil. Você mantém o acesso até o fim do período pago e, depois, os seus dados continuam disponíveis no plano gratuito."
+    "a6": "Sim. Os planos pagos não têm fidelidade e podem ser cancelados pelo seu perfil. Você mantém o acesso até o fim do período pago e, depois, os seus dados continuam disponíveis no plano gratuito.",
+    "q7": "O que é um aplicativo de coparentalidade?",
+    "a7": "É um espaço compartilhado entre pais separados para organizar a vida do filho: agenda da guarda, despesas divididas, saúde, escola e documentos importantes. O Lien Parental acrescenta um guia dos trâmites por território (Guiana Francesa, Martinica, Guadalupe, Reunião, Mayotte, França metropolitana) e um Coach com IA.",
+    "q8": "O Lien Parental ajuda com a guarda compartilhada, a pensão alimentícia ou o juiz de família?",
+    "a8": "Sim, para se organizar e preparar os trâmites. A agenda compartilhada segue o seu ritmo de guarda (semanas alternadas, 2-2-3…), as despesas registram os gastos e reembolsos, e o processo judicial reúne os documentos úteis. O guia explica quando recorrer ao juiz de família (JAF), o que fazer se a pensão não for paga (Caf e ARIPA) e onde encontrar mediação familiar. O Lien Parental não substitui um advogado.",
+    "a8Link": "Percurso “Acabei de me separar”"
   },
   "finalBanner": {
     "title": "Pronto para simplificar o seu dia a dia?",
@@ -579,8 +591,8 @@
     "rootTitle": "Lien Parental: informar, apoiar e preservar o vínculo entre pais e filhos",
     "rootDescription": "O Lien Parental apoia pais separados: agenda compartilhada, cofre criptografado, diário, depoimentos e coach parental com IA. Dados hospedados na Europa.",
     "ogDescription": "Comunique-se com tranquilidade, organize-se com facilidade e encontre tudo sobre o seu filho.",
-    "homeTitle": "Lien Parental: tudo para o seu filho, enfim num só lugar",
-    "homeDescription": "O app dos pais separados: agenda compartilhada, despesas, saúde dos filhos, cofre, processo judicial, Coach com IA e Guia parental. Gratuito para começar.",
+    "homeTitle": "App de coparentalidade para pais separados · Lien Parental",
+    "homeDescription": "Agenda da guarda compartilhada, despesas divididas, saúde, cofre, processo judicial e guia dos trâmites na França e na Guiana Francesa. Grátis para começar.",
     "appTitle": "Aplicativo"
   },
   "publicAside": {

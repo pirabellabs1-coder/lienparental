@@ -944,7 +944,7 @@
         "logement": "Logement & vie quotidienne"
       },
       "landing": {
-        "metaTitle": "Guide parental : démarches et aides",
+        "metaTitle": "Guide parental : démarches, aides et séparation",
         "metaDescription": "Démarches, aides et organismes pour les parents, expliqués pas à pas : documents à réunir, délais, où s'adresser. Fiches vérifiées sur des sources officielles.",
         "title": "Les démarches des parents, expliquées simplement",
         "lead": "École, santé, aides, naissance, séparation, logement : chaque fiche vous dit quoi faire, avec quels documents, dans quels délais et où vous adresser. Les informations sont vérifiées sur des sources officielles et datées.",
@@ -962,7 +962,7 @@
         "categoriesTitle": "Les thèmes du guide {territory}"
       },
       "territory": {
-        "metaTitle": "Guide parental {territory}",
+        "metaTitle": "Guide parental {territory} : démarches et aides",
         "metaDescription": "{count} fiches pratiques pour les parents {code, select, reunion {à {territory}} mayotte {à {territory}} other {en {territory}}} : école, santé, aides de la Caf, naissance, séparation, logement. Étapes, documents et organismes, avec sources officielles.",
         "title": "Guide parental : {territory}",
         "lead": "{count, plural, one {# fiche pratique} other {# fiches pratiques}} pour les parents {code, select, reunion {à {territory}} mayotte {à {territory}} other {en {territory}}}, classées par thème, et des parcours pour enchaîner les démarches dans le bon ordre.",
@@ -1030,7 +1030,8 @@
           "text": "Avec un compte Lien Parental, ajoutez un rappel, un document ou une date à partir de chaque fiche, et suivez vos démarches.",
           "signup": "Créer un compte gratuit"
         }
-      }
+      },
+      "inTerritory": "{code, select, reunion {à La Réunion} mayotte {à Mayotte} france {en France} other {en {territory}}}"
     },
     "partners": {
       "page": {

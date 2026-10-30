@@ -93,7 +93,7 @@
   },
   "home": {
     "hero": {
-      "badge": "L’application des parents séparés",
+      "badge": "L’application de coparentalité des parents séparés",
       "titleStart": "Tout pour votre enfant, ",
       "titleHighlight": "enfin au même endroit.",
       "subtitle": "Organisez, communiquez, conservez et avancez sereinement dans votre vie de parent séparé, avec des outils simples, pratiques et fiables, adaptés à votre situation.",
@@ -169,8 +169,8 @@
   },
   "video": {
     "title": "Découvrez Lien Parental en vidéo",
-    "playVideo": "Lire la vidéo de présentation",
-    "playImages": "Découvrir Lien Parental en images (vidéo bientôt disponible)",
+    "playVideo": "Voir la vidéo de présentation",
+    "playImages": "Aperçu en images de Lien Parental (vidéo bientôt disponible)",
     "seeVideo": "Voir la vidéo",
     "seeImages": "Aperçu en images",
     "overviewTitle": "Une seule application pour tout gérer",
@@ -316,7 +316,14 @@
     "available": "Disponible",
     "soon": "Bientôt",
     "cta": "Découvrir le Guide parental",
-    "phoneAlt": "L’écran Guide parental de l’application : recherche de démarche et parcours pas à pas"
+    "phoneAlt": "L’écran Guide parental de l’application : recherche de démarche et parcours pas à pas",
+    "popularTitle": "Les démarches les plus consultées après une séparation",
+    "popular": {
+      "separation": "Je viens de me séparer : les démarches dans l’ordre",
+      "jaf": "Saisir le juge aux affaires familiales (JAF)",
+      "pension": "Pension alimentaire impayée : la Caf et l’ARIPA",
+      "mediation": "Trouver une médiation familiale en Guyane"
+    }
   },
   "pwa": {
     "title": "Disponible dès maintenant en PWA",
@@ -360,7 +367,12 @@
     "q5": "Puis-je partager des informations avec l’autre parent ?",
     "a5": "Oui, avec « Parents liés ». Vous invitez l’autre parent et choisissez ce que vous partagez pour chaque enfant : fiche, calendrier, documents ou dépenses. Votre Journal, le Coach IA et vos documents non partagés restent privés.",
     "q6": "Puis-je résilier mon abonnement à tout moment ?",
-    "a6": "Oui. Les formules payantes sont sans engagement et se résilient depuis votre profil. Vous gardez l’accès jusqu’à la fin de la période payée, puis vos données restent consultables en offre gratuite."
+    "a6": "Oui. Les formules payantes sont sans engagement et se résilient depuis votre profil. Vous gardez l’accès jusqu’à la fin de la période payée, puis vos données restent consultables en offre gratuite.",
+    "q7": "Qu’est-ce qu’une application de coparentalité ?",
+    "a7": "C’est un espace partagé entre parents séparés pour organiser la vie de l’enfant : calendrier de garde, dépenses à partager, santé, école et documents importants. Lien Parental y ajoute un Guide des démarches par territoire (Guyane, Martinique, Guadeloupe, La Réunion, Mayotte, France métropolitaine) et un Coach IA.",
+    "q8": "Lien Parental aide-t-il pour la garde alternée, la pension alimentaire ou le JAF ?",
+    "a8": "Oui, pour s’organiser et préparer ses démarches. L’agenda partagé suit votre rythme de garde (une semaine sur deux, 2-2-3…), les dépenses gardent la trace des frais et des remboursements, et le dossier JAF rassemble les pièces utiles. Le Guide explique quand saisir le juge aux affaires familiales, que faire si la pension n’est pas payée (Caf et ARIPA) et où trouver une médiation familiale. Lien Parental ne remplace pas un avocat.",
+    "a8Link": "Parcours « Je viens de me séparer »"
   },
   "finalBanner": {
     "title": "Prêt à simplifier votre quotidien ?",
@@ -579,8 +591,8 @@
     "rootTitle": "Lien Parental : informer, accompagner, préserver le lien parent-enfant",
     "rootDescription": "Lien Parental accompagne les parents séparés : agenda partagé, coffre-fort chiffré, journal, témoignages et Coach parental IA. Données hébergées en Europe.",
     "ogDescription": "Communiquer sereinement, s’organiser facilement, retrouver tout ce qui concerne votre enfant.",
-    "homeTitle": "Lien Parental : tout pour votre enfant, enfin au même endroit",
-    "homeDescription": "L’application des parents séparés : agenda partagé, dépenses, santé des enfants, coffre-fort, dossier JAF, Coach IA et Guide parental. Gratuit pour commencer.",
+    "homeTitle": "Appli de coparentalité pour parents séparés · Lien Parental",
+    "homeDescription": "Calendrier de garde alternée, dépenses partagées, santé, coffre-fort, dossier JAF et guide des démarches, de la Guyane à l’Hexagone. Gratuit pour commencer.",
     "appTitle": "Application"
   },
   "publicAside": {

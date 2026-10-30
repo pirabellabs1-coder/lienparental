@@ -944,7 +944,7 @@
         "logement": "Housing & daily life"
       },
       "landing": {
-        "metaTitle": "Parenting guide: paperwork and benefits",
+        "metaTitle": "Parenting guide: procedures, benefits, separation",
         "metaDescription": "Paperwork, benefits and offices for parents, explained step by step: documents to gather, deadlines, where to go. Guides checked against official sources.",
         "title": "Parents’ paperwork, explained simply",
         "lead": "School, health, benefits, birth, separation, housing: each guide tells you what to do, with which documents, by when and where to go. The information is checked against official sources and dated.",
@@ -962,7 +962,7 @@
         "categoriesTitle": "Topics in the {territory} guide"
       },
       "territory": {
-        "metaTitle": "Parenting guide: {territory}",
+        "metaTitle": "Parenting guide {territory}: procedures and benefits",
         "metaDescription": "{count} practical guides for parents in {territory}: school, health, Caf benefits, birth, separation, housing. Steps, documents and offices, with official sources.",
         "title": "Parenting guide: {territory}",
         "lead": "{count, plural, one {# practical guide} other {# practical guides}} for parents in {territory}, sorted by topic, plus journeys to take the steps in the right order.",
@@ -1030,7 +1030,8 @@
           "text": "With a Lien Parental account, add a reminder, a document or a date from any guide, and track your procedures.",
           "signup": "Create a free account"
         }
-      }
+      },
+      "inTerritory": "{code, select, france {in France} other {in {territory}}}"
     },
     "partners": {
       "page": {

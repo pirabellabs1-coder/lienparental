@@ -944,7 +944,7 @@
         "logement": "Moradia e vida cotidiana"
       },
       "landing": {
-        "metaTitle": "Guia parental: trâmites e auxílios",
+        "metaTitle": "Guia parental: trâmites, auxílios e separação",
         "metaDescription": "Trâmites, auxílios e órgãos para pais, explicados passo a passo: documentos a reunir, prazos, onde ir. Fichas verificadas em fontes oficiais.",
         "title": "Os trâmites dos pais, explicados de forma simples",
         "lead": "Escola, saúde, auxílios, nascimento, separação, moradia: cada ficha diz o que fazer, com quais documentos, em que prazo e onde ir. As informações são verificadas em fontes oficiais e datadas.",
@@ -962,7 +962,7 @@
         "categoriesTitle": "Os temas do guia {territory}"
       },
       "territory": {
-        "metaTitle": "Guia parental: {territory}",
+        "metaTitle": "Guia parental {territory}: trâmites e auxílios",
         "metaDescription": "{count} fichas práticas para pais {code, select, guyane {na {territory}} martinique {na {territory}} reunion {na {territory}} france {na {territory}} other {em {territory}}}: escola, saúde, auxílios da Caf, nascimento, separação, moradia. Etapas, documentos e órgãos, com fontes oficiais.",
         "title": "Guia parental: {territory}",
         "lead": "{count, plural, one {# ficha prática} other {# fichas práticas}} para pais {code, select, guyane {na {territory}} martinique {na {territory}} reunion {na {territory}} france {na {territory}} other {em {territory}}}, organizadas por tema, e percursos para fazer os trâmites na ordem certa.",
@@ -1030,7 +1030,8 @@
           "text": "Com uma conta Lien Parental, adicione um lembrete, um documento ou uma data a partir de cada ficha e acompanhe seus trâmites.",
           "signup": "Criar uma conta grátis"
         }
-      }
+      },
+      "inTerritory": "{code, select, france {na França} guyane {na Guiana Francesa} martinique {na Martinica} reunion {na Reunião} guadeloupe {em Guadalupe} other {em {territory}}}"
     },
     "partners": {
       "page": {
