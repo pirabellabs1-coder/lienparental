@@ -60,19 +60,23 @@ function OrgCard({ p, t }: { p: Partner; t: T }) {
   )
 }
 
-/** Créateur de contenu : photo ronde, nom, thème, réseaux, chevron (maquette). */
+/**
+ * Créateur de contenu : photo ronde, nom, thème, réseaux, chevron (maquette).
+ * Mobile (2 cartes par ligne) : empilé et centré, pour que le nom et le thème restent lisibles en entier ;
+ * à partir de sm, photo à gauche et texte à droite.
+ */
 function CreatorCard({ p, t }: { p: Partner; t: T }) {
   return (
-    <li className={cn(SLOT, TILE, 'relative flex items-center gap-3 p-3 sm:p-4')}>
-      {p.demo && <span className={cn(EXAMPLE, '-top-2 right-3')}>{t('example')}</span>}
-      <span className="relative block h-14 w-14 shrink-0 overflow-hidden rounded-full sm:h-16 sm:w-16">
+    <li className={cn(SLOT, TILE, 'relative flex flex-col items-center gap-2 px-2.5 pb-3 pt-5 text-center sm:flex-row sm:gap-3 sm:p-4 sm:text-left')}>
+      {p.demo && <span className={cn(EXAMPLE, '-top-2 right-1/2 translate-x-1/2 sm:right-3 sm:translate-x-0')}>{t('example')}</span>}
+      <span className="relative block h-12 w-12 shrink-0 overflow-hidden rounded-full sm:h-16 sm:w-16">
         <Image src={p.image} alt="" fill sizes="64px" className="object-cover" />
       </span>
-      <span className="min-w-0 flex-1">
-        <Name p={p} t={t} className="line-clamp-2 text-[14px] font-bold leading-tight text-night-900" />
-        {p.tagline && <span className="mt-0.5 block truncate text-[13px] text-night-600">{p.tagline}</span>}
+      <span className="flex min-w-0 flex-1 flex-col items-center sm:items-start">
+        <Name p={p} t={t} className="line-clamp-2 text-[13.5px] font-bold leading-tight text-night-900 [text-wrap:balance] sm:text-[14px]" />
+        {p.tagline && <span className="mt-0.5 line-clamp-2 text-[12px] leading-snug text-night-600 sm:text-[13px]">{p.tagline}</span>}
         {p.socials?.length ? (
-          <span className="mt-1.5 flex gap-0.5">
+          <span className="mt-1 flex justify-center gap-0.5 sm:mt-1.5 sm:justify-start">
             {p.socials.map((s) => {
               const Icon = SOCIAL_ICON[s.network]
               // Exemple fictif : icônes seules, aucun lien vers un compte réel.
@@ -86,7 +90,7 @@ function CreatorCard({ p, t }: { p: Partner; t: T }) {
           </span>
         ) : null}
       </span>
-      <ChevronRight aria-hidden className="h-4 w-4 shrink-0 text-night-500" />
+      <ChevronRight aria-hidden className="hidden h-4 w-4 shrink-0 text-night-500 sm:block" />
     </li>
   )
 }
