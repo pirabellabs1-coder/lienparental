@@ -65,6 +65,8 @@ export function VaultGate({ initialStatus, blocked, context = 'coffre', showLock
   const tc = useTranslations('vault.common')
   const [status, setStatusState] = useState<VaultStatus | null>(initialStatus)
   const [notice, setNotice] = useState<string | null>(null)
+  // Raison du dernier verrouillage (null : arrivée sur la page) ; décide si l'empreinte se lance seule.
+  const [lockReason, setLockReason] = useState<LockReason | null>(null)
   const [announce, setAnnounce] = useState('')
   const lastActivity = useRef(Date.now())
   const lastTouch = useRef(Date.now())
@@ -78,6 +80,7 @@ export function VaultGate({ initialStatus, blocked, context = 'coffre', showLock
   const lock = useCallback((reason: LockReason = 'manual') => {
     setStatusState((s) => (s && s.enabled ? { ...s, unlocked: false, expiresAt: null } : s))
     setNotice(t(`notices.${NOTICE_KEYS[reason]}`))
+    setLockReason(reason)
     setAnnounce(t('locked'))
     if (reason !== 'other-tab') channel.current?.postMessage({ type: 'locked' })
     // Puis retire les écrans du coffre de l'arbre rendu côté serveur, une fois le cookie effacé.
@@ -191,7 +194,15 @@ export function VaultGate({ initialStatus, blocked, context = 'coffre', showLock
     return (
       <VaultContext.Provider value={ctx}>
         {live}
-        <VaultUnlockScreen status={status} onUnlocked={onUnlocked} context={context} notice={notice} />
+        <VaultUnlockScreen
+          // Nouveau verrouillage = nouvel écran : l'empreinte automatique peut se relancer.
+          key={lockReason ?? 'arrival'}
+          status={status}
+          onUnlocked={onUnlocked}
+          context={context}
+          notice={notice}
+          autoBiometric={lockReason === null || lockReason === 'background' || lockReason === 'expired'}
+        />
       </VaultContext.Provider>
     )
   }
