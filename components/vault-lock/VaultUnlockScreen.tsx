@@ -28,6 +28,11 @@ type Props = {
   context?: 'coffre' | 'settings'
   /** Message affiché après un verrouillage automatique. */
   notice?: string | null
+  /**
+   * Lancer l'empreinte dès l'affichage (empreinte enregistrée) : à l'arrivée sur le coffre ou au retour
+   * sur l'appli, pas après un verrouillage volontaire. Refuser l'invite laisse simplement le code.
+   */
+  autoBiometric?: boolean
 }
 
 function initialMode(s: VaultStatus): Mode {
@@ -47,7 +52,7 @@ function useCountdown(until: number | null) {
   return { left, label: `${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}` }
 }
 
-export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', notice }: Props) {
+export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', notice, autoBiometric = false }: Props) {
   const t = useTranslations('vault.lock.unlock')
   const te = useTranslations('vault.lock.errors')
   const tc = useTranslations('vault.common')
@@ -150,7 +155,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
     }
   }, [fail, onUnlocked, setupFirst, t])
 
-  const unlockWithBiometric = async () => {
+  const unlockWithBiometric = async (auto = false) => {
     setBusy(true)
     setError(null)
     try {
@@ -166,11 +171,29 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
         }
       }
     } catch (e) {
+      // Invite automatique refusée ou bloquée par le navigateur (pas de geste) : aucun message, le code reste là.
+      if (auto && e instanceof WebauthnError && e.kind === 'cancelled') {
+        pinRef.current?.focus()
+        return
+      }
       fail(e)
     } finally {
       setBusy(false)
     }
   }
+
+  // Empreinte proposée d'elle-même à l'arrivée, une seule fois par affichage (StrictMode monte deux fois).
+  const autoTried = useRef(false)
+  const hasRealPasskey = status.passkeys.some((p) => !p.simulated)
+  useEffect(() => {
+    if (!autoBiometric || autoTried.current || status.demo || !hasRealPasskey || !webauthnSupported()) return
+    if (initialMode(status) !== 'pin' || (status.pinLockedUntil ?? 0) > Date.now()) return
+    if (document.visibilityState !== 'visible') return
+    autoTried.current = true
+    void unlockWithBiometric(true)
+    // Au montage uniquement : `unlockWithBiometric` change à chaque rendu.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoBiometric, hasRealPasskey, status.demo])
 
   const switchTo = (m: Mode) => {
     setMode(m)
@@ -190,10 +213,11 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
   const bioButton = bioAvailable && mode === 'pin' ? (
     <button
       type="button"
-      onClick={unlockWithBiometric}
+      onClick={() => void unlockWithBiometric()}
       disabled={busy}
       aria-label={t('bioAria')}
-      className="inline-flex h-[60px] w-[60px] items-center justify-center rounded-full text-leaf-600 transition-colors hover:bg-leaf-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2 disabled:opacity-40 sm:h-16 sm:w-16"
+      title={t('bioButton')}
+      className="inline-flex h-[60px] w-[60px] items-center justify-center rounded-full bg-leaf-50 text-leaf-600 ring-1 ring-leaf-200 transition-colors hover:bg-leaf-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 focus-visible:ring-offset-2 disabled:opacity-40 sm:h-16 sm:w-16"
     >
       <Fingerprint className="h-8 w-8" aria-hidden="true" />
     </button>
@@ -233,7 +257,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
                 <GoogleButton next={pathname ?? '/app/coffre'} />
               ) : mode === 'pin' && !status.hasPin ? (
                 // Ni code ni mot de passe, mais une empreinte : seul le bouton empreinte est proposé.
-                <button type="button" onClick={unlockWithBiometric} disabled={busy} className={btn.primary}>
+                <button type="button" onClick={() => void unlockWithBiometric()} disabled={busy} className={btn.primary}>
                   <Fingerprint className="h-5 w-5" aria-hidden="true" /> {t('useBio')}
                 </button>
               ) : (
@@ -281,7 +305,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
 
         <div className="mt-2 flex w-full flex-col items-center gap-1">
           {bioAvailable && mode === 'pin' && status.hasPin && (
-            <button type="button" onClick={unlockWithBiometric} disabled={busy} className={cn(btn.secondary, 'mb-2')}>
+            <button type="button" onClick={() => void unlockWithBiometric()} disabled={busy} className={cn(btn.secondary, 'mb-2')}>
               <Fingerprint className="h-5 w-5 text-leaf-600" aria-hidden="true" /> {t('bioButton')}
             </button>
           )}
