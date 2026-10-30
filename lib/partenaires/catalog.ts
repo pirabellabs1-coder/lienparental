@@ -34,8 +34,8 @@ export const PARTNERS: Partner[] = [
 
 /**
  * Logos et avatars FICTIFS (public/partenaires/demo/) : aucun organisme ni aucune personne réels.
- * Montrés hors production seulement (local, préversions Vercel), pour juger la mise en page et le
- * défilement tant qu'aucun partenariat n'est signé.
+ * Montrés hors production (local, préversions Vercel), et en production seulement si
+ * NEXT_PUBLIC_PARTNERS_DEMO=on (démonstration client), toujours avec le badge « Exemple ».
  */
 export const DEMO_PARTNERS: Partner[] = [
   { name: 'Agence territoriale des Familles', category: 'institution', image: '/partenaires/demo/institution-1.svg', demo: true },
@@ -78,6 +78,12 @@ export function displayedPartners(category: PartnerCategory, showDemo: boolean, 
   return list.length || !showDemo ? list : partnersOf(category, DEMO_PARTNERS)
 }
 
-/** Exemples autorisés ? Jamais en production Vercel ; oui en local et sur les préversions. */
-export const demoPartnersAllowed = (env: Record<string, string | undefined> = process.env): boolean =>
-  env.NEXT_PUBLIC_PARTNERS_DEMO === 'off' ? false : env.VERCEL_ENV !== 'production'
+/**
+ * Exemples autorisés ? Oui en local et sur les préversions ; en production Vercel, seulement si
+ * NEXT_PUBLIC_PARTNERS_DEMO=on (à retirer dès les premiers partenariats signés). « off » les coupe partout.
+ */
+export const demoPartnersAllowed = (env: Record<string, string | undefined> = process.env): boolean => {
+  if (env.NEXT_PUBLIC_PARTNERS_DEMO === 'off') return false
+  if (env.NEXT_PUBLIC_PARTNERS_DEMO === 'on') return true
+  return env.VERCEL_ENV !== 'production'
+}

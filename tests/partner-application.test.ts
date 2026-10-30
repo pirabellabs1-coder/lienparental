@@ -94,8 +94,9 @@ test('schéma : caractères invisibles et d’inversion retirés ; objet sans do
   assert.ok(subject.endsWith('Familles & Co'))
 })
 
-test('logos d’exemple : jamais en production, et jamais à la place d’un vrai partenaire', () => {
+test('logos d’exemple : en production seulement sur demande, et jamais à la place d’un vrai partenaire', () => {
   assert.equal(demoPartnersAllowed({ VERCEL_ENV: 'production' }), false)
+  assert.equal(demoPartnersAllowed({ VERCEL_ENV: 'production', NEXT_PUBLIC_PARTNERS_DEMO: 'on' }), true)
   assert.equal(demoPartnersAllowed({ VERCEL_ENV: 'preview' }), true)
   assert.equal(demoPartnersAllowed({}), true) // local
   assert.equal(demoPartnersAllowed({ VERCEL_ENV: 'preview', NEXT_PUBLIC_PARTNERS_DEMO: 'off' }), false)
