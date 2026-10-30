@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl'
-import { CheckCheck, Database } from 'lucide-react'
+import { CheckCheck, Database, Loader2, Square, Volume2 } from 'lucide-react'
 import type { CoachChatMessage } from '@/lib/mock-data'
 import { cn } from '@/lib/cn'
 import { RobotMascot } from './RobotMascot'
@@ -96,9 +96,12 @@ export function RichText({ text, bullets }: { text: string; bullets?: string[] }
   )
 }
 
+/** Lecture à voix haute d'une réponse (bouton sous la bulle). */
+export type BubbleSpeech = { playing: boolean; loading: boolean; onToggle: () => void }
+
 // Bulle de discussion Coach IA : utilisateur à droite (violet clair),
 // IA à gauche (carte blanche + avatar robot).
-export function ChatBubble({ message, live = false }: { message: ChatMessage; live?: boolean }) {
+export function ChatBubble({ message, live = false, speech }: { message: ChatMessage; live?: boolean; speech?: BubbleSpeech }) {
   const t = useTranslations('coach.chat')
   if (message.from === 'me') {
     return (
@@ -143,10 +146,34 @@ export function ChatBubble({ message, live = false }: { message: ChatMessage; li
         {message.streaming && !waiting && (
           <span aria-hidden="true" className="ml-0.5 inline-block h-4 w-1.5 translate-y-0.5 rounded-sm bg-iris-400 motion-safe:animate-pulse" />
         )}
-        {message.time && (
-          <p className="mt-1 text-right text-[11px] text-night-500">
-            <time>{message.time}</time>
-          </p>
+        {(message.time || speech) && (
+          <div className="mt-1 flex items-center justify-between gap-3">
+            {speech ? (
+              <button
+                type="button"
+                onClick={speech.onToggle}
+                aria-pressed={speech.playing}
+                className={cn(
+                  '-ml-2 inline-flex min-h-[36px] items-center gap-1.5 rounded-full px-2.5 text-[12px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500',
+                  speech.playing || speech.loading ? 'bg-iris-50 text-iris-700' : 'text-iris-600 hover:bg-iris-50',
+                )}
+              >
+                {speech.loading ? (
+                  <Loader2 className="h-4 w-4 motion-safe:animate-spin" aria-hidden="true" />
+                ) : speech.playing ? (
+                  <Square className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
+                ) : (
+                  <Volume2 className="h-4 w-4" aria-hidden="true" />
+                )}
+                {speech.loading ? t('listenLoading') : speech.playing ? t('listenStop') : t('listen')}
+              </button>
+            ) : <span />}
+            {message.time && (
+              <p className="text-right text-[11px] text-night-500">
+                <time>{message.time}</time>
+              </p>
+            )}
+          </div>
         )}
       </div>
     </li>

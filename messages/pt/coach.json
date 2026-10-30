@@ -60,7 +60,23 @@
       "upgradePlan": "Mudar para o Premium",
       "seePlans": "Ver os planos",
       "attach": "Anexar uma imagem ou um documento",
-      "attachNote": "O Coach analisa o arquivo (a sua pergunta em curso o acompanha) e depois você pode conversar sobre ele. O custo depende do tipo de arquivo."
+      "attachNote": "O Coach analisa o arquivo (a sua pergunta em curso o acompanha) e depois você pode conversar sobre ele. O custo depende do tipo de arquivo.",
+      "listen": "Ler em voz alta",
+      "listenStop": "Parar a leitura",
+      "listenLoading": "Preparando…",
+      "voiceTitle": "Voz do Coach",
+      "voiceDesc": "Para ouvir as respostas em voz alta.",
+      "voiceGroup": {
+        "female": "Vozes femininas",
+        "male": "Vozes masculinas"
+      },
+      "voices": {
+        "koraly": "Koraly",
+        "lucie": "Lucie",
+        "marcel": "Marcel",
+        "fabien": "Fabien"
+      },
+      "voiceFallback": "A voz do Coach está indisponível no momento: leitura com a voz do seu aparelho."
     },
     "list": {
       "opFailed": "A operação falhou. Tente novamente.",
