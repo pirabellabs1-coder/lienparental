@@ -76,7 +76,12 @@
         "marcel": "Marcel",
         "fabien": "Fabien"
       },
-      "voiceFallback": "A voz do Coach está indisponível no momento: leitura com a voz do seu aparelho."
+      "voiceFallback": "A voz do Coach está indisponível no momento: leitura com a voz do seu aparelho.",
+      "options": "Anexar um arquivo e opções (voz, informações médicas)",
+      "attachImage": "Imagem",
+      "attachDoc": "Documento",
+      "medicalOn": "Informações médicas incluídas na próxima pergunta",
+      "noCreditsShort": "Sem créditos para fazer uma pergunta."
     },
     "list": {
       "opFailed": "A operação falhou. Tente novamente.",

@@ -1,19 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { ArrowLeft } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { CoachChat } from '@/components/coach/CoachChat'
 import type { ChatMessage } from '@/components/coach/ChatBubble'
 import type { ChatLogTurn } from '@/lib/ai/analyses'
-import { btn } from '@/components/coach/ui'
 import { loadAnalysis } from '@/components/coach/session'
 import { mockCoachChat } from '@/lib/mock-data'
 import { LIVE } from '@/lib/data/core'
 import { intlLocale } from '@/lib/i18n/config'
+
+const SUGGESTIONS = ['month', 'jaf', 'custody', 'owed'] as const
 
 type Props = { aiEnabled: boolean; initialQuestion?: string; analysisId?: string }
 
@@ -24,6 +23,7 @@ function toBubble(m: ChatLogTurn, i: number, locale: string): ChatMessage {
 
 export function DiscussionClient({ aiEnabled, initialQuestion, analysisId }: Props) {
   const t = useTranslations('coach.discussion')
+  const ta = useTranslations('coach.assistant')
   const router = useRouter()
   const locale = useLocale()
   // undefined = pas encore résolu (lecture du sessionStorage côté client).
@@ -72,7 +72,7 @@ export function DiscussionClient({ aiEnabled, initialQuestion, analysisId }: Pro
         showBell={false}
       />
 
-      <div className="w-full px-4 pb-6 pt-4">
+      <div className="w-full px-4 pb-2 pt-4">
         {target === undefined ? (
           <div className="h-24 animate-pulse rounded-xl2 bg-night-50" aria-busy="true" />
         ) : (
@@ -85,19 +85,11 @@ export function DiscussionClient({ aiEnabled, initialQuestion, analysisId }: Pro
             inputLabel={aboutAnalysis ? t('inputAnalysis') : t('inputCoach')}
             conversationLabel={t('conversationLabel')}
             persistKey={aboutAnalysis || question ? undefined : 'discussion'}
+            // Conversation libre : idées de questions en bulles au-dessus de la saisie (retour à la réponse : flèche du haut).
+            suggestions={aboutAnalysis ? [] : SUGGESTIONS.map((k) => ta(`suggestions.${k}`))}
           />
         )}
 
-        {aboutAnalysis ? (
-          <Link href="/app/coach/reponse" className={`${btn.secondary} mt-4`}>
-            <ArrowLeft className="h-5 w-5" aria-hidden="true" />
-            {t('backToResponse')}
-          </Link>
-        ) : (
-          <Link href="/app/coach/assistant" className={`${btn.secondary} mt-4`}>
-            {t('seeSuggestions')}
-          </Link>
-        )}
       </div>
     </>
   )

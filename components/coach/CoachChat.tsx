@@ -4,7 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { Coins, FileImage, FileText, HeartPulse, Paperclip, Send, Square, Volume2 } from 'lucide-react'
+import { Coins, FileImage, FileText, HeartPulse, Plus, Send, Square, Volume2 } from 'lucide-react'
 import { ChatBubble, type ChatMessage } from './ChatBubble'
 import { DemoNote, LegalNote } from './ui'
 import { errorMessage, readSse } from './sse-client'
@@ -274,11 +274,18 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
 
   const hasUserMessage = messages.some((m) => m.from === 'me')
 
-  return (
-    <div>
-      {demo && <DemoNote className="mb-3" />}
+  const outOfCredits = Boolean(blocked || (credits && credits.total < chatCost))
+  const panelClose = () => setAttachOpen(false)
 
-      <ol aria-label={conversationLabel} className="space-y-4">
+  // Mise en page « messagerie » : la conversation occupe l'écran, la zone de saisie reste collée en bas
+  // (au-dessus de la barre d'onglets sur mobile) ; pièces jointes, voix et informations médicales sont
+  // regroupées dans le menu « + ».
+  return (
+    <div className="flex min-h-[calc(100dvh-12rem)] flex-col lg:min-h-[calc(100dvh-10rem)]">
+      {demo && <DemoNote className="mb-3" />}
+      <LegalNote className="mb-4 text-center" />
+
+      <ol aria-label={conversationLabel} className="flex-1 space-y-4 pb-4">
         {messages.map((m) => (
           <ChatBubble
             key={m.id}
@@ -298,63 +305,123 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
         {status}
       </p>
 
-      {!hasUserMessage && suggestions.length > 0 && (
-        <div className="mt-5">
-          <h2 className="text-[13px] font-bold text-night-900">{t('suggestions')}</h2>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {suggestions.map((s) => (
-              <li key={s}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    void send(s)
-                    // La liste disparaît après le premier envoi : on garde le focus dans le champ.
-                    inputRef.current?.focus()
-                  }}
-                  disabled={streaming}
-                  className="min-h-[44px] rounded-xl border border-iris-200 bg-iris-50/60 px-3.5 py-2 text-left text-[13px] font-medium text-night-900 transition hover:border-iris-300 hover:bg-iris-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500 disabled:opacity-50"
-                >
-                  {s}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <form
+        onSubmit={submit}
+        className="sticky z-20 -mx-4 border-t border-night-100 bg-white/95 px-3 pb-2 pt-2 backdrop-blur [bottom:calc(4rem+env(safe-area-inset-bottom,0px))] lg:mx-0 lg:rounded-2xl lg:border lg:px-3 lg:[bottom:1rem]"
+      >
+        {!hasUserMessage && suggestions.length > 0 && (
+          <div className="mb-2">
+            <h2 className="sr-only">{t('suggestions')}</h2>
+            <ul className="-mx-3 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none]">
+              {suggestions.map((s) => (
+                <li key={s} className="shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      void send(s)
+                      inputRef.current?.focus()
+                    }}
+                    disabled={streaming}
+                    className="min-h-[40px] max-w-[260px] truncate rounded-full border border-iris-200 bg-iris-50/70 px-3.5 text-[13px] font-medium text-night-900 transition hover:border-iris-300 hover:bg-iris-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500 disabled:opacity-50"
+                  >
+                    {s}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-      <form onSubmit={submit} className="mt-6">
-        <label htmlFor={inputId} className="sr-only">
-          {inputLabel}
-        </label>
+        {outOfCredits ? (
+          <div role="alert" className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl bg-alert-50 px-3 py-2 text-[12.5px] leading-snug text-night-900">
+            <span className="min-w-0 flex-1">{blocked ?? t('noCreditsShort')}</span>
+            <Link href="/app/coach/credits#packs" className="inline-flex items-center gap-1 font-semibold underline underline-offset-2">
+              <Coins className="h-4 w-4" aria-hidden="true" />
+              {t('buyCredits')}
+            </Link>
+            <Link href="/app/abonnement" className="font-semibold underline underline-offset-2">{upgrade ? t('upgradePlan') : t('seePlans')}</Link>
+          </div>
+        ) : credits && credits.total <= chatCost * 3 ? (
+          <p role="status" className="mb-2 rounded-xl bg-gold-50 px-3 py-1.5 text-[12px] font-semibold text-gold-900">
+            {t('lowCredits', { total: credits.total })}{' '}
+            <Link href="/app/coach/credits#packs" className="underline underline-offset-2">{t('buyCredits')}</Link>
+          </p>
+        ) : null}
+
         {attachOpen && (
-          <div id={attachId} className="mb-2 rounded-xl2 border border-iris-100 bg-iris-50/50 p-2">
-            <div className="grid gap-2 sm:grid-cols-2">
+          <div id={attachId} className="mb-2 space-y-2 rounded-2xl border border-night-100 bg-white p-2 shadow-soft">
+            <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => imageRef.current?.click()}
                 disabled={streaming}
-                className="flex min-h-[48px] items-center gap-3 rounded-xl bg-white px-3 py-2 text-left ring-1 ring-night-100 transition hover:ring-iris-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500 disabled:opacity-50"
+                className="flex min-h-[48px] items-center gap-2.5 rounded-xl bg-iris-50/60 px-3 py-2 text-left transition hover:bg-iris-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500 disabled:opacity-50"
               >
                 <FileImage className="h-5 w-5 shrink-0 text-iris-600" aria-hidden="true" />
                 <span className="min-w-0">
-                  <span className="block text-[13px] font-semibold text-night-900">{th('addCapture')}</span>
-                  <span className="block text-[11.5px] text-night-600">{th('addCaptureHint')}</span>
+                  <span className="block text-[13px] font-semibold leading-tight text-night-900">{t('attachImage')}</span>
+                  <span className="block text-[11px] text-night-600">{th('addCaptureHint')}</span>
                 </span>
               </button>
               <button
                 type="button"
                 onClick={() => docRef.current?.click()}
                 disabled={streaming}
-                className="flex min-h-[48px] items-center gap-3 rounded-xl bg-white px-3 py-2 text-left ring-1 ring-night-100 transition hover:ring-iris-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500 disabled:opacity-50"
+                className="flex min-h-[48px] items-center gap-2.5 rounded-xl bg-iris-50/60 px-3 py-2 text-left transition hover:bg-iris-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500 disabled:opacity-50"
               >
                 <FileText className="h-5 w-5 shrink-0 text-iris-600" aria-hidden="true" />
                 <span className="min-w-0">
-                  <span className="block text-[13px] font-semibold text-night-900">{th('addDoc')}</span>
-                  <span className="block text-[11.5px] text-night-600">{th('addDocHint')}</span>
+                  <span className="block text-[13px] font-semibold leading-tight text-night-900">{t('attachDoc')}</span>
+                  <span className="block text-[11px] text-night-600">{th('addDocHint')}</span>
                 </span>
               </button>
             </div>
-            <p className="mt-2 px-1 text-[11.5px] leading-relaxed text-night-600">{t('attachNote')}</p>
+            <p className="px-1 text-[11px] leading-snug text-night-600">{t('attachNote')}</p>
+
+            <div className="flex items-center justify-between gap-3 border-t border-night-100 px-1 pt-2">
+              <label htmlFor={voiceId} className="flex min-w-0 items-center gap-2 text-[13px] font-semibold text-night-900">
+                <Volume2 className="h-4 w-4 shrink-0 text-night-700" aria-hidden="true" />
+                {t('voiceTitle')}
+              </label>
+              <select
+                id={voiceId}
+                value={speechCtl.voice}
+                onChange={(e) => speechCtl.setVoice(e.target.value as CoachVoiceKey)}
+                className="min-h-[40px] rounded-lg border border-night-200 bg-white px-2.5 text-[13px] font-semibold text-night-900 focus:border-iris-400 focus:outline-none focus:ring-2 focus:ring-iris-200"
+              >
+                {(['female', 'male'] as const).map((g) => (
+                  <optgroup key={g} label={t(`voiceGroup.${g}`)}>
+                    {COACH_VOICES.filter((v) => v.gender === g).map((v) => (
+                      <option key={v.key} value={v.key}>{t(`voices.${v.key}`)}</option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </div>
+
+            <label htmlFor={medId} className="flex min-h-[44px] cursor-pointer items-center justify-between gap-3 border-t border-night-100 px-1 pt-2">
+              <span className="flex min-w-0 items-start gap-2">
+                <HeartPulse className="mt-0.5 h-4 w-4 shrink-0 text-night-700" aria-hidden="true" />
+                <span>
+                  <span className="block text-[13px] font-semibold text-night-900">{t('medicalTitle')}</span>
+                  <span id={`${medId}-desc`} className="block text-[11px] text-night-600">{t('medicalDesc')}</span>
+                </span>
+              </span>
+              <span className="relative inline-flex shrink-0">
+                <input
+                  id={medId}
+                  type="checkbox"
+                  role="switch"
+                  checked={includeMedical}
+                  onChange={(e) => setIncludeMedical(e.target.checked)}
+                  aria-describedby={`${medId}-desc`}
+                  className="peer sr-only"
+                />
+                <span aria-hidden="true" className="h-7 w-12 rounded-full bg-night-200 transition-colors peer-checked:bg-leaf-500 peer-focus-visible:ring-2 peer-focus-visible:ring-leaf-400 peer-focus-visible:ring-offset-2" />
+                <span aria-hidden="true" className={cn('absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow-soft transition-transform duration-200 motion-reduce:transition-none', includeMedical && 'translate-x-5')} />
+              </span>
+            </label>
+
             <input
               ref={imageRef}
               type="file"
@@ -363,6 +430,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
               tabIndex={-1}
               aria-hidden="true"
               onChange={(e) => {
+                panelClose()
                 void onFile(e.target.files?.[0], 'image')
                 e.target.value = ''
               }}
@@ -375,26 +443,38 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
               tabIndex={-1}
               aria-hidden="true"
               onChange={(e) => {
+                panelClose()
                 void onFile(e.target.files?.[0], 'doc')
                 e.target.value = ''
               }}
             />
           </div>
         )}
-        <div className="flex items-end gap-2 rounded-xl2 border border-night-100 bg-night-50/40 py-1.5 pl-1.5 pr-1.5 focus-within:border-iris-300">
+
+        {includeMedical && !attachOpen && (
+          <p className="mb-1.5 inline-flex items-center gap-1.5 rounded-full bg-leaf-50 px-3 py-1 text-[12px] font-semibold text-leaf-700">
+            <HeartPulse className="h-3.5 w-3.5" aria-hidden="true" />
+            {t('medicalOn')}
+          </p>
+        )}
+
+        <label htmlFor={inputId} className="sr-only">
+          {inputLabel}
+        </label>
+        <div className="flex items-end gap-1.5">
           <button
             type="button"
             onClick={() => setAttachOpen((o) => !o)}
             aria-expanded={attachOpen}
             aria-controls={attachOpen ? attachId : undefined}
-            aria-label={t('attach')}
-            title={t('attach')}
+            aria-label={t('options')}
+            title={t('options')}
             className={cn(
-              'grid h-11 w-11 shrink-0 place-items-center rounded-full text-night-700 transition hover:bg-iris-50 hover:text-iris-600 active:scale-95',
-              attachOpen && 'bg-iris-50 text-iris-600',
+              'grid h-11 w-11 shrink-0 place-items-center rounded-full text-iris-600 transition hover:bg-iris-50 active:scale-95',
+              attachOpen && 'bg-iris-100',
             )}
           >
-            <Paperclip className="h-5 w-5" aria-hidden="true" />
+            <Plus className={cn('h-6 w-6 transition-transform duration-200 motion-reduce:transition-none', attachOpen && 'rotate-45')} aria-hidden="true" />
           </button>
           <textarea
             ref={inputRef}
@@ -407,7 +487,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
             placeholder={placeholder ?? t('placeholder')}
             autoComplete="off"
             aria-describedby={hintId}
-            className="block min-h-[44px] min-w-0 flex-1 resize-none border-0 bg-transparent py-2.5 text-[14px] leading-relaxed text-night-900 placeholder:text-night-400 focus:outline-none focus:ring-0"
+            className="block max-h-40 min-h-[44px] min-w-0 flex-1 resize-none rounded-[22px] border border-night-100 bg-night-50/60 px-4 py-2.5 text-[15px] leading-snug text-night-900 placeholder:text-night-400 focus:border-iris-300 focus:bg-white focus:outline-none focus:ring-0"
           />
           {streaming ? (
             <button
@@ -421,98 +501,28 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
           ) : (
             <button
               type="submit"
-              disabled={!q.trim()}
+              disabled={!q.trim() || outOfCredits}
               aria-label={t('send')}
-              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-iris-100 text-iris-600 transition hover:bg-iris-200 active:scale-95 disabled:opacity-50"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-iris-600 text-white transition hover:bg-iris-700 active:scale-95 disabled:bg-iris-100 disabled:text-iris-400"
             >
               <Send className="h-5 w-5" aria-hidden="true" />
             </button>
           )}
         </div>
         {fileError && (
-          <p role="alert" className="mt-1.5 text-[12px] font-medium text-alert-600">
+          <p role="alert" className="mt-1 px-1 text-[12px] font-medium text-alert-600">
             {fileError}
           </p>
         )}
-        <p id={hintId} className="mt-1.5 text-[11.5px] text-night-500">
-          {t('hint')} {t('costHint', { count: chatCost })}
+        {speechCtl.fallback && (
+          <p role="status" className="mt-1 px-1 text-[11px] leading-snug text-night-600">{t('voiceFallback')}</p>
+        )}
+        <p id={hintId} className="mt-1 truncate px-1 text-[11px] text-night-500">
+          <span className="sr-only">{t('hint')} </span>
+          {t('costHint', { count: chatCost })}
           {credits ? ` ${t('balanceHint', { total: credits.total })}` : ''}
         </p>
-        {(blocked || (credits && credits.total < chatCost)) ? (
-          <div role="alert" className="mt-3 rounded-xl2 border border-alert-200 bg-alert-50 p-3 text-[12.5px] leading-relaxed text-night-900">
-            <p>{blocked ?? t('noCredits')}</p>
-            <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-              <Link href="/app/coach/credits#packs" className="inline-flex items-center gap-1.5 font-semibold underline underline-offset-2">
-                <Coins className="h-4 w-4" aria-hidden="true" />
-                {t('buyCredits')}
-              </Link>
-              <Link href="/app/abonnement" className="font-semibold underline underline-offset-2">{upgrade ? t('upgradePlan') : t('seePlans')}</Link>
-            </p>
-          </div>
-        ) : credits && credits.total <= chatCost * 3 ? (
-          <p role="status" className="mt-3 rounded-xl2 bg-gold-50 px-3 py-2.5 text-[12.5px] font-semibold leading-relaxed text-gold-900">
-            {t('lowCredits', { total: credits.total })}{' '}
-            <Link href="/app/coach/credits#packs" className="underline underline-offset-2">{t('buyCredits')}</Link>
-          </p>
-        ) : null}
-
-        <div className="mt-3 flex min-h-[48px] flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-xl2 border border-night-100 bg-white px-4 py-2.5">
-          <label htmlFor={voiceId} className="flex min-w-0 items-center gap-2.5">
-            <Volume2 className="h-5 w-5 shrink-0 text-night-700" aria-hidden="true" />
-            <span>
-              <span className="block text-[13px] font-semibold text-night-900">{t('voiceTitle')}</span>
-              <span className="block text-[11.5px] text-night-600">{t('voiceDesc')}</span>
-            </span>
-          </label>
-          <select
-            id={voiceId}
-            value={speechCtl.voice}
-            onChange={(e) => speechCtl.setVoice(e.target.value as CoachVoiceKey)}
-            className="min-h-[44px] rounded-xl border border-night-200 bg-white px-3 text-[13px] font-semibold text-night-900 focus:border-iris-400 focus:outline-none focus:ring-2 focus:ring-iris-200"
-          >
-            {(['female', 'male'] as const).map((g) => (
-              <optgroup key={g} label={t(`voiceGroup.${g}`)}>
-                {COACH_VOICES.filter((v) => v.gender === g).map((v) => (
-                  <option key={v.key} value={v.key}>{t(`voices.${v.key}`)}</option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
-          {speechCtl.fallback && (
-            <p role="status" className="w-full text-[11.5px] leading-snug text-night-600">{t('voiceFallback')}</p>
-          )}
-        </div>
-
-        <label
-          htmlFor={medId}
-          className="mt-3 flex min-h-[48px] cursor-pointer items-center justify-between gap-4 rounded-xl2 border border-night-100 bg-white px-4 py-2.5"
-        >
-          <span className="flex min-w-0 items-start gap-2.5">
-            <HeartPulse className="mt-0.5 h-5 w-5 shrink-0 text-night-700" aria-hidden="true" />
-            <span>
-              <span className="block text-[13px] font-semibold text-night-900">{t('medicalTitle')}</span>
-              <span id={`${medId}-desc`} className="block text-[11.5px] text-night-600">
-                {t('medicalDesc')}
-              </span>
-            </span>
-          </span>
-          <span className="relative inline-flex shrink-0">
-            <input
-              id={medId}
-              type="checkbox"
-              role="switch"
-              checked={includeMedical}
-              onChange={(e) => setIncludeMedical(e.target.checked)}
-              aria-describedby={`${medId}-desc`}
-              className="peer sr-only"
-            />
-            <span aria-hidden="true" className="h-7 w-12 rounded-full bg-night-200 transition-colors peer-checked:bg-leaf-500 peer-focus-visible:ring-2 peer-focus-visible:ring-leaf-400 peer-focus-visible:ring-offset-2" />
-            <span aria-hidden="true" className={cn('absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow-soft transition-transform duration-200 motion-reduce:transition-none', includeMedical && 'translate-x-5')} />
-          </span>
-        </label>
       </form>
-
-      <LegalNote className="mt-5" />
     </div>
   )
 }
