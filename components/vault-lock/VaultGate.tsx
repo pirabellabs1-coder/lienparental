@@ -17,6 +17,7 @@ import { Loader2, Lock } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import type { VaultStatus } from '@/lib/vault-lock/config'
 import { VaultApiError, vaultApi } from './api'
+import { BiometricOffer } from './BiometricOffer'
 import { VaultUnlockScreen } from './VaultUnlockScreen'
 
 type LockReason = 'manual' | 'inactivity' | 'background' | 'expired' | 'other-tab'
@@ -198,6 +199,8 @@ export function VaultGate({ initialStatus, blocked, context = 'coffre', showLock
   return (
     <VaultContext.Provider value={ctx}>
       {live}
+      {/* Écrans du coffre : proposer l'empreinte sur cet appareil s'il en a une et qu'aucune n'est enregistrée. */}
+      {context === 'coffre' && children && <BiometricOffer status={status} onStatus={setStatus} />}
       {children ?? (
         // Déverrouillé : les écrans arrivent du serveur (router.refresh en cours).
         <div role="status" className="flex min-h-[60dvh] items-center justify-center gap-2 text-[14px] font-semibold text-night-700">
