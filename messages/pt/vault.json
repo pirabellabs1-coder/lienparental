@@ -210,7 +210,17 @@
         "unavailableTitle": "Cofre indisponível",
         "unavailableText": "Não foi possível verificar o bloqueio do cofre. Tente novamente em instantes.",
         "opening": "Abrindo o cofre…",
-        "lockButton": "Bloquear"
+        "lockButton": "Bloquear",
+        "bioOffer": {
+          "title": "Abra o seu cofre com a sua impressão digital",
+          "text": "Mais rápido que o código: Touch ID, Face ID, Windows Hello ou a impressão digital do seu telefone. A sua impressão digital fica no aparelho e nunca é enviada.",
+          "enable": "Ativar a impressão digital",
+          "later": "Mais tarde",
+          "settings": "Configurações",
+          "close": "Fechar a sugestão",
+          "doneTitle": "Impressão digital ativada",
+          "doneText": "Da próxima vez, toque no ícone de impressão digital na tela do cofre. O seu código continua válido."
+        }
       },
       "notice": {
         "defaultWhat": "seus documentos",

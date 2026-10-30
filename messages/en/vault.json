@@ -210,7 +210,17 @@
         "unavailableTitle": "Vault unavailable",
         "unavailableText": "Unable to check the vault lock. Please try again in a moment.",
         "opening": "Opening the vault…",
-        "lockButton": "Lock"
+        "lockButton": "Lock",
+        "bioOffer": {
+          "title": "Open your vault with your fingerprint",
+          "text": "Faster than the code: Touch ID, Face ID, Windows Hello or your phone’s fingerprint. Your fingerprint stays on the device and is never sent.",
+          "enable": "Turn on fingerprint",
+          "later": "Later",
+          "settings": "Settings",
+          "close": "Close this suggestion",
+          "doneTitle": "Fingerprint turned on",
+          "doneText": "Next time, tap the fingerprint icon on the vault screen. Your code still works."
+        }
       },
       "notice": {
         "defaultWhat": "your documents",

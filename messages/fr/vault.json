@@ -210,7 +210,17 @@
         "unavailableTitle": "Coffre-fort indisponible",
         "unavailableText": "Impossible de vérifier le verrou du coffre-fort. Réessayez dans un instant.",
         "opening": "Ouverture du coffre-fort…",
-        "lockButton": "Verrouiller"
+        "lockButton": "Verrouiller",
+        "bioOffer": {
+          "title": "Ouvrez votre coffre-fort avec votre empreinte",
+          "text": "Plus rapide que le code : Touch ID, Face ID, Windows Hello ou l’empreinte de votre téléphone. Votre empreinte reste sur l’appareil, elle n’est jamais envoyée.",
+          "enable": "Activer l’empreinte",
+          "later": "Plus tard",
+          "settings": "Réglages",
+          "close": "Fermer la proposition",
+          "doneTitle": "Empreinte activée",
+          "doneText": "La prochaine fois, touchez l’icône d’empreinte sur l’écran du coffre-fort. Votre code reste valable."
+        }
       },
       "notice": {
         "defaultWhat": "vos documents",
