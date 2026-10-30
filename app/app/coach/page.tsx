@@ -16,7 +16,7 @@ import {
   saveDraft,
   setPendingFile,
   takePrefill,
-  fileErrorCode,
+  prepareCoachFile,
 } from '@/components/coach/session'
 
 const MAX = 2000
@@ -42,13 +42,14 @@ export default function CoachPage() {
     if (prefill) setText(prefill.slice(0, MAX))
   }, [])
 
-  const onFile = (file: File | undefined, accept: 'image' | 'doc') => {
-    if (!file) return
-    const err = fileErrorCode(file, accept)
-    if (err) {
-      setError(tc(`fileErrors.${err}`))
+  const onFile = async (picked: File | undefined, accept: 'image' | 'doc') => {
+    if (!picked) return
+    const ready = await prepareCoachFile(picked, accept)
+    if ('error' in ready) {
+      setError(tc(`fileErrors.${ready.error}`))
       return
     }
+    const file = ready.file
     setError('')
     setPendingFile(file)
     saveDraft(draftFromFile(file))
@@ -144,7 +145,7 @@ export default function CoachPage() {
               tabIndex={-1}
               aria-hidden="true"
               onChange={(e) => {
-                onFile(e.target.files?.[0], 'image')
+                void onFile(e.target.files?.[0], 'image')
                 e.target.value = ''
               }}
             />
@@ -156,7 +157,7 @@ export default function CoachPage() {
               tabIndex={-1}
               aria-hidden="true"
               onChange={(e) => {
-                onFile(e.target.files?.[0], 'doc')
+                void onFile(e.target.files?.[0], 'doc')
                 e.target.value = ''
               }}
             />
