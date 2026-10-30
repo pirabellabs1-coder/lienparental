@@ -42,6 +42,8 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [defaultOgImage((await getTranslations('seo'))('ogImageAlt'))],
     },
     twitter: { card: 'summary_large_image', title: SITE_NAME, description: og },
+    // Propriété du domaine dans Google Search Console (jeton public, sans secret).
+    verification: { google: 'xMONRMSDLRyrcVZZnVuc-3WTKVrFr4JeSQrF_SlHsh8' },
   }
 }
 
