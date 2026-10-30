@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { BottomNav } from '@/components/mobile/BottomNav'
 import { DesktopSidebar } from '@/components/mobile/DesktopSidebar'
+import { NavigationProgress } from '@/components/mobile/NavigationProgress'
 import { SearchProvider } from '@/components/search/SearchProvider'
 import { LocaleSync } from '@/components/i18n/LocaleSync'
 import { ScopedIntlProvider } from '@/components/i18n/ScopedIntlProvider'
@@ -36,6 +38,8 @@ export default async function AppShellLayout({ children }: { children: React.Rea
     {/* Fuseau de l'utilisateur (préférence) : posé avant le rendu des pages (lib/tz → currentTz). */}
     <TimeZoneProvider initialTz={tz.tz} preference={tz.preference}>
     <div className="min-h-dvh bg-white lg:bg-[#f7f8fc]">
+      {/* Retour immédiat au clic sur un lien (lit l'URL : useSearchParams, d'où la frontière Suspense). */}
+      <Suspense fallback={null}><NavigationProgress /></Suspense>
       <DesktopSidebar plan={plan} />
       <div className="md:pl-64 lg:pr-8">
         <main

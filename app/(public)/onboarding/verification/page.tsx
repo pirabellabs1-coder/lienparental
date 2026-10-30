@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { usePrefetch } from '@/components/mobile/usePrefetch'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/cn'
@@ -33,6 +34,8 @@ function mmss(s: number) {
 
 export default function VerificationPage() {
   const router = useRouter()
+  // Écran suivant préchargé jusqu'à son squelette (loading.tsx) : retour immédiat au clic.
+  usePrefetch('/onboarding/profil')
   const t = useTranslations('public.onboarding.verify')
   const { draft, ready } = useOnboardingDraft()
   const [code, setCode] = useState('')

@@ -8,7 +8,7 @@ import { Home, NotebookText, CalendarDays, FolderLock, LayoutGrid } from 'lucide
 import { Sheet } from '@/components/messages/Sheet'
 import { LogoutButton } from '@/components/auth/LogoutButton'
 import { cn } from '@/lib/cn'
-import { NAV_MAIN, NAV_SECONDARY, NAV_TOOLS, activeNavHref, type NavItem } from './navItems'
+import { NAV_MAIN, NAV_SECONDARY, NAV_TOOLS, activeNavHref, navPrefetch, type NavItem } from './navItems'
 
 const TABS = [
   { href: '/app',            labelKey: 'accueil',    icon: Home },
@@ -61,7 +61,7 @@ export function BottomNav() {
               const active = onTab(href)
               return (
                 <li key={href} className="flex-1">
-                  <Link href={href} aria-current={active ? 'page' : undefined} className={tabClass(active)}>
+                  <Link href={href} prefetch={navPrefetch(href)} aria-current={active ? 'page' : undefined} className={tabClass(active)}>
                     <Icon className="h-[22px] w-[22px]" strokeWidth={active ? 2.4 : 1.8} fill={active ? 'currentColor' : 'none'} fillOpacity={active ? 0.15 : 0} aria-hidden />
                     <span className={cn('text-[11px]', active ? 'font-bold' : 'font-medium')}>{t(labelKey)}</span>
                   </Link>
@@ -90,6 +90,7 @@ export function BottomNav() {
                     <li key={href}>
                       <Link
                         href={href}
+                        prefetch={navPrefetch(href)}
                         aria-current={active ? 'page' : undefined}
                         onClick={() => setMenuOpen(false)}
                         className={cn(

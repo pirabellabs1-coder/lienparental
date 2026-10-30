@@ -27,6 +27,21 @@ export const NAV_SECONDARY = [
 
 export type NavItem = (typeof NAV_MAIN)[number]
 
+/**
+ * Rubriques préchargées EN ENTIER par les menus (prefetch={true}) : le clic les affiche sans attendre
+ * le serveur. Uniquement des pages client sans donnée rendue côté serveur (leurs données arrivent
+ * après coup, depuis le navigateur) : une copie préchargée ne peut donc jamais être périmée.
+ * Jamais le coffre-fort ni le dossier : leur garde serveur (verrou) doit être évaluée au clic.
+ * Les autres rubriques sont préchargées jusqu'à leur loading.tsx (squelette immédiat au clic).
+ */
+export const FULL_PREFETCH: ReadonlySet<string> = new Set([
+  '/app', '/app/enfants', '/app/journal', '/app/calendrier', '/app/coach',
+  '/app/messages', '/app/garde', '/app/coparents', '/app/notifications',
+])
+
+/** Valeur de `prefetch` de next/link pour une rubrique du menu (undefined = préchargement automatique). */
+export const navPrefetch = (href: string): true | undefined => (FULL_PREFETCH.has(href) ? true : undefined)
+
 /** Rubrique active : l'entrée la plus spécifique gagne (Témoignages vit sous /app/coffre). */
 export function activeNavHref(pathname: string): string | undefined {
   return [...NAV_MAIN, ...NAV_TOOLS, ...NAV_SECONDARY]

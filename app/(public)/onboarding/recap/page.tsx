@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { usePrefetch } from '@/components/mobile/usePrefetch'
 import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Pencil, User } from 'lucide-react'
@@ -17,6 +18,8 @@ import { isTerritoryCode } from '@/lib/guide/territories'
 // Étape 10 (récap) : vérifiez vos informations.
 export default function RecapPage() {
   const router = useRouter()
+  // Écran suivant préchargé jusqu'à son squelette (loading.tsx) : retour immédiat au clic.
+  usePrefetch('/onboarding/coparent')
   const t = useTranslations('public.onboarding.recap')
   const tc = useTranslations('public.onboarding.classes')
   const tTerr = useTranslations('shared.territories')

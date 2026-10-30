@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { usePrefetch } from '@/components/mobile/usePrefetch'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState, type FormEvent } from 'react'
 import { cn } from '@/lib/cn'
@@ -19,6 +20,8 @@ import { uploadAvatar } from '@/lib/auth/browser'
 // Étape 8 — Configurer votre profil (photo facultative, prénom, nom, territoire du Guide parental)
 export default function ProfilPage() {
   const router = useRouter()
+  // Écran suivant préchargé jusqu'à son squelette (loading.tsx) : retour immédiat au clic.
+  usePrefetch('/onboarding/enfant')
   const t = useTranslations('public.onboarding.profile')
   const [prenom, setPrenom] = useState('')
   const [nom, setNom] = useState('')

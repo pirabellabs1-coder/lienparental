@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { usePrefetch } from '@/components/mobile/usePrefetch'
 import { useLocale, useTranslations } from 'next-intl'
 import { CheckCheck, CheckCircle2, FileImage, FileText, Lock, RefreshCw, Trash2, WandSparkles } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
@@ -38,6 +39,8 @@ export default function CoachDocumentPage() {
   const tc = useTranslations('coach.common')
   const locale = useLocale()
   const router = useRouter()
+  // Écran suivant préchargé jusqu'à son squelette (loading.tsx) : retour immédiat au clic.
+  usePrefetch('/app/coach/analyse')
   const [draft, setDraft] = useState<CoachDraft | null>(null)
   const [savedToVault, setSavedToVault] = useState(false)
   const [error, setError] = useState('')

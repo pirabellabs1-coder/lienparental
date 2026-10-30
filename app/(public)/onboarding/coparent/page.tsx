@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { usePrefetch } from '@/components/mobile/usePrefetch'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
@@ -19,6 +20,8 @@ import { FAMILY_LIVE, type IssuedInvitation } from '@/lib/coparents'
 // l'étape 7 et la fiche enfant de l'étape 9 existe (draft.child.id).
 export default function OnboardingCoparentPage() {
   const router = useRouter()
+  // Écran suivant préchargé jusqu'à son squelette (loading.tsx) : retour immédiat au clic.
+  usePrefetch('/onboarding/pret')
   const t = useTranslations('public.onboarding.coparent')
   const { draft, ready } = useOnboardingDraft()
   const [issued, setIssued] = useState<IssuedInvitation | null>(null)
