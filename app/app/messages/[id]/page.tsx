@@ -265,7 +265,7 @@ export default function ConversationPage({ params }: { params: Promise<{ id: str
       setVaultCategory(DEFAULT_VAULT_CATEGORY)
       const sentMsg = attachment && autoVault ? t('sentWithVault', { category }) : t('sent')
       setToneNote(note)
-      announce(note ? `${sentMsg} ${note}` : sentMsg)
+      announce(note ? `${sentMsg.replace(/[.!]?$/, '.')} ${note}` : sentMsg)
     } catch (err) {
       setError(err instanceof Error ? err.message : t('sendFailed'))
     } finally {

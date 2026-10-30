@@ -10,7 +10,9 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
 const CSP = [
   "default-src 'self'",
   // 'unsafe-eval' uniquement en dev (rechargement à chaud de Next) ; jamais en production.
-  `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://js.stripe.com`,
+  // 'wasm-unsafe-eval' : compilation WebAssembly seulement (pas d'eval JS), requise par le moteur de mise en
+  // page des PDF générés dans le navigateur (@react-pdf → yoga-layout) : attestation du témoin, exports.
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${process.env.NODE_ENV === 'development' ? " 'unsafe-eval'" : ''} https://js.stripe.com`,
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob: https:",
