@@ -22,7 +22,7 @@ Commencez par une liste commune des tâches, puis attribuez chacune à un parent
 4. Certificats et documents demandés par l’établissement.
 5. Inscription aux activités de l’année.
 
-Le **Guide parental** de Lien Parental détaille ces démarches, avec les documents à apporter et les organismes concernés pour votre territoire.
+Le **Guide parental** de Lien Parental détaille ces démarches, avec les documents à apporter et les organismes concernés pour votre territoire : [inscrire son enfant à l’école](/guide/guyane/inscrire-enfant-ecole), [assurance scolaire](/guide/guyane/assurance-scolaire), [allocation de rentrée scolaire](/guide/guyane/allocation-rentree-scolaire), ou encore le parcours [Rentrée scolaire](/guide/guyane/parcours/rentree-scolaire) (fiches de la Guyane ; choisissez votre territoire depuis [le Guide](/guide)).
 
 ## 2. Informer l’établissement de la situation
 
@@ -34,7 +34,7 @@ Fournitures, cantine, activités : notez qui avance quelle dépense et gardez le
 
 ## 4. Partager le calendrier
 
-Réunions de rentrée, photos de classe, vacances scolaires : ajoutez ces dates au calendrier partagé dès qu’elles sont connues. Chaque parent voit la même information, au même moment.
+Réunions de rentrée, photos de classe, vacances scolaires : ajoutez ces dates au calendrier partagé dès qu’elles sont connues. Chaque parent voit la même information, au même moment. En Outre-mer, chaque académie a son propre calendrier scolaire : pour partager les vacances en garde alternée, voir [choisir un rythme et tenir un calendrier commun](/blog/garde-alternee-rythmes-et-calendrier).
 
 ## À retenir
 

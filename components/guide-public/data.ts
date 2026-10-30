@@ -3,7 +3,9 @@ import type { Metadata } from 'next'
 import { getLocale } from 'next-intl/server'
 import { loadGuide, type GuideSnapshot } from '@/lib/guide/load'
 import { intlLocale, locales, type Locale } from '@/lib/i18n/config'
-import { localeAlternates, metadataAlternates, ogLocale } from '@/lib/seo/metadata'
+import { defaultOgImage, localeAlternates, metadataAlternates, ogLocale } from '@/lib/seo/metadata'
+import { SITE_NAME } from '@/lib/seo/site'
+import { localTitle, pageTitle, truncate } from '@/lib/seo/titles'
 
 /**
  * Accès aux données du Guide public (/guide/**) avec validation stricte des paramètres d'URL :
@@ -43,26 +45,12 @@ export const formatDate =(iso: string, locale: string) =>
   new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
     .format(new Date(`${iso}T00:00:00Z`))
 
-/** Coupe un texte au dernier mot entier avant `max` caractères (points de suspension inclus). */
-export function truncate(text: string, max: number): string {
-  const clean = text.replace(/\s+/g, ' ').trim()
-  if (clean.length <= max) return clean
-  const cut = clean.slice(0, max - 1)
-  const space = cut.lastIndexOf(' ')
-  return `${(space > max * 0.6 ? cut.slice(0, space) : cut).replace(/[\s,;:.\-–—]+$/, '')}…`
-}
+// Réexportés pour les pages du Guide (fonctions pures dans lib/seo/titles.ts).
+export { localTitle, pageTitle, truncate }
+export { titleTerritory } from '@/lib/seo/territory-title'
 
-const SUFFIX = ' · Lien Parental'
-const TITLE_MAX = 60
-
-/**
- * Titre ≤ 60 caractères, gabarit du site compris (« %s · Lien Parental », app/layout.tsx).
- * Trop long avec le suffixe : titre absolu, sans suffixe, tronqué proprement.
- */
-export function pageTitle(title: string): Metadata['title'] {
-  if (title.length + SUFFIX.length <= TITLE_MAX) return title
-  return { absolute: truncate(title, TITLE_MAX) }
-}
+const titleText = (t: Metadata['title']): string =>
+  typeof t === 'string' ? t : t && 'absolute' in t ? t.absolute : ''
 
 /**
  * Métadonnées communes des pages du Guide public : canonical absolu de la langue courante, hreflang
@@ -82,25 +70,32 @@ export function guideMetadata(o: {
   modifiedTime?: string
   section?: string
   tags?: string[]
+  /** Fiche ou parcours : territoire ajouté au titre (voir localTitle). */
+  territory?: { where: string; name: string }
 }): Metadata {
   const description = truncate(o.description, 155)
   const alt = localeAlternates(o.path, { locale: o.locale, contentLocale: o.lang, available: o.available })
   const url = alt.canonical
+  const title = o.territory ? localTitle(o.title, o.territory.where, o.territory.name) : pageTitle(o.title)
+  const socialTitle = titleText(title) || o.title
+  // Les metadata d'une page remplacent l'openGraph du layout racine : l'image par défaut doit être reprise ici.
+  const images = [defaultOgImage()]
   return {
-    title: pageTitle(o.title),
+    title,
     description,
     alternates: metadataAlternates(alt),
     keywords: o.tags,
     openGraph: {
       type: o.type ?? 'website',
-      title: o.title,
+      title: socialTitle,
       description,
       url,
-      siteName: 'Lien Parental',
+      siteName: SITE_NAME,
       locale: ogLocale(alt.shown),
       ...(alt.others.length ? { alternateLocale: alt.others.map(ogLocale) } : {}),
+      images,
       ...(o.type === 'article' ? { modifiedTime: o.modifiedTime, section: o.section, tags: o.tags } : {}),
     },
-    twitter: { card: 'summary', title: o.title, description },
+    twitter: { card: 'summary_large_image', title: socialTitle, description, images: images.map((im) => im.url) },
   }
 }

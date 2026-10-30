@@ -22,6 +22,14 @@ function countSheets(codes: string[]): number {
   }, 0)
 }
 
+const POPULAR_TERRITORY = 'guyane'
+const POPULAR = [
+  { key: 'separation', href: guidePaths.parcours(POPULAR_TERRITORY, 'je-viens-de-me-separer') },
+  { key: 'jaf', href: guidePaths.fiche(POPULAR_TERRITORY, 'saisir-juge-affaires-familiales') },
+  { key: 'pension', href: guidePaths.fiche(POPULAR_TERRITORY, 'pension-alimentaire-aripa') },
+  { key: 'mediation', href: guidePaths.fiche(POPULAR_TERRITORY, 'mediation-familiale') },
+] as const
+
 export async function Guide() {
   const t = await getTranslations('guide')
   // Noms des territoires traduits (catalogue shared.territories, mêmes codes que TERRITORIES).
@@ -30,6 +38,8 @@ export async function Guide() {
   const lp = localePathFor(locale)
   const territories = await territoryStatuses()
   const sheets = countSheets(territories.filter((x) => x.available).map((x) => x.code))
+  // Démarches de séparation les plus recherchées, vers le Guide Guyane (territoire prioritaire) : maillage accueil → fiches.
+  const popular = territories.some((x) => x.code === POPULAR_TERRITORY && x.available) ? POPULAR : []
   const POINTS = [
     sheets > 0 ? t('pointSheets', { count: sheets }) : t('pointSheetsNoCount'),
     t('point2'),
@@ -77,6 +87,21 @@ export async function Guide() {
               )
             })}
           </ul>
+
+          {popular.length > 0 && (
+            <>
+              <h3 className="mt-10 text-[15px] font-bold text-night-900">{t('popularTitle')}</h3>
+              <ul className="mt-3 space-y-2">
+                {popular.map(({ key, href }) => (
+                  <li key={key}>
+                    <Link href={lp(href)} className="inline-flex min-h-[44px] items-center gap-2 text-[15.5px] font-semibold text-leaf-700 underline decoration-leaf-600/30 underline-offset-2 hover:decoration-leaf-600">
+                      {t(`popular.${key}`)}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
 
           <Link href={lp('/guide')} className={cn(BTN_PRIMARY, 'mt-10')}>
             {t('cta')}<ArrowRight className="h-4 w-4" aria-hidden />

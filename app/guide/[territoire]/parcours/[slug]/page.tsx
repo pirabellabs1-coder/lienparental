@@ -10,7 +10,7 @@ import { guidePaths } from '@/lib/seo/site'
 import { localePath, localePathFor } from '@/lib/i18n/routing'
 import { parcoursJsonLd, type Crumb } from '@/lib/seo/guide-jsonld'
 import { JsonLd } from '@/components/seo/JsonLd'
-import { guideItemLocales, guideMetadata, isSlug, loadPublicTerritory } from '@/components/guide-public/data'
+import { guideItemLocales, guideMetadata, isSlug, loadPublicTerritory, titleTerritory } from '@/components/guide-public/data'
 import { Breadcrumbs, CARD, CONTAINER, H1, SignupCta } from '@/components/guide-public/ui'
 
 export const dynamic = 'force-dynamic'
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!r) return { robots: { index: false } }
   return guideMetadata({
     title: r.parcours.titre,
+    territory: titleTerritory(r.g.territoire.code, r.parcours.lang ?? 'fr'),
     description: r.parcours.resume,
     path: guidePaths.parcours(r.g.territoire.code, r.parcours.slug),
     locale: r.locale,

@@ -49,7 +49,6 @@ export function LanguageSwitcher({ className }: { className?: string }) {
             onClick={() => pick(loc)}
             disabled={pending}
             aria-pressed={isActive}
-            aria-label={isActive ? t('current', { name: meta.native }) : t('switchTo', { name: meta.native })}
             className="group flex flex-col items-center gap-[7px] rounded-lg px-1 py-0.5 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-500 disabled:cursor-wait"
           >
             {/* Pastille compacte (plus petite que le logo) : contour vert si sélectionnée, gris léger sinon. */}
@@ -62,6 +61,8 @@ export function LanguageSwitcher({ className }: { className?: string }) {
               <Flag flag={meta.flag} />
             </span>
             <span className={cn('text-[9px] font-bold leading-none tracking-wide', isActive ? 'text-leaf-600' : 'text-night-500')}>{meta.code}</span>
+            {/* Nom accessible = texte visible (« FR ») + précision : WCAG 2.5.3 (étiquette dans le nom). */}
+            <span className="sr-only">{', '}{isActive ? t('current', { name: meta.native }) : t('switchTo', { name: meta.native })}</span>
           </button>
         )
       })}

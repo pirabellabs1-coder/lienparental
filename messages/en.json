@@ -93,7 +93,7 @@
   },
   "home": {
     "hero": {
-      "badge": "The app for separated parents",
+      "badge": "The co-parenting app for separated parents",
       "titleStart": "Everything for your child, ",
       "titleHighlight": "finally in one place.",
       "subtitle": "Organize, communicate, keep everything safe and move forward with confidence in your life as a separated parent, with simple, practical and reliable tools suited to your situation.",
@@ -169,8 +169,8 @@
   },
   "video": {
     "title": "Discover Lien Parental in video",
-    "playVideo": "Play the intro video",
-    "playImages": "Discover Lien Parental in pictures (video coming soon)",
+    "playVideo": "Watch the video introducing Lien Parental",
+    "playImages": "Picture preview of Lien Parental (video coming soon)",
     "seeVideo": "Watch the video",
     "seeImages": "Picture preview",
     "overviewTitle": "One app to manage everything",
@@ -316,7 +316,14 @@
     "available": "Available",
     "soon": "Coming soon",
     "cta": "Explore the Parenting guide",
-    "phoneAlt": "The app’s Parenting guide screen: search for a step and a step-by-step path"
+    "phoneAlt": "The app’s Parenting guide screen: search for a step and a step-by-step path",
+    "popularTitle": "Most-read procedures after a separation",
+    "popular": {
+      "separation": "Just separated: the steps, in order",
+      "jaf": "Applying to the family judge (JAF)",
+      "pension": "Unpaid child support: the Caf and ARIPA",
+      "mediation": "Finding family mediation in French Guiana"
+    }
   },
   "pwa": {
     "title": "Available right now as a PWA",
@@ -360,7 +367,12 @@
     "q5": "Can I share information with the other parent?",
     "a5": "Yes, with “Linked parents”. You invite the other parent and choose what you share for each child: profile, calendar, documents or expenses. Your Journal, the AI Coach and your unshared documents stay private.",
     "q6": "Can I cancel my subscription at any time?",
-    "a6": "Yes. Paid plans have no commitment and can be cancelled from your profile. You keep access until the end of the paid period, then your data stays viewable on the free plan."
+    "a6": "Yes. Paid plans have no commitment and can be cancelled from your profile. You keep access until the end of the paid period, then your data stays viewable on the free plan.",
+    "q7": "What is a co-parenting app?",
+    "a7": "A space shared by separated parents to organise their child’s life: custody calendar, shared expenses, health, school and important documents. Lien Parental adds a guide to family procedures for each territory (French Guiana, Martinique, Guadeloupe, Réunion, Mayotte, mainland France) and an AI Coach.",
+    "q8": "Does Lien Parental help with shared custody, child support or the family court?",
+    "a8": "Yes, to get organised and prepare your procedures. The shared calendar follows your custody schedule (alternate weeks, 2-2-3…), expenses keep track of costs and reimbursements, and the court file gathers the documents you need. The guide explains when to apply to the family judge (JAF), what to do when child support is unpaid (Caf and ARIPA) and where to find family mediation. Lien Parental does not replace a lawyer.",
+    "a8Link": "“I have just separated” guide"
   },
   "finalBanner": {
     "title": "Ready to simplify your daily life?",
@@ -579,8 +591,8 @@
     "rootTitle": "Lien Parental: inform, support and protect the parent-child bond",
     "rootDescription": "Lien Parental supports separated parents: shared calendar, encrypted vault, journal, testimonies and an AI parenting coach. Your data is hosted in Europe.",
     "ogDescription": "Communicate calmly, get organized easily and find everything about your child in one place.",
-    "homeTitle": "Lien Parental: everything for your child, finally in one place",
-    "homeDescription": "The app for separated parents: shared calendar, expenses, children’s health, vault, court file, AI Coach and Parenting guide. Free to start, works on any phone.",
+    "homeTitle": "Co-parenting app for separated parents · Lien Parental",
+    "homeDescription": "Shared custody calendar, split expenses, health, secure vault, court file and a guide to family procedures in France and French Guiana. Free to start.",
     "appTitle": "App"
   },
   "publicAside": {

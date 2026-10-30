@@ -14,7 +14,7 @@ Opening a savings account for your child, enrolling them in school, applying for
 
 ## Practical guides by territory
 
-Each guide answers the same questions: what the procedure is for, who it concerns, which documents to prepare, which steps to follow and where to go. The guide is available first for **French Guiana**; other territories will follow.
+Each guide answers the same questions: what the procedure is for, who it concerns, which documents to prepare, which steps to follow and where to go. The guide is available for [French Guiana](/guide/guyane), [Martinique](/guide/martinique), [Guadeloupe](/guide/guadeloupe), [Réunion](/guide/reunion), [Mayotte](/guide/mayotte) and [mainland France](/guide/france).
 
 Each guide shows its **date of last verification** and its official sources. Local information that is still to be confirmed is flagged as such.
 
@@ -24,7 +24,7 @@ Before you set off, tick the documents you have gathered. Your progress is saved
 
 ## Step-by-step pathways
 
-Some periods involve a series of procedures: a baby's arrival, back to school, a separation. **Pathways** group them in order, with a link to each guide.
+Some periods involve a series of procedures: a baby's arrival, back to school, a separation. **Pathways** group them in order, with a link to each guide. After a separation, for example, the [I have just separated](/guide/guyane/parcours/je-viens-de-me-separer) pathway takes you through declaring the change to the Caf, updating the child’s address, applying to the family judge and child support.
 
 ## Add to Lien Parental in one tap
 

@@ -13,7 +13,7 @@ import { localePath, localePathFor } from '@/lib/i18n/routing'
 import { ficheJsonLd, type Crumb } from '@/lib/seo/guide-jsonld'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { CategoryIcon } from '@/components/guide/icons'
-import { formatDate, guideItemLocales, guideMetadata, isSlug, loadPublicTerritory } from '@/components/guide-public/data'
+import { formatDate, guideItemLocales, guideMetadata, isSlug, loadPublicTerritory, titleTerritory } from '@/components/guide-public/data'
 import { Breadcrumbs, CARD, CONTAINER, EXT_LINK, H1, SignupCta } from '@/components/guide-public/ui'
 
 export const dynamic = 'force-dynamic'
@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations('public.guide')
   return guideMetadata({
     title: r.fiche.titre,
+    territory: titleTerritory(r.g.territoire.code, r.fiche.lang ?? 'fr'),
     description: r.fiche.resume,
     path: guidePaths.fiche(r.g.territoire.code, r.fiche.slug),
     locale: r.locale,
@@ -128,34 +129,25 @@ export default async function GuideFichePublicPage({ params }: Props) {
               <h2 id="en-bref" className="text-[16px] font-extrabold text-night-900">{t('fiche.inBrief')}</h2>
               <dl className="mt-3 space-y-3 text-[14.5px] leading-snug">
                 {fiche.datesLimites.length > 0 && (
-                  <div className="flex gap-3">
-                    <CalendarClock className="mt-0.5 h-5 w-5 shrink-0 text-gold-700" strokeWidth={1.75} aria-hidden="true" />
-                    <div className="min-w-0">
-                      <dt className="font-bold text-night-900">{t('fiche.briefDeadlines')}</dt>
-                      <dd className="mt-0.5 text-night-700" lang={cl}>
-                        <ul className="space-y-0.5">{fiche.datesLimites.map((d) => <li key={d.libelle}>{d.libelle}</li>)}</ul>
-                      </dd>
-                    </div>
-                  </div>
-                )}
-                <div className="flex gap-3">
-                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-leaf-700" strokeWidth={1.75} aria-hidden="true" />
-                  <div className="min-w-0">
-                    <dt className="font-bold text-night-900">{t('fiche.briefWhere')}</dt>
+                  <div className="relative pl-8">
+                    <dt className="font-bold text-night-900"><CalendarClock className="absolute left-0 top-0.5 h-5 w-5 text-gold-700" strokeWidth={1.75} aria-hidden="true" />{t('fiche.briefDeadlines')}</dt>
                     <dd className="mt-0.5 text-night-700" lang={cl}>
-                      <ul className="space-y-0.5">{fiche.ou.map((o) => <li key={o.nom}>{o.nom}</li>)}</ul>
+                      <ul className="space-y-0.5">{fiche.datesLimites.map((d) => <li key={d.libelle}>{d.libelle}</li>)}</ul>
                     </dd>
                   </div>
+                )}
+                <div className="relative pl-8">
+                  <dt className="font-bold text-night-900"><MapPin className="absolute left-0 top-0.5 h-5 w-5 text-leaf-700" strokeWidth={1.75} aria-hidden="true" />{t('fiche.briefWhere')}</dt>
+                  <dd className="mt-0.5 text-night-700" lang={cl}>
+                    <ul className="space-y-0.5">{fiche.ou.map((o) => <li key={o.nom}>{o.nom}</li>)}</ul>
+                  </dd>
                 </div>
                 {fiche.documents.length > 0 && (
-                  <div className="flex gap-3">
-                    <FileText className="mt-0.5 h-5 w-5 shrink-0 text-night-600" strokeWidth={1.75} aria-hidden="true" />
-                    <div className="min-w-0">
-                      <dt className="font-bold text-night-900">{t('fiche.briefDocuments')}</dt>
-                      <dd className="mt-0.5 text-night-700">
-                        <a href="#documents" className="font-semibold text-leaf-700 underline decoration-leaf-300 underline-offset-2">{t('fiche.documentsCount', { count: fiche.documents.length })}</a>
-                      </dd>
-                    </div>
+                  <div className="relative pl-8">
+                    <dt className="font-bold text-night-900"><FileText className="absolute left-0 top-0.5 h-5 w-5 text-night-600" strokeWidth={1.75} aria-hidden="true" />{t('fiche.briefDocuments')}</dt>
+                    <dd className="mt-0.5 text-night-700">
+                      <a href="#documents" className="font-semibold text-leaf-700 underline decoration-leaf-300 underline-offset-2">{t('fiche.documentsCount', { count: fiche.documents.length })}</a>
+                    </dd>
                   </div>
                 )}
               </dl>

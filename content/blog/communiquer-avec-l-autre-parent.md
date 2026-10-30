@@ -30,10 +30,12 @@ Décrire ce qui s’est passé, sans prêter d’intention, limite les réaction
 
 Quand une décision est prise à l’oral (un changement de week-end, une activité à financer à deux), un court message de confirmation évite les malentendus : « Comme convenu au téléphone, je garde Lina le week-end du 12 et tu la gardes celui du 19. »
 
-Dans Lien Parental, le **journal** et la **messagerie** conservent ces échanges de façon datée. Ils vous aident à retrouver une information, et le cas échéant à présenter un historique clair à un médiateur ou à votre avocat.
+Dans Lien Parental, le **journal** et la **messagerie** conservent ces échanges de façon datée. Ils vous aident à retrouver une information, et le cas échéant à présenter un historique clair à un médiateur ou à votre avocat. Beaucoup de messages portent sur le planning de l’enfant : un [calendrier de garde partagé](/blog/garde-alternee-rythmes-et-calendrier) en évite une bonne partie.
 
 ## Quand le dialogue est bloqué
 
 Si les échanges deviennent systématiquement conflictuels, la [médiation familiale](/blog/mediation-familiale-a-quoi-s-attendre) peut aider à rétablir un cadre de discussion. Elle ne remplace pas une décision de justice, mais elle permet souvent de trouver des solutions concrètes, construites par les deux parents.
 
-Pour en savoir plus sur vos droits et démarches, consultez les fiches officielles de [Service-Public.fr](https://www.service-public.fr/), rubrique Famille.
+Si un désaccord doit être tranché par le juge, les proches qui ont été témoins de la vie quotidienne de l’enfant peuvent rédiger une [attestation de témoin pour le JAF](/blog/attestation-de-temoin-jaf-cerfa-11527).
+
+Pour en savoir plus sur vos droits et démarches, consultez les fiches officielles de [Service-Public.fr](https://www.service-public.fr/), rubrique Famille, ou le [Guide parental](/guide) de votre territoire.

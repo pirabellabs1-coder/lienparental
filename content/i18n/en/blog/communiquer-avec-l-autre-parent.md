@@ -30,10 +30,12 @@ Describing what happened, without attributing intentions, limits defensive react
 
 When a decision is made verbally (swapping a weekend, an activity to be paid for by both of you), a short confirmation message avoids misunderstandings: "As agreed on the phone, I'll have Lina the weekend of the 12th and you'll have her the weekend of the 19th."
 
-In Lien Parental, the **journal** and the **messaging** keep these exchanges with their dates. They help you find information again and, if needed, present a clear history to a mediator or to your lawyer.
+In Lien Parental, the **journal** and the **messaging** keep these exchanges with their dates. They help you find information again and, if needed, present a clear history to a mediator or to your lawyer. Many messages are about the child’s schedule: a [shared custody calendar](/blog/garde-alternee-rythmes-et-calendrier) avoids a good number of them.
 
 ## When dialogue is blocked
 
 If exchanges become consistently conflictual, [family mediation](/blog/mediation-familiale-a-quoi-s-attendre) can help restore a framework for discussion. It does not replace a court decision, but it often makes it possible to find practical solutions, built by both parents.
 
-To find out more about your rights and procedures, see the official guides on [Service-Public.fr](https://www.service-public.fr/) (the French government's official information website), Family section.
+If a disagreement has to be settled by the judge, people who have witnessed the child’s daily life can write a [witness statement for the family judge](/blog/attestation-de-temoin-jaf-cerfa-11527).
+
+To find out more about your rights and procedures, see the official guides on [Service-Public.fr](https://www.service-public.fr/) (the French government's official information website), Family section, or the [Parenting guide](/guide) for your territory.

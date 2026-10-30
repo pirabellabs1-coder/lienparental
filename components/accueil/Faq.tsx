@@ -6,9 +6,26 @@ import { H2 } from './ui'
 
 // Réponses vérifiées : PWA (pas de store), Guide (Guyane d'abord), sécurité (docs/SECURITY.md : chiffrement en transit
 // et au repos, pas de bout en bout), partage via « Parents liés » (app/app/coparents), résiliation sans engagement.
-// Les 6 questions/réponses sont traduites (namespace faq, clés q1..q6 / a1..a6).
+// Les 8 questions/réponses sont traduites (namespace faq, clés q1..q8 / a1..a8) ; q7 et q8 (application de coparentalité,
+// garde alternée / pension / JAF) passent en tête. Les mêmes textes alimentent le FAQPage JSON-LD de l'accueil (app/page.tsx).
 
 type FaqItem = { q: string; a: string; linkHref?: string; linkLabel?: string }
+
+/** Questions de la FAQ de l'accueil, dans l'ordre d'affichage (aussi utilisées pour le JSON-LD). */
+export async function homeFaqItems(): Promise<FaqItem[]> {
+  const t = await getTranslations('faq')
+  const lp = localePathFor(await getLocale())
+  return [
+    { q: t('q7'), a: t('a7') },
+    { q: t('q8'), a: t('a8'), linkHref: lp('/guide/guyane/parcours/je-viens-de-me-separer'), linkLabel: t('a8Link') },
+    { q: t('q1'), a: t('a1') },
+    { q: t('q2'), a: t('a2'), linkHref: lp('/installer'), linkLabel: t('a2Link') },
+    { q: t('q3'), a: t('a3') },
+    { q: t('q4'), a: t('a4') },
+    { q: t('q5'), a: t('a5') },
+    { q: t('q6'), a: t('a6') },
+  ]
+}
 
 function Item({ q, a, linkHref, linkLabel }: FaqItem) {
   return (
@@ -35,14 +52,7 @@ function Item({ q, a, linkHref, linkLabel }: FaqItem) {
 export async function Faq() {
   const t = await getTranslations('faq')
   const lp = localePathFor(await getLocale())
-  const FAQ: FaqItem[] = [
-    { q: t('q1'), a: t('a1') },
-    { q: t('q2'), a: t('a2'), linkHref: lp('/installer'), linkLabel: t('a2Link') },
-    { q: t('q3'), a: t('a3') },
-    { q: t('q4'), a: t('a4') },
-    { q: t('q5'), a: t('a5') },
-    { q: t('q6'), a: t('a6') },
-  ]
+  const FAQ = await homeFaqItems()
   const half = Math.ceil(FAQ.length / 2)
   return (
     <div id="faq" className="scroll-mt-24">

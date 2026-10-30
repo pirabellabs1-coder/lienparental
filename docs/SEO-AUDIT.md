@@ -40,3 +40,14 @@ N1 canonical de `/blog?page=N` · N2 robots : `Host:` inutile, `/abonner`, `/aut
 
 ## Après déploiement
 `curl -I` article existant (200) / inconnu (404) ; test des résultats enrichis et validateur schema.org (`/`, `/aide`, article, fiche) ; Search Console : soumettre le sitemap, suivre hreflang et Couverture ; poids HTML de l'accueil.
+
+## Vague du 30/10/2026 (mots-clés et audit technique)
+
+Carte des mots-clés et manques de contenu : `docs/SEO-MOTS-CLES.md`. Mesures avant/après : description de la PR.
+
+- **Titres en double** : les 6 territoires partageaient les mêmes titres de fiches (684 pages dans 121 groupes de titres identiques, FR/EN/PT). Le `title` des fiches et parcours porte désormais le territoire, dans la langue du contenu (`public.guide.inTerritory`, `lib/seo/titles.ts`, testé).
+- **og:image absente du Guide** (933 pages) : `guideMetadata` reprend l'image par défaut et passe la carte Twitter en `summary_large_image`.
+- **Accueil** : requête principale (« application de coparentalité… parents séparés ») dans le `title`, la description et le H1 ; FAQ avec deux questions produit + `FAQPage` JSON-LD ; liens vers les fiches JAF, pension/ARIPA, médiation et le parcours « Je viens de me séparer ».
+- **Accessibilité relevée par Lighthouse** : `<dl>` des fiches, nom accessible du sélecteur de langue et du bouton vidéo (WCAG 2.5.3).
+- Lighthouse signale « meta description absente » sur toutes les pages : artefact du streaming des métadonnées (Lighthouse ne figure pas dans `htmlLimitedBots`), Googlebot les reçoit bien dans le `<head>` (vérifié avec son agent utilisateur).
+- **Non traité (suite à donner)** : toutes les pages publiques sont rendues à la demande (`force-dynamic`, locale lue dans un en-tête de la middleware) ; un passage en `app/[locale]` + `setRequestLocale` + rendu statique/ISR réduirait le TTFB. Le TBT de l'accueil (~0,7 s en mobile simulé) vient du style/layout d'un gros DOM et de l'hydratation.

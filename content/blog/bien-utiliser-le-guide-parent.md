@@ -14,7 +14,7 @@ Ouvrir un livret pour son enfant, l’inscrire à l’école, demander une aide 
 
 ## Des fiches pratiques par territoire
 
-Chaque fiche répond aux mêmes questions : à quoi sert la démarche, qui est concerné, quels documents prévoir, quelles étapes suivre et où s’adresser. Le guide est d’abord disponible pour la **Guyane**, d’autres territoires suivront.
+Chaque fiche répond aux mêmes questions : à quoi sert la démarche, qui est concerné, quels documents prévoir, quelles étapes suivre et où s’adresser. Le guide est disponible pour la [Guyane](/guide/guyane), la [Martinique](/guide/martinique), la [Guadeloupe](/guide/guadeloupe), [La Réunion](/guide/reunion), [Mayotte](/guide/mayotte) et la [France métropolitaine](/guide/france).
 
 Chaque fiche indique sa **date de dernière vérification** et ses sources officielles. Les informations locales qui restent à confirmer sont signalées comme telles.
 
@@ -24,7 +24,7 @@ Avant de partir, cochez les documents que vous avez réunis. Votre avancement es
 
 ## Des parcours pas à pas
 
-Certaines périodes enchaînent plusieurs démarches : l’arrivée d’un bébé, la rentrée, une séparation. Les **parcours** les regroupent dans l’ordre, avec un lien vers chaque fiche.
+Certaines périodes enchaînent plusieurs démarches : l’arrivée d’un bébé, la rentrée, une séparation. Les **parcours** les regroupent dans l’ordre, avec un lien vers chaque fiche. Après une séparation, par exemple, le parcours [Je viens de me séparer](/guide/guyane/parcours/je-viens-de-me-separer) enchaîne la déclaration à la Caf, le changement d’adresse de l’enfant, la saisine du juge aux affaires familiales et la pension alimentaire.
 
 ## Ajouter à Lien Parental en un geste
 

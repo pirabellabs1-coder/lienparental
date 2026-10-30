@@ -24,7 +24,9 @@ import { PricingFaq } from '@/components/accueil/PricingFaq'
 import { FinalBanner } from '@/components/accueil/FinalBanner'
 import { DEMO_COOKIE } from '@/lib/demo-auth'
 import { JsonLd } from '@/components/seo/JsonLd'
-import { graph, webApplication } from '@/lib/seo/jsonld'
+import { faqPage, graph, webApplication } from '@/lib/seo/jsonld'
+import { homeFaqItems } from '@/components/accueil/Faq'
+import { localePath } from '@/lib/i18n/routing'
 import { pageMetadata } from '@/lib/seo/metadata'
 
 // Page d'accueil : maquette du client (octobre 2026), fond clair et sections dans l'ordre de la maquette.
@@ -65,14 +67,19 @@ export default async function HomePage() {
   const video = presentationVideo(locale)
   const tm = await getTranslations('meta')
   const ts = await getTranslations('seo')
+  const faq = await homeFaqItems()
   // Ordre de la maquette du client ; en-tête et pied de page partagés avec les autres pages publiques (SiteShell).
   return (
     <SiteShell className="home" extraNamespaces={CLIENT_NS_SITE_HOME}>
       <HomeStyles />
-      <JsonLd data={graph(webApplication({
-        description: tm('homeDescription'),
-        offerLabels: { free: ts('offers.free'), monthly: ts('offers.monthly'), yearly: ts('offers.yearly') },
-      }))} />
+      <JsonLd data={graph(
+        webApplication({
+          description: tm('homeDescription'),
+          offerLabels: { free: ts('offers.free'), monthly: ts('offers.monthly'), yearly: ts('offers.yearly') },
+        }),
+        // Questions visibles plus bas sur la page (components/accueil/Faq.tsx), mot pour mot.
+        faqPage({ path: localePath(locale, '/'), locale, items: faq.map((f) => ({ question: f.q, answer: f.a })) }),
+      )} />
       <Hero />
       <div className="-mt-4 lg:-mt-6"><ModuleBar /></div>
       <Partners />
