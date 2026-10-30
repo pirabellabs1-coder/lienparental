@@ -19,6 +19,8 @@ import { isUuid, syncSubscription, type UpsertResult } from './subscription'
 import { grantCreditsForSession } from '@/lib/ai/credits'
 import { revokeCreditsForPayment } from '@/lib/ai/wallet'
 import { isCreditSession } from '@/lib/ai/credits-core'
+import { isStorageSession } from './storage-packs'
+import { grantStorageForSession, revokeStorageForPayment } from './storage'
 
 // --- Idempotence ----------------------------------------------------------
 
@@ -107,6 +109,12 @@ export async function handleStripeEvent(event: Stripe.Event): Promise<Deferred[]
       // Achat de crédits IA (paiement unique) : session relue chez Stripe, crédit idempotent par
       // session (grant_ai_credits + écriture « purchase » au journal, 0520). Aucun effet sur
       // l'abonnement, les droits Premium ni le stockage.
+      // Achat d'espace de stockage (paiement unique, 0610) : même principe, grant_storage_pack.
+      if (isStorageSession(session)) {
+        const fresh = await getStripe().checkout.sessions.retrieve(session.id, { expand: ['payment_intent.latest_charge'] })
+        await grantStorageForSession(fresh, 'webhook')
+        break
+      }
       if (isCreditSession(session)) {
         const fresh = await getStripe().checkout.sessions.retrieve(session.id)
         await grantCreditsForSession(fresh, 'webhook')
@@ -133,7 +141,10 @@ export async function handleStripeEvent(event: Stripe.Event): Promise<Deferred[]
         console.warn('[ai-credits] remboursement partiel, lot conservé', { pi: pi.slice(-8) })
         break
       }
-      await revokeCreditsForPayment(pi, event.type === 'charge.refunded' ? 'refund' : 'dispute')
+      const reason = event.type === 'charge.refunded' ? 'refund' : 'dispute'
+      await revokeCreditsForPayment(pi, reason)
+      // Espace de stockage acheté par ce paiement (0610) : lots révoqués, fichiers conservés.
+      await revokeStorageForPayment(pi, reason)
       break
     }
 

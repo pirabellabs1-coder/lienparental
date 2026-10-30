@@ -46,6 +46,7 @@ export function StorageQuotaNotice({ quota, className }: { quota: StorageQuota |
         <p className="font-bold">{full ? t('fullTitle') : t('warnTitle')}</p>
         <p className="mt-0.5">{full ? t('fullText', values) : t('warnText', values)}</p>
         <p className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 font-semibold">
+          <Link href="/app/profil/stockage#plus-d-espace" className="underline underline-offset-2">{t('buy')}</Link>
           <Link href="/app/abonnement" className="underline underline-offset-2">{t('upgrade')}</Link>
           <Link href="/app/coffre/corbeille" className="underline underline-offset-2">{t('trash')}</Link>
         </p>

@@ -85,7 +85,7 @@ export function seeOther(url: string): NextResponse {
   return NextResponse.redirect(target, { status: 303 })
 }
 
-const FAIL_CLOSED = new Set<BillingRateAction>(['checkout', 'credits', 'change-plan', 'cancel', 'portal'])
+const FAIL_CLOSED = new Set<BillingRateAction>(['checkout', 'credits', 'storage', 'change-plan', 'cancel', 'portal'])
 
 /**
  * Limite de débit par utilisateur (BILLING_RATE_LIMITS). Retourne la réponse de

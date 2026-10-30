@@ -951,7 +951,38 @@
       "fullTitle": "Your storage space is full",
       "fullText": "{used} used of {max}. Free up space (the trash counts until it is purged) or upgrade your plan to add files.",
       "upgrade": "See plans",
-      "trash": "Open the trash"
+      "trash": "Open the trash",
+      "buy": "Buy more space"
+    },
+    "storage": {
+      "title": "More space",
+      "intro": "Add space to your vault without changing plan. One-off payment, space valid for {months} months, can be combined.",
+      "choose": "Choose a storage pack",
+      "packName": "+{gb} GB",
+      "featured": "Most popular",
+      "perGb": "{price} per GB per year",
+      "lot": "+{gb} GB active",
+      "until": "until {date}",
+      "validity": "Space valid for {months} months",
+      "expiryRule": "When it expires, no file is deleted: only new uploads are blocked while the space used is above your quota.",
+      "waiver": "I ask for immediate access to the purchased space and waive my 14-day right of withdrawal once it is added.",
+      "pay": "Pay and add this space",
+      "payDemo": "Simulate the purchase (demo)",
+      "demoNotice": "Demo: the purchase is simulated, no payment is requested and no space is actually added.",
+      "secure": "Payment secured by Stripe. Lien Parental never sees your card.",
+      "terms": "Terms of use",
+      "success": "+{gb} GB added to your space. Thank you!",
+      "successPending": "Payment received: your space will be added in a few moments. Reload the page if needed.",
+      "paymentFailed": "The payment did not go through: nothing was charged.",
+      "demoSuccess": "+{gb} GB added (demo, simulated purchase).",
+      "canceled": "Payment cancelled: nothing was charged.",
+      "errors": {
+        "waiver_required": "Tick the immediate access box to continue.",
+        "invalid_pack": "This pack does not exist: choose one from the list.",
+        "rate_limited": "Too many attempts: try again in a few minutes.",
+        "stripe_unavailable": "Payment is temporarily unavailable. Please try again later.",
+        "generic": "Buying space is temporarily unavailable."
+      }
     }
   }
 }

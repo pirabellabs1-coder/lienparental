@@ -59,7 +59,8 @@
         "progress": "{pct}% do espaço utilizado",
         "warn": "Restam apenas {left}: pense em liberar espaço ou mudar para um plano superior.",
         "full": "Espaço cheio: novos envios estão bloqueados.",
-        "upgrade": "Aumentar meu espaço"
+        "upgrade": "Aumentar meu espaço",
+        "buy": "Comprar espaço"
       },
       "vault": {
         "title": "Seus arquivos são gerenciados no cofre",

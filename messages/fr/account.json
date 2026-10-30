@@ -59,7 +59,8 @@
         "progress": "{pct} % de l’espace utilisé",
         "warn": "Plus que {left} disponibles : pensez à libérer de la place ou à passer à une offre supérieure.",
         "full": "Espace plein : les nouveaux ajouts sont bloqués.",
-        "upgrade": "Augmenter mon espace"
+        "upgrade": "Augmenter mon espace",
+        "buy": "Acheter de l'espace"
       },
       "vault": {
         "title": "Vos fichiers se gèrent dans le coffre-fort",
