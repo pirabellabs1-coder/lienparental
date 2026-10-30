@@ -947,7 +947,38 @@
       "fullTitle": "Seu espaço de armazenamento está cheio",
       "fullText": "{used} usados de {max}. Libere espaço (a lixeira conta até ser esvaziada) ou mude para um plano superior para adicionar arquivos.",
       "upgrade": "Ver os planos",
-      "trash": "Abrir a lixeira"
+      "trash": "Abrir a lixeira",
+      "buy": "Comprar espaço"
+    },
+    "storage": {
+      "title": "Mais espaço",
+      "intro": "Adicione espaço ao seu cofre sem mudar de plano. Pagamento único, espaço válido por {months} meses, acumulável.",
+      "choose": "Escolher um pacote de espaço",
+      "packName": "+{gb} GB",
+      "featured": "O mais escolhido",
+      "perGb": "{price} por GB por ano",
+      "lot": "+{gb} GB ativos",
+      "until": "até {date}",
+      "validity": "Espaço válido por {months} meses",
+      "expiryRule": "Quando expira, nenhum ficheiro é apagado: apenas os novos envios ficam bloqueados enquanto o espaço usado ultrapassar a sua quota.",
+      "waiver": "Peço o acesso imediato ao espaço comprado e renuncio ao meu direito de desistência de 14 dias assim que for adicionado.",
+      "pay": "Pagar e adicionar este espaço",
+      "payDemo": "Simular a compra (demonstração)",
+      "demoNotice": "Demonstração: a compra é simulada, nenhum pagamento é pedido e nenhum espaço é realmente adicionado.",
+      "secure": "Pagamento protegido pela Stripe. A Lien Parental nunca vê o seu cartão.",
+      "terms": "Condições de utilização",
+      "success": "+{gb} GB adicionados ao seu espaço. Obrigado!",
+      "successPending": "Pagamento recebido: o seu espaço será adicionado dentro de instantes. Recarregue a página se necessário.",
+      "paymentFailed": "O pagamento não foi concluído: nada foi cobrado.",
+      "demoSuccess": "+{gb} GB adicionados (demonstração, compra simulada).",
+      "canceled": "Pagamento cancelado: nada foi cobrado.",
+      "errors": {
+        "waiver_required": "Marque a caixa de acesso imediato para continuar.",
+        "invalid_pack": "Este pacote não existe: escolha um da lista.",
+        "rate_limited": "Demasiadas tentativas: tente novamente dentro de alguns minutos.",
+        "stripe_unavailable": "O pagamento está temporariamente indisponível. Tente mais tarde.",
+        "generic": "A compra de espaço está temporariamente indisponível."
+      }
     }
   }
 }

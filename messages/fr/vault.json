@@ -947,7 +947,38 @@
       "fullTitle": "Votre espace de stockage est plein",
       "fullText": "{used} utilisés sur {max}. Libérez de la place (la corbeille compte jusqu’à sa purge) ou passez à une offre supérieure pour ajouter des fichiers.",
       "upgrade": "Voir les offres",
-      "trash": "Ouvrir la corbeille"
+      "trash": "Ouvrir la corbeille",
+      "buy": "Acheter de l'espace"
+    },
+    "storage": {
+      "title": "Plus d'espace",
+      "intro": "Ajoutez de l'espace à votre coffre-fort sans changer d'offre. Paiement unique, espace valable {months} mois, cumulable.",
+      "choose": "Choisir un pack d'espace",
+      "packName": "+{gb} Go",
+      "featured": "Le plus choisi",
+      "perGb": "{price} le Go par an",
+      "lot": "+{gb} Go actifs",
+      "until": "jusqu'au {date}",
+      "validity": "Espace valable {months} mois",
+      "expiryRule": "À l'expiration, aucun fichier n'est supprimé : seuls les nouveaux ajouts sont bloqués tant que l'espace utilisé dépasse votre quota.",
+      "waiver": "Je demande l'accès immédiat à l'espace acheté et je renonce à mon droit de rétractation de 14 jours dès son ajout.",
+      "pay": "Payer et ajouter cet espace",
+      "payDemo": "Simuler l'achat (démonstration)",
+      "demoNotice": "Démonstration : l'achat est simulé, aucun paiement n'est demandé et aucun espace n'est réellement ajouté.",
+      "secure": "Paiement sécurisé par Stripe. Lien Parental ne voit jamais votre carte.",
+      "terms": "Conditions d'utilisation",
+      "success": "+{gb} Go ajoutés à votre espace. Merci !",
+      "successPending": "Paiement reçu : votre espace sera ajouté dans quelques instants. Rechargez la page si besoin.",
+      "paymentFailed": "Le paiement n'a pas abouti : aucun montant n'a été prélevé.",
+      "demoSuccess": "+{gb} Go ajoutés (démonstration, achat simulé).",
+      "canceled": "Paiement annulé : rien n’a été prélevé.",
+      "errors": {
+        "waiver_required": "Cochez la case d'accès immédiat pour continuer.",
+        "invalid_pack": "Ce pack n'existe pas : choisissez-en un dans la liste.",
+        "rate_limited": "Trop de tentatives : réessayez dans quelques minutes.",
+        "stripe_unavailable": "Le paiement est momentanément indisponible. Réessayez plus tard.",
+        "generic": "L'achat d'espace est momentanément indisponible."
+      }
     }
   }
 }

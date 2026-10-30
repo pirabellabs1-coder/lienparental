@@ -5,13 +5,17 @@ import { TopBar } from '@/components/mobile/TopBar'
 import { CATEGORIES, GO, STORAGE, UsageCard, formatBytes } from '@/components/profil/storage'
 import { loadProfileUsage } from '@/components/profil/usage-server'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
+import { StorageNotice, StoragePacks, storagePurchaseNotice } from '@/components/profil/StoragePacks'
 
 export const dynamic = 'force-dynamic'
 
 type Row = { key: string; size: string; icon: typeof File }
 
 // Stockage - Utilisation. Compte réel : documents du coffre (usage-server) ; démonstration : valeurs fictives.
-export default async function StockagePage() {
+export default async function StockagePage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
+  const sp = await searchParams
+  // Retour de paiement d'un pack d'espace : traité AVANT la lecture de l'usage.
+  const notice = await storagePurchaseNotice(sp)
   const t = await getTranslations('account.storage')
   const locale = await getLocale()
   let usage: { usedBytes: number; maxBytes: number } | null
@@ -35,6 +39,7 @@ export default async function StockagePage() {
     <>
       <TopBar title={t('usageTitle')} showBack backHref="/app/profil" showBell={false} />
       <div className="px-5 pb-8 pt-3">
+        {notice && <StorageNotice notice={notice} />}
         {usage ? (
           <>
             <UsageCard usedBytes={usage.usedBytes} maxBytes={usage.maxBytes} caption={t('usedPct', { pct: '{pct}' })} />
@@ -55,6 +60,8 @@ export default async function StockagePage() {
             {t('unavailable')}
           </p>
         )}
+
+        <StoragePacks selected={Array.isArray(sp.pack) ? sp.pack[0] : sp.pack} />
 
         <Link
           href="/app/profil/stockage/fichiers"

@@ -74,7 +74,13 @@ async function loadStorage(user: CurrentUser, plan: PlanId): Promise<StorageUsag
         usedBytes = Number(total)
       }
     }
-    return { usedBytes, maxBytes: storageMaxBytes(plan), breakdown }
+    // Espace acheté encore actif (packs, 0610) : s'ajoute au quota de l'offre.
+    let extraBytes = 0
+    if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      const { data: extra, error: extraErr } = await db.rpc('storage_extra_bytes', { p_user_id: user.id })
+      if (!extraErr) extraBytes = Number(extra) || 0
+    }
+    return { usedBytes, maxBytes: storageMaxBytes(plan) + extraBytes, breakdown }
   } catch (err) {
     console.warn('[profil] stockage indisponible', err instanceof Error ? err.message : 'unknown')
     return null

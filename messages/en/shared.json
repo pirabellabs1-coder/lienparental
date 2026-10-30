@@ -100,7 +100,7 @@
         "relatedNotFound": "Linked item not found.",
         "sessionExpired": "Your session has expired. Please sign in again.",
         "childrenLimit": "You have reached the maximum of 5 child profiles.",
-        "storageQuota": "Your storage space is full: free up space (trash included) or upgrade your plan."
+        "storageQuota": "Your storage is full: free up space (bin included), buy more space (Profile > Storage) or upgrade your plan."
       },
       "family": {
         "linkedParent": "a linked parent"

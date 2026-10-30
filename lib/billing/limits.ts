@@ -5,6 +5,7 @@
 export const BILLING_RATE_LIMITS = {
   checkout: { limit: 10, windowMs: 10 * 60_000 },
   credits: { limit: 10, windowMs: 10 * 60_000 },
+  storage: { limit: 10, windowMs: 10 * 60_000 },
   'change-plan': { limit: 8, windowMs: 10 * 60_000 },
   cancel: { limit: 10, windowMs: 10 * 60_000 },
   portal: { limit: 20, windowMs: 10 * 60_000 },
