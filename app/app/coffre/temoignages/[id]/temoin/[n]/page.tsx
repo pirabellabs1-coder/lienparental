@@ -9,6 +9,7 @@ import { EnvelopeWaiting, ReceivedMedal } from '@/components/coffre/Illustration
 import { btn } from '@/components/coffre/buttons'
 import { useRequests } from '@/components/coffre/store'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
+import { useRemindWitness } from '@/components/coffre/useRemindWitness'
 import { useVaultI18n } from '@/components/coffre/i18n'
 import { testimonyLink } from '@/lib/data/testimonies'
 
@@ -20,6 +21,7 @@ export default function TemoinPage({ params }: { params: Promise<{ id: string; n
   const infoId = useId()
   const { requests, ready } = useRequests()
   const { announce, node } = useAnnounce()
+  const remind = useRemindWitness(announce)
   const [showInfo, setShowInfo] = useState(false)
   const r = requests.find((x) => x.id === id)
   const w = r?.witnesses.find((x) => String(x.n) === n)
@@ -65,7 +67,7 @@ export default function TemoinPage({ params }: { params: Promise<{ id: string; n
           {received ? (
             <Link href={`/app/coffre/temoignages/${r.id}/liste`} className={btn({ variant: 'primary' })}>{t('witnessView.view')}</Link>
           ) : (
-            <button type="button" onClick={() => announce(t('reminderSent', { n: w.n }))} className={btn({ variant: 'primary' })}>
+            <button type="button" onClick={() => void remind(r.token, t('reminderSent', { n: w.n }))} className={btn({ variant: 'primary' })}>
               {t('witnessView.remind')}
             </button>
           )}

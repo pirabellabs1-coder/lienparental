@@ -672,7 +672,7 @@
       "refuse": "Recusar",
       "refuseTitle": "Recusar este depoimento?",
       "refuseText": "O depoimento de {name} não será guardado no seu cofre. Esta ação é irreversível.",
-      "reminderSent": "Lembrete enviado à testemunha {n}",
+      "reminderSent": "Lembrete partilhado para a testemunha {n}",
       "list": {
         "title": "Minhas solicitações",
         "newRequest": "Nova solicitação",
@@ -768,10 +768,10 @@
         "progress": "Andamento",
         "receivedLabel": "Depoimentos recebidos",
         "awaiting": "Aguardando envio",
-        "remindAria": "Lembrar a testemunha {n}",
+        "remindAria": "Lembrar a testemunha {n} por mensagem",
         "seeTestimonials": "Ver depoimentos",
-        "remindedAll": "Lembrete enviado a {count, plural, one {# testemunha} other {# testemunhas}}",
-        "remindAll": "Lembrar as testemunhas",
+        "remindedAll": "Lembrete partilhado: {count, plural, one {# testemunha pendente} other {# testemunhas pendentes}}",
+        "remindAll": "Lembrar as testemunhas por mensagem",
         "stillOpen": "O link continua aberto a outras testemunhas. Encerre o pedido quando tiver recebido todos os testemunhos esperados.",
         "close": "Encerrar o pedido",
         "closeConfirm": "Encerrar o pedido? O link não aceitará mais novos testemunhos. {count, plural, =0 {Nenhum testemunho recebido por enquanto.} one {O testemunho recebido continua no seu cofre.} other {Os # testemunhos recebidos continuam no seu cofre.}}",
@@ -779,7 +779,8 @@
         "closeCancel": "Cancelar",
         "closing": "Encerrando…",
         "closed": "Pedido encerrado.",
-        "closeFailed": "Não foi possível encerrar o pedido. Tente novamente."
+        "closeFailed": "Não foi possível encerrar o pedido. Tente novamente.",
+        "remindHint": "As testemunhas recebem o link de si: o lembrete é enviado pela sua própria aplicação de mensagens (WhatsApp, SMS, e-mail…)."
       },
       "witnessView": {
         "title": "Testemunha",
@@ -793,7 +794,7 @@
         "awaiting": "Aguardando envio…",
         "notify": "Avisaremos você assim que a testemunha enviar o depoimento.",
         "view": "Ver depoimento",
-        "remind": "Lembrar esta testemunha",
+        "remind": "Lembrar esta testemunha por mensagem",
         "info": "Ver informações da testemunha",
         "invitation": "Convite",
         "name": "Nome",
@@ -838,7 +839,10 @@
         "contextPlaceholder": "Descreva brevemente o contexto…\n(ex.: processo na vara de família, guarda compartilhada etc.)",
         "contextNote": "Estas informações não serão visíveis para a testemunha.",
         "creating": "Criando…"
-      }
+      },
+      "reminderCopied": "Lembrete copiado: cole-o na sua conversa com a testemunha",
+      "reminderText": "Um pequeno lembrete: o seu testemunho é muito importante para mim. O formulário é seguro e leva apenas alguns minutos.",
+      "reminderTitle": "Lien Parental — lembrete de testemunho"
     },
     "album": {
       "title": "Álbum da criança",
