@@ -2,12 +2,13 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { Coins, Send, Square, HeartPulse } from 'lucide-react'
+import { Coins, FileImage, FileText, HeartPulse, Paperclip, Send, Square } from 'lucide-react'
 import { ChatBubble, type ChatMessage } from './ChatBubble'
 import { DemoNote, LegalNote } from './ui'
 import { errorMessage, readSse } from './sse-client'
-import { newIdempotencyKey } from './session'
+import { DOC_ACCEPT, IMAGE_ACCEPT, draftFromFile, fileErrorCode, newIdempotencyKey, saveDraft, setPendingFile } from './session'
 import { useCredits } from './CreditCost'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
@@ -61,7 +62,9 @@ function loadStored(key: string | undefined): ChatMessage[] | null {
 export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], suggestions = [], inputLabel, placeholder, conversationLabel, persistKey }: Props) {
   const t = useTranslations('coach.chat')
   const tc = useTranslations('coach.common')
+  const th = useTranslations('coach.home')
   const locale = useLocale()
+  const router = useRouter()
   const [messages, setMessages] = useState<ChatMessage[]>(seed)
   const [q, setQ] = useState('')
   const [streaming, setStreaming] = useState(false)
@@ -81,6 +84,28 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
   const inputId = useId()
   const medId = useId()
   const hintId = useId()
+  const attachId = useId()
+  // Pièce jointe : le chat n'envoie que du texte ; une image ou un document passe par l'analyse du Coach
+  // (contrôle du format côté serveur, coût selon le type), dont on peut ensuite discuter.
+  const [attachOpen, setAttachOpen] = useState(false)
+  const [fileError, setFileError] = useState('')
+  const imageRef = useRef<HTMLInputElement>(null)
+  const docRef = useRef<HTMLInputElement>(null)
+
+  const onFile = (file: File | undefined, accept: 'image' | 'doc') => {
+    if (!file) return
+    const err = fileErrorCode(file, accept)
+    if (err) {
+      setFileError(tc(`fileErrors.${err}`))
+      return
+    }
+    setFileError('')
+    setPendingFile(file)
+    // La question en cours de saisie accompagne le fichier (limite du serveur : 2 000 caractères).
+    const question = q.trim().slice(0, 2000)
+    saveDraft({ ...draftFromFile(file), ...(question ? { text: question } : {}) })
+    router.push('/app/coach/document')
+  }
 
   useEffect(() => () => abortRef.current?.abort(), [])
 
@@ -287,7 +312,76 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
         <label htmlFor={inputId} className="sr-only">
           {inputLabel}
         </label>
-        <div className="flex items-end gap-2 rounded-xl2 border border-night-100 bg-night-50/40 py-1.5 pl-4 pr-1.5 focus-within:border-iris-300">
+        {attachOpen && (
+          <div id={attachId} className="mb-2 rounded-xl2 border border-iris-100 bg-iris-50/50 p-2">
+            <div className="grid gap-2 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => imageRef.current?.click()}
+                disabled={streaming}
+                className="flex min-h-[48px] items-center gap-3 rounded-xl bg-white px-3 py-2 text-left ring-1 ring-night-100 transition hover:ring-iris-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500 disabled:opacity-50"
+              >
+                <FileImage className="h-5 w-5 shrink-0 text-iris-600" aria-hidden="true" />
+                <span className="min-w-0">
+                  <span className="block text-[13px] font-semibold text-night-900">{th('addCapture')}</span>
+                  <span className="block text-[11.5px] text-night-600">{th('addCaptureHint')}</span>
+                </span>
+              </button>
+              <button
+                type="button"
+                onClick={() => docRef.current?.click()}
+                disabled={streaming}
+                className="flex min-h-[48px] items-center gap-3 rounded-xl bg-white px-3 py-2 text-left ring-1 ring-night-100 transition hover:ring-iris-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500 disabled:opacity-50"
+              >
+                <FileText className="h-5 w-5 shrink-0 text-iris-600" aria-hidden="true" />
+                <span className="min-w-0">
+                  <span className="block text-[13px] font-semibold text-night-900">{th('addDoc')}</span>
+                  <span className="block text-[11.5px] text-night-600">{th('addDocHint')}</span>
+                </span>
+              </button>
+            </div>
+            <p className="mt-2 px-1 text-[11.5px] leading-relaxed text-night-600">{t('attachNote')}</p>
+            <input
+              ref={imageRef}
+              type="file"
+              accept={IMAGE_ACCEPT}
+              className="sr-only"
+              tabIndex={-1}
+              aria-hidden="true"
+              onChange={(e) => {
+                onFile(e.target.files?.[0], 'image')
+                e.target.value = ''
+              }}
+            />
+            <input
+              ref={docRef}
+              type="file"
+              accept={DOC_ACCEPT}
+              className="sr-only"
+              tabIndex={-1}
+              aria-hidden="true"
+              onChange={(e) => {
+                onFile(e.target.files?.[0], 'doc')
+                e.target.value = ''
+              }}
+            />
+          </div>
+        )}
+        <div className="flex items-end gap-2 rounded-xl2 border border-night-100 bg-night-50/40 py-1.5 pl-1.5 pr-1.5 focus-within:border-iris-300">
+          <button
+            type="button"
+            onClick={() => setAttachOpen((o) => !o)}
+            aria-expanded={attachOpen}
+            aria-controls={attachOpen ? attachId : undefined}
+            aria-label={t('attach')}
+            title={t('attach')}
+            className={cn(
+              'grid h-11 w-11 shrink-0 place-items-center rounded-full text-night-700 transition hover:bg-iris-50 hover:text-iris-600 active:scale-95',
+              attachOpen && 'bg-iris-50 text-iris-600',
+            )}
+          >
+            <Paperclip className="h-5 w-5" aria-hidden="true" />
+          </button>
           <textarea
             ref={inputRef}
             id={inputId}
@@ -321,6 +415,11 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
             </button>
           )}
         </div>
+        {fileError && (
+          <p role="alert" className="mt-1.5 text-[12px] font-medium text-alert-600">
+            {fileError}
+          </p>
+        )}
         <p id={hintId} className="mt-1.5 text-[11.5px] text-night-500">
           {t('hint')} {t('costHint', { count: chatCost })}
           {credits ? ` ${t('balanceHint', { total: credits.total })}` : ''}

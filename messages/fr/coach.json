@@ -58,7 +58,9 @@
       "noCredits": "Vous n’avez plus de crédits pour poser une question. Rechargez votre solde ou passez à une offre supérieure.",
       "lowCredits": "Il ne vous reste que {total, plural, one {# crédit} other {# crédits}}.",
       "upgradePlan": "Passer à Premium",
-      "seePlans": "Voir les offres"
+      "seePlans": "Voir les offres",
+      "attach": "Joindre une image ou un document",
+      "attachNote": "Le Coach analyse le fichier (votre question en cours l’accompagne), puis vous pouvez en discuter avec lui. Le coût dépend du type de fichier."
     },
     "list": {
       "opFailed": "L’opération a échoué. Réessayez.",

@@ -65,6 +65,8 @@ export default function CoachAnalysePage() {
         return
       }
       form.set('file', file, file.name)
+      // Question saisie dans la discussion avant de joindre le fichier : transmise avec lui.
+      if (draft.text?.trim()) form.set('text', draft.text.trim())
       title = draft.name
       kind = draft.kind
     }
