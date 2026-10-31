@@ -4,6 +4,7 @@ import { appOrigin, STRIPE_TAX_ENABLED } from '@/lib/billing/config'
 import { apiError, fail, isSameOrigin, limitBilling, logError, readBody, requireBillingUser, seeOther, wantsJson } from '@/lib/billing/http'
 import { parseCycleStrict, parsePlanStrict, priceIdForOffer } from '@/lib/billing/prices'
 import { getStripe } from '@/lib/billing/stripe'
+import { attributionMetadata } from '@/lib/attribution/server'
 import { getOrCreateCustomer, getSubscription, isBlockingStatus } from '@/lib/billing/subscription'
 
 /**
@@ -69,6 +70,8 @@ export async function POST(req: Request) {
       await stripe.checkout.sessions.expire(s.id).catch(() => undefined)
     }
 
+    // Campagne d'origine du compte (UTM, 0620) : visible dans Stripe sur la session et l'abonnement.
+    const utm = await attributionMetadata(user.id)
     const session = await stripe.checkout.sessions.create({
       // Durée minimale autorisée par Stripe : une session oubliée ne reste pas payable 24 h.
       expires_at: Math.floor(Date.now() / 1000) + 30 * 60 + 30,
@@ -78,8 +81,8 @@ export async function POST(req: Request) {
       // Lien explicite user ↔ session/abonnement : exploité par le webhook,
       // jamais l'e-mail du client.
       client_reference_id: user.id,
-      metadata: { user_id: user.id, cycle, formule },
-      subscription_data: { metadata: { user_id: user.id, formule } },
+      metadata: { ...utm, user_id: user.id, cycle, formule },
+      subscription_data: { metadata: { ...utm, user_id: user.id, formule } },
       // Retour : écran de confirmation qui vérifie la session et synchronise l'abonnement
       // sans attendre le webhook (GET /api/stripe/status).
       success_url: `${base}/app/abonnement/confirmation?session_id={CHECKOUT_SESSION_ID}`,

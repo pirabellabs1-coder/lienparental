@@ -15,7 +15,7 @@ export type PublicPage = {
 export const LEGAL_UPDATED = {
   mentions: '2026-10-25',
   cgu: '2026-10-29',
-  confidentialite: '2026-10-26',
+  confidentialite: '2026-10-31',
 } as const
 
 export const PUBLIC_PAGES: PublicPage[] = [

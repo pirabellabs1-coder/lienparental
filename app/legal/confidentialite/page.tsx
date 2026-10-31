@@ -124,6 +124,12 @@ export default async function ConfidentialitePage() {
           </section>
 
           <section>
+            {h2('cookies.title')}
+            {p('cookies.p1')}
+            {p('cookies.p2')}
+          </section>
+
+          <section>
             {h2('retention.title')}
             {p('retention.p1')}
           </section>
