@@ -1198,7 +1198,22 @@
       "send": "Enviar",
       "error": "Não consigo responder agora. Tente novamente em instantes ou escreva para contact@lienparental.fr.",
       "disclaimer": "Respostas geradas por IA, sem aconselhamento jurídico. Não informe dados pessoais.",
-      "privacy": "Privacidade"
+      "privacy": "Privacidade",
+      "coach": {
+        "open": "Abrir o Coach parental",
+        "title": "Coach parental",
+        "welcome": "Olá 👋 Sou o seu Coach parental. Pergunte sobre a organização da guarda, a comunicação com o outro genitor ou os seus procedimentos.",
+        "suggestion1": "Como preparar a troca deste fim de semana?",
+        "suggestion2": "Ajude-me a responder com calma ao outro genitor",
+        "suggestion3": "O que fazer se a pensão não for paga?",
+        "balance": "{total, plural, one {# crédito} other {# créditos}} · {cost, plural, one {# crédito} other {# créditos}} por pergunta",
+        "noCredits": "Você não tem mais créditos para fazer uma pergunta ao Coach. Recarregue o seu saldo para continuar.",
+        "recharge": "Recarregar meus créditos",
+        "fullHint": "Capturas e documentos:",
+        "openFull": "Abrir o Coach completo",
+        "disclaimer": "O Coach informa e aconselha; ele não substitui um advogado.",
+        "error": "O Coach não conseguiu responder. Tente novamente em instantes."
+      }
     }
   }
 }

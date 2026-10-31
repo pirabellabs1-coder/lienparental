@@ -1198,7 +1198,22 @@
       "send": "Send",
       "error": "I can’t answer right now. Try again in a moment or write to us at contact@lienparental.fr.",
       "disclaimer": "AI-generated answers, not legal advice. Don’t share personal data.",
-      "privacy": "Privacy"
+      "privacy": "Privacy",
+      "coach": {
+        "open": "Open the parenting Coach",
+        "title": "Parenting Coach",
+        "welcome": "Hello 👋 I’m your parenting Coach. Ask me about organising custody, communicating with the other parent or your next steps.",
+        "suggestion1": "How do I prepare this weekend’s handover?",
+        "suggestion2": "Help me reply calmly to the other parent",
+        "suggestion3": "What if child support isn’t paid?",
+        "balance": "{total, plural, one {# credit} other {# credits}} · {cost, plural, one {# credit} other {# credits}} per question",
+        "noCredits": "You have no credits left to ask the Coach a question. Top up your balance to continue.",
+        "recharge": "Top up my credits",
+        "fullHint": "Screenshots and documents:",
+        "openFull": "Open the full Coach",
+        "disclaimer": "The Coach informs and advises; it does not replace a lawyer.",
+        "error": "The Coach couldn’t answer. Try again in a moment."
+      }
     }
   }
 }

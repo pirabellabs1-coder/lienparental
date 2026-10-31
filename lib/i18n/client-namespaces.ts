@@ -57,6 +57,7 @@ export const CLIENT_NS_APP = [
   'messaging',
   'vault',
   'onb',
+  'public.assistant',
   'public.help',
   'public.onboarding.classes',
   'public.onboarding.fields',

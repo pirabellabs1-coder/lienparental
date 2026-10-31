@@ -5,6 +5,7 @@ import { BottomNav } from '@/components/mobile/BottomNav'
 import { DesktopSidebar } from '@/components/mobile/DesktopSidebar'
 import { NavigationProgress } from '@/components/mobile/NavigationProgress'
 import { SearchProvider } from '@/components/search/SearchProvider'
+import { CoachBubble } from '@/components/assistant/CoachBubble'
 import { LocaleSync } from '@/components/i18n/LocaleSync'
 import { ScopedIntlProvider } from '@/components/i18n/ScopedIntlProvider'
 import { CLIENT_NS_APP } from '@/lib/i18n/client-namespaces'
@@ -51,6 +52,8 @@ export default async function AppShellLayout({ children }: { children: React.Rea
       </div>
       <div className="md:hidden"><BottomNav /></div>
       <SearchProvider />
+      {/* Bulle du Coach parental (mascotte en bas à droite), au-dessus de la barre d'onglets mobile. */}
+      <CoachBubble />
       <LocaleSync />
     </div>
     </TimeZoneProvider>
