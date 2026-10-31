@@ -76,3 +76,9 @@ test('liens de l’assistant : chemins internes uniquement', async () => {
 test('historique réduit à des tours assistant : vide (refusé par la route)', () => {
   assert.deepEqual(trimAssistantHistory([{ role: 'assistant', content: 'x' }]), [])
 })
+
+test('bulle du Coach : masquée sur le Coach, les fils de messagerie et le coffre', async () => {
+  const { bubbleHiddenOn } = await import('../components/assistant/visibility')
+  for (const p of ['/app/coach', '/app/coach/discussion', '/app/messages/abc', '/app/coffre', '/app/coffre/album']) assert.ok(bubbleHiddenOn(p), p)
+  for (const p of ['/app', '/app/calendrier', '/app/messages', '/app/coachs-fictif', '/app/coffret']) assert.ok(!bubbleHiddenOn(p), p)
+})

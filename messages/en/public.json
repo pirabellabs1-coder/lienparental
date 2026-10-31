@@ -534,6 +534,12 @@
             "data": "Only when you use the Coach: your question or the content to analyze, and a summary of your space (children’s first names and ages, journal, calendar, document names). Medical information is only sent if you enable it for a question. For the website assistant, available without an account: only the messages of the current conversation, with no identifier or IP address; Lien Parental does not store them. Do not share personal data there.",
             "location": "United States (Anthropic is an American company)."
           },
+          "elevenlabs": {
+            "name": "ElevenLabs (read aloud)",
+            "purpose": "Reading the AI Coach’s and the website assistant’s answers aloud, when you ask for it (“Read aloud” button).",
+            "data": "Only the text of the answer to be read (cleaned and length-limited), with no identifier, IP address or content from your space. Your voice is never recorded.",
+            "location": "United States and European Union (ElevenLabs is an American company)."
+          },
           "stripe": {
             "name": "Stripe (payments)",
             "purpose": "Payment and management of subscriptions, invoices.",
@@ -551,7 +557,8 @@
             "purpose": "Sign-in with your Google account and, if you enable it, copying your events to your Google Calendar.",
             "data": "Sign-in: name, email address and Google ID. Calendar: title, dates and location of copied events (health appointments hidden by default, children’s first names never sent).",
             "location": "European Union and United States. For your Google account data, Google acts under its own privacy rules."
-          }
+          },
+          "dictation": "Dictation: the microphone button in the message field uses your browser’s or phone’s speech recognition. Lien Parental neither receives nor records your voice: only the text you choose to send reaches us. Depending on the browser, recognition may be performed by its publisher (for example Google for Chrome, Apple for Safari), under its own terms."
         },
         "google": {
           "title": "Data received from Google",
@@ -1198,7 +1205,32 @@
       "send": "Send",
       "error": "I can’t answer right now. Try again in a moment or write to us at contact@lienparental.fr.",
       "disclaimer": "AI-generated answers, not legal advice. Don’t share personal data.",
-      "privacy": "Privacy"
+      "privacy": "Privacy",
+      "coach": {
+        "open": "Open the parenting Coach",
+        "title": "Parenting Coach",
+        "welcome": "Hello 👋 I’m your parenting Coach. Ask me about organising custody, communicating with the other parent or your next steps.",
+        "suggestion1": "How do I prepare this weekend’s handover?",
+        "suggestion2": "Help me reply calmly to the other parent",
+        "suggestion3": "What if child support isn’t paid?",
+        "balance": "{total, plural, one {# credit} other {# credits}} · {cost, plural, one {# credit} other {# credits}} per question",
+        "noCredits": "You have no credits left to ask the Coach a question. Top up your balance to continue.",
+        "recharge": "Top up my credits",
+        "fullHint": "Screenshots and documents:",
+        "openFull": "Open the full Coach",
+        "disclaimer": "The Coach informs and advises; it does not replace a lawyer.",
+        "error": "The Coach couldn’t answer. Try again in a moment."
+      },
+      "listen": "Read aloud",
+      "listenStop": "Stop reading",
+      "listenLoading": "Preparing…",
+      "mic": "Dictate my message",
+      "micStop": "Stop dictation",
+      "listening": "Listening… speak, then review before sending.",
+      "micError": "Dictation couldn’t start. Check the microphone permission.",
+      "voiceUnavailable": "Voice playback is temporarily unavailable, please try again.",
+      "voiceLimit": "You’ve reached the listening limit without an account.",
+      "voiceLimitCta": "Create a free account to listen to more answers"
     }
   }
 }

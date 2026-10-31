@@ -1,8 +1,9 @@
 import { useTranslations } from 'next-intl'
-import { CheckCheck, Database, Loader2, Square, Volume2 } from 'lucide-react'
+import { CheckCheck, Database } from 'lucide-react'
 import type { CoachChatMessage } from '@/lib/mock-data'
 import { cn } from '@/lib/cn'
 import { RobotMascot } from './RobotMascot'
+import { SpeechButton, type BubbleSpeech } from './SpeechButton'
 
 export type ChatMessage = CoachChatMessage & {
   /** Réponse en cours de génération (flux). */
@@ -97,7 +98,7 @@ export function RichText({ text, bullets }: { text: string; bullets?: string[] }
 }
 
 /** Lecture à voix haute d'une réponse (bouton sous la bulle). */
-export type BubbleSpeech = { playing: boolean; loading: boolean; onToggle: () => void }
+export type { BubbleSpeech }
 
 // Bulle de discussion Coach IA : utilisateur à droite (violet clair),
 // IA à gauche (carte blanche + avatar robot).
@@ -149,24 +150,7 @@ export function ChatBubble({ message, live = false, speech }: { message: ChatMes
         {(message.time || speech) && (
           <div className="mt-1 flex items-center justify-between gap-3">
             {speech ? (
-              <button
-                type="button"
-                onClick={speech.onToggle}
-                aria-pressed={speech.playing}
-                className={cn(
-                  '-ml-2 inline-flex min-h-[36px] items-center gap-1.5 rounded-full px-2.5 text-[12px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-iris-500',
-                  speech.playing || speech.loading ? 'bg-iris-50 text-iris-700' : 'text-iris-600 hover:bg-iris-50',
-                )}
-              >
-                {speech.loading ? (
-                  <Loader2 className="h-4 w-4 motion-safe:animate-spin" aria-hidden="true" />
-                ) : speech.playing ? (
-                  <Square className="h-3.5 w-3.5 fill-current" aria-hidden="true" />
-                ) : (
-                  <Volume2 className="h-4 w-4" aria-hidden="true" />
-                )}
-                {speech.loading ? t('listenLoading') : speech.playing ? t('listenStop') : t('listen')}
-              </button>
+              <SpeechButton speech={speech} labels={{ listen: t('listen'), listenStop: t('listenStop'), listenLoading: t('listenLoading') }} />
             ) : <span />}
             {message.time && (
               <p className="text-right text-[11px] text-night-500">

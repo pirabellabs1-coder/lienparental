@@ -31,9 +31,14 @@ const config: Config = {
       animation: {
         'fade-up': 'fadeUp .5s ease-out both',
         'pulse-slow': 'pulse 3s ease-in-out infinite',
+        // Mascotte de l'assistant : flottement léger et clignement (motion-safe uniquement).
+        'float-soft': 'floatSoft 3.6s ease-in-out infinite',
+        blink: 'blink 5.5s ease-in-out infinite',
       },
       keyframes: {
         fadeUp: { '0%': { opacity: '0', transform: 'translateY(8px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+        floatSoft: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-4px)' } },
+        blink: { '0%, 92%, 100%': { transform: 'scaleY(1)' }, '95%': { transform: 'scaleY(0.15)' } },
       },
     },
   },
