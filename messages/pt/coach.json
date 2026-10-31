@@ -85,8 +85,10 @@
       "mic": "Ditar minha pergunta",
       "micStop": "Parar o ditado",
       "listening": "Ouvindo… fale e depois revise antes de enviar.",
-      "micError": "Não foi possível iniciar o ditado. Verifique a permissão do microfone.",
-      "voiceUnavailable": "Leitura em voz alta temporariamente indisponível, tente novamente."
+      "micError": "Não foi possível iniciar o ditado. Use o microfone 🎤 do teclado.",
+      "voiceUnavailable": "Leitura em voz alta temporariamente indisponível, tente novamente.",
+      "micDenied": "O microfone não está autorizado. Autorize-o nas definições do navegador ou use o microfone 🎤 do teclado.",
+      "micNothing": "Não ouvi nada. Toque no microfone, fale com clareza e espere que o texto apareça. Também pode usar o microfone 🎤 do teclado."
     },
     "list": {
       "opFailed": "A operação falhou. Tente novamente.",

@@ -531,7 +531,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
         </div>
         <p role="status" aria-live="polite" className={cn('px-1 text-[12px] font-semibold', dictation.listening ? 'mt-1 flex items-center gap-2 text-alert-600' : dictation.error ? 'mt-1 text-alert-700' : 'sr-only')}>
           {dictation.listening && <span aria-hidden="true" className="h-2 w-2 rounded-full bg-alert-500 motion-safe:animate-pulse" />}
-          {dictation.listening ? t('listening') : dictation.error ? t('micError') : ''}
+          {dictation.listening ? (dictation.interim ? `« ${dictation.interim} »` : t('listening')) : dictation.error ? t(dictation.error === 'denied' ? 'micDenied' : dictation.error === 'nothing' ? 'micNothing' : 'micError') : ''}
         </p>
         {fileError && (
           <p role="alert" className="mt-1 px-1 text-[12px] font-medium text-alert-600">
