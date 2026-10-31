@@ -251,7 +251,7 @@
         "mismatch": "The two codes don’t match. Start again.",
         "introConfirm": "Enter your code again to confirm it.",
         "introReauth": "For your security, sign in again with Google before choosing your 6-digit code. You will come back here afterwards.",
-        "introSetup": "Create a 6-digit code to protect your documents and testimonials.",
+        "introSetup": "Create a 6-digit code to protect your documents and testimonials. Avoid repeated or consecutive digits (111111, 123456).",
         "introPassword": "Enter your Lien Parental account password.",
         "introSettings": "Unlock the vault to change its security settings.",
         "introPin": "Enter your 6-digit code to access your documents and testimonials.",
@@ -270,7 +270,8 @@
         "forgotReset": "Forgot your code? Reset my code",
         "forgotRelogin": "Forgot your code? Sign out and sign back in: you’ll be able to reset it here for 5 minutes.",
         "autoLock": "Automatic lock after {minutes} min of inactivity",
-        "demo": "Demo: code 123456"
+        "demo": "Demo: code 123456",
+        "weak": "This code is too simple: avoid repeated or consecutive digits. Choose another one."
       },
       "settings": {
         "toggleOff": "Lock turned off.",

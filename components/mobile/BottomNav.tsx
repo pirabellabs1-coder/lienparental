@@ -34,18 +34,23 @@ export function BottomNav() {
   const t = useTranslations('appnav')
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+  // Onglet touché, allumé tout de suite sans attendre la nouvelle page (retour bêta-test : ~0,3 s ressenties).
+  const [pending, setPending] = useState<string | null>(null)
   const alias = Object.keys(ALIASES).find(p => pathname.startsWith(p))
-  const current = alias ? ALIASES[alias] : pathname
+  const current = pending ?? (alias ? ALIASES[alias] : pathname)
   // Témoignages vit sous /app/coffre mais appartient au menu.
   const onTab = (href: string) => (href === '/app' ? current === '/app' : current.startsWith(href) && !current.startsWith('/app/coffre/temoignages'))
   const inMenu = !TABS.some(t => onTab(t.href))
+  // aria-current suit la page réellement affichée, pas l'onglet en attente.
+  const realCurrent = alias ? ALIASES[alias] : pathname
+  const onTabNow = (href: string) => (href === '/app' ? realCurrent === '/app' : realCurrent.startsWith(href) && !realCurrent.startsWith('/app/coffre/temoignages'))
   const activeItem = activeNavHref(pathname)
 
-  // Ferme le menu après une navigation.
-  useEffect(() => { setMenuOpen(false) }, [pathname])
+  // Ferme le menu et oublie l'onglet en attente après une navigation.
+  useEffect(() => { setMenuOpen(false); setPending(null) }, [pathname])
 
   const tabClass = (active: boolean) => cn(
-    'flex h-16 w-full min-w-[44px] flex-col items-center justify-center gap-1 transition-colors',
+    'flex h-16 w-full min-w-[44px] flex-col items-center justify-center gap-1 transition-[color,transform] duration-100 active:scale-95 motion-reduce:transition-none motion-reduce:active:scale-100',
     active ? 'text-leaf-500' : 'text-night-900 hover:text-night-700',
   )
 
@@ -61,7 +66,13 @@ export function BottomNav() {
               const active = onTab(href)
               return (
                 <li key={href} className="flex-1">
-                  <Link href={href} prefetch={navPrefetch(href)} aria-current={active ? 'page' : undefined} className={tabClass(active)}>
+                  <Link
+                    href={href}
+                    prefetch={navPrefetch(href)}
+                    aria-current={onTabNow(href) ? 'page' : undefined}
+                    onPointerDown={(e) => { if (e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey) setPending(href) }}
+                    className={tabClass(active)}
+                  >
                     <Icon className="h-[22px] w-[22px]" strokeWidth={active ? 2.4 : 1.8} fill={active ? 'currentColor' : 'none'} fillOpacity={active ? 0.15 : 0} aria-hidden />
                     <span className={cn('text-[11px]', active ? 'font-bold' : 'font-medium')}>{t(labelKey)}</span>
                   </Link>

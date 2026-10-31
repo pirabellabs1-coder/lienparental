@@ -198,8 +198,10 @@ export function DateTimeFields({
   return (
     <fieldset>
       <FieldLabel as="legend">{legend ?? t('dateTime')}</FieldLabel>
-      <div className={cn('grid gap-3', withTime ? 'grid-cols-[1.25fr_1fr]' : 'grid-cols-1 sm:max-w-xs')}>
-        <div className="relative">
+      {/* min-w-0 + appearance-none : sur iPhone, le champ date natif garde une largeur minimale qui
+          ignore la grille et passait sous le champ Heure (retour bêta-test). Très petit écran : en pile. */}
+      <div className={cn('grid gap-3', withTime ? 'grid-cols-1 min-[340px]:grid-cols-[1.25fr_1fr]' : 'grid-cols-1 sm:max-w-xs')}>
+        <div className="relative min-w-0">
           <label htmlFor={`${id}-d`} className="sr-only">{t('date')}</label>
           <input
             id={`${id}-d`}
@@ -210,11 +212,11 @@ export function DateTimeFields({
             onChange={(e) => onDate(e.target.value)}
             aria-invalid={dateError ? true : undefined}
             aria-describedby={dateError ? `${id}-derr` : undefined}
-            className={cn(fieldBase, 'relative h-12 pr-11', pickerIndicator, dateError ? 'border-alert-400' : 'border-night-100')}
+            className={cn(fieldBase, 'relative h-12 min-w-0 appearance-none pr-11 text-left [&::-webkit-date-and-time-value]:text-left', pickerIndicator, dateError ? 'border-alert-400' : 'border-night-100')}
           />
           <Calendar aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-night-700" />
         </div>
-        {withTime && <div className="relative">
+        {withTime && <div className="relative min-w-0">
           {/* Sélecteur maison : le sélecteur natif d'Android déborde de l'écran en grande taille d'affichage. */}
           <TimePicker id={`${id}-t`} label={t('time')} value={time} onChange={onTime} />
         </div>}

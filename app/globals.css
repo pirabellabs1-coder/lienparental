@@ -16,6 +16,14 @@ body{
 /* Focus visibles AA */
 *:focus-visible{ outline: none; box-shadow: var(--focus-ring); border-radius: 12px }
 
+/* Champs date/heure natifs : sur iPhone, leur largeur minimale ignore la grille et les fait déborder
+   sur le champ voisin (retour bêta-test). appearance:none garde le sélecteur natif au toucher. */
+input[type="date"], input[type="time"], input[type="datetime-local"], input[type="month"]{ min-width:0; -webkit-appearance:none; appearance:none }
+input::-webkit-date-and-time-value{ text-align:left }
+
+/* Tap immédiat : pas d'attente de double-tap (zoom) sur les commandes. */
+a, button, [role="button"], label, summary{ touch-action: manipulation }
+
 /* Mobile viewport lock pour la PWA */
 .pwa-safe{ padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) }
 

@@ -128,10 +128,12 @@ function monthYear(iso: string) {
 
 /**
  * Profil de l'utilisateur connecté (public.users, RLS) — Supabase uniquement.
- * `fallback` = profil de démonstration renvoyé tel quel sans Supabase.
+ * `fallback` = profil de démonstration renvoyé tel quel sans Supabase. Avec Supabase, il n'est
+ * JAMAIS affiché : profil vide pendant le chargement (sinon « Bonjour Julie » apparaissait une
+ * fraction de seconde avant le vrai prénom, retour bêta-test).
  */
 export function useAccountProfile(fallback: DisplayProfile) {
-  const [profile, setProfile] = useState<DisplayProfile>(fallback)
+  const [profile, setProfile] = useState<DisplayProfile>(() => (SUPABASE_ENABLED ? { prenom: '', nom: '', email: '', memberSince: '' } : fallback))
   const [loading, setLoading] = useState(SUPABASE_ENABLED)
   const [error, setError] = useState<string | null>(null)
 
@@ -150,7 +152,7 @@ export function useAccountProfile(fallback: DisplayProfile) {
       if (cancelled) return
       if (e || !data) {
         setError(msg('loadProfileFailed'))
-        setProfile({ ...fallback, prenom: '', nom: '', email: user.email ?? '', avatarUrl: undefined, memberSince: monthYear(user.created_at) })
+        setProfile({ prenom: '', nom: '', email: user.email ?? '', avatarUrl: undefined, memberSince: monthYear(user.created_at) })
         setLoading(false)
         return
       }
@@ -175,8 +177,6 @@ export function useAccountProfile(fallback: DisplayProfile) {
       setLoading(false)
     })()
     return () => { cancelled = true }
-    // fallback volontairement ignoré : seul le premier rendu compte.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return { profile, loading, error }

@@ -9,6 +9,7 @@ import { CLIENT_NS_ROOT } from '@/lib/i18n/client-namespaces'
 import { pick } from '@/lib/i18n/pick'
 import { SITE, SITE_NAME } from '@/lib/seo/site'
 import { defaultOgImage, ogLocale } from '@/lib/seo/metadata'
+import { SPLASH_SCREENS, splashMedia } from '@/lib/pwa/splash.mjs'
 
 // Typographies du guide d'identité : Montserrat (titres et textes), Allura (signature « Parental »).
 // Auto-hébergées par next/font : pas d'appel à Google au chargement, pas de saut de mise en page.
@@ -26,7 +27,13 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t('rootDescription'),
     manifest: '/manifest.json',
     applicationName: SITE_NAME,
-    appleWebApp: { capable: true, title: SITE_NAME, statusBarStyle: 'black-translucent' },
+    // Écrans de lancement iOS (scripts/generate-splash.mjs) : plus d'écran blanc ou noir à l'ouverture.
+    appleWebApp: {
+      capable: true,
+      title: SITE_NAME,
+      statusBarStyle: 'black-translucent',
+      startupImage: SPLASH_SCREENS.map((s) => ({ url: `/splash/${s.file}`, media: splashMedia(s) })),
+    },
     icons: {
       icon: [{ url: '/icons/favicon.svg', type: 'image/svg+xml' }, { url: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' }, { url: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' }],
       apple: [{ url: '/icons/apple-touch-icon.png', sizes: '180x180' }],
