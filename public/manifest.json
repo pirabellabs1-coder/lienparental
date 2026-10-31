@@ -9,7 +9,7 @@
   "display": "standalone",
   "prefer_related_applications": false,
   "orientation": "portrait",
-  "background_color": "#ffffff",
+  "background_color": "#0b2d5b",
   "theme_color": "#0b2d5b",
   "categories": [
     "lifestyle",

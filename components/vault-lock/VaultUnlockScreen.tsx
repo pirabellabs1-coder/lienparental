@@ -14,7 +14,7 @@ import { Logo } from '@/components/brand/Logo'
 import { PasswordField } from '@/components/profil/fields'
 import { btn } from '@/components/profil/kit'
 import { cn } from '@/lib/cn'
-import type { VaultStatus } from '@/lib/vault-lock/config'
+import { isWeakPin, type VaultStatus } from '@/lib/vault-lock/config'
 import { VaultApiError, isWebauthnServerUnavailable, vaultApi } from './api'
 import { PinPad, type PinPadHandle } from './PinPad'
 import { WebauthnError, webauthnErrorMessage, webauthnSupported } from './webauthn-browser'
@@ -131,6 +131,13 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
 
   const submitSetup = useCallback(async (pin: string) => {
     if (!setupFirst) {
+      // Code trop simple refusé DÈS la première saisie : refusé seulement par le serveur après la
+      // confirmation, il ressemblait à une « confirmation rejetée » (retour bêta-test).
+      if (isWeakPin(pin) && !status.demo) {
+        pinRef.current?.clear()
+        setError(t('weak'))
+        return
+      }
       setSetupFirst(pin)
       setError(null)
       pinRef.current?.clear()
@@ -153,7 +160,7 @@ export function VaultUnlockScreen({ status, onUnlocked, context = 'coffre', noti
     } finally {
       setBusy(false)
     }
-  }, [fail, onUnlocked, setupFirst, t])
+  }, [fail, onUnlocked, setupFirst, status.demo, t])
 
   const unlockWithBiometric = async (auto = false) => {
     setBusy(true)

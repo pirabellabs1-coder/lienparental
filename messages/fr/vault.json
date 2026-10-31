@@ -251,7 +251,7 @@
         "mismatch": "Les deux codes ne correspondent pas. Recommencez.",
         "introConfirm": "Saisissez à nouveau votre code pour le confirmer.",
         "introReauth": "Pour votre sécurité, reconnectez-vous avec Google avant de choisir votre code à 6 chiffres. Vous reviendrez ici ensuite.",
-        "introSetup": "Créez un code à 6 chiffres pour protéger vos documents et témoignages.",
+        "introSetup": "Créez un code à 6 chiffres pour protéger vos documents et témoignages. Évitez les chiffres identiques ou qui se suivent (111111, 123456).",
         "introPassword": "Saisissez le mot de passe de votre compte Lien Parental.",
         "introSettings": "Déverrouillez le coffre-fort pour modifier ses réglages de sécurité.",
         "introPin": "Saisissez votre code à 6 chiffres pour accéder à vos documents et témoignages.",
@@ -270,7 +270,8 @@
         "forgotReset": "Code oublié ? Redéfinir mon code",
         "forgotRelogin": "Code oublié ? Déconnectez-vous puis reconnectez-vous : vous pourrez le redéfinir ici pendant 5 minutes.",
         "autoLock": "Verrouillage automatique après {minutes} min d’inactivité",
-        "demo": "Démonstration : code 123456"
+        "demo": "Démonstration : code 123456",
+        "weak": "Ce code est trop simple : évitez les chiffres identiques ou qui se suivent. Choisissez-en un autre."
       },
       "settings": {
         "toggleOff": "Verrouillage désactivé.",

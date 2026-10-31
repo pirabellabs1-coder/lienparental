@@ -251,7 +251,7 @@
         "mismatch": "Os dois códigos não coincidem. Recomece.",
         "introConfirm": "Digite seu código novamente para confirmá-lo.",
         "introReauth": "Para sua segurança, entre novamente com o Google antes de escolher o seu código de 6 dígitos. Voltará aqui em seguida.",
-        "introSetup": "Crie um código de 6 dígitos para proteger seus documentos e depoimentos.",
+        "introSetup": "Crie um código de 6 dígitos para proteger seus documentos e depoimentos. Evite dígitos repetidos ou em sequência (111111, 123456).",
         "introPassword": "Digite a senha da sua conta Lien Parental.",
         "introSettings": "Desbloqueie o cofre para alterar as configurações de segurança.",
         "introPin": "Digite seu código de 6 dígitos para acessar seus documentos e depoimentos.",
@@ -270,7 +270,8 @@
         "forgotReset": "Esqueceu o código? Redefinir meu código",
         "forgotRelogin": "Esqueceu o código? Saia e entre novamente: você poderá redefini-lo aqui por 5 minutos.",
         "autoLock": "Bloqueio automático após {minutes} min de inatividade",
-        "demo": "Demonstração: código 123456"
+        "demo": "Demonstração: código 123456",
+        "weak": "Este código é simples demais: evite dígitos repetidos ou em sequência. Escolha outro."
       },
       "settings": {
         "toggleOff": "Bloqueio desativado.",
