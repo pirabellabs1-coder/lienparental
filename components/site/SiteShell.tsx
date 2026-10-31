@@ -4,11 +4,13 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { ScopedIntlProvider } from '@/components/i18n/ScopedIntlProvider'
 import { CLIENT_NS_SITE } from '@/lib/i18n/client-namespaces'
 import { graph, organization, website } from '@/lib/seo/jsonld'
+import { AssistantWidget } from '@/components/assistant/AssistantWidget'
 import { SiteFooter } from './SiteFooter'
 import { SiteHeaderServer } from './SiteHeaderServer'
 
 // Gabarit des pages publiques : lien d'évitement, en-tête et pied de page partagés, <main id="contenu">,
-// et graphe schema.org Organization + WebSite (référencé par @id depuis les autres données structurées).
+// assistant public (bulle « Une question ? », jamais dans /app ni /admin) et graphe schema.org
+// Organization + WebSite (référencé par @id depuis les autres données structurées).
 // Animations sobres (transform / opacity uniquement), coupées en prefers-reduced-motion.
 const CSS = `
 @keyframes site-rise{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:none}}
@@ -53,6 +55,7 @@ export function SiteShell({ children, className, mainClassName, ownMain = false,
         {children}
       </Main>
       <SiteFooter />
+      <AssistantWidget />
     </div>
     </ScopedIntlProvider>
   )
