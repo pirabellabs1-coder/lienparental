@@ -588,7 +588,7 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
             >
               <p role="status" aria-live="polite" className={cn('text-[12.5px] font-semibold', dictation.listening ? 'mb-2 flex items-center gap-2 text-alert-600' : dictation.error ? 'mb-2 text-alert-700' : 'sr-only')}>
                 {dictation.listening && <span aria-hidden className="h-2 w-2 rounded-full bg-alert-500 motion-safe:animate-pulse" />}
-                {dictation.listening ? t('listening') : dictation.error ? t('micError') : ''}
+                {dictation.listening ? (dictation.interim ? `« ${dictation.interim} »` : t('listening')) : dictation.error ? t(dictation.error === 'denied' ? 'micDenied' : dictation.error === 'nothing' ? 'micNothing' : 'micError') : ''}
               </p>
               <div className="flex items-end gap-2">
                 <label htmlFor={`${titleId}-input`} className="sr-only">{t('inputLabel')}</label>

@@ -1227,10 +1227,12 @@
       "mic": "Dicter mon message",
       "micStop": "Arrêter la dictée",
       "listening": "Écoute en cours… parlez, puis relisez avant d’envoyer.",
-      "micError": "La dictée n’a pas pu démarrer. Vérifiez l’autorisation du micro.",
+      "micError": "La dictée n’a pas pu démarrer. Utilisez le micro 🎤 de votre clavier.",
       "voiceUnavailable": "Lecture vocale momentanément indisponible, réessayez.",
       "voiceLimit": "Vous avez atteint la limite d’écoute sans compte.",
-      "voiceLimitCta": "Créez un compte gratuit pour écouter plus de réponses"
+      "voiceLimitCta": "Créez un compte gratuit pour écouter plus de réponses",
+      "micDenied": "Le micro n’est pas autorisé. Autorisez-le dans les réglages du navigateur, ou utilisez le micro 🎤 de votre clavier.",
+      "micNothing": "Je n’ai rien entendu. Appuyez sur le micro, parlez distinctement, puis attendez que le texte s’écrive. Vous pouvez aussi utiliser le micro 🎤 de votre clavier."
     }
   }
 }

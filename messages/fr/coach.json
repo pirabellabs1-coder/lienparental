@@ -85,8 +85,10 @@
       "mic": "Dicter ma question",
       "micStop": "Arrêter la dictée",
       "listening": "Écoute en cours… parlez, puis relisez avant d’envoyer.",
-      "micError": "La dictée n’a pas pu démarrer. Vérifiez l’autorisation du micro.",
-      "voiceUnavailable": "Lecture vocale momentanément indisponible, réessayez."
+      "micError": "La dictée n’a pas pu démarrer. Utilisez le micro 🎤 de votre clavier.",
+      "voiceUnavailable": "Lecture vocale momentanément indisponible, réessayez.",
+      "micDenied": "Le micro n’est pas autorisé. Autorisez-le dans les réglages du navigateur, ou utilisez le micro 🎤 de votre clavier.",
+      "micNothing": "Je n’ai rien entendu. Appuyez sur le micro, parlez distinctement, puis attendez que le texte s’écrive. Vous pouvez aussi utiliser le micro 🎤 de votre clavier."
     },
     "list": {
       "opFailed": "L’opération a échoué. Réessayez.",
