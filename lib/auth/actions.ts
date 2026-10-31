@@ -127,6 +127,8 @@ export async function saveOnboardingChild(input: {
     : ctx.supabase.from('children').insert(row).select('id').single()
 
   const { data, error } = await query
+  // Index 0630 : un seul enfant par prénom dans un compte.
+  if (error?.code === '23505') return { ok: false, error: (await tr('actions'))('childDuplicate', { name: c.prenom }) }
   if (error || !data) return { ok: false, error: await generic() }
 
   // Premier enfant = enfant actif par défaut (sans écraser un choix existant).

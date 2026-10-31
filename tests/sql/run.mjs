@@ -96,11 +96,19 @@ if (scenarios.length === 0) {
 }
 
 let crashed = 0
+// Contrôles en échec renvoyés par les scénarios ({ pass, fail }) : ils font échouer la suite
+// (auparavant seul un plantage le faisait, un contrôle KO restait « vert »).
+let failedChecks = 0
 for (const f of scenarios) {
   const mod = await import(pathToFileURL(path.join(scenariosDir, f)).href)
   if (mod.vaultOpen) await db.exec(`create trigger _test_vault_open after insert on public.users for each row execute function public._test_vault_open()`)
   try {
-    await mod.default(db)
+    const res = await mod.default(db)
+    if (res && typeof res.fail === 'number' && res.fail > 0) {
+      failedChecks += res.fail
+      console.log(`
+FAIL ${f} : ${res.fail} contrôle(s) en échec`)
+    }
   } catch (e) {
     crashed++
     console.log(`\nFAIL ${f} interrompu :`, e?.message ?? e)
@@ -110,5 +118,5 @@ for (const f of scenarios) {
 }
 
 await db.close()
-if (crashed) process.exitCode = 1
+if (crashed || failedChecks) process.exitCode = 1
 console.log(`\n${migrations.length} migrations + storage.sql, ${scenarios.length} scénario(s) : ${process.exitCode ? 'ÉCHEC' : 'tout est vert'}.`)

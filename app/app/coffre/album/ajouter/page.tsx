@@ -75,7 +75,8 @@ export default function AddPhotosPage({ searchParams }: { searchParams: Promise<
     if (!list) return
     setPickError('')
     const files = Array.from(list)
-    const room = MAX_PHOTOS_PER_BATCH - items.length
+    // Sélections successives rapprochées : place restante lue sur la liste à jour, pas sur un rendu ancien.
+    const room = MAX_PHOTOS_PER_BATCH - itemsRef.current.length
     if (files.length > room) setPickError(tu('tooMany', { max: MAX_PHOTOS_PER_BATCH }))
     const today = todayKey()
     const next: Item[] = []
@@ -120,8 +121,16 @@ export default function AddPhotosPage({ searchParams }: { searchParams: Promise<
     setRunning(true)
     for (const it of pending) {
       patch(it.key, { status: 'sending', error: undefined })
+      const meta = { title: it.title.trim(), note: it.note.trim() || undefined, date: it.date, childId, album: album || null, important: it.important, shared }
       try {
-        await addAlbumPhoto(it.file, { title: it.title.trim(), note: it.note.trim() || undefined, date: it.date, childId, album: album || null, important: it.important, shared })
+        // Réseau mobile instable : un envoi interrompu est retenté une fois avant d'afficher l'erreur
+        // (aucun doublon possible : un échec n'enregistre rien, fichiers nettoyés par addAlbumPhoto).
+        await addAlbumPhoto(it.file, meta).catch((e) => {
+          // Espace plein ou photo illisible : une nouvelle tentative n'y changerait rien.
+          const code = (e as { code?: string }).code
+          if (code === 'storage_quota' || code === 'invalid') throw e
+          return new Promise((r) => setTimeout(r, 1500)).then(() => addAlbumPhoto(it.file, meta))
+        })
         patch(it.key, { status: 'done' })
       } catch (e) {
         patch(it.key, { status: 'error', error: e instanceof Error ? e.message : tu('status.error') })

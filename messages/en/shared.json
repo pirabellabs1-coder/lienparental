@@ -85,7 +85,11 @@
         "medicalSaveFailed": "The medical information could not be saved.",
         "notFound": "This profile doesn’t exist or has been deleted.",
         "photoFailed": "The photo could not be saved. Please try again.",
-        "photoOwnerOnly": "Only the parent who created this profile can change the photo."
+        "photoOwnerOnly": "Only the parent who created this profile can change the photo.",
+        "duplicateOwn": "You already have a child named {name}. Open their profile to edit it.",
+        "duplicateShared": "{name} is already shared by the other parent: their profile is visible in your account, no need to create it again.",
+        "mineTag": "my profile",
+        "sharedTag": "shared profile"
       },
       "errors": {
         "duplicate": "This item already exists.",

@@ -85,7 +85,11 @@
         "medicalSaveFailed": "Les informations médicales n’ont pas pu être enregistrées.",
         "notFound": "Ce profil n’existe pas ou a été supprimé.",
         "photoFailed": "La photo n’a pas pu être enregistrée. Réessayez.",
-        "photoOwnerOnly": "Seul le parent qui a créé cette fiche peut changer la photo."
+        "photoOwnerOnly": "Seul le parent qui a créé cette fiche peut changer la photo.",
+        "duplicateOwn": "Vous avez déjà un enfant prénommé {name}. Ouvrez sa fiche pour la modifier.",
+        "duplicateShared": "{name} est déjà partagé(e) par l’autre parent : sa fiche est visible dans votre compte, inutile de la recréer.",
+        "mineTag": "ma fiche",
+        "sharedTag": "fiche partagée"
       },
       "errors": {
         "duplicate": "Cet élément existe déjà.",

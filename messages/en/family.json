@@ -746,7 +746,13 @@
         "cancelTitle": "Cancel the invitation?",
         "cancelText": "The link sent to {email} will no longer work.",
         "cancelConfirm": "Cancel the invitation",
-        "keep": "Keep"
+        "keep": "Keep",
+        "conflicts": {
+          "title": "Same first name, different profiles",
+          "text": "You have a profile \"{name}\" and {owner} also shares a profile \"{name}\" with you, with a different date of birth. If it is the same child, correct the date of birth on your profile: merging will then be offered here, with its photos and documents.",
+          "action": "Check my profile",
+          "otherParent": "the other parent"
+        }
       },
       "card": {
         "born": "Born on {date}",

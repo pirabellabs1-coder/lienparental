@@ -85,7 +85,11 @@
         "medicalSaveFailed": "Não foi possível salvar as informações médicas.",
         "notFound": "Este perfil não existe ou foi excluído.",
         "photoFailed": "Não foi possível salvar a foto. Tente novamente.",
-        "photoOwnerOnly": "Somente o genitor que criou esta ficha pode trocar a foto."
+        "photoOwnerOnly": "Somente o genitor que criou esta ficha pode trocar a foto.",
+        "duplicateOwn": "Já tem uma criança chamada {name}. Abra a ficha dela para a modificar.",
+        "duplicateShared": "{name} já é partilhado(a) pelo outro progenitor: a ficha está visível na sua conta, não é preciso criá-la de novo.",
+        "mineTag": "a minha ficha",
+        "sharedTag": "ficha partilhada"
       },
       "errors": {
         "duplicate": "Este item já existe.",

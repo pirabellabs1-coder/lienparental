@@ -1,6 +1,7 @@
 import 'server-only'
 // Conversion des lignes RPC (0340) vers les types de lib/coparents/types.ts.
 import type {
+  NameConflict,
   FamilyChild, FamilyRole, GuardianRole, InvitationChild, MergeCandidate, ReceivedInvitation, SentInvitation,
 } from '../types'
 
@@ -53,6 +54,15 @@ export function toReceived(rows: ReceivedRow[]): ReceivedInvitation[] {
   return rows.map((r) => ({
     id: r.id, fromPrenom: r.inviter_prenom, fromNom: r.inviter_nom, role: r.role,
     children: r.children ?? [], createdAt: r.created_at, expiresAt: r.expires_at,
+  }))
+}
+
+type ConflictRow = { my_child_id: string; my_child_prenom: string; shared_child_id: string; shared_child_prenom: string; shared_owner_prenom: string }
+
+export function toConflicts(rows: ConflictRow[]): NameConflict[] {
+  return rows.map((r) => ({
+    myChild: { id: r.my_child_id, prenom: r.my_child_prenom },
+    sharedChild: { id: r.shared_child_id, prenom: r.shared_child_prenom, ownerPrenom: r.shared_owner_prenom },
   }))
 }
 
