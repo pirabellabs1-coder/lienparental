@@ -5,6 +5,7 @@ import { passThrough, redirectWithSession, updateSession, type Forward } from '@
 import { ADMIN_ENTRY_PREFIX, ADMIN_GATE_COOKIE, ADMIN_LOGIN_PATH, adminGateConfigured, adminGateProof, hasAdminGate, isValidAdminEntry } from '@/lib/admin/gate'
 import { LOCALE_AUTO_COOKIE, LOCALE_COOKIE, type Locale } from '@/lib/i18n/config'
 import { decideLocaleRoute, forwardHeaders } from '@/lib/i18n/routing'
+import { ATTR_COOKIE, ATTR_MAX_AGE, mergeAttribution, parseAttribution, serializeAttribution, touchFromUrl } from '@/lib/attribution/core'
 
 /** « Page introuvable » (404) : réécriture vers une route inexistante, en-têtes internes assainis. */
 const notFoundRewrite = (req: NextRequest, locale: Locale | null = null) =>
@@ -98,11 +99,37 @@ function planIntentUrl(req: NextRequest): URL | null {
   return url
 }
 
+// --- Attribution des inscriptions (UTM, lib/attribution/core.ts) --------
+// Arrivée avec utm_source sur une page : contact enregistré dans un cookie first-party (30 jours).
+// Première requête d'un utilisateur connecté avec ce cookie : rattachement au compte s'il vient
+// d'être créé (record_signup_attribution, 0620), puis cookie effacé dans tous les cas.
+type AttrState = { recorded: boolean }
+
+function withAttribution(req: NextRequest, res: NextResponse, state: AttrState): NextResponse {
+  if (state.recorded) {
+    res.cookies.delete(ATTR_COOKIE)
+    return res
+  }
+  if (req.method !== 'GET' || req.nextUrl.pathname.startsWith('/api/')) return res
+  const touch = touchFromUrl(req.nextUrl, req.headers.get('referer'))
+  if (!touch) return res
+  const value = serializeAttribution(mergeAttribution(parseAttribution(req.cookies.get(ATTR_COOKIE)?.value), touch))
+  res.cookies.set(ATTR_COOKIE, value, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/', maxAge: ATTR_MAX_AGE })
+  return res
+}
+
 // --- Authentification réelle (Supabase) --------------------------------
-async function supabaseMiddleware(req: NextRequest, forward: Forward) {
+async function supabaseMiddleware(req: NextRequest, forward: Forward, attr: AttrState) {
   // Rafraîchit la session sur toutes les routes couvertes par le matcher (réécriture de langue conservée).
   const { response, user, supabase } = await updateSession(req, forward)
   const { pathname } = req.nextUrl
+
+  const pendingAttr = user ? parseAttribution(req.cookies.get(ATTR_COOKIE)?.value) : null
+  if (user && req.cookies.has(ATTR_COOKIE)) {
+    // Échec de l'appel : sans conséquence pour la navigation (l'attribution est perdue, rien d'autre).
+    if (pendingAttr) await supabase.rpc('record_signup_attribution' as never, { p_attr: pendingAttr } as never).then(() => undefined, () => undefined)
+    attr.recorded = true
+  }
 
   if (!isProtected(pathname)) return response
   if (!user) return redirectWithSession(response, loginUrl(req))
@@ -228,12 +255,13 @@ export async function middleware(req: NextRequest) {
     forward.setLocaleCookie = route.setCookie
   }
 
-  if (SUPABASE_ENABLED) return supabaseMiddleware(req, forward)
-  if (DEMO_MODE) return demoMiddleware(req, forward)
+  const attr: AttrState = { recorded: false }
+  if (SUPABASE_ENABLED) return withAttribution(req, await supabaseMiddleware(req, forward, attr), attr)
+  if (DEMO_MODE) return withAttribution(req, demoMiddleware(req, forward), attr)
   if (process.env.NODE_ENV === 'production' && isUnavailableWithoutBackend(req.nextUrl.pathname)) {
     return notConfigured(req)
   }
-  return passThrough(req, forward)
+  return withAttribution(req, passThrough(req, forward), attr)
 }
 
 export const config = {

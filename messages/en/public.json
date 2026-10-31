@@ -563,6 +563,11 @@
           "title": "Encryption and security",
           "p1": "Exchanges are encrypted in transit (HTTPS/TLS). Data is stored encrypted at rest by our database host (AES-256), and children’s medical information is additionally encrypted by the application itself (AES-256-GCM). Passwords are hashed by our authentication service (bcrypt) and the vault code is hashed (scrypt): they are never stored in plain text. Google access tokens are encrypted. Database backups are encrypted."
         },
+        "cookies": {
+          "title": "Cookies and visit source",
+          "p1": "Lien Parental uses no advertising cookies or third-party trackers. The cookies we set are needed for the service to work (sign-in session, language, vault lock).",
+          "p2": "When you arrive from a campaign link (\"utm\" parameters on a Lien Parental post or ad), a first-party cookie named \"lp_attr\" keeps the source of the visit (network, campaign, content) for 30 days, with no advertising identifier. If you create an account, this source is attached to it so we can measure, in aggregate, which posts lead to sign-ups and subscriptions (legitimate interest); it is never shared with a social network or an ad network. You can delete this cookie from your browser."
+        },
         "retention": {
           "title": "Retention period",
           "p1": "Account data is kept for as long as you use the service, then for a period of three (3) years after the last active sign-in, for evidentiary purposes and in accordance with legal requirements. Documents with evidentiary value uploaded to the vault may be kept longer at your express request."

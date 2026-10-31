@@ -563,6 +563,11 @@
           "title": "Chiffrement et sécurité",
           "p1": "Les échanges sont chiffrés en transit (HTTPS/TLS). Les données sont stockées chiffrées au repos par notre hébergeur de base de données (AES-256), et les informations médicales des enfants sont en plus chiffrées par l'application elle-même (AES-256-GCM). Les mots de passe sont hachés par notre service d'authentification (bcrypt) et le code du coffre-fort est haché (scrypt) : ils ne sont jamais stockés en clair. Les jetons d'accès Google sont chiffrés. Les sauvegardes de la base sont chiffrées."
         },
+        "cookies": {
+          "title": "Cookies et provenance des visites",
+          "p1": "Lien Parental n'utilise aucun cookie publicitaire ni traceur tiers. Les cookies déposés servent au fonctionnement du service (session de connexion, langue, verrouillage du coffre-fort).",
+          "p2": "Lorsque vous arrivez depuis un lien de campagne (paramètres « utm » d'une publication ou d'une publicité Lien Parental), un cookie first-party « lp_attr » conserve pendant 30 jours la provenance de la visite (réseau, campagne, contenu), sans aucun identifiant publicitaire. Si vous créez un compte, cette provenance lui est rattachée pour mesurer, de façon agrégée, quelles publications amènent des inscriptions et des abonnements (intérêt légitime) ; elle n'est jamais transmise à un réseau social ou à une régie. Vous pouvez supprimer ce cookie depuis votre navigateur."
+        },
         "retention": {
           "title": "Durée de conservation",
           "p1": "Les données du compte sont conservées pendant toute la durée d'utilisation du service, puis pendant une durée de trois (3) ans suivant la dernière connexion active, à des fins de preuve et conformément aux prescriptions légales. Les documents à valeur probatoire téléversés dans le coffre-fort peuvent être conservés plus longtemps à votre demande expresse."

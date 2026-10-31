@@ -563,6 +563,11 @@
           "title": "Criptografia e segurança",
           "p1": "As trocas são criptografadas em trânsito (HTTPS/TLS). Os dados são armazenados criptografados em repouso pelo nosso provedor de banco de dados (AES-256), e as informações médicas das crianças são, além disso, criptografadas pelo próprio aplicativo (AES-256-GCM). As senhas recebem hash do nosso serviço de autenticação (bcrypt) e o código do cofre recebe hash (scrypt): eles nunca são armazenados em texto simples. Os tokens de acesso do Google são criptografados. Os backups do banco de dados são criptografados."
         },
+        "cookies": {
+          "title": "Cookies e origem das visitas",
+          "p1": "A Lien Parental não utiliza cookies publicitários nem rastreadores de terceiros. Os cookies utilizados são necessários ao funcionamento do serviço (sessão de início de sessão, idioma, bloqueio do cofre).",
+          "p2": "Quando chega através de um link de campanha (parâmetros «utm» de uma publicação ou anúncio da Lien Parental), um cookie próprio «lp_attr» guarda durante 30 dias a origem da visita (rede, campanha, conteúdo), sem qualquer identificador publicitário. Se criar uma conta, essa origem é associada a ela para medir, de forma agregada, que publicações geram inscrições e assinaturas (interesse legítimo); nunca é partilhada com uma rede social ou uma rede de anúncios. Pode apagar este cookie no seu navegador."
+        },
         "retention": {
           "title": "Prazo de conservação",
           "p1": "Os dados da conta são conservados durante todo o período de uso do serviço e, depois, por três (3) anos após o último acesso ativo, para fins de prova e de acordo com as exigências legais. Os documentos com valor probatório enviados ao cofre podem ser conservados por mais tempo a seu pedido expresso."
