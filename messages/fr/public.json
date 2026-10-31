@@ -534,6 +534,12 @@
             "data": "Uniquement lorsque vous utilisez le Coach : votre question ou le contenu à analyser, et un résumé de votre espace (prénoms et âges des enfants, journal, calendrier, noms des documents). Les informations médicales ne sont transmises que si vous l’activez pour une question. Pour l’assistant du site, accessible sans compte : uniquement les messages de la conversation en cours, sans identifiant ni adresse IP ; ils ne sont pas enregistrés par Lien Parental. N’y indiquez pas de données personnelles.",
             "location": "États-Unis (Anthropic est une société américaine)."
           },
+          "elevenlabs": {
+            "name": "ElevenLabs (lecture à voix haute)",
+            "purpose": "Lecture à voix haute des réponses du Coach IA et de l’assistant du site, à votre demande (bouton « Lire à haute voix »).",
+            "data": "Uniquement le texte de la réponse à lire (nettoyé et limité en longueur), sans identifiant, sans adresse IP ni contenu de votre espace. Aucun enregistrement de votre voix.",
+            "location": "États-Unis et Union européenne (ElevenLabs est une société américaine)."
+          },
           "stripe": {
             "name": "Stripe (paiements)",
             "purpose": "Paiement et gestion des abonnements, factures.",
@@ -551,7 +557,8 @@
             "purpose": "Connexion avec votre compte Google et, si vous l’activez, copie de vos événements dans votre Google Agenda.",
             "data": "Connexion : nom, adresse e-mail et identifiant Google. Agenda : titre, dates et lieu des événements copiés (rendez-vous de santé masqués par défaut, prénoms des enfants jamais envoyés).",
             "location": "Union européenne et États-Unis. Pour les données de votre compte Google, Google agit selon ses propres règles de confidentialité."
-          }
+          },
+          "dictation": "Dictée : le bouton micro du champ de message utilise la reconnaissance vocale de votre navigateur ou de votre téléphone. Lien Parental ne reçoit ni n’enregistre votre voix : seul le texte que vous choisissez d’envoyer nous parvient. Selon le navigateur, la reconnaissance peut être réalisée par son éditeur (par exemple Google pour Chrome, Apple pour Safari), selon ses propres conditions."
         },
         "google": {
           "title": "Données reçues de Google",
@@ -1213,7 +1220,14 @@
         "openFull": "Ouvrir le Coach complet",
         "disclaimer": "Le Coach informe et conseille ; il ne remplace pas un avocat.",
         "error": "Le Coach n’a pas pu répondre. Réessayez dans un instant."
-      }
+      },
+      "listen": "Lire à haute voix",
+      "listenStop": "Arrêter la lecture",
+      "listenLoading": "Préparation…",
+      "mic": "Dicter mon message",
+      "micStop": "Arrêter la dictée",
+      "listening": "Écoute en cours… parlez, puis relisez avant d’envoyer.",
+      "micError": "La dictée n’a pas pu démarrer. Vérifiez l’autorisation du micro."
     }
   }
 }

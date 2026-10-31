@@ -81,7 +81,11 @@
       "attachImage": "Image",
       "attachDoc": "Document",
       "medicalOn": "Informations médicales incluses pour la prochaine question",
-      "noCreditsShort": "Plus de crédits pour poser une question."
+      "noCreditsShort": "Plus de crédits pour poser une question.",
+      "mic": "Dicter ma question",
+      "micStop": "Arrêter la dictée",
+      "listening": "Écoute en cours… parlez, puis relisez avant d’envoyer.",
+      "micError": "La dictée n’a pas pu démarrer. Vérifiez l’autorisation du micro."
     },
     "list": {
       "opFailed": "L’opération a échoué. Réessayez.",

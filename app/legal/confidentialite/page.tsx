@@ -21,7 +21,7 @@ const LAST_UPDATED = isoDate(LEGAL_UPDATED.confidentialite);
  * Textes : public.legal.privacy.processors.<key>.{name,purpose,data,location} ;
  * la garantie de transfert (clauses contractuelles types) est commune : processors.scc.
  */
-const SUBPROCESSORS = ['supabase', 'vercel', 'anthropic', 'stripe', 'resend', 'google'] as const;
+const SUBPROCESSORS = ['supabase', 'vercel', 'anthropic', 'elevenlabs', 'stripe', 'resend', 'google'] as const;
 const FIELDS = ['purpose', 'data', 'location', 'safeguard'] as const;
 
 const strong = (c: ReactNode) => <strong>{c}</strong>;
@@ -95,6 +95,7 @@ export default async function ConfidentialitePage() {
                 </li>
               ))}
             </ul>
+            {p('processors.dictation')}
             <p className="mt-4">
               {t.rich('processors.outro', { b: strong })}
             </p>

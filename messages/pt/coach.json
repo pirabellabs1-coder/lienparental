@@ -81,7 +81,11 @@
       "attachImage": "Imagem",
       "attachDoc": "Documento",
       "medicalOn": "Informações médicas incluídas na próxima pergunta",
-      "noCreditsShort": "Sem créditos para fazer uma pergunta."
+      "noCreditsShort": "Sem créditos para fazer uma pergunta.",
+      "mic": "Ditar minha pergunta",
+      "micStop": "Parar o ditado",
+      "listening": "Ouvindo… fale e depois revise antes de enviar.",
+      "micError": "Não foi possível iniciar o ditado. Verifique a permissão do microfone."
     },
     "list": {
       "opFailed": "A operação falhou. Tente novamente.",

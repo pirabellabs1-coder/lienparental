@@ -4,13 +4,14 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
-import { Coins, FileImage, FileText, HeartPulse, Plus, Send, Square, Volume2 } from 'lucide-react'
+import { Coins, FileImage, FileText, HeartPulse, Mic, Plus, Send, Square, Volume2 } from 'lucide-react'
 import { ChatBubble, type ChatMessage } from './ChatBubble'
 import { DemoNote, LegalNote } from './ui'
 import { errorMessage, readSse } from './sse-client'
 import { DOC_ACCEPT, IMAGE_ACCEPT, draftFromFile, newIdempotencyKey, prepareCoachFile, saveDraft, setPendingFile } from './session'
 import { useCredits } from './CreditCost'
 import { useCoachVoice } from './useCoachVoice'
+import { appendDictation, useDictation } from './useDictation'
 import { COACH_VOICES, type CoachVoiceKey } from '@/lib/ai/voices'
 import { cn } from '@/lib/cn'
 import { intlLocale } from '@/lib/i18n/config'
@@ -80,6 +81,9 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
   const { data: credits, refresh: refreshCredits } = useCredits()
   const chatCost = credits?.costs.chat_question ?? 1
   const speechCtl = useCoachVoice(locale)
+  // Dictée : la reconnaissance vocale du navigateur écrit dans le champ ; rien n'est envoyé à nos serveurs.
+  const dictation = useDictation(locale, useCallback((text: string) => setQ((cur) => appendDictation(cur, text).slice(0, MAX)), []))
+  const stopDictation = dictation.stop
   const voiceId = useId()
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const endRef = useRef<HTMLLIElement>(null)
@@ -162,6 +166,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
       }
       history.push({ role: 'user', content: text })
 
+      stopDictation()
       const medical = includeMedical
       // Une clé par question : une relance réseau ou un double envoi ne débite qu'un crédit.
       const key = newIdempotencyKey()
@@ -247,7 +252,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
         requestAnimationFrame(scrollToEnd)
       }
     },
-    [messages, streaming, includeMedical, analysisId, scrollToEnd, t, tc, locale, refreshCredits],
+    [messages, streaming, includeMedical, analysisId, scrollToEnd, t, tc, locale, refreshCredits, stopDictation],
   )
 
   // Question transmise par le dashboard : envoyée une seule fois.
@@ -489,6 +494,21 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
             aria-describedby={hintId}
             className="block max-h-40 min-h-[44px] min-w-0 flex-1 resize-none rounded-[22px] border border-night-100 bg-night-50/60 px-4 py-2.5 text-[15px] leading-snug text-night-900 placeholder:text-night-400 focus:border-iris-300 focus:bg-white focus:outline-none focus:ring-0"
           />
+          {dictation.supported && !streaming && (
+            <button
+              type="button"
+              onClick={dictation.toggle}
+              aria-pressed={dictation.listening}
+              aria-label={dictation.listening ? t('micStop') : t('mic')}
+              title={dictation.listening ? t('micStop') : t('mic')}
+              className={cn(
+                'grid h-11 w-11 shrink-0 place-items-center rounded-full transition active:scale-95',
+                dictation.listening ? 'bg-alert-500 text-white motion-safe:animate-pulse' : 'text-iris-600 hover:bg-iris-50',
+              )}
+            >
+              <Mic className="h-5 w-5" aria-hidden="true" />
+            </button>
+          )}
           {streaming ? (
             <button
               type="button"
@@ -509,6 +529,10 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
             </button>
           )}
         </div>
+        <p role="status" aria-live="polite" className={cn('px-1 text-[12px] font-semibold', dictation.listening ? 'mt-1 flex items-center gap-2 text-alert-600' : dictation.error ? 'mt-1 text-alert-700' : 'sr-only')}>
+          {dictation.listening && <span aria-hidden="true" className="h-2 w-2 rounded-full bg-alert-500 motion-safe:animate-pulse" />}
+          {dictation.listening ? t('listening') : dictation.error ? t('micError') : ''}
+        </p>
         {fileError && (
           <p role="alert" className="mt-1 px-1 text-[12px] font-medium text-alert-600">
             {fileError}

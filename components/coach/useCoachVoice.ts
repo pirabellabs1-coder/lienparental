@@ -6,6 +6,7 @@ import { DEFAULT_COACH_VOICE, isCoachVoice, speechText, type CoachVoiceKey } fro
 // Lecture à voix haute des réponses du Coach : voix ElevenLabs (route /api/coach/speech), mise en
 // cache par message et par voix pendant la page (une relecture ne coûte rien). Si le service est
 // indisponible (quota, panne, démo), la voix de l'appareil (speechSynthesis) prend le relais.
+// Assistant public du site : `endpoint` /api/assistant/speech et voix Koraly imposée (`fixedVoice`).
 
 const VOICE_KEY = 'lp-coach-voice'
 
@@ -20,7 +21,9 @@ function readVoice(): CoachVoiceKey {
   }
 }
 
-export function useCoachVoice(locale: string) {
+export function useCoachVoice(locale: string, opts: { endpoint?: string; fixedVoice?: boolean } = {}) {
+  const endpoint = opts.endpoint ?? '/api/coach/speech'
+  const fixedVoice = opts.fixedVoice ?? false
   const [voice, setVoiceState] = useState<CoachVoiceKey>(DEFAULT_COACH_VOICE)
   const [state, setState] = useState<SpeechState>({ id: null, status: 'idle' })
   const [fallback, setFallback] = useState(false)
@@ -28,7 +31,9 @@ export function useCoachVoice(locale: string) {
   const cache = useRef(new Map<string, string>())
   const ctrl = useRef<AbortController | null>(null)
 
-  useEffect(() => setVoiceState(readVoice()), [])
+  useEffect(() => {
+    if (!fixedVoice) setVoiceState(readVoice())
+  }, [fixedVoice])
 
   const stop = useCallback(() => {
     ctrl.current?.abort()
@@ -96,10 +101,10 @@ export function useCoachVoice(locale: string) {
     ctrl.current = c
     setState({ id, status: 'loading' })
     try {
-      const res = await fetch('/api/coach/speech', {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, voice }),
+        body: JSON.stringify(fixedVoice ? { text } : { text, voice }),
         signal: c.signal,
       })
       if (!res.ok || !(res.headers.get('content-type') ?? '').startsWith('audio/')) throw new Error(String(res.status))
@@ -112,7 +117,7 @@ export function useCoachVoice(locale: string) {
     } finally {
       if (ctrl.current === c) ctrl.current = null
     }
-  }, [playUrl, speakWithDevice, state.id, stop, voice])
+  }, [endpoint, fixedVoice, playUrl, speakWithDevice, state.id, stop, voice])
 
   return { voice, setVoice, state, toggle, stop, fallback }
 }

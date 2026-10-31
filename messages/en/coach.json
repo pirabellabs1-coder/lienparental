@@ -81,7 +81,11 @@
       "attachImage": "Image",
       "attachDoc": "Document",
       "medicalOn": "Medical information included for the next question",
-      "noCreditsShort": "No credits left to ask a question."
+      "noCreditsShort": "No credits left to ask a question.",
+      "mic": "Dictate my question",
+      "micStop": "Stop dictation",
+      "listening": "Listening… speak, then review before sending.",
+      "micError": "Dictation couldn’t start. Check the microphone permission."
     },
     "list": {
       "opFailed": "The operation failed. Please try again.",

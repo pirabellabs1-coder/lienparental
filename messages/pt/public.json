@@ -534,6 +534,12 @@
             "data": "Somente quando você usa o Coach: sua pergunta ou o conteúdo a analisar, e um resumo do seu espaço (nomes e idades das crianças, diário, calendário, nomes dos documentos). As informações médicas só são enviadas se você ativar essa opção para uma pergunta. Para o assistente do site, acessível sem conta: somente as mensagens da conversa em andamento, sem identificador nem endereço IP; o Lien Parental não as armazena. Não informe dados pessoais nele.",
             "location": "Estados Unidos (a Anthropic é uma empresa americana)."
           },
+          "elevenlabs": {
+            "name": "ElevenLabs (leitura em voz alta)",
+            "purpose": "Leitura em voz alta das respostas do Coach com IA e do assistente do site, quando você pede (botão « Ler em voz alta »).",
+            "data": "Somente o texto da resposta a ser lida (limpo e com tamanho limitado), sem identificador, sem endereço IP nem conteúdo do seu espaço. A sua voz nunca é gravada.",
+            "location": "Estados Unidos e União Europeia (a ElevenLabs é uma empresa americana)."
+          },
           "stripe": {
             "name": "Stripe (pagamentos)",
             "purpose": "Pagamento e gestão das assinaturas, faturas.",
@@ -551,7 +557,8 @@
             "purpose": "Login com sua conta Google e, se você ativar, cópia dos seus eventos para o seu Google Agenda.",
             "data": "Login: nome, endereço de e-mail e identificador Google. Agenda: título, datas e local dos eventos copiados (consultas de saúde ocultadas por padrão, nomes das crianças nunca enviados).",
             "location": "União Europeia e Estados Unidos. Para os dados da sua conta Google, o Google atua segundo suas próprias regras de privacidade."
-          }
+          },
+          "dictation": "Ditado: o botão de microfone do campo de mensagem usa o reconhecimento de voz do seu navegador ou do seu telefone. O Lien Parental não recebe nem grava a sua voz: só o texto que você decide enviar chega até nós. Conforme o navegador, o reconhecimento pode ser feito pelo seu editor (por exemplo, o Google no Chrome, a Apple no Safari), segundo as condições dele."
         },
         "google": {
           "title": "Dados recebidos do Google",
@@ -1213,7 +1220,14 @@
         "openFull": "Abrir o Coach completo",
         "disclaimer": "O Coach informa e aconselha; ele não substitui um advogado.",
         "error": "O Coach não conseguiu responder. Tente novamente em instantes."
-      }
+      },
+      "listen": "Ler em voz alta",
+      "listenStop": "Parar a leitura",
+      "listenLoading": "Preparando…",
+      "mic": "Ditar minha mensagem",
+      "micStop": "Parar o ditado",
+      "listening": "Ouvindo… fale e depois revise antes de enviar.",
+      "micError": "Não foi possível iniciar o ditado. Verifique a permissão do microfone."
     }
   }
 }

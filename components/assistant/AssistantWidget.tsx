@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { ArrowRight, CheckCheck, CheckCircle2, Coins, Mail, MessageCircle, Minus, Phone, RotateCcw, SendHorizontal, User, X } from 'lucide-react'
+import { ArrowRight, CheckCheck, CheckCircle2, Coins, Mail, MessageCircle, Mic, Minus, Phone, RotateCcw, SendHorizontal, User, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { safeInternalPath } from '@/lib/ai/assistant-links'
 import { localePath, signupPath } from '@/lib/i18n/routing'
@@ -11,6 +11,9 @@ import { CONTACT_EMAIL } from '@/lib/seo/site'
 import { RobotMascot } from '@/components/coach/RobotMascot'
 import { errorMessage, readSse } from '@/components/coach/sse-client'
 import { newIdempotencyKey } from '@/components/coach/session'
+import { SpeechButton } from '@/components/coach/SpeechButton'
+import { useCoachVoice } from '@/components/coach/useCoachVoice'
+import { appendDictation, useDictation } from '@/components/coach/useDictation'
 import { TalkBadge } from './TalkBadge'
 
 // Bulle « Une question ? » et son panneau de discussion, en deux modes :
@@ -18,7 +21,8 @@ import { TalkBadge } from './TalkBadge'
 //  - coach (espace connecté, via CoachBubble) : le Coach parental lui-même (POST /api/coach/chat,
 //    1 crédit par question, mémoire du Coach côté serveur). Le fil est partagé avec la page
 //    « Discussion » du Coach (même clé sessionStorage) : « Ouvrir le Coach complet » le reprend.
-// Mascotte = celle du Coach (RobotMascot), posée sans fond. Accessibilité : dialogue au focus
+// Mascotte = celle du Coach (RobotMascot), posée sans fond. Comme le Coach : lecture à voix haute
+// (ElevenLabs, voix de l'appareil en repli ; route publique bridée hors connexion) et dictée du champ. Accessibilité : dialogue au focus
 // piégé, Échap pour réduire, fil en aria-live, animations coupées en prefers-reduced-motion.
 
 /** Numéros publics (format international, chiffres seuls ou avec espaces). Absents : boutons inactifs. */
@@ -31,6 +35,7 @@ const STORE_KEY = 'lp_assistant_v1'
 /** Même clé que CoachChat (persistKey « discussion ») : un seul fil entre la bulle et le Coach. */
 const COACH_STORE_KEY = 'lp-coach-chat:discussion'
 const TEASER_KEY = 'lp_assistant_teaser_off'
+const PUBLIC_VOICE = { endpoint: '/api/assistant/speech', fixedVoice: true }
 
 export type Msg = { id: string; role: 'user' | 'assistant'; content: string; cta?: boolean; error?: boolean }
 
@@ -74,6 +79,9 @@ function writeStore(coach: boolean, msgs: Msg[]) {
     // stockage bloqué : conversation non conservée
   }
 }
+
+/** Texte à lire à voix haute : liens [libellé](/chemin) réduits à leur libellé. */
+const withoutLinks = (text: string) => text.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
 
 /** Texte de l'assistant : paragraphes, puces « - » (coches vertes), liens internes [libellé](/chemin). */
 function RichText({ text, locale, onNavigate }: { text: string; locale: string; onNavigate: () => void }) {
@@ -151,6 +159,9 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
   const hydrated = useRef(false)
   // Plein écran sur mobile (modal) ; panneau de coin sur ordinateur, page restée accessible.
   const [modal, setModal] = useState(true)
+  // Hors connexion : route publique, voix Koraly imposée. Connecté : route et voix choisie du Coach.
+  const speech = useCoachVoice(locale, isCoach ? {} : PUBLIC_VOICE)
+  const dictation = useDictation(locale, useCallback((text: string) => setInput((cur) => appendDictation(cur, text).slice(0, isCoach ? COACH_MAX_CHARS : MAX_CHARS)), [isCoach]))
 
   // Restauration après hydratation (sessionStorage indisponible au rendu serveur).
   useEffect(() => {
@@ -212,17 +223,20 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
 
   const minimize = useCallback(() => {
     returnFocus.current = true
+    dictation.stop()
     setOpen(false)
-  }, [])
+  }, [dictation])
 
   const close = useCallback(() => {
     abort.current?.abort()
+    speech.stop()
     setPending(false)
     minimize()
-  }, [minimize])
+  }, [minimize, speech])
 
   const reset = () => {
     abort.current?.abort()
+    speech.stop()
     setPending(false)
     setBlocked(null)
     setMsgs([])
@@ -287,6 +301,7 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
   const send = async (text: string) => {
     const content = text.trim().slice(0, maxChars)
     if (!content || pending) return
+    dictation.stop()
     const userMsg: Msg = { id: uid(), role: 'user', content }
     setMsgs((prev) => [...prev, userMsg])
     setInput('')
@@ -357,10 +372,10 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
             <button
               type="button"
               onClick={openPanel}
-              className="relative mb-7 rounded-full border border-iris-200 bg-white px-4 py-2.5 text-[15px] font-extrabold text-night-900 shadow-[0_10px_28px_-12px_rgba(91,69,227,0.55)] motion-safe:animate-fade-up"
+              className="relative mb-7 rounded-full border-[3px] border-[#7b3ff2] bg-white px-4 py-2 text-[15px] font-extrabold text-[#0b1a4a] shadow-[0_10px_28px_-12px_rgba(91,69,227,0.55)] motion-safe:animate-fade-up"
             >
               {t('teaser')}
-              <span aria-hidden className="absolute -bottom-[7px] right-7 h-3.5 w-3.5 rotate-45 border-b border-r border-iris-200 bg-white" />
+              <span aria-hidden className="absolute -bottom-[9px] right-6 h-4 w-4 rotate-45 border-b-[3px] border-r-[3px] border-[#7b3ff2] bg-white" />
             </button>
           )}
           <button
@@ -372,7 +387,7 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
             className="group relative shrink-0 rounded-3xl p-1 pt-3"
           >
             <span className="block drop-shadow-[0_12px_14px_rgba(60,42,163,0.30)] transition-transform duration-200 group-hover:scale-105 motion-safe:animate-float-soft motion-reduce:transition-none motion-reduce:group-hover:scale-100">
-              <RobotMascot variant="head" size={80} animated />
+              <RobotMascot variant="head" size={72} animated />
             </span>
             <TalkBadge className="absolute -right-2.5 -top-0.5 h-8 w-9" />
           </button>
@@ -468,6 +483,18 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
                       <div className={cn('max-w-[85%] break-words rounded-2xl rounded-tl-md px-3.5 py-2.5 ring-1', m.error ? 'bg-alert-50 text-alert-800 ring-alert-100' : 'bg-iris-50 ring-iris-100')}>
                         <span className="sr-only">{isCoach ? t('coach.title') : t('assistant')} :</span>
                         <RichText text={m.content} locale={locale} onNavigate={minimize} />
+                        {!m.error && !(pending && m === msgs[msgs.length - 1]) && (
+                          <div className="mt-1">
+                            <SpeechButton
+                              speech={{
+                                playing: speech.state.id === m.id && speech.state.status === 'playing',
+                                loading: speech.state.id === m.id && speech.state.status === 'loading',
+                                onToggle: () => void speech.toggle(m.id, withoutLinks(m.content)),
+                              }}
+                              labels={{ listen: t('listen'), listenStop: t('listenStop'), listenLoading: t('listenLoading') }}
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                     {!isCoach && m.cta && (
@@ -549,6 +576,10 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
                 void send(input)
               }}
             >
+              <p role="status" aria-live="polite" className={cn('text-[12.5px] font-semibold', dictation.listening ? 'mb-2 flex items-center gap-2 text-alert-600' : dictation.error ? 'mb-2 text-alert-700' : 'sr-only')}>
+                {dictation.listening && <span aria-hidden className="h-2 w-2 rounded-full bg-alert-500 motion-safe:animate-pulse" />}
+                {dictation.listening ? t('listening') : dictation.error ? t('micError') : ''}
+              </p>
               <div className="flex items-end gap-2">
                 <label htmlFor={`${titleId}-input`} className="sr-only">{t('inputLabel')}</label>
                 <textarea
@@ -567,6 +598,21 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
                   }}
                   className="max-h-28 min-h-[44px] flex-1 resize-none rounded-2xl bg-night-50 px-4 py-2.5 text-[15px] text-night-900 ring-1 ring-night-100 placeholder:text-night-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-iris-400"
                 />
+                {dictation.supported && (
+                  <button
+                    type="button"
+                    onClick={dictation.toggle}
+                    aria-pressed={dictation.listening}
+                    aria-label={dictation.listening ? t('micStop') : t('mic')}
+                    title={dictation.listening ? t('micStop') : t('mic')}
+                    className={cn(
+                      'grid h-11 w-11 shrink-0 place-items-center rounded-full ring-1 transition-colors',
+                      dictation.listening ? 'bg-alert-500 text-white ring-alert-500 motion-safe:animate-pulse' : 'bg-iris-50 text-iris-700 ring-iris-200 hover:bg-iris-100',
+                    )}
+                  >
+                    <Mic className="h-5 w-5" aria-hidden />
+                  </button>
+                )}
                 <button
                   type="submit"
                   disabled={pending || !input.trim()}

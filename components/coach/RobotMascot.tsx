@@ -44,16 +44,19 @@ export function RobotMascot({ size = 96, variant = 'full', bubble = false, anima
           <stop offset="0.55" stopColor="#f3f1fb" />
           <stop offset="1" stopColor="#d3cfe8" />
         </radialGradient>
-        <linearGradient id={visor} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#26357a" />
-          <stop offset="0.55" stopColor="#0f1a4d" />
-          <stop offset="1" stopColor="#070d2e" />
+        <linearGradient id={visor} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#141a5a" />
+          <stop offset="1" stopColor="#0b1240" />
         </linearGradient>
         <radialGradient id={violet} cx="35%" cy="30%" r="75%">
-          <stop offset="0" stopColor="#c6b9fb" />
-          <stop offset="0.45" stopColor="#7350f0" />
-          <stop offset="1" stopColor="#3f22b0" />
+          <stop offset="0" stopColor="#b48cff" />
+          <stop offset="0.45" stopColor="#7b2ff2" />
+          <stop offset="1" stopColor="#5a18c9" />
         </radialGradient>
+        <linearGradient id={`${glow}-eye`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#3bff5a" />
+          <stop offset="1" stopColor="#22d84a" />
+        </linearGradient>
         <linearGradient id={stem} x1="0" x2="1">
           <stop offset="0" stopColor="#9aa1b2" />
           <stop offset="0.45" stopColor="#f4f5f8" />
@@ -79,31 +82,33 @@ export function RobotMascot({ size = 96, variant = 'full', bubble = false, anima
       <circle cx="60" cy="9" r="6" fill={`url(#${violet})`} />
       <ellipse cx="57.8" cy="6.8" rx="2.2" ry="1.3" fill="#ffffff" opacity="0.75" />
 
-      {/* Oreilles */}
-      <rect x="11" y="38" width="15" height="32" rx="7.5" fill={`url(#${violet})`} />
-      <rect x="94" y="38" width="15" height="32" rx="7.5" fill={`url(#${violet})`} />
-      <ellipse cx="15.5" cy="46" rx="2" ry="4.5" fill="#ffffff" opacity="0.35" />
+      {/* Oreilles : demi-disques violets brillants, à mi-hauteur */}
+      <path d="M24 38 A13 16 0 0 0 24 70 Z" fill={`url(#${violet})`} />
+      <path d="M96 38 A13 16 0 0 1 96 70 Z" fill={`url(#${violet})`} />
+      <ellipse cx="15.5" cy="47" rx="1.8" ry="4.5" fill="#ffffff" opacity="0.45" />
+      <ellipse cx="104.5" cy="47" rx="1.6" ry="4" fill="#ffffff" opacity="0.3" />
 
       {/* Tête nacrée + reflet */}
       <rect x="20" y="24" width="80" height="60" rx="26" fill={`url(#${shell})`} stroke="#ddd9f0" strokeWidth="1.2" />
+      <rect x="22" y="70" width="76" height="13" rx="6.5" fill="#b9b2dc" opacity="0.18" />
       <ellipse cx="44" cy="30.5" rx="17" ry="3.8" fill="#ffffff" opacity="0.95" />
 
       {/* Visière brillante */}
-      <rect x="27.5" y="33.5" width="65" height="41" rx="18.5" fill="#0b2d5b" />
-      <rect x="29" y="35" width="62" height="38" rx="17" fill={`url(#${visor})`} />
+      <rect x="27.5" y="33.5" width="65" height="41" rx="18.5" fill="#0b1240" />
+      <rect x="29" y="35" width="62" height="38" rx="17" fill={`url(#${visor})`} stroke="#3a4592" strokeWidth="0.8" />
       <path d="M35 44c2.2-4.8 7-6.8 13-6.8" stroke="#ffffff" strokeOpacity="0.3" strokeWidth="1.8" strokeLinecap="round" />
 
       {/* Yeux + sourire lumineux : halo flouté puis trait net */}
       <g className={animated ? 'origin-center [transform-box:fill-box] motion-safe:animate-blink' : undefined}>
-        <g filter={`url(#${glow})`} stroke="#86efac" strokeWidth="6" strokeLinecap="round" opacity="0.6">
+        <g filter={`url(#${glow})`} stroke="#3bff5a" strokeWidth="6" strokeLinecap="round" opacity="0.45">
           <path d="M42 56 q6 -8 12 0" />
           <path d="M66 56 q6 -8 12 0" />
         </g>
-        <path d="M42 56 q6 -8 12 0" stroke="#4ade80" strokeWidth="3.5" strokeLinecap="round" />
-        <path d="M66 56 q6 -8 12 0" stroke="#4ade80" strokeWidth="3.5" strokeLinecap="round" />
+        <path d="M42 56 q6 -8 12 0" stroke={`url(#${glow}-eye)`} strokeWidth="3.8" strokeLinecap="round" />
+        <path d="M66 56 q6 -8 12 0" stroke={`url(#${glow}-eye)`} strokeWidth="3.8" strokeLinecap="round" />
       </g>
-      <path d="M53 62 q7 6 14 0" stroke="#86efac" strokeWidth="5.5" strokeLinecap="round" opacity="0.6" filter={`url(#${glow})`} />
-      <path d="M53 62 q7 6 14 0" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" />
+      <path d="M54 62 q6 5.5 12 0" stroke="#86efac" strokeWidth="5.5" strokeLinecap="round" opacity="0.6" filter={`url(#${glow})`} />
+      <path d="M54 62 q6 5.5 12 0" stroke={`url(#${glow}-eye)`} strokeWidth="3.4" strokeLinecap="round" />
 
       {/* Bulle « … » */}
       {bubble && variant === 'full' && (
