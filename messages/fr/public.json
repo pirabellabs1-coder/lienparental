@@ -529,9 +529,9 @@
             "location": "Fonctions exécutées dans l’Union européenne (Paris). Vercel est une société américaine dont le réseau de diffusion est mondial : une requête peut transiter par un point de présence proche de vous, y compris hors UE."
           },
           "anthropic": {
-            "name": "Anthropic (Coach IA)",
-            "purpose": "Réponses du Coach IA et analyse des messages que vous lui soumettez.",
-            "data": "Uniquement lorsque vous utilisez le Coach : votre question ou le contenu à analyser, et un résumé de votre espace (prénoms et âges des enfants, journal, calendrier, noms des documents). Les informations médicales ne sont transmises que si vous l’activez pour une question.",
+            "name": "Anthropic (Coach IA, assistant du site)",
+            "purpose": "Réponses du Coach IA et analyse des messages que vous lui soumettez ; réponses de l’assistant du site (bulle « Une question ? »).",
+            "data": "Uniquement lorsque vous utilisez le Coach : votre question ou le contenu à analyser, et un résumé de votre espace (prénoms et âges des enfants, journal, calendrier, noms des documents). Les informations médicales ne sont transmises que si vous l’activez pour une question. Pour l’assistant du site, accessible sans compte : uniquement les messages de la conversation en cours, sans identifiant ni adresse IP ; ils ne sont pas enregistrés par Lien Parental. N’y indiquez pas de données personnelles.",
             "location": "États-Unis (Anthropic est une société américaine)."
           },
           "stripe": {
@@ -1167,6 +1167,38 @@
         "logoChange": "Changer l’image",
         "logoPreviewAlt": "Aperçu du logo choisi"
       }
+    },
+    "assistant": {
+      "open": "Ouvrir l’assistant Lien Parental",
+      "teaser": "Une question ?",
+      "title": "Assistant Lien Parental",
+      "online": "En ligne",
+      "newChat": "Nouvelle conversation",
+      "minimize": "Réduire",
+      "close": "Fermer",
+      "logLabel": "Conversation avec l’assistant",
+      "welcome": "Bonjour 👋 Je peux vous aider à découvrir Lien Parental, répondre à vos questions et vous accompagner.",
+      "suggestion1": "Comment ça marche ?",
+      "suggestion2": "Quels sont les tarifs ?",
+      "suggestion3": "C’est quoi le Guide parental ?",
+      "you": "Vous",
+      "assistant": "Assistant",
+      "sent": "Envoyé",
+      "read": "Lu",
+      "typing": "L’assistant écrit…",
+      "cta": "Créer mon compte gratuitement",
+      "ctaNote": "Gratuit • Sans engagement • Moins de 2 minutes",
+      "otherWays": "Autres moyens de nous contacter",
+      "whatsapp": "WhatsApp",
+      "call": "Appeler Lien Parental",
+      "write": "Nous écrire",
+      "soon": "Numéro bientôt disponible",
+      "inputLabel": "Votre message",
+      "placeholder": "Écrivez votre message…",
+      "send": "Envoyer",
+      "error": "Je n’arrive pas à répondre pour le moment. Réessayez dans un instant ou écrivez-nous à contact@lienparental.fr.",
+      "disclaimer": "Réponses générées par IA, sans conseil juridique. N’indiquez pas de données personnelles.",
+      "privacy": "Confidentialité"
     }
   }
 }

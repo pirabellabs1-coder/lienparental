@@ -125,7 +125,7 @@ export function estimateCostUsd(u: UsageLike | null | undefined): number {
  * Jamais de contenu, d'identifiant utilisateur, d'e-mail ni de nom de fichier.
  */
 export function logAiCall(entry: {
-  route: 'analyze' | 'chat'
+  route: 'analyze' | 'chat' | 'assistant'
   model: string
   promptVersion: string
   effort: string

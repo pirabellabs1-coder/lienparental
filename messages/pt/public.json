@@ -529,9 +529,9 @@
             "location": "Funções executadas na União Europeia (Paris). A Vercel é uma empresa americana com rede de distribuição mundial: uma requisição pode passar por um ponto de presença próximo de você, inclusive fora da UE."
           },
           "anthropic": {
-            "name": "Anthropic (Coach com IA)",
-            "purpose": "Respostas do Coach com IA e análise das mensagens que você envia a ele.",
-            "data": "Somente quando você usa o Coach: sua pergunta ou o conteúdo a analisar, e um resumo do seu espaço (nomes e idades das crianças, diário, calendário, nomes dos documentos). As informações médicas só são enviadas se você ativar essa opção para uma pergunta.",
+            "name": "Anthropic (Coach com IA, assistente do site)",
+            "purpose": "Respostas do Coach com IA e análise das mensagens que você envia a ele; respostas do assistente do site (balão « Alguma dúvida? »).",
+            "data": "Somente quando você usa o Coach: sua pergunta ou o conteúdo a analisar, e um resumo do seu espaço (nomes e idades das crianças, diário, calendário, nomes dos documentos). As informações médicas só são enviadas se você ativar essa opção para uma pergunta. Para o assistente do site, acessível sem conta: somente as mensagens da conversa em andamento, sem identificador nem endereço IP; o Lien Parental não as armazena. Não informe dados pessoais nele.",
             "location": "Estados Unidos (a Anthropic é uma empresa americana)."
           },
           "stripe": {
@@ -1167,6 +1167,38 @@
         "logoChange": "Trocar a imagem",
         "logoPreviewAlt": "Prévia do logotipo escolhido"
       }
+    },
+    "assistant": {
+      "open": "Abrir o assistente Lien Parental",
+      "teaser": "Alguma dúvida?",
+      "title": "Assistente Lien Parental",
+      "online": "Online",
+      "newChat": "Nova conversa",
+      "minimize": "Minimizar",
+      "close": "Fechar",
+      "logLabel": "Conversa com o assistente",
+      "welcome": "Olá 👋 Posso ajudar você a conhecer o Lien Parental, responder às suas perguntas e acompanhar você.",
+      "suggestion1": "Como funciona?",
+      "suggestion2": "Quais são os preços?",
+      "suggestion3": "O que é o Guia parental?",
+      "you": "Você",
+      "assistant": "Assistente",
+      "sent": "Enviada",
+      "read": "Lida",
+      "typing": "O assistente está digitando…",
+      "cta": "Criar minha conta grátis",
+      "ctaNote": "Grátis • Sem compromisso • Menos de 2 minutos",
+      "otherWays": "Outras formas de falar conosco",
+      "whatsapp": "WhatsApp",
+      "call": "Ligar para o Lien Parental",
+      "write": "Escreva para nós",
+      "soon": "Número disponível em breve",
+      "inputLabel": "Sua mensagem",
+      "placeholder": "Escreva sua mensagem…",
+      "send": "Enviar",
+      "error": "Não consigo responder agora. Tente novamente em instantes ou escreva para contact@lienparental.fr.",
+      "disclaimer": "Respostas geradas por IA, sem aconselhamento jurídico. Não informe dados pessoais.",
+      "privacy": "Privacidade"
     }
   }
 }

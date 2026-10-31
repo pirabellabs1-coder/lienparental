@@ -17,10 +17,10 @@ export const CLIENT_NS_ROOT = ['lang', 'a11y'] as const
 
 /**
  * Site public (components/site/SiteShell.tsx) : accueil, /aide, /blog, /guide, /legal, /don, /installer,
- * /a-propos, 404. Volontairement minimal : la page 404 racine est sérialisée dans le flux RSC de
- * TOUTES les pages (frontière notFound du layout racine), avec son provider.
+ * /a-propos, 404, et l'assistant public (bulle « Une question ? »). Volontairement minimal : la page 404
+ * racine est sérialisée dans le flux RSC de TOUTES les pages (frontière notFound du layout racine), avec son provider.
  */
-export const CLIENT_NS_SITE = [...CLIENT_NS_ROOT, 'nav', 'header'] as const
+export const CLIENT_NS_SITE = [...CLIENT_NS_ROOT, 'nav', 'header', 'public.assistant'] as const
 
 /** En plus de CLIENT_NS_SITE sur l'accueil (`<SiteShell extraNamespaces>` dans app/page.tsx). */
 export const CLIENT_NS_SITE_HOME = ['featureTabs', 'testimonials', 'video.dialog', 'video.slides'] as const

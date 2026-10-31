@@ -529,9 +529,9 @@
             "location": "Functions run in the European Union (Paris). Vercel is an American company with a global delivery network: a request may pass through a point of presence near you, including outside the EU."
           },
           "anthropic": {
-            "name": "Anthropic (AI Coach)",
-            "purpose": "AI Coach answers and analysis of the messages you submit to it.",
-            "data": "Only when you use the Coach: your question or the content to analyze, and a summary of your space (children’s first names and ages, journal, calendar, document names). Medical information is only sent if you enable it for a question.",
+            "name": "Anthropic (AI Coach, website assistant)",
+            "purpose": "AI Coach answers and analysis of the messages you submit to it; answers from the website assistant (“Got a question?” bubble).",
+            "data": "Only when you use the Coach: your question or the content to analyze, and a summary of your space (children’s first names and ages, journal, calendar, document names). Medical information is only sent if you enable it for a question. For the website assistant, available without an account: only the messages of the current conversation, with no identifier or IP address; Lien Parental does not store them. Do not share personal data there.",
             "location": "United States (Anthropic is an American company)."
           },
           "stripe": {
@@ -1167,6 +1167,38 @@
         "logoChange": "Change the image",
         "logoPreviewAlt": "Preview of the chosen logo"
       }
+    },
+    "assistant": {
+      "open": "Open the Lien Parental assistant",
+      "teaser": "Got a question?",
+      "title": "Lien Parental Assistant",
+      "online": "Online",
+      "newChat": "New conversation",
+      "minimize": "Minimise",
+      "close": "Close",
+      "logLabel": "Conversation with the assistant",
+      "welcome": "Hello 👋 I can help you discover Lien Parental, answer your questions and guide you.",
+      "suggestion1": "How does it work?",
+      "suggestion2": "What does it cost?",
+      "suggestion3": "What is the parenting Guide?",
+      "you": "You",
+      "assistant": "Assistant",
+      "sent": "Sent",
+      "read": "Read",
+      "typing": "The assistant is typing…",
+      "cta": "Create my free account",
+      "ctaNote": "Free • No commitment • Less than 2 minutes",
+      "otherWays": "Other ways to contact us",
+      "whatsapp": "WhatsApp",
+      "call": "Call Lien Parental",
+      "write": "Write to us",
+      "soon": "Number coming soon",
+      "inputLabel": "Your message",
+      "placeholder": "Type your message…",
+      "send": "Send",
+      "error": "I can’t answer right now. Try again in a moment or write to us at contact@lienparental.fr.",
+      "disclaimer": "AI-generated answers, not legal advice. Don’t share personal data.",
+      "privacy": "Privacy"
     }
   }
 }
