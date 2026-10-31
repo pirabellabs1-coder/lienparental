@@ -63,7 +63,7 @@ async function memoryWallet(user: Pick<CurrentUser, 'id' | 'plan'>): Promise<Mem
   return w
 }
 
-const useDemoCookie = async () => !SUPABASE_ENABLED && !AI_ENABLED && !!(await readDemoAi())
+const isDemoCookie = async () => !SUPABASE_ENABLED && !AI_ENABLED && !!(await readDemoAi())
 
 // --- Lecture ---------------------------------------------------------------------------------
 
@@ -113,7 +113,7 @@ export async function getWallet(user: Pick<CurrentUser, 'id' | 'plan'>): Promise
     if (error) throw new Error(`credits_balance failed: ${error.code ?? 'unknown'}`)
     return fromSql(data as SqlState)
   }
-  if (await useDemoCookie()) return demoView()
+  if (await isDemoCookie()) return demoView()
   const w = await memoryWallet(user)
   const b = w.balance(user.id)
   return { ...b, periodStart: b.period.start, periodEnd: b.period.end, live: false }
@@ -143,7 +143,7 @@ export async function reserveCredits(user: Pick<CurrentUser, 'id' | 'plan'>, act
 
   const { config } = await getCreditConfig()
   const cost = config.actions[action]
-  if (await useDemoCookie()) {
+  if (await isDemoCookie()) {
     if (!cost?.active) return { ok: false, reason: 'inactive' }
     const demo = (await readDemoAi())!
     const plan = (await getDemoBilling())?.plan ?? 'gratuit'
@@ -251,7 +251,7 @@ export async function listLedger(user: Pick<CurrentUser, 'id' | 'plan'>, type: L
     return ((data ?? []) as Array<{ id: number; wallet: 'monthly' | 'purchased'; entry_type: LedgerType; delta: number; amount: number; created_at: string }>)
       .map((r) => ({ id: String(r.id), wallet: r.wallet, type: r.entry_type, delta: r.delta, amount: r.amount, at: r.created_at }))
   }
-  if (await useDemoCookie()) return []
+  if (await isDemoCookie()) return []
   const w = await memoryWallet(user)
   return w.ledger.filter((e) => e.userId === user.id && (!type || e.type === type)).slice(-n).reverse()
     .map((e) => ({ id: String(e.id), wallet: e.wallet, type: e.type, delta: e.delta, amount: e.amount, at: e.at }))

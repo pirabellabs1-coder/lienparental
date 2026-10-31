@@ -89,9 +89,9 @@ function checkFile(locale: string, file: string) {
   const frRaw = fs.readFileSync(frFile, 'utf8')
 
   if (file.endsWith('.json')) {
-    let fr: unknown, tr: unknown
+    let tr: unknown
     try { tr = JSON.parse(raw) } catch (e) { return void problems.push({ file: name, msg: `JSON invalide : ${(e as Error).message}` }) }
-    fr = JSON.parse(frRaw)
+    const fr: unknown = JSON.parse(frRaw)
     compare(fr, tr, name)
     if (sub.includes('/fiches/')) zodCheck(ficheSchema, tr, name)
     else if (sub.includes('/parcours/')) zodCheck(parcoursSchema, tr, name)

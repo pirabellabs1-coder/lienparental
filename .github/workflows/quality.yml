@@ -1,0 +1,45 @@
+# Contrôle qualité de chaque pull request vers main (et de chaque push sur main).
+# Mêmes commandes qu'en local (package.json) : la CI fait foi, le hook pre-commit n'est qu'un raccourci.
+# Le build et l'aperçu restent faits par Vercel (statut « Vercel » sur la PR).
+name: Qualité
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Typage, lint et tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installation (lockfile)
+        run: npm ci --no-audit --no-fund
+
+      - name: Typage
+        run: npm run typecheck
+
+      - name: Lint (aucune erreur, avertissements plafonnés)
+        run: npm run lint
+
+      - name: Tests unitaires
+        run: npm test
+
+      - name: Tests SQL (migrations + scénarios RLS sur PGlite)
+        run: npm run test:sql
