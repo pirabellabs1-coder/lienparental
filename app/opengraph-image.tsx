@@ -26,7 +26,6 @@ export default async function OpengraphImage() {
       <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', background: '#ffffff', padding: '64px 80px', fontFamily: fonts.length ? 'Montserrat' : undefined }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           {logo ? (
-            // eslint-disable-next-line @next/next/no-img-element -- rendu next/og (pas de next/image)
             <img src={`data:image/svg+xml;base64,${logo.toString('base64')}`} width={264} height={160} alt="" />
           ) : (
             <span style={{ fontSize: 56, fontWeight: 800, color: '#0b2d5b' }}>Lien Parental</span>

@@ -16,6 +16,12 @@ const config = [
     files: ['lib/pdf/**/*.tsx'],
     rules: { 'react/no-unescaped-entities': 'off' },
   },
+  {
+    // Images générées par next/og : <img> obligatoire (pas de next/image). Déclaré ici plutôt qu'en
+    // commentaire : la règle ignore déjà ces fichiers sous Linux, pas sous Windows (chemins).
+    files: ['app/**/opengraph-image.tsx', 'app/**/twitter-image.tsx', 'app/**/icon.tsx', 'app/**/apple-icon.tsx'],
+    rules: { '@next/next/no-img-element': 'off' },
+  },
 ]
 
 export default config
