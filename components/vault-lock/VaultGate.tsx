@@ -233,6 +233,8 @@ function LockButton({ onLock }: { onLock: () => void }) {
     <button
       type="button"
       onClick={onLock}
+      // Bouton flottant : la bulle du Coach se place au-dessus (data-fab, comme le bouton « + »).
+      data-fab=""
       className={cn(
         'fixed right-4 z-40 inline-flex min-h-[44px] items-center gap-2 rounded-full border border-night-100 bg-white/95 px-4 text-[13.5px] font-bold text-night-900',
         'shadow-card backdrop-blur transition-[background-color,transform] duration-200 hover:bg-night-50 active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100',
