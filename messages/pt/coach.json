@@ -85,7 +85,8 @@
       "mic": "Ditar minha pergunta",
       "micStop": "Parar o ditado",
       "listening": "Ouvindo… fale e depois revise antes de enviar.",
-      "micError": "Não foi possível iniciar o ditado. Verifique a permissão do microfone."
+      "micError": "Não foi possível iniciar o ditado. Verifique a permissão do microfone.",
+      "voiceUnavailable": "Leitura em voz alta temporariamente indisponível, tente novamente."
     },
     "list": {
       "opFailed": "A operação falhou. Tente novamente.",

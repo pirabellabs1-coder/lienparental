@@ -4,8 +4,8 @@
  * - Compte connecté uniquement ; la clé ElevenLabs reste côté serveur (ELEVENLABS_API_KEY).
  * - Voix limitées aux quatre voix du Coach (lib/ai/voices.ts) ; texte nettoyé et borné.
  * - Limites : 10 lectures par minute, 60 par jour et par compte (forfait de caractères partagé).
- * - Sans clé, quota du fournisseur épuisé ou panne : 503 `tts_unavailable`, le navigateur lit
- *   alors avec la voix de l'appareil (components/coach/useCoachVoice.ts).
+ * - Sans clé, quota du fournisseur épuisé ou panne : 503 `tts_unavailable` ; le navigateur réessaie une
+ *   fois puis affiche « Lecture vocale momentanément indisponible » (jamais de voix de synthèse robotique).
  * - Ne débite aucun crédit du Coach. Synthèse partagée : lib/ai/elevenlabs.ts.
  */
 import { getTranslations } from 'next-intl/server'
@@ -18,6 +18,8 @@ import { AUDIO_HEADERS, elevenLabsSpeech } from '@/lib/ai/elevenlabs'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
+// Réponse longue (jusqu'à 3 000 caractères) lue en flux : la fonction reste ouverte pendant le relais.
+export const maxDuration = 60
 
 const MAX_BODY = 20_000
 

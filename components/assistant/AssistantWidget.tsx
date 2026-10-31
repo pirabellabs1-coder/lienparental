@@ -160,7 +160,7 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
   // Plein écran sur mobile (modal) ; panneau de coin sur ordinateur, page restée accessible.
   const [modal, setModal] = useState(true)
   // Hors connexion : route publique, voix Koraly imposée. Connecté : route et voix choisie du Coach.
-  const speech = useCoachVoice(locale, isCoach ? {} : PUBLIC_VOICE)
+  const speech = useCoachVoice(isCoach ? {} : PUBLIC_VOICE)
   const dictation = useDictation(locale, useCallback((text: string) => setInput((cur) => appendDictation(cur, text).slice(0, isCoach ? COACH_MAX_CHARS : MAX_CHARS)), [isCoach]))
 
   // Restauration après hydratation (sessionStorage indisponible au rendu serveur).
@@ -493,6 +493,16 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
                               }}
                               labels={{ listen: t('listen'), listenStop: t('listenStop'), listenLoading: t('listenLoading') }}
                             />
+                            {speech.error?.id === m.id && (
+                              <p role="status" className="mt-0.5 text-[12px] leading-snug text-night-600">
+                                {speech.error.kind === 'limit' ? (
+                                  <>
+                                    {t('voiceLimit')}{' '}
+                                    <Link href={signupPath(locale)} className="font-semibold text-iris-700 underline underline-offset-2">{t('voiceLimitCta')}</Link>
+                                  </>
+                                ) : t('voiceUnavailable')}
+                              </p>
+                            )}
                           </div>
                         )}
                       </div>

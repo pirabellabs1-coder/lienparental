@@ -6,8 +6,9 @@
  * en fail-closed (limiteur indisponible = refus) :
  *  - par IP : 3 lectures par 10 minutes, 10 par jour ;
  *  - global : ASSISTANT_SPEECH_DAILY_CAP lectures par jour, toutes IP confondues (défaut 10).
- * Tout refus (limite, quota, clé absente, panne) répond 503 `tts_unavailable` sans détail : le navigateur
- * lit alors avec la voix de l'appareil (components/coach/useCoachVoice.ts), sans erreur visible.
+ * Limite atteinte : 429 `speech_limit` (le widget propose de créer un compte gratuit). Quota, clé absente,
+ * panne : 503 `tts_unavailable` (le widget réessaie une fois puis affiche un court message). Jamais de
+ * voix de synthèse de l'appareil.
  * Rien n'est enregistré.
  */
 import { z } from 'zod'
@@ -18,6 +19,7 @@ import { AUDIO_HEADERS, elevenLabsSpeech } from '@/lib/ai/elevenlabs'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
+export const maxDuration = 60
 
 const PUBLIC_SPEECH_MAX_CHARS = 600
 const MAX_BODY = 8_000
@@ -26,6 +28,7 @@ const GLOBAL_PER_DAY = Math.max(0, Number(process.env.ASSISTANT_SPEECH_DAILY_CAP
 const Body = z.object({ text: z.string().trim().min(1).max(4_000) }).strict()
 
 const unavailable = () => jsonError(503, 'tts_unavailable', 'Lecture indisponible.')
+const limited = () => jsonError(429, 'speech_limit', 'Limite de lectures atteinte.')
 
 export async function POST(req: Request) {
   const rejected = rejectCrossSiteJson(req)
@@ -49,11 +52,11 @@ export async function POST(req: Request) {
   // Comptées seulement pour une requête valide : une erreur de saisie ne consomme pas le quota.
   const ip = clientIp(req.headers)
   const burst = await rateLimit(ipKey('assistant-speech', ip), 3, 10 * 60_000, { failClosed: true })
-  if (!burst.ok) return unavailable()
+  if (!burst.ok) return burst.reason === 'limited' ? limited() : unavailable()
   const daily = await rateLimit(ipKey('assistant-speech-day', ip), 10, 86_400_000, { failClosed: true })
-  if (!daily.ok) return unavailable()
+  if (!daily.ok) return daily.reason === 'limited' ? limited() : unavailable()
   const global = await rateLimit('assistant-speech-global:all', GLOBAL_PER_DAY, 86_400_000, { failClosed: true })
-  if (!global.ok) return unavailable()
+  if (!global.ok) return global.reason === 'limited' ? limited() : unavailable()
 
   const voice = COACH_VOICES.find((v) => v.key === DEFAULT_COACH_VOICE)!
   const audio = await elevenLabsSpeech(text, voice.id, 'assistant-speech')

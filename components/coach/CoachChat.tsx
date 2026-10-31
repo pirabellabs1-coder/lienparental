@@ -80,7 +80,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
   const [upgrade, setUpgrade] = useState(false)
   const { data: credits, refresh: refreshCredits } = useCredits()
   const chatCost = credits?.costs.chat_question ?? 1
-  const speechCtl = useCoachVoice(locale)
+  const speechCtl = useCoachVoice()
   // Dictée : la reconnaissance vocale du navigateur écrit dans le champ ; rien n'est envoyé à nos serveurs.
   const dictation = useDictation(locale, useCallback((text: string) => setQ((cur) => appendDictation(cur, text).slice(0, MAX)), []))
   const stopDictation = dictation.stop
@@ -538,8 +538,8 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
             {fileError}
           </p>
         )}
-        {speechCtl.fallback && (
-          <p role="status" className="mt-1 px-1 text-[11px] leading-snug text-night-600">{t('voiceFallback')}</p>
+        {speechCtl.error && (
+          <p role="status" className="mt-1 px-1 text-[11px] leading-snug text-night-600">{t('voiceUnavailable')}</p>
         )}
         <p id={hintId} className="mt-1 truncate px-1 text-[11px] text-night-500">
           <span className="sr-only">{t('hint')} </span>

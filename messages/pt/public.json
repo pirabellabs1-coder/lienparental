@@ -1227,7 +1227,10 @@
       "mic": "Ditar minha mensagem",
       "micStop": "Parar o ditado",
       "listening": "Ouvindo… fale e depois revise antes de enviar.",
-      "micError": "Não foi possível iniciar o ditado. Verifique a permissão do microfone."
+      "micError": "Não foi possível iniciar o ditado. Verifique a permissão do microfone.",
+      "voiceUnavailable": "Leitura em voz alta temporariamente indisponível, tente novamente.",
+      "voiceLimit": "Você atingiu o limite de escuta sem conta.",
+      "voiceLimitCta": "Crie uma conta grátis para ouvir mais respostas"
     }
   }
 }
