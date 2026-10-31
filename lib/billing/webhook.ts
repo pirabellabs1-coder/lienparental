@@ -106,15 +106,16 @@ export async function handleStripeEvent(event: Stripe.Event): Promise<Deferred[]
   switch (event.type) {
     case 'checkout.session.completed': {
       const session = event.data.object
-      // Achat de crédits IA (paiement unique) : session relue chez Stripe, crédit idempotent par
-      // session (grant_ai_credits + écriture « purchase » au journal, 0520). Aucun effet sur
-      // l'abonnement, les droits Premium ni le stockage.
-      // Achat d'espace de stockage (paiement unique, 0610) : même principe, grant_storage_pack.
+      // Achat d'espace de stockage (paiement unique, 0610) : session relue chez Stripe avec sa charge
+      // (un paiement déjà remboursé ou contesté n'accorde rien), octroi idempotent (grant_storage_pack).
       if (isStorageSession(session)) {
         const fresh = await getStripe().checkout.sessions.retrieve(session.id, { expand: ['payment_intent.latest_charge'] })
         await grantStorageForSession(fresh, 'webhook')
         break
       }
+      // Achat de crédits IA (paiement unique) : session relue chez Stripe, crédit idempotent par
+      // session (grant_ai_credits + écriture « purchase » au journal, 0520). Aucun effet sur
+      // l'abonnement, les droits Premium ni le stockage.
       if (isCreditSession(session)) {
         const fresh = await getStripe().checkout.sessions.retrieve(session.id)
         await grantCreditsForSession(fresh, 'webhook')

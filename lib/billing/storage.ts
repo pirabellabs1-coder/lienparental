@@ -4,12 +4,13 @@ import 'server-only'
  * Lots public.storage_purchases (0610), accordés UNIQUEMENT par grant_storage_pack : webhook Stripe
  * ou relecture de la session chez Stripe au retour de paiement, idempotent par session.
  */
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { storageGrantFromSession, type StorageGrant, type StorageSessionLike } from './storage-packs'
 
-type Db = { rpc: (fn: string, args?: Record<string, unknown>) => PromiseLike<{ data: unknown; error: { code?: string } | null }>; from: (t: string) => any } // eslint-disable-line @typescript-eslint/no-explicit-any
-const serviceDb = () => createServiceClient() as unknown as Db
+// Client non typé : `storage_purchases` et ses fonctions (0610) ne sont pas dans lib/supabase/types.
+const serviceDb = () => createServiceClient() as unknown as SupabaseClient
 
 export type StorageGrantOutcome = 'granted' | 'duplicate' | 'unknown_user' | 'not_storage' | 'not_paid' | 'invalid' | 'reversed'
 
@@ -57,7 +58,7 @@ export type StorageLot = { gigabytes: number; expiresAt: string }
 export async function listActiveStoragePacks(): Promise<StorageLot[]> {
   if (!SUPABASE_ENABLED) return []
   try {
-    const db = (await createClient()) as unknown as Db
+    const db = (await createClient()) as unknown as SupabaseClient
     const { data, error } = await db.from('storage_purchases').select('gigabytes, expires_at').is('revoked_at', null)
       .gt('expires_at', new Date().toISOString()).order('expires_at', { ascending: true }).limit(50)
     if (error) return []
