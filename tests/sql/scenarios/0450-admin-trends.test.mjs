@@ -72,8 +72,9 @@ export default async function run(db) {
   for (const [id, at, ua] of sessions) await db.query(`insert into auth.sessions (user_id, created_at, user_agent, aal) values ($1, $2, $3, 'aal1')`, [id, at, ua])
 
   // --- Garde -----------------------------------------------------------------
+  // 0480 : la 2FA n'est plus exigée pour l'administration.
   let e = await err(as(db, ADM, TRENDS, P, 'aal1'))
-  check('séries : admin aal1 refusé (42501)', e && /admin only/.test(e.message), e?.message)
+  check('séries : admin aal1 accepté (0480)', !e, e?.message)
   e = await err(as(db, A, TRENDS, P, 'aal2'))
   check('séries : utilisateur aal2 refusé', e && /admin only/.test(e.message), e?.message)
   e = await err(anon(db, TRENDS, P))
@@ -83,7 +84,7 @@ export default async function run(db) {
   e = await err(as(db, A, `select public.admin_stats_today($1)`, [TZ], 'aal2'))
   check('aujourd’hui : utilisateur refusé', e && /admin only/.test(e.message), e?.message)
   e = await err(as(db, ADM, `select public.admin_stats_today($1)`, [TZ], 'aal1'))
-  check('aujourd’hui : admin aal1 refusé', e && /admin only/.test(e.message), e?.message)
+  check('aujourd’hui : admin aal1 accepté (0480)', !e, e?.message)
   e = await err(adm(db, `select * from public.admin_stats_activity_days(now() - interval '1 day', now(), $1)`, [TZ]))
   check('fonction interne activity_days non exécutable (même admin)', e && /permission denied/.test(e.message), e?.message)
   e = await err(anon(db, `select public.admin_stats_cohorts(now(), $1, 12)`, [TZ]))

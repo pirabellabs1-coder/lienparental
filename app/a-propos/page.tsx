@@ -24,6 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const LINK = 'font-semibold text-leaf-700 underline underline-offset-4 hover:text-leaf-600'
 const strong = (c: ReactNode) => <strong>{c}</strong>
+// eslint-disable-next-line react/display-name -- fonction de rendu passée à t.rich, pas un composant
 const linkTo = (href: string) => (c: ReactNode) => <Link href={href} className={LINK}>{c}</Link>
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {

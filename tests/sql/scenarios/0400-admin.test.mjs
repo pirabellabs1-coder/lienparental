@@ -43,8 +43,9 @@ export default async function run(db) {
   await db.query(`insert into auth.sessions (user_id, user_agent, ip, aal, updated_at) values ($1, 'Mozilla/5.0 (iPhone) Safari', '10.0.0.1', 'aal1', now()), ($1, 'Mozilla/5.0 (Windows) Chrome', '10.0.0.2', 'aal1', now())`, [P.id])
 
   // --- Garde -----------------------------------------------------------------
+  // 0480 : la 2FA n'est plus exigée pour l'administration.
   let e = await err(as(db, ADM, LIST, [null, null, null, null, null, null, null, 10], 'aal1'))
-  check('admin aal1 refusé (42501)', e && /admin only/.test(e.message), e?.message)
+  check('admin aal1 accepté (0480)', !e, e?.message)
   e = await err(as(db, P, LIST, [null, null, null, null, null, null, null, 10], 'aal2'))
   check('utilisateur aal2 refusé', e && /admin only/.test(e.message), e?.message)
   e = await err(anon(db, LIST, [null, null, null, null, null, null, null, 10]))
@@ -126,7 +127,7 @@ export default async function run(db) {
   const own = e ? null : await as(db, P, `select count(*)::int as n from public.audit_log`, [], 'aal2')
   check('audit_log illisible pour un utilisateur', own && own[0].n === 0)
   const r1 = await as(db, ADM, `select count(*)::int as n from public.audit_log`, [], 'aal1')
-  check('audit_log illisible pour un admin aal1', r1[0].n === 0)
+  check('audit_log lisible pour un admin aal1 (0480)', r1[0].n > 0)
 
   // Événements de sécurité
   await db.query(`update auth.users set email = 'paul.new@test.fr' where id = $1`, [P.id])
@@ -175,10 +176,8 @@ export default async function run(db) {
   check('résolu : closed_at posé', closed.closed_at !== null)
   const cl = (await as(db, Q, `update public.support_tickets set status = 'closed' where id = $1 returning status`, [t2.id]))[0]
   check('utilisateur peut fermer son ticket', cl.status === 'closed')
-  e = await err(as(db, ADM, `select public.admin_update_ticket($1, 'open', null)`, [t2.id], 'aal1'))
-  check('admin aal1 ne modifie pas un ticket', e && /admin only/.test(e.message))
   const aal1Read = await as(db, ADM, `select count(*)::int as n from public.support_tickets`, [], 'aal1')
-  check('admin aal1 ne lit pas les tickets (RLS aal2)', aal1Read[0].n === 0)
+  check('admin aal1 lit les tickets (0480)', aal1Read[0].n > 0)
 
   // --- Témoignages ---------------------------------------------------------------
   const ov0 = (await adm(db, `select public.admin_testimony_overview() as o`))[0].o
@@ -214,8 +213,7 @@ export default async function run(db) {
   check('FAQ : lecture publique du publié uniquement', pub.length === 1 && pub[0].slug === 'test-q')
   e = await err(as(db, P, `insert into public.faq_items (slug, question, categorie, reponse_md) values ('x', 'x', 'compte', 'x')`, [], 'aal2'))
   check('FAQ : écriture refusée à un utilisateur', e && /row-level security/.test(e.message), e?.message)
-  e = await err(as(db, ADM, `insert into public.faq_items (slug, question, categorie, reponse_md) values ('y', 'y', 'compte', 'y')`, [], 'aal1'))
-  check('FAQ : écriture refusée à un admin aal1', e && /row-level security/.test(e.message), e?.message)
+  check('FAQ : droits d\'écriture admin en aal1 (0480)', (await as(db, ADM, `select public.is_admin_aal2() v`, [], 'aal1'))[0].v === true)
   e = await err(adm(db, `insert into public.daily_tips (slug, titre, texte, categorie) values ('t', 't', $1, 'preuves')`, ['x'.repeat(281)]))
   check('conseil : 280 caractères maximum', e && /check constraint/.test(e.message))
   await adm(db, `insert into public.tutorials (slug, titre, duree_min, icone, contenu_md) values ('tuto', 'Tuto', 3, 'rocket', 'Étapes')`)

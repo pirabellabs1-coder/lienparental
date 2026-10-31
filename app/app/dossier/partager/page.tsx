@@ -164,7 +164,7 @@ export default function PartagerPage() {
 
             {source.children.length > 0 && (
               <section className={cn(card, 'p-4')}>
-                <ChildPicker children={source.children} value={childId} onChange={setChildId} />
+                <ChildPicker kids={source.children} value={childId} onChange={setChildId} />
               </section>
             )}
 

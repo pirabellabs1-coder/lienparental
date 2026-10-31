@@ -209,7 +209,7 @@ export default function DossierPage() {
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-start">
           <div className="space-y-5">
             <section className={cn(card, 'p-4')}>
-              <ChildPicker children={source.children} value={childId} onChange={setChildId} />
+              <ChildPicker kids={source.children} value={childId} onChange={setChildId} />
             </section>
 
             <section className={cn(card, 'p-4')}>

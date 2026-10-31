@@ -80,7 +80,6 @@ export function htmlToText(html: string): string {
 
 /** Objet sur une seule ligne : aucun caractère de contrôle (CR / LF / NUL…) issu d'un prénom ou d'un titre. */
 export function cleanSubject(subject: string): string {
-  // eslint-disable-next-line no-control-regex
   return subject.replace(/[\r\n\u0000-\u001f\u007f]+/g, ' ').trim().slice(0, 250)
 }
 

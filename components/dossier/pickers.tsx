@@ -10,7 +10,7 @@ import { PERIOD_PRESETS, presetPeriod, type Period, type PeriodPreset } from './
 const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 focus-visible:ring-offset-2'
 
 /** Choix de l'enfant concerné (boutons radio natifs, cibles ≥ 44 px). */
-export function ChildPicker({ children, value, onChange }: { children: Child[]; value: string; onChange: (id: string) => void }) {
+export function ChildPicker({ kids, value, onChange }: { kids: Child[]; value: string; onChange: (id: string) => void }) {
   const t = useTranslations('family.courtFile.pickers')
   const labels = useChildLabels()
   const name = useId()
@@ -18,7 +18,7 @@ export function ChildPicker({ children, value, onChange }: { children: Child[]; 
     <fieldset>
       <legend className="mb-2.5 text-[15px] font-bold text-night-900">{t('child')}</legend>
       <div className="grid grid-cols-2 gap-2.5">
-        {children.map((c) => {
+        {kids.map((c) => {
           const checked = c.id === value
           return (
             <label

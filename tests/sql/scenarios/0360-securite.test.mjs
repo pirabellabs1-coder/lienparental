@@ -159,18 +159,19 @@ export default async function run(db) {
   // ===================== M7 =====================
   console.log(' -- M7 admin aal2')
   await db.query(`insert into public.vault_lock_settings (user_id) values ($1)`, [A.id])
-  check('is_admin_aal2 : admin en aal1 → false', (await as(db, F, `select public.is_admin_aal2() v`))[0].v === false)
+  // 0480 : la 2FA n'est plus exigée pour l'administration (is_admin_aal2() = is_admin()).
+  check('is_admin_aal2 : admin en aal1 → true (0480)', (await as(db, F, `select public.is_admin_aal2() v`))[0].v === true)
   check('is_admin_aal2 : admin en aal2 → true', (await as(db, F, `select public.is_admin_aal2() v`, [], { aal: 'aal2' }))[0].v === true)
   check('is_admin_aal2 : non-admin en aal2 → false', (await as(db, A, `select public.is_admin_aal2() v`, [], { aal: 'aal2' }))[0].v === false)
-  check('admin aal1 (sans facteur) : réglages coffre d\'autrui invisibles', (await as(db, F, `select user_id from public.vault_lock_settings where user_id = $1`, [A.id])).length === 0)
+  check('admin aal1 (0480) : réglages coffre visibles', (await as(db, F, `select user_id from public.vault_lock_settings where user_id = $1`, [A.id])).length === 1)
   check('admin aal2 : réglages visibles', (await as(db, F, `select user_id from public.vault_lock_settings where user_id = $1`, [A.id], { aal: 'aal2' })).length === 1)
-  check('admin aal1 : invitations d\'autrui invisibles', (await as(db, F, `select id from public.family_invitations`)).length === 0)
+  check('admin aal1 (0480) : invitations visibles', (await as(db, F, `select id from public.family_invitations`)).length > 0)
   check('admin aal2 : invitations visibles', (await as(db, F, `select id from public.family_invitations`, [], { aal: 'aal2' })).length > 0)
   const statsErr = await err(db.transaction(async (tx) => {
     await tx.query(`select set_config('request.jwt.claims', $1, true)`, [JSON.stringify({ sub: F.id, aal: 'aal1', role: 'authenticated' })])
     return tx.query(`select public.admin_stats_assert()`)
   }))
-  check('admin_stats_assert : refus en aal1', statsErr?.code === '42501')
+  check('admin_stats_assert : admin accepté en aal1 (0480)', !statsErr, statsErr?.message)
   const statsOk = await err(db.transaction(async (tx) => {
     await tx.query(`select set_config('request.jwt.claims', $1, true)`, [JSON.stringify({ sub: F.id, aal: 'aal2', role: 'authenticated' })])
     return tx.query(`select public.admin_stats_assert()`)

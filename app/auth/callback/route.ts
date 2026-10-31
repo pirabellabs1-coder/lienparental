@@ -32,7 +32,6 @@ const FIRST_SIGN_IN_MS = 60_000
 
 function clean(v: unknown): string | null {
   if (typeof v !== 'string') return null
-  // eslint-disable-next-line no-control-regex
   const s = v.replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 80)
   return s || null
 }

@@ -22,7 +22,6 @@ export default function RegisterSW(): null {
         // nouvelle version (push, notificationclick…) est détectée à chaque navigation.
         .register('/sw.js', { scope: '/', updateViaCache: 'none' })
         .catch((err) => {
-          // eslint-disable-next-line no-console
           console.warn('[SW] registration failed:', err);
         });
     };
