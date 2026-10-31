@@ -145,6 +145,8 @@ Correctifs appliqués au cours de l'audit du 2026-10-25. Un correctif par findin
 
 **TODO documenté** : réactivation éventuelle de camera/mic par route via balise `<meta http-equiv="Permissions-Policy" ...>`.
 
+**Mise à jour (31/10/2026)** : `microphone=(self)` sur tout le site (dictée de la bulle publique et du Coach, notes vocales). Les navigateurs n'acceptent Permissions-Policy qu'en en-tête et ne le relisent qu'au chargement du document : une règle par route bloquait le micro après une navigation côté client. Seule l'origine du site peut demander le micro, et l'utilisateur doit l'autoriser.
+
 ---
 
 ## MEDIUM 14 — `server-only` dans `supabase/server.ts`

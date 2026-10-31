@@ -930,8 +930,7 @@ Détail fonctionnel et sécurité : `docs/FAMILLE.md`.
 2. Exécuter les requêtes « CONTRÔLES » en fin de migration (résultat attendu : vide).
 3. Variables : aucune nouvelle. `SUPABASE_SERVICE_ROLE_KEY` est **indispensable** au rangement automatique des pièces jointes dans le coffre-fort de chaque participant (action serveur `app/app/messages/actions.ts`). Sans elle, la messagerie fonctionne et les pièces restent en attente (`vault_imports.status = 'pending'`), puis sont rangées à la première ouverture de conversation une fois la clé configurée.
 4. En-têtes HTTP (`next.config.mjs`, coordinateur) :
-   - Permissions-Policy : autoriser le micro sur la messagerie, sinon l'enregistrement vocal est refusé par le navigateur :
-     `{ source: '/app/messages/:path*', headers: [{ key: 'Permissions-Policy', value: 'camera=(), microphone=(self), geolocation=(), payment=(self)' }] }` (après la règle générale `/(.*)`).
+   - Permissions-Policy : le micro est autorisé pour l'origine du site sur tout le site (`microphone=(self)` dans la règle générale `/(.*)` de next.config.mjs) : messagerie vocale, dictée du Coach et de la bulle publique. Une règle limitée à certaines routes ne suffit pas, car l'en-tête n'est lu qu'au chargement de la première page.
    - CSP : ajouter `media-src 'self' blob: https://*.supabase.co` (lecture des notes vocales : URL `blob:` avant envoi, URL signée Supabase ensuite).
 5. Tâche planifiée facultative : les imports en échec sont retentés à chaque ouverture de la conversation (5 essais). Surveiller `select status, count(*) from vault_imports where status <> 'done' group by 1`.
 6. Recette : envoyer un PDF, une photo et une note vocale ; vérifier qu'ils apparaissent dans le coffre-fort des deux parents (source « Messagerie », description avec conversation, date et expéditeur), qu'un second envoi du même fichier ne crée pas de doublon, et qu'un parent non lié ne peut pas être ajouté à une discussion.

@@ -53,19 +53,15 @@ const nextConfig = {
           { key: 'X-Frame-Options', value: 'DENY' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-          // camera/mic désactivés par défaut ; ré-autorisés ci-dessous pour les seules routes qui en ont besoin
+          // Micro autorisé pour l'origine du site uniquement (jamais pour un tiers ni un iframe), sur TOUT le
+          // site : la dictée existe dans la bulle publique, le Coach et les notes vocales. L'en-tête n'est lu
+          // qu'au chargement de la première page (la navigation côté client ne recharge pas le document) :
+          // le limiter à /app bloquait la dictée après une arrivée par l'accueil ou la connexion. Le
+          // navigateur demande toujours l'autorisation à l'utilisateur. Caméra et géolocalisation coupées.
           // (une balise <meta> ne suffit pas : les navigateurs n'acceptent Permissions-Policy qu'en en-tête).
-          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(self)' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(self), geolocation=(), payment=(self)' },
           { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
         ],
-      },
-      // Micro autorisé pour l'origine du site uniquement, sur TOUTE l'app connectée (« /app/:path* » couvre
-      // aussi « /app ») : la navigation côté client ne recharge pas la page, donc l'en-tête reçu à l'entrée
-      // vaut pour toute la session ; une liste de sous-routes rendait la dictée / les notes vocales
-      // dépendantes de la page d'arrivée. Le site public garde microphone=().
-      {
-        source: '/app/:path*',
-        headers: [{ key: 'Permissions-Policy', value: 'camera=(), microphone=(self), geolocation=(), payment=(self)' }],
       },
       ...PRIVATE_PATHS.map((source) => ({ source, headers: [NOINDEX] })),
     ]
