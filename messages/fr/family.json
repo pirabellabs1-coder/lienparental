@@ -746,7 +746,13 @@
         "cancelTitle": "Annuler l’invitation ?",
         "cancelText": "Le lien envoyé à {email} ne fonctionnera plus.",
         "cancelConfirm": "Annuler l’invitation",
-        "keep": "Garder"
+        "keep": "Garder",
+        "conflicts": {
+          "title": "Même prénom, fiches différentes",
+          "text": "Vous avez une fiche « {name} » et {owner} vous partage aussi une fiche « {name} », avec une autre date de naissance. S’il s’agit du même enfant, corrigez la date de naissance de votre fiche : la fusion vous sera ensuite proposée ici, avec ses photos et documents.",
+          "action": "Vérifier ma fiche",
+          "otherParent": "l’autre parent"
+        }
       },
       "card": {
         "born": "Né(e) le {date}",

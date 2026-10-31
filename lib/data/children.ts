@@ -18,6 +18,7 @@ import { uploadAvatar } from '@/lib/auth/browser'
 
 type ChildRow = {
   id: string
+  user_id: string
   prenom: string
   nom: string | null
   date_naissance: string
@@ -32,7 +33,7 @@ type ChildRow = {
   created_at: string
 }
 
-const COLUMNS = 'id, prenom, nom, date_naissance, classe, langue, photo_url, taille_cm, poids_kg, couleur_yeux, couleur_cheveux, profil_complet, created_at'
+const COLUMNS = 'id, user_id, prenom, nom, date_naissance, classe, langue, photo_url, taille_cm, poids_kg, couleur_yeux, couleur_cheveux, profil_complet, created_at'
 
 export const MEDICAL_KEYS = ['allergies', 'autresAllergies', 'infosMedicales', 'groupeSanguin', 'traitement', 'medecinTraitant'] as const
 export type MedicalKey = (typeof MEDICAL_KEYS)[number]
@@ -55,6 +56,25 @@ function fromRow(r: ChildRow, medical?: ChildMedical): Child {
     createdAt: r.created_at,
     ...medical,
   }
+}
+
+/** Prénom comparable (casse, accents et espaces ignorés), même règle que l'index 0630. */
+export function normPrenom(p: string): string {
+  return p.normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().replace(/\s+/g, ' ').toLowerCase()
+}
+
+/**
+ * Deux enfants ne peuvent pas porter le même prénom dans un compte (index 0630) ; un enfant déjà
+ * partagé par l'autre parent n'a pas à être recréé : sa fiche est déjà visible ici.
+ */
+async function assertPrenomFree(prenom: string, exceptId?: string): Promise<void> {
+  const same = (await listChildren()).filter((c) => c.id !== exceptId && normPrenom(c.prenom) === normPrenom(prenom))
+  if (same.some((c) => c.mine)) throw new DataError(dataMsg('children.duplicateOwn', { name: prenom }), 'duplicate')
+  if (same.length) throw new DataError(dataMsg('children.duplicateShared', { name: prenom }), 'duplicate')
+}
+
+function duplicateError(error: { code?: string } | null, prenom: string): DataError | null {
+  return error?.code === '23505' ? new DataError(dataMsg('children.duplicateOwn', { name: prenom }), 'duplicate') : null
 }
 
 // --- Photo ------------------------------------------------------------------
@@ -176,7 +196,8 @@ export async function listChildren(): Promise<Child[]> {
     .limit(50)
   if (error) throw toDataError(error, 'children.list')
   const rows = (data ?? []) as ChildRow[]
-  return withPhotoUrls(rows, rows.map((r) => fromRow(r)))
+  const me = await requireUserId()
+  return withPhotoUrls(rows, rows.map((r) => ({ ...fromRow(r), mine: r.user_id === me })))
 }
 
 /** Profil complet (y compris médical déchiffré côté serveur). */
@@ -220,12 +241,13 @@ export async function createChild(input: { prenom: string; dateNaissance: string
   }
   const userId = await requireUserId()
   const v = parsed.data
+  await assertPrenomFree(v.prenom)
   const { data, error } = await db()
     .from('children')
     .insert({ user_id: userId, prenom: v.prenom, date_naissance: v.dateNaissance, classe: v.classe || null })
     .select(COLUMNS)
     .single()
-  if (error) throw toDataError(error, 'children.create')
+  if (error) throw duplicateError(error, v.prenom) ?? toDataError(error, 'children.create')
   return fromRow(data as ChildRow)
 }
 
@@ -280,7 +302,7 @@ export async function updateChild(id: string, patch: Partial<Child>): Promise<vo
 
   if (Object.keys(row).length > 0) {
     const { error } = await db().from('children').update(row).eq('id', id)
-    if (error) throw toDataError(error, 'children.update')
+    if (error) throw duplicateError(error, String(row.prenom ?? current.prenom)) ?? toDataError(error, 'children.update')
   }
 }
 
@@ -303,12 +325,21 @@ export function useChildData(id: string) {
   return useAsyncData(() => getChild(id), `child:${id}`, seed ? withAge(seed) : undefined)
 }
 
-/** Options des sélecteurs « Enfants concernés » : « Lina (5 ans) ». */
+/**
+ * Options des sélecteurs « Enfants concernés » : « Lina (5 ans) ». Deux fiches au même prénom (la
+ * mienne et celle que l'autre parent me partage) sont distinguées : « Lina · ma fiche ».
+ */
 export function useChildOptions() {
   const { data, loading } = useChildrenList()
-  const options = useMemo(
-    () => (data ?? []).map((c) => ({ id: c.id, prenom: c.prenom, age: c.age, classe: c.classe, label: `${c.prenom} (${c.age} ans)` })),
-    [data],
-  )
+  const options = useMemo(() => {
+    const list = data ?? []
+    const seen = new Map<string, number>()
+    for (const c of list) seen.set(normPrenom(c.prenom), (seen.get(normPrenom(c.prenom)) ?? 0) + 1)
+    return list.map((c) => {
+      const twin = (seen.get(normPrenom(c.prenom)) ?? 0) > 1 && c.mine !== undefined
+      const prenom = twin ? `${c.prenom} · ${dataMsg(c.mine ? 'children.mineTag' : 'children.sharedTag')}` : c.prenom
+      return { id: c.id, prenom, age: c.age, classe: c.classe, label: `${prenom} (${c.age} ans)` }
+    })
+  }, [data])
   return { options, loading }
 }

@@ -56,11 +56,19 @@ export type MergeCandidate = {
   dateNaissance: string
 }
 
+/** Ma fiche et une fiche partagée : même prénom, date de naissance différente (fusion impossible en l'état). */
+export type NameConflict = {
+  myChild: { id: string; prenom: string }
+  sharedChild: { id: string; prenom: string; ownerPrenom: string }
+}
+
 export type FamilyOverview = {
   children: FamilyChild[]
   sent: SentInvitation[]
   received: ReceivedInvitation[]
   mergeCandidates: MergeCandidate[]
+  /** Absent en démo et avant la migration 0630. */
+  nameConflicts?: NameConflict[]
 }
 
 /** Réponse à la création ou au renvoi : le lien n'est affiché qu'à ce moment-là. */

@@ -746,7 +746,13 @@
         "cancelTitle": "Cancelar o convite?",
         "cancelText": "O link enviado para {email} não funcionará mais.",
         "cancelConfirm": "Cancelar o convite",
-        "keep": "Manter"
+        "keep": "Manter",
+        "conflicts": {
+          "title": "Mesmo nome, fichas diferentes",
+          "text": "Tem uma ficha «{name}» e {owner} também lhe partilha uma ficha «{name}», com outra data de nascimento. Se for a mesma criança, corrija a data de nascimento da sua ficha: a fusão será depois proposta aqui, com as fotos e documentos.",
+          "action": "Verificar a minha ficha",
+          "otherParent": "o outro progenitor"
+        }
       },
       "card": {
         "born": "Nascido(a) em {date}",

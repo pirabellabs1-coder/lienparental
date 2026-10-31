@@ -168,6 +168,20 @@ export default function CoparentsPage() {
                 </section>
               )}
 
+              {(data.nameConflicts ?? []).length > 0 && (
+                <section aria-labelledby="conflict-title">
+                  <h2 id="conflict-title" className="mb-2.5 text-[15px] font-bold text-night-900">{t('conflicts.title')}</h2>
+                  <ul className="space-y-3">
+                    {(data.nameConflicts ?? []).map((c) => (
+                      <li key={`${c.myChild.id}-${c.sharedChild.id}`} className={cn(card, 'flex flex-wrap items-center gap-3 border-orange-200 bg-orange-50/40 p-4')}>
+                        <p className="min-w-0 flex-1 text-[13px] leading-relaxed text-night-800">{t('conflicts.text', { name: c.myChild.prenom, owner: c.sharedChild.ownerPrenom || t('conflicts.otherParent') })}</p>
+                        <Link href={`/app/enfants/${c.myChild.id}`} className={cn(btn.secondary, 'w-full sm:w-auto')}>{t('conflicts.action')}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
               {data.mergeCandidates.length > 0 && (
                 <section aria-labelledby="merge-title">
                   <h2 id="merge-title" className="mb-2.5 text-[15px] font-bold text-night-900">{t('duplicates')}</h2>

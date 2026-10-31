@@ -17,22 +17,29 @@ export function useAlbum() {
   const [thumbs, setThumbs] = useState<Record<string, string>>({})
   const signedAt = useRef(0)
   const loadingThumbs = useRef(false)
+  // Liste demandée pendant un chargement en cours : rechargée juste après, jamais ignorée
+  // (sinon les photos ajoutées entre-temps restaient sans vignette jusqu'au renouvellement).
+  const queued = useRef<AlbumPhoto[] | null>(null)
 
   const loadThumbs = useCallback(async (list: AlbumPhoto[]) => {
-    if (loadingThumbs.current || list.length === 0) return
+    if (list.length === 0) return
+    if (loadingThumbs.current) { queued.current = list; return }
     loadingThumbs.current = true
     try {
       const ids = list.map((p) => p.id)
-      const out: Record<string, string> = {}
+      let failed = false
       for (let i = 0; i < ids.length; i += MAX_THUMBS_PER_REQUEST) {
-        Object.assign(out, await albumThumbUrls(ids.slice(i, i + MAX_THUMBS_PER_REQUEST)))
-        setThumbs((t) => ({ ...t, ...out }))
+        const batch = ids.slice(i, i + MAX_THUMBS_PER_REQUEST)
+        // Un lot en échec (réseau mobile) est retenté une fois, sans bloquer les lots suivants.
+        const urls = await albumThumbUrls(batch).catch(() => new Promise<Record<string, string>>((r) => setTimeout(r, 1200)).then(() => albumThumbUrls(batch))).catch(() => { failed = true; return {} })
+        setThumbs((t) => ({ ...t, ...urls }))
       }
-      signedAt.current = Date.now()
-    } catch {
-      // Vignettes indisponibles : les cases restent en attente ; la liste reste utilisable.
+      if (!failed) signedAt.current = Date.now()
     } finally {
       loadingThumbs.current = false
+      const next = queued.current
+      queued.current = null
+      if (next) void loadThumbs(next)
     }
   }, [])
 

@@ -14,6 +14,8 @@ export type User = {
 export type Child = {
   id: string
   prenom: string
+  /** Fiche dont je suis titulaire (false : fiche que l'autre parent me partage). Absent en démo. */
+  mine?: boolean
   age: number
   classe: string
   photoUrl?: string
