@@ -110,6 +110,8 @@ export function parseRule(raw: string | null | undefined): Rule | null {
   if (md) {
     const n = Number(md)
     if (freq !== 'MONTHLY' || !Number.isInteger(n) || n < 1 || n > 31) return null
+    // Tous les 12 (24…) mois le 29 ou plus : le même mois revient toujours, la date peut ne jamais exister.
+    if (n >= 29 && interval % 12 === 0) return null
     rule.byMonthDay = n
   }
   if (parts.has('COUNT') && parts.has('UNTIL')) return null
@@ -191,32 +193,38 @@ function nthWeekdayOfMonth(y: number, m: number, pos: number, day: Weekday): str
 function* candidateDays(rule: RRule, firstDay: string, skipTo: string | null): Generator<string> {
   const step = rule.interval
   const [y0, m0, d0] = firstDay.split('-').map(Number)
+  // Plafond d'ITÉRATIONS (pas seulement de dates produites) : une règle qui ne tombe jamais
+  // (« le 31 », tous les 12 mois, à partir de février) ne doit pas bloquer le moteur.
+  const MAX_STEPS = 20_000
   if (rule.freq === 'DAILY') {
-    let k = skipTo ? Math.max(0, Math.floor(daysBetween(firstDay, skipTo) / step)) : 0
-    for (;; k++) yield addDaysToKey(firstDay, k * step)
+    const k0 = skipTo ? Math.max(0, Math.floor(daysBetween(firstDay, skipTo) / step)) : 0
+    for (let k = k0; k < k0 + MAX_STEPS; k++) yield addDaysToKey(firstDay, k * step)
+    return
   }
   if (rule.freq === 'WEEKLY') {
     const days = rule.byDay?.length ? rule.byDay : [WEEKDAYS[weekdayIndex(firstDay)]]
     const monday = addDaysToKey(firstDay, -weekdayIndex(firstDay))
-    let k = skipTo ? Math.max(0, Math.floor(daysBetween(monday, skipTo) / (7 * step))) : 0
-    for (;; k++) {
+    const k0 = skipTo ? Math.max(0, Math.floor(daysBetween(monday, skipTo) / (7 * step))) : 0
+    for (let k = k0; k < k0 + MAX_STEPS; k++) {
       const weekStart = addDaysToKey(monday, k * 7 * step)
       for (const d of days) {
         const day = addDaysToKey(weekStart, WEEKDAYS.indexOf(d))
         if (day >= firstDay) yield day
       }
     }
+    return
   }
   if (rule.freq === 'MONTHLY') {
-    for (let k = 0; ; k++) {
+    for (let k = 0; k < MAX_STEPS; k++) {
       const m = m0 - 1 + k * step
       const y = y0 + Math.floor(m / 12)
       const mm = ((m % 12) + 12) % 12
       const day = rule.byNthDay ? nthWeekdayOfMonth(y, mm, rule.byNthDay.pos, rule.byNthDay.day) : ymd(y, mm, rule.byMonthDay ?? d0)
       if (day && day >= firstDay) yield day
     }
+    return
   }
-  for (let k = 0; ; k++) {
+  for (let k = 0; k < MAX_STEPS; k++) {
     const day = ymd(y0 + k * step, m0 - 1, d0)
     if (day) yield day
   }
@@ -278,20 +286,25 @@ export function expandSeries(series: Series, from: string, to: string): Occurren
 /** Dernier instant couvert par la série (fin de la dernière occurrence), ou null si elle est sans fin. */
 export function seriesEnd(series: Series): string | null {
   const rule = series.rule
-  if (rule.kind === 'holidays') {
-    const all = expandSeries(series, series.start, '9999-12-31T00:00:00.000Z')
-    return all.length ? all[all.length - 1].end : series.end
-  }
-  if (!rule.count && !rule.until) return null
+  // Sans fin explicite : sans fin (vacances comprises, les dates des années suivantes seront ajoutées).
+  if (!(rule.kind === 'rrule' && rule.count) && !rule.until) return null
   const horizon = rule.until ?? '9999-12-31T00:00:00.000Z'
   const all = expandSeries(series, series.start, new Date(Date.parse(horizon) + 1000).toISOString())
   return all.length ? all[all.length - 1].end : series.end
 }
 
-/** La série commence-t-elle bien un jour prévu par la règle ? (sinon la 1re occurrence est le 1er jour valide). */
+/** Première occurrence réelle (le jour de début peut ne pas être prévu par la règle, ex. BYDAY). */
 export function firstOccurrence(series: Series): Occurrence | null {
-  const far = new Date(Date.parse(series.start) + 400 * DAY_MS * 10).toISOString()
-  return expandSeries(series, series.start, far)[0] ?? null
+  for (const days of [62, 800, 4000]) {
+    const found = expandSeries(series, series.start, new Date(Date.parse(series.start) + days * DAY_MS).toISOString())[0]
+    if (found) return found
+  }
+  return null
+}
+
+/** Nombre d'occurrences de la série avant `occurrence` (pour « et les suivantes » d'une série « N fois »). */
+export function occurrencesBefore(series: Series, occurrence: string): number {
+  return expandSeries(series, series.start, occurrence).filter((o) => Date.parse(o.key) < Date.parse(occurrence)).length
 }
 
 /** Règle arrêtée juste avant une occurrence (« cet événement et les suivants »). */

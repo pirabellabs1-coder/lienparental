@@ -3,7 +3,7 @@
  */
 import { appUrl } from '@/lib/auth/redirect'
 import { parseRule } from '@/lib/recurrence'
-import { DEFAULT_TZ, timeInTz, dayKeyInTz } from '@/lib/tz'
+import { DEFAULT_TZ, isValidTz, timeInTz, dayKeyInTz } from '@/lib/tz'
 import type { GoogleEventBody } from './calendar-api'
 import type { ConnectionRow } from './store'
 import { GENERIC_TITLES, type DbEventType } from './types'
@@ -44,7 +44,7 @@ export function toGoogleEvent(ev: EventRow, conn: Pick<ConnectionRow, 'mask_mode
   const footer = 'Ajouté depuis Lien Parental.'
   // Série : répétée par Google dans le fuseau de la série (18h à Cayenne reste 18h à Cayenne).
   const rule = ev.rrule ? parseRule(ev.rrule) : null
-  const seriesTz = rule && ev.tzid ? ev.tzid : tz
+  const seriesTz = rule && ev.tzid && isValidTz(ev.tzid) ? ev.tzid : tz
   const recurrence = rule?.kind === 'rrule'
     ? [`RRULE:${ev.rrule}`, ...(removed.length ? [`EXDATE;TZID=${seriesTz}:${removed.map((r) => exdate(r, seriesTz)).join(',')}`] : [])]
     : undefined

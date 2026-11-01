@@ -177,7 +177,7 @@ export default function EvenementDetailPage({ params }: { params: Promise<{ id: 
             </Row>
           )}
           <Row icon={<CircleDot className="h-5 w-5" />} label={t('detail.status')}>
-            {event.sharedBy ? t(`detail.statuses.${event.status ?? 'prevu'}`) : (
+            {event.sharedBy || (event.recurrence && !event.recurrence.occurrence) ? t(`detail.statuses.${event.status ?? 'prevu'}`) : (
               <span className="relative mt-1 block max-w-[220px]">
                 <label htmlFor="ev-status" className="sr-only">{t('detail.statusLabel')}</label>
                 <select

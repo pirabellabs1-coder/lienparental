@@ -10,6 +10,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js'
 import { expandEvent, type CalendarEvent, type OccurrenceException } from '@/lib/calendrier'
 import type { EventStatus } from '@/lib/recurrence'
+import { DEFAULT_TZ, isValidTz } from '@/lib/tz'
 
 export type RecurringTarget = {
   event_id: string
@@ -47,7 +48,7 @@ export function dueOccurrences(t: RecurringTarget, exceptions: OccurrenceExcepti
   const master: CalendarEvent = {
     id: t.event_id, title: '', type: 'autre', start: t.start_at,
     end: t.end_at ?? new Date(Date.parse(t.start_at) + 3_600_000).toISOString(),
-    recurrence: { rule: t.rrule, tz: t.tzid },
+    recurrence: { rule: t.rrule, tz: isValidTz(t.tzid) ? t.tzid : DEFAULT_TZ },
   }
   const from = new Date(now.getTime() - LATE_MS).toISOString()
   const to = new Date(now.getTime() + t.mins * 60_000 + 1).toISOString()
@@ -81,18 +82,33 @@ export async function enqueueRecurringReminders(db: SupabaseClient, now: Date = 
       exceptions.set(r.event_id, [...(exceptions.get(r.event_id) ?? []), toException(r)])
     }
   }
-  let count = 0
+  const pending: { t: RecurringTarget; o: { occurrence: string; start: string }; key: string }[] = []
   for (const t of targets) {
-    for (const o of dueOccurrences(t, exceptions.get(t.event_id) ?? [], now)) {
-      const epoch = Math.floor(Date.parse(o.start) / 1000)
-      const { error: qErr } = await db.rpc('_notif_enqueue', {
-        p_user_id: t.user_id,
-        p_event: 'calendar_reminder',
-        p_payload: { event_id: t.event_id, start_at: o.start, occurrence: o.occurrence },
-        p_dedupe_key: `calendar_reminder:${t.event_id}:${t.user_id}:${epoch}`,
-      })
-      if (!qErr) count++
+    // Une série illisible ne doit jamais bloquer les rappels des autres.
+    try {
+      for (const o of dueOccurrences(t, exceptions.get(t.event_id) ?? [], now)) {
+        pending.push({ t, o, key: `calendar_reminder:${t.event_id}:${t.user_id}:${Math.floor(Date.parse(o.start) / 1000)}` })
+      }
+    } catch {
+      console.warn('[notify] série ignorée', { event: t.event_id })
     }
+  }
+  // Rappels déjà en file (passages précédents du cron) : écartés en lot, sans RPC par occurrence.
+  const queued = new Set<string>()
+  for (let i = 0; i < pending.length; i += 200) {
+    const { data: rows } = await db.from('notification_jobs').select('dedupe_key').in('dedupe_key', pending.slice(i, i + 200).map((x) => x.key))
+    for (const r of (rows ?? []) as { dedupe_key: string }[]) queued.add(r.dedupe_key)
+  }
+  let count = 0
+  for (const { t, o, key } of pending) {
+    if (queued.has(key)) continue
+    const { error: qErr } = await db.rpc('_notif_enqueue', {
+      p_user_id: t.user_id,
+      p_event: 'calendar_reminder',
+      p_payload: { event_id: t.event_id, start_at: o.start, occurrence: o.occurrence },
+      p_dedupe_key: key,
+    })
+    if (!qErr) count++
   }
   return count
 }

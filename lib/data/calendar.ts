@@ -120,8 +120,8 @@ function fromExceptionRow(r: ExceptionRow): OccurrenceException {
     deleted: r.deleted,
     ...(r.start_at && r.end_at ? { start: r.start_at, end: r.end_at } : {}),
     ...(r.titre ? { title: r.titre } : {}),
-    ...(r.lieu != null ? { location: r.lieu || undefined } : {}),
-    ...(r.description != null ? { description: r.description || undefined } : {}),
+    ...(r.lieu != null ? { location: r.lieu } : {}),
+    ...(r.description != null ? { description: r.description } : {}),
     ...(r.status ? { status: r.status } : {}),
   }
 }
@@ -176,13 +176,21 @@ function parseInput(input: EventInput) {
   if (Date.parse(end) - Date.parse(start) > 14 * 86_400_000) throw new DataError(dataMsg('calendar.endBeforeStart'), 'invalid')
   let rrule: string | null = null
   let occursUntil: string | null = null
+  let s0 = start
+  let e0 = end
   if (v.recurrence) {
     const rule = parseRule(v.recurrence)
     if (!rule) throw new DataError(dataMsg('calendar.invalidRule'), 'invalid')
     rrule = formatRule(rule)
-    occursUntil = seriesEnd({ start, end, tz, rule })
+    if (rule.kind === 'rrule') {
+      const first = firstOccurrence({ start, end, tz, rule })
+      if (!first) throw new DataError(dataMsg('calendar.invalidRule'), 'invalid')
+      s0 = first.start
+      e0 = first.end
+    }
+    occursUntil = seriesEnd({ start: s0, end: e0, tz, rule })
   }
-  return { v, tz, start, end, rrule, occursUntil }
+  return { v, tz, start: s0, end: e0, rrule, occursUntil }
 }
 
 function toRow(input: EventInput) {
@@ -378,6 +386,15 @@ async function dropExceptions(seriesId: string, fromOccurrence?: string): Promis
 
 type ExceptionPatch = Partial<Omit<ExceptionRow, 'event_id' | 'occurrence_start'>>
 
+/** Exceptions d'une série à partir d'une occurrence (incluse). */
+async function exceptionsFrom(seriesId: string, fromOccurrence: string): Promise<OccurrenceException[]> {
+  if (!LIVE) return demoExceptions().filter((e) => e.eventId === seriesId && Date.parse(e.occurrence) >= Date.parse(fromOccurrence))
+  const { data, error } = await db().from('calendar_event_exceptions').select(EXC_COLUMNS)
+    .eq('event_id', seriesId).gte('occurrence_start', fromOccurrence)
+  if (error) throw toDataError(error, 'calendar.update')
+  return ((data ?? []) as ExceptionRow[]).map(fromExceptionRow)
+}
+
 async function upsertException(master: CalendarEvent, occurrence: string, patch: ExceptionPatch): Promise<void> {
   if (master.sharedBy) throw new DataError(NOT_AUTHOR(), 'not_author')
   if (!findOccurrence(master, occurrence)) throw new DataError(dataMsg('calendar.occurrenceNotFound'), 'invalid')
@@ -431,10 +448,13 @@ export async function updateEvent(id: string, input: EventInput, scope: SeriesSc
   if (master.sharedBy) throw new DataError(NOT_AUTHOR(), 'not_author')
 
   if (occ && master.recurrence && scope === 'one') {
-    const { v, start, end } = parseInput(input)
+    // Une occurrence garde l'heure saisie telle quelle (pas de calage sur la règle).
+    const { v, start, end } = parseInput({ ...input, recurrence: null })
     const o = findOccurrence(master, occ.occurrence)
     if (!o) throw new DataError(dataMsg('calendar.occurrenceNotFound'), 'invalid')
+    const prev = await getException(master.id, occ.occurrence)
     const moved = Date.parse(start) !== Date.parse(o.start) || Date.parse(end) !== Date.parse(o.end)
+    const status = v.status ?? (moved && !prev?.status ? 'reporte' : undefined)
     await upsertException(master, occ.occurrence, {
       deleted: false,
       start_at: moved ? start : null,
@@ -442,7 +462,7 @@ export async function updateEvent(id: string, input: EventInput, scope: SeriesSc
       titre: v.title !== master.title ? v.title : null,
       lieu: (v.location || '') !== (master.location ?? '') ? (v.location ?? '') : null,
       description: (v.description || '') !== (master.description ?? '') ? (v.description ?? '') : null,
-      status: v.status ?? (moved ? 'reporte' : null),
+      ...(status ? { status } : {}),
     })
     if (LIVE) { pushCalendarSync(master.id, 'upsert'); kickNotifications() }
     return id
@@ -451,14 +471,31 @@ export async function updateEvent(id: string, input: EventInput, scope: SeriesSc
   if (occ && master.recurrence && scope === 'following') {
     const rule = parseRule(master.recurrence.rule)
     if (rule && !isFirstOccurrence(master, occ.occurrence)) {
+      parseInput(input) // saisie validée avant de toucher à la série d'origine
       const truncated = truncateBefore(rule, occ.occurrence)
       const series = { start: master.start, end: master.end, tz: master.recurrence.tz, rule: truncated }
-      const newId = await createEvent(input, { seriesParentId: master.id })
+      const future = await exceptionsFrom(master.id, occ.occurrence)
       if (!LIVE) {
         writeDemoList(DEMO_EVENTS_KEY, demoCreated().map((e) => (e.id === master.id ? { ...e, recurrence: { ...e.recurrence!, rule: formatRule(truncated) } } : e)), 100)
       } else {
         await updateMaster(master.id, { rrule: formatRule(truncated), occurs_until: seriesEnd(series) })
         pushCalendarSync(master.id, 'upsert')
+      }
+      const newId = await createEvent(input, { seriesParentId: master.id })
+      const next = newId ? await getMaster(newId) : null
+      if (next) {
+        for (const ex of future) {
+          if (!findOccurrence(next, ex.occurrence)) continue // horaire ou règle changés : l'exception ne s'applique plus
+          await upsertException(next, ex.occurrence, {
+            deleted: ex.deleted,
+            start_at: ex.start ?? null,
+            end_at: ex.end ?? null,
+            titre: ex.title ?? null,
+            lieu: ex.location ?? null,
+            description: ex.description ?? null,
+            status: ex.status ?? null,
+          })
+        }
       }
       await dropExceptions(master.id, occ.occurrence)
       return newId ?? master.id

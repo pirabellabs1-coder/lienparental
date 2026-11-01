@@ -19,6 +19,7 @@ import { maskEmail } from './device'
 import { sendPushToUser } from './push'
 import { toLocale } from '@/lib/email/i18n'
 import { tzFromPreferencesRow } from '@/lib/timezones'
+import { DEFAULT_TZ, isValidTz } from '@/lib/tz'
 import { isModerationKind, isModerationReason } from '@/lib/admin/ops/moderation'
 import { occurrenceId, occurrenceOf, type CalendarEvent } from '@/lib/calendrier'
 import { toException, type ExceptionRow } from './recurring'
@@ -65,10 +66,15 @@ async function recurringOccurrence(db: SupabaseClient, eventId: string, occurren
   const master: CalendarEvent = {
     id: eventId, title: '', type: 'autre', start: r.start_at,
     end: r.end_at ?? new Date(Date.parse(r.start_at) + 3_600_000).toISOString(),
-    recurrence: { rule: r.rrule, tz: r.tzid },
+    recurrence: { rule: r.rrule, tz: isValidTz(r.tzid) ? r.tzid : DEFAULT_TZ },
   }
   const e = exc as (ExceptionRow & { titre: string | null }) | null
-  const occ = occurrenceOf(master, occurrence, e ? toException(e) : undefined)
+  let occ: CalendarEvent | null = null
+  try {
+    occ = occurrenceOf(master, occurrence, e ? toException(e) : undefined)
+  } catch {
+    return null
+  }
   if (!occ || occ.status === 'annule') return null
   return { occurrence: new Date(occurrence).toISOString(), start: new Date(occ.start).toISOString(), ...(e?.titre ? { title: e.titre } : {}) }
 }

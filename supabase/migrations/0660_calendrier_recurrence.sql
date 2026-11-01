@@ -56,6 +56,16 @@ security invoker
 set search_path = ''
 as $$
 begin
+  -- Fuseau inconnu de PostgreSQL (« Foo/Bar » passe l'expression régulière) : refusé.
+  if new.tzid is distinct from 'America/Cayenne' and not exists (select 1 from pg_catalog.pg_timezone_names where name = new.tzid) then
+    raise exception 'tzid inconnu' using errcode = '23514';
+  end if;
+  -- Série parente : uniquement une série du même auteur.
+  if new.series_parent_id is not null and not exists (
+    select 1 from public.calendar_events p where p.id = new.series_parent_id and p.user_id = new.user_id
+  ) then
+    new.series_parent_id := null;
+  end if;
   if new.rrule is null then
     new.occurs_until := coalesce(new.end_at, new.start_at);
   elsif new.occurs_until is null or new.occurs_until < new.start_at then
@@ -68,7 +78,7 @@ revoke all on function public.calendar_events_occurs_until() from public, anon, 
 
 drop trigger if exists trg_calendar_events_occurs_until on public.calendar_events;
 create trigger trg_calendar_events_occurs_until
-  before insert or update of rrule, start_at, end_at, occurs_until on public.calendar_events
+  before insert or update of rrule, tzid, start_at, end_at, occurs_until, series_parent_id on public.calendar_events
   for each row execute function public.calendar_events_occurs_until();
 
 update public.calendar_events set occurs_until = coalesce(end_at, start_at) where occurs_until is null and rrule is null;
@@ -359,13 +369,32 @@ as $$
        and e.occurs_until > now() - interval '10 minutes'
        and e.start_at <= now() + make_interval(mins => m.mins)
   ) t
+  order by t.start_at, t.id
   limit greatest(1, least(coalesce(p_limit, 2000), 5000));
 $$;
+
+-- Conservation de l'historique : 24 mois (minimisation, RGPD art. 5). Appelée par le cron des notifications.
+create or replace function public.calendar_audit_purge()
+returns integer
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare v integer;
+begin
+  delete from public.calendar_event_audit where created_at < now() - interval '24 months';
+  get diagnostics v = row_count;
+  return v;
+end;
+$$;
+revoke all on function public.calendar_audit_purge() from public, anon, authenticated;
+grant execute on function public.calendar_audit_purge() to service_role;
 revoke all on function public.notif_calendar_recurring_targets(integer) from public, anon, authenticated;
 grant execute on function public.notif_calendar_recurring_targets(integer) to service_role;
 
 -- =====================================================================
 -- Rollback (manuel, dans l'ordre) :
+-- drop function if exists public.calendar_audit_purge();
 -- drop function if exists public.notif_calendar_recurring_targets(integer);
 -- ré-appliquer notif_enqueue_calendar_reminders de 0440 ;
 -- drop trigger if exists trg_calendar_exceptions_audit on public.calendar_event_exceptions;

@@ -50,6 +50,10 @@ export default async function run(db) {
   check('règle invalide refusée (23514)', (await err(as(db, A, INS, [A.id, inHours(1), inHours(2), kid, 'FREQ=HOURLY', 'America/Cayenne', null])))?.code === '23514')
   check('injection dans la règle refusée (23514)', (await err(as(db, A, INS, [A.id, inHours(1), inHours(2), kid, "FREQ=DAILY;X=1'--", 'America/Cayenne', null])))?.code === '23514')
   check('fuseau invalide refusé (23514)', (await err(as(db, A, INS, [A.id, inHours(1), inHours(2), kid, 'FREQ=DAILY', 'UTC+3', null])))?.code === '23514')
+  check('fuseau inconnu de PostgreSQL refusé (23514)', (await err(as(db, A, INS, [A.id, inHours(1), inHours(2), kid, 'FREQ=DAILY', 'Foo/Bar', null])))?.code === '23514')
+  const xs = (await as(db, X, `insert into public.calendar_events (user_id, type, titre, start_at, series_parent_id) values ($1, 'autre', 'x', now(), $2) returning series_parent_id`, [X.id, daily.id]))[0]
+  check('série parente d’un autre compte : ignorée', xs.series_parent_id === null)
+  check('purge de l’historique : réservée au service', (await err(as(db, A, `select public.calendar_audit_purge()`))) !== null && (await err(db.query(`select public.calendar_audit_purge()`))) === null)
   check('statut invalide refusé (23514)', (await err(as(db, A, `update public.calendar_events set status = 'perdu' where id = $1`, [daily.id])))?.code === '23514')
 
   // --- Exceptions
@@ -73,7 +77,7 @@ export default async function run(db) {
   const actions = log.map((r) => r.action)
   check('historique : création, partage, titre, occurrences, suppression', ['create', 'occurrence_update', 'update', 'occurrence_delete', 'delete'].every((a) => actions.includes(a)), actions.join(','))
   check('historique : ancien et nouveau titre', log.some((r) => r.action === 'update' && JSON.stringify(r.changes.titre) === JSON.stringify(['Appel du soir', 'Appel vidéo'])))
-  check('historique : invisible du parent lié et des tiers', (await as(db, B, `select 1 from public.calendar_event_audit`)).length === 0 && (await as(db, X, `select 1 from public.calendar_event_audit`)).length === 0)
+  check('historique : invisible du parent lié et des tiers', (await as(db, B, `select 1 from public.calendar_event_audit`)).length === 0 && (await as(db, X, `select 1 from public.calendar_event_audit where owner_id <> $1`, [X.id])).length === 0)
   check('historique : non modifiable par l’utilisateur', (await err(as(db, A, `insert into public.calendar_event_audit (event_id, owner_id, action) values ($1, $2, 'update')`, [daily.id, A.id]))) !== null
     && (await err(as(db, A, `delete from public.calendar_event_audit where event_id = $1`, [daily.id]))) !== null
     && (await as(db, A, `select count(*)::int n from public.calendar_event_audit where event_id = $1`, [daily.id]))[0].n === log.length)

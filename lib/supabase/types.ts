@@ -139,9 +139,44 @@ export type CalendarEventRow = {
   ics_uid: string | null
   // 0340_famille.sql : visible en lecture seule par les adultes liés (défaut true à la création)
   family_shared: boolean
+  // 0660_calendrier_recurrence.sql : série (RRULE + fuseau), statut, fin couverte
+  rrule: string | null
+  tzid: string
+  status: 'prevu' | 'confirme' | 'reporte' | 'annule' | 'realise'
+  occurs_until: string | null
+  series_parent_id: string | null
   created_at: string
   updated_at: string
   deleted_at: string | null
+}
+
+// 0660 : occurrence modifiée, déplacée, annulée ou supprimée d'une série.
+export type CalendarEventExceptionRow = {
+  id: string
+  event_id: string
+  user_id: string
+  occurrence_start: string
+  deleted: boolean
+  start_at: string | null
+  end_at: string | null
+  titre: string | null
+  lieu: string | null
+  description: string | null
+  status: CalendarEventRow['status'] | null
+  created_at: string
+  updated_at: string
+}
+
+// 0660 : historique des modifications (écrit par trigger, lisible par l'auteur).
+export type CalendarEventAuditRow = {
+  id: number
+  event_id: string
+  owner_id: string
+  actor_id: string | null
+  action: string
+  occurrence_start: string | null
+  changes: Record<string, unknown>
+  created_at: string
 }
 
 export type CategoryRow = {
@@ -378,6 +413,8 @@ export type Database = {
       preferences:          Table<PreferenceRow>
       journal_entries:      Table<JournalEntryRow>
       calendar_events:      Table<CalendarEventRow>
+      calendar_event_exceptions: Table<CalendarEventExceptionRow>
+      calendar_event_audit: Table<CalendarEventAuditRow>
       categories:           Table<CategoryRow>
       documents:            Table<DocumentRow>
       shares:               Table<ShareRow>

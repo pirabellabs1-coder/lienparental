@@ -72,6 +72,8 @@ test('fin à une date précise (incluse) et « cet événement et les suivants �
   const cut = { ...s, rule: truncateBefore(s.rule as RRule, '2026-11-03T21:00:00.000Z') }
   assert.deepEqual(days(expandSeries(cut, '2026-10-01T00:00:00.000Z', '2026-12-01T00:00:00.000Z')), ['2026-11-01', '2026-11-02'])
   assert.equal(seriesEnd({ ...s, rule: rule('FREQ=DAILY') }), null)
+  assert.equal(seriesEnd({ ...s, rule: rule('X-LP-HOLIDAYS=1;ZONE=guyane;PART=ALL;YEARS=ALL') }), null)
+  assert.equal(parseRule('FREQ=MONTHLY;INTERVAL=12;BYMONTHDAY=31'), null)
 })
 
 test('vacances scolaires (Guyane) : périodes entières, moitiés, années paires ou impaires', () => {
@@ -100,7 +102,16 @@ test('formulaire : choix rapides, jours, mensuel « 2e mardi », fin, aller-reto
   assert.equal(buildRule({ ...D, preset: 'holidays', zone: 'A', part: 'SECOND', years: 'ODD', end: 'count' }, '2026-11-10', CAY), 'X-LP-HOLIDAYS=1;ZONE=A;PART=SECOND;YEARS=ODD')
   const back = stateFromRule('FREQ=WEEKLY;INTERVAL=2;BYDAY=FR;COUNT=8', CAY)
   assert.equal(back.preset, 'biweekly'); assert.deepEqual(back.days, ['FR']); assert.equal(back.end, 'count')
-  assert.equal(stateFromRule('FREQ=WEEKLY;INTERVAL=2;BYDAY=FR;COUNT=8', CAY, { dropCount: true }).end, 'never')
+  // « Et les suivantes » à la 4e séance d'une série de 8 : il en reste 5.
+  const opts = { seriesStart: '2026-11-06T21:00:00.000Z', seriesEnd: '2026-11-06T22:00:00.000Z', occurrence: '2026-12-18T21:00:00.000Z' }
+  const rest = stateFromRule('FREQ=WEEKLY;INTERVAL=2;BYDAY=FR;COUNT=8', CAY, opts)
+  assert.equal(rest.end, 'count'); assert.equal(rest.count, 5)
+  // Série coupée juste avant le 20/11 : fin affichée au 6/11, et règle inchangée si l'on n'y touche pas.
+  const cut = 'FREQ=WEEKLY;INTERVAL=2;BYDAY=FR;UNTIL=20261120T205959Z'
+  const st = stateFromRule(cut, CAY, opts)
+  assert.equal(st.untilDate, '2026-11-06')
+  assert.equal(buildRule(st, '2026-11-06', CAY), cut)
+  assert.equal(stateFromRule('FREQ=WEEKLY;INTERVAL=2;BYDAY=FR;COUNT=8', CAY).count, 8)
 })
 
 test('rappels des séries : occurrence échue, supprimée, déplacée (nouveau rappel), annulée', async () => {

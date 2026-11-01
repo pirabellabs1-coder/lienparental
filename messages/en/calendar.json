@@ -486,7 +486,8 @@
         "A": "Mainland France, zone A",
         "B": "Mainland France, zone B",
         "C": "Mainland France, zone C"
-      }
+      },
+      "untilError": "The last repeat day must be after the start."
     }
   }
 }

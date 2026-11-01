@@ -486,7 +486,8 @@
         "A": "França metropolitana, zona A",
         "B": "França metropolitana, zona B",
         "C": "França metropolitana, zona C"
-      }
+      },
+      "untilError": "O último dia da repetição deve ser depois do início."
     }
   }
 }

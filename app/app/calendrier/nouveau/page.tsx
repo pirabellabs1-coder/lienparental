@@ -16,7 +16,7 @@ import { useCalFormat } from '@/components/calendrier/useCalFormat'
 import { RecurrenceFields, selectCls } from '@/components/calendrier/RecurrenceFields'
 import { EVENT_TYPES, REMINDER_OPTIONS, SHARED_BY_DEFAULT, dayOf, parseOccurrenceId, type EventTypeKey, type ReminderKey } from '@/lib/calendrier'
 import { cn } from '@/lib/cn'
-import { DEFAULT_RECURRENCE, buildRule, stateFromRule, type RecurrenceState } from '@/lib/recurrence-form'
+import { DEFAULT_RECURRENCE, buildRule, stateFromRule, untilBeforeStart, type RecurrenceState } from '@/lib/recurrence-form'
 import { TIMEZONE_CHOICES } from '@/lib/timezones'
 import { DEFAULT_TZ, addDaysToKey, currentTz, dayKeyInTz, timeInTz, todayKey, wallTimeToIso } from '@/lib/tz'
 import { useChildOptions } from '@/lib/data/children'
@@ -137,7 +137,13 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
     setChildIds(existing.childrenIds ?? [])
     setReminder(existing.reminder ?? 'none')
     setFamilyChoice(existing.familyShared ?? null)
-    if (existing.recurrence) setRepeat(stateFromRule(existing.recurrence.rule, evTz, { dropCount: scope === 'following' }))
+    if (existing.recurrence) {
+      setRepeat(stateFromRule(existing.recurrence.rule, evTz, {
+        seriesStart: existing.recurrence.seriesStart ?? existing.start,
+        seriesEnd: existing.recurrence.seriesEnd ?? existing.end,
+        occurrence: scope === 'following' ? existing.recurrence.occurrence : undefined,
+      }))
+    }
   }, [existing, scope])
 
   // Création : enfant de l'URL, sinon l'enfant unique pour un rendez-vous santé (une seule fois).
@@ -180,6 +186,7 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
   const titleError = submitted && !title.trim() ? t('new.titleRequired') : undefined
   const dateError = submitted && !date ? t('new.dateRequired') : undefined
   const endError = submitted && (!endDate || span < 0 || span > 14 * 1440) ? t('new.endError') : undefined
+  const untilError = submitted && !onlyOne && untilBeforeStart(repeat, date) ? t('recurrence.untilError') : undefined
   const childMissing = isHealth && childOptions.length > 1 && childIds.length === 0
   const childError = submitted && childMissing ? t('new.childRequired') : undefined
   const tzChoice = TIMEZONE_CHOICES.find((c) => c.value === tz)
@@ -210,6 +217,7 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
     if (!title.trim()) { document.getElementById('ev-title')?.focus(); return }
     if (!date) return
     if (!endDate || span < 0 || span > 14 * 1440) return
+    if (!onlyOne && untilBeforeStart(repeat, date)) return
     if (childMissing) { pickerRef.current?.querySelector<HTMLButtonElement>('button')?.focus(); return }
     setSaving(true)
     setSaveError(null)
@@ -297,7 +305,10 @@ export default function NouvelEvenementPage({ searchParams }: { searchParams: Pr
         </div>
 
         {!onlyOne && (
-          <RecurrenceFields value={repeat} onChange={setRepeat} startDay={date} startTime={time} endDay={endDate} endTime={endTime} tz={tz} />
+          <div>
+            <RecurrenceFields value={repeat} onChange={setRepeat} startDay={date} startTime={time} endDay={endDate} endTime={endTime} tz={tz} />
+            {untilError && <p role="alert" className="mt-1.5 text-xs font-medium text-alert-600">{untilError}</p>}
+          </div>
         )}
 
         <TextField

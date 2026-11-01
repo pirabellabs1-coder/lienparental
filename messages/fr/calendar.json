@@ -486,7 +486,8 @@
         "A": "Métropole, zone A",
         "B": "Métropole, zone B",
         "C": "Métropole, zone C"
-      }
+      },
+      "untilError": "Le dernier jour de répétition doit être après le début."
     }
   }
 }

@@ -5,7 +5,7 @@
  */
 import { DEFAULT_ZONE, type ZoneScolaire } from '@/lib/garde'
 import {
-  WEEKDAYS, formatRule, parseRule, presetOf, untilEndOfDay,
+  WEEKDAYS, expandSeries, formatRule, occurrencesBefore, parseRule, presetOf, untilEndOfDay,
   type HolidayPart, type HolidayYears, type RRule, type RepeatPreset, type Rule, type Weekday,
 } from '@/lib/recurrence'
 import { dayKeyInTz, dayKeyToDate } from '@/lib/tz'
@@ -29,6 +29,11 @@ export type RecurrenceState = {
   zone: ZoneScolaire
   part: HolidayPart
   years: HolidayYears
+  /**
+   * Fin enregistrée, reprise telle quelle tant que la date de fin n'est pas touchée : une série
+   * arrêtée « juste avant » une occurrence ne doit pas être rallongée jusqu'au soir (doublon).
+   */
+  keepUntil?: { day: string; iso: string }
 }
 
 export const DEFAULT_RECURRENCE: RecurrenceState = {
@@ -68,24 +73,45 @@ export function buildRule(s: RecurrenceState, startDay: string, tz: string): str
     }
     rule = r
   }
-  if (s.end === 'until' && s.untilDate && s.untilDate >= startDay) rule.until = untilEndOfDay(s.untilDate, tz)
+  if (s.end === 'until' && s.untilDate && s.untilDate >= startDay) {
+    rule.until = s.keepUntil && s.keepUntil.day === s.untilDate ? s.keepUntil.iso : untilEndOfDay(s.untilDate, tz)
+  }
   if (s.end === 'count' && rule.kind === 'rrule') rule.count = Math.min(730, Math.max(1, Math.round(s.count) || 1))
   return formatRule(rule)
 }
 
-/** Règle stockée → état de saisie (édition). `dropCount` : « et les suivantes » repart d'un compteur neuf. */
-export function stateFromRule(raw: string | null | undefined, tz: string, opts: { dropCount?: boolean } = {}): RecurrenceState {
+/** Fin de répétition antérieure au début : à signaler (sinon la borne serait ignorée et la série sans fin). */
+export function untilBeforeStart(s: RecurrenceState, startDay: string): boolean {
+  return s.preset !== 'none' && s.end === 'until' && Boolean(s.untilDate) && s.untilDate < startDay
+}
+
+/**
+ * Règle stockée → état de saisie (édition).
+ * - `seriesStart` / `seriesEnd` : bornes de la 1re occurrence, pour retrouver le jour de la dernière occurrence ;
+ * - `occurrence` : « et les suivantes » à partir de cette date → une série « N fois » garde le nombre RESTANT.
+ */
+export function stateFromRule(
+  raw: string | null | undefined,
+  tz: string,
+  opts: { seriesStart?: string; seriesEnd?: string; occurrence?: string } = {},
+): RecurrenceState {
   const rule = parseRule(raw)
   if (!rule) return DEFAULT_RECURRENCE
   const preset = presetOf(rule)
   const base: RecurrenceState = { ...DEFAULT_RECURRENCE, preset }
+  const series = opts.seriesStart ? { start: opts.seriesStart, end: opts.seriesEnd ?? opts.seriesStart, tz, rule } : null
   if (rule.until) {
     base.end = 'until'
-    // UNTIL = fin de journée dans le fuseau de la série : on retrouve le jour inclus.
-    base.untilDate = dayKeyInTz(rule.until, tz)
+    // Jour de la DERNIÈRE occurrence (une coupe « juste avant le 20 » ne vaut pas « jusqu'au 20 »).
+    const last = series ? expandSeries(series, series.start, new Date(Date.parse(rule.until) + 1000).toISOString()).pop() : undefined
+    base.untilDate = dayKeyInTz(last?.start ?? rule.until, tz)
+    base.keepUntil = { day: base.untilDate, iso: rule.until }
   }
   if (rule.kind === 'holidays') return { ...base, zone: rule.zone, part: rule.part, years: rule.years }
-  if (rule.count && !opts.dropCount) { base.end = 'count'; base.count = rule.count }
+  if (rule.count) {
+    base.end = 'count'
+    base.count = series && opts.occurrence ? Math.max(1, rule.count - occurrencesBefore(series, opts.occurrence)) : rule.count
+  }
   return {
     ...base,
     interval: rule.interval,
