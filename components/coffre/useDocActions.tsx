@@ -21,6 +21,7 @@ const FR_FALLBACK: DocActionsT = (key, values) => {
     case 'shareText': return `Document « ${name} » — Lien Parental`
     case 'linkCopied': return 'Lien du document copié'
     case 'shareUnavailable': return 'Partage indisponible sur cet appareil'
+    case 'tapAgain': return 'Lien prêt : touchez « Partager » à nouveau.'
     case 'downloadStarted': return `Téléchargement de « ${name} » lancé`
     case 'downloadFailed': return 'Téléchargement impossible'
     case 'previewDemo': return 'Aperçu indisponible en mode démonstration : aucun fichier réel n’est stocké.'
@@ -29,24 +30,40 @@ const FR_FALLBACK: DocActionsT = (key, values) => {
   }
 }
 
+/** Lien sécurisé tout juste créé, gardé 2 min pour le second appui après un refus de Safari (jamais un
+ *  lien ancien : il a pu être révoqué dans « Partages actifs » ou avoir expiré). */
+const createdLinks = new Map<string, { url: string; at: number }>()
+const RETRY_LINK_MS = 120_000
+
 /** Partage natif si disponible, sinon copie du lien. Renvoie un message de retour.
  *  Supabase : un document « Partageable » génère un lien sécurisé expirable (7 jours, révocable
  *  dans « Partages actifs ») ; un document « Privé » ne partage que le lien interne (connexion requise). */
 export async function shareDocument(doc: Pick<VaultDocument, 'id' | 'name'> & Partial<Pick<VaultDocument, 'confidentialite'>>, t: DocActionsT = FR_FALLBACK): Promise<string | null> {
   let url = `${window.location.origin}/app/coffre/documents/${doc.id}`
   if (LIVE && doc.confidentialite === 'partage') {
-    try {
-      url = (await createShare(doc.id, { days: 7 })).url
-    } catch (e) {
-      return e instanceof Error ? e.message : t('linkFailed')
+    const known = createdLinks.get(doc.id)
+    createdLinks.delete(doc.id)
+    if (known && Date.now() - known.at < RETRY_LINK_MS) url = known.url
+    else {
+      try {
+        url = (await createShare(doc.id, { days: 7 })).url
+      } catch (e) {
+        return e instanceof Error ? e.message : t('linkFailed')
+      }
     }
   }
   if (navigator.share) {
     try {
       await navigator.share({ title: doc.name, text: t('shareText', { name: doc.name }), url })
       return null
-    } catch {
-      return null // annulation utilisateur
+    } catch (e) {
+      // Safari iPhone refuse le partage après l'attente du réseau (appui « expiré ») : le lien est
+      // prêt, un nouvel appui le partage aussitôt. Toute autre erreur = annulation de l'utilisateur.
+      if (e instanceof Error && e.name === 'NotAllowedError') {
+        createdLinks.set(doc.id, { url, at: Date.now() })
+        return t('tapAgain')
+      }
+      return null
     }
   }
   try {

@@ -53,7 +53,13 @@ function encode(img: HTMLImageElement, max: number, quality: number): Promise<Bl
   ctx.fillRect(0, 0, width, height)
   ctx.imageSmoothingQuality = 'high'
   ctx.drawImage(img, 0, 0, width, height)
-  return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('encode'))), 'image/jpeg', quality))
+  return new Promise((resolve, reject) => canvas.toBlob((b) => {
+    // Mémoire du canevas libérée tout de suite : Safari iPhone plafonne la mémoire totale des canevas
+    // et un lot de photos finissait en « photo illisible ».
+    canvas.width = canvas.height = 0
+    if (b) resolve(b)
+    else reject(new Error('encode'))
+  }, 'image/jpeg', quality))
 }
 
 /** Lève une Error('decode') si le fichier n'est pas une image lisible par le navigateur. */

@@ -24,8 +24,10 @@ export default function RecapPage() {
   const tc = useTranslations('public.onboarding.classes')
   const tTerr = useTranslations('shared.territories')
   const locale = useLocale()
+  // Date seule (AAAA-MM-JJ) lue à midi UTC et affichée en UTC : pas de veille en Guyane (UTC-3).
   const formatDate = (iso: string) =>
-    new Date(iso).toLocaleDateString(intlLocale(locale), { day: '2-digit', month: '2-digit', year: 'numeric' })
+    new Date(/^\d{4}-\d{2}-\d{2}$/.test(iso) ? `${iso}T12:00:00Z` : iso)
+      .toLocaleDateString(intlLocale(locale), { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' })
   const classLabel = (c: string) => {
     const k = childClassKey(c)
     return k ? tc(k) : c

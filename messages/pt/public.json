@@ -50,7 +50,7 @@
         "optional": "(opcional)",
         "remove": "Remover a foto",
         "errFormat": "Formato não suportado. Escolha uma imagem (JPG, PNG, HEIC…).",
-        "errSize": "Imagem muito pesada (máximo de 5 MB)."
+        "errSize": "Imagem muito pesada (máximo de 25 MB)."
       },
       "otp": {
         "label": "Código de verificação",

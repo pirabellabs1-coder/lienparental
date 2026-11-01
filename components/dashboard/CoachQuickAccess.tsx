@@ -1,10 +1,11 @@
 'use client'
 
-import { useEffect, useId, useRef, useState } from 'react'
+import { useCallback, useId, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { ArrowRight, Camera, Mic, Paperclip, Sparkles } from 'lucide-react'
 import { RobotMascot } from '@/components/coach/RobotMascot'
+import { appendDictation, useDictation } from '@/components/coach/useDictation'
 import {
   DOC_ACCEPT,
   IMAGE_ACCEPT,
@@ -15,49 +16,31 @@ import {
 } from '@/components/coach/session'
 import { cn } from '@/lib/cn'
 
-// Typage minimal de la Web Speech API (non incluse dans lib.dom).
-type Recognition = {
-  lang: string
-  interimResults: boolean
-  onresult: ((e: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void) | null
-  onend: (() => void) | null
-  onerror: (() => void) | null
-  start: () => void
-  stop: () => void
-}
-type RecognitionCtor = new () => Recognition
-
-function getRecognition(): RecognitionCtor | null {
-  if (typeof window === 'undefined') return null
-  const w = window as unknown as { SpeechRecognition?: RecognitionCtor; webkitSpeechRecognition?: RecognitionCtor }
-  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null
-}
-
 // M03 — Accès rapide au Coach parental IA.
 export function CoachQuickAccess() {
   const t = useTranslations('dash')
   const tc = useTranslations('coach.common')
+  const tChat = useTranslations('coach.chat')
   const locale = useLocale()
   const router = useRouter()
   const [value, setValue] = useState('')
   const [error, setError] = useState('')
-  const [listening, setListening] = useState(false)
-  const [canDictate, setCanDictate] = useState(false)
-  const recRef = useRef<Recognition | null>(null)
   const photoRef = useRef<HTMLInputElement>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const inputId = useId()
   const errorId = useId()
 
-  useEffect(() => {
-    setCanDictate(getRecognition() !== null)
-    return () => recRef.current?.stop()
-  }, [])
+  // Même dictée que le Coach : relance après les pauses, texte en direct, message en cas d'échec.
+  const dictation = useDictation(locale, useCallback((text: string) => setValue((v) => appendDictation(v, text).slice(0, 2000)), []))
+  const listening = dictation.listening
+  const canDictate = dictation.supported
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    const q = value.trim()
+    // Phrase encore en cours de dictée : envoyée avec le reste (elle arriverait après la navigation).
+    const q = (dictation.listening && dictation.interim ? appendDictation(value, dictation.interim) : value).trim()
     if (!q) return
+    dictation.stop()
     // Réponse du Coach sur la base de connaissances du parent (chat en streaming).
     router.push(`/app/coach/discussion?q=${encodeURIComponent(q.slice(0, 2000))}`)
   }
@@ -71,27 +54,6 @@ export function CoachQuickAccess() {
     setPendingFile(file)
     saveDraft(draftFromFile(file))
     router.push('/app/coach/document')
-  }
-
-  const toggleDictation = () => {
-    if (listening) {
-      recRef.current?.stop()
-      return
-    }
-    const Ctor = getRecognition()
-    if (!Ctor) return
-    const rec = new Ctor()
-    rec.lang = locale === 'en' ? 'en-US' : locale === 'pt' ? 'pt-BR' : 'fr-FR'
-    rec.interimResults = false
-    rec.onresult = (e) => {
-      const t = e.results[0]?.[0]?.transcript ?? ''
-      if (t) setValue((v) => (v ? `${v} ${t}` : t))
-    }
-    rec.onend = () => setListening(false)
-    rec.onerror = () => setListening(false)
-    recRef.current = rec
-    setListening(true)
-    rec.start()
   }
 
   const iconBtn =
@@ -138,7 +100,7 @@ export function CoachQuickAccess() {
             </button>
             <button
               type="button"
-              onClick={toggleDictation}
+              onClick={dictation.toggle}
               disabled={!canDictate}
               aria-pressed={listening}
               aria-label={canDictate ? (listening ? t('coachStopDictation') : t('coachDictate')) : t('coachDictateUnavailable')}
@@ -182,6 +144,12 @@ export function CoachQuickAccess() {
           }}
         />
       </form>
+      {/* Toujours monté : VoiceOver / TalkBack n'annoncent pas une zone insérée avec son texte. */}
+      <p role="status" aria-live="polite" className={cn('text-[12px] font-semibold', listening ? 'mt-2 text-alert-600' : dictation.error ? 'mt-2 text-alert-700' : 'sr-only')}>
+        {listening
+          ? dictation.interim ? `« ${dictation.interim} »` : tChat('listening')
+          : dictation.error ? tChat(dictation.error === 'denied' ? 'micDenied' : dictation.error === 'nothing' ? 'micNothing' : 'micError') : ''}
+      </p>
       {error && (
         <p id={errorId} role="alert" className="mt-2 text-[12px] font-medium text-alert-600">
           {error}

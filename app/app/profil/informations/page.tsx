@@ -152,7 +152,7 @@ export default function InformationsWizardPage() {
     setPhotoError(undefined)
     if (!file) return
     if (!file.type.startsWith('image/')) return setPhotoError(t('photoType'))
-    if (file.size > 5 * 1024 * 1024) return setPhotoError(t('photoSize'))
+    if (file.size > 25 * 1024 * 1024) return setPhotoError(t('photoSize'))
     setAvatarFile(file)
   }
 

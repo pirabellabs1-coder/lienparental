@@ -13,7 +13,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 //  - Android (Chrome) renvoie des résultats cumulatifs (« bonjour », puis « bonjour j'espère »…) et
 //    rejoue des résultats définitifs : ajouter chaque résultat répétait la phrase des dizaines de fois ;
 //  - iPhone (Safari) laisse les résultats « provisoires » (isFinal jamais vrai).
-// Téléphones : une phrase à la fois (continuous = false), un nouvel appui pour continuer.
+// Téléphones : une phrase à la fois (continuous = false). Le navigateur coupe l'écoute à la première
+// pause (une dizaine de secondes) : on la relance aussitôt, jusqu'à l'appui sur le micro, deux écoutes
+// de suite sans parole ou MAX_LISTEN_MS. Le texte de toutes les écoutes est écrit en une fois à la fin.
 
 type RecognitionResult = { isFinal: boolean; 0: { transcript: string } }
 type RecognitionEvent = { resultIndex: number; results: ArrayLike<RecognitionResult> }
@@ -70,6 +72,32 @@ export function transcriptFromResults(segments: readonly string[]): string {
 
 const LANG: Record<string, string> = { fr: 'fr-FR', en: 'en-US', pt: 'pt-BR' }
 
+/** Durée maximale d'une dictée (relances comprises). */
+const MAX_LISTEN_MS = 3 * 60_000
+/** Écoutes consécutives sans aucune parole avant d'arrêter (silence prolongé). */
+const MAX_SILENT_RUNS = 2
+
+// Pas de lookbehind dans ces expressions : non pris en charge par Safari avant iOS 16.4 (le module
+// entier ne se chargerait pas).
+const BRAND_VARIANTS = /(^|[^\p{L}])(lyon|l[ée]on|lean|lian(?:n?e)?|lient|l['’]\s?hymne|l['’]\s?ien)\s+parent(?:al|ale|aux|als)(?![\p{L}])/giu
+// « lien parental » sans déterminant après une préposition = la marque (« inscrit sur lien parental ») ;
+// avec déterminant (« le », « mon », « les liens parentaux »…), c'est la notion juridique : inchangé.
+const BRAND_PLAIN = /(^|[^\p{L}])(sur|à|avec|via|dans|chez|pour|em|no|na|com|pelo|on|with|at|to|from|use|using)\s+liens?\s+parental(?![\p{L}])/giu
+const BRAND_DROPPED_FR_PT = /(^|[^\p{L}])(sur|à|avec|via|dans|chez|pour|em|no|na|com|pelo)\s+parental(?![\p{L}])/giu
+const BRAND_DROPPED_EN = /(^|[^\p{L}])(with|from|joined|use|using|signed up on|sign up on|on the)\s+parental(?=\s*(?:$|[.,;:!?]|app\b))/giu
+
+/**
+ * Nom de la marque, souvent déformé par la reconnaissance vocale : « Lyon parental », « l'hymne
+ * parental », ou « lien » avalé (« je me suis inscrit sur parental »). « le lien parental », « les liens
+ * parentaux » (la notion juridique) sont laissés tels quels. Exporté pour les tests.
+ */
+export function fixBrandNames(text: string, locale: string): string {
+  let out = text.replace(BRAND_VARIANTS, (_all, pre: string) => `${pre}Lien Parental`)
+  out = out.replace(BRAND_PLAIN, (_all, pre: string, prep: string) => `${pre}${prep} Lien Parental`)
+  out = out.replace(locale === 'en' ? BRAND_DROPPED_EN : BRAND_DROPPED_FR_PT, (_all, pre: string, prep: string) => `${pre}${prep} Lien Parental`)
+  return out
+}
+
 export function useDictation(locale: string, onText: (text: string) => void) {
   const [supported, setSupported] = useState(false)
   const [listening, setListening] = useState(false)
@@ -77,6 +105,8 @@ export function useDictation(locale: string, onText: (text: string) => void) {
   /** Texte reconnu en cours, pas encore écrit dans le champ (affiché en direct). */
   const [interim, setInterim] = useState('')
   const rec = useRef<Recognition | null>(null)
+  /** Faux dès que l'utilisateur arrête : plus de relance. */
+  const wanted = useRef(false)
   const onTextRef = useRef(onText)
 
   useEffect(() => {
@@ -85,57 +115,104 @@ export function useDictation(locale: string, onText: (text: string) => void) {
 
   useEffect(() => {
     setSupported(Boolean(recognitionCtor()))
-    return () => rec.current?.abort()
+    return () => {
+      wanted.current = false
+      rec.current?.abort()
+    }
   }, [])
 
   /** Démarre l'écoute, ou l'arrête si elle est en cours. */
   const toggle = useCallback(() => {
     if (rec.current) {
+      wanted.current = false
       rec.current.stop()
       return
     }
     const Ctor = recognitionCtor()
     if (!Ctor) return
-    const r = new Ctor()
-    r.lang = LANG[locale] ?? 'fr-FR'
-    r.interimResults = true
-    r.continuous = !isMobile()
-    r.maxAlternatives = 1
 
-    let heard = ''        // texte reconnu de toute l'écoute, recalculé à chaque événement
-    let failed: DictationError | null = null
+    const startedAt = Date.now()
+    let done = ''         // texte des écoutes terminées
+    let silentRuns = 0
+    let runs = 0
+    let limit = 0
+    const join = (heard: string) => fixBrandNames([done, heard].filter(Boolean).join(' '), locale)
 
-    r.onresult = (e) => {
-      const segments: string[] = []
-      for (let i = 0; i < e.results.length; i++) segments.push(e.results[i]![0].transcript)
-      heard = transcriptFromResults(segments)
-      setInterim(heard)
-    }
-    r.onerror = (e) => {
-      if (e.error === 'not-allowed' || e.error === 'service-not-allowed' || e.error === 'audio-capture') failed = 'denied'
-      else if (e.error === 'no-speech') failed = 'nothing'
-      else if (e.error !== 'aborted') failed = 'other'
-    }
-    r.onend = () => {
-      // Écrit une seule fois, à la fin : jamais de doublon dans le champ.
-      if (heard) onTextRef.current(heard)
+    const finish = (failed: DictationError | null) => {
+      window.clearTimeout(limit)
+      wanted.current = false
       rec.current = null
+      const text = join('')
+      // Écrit une seule fois, à la fin : jamais de doublon dans le champ.
+      if (text) onTextRef.current(text)
       setInterim('')
       setListening(false)
-      setError(heard ? null : failed ?? 'nothing')
+      // Micro refusé à une relance seulement (Safari) : il fonctionnait, on n'accuse pas le micro.
+      setError(text ? null : failed === 'denied' && runs > 1 ? 'nothing' : failed ?? 'nothing')
     }
+
+    const listen = (): boolean => {
+      const r = new Ctor()
+      r.lang = LANG[locale] ?? 'fr-FR'
+      r.interimResults = true
+      r.continuous = !isMobile()
+      r.maxAlternatives = 1
+
+      let heard = ''        // texte de cette écoute, recalculé à chaque événement
+      let failed: DictationError | null = null
+
+      r.onresult = (e) => {
+        const segments: string[] = []
+        for (let i = 0; i < e.results.length; i++) segments.push(e.results[i]![0].transcript)
+        heard = transcriptFromResults(segments)
+        setInterim(join(heard))
+      }
+      r.onerror = (e) => {
+        if (e.error === 'not-allowed' || e.error === 'service-not-allowed' || e.error === 'audio-capture') failed = 'denied'
+        else if (e.error === 'no-speech') failed = 'nothing'
+        else if (e.error !== 'aborted') failed = 'other'
+      }
+      r.onend = () => {
+        if (heard) {
+          done = [done, heard].join(' ').trim()
+          silentRuns = 0
+        } else silentRuns++
+        const again = wanted.current && failed !== 'denied' && failed !== 'other'
+          && silentRuns < MAX_SILENT_RUNS && Date.now() - startedAt < MAX_LISTEN_MS
+        // Coupure du navigateur à la première pause : on reprend l'écoute sans nouvel appui.
+        if (!(again && listen())) finish(failed)
+      }
+      try {
+        r.start()
+        rec.current = r
+        runs++
+        return true
+      } catch {
+        return false
+      }
+    }
+
+    wanted.current = true
     setError(null)
     setInterim('')
-    try {
-      r.start()
-      rec.current = r
+    if (listen()) {
       setListening(true)
-    } catch {
+      // Ordinateur (écoute continue) : sans coupure du navigateur, la limite est posée ici.
+      limit = window.setTimeout(() => {
+        wanted.current = false
+        rec.current?.stop()
+      }, MAX_LISTEN_MS)
+    }
+    else {
+      wanted.current = false
       setError('other')
     }
   }, [locale])
 
-  const stop = useCallback(() => rec.current?.stop(), [])
+  const stop = useCallback(() => {
+    wanted.current = false
+    rec.current?.stop()
+  }, [])
 
   return { supported, listening, error, interim, toggle, stop }
 }

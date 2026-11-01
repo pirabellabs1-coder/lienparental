@@ -6,7 +6,8 @@ import { Camera, User } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { ChildAvatarIllustration } from '@/components/illustrations'
 
-const MAX_BYTES = 5 * 1024 * 1024
+// Photo réduite ensuite à 512 px (prepareAvatar) : seuls les fichiers aberrants sont refusés.
+const MAX_BYTES = 25 * 1024 * 1024
 
 type Props = {
   kind: 'parent' | 'child'

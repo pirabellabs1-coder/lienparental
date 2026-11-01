@@ -94,3 +94,21 @@ test('dictée : résultats cumulatifs d’Android sans doublon', async () => {
   assert.equal(transcriptFromResults(['Bonjour j’espère', 'j’espère']), 'Bonjour j’espère')
   assert.equal(transcriptFromResults(['', '  ']), '')
 })
+
+test('dictée : nom « Lien Parental » rétabli', async () => {
+  const { fixBrandNames } = await import('../components/coach/useDictation')
+  assert.equal(fixBrandNames('je me suis inscrit sur parental et ça marche', 'fr'), 'je me suis inscrit sur Lien Parental et ça marche')
+  assert.equal(fixBrandNames('j’utilise Lyon parental depuis un mois', 'fr'), 'j’utilise Lien Parental depuis un mois')
+  assert.equal(fixBrandNames('à parental, avec l’hymne parental', 'fr'), 'à Lien Parental, avec Lien Parental')
+  assert.equal(fixBrandNames('inscrit sur lien parental', 'fr'), 'inscrit sur Lien Parental')
+  // Notion juridique et adjectif ordinaire : inchangés.
+  assert.equal(fixBrandNames('maintenir le lien parental avec mon fils', 'fr'), 'maintenir le lien parental avec mon fils')
+  for (const phrase of ['maintenir les liens parentaux', 'préserver mon lien parental', 'absence de lien parental', 'des liens parentaux solides']) {
+    assert.equal(fixBrandNames(phrase, 'fr'), phrase)
+  }
+  assert.equal(fixBrandNames('un congé parental, l’autorité parentale', 'fr'), 'un congé parental, l’autorité parentale')
+  assert.equal(fixBrandNames('I signed up on parental.', 'en'), 'I signed up on Lien Parental.')
+  assert.equal(fixBrandNames('I am on parental leave', 'en'), 'I am on parental leave')
+  assert.equal(fixBrandNames('I’m on parental.', 'en'), 'I’m on parental.')
+  assert.equal(fixBrandNames('eu uso o lean parental', 'pt'), 'eu uso o Lien Parental')
+})

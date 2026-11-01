@@ -109,7 +109,8 @@ export function JustificatifsField({
           type="file"
           multiple
           disabled={full}
-          accept="image/jpeg,image/png,image/webp,image/heic,application/pdf"
+          // Sans image/heic : l'iPhone convertit en JPEG, lisible par l'autre parent sur Android.
+          accept="image/jpeg,image/png,image/webp,application/pdf"
           onChange={onFiles}
           aria-describedby={`${inputId}-note${error ? ` ${inputId}-err` : ''}`}
           aria-invalid={error ? true : undefined}
