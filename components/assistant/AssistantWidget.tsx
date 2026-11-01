@@ -5,6 +5,7 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { ArrowRight, CheckCheck, CheckCircle2, Coins, Mail, MessageCircle, Mic, Minus, Phone, RotateCcw, SendHorizontal, User, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import { useCloseOnBack } from '@/components/ui/useCloseOnBack'
 import { safeInternalPath } from '@/lib/ai/assistant-links'
 import { localePath, signupPath } from '@/lib/i18n/routing'
 import { CONTACT_EMAIL } from '@/lib/seo/site'
@@ -233,6 +234,8 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
     setPending(false)
     minimize()
   }, [minimize, speech])
+  // Retour Android : réduit le panneau (comme Échap), la conversation est gardée.
+  useCloseOnBack(open, minimize)
 
   const reset = () => {
     abort.current?.abort()
@@ -326,6 +329,7 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
   // Focus piégé dans le panneau, Échap pour réduire.
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Escape') {
+      e.preventDefault()
       e.stopPropagation()
       minimize()
       return

@@ -11,7 +11,7 @@ import { getTranslations } from 'next-intl/server'
 export default async function PageSkeleton() {
   const t = await getTranslations('shared.states.loading')
   return (
-    <div role="status" className="w-full px-5 pb-6" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}>
+    <div role="status" className="w-full px-5 pb-6" data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}>
       <span className="sr-only">{t('title')}</span>
       <div aria-hidden="true" className="motion-safe:animate-pulse">
         <div className="flex items-center justify-between">

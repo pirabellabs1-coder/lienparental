@@ -35,7 +35,7 @@ export function TopBar({
   return (
     <header
       className={cn('sticky top-0 z-30 bg-white px-4', className)}
-      style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
+      data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
     >
       <div className="relative flex h-12 items-center justify-between">
         <div className="flex w-12 items-center">

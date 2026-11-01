@@ -9,6 +9,7 @@ import {
   LAYOUT_MARGINS, LAYOUT_SIZES, interpolate, lines, parseTemplateBody,
   type DocumentTemplate, type InterpolateMode, type TemplateValues,
 } from './template'
+import { saveBlob } from '@/lib/download'
 
 export type TemplateExportFormat = 'pdf' | 'word'
 
@@ -136,13 +137,5 @@ export async function buildTemplateFile(
 
 /** Déclenche le téléchargement d'un Blob. */
 export function downloadBlob(blob: Blob, filename: string) {
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = filename
-  document.body.appendChild(a)
-  a.click()
-  a.remove()
-  // 60 s : l'iPhone demande de confirmer le téléchargement ; un lien révoqué avant donnait un fichier vide.
-  setTimeout(() => URL.revokeObjectURL(url), 60_000)
+  saveBlob(blob, filename)
 }

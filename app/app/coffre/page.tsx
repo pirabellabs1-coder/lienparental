@@ -21,7 +21,7 @@ export default function CoffrePage() {
     <div className="w-full px-5 pb-6">
       <header
         className="flex items-center justify-between"
-        style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}
+        data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}
       >
         <Link href="/app" aria-label={tc('homeAria')} className="rounded-lg md:invisible">
           <Logo size="sm" />

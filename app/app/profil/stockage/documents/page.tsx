@@ -60,7 +60,7 @@ function DemoDocumentsPage() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 bg-white px-4" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}>
+      <header className="sticky top-0 z-30 bg-white px-4" data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}>
         <div className="relative flex h-12 items-center justify-between">
           {selecting ? (
             <button type="button" onClick={() => setSelected(new Set())} aria-label={t('exitSelection')} className="-ml-2 inline-flex h-11 w-11 items-center justify-center rounded-full text-night-900 hover:bg-night-50">

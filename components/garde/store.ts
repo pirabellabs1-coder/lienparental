@@ -1,6 +1,7 @@
 'use client'
 
 import { defaultGardeConfig, normalizeZone, type GardeConfig } from '@/lib/garde'
+import { saveBlob } from '@/lib/download'
 
 // Persistance de démo (sessionStorage) : rien ne quitte l'appareil.
 // TODO Supabase : upsert dans `custody_plans` (RLS household_id), lecture au chargement.
@@ -62,13 +63,5 @@ export function takeGardeFlash(): string | null {
 
 /** Téléchargement côté client d'un contenu texte. */
 export function downloadText(content: string, filename: string, mime: string): void {
-  const blob = new Blob([content], { type: mime })
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = filename
-  document.body.appendChild(a)
-  a.click()
-  a.remove()
-  setTimeout(() => URL.revokeObjectURL(url), 1000)
+  saveBlob(new Blob([content], { type: mime }), filename)
 }

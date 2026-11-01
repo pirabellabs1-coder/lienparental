@@ -15,7 +15,7 @@ type Props = {
 export function GuideHeader({ territoire, territoires, back }: Props) {
   const t = useTranslations('coach.guide')
   return (
-    <div style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}>
+    <div data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}>
       <div className="flex min-h-[44px] items-center justify-between gap-3">
         {back ? (
           <Link

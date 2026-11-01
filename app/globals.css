@@ -35,6 +35,12 @@ a, button, [role="button"], label, summary{ touch-action: manipulation }
 }
 
 .pwa-safe{ padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) }
+/* App installée sur iPhone : un en-tête qui ajoute déjà la zone de l'encoche (data-safe-top) ou le bas
+   de l'espace connecté (data-safe-bottom) l'aurait reçue deux fois (bande vide). Le body s'efface alors. */
+body.pwa-safe:has([data-safe-top]){ padding-top: 0 }
+body.pwa-safe:has([data-safe-bottom]){ padding-bottom: 0 }
+/* Parcours public et page témoin : leur conteneur porte déjà .pwa-safe. */
+body.pwa-safe:has([data-safe-all]){ padding: 0 }
 
 @keyframes showcase-progress { from { transform: scaleX(0) } to { transform: scaleX(1) } }
 /* Barre de navigation (components/mobile/NavigationProgress) : avance vite puis ralentit, sans jamais finir. */

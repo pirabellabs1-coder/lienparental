@@ -5,6 +5,7 @@
  */
 import { Document, Page, StyleSheet, Text, View, pdf } from '@react-pdf/renderer'
 import type { Modele } from '@/lib/mock-vault'
+import { saveBlob } from '@/lib/download'
 
 export type ExportFormat = 'pdf' | 'word' | 'canva'
 
@@ -102,13 +103,5 @@ export async function buildModeleFile(m: Modele, format: ExportFormat): Promise<
 
 /** Déclenche le téléchargement d'un Blob (« Enregistrer dans Fichiers » sur mobile). */
 export function downloadBlob(blob: Blob, filename: string) {
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = filename
-  document.body.appendChild(a)
-  a.click()
-  a.remove()
-  // 60 s : l'iPhone demande de confirmer le téléchargement ; un lien révoqué avant donnait un fichier vide.
-  setTimeout(() => URL.revokeObjectURL(url), 60_000)
+  saveBlob(blob, filename)
 }

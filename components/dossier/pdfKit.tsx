@@ -8,6 +8,7 @@
 import type { ReactNode } from 'react'
 import { Font, StyleSheet, Text, View } from '@react-pdf/renderer'
 import { dayKeyInTz, fmtDayKey, timeInTz } from '@/lib/tz'
+import { saveBlob } from '@/lib/download'
 
 const fontUrl = (file: string) => `${typeof window !== 'undefined' ? window.location.origin : ''}/fonts/${file}`
 
@@ -130,13 +131,5 @@ export function frDay(iso: string): string {
 }
 
 export function downloadBlob(blob: Blob, filename: string) {
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = filename
-  document.body.appendChild(a)
-  a.click()
-  a.remove()
-  // 60 s : l'iPhone demande de confirmer le téléchargement ; un lien révoqué avant donnait un fichier vide.
-  setTimeout(() => URL.revokeObjectURL(url), 60_000)
+  saveBlob(blob, filename)
 }

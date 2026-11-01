@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useId, useRef, type ReactNode } from 'react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
+import { useCloseOnBack } from '@/components/ui/useCloseOnBack'
 
 export type ActionSheetAction = {
   key?: string
@@ -41,6 +42,8 @@ export function ActionSheet({ open, onClose, title, description, actions, cancel
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
     }
   }, [onClose])
+
+  useCloseOnBack(open, onClose)
 
   useEffect(() => {
     if (!open) return

@@ -8,6 +8,7 @@ import { TopBar } from '@/components/mobile/TopBar'
 import { Button, Card, Checkbox, ConfirmDialog, Input } from '@/components/ui'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { signOutAndRedirect } from '@/lib/auth/browser'
+import { saveBlob } from '@/lib/download'
 
 type ApiError = { error?: { code?: string; message?: string } }
 
@@ -59,14 +60,7 @@ export default function SuppressionPage() {
       if (!res.ok) { setExportStatus(await readError(res, t('exportError'))); return }
       const blob = await res.blob()
       const name = /filename="([^"]+)"/.exec(res.headers.get('Content-Disposition') ?? '')?.[1] ?? 'lien-parental-export.json'
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = name
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-      setTimeout(() => URL.revokeObjectURL(url), 1000)
+      saveBlob(blob, name)
       setExportStatus(t('exportDone'))
     } catch {
       setExportStatus(t('networkError'))

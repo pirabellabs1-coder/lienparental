@@ -70,7 +70,7 @@ export default function CoachPage() {
       {/* En-tête : menu à gauche, titre centré (maquette) */}
       <header
         className="sticky top-0 z-30 bg-white px-4"
-        style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
+        data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
       >
         <div className="relative flex h-12 items-center justify-between">
           <button

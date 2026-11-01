@@ -53,7 +53,7 @@ export function ScreenHeader({ title, srSuffix, leading = 'back', backHref, onBa
   return (
     <header
       className={cn('sticky top-0 z-30 bg-white/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-white/85', className)}
-      style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
+      data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
     >
       {large ? (
         <div className="flex h-14 items-center justify-between gap-2">

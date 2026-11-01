@@ -8,7 +8,7 @@ import { cn } from '@/lib/cn'
 /** Desktop: centred white card on a light page. Mobile: full screen (mockup). */
 export function WitnessFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-dvh bg-white pwa-safe md:bg-[radial-gradient(1200px_600px_at_50%_-10%,#eef0fb_0%,#f6f7fb_45%,#f6f7fb_100%)] md:px-4">
+    <div data-safe-all className="min-h-dvh bg-white pwa-safe md:bg-[radial-gradient(1200px_600px_at_50%_-10%,#eef0fb_0%,#f6f7fb_45%,#f6f7fb_100%)] md:px-4">
       <main className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col bg-white md:my-10 md:min-h-[min(820px,calc(100dvh-5rem))] md:max-w-[440px] md:overflow-hidden md:rounded-3xl md:border md:border-night-100/70 md:shadow-[0_1px_2px_rgba(11,45,91,0.06),0_24px_60px_-24px_rgba(11,45,91,0.18)]">
         {children}
       </main>

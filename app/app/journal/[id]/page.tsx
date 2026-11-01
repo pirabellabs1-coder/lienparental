@@ -26,6 +26,7 @@ import { FinancesNotice, StatutBadge } from '@/components/journal/FinancesView'
 import {
   allJustificatifs, fluxOf, partsCents, recurrenceOf, resteDuCents, sensOf, statutOf,
 } from '@/lib/journal-finances'
+import { saveBlob } from '@/lib/download'
 
 // M05 — Détail d'une entrée. Supabase : journal_entries (RLS user_id = auth.uid()), images en URL signées 15 min.
 export default function JournalDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -174,12 +175,7 @@ export default function JournalDetailPage({ params }: { params: Promise<{ id: st
       ? t('createdOnAt', { date: fmtDateMedium(created, loc), time: fmtHeure(createdTime, loc) })
       : t('createdOn', { date: fmtDateMedium(created, loc) })
     const blob = new Blob([summary + `\n\n${createdLine}\n`], { type: 'text/plain;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `journal-${entry!.date}-${entry!.id}.txt`
-    a.click()
-    URL.revokeObjectURL(url)
+    saveBlob(blob, `journal-${entry!.date}-${entry!.id}.txt`)
     setNotice(t('exported'))
   }
 

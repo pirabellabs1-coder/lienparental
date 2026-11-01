@@ -49,7 +49,7 @@ export default function DashboardPage() {
   return (
     <div
       className="w-full space-y-6 px-4 pb-8"
-      style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1.5rem)' }}
+      data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1.5rem)' }}
     >
       {/* Salutation */}
       <header className="flex items-start justify-between gap-3">

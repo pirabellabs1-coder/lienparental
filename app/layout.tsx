@@ -5,6 +5,7 @@ import { getLocale, getMessages, getTranslations } from 'next-intl/server'
 import './globals.css'
 import { DisplayPrefs } from '@/components/a11y/DisplayPrefs'
 import { IosFixedRecover } from '@/components/pwa/IosFixedRecover'
+import RegisterSW from '@/components/pwa/RegisterSW'
 import { isLocale, LOCALE_META } from '@/lib/i18n/config'
 import { CLIENT_NS_ROOT } from '@/lib/i18n/client-namespaces'
 import { pick } from '@/lib/i18n/pick'
@@ -77,6 +78,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <NextIntlClientProvider locale={locale} messages={messages}>
           <DisplayPrefs />
           <IosFixedRecover />
+          {/* Hors ligne : page /offline et fichiers statiques en cache (jamais de page de l'espace connecté). */}
+          <RegisterSW />
           {children}
         </NextIntlClientProvider>
       </body>
