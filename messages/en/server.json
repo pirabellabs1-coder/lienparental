@@ -277,7 +277,8 @@
       "healthInvalid": "Invalid health information.",
       "invalidRequest": "Invalid request.",
       "deleteFailed": "Unable to delete right now.",
-      "itemNotFound": "Item not found."
+      "itemNotFound": "Item not found.",
+      "medicalOwnerOnly": "This profile was created by the other parent: only they can change the medical information."
     },
     "modeles": {
       "notFound": "Template not found or not published."

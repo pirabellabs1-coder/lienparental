@@ -19,7 +19,9 @@ body{
 /* Champs date/heure natifs : sur iPhone, leur largeur minimale ignore la grille et les fait déborder
    sur le champ voisin (retour bêta-test). appearance:none garde le sélecteur natif au toucher. */
 input[type="date"], input[type="time"], input[type="datetime-local"], input[type="month"]{ min-width:0; -webkit-appearance:none; appearance:none }
-input::-webkit-date-and-time-value{ text-align:left }
+input::-webkit-date-and-time-value{ text-align:left; margin:0 }
+/* iPhone : la valeur d'un champ date restait collée en haut du champ ; centrage vertical. */
+input[type="date"], input[type="month"], input[type="datetime-local"]{ display:flex; align-items:center }
 
 /* Tap immédiat : pas d'attente de double-tap (zoom) sur les commandes. */
 a, button, [role="button"], label, summary{ touch-action: manipulation }
