@@ -7,9 +7,13 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 // serveurs : seul le texte reconnu est inséré dans le champ, l'utilisateur relit puis envoie.
 // Navigateur sans prise en charge : `supported` faux, le bouton n'est pas affiché.
 //
-// iPhone (Safari / WebKit) : l'écoute continue y livre des résultats restés « provisoires »
-// (isFinal jamais vrai) ; ne garder que les résultats définitifs n'écrivait donc rien. On écoute
-// une phrase à la fois, on affiche le texte provisoire en direct et on l'écrit à la fin de l'écoute.
+// Le texte n'est écrit dans le champ qu'UNE fois, à la fin de l'écoute ; pendant l'écoute, la phrase
+// reconnue est affichée en direct (`interim`). Elle est recalculée à chaque événement depuis TOUS les
+// résultats (transcriptFromResults), jamais ajoutée morceau par morceau :
+//  - Android (Chrome) renvoie des résultats cumulatifs (« bonjour », puis « bonjour j'espère »…) et
+//    rejoue des résultats définitifs : ajouter chaque résultat répétait la phrase des dizaines de fois ;
+//  - iPhone (Safari) laisse les résultats « provisoires » (isFinal jamais vrai).
+// Téléphones : une phrase à la fois (continuous = false), un nouvel appui pour continuer.
 
 type RecognitionResult = { isFinal: boolean; 0: { transcript: string } }
 type RecognitionEvent = { resultIndex: number; results: ArrayLike<RecognitionResult> }
@@ -36,9 +40,32 @@ function recognitionCtor(): RecognitionCtor | null {
   return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null
 }
 
-function isAppleMobile(): boolean {
+function isMobile(): boolean {
   if (typeof navigator === 'undefined') return false
-  return /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  return /iP(hone|ad|od)|Android/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+}
+
+const norm = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
+
+/**
+ * Texte reconnu à partir de la liste COMPLÈTE des résultats. Un segment qui reprend tout le texte déjà
+ * reconnu (résultat cumulatif d'Android) le remplace ; un segment identique au dernier est ignoré ;
+ * sinon il s'ajoute (segments successifs de Chrome sur ordinateur). Exporté pour les tests.
+ */
+export function transcriptFromResults(segments: readonly string[]): string {
+  let acc = ''
+  let last = ''
+  for (const raw of segments) {
+    const seg = raw.trim()
+    if (!seg) continue
+    const n = norm(seg)
+    if (n === norm(last)) continue
+    if (acc && n.startsWith(norm(acc))) acc = seg
+    else if (acc && norm(acc).endsWith(n)) continue
+    else acc = acc ? `${acc} ${seg}` : seg
+    last = seg
+  }
+  return acc
 }
 
 const LANG: Record<string, string> = { fr: 'fr-FR', en: 'en-US', pt: 'pt-BR' }
@@ -72,26 +99,17 @@ export function useDictation(locale: string, onText: (text: string) => void) {
     const r = new Ctor()
     r.lang = LANG[locale] ?? 'fr-FR'
     r.interimResults = true
-    r.continuous = !isAppleMobile()
+    r.continuous = !isMobile()
     r.maxAlternatives = 1
 
-    let pending = ''      // texte provisoire de la phrase en cours
-    let wrote = false     // au moins un texte écrit dans le champ
+    let heard = ''        // texte reconnu de toute l'écoute, recalculé à chaque événement
     let failed: DictationError | null = null
 
     r.onresult = (e) => {
-      let finals = ''
-      pending = ''
-      for (let i = e.resultIndex; i < e.results.length; i++) {
-        const res = e.results[i]!
-        if (res.isFinal) finals += res[0].transcript
-        else pending += res[0].transcript
-      }
-      if (finals.trim()) {
-        onTextRef.current(finals.trim())
-        wrote = true
-      }
-      setInterim(pending.trim())
+      const segments: string[] = []
+      for (let i = 0; i < e.results.length; i++) segments.push(e.results[i]![0].transcript)
+      heard = transcriptFromResults(segments)
+      setInterim(heard)
     }
     r.onerror = (e) => {
       if (e.error === 'not-allowed' || e.error === 'service-not-allowed' || e.error === 'audio-capture') failed = 'denied'
@@ -99,15 +117,12 @@ export function useDictation(locale: string, onText: (text: string) => void) {
       else if (e.error !== 'aborted') failed = 'other'
     }
     r.onend = () => {
-      // Phrase restée provisoire (cas de l'iPhone) : écrite telle quelle à la fin de l'écoute.
-      if (pending.trim()) {
-        onTextRef.current(pending.trim())
-        wrote = true
-      }
+      // Écrit une seule fois, à la fin : jamais de doublon dans le champ.
+      if (heard) onTextRef.current(heard)
       rec.current = null
       setInterim('')
       setListening(false)
-      setError(failed ?? (wrote ? null : 'nothing'))
+      setError(heard ? null : failed ?? 'nothing')
     }
     setError(null)
     setInterim('')

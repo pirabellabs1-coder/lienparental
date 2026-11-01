@@ -82,3 +82,15 @@ test('bulle du Coach : masquée sur le Coach, les fils de messagerie et le coffr
   for (const p of ['/app/coach', '/app/coach/discussion', '/app/messages/abc', '/app/coffre', '/app/coffre/album']) assert.ok(bubbleHiddenOn(p), p)
   for (const p of ['/app', '/app/calendrier', '/app/messages', '/app/coachs-fictif', '/app/coffret']) assert.ok(!bubbleHiddenOn(p), p)
 })
+
+test('dictée : résultats cumulatifs d’Android sans doublon', async () => {
+  const { transcriptFromResults } = await import('../components/coach/useDictation')
+  // Android (Chrome) : chaque résultat reprend toute la phrase, et certains sont rejoués.
+  const android = ['bonjour', 'bonjour', 'bonjour j’espère', 'Bonjour, j’espère que tout va bien', 'bonjour j’espère que tout va bien', 'Bonjour, j’espère que tout va bien']
+  assert.equal(transcriptFromResults(android), 'Bonjour, j’espère que tout va bien')
+  // Ordinateur (Chrome) : segments successifs, ajoutés dans l’ordre.
+  assert.equal(transcriptFromResults(['Bonjour', 'j’espère que tout va bien']), 'Bonjour j’espère que tout va bien')
+  // Segment déjà présent à la fin : ignoré.
+  assert.equal(transcriptFromResults(['Bonjour j’espère', 'j’espère']), 'Bonjour j’espère')
+  assert.equal(transcriptFromResults(['', '  ']), '')
+})
