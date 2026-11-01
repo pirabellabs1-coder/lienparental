@@ -17,6 +17,7 @@ import { listJournal } from '@/lib/data/journal'
 import { listCategories, listDocuments } from '@/lib/data/vault'
 import { listTestimonyRequests } from '@/lib/data/testimonies'
 import { cn } from '@/lib/cn'
+import { useCloseOnBack } from '@/components/ui/useCloseOnBack'
 import { useVaultLockState } from '@/components/vault-lock/useVaultLockState'
 
 /** Événement DOM permettant d'ouvrir la recherche depuis n'importe quel bouton. */
@@ -255,6 +256,7 @@ export function CommandPalette() {
   const optionId = (i: number) => `${uid}-opt-${i}`
 
   const close = useCallback(() => setOpen(false), [])
+  useCloseOnBack(open, close)
 
   // Ouverture : Ctrl+K / Cmd+K et événement DOM `lp:open-search`.
   useEffect(() => {

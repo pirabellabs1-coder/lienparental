@@ -11,6 +11,7 @@ import { LIVE } from '@/lib/data/core'
 import type { ReceivedTestimonyRecord } from '@/lib/data/testimonies'
 import { useAnnounce } from '@/components/coffre/useAnnounce'
 import { useVaultI18n } from '@/components/coffre/i18n'
+import { saveBlob } from '@/lib/download'
 
 // Maquette « Témoignages reçus » (liste téléchargeable d'une demande)
 export default function TemoignagesRecusListePage({ params }: { params: Promise<{ id: string }> }) {
@@ -37,14 +38,7 @@ export default function TemoignagesRecusListePage({ params }: { params: Promise<
       tm.fullText ?? tm.summary,
     ].join('\n')).join('\n\n----------------------------------------\n\n')
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `temoignages-${id.slice(0, 8)}.txt`
-    document.body.appendChild(a)
-    a.click()
-    a.remove()
-    setTimeout(() => URL.revokeObjectURL(url), 1000)
+    saveBlob(blob, `temoignages-${id.slice(0, 8)}.txt`)
     announce(t('download.started', { label }))
   }
 

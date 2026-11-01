@@ -11,6 +11,7 @@ import { btn } from '@/components/coffre/buttons'
 import { getModele, modelePages } from '@/lib/mock-vault'
 import type { ExportFormat } from '@/components/coffre/modeleExport'
 import { cn } from '@/lib/cn'
+import { isIosStandalone, saveBlob } from '@/lib/download'
 
 type Phase = 'choose' | 'progress' | 'success' | 'error'
 const STEPS = ['file', 'layout', 'compat', 'final'] as const
@@ -93,6 +94,9 @@ export default function ExportPage({ params }: { params: Promise<{ slug: string 
   }
   const openFile = () => {
     if (!file) return
+    // App installée sur iPhone : le nouvel onglet n'a pas accès au fichier (page blanche) ; la
+    // feuille de partage permet de l'ouvrir ou de l'enregistrer.
+    if (isIosStandalone()) { saveBlob(file.blob, file.filename); return }
     const url = URL.createObjectURL(file.blob)
     window.open(url, '_blank', 'noopener')
     setTimeout(() => URL.revokeObjectURL(url), 60_000)

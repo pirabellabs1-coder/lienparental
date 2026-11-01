@@ -52,7 +52,7 @@ export default function ModelesPage() {
   }, [source, q, cat, popularFirst])
 
   return (
-    <div className="w-full px-5 pb-6" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1.25rem)' }}>
+    <div className="w-full px-5 pb-6" data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1.25rem)' }}>
       <h1 className="max-w-[260px] text-[24px] font-extrabold leading-tight tracking-[-0.02em] text-night-900 md:max-w-none">
         {tr('list.title')}
       </h1>

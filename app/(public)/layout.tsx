@@ -25,7 +25,7 @@ export default async function PublicLayout({ children }: { children: ReactNode }
   return (
     // Textes des composants client des parcours publics uniquement (audit C3).
     <ScopedIntlProvider namespaces={CLIENT_NS_PUBLIC_FLOWS}>
-    <div className="min-h-dvh bg-white pwa-safe md:bg-[#f6f7fb] lg:grid lg:grid-cols-[1.05fr_1fr] lg:bg-white">
+    <div data-safe-all className="min-h-dvh bg-white pwa-safe md:bg-[#f6f7fb] lg:grid lg:grid-cols-[1.05fr_1fr] lg:bg-white">
       <aside className="relative hidden overflow-hidden lg:block" aria-hidden="false">
         <Image
           src="/images/hero-pere-fille.jpg"

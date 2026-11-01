@@ -12,7 +12,7 @@ export function CalendarHeader({ view }: { view: 'mois' | 'semaine' }) {
       active ? 'bg-leaf-500 font-bold text-white shadow-soft' : 'font-semibold text-night-900 hover:bg-night-50',
     )
   return (
-    <div className="px-4" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1rem)' }}>
+    <div className="px-4" data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1rem)' }}>
       <header className="flex h-12 items-center justify-between">
         <h1 className="text-[22px] font-extrabold tracking-tight text-night-900">{t('title')}</h1>
         <div className="-mr-1 flex items-center gap-1">

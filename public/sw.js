@@ -6,13 +6,14 @@
  *   • Activate  : delete every cache whose name does not match CACHE_V.
  *   • Fetch     :
  *       - navigation requests   → network-first, fall back to cached page, then /offline
- *       - same-origin assets    → stale-while-revalidate
+ *       - same-origin static files (/_next/static, icônes, images, polices) → stale-while-revalidate
+ *       - every other same-origin GET (RSC payloads, /_next/image, pages) → network-only
  *       - cross-origin / third- → network-only (not cached)
  *
  * Bump CACHE_V whenever the precache list changes — the old cache is cleared on activate.
  */
 
-const CACHE_V = 'lp-v4';
+const CACHE_V = 'lp-v5';
 const RUNTIME = `${CACHE_V}-runtime`;
 const SHELL   = `${CACHE_V}-shell`;
 
@@ -82,8 +83,11 @@ self.addEventListener('fetch', (event) => {
   //    (e.g. GET /api/push/subscribe returns the signed-in user's devices).
   if (sameOrigin && isPrivatePath(url.pathname)) return;
 
-  // 3) Same-origin assets → stale-while-revalidate
-  if (sameOrigin) {
+  // 3) Same-origin static files → stale-while-revalidate. Anything else (RSC payloads of
+  //    /onboarding/recap…, /_next/image which may proxy a private photo, routes) stays
+  //    network-only: never per-user content in the shared cache, never a stale payload after a
+  //    deployment.
+  if (sameOrigin && isStaticAsset(url, req)) {
     event.respondWith(staleWhileRevalidate(req));
     return;
   }
@@ -104,6 +108,16 @@ const PUBLIC_CACHEABLE = ['/', '/aide', '/legal/'];
 
 function isPrivatePath(pathname) {
   return PRIVATE_PREFIXES.some((p) => pathname === p.replace(/\/$/, '') || pathname.startsWith(p));
+}
+
+const STATIC_PREFIXES = ['/_next/static/', '/icons/', '/brand/', '/fonts/'];
+const STATIC_EXT = /\.(?:png|jpe?g|webp|avif|gif|svg|ico|woff2?|css|js)$/i; // pas d'audio/vidéo : requêtes Range (206), non cachables
+
+function isStaticAsset(url, req) {
+  if (url.search) return false; // ?_rsc=…, /_next/image?url=…
+  if (req && req.headers && typeof req.headers.get === 'function' && req.headers.get('RSC')) return false;
+  if (STATIC_PREFIXES.some((p) => url.pathname.startsWith(p))) return true;
+  return STATIC_EXT.test(url.pathname) && !url.pathname.startsWith('/_next/');
 }
 
 function isPublicCacheable(pathname) {

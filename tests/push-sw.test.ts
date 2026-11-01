@@ -212,3 +212,21 @@ test('pushsubscriptionchange : clé inconnue → lue sur GET /api/push/subscribe
   await sw.fire('pushsubscriptionchange', { oldSubscription: null })
   assert.deepEqual(Array.from(subscribedKey ?? []), [1, 2, 3])
 })
+
+// --- cache --------------------------------------------------------------------------
+
+test('cache : seuls les fichiers statiques sont gardés, jamais une page, un RSC ou /_next/image', () => {
+  const { ctx } = load()
+  const isStatic = (path: string, rsc = false) =>
+    (ctx as unknown as { isStaticAsset(u: URL, r: unknown): boolean }).isStaticAsset(
+      new URL(path, ORIGIN),
+      { headers: { get: (h: string) => (rsc && h === 'RSC' ? '1' : null) } },
+    )
+  for (const p of ['/_next/static/chunks/app-1a2b.js', '/_next/static/css/x.css', '/icons/icon-192.png', '/brand/logo.svg', '/screens/fr/coffre.webp']) {
+    assert.equal(isStatic(p), true, p)
+  }
+  for (const p of ['/_next/static/x.js?dpl=abc', '/', '/onboarding/recap', '/guide/guyane', '/_next/image?url=%2Fa.png&w=64&q=75', '/onboarding/recap?_rsc=abc', '/videos/presentation.mp4', '/_next/data/x.json']) {
+    assert.equal(isStatic(p), false, p)
+  }
+  assert.equal(isStatic('/guide', true), false)
+})

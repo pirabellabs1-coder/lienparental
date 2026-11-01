@@ -11,6 +11,7 @@ import {
 import { Logo } from '@/components/brand/Logo'
 import { LanguageSwitcher } from '@/components/i18n/LanguageSwitcher'
 import { cn } from '@/lib/cn'
+import { useCloseOnBack } from '@/components/ui/useCloseOnBack'
 import { signupPath, stripLocale } from '@/lib/i18n/routing'
 import { guidePaths } from '@/lib/seo/site'
 import { useLocalePath } from '@/components/i18n/useLocalePath'
@@ -167,13 +168,15 @@ export function SiteHeader({ territories, soonLabel }: { territories: HeaderTerr
     }
   }, [mega, closeMega])
 
+  useCloseOnBack(open, () => { setOpen(false); toggle.current?.focus() })
+
   // Menu mobile : défilement bloqué, focus piégé, Échap.
   useEffect(() => {
     if (!open) return
     document.body.style.overflow = 'hidden'
     menu.current?.querySelector<HTMLElement>('a[href], button')?.focus()
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { setOpen(false); toggle.current?.focus(); return }
+      if (e.key === 'Escape') { e.preventDefault(); setOpen(false); toggle.current?.focus(); return }
       if (e.key !== 'Tab') return
       const items = [toggle.current, ...Array.from(menu.current?.querySelectorAll<HTMLElement>('a[href], button') ?? [])].filter(Boolean) as HTMLElement[]
       const first = items[0], last = items[items.length - 1]

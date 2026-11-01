@@ -3,6 +3,7 @@ import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
+import { useCloseOnBack } from '@/components/ui/useCloseOnBack'
 
 type Props = {
   open: boolean
@@ -34,6 +35,8 @@ export function Modal({ open, onClose, title, description, children, footer, clo
     onCloseRef.current = onClose
     initialFocus.current = initialFocusRef
   })
+
+  useCloseOnBack(open, onClose)
 
   useEffect(() => {
     if (!open) return

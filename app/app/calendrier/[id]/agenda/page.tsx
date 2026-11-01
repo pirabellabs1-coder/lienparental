@@ -9,6 +9,7 @@ import { EmptyState, LoadingState } from '@/components/mobile/StateScreens'
 import { useClientNow } from '@/components/calendrier/useClientNow'
 import { buildIcs, googleCalendarUrl, outlookCalendarUrl } from '@/lib/calendrier'
 import { useEvent } from '@/lib/data/calendar'
+import { saveBlob } from '@/lib/download'
 
 // M06 — « Ajouter à l'agenda » : choix d'un agenda externe, puis indication de ce qui s'est passé.
 // Rien n'est ajouté tant que l'utilisateur n'a pas choisi un agenda (et ne l'y a pas enregistré) :
@@ -56,12 +57,7 @@ export default function AjouterAgendaPage({ params }: { params: Promise<{ id: st
 
   function downloadIcs() {
     const blob = new Blob([buildIcs(event!)], { type: 'text/calendar;charset=utf-8' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${event!.title.replace(/[^\p{L}\p{N}]+/gu, '-').toLowerCase()}.ics`
-    a.click()
-    URL.revokeObjectURL(url)
+    saveBlob(blob, `${event!.title.replace(/[^\p{L}\p{N}]+/gu, '-').toLowerCase()}.ics`)
     setSent('apple')
   }
 

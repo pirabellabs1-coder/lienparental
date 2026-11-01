@@ -17,8 +17,10 @@ export default async function OfflinePage() {
   return (
     <div className="min-h-dvh bg-white">
       <div className="mx-auto w-full max-w-3xl">
-        <header className="flex h-14 items-center justify-center px-4" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
-          <p className="text-[17px] font-bold text-night-900">{t('title')}</p>
+        <header data-safe-top style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
+          <div className="flex h-14 items-center justify-center px-4">
+            <p className="text-[17px] font-bold text-night-900">{t('title')}</p>
+          </div>
         </header>
         <main>
           <OfflineState

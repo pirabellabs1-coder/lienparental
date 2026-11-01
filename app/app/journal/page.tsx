@@ -62,7 +62,7 @@ export default function JournalPage({ searchParams }: { searchParams: Promise<Se
   const month = isMonthKey(moisParam) && (!currentMonth || moisParam <= currentMonth) ? moisParam : currentMonth
 
   return (
-    <div className="px-4 pb-6" style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1rem)' }}>
+    <div className="px-4 pb-6" data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 1rem)' }}>
       <header className="flex h-12 items-center justify-between">
         <h1 className="text-[22px] font-extrabold tracking-tight text-night-900">{t('title')}</h1>
         <Link

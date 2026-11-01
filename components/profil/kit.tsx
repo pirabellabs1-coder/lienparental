@@ -49,7 +49,7 @@ export function BrandHeader({
   return (
     <header
       className="flex items-center gap-4 px-5 pb-2"
-      style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}
+      data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.75rem)' }}
     >
       <Link href="/app" aria-label={t('homeAria')} className="rounded-lg md:invisible focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400">
         <Logo size="sm" />

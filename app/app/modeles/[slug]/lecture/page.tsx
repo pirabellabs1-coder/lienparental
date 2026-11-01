@@ -59,7 +59,7 @@ export default function LecturePage({ params }: { params: Promise<{ slug: string
     <>
       <header
         className="sticky top-0 z-30 bg-white px-4"
-        style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
+        data-safe-top style={{ paddingTop: 'calc(env(safe-area-inset-top, 0px) + 0.5rem)' }}
       >
         <div className="flex items-start gap-1 pb-2">
           <Link href={`/app/modeles/${m.slug}`} aria-label={tr('back')} className={cn(headerIconBtn, '-ml-2 shrink-0')}>
