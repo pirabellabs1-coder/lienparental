@@ -9,10 +9,16 @@ export type VoiceClip = { blob: Blob; url: string; durationMs: number; mime: str
 
 export const VOICE_BARS = 32
 
-/** Format pris en charge par le navigateur (Chrome/Firefox : webm/ogg, Safari : mp4). */
+/**
+ * Format d'enregistrement : MP4/AAC d'abord, lisible sur TOUS les appareils (iPhone compris) ; Chrome
+ * récent (Android, ordinateur) et Safari le produisent. Sinon WebM/Ogg (Firefox, anciens Chrome), que
+ * l'iPhone ne lit pas nativement : le lecteur les convertit alors (components/messages/audioFallback.ts).
+ */
+export const RECORD_MIME_PREFERENCE = ['audio/mp4;codecs=mp4a.40.2', 'audio/mp4', 'audio/aac', 'audio/webm;codecs=opus', 'audio/webm', 'audio/ogg;codecs=opus'] as const
+
 function pickMime(): string | undefined {
   if (typeof MediaRecorder === 'undefined' || typeof MediaRecorder.isTypeSupported !== 'function') return undefined
-  return ['audio/webm;codecs=opus', 'audio/webm', 'audio/ogg;codecs=opus', 'audio/mp4', 'audio/aac'].find((m) => MediaRecorder.isTypeSupported(m))
+  return RECORD_MIME_PREFERENCE.find((m) => MediaRecorder.isTypeSupported(m))
 }
 
 export function voiceSupported(): boolean {
