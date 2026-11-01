@@ -382,6 +382,18 @@ export async function humanAvailable(service: string, language: AgentLocale): Pr
   return availableNow(reps, service, language, now, busy).length > 0
 }
 
+/**
+ * Numéros de transfert des représentants joignables maintenant (standard téléphonique), par ordre de
+ * priorité ; jamais renvoyés au navigateur. Tous services confondus si `service` est absent.
+ */
+export async function transferTargets(language: AgentLocale, service = 'info'): Promise<string[]> {
+  const d = db()
+  const now = Date.now()
+  const [reps, busy] = await Promise.all([readReps(d), readBusy(d, new Date(now - 1).toISOString(), new Date(now + 1).toISOString())])
+  const ids = new Set(availableNow(reps, service, language, now, busy).map((r) => r.id))
+  return reps.filter((r) => ids.has(r.id) && r.transfer_phone).map((r) => r.transfer_phone!.replace(/[^\d+]/g, '')).slice(0, 2)
+}
+
 // --- Tâche planifiée : rappels 24 h / 2 h, versions programmées, réservations expirées, conservation ---
 
 export async function runAgentCron(): Promise<{ reminders: number; kbActivated?: number; purged?: unknown }> {

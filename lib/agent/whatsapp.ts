@@ -199,16 +199,17 @@ async function say(c: Conversation, text: string, buttons: WaButton[] = [], auth
 
 /**
  * Rappel de rendez-vous (souvent plus de 24 h après le dernier message) : modèle Meta approuvé si
- * configuré (TWILIO_WA_REMINDER_SID, variables date / heure), sinon texte libre (accepté seulement
+ * configuré (TWILIO_WA_REMINDER_SID_FR | _EN | _PT, sinon TWILIO_WA_REMINDER_SID ; variables date / heure), sinon texte libre (accepté seulement
  * dans la fenêtre de 24 h). Enregistré dans la conversation.
  */
 export async function notifyByWhatsApp(phone: string, locale: AgentLocale, text: string, vars?: { date: string; time: string }): Promise<boolean> {
   const c = await getConversation(phone, null, locale)
-  const templateSid = process.env.TWILIO_WA_REMINDER_SID?.trim()
+  const templateSid = (process.env[`TWILIO_WA_REMINDER_SID_${locale.toUpperCase()}`] ?? process.env.TWILIO_WA_REMINDER_SID)?.trim()
   if (!templateSid || !vars) return say(c, text)
   await storeMessage(c.id, { direction: 'out', author: 'bot', waId: null, body: text })
   const r = await sendTwilioWhatsApp(c.phone, text, { sid: templateSid, variables: { 1: vars.date, 2: vars.time } })
-  return r.ok
+  // Modèle pas encore approuvé par Meta : texte libre (accepté dans la fenêtre de 24 h).
+  return r.ok || (await sendTwilioWhatsApp(c.phone, text)).ok
 }
 
 /** Réponse d'un représentant depuis le back-office : envoyée puis, si elle est partie, l'assistant se met en retrait. */

@@ -5,7 +5,7 @@ import 'server-only'
  *
  * Variables : TWILIO_ACCOUNT_SID (AC…), TWILIO_AUTH_TOKEN, TWILIO_WHATSAPP_NUMBER (expéditeur WhatsApp
  * approuvé, +594… / +33… ; à défaut TWILIO_PHONE_NUMBER). Absentes : aucun envoi (journal expurgé).
- * Modèle Meta pour les rappels hors fenêtre de 24 h : TWILIO_WA_REMINDER_SID (HX…, variables {{1}} date,
+ * Modèles Meta pour les rappels hors fenêtre de 24 h : TWILIO_WA_REMINDER_SID_FR / _EN / _PT (HX…, variables {{1}} date,
  * {{2}} heure).
  */
 import { signatureMatches } from './twilio-signature'
@@ -56,6 +56,30 @@ export async function sendTwilioWhatsApp(to: string, body: string, template?: { 
     return { ok: true, id: typeof json?.sid === 'string' ? json.sid : null }
   } catch (e) {
     console.warn('[twilio] envoi impossible (%s)', e instanceof Error ? e.name : 'erreur')
+    return { ok: false, error: 'network' }
+  }
+}
+
+/** SMS depuis le numéro de l'association (TWILIO_PHONE_NUMBER). */
+export async function sendTwilioSms(to: string, body: string): Promise<SendResult> {
+  const from = (process.env.TWILIO_PHONE_NUMBER?.trim() || '').replace(/[^\d+]/g, '')
+  if (!sid() || !token() || !from) return { ok: false, error: 'disabled' }
+  try {
+    const res = await fetch(`${API}/Accounts/${sid()}/Messages.json`, {
+      method: 'POST',
+      headers: { Authorization: `Basic ${Buffer.from(`${sid()}:${token()}`).toString('base64')}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ From: from, To: to, Body: body.slice(0, 600) }),
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+      cache: 'no-store',
+    })
+    const json = (await res.json().catch(() => null)) as { sid?: string; code?: number } | null
+    if (!res.ok) {
+      console.warn('[twilio] SMS refusé (%s)', String(json?.code ?? res.status))
+      return { ok: false, error: String(json?.code ?? res.status) }
+    }
+    return { ok: true, id: json?.sid ?? null }
+  } catch (e) {
+    console.warn('[twilio] SMS impossible (%s)', e instanceof Error ? e.name : 'erreur')
     return { ok: false, error: 'network' }
   }
 }

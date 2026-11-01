@@ -15,7 +15,7 @@ const isAdminPath = (p: string) => p === '/admin' || p.startsWith('/admin/')
 
 const MUTATING = new Set(['POST', 'PUT', 'PATCH', 'DELETE'])
 // Routes d'API appelées par des tiers (authentifiées autrement) : exemptées du contrôle d'origine.
-const isThirdPartyApi = (p: string) => p === '/api/stripe/webhook' || p === '/api/whatsapp/webhook' || p === '/api/stripe/cron' || p.startsWith('/api/cron/')
+const isThirdPartyApi = (p: string) => p === '/api/stripe/webhook' || p === '/api/whatsapp/webhook' || p.startsWith('/api/voice/') || p === '/api/stripe/cron' || p.startsWith('/api/cron/')
 
 /**
  * Anti-CSRF uniforme (défense en profondeur, en plus de SameSite=Lax) : une mutation d'API

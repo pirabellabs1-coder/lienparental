@@ -48,7 +48,7 @@ export default async function WhatsAppAdminPage({ searchParams }: { searchParams
             <p><Pill tone="ok">Compte reconnu</Pill> statut : {twilio.accountStatus}</p>
             <p>Numéros du compte : {twilio.numbers.length ? twilio.numbers.map((x) => `${x.phone} (${[x.voice && 'appels', x.sms && 'SMS'].filter(Boolean).join(', ') || 'aucune capacité'})`).join(' · ') : 'aucun pour le moment'}</p>
             <p>Expéditeur WhatsApp configuré : {twilio.sender || 'non renseigné (TWILIO_WHATSAPP_NUMBER)'}</p>
-            <p className="text-[12.5px] text-night-500">Adresse du webhook à indiquer chez Twilio : https://lienparental.fr/api/whatsapp/webhook (méthode POST).</p>
+            <p className="text-[12.5px] text-night-500">Webhooks (méthode POST) — messages WhatsApp et SMS : https://lienparental.fr/api/whatsapp/webhook ; appels (« A call comes in ») : https://lienparental.fr/api/voice/incoming.</p>
           </div>
         )}
       </Panel>
