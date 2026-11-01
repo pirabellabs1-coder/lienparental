@@ -1,4 +1,4 @@
-import { BookOpen, Coins, TrendingUp, FileStack, FileText, Handshake, LayoutDashboard, LifeBuoy, MessageSquareHeart, Newspaper, ScrollText, Settings, Users } from 'lucide-react'
+import { BookOpen, Bot, Coins, TrendingUp, FileStack, FileText, Handshake, LayoutDashboard, LifeBuoy, MessageSquareHeart, Newspaper, ScrollText, Settings, Users } from 'lucide-react'
 
 export type NavItem = { href: string; label: string; icon: React.ComponentType<{ className?: string }> }
 export type NavGroup = { title: string; items: NavItem[] }
@@ -30,6 +30,7 @@ export const NAV_GROUPS: NavGroup[] = [
     title: 'Exploitation',
     items: [
       { href: '/admin/support', label: 'Support', icon: LifeBuoy },
+      { href: '/admin/agent', label: 'Agent d’accueil', icon: Bot },
       { href: '/admin/partenaires', label: 'Partenaires', icon: Handshake },
       { href: '/admin/credits', label: 'Crédits IA', icon: Coins },
       { href: '/admin/journaux', label: 'Journaux', icon: ScrollText },

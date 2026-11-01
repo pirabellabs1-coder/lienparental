@@ -12,6 +12,7 @@ import { jsonError, jsonOk } from '@/lib/data/server/http'
 import { cronUnauthorized } from '@/lib/data/server/cron-auth'
 import { SUPABASE_ENABLED } from '@/lib/supabase/config'
 import { runNotificationsCron } from '@/lib/notify/jobs'
+import { runAgentCron } from '@/lib/agent/server'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -23,8 +24,11 @@ async function handle(req: Request) {
   if (!SUPABASE_ENABLED) return jsonOk({ status: 'skipped' })
   try {
     const report = await runNotificationsCron()
-    if (!report) return jsonOk({ status: 'skipped' })
-    return jsonOk({ status: 'processed', ...report })
+    // Agent d'accueil (0640) : rappels de rendez-vous 24 h / 2 h et conservation ; une panne ici
+    // n'empêche pas les notifications.
+    const agent = await runAgentCron().catch((e: unknown) => ({ error: e instanceof Error ? e.message : 'agent' }))
+    if (!report) return jsonOk({ status: 'skipped', agent })
+    return jsonOk({ status: 'processed', ...report, agent })
   } catch {
     return jsonError(500, 'cron_failed', 'Traitement interrompu. Il sera repris au prochain passage.')
   }

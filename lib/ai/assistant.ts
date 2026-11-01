@@ -16,7 +16,7 @@ import { MONTHLY_CREDITS, PLAN_NAME, PRICING, formatPrice, planPromo } from '@/c
 import { CONTACT_EMAIL, SITE_NAME, guidePaths } from '@/lib/seo/site'
 import type { Locale } from '@/lib/i18n/config'
 
-export const ASSISTANT_PROMPT_VERSION = 'assistant-2026-10-31'
+export const ASSISTANT_PROMPT_VERSION = 'assistant-2026-11-01-agent'
 
 /** Bornes : un visiteur anonyme, des questions courtes. */
 export const ASSISTANT_MAX_BODY = 16 * 1024
@@ -25,6 +25,9 @@ export const ASSISTANT_MAX_TURNS = 10
 export const ASSISTANT_MAX_TOTAL_CHARS = 6_000
 
 export const CTA_TOKEN = '[[INSCRIPTION]]'
+/** Actions de l'agent d'accueil (lib/agent) : le widget affiche le parcours correspondant. */
+export const ACTION_TOKENS = { rdv: '[[RDV]]', rappel: '[[RAPPEL]]', humain: '[[HUMAIN]]' } as const
+export type AssistantAction = keyof typeof ACTION_TOKENS
 
 const Turn = z.object({
   role: z.enum(['user', 'assistant']),
@@ -57,10 +60,19 @@ export function trimAssistantHistory(turns: AssistantTurn[]): AssistantTurn[] {
   return kept
 }
 
+/** Retire les jetons (inscription, rendez-vous, rappel, représentant) et indique lesquels étaient présents. */
+export function splitAnswer(text: string): { text: string; cta: boolean; actions: AssistantAction[] } {
+  const cta = text.includes(CTA_TOKEN)
+  const actions = (Object.keys(ACTION_TOKENS) as AssistantAction[]).filter((k) => text.includes(ACTION_TOKENS[k]))
+  let out = text.split(CTA_TOKEN).join('')
+  for (const tok of Object.values(ACTION_TOKENS)) out = out.split(tok).join('')
+  return { text: out.replace(/\n{3,}/g, '\n\n').trim(), cta, actions }
+}
+
 /** Retire le jeton CTA du texte et indique s'il était présent. */
 export function splitCta(text: string): { text: string; cta: boolean } {
-  const cta = text.includes(CTA_TOKEN)
-  return { text: text.split(CTA_TOKEN).join('').replace(/\n{3,}/g, '\n\n').trim(), cta }
+  const { text: t, cta } = splitAnswer(text)
+  return { text: t, cta }
 }
 
 /** Les balises de délimitation ne peuvent pas être ouvertes ou fermées par le visiteur. */
@@ -93,7 +105,7 @@ const LANGUAGE: Record<Locale, string> = {
   pt: 'Responda em português do Brasil (mantenha os nomes das formulas como estão escritos).',
 }
 
-export function assistantSystemPrompt(locale: Locale): string {
+export function assistantSystemPrompt(locale: Locale, knowledge = ''): string {
   return [
     `Tu es « Assistant ${SITE_NAME} », l'assistant du site public de ${SITE_NAME}. Tu parles à un visiteur anonyme, sans compte.`,
     '',
@@ -103,8 +115,9 @@ export function assistantSystemPrompt(locale: Locale): string {
     productFacts(),
     '</faits_produit>',
     '',
+    ...(knowledge ? ['Base de connaissances officielle (publiée par l’association, à jour) :', '<base_connaissances>', knowledge, '</base_connaissances>', ''] : []),
     'Règles impératives :',
-    '- N’utilise QUE les faits ci-dessus. N’invente jamais un prix, une formule, une remise, une fonctionnalité, une intégration, un délai, un partenaire ou un numéro de téléphone. Si l’information manque, dis-le simplement et propose d’écrire à l’équipe.',
+    '- N’utilise QUE les faits et la base de connaissances ci-dessus (en cas de contradiction sur un prix, les faits produit priment). N’invente jamais un prix, une formule, une remise, une fonctionnalité, une intégration, un délai, un horaire, une disponibilité, un partenaire ou un numéro de téléphone. Si l’information manque : dis-le en une phrase et termine par la ligne [[HUMAIN]].',
     '- Aucun conseil juridique, médical ou fiscal individualisé : pas d’avis sur une situation personnelle, une procédure, des chances de succès ou un montant de pension. Renvoie vers le Guide parental pour l’information générale, et vers un avocat, un médiateur familial ou un point d’accès au droit pour un cas personnel.',
     '- En cas de danger ou de violence : 17 ou 112, et le 119 pour un enfant en danger. Le 3919 pour les violences conjugales.',
     '- Ne demande jamais de données personnelles (nom, adresse, situation familiale détaillée, documents). Si le visiteur en donne, n’en reprends pas le détail.',
@@ -115,7 +128,12 @@ export function assistantSystemPrompt(locale: Locale): string {
     '- Court : 2 à 6 phrases, ou une phrase suivie d’une liste de 3 à 5 puces commençant par « - ».',
     '- Texte brut, sans titre ni tableau ni gras. Liens internes uniquement, au format [libellé](/chemin) (ex. [le Guide parental](/guide)).',
     `- Quand l’inscription est la suite logique, termine par une ligne contenant seulement ${CTA_TOKEN} (le site affiche alors le bouton d’inscription : ne l’écris pas toi-même).`,
-    '- Chaleureux et simple, vouvoiement.',
+    '- Chaleureux et simple, vouvoiement. Une seule question à la fois si une précision est nécessaire.',
+    '- Actions (une ligne seule chacune, en fin de réponse ; le site affiche le bouton, ne décris pas la procédure) :',
+    '  [[RDV]] si la personne veut un rendez-vous, une démonstration, parler d’un partenariat, d’une offre commerciale, rejoindre l’association, ou pour une question juridique personnelle ;',
+    '  [[RAPPEL]] si elle veut être rappelée ;',
+    '  [[HUMAIN]] si elle demande un humain / un représentant, si un problème technique persiste, ou si tu n’as pas la réponse.',
+    '- Ne demande jamais toi-même nom, téléphone ou e-mail : le formulaire du site s’en charge.',
     '',
     LANGUAGE[locale],
   ].join('\n')
@@ -150,9 +168,9 @@ function fallbackTexts(locale: Locale): Record<Topic, string> {
       features: `${SITE_NAME} helps separated parents get organised:\n- Shared custody calendar\n- Journal and expense tracking\n- Document vault\n- Court file and testimonies\n- AI parenting Coach\n${CTA_TOKEN}`,
       guide: `The [parenting Guide](/guide) is free and needs no account: practical sheets by territory (French Guiana first), each citing its official sources and last check date.`,
       signup: `Creating an account is free, with no commitment, and takes less than 2 minutes. You can invite the other parent afterwards.\n${CTA_TOKEN}`,
-      contact: `You can write to us at ${CONTACT_EMAIL}. Frequently asked questions are on [the help centre](/aide).`,
+      contact: `You can write to us at ${CONTACT_EMAIL}. Frequently asked questions are on [the help centre](/aide).\n[[HUMAIN]]`,
       security: `Your data is hosted in the European Union and encrypted in transit and at rest. More in [the privacy policy](/legal/confidentialite).`,
-      legal: `I can't give legal advice on a personal situation. The [parenting Guide](/guide) explains the general steps; for your case, a lawyer, a family mediator or a legal access point can help. In danger: 17 or 112, 119 for a child in danger.`,
+      legal: `I can't give legal advice on a personal situation. The [parenting Guide](/guide) explains the general steps; for your case, a lawyer, a family mediator or a legal access point can help. In danger: 17 or 112, 119 for a child in danger.\n[[RDV]]`,
       default: `I can tell you about ${SITE_NAME}: features, pricing, the parenting Guide or how to sign up. What would you like to know?`,
     }
   }
@@ -162,9 +180,9 @@ function fallbackTexts(locale: Locale): Record<Topic, string> {
       features: `O ${SITE_NAME} ajuda pais separados a se organizarem:\n- Agenda compartilhada da guarda\n- Diário e controle de despesas\n- Cofre de documentos\n- Dossiê para o juiz e depoimentos\n- Coach parental com IA\n${CTA_TOKEN}`,
       guide: `O [Guia parental](/guide) é gratuito e não exige conta: fichas práticas por território (Guiana Francesa primeiro), com fontes oficiais e data da última verificação.`,
       signup: `Criar uma conta é gratuito, sem compromisso, e leva menos de 2 minutos. Depois, você pode convidar o outro genitor.\n${CTA_TOKEN}`,
-      contact: `Escreva para ${CONTACT_EMAIL}. As perguntas frequentes estão na [central de ajuda](/aide).`,
+      contact: `Escreva para ${CONTACT_EMAIL}. As perguntas frequentes estão na [central de ajuda](/aide).\n[[HUMAIN]]`,
       security: `Seus dados ficam hospedados na União Europeia e são criptografados em trânsito e em repouso. Mais na [política de privacidade](/legal/confidentialite).`,
-      legal: `Não posso dar aconselhamento jurídico sobre uma situação pessoal. O [Guia parental](/guide) explica os procedimentos gerais; para o seu caso, um advogado, um mediador familiar ou um ponto de acesso ao direito podem ajudar. Em perigo: 17 ou 112, 119 para uma criança em perigo.`,
+      legal: `Não posso dar aconselhamento jurídico sobre uma situação pessoal. O [Guia parental](/guide) explica os procedimentos gerais; para o seu caso, um advogado, um mediador familiar ou um ponto de acesso ao direito podem ajudar. Em perigo: 17 ou 112, 119 para uma criança em perigo.\n[[RDV]]`,
       default: `Posso falar sobre o ${SITE_NAME}: recursos, preços, o Guia parental ou o cadastro. O que você gostaria de saber?`,
     }
   }
@@ -173,14 +191,14 @@ function fallbackTexts(locale: Locale): Record<Topic, string> {
     features: `${SITE_NAME} aide les parents séparés à s’organiser :\n- Agenda partagé de la garde\n- Journal et suivi des dépenses\n- Coffre-fort de documents\n- Dossier JAF et témoignages\n- Coach parental IA\n${CTA_TOKEN}`,
     guide: `Le [Guide parental](/guide) est gratuit et sans compte : des fiches pratiques par territoire (la Guyane d’abord), avec leurs sources officielles et leur date de dernière vérification.`,
     signup: `La création de compte est gratuite, sans engagement, et prend moins de 2 minutes. Vous pourrez ensuite inviter l’autre parent.\n${CTA_TOKEN}`,
-    contact: `Vous pouvez nous écrire à ${CONTACT_EMAIL}. Les questions fréquentes sont dans [le centre d’aide](/aide).`,
+    contact: `Vous pouvez nous écrire à ${CONTACT_EMAIL}. Les questions fréquentes sont dans [le centre d’aide](/aide).\n[[HUMAIN]]`,
     security: `Vos données sont hébergées dans l’Union européenne et chiffrées en transit et au repos. Plus de détails dans [la politique de confidentialité](/legal/confidentialite).`,
-    legal: `Je ne peux pas donner de conseil juridique sur une situation personnelle. Le [Guide parental](/guide) explique les démarches générales ; pour votre cas, un avocat, un médiateur familial ou un point d’accès au droit pourra vous accompagner. En cas de danger : 17 ou 112, 119 pour un enfant en danger.`,
+    legal: `Je ne peux pas donner de conseil juridique sur une situation personnelle. Le [Guide parental](/guide) explique les démarches générales ; pour votre cas, un avocat, un médiateur familial ou un point d’accès au droit pourra vous accompagner. En cas de danger : 17 ou 112, 119 pour un enfant en danger.\n[[RDV]]`,
     default: `Je peux vous présenter ${SITE_NAME} : les fonctionnalités, les tarifs, le Guide parental ou l’inscription. Que souhaitez-vous savoir ?`,
   }
 }
 
-/** Réponse prédéfinie (jeton CTA éventuel inclus, à passer dans splitCta). */
+/** Réponse prédéfinie (jetons éventuels inclus, à passer dans splitAnswer). */
 export function fallbackAssistantAnswer(question: string, locale: Locale): string {
   return fallbackTexts(locale)[detectTopic(question)]
 }
