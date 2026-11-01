@@ -136,6 +136,7 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
     setSaveError(null)
     // Supabase : update children (RLS) ; champs médicaux chiffrés AES-256-GCM côté serveur.
     try {
+    const shared = child?.mine === false
     await save({
       prenom: form.prenom.trim(),
       dateNaissance: form.dateNaissance,
@@ -144,12 +145,15 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
       poids: num(form.poids),
       couleurYeux: form.couleurYeux || undefined,
       couleurCheveux: form.couleurCheveux || undefined,
+      // Fiche partagée : informations médicales réservées au parent qui a créé la fiche.
+      ...(shared ? {} : {
       allergies: form.allergies,
       autresAllergies: form.autresAllergies.trim() || undefined,
       infosMedicales: form.infosMedicales.trim() || undefined,
       groupeSanguin: form.groupeSanguin || undefined,
       traitement: form.traitement.trim() || undefined,
       medecinTraitant: form.medecinTraitant.trim() || undefined,
+      }),
     })
     router.push(`/app/enfants/${id}?vue=recap`)
     } catch (err) {
@@ -260,8 +264,11 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
               <Lock className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               <HealthPrivacyNote childId={id} />
             </p>
+            {child.mine === false && (
+              <p className="mt-3 rounded-xl bg-night-50 px-3.5 py-3 text-[12.5px] leading-relaxed text-night-700">{t('medicalOwnerOnly')}</p>
+            )}
 
-            <div className="mt-4 space-y-4">
+            <fieldset disabled={child.mine === false} className="mt-4 space-y-4 disabled:opacity-60">
               <div>
                 <span id="allergies-label" className="mb-1.5 block text-[13px] font-bold text-night-900">
                   {t('allergies')} <span className="font-medium text-night-500">{t('optional')}</span>
@@ -307,7 +314,7 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
               <SelectField label={t('bloodGroup')} optional placeholder={t('select')} options={labels.options(BLOOD_GROUPS, labels.bloodLabel)} value={form.groupeSanguin} onChange={(e) => set('groupeSanguin', e.target.value)} />
               <TextField label={t('treatment')} optional placeholder={t('treatmentPlaceholder')} value={form.traitement} onChange={(e) => set('traitement', e.target.value)} />
               <TextField label={t('doctor')} optional placeholder={t('doctorPlaceholder')} value={form.medecinTraitant} onChange={(e) => set('medecinTraitant', e.target.value)} />
-            </div>
+            </fieldset>
 
             {saveError && (
               <p role="alert" className="mt-6 text-center text-sm font-semibold text-alert-600">
@@ -326,13 +333,13 @@ export default function ModifierEnfantPage({ params }: { params: Promise<{ id: s
               </button>
             </div>
 
-            <button
+            {child.mine !== false && <button
               type="button"
               onClick={() => setConfirmDelete(true)}
               className="mx-auto mt-6 flex min-h-[44px] items-center text-xs font-semibold text-alert-600 underline-offset-4 hover:underline"
             >
               {t('deleteProfile')}
-            </button>
+            </button>}
           </>
         )}
       </form>

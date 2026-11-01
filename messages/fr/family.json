@@ -72,7 +72,8 @@
         "deleteFailed": "Suppression impossible.",
         "deleteTitle": "Supprimer le profil de {name} ?",
         "deleteText": "Cette action est irréversible. Les informations rattachées à cet enfant seront retirées.",
-        "delete": "Supprimer"
+        "delete": "Supprimer",
+        "medicalOwnerOnly": "Fiche partagée par l’autre parent : seul lui peut modifier les informations médicales. Vous pouvez les consulter."
       },
       "profile": {
         "title": "Profil",
@@ -107,7 +108,17 @@
         "photoSaving": "Enregistrement de la photo…",
         "photoSaved": "Photo enregistrée.",
         "photoFailed": "La photo n’a pas pu être enregistrée. Réessayez.",
-        "photoInvalid": "Choisissez une image JPG, PNG ou WebP de 25 Mo maximum."
+        "photoInvalid": "Choisissez une image JPG, PNG ou WebP de 25 Mo maximum.",
+        "sharedNote": "Fiche partagée par l’autre parent : seul lui peut la supprimer ou modifier les informations médicales.",
+        "leave": "Retirer de mon compte",
+        "leaveTitle": "Retirer la fiche de {name} de votre compte ?",
+        "leaveText": "La fiche n’apparaîtra plus chez vous. L’autre parent la garde : il pourra vous la repartager.",
+        "leaveConfirm": "Retirer",
+        "deleteProfile": "Supprimer ce profil",
+        "deleteTitle": "Supprimer le profil de {name} ?",
+        "deleteText": "Cette action est irréversible. Les informations rattachées à cet enfant seront retirées.",
+        "deleteConfirm": "Supprimer",
+        "actionFailed": "L’opération n’a pas abouti. Réessayez."
       },
       "values": {
         "ageYears": "{count, plural, one {# an} other {# ans}}",

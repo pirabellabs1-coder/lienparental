@@ -92,7 +92,9 @@
         "duplicateOwn": "You already have a child named {name}. Open their profile to edit it.",
         "duplicateShared": "{name} is already shared by the other parent: their profile is visible in your account, no need to create it again.",
         "mineTag": "my profile",
-        "sharedTag": "shared profile"
+        "sharedTag": "shared profile",
+        "deleteOwnerOnly": "This profile was created by the other parent: you can’t delete it. Use “Remove from my account”.",
+        "leaveFailed": "The profile couldn’t be removed from your account. Please try again."
       },
       "errors": {
         "duplicate": "This item already exists.",

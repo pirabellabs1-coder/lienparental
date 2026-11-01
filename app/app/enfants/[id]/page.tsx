@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { use, useEffect, useState, type ChangeEvent, type ReactNode } from 'react'
 import {
   CalendarDays,
@@ -17,6 +18,8 @@ import {
   Scissors,
   ShieldAlert,
   Stethoscope,
+  Trash2,
+  UserMinus,
   UserRound,
   Weight,
 } from 'lucide-react'
@@ -26,7 +29,8 @@ import { btn } from '@/components/onboarding/styles'
 import { BackButton, EnfantsHeader } from '@/components/enfants/EnfantsHeader'
 import { ChildAvatar, ChildStatusBadge, DetailRow } from '@/components/enfants/ChildBits'
 import { useChild } from '@/components/enfants/useChild'
-import { setChildPhoto } from '@/lib/data/children'
+import { leaveChild, removeChild, setChildPhoto } from '@/lib/data/children'
+import { ConfirmDialog } from '@/components/ui'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
 import { ageFromBirthDate, type Child } from '@/lib/mock-data'
 import { useChildLabels } from '@/components/enfants/childLabels'
@@ -51,6 +55,10 @@ export default function EnfantProfilePage({
   const [open, setOpen] = useState<Record<SectionKey, boolean>>({ general: recap, physique: recap, medical: recap })
   const [photo, setPhoto] = useState<string | null>(null)
   const [photoState, setPhotoState] = useState<{ kind: 'saving' | 'saved' | 'error'; text: string } | null>(null)
+  const router = useRouter()
+  const [confirm, setConfirm] = useState<'delete' | 'leave' | null>(null)
+  const [busy, setBusy] = useState(false)
+  const [actionError, setActionError] = useState<string | null>(null)
 
   useEffect(() => () => {
     if (photo?.startsWith('blob:')) URL.revokeObjectURL(photo)
@@ -207,6 +215,40 @@ export default function EnfantProfilePage({
       <Link href={`/app/enfants/${child.id}/modifier`} className={cn(btn.secondary, 'mt-8 w-full')}>
         {t('edit')}
       </Link>
+
+      {/* Fiche à moi : suppression. Fiche partagée par l'autre parent : la retirer de mon compte seulement. */}
+      {child.mine === false && <p className="mt-6 text-center text-[12.5px] leading-relaxed text-night-600">{t('sharedNote')}</p>}
+      <button
+        type="button"
+        onClick={() => { setActionError(null); setConfirm(child.mine === false ? 'leave' : 'delete') }}
+        className="mt-3 flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border border-alert-300 bg-white text-[14px] font-semibold text-alert-600 transition-colors hover:bg-alert-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-alert-400"
+      >
+        {child.mine === false ? <UserMinus className="h-[18px] w-[18px]" aria-hidden="true" /> : <Trash2 className="h-[18px] w-[18px]" aria-hidden="true" />}
+        {child.mine === false ? t('leave') : t('deleteProfile')}
+      </button>
+      {actionError && <p role="alert" className="mt-2 text-center text-[13px] font-semibold text-alert-600">{actionError}</p>}
+
+      <ConfirmDialog
+        open={confirm !== null}
+        onClose={() => setConfirm(null)}
+        loading={busy}
+        onConfirm={async () => {
+          setBusy(true)
+          try {
+            if (confirm === 'leave') await leaveChild(child.id)
+            else await removeChild(child.id)
+            router.push('/app/enfants')
+          } catch (err) {
+            setBusy(false)
+            setConfirm(null)
+            setActionError(err instanceof Error && err.message ? err.message : t('actionFailed'))
+          }
+        }}
+        title={confirm === 'leave' ? t('leaveTitle', { name: child.prenom }) : t('deleteTitle', { name: child.prenom })}
+        description={confirm === 'leave' ? t('leaveText') : t('deleteText')}
+        confirmLabel={confirm === 'leave' ? t('leaveConfirm') : t('deleteConfirm')}
+        tone="danger"
+      />
     </div>
   )
 }
