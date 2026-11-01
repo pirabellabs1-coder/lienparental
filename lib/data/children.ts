@@ -210,9 +210,9 @@ export async function getChild(id: string): Promise<Child | null> {
   const { data, error } = await db().from('children').select(COLUMNS).eq('id', id).is('deleted_at', null).maybeSingle()
   if (error) throw toDataError(error, 'children.get')
   if (!data) return null
-  const medical = await fetchMedical(id)
+  const [medical, me] = await Promise.all([fetchMedical(id), requireUserId()])
   const row = data as ChildRow
-  return (await withPhotoUrls([row], [fromRow(row, medical)]))[0]
+  return (await withPhotoUrls([row], [{ ...fromRow(row, medical), mine: row.user_id === me }]))[0]
 }
 
 async function fetchMedical(id: string): Promise<ChildMedical | undefined> {
@@ -274,7 +274,7 @@ export async function updateChild(id: string, patch: Partial<Child>): Promise<vo
   const current = await getChild(id)
   if (!current) throw new DataError(dataMsg('children.notFound'), 'not_found')
 
-  const touchesMedical = MEDICAL_KEYS.some((k) => k in patch)
+  const touchesMedical = current.mine !== false && MEDICAL_KEYS.some((k) => k in patch)
   if (touchesMedical) {
     // Fusion avec l'existant : un patch partiel n'efface pas les autres champs médicaux.
     const pick = <K extends MedicalKey>(k: K): ChildMedical[K] => (k in patch ? (v[k] as ChildMedical[K]) : current[k])
@@ -306,11 +306,32 @@ export async function updateChild(id: string, patch: Partial<Child>): Promise<vo
   }
 }
 
-/** Suppression logique (purge réelle par le job de rétention). */
+/** Suppression logique (purge réelle par le job de rétention). Réservée au parent qui a créé la fiche. */
 export async function removeChild(id: string): Promise<void> {
   if (!LIVE) return // démo : comportement historique
-  const { error } = await db().from('children').update({ deleted_at: new Date().toISOString() }).eq('id', id)
+  const userId = await requireUserId()
+  const { data, error } = await db().from('children').update({ deleted_at: new Date().toISOString() })
+    .eq('id', id).eq('user_id', userId).select('id')
   if (error) throw toDataError(error, 'children.remove')
+  if (!data || data.length === 0) throw new DataError(dataMsg('children.deleteOwnerOnly'), 'not_owner')
+}
+
+/**
+ * Fiche partagée par l'autre parent : la retirer de MON compte (lien de gardien révoqué,
+ * revoke_child_guardian « left »). La fiche reste intacte chez l'autre parent.
+ */
+export async function leaveChild(id: string): Promise<void> {
+  if (!LIVE) return
+  const userId = await requireUserId()
+  const { data, error } = await db().from('child_guardians').select('id')
+    .eq('child_id', id).eq('user_id', userId).eq('status', 'active').maybeSingle()
+  if (error) throw toDataError(error, 'children.leave')
+  if (!data) throw new DataError(dataMsg('children.notFound'), 'not_found')
+  const res = await fetch(`/api/coparents/guardians/${encodeURIComponent((data as { id: string }).id)}`, { method: 'DELETE' })
+  if (!res.ok) {
+    const body = (await res.json().catch(() => null)) as { error?: { message?: string } } | null
+    throw new DataError(body?.error?.message ?? dataMsg('children.leaveFailed'), `http_${res.status}`)
+  }
 }
 
 // --- Hooks ------------------------------------------------------------------

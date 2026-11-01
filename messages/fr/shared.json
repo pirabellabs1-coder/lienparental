@@ -92,7 +92,9 @@
         "duplicateOwn": "Vous avez déjà un enfant prénommé {name}. Ouvrez sa fiche pour la modifier.",
         "duplicateShared": "{name} est déjà partagé(e) par l’autre parent : sa fiche est visible dans votre compte, inutile de la recréer.",
         "mineTag": "ma fiche",
-        "sharedTag": "fiche partagée"
+        "sharedTag": "fiche partagée",
+        "deleteOwnerOnly": "Cette fiche a été créée par l’autre parent : vous ne pouvez pas la supprimer. Utilisez « Retirer de mon compte ».",
+        "leaveFailed": "La fiche n’a pas pu être retirée de votre compte. Réessayez."
       },
       "errors": {
         "duplicate": "Cet élément existe déjà.",

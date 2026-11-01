@@ -72,7 +72,8 @@
         "deleteFailed": "Couldn’t delete.",
         "deleteTitle": "Delete {name}’s profile?",
         "deleteText": "This action cannot be undone. Information linked to this child will be removed.",
-        "delete": "Delete"
+        "delete": "Delete",
+        "medicalOwnerOnly": "Profile shared by the other parent: only they can change the medical information. You can view it."
       },
       "profile": {
         "title": "Profile",
@@ -107,7 +108,17 @@
         "photoSaving": "Saving photo…",
         "photoSaved": "Photo saved.",
         "photoFailed": "The photo could not be saved. Please try again.",
-        "photoInvalid": "Choose a JPG, PNG or WebP image of 25 MB maximum."
+        "photoInvalid": "Choose a JPG, PNG or WebP image of 25 MB maximum.",
+        "sharedNote": "Profile shared by the other parent: only they can delete it or change the medical information.",
+        "leave": "Remove from my account",
+        "leaveTitle": "Remove {name}’s profile from your account?",
+        "leaveText": "The profile will no longer appear in your account. The other parent keeps it and can share it with you again.",
+        "leaveConfirm": "Remove",
+        "deleteProfile": "Delete this profile",
+        "deleteTitle": "Delete {name}’s profile?",
+        "deleteText": "This can’t be undone. Information linked to this child will be removed.",
+        "deleteConfirm": "Delete",
+        "actionFailed": "That didn’t work. Please try again."
       },
       "values": {
         "ageYears": "{count, plural, one {# year old} other {# years old}}",
