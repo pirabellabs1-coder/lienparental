@@ -233,6 +233,13 @@
     },
     "custody": {
       "title": "Custody schedule",
+      "emptyTitle": "Create your custody schedule",
+      "emptyText": "Set your custody rhythm and handovers: the calendar fills itself in and reminds you of each handover.",
+      "emptyStep1": "Pick the rhythm: alternate weeks, 2-2-3, weekends or custom.",
+      "emptyStep2": "Set the day, time and place of handovers, and where the children start.",
+      "emptyStep3": "Choose how school holidays are shared, then check the preview before saving.",
+      "emptyCta": "Create my schedule",
+      "emptyHint": "About 2 minutes. You can change it at any time.",
       "loadFailed": "Could not load the schedule.",
       "backHome": "Back to home",
       "loading": "Loading schedule",
@@ -309,6 +316,9 @@
     },
     "custodySetup": {
       "title": "Set up custody",
+      "titleCreate": "Create the schedule",
+      "previewTitle": "Preview",
+      "previewHint": "The calendar updates with each choice. Nothing is saved before the last step.",
       "loading": "Loading",
       "loadFailed": "Could not load.",
       "steps": {

@@ -30,18 +30,27 @@ const configSchema = z.object({
   }),
 })
 
-/** Lit la configuration (défaut si aucune n'est enregistrée ou si elle est illisible). */
-export async function fetchGardeConfig(today: Date): Promise<GardeConfig> {
-  if (!LIVE) return loadLocal(today)
+/**
+ * Lit la configuration et indique si l'utilisateur en a enregistré une (`saved`).
+ * Sans planning enregistré, `config` est le défaut de l'assistant : à ne jamais présenter
+ * comme le planning réel. Démonstration : toujours `saved` (planning d'exemple).
+ */
+export async function fetchGardeState(today: Date): Promise<{ config: GardeConfig; saved: boolean }> {
+  if (!LIVE) return { config: loadLocal(today), saved: true }
   const fallback = defaultGardeConfig(today)
   const { data, error } = await db().from('garde_configs').select('config').maybeSingle()
   if (error) throw toDataError(error, 'garde.load')
-  if (!data) return fallback
+  if (!data) return { config: fallback, saved: false }
   const merged = { ...fallback, ...(data as { config: Partial<GardeConfig> }).config }
   merged.vacances = { ...fallback.vacances, ...(merged.vacances ?? {}) }
   merged.vacances.zone = normalizeZone(merged.vacances.zone)
   const p = configSchema.safeParse(merged)
-  return p.success ? (p.data as GardeConfig) : fallback
+  return { config: p.success ? (p.data as GardeConfig) : fallback, saved: true }
+}
+
+/** Lit la configuration (défaut si aucune n'est enregistrée ou si elle est illisible). */
+export async function fetchGardeConfig(today: Date): Promise<GardeConfig> {
+  return (await fetchGardeState(today)).config
 }
 
 /** Enregistre (upsert idempotent sur user_id). */

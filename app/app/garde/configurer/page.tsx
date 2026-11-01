@@ -8,12 +8,13 @@ import { TopBar } from '@/components/mobile/TopBar'
 import { LoadingState } from '@/components/mobile/StateScreens'
 import { useGardeNow } from '@/components/garde/useGardeNow'
 import { CustomPatternPicker } from '@/components/garde/CustomPatternPicker'
+import { CustodyLegend, CustodyMonth } from '@/components/garde/CustodyMonth'
 import { setGardeFlash } from '@/components/garde/store'
 import { useGardeNames } from '@/components/garde/useGardeNames'
 import { weekdayNames } from '@/components/calendrier/useCalFormat'
 import { intlLocale } from '@/lib/i18n/config'
 import { TimePicker } from '@/components/forms/TimePicker'
-import { fetchGardeConfig, storeGardeConfig } from '@/lib/data/garde'
+import { fetchGardeState, storeGardeConfig } from '@/lib/data/garde'
 import {
   SCHOOL_HOLIDAYS, ZONE_CALENDAR_UNTIL, ZONE_OPTIONS,
   type GardeConfig, type GardeNames, type LieuEchange, type Parent, type Rythme, type ZoneScolaire,
@@ -51,6 +52,12 @@ function parentOptions(t: Translate, names: GardeNames) {
   ]
 }
 
+/** Mois affiché par l'aperçu : celui de la date de début si elle est valide, sinon le mois en cours. */
+function previewMonth(startDate: string, today: Date): Date {
+  const m = /^(\d{4})-(\d{2})-\d{2}$/.exec(startDate)
+  return m ? new Date(Number(m[1]), Number(m[2]) - 1, 1) : new Date(today.getFullYear(), today.getMonth(), 1)
+}
+
 /** Aide sous le choix de zone : période couverte par les dates officielles (cf. lib/garde → zoneCalendarNote). */
 function zoneNote(t: Translate, locale: string, zone: ZoneScolaire): string {
   const [y, m, d] = ZONE_CALENDAR_UNTIL[zone].split('-').map(Number)
@@ -59,7 +66,7 @@ function zoneNote(t: Translate, locale: string, zone: ZoneScolaire): string {
   return summer ? t('custodySetup.zoneNoteFull', { date }) : t('custodySetup.zoneNotePartial', { date })
 }
 
-// Assistant de configuration du planning de garde (3 étapes).
+// Assistant de configuration du planning de garde (3 étapes), avec aperçu du mois en direct.
 // Supabase : upsert garde_configs (RLS user_id) via lib/data/garde. Notification à l'autre parent : à venir.
 export default function ConfigurerGardePage() {
   const router = useRouter()
@@ -71,6 +78,7 @@ export default function ConfigurerGardePage() {
   const today = useGardeNow()
   const names = useGardeNames()
   const [config, setConfig] = useState<GardeConfig | null>(null)
+  const [saved, setSaved] = useState(true)
   const [step, setStep] = useState(1)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -81,8 +89,12 @@ export default function ConfigurerGardePage() {
   useEffect(() => {
     if (!today) return
     let alive = true
-    fetchGardeConfig(today)
-      .then((c) => alive && setConfig(c))
+    fetchGardeState(today)
+      .then((s) => {
+        if (!alive) return
+        setSaved(s.saved)
+        setConfig(s.config)
+      })
       .catch((e: unknown) => alive && setLoadError(e instanceof Error ? e.message : t('custodySetup.loadFailed')))
     return () => { alive = false }
   }, [today])
@@ -99,7 +111,7 @@ export default function ConfigurerGardePage() {
   if (!config) {
     return (
       <>
-        <TopBar title={t('custodySetup.title')} showBack backHref="/app/garde" showBell={false} />
+        <TopBar title={t(saved ? 'custodySetup.title' : 'custodySetup.titleCreate')} showBack backHref="/app/garde" showBell={false} />
         {loadError ? <p role="alert" className="px-5 pt-6 text-center text-sm font-semibold text-alert-600">{loadError}</p> : <LoadingState compact title={t('custodySetup.loading')} description="" />}
       </>
     )
@@ -161,7 +173,7 @@ export default function ConfigurerGardePage() {
 
   return (
     <>
-      <TopBar title={t('custodySetup.title')} showBack backHref="/app/garde" showBell={false} />
+      <TopBar title={t(saved ? 'custodySetup.title' : 'custodySetup.titleCreate')} showBack backHref="/app/garde" showBell={false} />
 
       <form onSubmit={next} noValidate className="w-full px-5 pb-8 pt-2">
         <StepIndicator current={step} total={STEPS.length} labels={STEPS.map((s) => t(`custodySetup.steps.${s}`))} variant="numbered" />
@@ -315,6 +327,19 @@ export default function ConfigurerGardePage() {
             </>
           )}
         </div>
+
+        {today && (
+          <section aria-labelledby="garde-preview" className="mt-8 rounded-2xl border border-night-100 bg-white p-3 shadow-[0_1px_2px_rgba(11,45,91,0.05),0_12px_30px_-18px_rgba(11,45,91,0.2)] md:p-4">
+            <h3 id="garde-preview" className="px-1 text-[14px] font-bold text-night-900">{t('custodySetup.previewTitle')}</h3>
+            <p className="mt-0.5 px-1 text-[12px] leading-snug text-night-500">{t('custodySetup.previewHint')}</p>
+            <div className="mt-2">
+              <CustodyMonth month={previewMonth(c.startDate, today)} config={c} today={today} names={names} />
+            </div>
+            <div className="mt-3 border-t border-night-100 px-1 pt-3">
+              <CustodyLegend names={names} />
+            </div>
+          </section>
+        )}
 
         {errors.save && (
           <p role="alert" className="mt-6 text-center text-[13px] font-semibold text-alert-600">{errors.save}</p>

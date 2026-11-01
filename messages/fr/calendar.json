@@ -233,6 +233,13 @@
     },
     "custody": {
       "title": "Planning de garde",
+      "emptyTitle": "Créez votre planning de garde",
+      "emptyText": "Indiquez votre rythme de garde et vos échanges : le calendrier se remplit tout seul et vous rappelle chaque échange.",
+      "emptyStep1": "Choisissez le rythme : une semaine sur deux, 2-2-3, week-ends ou sur mesure.",
+      "emptyStep2": "Indiquez le jour, l’heure et le lieu des échanges, et chez qui les enfants commencent.",
+      "emptyStep3": "Réglez le partage des vacances scolaires, puis vérifiez l’aperçu avant d’enregistrer.",
+      "emptyCta": "Créer mon planning",
+      "emptyHint": "Environ 2 minutes. Modifiable à tout moment.",
       "loadFailed": "Chargement du planning impossible.",
       "backHome": "Retour à l'accueil",
       "loading": "Chargement du planning",
@@ -309,6 +316,9 @@
     },
     "custodySetup": {
       "title": "Configurer la garde",
+      "titleCreate": "Créer le planning",
+      "previewTitle": "Aperçu",
+      "previewHint": "Le calendrier se met à jour à chaque choix. Rien n’est enregistré avant la dernière étape.",
       "loading": "Chargement",
       "loadFailed": "Chargement impossible.",
       "steps": {

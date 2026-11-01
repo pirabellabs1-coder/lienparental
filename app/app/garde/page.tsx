@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
-import { ArrowLeftRight, CalendarPlus, MapPin, Settings2, Users } from 'lucide-react'
+import { ArrowLeftRight, CalendarHeart, CalendarPlus, MapPin, Settings2, Users } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { TopBar } from '@/components/mobile/TopBar'
 import { ErrorState, LoadingState } from '@/components/mobile/StateScreens'
@@ -13,7 +13,7 @@ import { CustodyLegend, CustodyMonth } from '@/components/garde/CustodyMonth'
 import { downloadText, takeGardeFlash } from '@/components/garde/store'
 import { useGardeNames } from '@/components/garde/useGardeNames'
 import { useGardeFormat } from '@/components/garde/useGardeFormat'
-import { fetchGardeConfig } from '@/lib/data/garde'
+import { fetchGardeState } from '@/lib/data/garde'
 import { cn } from '@/lib/cn'
 import {
   buildHandoversIcs, capitalize, computeCustody, custodyOfDay,
@@ -26,12 +26,14 @@ const btnSecondary =
 
 // Planning de garde (vue mois). Configuration : garde_configs (Supabase) ou sessionStorage (démo).
 // Prénoms : enfants du compte et parent lié (useGardeNames), formulation neutre si inconnus.
+// Sans planning enregistré : écran de création, jamais le planning par défaut présenté comme réel.
 export default function GardePage() {
   const today = useGardeNow()
   const names = useGardeNames()
   const t = useTranslations('calendar')
   const f = useGardeFormat(names)
   const [config, setConfig] = useState<GardeConfig | null>(null)
+  const [saved, setSaved] = useState(true)
   const [loadError, setLoadError] = useState<string | null>(null)
   const [attempt, setAttempt] = useState(0)
   const [month, setMonth] = useState<Date | null>(null)
@@ -40,10 +42,14 @@ export default function GardePage() {
   useEffect(() => {
     if (!today) return
     let alive = true
-    // Supabase : garde_configs (RLS user_id) ; démo : sessionStorage. Défaut si rien d'enregistré.
+    // Supabase : garde_configs (RLS user_id) ; démo : sessionStorage.
     setLoadError(null)
-    fetchGardeConfig(today)
-      .then((c) => alive && setConfig(c))
+    fetchGardeState(today)
+      .then((s) => {
+        if (!alive) return
+        setSaved(s.saved)
+        setConfig(s.config)
+      })
       .catch((e: unknown) => alive && setLoadError(e instanceof Error ? e.message : t('custody.loadFailed')))
     setMonth(new Date(today.getFullYear(), today.getMonth(), 1))
     const flash = takeGardeFlash()
@@ -94,6 +100,8 @@ export default function GardePage() {
         <ErrorState compact description={loadError} primary={{ label: t('common.retry'), onClick: () => setAttempt((n) => n + 1) }} secondary={{ label: t('custody.backHome'), href: '/app' }} />
       ) : !config || !month || !today || !summary ? (
         <LoadingState compact title={t('custody.loading')} description="" />
+      ) : !saved ? (
+        <EmptyPlan />
       ) : (
         <div className="w-full space-y-5 px-5 pb-8 pt-2">
           <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
@@ -213,5 +221,37 @@ export default function GardePage() {
       )}
       {announcer}
     </>
+  )
+}
+
+/** Aucun planning enregistré : ce que fait le planning, les 3 étapes, puis l'assistant. */
+function EmptyPlan() {
+  const t = useTranslations('calendar')
+  const steps = [t('custody.emptyStep1'), t('custody.emptyStep2'), t('custody.emptyStep3')]
+  return (
+    <div className="w-full px-5 pb-8 pt-2">
+      <section aria-labelledby="garde-empty" className={cn(card, 'mx-auto max-w-xl p-5 text-center')}>
+        <span aria-hidden="true" className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-leaf-50 text-leaf-600">
+          <CalendarHeart className="h-7 w-7" strokeWidth={1.8} />
+        </span>
+        <h2 id="garde-empty" className="mt-4 text-[18px] font-extrabold text-night-900">{t('custody.emptyTitle')}</h2>
+        <p className="mt-2 text-[13.5px] leading-relaxed text-night-600">{t('custody.emptyText')}</p>
+        <ol className="mt-5 space-y-3 text-left">
+          {steps.map((s, i) => (
+            <li key={i} className="flex items-start gap-3">
+              <span aria-hidden="true" className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-night-900 text-[12px] font-bold text-white">{i + 1}</span>
+              <span className="pt-0.5 text-[13.5px] leading-snug text-night-800">{s}</span>
+            </li>
+          ))}
+        </ol>
+        <Link
+          href="/app/garde/configurer"
+          className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-xl bg-leaf-500 px-5 text-[14px] font-semibold text-white transition hover:bg-leaf-600 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 focus-visible:ring-offset-2"
+        >
+          {t('custody.emptyCta')}
+        </Link>
+        <p className="mt-2 text-[12px] text-night-500">{t('custody.emptyHint')}</p>
+      </section>
+    </div>
   )
 }
