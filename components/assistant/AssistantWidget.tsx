@@ -18,7 +18,7 @@ import { appendDictation, useDictation } from '@/components/coach/useDictation'
 import { TalkBadge } from './TalkBadge'
 import { AgentFlow, type AgentConfig, type FlowKind, type FlowStart } from './AgentFlows'
 
-// Bulle « Une question ? » et son panneau de discussion, en deux modes :
+// Robot de l’assistant et son panneau de discussion, en deux modes :
 //  - public (site) : présentation du produit, réponses de POST /api/assistant ;
 //  - coach (espace connecté, via CoachBubble) : le Coach parental lui-même (POST /api/coach/chat,
 //    1 crédit par question, mémoire du Coach côté serveur). Le fil est partagé avec la page
@@ -36,7 +36,6 @@ export const COACH_MAX_CHARS = 4000
 const STORE_KEY = 'lp_assistant_v1'
 /** Même clé que CoachChat (persistKey « discussion ») : un seul fil entre la bulle et le Coach. */
 const COACH_STORE_KEY = 'lp-coach-chat:discussion'
-const TEASER_KEY = 'lp_assistant_teaser_off'
 const PUBLIC_VOICE = { endpoint: '/api/assistant/speech', fixedVoice: true }
 
 export type Msg = { id: string; role: 'user' | 'assistant'; content: string; cta?: boolean; actions?: FlowKind[]; error?: boolean }
@@ -146,7 +145,6 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
   const isCoach = Boolean(coach)
   const maxChars = isCoach ? COACH_MAX_CHARS : MAX_CHARS
   const [open, setOpen] = useState(false)
-  const [teaser, setTeaser] = useState(false)
   const [msgs, setMsgs] = useState<Msg[]>([])
   const [input, setInput] = useState('')
   const [pending, setPending] = useState(false)
@@ -178,17 +176,7 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
     const sync = () => setModal(!mq.matches)
     sync()
     mq.addEventListener('change', sync)
-    let off = false
-    try {
-      off = sessionStorage.getItem(TEASER_KEY) === '1'
-    } catch {
-      // stockage bloqué : bulle affichée
-    }
-    const timer = off ? undefined : setTimeout(() => setTeaser(true), 1200)
-    return () => {
-      clearTimeout(timer)
-      mq.removeEventListener('change', sync)
-    }
+    return () => mq.removeEventListener('change', sync)
   }, [isCoach])
 
   useEffect(() => {
@@ -243,19 +231,7 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
     if (text) setMsgs((prev) => [...prev, { id: uid(), role: 'assistant', content: text }])
   }
 
-  const hideTeaser = () => {
-    setTeaser(false)
-    try {
-      sessionStorage.setItem(TEASER_KEY, '1')
-    } catch {
-      // sans effet
-    }
-  }
-
-  const openPanel = () => {
-    hideTeaser()
-    setOpen(true)
-  }
+  const openPanel = () => setOpen(true)
 
   const minimize = useCallback(() => {
     returnFocus.current = true
@@ -408,16 +384,6 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
               : 'bottom-[max(0.75rem,env(safe-area-inset-bottom))]',
           )}
         >
-          {teaser && (
-            <button
-              type="button"
-              onClick={openPanel}
-              className="relative mb-7 rounded-full border-[3px] border-[#7b3ff2] bg-white px-4 py-2 text-[15px] font-extrabold text-[#0b1a4a] shadow-[0_10px_28px_-12px_rgba(91,69,227,0.55)] motion-safe:animate-fade-up"
-            >
-              {t('teaser')}
-              <span aria-hidden className="absolute -bottom-[9px] right-6 h-4 w-4 rotate-45 border-b-[3px] border-r-[3px] border-[#7b3ff2] bg-white" />
-            </button>
-          )}
           <button
             ref={launcher}
             type="button"

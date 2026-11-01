@@ -71,14 +71,14 @@ export default function AlbumPage() {
 
         <div role="group" aria-label={t('filtersLabel')} className="mt-4 space-y-2.5">
           {children.length > 1 && (
-            <div role="radiogroup" aria-label={t('childLabel')} className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none]">
+            <div role="radiogroup" aria-label={t('childLabel')} className="-mx-5 flex gap-2 overflow-x-auto px-5 py-1 [scrollbar-width:none]">
               <button type="button" role="radio" aria-checked={childId === undefined} onClick={() => setChildId(undefined)} className={chip(childId === undefined)}>{t('allChildren')}</button>
               {children.map((c) => (
                 <button key={c.id} type="button" role="radio" aria-checked={childId === c.id} onClick={() => setChildId(c.id)} className={chip(childId === c.id)}>{c.prenom}</button>
               ))}
             </div>
           )}
-          <div role="radiogroup" aria-label={t('viewLabel')} className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none]">
+          <div role="radiogroup" aria-label={t('viewLabel')} className="-mx-5 flex gap-2 overflow-x-auto px-5 py-1 [scrollbar-width:none]">
             {VIEWS.map((v) => (
               <button key={v} type="button" role="radio" aria-checked={view === v} onClick={() => setView(v)} className={chip(view === v)}>
                 {v === 'important' && <Star className="h-4 w-4" aria-hidden="true" />}
