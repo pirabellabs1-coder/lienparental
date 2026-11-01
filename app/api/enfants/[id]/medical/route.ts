@@ -99,6 +99,11 @@ export async function PUT(req: Request, ctx: Ctx) {
     .is('deleted_at', null)
     .select('id')
   if (error) return jsonError(500, 'db_error', t('saveFailed'))
-  if (!data || data.length === 0) return jsonError(404, 'not_found', t('profileNotFound'))
+  if (!data || data.length === 0) {
+    // Fiche visible mais créée par l'autre parent : médical chiffré avec SA clé, non modifiable ici.
+    const { data: seen } = await a.supabase.from('children').select('id').eq('id', a.id).is('deleted_at', null).maybeSingle()
+    if (seen) return jsonError(403, 'owner_only', t('medicalOwnerOnly'))
+    return jsonError(404, 'not_found', t('profileNotFound'))
+  }
   return jsonOk({ ok: true })
 }

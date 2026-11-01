@@ -277,7 +277,8 @@
       "healthInvalid": "Informations de santé invalides.",
       "invalidRequest": "Requête invalide.",
       "deleteFailed": "Suppression impossible pour le moment.",
-      "itemNotFound": "Élément introuvable."
+      "itemNotFound": "Élément introuvable.",
+      "medicalOwnerOnly": "Cette fiche a été créée par l’autre parent : seul lui peut modifier les informations médicales."
     },
     "modeles": {
       "notFound": "Modèle introuvable ou non publié."

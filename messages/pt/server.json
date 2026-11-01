@@ -277,7 +277,8 @@
       "healthInvalid": "Informações de saúde inválidas.",
       "invalidRequest": "Solicitação inválida.",
       "deleteFailed": "Não é possível excluir no momento.",
-      "itemNotFound": "Item não encontrado."
+      "itemNotFound": "Item não encontrado.",
+      "medicalOwnerOnly": "Esta ficha foi criada pelo outro responsável: só ele pode alterar as informações médicas."
     },
     "modeles": {
       "notFound": "Modelo não encontrado ou não publicado."
