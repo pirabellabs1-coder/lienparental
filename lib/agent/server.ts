@@ -416,7 +416,7 @@ export async function runAgentCron(): Promise<{ reminders: number; kbActivated?:
       const text = `${fillMessage(m.WA_REMINDER, slotLabel(a.starts_at, a.language))}\n${topic} · ${a.ref}`
       // Enregistré dans la conversation AVANT l'envoi : l'écho du fournisseur n'est pas pris pour un représentant.
       const { notifyByWhatsApp } = await import('./whatsapp')
-      if (await notifyByWhatsApp(a.contact_phone!, a.language, text)) sent++
+      if (await notifyByWhatsApp(a.contact_phone!, a.language, text, slotLabel(a.starts_at, a.language))) sent++
       continue
     }
     const mail = agentAppointmentEmail({ kind: 'reminder', locale: a.language, name: a.contact_name, ...slotLabel(a.starts_at, a.language), topic, ref: a.ref })

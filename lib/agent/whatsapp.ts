@@ -1,6 +1,6 @@
 import 'server-only'
 /**
- * Agent d'accueil, canal WhatsApp (phase 3, fournisseur WaChap, migration 0650).
+ * Agent d'accueil, canal WhatsApp (phase 3, Twilio — API officielle Meta, migration 0650).
  *
  * Même agent que le site : base de connaissances publiée, agenda partagé, représentants, rappels.
  * Parcours (cahier V2 §5) : accueil + 3 boutons ; question libre → IA ; rendez-vous (motif, langue,
@@ -31,7 +31,14 @@ import { LIVE, insertEvent, readServices, readTypes, svc, toType, type Appointme
 import { answerQuestion } from './answer'
 import { AgentError, bookConfirmed, cancelRow, humanAvailable, listSlots, messagesFor, requestCallback, rescheduleRow, upcomingForPhone } from './server'
 import { detectCommand, detectLocale, pickOption, toWhatsAppText, yesNo, type Command, type Inbound } from './wa-core'
-import { sendWhatsApp, type WaButton } from './wachap'
+import { sendTwilioWhatsApp } from './twilio'
+
+/**
+ * Choix proposés après un message. Les messages libres WhatsApp (API officielle) n'ont pas de boutons :
+ * les choix sont écrits à la suite (« 👉 Prendre rendez-vous · Représentant »), et la réponse tapée est
+ * reconnue (libellé, numéro de la liste, commande). Les identifiants restent ceux du parcours.
+ */
+type WaButton = { id: string; text: string; type: 'reply' }
 
 // --- Données --------------------------------------------------------------------------------
 
@@ -175,29 +182,40 @@ const teamAddress = () => process.env.AGENT_TEAM_EMAIL?.trim() || CONTACT_EMAIL
  * plafond global d'envois par heure (protège le numéro d'un bannissement en cas d'abus).
  */
 async function say(c: Conversation, text: string, buttons: WaButton[] = [], author: 'bot' | 'team' = 'bot'): Promise<boolean> {
-  const cap = await rateLimit('wa-out-global:all', Math.max(10, Number(process.env.WACHAP_HOURLY_CAP) || 300), 3_600_000, { failClosed: true })
+  const cap = await rateLimit('wa-out-global:all', Math.max(10, Number(process.env.WHATSAPP_HOURLY_CAP) || 300), 3_600_000, { failClosed: true })
   if (!cap.ok) {
     console.warn('[whatsapp] plafond horaire d’envois atteint')
     return false
   }
-  const rowId = await storeMessage(c.id, { direction: 'out', author, waId: null, body: text })
-  const r = await sendWhatsApp(c.phone, text, buttons)
+  // Créneaux et actions protégées par code : déjà décrits dans le texte (liste numérotée, code).
+  const choices = buttons.filter((b) => !b.id.startsWith('s:') && !/^m:(move|cancel):/.test(b.id)).map((b) => b.text)
+  const body = choices.length ? `${text}\n\n👉 ${choices.join(' · ')}` : text
+  const rowId = await storeMessage(c.id, { direction: 'out', author, waId: null, body })
+  const r = await sendTwilioWhatsApp(c.phone, body)
   if (r.ok && r.id && rowId && rowId > 0) await setWaId(rowId, r.id)
   await saveConversation(c, {})
   return r.ok
 }
 
-/** Message de l'association hors conversation (rappel de rendez-vous) : même enregistrement préalable. */
-export async function notifyByWhatsApp(phone: string, locale: AgentLocale, text: string): Promise<boolean> {
+/**
+ * Rappel de rendez-vous (souvent plus de 24 h après le dernier message) : modèle Meta approuvé si
+ * configuré (TWILIO_WA_REMINDER_SID, variables date / heure), sinon texte libre (accepté seulement
+ * dans la fenêtre de 24 h). Enregistré dans la conversation.
+ */
+export async function notifyByWhatsApp(phone: string, locale: AgentLocale, text: string, vars?: { date: string; time: string }): Promise<boolean> {
   const c = await getConversation(phone, null, locale)
-  return say(c, text)
+  const templateSid = process.env.TWILIO_WA_REMINDER_SID?.trim()
+  if (!templateSid || !vars) return say(c, text)
+  await storeMessage(c.id, { direction: 'out', author: 'bot', waId: null, body: text })
+  const r = await sendTwilioWhatsApp(c.phone, text, { sid: templateSid, variables: { 1: vars.date, 2: vars.time } })
+  return r.ok
 }
 
 /** Réponse d'un représentant depuis le back-office : envoyée puis, si elle est partie, l'assistant se met en retrait. */
 export async function teamReply(conversationId: string, text: string): Promise<{ ok: boolean }> {
   const c = await conversationById(conversationId)
   if (!c) return { ok: false }
-  const r = await sendWhatsApp(c.phone, text)
+  const r = await sendTwilioWhatsApp(c.phone, text)
   if (!r.ok) return { ok: false }
   await storeMessage(c.id, { direction: 'out', author: 'team', waId: r.id, body: text })
   await saveConversation(c, { mode: 'human', human_until: new Date(Date.now() + TEAM_HOURS * 3_600_000).toISOString() })
@@ -221,7 +239,7 @@ const norm = (s: string) => s.replace(/\s+/g, ' ').trim()
 // --- Traitement d'un message reçu ----------------------------------------------------------------
 
 export async function handleInbound(msg: Inbound): Promise<unknown> {
-  const own = (process.env.WACHAP_OWN_NUMBER ?? '').replace(/[^\d]/g, '')
+  const own = (process.env.TWILIO_WHATSAPP_NUMBER || process.env.TWILIO_PHONE_NUMBER || '').replace(/[^\d]/g, '')
   if (own && msg.phone === own) return
   const c = await getConversation(msg.phone, msg.name, detectLocale(msg.text))
 

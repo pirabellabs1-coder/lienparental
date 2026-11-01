@@ -1,6 +1,6 @@
 -- =====================================================================
 -- Lien Parental — 0650_agent_whatsapp.sql
--- Agent d'accueil, phase 3 : WhatsApp (fournisseur WaChap). Même agent, même base de connaissances,
+-- Agent d'accueil, phase 3 : WhatsApp (Twilio, API officielle Meta). Même agent, même base de connaissances,
 -- même agenda que le chatbot du site (0640).
 --
 --   1. agent_wa_conversations  une conversation par numéro : langue, étape du parcours en cours,

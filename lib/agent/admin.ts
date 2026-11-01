@@ -289,7 +289,7 @@ export async function runAdminOp(ctx: AdminCtx, op: AdminOp): Promise<unknown> {
       // Contenu non journalisé (seulement l'auteur et la conversation).
       await audit(ctx, 'admin.agent.whatsapp.reply', 'agent_wa_conversations', op.id)
       const r = await teamReply(op.id, op.text)
-      if (!r.ok) throw new RepoError('unavailable', 'Message non envoyé : vérifiez la connexion WaChap (clé, compte, téléphone connecté).')
+      if (!r.ok) throw new RepoError('unavailable', 'Message non envoyé : vérifiez la configuration Twilio, ou la fenêtre de 24 h (WhatsApp n’accepte un message libre que dans les 24 h suivant le dernier message de la personne).')
       return { ok: true }
     }
     case 'wa.release': {

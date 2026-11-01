@@ -1,9 +1,11 @@
 /**
- * Agent d'accueil, canal WhatsApp (WaChap) — règles pures, testées par tests/agent-whatsapp.test.ts.
+ * Agent d'accueil, canal WhatsApp (Twilio, API officielle Meta) — règles pures, testées par
+ * tests/agent-whatsapp.test.ts.
  *
- *  - lecture tolérante des messages reçus : la documentation WaChap ne décrit pas le format du webhook
- *    entrant ; on accepte les formes courantes (Baileys « messages.upsert », objet plat, enveloppe
- *    `data`) et on ignore le reste (groupes, statuts, accusés de lecture) ;
+ *  - lecture du webhook Twilio (formulaire : From « whatsapp:+… », Body, MessageSid, ProfileName,
+ *    ButtonPayload) ; les rappels de statut (MessageStatus, sans texte) sont ignorés ;
+ *  - lecture tolérante d'autres formes JSON courantes (extractInbound), gardée pour un éventuel
+ *    changement de fournisseur ;
  *  - numéro au format international (chiffres seuls), langue du premier message, choix de l'utilisateur
  *    (bouton, numéro « 2 », ou libellé tapé) ;
  *  - texte du site converti pour WhatsApp (liens absolus, pas de Markdown).
@@ -77,6 +79,18 @@ function fromFlat(m: Record<string, unknown>): Inbound | null {
   const text = str(m.body) ?? body ?? str(m.text) ?? str(m.message) ?? str(m.content) ?? str(m.caption) ?? str(obj(m.button)?.text)
   if (!text && !buttonId) return null
   return { id: str(m.id ?? m.messageId ?? m.message_id ?? m.wa_id, 200), phone, name: str(m.pushName ?? m.notifyName ?? m.senderName ?? m.name, 120), text: text ?? buttonId ?? '', buttonId, fromMe }
+}
+
+/** Message reçu dans un webhook Twilio (paramètres du formulaire POST), ou null (statut, média seul…). */
+export function fromTwilioForm(p: Record<string, string>): Inbound | null {
+  if (!p.MessageSid && !p.SmsMessageSid) return null
+  const from = (p.From ?? '').replace(/^whatsapp:/, '')
+  const phone = normalizePhone(from)
+  if (!phone) return null
+  const buttonId = str(p.ButtonPayload, 120)
+  const text = str(p.Body) ?? str(p.ButtonText)
+  if (!text && !buttonId) return null
+  return { id: str(p.MessageSid ?? p.SmsMessageSid, 200), phone, name: str(p.ProfileName, 120), text: text ?? buttonId ?? '', buttonId, fromMe: false }
 }
 
 /** Messages reçus dans un appel du webhook (0, 1 ou plusieurs). */
@@ -153,8 +167,8 @@ const COMMANDS: [Command, RegExp][] = [
   ['cancel', /^(annuler|stop|retour|cancel|back|cancelar|voltar|sortir|quitter)$/],
   ['mes-rdv', /\b(mon|mes|my|meu|minha) (rendez vous|rdv|appointment|reuniao)s?\b|\b(annuler|deplacer|modifier|cancel|reschedule|move|remarcar) (mon |le |my |a )?(rendez vous|rdv|appointment|reuniao)\b/],
   ['rdv', /\b(prendre|reserver|book|marcar|agendar) (un |an |uma )?(rendez vous|rdv|appointment|reuniao)\b|^(rendez vous|rdv|appointment|reuniao)$/],
-  ['rappel', /\b(rappel(er|ez)?|me rappeler|call ?back|ligue?m me|retorno)\b/],
-  ['humain', /\b(humain|conseill(er|ere)|representant|human|agent humain|person|pessoa|atendente|parler a quelqu un)\b/],
+  ['rappel', /\b(rappel(er|ez|e)?|etre rappele|me rappeler|call ?back|call me back|ligue?m me|retorno)\b/],
+  ['humain', /\b(humain|conseill(er|ere)|representant|representative|representante|human|agent humain|person|pessoa|atendente|parler a quelqu un)\b/],
   ['stop-human', /^(assistant|robot|bot|assistente)$/],
 ]
 
@@ -174,7 +188,7 @@ export function toWhatsAppText(text: string, site: string): string {
     .slice(0, 3500)
 }
 
-/** Libellé de bouton ≤ 20 caractères (contrainte WaChap). */
+/** Libellé de bouton ≤ 20 caractères (contrainte WhatsApp). */
 export function buttonLabel(s: string): string {
   return s.length <= 20 ? s : `${s.slice(0, 19).trimEnd()}…`
 }

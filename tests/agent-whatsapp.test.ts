@@ -1,10 +1,10 @@
 /**
- * lib/agent/wa-core.ts : lecture des webhooks WaChap (formes courantes), numéros, langue, choix,
+ * lib/agent/wa-core.ts : lecture du webhook Twilio (et formes JSON courantes), numéros, langue, choix,
  * commandes, conversion du texte pour WhatsApp.
  */
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { buttonLabel, detectCommand, detectLocale, extractInbound, normalizePhone, pickOption, shapeOf, toWhatsAppText, yesNo } from '../lib/agent/wa-core'
+import { buttonLabel, detectCommand, detectLocale, extractInbound, fromTwilioForm, normalizePhone, pickOption, shapeOf, toWhatsAppText, yesNo } from '../lib/agent/wa-core'
 
 test('webhook : forme Baileys « messages.upsert » (texte, bouton, envoyé par nous)', () => {
   const payload = {
@@ -77,4 +77,21 @@ test('texte pour WhatsApp : liens complets, gras WhatsApp ; boutons ≤ 20 carac
   assert.equal(toWhatsAppText('Voir **le Guide** : [le Guide parental](/guide).', 'https://lienparental.fr'), 'Voir *le Guide* : le Guide parental : https://lienparental.fr/guide.')
   assert.equal(buttonLabel('Prendre rendez-vous'), 'Prendre rendez-vous')
   assert.ok(buttonLabel('Parler à un représentant de l’association').length <= 20)
+})
+
+test('webhook Twilio : formulaire lu (texte, bouton de modèle), statut ignoré', () => {
+  assert.deepEqual(fromTwilioForm({ MessageSid: 'SM1', From: 'whatsapp:+594694123456', Body: 'Bonjour', ProfileName: 'Marie' }),
+    { id: 'SM1', phone: '594694123456', name: 'Marie', text: 'Bonjour', buttonId: null, fromMe: false })
+  assert.equal(fromTwilioForm({ MessageSid: 'SM2', From: 'whatsapp:+594694123456', ButtonPayload: 'act:rdv', ButtonText: 'Prendre rendez-vous' })?.buttonId, 'act:rdv')
+  assert.equal(fromTwilioForm({ MessageSid: 'SM3', MessageStatus: 'delivered', From: 'whatsapp:+594694123456' }), null)
+  assert.equal(fromTwilioForm({ From: 'whatsapp:+594694123456', Body: 'sans identifiant' }), null)
+})
+
+test('choix écrits en toutes lettres reconnus (pas de boutons sur l’API officielle)', () => {
+  assert.equal(detectCommand('Être rappelé'), 'rappel')
+  assert.equal(detectCommand('Call me back'), 'rappel')
+  assert.equal(detectCommand('Representative'), 'humain')
+  assert.equal(detectCommand('Representante'), 'humain')
+  assert.equal(detectCommand('Book appointment'), 'rdv')
+  assert.equal(detectCommand('Marcar reunião'), 'rdv')
 })
