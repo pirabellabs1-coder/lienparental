@@ -247,6 +247,23 @@ export function OpButton({ body, label, done, danger, confirm }: { body: Record<
   )
 }
 
+// --- WhatsApp -------------------------------------------------------------------------------------
+
+export function WaReply({ id }: { id: string }) {
+  const [text, setText] = useState('')
+  const { run, busy, feedback } = useOp()
+  return (
+    <form onSubmit={async (e) => { e.preventDefault(); if (await run({ op: 'wa.reply', id, text }, 'Message envoyé. L’assistant reste en retrait 12 h sur cette conversation.')) setText('') }} className="space-y-2">
+      <label htmlFor={`wa-${id}`} className="block text-[13.5px] font-semibold text-night-900">Répondre en tant que représentant</label>
+      <textarea id={`wa-${id}`} rows={3} maxLength={3000} required value={text} onChange={(e) => setText(e.target.value)} className={cn(fieldCls, 'h-auto py-2')} />
+      <div className="flex flex-wrap items-center gap-3">
+        <button type="submit" disabled={busy || !text.trim()} className={btnPrimaryCls}>Envoyer sur WhatsApp</button>
+        {feedback}
+      </div>
+    </form>
+  )
+}
+
 // --- Textes par défaut -----------------------------------------------------------------------------
 
 export function MessageEditor({ msgKey, locale, value, fallback, custom }: { msgKey: string; locale: string; value: string; fallback: string; custom: boolean }) {

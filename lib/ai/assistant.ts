@@ -105,7 +105,7 @@ const LANGUAGE: Record<Locale, string> = {
   pt: 'Responda em português do Brasil (mantenha os nomes das formulas como estão escritos).',
 }
 
-export function assistantSystemPrompt(locale: Locale, knowledge = ''): string {
+export function assistantSystemPrompt(locale: Locale, knowledge = '', channel: 'web' | 'whatsapp' = 'web'): string {
   return [
     `Tu es « Assistant ${SITE_NAME} », l'assistant du site public de ${SITE_NAME}. Tu parles à un visiteur anonyme, sans compte.`,
     '',
@@ -135,6 +135,7 @@ export function assistantSystemPrompt(locale: Locale, knowledge = ''): string {
     '  [[HUMAIN]] si elle demande un humain / un représentant, si un problème technique persiste, ou si tu n’as pas la réponse.',
     '- Ne demande jamais toi-même nom, téléphone ou e-mail : le formulaire du site s’en charge.',
     '',
+    ...(channel === 'whatsapp' ? ['', 'Canal : WhatsApp. Réponses encore plus courtes (3 phrases au plus), sans liste longue. Les boutons d’action sont ajoutés par le système.'] : []),
     LANGUAGE[locale],
   ].join('\n')
 }

@@ -19,6 +19,7 @@ import {
   type AppointmentRow, type BlackoutRow, type CallbackRow, type EventRow,
 } from './repo'
 import { invalidateAgentCache, notifyCancelled } from './server'
+import { conversationMessages, listConversations, releaseToBot, teamReply } from './whatsapp'
 
 const dbOf = (ctx: AdminCtx): SupabaseClient | null => (ctx.mode === 'live' ? (ctx.db as SupabaseClient) : null)
 const audit = async (ctx: AdminCtx, action: `admin.${string}`, entity: string, entityId?: string, metadata: Record<string, unknown> = {}) => {
@@ -41,6 +42,8 @@ export const listReps = (ctx: AdminCtx) => readReps(dbOf(ctx))
 export const listServices = (ctx: AdminCtx) => readServices(dbOf(ctx))
 export const listTypes = (ctx: AdminCtx) => readTypes(dbOf(ctx))
 export const listMessages = (ctx: AdminCtx) => readMessages(dbOf(ctx))
+export const listWaConversations = (ctx: AdminCtx) => listConversations(dbOf(ctx))
+export const listWaMessages = (ctx: AdminCtx, id: string) => conversationMessages(dbOf(ctx), id)
 
 export async function listBlackouts(ctx: AdminCtx): Promise<BlackoutRow[]> {
   const db = dbOf(ctx)
@@ -138,6 +141,8 @@ export const AdminOpSchema = z.discriminatedUnion('op', [
   z.object({ op: z.literal('callback.status'), id: Uuid, status: z.enum(['new', 'done', 'cancelled']) }),
   z.object({ op: z.literal('message.save'), msg_key: z.enum(MESSAGE_KEYS), locale: Locale, text: z.string().trim().min(1).max(600) }),
   z.object({ op: z.literal('message.reset'), msg_key: z.enum(MESSAGE_KEYS), locale: Locale }),
+  z.object({ op: z.literal('wa.reply'), id: Uuid, text: z.string().trim().min(1).max(3000) }),
+  z.object({ op: z.literal('wa.release'), id: Uuid }),
 ])
 export type AdminOp = z.infer<typeof AdminOpSchema>
 
@@ -278,6 +283,18 @@ export async function runAdminOp(ctx: AdminCtx, op: AdminOp): Promise<unknown> {
       }
       const { error } = await db.from('agent_callbacks').update({ ...patch, handled_by: op.status === 'new' || ctx.mode !== 'live' ? null : ctx.userId }).eq('id', op.id)
       check(error, 'callback.status')
+      return { ok: true }
+    }
+    case 'wa.reply': {
+      // Contenu non journalisé (seulement l'auteur et la conversation).
+      await audit(ctx, 'admin.agent.whatsapp.reply', 'agent_wa_conversations', op.id)
+      const r = await teamReply(op.id, op.text)
+      if (!r.ok) throw new RepoError('unavailable', 'Message non envoyé : vérifiez la connexion WaChap (clé, compte, téléphone connecté).')
+      return { ok: true }
+    }
+    case 'wa.release': {
+      await audit(ctx, 'admin.agent.whatsapp.release', 'agent_wa_conversations', op.id)
+      await releaseToBot(op.id)
       return { ok: true }
     }
     case 'message.save':

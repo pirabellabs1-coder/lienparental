@@ -13,11 +13,11 @@ import { sendEmail } from '@/lib/email/send'
 import { agentAppointmentEmail, agentTeamEmail } from '@/lib/email/templates/agentAppointment'
 import { CONTACT_EMAIL, SITE } from '@/lib/seo/site'
 import {
-  PENDING_MS, availableNow, canChange, computeSlots, dueReminder, liveEntries, makeRef, mergeMessages, repsForStart, slotLabel,
+  PENDING_MS, availableNow, canChange, computeSlots, dueReminder, fillMessage, liveEntries, makeRef, mergeMessages, repsForStart, slotLabel,
   type AgentLocale, type Channel, type KbEntry, type MessageKey, type Slot,
 } from './core'
 import {
-  LIVE, appointmentByTokenHash, expirePending, insertAppointment, insertCallback, insertEvent, readBusy, readKbCandidates, readMessages,
+  LIVE, appointmentByTokenHash, appointmentsByPhone, expirePending, insertAppointment, insertCallback, insertEvent, readBusy, readKbCandidates, readMessages,
   readReps, readServices, readTypes, rescheduleAppointment, svc, toType, updateAppointment, APPT_COLUMNS, type AppointmentRow,
 } from './repo'
 
@@ -27,7 +27,7 @@ const hashToken = (t: string) => createHash('sha256').update(t).digest('hex')
 const TEAM_EMAIL = process.env.AGENT_TEAM_EMAIL?.trim() || CONTACT_EMAIL
 
 export class AgentError extends Error {
-  constructor(readonly code: 'not_found' | 'slot_taken' | 'too_late' | 'expired' | 'invalid' | 'unavailable', message = code) {
+  constructor(readonly code: 'not_found' | 'slot_taken' | 'too_late' | 'expired' | 'duplicate' | 'limit' | 'invalid' | 'unavailable', message = code) {
     super(message)
   }
 }
@@ -260,7 +260,11 @@ export async function notifyCancelled(row: AppointmentRow): Promise<void> {
  * agent_reschedule) ; le même lien de gestion reste valable. Échec = l'ancien reste confirmé.
  */
 export async function rescheduleByToken(token: string, start: string): Promise<Booked> {
-  const row = await byToken(token)
+  return rescheduleRow(await byToken(token), start, token, 'web')
+}
+
+/** Déplacement d'un rendez-vous déjà identifié (lien sécurisé, ou numéro WhatsApp vérifié). */
+export async function rescheduleRow(row: AppointmentRow, start: string, token: string | undefined, channel: Channel): Promise<Booked> {
   if (row.status !== 'confirmed') throw new AgentError('not_found')
   const nowMs = Date.now()
   if (!canChange(row.starts_at, nowMs)) throw new AgentError('too_late')
@@ -293,15 +297,67 @@ export async function rescheduleByToken(token: string, start: string): Promise<B
   const topic = await typeLabelOf(row.type_code, row.language)
   let emailSent = false
   if (row.contact_email) {
-    const mail = agentAppointmentEmail({ kind: 'changed', locale: row.language, name: row.contact_name, ...label, topic, ref, manageUrl: manageUrl(token) })
+    const mail = agentAppointmentEmail({ kind: 'changed', locale: row.language, name: row.contact_name, ...label, topic, ref, manageUrl: token ? manageUrl(token) : undefined })
     emailSent = delivered(await sendEmail({ to: row.contact_email, ...mail, idempotencyKey: `agent-appt-${ref}` }))
   }
   const fr = await typeLabelOf(row.type_code, 'fr')
   await teamNotice(moved, 'Rendez-vous déplacé', fr, [['Ancien créneau', `${slotLabel(row.starts_at, 'fr').date} à ${slotLabel(row.starts_at, 'fr').time}`]])
   // Représentant différent : l'ancien apprend que son créneau est libéré.
   if (moved.representative_id !== row.representative_id) await teamNotice(row, 'Créneau libéré (rendez-vous déplacé)', fr)
-  void insertEvent({ channel: 'web', locale: row.language, kind: 'appointment_changed', intent: 'APPOINTMENT' })
+  void insertEvent({ channel, locale: row.language, kind: 'appointment_changed', intent: 'APPOINTMENT' })
   return { ref, start: moved.starts_at, ...label, emailSent }
+}
+
+// --- WhatsApp : le numéro est vérifié par le canal lui-même -------------------------------------
+
+export const MAX_UPCOMING_PER_PHONE = 2
+
+/** Réservation depuis WhatsApp : confirmée tout de suite (le numéro de l'interlocuteur est authentique). */
+export async function bookConfirmed(input: { typeCode: string; language: AgentLocale; start: string; name: string; phone: string; channel: Exclude<Channel, 'web'>; remindersConsent: boolean }): Promise<Booked> {
+  // Pas de vidage de l'agenda depuis un seul numéro : 2 rendez-vous à venir au plus.
+  if ((await appointmentsByPhone(db(), input.phone)).length >= MAX_UPCOMING_PER_PHONE) throw new AgentError('limit')
+  const { d, type, reps, busy, now } = await context(input.typeCode)
+  const startMs = Date.parse(input.start)
+  if (!Number.isFinite(startMs)) throw new AgentError('invalid')
+  const candidates = repsForStart({ type, language: input.language, reps, busy, nowMs: now, startMs })
+  if (!candidates.length) throw new AgentError('slot_taken')
+  const ref = makeRef(randomBytes(6))
+  let row: AppointmentRow | null = null
+  for (const rep of candidates) {
+    const next = {
+      id: crypto.randomUUID(), ref, type_code: type.code, service: type.service, representative_id: rep.id,
+      starts_at: new Date(startMs).toISOString(), ends_at: new Date(startMs + type.durationMin * 60_000).toISOString(),
+      busy_until: new Date(startMs + (type.durationMin + type.bufferMin) * 60_000).toISOString(),
+      contact_name: input.name, contact_phone: input.phone, contact_email: null, language: input.language, reason: null,
+      channel: input.channel, confirm_channel: 'whatsapp' as const, reminders_consent: input.remindersConsent,
+      manage_token_hash: null, rescheduled_from: null, status: 'confirmed' as const,
+    }
+    const res = await insertAppointment(d, next)
+    if (res === 'duplicate') throw new AgentError('duplicate')
+    if (res === 'ok') {
+      row = { ...next, created_at: new Date().toISOString(), cancelled_at: null, reminder_24_sent_at: null, reminder_2_sent_at: null }
+      break
+    }
+  }
+  if (!row) throw new AgentError('slot_taken')
+  await teamNotice(row, 'Nouveau rendez-vous', await typeLabelOf(type.code, 'fr'))
+  void insertEvent({ channel: input.channel, locale: input.language, kind: 'appointment_booked', intent: 'APPOINTMENT' })
+  return { ref, start: row.starts_at, ...slotLabel(row.starts_at, input.language), emailSent: false }
+}
+
+/** Rendez-vous à venir pris avec ce numéro (gestion depuis WhatsApp). */
+export async function upcomingForPhone(phone: string): Promise<(AppointmentRow & { topic: string })[]> {
+  const rows = await appointmentsByPhone(db(), phone)
+  return Promise.all(rows.map(async (r) => ({ ...r, topic: await typeLabelOf(r.type_code, r.language) })))
+}
+
+/** Annulation d'un rendez-vous identifié par le canal (numéro vérifié). */
+export async function cancelRow(row: AppointmentRow, channel: Channel): Promise<void> {
+  if (row.status !== 'confirmed') return
+  if (!canChange(row.starts_at, Date.now())) throw new AgentError('too_late')
+  if (!(await updateAppointment(db(), row.id, { status: 'cancelled', cancelled_at: new Date().toISOString() }))) return
+  await notifyCancelled(row)
+  void insertEvent({ channel, locale: row.language, kind: 'appointment_cancelled', intent: 'APPOINTMENT' })
 }
 
 // --- Rappel et représentant -----------------------------------------------------------------
@@ -336,7 +392,7 @@ export async function runAgentCron(): Promise<{ reminders: number; kbActivated?:
   const kb = await d.rpc('agent_kb_activate_due')
   if (typeof kb.data === 'number' && kb.data > 0) invalidateAgentCache()
   const { data, error } = await d.from('agent_appointments').select(APPT_COLUMNS)
-    .eq('status', 'confirmed').eq('reminders_consent', true).not('contact_email', 'is', null)
+    .eq('status', 'confirmed').eq('reminders_consent', true).or('contact_email.not.is.null,confirm_channel.eq.whatsapp')
     .or('reminder_24_sent_at.is.null,reminder_2_sent_at.is.null')
     .gt('starts_at', new Date(now).toISOString()).lt('starts_at', new Date(now + 24 * 3_600_000).toISOString())
     .order('starts_at').limit(500)
@@ -346,13 +402,24 @@ export async function runAgentCron(): Promise<{ reminders: number; kbActivated?:
   for (const a of data as AppointmentRow[]) {
     const due = dueReminder(a, now)
     if (!due) continue
+    const viaWhatsApp = a.confirm_channel === 'whatsapp' && Boolean(a.contact_phone)
+    if (!viaWhatsApp && !a.contact_email) continue
     const column = due === '24h' ? 'reminder_24_sent_at' : 'reminder_2_sent_at'
     // Marque d'abord (une seule fois même si deux passages se chevauchent, jamais pour un rendez-vous
     // annulé entre-temps), puis envoie.
     const { data: claimed } = await d.from('agent_appointments').update({ [column]: new Date().toISOString() }).eq('id', a.id).eq('status', 'confirmed').is(column, null).select('id')
     if (!claimed?.length) continue
     const t = types.find((x) => x.code === a.type_code)
-    const mail = agentAppointmentEmail({ kind: 'reminder', locale: a.language, name: a.contact_name, ...slotLabel(a.starts_at, a.language), topic: t ? toType(t).labels[a.language] : a.type_code, ref: a.ref })
+    const topic = t ? toType(t).labels[a.language] : a.type_code
+    if (viaWhatsApp) {
+      const m = await messagesFor(a.language)
+      const text = `${fillMessage(m.WA_REMINDER, slotLabel(a.starts_at, a.language))}\n${topic} · ${a.ref}`
+      // Enregistré dans la conversation AVANT l'envoi : l'écho du fournisseur n'est pas pris pour un représentant.
+      const { notifyByWhatsApp } = await import('./whatsapp')
+      if (await notifyByWhatsApp(a.contact_phone!, a.language, text)) sent++
+      continue
+    }
+    const mail = agentAppointmentEmail({ kind: 'reminder', locale: a.language, name: a.contact_name, ...slotLabel(a.starts_at, a.language), topic, ref: a.ref })
     if ((await sendEmail({ to: a.contact_email!, ...mail, idempotencyKey: `agent-rem-${due}-${a.ref}` })).ok) sent++
   }
   // Conservation : une fois par heure suffit (premier passage de l'heure).

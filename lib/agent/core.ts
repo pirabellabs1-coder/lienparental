@@ -259,7 +259,8 @@ export function matchKb(question: string, entries: KbEntry[], locale: AgentLocal
 export const MESSAGE_KEYS = [
   'WELCOME_WEB', 'OFFER_CHANNELS', 'OFFER_HUMAN', 'HUMAN_AVAILABLE', 'HUMAN_UNAVAILABLE', 'OFFER_APPOINTMENT',
   'ASK_APPOINTMENT_REASON', 'ASK_LANGUAGE', 'ASK_SLOT', 'NO_SLOTS', 'ASK_CONTACT', 'ASK_CALLBACK', 'CALLBACK_DONE',
-  'APPT_PENDING', 'APPT_CONFIRMED', 'APPT_CANCELLED', 'APPT_CHANGED', 'AGENDA_DOWN', 'TECH_ISSUE', 'UNKNOWN', 'EMAIL_SLA', 'END',
+  'APPT_PENDING', 'APPT_CONFIRMED', 'WELCOME_WHATSAPP', 'WA_HINT', 'ASK_SERVICE', 'ASK_NAME', 'ASK_REMINDER', 'HUMAN_HANDOFF',
+  'NO_UPCOMING', 'UPCOMING', 'WA_REMINDER', 'APPT_CANCELLED', 'APPT_CHANGED', 'AGENDA_DOWN', 'TECH_ISSUE', 'UNKNOWN', 'EMAIL_SLA', 'END',
 ] as const
 export type MessageKey = (typeof MESSAGE_KEYS)[number]
 
@@ -328,6 +329,51 @@ export const DEFAULT_MESSAGES: Record<MessageKey, Record<AgentLocale, string>> =
     fr: 'Merci. Votre demande de rappel est bien enregistrée.',
     en: 'Thank you. Your callback request has been recorded.',
     pt: 'Obrigado. Seu pedido de retorno foi registrado.',
+  },
+  WELCOME_WHATSAPP: {
+    fr: 'Bonjour 👋 Bienvenue chez Lien Parental. Je suis l’assistant de l’association. Posez votre question, ou choisissez :',
+    en: 'Hello 👋 Welcome to Lien Parental. I’m the association’s assistant. Ask your question, or choose:',
+    pt: 'Olá 👋 Bem-vindo à Lien Parental. Sou o assistente da associação. Faça sua pergunta ou escolha:',
+  },
+  WA_HINT: {
+    fr: 'À tout moment : « menu », « mon rendez-vous », ou écrivez « FR », « EN », « PT » pour changer de langue.',
+    en: 'At any time: “menu”, “my appointment”, or type “FR”, “EN”, “PT” to change language.',
+    pt: 'A qualquer momento: «menu», «minha reunião», ou escreva «FR», «EN», «PT» para mudar de idioma.',
+  },
+  ASK_SERVICE: {
+    fr: 'Pour quel sujet souhaitez-vous parler à un représentant ?',
+    en: 'What would you like to talk to a representative about?',
+    pt: 'Sobre qual assunto quer falar com um representante?',
+  },
+  ASK_NAME: {
+    fr: 'À quel nom dois-je enregistrer la demande ?',
+    en: 'What name should I use for your request?',
+    pt: 'Em que nome devo registrar o pedido?',
+  },
+  ASK_REMINDER: {
+    fr: 'Souhaitez-vous un rappel ici 24 h et 2 h avant le rendez-vous ?',
+    en: 'Would you like a reminder here 24 hours and 2 hours before the appointment?',
+    pt: 'Quer um lembrete aqui 24 h e 2 h antes da reunião?',
+  },
+  HUMAN_HANDOFF: {
+    fr: 'Très bien. Un représentant de Lien Parental va vous répondre ici dès que possible.',
+    en: 'All right. A Lien Parental representative will reply here as soon as possible.',
+    pt: 'Muito bem. Um representante da Lien Parental vai responder aqui assim que possível.',
+  },
+  NO_UPCOMING: {
+    fr: 'Je ne trouve aucun rendez-vous à venir pris avec ce numéro.',
+    en: 'I can’t find any upcoming appointment booked with this number.',
+    pt: 'Não encontro nenhuma reunião futura marcada com este número.',
+  },
+  UPCOMING: {
+    fr: 'Votre rendez-vous : [DATE] à [HEURE]. Souhaitez-vous le conserver, le déplacer ou l’annuler ?',
+    en: 'Your appointment: [DATE] at [HEURE]. Would you like to keep, move or cancel it?',
+    pt: 'Sua reunião: [DATE] às [HEURE]. Quer manter, remarcar ou cancelar?',
+  },
+  WA_REMINDER: {
+    fr: 'Rappel : votre rendez-vous avec Lien Parental est prévu [DATE] à [HEURE] (heure de Cayenne).',
+    en: 'Reminder: your appointment with Lien Parental is on [DATE] at [HEURE] (Cayenne time).',
+    pt: 'Lembrete: sua reunião com a Lien Parental está marcada para [DATE] às [HEURE] (hora de Caiena).',
   },
   APPT_PENDING: {
     fr: 'Créneau réservé le [DATE] à [HEURE]. Pour le confirmer, cliquez sur le lien que nous venons de vous envoyer par e-mail (valable 30 minutes).',

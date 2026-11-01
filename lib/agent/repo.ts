@@ -169,16 +169,21 @@ type NewAppointment = Omit<AppointmentRow, 'created_at' | 'cancelled_at' | 'remi
 const clashes = (list: AppointmentRow[], row: { representative_id: string; starts_at: string; busy_until: string }) =>
   list.some((a) => (a.status === 'confirmed' || a.status === 'pending') && a.representative_id === row.representative_id && a.starts_at < row.busy_until && row.starts_at < a.busy_until)
 
-/** Insère un rendez-vous ; 'overlap' si la contrainte d'exclusion refuse (créneau pris entre-temps). */
-export async function insertAppointment(db: SupabaseClient | null, row: NewAppointment): Promise<'ok' | 'overlap'> {
+/**
+ * Insère un rendez-vous ; 'overlap' si la contrainte d'exclusion refuse (créneau pris entre-temps) ;
+ * 'duplicate' si ce numéro a déjà un rendez-vous confirmé à cette heure (double envoi simultané).
+ */
+export async function insertAppointment(db: SupabaseClient | null, row: NewAppointment): Promise<'ok' | 'overlap' | 'duplicate'> {
   if (!db) {
     const d = demo()
+    if (row.status === 'confirmed' && row.contact_phone && d.appointments.some((a) => a.status === 'confirmed' && a.contact_phone === row.contact_phone && a.starts_at === row.starts_at)) return 'duplicate'
     if (clashes(d.appointments, row)) return 'overlap'
     d.appointments.push({ ...row, created_at: new Date().toISOString(), cancelled_at: null, reminder_24_sent_at: null, reminder_2_sent_at: null })
     return 'ok'
   }
   const { error } = await db.from('agent_appointments').insert(row)
   if (error?.code === '23P01') return 'overlap'
+  if (error?.code === '23505' && /one_per_phone_slot/.test(error.message ?? '')) return 'duplicate'
   if (error) throw fail('appointment_insert', error)
   return 'ok'
 }
@@ -204,13 +209,22 @@ export async function rescheduleAppointment(db: SupabaseClient | null, oldId: st
     if (clashes(d.appointments.filter((a) => a !== old), next)) return 'overlap'
     const hash = old.manage_token_hash
     Object.assign(old, { status: 'cancelled', cancelled_at: new Date().toISOString(), manage_token_hash: null })
-    d.appointments.push({ ...next, status: 'confirmed', confirm_channel: 'email', manage_token_hash: hash, rescheduled_from: oldId, created_at: new Date().toISOString(), cancelled_at: null, reminder_24_sent_at: null, reminder_2_sent_at: null })
+    d.appointments.push({ ...next, status: 'confirmed', confirm_channel: old.confirm_channel, manage_token_hash: hash, rescheduled_from: oldId, created_at: new Date().toISOString(), cancelled_at: null, reminder_24_sent_at: null, reminder_2_sent_at: null })
     return 'ok'
   }
   const { data, error } = await db.rpc('agent_reschedule', { p_old: oldId, p_new: next })
   if (error?.message?.includes('agent_slot_taken')) return 'overlap'
   if (error) throw fail('reschedule', error)
   return data === 'ok' ? 'ok' : 'not_found'
+}
+
+/** Rendez-vous confirmés à venir pris avec ce numéro (WhatsApp, téléphone). */
+export async function appointmentsByPhone(db: SupabaseClient | null, phone: string): Promise<AppointmentRow[]> {
+  const now = new Date().toISOString()
+  if (!db) return demo().appointments.filter((a) => a.status === 'confirmed' && a.contact_phone === phone && a.starts_at > now).sort((a, b) => a.starts_at.localeCompare(b.starts_at)).slice(0, 5)
+  const { data, error } = await db.from('agent_appointments').select(APPT_COLUMNS).eq('status', 'confirmed').eq('contact_phone', phone).gt('starts_at', now).order('starts_at').limit(5)
+  if (error) throw fail('appointments_phone', error)
+  return data as AppointmentRow[]
 }
 
 export async function appointmentByTokenHash(db: SupabaseClient | null, hash: string): Promise<AppointmentRow | null> {
