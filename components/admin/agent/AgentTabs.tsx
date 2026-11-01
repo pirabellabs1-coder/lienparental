@@ -7,6 +7,7 @@ const TABS = [
   ['/admin/agent/equipe', 'Services et représentants'],
   ['/admin/agent/agenda', 'Agenda et rendez-vous'],
   ['/admin/agent/messages', 'Textes par défaut'],
+  ['/admin/agent/whatsapp', 'WhatsApp'],
 ] as const
 
 export const CATEGORY_LABEL: Record<string, string> = {

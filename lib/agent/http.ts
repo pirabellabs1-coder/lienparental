@@ -9,6 +9,8 @@ const MESSAGES: Record<AgentError['code'], [number, string]> = {
   slot_taken: [409, 'Ce créneau vient d’être pris. Choisissez-en un autre.'],
   too_late: [409, 'Ce rendez-vous ne peut plus être modifié (moins de 2 heures avant).'],
   expired: [410, 'Le délai de confirmation (30 minutes) est dépassé : le créneau a été libéré. Reprenez rendez-vous depuis l’assistant.'],
+  duplicate: [409, 'Ce rendez-vous est déjà enregistré.'],
+  limit: [429, 'Nombre maximal de rendez-vous à venir atteint.'],
   invalid: [422, 'Demande invalide.'],
   unavailable: [503, 'Service momentanément indisponible.'],
 }
