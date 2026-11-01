@@ -103,8 +103,12 @@ test('dictée : nom « Lien Parental » rétabli', async () => {
   assert.equal(fixBrandNames('inscrit sur lien parental', 'fr'), 'inscrit sur Lien Parental')
   // Notion juridique et adjectif ordinaire : inchangés.
   assert.equal(fixBrandNames('maintenir le lien parental avec mon fils', 'fr'), 'maintenir le lien parental avec mon fils')
+  for (const phrase of ['maintenir les liens parentaux', 'préserver mon lien parental', 'absence de lien parental', 'des liens parentaux solides']) {
+    assert.equal(fixBrandNames(phrase, 'fr'), phrase)
+  }
   assert.equal(fixBrandNames('un congé parental, l’autorité parentale', 'fr'), 'un congé parental, l’autorité parentale')
   assert.equal(fixBrandNames('I signed up on parental.', 'en'), 'I signed up on Lien Parental.')
   assert.equal(fixBrandNames('I am on parental leave', 'en'), 'I am on parental leave')
+  assert.equal(fixBrandNames('I’m on parental.', 'en'), 'I’m on parental.')
   assert.equal(fixBrandNames('eu uso o lean parental', 'pt'), 'eu uso o Lien Parental')
 })

@@ -79,18 +79,21 @@ const MAX_SILENT_RUNS = 2
 
 // Pas de lookbehind dans ces expressions : non pris en charge par Safari avant iOS 16.4 (le module
 // entier ne se chargerait pas).
-const BRAND_VARIANTS = /(^|[^\p{L}])((?:le|du|au|un|ce|the|o|do)\s+)?(liens?|lyon|l[ée]on|lean|lian(?:n?e)?|lient|l['’]\s?hymne|l['’]\s?ien)\s+parent(?:al|ale|aux|als)(?![\p{L}])/giu
+const BRAND_VARIANTS = /(^|[^\p{L}])(lyon|l[ée]on|lean|lian(?:n?e)?|lient|l['’]\s?hymne|l['’]\s?ien)\s+parent(?:al|ale|aux|als)(?![\p{L}])/giu
+// « lien parental » sans déterminant après une préposition = la marque (« inscrit sur lien parental ») ;
+// avec déterminant (« le », « mon », « les liens parentaux »…), c'est la notion juridique : inchangé.
+const BRAND_PLAIN = /(^|[^\p{L}])(sur|à|avec|via|dans|chez|pour|em|no|na|com|pelo|on|with|at|to|from|use|using)\s+liens?\s+parental(?![\p{L}])/giu
 const BRAND_DROPPED_FR_PT = /(^|[^\p{L}])(sur|à|avec|via|dans|chez|pour|em|no|na|com|pelo)\s+parental(?![\p{L}])/giu
-const BRAND_DROPPED_EN = /(^|[^\p{L}])(on|with|at|to|from|joined|use|using)\s+parental(?=\s*(?:$|[.,;:!?]|app\b))/giu
+const BRAND_DROPPED_EN = /(^|[^\p{L}])(with|from|joined|use|using|signed up on|sign up on|on the)\s+parental(?=\s*(?:$|[.,;:!?]|app\b))/giu
 
 /**
  * Nom de la marque, souvent déformé par la reconnaissance vocale : « Lyon parental », « l'hymne
- * parental », ou « lien » avalé (« je me suis inscrit sur parental »). « le lien parental » (la notion
- * juridique) est laissé tel quel. Exporté pour les tests.
+ * parental », ou « lien » avalé (« je me suis inscrit sur parental »). « le lien parental », « les liens
+ * parentaux » (la notion juridique) sont laissés tels quels. Exporté pour les tests.
  */
 export function fixBrandNames(text: string, locale: string): string {
-  let out = text.replace(BRAND_VARIANTS, (all, pre: string, article: string | undefined, word: string) =>
-    article && /^liens?$/i.test(word) ? all : `${pre}${article ?? ''}Lien Parental`)
+  let out = text.replace(BRAND_VARIANTS, (_all, pre: string) => `${pre}Lien Parental`)
+  out = out.replace(BRAND_PLAIN, (_all, pre: string, prep: string) => `${pre}${prep} Lien Parental`)
   out = out.replace(locale === 'en' ? BRAND_DROPPED_EN : BRAND_DROPPED_FR_PT, (_all, pre: string, prep: string) => `${pre}${prep} Lien Parental`)
   return out
 }
@@ -131,9 +134,12 @@ export function useDictation(locale: string, onText: (text: string) => void) {
     const startedAt = Date.now()
     let done = ''         // texte des écoutes terminées
     let silentRuns = 0
+    let runs = 0
+    let limit = 0
     const join = (heard: string) => fixBrandNames([done, heard].filter(Boolean).join(' '), locale)
 
     const finish = (failed: DictationError | null) => {
+      window.clearTimeout(limit)
       wanted.current = false
       rec.current = null
       const text = join('')
@@ -141,7 +147,8 @@ export function useDictation(locale: string, onText: (text: string) => void) {
       if (text) onTextRef.current(text)
       setInterim('')
       setListening(false)
-      setError(text ? null : failed ?? 'nothing')
+      // Micro refusé à une relance seulement (Safari) : il fonctionnait, on n'accuse pas le micro.
+      setError(text ? null : failed === 'denied' && runs > 1 ? 'nothing' : failed ?? 'nothing')
     }
 
     const listen = (): boolean => {
@@ -178,6 +185,7 @@ export function useDictation(locale: string, onText: (text: string) => void) {
       try {
         r.start()
         rec.current = r
+        runs++
         return true
       } catch {
         return false
@@ -187,7 +195,14 @@ export function useDictation(locale: string, onText: (text: string) => void) {
     wanted.current = true
     setError(null)
     setInterim('')
-    if (listen()) setListening(true)
+    if (listen()) {
+      setListening(true)
+      // Ordinateur (écoute continue) : sans coupure du navigateur, la limite est posée ici.
+      limit = window.setTimeout(() => {
+        wanted.current = false
+        rec.current?.stop()
+      }, MAX_LISTEN_MS)
+    }
     else {
       wanted.current = false
       setError('other')

@@ -37,7 +37,8 @@ export function CoachQuickAccess() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    const q = value.trim()
+    // Phrase encore en cours de dictée : envoyée avec le reste (elle arriverait après la navigation).
+    const q = (dictation.listening && dictation.interim ? appendDictation(value, dictation.interim) : value).trim()
     if (!q) return
     dictation.stop()
     // Réponse du Coach sur la base de connaissances du parent (chat en streaming).
@@ -143,13 +144,12 @@ export function CoachQuickAccess() {
           }}
         />
       </form>
-      {(listening || dictation.error) && (
-        <p role="status" aria-live="polite" className={cn('mt-2 text-[12px] font-semibold', listening ? 'text-alert-600' : 'text-alert-700')}>
-          {listening
-            ? dictation.interim ? `« ${dictation.interim} »` : tChat('listening')
-            : tChat(dictation.error === 'denied' ? 'micDenied' : dictation.error === 'nothing' ? 'micNothing' : 'micError')}
-        </p>
-      )}
+      {/* Toujours monté : VoiceOver / TalkBack n'annoncent pas une zone insérée avec son texte. */}
+      <p role="status" aria-live="polite" className={cn('text-[12px] font-semibold', listening ? 'mt-2 text-alert-600' : dictation.error ? 'mt-2 text-alert-700' : 'sr-only')}>
+        {listening
+          ? dictation.interim ? `« ${dictation.interim} »` : tChat('listening')
+          : dictation.error ? tChat(dictation.error === 'denied' ? 'micDenied' : dictation.error === 'nothing' ? 'micNothing' : 'micError') : ''}
+      </p>
       {error && (
         <p id={errorId} role="alert" className="mt-2 text-[12px] font-medium text-alert-600">
           {error}

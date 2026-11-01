@@ -26,9 +26,12 @@ a, button, [role="button"], label, summary{ touch-action: manipulation }
 
 /* Mobile viewport lock pour la PWA */
 /* iPhone / iPad : Safari zoome sur tout champ dont le texte fait moins de 16 px (et ne dézoome pas).
-   -webkit-touch-callout n'existe que sur iOS : ordinateur et Android gardent les tailles du design. */
+   Seuls les champs à petite taille (ou sans taille, donc hérités) passent à 16 px : les codes à gros
+   chiffres gardent la leur. -webkit-touch-callout n'existe que sur iOS : ordinateur et Android gardent
+   les tailles du design. */
 @supports (-webkit-touch-callout: none) {
-  input:not([type=checkbox]):not([type=radio]):not([type=range]), textarea, select { font-size: max(16px, 1em) !important }
+  :is(input, textarea, select):is([class*="text-[11px]"], [class*="text-[12px]"], [class*="text-[13px]"], [class*="text-[14px]"], [class*="text-[15px]"], [class*="text-xs"], [class*="text-sm"]),
+  :is(input, textarea, select):not([class*="text-"]) { font-size: 16px !important }
 }
 
 .pwa-safe{ padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) }

@@ -30,8 +30,10 @@ const FR_FALLBACK: DocActionsT = (key, values) => {
   }
 }
 
-/** Liens sécurisés déjà créés (par document) : le second appui partage sans attendre le réseau. */
-const createdLinks = new Map<string, string>()
+/** Lien sécurisé tout juste créé, gardé 2 min pour le second appui après un refus de Safari (jamais un
+ *  lien ancien : il a pu être révoqué dans « Partages actifs » ou avoir expiré). */
+const createdLinks = new Map<string, { url: string; at: number }>()
+const RETRY_LINK_MS = 120_000
 
 /** Partage natif si disponible, sinon copie du lien. Renvoie un message de retour.
  *  Supabase : un document « Partageable » génère un lien sécurisé expirable (7 jours, révocable
@@ -40,11 +42,11 @@ export async function shareDocument(doc: Pick<VaultDocument, 'id' | 'name'> & Pa
   let url = `${window.location.origin}/app/coffre/documents/${doc.id}`
   if (LIVE && doc.confidentialite === 'partage') {
     const known = createdLinks.get(doc.id)
-    if (known) url = known
+    createdLinks.delete(doc.id)
+    if (known && Date.now() - known.at < RETRY_LINK_MS) url = known.url
     else {
       try {
         url = (await createShare(doc.id, { days: 7 })).url
-        createdLinks.set(doc.id, url)
       } catch (e) {
         return e instanceof Error ? e.message : t('linkFailed')
       }
@@ -57,7 +59,11 @@ export async function shareDocument(doc: Pick<VaultDocument, 'id' | 'name'> & Pa
     } catch (e) {
       // Safari iPhone refuse le partage après l'attente du réseau (appui « expiré ») : le lien est
       // prêt, un nouvel appui le partage aussitôt. Toute autre erreur = annulation de l'utilisateur.
-      return e instanceof Error && e.name === 'NotAllowedError' ? t('tapAgain') : null
+      if (e instanceof Error && e.name === 'NotAllowedError') {
+        createdLinks.set(doc.id, { url, at: Date.now() })
+        return t('tapAgain')
+      }
+      return null
     }
   }
   try {
