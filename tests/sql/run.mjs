@@ -28,6 +28,7 @@ try {
     citext: (await import('@electric-sql/pglite/contrib/citext')).citext,
     pgcrypto: (await import('@electric-sql/pglite/contrib/pgcrypto')).pgcrypto,
     uuid_ossp: (await import('@electric-sql/pglite/contrib/uuid_ossp')).uuid_ossp,
+    btree_gist: (await import('@electric-sql/pglite/contrib/btree_gist')).btree_gist,
   }
 } catch {
   console.error('PGlite est absent. Installer la dépendance de développement :\n  npm install --save-dev --save-exact @electric-sql/pglite@0.5.11')
@@ -35,7 +36,7 @@ try {
 }
 
 const filters = process.argv.slice(2).map((f) => f.toLowerCase())
-const db = await pglite.PGlite.create({ extensions: { citext: pglite.citext, pgcrypto: pglite.pgcrypto, uuid_ossp: pglite.uuid_ossp } })
+const db = await pglite.PGlite.create({ extensions: { citext: pglite.citext, pgcrypto: pglite.pgcrypto, uuid_ossp: pglite.uuid_ossp, btree_gist: pglite.btree_gist } })
 
 let failedMigrations = 0
 async function apply(file, label) {

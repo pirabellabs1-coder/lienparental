@@ -1232,7 +1232,51 @@
       "voiceLimit": "Você atingiu o limite de escuta sem conta.",
       "voiceLimitCta": "Crie uma conta grátis para ouvir mais respostas",
       "micDenied": "O microfone não está autorizado. Autorize-o nas definições do navegador ou use o microfone 🎤 do teclado.",
-      "micNothing": "Não ouvi nada. Toque no microfone, fale com clareza e espere que o texto apareça. Também pode usar o microfone 🎤 do teclado."
+      "micNothing": "Não ouvi nada. Toque no microfone, fale com clareza e espere que o texto apareça. Também pode usar o microfone 🎤 do teclado.",
+      "agent": {
+        "titleRdv": "Marcar uma reunião",
+        "titleCallback": "Pedir retorno de ligação",
+        "titleHuman": "Falar com um representante",
+        "cancel": "Fechar",
+        "name": "Nome completo",
+        "phone": "Telefone",
+        "email": "E-mail",
+        "optional": "opcional",
+        "emailHint": "Obrigatório: você receberá um link para confirmar a reunião (válido por 30 minutos) e depois para alterá-la ou cancelá-la.",
+        "reason": "Motivo em poucas palavras",
+        "topic": "Assunto do pedido",
+        "consent": "Quero receber um lembrete 24 h e 2 h antes da reunião.",
+        "privacy": "Seus dados servem apenas para esta reunião ou retorno e são apagados em no máximo 12 meses.",
+        "confirm": "Confirmar a reunião",
+        "otherSlot": "Escolher outro horário",
+        "moreSlots": "Ver outros horários",
+        "loadingSlots": "Procurando horários…",
+        "tz": "hora de Caiena",
+        "ref": "Referência",
+        "slotTaken": "Este horário acabou de ser reservado. Escolha outro.",
+        "error": "O pedido não foi concluído. Tente novamente em instantes.",
+        "sendCallback": "Pedir retorno",
+        "askService": "Sobre qual assunto quer falar com um representante?",
+        "checking": "Verificando quem está disponível…",
+        "callNow": "Ligar agora",
+        "whatsapp": "Continuar no WhatsApp",
+        "whatsappText": "Olá, venho do site da Lien Parental e gostaria de falar com um representante.",
+        "emailNotSent": "O e-mail de confirmação não pôde ser enviado. Tente novamente em instantes ou escreva para nós.",
+        "unavailable": "Este serviço está temporariamente indisponível. Escreva para"
+      },
+      "start": {
+        "discover": "Conhecer a Lien Parental",
+        "ask": "Fazer uma pergunta",
+        "problem": "Estou com um problema",
+        "plans": "Ver planos",
+        "rdv": "Marcar uma reunião",
+        "human": "Falar com um representante",
+        "partner": "Tornar-se parceiro",
+        "join": "Participar da associação",
+        "discoverQ": "Pode me apresentar a Lien Parental?",
+        "problemQ": "Estou com um problema na Lien Parental.",
+        "plansQ": "Quais são os planos e os preços?"
+      }
     }
   }
 }

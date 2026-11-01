@@ -1232,7 +1232,51 @@
       "voiceLimit": "You’ve reached the listening limit without an account.",
       "voiceLimitCta": "Create a free account to listen to more answers",
       "micDenied": "The microphone is not allowed. Allow it in your browser settings, or use the 🎤 microphone on your keyboard.",
-      "micNothing": "I didn’t hear anything. Tap the microphone, speak clearly, then wait for the text to appear. You can also use the 🎤 microphone on your keyboard."
+      "micNothing": "I didn’t hear anything. Tap the microphone, speak clearly, then wait for the text to appear. You can also use the 🎤 microphone on your keyboard.",
+      "agent": {
+        "titleRdv": "Book an appointment",
+        "titleCallback": "Request a callback",
+        "titleHuman": "Talk to a representative",
+        "cancel": "Close",
+        "name": "Full name",
+        "phone": "Phone",
+        "email": "E-mail",
+        "optional": "optional",
+        "emailHint": "Required: you will receive a link to confirm the appointment (valid for 30 minutes), then to change or cancel it.",
+        "reason": "Topic in a few words",
+        "topic": "What is it about?",
+        "consent": "Send me a reminder 24 hours and 2 hours before the appointment.",
+        "privacy": "Your details are used only for this appointment or callback and deleted within 12 months at the latest.",
+        "confirm": "Confirm the appointment",
+        "otherSlot": "Choose another slot",
+        "moreSlots": "See other slots",
+        "loadingSlots": "Looking for slots…",
+        "tz": "Cayenne time",
+        "ref": "Reference",
+        "slotTaken": "This slot has just been taken. Please choose another one.",
+        "error": "The request did not go through. Please try again in a moment.",
+        "sendCallback": "Request a callback",
+        "askService": "What would you like to talk to a representative about?",
+        "checking": "Checking who is available…",
+        "callNow": "Call now",
+        "whatsapp": "Continue on WhatsApp",
+        "whatsappText": "Hello, I come from the Lien Parental website and would like to talk to a representative.",
+        "emailNotSent": "The confirmation e-mail could not be sent. Please try again in a moment or write to us.",
+        "unavailable": "This service is temporarily unavailable. Write to us at"
+      },
+      "start": {
+        "discover": "Discover Lien Parental",
+        "ask": "Ask a question",
+        "problem": "I have a problem",
+        "plans": "View plans",
+        "rdv": "Book an appointment",
+        "human": "Talk to a representative",
+        "partner": "Become a partner",
+        "join": "Join the association",
+        "discoverQ": "Can you tell me about Lien Parental?",
+        "problemQ": "I have a problem with Lien Parental.",
+        "plansQ": "What are the plans and their prices?"
+      }
     }
   }
 }

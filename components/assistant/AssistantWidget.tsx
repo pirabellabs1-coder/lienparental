@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { ArrowRight, CheckCheck, CheckCircle2, Coins, Mail, MessageCircle, Mic, Minus, Phone, RotateCcw, SendHorizontal, User, X } from 'lucide-react'
+import { ArrowRight, CalendarCheck, CheckCheck, CheckCircle2, Coins, Mail, MessageCircle, Mic, Minus, Phone, PhoneCall, RotateCcw, SendHorizontal, User, UserRound, X } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { useCloseOnBack } from '@/components/ui/useCloseOnBack'
 import { safeInternalPath } from '@/lib/ai/assistant-links'
@@ -16,6 +16,7 @@ import { SpeechButton } from '@/components/coach/SpeechButton'
 import { useCoachVoice } from '@/components/coach/useCoachVoice'
 import { appendDictation, useDictation } from '@/components/coach/useDictation'
 import { TalkBadge } from './TalkBadge'
+import { AgentFlow, type AgentConfig, type FlowKind, type FlowStart } from './AgentFlows'
 
 // Bulle « Une question ? » et son panneau de discussion, en deux modes :
 //  - public (site) : présentation du produit, réponses de POST /api/assistant ;
@@ -38,7 +39,7 @@ const COACH_STORE_KEY = 'lp-coach-chat:discussion'
 const TEASER_KEY = 'lp_assistant_teaser_off'
 const PUBLIC_VOICE = { endpoint: '/api/assistant/speech', fixedVoice: true }
 
-export type Msg = { id: string; role: 'user' | 'assistant'; content: string; cta?: boolean; error?: boolean }
+export type Msg = { id: string; role: 'user' | 'assistant'; content: string; cta?: boolean; actions?: FlowKind[]; error?: boolean }
 
 export type CoachLink = {
   /** Solde (useCredits du Coach) : seuls le total et le coût d'une question servent ici. */
@@ -158,6 +159,11 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
   const abort = useRef<AbortController | null>(null)
   const returnFocus = useRef(false)
   const hydrated = useRef(false)
+  // Agent d'accueil (site public) : textes du back-office, types de rendez-vous, parcours en cours.
+  const [agent, setAgent] = useState<AgentConfig | null>(null)
+  const [flow, setFlow] = useState<FlowStart | null>(null)
+  const [agentFailed, setAgentFailed] = useState(false)
+  const [agentTry, setAgentTry] = useState(0)
   // Plein écran sur mobile (modal) ; panneau de coin sur ordinateur, page restée accessible.
   const [modal, setModal] = useState(true)
   // Hors connexion : route publique, voix Koraly imposée. Connecté : route et voix choisie du Coach.
@@ -208,6 +214,35 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
 
   useEffect(() => () => abort.current?.abort(), [])
 
+  // Configuration de l'agent chargée à la première ouverture (sans elle : textes par défaut du widget).
+  useEffect(() => {
+    if (!open || isCoach || agent) return
+    let alive = true
+    fetch(`/api/assistant/agent?lang=${locale}`)
+      .then((r) => (r.ok ? (r.json() as Promise<AgentConfig>) : null))
+      .then((c) => {
+        if (!alive) return
+        if (c?.messages) setAgent(c)
+        else setAgentFailed(true)
+      })
+      .catch(() => { if (alive) setAgentFailed(true) })
+    return () => { alive = false }
+  }, [open, isCoach, agent, locale, agentTry])
+
+  const startFlow = (f: FlowStart) => {
+    speech.stop()
+    // Configuration absente (réseau) : nouvel essai au lancement du parcours.
+    if (!agent && agentFailed) {
+      setAgentFailed(false)
+      setAgentTry((n) => n + 1)
+    }
+    setFlow(f)
+  }
+  const endFlow = (text?: string) => {
+    setFlow(null)
+    if (text) setMsgs((prev) => [...prev, { id: uid(), role: 'assistant', content: text }])
+  }
+
   const hideTeaser = () => {
     setTeaser(false)
     try {
@@ -243,6 +278,7 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
     setPending(false)
     setBlocked(null)
     setMsgs([])
+    setFlow(null)
     setInput('')
     field.current?.focus()
   }
@@ -255,12 +291,12 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
       body: JSON.stringify({ locale, messages: history.map(({ role, content: c }) => ({ role, content: c })) }),
       signal: ctrl.signal,
     })
-    const data = (await res.json().catch(() => null)) as { text?: string; cta?: boolean; error?: { message?: string } } | null
+    const data = (await res.json().catch(() => null)) as { text?: string; cta?: boolean; actions?: FlowKind[]; error?: { message?: string } } | null
     const reply = data?.text
     if (!res.ok || !reply) {
       setMsgs((prev) => [...prev, { id: uid(), role: 'assistant', content: data?.error?.message || t('error'), error: true }])
     } else {
-      setMsgs((prev) => [...prev, { id: uid(), role: 'assistant', content: reply, cta: Boolean(data?.cta) }])
+      setMsgs((prev) => [...prev, { id: uid(), role: 'assistant', content: reply, cta: Boolean(data?.cta), actions: data?.actions?.filter((a) => a === 'rdv' || a === 'rappel' || a === 'humain') }])
     }
   }
 
@@ -455,10 +491,30 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
             <div role="log" aria-live="polite" aria-relevant="additions" aria-label={t('logLabel')} className="space-y-3">
               <div className="flex items-start gap-2">
                 <RobotMascot variant="head" size={30} className="mt-0.5" />
-                <div className="max-w-[85%] rounded-2xl rounded-tl-md bg-iris-50 px-3.5 py-2.5 ring-1 ring-iris-100">{isCoach ? t('coach.welcome') : t('welcome')}</div>
+                <div className="max-w-[85%] rounded-2xl rounded-tl-md bg-iris-50 px-3.5 py-2.5 ring-1 ring-iris-100">{isCoach ? t('coach.welcome') : agent?.messages.WELCOME_WEB ?? t('welcome')}</div>
               </div>
 
-              {msgs.length === 0 && !outOfCredits && (
+              {msgs.length === 0 && !isCoach && !flow && (
+                <div className="flex flex-wrap gap-2 pl-9">
+                  {/* Accueil du cahier V2 (§4.2) : questions envoyées telles quelles, ou parcours de l'agent. */}
+                  {([
+                    ['discover', () => send(t('start.discoverQ'))],
+                    ['ask', () => field.current?.focus()],
+                    ['problem', () => send(t('start.problemQ'))],
+                    ['plans', () => send(t('start.plansQ'))],
+                    ['rdv', () => startFlow({ kind: 'rdv' })],
+                    ['human', () => startFlow({ kind: 'humain' })],
+                    ['partner', () => startFlow({ kind: 'rdv', type: 'partenariat' })],
+                    ['join', () => startFlow({ kind: 'rdv', type: 'association' })],
+                  ] as const).map(([key, run]) => (
+                    <button key={key} type="button" onClick={() => void run()} className="rounded-full bg-white px-3 py-1.5 text-left text-[13px] font-semibold text-iris-700 ring-1 ring-iris-200 hover:bg-iris-50">
+                      {t(`start.${key}`)}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {msgs.length === 0 && isCoach && !outOfCredits && (
                 <div className="flex flex-wrap gap-2 pl-9">
                   {suggestions.map((s) => (
                     <button key={s} type="button" onClick={() => send(s)} className="rounded-full bg-white px-3 py-1.5 text-left text-[13px] font-semibold text-iris-700 ring-1 ring-iris-200 hover:bg-iris-50">
@@ -511,6 +567,16 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
                         )}
                       </div>
                     </div>
+                    {!isCoach && m.actions?.length && !flow ? (
+                      <div className="flex flex-wrap gap-2 pl-9">
+                        {m.actions.map((a) => (
+                          <button key={a} type="button" onClick={() => startFlow({ kind: a })} className="inline-flex min-h-[40px] items-center gap-1.5 rounded-full bg-iris-600 px-3.5 text-[13.5px] font-bold text-white hover:bg-iris-700">
+                            {a === 'rdv' ? <CalendarCheck className="h-4 w-4" aria-hidden /> : a === 'rappel' ? <PhoneCall className="h-4 w-4" aria-hidden /> : <UserRound className="h-4 w-4" aria-hidden />}
+                            {t(a === 'rdv' ? 'agent.titleRdv' : a === 'rappel' ? 'agent.titleCallback' : 'agent.titleHuman')}
+                          </button>
+                        ))}
+                      </div>
+                    ) : null}
                     {!isCoach && m.cta && (
                       <div>
                         <Link href={signupPath(locale)} className="flex h-12 w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-iris-600 px-4 text-[15px] font-bold text-white shadow-[0_8px_20px_-10px_rgba(74,53,201,0.8)] hover:bg-iris-700">
@@ -535,7 +601,29 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
                 </div>
               </div>
             )}
-            {!isCoach && lastBot && !pending && (
+            {!isCoach && flow && agent && (
+              <AgentFlow
+                key={`${flow.kind}-${flow.type ?? ''}-${flow.service ?? ''}`}
+                start={flow}
+                config={agent}
+                locale={locale === 'en' || locale === 'pt' ? locale : 'fr'}
+                phone={PHONE}
+                whatsapp={WHATSAPP}
+                onDone={endFlow}
+                onClose={() => endFlow()}
+                onSwitch={startFlow}
+              />
+            )}
+            {!isCoach && flow && !agent && (
+              agentFailed ? (
+                <p role="alert" className="mt-3 rounded-xl bg-alert-50 px-3 py-2 text-[13.5px] text-alert-800">
+                  {t('agent.unavailable')} <a className="font-semibold underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                </p>
+              ) : (
+                <p role="status" className="mt-3 text-[13.5px] text-night-600">{t('agent.loadingSlots')}</p>
+              )
+            )}
+            {!isCoach && lastBot && !pending && !flow && (
               <div className="mt-3 rounded-2xl bg-white p-3 ring-1 ring-night-100">
                 <p className="mb-2 text-[13px] font-bold text-night-700">{t('otherWays')}</p>
                 <div className="space-y-2">
@@ -561,6 +649,14 @@ export function AssistantWidget({ coach }: { coach?: CoachLink } = {}) {
                       <span className="flex flex-col leading-tight">{t('call')}<span className="text-[12px] font-medium">{t('soon')}</span></span>
                     </button>
                   )}
+                  <button type="button" onClick={() => startFlow({ kind: 'rdv' })} className={cn(contactBtn, 'bg-white text-night-800 ring-night-200 hover:bg-night-50')}>
+                    <CalendarCheck className="h-5 w-5 shrink-0 text-iris-600" aria-hidden />
+                    {t('agent.titleRdv')}
+                  </button>
+                  <button type="button" onClick={() => startFlow({ kind: 'rappel' })} className={cn(contactBtn, 'bg-white text-night-800 ring-night-200 hover:bg-night-50')}>
+                    <PhoneCall className="h-5 w-5 shrink-0 text-iris-600" aria-hidden />
+                    {t('agent.titleCallback')}
+                  </button>
                   <a href={`mailto:${CONTACT_EMAIL}`} className={cn(contactBtn, 'bg-white text-night-800 ring-night-200 hover:bg-night-50')}>
                     <Mail className="h-5 w-5 shrink-0 text-night-600" aria-hidden />
                     <span className="flex min-w-0 flex-col leading-tight">

@@ -3,7 +3,10 @@
  *
  * Corps JSON (≤ 16 Ko) : { messages: [{ role: 'user'|'assistant', content }...] (dernier = user,
  * ≤ 800 caractères), locale?: 'fr'|'en'|'pt' }.
- * Réponse : { text, cta, demo } — `cta` : afficher le bouton « Créer mon compte gratuitement ».
+ * Réponse : { text, cta, actions, demo } — `cta` : bouton « Créer mon compte gratuitement » ;
+ * `actions` : parcours de l'agent d'accueil à proposer (rdv, rappel, humain — lib/agent).
+ * La base de connaissances publiée (back-office, 0640) complète les faits produit du prompt ; sans IA,
+ * la fiche la plus proche répond avant les réponses prédéfinies.
  *
  * Garde-fous : même origine + JSON (anti-CSRF), limiteur par IP (par minute et par jour, partagé en
  * base) et plafond quotidien global (au-delà, ou limiteur indisponible : réponses prédéfinies), historique tronqué, prompt limité à la présentation du produit (lib/ai/assistant.ts),
@@ -17,8 +20,11 @@ import { clientIp, ipKey, rateLimit, rateLimitedResponse } from '@/lib/data/serv
 import { AI_MODEL, fallbackParams, getAnthropic, logAiCall, mapAiError } from '@/lib/ai/client'
 import {
   ASSISTANT_MAX_BODY, ASSISTANT_MAX_CHARS, ASSISTANT_PROMPT_VERSION, AssistantBodySchema,
-  assistantSystemPrompt, fallbackAssistantAnswer, neutralizeVisitorText, splitCta, trimAssistantHistory,
+  assistantSystemPrompt, detectTopic, fallbackAssistantAnswer, neutralizeVisitorText, splitAnswer, trimAssistantHistory,
 } from '@/lib/ai/assistant'
+import { kbForPrompt, matchKb } from '@/lib/agent/core'
+import { insertEvent } from '@/lib/agent/repo'
+import { liveKb } from '@/lib/agent/server'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -39,6 +45,12 @@ const MESSAGES: Record<Locale, { invalid: string; tooLong: string; unavailable: 
   fr: { invalid: 'Message invalide.', tooLong: `Votre message est trop long (${ASSISTANT_MAX_CHARS} caractères au maximum).`, unavailable: "L'assistant est momentanément indisponible. Écrivez-nous à contact@lienparental.fr." },
   en: { invalid: 'Invalid message.', tooLong: `Your message is too long (${ASSISTANT_MAX_CHARS} characters maximum).`, unavailable: 'The assistant is temporarily unavailable. Write to us at contact@lienparental.fr.' },
   pt: { invalid: 'Mensagem inválida.', tooLong: `Sua mensagem é longa demais (${ASSISTANT_MAX_CHARS} caracteres no máximo).`, unavailable: 'O assistente está temporariamente indisponível. Escreva para contact@lienparental.fr.' },
+}
+
+/** Intention (cahier V2 §2.2) déduite du thème, pour les statistiques seulement. */
+const INTENT: Record<ReturnType<typeof detectTopic>, string> = {
+  pricing: 'PRICING', features: 'FEATURE', guide: 'NAVIGATION', signup: 'ACCOUNT_HELP', contact: 'HUMAN',
+  security: 'FEATURE', legal: 'SENSITIVE', default: 'PRESENTATION',
 }
 
 export async function POST(req: Request) {
@@ -70,14 +82,18 @@ export async function POST(req: Request) {
   if (!question || question.role !== 'user') return jsonError(422, 'invalid_body', m.invalid)
   if (question.content.length > ASSISTANT_MAX_CHARS) return jsonError(413, 'message_too_long', m.tooLong)
 
-  if (!AI_ENABLED) {
-    return jsonOk({ ...splitCta(fallbackAssistantAnswer(question.content, locale)), demo: true })
+  const kb = await liveKb(locale).catch(() => [])
+  const intent = INTENT[detectTopic(question.content)]
+  // Réponse sans IA : fiche publiée la plus proche, sinon réponse prédéfinie.
+  const offline = (demo: boolean) => {
+    const hit = matchKb(question.content, kb, locale)
+    void insertEvent({ channel: 'web', locale, kind: hit ? 'answer_kb' : 'answer_fallback', intent })
+    return jsonOk({ ...splitAnswer(hit ? hit.answer : fallbackAssistantAnswer(question.content, locale)), demo })
   }
+  if (!AI_ENABLED) return offline(true)
   // Plafond global (fail-closed) : le visiteur reçoit une réponse prédéfinie plutôt qu'une erreur.
   const global = await rateLimit('assistant-global:all', GLOBAL_PER_DAY, 86_400_000, { failClosed: true })
-  if (!global.ok) {
-    return jsonOk({ ...splitCta(fallbackAssistantAnswer(question.content, locale)), demo: true })
-  }
+  if (!global.ok) return offline(true)
 
   const started = Date.now()
   try {
@@ -85,7 +101,7 @@ export async function POST(req: Request) {
       {
         model: MODEL,
         max_tokens: MAX_TOKENS,
-        system: [{ type: 'text', text: assistantSystemPrompt(locale), cache_control: { type: 'ephemeral' } }],
+        system: [{ type: 'text', text: assistantSystemPrompt(locale, kbForPrompt(kb, locale)), cache_control: { type: 'ephemeral' } }],
         messages: history.map((t) =>
           t.role === 'assistant'
             ? { role: 'assistant' as const, content: t.content }
@@ -102,14 +118,15 @@ export async function POST(req: Request) {
     })
     const text = msg.content.map((b) => (b.type === 'text' ? b.text : '')).join('').trim()
     // Refus ou réponse vide : repli prédéfini plutôt qu'un message d'erreur au visiteur.
-    if (msg.stop_reason === 'refusal' || !text) {
-      return jsonOk({ ...splitCta(fallbackAssistantAnswer(question.content, locale)), demo: false })
-    }
-    return jsonOk({ ...splitCta(text), demo: false })
+    if (msg.stop_reason === 'refusal' || !text) return offline(false)
+    const answer = splitAnswer(text)
+    void insertEvent({ channel: 'web', locale, kind: answer.actions.includes('humain') ? 'answer_escalated' : 'answer_ai', intent })
+    return jsonOk({ ...answer, demo: false })
   } catch (err) {
     const f = mapAiError(err)
     logAiCall({ route: 'assistant', model: MODEL, promptVersion: ASSISTANT_PROMPT_VERSION, effort: 'low', latencyMs: Date.now() - started, stopReason: null, error: f.code })
     if (f.code === 'aborted') return jsonError(499, 'aborted', m.invalid)
+    void insertEvent({ channel: 'web', locale, kind: 'ai_error', intent })
     return jsonError(503, f.code, m.unavailable, f.retryAfter ? { 'Retry-After': String(f.retryAfter) } : undefined)
   }
 }

@@ -1232,7 +1232,51 @@
       "voiceLimit": "Vous avez atteint la limite d’écoute sans compte.",
       "voiceLimitCta": "Créez un compte gratuit pour écouter plus de réponses",
       "micDenied": "Le micro n’est pas autorisé. Autorisez-le dans les réglages du navigateur, ou utilisez le micro 🎤 de votre clavier.",
-      "micNothing": "Je n’ai rien entendu. Appuyez sur le micro, parlez distinctement, puis attendez que le texte s’écrive. Vous pouvez aussi utiliser le micro 🎤 de votre clavier."
+      "micNothing": "Je n’ai rien entendu. Appuyez sur le micro, parlez distinctement, puis attendez que le texte s’écrive. Vous pouvez aussi utiliser le micro 🎤 de votre clavier.",
+      "agent": {
+        "titleRdv": "Prendre rendez-vous",
+        "titleCallback": "Être rappelé",
+        "titleHuman": "Parler à un représentant",
+        "cancel": "Fermer ce parcours",
+        "name": "Nom et prénom",
+        "phone": "Téléphone",
+        "email": "E-mail",
+        "optional": "facultatif",
+        "emailHint": "Obligatoire : vous recevrez un lien pour confirmer le rendez-vous (valable 30 minutes), puis pour le modifier ou l’annuler.",
+        "reason": "Motif en quelques mots",
+        "topic": "Sujet de votre demande",
+        "consent": "Je souhaite recevoir un rappel 24 h et 2 h avant le rendez-vous.",
+        "privacy": "Vos coordonnées servent uniquement à ce rendez-vous ou à ce rappel ; elles sont supprimées au plus tard 12 mois après.",
+        "confirm": "Confirmer le rendez-vous",
+        "otherSlot": "Choisir un autre créneau",
+        "moreSlots": "Voir d’autres créneaux",
+        "loadingSlots": "Recherche des créneaux…",
+        "tz": "heure de Cayenne",
+        "ref": "Référence",
+        "slotTaken": "Ce créneau vient d’être pris. Choisissez-en un autre.",
+        "error": "La demande n’a pas abouti. Réessayez dans un instant.",
+        "sendCallback": "Demander à être rappelé",
+        "askService": "Pour quel sujet souhaitez-vous parler à un représentant ?",
+        "checking": "Je vérifie qui est disponible…",
+        "callNow": "Appeler maintenant",
+        "whatsapp": "Continuer sur WhatsApp",
+        "whatsappText": "Bonjour, je viens du site Lien Parental et je souhaite parler à un représentant.",
+        "emailNotSent": "L’e-mail de confirmation n’a pas pu partir. Réessayez dans un instant ou écrivez-nous.",
+        "unavailable": "Ce service est momentanément indisponible. Écrivez-nous à"
+      },
+      "start": {
+        "discover": "Découvrir Lien Parental",
+        "ask": "Poser une question",
+        "problem": "J’ai un problème",
+        "plans": "Voir les abonnements",
+        "rdv": "Prendre rendez-vous",
+        "human": "Parler à un représentant",
+        "partner": "Devenir partenaire",
+        "join": "Rejoindre l’association",
+        "discoverQ": "Pouvez-vous me présenter Lien Parental ?",
+        "problemQ": "J’ai un problème avec Lien Parental.",
+        "plansQ": "Quels sont les abonnements et leurs tarifs ?"
+      }
     }
   }
 }
