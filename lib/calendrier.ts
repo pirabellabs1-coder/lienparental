@@ -3,6 +3,7 @@
 // filtré par household + range de dates. Les helpers date/heure restent purs.
 
 import { intlLocale } from '@/lib/i18n/config'
+import { expandSeries, parseRule, type EventStatus, type Occurrence } from '@/lib/recurrence'
 import {
   DEFAULT_TZ, addDaysToKey, currentTz, dateToDayKey, dayKeyInTz, dayKeyToDate, timeInTz, todayKey, wallTimeToIso,
   type InstantInput,
@@ -72,16 +73,123 @@ export type CalendarEvent = {
   familyShared?: boolean
   /** Renseigné quand l'événement vient d'un AUTRE adulte lié : lecture seule (seul l'auteur modifie). */
   sharedBy?: { prenom: string }
+  /** Statut (0660) : prévu, confirmé, reporté, annulé, réalisé. Absent = prévu. */
+  status?: EventStatus
+  /**
+   * Série récurrente (0660). Sur la série elle-même (lecture d'un événement par son id) : `rule`
+   * et `tz` seuls. Sur une occurrence (listes du calendrier) : id = « idSérie~début prévu (ms) »,
+   * `seriesId` et `occurrence` (début prévu, clé stable même si l'occurrence est déplacée).
+   */
+  recurrence?: { rule: string; tz: string; seriesId?: string; occurrence?: string; seriesStart?: string; seriesEnd?: string }
 }
 
-export type ReminderKey = 'none' | '15m' | '1h' | 'eve20'
+export type ReminderKey = 'none' | '5m' | '15m' | '30m' | '1h' | '1d' | '2d' | 'eve20'
+
+/** Délai fixe (minutes) des rappels « X avant » ; « la veille à 20 h » est calculé à part. */
+export const REMINDER_MINUTES: Partial<Record<ReminderKey, number>> = { '5m': 5, '15m': 15, '30m': 30, '1h': 60, '1d': 1440, '2d': 2880 }
 
 export const REMINDER_OPTIONS: { value: ReminderKey; label: string }[] = [
   { value: 'none',  label: 'Aucun rappel' },
+  { value: '5m',    label: '5 minutes avant' },
   { value: '15m',   label: '15 minutes avant' },
+  { value: '30m',   label: '30 minutes avant' },
   { value: '1h',    label: '1 heure avant' },
+  { value: '1d',    label: '1 jour avant' },
+  { value: '2d',    label: '2 jours avant' },
   { value: 'eve20', label: 'La veille à 20h' },
 ]
+
+/**
+ * Occurrence modifiée d'une série (0660, calendar_event_exceptions) : supprimée, déplacée (reportée),
+ * texte ou statut propre. `occurrence` = début prévu par la règle.
+ */
+export type OccurrenceException = {
+  occurrence: string
+  deleted: boolean
+  start?: string
+  end?: string
+  title?: string
+  location?: string
+  description?: string
+  status?: EventStatus
+}
+
+const overlaps = (start: string, end: string, from: string, to: string) =>
+  Date.parse(end) > Date.parse(from) && Date.parse(start) < Date.parse(to)
+  || (Date.parse(start) === Date.parse(end) && Date.parse(start) >= Date.parse(from) && Date.parse(start) < Date.parse(to))
+
+function occurrenceEvent(master: CalendarEvent, o: Occurrence, ex: OccurrenceException | undefined): CalendarEvent {
+  const moved = Boolean(ex?.start && Date.parse(ex.start) !== Date.parse(o.start))
+  return {
+    ...master,
+    id: occurrenceId(master.id, o.key),
+    start: ex?.start ?? o.start,
+    end: ex?.end ?? o.end,
+    title: ex?.title ?? master.title,
+    location: ex?.location ?? master.location,
+    description: ex?.description ?? master.description,
+    status: ex?.status ?? (moved ? 'reporte' : master.status),
+    recurrence: { ...master.recurrence!, seriesId: master.id, occurrence: o.key, seriesStart: master.start, seriesEnd: master.end },
+  }
+}
+
+/**
+ * Événements à afficher sur [from, to[ : un événement ponctuel tel quel (s'il chevauche la période),
+ * une série développée en occurrences (exceptions appliquées, occurrences supprimées retirées,
+ * occurrences déplacées DANS la période depuis un autre jour ajoutées). Règle illisible : ponctuel.
+ */
+export function expandEvent(master: CalendarEvent, exceptions: OccurrenceException[], from: string, to: string): CalendarEvent[] {
+  const rule = master.recurrence ? parseRule(master.recurrence.rule) : null
+  if (!rule || !master.recurrence || master.recurrence.occurrence) return overlaps(master.start, master.end, from, to) ? [master] : []
+  const series = { start: master.start, end: master.end, tz: master.recurrence.tz, rule }
+  const byKey = new Map(exceptions.map((e) => [Date.parse(e.occurrence), e]))
+  const out: CalendarEvent[] = []
+  const seen = new Set<number>()
+  for (const o of expandSeries(series, from, to)) {
+    const k = Date.parse(o.key)
+    seen.add(k)
+    const ex = byKey.get(k)
+    if (ex?.deleted) continue
+    if (ex?.start && ex.end && !overlaps(ex.start, ex.end, from, to)) continue // déplacée hors de la période
+    out.push(occurrenceEvent(master, o, ex))
+  }
+  for (const ex of exceptions) {
+    const k = Date.parse(ex.occurrence)
+    if (ex.deleted || !ex.start || !ex.end || seen.has(k) || !overlaps(ex.start, ex.end, from, to)) continue
+    const original = findOccurrence(master, ex.occurrence)
+    if (original) out.push(occurrenceEvent(master, original, ex))
+  }
+  return out.sort((a, b) => Date.parse(a.start) - Date.parse(b.start))
+}
+
+/** Occurrence prévue par la règle à cet instant précis (null si la série n'en prévoit pas). */
+export function findOccurrence(master: CalendarEvent, occurrence: string): Occurrence | null {
+  const rule = master.recurrence ? parseRule(master.recurrence.rule) : null
+  if (!rule || !master.recurrence) return null
+  const ms = Date.parse(occurrence)
+  const found = expandSeries({ start: master.start, end: master.end, tz: master.recurrence.tz, rule }, new Date(ms - 1).toISOString(), new Date(ms + 1).toISOString())
+  return found.find((o) => Date.parse(o.key) === ms) ?? null
+}
+
+/** Une occurrence d'une série (exception appliquée), ou null si elle n'existe pas ou a été supprimée. */
+export function occurrenceOf(master: CalendarEvent, occurrence: string, ex: OccurrenceException | undefined): CalendarEvent | null {
+  if (ex?.deleted) return null
+  const o = findOccurrence(master, occurrence)
+  return o ? occurrenceEvent(master, o, ex) : null
+}
+
+/** Identifiant d'occurrence : « idSérie~début prévu en ms ». */
+export const OCCURRENCE_SEP = '~'
+export function occurrenceId(seriesId: string, occurrenceStart: string): string {
+  return `${seriesId}${OCCURRENCE_SEP}${Date.parse(occurrenceStart)}`
+}
+export function parseOccurrenceId(id: string): { seriesId: string; occurrence: string } | null {
+  const i = id.lastIndexOf(OCCURRENCE_SEP)
+  if (i <= 0) return null
+  const ms = Number(id.slice(i + 1))
+  if (!Number.isSafeInteger(ms)) return null
+  return { seriesId: id.slice(0, i), occurrence: new Date(ms).toISOString() }
+}
 
 // --- Date helpers ----------------------------------------------------------
 // Un « jour » du calendrier est une Date à MIDI UTC (cf. lib/tz → dayKeyToDate) :

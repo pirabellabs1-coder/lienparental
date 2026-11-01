@@ -14,6 +14,7 @@ import { dispatch } from './core'
 import { CHANNELS, isNotifyEvent, type Channel } from './events'
 import { realDeps, serviceDb } from './server'
 import { recordSessionFromServer } from './login'
+import { enqueueRecurringReminders } from './recurring'
 
 type JobRow = {
   id: number
@@ -86,6 +87,8 @@ export async function runNotificationsCron(opts: { budgetMs?: number; batch?: nu
   const { data: reminders, error: remErr } = await db.rpc('notif_enqueue_calendar_reminders', { p_limit: 500 })
   if (remErr) console.warn('[notify] rappels du calendrier non planifiés', { code: remErr.code })
   else report.reminders = typeof reminders === 'number' ? reminders : 0
+  // Séries récurrentes (0660) : une occurrence à la fois, développées ici (lib/recurrence).
+  report.reminders += await enqueueRecurringReminders(db)
 
   for (;;) {
     if (Date.now() - started > budget) { report.truncated = true; break }

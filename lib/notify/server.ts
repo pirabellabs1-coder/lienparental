@@ -20,6 +20,8 @@ import { sendPushToUser } from './push'
 import { toLocale } from '@/lib/email/i18n'
 import { tzFromPreferencesRow } from '@/lib/timezones'
 import { isModerationKind, isModerationReason } from '@/lib/admin/ops/moderation'
+import { occurrenceId, occurrenceOf, type CalendarEvent } from '@/lib/calendrier'
+import { toException, type ExceptionRow } from './recurring'
 
 const str = (v: unknown): string => (typeof v === 'string' ? v : '')
 const UUID = /^[0-9a-f-]{36}$/i
@@ -47,6 +49,28 @@ async function calendarFor(db: SupabaseClient, userId: string, eventId: string |
   if (error) throw new Error(`calendar_${error.code ?? 'error'}`)
   const row = (Array.isArray(data) ? data[0] : data) as CalendarRow | undefined
   return row && row.visible ? row : null
+}
+
+/** Occurrence d'une série au moment de la livraison (exception appliquée), ou null si elle n'a plus lieu. */
+async function recurringOccurrence(db: SupabaseClient, eventId: string, occurrence: string): Promise<{ occurrence: string; start: string; title?: string } | null> {
+  if (Number.isNaN(Date.parse(occurrence))) return null
+  const [{ data: row, error }, { data: exc, error: excErr }] = await Promise.all([
+    db.from('calendar_events').select('start_at, end_at, rrule, tzid, deleted_at').eq('id', eventId).maybeSingle(),
+    db.from('calendar_event_exceptions').select('event_id, occurrence_start, deleted, start_at, end_at, status, titre')
+      .eq('event_id', eventId).eq('occurrence_start', new Date(occurrence).toISOString()).maybeSingle(),
+  ])
+  if (error || excErr) throw new Error(`calendar_${(error ?? excErr)?.code ?? 'error'}`)
+  const r = row as { start_at: string; end_at: string | null; rrule: string | null; tzid: string; deleted_at: string | null } | null
+  if (!r || r.deleted_at || !r.rrule) return null
+  const master: CalendarEvent = {
+    id: eventId, title: '', type: 'autre', start: r.start_at,
+    end: r.end_at ?? new Date(Date.parse(r.start_at) + 3_600_000).toISOString(),
+    recurrence: { rule: r.rrule, tz: r.tzid },
+  }
+  const e = exc as (ExceptionRow & { titre: string | null }) | null
+  const occ = occurrenceOf(master, occurrence, e ? toException(e) : undefined)
+  if (!occ || occ.status === 'annule') return null
+  return { occurrence: new Date(occurrence).toISOString(), start: new Date(occ.start).toISOString(), ...(e?.titre ? { title: e.titre } : {}) }
 }
 
 export function realDeps(db: SupabaseClient): DispatchDeps {
@@ -124,6 +148,12 @@ export function realDeps(db: SupabaseClient): DispatchDeps {
           const id = uuid(payload.event_id)
           const ev = await calendarFor(db, userId, id)
           if (!ev || ev.deleted) return null
+          // Occurrence d'une série (0660) : toujours prévue, à la même heure, ni supprimée ni annulée.
+          if (payload.occurrence) {
+            const occ = await recurringOccurrence(db, id!, str(payload.occurrence))
+            if (!occ || Date.parse(str(payload.start_at)) !== Date.parse(occ.start)) return null
+            return { event, eventId: occurrenceId(id!, occ.occurrence), titre: occ.title ?? ev.titre, startAt: occ.start, allDay: ev.all_day, kind: ev.type, childName: ev.child_name }
+          }
           // Événement déplacé depuis la mise en file : un autre rappel suivra.
           if (payload.start_at && Date.parse(str(payload.start_at)) !== Date.parse(ev.start_at)) return null
           return { event, eventId: id!, titre: ev.titre, startAt: ev.start_at, allDay: ev.all_day, kind: ev.type, childName: ev.child_name }

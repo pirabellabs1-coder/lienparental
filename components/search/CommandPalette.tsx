@@ -160,7 +160,7 @@ async function loadLiveSource(vaultOpen: boolean): Promise<IndexSource> {
   const none = Promise.resolve([] as never[])
   const [journal, events, docs, requests, categories] = await Promise.allSettled([
     listJournal(),
-    listEvents(),
+    listEvents({ expand: false }),
     vaultOpen ? listDocuments() : none,
     vaultOpen ? listTestimonyRequests() : none,
     vaultOpen ? listCategories() : none,

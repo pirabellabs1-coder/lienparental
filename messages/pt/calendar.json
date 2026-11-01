@@ -34,8 +34,12 @@
     },
     "reminderOptions": {
       "none": "Sem lembrete",
+      "5m": "5 minutos antes",
       "15m": "15 minutos antes",
+      "30m": "30 minutos antes",
       "1h": "1 hora antes",
+      "1d": "1 dia antes",
+      "2d": "2 dias antes",
       "eve20": "Na véspera às 20h"
     },
     "countdown": {
@@ -91,7 +95,29 @@
       "toJournal": "Converter em registro do diário",
       "confirmTitle": "Excluir este evento?",
       "confirmDesc": "Esta ação é definitiva. Os lembretes vinculados serão cancelados.",
-      "confirmLabel": "Excluir"
+      "confirmLabel": "Excluir",
+      "repeat": "Repetição",
+      "status": "Status",
+      "statusLabel": "Status deste evento",
+      "statusSaved": "Status atualizado.",
+      "statuses": {
+        "prevu": "Previsto",
+        "confirme": "Confirmado",
+        "reporte": "Adiado",
+        "annule": "Cancelado",
+        "realise": "Realizado"
+      },
+      "editScopeTitle": "Editar um evento recorrente",
+      "deleteScopeTitle": "Excluir um evento recorrente",
+      "scope": {
+        "one": "Somente este evento",
+        "following": "Este e os seguintes",
+        "all": "A série inteira"
+      },
+      "deleteOneDesc": "Somente a data de {date} será removida. As outras continuam previstas.",
+      "deleteFollowingDesc": "A data de {date} e todas as seguintes serão removidas.",
+      "deleteAllDesc": "Todas as datas desta série serão excluídas.",
+      "wallTime": "{time}, horário de {tz}"
     },
     "agenda": {
       "title": "Adicionar à agenda",
@@ -141,7 +167,15 @@
       "healthHint": "A consulta aparecerá no espaço Saúde da criança.",
       "reminderLabel": "Lembrete",
       "familyLabel": "Visível para o outro responsável",
-      "save": "Salvar"
+      "save": "Salvar",
+      "startLabel": "Início",
+      "endLabel": "Fim",
+      "tzLine": "Fuso horário: {tz}",
+      "tzChange": "Alterar",
+      "scopeOne": "Você altera apenas a data de {date}. As outras datas da série não mudam.",
+      "scopeFollowing": "Você altera a série a partir de {date}. As datas anteriores não mudam.",
+      "scopeAll": "Você altera a série inteira: cada data será atualizada.",
+      "endError": "O fim deve ser depois do início (no máximo 14 dias)."
     },
     "settings": {
       "title": "Configurações dos lembretes",
@@ -376,6 +410,83 @@
       "back": "Voltar",
       "continue": "Continuar",
       "savePlan": "Salvar a agenda"
+    },
+    "recurrence": {
+      "title": "Repetição",
+      "presets": {
+        "none": "Uma única vez",
+        "daily": "Todos os dias",
+        "weekly": "Toda semana",
+        "biweekly": "A cada duas semanas",
+        "monthly": "Todo mês",
+        "yearly": "Todo ano",
+        "holidays": "Durante as férias escolares",
+        "custom": "Personalizada…"
+      },
+      "every": "Repetir a cada",
+      "unitLabel": "Unidade",
+      "units": {
+        "DAILY": "{count, plural, one {dia} other {dias}}",
+        "WEEKLY": "{count, plural, one {semana} other {semanas}}",
+        "MONTHLY": "{count, plural, one {mês} other {meses}}",
+        "YEARLY": "{count, plural, one {ano} other {anos}}"
+      },
+      "days": "Dias da semana",
+      "monthlyLabel": "Dia do mês",
+      "monthlyDay": "No dia {day} do mês",
+      "monthlyNth": "{weekday} da {nth} semana do mês",
+      "nth": {
+        "1": "1ª",
+        "2": "2ª",
+        "3": "3ª",
+        "4": "4ª",
+        "last": "última"
+      },
+      "zone": "Calendário escolar",
+      "part": "Período",
+      "parts": {
+        "ALL": "Férias inteiras",
+        "FIRST": "1ª metade",
+        "SECOND": "2ª metade"
+      },
+      "years": "Anos",
+      "yearsOptions": {
+        "ALL": "Todos os anos",
+        "EVEN": "Anos pares",
+        "ODD": "Anos ímpares"
+      },
+      "holidayHint": "Datas oficiais conhecidas até {date}. Cada período pode depois ser ajustado manualmente.",
+      "endLabel": "Fim da repetição",
+      "end": {
+        "never": "Nunca",
+        "until": "Em uma data",
+        "count": "Após X vezes"
+      },
+      "untilLabel": "Último dia incluído",
+      "countLabel": "Número de vezes",
+      "countSuffix": "{count, plural, one {vez} other {vezes}}",
+      "preview": "Próximas datas",
+      "previewNone": "Nenhuma data com essas configurações.",
+      "previewMore": "… e assim por diante.",
+      "summary": {
+        "daily": "{count, plural, one {Todos os dias} other {A cada # dias}}",
+        "weekly": "{count, plural, one {Toda semana} other {A cada # semanas}}: {days}",
+        "monthlyDay": "{count, plural, one {Todo mês} other {A cada # meses}}, no dia {day}",
+        "monthlyNth": "{count, plural, one {Todo mês} other {A cada # meses}}, {weekday} da {nth} semana",
+        "yearly": "{count, plural, one {Todo ano} other {A cada # anos}}",
+        "holidays": "Férias escolares ({zone}) · {part} · {years}",
+        "until": "{rule}, até {date}",
+        "count": "{rule}, {count, plural, one {# vez} other {# vezes}}"
+      },
+      "badge": "Evento recorrente",
+      "zones": {
+        "guyane": "Guiana Francesa",
+        "martinique": "Martinica",
+        "guadeloupe": "Guadalupe",
+        "A": "França metropolitana, zona A",
+        "B": "França metropolitana, zona B",
+        "C": "França metropolitana, zona C"
+      }
     }
   }
 }

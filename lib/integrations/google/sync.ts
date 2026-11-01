@@ -20,7 +20,7 @@ import { googleOAuthConfig } from './config'
 import { openToken, sealToken } from './crypto'
 import { refreshAccessToken, revokeToken } from './oauth'
 import * as store from './store'
-import { toGoogleEvent, type EventRow } from './event-body'
+import { isGoogleSyncable, toGoogleEvent, type EventRow } from './event-body'
 import { tzFromPreferencesRow } from '@/lib/timezones'
 
 
@@ -109,7 +109,7 @@ class GoogleSession {
 // un événement d'autrui serait recopié dans l'agenda Google de l'appelant.
 async function readEvent(userDb: SupabaseClient, userId: string, eventId: string): Promise<EventRow | null> {
   const { data, error } = await userDb.from('calendar_events')
-    .select('id, type, titre, description, lieu, start_at, end_at, reminder_minutes, deleted_at')
+    .select('id, type, titre, description, lieu, start_at, end_at, reminder_minutes, deleted_at, rrule, tzid')
     .eq('id', eventId).eq('user_id', userId).maybeSingle()
   if (error) throw new TransientError(`db:${error.code ?? 'read'}`)
   return (data as EventRow | null) ?? null
@@ -118,7 +118,7 @@ async function readEvent(userDb: SupabaseClient, userId: string, eventId: string
 async function reconcile(s: GoogleSession, userDb: SupabaseClient, eventId: string): Promise<'synced' | 'removed' | 'skipped'> {
   const userId = s.conn.user_id
   const [ev, link] = await Promise.all([readEvent(userDb, userId, eventId), store.getLink(userId, eventId)])
-  const wanted = Boolean(ev && !ev.deleted_at && s.conn.sync_types.includes(ev.type))
+  const wanted = Boolean(ev && !ev.deleted_at && s.conn.sync_types.includes(ev.type) && isGoogleSyncable(ev))
 
   if (!wanted || !ev) {
     if (!link) return 'skipped'
@@ -128,7 +128,15 @@ async function reconcile(s: GoogleSession, userDb: SupabaseClient, eventId: stri
     return 'removed'
   }
 
-  const body = toGoogleEvent(ev, s.conn, s.tz)
+  // Série : occurrences supprimées une à une → EXDATE (les déplacements restent propres à Lien Parental).
+  let removed: string[] = []
+  if (ev.rrule) {
+    const { data: exc, error: excErr } = await userDb.from('calendar_event_exceptions')
+      .select('occurrence_start').eq('event_id', ev.id).eq('deleted', true).limit(500)
+    if (excErr) throw new TransientError(`db:${excErr.code ?? 'read'}`)
+    removed = ((exc ?? []) as { occurrence_start: string }[]).map((r) => r.occurrence_start)
+  }
+  const body = toGoogleEvent(ev, s.conn, s.tz, removed)
 
   if (link) {
     const r = await s.call<GoogleEvent>('PUT', `/calendars/${enc(link.external_calendar_id)}/events/${enc(link.external_event_id)}`, body)
@@ -233,7 +241,7 @@ export async function enqueueUpcoming(userId: string, userDb: SupabaseClient): P
   const from = new Date(Date.now() - 86_400_000).toISOString()
   const to = new Date(Date.now() + 366 * 86_400_000).toISOString()
   const { data, error } = await userDb.from('calendar_events').select('id')
-    .eq('user_id', userId).gte('start_at', from).lt('start_at', to)
+    .eq('user_id', userId).lt('start_at', to).gte('occurs_until', from)
     .order('start_at', { ascending: true }).limit(500)
   if (error) throw new Error(`enqueueUpcoming: ${error.code ?? 'read'}`)
   // Inclut les événements supprimés récemment : leur copie Google sera retirée.
