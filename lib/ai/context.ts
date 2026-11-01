@@ -30,7 +30,8 @@ import { requireVaultUnlocked } from '@/lib/vault-lock'
 import { decryptMedical, isEncryptedPayload, medicalCryptoReady } from '@/lib/data/server/medical-crypto'
 import { ageFromBirthDate, mockChildren, mockJournalEntries } from '@/lib/mock-data'
 import { TESTIMONY_REQUESTS, VAULT_CATEGORIES, VAULT_DOCS, receivedCount } from '@/lib/mock-vault'
-import { EVENTS } from '@/lib/calendrier'
+import { EVENTS, expandEvent, type CalendarEvent } from '@/lib/calendrier'
+import { toException, type ExceptionRow } from '@/lib/notify/recurring'
 import { DEFAULT_TZ, dayKeyInTz, isValidTz, monthKeyInTz, shiftMonthKey, wallClockDate, wallTimeToIso } from '@/lib/tz'
 import { getRequestTz } from '@/lib/tz-server'
 import {
@@ -512,18 +513,42 @@ async function supabaseSnapshot(user: CurrentUser, opts: ContextOptions, today: 
   })
 
   const eventsP = safe(async () => {
+    const from = iso(-EVENTS_PAST_DAYS)
+    const to = iso(EVENTS_NEXT_DAYS)
     const { data, error } = await supabase
       .from('calendar_events')
-      .select('type, titre, description, lieu, start_at, end_at, all_day, children_ids')
+      .select('id, type, titre, description, lieu, start_at, end_at, all_day, children_ids, rrule, tzid')
       // m1 (audit) : jamais les événements partagés par l'autre parent (RLS famille 0340).
       .eq('user_id', user.id)
       .is('deleted_at', null)
-      .gte('start_at', iso(-EVENTS_PAST_DAYS))
-      .lte('start_at', iso(EVENTS_NEXT_DAYS))
+      // Séries récurrentes (0660) : lues par période couverte, puis développées en occurrences.
+      .lte('start_at', to)
+      .gte('occurs_until', from)
       .order('start_at', { ascending: true })
       .limit(MAX_EVENTS)
     if (error) throw error
-    return (data ?? []).map<KbEvent>((r) => ({ start: r.start_at, end: r.end_at, allDay: r.all_day, type: r.type, titre: r.titre, description: r.description, lieu: r.lieu, childIds: r.children_ids ?? [] }))
+    const rows = data ?? []
+    const seriesIds = rows.filter((r) => r.rrule).map((r) => r.id)
+    const exc = seriesIds.length
+      ? ((await supabase.from('calendar_event_exceptions').select('event_id, occurrence_start, deleted, start_at, end_at, status').in('event_id', seriesIds)).data ?? [])
+      : []
+    const out: KbEvent[] = []
+    for (const r of rows) {
+      const base = { allDay: r.all_day, type: r.type, titre: r.titre, description: r.description, lieu: r.lieu, childIds: r.children_ids ?? [] }
+      if (!r.rrule) { out.push({ ...base, start: r.start_at, end: r.end_at }); continue }
+      const master: CalendarEvent = {
+        id: r.id, title: r.titre, type: 'autre', start: r.start_at,
+        end: r.end_at ?? new Date(Date.parse(r.start_at) + 3_600_000).toISOString(),
+        recurrence: { rule: r.rrule, tz: isValidTz(r.tzid) ? r.tzid : DEFAULT_TZ },
+      }
+      const exceptions = exc.filter((e) => e.event_id === r.id).map((e) => toException(e as ExceptionRow))
+      try {
+        for (const o of expandEvent(master, exceptions, from, to)) {
+          if (o.status !== 'annule') out.push({ ...base, start: o.start, end: o.end })
+        }
+      } catch { /* série illisible : ignorée */ }
+    }
+    return out.sort((a, b) => Date.parse(a.start) - Date.parse(b.start)).slice(0, MAX_EVENTS)
   })
 
   // Coffre verrouillé : aucune requête (la base refuserait de toute façon, 0370).

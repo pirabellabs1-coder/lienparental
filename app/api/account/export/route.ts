@@ -29,12 +29,14 @@ const PAGE = 1000
 type TableName = keyof Database['public']['Tables']
 
 /** Tables exportées : nom → colonne propriétaire + colonnes (jamais de secrets). */
-const TABLES: Array<{ table: TableName; owner: 'id' | 'user_id'; columns: string; order: string }> = [
+const TABLES: Array<{ table: TableName; owner: 'id' | 'user_id' | 'owner_id'; columns: string; order: string }> = [
   { table: 'users', owner: 'id', columns: '*', order: 'id' },
   { table: 'preferences', owner: 'user_id', columns: '*', order: 'user_id' },
   { table: 'children', owner: 'user_id', columns: '*', order: 'id' },
   { table: 'journal_entries', owner: 'user_id', columns: '*', order: 'id' },
   { table: 'calendar_events', owner: 'user_id', columns: '*', order: 'id' },
+  { table: 'calendar_event_exceptions', owner: 'user_id', columns: '*', order: 'id' },
+  { table: 'calendar_event_audit', owner: 'owner_id', columns: '*', order: 'id' },
   { table: 'categories', owner: 'user_id', columns: '*', order: 'id' },
   { table: 'documents', owner: 'user_id', columns: '*', order: 'id' },
   { table: 'shares', owner: 'user_id', columns: 'id, document_id, expires_at, revoked_at, download_count, max_downloads, created_at', order: 'id' },

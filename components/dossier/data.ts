@@ -91,7 +91,7 @@ async function loadConversation(): Promise<DossierSource['conversation']> {
 
 export async function loadDossierSource(): Promise<DossierSource> {
   const [profile, children, journal, events, documents, testimonies, conversation] = await Promise.allSettled([
-    loadProfile(), listChildren(), listJournal(), listEvents(), listDocuments(), loadTestimonies(), loadConversation(),
+    loadProfile(), listChildren(), listJournal(), listEvents({ expand: false }), listDocuments(), loadTestimonies(), loadConversation(),
   ])
   const unavailable: string[] = []
   const pick = <T,>(r: PromiseSettledResult<T>, label: string, fallback: T): T => {

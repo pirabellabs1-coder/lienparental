@@ -14,6 +14,7 @@ import { dispatch } from './core'
 import { CHANNELS, isNotifyEvent, type Channel } from './events'
 import { realDeps, serviceDb } from './server'
 import { recordSessionFromServer } from './login'
+import { enqueueRecurringReminders } from './recurring'
 
 type JobRow = {
   id: number
@@ -86,6 +87,12 @@ export async function runNotificationsCron(opts: { budgetMs?: number; batch?: nu
   const { data: reminders, error: remErr } = await db.rpc('notif_enqueue_calendar_reminders', { p_limit: 500 })
   if (remErr) console.warn('[notify] rappels du calendrier non planifiés', { code: remErr.code })
   else report.reminders = typeof reminders === 'number' ? reminders : 0
+  // Séries récurrentes (0660) : une occurrence à la fois, développées ici (lib/recurrence).
+  try {
+    report.reminders += await enqueueRecurringReminders(db)
+  } catch {
+    console.warn('[notify] rappels des séries non planifiés')
+  }
 
   for (;;) {
     if (Date.now() - started > budget) { report.truncated = true; break }
@@ -93,6 +100,7 @@ export async function runNotificationsCron(opts: { budgetMs?: number; batch?: nu
     if (n < batch) break
   }
 
+  await db.rpc('calendar_audit_purge') // historique du calendrier : 24 mois (0660)
   const { data: purged } = await db.rpc('notif_purge_jobs')
   report.purged = typeof purged === 'number' ? purged : 0
   const { data: sessions } = await db.rpc('notif_purge_sessions')

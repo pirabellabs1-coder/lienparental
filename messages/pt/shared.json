@@ -77,7 +77,10 @@
         "dateRequired": "A data é obrigatória.",
         "healthChildRequired": "Escolha a criança desta consulta de saúde.",
         "notAuthor": "Este evento foi compartilhado por outro pai/mãe: somente o autor pode editá-lo ou excluí-lo.",
-        "titleRequired": "Dê um título ao evento."
+        "titleRequired": "Dê um título ao evento.",
+        "endBeforeStart": "O fim deve ser depois do início.",
+        "invalidRule": "Esta repetição não é válida. Verifique a frequência e o fim da repetição.",
+        "occurrenceNotFound": "Esta ocorrência não existe mais na série."
       },
       "children": {
         "firstNameRequired": "O primeiro nome é obrigatório.",

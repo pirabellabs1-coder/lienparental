@@ -77,7 +77,10 @@
         "dateRequired": "The date is required.",
         "healthChildRequired": "Choose the child this health appointment is for.",
         "notAuthor": "This event was shared by another parent: only its author can edit or delete it.",
-        "titleRequired": "Give the event a title."
+        "titleRequired": "Give the event a title.",
+        "endBeforeStart": "The end must be after the start.",
+        "invalidRule": "This repetition isn’t valid. Check the frequency and when it ends.",
+        "occurrenceNotFound": "This occurrence no longer exists in the series."
       },
       "children": {
         "firstNameRequired": "First name is required.",

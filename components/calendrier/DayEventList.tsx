@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Repeat } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { type CalendarEvent } from '@/lib/calendrier'
@@ -27,8 +28,11 @@ export function DayEventList({ events, childNames }: { events: CalendarEvent[]; 
           >
             <EventTypeIcon type={e.type} size="md" className="rounded-xl" />
             <span className="min-w-0 flex-1">
-              <span className="block text-[11px] tabular-nums text-night-600">{f.hourRange(e.start, e.end)}</span>
-              <span className="block truncate text-[13px] font-bold text-night-900">
+              <span className="flex items-center gap-1.5 text-[11px] tabular-nums text-night-600">
+                {f.hourRange(e.start, e.end)}
+                <EventMarks event={e} />
+              </span>
+              <span className={cn('block truncate text-[13px] font-bold text-night-900', e.status === 'annule' && 'text-night-500 line-through')}>
                 {e.title}
                 <span className="sr-only"> ({f.typeLabel(e.type)})</span>
               </span>
@@ -40,6 +44,30 @@ export function DayEventList({ events, childNames }: { events: CalendarEvent[]; 
         </li>
       ))}
     </ul>
+  )
+}
+
+/** Repères d'un événement : série récurrente (icône) et statut s'il n'est pas « prévu ». */
+export function EventMarks({ event }: { event: CalendarEvent }) {
+  const t = useTranslations('calendar')
+  return (
+    <>
+      {event.recurrence && (
+        <Repeat role="img" aria-label={t('recurrence.badge')} className="h-3 w-3 shrink-0 text-night-500" strokeWidth={2.2} />
+      )}
+      {event.status && event.status !== 'prevu' && (
+        <span
+          className={cn(
+            'rounded-full px-1.5 py-px text-[10px] font-bold',
+            event.status === 'annule' ? 'bg-alert-50 text-alert-700'
+              : event.status === 'reporte' ? 'bg-gold-50 text-gold-700'
+                : 'bg-leaf-50 text-leaf-700',
+          )}
+        >
+          {t(`detail.statuses.${event.status}`)}
+        </span>
+      )}
+    </>
   )
 }
 

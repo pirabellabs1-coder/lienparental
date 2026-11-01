@@ -77,7 +77,10 @@
         "dateRequired": "La date est requise.",
         "healthChildRequired": "Choisissez l’enfant concerné par ce rendez-vous santé.",
         "notAuthor": "Cet événement a été partagé par un autre parent : seul son auteur peut le modifier ou le supprimer.",
-        "titleRequired": "Donnez un titre à l'événement."
+        "titleRequired": "Donnez un titre à l'événement.",
+        "endBeforeStart": "La fin doit être après le début.",
+        "invalidRule": "Cette répétition n’est pas valide. Vérifiez la fréquence et la fin de répétition.",
+        "occurrenceNotFound": "Cette occurrence n’existe plus dans la série."
       },
       "children": {
         "firstNameRequired": "Le prénom est requis.",

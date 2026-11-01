@@ -63,6 +63,8 @@ export type GoogleEventBody = {
   location?: string
   start: { dateTime: string; timeZone: string }
   end: { dateTime: string; timeZone: string }
+  /** RRULE / EXDATE (RFC 5545) d'une série. */
+  recurrence?: string[]
   reminders: { useDefault: boolean; overrides?: { method: 'popup'; minutes: number }[] }
   extendedProperties: { private: Record<string, string> }
   source?: { title: string; url: string }

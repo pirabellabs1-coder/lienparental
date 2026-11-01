@@ -34,8 +34,12 @@
     },
     "reminderOptions": {
       "none": "No reminder",
+      "5m": "5 minutes before",
       "15m": "15 minutes before",
+      "30m": "30 minutes before",
       "1h": "1 hour before",
+      "1d": "1 day before",
+      "2d": "2 days before",
       "eve20": "The day before at 8 PM"
     },
     "countdown": {
@@ -91,7 +95,29 @@
       "toJournal": "Convert to a journal entry",
       "confirmTitle": "Delete this event?",
       "confirmDesc": "This action is permanent. Related reminders will be cancelled.",
-      "confirmLabel": "Delete"
+      "confirmLabel": "Delete",
+      "repeat": "Repeat",
+      "status": "Status",
+      "statusLabel": "Status of this event",
+      "statusSaved": "Status updated.",
+      "statuses": {
+        "prevu": "Scheduled",
+        "confirme": "Confirmed",
+        "reporte": "Postponed",
+        "annule": "Cancelled",
+        "realise": "Done"
+      },
+      "editScopeTitle": "Edit a recurring event",
+      "deleteScopeTitle": "Delete a recurring event",
+      "scope": {
+        "one": "This event only",
+        "following": "This and following events",
+        "all": "The whole series"
+      },
+      "deleteOneDesc": "Only the {date} occurrence will be removed. The others stay scheduled.",
+      "deleteFollowingDesc": "The {date} occurrence and all following ones will be removed.",
+      "deleteAllDesc": "Every date in this series will be deleted.",
+      "wallTime": "{time}, {tz} time"
     },
     "agenda": {
       "title": "Add to calendar",
@@ -141,7 +167,15 @@
       "healthHint": "The appointment will appear in the child’s Health space.",
       "reminderLabel": "Reminder",
       "familyLabel": "Visible to the other parent",
-      "save": "Save"
+      "save": "Save",
+      "startLabel": "Start",
+      "endLabel": "End",
+      "tzLine": "Time zone: {tz}",
+      "tzChange": "Change",
+      "scopeOne": "You’re only changing the {date} occurrence. Other dates in the series stay the same.",
+      "scopeFollowing": "You’re changing the series from {date} onwards. Earlier dates stay the same.",
+      "scopeAll": "You’re changing the whole series: every date will be updated.",
+      "endError": "The end must be after the start (14 days at most)."
     },
     "settings": {
       "title": "Reminder settings",
@@ -386,6 +420,84 @@
       "back": "Back",
       "continue": "Continue",
       "savePlan": "Save schedule"
+    },
+    "recurrence": {
+      "title": "Repeat",
+      "presets": {
+        "none": "Does not repeat",
+        "daily": "Every day",
+        "weekly": "Every week",
+        "biweekly": "Every two weeks",
+        "monthly": "Every month",
+        "yearly": "Every year",
+        "holidays": "During school holidays",
+        "custom": "Custom…"
+      },
+      "every": "Repeat every",
+      "unitLabel": "Unit",
+      "units": {
+        "DAILY": "{count, plural, one {day} other {days}}",
+        "WEEKLY": "{count, plural, one {week} other {weeks}}",
+        "MONTHLY": "{count, plural, one {month} other {months}}",
+        "YEARLY": "{count, plural, one {year} other {years}}"
+      },
+      "days": "Days of the week",
+      "monthlyLabel": "Day of the month",
+      "monthlyDay": "On day {day} of the month",
+      "monthlyNth": "On the {nth} {weekday} of the month",
+      "nth": {
+        "1": "first",
+        "2": "second",
+        "3": "third",
+        "4": "fourth",
+        "last": "last"
+      },
+      "zone": "School calendar",
+      "part": "Period",
+      "parts": {
+        "ALL": "Whole holidays",
+        "FIRST": "First half",
+        "SECOND": "Second half"
+      },
+      "years": "Years",
+      "yearsOptions": {
+        "ALL": "Every year",
+        "EVEN": "Even years",
+        "ODD": "Odd years"
+      },
+      "holidayHint": "Official dates known until {date}. Each period can then be adjusted by hand.",
+      "endLabel": "Ends",
+      "end": {
+        "never": "Never",
+        "until": "On a date",
+        "count": "After X times"
+      },
+      "untilLabel": "Last day included",
+      "countLabel": "Number of times",
+      "countSuffix": "{count, plural, one {time} other {times}}",
+      "preview": "Next dates",
+      "previewNone": "No dates with these settings.",
+      "previewMore": "… and so on.",
+      "summary": {
+        "daily": "{count, plural, one {Every day} other {Every # days}}",
+        "weekly": "{count, plural, one {Every week} other {Every # weeks}}: {days}",
+        "monthlyDay": "{count, plural, one {Every month} other {Every # months}}, on day {day}",
+        "monthlyNth": "{count, plural, one {Every month} other {Every # months}}, on the {nth} {weekday}",
+        "yearly": "{count, plural, one {Every year} other {Every # years}}",
+        "holidays": "School holidays ({zone}) · {part} · {years}",
+        "until": "{rule}, until {date}",
+        "count": "{rule}, {count, plural, one {# time} other {# times}}"
+      },
+      "badge": "Recurring event",
+      "zones": {
+        "guyane": "French Guiana",
+        "martinique": "Martinique",
+        "guadeloupe": "Guadeloupe",
+        "A": "Mainland France, zone A",
+        "B": "Mainland France, zone B",
+        "C": "Mainland France, zone C"
+      },
+      "untilError": "The last repeat day must be after the start."
     }
   }
 }

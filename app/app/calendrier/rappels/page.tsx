@@ -43,12 +43,12 @@ export default function RappelsPage() {
 
   const nowMs = now.getTime()
   const withReminder = EVENTS.filter((e) => hasReminder(e))
-  const avenir = withReminder
+  const avenir = perSeries(withReminder
     .filter((e) => new Date(e.start).getTime() >= nowMs)
-    .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
-  const passes = withReminder
+    .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime()))
+  const passes = perSeries(withReminder
     .filter((e) => new Date(e.start).getTime() < nowMs)
-    .sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime())
+    .sort((a, b) => new Date(b.start).getTime() - new Date(a.start).getTime()))
 
   return (
     <>
@@ -102,4 +102,16 @@ function ReminderSection({ id, title, events, now, upcoming, empty }: {
       )}
     </section>
   )
+}
+
+/** Série récurrente (0660) : 3 occurrences au plus par série, pour ne pas noyer la liste (appel quotidien…). */
+function perSeries(list: CalendarEvent[], max = 3): CalendarEvent[] {
+  const seen = new Map<string, number>()
+  return list.filter((e) => {
+    const id = e.recurrence?.seriesId
+    if (!id) return true
+    const n = (seen.get(id) ?? 0) + 1
+    seen.set(id, n)
+    return n <= max
+  })
 }
