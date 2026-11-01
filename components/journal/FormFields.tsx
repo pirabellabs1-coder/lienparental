@@ -3,10 +3,11 @@
 import {
   useId, useState, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes,
 } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Calendar, Check, ChevronDown, ChevronRight, Clock } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { TimePicker } from '@/components/forms/TimePicker'
+import { fmtDayKey, isDayKey } from '@/lib/tz'
 
 // Primitives de formulaire « Ajouter un événement » (maquettes Journal + Calendrier).
 // Partagées par components/journal et components/calendrier.
@@ -194,14 +195,20 @@ export function DateTimeFields({
   withTime?: boolean
 }) {
   const t = useTranslations('family.journal.fields')
+  const locale = useLocale()
   const id = useId()
+  const shown = isDayKey(date) ? fmtDayKey(date, { day: 'numeric', month: 'short', year: 'numeric' }, locale) : ''
   return (
     <fieldset>
       <FieldLabel as="legend">{legend ?? t('dateTime')}</FieldLabel>
       {/* min-w-0 + appearance-none : sur iPhone, le champ date natif garde une largeur minimale qui
           ignore la grille et passait sous le champ Heure (retour bêta-test). Très petit écran : en pile. */}
       <div className={cn('grid gap-3', withTime ? 'grid-cols-1 min-[340px]:grid-cols-[1.25fr_1fr]' : 'grid-cols-1 sm:max-w-xs')}>
-        <div className="relative min-w-0">
+        {/* Sur iPhone, la valeur d'un champ date natif reste collée en haut quoi qu'on fasse : la date
+            est affichée dans notre propre cadre (centré), le champ natif transparent par-dessus reçoit
+            l'appui et ouvre le sélecteur du téléphone. */}
+        <div className={cn(fieldBase, 'relative flex h-12 min-w-0 items-center pr-11 focus-within:border-leaf-500 focus-within:ring-2 focus-within:ring-leaf-500/20', dateError ? 'border-alert-400' : 'border-night-100')}>
+          <span aria-hidden="true" className={cn('truncate', !shown && 'text-night-400')}>{shown || t('date')}</span>
           <label htmlFor={`${id}-d`} className="sr-only">{t('date')}</label>
           <input
             id={`${id}-d`}
@@ -212,7 +219,7 @@ export function DateTimeFields({
             onChange={(e) => onDate(e.target.value)}
             aria-invalid={dateError ? true : undefined}
             aria-describedby={dateError ? `${id}-derr` : undefined}
-            className={cn(fieldBase, 'relative h-12 min-w-0 appearance-none pr-11 text-left [&::-webkit-date-and-time-value]:text-left', pickerIndicator, dateError ? 'border-alert-400' : 'border-night-100')}
+            className={cn('absolute inset-0 h-full w-full cursor-pointer appearance-none rounded-xl bg-transparent text-base opacity-0', pickerIndicator)}
           />
           <Calendar aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-night-700" />
         </div>
