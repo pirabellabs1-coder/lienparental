@@ -189,7 +189,8 @@
       "toFolder": "Guardar em uma pasta",
       "changeCategory": "Mudar de categoria",
       "movedToTrash": "“{name}” foi movido para a lixeira. Você pode restaurá-lo por 30 dias.",
-      "movedToTrashShort": "Documento movido para a lixeira. Você pode restaurá-lo por 30 dias."
+      "movedToTrashShort": "Documento movido para a lixeira. Você pode restaurá-lo por 30 dias.",
+      "tapAgain": "Link pronto: toque novamente em «Partilhar»."
     },
     "lock": {
       "pinPad": {

@@ -268,7 +268,7 @@
           "LU": "Luxemburgo"
         },
         "photoType": "Escolha uma imagem (JPG ou PNG).",
-        "photoSize": "Imagem muito pesada (máximo de 5 MB).",
+        "photoSize": "Imagem muito pesada (máximo de 25 MB).",
         "invalidEmail": "Endereço de e-mail inválido.",
         "emailPending": "{current} (novo endereço {next} a confirmar por e-mail)",
         "title": "Informações pessoais",

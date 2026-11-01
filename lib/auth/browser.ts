@@ -60,6 +60,7 @@ export async function prepareAvatar(source: string | Blob): Promise<Blob> {
     if (!ctx) throw new Error('canvas_unavailable')
     ctx.drawImage(img, 0, 0, w, h)
     const blob = await new Promise<Blob | null>(r => canvas.toBlob(r, 'image/jpeg', 0.85))
+    canvas.width = canvas.height = 0 // mémoire libérée (plafond des canevas sur iPhone)
     if (!blob) throw new Error('encode_failed')
     return blob
   } finally {

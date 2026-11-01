@@ -97,6 +97,9 @@ export function useVoiceRecorder(opts: { maxMs?: number; onAutoStop?: () => void
     setClipSafe(null)
     cancelledRef.current = false
     stopAskedRef.current = false
+    // Heure de la note précédente effacée : sinon un appui bref sur le micro (relâché pendant la
+    // demande d'accès) était pris pour un maintien terminé et arrêtait aussitôt l'enregistrement.
+    startedRef.current = 0
     setPhase('requesting')
 
     let stream: MediaStream
@@ -150,6 +153,8 @@ export function useVoiceRecorder(opts: { maxMs?: number; onAutoStop?: () => void
       if (Ctx) {
         const ctx = new Ctx()
         ctxRef.current = ctx
+        // iPhone : contexte créé après l'attente du micro, donc « suspendu » (barres de niveau à plat).
+        if (ctx.state === 'suspended') void ctx.resume().catch(() => {})
         analyser = ctx.createAnalyser()
         analyser.fftSize = 512
         ctx.createMediaStreamSource(stream).connect(analyser)

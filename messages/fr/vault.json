@@ -189,7 +189,8 @@
       "toFolder": "Ranger dans un dossier",
       "changeCategory": "Changer de catégorie",
       "movedToTrash": "« {name} » a été placé dans la corbeille. Vous pouvez le restaurer pendant 30 jours.",
-      "movedToTrashShort": "Document placé dans la corbeille. Vous pouvez le restaurer pendant 30 jours."
+      "movedToTrashShort": "Document placé dans la corbeille. Vous pouvez le restaurer pendant 30 jours.",
+      "tapAgain": "Lien prêt : touchez « Partager » à nouveau."
     },
     "lock": {
       "pinPad": {

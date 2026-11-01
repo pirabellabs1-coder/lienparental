@@ -86,7 +86,7 @@ export default function EnfantProfilePage({
     const f = e.target.files?.[0]
     e.target.value = ''
     if (!f) return
-    if (!/^image\/(jpeg|png|webp)$/.test(f.type) || f.size > 5 * 1024 * 1024) {
+    if (!/^image\/(jpeg|png|webp)$/.test(f.type) || f.size > 25 * 1024 * 1024) {
       setPhotoState({ kind: 'error', text: t('photoInvalid') })
       return
     }

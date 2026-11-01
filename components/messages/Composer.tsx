@@ -201,7 +201,8 @@ export function Composer({
           <input
             ref={fileRef}
             type="file"
-            accept={ALLOWED_ATTACHMENT_MIME.join(',')}
+            // Sans image/heic : l'iPhone convertit alors la photo en JPEG, lisible par tous les navigateurs.
+            accept={ALLOWED_ATTACHMENT_MIME.filter((m) => m !== 'image/heic').join(',')}
             onChange={onFile}
             className="sr-only"
             tabIndex={-1}

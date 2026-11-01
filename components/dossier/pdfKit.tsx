@@ -137,5 +137,6 @@ export function downloadBlob(blob: Blob, filename: string) {
   document.body.appendChild(a)
   a.click()
   a.remove()
-  setTimeout(() => URL.revokeObjectURL(url), 2000)
+  // 60 s : l'iPhone demande de confirmer le téléchargement ; un lien révoqué avant donnait un fichier vide.
+  setTimeout(() => URL.revokeObjectURL(url), 60_000)
 }

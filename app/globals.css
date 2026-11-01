@@ -25,6 +25,12 @@ input::-webkit-date-and-time-value{ text-align:left }
 a, button, [role="button"], label, summary{ touch-action: manipulation }
 
 /* Mobile viewport lock pour la PWA */
+/* iPhone / iPad : Safari zoome sur tout champ dont le texte fait moins de 16 px (et ne dézoome pas).
+   -webkit-touch-callout n'existe que sur iOS : ordinateur et Android gardent les tailles du design. */
+@supports (-webkit-touch-callout: none) {
+  input:not([type=checkbox]):not([type=radio]):not([type=range]), textarea, select { font-size: max(16px, 1em) !important }
+}
+
 .pwa-safe{ padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left) }
 
 @keyframes showcase-progress { from { transform: scaleX(0) } to { transform: scaleX(1) } }
