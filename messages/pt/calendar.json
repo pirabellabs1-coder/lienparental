@@ -233,6 +233,13 @@
     },
     "custody": {
       "title": "Agenda de guarda",
+      "emptyTitle": "Crie a sua agenda de guarda",
+      "emptyText": "Indique o ritmo da guarda e as trocas: o calendário se preenche sozinho e lembra você de cada troca.",
+      "emptyStep1": "Escolha o ritmo: semanas alternadas, 2-2-3, fins de semana ou personalizado.",
+      "emptyStep2": "Indique o dia, a hora e o local das trocas, e com quem as crianças começam.",
+      "emptyStep3": "Defina a divisão das férias escolares e confira a prévia antes de salvar.",
+      "emptyCta": "Criar minha agenda",
+      "emptyHint": "Cerca de 2 minutos. Pode ser alterado a qualquer momento.",
       "loadFailed": "Não foi possível carregar a agenda.",
       "backHome": "Voltar ao início",
       "loading": "Carregando a agenda",
@@ -309,6 +316,9 @@
     },
     "custodySetup": {
       "title": "Configurar a guarda",
+      "titleCreate": "Criar a agenda",
+      "previewTitle": "Prévia",
+      "previewHint": "O calendário é atualizado a cada escolha. Nada é salvo antes da última etapa.",
       "loading": "Carregando",
       "loadFailed": "Não foi possível carregar.",
       "steps": {

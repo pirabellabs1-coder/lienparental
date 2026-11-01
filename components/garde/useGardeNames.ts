@@ -44,7 +44,8 @@ export function useGardeNames(): GardeNames {
 
   return useMemo(() => {
     // Même règle que lib/garde → childrenLabel : 1 à 3 prénoms, sinon « les enfants ».
-    const list = raw.prenoms.map((p) => p.trim()).filter(Boolean)
+    // Prénoms identiques (enfant saisi deux fois) : un seul affiché, jamais « Lina, Noah et Lina ».
+    const list = [...new Set(raw.prenoms.map((p) => p.trim()).filter(Boolean))]
     let kids: Pick<GardeNames, 'children' | 'childrenPlural'>
     if (list.length === 0 || list.length > 3) kids = { children: t('neutralChildren'), childrenPlural: true }
     else if (list.length === 1) kids = { children: list[0], childrenPlural: false }
