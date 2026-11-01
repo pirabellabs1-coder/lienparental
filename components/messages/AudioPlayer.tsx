@@ -1,14 +1,17 @@
 'use client'
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Loader2, Pause, Play } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import { durationLabel } from '@/lib/messages'
+import { needsFallback, toPlayableWav } from './audioFallback'
 
 type Props = {
   /** URL lisible (blob: ou signée) ; undefined = en cours d'obtention, null = indisponible. */
   src: string | null | undefined
+  /** Format du fichier : un format que l'appareil ne lit pas (WebM sur iPhone) est converti d'avance. */
+  mime?: string
   durationMs: number
   /** Nom accessible : « Note vocale de Thomas, 0:14 ». */
   label: string
@@ -36,13 +39,21 @@ function bars(seed: string): number[] {
 /**
  * Lecteur de note vocale : lecture / pause, barre de progression manipulable
  * au clavier (curseur natif), durée. Un seul lecteur joue à la fois.
+ * Format refusé par le lecteur natif (notes WebM sur iPhone) : conversion en WAV dans le navigateur
+ * (audioFallback.ts), lancée dès l'affichage pour que l'appui sur « lecture » démarre aussitôt
+ * (Safari refuse un play() lancé après une attente).
  */
-export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', className }: Props) {
+export function AudioPlayer({ src, mime, durationMs, label, seed, tone = 'neutral', className }: Props) {
   const t = useTranslations('messaging.audio')
   const audioRef = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
   const [current, setCurrent] = useState(0)
   const [failed, setFailed] = useState(false)
+  // Version WAV convertie (repli) et conversion en cours.
+  const [fallback, setFallback] = useState<string | null>(null)
+  const [converting, setConverting] = useState(false)
+  const triedFallback = useRef(false)
+  const playSrc = fallback ?? src
   const uid = useId()
   const heights = useMemo(() => bars(seed), [seed])
   const total = Math.max(0.5, durationMs / 1000)
@@ -57,22 +68,41 @@ export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', cl
     return () => window.removeEventListener(PLAY_EVENT, onOther)
   }, [uid])
 
+  const convert = useCallback(() => {
+    if (!src || triedFallback.current) return setFailed(true)
+    triedFallback.current = true
+    setConverting(true)
+    void toPlayableWav(src).then((url) => {
+      if (url) setFallback(url)
+      else setFailed(true)
+      setConverting(false)
+    })
+  }, [src])
+
   useEffect(() => {
     setPlaying(false)
     setCurrent(0)
     setFailed(false)
-  }, [src])
+    setFallback(null)
+    triedFallback.current = false
+    if (src && needsFallback(mime)) convert()
+  }, [src, mime, convert])
+
+  // URL convertie libérée au changement de fichier et au démontage.
+  useEffect(() => () => { if (fallback) URL.revokeObjectURL(fallback) }, [fallback])
 
   const toggle = async () => {
     const a = audioRef.current
-    if (!a || !src) return
+    if (!a || !playSrc || converting) return
     if (!a.paused) { a.pause(); return }
     window.dispatchEvent(new CustomEvent(PLAY_EVENT, { detail: uid }))
     try {
       if (current >= total - 0.05) a.currentTime = 0
       await a.play()
-    } catch {
-      setFailed(true)
+    } catch (err) {
+      // Format refusé : conversion, puis nouvel appui (l'attente sortirait du geste sur iPhone).
+      if ((err as { name?: string } | null)?.name === 'NotSupportedError' && !fallback) convert()
+      else if ((err as { name?: string } | null)?.name !== 'NotAllowedError') setFailed(true)
     }
   }
 
@@ -85,21 +115,22 @@ export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', cl
   }
 
   const unavailable = src === null || failed
+  const loading = src === undefined || converting
   const fill = tone === 'mine' ? 'bg-leaf-600' : 'bg-night-700'
   const rest = tone === 'mine' ? 'bg-leaf-200' : 'bg-night-200'
 
   return (
     <div className={cn('flex min-w-[220px] items-center gap-2.5', className)}>
-      {src ? (
+      {playSrc ? (
         <audio
           ref={audioRef}
-          src={src}
+          src={playSrc}
           preload="metadata"
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
           onEnded={() => { setPlaying(false); setCurrent(total) }}
           onTimeUpdate={(e) => setCurrent(Math.min(total, e.currentTarget.currentTime))}
-          onError={() => setFailed(true)}
+          onError={() => (fallback ? setFailed(true) : convert())}
           className="hidden"
         />
       ) : null}
@@ -107,7 +138,8 @@ export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', cl
       <button
         type="button"
         onClick={() => void toggle()}
-        disabled={!src || failed}
+        disabled={!playSrc || failed || converting}
+        aria-busy={converting || undefined}
         aria-label={playing ? t('pause', { label }) : t('play', { label })}
         className={cn(
           'inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition disabled:cursor-not-allowed disabled:opacity-50',
@@ -115,7 +147,7 @@ export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', cl
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-leaf-400 focus-visible:ring-offset-2',
         )}
       >
-        {src === undefined ? (
+        {loading ? (
           <Loader2 className="h-5 w-5 motion-safe:animate-spin" aria-hidden="true" />
         ) : playing ? (
           <Pause className="h-5 w-5" aria-hidden="true" fill="currentColor" />
@@ -144,14 +176,14 @@ export function AudioPlayer({ src, durationMs, label, seed, tone = 'neutral', cl
             step={0.1}
             value={Math.min(current, total)}
             onChange={(e) => seek(Number(e.target.value))}
-            disabled={!src || failed}
+            disabled={!playSrc || failed || converting}
             aria-valuetext={t('valueText', { current: durationLabel(current * 1000), total: durationLabel(durationMs) })}
             className="absolute inset-0 h-full w-full cursor-pointer appearance-none bg-transparent opacity-0 disabled:cursor-not-allowed"
           />
         </div>
         <p className="mt-0.5 flex justify-between text-[11px] tabular-nums text-night-600">
           <span>{playing || current > 0 ? durationLabel(current * 1000) : t('voiceNote')}</span>
-          <span>{unavailable ? t('unavailable') : durationLabel(durationMs)}</span>
+          <span>{unavailable ? t(failed && triedFallback.current ? 'unsupported' : 'unavailable') : converting ? t('converting') : durationLabel(durationMs)}</span>
         </p>
       </div>
     </div>

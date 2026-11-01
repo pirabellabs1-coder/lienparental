@@ -153,6 +153,7 @@ export function Composer({
               <div className="min-w-0 flex-1 rounded-xl bg-night-50/70 px-2 py-1.5" data-voice-focus-wrap>
                 <AudioPlayer
                   src={voice.clip.url}
+                  mime={voice.clip.mime}
                   durationMs={voice.clip.durationMs}
                   label={t('yourVoiceNote', { duration: durationLabel(voice.clip.durationMs) })}
                   seed={voice.clip.url}

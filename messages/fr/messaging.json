@@ -153,7 +153,9 @@
       "seek": "Position de lecture",
       "valueText": "{current} sur {total}",
       "voiceNote": "Note vocale",
-      "unavailable": "Lecture indisponible"
+      "unavailable": "Lecture indisponible",
+      "converting": "Préparation…",
+      "unsupported": "Format non lu par cet appareil"
     },
     "row": {
       "noMessage": "Aucun message pour le moment",

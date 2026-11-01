@@ -128,6 +128,7 @@ function VoiceView({ attachment, durationMs, mine, senderName, seed }: {
   return (
     <AudioPlayer
       src={url}
+      mime={attachment.mime}
       durationMs={durationMs}
       label={mine ? t('voiceSent', { duration: durationLabel(durationMs) }) : t('voiceFrom', { name: senderName, duration: durationLabel(durationMs) })}
       seed={seed}
