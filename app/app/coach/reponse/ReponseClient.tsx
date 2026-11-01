@@ -7,6 +7,8 @@ import { useTranslations } from 'next-intl'
 import { Archive, ClipboardCopy, Check, MessageSquare, RefreshCw } from 'lucide-react'
 import { TopBar } from '@/components/mobile/TopBar'
 import { RobotMascot } from '@/components/coach/RobotMascot'
+import { SpeechButton } from '@/components/coach/SpeechButton'
+import { useCoachVoice } from '@/components/coach/useCoachVoice'
 import { btn, DemoNote, LegalNote, ScreenTitle } from '@/components/coach/ui'
 import { clearAnalysis, clearDraft, loadAnalysis, saveAnalysis, type CoachAnalysisSession } from '@/components/coach/session'
 import { errorMessage } from '@/components/coach/sse-client'
@@ -39,6 +41,8 @@ const isLocalId = (id: string) => id.startsWith('demo_')
 export function ReponseClient({ id }: { id?: string }) {
   const t = useTranslations('coach.response')
   const tc = useTranslations('coach.common')
+  const tchat = useTranslations('coach.chat')
+  const voice = useCoachVoice()
   const router = useRouter()
   const [session, setSession] = useState<CoachAnalysisSession | null>(null)
   const [loadError, setLoadError] = useState('')
@@ -178,6 +182,17 @@ export function ReponseClient({ id }: { id?: string }) {
               </h3>
             </div>
             <p className="mt-3 whitespace-pre-line text-[13.5px] leading-[1.7] text-night-900">{r.reformulation}</p>
+            <div className="mt-2">
+              <SpeechButton
+                speech={{
+                  playing: voice.state.id === 'proposal' && voice.state.status === 'playing',
+                  loading: voice.state.id === 'proposal' && voice.state.status === 'loading',
+                  onToggle: () => void voice.toggle('proposal', r.reformulation),
+                }}
+                labels={{ listen: tchat('listen'), listenStop: tchat('listenStop'), listenLoading: tchat('listenLoading') }}
+              />
+              {voice.error && <p role="status" className="mt-1 text-[11px] leading-snug text-night-600">{tchat('voiceUnavailable')}</p>}
+            </div>
 
             <div className="mt-4 grid grid-cols-2 gap-3">
               <button

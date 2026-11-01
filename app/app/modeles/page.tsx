@@ -84,7 +84,7 @@ export default function ModelesPage() {
         </button>
       </div>
 
-      <div role="radiogroup" aria-label={tr('list.categoryGroup')} className="-mx-5 mt-4 flex gap-2 overflow-x-auto px-5 pb-1 [scrollbar-width:none]">
+      <div role="radiogroup" aria-label={tr('list.categoryGroup')} className="-mx-5 mt-4 flex gap-2 overflow-x-auto px-5 py-1 [scrollbar-width:none]">
         {MODELE_CATEGORIES.map((c) => {
           const on = cat === c.id
           return (

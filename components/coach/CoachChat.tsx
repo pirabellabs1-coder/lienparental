@@ -317,7 +317,7 @@ export function CoachChat({ aiEnabled, analysisId, initialQuestion, seed = [], s
         {!hasUserMessage && suggestions.length > 0 && (
           <div className="mb-2">
             <h2 className="sr-only">{t('suggestions')}</h2>
-            <ul className="-mx-3 flex gap-2 overflow-x-auto px-3 pb-1 [scrollbar-width:none]">
+            <ul className="-mx-3 flex gap-2 overflow-x-auto px-3 py-1 [scrollbar-width:none]">
               {suggestions.map((s) => (
                 <li key={s} className="shrink-0">
                   <button
